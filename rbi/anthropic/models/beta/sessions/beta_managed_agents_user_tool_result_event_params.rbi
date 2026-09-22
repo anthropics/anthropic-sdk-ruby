@@ -255,13 +255,13 @@ module Anthropic
               type:,
               # The text content.
               text: nil,
-              # Union type for image source variants.
+              # The source of the image data.
               source: nil,
               # Additional context about the document for the model.
               context: nil,
               # The title of the document.
               title: nil,
-              # Citation settings for a search result.
+              # Citation settings for this search result.
               citations: nil,
               # Array of text content blocks from the search result.
               content: nil

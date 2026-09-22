@@ -24,7 +24,7 @@ module Anthropic
         #
         # @param environment_id [String] Body param: ID of the `environment` defining the container configuration for thi
         #
-        # @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit] Body param: A hard spend ceiling. The session stops issuing new model requests o
+        # @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit] Body param: Enforced spend ceiling for the session. Omit to create an uncapped s
         #
         # @param initial_events [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams>] Body param: Initial events to send to the `session` at creation, processed in or
         #
@@ -96,9 +96,9 @@ module Anthropic
         #
         # @param session_id [String] Path param
         #
-        # @param agent [Anthropic::Models::Beta::BetaManagedAgentsSessionAgentUpdate] Body param: Mid-session agent configuration update. Only `tools` and `mcp_server
+        # @param agent [Anthropic::Models::Beta::BetaManagedAgentsSessionAgentUpdate] Body param: Agent configuration update. Only `tools` and `mcp_servers` are updat
         #
-        # @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] Body param: A hard spend ceiling. The session stops issuing new model requests o
+        # @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] Body param: Enforced spend ceiling for the session. Set an object to replace the
         #
         # @param metadata [Hash{Symbol=>String, nil}, nil] Body param: Metadata patch. Set a key to a string to upsert it, or to null to de
         #

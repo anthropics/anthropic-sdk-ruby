@@ -26,7 +26,7 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :outcome_id
 
-          # A timestamp in RFC 3339 format
+          # Timestamp when outcome evaluation started.
           sig { returns(Time) }
           attr_accessor :processed_at
 
@@ -56,7 +56,7 @@ module Anthropic
             iteration:,
             # The `outc_` ID of the outcome being evaluated.
             outcome_id:,
-            # A timestamp in RFC 3339 format
+            # Timestamp when outcome evaluation started.
             processed_at:,
             type:
           )

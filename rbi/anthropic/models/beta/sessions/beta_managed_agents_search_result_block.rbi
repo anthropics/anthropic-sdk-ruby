@@ -13,7 +13,7 @@ module Anthropic
               )
             end
 
-          # Citation settings for a search result.
+          # Citation settings for this search result.
           sig do
             returns(
               Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultCitations
@@ -70,7 +70,7 @@ module Anthropic
             ).returns(T.attached_class)
           end
           def self.new(
-            # Citation settings for a search result.
+            # Citation settings for this search result.
             citations:,
             # Array of text content blocks from the search result.
             content:,

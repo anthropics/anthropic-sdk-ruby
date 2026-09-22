@@ -21,7 +21,7 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :agent_name
 
-          # A timestamp in RFC 3339 format
+          # Timestamp of the status transition.
           sig { returns(Time) }
           attr_accessor :processed_at
 
@@ -54,7 +54,7 @@ module Anthropic
             id:,
             # Name of the agent the thread runs.
             agent_name:,
-            # A timestamp in RFC 3339 format
+            # Timestamp of the status transition.
             processed_at:,
             # Public sthr\_ ID of the thread that is retrying.
             session_thread_id:,

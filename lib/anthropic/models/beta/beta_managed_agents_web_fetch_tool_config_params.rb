@@ -43,7 +43,8 @@ module Anthropic
         optional :max_content_tokens, Integer, nil?: true
 
         # @!attribute permission_policy
-        #   Permission policy for tool execution.
+        #   Permission policy for this tool. Controls whether tool calls are auto-approved
+        #   or require confirmation.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy, Anthropic::Models::Beta::BetaManagedAgentsAutoPolicy, nil]
         optional :permission_policy,
@@ -70,13 +71,14 @@ module Anthropic
         #
         #   @param max_content_tokens [Integer, nil] Maximum number of tokens of fetched text content to include in context per call.
         #
-        #   @param permission_policy [Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy, Anthropic::Models::Beta::BetaManagedAgentsAutoPolicy, nil] Permission policy for tool execution.
+        #   @param permission_policy [Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy, Anthropic::Models::Beta::BetaManagedAgentsAutoPolicy, nil] Permission policy for this tool. Controls whether tool calls are auto-approved o
         #
         #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfigParams::Type]
         #
         #   @param name [Symbol, :web_fetch] Must be "web_fetch".
 
-        # Permission policy for tool execution.
+        # Permission policy for this tool. Controls whether tool calls are auto-approved
+        # or require confirmation.
         #
         # @see Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfigParams#permission_policy
         module PermissionPolicy

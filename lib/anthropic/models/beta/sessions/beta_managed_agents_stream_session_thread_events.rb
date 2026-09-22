@@ -204,11 +204,11 @@ module Anthropic
           #
           #   @option args [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRedactedBlock>, Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultBlock>, Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRedactedBlock>, Array<Anthropic::Models::Beta::BetaManagedAgentsSystemContentBlock>] :content Array of content blocks comprising the user message.
           #
-          #   @option args [Time, nil, Time] :processed_at A timestamp in RFC 3339 format
+          #   @option args [Time, nil, Time] :processed_at Timestamp when the agent finished processing this message.
           #
           #   @option args [String, nil, String] :session_thread_id If absent, interrupts every non-archived thread in a multiagent session (or the
           #
-          #   @option args [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::Result, String] :result UserToolConfirmationResult enum
+          #   @option args [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::Result, String] :result The confirmation result: 'allow' or 'deny'.
           #
           #   @option args [String] :tool_use_id The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresp
           #
@@ -224,9 +224,9 @@ module Anthropic
           #
           #   @option args [String] :mcp_server_name Name of the MCP server providing the tool.
           #
-          #   @option args [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentEvaluatedPermission] :evaluated_permission AgentEvaluatedPermission enum
+          #   @option args [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentEvaluatedPermission] :evaluated_permission The evaluated permission policy for this tool invocation.
           #
-          #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAllow, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAsk, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAuto] :evaluation Names the resolved permission_policy that produced evaluated_permission, and und
+          #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAllow, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAsk, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAuto] :evaluation Which resolved permission_policy produced evaluated_permission: always_allow, al
           #
           #   @option args [String] :mcp_tool_use_id The id of the `agent.mcp_tool_use` event this result corresponds to.
           #
@@ -252,21 +252,21 @@ module Anthropic
           #
           #   @option args [String] :outcome_evaluation_start_id The id of the corresponding `span.outcome_evaluation_start` event.
           #
-          #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelUsage, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionUsageSnapshot] :usage Token usage for a single model request.
+          #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelUsage, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionUsageSnapshot] :usage Aggregate token usage for this evaluation cycle. Sums across all grader model re
           #
           #   @option args [String] :model_request_start_id The id of the corresponding `span.model_request_start` event.
           #
-          #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelUsage] :model_usage Token usage for a single model request.
+          #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelUsage] :model_usage Token usage for this model request.
           #
           #   @option args [String] :description What the agent should produce. Copied from the input event.
           #
           #   @option args [Integer, nil] :max_iterations Evaluate-then-revise cycles before giving up. Default 3, max 20.
           #
-          #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubric, Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubric] :rubric Rubric for grading the quality of an outcome.
+          #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubric, Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubric] :rubric How to grade the outcome. File rubrics are currently resolved to their text cont
           #
-          #   @option args [Anthropic::Models::Beta::BetaManagedAgentsSessionAgent, nil] :agent Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session
+          #   @option args [Anthropic::Models::Beta::BetaManagedAgentsSessionAgent, nil] :agent The session's effective agent configuration after the update. Present only when
           #
-          #   @option args [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] :budget A hard spend ceiling. The session stops issuing new model requests once the trac
+          #   @option args [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] :budget The session's budget after the update: the new budget when set or replaced, or n
           #
           #   @option args [Hash{Symbol=>String}] :metadata The session's full metadata bag after the update. Present when the update set no
           #

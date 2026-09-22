@@ -25,8 +25,8 @@ module Anthropic
 
         # @!attribute block_binding
         #   Controls for block binding: what happens when a thinking block this request
-        #   sends back fails the conversation check. Every field is optional; an empty
-        #   object means every default.
+        #   sends back fails the conversation check. `null`, absent or an empty object means
+        #   every default.
         #
         #   @return [Anthropic::Models::Beta::BetaThinkingBlockBinding, nil]
         optional :block_binding, -> { Anthropic::Beta::BetaThinkingBlockBinding }, nil?: true
@@ -49,7 +49,7 @@ module Anthropic
         #
         #   @param budget_tokens [Integer] Determines how many tokens Claude can use for its internal reasoning process. La
         #
-        #   @param block_binding [Anthropic::Models::Beta::BetaThinkingBlockBinding, nil] Controls for block binding: what happens when a thinking block this
+        #   @param block_binding [Anthropic::Models::Beta::BetaThinkingBlockBinding, nil] Controls for block binding: what happens when a thinking block this request send
         #
         #   @param display_ [Symbol, Anthropic::Models::Beta::BetaThinkingConfigEnabled::Display, nil] Controls how thinking content appears in the response. When set to `summarized`,
         #

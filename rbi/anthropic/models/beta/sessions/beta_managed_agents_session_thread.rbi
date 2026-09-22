@@ -17,7 +17,8 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :id
 
-          # The resolved agent a `session_thread` runs.
+          # Resolved agent definition for this thread. Snapshot of the agent at thread
+          # creation time.
           sig do
             returns(
               Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread::Agent::Variants
@@ -25,11 +26,11 @@ module Anthropic
           end
           attr_accessor :agent
 
-          # A timestamp in RFC 3339 format
+          # When the thread was archived. Null if not archived.
           sig { returns(T.nilable(Time)) }
           attr_accessor :archived_at
 
-          # A timestamp in RFC 3339 format
+          # When the thread was created.
           sig { returns(Time) }
           attr_accessor :created_at
 
@@ -41,7 +42,8 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :session_id
 
-          # Timing statistics for a session thread.
+          # Timing statistics for this thread. Null until the thread's first status
+          # transition.
           sig do
             returns(
               T.nilable(
@@ -61,7 +63,7 @@ module Anthropic
           end
           attr_writer :stats
 
-          # SessionThreadStatus enum
+          # Current execution status of the thread.
           sig do
             returns(
               Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatus::TaggedSymbol
@@ -76,11 +78,12 @@ module Anthropic
           end
           attr_accessor :type
 
-          # A timestamp in RFC 3339 format
+          # When the thread was last updated.
           sig { returns(Time) }
           attr_accessor :updated_at
 
-          # Cumulative token usage for a session thread across all turns.
+          # Cumulative token usage for this thread. Null until the thread's first idle
+          # transition.
           sig do
             returns(
               T.nilable(
@@ -132,24 +135,27 @@ module Anthropic
           def self.new(
             # Unique identifier for this thread.
             id:,
-            # The resolved agent a `session_thread` runs.
+            # Resolved agent definition for this thread. Snapshot of the agent at thread
+            # creation time.
             agent:,
-            # A timestamp in RFC 3339 format
+            # When the thread was archived. Null if not archived.
             archived_at:,
-            # A timestamp in RFC 3339 format
+            # When the thread was created.
             created_at:,
             # Parent thread that spawned this thread. Null for the primary thread.
             parent_thread_id:,
             # The session this thread belongs to.
             session_id:,
-            # Timing statistics for a session thread.
+            # Timing statistics for this thread. Null until the thread's first status
+            # transition.
             stats:,
-            # SessionThreadStatus enum
+            # Current execution status of the thread.
             status:,
             type:,
-            # A timestamp in RFC 3339 format
+            # When the thread was last updated.
             updated_at:,
-            # Cumulative token usage for a session thread across all turns.
+            # Cumulative token usage for this thread. Null until the thread's first idle
+            # transition.
             usage:
           )
           end
@@ -183,7 +189,8 @@ module Anthropic
           def to_hash
           end
 
-          # The resolved agent a `session_thread` runs.
+          # Resolved agent definition for this thread. Snapshot of the agent at thread
+          # creation time.
           module Agent
             extend Anthropic::Internal::Type::Union
 

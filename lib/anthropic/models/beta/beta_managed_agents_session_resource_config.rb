@@ -54,7 +54,7 @@ module Anthropic
         #   @option args [String] :memory_store_id The memory store ID (memstore\_...). Must belong to the caller's organization
         #   and
         #
-        #   @option args [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceConfig::Access, nil] :access Access mode for an attached memory store.
+        #   @option args [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceConfig::Access, nil] :access Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts
         #
         #   @option args [String, nil] :instructions Per-attachment guidance for the agent on how to use this store. Rendered into th
         #

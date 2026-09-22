@@ -27,8 +27,7 @@ module Anthropic
         required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsScheduleParams::Type }
 
         # @!method initialize(expression:, timezone:, type:)
-        #   5-field POSIX cron schedule. Literal wall-clock matching in the configured
-        #   timezone.
+        #   A recurring schedule. Discriminated union — only cron is supported currently.
         #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsScheduleParams} for more details.

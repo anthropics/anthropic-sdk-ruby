@@ -74,12 +74,8 @@ module Anthropic
       optional :strict, Anthropic::Internal::Type::Boolean
 
       # @!attribute url_sources
-      #   Which sources contribute to the set of URLs web fetch may fetch.
-      #
-      #   Each key is a tagged variant: `user_input` is `all` or `none`; the two tool
-      #   filters are `all`, `none`, `only` (only the named tools' results) or `except`
-      #   (every result but the named tools'). A named tool must be declared in this
-      #   request's `tools[]`.
+      #   Which sources contribute to the set of URLs the tool may fetch. Omitted means
+      #   every source.
       #
       #   @return [Anthropic::Models::WebFetchURLSources, nil]
       optional :url_sources, -> { Anthropic::WebFetchURLSources }, nil?: true
@@ -106,7 +102,7 @@ module Anthropic
       #
       #   @param strict [Boolean] When true, guarantees schema validation on tool names and inputs
       #
-      #   @param url_sources [Anthropic::Models::WebFetchURLSources, nil] Which sources contribute to the set of URLs web fetch may fetch.
+      #   @param url_sources [Anthropic::Models::WebFetchURLSources, nil] Which sources contribute to the set of URLs the tool may fetch. Omitted means ev
       #
       #   @param name [Symbol, :web_fetch] Name of the tool.
       #

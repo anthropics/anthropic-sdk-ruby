@@ -17,14 +17,9 @@ module Anthropic
         optional :networking, union: -> { Anthropic::Beta::BetaCloudConfigParams::Networking }, nil?: true
 
         # @!attribute packages
-        #   Specify packages (and optionally their versions) available in this environment.
-        #
-        #   When versioning, use the version semantics relevant for the package manager,
-        #   e.g. for `pip` use `package==1.0.0`. You are responsible for validating the
-        #   package and version exist. Unversioned installs the latest.
-        #
-        #   Under `limited` networking, requires `networking.allow_package_managers` to be
-        #   `true`.
+        #   Package manager configuration. Under `limited` networking, requires
+        #   `networking.allow_package_managers` to be `true`. Omit on update to preserve the
+        #   existing value.
         #
         #   @return [Anthropic::Models::Beta::BetaPackagesParams, nil]
         optional :packages, -> { Anthropic::Beta::BetaPackagesParams }, nil?: true
@@ -39,7 +34,7 @@ module Anthropic
         #
         #   @param networking [Anthropic::Models::Beta::BetaUnrestrictedNetwork, Anthropic::Models::Beta::BetaLimitedNetworkParams, nil] Network configuration policy. Omit on update to preserve the existing value.
         #
-        #   @param packages [Anthropic::Models::Beta::BetaPackagesParams, nil] Specify packages (and optionally their versions) available in this environment.
+        #   @param packages [Anthropic::Models::Beta::BetaPackagesParams, nil] Package manager configuration. Under `limited` networking, requires `networking.
         #
         #   @param type [Symbol, :cloud] Environment type
 

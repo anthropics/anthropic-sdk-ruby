@@ -36,7 +36,8 @@ module Anthropic
         optional :enabled, Anthropic::Internal::Type::Boolean, nil?: true
 
         # @!attribute permission_policy
-        #   Permission policy for tool execution.
+        #   Permission policy for this tool. Controls whether tool calls are auto-approved
+        #   or require confirmation.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy, Anthropic::Models::Beta::BetaManagedAgentsAutoPolicy, nil]
         optional :permission_policy,
@@ -67,7 +68,7 @@ module Anthropic
         #
         #   @param enabled [Boolean, nil] Whether this tool is enabled and available to Claude. Overrides the default_conf
         #
-        #   @param permission_policy [Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy, Anthropic::Models::Beta::BetaManagedAgentsAutoPolicy, nil] Permission policy for tool execution.
+        #   @param permission_policy [Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy, Anthropic::Models::Beta::BetaManagedAgentsAutoPolicy, nil] Permission policy for this tool. Controls whether tool calls are auto-approved o
         #
         #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsWebSearchToolConfigParams::Type]
         #
@@ -75,7 +76,8 @@ module Anthropic
         #
         #   @param name [Symbol, :web_search] Must be "web_search".
 
-        # Permission policy for tool execution.
+        # Permission policy for this tool. Controls whether tool calls are auto-approved
+        # or require confirmation.
         #
         # @see Anthropic::Models::Beta::BetaManagedAgentsWebSearchToolConfigParams#permission_policy
         module PermissionPolicy

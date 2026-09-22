@@ -17,7 +17,7 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :id
 
-          # UserToolConfirmationResult enum
+          # The confirmation result: 'allow' or 'deny'.
           sig do
             returns(
               Anthropic::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::Result::TaggedSymbol
@@ -44,7 +44,7 @@ module Anthropic
           sig { returns(T.nilable(String)) }
           attr_accessor :deny_message
 
-          # A timestamp in RFC 3339 format
+          # Timestamp when the confirmation was processed.
           sig { returns(T.nilable(Time)) }
           attr_accessor :processed_at
 
@@ -70,7 +70,7 @@ module Anthropic
           def self.new(
             # Unique identifier for this event.
             id:,
-            # UserToolConfirmationResult enum
+            # The confirmation result: 'allow' or 'deny'.
             result:,
             # The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result
             # corresponds to, which can be found in the last `session.status_idle`
@@ -81,7 +81,7 @@ module Anthropic
             # Optional message providing context for a 'deny' decision. Only allowed when
             # result is 'deny'.
             deny_message: nil,
-            # A timestamp in RFC 3339 format
+            # Timestamp when the confirmation was processed.
             processed_at: nil,
             # Set by the server to the subagent thread this confirmation was routed to.
             # Omitted when it was routed to the primary thread.
@@ -107,7 +107,7 @@ module Anthropic
           def to_hash
           end
 
-          # UserToolConfirmationResult enum
+          # The confirmation result: 'allow' or 'deny'.
           module Result
             extend Anthropic::Internal::Type::Enum
 

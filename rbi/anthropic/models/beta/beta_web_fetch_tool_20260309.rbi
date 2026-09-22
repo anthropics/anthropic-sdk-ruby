@@ -101,12 +101,8 @@ module Anthropic
         sig { params(strict: T::Boolean).void }
         attr_writer :strict
 
-        # Which sources contribute to the set of URLs web fetch may fetch.
-        #
-        # Each key is a tagged variant: `user_input` is `all` or `none`; the two tool
-        # filters are `all`, `none`, `only` (only the named tools' results) or `except`
-        # (every result but the named tools'). A named tool must be declared in this
-        # request's `tools[]`.
+        # Which sources contribute to the set of URLs the tool may fetch. Omitted means
+        # every source.
         sig { returns(T.nilable(Anthropic::Beta::BetaWebFetchURLSources)) }
         attr_reader :url_sources
 
@@ -172,12 +168,8 @@ module Anthropic
           max_uses: nil,
           # When true, guarantees schema validation on tool names and inputs
           strict: nil,
-          # Which sources contribute to the set of URLs web fetch may fetch.
-          #
-          # Each key is a tagged variant: `user_input` is `all` or `none`; the two tool
-          # filters are `all`, `none`, `only` (only the named tools' results) or `except`
-          # (every result but the named tools'). A named tool must be declared in this
-          # request's `tools[]`.
+          # Which sources contribute to the set of URLs the tool may fetch. Omitted means
+          # every source.
           url_sources: nil,
           # Whether to use cached content. Set to false to bypass the cache and fetch fresh
           # content. Only set to false when the user explicitly requests fresh content or

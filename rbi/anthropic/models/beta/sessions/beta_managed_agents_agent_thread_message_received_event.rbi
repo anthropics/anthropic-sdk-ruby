@@ -31,7 +31,7 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :from_session_thread_id
 
-          # A timestamp in RFC 3339 format
+          # Timestamp when the message was received.
           sig { returns(Time) }
           attr_accessor :processed_at
 
@@ -75,7 +75,7 @@ module Anthropic
             content:,
             # Public `sthr_` ID of the thread that sent the message.
             from_session_thread_id:,
-            # A timestamp in RFC 3339 format
+            # Timestamp when the message was received.
             processed_at:,
             type:,
             # Name of the callable agent this message came from. Absent when received from the
@@ -202,7 +202,7 @@ module Anthropic
               type:,
               # The text content.
               text: nil,
-              # Union type for image source variants.
+              # The source of the image data.
               source: nil,
               # Additional context about the document for the model.
               context: nil,

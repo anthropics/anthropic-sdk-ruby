@@ -31,11 +31,14 @@ module Anthropic
         # Creates a new instance of the variant class whose `type` matches the given
         # value, passing the remaining arguments to its constructor.
         #
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::BetaManagedAgentsTriggerContext} for more details.
+        #
         # @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsTriggerContext::Type, String]
         #
         # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
         #
-        #   @option args [Time] :scheduled_at A timestamp in RFC 3339 format
+        #   @option args [Time] :scheduled_at The UTC instant at which the cron expression matched in the configured timezone,
         #
         # @raise [ArgumentError]
         # @return [Anthropic::Models::Beta::BetaManagedAgentsScheduleTriggerContext, Anthropic::Models::Beta::BetaManagedAgentsManualTriggerContext]

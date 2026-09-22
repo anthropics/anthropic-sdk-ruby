@@ -26,7 +26,7 @@ module Anthropic
           def create(
             # Path param: Identifier of the vault to create the credential in.
             vault_id,
-            # Body param: Authentication details for creating a credential.
+            # Body param: Authentication configuration for the credential.
             auth:,
             # Body param: Human-readable name for the credential. Up to 255 characters.
             display_name: nil,
@@ -99,7 +99,8 @@ module Anthropic
             credential_id,
             # Path param: Identifier of the vault containing the credential.
             vault_id:,
-            # Body param: Updated authentication details for a credential.
+            # Body param: Updated authentication configuration. The `type` is immutable; the
+            # variant sent must match the stored credential's type.
             auth: nil,
             # Body param: Updated human-readable name for the credential. 1-255 characters.
             display_name: nil,

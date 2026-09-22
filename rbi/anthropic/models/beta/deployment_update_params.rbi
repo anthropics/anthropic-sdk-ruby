@@ -42,8 +42,11 @@ module Anthropic
         end
         attr_writer :agent
 
-        # A hard spend ceiling. The session stops issuing new model requests once the
-        # tracked list cost reaches `max_list_cost`.
+        # Spend ceiling for future sessions. Full replacement. Omit to preserve; send null
+        # to clear (sessions created afterwards are uncapped). The deployment agent's
+        # model must have a public list price, or the request is rejected; a multiagent
+        # roster is re-validated in full when each fire copies the cap, which fails closed
+        # the same way.
         sig do
           returns(T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit))
         end
@@ -129,8 +132,8 @@ module Anthropic
         end
         attr_accessor :resources
 
-        # 5-field POSIX cron schedule. Literal wall-clock matching in the configured
-        # timezone.
+        # Cron schedule. Full replacement. Omit to preserve; send null to clear (revert to
+        # manual-only).
         sig do
           returns(T.nilable(Anthropic::Beta::BetaManagedAgentsScheduleParams))
         end
@@ -229,8 +232,11 @@ module Anthropic
           # version, or an `agent` object with both id and version specified. Omit to
           # preserve. Cannot be cleared.
           agent: nil,
-          # A hard spend ceiling. The session stops issuing new model requests once the
-          # tracked list cost reaches `max_list_cost`.
+          # Spend ceiling for future sessions. Full replacement. Omit to preserve; send null
+          # to clear (sessions created afterwards are uncapped). The deployment agent's
+          # model must have a public list price, or the request is rejected; a multiagent
+          # roster is re-validated in full when each fire copies the cap, which fails closed
+          # the same way.
           budget: nil,
           # Description. Omit to preserve; send empty string or null to clear.
           description: nil,
@@ -248,8 +254,8 @@ module Anthropic
           # Session resources. Full replacement. Omit to preserve; send empty array or null
           # to clear. Maximum 500.
           resources: nil,
-          # 5-field POSIX cron schedule. Literal wall-clock matching in the configured
-          # timezone.
+          # Cron schedule. Full replacement. Omit to preserve; send null to clear (revert to
+          # manual-only).
           schedule: nil,
           # Vault IDs. Full replacement. Omit to preserve; send empty array or null to
           # clear. Maximum 50.
@@ -434,7 +440,8 @@ module Anthropic
             # The memory store ID (memstore\_...). Must belong to the caller's organization
             # and workspace.
             memory_store_id: nil,
-            # Access mode for an attached memory store.
+            # Access mode for the mounted store. Defaults to read_write. read_only mounts the
+            # store as a read-only filesystem.
             access: nil,
             # Per-attachment guidance for the agent on how to use this store. Rendered into
             # the memory section of the system prompt. Max 4096 chars.

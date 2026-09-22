@@ -19,7 +19,7 @@ module Anthropic
         #
         # @param name [String] Body param: Human-readable name for the deployment.
         #
-        # @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] Body param: A hard spend ceiling. The session stops issuing new model requests o
+        # @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] Body param: Enforced spend ceiling stamped onto each session created from this d
         #
         # @param description [String, nil] Body param: Description of what the deployment does.
         #
@@ -27,7 +27,7 @@ module Anthropic
         #
         # @param resources [Array<Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams, Anthropic::Models::Beta::BetaManagedAgentsFileResourceParams, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam>] Body param: Resources (e.g. repositories, files) to mount into each session's co
         #
-        # @param schedule [Anthropic::Models::Beta::BetaManagedAgentsScheduleParams, nil] Body param: 5-field POSIX cron schedule. Literal wall-clock matching in the conf
+        # @param schedule [Anthropic::Models::Beta::BetaManagedAgentsScheduleParams, nil] Body param: Optional recurring cron schedule. When present, the deployment fires
         #
         # @param vault_ids [Array<String>] Body param: Vault IDs for stored credentials the agent can use during sessions c
         #
@@ -93,7 +93,7 @@ module Anthropic
         #
         # @param agent [Anthropic::Models::Beta::BetaManagedAgentsAgentParams, String] Body param: Agent to deploy. Accepts the `agent` ID string, which re-pins to the
         #
-        # @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] Body param: A hard spend ceiling. The session stops issuing new model requests o
+        # @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] Body param: Spend ceiling for future sessions. Full replacement. Omit to preserv
         #
         # @param description [String, nil] Body param: Description. Omit to preserve; send empty string or null to clear.
         #
@@ -107,7 +107,7 @@ module Anthropic
         #
         # @param resources [Array<Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams, Anthropic::Models::Beta::BetaManagedAgentsFileResourceParams, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam>, nil] Body param: Session resources. Full replacement. Omit to preserve; send empty ar
         #
-        # @param schedule [Anthropic::Models::Beta::BetaManagedAgentsScheduleParams, nil] Body param: 5-field POSIX cron schedule. Literal wall-clock matching in the conf
+        # @param schedule [Anthropic::Models::Beta::BetaManagedAgentsScheduleParams, nil] Body param: Cron schedule. Full replacement. Omit to preserve; send null to clea
         #
         # @param vault_ids [Array<String>, nil] Body param: Vault IDs. Full replacement. Omit to preserve; send empty array or n
         #

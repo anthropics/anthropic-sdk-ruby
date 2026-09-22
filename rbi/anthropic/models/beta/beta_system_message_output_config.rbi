@@ -14,7 +14,10 @@ module Anthropic
             )
           end
 
-        # All possible effort levels.
+        # How much effort the model should put into its response. Higher effort levels may
+        # result in more thorough analysis but take longer.
+        #
+        # Valid values are `low`, `medium`, `high`, `xhigh`, or `max`.
         sig do
           returns(
             T.nilable(
@@ -38,7 +41,10 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
-          # All possible effort levels.
+          # How much effort the model should put into its response. Higher effort levels may
+          # result in more thorough analysis but take longer.
+          #
+          # Valid values are `low`, `medium`, `high`, `xhigh`, or `max`.
           effort: nil
         )
         end
@@ -56,7 +62,10 @@ module Anthropic
         def to_hash
         end
 
-        # All possible effort levels.
+        # How much effort the model should put into its response. Higher effort levels may
+        # result in more thorough analysis but take longer.
+        #
+        # Valid values are `low`, `medium`, `high`, `xhigh`, or `max`.
         module Effort
           extend Anthropic::Internal::Type::Enum
 

@@ -12,7 +12,7 @@ module Anthropic
         required :id, String
 
         # @!attribute archived_at
-        #   A timestamp in RFC 3339 format
+        #   When the vault was archived. Null if not archived.
         #
         #   @return [Time, nil]
         required :archived_at, Time, nil?: true
@@ -51,7 +51,7 @@ module Anthropic
         #
         #   @param id [String] Unique identifier for the vault.
         #
-        #   @param archived_at [Time, nil] A timestamp in RFC 3339 format
+        #   @param archived_at [Time, nil] When the vault was archived. Null if not archived.
         #
         #   @param created_at [Time] A timestamp in RFC 3339 format
         #

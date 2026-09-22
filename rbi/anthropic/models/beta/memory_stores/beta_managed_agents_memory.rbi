@@ -30,7 +30,7 @@ module Anthropic
           sig { returns(Integer) }
           attr_accessor :content_size_bytes
 
-          # A timestamp in RFC 3339 format
+          # When this memory was created, in RFC 3339 format.
           sig { returns(Time) }
           attr_accessor :created_at
 
@@ -59,7 +59,10 @@ module Anthropic
           end
           attr_accessor :type
 
-          # A timestamp in RFC 3339 format
+          # When this memory was last modified, in RFC 3339 format. Use this as a cheap
+          # freshness signal; for who made the change, look up the head version's
+          # `created_by` via
+          # [List memory versions](/en/api/beta/memory_stores/memory_versions/list).
           sig { returns(Time) }
           attr_accessor :updated_at
 
@@ -101,7 +104,7 @@ module Anthropic
             # Size of `content` in bytes (the UTF-8 plaintext length). Always populated,
             # regardless of `view`.
             content_size_bytes:,
-            # A timestamp in RFC 3339 format
+            # When this memory was created, in RFC 3339 format.
             created_at:,
             # ID of the memory store this memory belongs to (a `memstore_...` value).
             memory_store_id:,
@@ -116,7 +119,10 @@ module Anthropic
             # Maximum 1,024 bytes.
             path:,
             type:,
-            # A timestamp in RFC 3339 format
+            # When this memory was last modified, in RFC 3339 format. Use this as a cheap
+            # freshness signal; for who made the change, look up the head version's
+            # `created_by` via
+            # [List memory versions](/en/api/beta/memory_stores/memory_versions/list).
             updated_at:,
             # The memory's UTF-8 text content. Populated when `view=full`; `null` when
             # `view=basic`. Maximum 100 kB (102,400 bytes).

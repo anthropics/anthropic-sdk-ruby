@@ -17,7 +17,7 @@ module Anthropic
           required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEvent::Type }
 
           # @!attribute processed_at
-          #   A timestamp in RFC 3339 format
+          #   Timestamp when the interrupt was processed.
           #
           #   @return [Time, nil]
           optional :processed_at, Time, nil?: true
@@ -41,7 +41,7 @@ module Anthropic
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEvent::Type]
           #
-          #   @param processed_at [Time, nil] A timestamp in RFC 3339 format
+          #   @param processed_at [Time, nil] Timestamp when the interrupt was processed.
           #
           #   @param session_thread_id [String, nil] If absent, interrupts every non-archived thread in a multiagent session (or the
 

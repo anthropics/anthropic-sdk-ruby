@@ -30,7 +30,7 @@ module Anthropic
           required :content_size_bytes, Integer
 
           # @!attribute created_at
-          #   A timestamp in RFC 3339 format
+          #   When this memory was created, in RFC 3339 format.
           #
           #   @return [Time]
           required :created_at, Time
@@ -65,7 +65,10 @@ module Anthropic
           required :type, enum: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsMemory::Type }
 
           # @!attribute updated_at
-          #   A timestamp in RFC 3339 format
+          #   When this memory was last modified, in RFC 3339 format. Use this as a cheap
+          #   freshness signal; for who made the change, look up the head version's
+          #   `created_by` via
+          #   [List memory versions](/en/api/beta/memory_stores/memory_versions/list).
           #
           #   @return [Time]
           required :updated_at, Time
@@ -95,7 +98,7 @@ module Anthropic
           #
           #   @param content_size_bytes [Integer] Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regar
           #
-          #   @param created_at [Time] A timestamp in RFC 3339 format
+          #   @param created_at [Time] When this memory was created, in RFC 3339 format.
           #
           #   @param memory_store_id [String] ID of the memory store this memory belongs to (a `memstore_...` value).
           #
@@ -105,7 +108,7 @@ module Anthropic
           #
           #   @param type [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemory::Type]
           #
-          #   @param updated_at [Time] A timestamp in RFC 3339 format
+          #   @param updated_at [Time] When this memory was last modified, in RFC 3339 format. Use this as a cheap fres
           #
           #   @param content [String, nil] The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=b
 

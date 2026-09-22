@@ -17,15 +17,17 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :id
 
-          # A timestamp in RFC 3339 format
+          # RFC 3339 datetime string indicating when the certificate was archived. Null if
+          # it is still in the trusted set.
           sig { returns(T.nilable(Time)) }
           attr_accessor :archived_at
 
-          # A timestamp in RFC 3339 format
+          # RFC 3339 datetime string indicating when the certificate was registered.
           sig { returns(Time) }
           attr_accessor :created_at
 
-          # A timestamp in RFC 3339 format
+          # RFC 3339 datetime string indicating when the certificate expires, or `null` if
+          # it does not expire.
           sig { returns(T.nilable(Time)) }
           attr_accessor :expires_at
 
@@ -55,11 +57,13 @@ module Anthropic
           def self.new(
             # Unique identifier for the certificate, prefixed with `tcrt_`.
             id:,
-            # A timestamp in RFC 3339 format
+            # RFC 3339 datetime string indicating when the certificate was archived. Null if
+            # it is still in the trusted set.
             archived_at:,
-            # A timestamp in RFC 3339 format
+            # RFC 3339 datetime string indicating when the certificate was registered.
             created_at:,
-            # A timestamp in RFC 3339 format
+            # RFC 3339 datetime string indicating when the certificate expires, or `null` if
+            # it does not expire.
             expires_at:,
             # Lowercase hex SHA-256 fingerprint of the certificate's DER encoding.
             fingerprint:,

@@ -18,7 +18,7 @@ module Anthropic
           required :agent_name, String
 
           # @!attribute processed_at
-          #   A timestamp in RFC 3339 format
+          #   Timestamp of the status transition.
           #
           #   @return [Time]
           required :processed_at, Time
@@ -43,7 +43,7 @@ module Anthropic
           #
           #   @param agent_name [String] Name of the agent the thread runs.
           #
-          #   @param processed_at [Time] A timestamp in RFC 3339 format
+          #   @param processed_at [Time] Timestamp of the status transition.
           #
           #   @param session_thread_id [String] Public sthr\_ ID of the thread that started running.
           #

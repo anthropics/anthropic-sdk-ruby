@@ -24,7 +24,7 @@ module Anthropic
         sig { params(active_seconds: Float).void }
         attr_writer :active_seconds
 
-        # Prompt-cache creation token usage broken down by cache lifetime.
+        # Tokens used to create prompt cache entries, broken down by cache TTL.
         sig do
           returns(
             T.nilable(Anthropic::Beta::BetaManagedAgentsCacheCreationUsage)
@@ -54,7 +54,8 @@ module Anthropic
         sig { params(input_tokens: Integer).void }
         attr_writer :input_tokens
 
-        # A monetary amount in a specific currency.
+        # Cumulative list cost of the session across all turns, priced at public list
+        # rates. Absent until cost tracking is available for the session.
         sig { returns(T.nilable(Anthropic::BetaMonetaryAmount)) }
         attr_reader :list_cost
 
@@ -72,7 +73,8 @@ module Anthropic
         sig { params(output_tokens: Integer).void }
         attr_writer :output_tokens
 
-        # Cumulative count of server-executed tool invocations, broken down by tool.
+        # Cumulative server-executed tool usage across all turns. Absent until server-tool
+        # tracking is available for the session.
         sig do
           returns(T.nilable(Anthropic::Beta::BetaManagedAgentsServerToolUsage))
         end
@@ -110,17 +112,19 @@ module Anthropic
           # unlike `stats.active_seconds`, which sums each thread's own active time. This is
           # the duration the session's runtime cost is priced on.
           active_seconds: nil,
-          # Prompt-cache creation token usage broken down by cache lifetime.
+          # Tokens used to create prompt cache entries, broken down by cache TTL.
           cache_creation: nil,
           # Total tokens read from prompt cache.
           cache_read_input_tokens: nil,
           # Total input tokens consumed across all turns.
           input_tokens: nil,
-          # A monetary amount in a specific currency.
+          # Cumulative list cost of the session across all turns, priced at public list
+          # rates. Absent until cost tracking is available for the session.
           list_cost: nil,
           # Total output tokens generated across all turns.
           output_tokens: nil,
-          # Cumulative count of server-executed tool invocations, broken down by tool.
+          # Cumulative server-executed tool usage across all turns. Absent until server-tool
+          # tracking is available for the session.
           server_tool_use: nil
         )
         end

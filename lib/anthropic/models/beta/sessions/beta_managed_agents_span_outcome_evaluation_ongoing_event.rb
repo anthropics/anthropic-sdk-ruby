@@ -25,7 +25,7 @@ module Anthropic
           required :outcome_id, String
 
           # @!attribute processed_at
-          #   A timestamp in RFC 3339 format
+          #   Timestamp when this heartbeat was emitted.
           #
           #   @return [Time]
           required :processed_at, Time
@@ -52,7 +52,7 @@ module Anthropic
           #
           #   @param outcome_id [String] The `outc_` ID of the outcome being evaluated.
           #
-          #   @param processed_at [Time] A timestamp in RFC 3339 format
+          #   @param processed_at [Time] Timestamp when this heartbeat was emitted.
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent::Type]
 

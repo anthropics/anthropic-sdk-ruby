@@ -15,11 +15,10 @@ module Anthropic
             )
           end
 
-        # How the platform uses the API on behalf of the entity this profile represents.
-        # `application`: the platform sells a product that uses the API behind the scenes,
-        # and the profile represents an individual end-user of that product.
-        # `passthrough`: the platform resells raw inference, and the profile identifies
-        # the resold-to company.
+        # How the platform uses the API for this entity. `application` (default): the
+        # profile represents an individual end-user of the platform's product.
+        # `passthrough`: the profile identifies a company the platform resells Claude
+        # access to.
         sig do
           returns(
             T.nilable(
@@ -62,7 +61,12 @@ module Anthropic
         end
         attr_writer :external_user_details
 
-        # A timestamp in RFC 3339 format
+        # When the entity this profile represents opened its account with the platform, in
+        # RFC 3339 format: for an `application` profile, when the end-user signed up; for
+        # a `passthrough` profile, when the company became the platform's customer. Must
+        # be a complete timestamp no more than 1 minute in the future. Optional. Accepted
+        # under the `user-profiles-2026-08-18` beta header; under
+        # `user-profiles-2026-09-04` send `external_user_details.onboarded_at` instead.
         sig { returns(T.nilable(Time)) }
         attr_reader :external_user_onboarded_at
 
@@ -130,11 +134,10 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
-          # How the platform uses the API on behalf of the entity this profile represents.
-          # `application`: the platform sells a product that uses the API behind the scenes,
-          # and the profile represents an individual end-user of that product.
-          # `passthrough`: the platform resells raw inference, and the profile identifies
-          # the resold-to company.
+          # How the platform uses the API for this entity. `application` (default): the
+          # profile represents an individual end-user of the platform's product.
+          # `passthrough`: the profile identifies a company the platform resells Claude
+          # access to.
           access_type: nil,
           # Platform's own identifier for this user. Not enforced unique. Maximum 255
           # characters. Accepted under the `user-profiles-2026-03-24` and
@@ -145,7 +148,12 @@ module Anthropic
           # Every field is optional. Accepted under the `user-profiles-2026-09-04` beta
           # header only.
           external_user_details: nil,
-          # A timestamp in RFC 3339 format
+          # When the entity this profile represents opened its account with the platform, in
+          # RFC 3339 format: for an `application` profile, when the end-user signed up; for
+          # a `passthrough` profile, when the company became the platform's customer. Must
+          # be a complete timestamp no more than 1 minute in the future. Optional. Accepted
+          # under the `user-profiles-2026-08-18` beta header; under
+          # `user-profiles-2026-09-04` send `external_user_details.onboarded_at` instead.
           external_user_onboarded_at: nil,
           # Free-form key-value data to attach to this user profile. Maximum 16 keys, with
           # keys up to 64 characters and values up to 512 characters. Values must be
@@ -190,11 +198,10 @@ module Anthropic
         def to_hash
         end
 
-        # How the platform uses the API on behalf of the entity this profile represents.
-        # `application`: the platform sells a product that uses the API behind the scenes,
-        # and the profile represents an individual end-user of that product.
-        # `passthrough`: the platform resells raw inference, and the profile identifies
-        # the resold-to company.
+        # How the platform uses the API for this entity. `application` (default): the
+        # profile represents an individual end-user of the platform's product.
+        # `passthrough`: the profile identifies a company the platform resells Claude
+        # access to.
         module AccessType
           extend Anthropic::Internal::Type::Enum
 

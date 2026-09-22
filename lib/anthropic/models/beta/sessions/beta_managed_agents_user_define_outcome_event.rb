@@ -31,13 +31,14 @@ module Anthropic
           required :outcome_id, String
 
           # @!attribute processed_at
-          #   A timestamp in RFC 3339 format
+          #   Timestamp when the outcome was accepted.
           #
           #   @return [Time]
           required :processed_at, Time
 
           # @!attribute rubric
-          #   Rubric for grading the quality of an outcome.
+          #   How to grade the outcome. File rubrics are currently resolved to their text
+          #   content; clients should handle both variants.
           #
           #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubric, Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubric]
           required :rubric, union: -> { Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::Rubric }
@@ -63,13 +64,14 @@ module Anthropic
           #
           #   @param outcome_id [String] Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evalua
           #
-          #   @param processed_at [Time] A timestamp in RFC 3339 format
+          #   @param processed_at [Time] Timestamp when the outcome was accepted.
           #
-          #   @param rubric [Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubric, Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubric] Rubric for grading the quality of an outcome.
+          #   @param rubric [Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubric, Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubric] How to grade the outcome. File rubrics are currently resolved to their text cont
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::Type]
 
-          # Rubric for grading the quality of an outcome.
+          # How to grade the outcome. File rubrics are currently resolved to their text
+          # content; clients should handle both variants.
           #
           # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent#rubric
           module Rubric

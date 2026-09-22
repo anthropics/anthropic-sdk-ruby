@@ -19,7 +19,7 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :description
 
-        # Rubric for grading the quality of an outcome.
+        # How to grade the outcome. Text or file reference.
         sig do
           returns(
             Anthropic::Beta::BetaManagedAgentsDeploymentUserDefineOutcomeEvent::Rubric::Variants
@@ -55,7 +55,7 @@ module Anthropic
         def self.new(
           # What the agent should produce. This is the task specification.
           description:,
-          # Rubric for grading the quality of an outcome.
+          # How to grade the outcome. Text or file reference.
           rubric:,
           type:,
           # Eval→revision cycles before giving up. Default 3, max 20.
@@ -78,7 +78,7 @@ module Anthropic
         def to_hash
         end
 
-        # Rubric for grading the quality of an outcome.
+        # How to grade the outcome. Text or file reference.
         module Rubric
           extend Anthropic::Internal::Type::Union
 

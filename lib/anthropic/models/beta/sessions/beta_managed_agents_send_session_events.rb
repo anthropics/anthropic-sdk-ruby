@@ -80,11 +80,11 @@ module Anthropic
             #
             #   @option args [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRedactedBlock>, Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultBlock>, Array<Anthropic::Models::Beta::BetaManagedAgentsSystemContentBlock>] :content Array of content blocks comprising the user message.
             #
-            #   @option args [Time, nil, Time] :processed_at A timestamp in RFC 3339 format
+            #   @option args [Time, nil, Time] :processed_at Timestamp when the agent finished processing this message.
             #
             #   @option args [String, nil] :session_thread_id If absent, interrupts every non-archived thread in a multiagent session (or the
             #
-            #   @option args [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::Result] :result UserToolConfirmationResult enum
+            #   @option args [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::Result] :result The confirmation result: 'allow' or 'deny'.
             #
             #   @option args [String] :tool_use_id The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresp
             #
@@ -100,7 +100,7 @@ module Anthropic
             #
             #   @option args [String] :outcome_id Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evalua
             #
-            #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubric, Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubric] :rubric Rubric for grading the quality of an outcome.
+            #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubric, Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubric] :rubric How to grade the outcome. File rubrics are currently resolved to their text cont
             #
             # @raise [ArgumentError]
             # @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent, Anthropic::Models::Beta::BetaManagedAgentsUserToolResultEvent, Anthropic::Models::Beta::BetaManagedAgentsSystemMessageEvent]

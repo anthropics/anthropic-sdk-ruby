@@ -5,7 +5,8 @@ module Anthropic
     module Beta
       class BetaManagedAgentsOutcomeEvaluationResource < Anthropic::Internal::Type::BaseModel
         # @!attribute completed_at
-        #   A timestamp in RFC 3339 format
+        #   When the outcome reached a terminal result. Null while
+        #   `pending`/`running`/`evaluating`.
         #
         #   @return [Time, nil]
         required :completed_at, Time, nil?: true
@@ -56,7 +57,7 @@ module Anthropic
         #   {Anthropic::Models::Beta::BetaManagedAgentsOutcomeEvaluationResource} for more
         #   details.
         #
-        #   @param completed_at [Time, nil] A timestamp in RFC 3339 format
+        #   @param completed_at [Time, nil] When the outcome reached a terminal result. Null while `pending`/`running`/`eval
         #
         #   @param description [String] What the agent should produce.
         #

@@ -13,19 +13,20 @@ module Anthropic
           required :id, String
 
           # @!attribute agent
-          #   The resolved agent a `session_thread` runs.
+          #   Resolved agent definition for this thread. Snapshot of the agent at thread
+          #   creation time.
           #
           #   @return [Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent, Anthropic::Models::Beta::BetaManagedAgentsAdvisor]
           required :agent, union: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread::Agent }
 
           # @!attribute archived_at
-          #   A timestamp in RFC 3339 format
+          #   When the thread was archived. Null if not archived.
           #
           #   @return [Time, nil]
           required :archived_at, Time, nil?: true
 
           # @!attribute created_at
-          #   A timestamp in RFC 3339 format
+          #   When the thread was created.
           #
           #   @return [Time]
           required :created_at, Time
@@ -43,13 +44,14 @@ module Anthropic
           required :session_id, String
 
           # @!attribute stats
-          #   Timing statistics for a session thread.
+          #   Timing statistics for this thread. Null until the thread's first status
+          #   transition.
           #
           #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStats, nil]
           required :stats, -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStats }, nil?: true
 
           # @!attribute status
-          #   SessionThreadStatus enum
+          #   Current execution status of the thread.
           #
           #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatus]
           required :status, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatus }
@@ -60,13 +62,14 @@ module Anthropic
           required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread::Type }
 
           # @!attribute updated_at
-          #   A timestamp in RFC 3339 format
+          #   When the thread was last updated.
           #
           #   @return [Time]
           required :updated_at, Time
 
           # @!attribute usage
-          #   Cumulative token usage for a session thread across all turns.
+          #   Cumulative token usage for this thread. Null until the thread's first idle
+          #   transition.
           #
           #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadUsage, nil]
           required :usage, -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadUsage }, nil?: true
@@ -75,29 +78,34 @@ module Anthropic
           #   An execution thread within a `session`. Each session has one primary thread plus
           #   zero or more child threads spawned by the coordinator.
           #
+          #   Some parameter documentations has been truncated, see
+          #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread} for more
+          #   details.
+          #
           #   @param id [String] Unique identifier for this thread.
           #
-          #   @param agent [Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent, Anthropic::Models::Beta::BetaManagedAgentsAdvisor] The resolved agent a `session_thread` runs.
+          #   @param agent [Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent, Anthropic::Models::Beta::BetaManagedAgentsAdvisor] Resolved agent definition for this thread. Snapshot of the agent at thread creat
           #
-          #   @param archived_at [Time, nil] A timestamp in RFC 3339 format
+          #   @param archived_at [Time, nil] When the thread was archived. Null if not archived.
           #
-          #   @param created_at [Time] A timestamp in RFC 3339 format
+          #   @param created_at [Time] When the thread was created.
           #
           #   @param parent_thread_id [String, nil] Parent thread that spawned this thread. Null for the primary thread.
           #
           #   @param session_id [String] The session this thread belongs to.
           #
-          #   @param stats [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStats, nil] Timing statistics for a session thread.
+          #   @param stats [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStats, nil] Timing statistics for this thread. Null until the thread's first status transiti
           #
-          #   @param status [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatus] SessionThreadStatus enum
+          #   @param status [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatus] Current execution status of the thread.
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread::Type]
           #
-          #   @param updated_at [Time] A timestamp in RFC 3339 format
+          #   @param updated_at [Time] When the thread was last updated.
           #
-          #   @param usage [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadUsage, nil] Cumulative token usage for a session thread across all turns.
+          #   @param usage [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadUsage, nil] Cumulative token usage for this thread. Null until the thread's first idle trans
 
-          # The resolved agent a `session_thread` runs.
+          # Resolved agent definition for this thread. Snapshot of the agent at thread
+          # creation time.
           #
           # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread#agent
           module Agent

@@ -14,7 +14,7 @@ module Anthropic
         required :id, String
 
         # @!attribute created_at
-        #   A timestamp in RFC 3339 format
+        #   Timestamp when the store was created.
         #
         #   @return [Time]
         required :created_at, Time
@@ -32,13 +32,16 @@ module Anthropic
         required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsMemoryStore::Type }
 
         # @!attribute updated_at
-        #   A timestamp in RFC 3339 format
+        #   Timestamp when the store's `name`, `description`, or `metadata` was last
+        #   modified. Memory writes inside the store do not advance this.
         #
         #   @return [Time]
         required :updated_at, Time
 
         # @!attribute archived_at
-        #   A timestamp in RFC 3339 format
+        #   Timestamp when the store was archived, or `null` if active. Set once and never
+        #   cleared; archiving is one-way. Archived stores are read-only and cannot be
+        #   attached to new sessions.
         #
         #   @return [Time, nil]
         optional :archived_at, Time, nil?: true
@@ -69,15 +72,15 @@ module Anthropic
         #
         #   @param id [String] Unique identifier for the memory store (a `memstore_...` tagged ID). Use this wh
         #
-        #   @param created_at [Time] A timestamp in RFC 3339 format
+        #   @param created_at [Time] Timestamp when the store was created.
         #
         #   @param name [String] Human-readable name for the store. 1–255 characters. The store's mount-path slug
         #
         #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMemoryStore::Type]
         #
-        #   @param updated_at [Time] A timestamp in RFC 3339 format
+        #   @param updated_at [Time] Timestamp when the store's `name`, `description`, or `metadata` was last modifie
         #
-        #   @param archived_at [Time, nil] A timestamp in RFC 3339 format
+        #   @param archived_at [Time, nil] Timestamp when the store was archived, or `null` if active. Set once and never c
         #
         #   @param description [String] Free-text description of what the store contains, up to 1024 characters. Include
         #

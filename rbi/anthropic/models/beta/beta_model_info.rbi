@@ -21,7 +21,8 @@ module Anthropic
         sig { returns(T.nilable(T::Array[String])) }
         attr_accessor :allowed_fallback_models
 
-        # Model capability information.
+        # Object mapping capability names to their support details. Keys are always
+        # present for all known capabilities.
         sig { returns(T.nilable(Anthropic::Beta::BetaModelCapabilities)) }
         attr_reader :capabilities
 
@@ -76,7 +77,8 @@ module Anthropic
           # empty list means the `fallbacks` parameter is not supported for this model as
           # primary.
           allowed_fallback_models:,
-          # Model capability information.
+          # Object mapping capability names to their support details. Keys are always
+          # present for all known capabilities.
           capabilities:,
           # RFC 3339 datetime string representing the time at which the model was released.
           # May be set to an epoch value if the release date is unknown.

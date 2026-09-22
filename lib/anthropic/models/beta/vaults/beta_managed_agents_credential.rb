@@ -13,13 +13,13 @@ module Anthropic
           required :id, String
 
           # @!attribute archived_at
-          #   A timestamp in RFC 3339 format
+          #   When the credential was archived. Null if not archived.
           #
           #   @return [Time, nil]
           required :archived_at, Time, nil?: true
 
           # @!attribute auth
-          #   Authentication details for a credential.
+          #   Authentication configuration for this credential.
           #
           #   @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthAuthResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerAuthResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse]
           required :auth, union: -> { Anthropic::Beta::Vaults::BetaManagedAgentsCredential::Auth }
@@ -65,9 +65,9 @@ module Anthropic
           #
           #   @param id [String] Unique identifier for the credential.
           #
-          #   @param archived_at [Time, nil] A timestamp in RFC 3339 format
+          #   @param archived_at [Time, nil] When the credential was archived. Null if not archived.
           #
-          #   @param auth [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthAuthResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerAuthResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse] Authentication details for a credential.
+          #   @param auth [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthAuthResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerAuthResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse] Authentication configuration for this credential.
           #
           #   @param created_at [Time] A timestamp in RFC 3339 format
           #
@@ -81,7 +81,7 @@ module Anthropic
           #
           #   @param display_name [String, nil] Human-readable name for the credential.
 
-          # Authentication details for a credential.
+          # Authentication configuration for this credential.
           #
           # @see Anthropic::Models::Beta::Vaults::BetaManagedAgentsCredential#auth
           module Auth
@@ -124,7 +124,7 @@ module Anthropic
             #
             #   @option args [Time, nil] :expires_at A timestamp in RFC 3339 format
             #
-            #   @option args [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshResponse, nil] :refresh OAuth refresh token configuration returned in credential responses.
+            #   @option args [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshResponse, nil] :refresh Refresh token configuration, if the credential supports token refresh.
             #
             #   @option args [Anthropic::Models::Beta::Vaults::BetaManagedAgentsInjectionLocationResponse] :injection_location Where in the outbound request the secret value is substituted.
             #

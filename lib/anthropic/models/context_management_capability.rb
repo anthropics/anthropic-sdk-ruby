@@ -4,19 +4,19 @@ module Anthropic
   module Models
     class ContextManagementCapability < Anthropic::Internal::Type::BaseModel
       # @!attribute clear_thinking_20251015
-      #   Indicates whether a capability is supported.
+      #   Whether the clear_thinking_20251015 strategy is supported.
       #
       #   @return [Anthropic::Models::CapabilitySupport, nil]
       required :clear_thinking_20251015, -> { Anthropic::CapabilitySupport }, nil?: true
 
       # @!attribute clear_tool_uses_20250919
-      #   Indicates whether a capability is supported.
+      #   Whether the clear_tool_uses_20250919 strategy is supported.
       #
       #   @return [Anthropic::Models::CapabilitySupport, nil]
       required :clear_tool_uses_20250919, -> { Anthropic::CapabilitySupport }, nil?: true
 
       # @!attribute compact_20260112
-      #   Indicates whether a capability is supported.
+      #   Whether the compact_20260112 strategy is supported.
       #
       #   @return [Anthropic::Models::CapabilitySupport, nil]
       required :compact_20260112, -> { Anthropic::CapabilitySupport }, nil?: true
@@ -30,11 +30,11 @@ module Anthropic
       # @!method initialize(clear_thinking_20251015:, clear_tool_uses_20250919:, compact_20260112:, supported:)
       #   Context management capability details.
       #
-      #   @param clear_thinking_20251015 [Anthropic::Models::CapabilitySupport, nil] Indicates whether a capability is supported.
+      #   @param clear_thinking_20251015 [Anthropic::Models::CapabilitySupport, nil] Whether the clear_thinking_20251015 strategy is supported.
       #
-      #   @param clear_tool_uses_20250919 [Anthropic::Models::CapabilitySupport, nil] Indicates whether a capability is supported.
+      #   @param clear_tool_uses_20250919 [Anthropic::Models::CapabilitySupport, nil] Whether the clear_tool_uses_20250919 strategy is supported.
       #
-      #   @param compact_20260112 [Anthropic::Models::CapabilitySupport, nil] Indicates whether a capability is supported.
+      #   @param compact_20260112 [Anthropic::Models::CapabilitySupport, nil] Whether the compact_20260112 strategy is supported.
       #
       #   @param supported [Boolean] Whether this capability is supported by the model.
     end

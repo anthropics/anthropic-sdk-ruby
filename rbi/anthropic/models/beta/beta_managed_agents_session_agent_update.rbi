@@ -223,7 +223,7 @@ module Anthropic
             type:,
             # Per-tool configuration overrides.
             configs: nil,
-            # Default configuration for all tools in a toolset.
+            # Default configuration applied to all tools in this set.
             default_config: nil,
             # Name of the MCP server. Must match a server name from the mcp_servers array.
             # 1-255 characters.
@@ -231,7 +231,7 @@ module Anthropic
             # Description of what the tool does, shown to the agent to help it decide when to
             # use the tool.
             description: nil,
-            # JSON Schema for custom tool input parameters.
+            # JSON Schema defining the expected input parameters for the tool.
             input_schema: nil,
             # Unique name for the tool. 1-128 characters; letters, digits, underscores, and
             # hyphens.

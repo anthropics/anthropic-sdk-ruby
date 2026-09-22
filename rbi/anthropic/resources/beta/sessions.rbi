@@ -55,8 +55,10 @@ module Anthropic
           # Body param: ID of the `environment` defining the container configuration for
           # this session.
           environment_id:,
-          # Body param: A hard spend ceiling. The session stops issuing new model requests
-          # once the tracked list cost reaches `max_list_cost`.
+          # Body param: Enforced spend ceiling for the session. Omit to create an uncapped
+          # session. Every model the session can run — the agent's model and each callable
+          # agent's model — must have a public list price, or the request is rejected with
+          # reason `model_not_budgetable`.
           budget: nil,
           # Body param: Initial events to send to the `session` at creation, processed in
           # order. Supports `user.message` and `user.define_outcome` events. Maximum 50
@@ -128,13 +130,18 @@ module Anthropic
         def update(
           # Path param
           session_id,
-          # Body param: Mid-session agent configuration update. Only `tools` and
-          # `mcp_servers` are updatable. Full replacement: the provided array becomes the
-          # new value. To preserve existing entries, GET the session, modify the array, and
-          # POST it back.
+          # Body param: Agent configuration update. Only `tools` and `mcp_servers` are
+          # updatable mid-session. Only valid for sessions created from an agent or
+          # deployment reference. The session must not be running.
           agent: nil,
-          # Body param: A hard spend ceiling. The session stops issuing new model requests
-          # once the tracked list cost reaches `max_list_cost`.
+          # Body param: Enforced spend ceiling for the session. Set an object to replace the
+          # budget of a session that was created with one, or `null` to remove it; omit to
+          # preserve. A budget cannot be added to a session created without one (rejected
+          # with reason `budget_create_only`), and a removed budget cannot be re-added.
+          # Allowed in any non-terminated status. Lowering `max_list_cost` to at or below
+          # the session's consumed list cost is rejected with reason `budget_not_raised`,
+          # and every model the session can run must have a public list price or the request
+          # is rejected with reason `model_not_budgetable`.
           budget: nil,
           # Body param: Metadata patch. Set a key to a string to upsert it, or to null to
           # delete it. Omit the field to preserve.

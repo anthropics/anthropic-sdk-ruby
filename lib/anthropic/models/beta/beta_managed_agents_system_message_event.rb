@@ -23,7 +23,7 @@ module Anthropic
         required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsSystemMessageEvent::Type }
 
         # @!attribute processed_at
-        #   A timestamp in RFC 3339 format
+        #   Timestamp when this system message was processed.
         #
         #   @return [Time, nil]
         optional :processed_at, Time, nil?: true
@@ -38,7 +38,7 @@ module Anthropic
         #
         #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSystemMessageEvent::Type]
         #
-        #   @param processed_at [Time, nil] A timestamp in RFC 3339 format
+        #   @param processed_at [Time, nil] Timestamp when this system message was processed.
 
         # @see Anthropic::Models::Beta::BetaManagedAgentsSystemMessageEvent#type
         module Type

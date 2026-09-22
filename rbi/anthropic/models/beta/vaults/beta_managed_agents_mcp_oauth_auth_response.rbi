@@ -28,7 +28,7 @@ module Anthropic
           sig { returns(T.nilable(Time)) }
           attr_accessor :expires_at
 
-          # OAuth refresh token configuration returned in credential responses.
+          # Refresh token configuration, if the credential supports token refresh.
           sig do
             returns(
               T.nilable(
@@ -67,7 +67,7 @@ module Anthropic
             type:,
             # A timestamp in RFC 3339 format
             expires_at: nil,
-            # OAuth refresh token configuration returned in credential responses.
+            # Refresh token configuration, if the credential supports token refresh.
             refresh: nil
           )
           end

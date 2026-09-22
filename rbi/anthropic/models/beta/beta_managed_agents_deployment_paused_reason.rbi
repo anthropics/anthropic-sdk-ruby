@@ -91,7 +91,7 @@ module Anthropic
         end
         def self.new(
           type:,
-          # The error that triggered an auto-pause. Matches the failed run's `error.type`.
+          # The failed run's error.
           error: nil
         )
         end

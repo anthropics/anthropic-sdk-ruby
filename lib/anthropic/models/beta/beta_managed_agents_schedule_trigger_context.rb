@@ -5,7 +5,9 @@ module Anthropic
     module Beta
       class BetaManagedAgentsScheduleTriggerContext < Anthropic::Internal::Type::BaseModel
         # @!attribute scheduled_at
-        #   A timestamp in RFC 3339 format
+        #   The UTC instant at which the cron expression matched in the configured timezone,
+        #   before jitter is applied. At most one run is recorded per (`deployment_id`,
+        #   `scheduled_at`) pair.
         #
         #   @return [Time]
         required :scheduled_at, Time
@@ -18,7 +20,11 @@ module Anthropic
         # @!method initialize(scheduled_at:, type:)
         #   The run was fired by the deployment's cron schedule.
         #
-        #   @param scheduled_at [Time] A timestamp in RFC 3339 format
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaManagedAgentsScheduleTriggerContext} for more
+        #   details.
+        #
+        #   @param scheduled_at [Time] The UTC instant at which the cron expression matched in the configured timezone,
         #
         #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsScheduleTriggerContext::Type]
 

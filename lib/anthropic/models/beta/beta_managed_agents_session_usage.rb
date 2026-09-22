@@ -14,7 +14,7 @@ module Anthropic
         optional :active_seconds, Float
 
         # @!attribute cache_creation
-        #   Prompt-cache creation token usage broken down by cache lifetime.
+        #   Tokens used to create prompt cache entries, broken down by cache TTL.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsCacheCreationUsage, nil]
         optional :cache_creation, -> { Anthropic::Beta::BetaManagedAgentsCacheCreationUsage }
@@ -32,7 +32,8 @@ module Anthropic
         optional :input_tokens, Integer
 
         # @!attribute list_cost
-        #   A monetary amount in a specific currency.
+        #   Cumulative list cost of the session across all turns, priced at public list
+        #   rates. Absent until cost tracking is available for the session.
         #
         #   @return [Anthropic::Models::BetaMonetaryAmount, nil]
         optional :list_cost, -> { Anthropic::BetaMonetaryAmount }, nil?: true
@@ -44,7 +45,8 @@ module Anthropic
         optional :output_tokens, Integer
 
         # @!attribute server_tool_use
-        #   Cumulative count of server-executed tool invocations, broken down by tool.
+        #   Cumulative server-executed tool usage across all turns. Absent until server-tool
+        #   tracking is available for the session.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsServerToolUsage, nil]
         optional :server_tool_use, -> { Anthropic::Beta::BetaManagedAgentsServerToolUsage }, nil?: true
@@ -57,17 +59,17 @@ module Anthropic
         #
         #   @param active_seconds [Float] Cumulative time in seconds during which the session had at least one thread in r
         #
-        #   @param cache_creation [Anthropic::Models::Beta::BetaManagedAgentsCacheCreationUsage] Prompt-cache creation token usage broken down by cache lifetime.
+        #   @param cache_creation [Anthropic::Models::Beta::BetaManagedAgentsCacheCreationUsage] Tokens used to create prompt cache entries, broken down by cache TTL.
         #
         #   @param cache_read_input_tokens [Integer] Total tokens read from prompt cache.
         #
         #   @param input_tokens [Integer] Total input tokens consumed across all turns.
         #
-        #   @param list_cost [Anthropic::Models::BetaMonetaryAmount, nil] A monetary amount in a specific currency.
+        #   @param list_cost [Anthropic::Models::BetaMonetaryAmount, nil] Cumulative list cost of the session across all turns, priced at public list rate
         #
         #   @param output_tokens [Integer] Total output tokens generated across all turns.
         #
-        #   @param server_tool_use [Anthropic::Models::Beta::BetaManagedAgentsServerToolUsage, nil] Cumulative count of server-executed tool invocations, broken down by tool.
+        #   @param server_tool_use [Anthropic::Models::Beta::BetaManagedAgentsServerToolUsage, nil] Cumulative server-executed tool usage across all turns. Absent until server-tool
       end
     end
 

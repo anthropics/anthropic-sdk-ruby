@@ -50,7 +50,7 @@ module Anthropic
           #
           #   @option args [Integer] :content_size_bytes Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regar
           #
-          #   @option args [Time] :created_at A timestamp in RFC 3339 format
+          #   @option args [Time] :created_at When this memory was created, in RFC 3339 format.
           #
           #   @option args [String] :memory_store_id ID of the memory store this memory belongs to (a `memstore_...` value).
           #
@@ -58,7 +58,7 @@ module Anthropic
           #
           #   @option args [String] :path Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`.
           #
-          #   @option args [Time] :updated_at A timestamp in RFC 3339 format
+          #   @option args [Time] :updated_at When this memory was last modified, in RFC 3339 format. Use this as a cheap fres
           #
           #   @option args [String, nil] :content The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=b
           #

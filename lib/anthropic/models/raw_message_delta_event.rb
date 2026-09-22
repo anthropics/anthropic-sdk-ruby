@@ -46,14 +46,17 @@ module Anthropic
       # @see Anthropic::Models::RawMessageDeltaEvent#delta
       class Delta < Anthropic::Internal::Type::BaseModel
         # @!attribute container
-        #   Information about the container used in the request (for the code execution
-        #   tool)
+        #   Information about the container used in this request.
+        #
+        #   This will be non-null if a container tool (e.g. code execution) was used.
         #
         #   @return [Anthropic::Models::Container, nil]
         required :container, -> { Anthropic::Container }, nil?: true
 
         # @!attribute stop_details
-        #   Structured information about a refusal.
+        #   Structured information about why model output stopped.
+        #
+        #   This is `null` when the `stop_reason` has no additional detail to report.
         #
         #   @return [Anthropic::Models::RefusalStopDetails, nil]
         required :stop_details, -> { Anthropic::RefusalStopDetails }, nil?: true
@@ -72,9 +75,9 @@ module Anthropic
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::RawMessageDeltaEvent::Delta} for more details.
         #
-        #   @param container [Anthropic::Models::Container, nil] Information about the container used in the request (for the code execution tool
+        #   @param container [Anthropic::Models::Container, nil] Information about the container used in this request.
         #
-        #   @param stop_details [Anthropic::Models::RefusalStopDetails, nil] Structured information about a refusal.
+        #   @param stop_details [Anthropic::Models::RefusalStopDetails, nil] Structured information about why model output stopped.
         #
         #   @param stop_reason [Symbol, Anthropic::Models::StopReason, nil]
         #

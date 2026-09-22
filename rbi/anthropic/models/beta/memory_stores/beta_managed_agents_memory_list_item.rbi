@@ -98,7 +98,7 @@ module Anthropic
             # Size of `content` in bytes (the UTF-8 plaintext length). Always populated,
             # regardless of `view`.
             content_size_bytes: nil,
-            # A timestamp in RFC 3339 format
+            # When this memory was created, in RFC 3339 format.
             created_at: nil,
             # ID of the memory store this memory belongs to (a `memstore_...` value).
             memory_store_id: nil,
@@ -108,7 +108,10 @@ module Anthropic
             # Enumerate the history via
             # [List memory versions](/en/api/beta/memory_stores/memory_versions/list).
             memory_version_id: nil,
-            # A timestamp in RFC 3339 format
+            # When this memory was last modified, in RFC 3339 format. Use this as a cheap
+            # freshness signal; for who made the change, look up the head version's
+            # `created_by` via
+            # [List memory versions](/en/api/beta/memory_stores/memory_versions/list).
             updated_at: nil,
             # The memory's UTF-8 text content. Populated when `view=full`; `null` when
             # `view=basic`. Maximum 100 kB (102,400 bytes).

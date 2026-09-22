@@ -18,7 +18,7 @@ module Anthropic
           required :agent_name, String
 
           # @!attribute processed_at
-          #   A timestamp in RFC 3339 format
+          #   Timestamp when the thread was created.
           #
           #   @return [Time]
           required :processed_at, Time
@@ -42,7 +42,7 @@ module Anthropic
           #
           #   @param agent_name [String] Name of the callable agent the thread runs.
           #
-          #   @param processed_at [Time] A timestamp in RFC 3339 format
+          #   @param processed_at [Time] Timestamp when the thread was created.
           #
           #   @param session_thread_id [String] Public `sthr_` ID of the newly created thread.
           #

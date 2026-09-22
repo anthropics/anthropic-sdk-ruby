@@ -21,7 +21,7 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :mcp_tool_use_id
 
-          # A timestamp in RFC 3339 format
+          # Timestamp when this event was processed.
           sig { returns(Time) }
           attr_accessor :processed_at
 
@@ -88,7 +88,7 @@ module Anthropic
             id:,
             # The id of the `agent.mcp_tool_use` event this result corresponds to.
             mcp_tool_use_id:,
-            # A timestamp in RFC 3339 format
+            # Timestamp when this event was processed.
             processed_at:,
             type:,
             # The result content returned by the tool.
@@ -253,13 +253,13 @@ module Anthropic
               type:,
               # The text content.
               text: nil,
-              # Union type for image source variants.
+              # The source of the image data.
               source: nil,
               # Additional context about the document for the model.
               context: nil,
               # The title of the document.
               title: nil,
-              # Citation settings for a search result.
+              # Citation settings for this search result.
               citations: nil,
               # Array of text content blocks from the search result.
               content: nil

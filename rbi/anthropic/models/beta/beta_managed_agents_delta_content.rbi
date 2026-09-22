@@ -14,7 +14,8 @@ module Anthropic
             )
           end
 
-        # Regular text content.
+        # A partial element of the content array at index, typed like the element itself —
+        # the same shape the buffered agent.message carries in content.
         sig { returns(Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock) }
         attr_reader :content
 
@@ -52,7 +53,8 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
-          # Regular text content.
+          # A partial element of the content array at index, typed like the element itself —
+          # the same shape the buffered agent.message carries in content.
           content:,
           type:,
           # Which entry in the previewed event's content array this fragment lands in.

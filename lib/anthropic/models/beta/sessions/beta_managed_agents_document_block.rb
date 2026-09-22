@@ -6,7 +6,7 @@ module Anthropic
       module Sessions
         class BetaManagedAgentsDocumentBlock < Anthropic::Internal::Type::BaseModel
           # @!attribute source
-          #   Union type for document source variants.
+          #   The source of the document data.
           #
           #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64DocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsURLDocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileDocumentSource]
           required :source, union: -> { Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock::Source }
@@ -32,7 +32,7 @@ module Anthropic
           #   Document content, either specified directly as base64 data, as text, or as a
           #   reference via a URL.
           #
-          #   @param source [Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64DocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsURLDocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileDocumentSource] Union type for document source variants.
+          #   @param source [Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64DocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsURLDocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileDocumentSource] The source of the document data.
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock::Type]
           #
@@ -40,7 +40,7 @@ module Anthropic
           #
           #   @param title [String, nil] The title of the document.
 
-          # Union type for document source variants.
+          # The source of the document data.
           #
           # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock#source
           module Source

@@ -119,14 +119,15 @@ module Anthropic
         end
         attr_writer :cache_control
 
-        # Compact the whole conversation and return a signed `compaction` block, alone,
-        # that a later request sends back first in `messages`, in place of the messages it
-        # summarizes. There is no trigger and no pause flag: sending the parameter
-        # compacts, and nothing is sampled after the block.
+        # Compaction configuration.
         #
-        # The summarization prompt is the server's own unless `instructions` are given,
-        # which then replace it for this request; a value that is empty or only whitespace
-        # counts as absent.
+        # When set on `POST /v1/messages`, the request is a compaction request: the
+        # conversation in `messages` is summarized and the response holds only the
+        # resulting `compaction` block (`stop_reason` `"compaction"`), which later
+        # requests send first in `messages` in place of the messages it summarizes.
+        # `POST /v1/messages/count_tokens` accepts this parameter and ignores it: the
+        # count it returns is for the conversation in `messages` as sent. Cannot be
+        # combined with `context_management`.
         sig { returns(T.nilable(Anthropic::Beta::BetaCompactionConfig)) }
         attr_reader :compaction
 
@@ -160,8 +161,9 @@ module Anthropic
         end
         attr_writer :context_management
 
-        # Request-level diagnostics. Currently carries the previous response id for
-        # prompt-cache divergence reporting.
+        # Request-level diagnostics. Supply `previous_message_id` to have the response
+        # include `diagnostics.cache_miss_reason` explaining any prompt-cache divergence
+        # from that prior request.
         sig { returns(T.nilable(Anthropic::Beta::BetaDiagnosticsParam)) }
         attr_reader :diagnostics
 
@@ -294,9 +296,8 @@ module Anthropic
         end
         attr_writer :service_tier
 
-        # Inference speed mode. `fast` provides significantly faster output token
-        # generation at premium pricing. Not all models support `fast`; invalid
-        # combinations are rejected at create time.
+        # The inference speed mode for this request. `"fast"` enables high
+        # output-tokens-per-second inference.
         sig do
           returns(
             T.nilable(Anthropic::Beta::MessageCreateParams::Speed::OrSymbol)
@@ -823,14 +824,15 @@ module Anthropic
           # Top-level cache control automatically applies a cache_control marker to the last
           # cacheable block in the request.
           cache_control: nil,
-          # Compact the whole conversation and return a signed `compaction` block, alone,
-          # that a later request sends back first in `messages`, in place of the messages it
-          # summarizes. There is no trigger and no pause flag: sending the parameter
-          # compacts, and nothing is sampled after the block.
+          # Compaction configuration.
           #
-          # The summarization prompt is the server's own unless `instructions` are given,
-          # which then replace it for this request; a value that is empty or only whitespace
-          # counts as absent.
+          # When set on `POST /v1/messages`, the request is a compaction request: the
+          # conversation in `messages` is summarized and the response holds only the
+          # resulting `compaction` block (`stop_reason` `"compaction"`), which later
+          # requests send first in `messages` in place of the messages it summarizes.
+          # `POST /v1/messages/count_tokens` accepts this parameter and ignores it: the
+          # count it returns is for the conversation in `messages` as sent. Cannot be
+          # combined with `context_management`.
           compaction: nil,
           # Container identifier for reuse across requests.
           container: nil,
@@ -839,8 +841,9 @@ module Anthropic
           # This allows you to control how Claude manages context across multiple requests,
           # such as whether to clear function results or not.
           context_management: nil,
-          # Request-level diagnostics. Currently carries the previous response id for
-          # prompt-cache divergence reporting.
+          # Request-level diagnostics. Supply `previous_message_id` to have the response
+          # include `diagnostics.cache_miss_reason` explaining any prompt-cache divergence
+          # from that prior request.
           diagnostics: nil,
           # The `fallback_credit_token` from a prior refusal's `stop_details`.
           #
@@ -889,9 +892,8 @@ module Anthropic
           # [service-tiers](https://platform.claude.com/docs/en/api/service-tiers) for
           # details.
           service_tier: nil,
-          # Inference speed mode. `fast` provides significantly faster output token
-          # generation at premium pricing. Not all models support `fast`; invalid
-          # combinations are rejected at create time.
+          # The inference speed mode for this request. `"fast"` enables high
+          # output-tokens-per-second inference.
           speed: nil,
           # Custom text sequences that will cause the model to stop generating.
           #
@@ -1229,9 +1231,8 @@ module Anthropic
           end
         end
 
-        # Inference speed mode. `fast` provides significantly faster output token
-        # generation at premium pricing. Not all models support `fast`; invalid
-        # combinations are rejected at create time.
+        # The inference speed mode for this request. `"fast"` enables high
+        # output-tokens-per-second inference.
         module Speed
           extend Anthropic::Internal::Type::Enum
 

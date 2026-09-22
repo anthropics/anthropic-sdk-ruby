@@ -20,7 +20,8 @@ module Anthropic
         required :allowed_fallback_models, Anthropic::Internal::Type::ArrayOf[String], nil?: true
 
         # @!attribute capabilities
-        #   Model capability information.
+        #   Object mapping capability names to their support details. Keys are always
+        #   present for all known capabilities.
         #
         #   @return [Anthropic::Models::Beta::BetaModelCapabilities, nil]
         required :capabilities, -> { Anthropic::Beta::BetaModelCapabilities }, nil?: true
@@ -66,7 +67,7 @@ module Anthropic
         #
         #   @param allowed_fallback_models [Array<String>, nil] Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An emp
         #
-        #   @param capabilities [Anthropic::Models::Beta::BetaModelCapabilities, nil] Model capability information.
+        #   @param capabilities [Anthropic::Models::Beta::BetaModelCapabilities, nil] Object mapping capability names to their support details. Keys are always presen
         #
         #   @param created_at [Time] RFC 3339 datetime string representing the time at which the model was released.
         #

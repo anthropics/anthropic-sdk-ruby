@@ -23,7 +23,7 @@ module Anthropic
         sig { returns(T.nilable(T::Boolean)) }
         attr_accessor :enabled
 
-        # Permission policy for tool execution.
+        # Permission policy for this tool. Overrides the `default_config` setting.
         sig do
           returns(
             T.nilable(
@@ -57,7 +57,7 @@ module Anthropic
           name:,
           # Whether this tool is enabled. Overrides the `default_config` setting.
           enabled: nil,
-          # Permission policy for tool execution.
+          # Permission policy for this tool. Overrides the `default_config` setting.
           permission_policy: nil
         )
         end
@@ -81,7 +81,7 @@ module Anthropic
         def to_hash
         end
 
-        # Permission policy for tool execution.
+        # Permission policy for this tool. Overrides the `default_config` setting.
         module PermissionPolicy
           extend Anthropic::Internal::Type::Union
 

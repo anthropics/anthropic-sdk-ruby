@@ -18,7 +18,7 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :id
 
-        # A timestamp in RFC 3339 format
+        # When this user profile was created, in RFC 3339 format.
         sig { returns(Time) }
         attr_accessor :created_at
 
@@ -38,15 +38,14 @@ module Anthropic
         sig { returns(Anthropic::Beta::BetaUserProfile::Type::TaggedSymbol) }
         attr_accessor :type
 
-        # A timestamp in RFC 3339 format
+        # When this user profile was last modified, in RFC 3339 format. Trust-grant status
+        # changes also bump this timestamp.
         sig { returns(Time) }
         attr_accessor :updated_at
 
-        # How the platform uses the API on behalf of the entity this profile represents.
-        # `application`: the platform sells a product that uses the API behind the scenes,
-        # and the profile represents an individual end-user of that product.
-        # `passthrough`: the platform resells raw inference, and the profile identifies
-        # the resold-to company.
+        # How the platform uses the API for this entity: `application` (default) or
+        # `passthrough`. Present under the `user-profiles-2026-08-18` and later beta
+        # headers.
         sig do
           returns(
             T.nilable(
@@ -69,9 +68,12 @@ module Anthropic
         sig { returns(T.nilable(String)) }
         attr_accessor :external_id
 
-        # Details about the entity this profile represents, as the platform states them.
-        # Anthropic does not verify them. Every field is present, `null` until the
-        # platform supplies a value.
+        # Details about the entity this profile represents, as the platform states them;
+        # not verified by Anthropic. Present under the `user-profiles-2026-09-04` beta
+        # header, with every field present and `null` until the platform supplies a value;
+        # the earlier beta headers serve `reference_id` as the top-level `external_id`,
+        # and `user-profiles-2026-08-18` serves `onboarded_at` as
+        # `external_user_onboarded_at`.
         sig do
           returns(
             T.nilable(Anthropic::Beta::BetaUserProfileExternalUserDetails)
@@ -87,7 +89,10 @@ module Anthropic
         end
         attr_writer :external_user_details
 
-        # A timestamp in RFC 3339 format
+        # When the entity this profile represents opened its account with the platform, as
+        # stated by the platform, in RFC 3339 format (UTC). `null` until the platform
+        # supplies one. Present under the `user-profiles-2026-08-18` beta header; under
+        # `user-profiles-2026-09-04` the value is `external_user_details.onboarded_at`.
         sig { returns(T.nilable(Time)) }
         attr_accessor :external_user_onboarded_at
 
@@ -127,7 +132,7 @@ module Anthropic
         def self.new(
           # Unique identifier for this user profile, prefixed `uprof_`.
           id:,
-          # A timestamp in RFC 3339 format
+          # When this user profile was created, in RFC 3339 format.
           created_at:,
           # Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up
           # to 512 chars.
@@ -137,23 +142,28 @@ module Anthropic
           trust_grants:,
           # Object type. Always `user_profile`.
           type:,
-          # A timestamp in RFC 3339 format
+          # When this user profile was last modified, in RFC 3339 format. Trust-grant status
+          # changes also bump this timestamp.
           updated_at:,
-          # How the platform uses the API on behalf of the entity this profile represents.
-          # `application`: the platform sells a product that uses the API behind the scenes,
-          # and the profile represents an individual end-user of that product.
-          # `passthrough`: the platform resells raw inference, and the profile identifies
-          # the resold-to company.
+          # How the platform uses the API for this entity: `application` (default) or
+          # `passthrough`. Present under the `user-profiles-2026-08-18` and later beta
+          # headers.
           access_type: nil,
           # Platform's own identifier for this user. Not enforced unique. Present under the
           # `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; under
           # `user-profiles-2026-09-04` the value is `external_user_details.reference_id`.
           external_id: nil,
-          # Details about the entity this profile represents, as the platform states them.
-          # Anthropic does not verify them. Every field is present, `null` until the
-          # platform supplies a value.
+          # Details about the entity this profile represents, as the platform states them;
+          # not verified by Anthropic. Present under the `user-profiles-2026-09-04` beta
+          # header, with every field present and `null` until the platform supplies a value;
+          # the earlier beta headers serve `reference_id` as the top-level `external_id`,
+          # and `user-profiles-2026-08-18` serves `onboarded_at` as
+          # `external_user_onboarded_at`.
           external_user_details: nil,
-          # A timestamp in RFC 3339 format
+          # When the entity this profile represents opened its account with the platform, as
+          # stated by the platform, in RFC 3339 format (UTC). `null` until the platform
+          # supplies one. Present under the `user-profiles-2026-08-18` beta header; under
+          # `user-profiles-2026-09-04` the value is `external_user_details.onboarded_at`.
           external_user_onboarded_at: nil,
           # Real-world name of the entity this profile represents (company or individual).
           # For a company the platform resells Claude access to (`access_type`
@@ -210,11 +220,9 @@ module Anthropic
           end
         end
 
-        # How the platform uses the API on behalf of the entity this profile represents.
-        # `application`: the platform sells a product that uses the API behind the scenes,
-        # and the profile represents an individual end-user of that product.
-        # `passthrough`: the platform resells raw inference, and the profile identifies
-        # the resold-to company.
+        # How the platform uses the API for this entity: `application` (default) or
+        # `passthrough`. Present under the `user-profiles-2026-08-18` and later beta
+        # headers.
         module AccessType
           extend Anthropic::Internal::Type::Enum
 

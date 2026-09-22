@@ -24,7 +24,7 @@ module Anthropic
           required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEvent::Type }
 
           # @!attribute processed_at
-          #   A timestamp in RFC 3339 format
+          #   Timestamp when the agent finished processing this message.
           #
           #   @return [Time, nil]
           optional :processed_at, Time, nil?: true
@@ -38,7 +38,7 @@ module Anthropic
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEvent::Type]
           #
-          #   @param processed_at [Time, nil] A timestamp in RFC 3339 format
+          #   @param processed_at [Time, nil] Timestamp when the agent finished processing this message.
 
           # Content block in a user message. Can be `text`, `image`, or `document`.
           module Content
@@ -82,7 +82,7 @@ module Anthropic
             #
             #   @option args [String] :text The text content.
             #
-            #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64ImageSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsURLImageSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileImageSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64DocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsURLDocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileDocumentSource] :source Union type for image source variants.
+            #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64ImageSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsURLImageSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileImageSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64DocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsURLDocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileDocumentSource] :source The source of the image data.
             #
             #   @option args [String, nil] :context Additional context about the document for the model.
             #

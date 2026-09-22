@@ -22,8 +22,8 @@ module Anthropic
         required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsMultiagentParams::Type }
 
         # @!method initialize(agents:, type:)
-        #   A coordinator topology: the session's primary thread orchestrates work by
-        #   spawning session threads, each running an agent drawn from the `agents` roster.
+        #   Multiagent orchestration configuration. Currently supports the `coordinator`
+        #   topology.
         #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams} for more details.

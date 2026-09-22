@@ -38,7 +38,7 @@ module Anthropic
           required :outcome_id, String
 
           # @!attribute processed_at
-          #   A timestamp in RFC 3339 format
+          #   Timestamp when outcome evaluation ended.
           #
           #   @return [Time]
           required :processed_at, Time
@@ -62,7 +62,8 @@ module Anthropic
                    enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationEndEvent::Type }
 
           # @!attribute usage
-          #   Token usage for a single model request.
+          #   Aggregate token usage for this evaluation cycle. Sums across all grader model
+          #   requests within the cycle.
           #
           #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelUsage]
           required :usage, -> { Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelUsage }
@@ -87,13 +88,13 @@ module Anthropic
           #
           #   @param outcome_id [String] The `outc_` ID of the outcome being evaluated.
           #
-          #   @param processed_at [Time] A timestamp in RFC 3339 format
+          #   @param processed_at [Time] Timestamp when outcome evaluation ended.
           #
           #   @param result [String] Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revisio
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationEndEvent::Type]
           #
-          #   @param usage [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelUsage] Token usage for a single model request.
+          #   @param usage [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelUsage] Aggregate token usage for this evaluation cycle. Sums across all grader model re
 
           # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationEndEvent#type
           module Type

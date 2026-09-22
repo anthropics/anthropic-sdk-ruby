@@ -24,7 +24,7 @@ module Anthropic
           end
           attr_accessor :error
 
-          # A timestamp in RFC 3339 format
+          # Timestamp when the error occurred.
           sig { returns(Time) }
           attr_accessor :processed_at
 
@@ -59,7 +59,7 @@ module Anthropic
             # Unique identifier for this event.
             id:,
             error:,
-            # A timestamp in RFC 3339 format
+            # Timestamp when the error occurred.
             processed_at:,
             type:
           )
@@ -195,7 +195,7 @@ module Anthropic
               type:,
               # Human-readable error description.
               message:,
-              # What the client should do next in response to this error.
+              # What the client should do next.
               retry_status:,
               # Name of the MCP server that failed to connect.
               mcp_server_name: nil,

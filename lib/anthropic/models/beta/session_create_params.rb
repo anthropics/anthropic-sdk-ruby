@@ -22,8 +22,10 @@ module Anthropic
         required :environment_id, String
 
         # @!attribute budget
-        #   A hard spend ceiling. The session stops issuing new model requests once the
-        #   tracked list cost reaches `max_list_cost`.
+        #   Enforced spend ceiling for the session. Omit to create an uncapped session.
+        #   Every model the session can run — the agent's model and each callable agent's
+        #   model — must have a public list price, or the request is rejected with reason
+        #   `model_not_budgetable`.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil]
         optional :budget, -> { Anthropic::Beta::BetaManagedAgentsBudgetLimit }
@@ -87,7 +89,7 @@ module Anthropic
         #
         #   @param environment_id [String] ID of the `environment` defining the container configuration for this session.
         #
-        #   @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit] A hard spend ceiling. The session stops issuing new model requests once the trac
+        #   @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit] Enforced spend ceiling for the session. Omit to create an uncapped session. Ever
         #
         #   @param initial_events [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams>] Initial events to send to the `session` at creation, processed in order. Support
         #
@@ -160,7 +162,7 @@ module Anthropic
           #
           #   @option args [String] :description What the agent should produce. This is the task specification.
           #
-          #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubricParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubricParams] :rubric Rubric for grading the quality of an outcome.
+          #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubricParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubricParams] :rubric How to grade the outcome. Text or file reference.
           #
           #   @option args [Integer, nil] :max_iterations Eval→revision cycles before giving up. Default 3, max 20.
           #
@@ -230,7 +232,7 @@ module Anthropic
           #   @option args [String] :memory_store_id The memory store ID (memstore\_...). Must belong to the caller's organization
           #   and
           #
-          #   @option args [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam::Access, nil] :access Access mode for an attached memory store.
+          #   @option args [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam::Access, nil] :access Access mode for the mounted store. Defaults to read_write. read_only mounts the
           #
           #   @option args [String, nil] :instructions Per-attachment guidance for the agent on how to use this store. Rendered into th
           #

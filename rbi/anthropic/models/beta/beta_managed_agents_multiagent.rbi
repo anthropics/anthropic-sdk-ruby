@@ -32,7 +32,7 @@ module Anthropic
         end
         attr_accessor :type
 
-        # Resolved coordinator topology with a concrete agent roster.
+        # Resolved multiagent orchestration configuration as returned in API responses.
         sig do
           params(
             agents:

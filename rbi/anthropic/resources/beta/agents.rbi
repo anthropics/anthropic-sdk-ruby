@@ -66,9 +66,8 @@ module Anthropic
           # Body param: Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars,
           # values up to 512 chars.
           metadata: nil,
-          # Body param: A coordinator topology: the session's primary thread orchestrates
-          # work by spawning session threads, each running an agent drawn from the `agents`
-          # roster.
+          # Body param: Multiagent orchestration configuration. Currently supports the
+          # `coordinator` topology with a roster of 1-20 agents.
           multiagent: nil,
           # Body param: Skills available to the agent.
           skills: nil,
@@ -188,9 +187,8 @@ module Anthropic
           # e.g. `claude-opus-5`, or a `model_config` object for additional configuration
           # control. Omit to preserve. Cannot be cleared.
           model: nil,
-          # Body param: A coordinator topology: the session's primary thread orchestrates
-          # work by spawning session threads, each running an agent drawn from the `agents`
-          # roster.
+          # Body param: Multiagent orchestration configuration. Full replacement. Omit to
+          # preserve; send null to clear.
           multiagent: nil,
           # Body param: Human-readable name. Must be non-empty. Omit to preserve. Cannot be
           # cleared.

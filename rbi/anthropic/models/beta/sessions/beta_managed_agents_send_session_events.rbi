@@ -220,13 +220,13 @@ module Anthropic
               id:,
               # Array of content blocks comprising the user message.
               content: nil,
-              # A timestamp in RFC 3339 format
+              # Timestamp when the agent finished processing this message.
               processed_at: nil,
               # If absent, interrupts every non-archived thread in a multiagent session (or the
               # primary alone in a single-agent session). If present, interrupts only the named
               # thread.
               session_thread_id: nil,
-              # UserToolConfirmationResult enum
+              # The confirmation result: 'allow' or 'deny'.
               result: nil,
               # The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result
               # corresponds to, which can be found in the last `session.status_idle`
@@ -250,7 +250,8 @@ module Anthropic
               # Server-generated `outc_` ID for this outcome. Referenced by
               # `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
               outcome_id: nil,
-              # Rubric for grading the quality of an outcome.
+              # How to grade the outcome. File rubrics are currently resolved to their text
+              # content; clients should handle both variants.
               rubric: nil
             )
             end

@@ -6,7 +6,7 @@ module Anthropic
       module Sessions
         class BetaManagedAgentsSearchResultBlock < Anthropic::Internal::Type::BaseModel
           # @!attribute citations
-          #   Citation settings for a search result.
+          #   Citation settings for this search result.
           #
           #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultCitations]
           required :citations, -> { Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultCitations }
@@ -38,7 +38,7 @@ module Anthropic
           # @!method initialize(citations:, content:, source:, title:, type:)
           #   A block containing a web search result.
           #
-          #   @param citations [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultCitations] Citation settings for a search result.
+          #   @param citations [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultCitations] Citation settings for this search result.
           #
           #   @param content [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultContent>] Array of text content blocks from the search result.
           #

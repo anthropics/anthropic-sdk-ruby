@@ -84,14 +84,17 @@ module Anthropic
         # @see Anthropic::Models::Beta::BetaRawMessageDeltaEvent#delta
         class Delta < Anthropic::Internal::Type::BaseModel
           # @!attribute container
-          #   Information about the container used in the request (for the code execution
-          #   tool)
+          #   Information about the container used in this request.
+          #
+          #   This will be non-null if a container tool (e.g. code execution) was used.
           #
           #   @return [Anthropic::Models::Beta::BetaContainer, nil]
           required :container, -> { Anthropic::Beta::BetaContainer }, nil?: true
 
           # @!attribute stop_details
-          #   Structured information about a refusal.
+          #   Structured information about why model output stopped.
+          #
+          #   This is `null` when the `stop_reason` has no additional detail to report.
           #
           #   @return [Anthropic::Models::Beta::BetaRefusalStopDetails, nil]
           required :stop_details, -> { Anthropic::Beta::BetaRefusalStopDetails }, nil?: true
@@ -110,9 +113,9 @@ module Anthropic
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta} for more details.
           #
-          #   @param container [Anthropic::Models::Beta::BetaContainer, nil] Information about the container used in the request (for the code execution tool
+          #   @param container [Anthropic::Models::Beta::BetaContainer, nil] Information about the container used in this request.
           #
-          #   @param stop_details [Anthropic::Models::Beta::BetaRefusalStopDetails, nil] Structured information about a refusal.
+          #   @param stop_details [Anthropic::Models::Beta::BetaRefusalStopDetails, nil] Structured information about why model output stopped.
           #
           #   @param stop_reason [Symbol, Anthropic::Models::Beta::BetaStopReason, nil]
           #

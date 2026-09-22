@@ -17,7 +17,7 @@ module Anthropic
         optional :enabled, Anthropic::Internal::Type::Boolean, nil?: true
 
         # @!attribute permission_policy
-        #   Permission policy for tool execution.
+        #   Permission policy for this tool. Overrides the `default_config` setting.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy, Anthropic::Models::Beta::BetaManagedAgentsAutoPolicy, nil]
         optional :permission_policy,
@@ -31,9 +31,9 @@ module Anthropic
         #
         #   @param enabled [Boolean, nil] Whether this tool is enabled. Overrides the `default_config` setting.
         #
-        #   @param permission_policy [Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy, Anthropic::Models::Beta::BetaManagedAgentsAutoPolicy, nil] Permission policy for tool execution.
+        #   @param permission_policy [Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy, Anthropic::Models::Beta::BetaManagedAgentsAutoPolicy, nil] Permission policy for this tool. Overrides the `default_config` setting.
 
-        # Permission policy for tool execution.
+        # Permission policy for this tool. Overrides the `default_config` setting.
         #
         # @see Anthropic::Models::Beta::BetaManagedAgentsMCPToolConfigParams#permission_policy
         module PermissionPolicy

@@ -5,7 +5,9 @@ module Anthropic
     module Beta
       class BetaFallbackRefusalTrigger < Anthropic::Internal::Type::BaseModel
         # @!attribute category
-        #   The policy category that triggered a refusal.
+        #   The policy category that triggered the `from` model's refusal at this hop.
+        #   `null` when the refusal doesn't map to a named category. Same vocabulary as
+        #   `stop_details.category`.
         #
         #   @return [Symbol, Anthropic::Models::Beta::BetaFallbackRefusalTrigger::Category, nil]
         required :category, enum: -> { Anthropic::Beta::BetaFallbackRefusalTrigger::Category }, nil?: true
@@ -18,11 +20,16 @@ module Anthropic
         # @!method initialize(category:, type: :refusal)
         #   The `from` model declined for policy reasons.
         #
-        #   @param category [Symbol, Anthropic::Models::Beta::BetaFallbackRefusalTrigger::Category, nil] The policy category that triggered a refusal.
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaFallbackRefusalTrigger} for more details.
+        #
+        #   @param category [Symbol, Anthropic::Models::Beta::BetaFallbackRefusalTrigger::Category, nil] The policy category that triggered the `from` model's refusal at this hop. `null
         #
         #   @param type [Symbol, :refusal]
 
-        # The policy category that triggered a refusal.
+        # The policy category that triggered the `from` model's refusal at this hop.
+        # `null` when the refusal doesn't map to a named category. Same vocabulary as
+        # `stop_details.category`.
         #
         # @see Anthropic::Models::Beta::BetaFallbackRefusalTrigger#category
         module Category

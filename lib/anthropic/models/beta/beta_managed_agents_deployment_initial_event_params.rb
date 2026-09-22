@@ -45,7 +45,7 @@ module Anthropic
         #
         #   @option args [String] :description What the agent should produce. This is the task specification.
         #
-        #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubricParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubricParams] :rubric Rubric for grading the quality of an outcome.
+        #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubricParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubricParams] :rubric How to grade the outcome. Text or file reference.
         #
         #   @option args [Integer, nil] :max_iterations Eval→revision cycles before giving up. Default 3, max 20.
         #

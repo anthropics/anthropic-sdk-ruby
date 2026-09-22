@@ -12,7 +12,7 @@ module Anthropic
           required :id, String
 
           # @!attribute processed_at
-          #   A timestamp in RFC 3339 format
+          #   Timestamp when the session was deleted.
           #
           #   @return [Time]
           required :processed_at, Time
@@ -28,7 +28,7 @@ module Anthropic
           #
           #   @param id [String] Unique identifier for this event.
           #
-          #   @param processed_at [Time] A timestamp in RFC 3339 format
+          #   @param processed_at [Time] Timestamp when the session was deleted.
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionDeletedEvent::Type]
 

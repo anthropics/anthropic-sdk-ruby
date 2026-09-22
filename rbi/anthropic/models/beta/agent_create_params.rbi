@@ -69,8 +69,8 @@ module Anthropic
         sig { params(metadata: T::Hash[Symbol, String]).void }
         attr_writer :metadata
 
-        # A coordinator topology: the session's primary thread orchestrates work by
-        # spawning session threads, each running an agent drawn from the `agents` roster.
+        # Multiagent orchestration configuration. Currently supports the `coordinator`
+        # topology with a roster of 1-20 agents.
         sig do
           returns(T.nilable(Anthropic::Beta::BetaManagedAgentsMultiagentParams))
         end
@@ -236,8 +236,8 @@ module Anthropic
           # Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up
           # to 512 chars.
           metadata: nil,
-          # A coordinator topology: the session's primary thread orchestrates work by
-          # spawning session threads, each running an agent drawn from the `agents` roster.
+          # Multiagent orchestration configuration. Currently supports the `coordinator`
+          # topology with a roster of 1-20 agents.
           multiagent: nil,
           # Skills available to the agent.
           skills: nil,
@@ -425,7 +425,7 @@ module Anthropic
             type:,
             # Per-tool configuration overrides.
             configs: nil,
-            # Default configuration for all tools in a toolset.
+            # Default configuration applied to all tools in this set.
             default_config: nil,
             # Name of the MCP server. Must match a server name from the mcp_servers array.
             # 1-255 characters.
@@ -433,7 +433,7 @@ module Anthropic
             # Description of what the tool does, shown to the agent to help it decide when to
             # use the tool.
             description: nil,
-            # JSON Schema for custom tool input parameters.
+            # JSON Schema defining the expected input parameters for the tool.
             input_schema: nil,
             # Unique name for the tool. 1-128 characters; letters, digits, underscores, and
             # hyphens.

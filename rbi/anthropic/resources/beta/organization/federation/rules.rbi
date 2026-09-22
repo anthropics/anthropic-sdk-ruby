@@ -178,11 +178,8 @@ module Anthropic
               # Body param: Replaces the description. Omit to leave unchanged; send `null` to
               # clear (the field is stored as an empty string).
               description: nil,
-              # Body param: Does the incoming JWT qualify?
-              #
-              # All populated fields must pass; omitted fields are skipped. At least one of
-              # `subject_prefix` (other than a wildcard-only value like `*`), `claims`, or
-              # `condition` is required; `audience` alone is not sufficient.
+              # Body param: Replaces the entire match object. All populated matcher fields must
+              # pass.
               match: nil,
               # Body param: Replaces the slug identifier (lowercase, digits, hyphens). Unique
               # within the organization; a duplicate name returns 409.
@@ -191,7 +188,8 @@ module Anthropic
               # OAuth callers may only set `workspace:developer` or `workspace:inference`; other
               # scopes (such as `org:admin`) require a Console session.
               oauth_scope: nil,
-              # Body param: Bind to a fixed service account by ID.
+              # Body param: Replaces the entire target object. Currently always a
+              # `service_account` target.
               target: nil,
               # Body param: Replaces the lifetime in seconds for access tokens minted via this
               # rule (60-86400). Minted tokens are capped at

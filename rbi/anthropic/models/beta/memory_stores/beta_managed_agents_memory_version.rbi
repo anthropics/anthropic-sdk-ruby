@@ -17,7 +17,7 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :id
 
-          # A timestamp in RFC 3339 format
+          # When this version was written, in RFC 3339 format.
           sig { returns(Time) }
           attr_accessor :created_at
 
@@ -33,8 +33,7 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :memory_store_id
 
-          # The kind of mutation a `memory_version` records. Every non-no-op mutation to a
-          # memory appends exactly one version row with one of these values.
+          # The kind of mutation this version records: `created`, `modified`, or `deleted`.
           sig do
             returns(
               Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryVersionOperation::TaggedSymbol
@@ -65,11 +64,9 @@ module Anthropic
           sig { returns(T.nilable(Integer)) }
           attr_accessor :content_size_bytes
 
-          # Identifies who performed a write or redact operation. Captured at write time on
-          # the `memory_version` row. The API key that created a session is not recorded on
-          # agent writes; attribution answers who made the write, not who is ultimately
-          # responsible. Look up session provenance separately via the
-          # [Sessions API](/en/api/beta/sessions/retrieve).
+          # Who performed this write: one of `session_actor`, `api_actor`, `user_actor`, or
+          # `service_account_actor`; `null` when no writer is recorded. Captured at write
+          # time and preserved through redaction.
           sig do
             returns(
               T.nilable(
@@ -97,15 +94,16 @@ module Anthropic
           sig { returns(T.nilable(String)) }
           attr_accessor :path
 
-          # A timestamp in RFC 3339 format
+          # When this version was redacted, in RFC 3339 format, or `null` if it has not been
+          # redacted. When set, `content`, `path`, `content_size_bytes`, and
+          # `content_sha256` are all `null`. See
+          # [Redact a memory version](/en/api/beta/memory_stores/memory_versions/redact).
           sig { returns(T.nilable(Time)) }
           attr_accessor :redacted_at
 
-          # Identifies who performed a write or redact operation. Captured at write time on
-          # the `memory_version` row. The API key that created a session is not recorded on
-          # agent writes; attribution answers who made the write, not who is ultimately
-          # responsible. Look up session provenance separately via the
-          # [Sessions API](/en/api/beta/sessions/retrieve).
+          # Who redacted this version, or `null` if it has not been redacted. In practice
+          # always an `api_actor`, `user_actor`, or `service_account_actor` (agents do not
+          # have a redact capability).
           sig do
             returns(
               T.nilable(
@@ -170,7 +168,7 @@ module Anthropic
           def self.new(
             # Unique identifier for this version (a `memver_...` value).
             id:,
-            # A timestamp in RFC 3339 format
+            # When this version was written, in RFC 3339 format.
             created_at:,
             # ID of the memory this version snapshots (a `mem_...` value). Remains valid after
             # the memory is deleted; pass it as `memory_id` to
@@ -180,8 +178,7 @@ module Anthropic
             memory_id:,
             # ID of the memory store this version belongs to (a `memstore_...` value).
             memory_store_id:,
-            # The kind of mutation a `memory_version` records. Every non-no-op mutation to a
-            # memory appends exactly one version row with one of these values.
+            # The kind of mutation this version records: `created`, `modified`, or `deleted`.
             operation:,
             type:,
             # The memory's UTF-8 text content as of this version. `null` when `view=basic`,
@@ -194,22 +191,21 @@ module Anthropic
             # Size of `content` in bytes as of this version. `null` when `redacted_at` is set
             # or `operation` is `deleted`. Populated regardless of `view` otherwise.
             content_size_bytes: nil,
-            # Identifies who performed a write or redact operation. Captured at write time on
-            # the `memory_version` row. The API key that created a session is not recorded on
-            # agent writes; attribution answers who made the write, not who is ultimately
-            # responsible. Look up session provenance separately via the
-            # [Sessions API](/en/api/beta/sessions/retrieve).
+            # Who performed this write: one of `session_actor`, `api_actor`, `user_actor`, or
+            # `service_account_actor`; `null` when no writer is recorded. Captured at write
+            # time and preserved through redaction.
             created_by: nil,
             # The memory's path at the time of this write. `null` if and only if `redacted_at`
             # is set.
             path: nil,
-            # A timestamp in RFC 3339 format
+            # When this version was redacted, in RFC 3339 format, or `null` if it has not been
+            # redacted. When set, `content`, `path`, `content_size_bytes`, and
+            # `content_sha256` are all `null`. See
+            # [Redact a memory version](/en/api/beta/memory_stores/memory_versions/redact).
             redacted_at: nil,
-            # Identifies who performed a write or redact operation. Captured at write time on
-            # the `memory_version` row. The API key that created a session is not recorded on
-            # agent writes; attribution answers who made the write, not who is ultimately
-            # responsible. Look up session provenance separately via the
-            # [Sessions API](/en/api/beta/sessions/retrieve).
+            # Who redacted this version, or `null` if it has not been redacted. In practice
+            # always an `api_actor`, `user_actor`, or `service_account_actor` (agents do not
+            # have a redact capability).
             redacted_by: nil
           )
           end

@@ -47,8 +47,11 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :name
 
-        # A hard spend ceiling. The session stops issuing new model requests once the
-        # tracked list cost reaches `max_list_cost`.
+        # Enforced spend ceiling stamped onto each session created from this deployment,
+        # copied at session-creation time. Omit to leave sessions uncapped. The deployment
+        # agent's model must have a public list price, or the request is rejected; a
+        # multiagent roster is re-validated in full when each fire copies the cap, which
+        # fails closed the same way.
         sig do
           returns(T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit))
         end
@@ -105,8 +108,8 @@ module Anthropic
         end
         attr_writer :resources
 
-        # 5-field POSIX cron schedule. Literal wall-clock matching in the configured
-        # timezone.
+        # Optional recurring cron schedule. When present, the deployment fires
+        # automatically. Both expression and timezone are required when schedule is set.
         sig do
           returns(T.nilable(Anthropic::Beta::BetaManagedAgentsScheduleParams))
         end
@@ -211,8 +214,11 @@ module Anthropic
           initial_events:,
           # Human-readable name for the deployment.
           name:,
-          # A hard spend ceiling. The session stops issuing new model requests once the
-          # tracked list cost reaches `max_list_cost`.
+          # Enforced spend ceiling stamped onto each session created from this deployment,
+          # copied at session-creation time. Omit to leave sessions uncapped. The deployment
+          # agent's model must have a public list price, or the request is rejected; a
+          # multiagent roster is re-validated in full when each fire copies the cap, which
+          # fails closed the same way.
           budget: nil,
           # Description of what the deployment does.
           description: nil,
@@ -222,8 +228,8 @@ module Anthropic
           # Resources (e.g. repositories, files) to mount into each session's container.
           # Maximum 500.
           resources: nil,
-          # 5-field POSIX cron schedule. Literal wall-clock matching in the configured
-          # timezone.
+          # Optional recurring cron schedule. When present, the deployment fires
+          # automatically. Both expression and timezone are required when schedule is set.
           schedule: nil,
           # Vault IDs for stored credentials the agent can use during sessions created from
           # this deployment. Maximum 50.
@@ -405,7 +411,8 @@ module Anthropic
             # The memory store ID (memstore\_...). Must belong to the caller's organization
             # and workspace.
             memory_store_id: nil,
-            # Access mode for an attached memory store.
+            # Access mode for the mounted store. Defaults to read_write. read_only mounts the
+            # store as a read-only filesystem.
             access: nil,
             # Per-attachment guidance for the agent on how to use this store. Rendered into
             # the memory section of the system prompt. Max 4096 chars.

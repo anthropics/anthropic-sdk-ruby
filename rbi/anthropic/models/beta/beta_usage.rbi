@@ -32,6 +32,10 @@ module Anthropic
         attr_accessor :cache_read_input_tokens
 
         # Outcome of the `fallback_credit_token` presented on this request.
+        #
+        # Present on every response to a non-batch request that carried a
+        # `fallback_credit_token`, in either redemption mode; absent otherwise (batch
+        # items accept and ignore the token and carry no outcome object).
         sig { returns(T.nilable(Anthropic::Beta::BetaFallbackCreditUsage)) }
         attr_reader :fallback_credit
 
@@ -123,9 +127,7 @@ module Anthropic
         end
         attr_accessor :service_tier
 
-        # Inference speed mode. `fast` provides significantly faster output token
-        # generation at premium pricing. Not all models support `fast`; invalid
-        # combinations are rejected at create time.
+        # The inference speed mode used for this request.
         sig do
           returns(T.nilable(Anthropic::Beta::BetaUsage::Speed::TaggedSymbol))
         end
@@ -170,6 +172,10 @@ module Anthropic
           # The number of input tokens read from the cache.
           cache_read_input_tokens:,
           # Outcome of the `fallback_credit_token` presented on this request.
+          #
+          # Present on every response to a non-batch request that carried a
+          # `fallback_credit_token`, in either redemption mode; absent otherwise (batch
+          # items accept and ignore the token and carry no outcome object).
           fallback_credit:,
           # The geographic region where inference was performed for this request.
           inference_geo:,
@@ -211,9 +217,7 @@ module Anthropic
           server_tool_use:,
           # If the request used the priority, standard, or batch tier.
           service_tier:,
-          # Inference speed mode. `fast` provides significantly faster output token
-          # generation at premium pricing. Not all models support `fast`; invalid
-          # combinations are rejected at create time.
+          # The inference speed mode used for this request.
           speed:
         )
         end
@@ -279,9 +283,7 @@ module Anthropic
           end
         end
 
-        # Inference speed mode. `fast` provides significantly faster output token
-        # generation at premium pricing. Not all models support `fast`; invalid
-        # combinations are rejected at create time.
+        # The inference speed mode used for this request.
         module Speed
           extend Anthropic::Internal::Type::Enum
 

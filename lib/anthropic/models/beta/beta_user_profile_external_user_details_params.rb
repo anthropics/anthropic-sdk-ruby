@@ -5,11 +5,8 @@ module Anthropic
     module Beta
       class BetaUserProfileExternalUserDetailsParams < Anthropic::Internal::Type::BaseModel
         # @!attribute account_status
-        #   The status of the entity's account on the platform, as the platform states it:
-        #   `active`; `suspended`, when the platform has restricted the account and may
-        #   restore it; or `blocked`, when the platform has barred it. It records the
-        #   platform's decision only; the statuses in `trust_grants` are Anthropic's and do
-        #   not follow it.
+        #   The status of the entity's account on the platform: `active`, `suspended` or
+        #   `blocked`.
         #
         #   @return [Symbol, Anthropic::Models::Beta::BetaUserProfileExternalUserDetailsParams::AccountStatus, nil]
         optional :account_status,
@@ -33,8 +30,8 @@ module Anthropic
         optional :email_hash, String, nil?: true
 
         # @!attribute entity_type
-        #   What kind of entity the profile represents, as the platform states it:
-        #   `individual`, `business`, `non_profit` or `government`.
+        #   What kind of entity the profile represents: `individual`, `business`,
+        #   `non_profit` or `government`.
         #
         #   @return [Symbol, Anthropic::Models::Beta::BetaUserProfileExternalUserDetailsParams::EntityType, nil]
         optional :entity_type,
@@ -49,7 +46,10 @@ module Anthropic
         optional :name_hash, String, nil?: true
 
         # @!attribute onboarded_at
-        #   A timestamp in RFC 3339 format
+        #   When the entity opened its account with the platform, in RFC 3339 format: for an
+        #   `application` profile, when the end-user signed up; for a `passthrough` profile,
+        #   when the company became the platform's customer. Must be a complete timestamp no
+        #   more than 1 minute in the future.
         #
         #   @return [Time, nil]
         optional :onboarded_at, Time
@@ -67,25 +67,22 @@ module Anthropic
         #   {Anthropic::Models::Beta::BetaUserProfileExternalUserDetailsParams} for more
         #   details.
         #
-        #   @param account_status [Symbol, Anthropic::Models::Beta::BetaUserProfileExternalUserDetailsParams::AccountStatus, nil] The status of the entity's account on the platform, as the platform states it: `
+        #   @param account_status [Symbol, Anthropic::Models::Beta::BetaUserProfileExternalUserDetailsParams::AccountStatus, nil] The status of the entity's account on the platform: `active`, `suspended` or `bl
         #
         #   @param country [String, nil] The country of the entity (not of the platform), as the platform determines it:
         #
         #   @param email_hash [String, nil] A hash of the entity's email address, computed by the platform. Anthropic treats
         #
-        #   @param entity_type [Symbol, Anthropic::Models::Beta::BetaUserProfileExternalUserDetailsParams::EntityType, nil] What kind of entity the profile represents, as the platform states it: `individu
+        #   @param entity_type [Symbol, Anthropic::Models::Beta::BetaUserProfileExternalUserDetailsParams::EntityType, nil] What kind of entity the profile represents: `individual`, `business`, `non_profi
         #
         #   @param name_hash [String, nil] A hash of the entity's name, computed by the platform. Anthropic treats it as an
         #
-        #   @param onboarded_at [Time] A timestamp in RFC 3339 format
+        #   @param onboarded_at [Time] When the entity opened its account with the platform, in RFC 3339 format: for an
         #
         #   @param reference_id [String, nil] The platform's own reference for the entity, for example the key of the end-user
 
-        # The status of the entity's account on the platform, as the platform states it:
-        # `active`; `suspended`, when the platform has restricted the account and may
-        # restore it; or `blocked`, when the platform has barred it. It records the
-        # platform's decision only; the statuses in `trust_grants` are Anthropic's and do
-        # not follow it.
+        # The status of the entity's account on the platform: `active`, `suspended` or
+        # `blocked`.
         #
         # @see Anthropic::Models::Beta::BetaUserProfileExternalUserDetailsParams#account_status
         module AccountStatus
@@ -104,8 +101,8 @@ module Anthropic
           #   @return [Array<Symbol>]
         end
 
-        # What kind of entity the profile represents, as the platform states it:
-        # `individual`, `business`, `non_profit` or `government`.
+        # What kind of entity the profile represents: `individual`, `business`,
+        # `non_profit` or `government`.
         #
         # @see Anthropic::Models::Beta::BetaUserProfileExternalUserDetailsParams#entity_type
         module EntityType

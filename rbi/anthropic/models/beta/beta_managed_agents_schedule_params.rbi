@@ -34,8 +34,7 @@ module Anthropic
         end
         attr_accessor :type
 
-        # 5-field POSIX cron schedule. Literal wall-clock matching in the configured
-        # timezone.
+        # A recurring schedule. Discriminated union — only cron is supported currently.
         sig do
           params(
             expression: String,

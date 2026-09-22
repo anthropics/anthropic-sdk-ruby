@@ -13,7 +13,7 @@ module Anthropic
               )
             end
 
-          # Union type for document source variants.
+          # The source of the document data.
           sig do
             returns(
               T.any(
@@ -59,7 +59,7 @@ module Anthropic
             ).returns(T.attached_class)
           end
           def self.new(
-            # Union type for document source variants.
+            # The source of the document data.
             source:,
             type:,
             # Additional context about the document for the model.
@@ -89,7 +89,7 @@ module Anthropic
           def to_hash
           end
 
-          # Union type for document source variants.
+          # The source of the document data.
           module Source
             extend Anthropic::Internal::Type::Union
 

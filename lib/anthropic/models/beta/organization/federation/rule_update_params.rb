@@ -41,11 +41,7 @@ module Anthropic
             optional :description, String, nil?: true
 
             # @!attribute match
-            #   Does the incoming JWT qualify?
-            #
-            #   All populated fields must pass; omitted fields are skipped. At least one of
-            #   `subject_prefix` (other than a wildcard-only value like `*`), `claims`, or
-            #   `condition` is required; `audience` alone is not sufficient.
+            #   Replaces the entire match object. All populated matcher fields must pass.
             #
             #   @return [Anthropic::Models::Beta::Organization::Federation::BetaFederationRuleMatch, nil]
             optional :match,
@@ -70,7 +66,7 @@ module Anthropic
             optional :oauth_scope, String, nil?: true
 
             # @!attribute target
-            #   Bind to a fixed service account by ID.
+            #   Replaces the entire target object. Currently always a `service_account` target.
             #
             #   @return [Anthropic::Models::Beta::Organization::Federation::BetaServiceAccountTarget, nil]
             optional :target,
@@ -114,13 +110,13 @@ module Anthropic
             #
             #   @param description [String, nil] Replaces the description. Omit to leave unchanged; send `null` to clear (the fie
             #
-            #   @param match [Anthropic::Models::Beta::Organization::Federation::BetaFederationRuleMatch, nil] Does the incoming JWT qualify?
+            #   @param match [Anthropic::Models::Beta::Organization::Federation::BetaFederationRuleMatch, nil] Replaces the entire match object. All populated matcher fields must pass.
             #
             #   @param name [String, nil] Replaces the slug identifier (lowercase, digits, hyphens). Unique within the org
             #
             #   @param oauth_scope [String, nil] Replaces the space-separated OAuth scopes granted on minted tokens. OAuth caller
             #
-            #   @param target [Anthropic::Models::Beta::Organization::Federation::BetaServiceAccountTarget, nil] Bind to a fixed service account by ID.
+            #   @param target [Anthropic::Models::Beta::Organization::Federation::BetaServiceAccountTarget, nil] Replaces the entire target object. Currently always a `service_account` target.
             #
             #   @param token_lifetime_seconds [Integer, nil] Replaces the lifetime in seconds for access tokens minted via this rule (60-8640
             #

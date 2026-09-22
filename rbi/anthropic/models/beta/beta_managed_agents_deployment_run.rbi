@@ -18,7 +18,8 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :id
 
-        # A resolved agent reference with a concrete version.
+        # Snapshot of the agent at fire time. Always fully resolved — deployments pin
+        # agent + version.
         sig { returns(Anthropic::Beta::BetaManagedAgentsAgentReference) }
         attr_reader :agent
 
@@ -29,7 +30,7 @@ module Anthropic
         end
         attr_writer :agent
 
-        # A timestamp in RFC 3339 format
+        # Time this run record was persisted.
         sig { returns(Time) }
         attr_accessor :created_at
 
@@ -37,8 +38,8 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :deployment_id
 
-        # Why the run failed to create a session. The type identifies the failure; message
-        # is human-readable detail.
+        # Populated on creation failure. Null on success. Exactly one of `session_id` or
+        # `error` is non-null.
         sig do
           returns(
             T.nilable(
@@ -53,7 +54,7 @@ module Anthropic
         sig { returns(T.nilable(String)) }
         attr_accessor :session_id
 
-        # Describes what triggered a deployment run, with trigger-specific metadata.
+        # What triggered this run and trigger-specific metadata.
         sig do
           returns(Anthropic::Beta::BetaManagedAgentsTriggerContext::Variants)
         end
@@ -108,19 +109,20 @@ module Anthropic
         def self.new(
           # Unique identifier for this run (`drun_...`).
           id:,
-          # A resolved agent reference with a concrete version.
+          # Snapshot of the agent at fire time. Always fully resolved — deployments pin
+          # agent + version.
           agent:,
-          # A timestamp in RFC 3339 format
+          # Time this run record was persisted.
           created_at:,
           # ID of the deployment that produced this run.
           deployment_id:,
-          # Why the run failed to create a session. The type identifies the failure; message
-          # is human-readable detail.
+          # Populated on creation failure. Null on success. Exactly one of `session_id` or
+          # `error` is non-null.
           error:,
           # Populated on success. Null on creation failure. Exactly one of `session_id` or
           # `error` is non-null.
           session_id:,
-          # Describes what triggered a deployment run, with trigger-specific metadata.
+          # What triggered this run and trigger-specific metadata.
           trigger_context:,
           type:
         )
@@ -148,8 +150,8 @@ module Anthropic
         def to_hash
         end
 
-        # Why the run failed to create a session. The type identifies the failure; message
-        # is human-readable detail.
+        # Populated on creation failure. Null on success. Exactly one of `session_id` or
+        # `error` is non-null.
         module Error
           extend Anthropic::Internal::Type::Union
 

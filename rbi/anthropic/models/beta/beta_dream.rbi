@@ -15,19 +15,22 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :id
 
-        # A timestamp in RFC 3339 format
+        # When the dream was archived, in RFC 3339, or `null` if it hasn't been archived.
         sig { returns(T.nilable(Time)) }
         attr_accessor :archived_at
 
-        # A timestamp in RFC 3339 format
+        # When the dream was created, in RFC 3339.
+        #
+        # Lists of dreams are sorted by this time, newest first.
         sig { returns(Time) }
         attr_accessor :created_at
 
-        # A timestamp in RFC 3339 format
+        # When the dream reached `completed`, `failed`, or `canceled`, in RFC 3339, or
+        # `null` if it is still `pending` or `running`.
         sig { returns(T.nilable(Time)) }
         attr_accessor :ended_at
 
-        # Failure detail for a Dream whose `status` is `failed`.
+        # Why the dream failed, or `null` if `status` isn't `failed`.
         sig { returns(T.nilable(Anthropic::Beta::BetaDreamError)) }
         attr_reader :error
 
@@ -56,8 +59,9 @@ module Anthropic
         end
         attr_writer :model
 
-        # Which memory store a dream writes its result to. Defaults to `create_new` when
-        # left out of a create request.
+        # Where the dream writes its result, as set in the request that created the dream.
+        # If that request left out `output_behavior`, the dream used the `create_new`
+        # behavior.
         sig { returns(Anthropic::Beta::BetaOutputBehavior::Variants) }
         attr_accessor :output_behavior
 
@@ -100,16 +104,8 @@ module Anthropic
         sig { returns(Anthropic::Beta::BetaDream::Type::TaggedSymbol) }
         attr_accessor :type
 
-        # The tokens that a dream has used so far.
-        #
-        # The counts are zero while the dream is `pending` and update while it is
-        # `running`. They can keep changing after a cancel.
-        #
-        # See the
-        # [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams#billing)
-        # for how dreams are billed. See the
-        # [prompt caching guide](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#tracking-cache-performance)
-        # for how the input token counts add up.
+        # The dream's token counts, which stop changing once its `status` is `completed`
+        # or `failed`. After a cancel, they can keep changing.
         sig { returns(Anthropic::Beta::BetaDreamUsage) }
         attr_reader :usage
 
@@ -158,13 +154,16 @@ module Anthropic
         def self.new(
           # The unique ID of the dream (`drm_...`).
           id:,
-          # A timestamp in RFC 3339 format
+          # When the dream was archived, in RFC 3339, or `null` if it hasn't been archived.
           archived_at:,
-          # A timestamp in RFC 3339 format
+          # When the dream was created, in RFC 3339.
+          #
+          # Lists of dreams are sorted by this time, newest first.
           created_at:,
-          # A timestamp in RFC 3339 format
+          # When the dream reached `completed`, `failed`, or `canceled`, in RFC 3339, or
+          # `null` if it is still `pending` or `running`.
           ended_at:,
-          # Failure detail for a Dream whose `status` is `failed`.
+          # Why the dream failed, or `null` if `status` isn't `failed`.
           error:,
           # The sources that the dream reads, from the request that created it.
           inputs:,
@@ -175,8 +174,9 @@ module Anthropic
           # The dream uses this model for all of its work. The response always gives the
           # model as an object, even if the request gave only a model ID.
           model:,
-          # Which memory store a dream writes its result to. Defaults to `create_new` when
-          # left out of a create request.
+          # Where the dream writes its result, as set in the request that created the dream.
+          # If that request left out `output_behavior`, the dream used the `create_new`
+          # behavior.
           output_behavior:,
           # The memory store that holds the dream's result, as a one-item array, or an empty
           # array until the dream records that memory store.
@@ -209,16 +209,8 @@ module Anthropic
           # for what each status means.
           status:,
           type:,
-          # The tokens that a dream has used so far.
-          #
-          # The counts are zero while the dream is `pending` and update while it is
-          # `running`. They can keep changing after a cancel.
-          #
-          # See the
-          # [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams#billing)
-          # for how dreams are billed. See the
-          # [prompt caching guide](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#tracking-cache-performance)
-          # for how the input token counts add up.
+          # The dream's token counts, which stop changing once its `status` is `completed`
+          # or `failed`. After a cancel, they can keep changing.
           usage:
         )
         end

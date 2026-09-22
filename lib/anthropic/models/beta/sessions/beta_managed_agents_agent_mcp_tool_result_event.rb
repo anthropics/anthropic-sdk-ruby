@@ -18,7 +18,7 @@ module Anthropic
           required :mcp_tool_use_id, String
 
           # @!attribute processed_at
-          #   A timestamp in RFC 3339 format
+          #   Timestamp when this event was processed.
           #
           #   @return [Time]
           required :processed_at, Time
@@ -48,7 +48,7 @@ module Anthropic
           #
           #   @param mcp_tool_use_id [String] The id of the `agent.mcp_tool_use` event this result corresponds to.
           #
-          #   @param processed_at [Time] A timestamp in RFC 3339 format
+          #   @param processed_at [Time] Timestamp when this event was processed.
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::Type]
           #
@@ -109,13 +109,13 @@ module Anthropic
             #
             #   @option args [String] :text The text content.
             #
-            #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64ImageSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsURLImageSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileImageSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64DocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsURLDocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileDocumentSource, String] :source Union type for image source variants.
+            #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64ImageSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsURLImageSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileImageSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64DocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsURLDocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileDocumentSource, String] :source The source of the image data.
             #
             #   @option args [String, nil] :context Additional context about the document for the model.
             #
             #   @option args [String, nil, String] :title The title of the document.
             #
-            #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultCitations] :citations Citation settings for a search result.
+            #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultCitations] :citations Citation settings for this search result.
             #
             #   @option args [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultContent>] :content Array of text content blocks from the search result.
             #

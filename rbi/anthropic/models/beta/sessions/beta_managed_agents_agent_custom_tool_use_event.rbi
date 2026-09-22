@@ -25,7 +25,7 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :name
 
-          # A timestamp in RFC 3339 format
+          # Timestamp when this tool use was processed.
           sig { returns(Time) }
           attr_accessor :processed_at
 
@@ -64,7 +64,7 @@ module Anthropic
             input:,
             # Name of the custom tool being called.
             name:,
-            # A timestamp in RFC 3339 format
+            # Timestamp when this tool use was processed.
             processed_at:,
             type:,
             # When set, this event was cross-posted from a subagent's thread to surface its

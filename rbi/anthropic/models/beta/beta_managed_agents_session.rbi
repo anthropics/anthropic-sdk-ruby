@@ -29,12 +29,11 @@ module Anthropic
         end
         attr_writer :agent
 
-        # A timestamp in RFC 3339 format
+        # When the session was archived. Null if not archived.
         sig { returns(T.nilable(Time)) }
         attr_accessor :archived_at
 
-        # A hard spend ceiling. The session stops issuing new model requests once the
-        # tracked list cost reaches `max_list_cost`.
+        # The session's enforced spend ceiling, or null when no budget is set.
         sig do
           returns(T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit))
         end
@@ -78,7 +77,7 @@ module Anthropic
         end
         attr_accessor :resources
 
-        # Timing statistics for a session.
+        # Timing statistics for the session.
         sig { returns(Anthropic::Beta::BetaManagedAgentsSessionStats) }
         attr_reader :stats
 
@@ -109,7 +108,7 @@ module Anthropic
         sig { returns(Time) }
         attr_accessor :updated_at
 
-        # Cumulative token usage for a session across all turns.
+        # Cumulative token usage for the session.
         sig { returns(Anthropic::Beta::BetaManagedAgentsSessionUsage) }
         attr_reader :usage
 
@@ -168,10 +167,9 @@ module Anthropic
           # Resolved `agent` definition for a `session`. Snapshot of the `agent` at
           # `session` creation time.
           agent:,
-          # A timestamp in RFC 3339 format
+          # When the session was archived. Null if not archived.
           archived_at:,
-          # A hard spend ceiling. The session stops issuing new model requests once the
-          # tracked list cost reaches `max_list_cost`.
+          # The session's enforced spend ceiling, or null when no budget is set.
           budget:,
           # A timestamp in RFC 3339 format
           created_at:,
@@ -181,7 +179,7 @@ module Anthropic
           # session.
           outcome_evaluations:,
           resources:,
-          # Timing statistics for a session.
+          # Timing statistics for the session.
           stats:,
           # SessionStatus enum
           status:,
@@ -189,7 +187,7 @@ module Anthropic
           type:,
           # A timestamp in RFC 3339 format
           updated_at:,
-          # Cumulative token usage for a session across all turns.
+          # Cumulative token usage for the session.
           usage:,
           # Vault IDs attached to the session at creation. Empty when no vaults were
           # supplied.

@@ -14,7 +14,7 @@ module Anthropic
             )
           end
 
-        # A timestamp in RFC 3339 format
+        # When this enrollment URL expires, in RFC 3339 format.
         sig { returns(Time) }
         attr_accessor :expires_at
 
@@ -40,7 +40,7 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
-          # A timestamp in RFC 3339 format
+          # When this enrollment URL expires, in RFC 3339 format.
           expires_at:,
           # Object type. Always `enrollment_url`.
           type:,

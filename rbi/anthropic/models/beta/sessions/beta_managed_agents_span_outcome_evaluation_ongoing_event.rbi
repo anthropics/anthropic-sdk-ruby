@@ -26,7 +26,7 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :outcome_id
 
-          # A timestamp in RFC 3339 format
+          # Timestamp when this heartbeat was emitted.
           sig { returns(Time) }
           attr_accessor :processed_at
 
@@ -59,7 +59,7 @@ module Anthropic
             iteration:,
             # The `outc_` ID of the outcome being evaluated.
             outcome_id:,
-            # A timestamp in RFC 3339 format
+            # Timestamp when this heartbeat was emitted.
             processed_at:,
             type:
           )

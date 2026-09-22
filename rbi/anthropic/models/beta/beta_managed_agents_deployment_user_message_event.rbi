@@ -169,7 +169,7 @@ module Anthropic
             type:,
             # The text content.
             text: nil,
-            # Union type for image source variants.
+            # The source of the image data.
             source: nil,
             # Additional context about the document for the model.
             context: nil,

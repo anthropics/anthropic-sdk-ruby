@@ -4,7 +4,9 @@ module Anthropic
   module Models
     class RefusalStopDetails < Anthropic::Internal::Type::BaseModel
       # @!attribute category
-      #   The policy category that triggered a refusal.
+      #   The policy category that triggered the refusal.
+      #
+      #   `null` when the refusal doesn't map to a named category.
       #
       #   @return [Symbol, Anthropic::Models::RefusalStopDetails::Category, nil]
       required :category, enum: -> { Anthropic::RefusalStopDetails::Category }, nil?: true
@@ -29,13 +31,15 @@ module Anthropic
       #   Some parameter documentations has been truncated, see
       #   {Anthropic::Models::RefusalStopDetails} for more details.
       #
-      #   @param category [Symbol, Anthropic::Models::RefusalStopDetails::Category, nil] The policy category that triggered a refusal.
+      #   @param category [Symbol, Anthropic::Models::RefusalStopDetails::Category, nil] The policy category that triggered the refusal.
       #
       #   @param explanation [String, nil] Human-readable explanation of the refusal.
       #
       #   @param type [Symbol, :refusal]
 
-      # The policy category that triggered a refusal.
+      # The policy category that triggered the refusal.
+      #
+      # `null` when the refusal doesn't map to a named category.
       #
       # @see Anthropic::Models::RefusalStopDetails#category
       module Category

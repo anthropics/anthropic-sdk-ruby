@@ -12,7 +12,7 @@ module Anthropic
           required :id, String
 
           # @!attribute processed_at
-          #   A timestamp in RFC 3339 format
+          #   Timestamp of status change.
           #
           #   @return [Time]
           required :processed_at, Time
@@ -33,7 +33,7 @@ module Anthropic
           #
           #   @param id [String] Unique identifier for this event.
           #
-          #   @param processed_at [Time] A timestamp in RFC 3339 format
+          #   @param processed_at [Time] Timestamp of status change.
           #
           #   @param stop_reason [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionBudgetReached]
           #
