@@ -63,7 +63,6 @@ module Anthropic
             top_p: Float,
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             stream: T.noreturn,
-            compaction_control: T.nilable(T::Boolean),
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Helpers::Tools::Runner)
         end
@@ -300,7 +299,6 @@ module Anthropic
           # There is no need to provide `stream:`. Instead, use `#stream_raw` or `#create`
           # for streaming and non-streaming use cases, respectively.
           stream: false,
-          compaction_control: nil,
           request_options: {}
         )
         end

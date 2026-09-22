@@ -191,15 +191,10 @@ module Anthropic
             messages = current_messages
             brk, response = blk.call(params)
 
-            # Store the response for compaction check
             @last_response = response
 
-            # Check and perform compaction if needed
-            compacted = check_and_compact?
-
-            # Skip tool processing if we just compacted or if messages were modified
+            # Skip tool processing if messages were modified
             next unless current_messages.equal?(messages)
-            break if compacted
 
             next_step = determine_next_step_from_stop_reason(response.stop_reason)
 
@@ -571,101 +566,6 @@ module Anthropic
           end
         end
 
-        # Check token usage and compact messages if threshold exceeded
-        #
-        # @return [Boolean] true if compaction occurred, false otherwise
-        # @api private
-        private def check_and_compact?
-          return false unless @compaction_control&.[](:enabled)
-          return false unless @last_response
-
-          # Calculate total tokens used
-          usage = @last_response.usage
-          total_input_tokens = (
-            usage.input_tokens.to_i +
-            usage.cache_creation_input_tokens.to_i +
-            usage.cache_read_input_tokens.to_i
-          )
-          tokens_used = total_input_tokens + usage.output_tokens.to_i
-
-          # Check if we've exceeded the threshold
-          threshold = @compaction_control[:context_token_threshold] || DEFAULT_THRESHOLD
-          return false if tokens_used < threshold
-
-          # Warn once about compaction (only if no callback provided)
-          if @compaction_control[:on_compact].nil? && !@compaction_warned
-            warn(
-              "[anthropic-ruby] Context compaction triggered (#{tokens_used} tokens). " \
-              "Use compaction_control: { on_compact: ->(before, after) { ... } } for details."
-            )
-            @compaction_warned = true
-          end
-
-          # Prepare compaction request
-          model = @compaction_control[:model] || params[:model]
-          summary_prompt = @compaction_control[:summary_prompt] || DEFAULT_SUMMARY_PROMPT
-
-          # Prepare messages for compaction - handle tool_use blocks to avoid 400 errors
-          messages_for_compaction = current_messages.dup
-
-          # If last message is from assistant with tool_use blocks, we need to filter them out
-          # because tool_use blocks require corresponding tool_result blocks
-          if messages_for_compaction.last&.[](:role) == :assistant
-            last_msg = messages_for_compaction.last
-            content = last_msg[:content]
-
-            if content.is_a?(Array)
-              # Filter out tool_use blocks, keep text/thinking blocks
-              non_tool_blocks = content.reject do |block|
-                (block.is_a?(Hash) && block[:type] == :tool_use) ||
-                  block.is_a?(Anthropic::Beta::BetaToolUseBlock)
-              end
-
-              if non_tool_blocks.empty?
-                # If no content remains after filtering, remove the entire message
-                messages_for_compaction.pop
-              else
-                # Keep the message but with filtered content
-                last_msg[:content] = non_tool_blocks
-              end
-            end
-          end
-
-          messages = [
-            *messages_for_compaction,
-            {role: :user, content: summary_prompt}
-          ]
-
-          # Get summary from Claude
-          response = @client.beta.messages.create(
-            with_helper_header(
-              {model: model, messages: messages, max_tokens: params[:max_tokens]},
-              "compaction"
-            )
-          )
-
-          # Validate that compaction response is text
-          first_content = response.content.first
-          unless first_content.is_a?(Anthropic::Beta::BetaTextBlock)
-            raise "Compaction response content is not of type 'text', got: #{first_content.class}"
-          end
-
-          tokens_after = response.usage.output_tokens.to_i
-
-          # Invoke callback if provided
-          @compaction_control[:on_compact]&.call(tokens_used, tokens_after)
-
-          # Replace message history with just the summary
-          self.params = {
-            **params,
-            messages: [
-              {role: :user, content: response.content}
-            ]
-          }
-
-          true
-        end
-
         # @api private
         #
         # @param client [Anthropic::Client]
@@ -673,17 +573,13 @@ module Anthropic
         # @param params [Anthropic::Models::Beta::MessageCreateParams]
         #
         # @param max_iterations [Integer, nil]
-        #
-        # @param compaction_control [Hash, nil]
-        def initialize(client, params:, max_iterations: nil, compaction_control: nil)
+        def initialize(client, params:, max_iterations: nil)
           @client = client
           @params = params.to_h
           reject_compaction_param!(@params)
           @finished = false
           @max_iterations = max_iterations
           @iteration_count = 0
-          @compaction_control = compaction_control
-          @compaction_warned = false
           @last_response = nil
           @pending_tool_changes = []
           @tool_overrides = {}

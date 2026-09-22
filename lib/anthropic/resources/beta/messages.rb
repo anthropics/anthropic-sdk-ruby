@@ -14,16 +14,13 @@ module Anthropic
           params = params.to_h
           warn_thinking_enabled(params)
           max_iterations = params.delete(:max_iterations)
-          compaction_control = params.delete(:compaction_control)
-          if compaction_control&.dig(:enabled) || compaction_control&.dig("enabled")
-            warn(
-              "[DEPRECATION] The 'compaction_control' parameter is deprecated and will be removed in a future version. " \
-              "Use server-side compaction instead by passing edits: [{ type: 'compact_20260112' }] in the params passed to `tool_runner()`. " \
-              "See https://platform.claude.com/docs/en/build-with-claude/compaction",
-              category: :deprecated
+          unless params.delete(:compaction_control).nil?
+            raise ArgumentError.new(
+              "`compaction_control` has been removed from the tool runner. Use server-side compaction " \
+              "instead: call `#compact_before_next_turn` when the conversation should be compacted."
             )
           end
-          Anthropic::Helpers::Tools::Runner.new(@client, params:, max_iterations:, compaction_control:)
+          Anthropic::Helpers::Tools::Runner.new(@client, params:, max_iterations:)
         end
 
         # See {Anthropic::Resources::Beta::Messages#stream_raw} for streaming counterpart.
