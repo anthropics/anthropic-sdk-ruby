@@ -31,6 +31,14 @@ module Anthropic
             end
             attr_accessor :group_type
 
+            # Also list the limiter values the workspace inherits from the organization,
+            # including groups with no workspace-level override.
+            sig { returns(T.nilable(T::Boolean)) }
+            attr_reader :include_inherited
+
+            sig { params(include_inherited: T::Boolean).void }
+            attr_writer :include_inherited
+
             # Maximum number of items to return per page. Ranges from `1` to `1000`.
             #
             # When omitted, every remaining entry is returned in a single page and `next_page`
@@ -49,6 +57,7 @@ module Anthropic
                   T.nilable(
                     Anthropic::Beta::Organization::Workspaces::RateLimitListParams::GroupType::OrSymbol
                   ),
+                include_inherited: T::Boolean,
                 limit: T.nilable(Integer),
                 page: T.nilable(String),
                 request_options: Anthropic::RequestOptions::OrHash
@@ -59,6 +68,9 @@ module Anthropic
               workspace_id:,
               # Filter by group type.
               group_type: nil,
+              # Also list the limiter values the workspace inherits from the organization,
+              # including groups with no workspace-level override.
+              include_inherited: nil,
               # Maximum number of items to return per page. Ranges from `1` to `1000`.
               #
               # When omitted, every remaining entry is returned in a single page and `next_page`
@@ -78,6 +90,7 @@ module Anthropic
                     T.nilable(
                       Anthropic::Beta::Organization::Workspaces::RateLimitListParams::GroupType::OrSymbol
                     ),
+                  include_inherited: T::Boolean,
                   limit: T.nilable(Integer),
                   page: T.nilable(String),
                   request_options: Anthropic::RequestOptions

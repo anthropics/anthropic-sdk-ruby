@@ -24,6 +24,13 @@ module Anthropic
                      enum: -> { Anthropic::Beta::Organization::Workspaces::RateLimitListParams::GroupType },
                      nil?: true
 
+            # @!attribute include_inherited
+            #   Also list the limiter values the workspace inherits from the organization,
+            #   including groups with no workspace-level override.
+            #
+            #   @return [Boolean, nil]
+            optional :include_inherited, Anthropic::Internal::Type::Boolean
+
             # @!attribute limit
             #   Maximum number of items to return per page. Ranges from `1` to `1000`.
             #
@@ -39,7 +46,7 @@ module Anthropic
             #   @return [String, nil]
             optional :page, String, nil?: true
 
-            # @!method initialize(workspace_id:, group_type: nil, limit: nil, page: nil, request_options: {})
+            # @!method initialize(workspace_id:, group_type: nil, include_inherited: nil, limit: nil, page: nil, request_options: {})
             #   Some parameter documentations has been truncated, see
             #   {Anthropic::Models::Beta::Organization::Workspaces::RateLimitListParams} for
             #   more details.
@@ -47,6 +54,8 @@ module Anthropic
             #   @param workspace_id [String] The ID of the workspace.
             #
             #   @param group_type [Symbol, Anthropic::Models::Beta::Organization::Workspaces::RateLimitListParams::GroupType, nil] Filter by group type.
+            #
+            #   @param include_inherited [Boolean] Also list the limiter values the workspace inherits from the organization, inclu
             #
             #   @param limit [Integer, nil] Maximum number of items to return per page. Ranges from `1` to `1000`.
             #

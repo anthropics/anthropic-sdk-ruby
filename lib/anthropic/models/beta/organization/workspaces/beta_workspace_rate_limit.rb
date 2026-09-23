@@ -28,8 +28,10 @@ module Anthropic
                      enum: -> { Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::GroupType }
 
             # @!attribute limits
-            #   The limiter values overridden for this group in this workspace. Limiter types
-            #   without a workspace override are omitted and inherit the organization value.
+            #   The workspace's limiter values for this group. By default only the limiter types
+            #   with a workspace-level override are listed. With `include_inherited` set to
+            #   `true`, the limiter types the workspace inherits from the organization are
+            #   listed too, each marked by `source`.
             #
             #   @return [Array<Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimitValue>]
             required :limits,
@@ -43,7 +45,7 @@ module Anthropic
             required :models, Anthropic::Internal::Type::ArrayOf[String], nil?: true
 
             # @!attribute rate_limit_id
-            #   The `id` of the organization's RateLimit entry this override applies to.
+            #   The `id` of the organization's RateLimit entry this entry applies to.
             #
             #   @return [String]
             required :rate_limit_id, String
@@ -55,7 +57,7 @@ module Anthropic
             required :type, const: :workspace_rate_limit
 
             # @!attribute workspace_id
-            #   ID of the Workspace this override applies to.
+            #   ID of the Workspace this entry applies to.
             #
             #   @return [String]
             required :workspace_id, String
@@ -69,14 +71,14 @@ module Anthropic
             #
             #   @param group_type [Symbol, Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::GroupType] Deprecated: use `group.type` instead. The kind of rate-limit group this entry re
             #
-            #   @param limits [Array<Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimitValue>] The limiter values overridden for this group in this workspace. Limiter types wi
+            #   @param limits [Array<Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimitValue>] The workspace's limiter values for this group. By default only the limiter types
             #
             #   @param models [Array<String>, nil] Model names this entry's limits apply to, including aliases. `null` when
             #   `group\_
             #
-            #   @param rate_limit_id [String] The `id` of the organization's RateLimit entry this override applies to.
+            #   @param rate_limit_id [String] The `id` of the organization's RateLimit entry this entry applies to.
             #
-            #   @param workspace_id [String] ID of the Workspace this override applies to.
+            #   @param workspace_id [String] ID of the Workspace this entry applies to.
             #
             #   @param type [Symbol, :workspace_rate_limit] Object type. Always `workspace_rate_limit` for workspace rate-limit entries.
 
