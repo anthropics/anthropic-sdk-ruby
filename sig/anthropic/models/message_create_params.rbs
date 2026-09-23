@@ -7,6 +7,7 @@ module Anthropic
         model: Anthropic::Models::model,
         cache_control: Anthropic::CacheControlEphemeral?,
         container: Anthropic::Models::message_create_params_container?,
+        diagnostics: Anthropic::DiagnosticsParam?,
         inference_geo: String?,
         metadata: Anthropic::Metadata,
         output_config: Anthropic::OutputConfig,
@@ -37,6 +38,8 @@ module Anthropic
       attr_accessor cache_control: Anthropic::CacheControlEphemeral?
 
       attr_accessor container: Anthropic::Models::message_create_params_container?
+
+      attr_accessor diagnostics: Anthropic::DiagnosticsParam?
 
       attr_accessor inference_geo: String?
 
@@ -108,6 +111,7 @@ module Anthropic
         model: Anthropic::Models::model,
         ?cache_control: Anthropic::CacheControlEphemeral?,
         ?container: Anthropic::Models::message_create_params_container?,
+        ?diagnostics: Anthropic::DiagnosticsParam?,
         ?inference_geo: String?,
         ?metadata: Anthropic::Metadata,
         ?output_config: Anthropic::OutputConfig,
@@ -131,6 +135,7 @@ module Anthropic
         model: Anthropic::Models::model,
         cache_control: Anthropic::CacheControlEphemeral?,
         container: Anthropic::Models::message_create_params_container?,
+        diagnostics: Anthropic::DiagnosticsParam?,
         inference_geo: String?,
         metadata: Anthropic::Metadata,
         output_config: Anthropic::OutputConfig,

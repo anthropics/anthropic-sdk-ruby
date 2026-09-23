@@ -61,6 +61,16 @@ module Anthropic
       def parsed_output
       end
 
+      # Request-level diagnostics. `null` when the request did not supply `diagnostics`,
+      # or when it did and no prompt-cache divergence was detected.
+      sig { returns(T.nilable(Anthropic::Diagnostics)) }
+      attr_reader :diagnostics
+
+      sig do
+        params(diagnostics: T.nilable(Anthropic::Diagnostics::OrHash)).void
+      end
+      attr_writer :diagnostics
+
       # The model that will complete your prompt.
       #
       # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
@@ -161,6 +171,7 @@ module Anthropic
                 Anthropic::ContainerUploadBlock::OrHash
               )
             ],
+          diagnostics: T.nilable(Anthropic::Diagnostics::OrHash),
           model: T.any(Anthropic::Model::OrSymbol, String),
           stop_details: T.nilable(Anthropic::RefusalStopDetails::OrHash),
           stop_reason: T.nilable(Anthropic::StopReason::OrSymbol),
@@ -212,6 +223,9 @@ module Anthropic
         # [{ "type": "text", "text": "B)" }]
         # ```
         content:,
+        # Request-level diagnostics. `null` when the request did not supply `diagnostics`,
+        # or when it did and no prompt-cache divergence was detected.
+        diagnostics:,
         # The model that will complete your prompt.
         #
         # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
@@ -276,6 +290,7 @@ module Anthropic
             id: String,
             container: T.nilable(Anthropic::Container),
             content: T::Array[Anthropic::ContentBlock::Variants],
+            diagnostics: T.nilable(Anthropic::Diagnostics),
             model: Anthropic::Model::Variants,
             role: Symbol,
             stop_details: T.nilable(Anthropic::RefusalStopDetails),

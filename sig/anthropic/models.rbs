@@ -141,6 +141,20 @@ module Anthropic
 
   class CacheCreation = Anthropic::Models::CacheCreation
 
+  class CacheMissMessagesChanged = Anthropic::Models::CacheMissMessagesChanged
+
+  class CacheMissModelChanged = Anthropic::Models::CacheMissModelChanged
+
+  class CacheMissPreviousMessageNotFound = Anthropic::Models::CacheMissPreviousMessageNotFound
+
+  module CacheMissReason = Anthropic::Models::CacheMissReason
+
+  class CacheMissSystemChanged = Anthropic::Models::CacheMissSystemChanged
+
+  class CacheMissToolsChanged = Anthropic::Models::CacheMissToolsChanged
+
+  class CacheMissUnavailable = Anthropic::Models::CacheMissUnavailable
+
   class CapabilitySupport = Anthropic::Models::CapabilitySupport
 
   class CitationCharLocation = Anthropic::Models::CitationCharLocation
@@ -264,6 +278,10 @@ module Anthropic
   class DeletedFile = Anthropic::Models::DeletedFile
 
   class DeletedSkill = Anthropic::Models::DeletedSkill
+
+  class Diagnostics = Anthropic::Models::Diagnostics
+
+  class DiagnosticsParam = Anthropic::Models::DiagnosticsParam
 
   class DirectCaller = Anthropic::Models::DirectCaller
 

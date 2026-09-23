@@ -4,84 +4,18 @@ module Anthropic
 
     module Beta
       type beta_diagnostics =
-        {
-          cache_miss_reason: Anthropic::Models::Beta::BetaDiagnostics::cache_miss_reason?
-        }
+        { cache_miss_reason: Anthropic::Models::Beta::beta_cache_miss_reason? }
 
       class BetaDiagnostics < Anthropic::Internal::Type::BaseModel
-        attr_accessor cache_miss_reason: Anthropic::Models::Beta::BetaDiagnostics::cache_miss_reason?
+        attr_accessor cache_miss_reason: Anthropic::Models::Beta::beta_cache_miss_reason?
 
         def initialize: (
-          cache_miss_reason: Anthropic::Models::Beta::BetaDiagnostics::cache_miss_reason?
+          cache_miss_reason: Anthropic::Models::Beta::beta_cache_miss_reason?
         ) -> void
 
         def to_hash: -> {
-          cache_miss_reason: Anthropic::Models::Beta::BetaDiagnostics::cache_miss_reason?
+          cache_miss_reason: Anthropic::Models::Beta::beta_cache_miss_reason?
         }
-
-        type cache_miss_reason =
-          Anthropic::Beta::BetaCacheMissModelChanged
-          | Anthropic::Beta::BetaCacheMissSystemChanged
-          | Anthropic::Beta::BetaCacheMissToolsChanged
-          | Anthropic::Beta::BetaCacheMissMessagesChanged
-          | Anthropic::Beta::BetaCacheMissPreviousMessageNotFound
-          | Anthropic::Beta::BetaCacheMissUnavailable
-
-        module CacheMissReason
-          extend Anthropic::Internal::Type::Union
-
-          type type_ =
-            :model_changed
-            | :system_changed
-            | :tools_changed
-            | :messages_changed
-            | :previous_message_not_found
-            | :unavailable
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            MODEL_CHANGED: :model_changed
-            SYSTEM_CHANGED: :system_changed
-            TOOLS_CHANGED: :tools_changed
-            MESSAGES_CHANGED: :messages_changed
-            PREVIOUS_MESSAGE_NOT_FOUND: :previous_message_not_found
-            UNAVAILABLE: :unavailable
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::BetaDiagnostics::CacheMissReason::type_]
-          end
-
-          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaDiagnostics::cache_miss_reason]
-
-          def self.new:
-            (
-              type: :model_changed | "model_changed",
-              cache_missed_input_tokens: Integer
-            ) -> Anthropic::Beta::BetaCacheMissModelChanged
-            | (
-              type: :system_changed | "system_changed",
-              cache_missed_input_tokens: Integer
-            ) -> Anthropic::Beta::BetaCacheMissSystemChanged
-            | (
-              type: :tools_changed | "tools_changed",
-              cache_missed_input_tokens: Integer
-            ) -> Anthropic::Beta::BetaCacheMissToolsChanged
-            | (
-              type: :messages_changed | "messages_changed",
-              cache_missed_input_tokens: Integer
-            ) -> Anthropic::Beta::BetaCacheMissMessagesChanged
-            | (
-              type: :previous_message_not_found | "previous_message_not_found"
-            ) -> Anthropic::Beta::BetaCacheMissPreviousMessageNotFound
-            | (
-              type: :unavailable | "unavailable"
-            ) -> Anthropic::Beta::BetaCacheMissUnavailable
-            | (
-              type: Anthropic::Models::Beta::BetaDiagnostics::CacheMissReason::type_
-              | String,
-              ?cache_missed_input_tokens: Integer
-            ) -> Anthropic::Models::Beta::BetaDiagnostics::cache_miss_reason
-        end
       end
     end
   end

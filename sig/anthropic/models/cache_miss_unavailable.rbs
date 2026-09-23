@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    type cache_miss_unavailable = { type: :unavailable }
+
+    class CacheMissUnavailable < Anthropic::Internal::Type::BaseModel
+      attr_accessor type: :unavailable
+
+      def initialize: (?type: :unavailable) -> void
+
+      def to_hash: -> { type: :unavailable }
+    end
+  end
+end

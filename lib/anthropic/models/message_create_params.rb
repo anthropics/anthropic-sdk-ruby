@@ -119,6 +119,14 @@ module Anthropic
       #   @return [Anthropic::Models::ContainerParams, String, nil]
       optional :container, union: -> { Anthropic::MessageCreateParamsContainer }, nil?: true
 
+      # @!attribute diagnostics
+      #   Request-level diagnostics. Supply `previous_message_id` to have the response
+      #   include `diagnostics.cache_miss_reason` explaining any prompt-cache divergence
+      #   from that prior request.
+      #
+      #   @return [Anthropic::Models::DiagnosticsParam, nil]
+      optional :diagnostics, -> { Anthropic::DiagnosticsParam }, nil?: true
+
       # @!attribute inference_geo
       #   Specifies the geographic region for inference processing. If not specified, the
       #   workspace's `default_inference_geo` is used.
@@ -341,7 +349,7 @@ module Anthropic
       #   @return [String, nil]
       optional :workspace_id, String
 
-      # @!method initialize(max_tokens:, messages:, model:, cache_control: nil, container: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+      # @!method initialize(max_tokens:, messages:, model:, cache_control: nil, container: nil, diagnostics: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Anthropic::Models::MessageCreateParams} for more details.
       #
@@ -354,6 +362,8 @@ module Anthropic
       #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Top-level cache control automatically applies a cache_control marker to the last
       #
       #   @param container [Anthropic::Models::ContainerParams, String, nil] Container identifier for reuse across requests.
+      #
+      #   @param diagnostics [Anthropic::Models::DiagnosticsParam, nil] Request-level diagnostics. Supply `previous_message_id` to have the response inc
       #
       #   @param inference_geo [String, nil] Specifies the geographic region for inference processing. If not specified, the
       #

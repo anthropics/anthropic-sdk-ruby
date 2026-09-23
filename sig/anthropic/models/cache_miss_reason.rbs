@@ -1,0 +1,66 @@
+module Anthropic
+  module Models
+    type cache_miss_reason =
+      Anthropic::CacheMissModelChanged
+      | Anthropic::CacheMissSystemChanged
+      | Anthropic::CacheMissToolsChanged
+      | Anthropic::CacheMissMessagesChanged
+      | Anthropic::CacheMissPreviousMessageNotFound
+      | Anthropic::CacheMissUnavailable
+
+    module CacheMissReason
+      extend Anthropic::Internal::Type::Union
+
+      type type_ =
+        :model_changed
+        | :system_changed
+        | :tools_changed
+        | :messages_changed
+        | :previous_message_not_found
+        | :unavailable
+
+      module Type
+        extend Anthropic::Internal::Type::Enum
+
+        MODEL_CHANGED: :model_changed
+        SYSTEM_CHANGED: :system_changed
+        TOOLS_CHANGED: :tools_changed
+        MESSAGES_CHANGED: :messages_changed
+        PREVIOUS_MESSAGE_NOT_FOUND: :previous_message_not_found
+        UNAVAILABLE: :unavailable
+
+        def self?.values: -> ::Array[Anthropic::Models::CacheMissReason::type_]
+      end
+
+      def self?.variants: -> ::Array[Anthropic::Models::cache_miss_reason]
+
+      def self.new:
+        (
+          type: :model_changed | "model_changed",
+          cache_missed_input_tokens: Integer
+        ) -> Anthropic::CacheMissModelChanged
+        | (
+          type: :system_changed | "system_changed",
+          cache_missed_input_tokens: Integer
+        ) -> Anthropic::CacheMissSystemChanged
+        | (
+          type: :tools_changed | "tools_changed",
+          cache_missed_input_tokens: Integer
+        ) -> Anthropic::CacheMissToolsChanged
+        | (
+          type: :messages_changed | "messages_changed",
+          cache_missed_input_tokens: Integer
+        ) -> Anthropic::CacheMissMessagesChanged
+        | (
+          type: :previous_message_not_found | "previous_message_not_found"
+        ) -> Anthropic::CacheMissPreviousMessageNotFound
+        | (
+          type: :unavailable | "unavailable"
+        ) -> Anthropic::CacheMissUnavailable
+        | (
+          type: Anthropic::Models::CacheMissReason::type_ | String,
+          ?cache_missed_input_tokens: Integer
+        ) -> Anthropic::Models::cache_miss_reason
+    end
+  end
+end
