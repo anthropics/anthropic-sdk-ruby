@@ -286,6 +286,9 @@ module Anthropic
           method, uninterpolated_path = req.fetch_values(:method, :path)
 
           path = Anthropic::Internal::Util.interpolate_path(uninterpolated_path)
+          # Only a path that starts with a scheme (`https:`) can change host. Other paths, `/x` and `//host/x` included,
+          # resolve under the base URL's path: `./` replaces their leading slashes so `/https://x` is not read as a URL.
+          path = path.sub(%r{\A/*}, "./") unless path.match?(/\A[a-z][a-z0-9+.-]*:/i)
 
           query = Anthropic::Internal::Util.deep_merge(req[:query].to_h, opts[:extra_query].to_h)
 

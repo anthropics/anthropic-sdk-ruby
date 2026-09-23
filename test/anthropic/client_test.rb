@@ -541,6 +541,24 @@ class AnthropicTest < Minitest::Test
     end
   end
 
+  def test_custom_request_path_resolves_against_base_url
+    stub_request(:get, /./).to_return_json(status: 200, body: {})
+    client = Anthropic::Client.new(base_url: "http://localhost/prefix", api_key: "my-anthropic-api-key")
+
+    {
+      "v1/thing" => ["localhost", "/prefix/v1/thing"],
+      "/v1/thing" => ["localhost", "/prefix/v1/thing"],
+      "//example.com/v1/thing" => ["localhost", "/prefix/example.com/v1/thing"],
+      "/https://example.com/v1/thing" => ["localhost", "/prefix/https://example.com/v1/thing"],
+      "https://example.com/v1/thing" => ["example.com", "/v1/thing"]
+    }.each do |path, expected|
+      WebMock.reset_executed_requests!
+      client.request(method: :get, path: path)
+      recorded, = WebMock::RequestRegistry.instance.requested_signatures.hash.first
+      assert_equal(expected, [recorded.uri.host, recorded.uri.path], "path #{path.inspect}")
+    end
+  end
+
   def test_default_headers
     stub_request(:post, "http://localhost/v1/messages").to_return_json(status: 200, body: {})
 
