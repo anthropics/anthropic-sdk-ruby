@@ -66,7 +66,11 @@ module Anthropic
 
           # Who performed this write: one of `session_actor`, `api_actor`, `user_actor`, or
           # `service_account_actor`; `null` when no writer is recorded. Captured at write
-          # time and preserved through redaction.
+          # time and preserved through redaction. A `session_actor` is an agent writing
+          # through the store's mounted filesystem at `/mnt/memory/`. The API key that
+          # created that session is not recorded on agent writes, so attribution names who
+          # made the write, not who is ultimately responsible; look up session provenance
+          # via the [Sessions API](/en/api/beta/sessions/retrieve).
           sig do
             returns(
               T.nilable(
@@ -193,7 +197,11 @@ module Anthropic
             content_size_bytes: nil,
             # Who performed this write: one of `session_actor`, `api_actor`, `user_actor`, or
             # `service_account_actor`; `null` when no writer is recorded. Captured at write
-            # time and preserved through redaction.
+            # time and preserved through redaction. A `session_actor` is an agent writing
+            # through the store's mounted filesystem at `/mnt/memory/`. The API key that
+            # created that session is not recorded on agent writes, so attribution names who
+            # made the write, not who is ultimately responsible; look up session provenance
+            # via the [Sessions API](/en/api/beta/sessions/retrieve).
             created_by: nil,
             # The memory's path at the time of this write. `null` if and only if `redacted_at`
             # is set.

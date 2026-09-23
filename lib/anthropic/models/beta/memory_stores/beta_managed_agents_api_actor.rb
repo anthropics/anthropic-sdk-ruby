@@ -6,7 +6,7 @@ module Anthropic
       module MemoryStores
         class BetaManagedAgentsAPIActor < Anthropic::Internal::Type::BaseModel
           # @!attribute api_key_id
-          #   ID of the API key that performed the write. This identifies the key, not the
+          #   ID of the API key (an `apikey_...` value). This identifies the key, not the
           #   secret.
           #
           #   @return [String]
@@ -18,14 +18,14 @@ module Anthropic
           required :type, enum: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsAPIActor::Type }
 
           # @!method initialize(api_key_id:, type:)
-          #   Attribution for a write made directly via the public API (outside of any
-          #   session).
+          #   A direct caller of the public API, identified by the API key that authenticated
+          #   the request.
           #
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsAPIActor} for more
           #   details.
           #
-          #   @param api_key_id [String] ID of the API key that performed the write. This identifies the key, not the sec
+          #   @param api_key_id [String] ID of the API key (an `apikey_...` value). This identifies the key, not the secr
           #
           #   @param type [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsAPIActor::Type]
 

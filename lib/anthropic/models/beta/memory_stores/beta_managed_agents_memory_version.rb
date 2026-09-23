@@ -70,7 +70,11 @@ module Anthropic
           # @!attribute created_by
           #   Who performed this write: one of `session_actor`, `api_actor`, `user_actor`, or
           #   `service_account_actor`; `null` when no writer is recorded. Captured at write
-          #   time and preserved through redaction.
+          #   time and preserved through redaction. A `session_actor` is an agent writing
+          #   through the store's mounted filesystem at `/mnt/memory/`. The API key that
+          #   created that session is not recorded on agent writes, so attribution names who
+          #   made the write, not who is ultimately responsible; look up session provenance
+          #   via the [Sessions API](/en/api/beta/sessions/retrieve).
           #
           #   @return [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsAPIActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor, nil]
           optional :created_by, union: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsActor }

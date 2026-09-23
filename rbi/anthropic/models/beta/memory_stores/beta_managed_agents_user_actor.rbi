@@ -20,11 +20,11 @@ module Anthropic
           end
           attr_accessor :type
 
-          # ID of the user who performed the write (a `user_...` value).
+          # ID of the user (a `user_...` value).
           sig { returns(String) }
           attr_accessor :user_id
 
-          # Attribution for a write made by a human user through the Anthropic Console.
+          # A human user, for example acting through the Anthropic Console.
           sig do
             params(
               type:
@@ -34,7 +34,7 @@ module Anthropic
           end
           def self.new(
             type:,
-            # ID of the user who performed the write (a `user_...` value).
+            # ID of the user (a `user_...` value).
             user_id:
           )
           end

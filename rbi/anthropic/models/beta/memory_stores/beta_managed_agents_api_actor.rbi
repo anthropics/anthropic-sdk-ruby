@@ -13,7 +13,7 @@ module Anthropic
               )
             end
 
-          # ID of the API key that performed the write. This identifies the key, not the
+          # ID of the API key (an `apikey_...` value). This identifies the key, not the
           # secret.
           sig { returns(String) }
           attr_accessor :api_key_id
@@ -25,8 +25,8 @@ module Anthropic
           end
           attr_accessor :type
 
-          # Attribution for a write made directly via the public API (outside of any
-          # session).
+          # A direct caller of the public API, identified by the API key that authenticated
+          # the request.
           sig do
             params(
               api_key_id: String,
@@ -35,7 +35,7 @@ module Anthropic
             ).returns(T.attached_class)
           end
           def self.new(
-            # ID of the API key that performed the write. This identifies the key, not the
+            # ID of the API key (an `apikey_...` value). This identifies the key, not the
             # secret.
             api_key_id:,
             type:

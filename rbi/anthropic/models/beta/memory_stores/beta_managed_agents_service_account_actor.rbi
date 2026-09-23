@@ -13,22 +13,22 @@ module Anthropic
               )
             end
 
-          # ID of the service account that performed the write (a `svac_...` value).
+          # ID of the service account (a `svac_...` value).
           sig { returns(String) }
           attr_accessor :service_account_id
 
           sig { returns(Symbol) }
           attr_accessor :type
 
-          # Attribution for a write made by a workload authenticated as a service account,
-          # for example via Workload Identity Federation.
+          # A workload authenticated as a service account, for example via Workload Identity
+          # Federation.
           sig do
             params(service_account_id: String, type: Symbol).returns(
               T.attached_class
             )
           end
           def self.new(
-            # ID of the service account that performed the write (a `svac_...` value).
+            # ID of the service account (a `svac_...` value).
             service_account_id:,
             type: :service_account_actor
           )
