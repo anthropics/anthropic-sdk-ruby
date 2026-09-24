@@ -368,6 +368,7 @@ module Anthropic
               T.any(
                 Anthropic::Beta::BetaThinkingConfigEnabled,
                 Anthropic::Beta::BetaThinkingConfigDisabled,
+                Anthropic::Beta::BetaThinkingConfigParam::BetweenTools,
                 Anthropic::Beta::BetaThinkingConfigAdaptive
               )
             )
@@ -381,6 +382,7 @@ module Anthropic
               T.any(
                 Anthropic::Beta::BetaThinkingConfigEnabled::OrHash,
                 Anthropic::Beta::BetaThinkingConfigDisabled::OrHash,
+                Anthropic::Beta::BetaThinkingConfigParam::BetweenTools::OrHash,
                 Anthropic::Beta::BetaThinkingConfigAdaptive::OrHash
               )
           ).void
@@ -685,6 +687,7 @@ module Anthropic
               T.any(
                 Anthropic::Beta::BetaThinkingConfigEnabled::OrHash,
                 Anthropic::Beta::BetaThinkingConfigDisabled::OrHash,
+                Anthropic::Beta::BetaThinkingConfigParam::BetweenTools::OrHash,
                 Anthropic::Beta::BetaThinkingConfigAdaptive::OrHash
               ),
             tool_choice:
@@ -1083,6 +1086,7 @@ module Anthropic
                 T.any(
                   Anthropic::Beta::BetaThinkingConfigEnabled,
                   Anthropic::Beta::BetaThinkingConfigDisabled,
+                  Anthropic::Beta::BetaThinkingConfigParam::BetweenTools,
                   Anthropic::Beta::BetaThinkingConfigAdaptive
                 ),
               tool_choice:

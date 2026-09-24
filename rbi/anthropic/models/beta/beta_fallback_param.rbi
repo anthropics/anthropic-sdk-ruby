@@ -50,6 +50,7 @@ module Anthropic
               T.any(
                 Anthropic::Beta::BetaThinkingConfigEnabled,
                 Anthropic::Beta::BetaThinkingConfigDisabled,
+                Anthropic::Beta::BetaFallbackParam::Thinking::BetweenTools,
                 Anthropic::Beta::BetaThinkingConfigAdaptive
               )
             )
@@ -75,6 +76,7 @@ module Anthropic
                 T.any(
                   Anthropic::Beta::BetaThinkingConfigEnabled::OrHash,
                   Anthropic::Beta::BetaThinkingConfigDisabled::OrHash,
+                  Anthropic::Beta::BetaFallbackParam::Thinking::BetweenTools::OrHash,
                   Anthropic::Beta::BetaThinkingConfigAdaptive::OrHash
                 )
               )
@@ -109,6 +111,7 @@ module Anthropic
                   T.any(
                     Anthropic::Beta::BetaThinkingConfigEnabled,
                     Anthropic::Beta::BetaThinkingConfigDisabled,
+                    Anthropic::Beta::BetaFallbackParam::Thinking::BetweenTools,
                     Anthropic::Beta::BetaThinkingConfigAdaptive
                   )
                 )
@@ -158,6 +161,7 @@ module Anthropic
               T.any(
                 Anthropic::Beta::BetaThinkingConfigEnabled,
                 Anthropic::Beta::BetaThinkingConfigDisabled,
+                Anthropic::Beta::BetaFallbackParam::Thinking::BetweenTools,
                 Anthropic::Beta::BetaThinkingConfigAdaptive
               )
             end
@@ -184,6 +188,11 @@ module Anthropic
                 :disabled,
                 Anthropic::Beta::BetaFallbackParam::Thinking::Type::TaggedSymbol
               )
+            BETWEEN_TOOLS =
+              T.let(
+                :between_tools,
+                Anthropic::Beta::BetaFallbackParam::Thinking::Type::TaggedSymbol
+              )
             ADAPTIVE =
               T.let(
                 :adaptive,
@@ -198,6 +207,27 @@ module Anthropic
               )
             end
             def self.values
+            end
+          end
+
+          class BetweenTools < Anthropic::Internal::Type::BaseModel
+            OrHash =
+              T.type_alias do
+                T.any(
+                  Anthropic::Beta::BetaFallbackParam::Thinking::BetweenTools,
+                  Anthropic::Internal::AnyHash
+                )
+              end
+
+            sig { returns(Symbol) }
+            attr_accessor :type
+
+            sig { params(type: Symbol).returns(T.attached_class) }
+            def self.new(type: :between_tools)
+            end
+
+            sig { override.returns({ type: Symbol }) }
+            def to_hash
             end
           end
 

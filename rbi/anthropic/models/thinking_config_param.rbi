@@ -19,6 +19,7 @@ module Anthropic
           T.any(
             Anthropic::ThinkingConfigEnabled,
             Anthropic::ThinkingConfigDisabled,
+            Anthropic::ThinkingConfigParam::BetweenTools,
             Anthropic::ThinkingConfigAdaptive
           )
         end
@@ -34,6 +35,11 @@ module Anthropic
           T.let(:enabled, Anthropic::ThinkingConfigParam::Type::TaggedSymbol)
         DISABLED =
           T.let(:disabled, Anthropic::ThinkingConfigParam::Type::TaggedSymbol)
+        BETWEEN_TOOLS =
+          T.let(
+            :between_tools,
+            Anthropic::ThinkingConfigParam::Type::TaggedSymbol
+          )
         ADAPTIVE =
           T.let(:adaptive, Anthropic::ThinkingConfigParam::Type::TaggedSymbol)
 
@@ -43,6 +49,27 @@ module Anthropic
           )
         end
         def self.values
+        end
+      end
+
+      class BetweenTools < Anthropic::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Anthropic::ThinkingConfigParam::BetweenTools,
+              Anthropic::Internal::AnyHash
+            )
+          end
+
+        sig { returns(Symbol) }
+        attr_accessor :type
+
+        sig { params(type: Symbol).returns(T.attached_class) }
+        def self.new(type: :between_tools)
+        end
+
+        sig { override.returns({ type: Symbol }) }
+        def to_hash
         end
       end
 

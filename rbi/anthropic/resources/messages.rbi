@@ -36,6 +36,7 @@ module Anthropic
             T.any(
               Anthropic::ThinkingConfigEnabled::OrHash,
               Anthropic::ThinkingConfigDisabled::OrHash,
+              Anthropic::ThinkingConfigParam::BetweenTools::OrHash,
               Anthropic::ThinkingConfigAdaptive::OrHash
             ),
           tool_choice:
@@ -368,6 +369,7 @@ module Anthropic
             T.any(
               Anthropic::ThinkingConfigEnabled::OrHash,
               Anthropic::ThinkingConfigDisabled::OrHash,
+              Anthropic::ThinkingConfigParam::BetweenTools::OrHash,
               Anthropic::ThinkingConfigAdaptive::OrHash
             ),
           tool_choice:
@@ -1008,6 +1010,7 @@ module Anthropic
             T.any(
               Anthropic::ThinkingConfigEnabled::OrHash,
               Anthropic::ThinkingConfigDisabled::OrHash,
+              Anthropic::ThinkingConfigParam::BetweenTools::OrHash,
               Anthropic::ThinkingConfigAdaptive::OrHash
             ),
           tool_choice:

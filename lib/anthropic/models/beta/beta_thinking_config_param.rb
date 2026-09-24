@@ -21,6 +21,8 @@ module Anthropic
 
         variant :disabled, -> { Anthropic::Beta::BetaThinkingConfigDisabled }
 
+        variant :between_tools, -> { Anthropic::Beta::BetaThinkingConfigParam::BetweenTools }
+
         variant :adaptive, -> { Anthropic::Beta::BetaThinkingConfigAdaptive }
 
         module Type
@@ -28,14 +30,25 @@ module Anthropic
 
           ENABLED = :enabled
           DISABLED = :disabled
+          BETWEEN_TOOLS = :between_tools
           ADAPTIVE = :adaptive
 
           # @!method self.values
           #   @return [Array<Symbol>]
         end
 
+        class BetweenTools < Anthropic::Internal::Type::BaseModel
+          # @!attribute type
+          #
+          #   @return [Symbol, :between_tools]
+          required :type, const: :between_tools
+
+          # @!method initialize(type: :between_tools)
+          #   @param type [Symbol, :between_tools]
+        end
+
         # @!method self.variants
-        #   @return [Array(Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigAdaptive)]
+        #   @return [Array(Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigParam::BetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive)]
 
         # Creates a new instance of the variant class whose `type` matches the given
         # value, passing the remaining arguments to its constructor.
@@ -54,13 +67,15 @@ module Anthropic
         #   @option args [Symbol, Anthropic::Models::Beta::BetaThinkingConfigEnabled::Display, nil, Symbol, Anthropic::Models::Beta::BetaThinkingConfigAdaptive::Display, nil] :display_ Controls how thinking content appears in the response. When set to `summarized`,
         #
         # @raise [ArgumentError]
-        # @return [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigAdaptive]
+        # @return [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigParam::BetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive]
         def self.new(type:, **args)
           case type.to_sym
           when :enabled
             Anthropic::Beta::BetaThinkingConfigEnabled.new(**args)
           when :disabled
             Anthropic::Beta::BetaThinkingConfigDisabled.new(**args)
+          when :between_tools
+            Anthropic::Beta::BetaThinkingConfigParam::BetweenTools.new(**args)
           when :adaptive
             Anthropic::Beta::BetaThinkingConfigAdaptive.new(**args)
           else

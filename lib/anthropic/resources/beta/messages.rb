@@ -79,7 +79,7 @@ module Anthropic
         #
         # @param temperature [Float] Body param: Amount of randomness injected into the response.
         #
-        # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigAdaptive] Body param: Configuration for enabling Claude's extended thinking.
+        # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigParam::BetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive] Body param: Configuration for enabling Claude's extended thinking.
         #
         # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
         #
@@ -317,7 +317,7 @@ module Anthropic
         #
         # @param temperature [Float] Body param: Amount of randomness injected into the response.
         #
-        # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigAdaptive] Body param: Configuration for enabling Claude's extended thinking.
+        # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigParam::BetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive] Body param: Configuration for enabling Claude's extended thinking.
         #
         # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
         #
@@ -404,7 +404,7 @@ module Anthropic
         #
         # @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>] Body param: System prompt.
         #
-        # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigAdaptive] Body param: Configuration for enabling Claude's extended thinking.
+        # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigParam::BetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive] Body param: Configuration for enabling Claude's extended thinking.
         #
         # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
         #
