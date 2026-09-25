@@ -422,6 +422,33 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
     refute(@bodies[1].key?("thinking"))
   end
 
+  def test_between_tools_thinking_degrades_to_disabled_on_the_hop
+    stub_responses(refusal_body("primary-model"), message_body("fallback-model"))
+    client = make_client([{model: "fallback-model"}])
+
+    client.beta.messages.create(
+      **PARAMS,
+      thinking: {type: :between_tools},
+      request_options: {fallback_state: Anthropic::BetaFallbackState.new}
+    )
+
+    assert_equal({"type" => "between_tools"}, @bodies[0]["thinking"])
+    assert_equal({"type" => "disabled"}, @bodies[1]["thinking"])
+  end
+
+  def test_an_entry_that_sets_thinking_overrides_between_tools
+    stub_responses(refusal_body("primary-model"), message_body("fallback-model"))
+    client = make_client([{model: "fallback-model", thinking: {type: :between_tools}}])
+
+    client.beta.messages.create(
+      **PARAMS,
+      thinking: {type: :between_tools},
+      request_options: {fallback_state: Anthropic::BetaFallbackState.new}
+    )
+
+    assert_equal({"type" => "between_tools"}, @bodies[1]["thinking"])
+  end
+
   def test_each_hop_patches_the_original_params_not_the_previous_hop
     stub_responses(
       refusal_body("primary-model"),
@@ -1007,6 +1034,33 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
     # The declined final hop is recorded as a `message` iteration, not `fallback_message`.
     assert_equal([:message, :message], delta.usage.iterations.map(&:type))
     assert_nil(state.index)
+  end
+
+  def test_streaming_between_tools_thinking_degrades_to_disabled_on_the_hop
+    stub_streams(refusal_stream("primary-model", token: "tok-1"), accept_stream("fallback-model", text: "ok"))
+    client = make_client([{model: "fallback-model"}])
+
+    client.beta.messages.stream_raw(
+      **PARAMS,
+      thinking: {type: :between_tools},
+      request_options: {fallback_state: Anthropic::BetaFallbackState.new}
+    ).to_a
+
+    assert_equal({"type" => "between_tools"}, @bodies[0]["thinking"])
+    assert_equal({"type" => "disabled"}, @bodies[1]["thinking"])
+  end
+
+  def test_streaming_degrades_between_tools_even_when_the_entry_sets_thinking
+    stub_streams(refusal_stream("primary-model", token: "tok-1"), accept_stream("fallback-model", text: "ok"))
+    client = make_client([{model: "fallback-model", thinking: {type: :between_tools}}])
+
+    client.beta.messages.stream_raw(
+      **PARAMS,
+      thinking: {type: :between_tools},
+      request_options: {fallback_state: Anthropic::BetaFallbackState.new}
+    ).to_a
+
+    assert_equal({"type" => "disabled"}, @bodies[1]["thinking"])
   end
 
   def test_streaming_pinned_start_only_applies_model_from_the_entry
