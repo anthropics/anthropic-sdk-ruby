@@ -84,10 +84,25 @@ module Anthropic
 
           # Filter by event type. Values match the `type` field on returned events (for
           # example, `user.message` or `agent.tool_use`). Omit to return all event types.
-          sig { returns(T.nilable(T::Array[String])) }
+          sig do
+            returns(
+              T.nilable(
+                T::Array[
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionEventType::OrSymbol
+                ]
+              )
+            )
+          end
           attr_reader :types
 
-          sig { params(types: T::Array[String]).void }
+          sig do
+            params(
+              types:
+                T::Array[
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionEventType::OrSymbol
+                ]
+            ).void
+          end
           attr_writer :types
 
           # Optional header to specify the beta version(s) you want to use.
@@ -130,7 +145,10 @@ module Anthropic
               order:
                 Anthropic::Beta::Sessions::EventListParams::Order::OrSymbol,
               page: String,
-              types: T::Array[String],
+              types:
+                T::Array[
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionEventType::OrSymbol
+                ],
               betas:
                 T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               workspace_id: String,
@@ -185,7 +203,10 @@ module Anthropic
                 order:
                   Anthropic::Beta::Sessions::EventListParams::Order::OrSymbol,
                 page: String,
-                types: T::Array[String],
+                types:
+                  T::Array[
+                    Anthropic::Beta::Sessions::BetaManagedAgentsSessionEventType::OrSymbol
+                  ],
                 betas:
                   T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
                 workspace_id: String,

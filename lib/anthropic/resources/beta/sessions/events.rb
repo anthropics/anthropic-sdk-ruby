@@ -28,7 +28,7 @@ module Anthropic
           #
           # @param page [String] Query param: Opaque pagination cursor from a previous response's `next_page`.
           #
-          # @param types [Array<String>] Query param: Filter by event type. Values match the `type` field on returned eve
+          # @param types [Array<Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEventType>] Query param: Filter by event type. Values match the `type` field on returned eve
           #
           # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #
