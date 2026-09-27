@@ -3,7 +3,7 @@ module Anthropic
     type thinking_config_param =
       Anthropic::ThinkingConfigEnabled
       | Anthropic::ThinkingConfigDisabled
-      | Anthropic::ThinkingConfigParam::BetweenTools
+      | Anthropic::ThinkingConfigBetweenTools
       | Anthropic::ThinkingConfigAdaptive
 
     module ThinkingConfigParam
@@ -22,16 +22,6 @@ module Anthropic
         def self?.values: -> ::Array[Anthropic::Models::ThinkingConfigParam::type_]
       end
 
-      type between_tools = { type: :between_tools }
-
-      class BetweenTools < Anthropic::Internal::Type::BaseModel
-        attr_accessor type: :between_tools
-
-        def initialize: (?type: :between_tools) -> void
-
-        def to_hash: -> { type: :between_tools }
-      end
-
       def self?.variants: -> ::Array[Anthropic::Models::thinking_config_param]
 
       def self.new:
@@ -43,7 +33,7 @@ module Anthropic
         | (type: :disabled | "disabled") -> Anthropic::ThinkingConfigDisabled
         | (
           type: :between_tools | "between_tools"
-        ) -> Anthropic::ThinkingConfigParam::BetweenTools
+        ) -> Anthropic::ThinkingConfigBetweenTools
         | (
           type: :adaptive | "adaptive",
           ?display_: Anthropic::Models::ThinkingConfigAdaptive::display_?

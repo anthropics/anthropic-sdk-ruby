@@ -36,7 +36,7 @@ client = Anthropic::Client.new(middleware: [logging, AddTeamHeader.new("demo")])
 message = client.messages.create(
   max_tokens: 1024,
   messages: [{role: :user, content: "Hello, Claude"}],
-  model: :"claude-sonnet-5"
+  model: :"claude-sonnet-5-5"
 )
 puts(message.to_json)
 
@@ -53,7 +53,7 @@ end
 message = client.messages.create(
   max_tokens: 1024,
   messages: [{role: :user, content: "And hello again"}],
-  model: :"claude-sonnet-5",
+  model: :"claude-sonnet-5-5",
   request_options: {middleware: [timer]}
 )
 puts(message.to_json)
@@ -71,6 +71,6 @@ end
 client.messages.create(
   max_tokens: 1024,
   messages: [{role: :user, content: "One more"}],
-  model: :"claude-sonnet-5",
+  model: :"claude-sonnet-5-5",
   request_options: {middleware: [usage]}
 )

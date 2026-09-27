@@ -227,7 +227,7 @@ module Anthropic
             T.any(
               Anthropic::ThinkingConfigEnabled,
               Anthropic::ThinkingConfigDisabled,
-              Anthropic::ThinkingConfigParam::BetweenTools,
+              Anthropic::ThinkingConfigBetweenTools,
               Anthropic::ThinkingConfigAdaptive
             )
           )
@@ -241,7 +241,7 @@ module Anthropic
             T.any(
               Anthropic::ThinkingConfigEnabled::OrHash,
               Anthropic::ThinkingConfigDisabled::OrHash,
-              Anthropic::ThinkingConfigParam::BetweenTools::OrHash,
+              Anthropic::ThinkingConfigBetweenTools::OrHash,
               Anthropic::ThinkingConfigAdaptive::OrHash
             )
         ).void
@@ -484,7 +484,7 @@ module Anthropic
             T.any(
               Anthropic::ThinkingConfigEnabled::OrHash,
               Anthropic::ThinkingConfigDisabled::OrHash,
-              Anthropic::ThinkingConfigParam::BetweenTools::OrHash,
+              Anthropic::ThinkingConfigBetweenTools::OrHash,
               Anthropic::ThinkingConfigAdaptive::OrHash
             ),
           tool_choice:
@@ -801,7 +801,7 @@ module Anthropic
               T.any(
                 Anthropic::ThinkingConfigEnabled,
                 Anthropic::ThinkingConfigDisabled,
-                Anthropic::ThinkingConfigParam::BetweenTools,
+                Anthropic::ThinkingConfigBetweenTools,
                 Anthropic::ThinkingConfigAdaptive
               ),
             tool_choice:

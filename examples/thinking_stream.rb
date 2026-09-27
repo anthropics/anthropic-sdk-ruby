@@ -26,7 +26,7 @@ stream = anthropic.messages.stream(
       content: "Create a haiku about Anthropic. Think carefully about syllable counts before answering."
     }
   ],
-  model: :"claude-sonnet-5"
+  model: :"claude-sonnet-5-5"
 )
 
 # use grep to filter only ThinkingEvent objects, and use lazy to do so in real time.

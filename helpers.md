@@ -6,7 +6,7 @@
 stream = anthropic.messages.stream(
   max_tokens: 1024,
   messages: [{role: :user, content: "Say hello there!"}],
-  model: :"claude-sonnet-5"
+  model: :"claude-sonnet-5-5"
 )
 
 stream.text.each do |text|
@@ -80,7 +80,7 @@ require "anthropic"
 stream = anthropic.messages.stream(
   max_tokens: 1024,
   messages: [{role: :user, content: "Say hello there!"}],
-  model: :"claude-sonnet-5"
+  model: :"claude-sonnet-5-5"
 )
 
 stream.each do |event|
@@ -308,7 +308,7 @@ Handle tool calls yourself:
 
 ```ruby
 message = client.messages.create(
-  model: "claude-sonnet-5",
+  model: "claude-sonnet-5-5",
   max_tokens: 1024,
   messages: [user_message],
   tools: [GetWeather.new]
@@ -327,7 +327,7 @@ Get tool input as it streams:
 
 ```ruby
 stream = client.messages.stream(
-  model: "claude-sonnet-5",
+  model: "claude-sonnet-5-5",
   max_tokens: 1024,
   tools: [GetWeather.new],
   messages: [...]
@@ -375,7 +375,7 @@ tool = Calculator.new
 
 # Automatically handles tool execution loop
 client.beta.messages.tool_runner(
-  model: "claude-sonnet-5",
+  model: "claude-sonnet-5-5",
   max_tokens: 1024,
   messages: [{role: "user", content: "What's 15 * 7?"}],
   tools: [tool]
@@ -450,7 +450,7 @@ Changing `tools:` in the middle of a conversation misses the prompt cache for ev
 
 ```ruby
 runner = client.beta.messages.tool_runner(
-  model: "claude-sonnet-5",
+  model: "claude-sonnet-5-5",
   max_tokens: 1024,
   betas: ["inline-tools-2026-09-15"],
   messages: [{role: "user", content: "Find a slot for a 30 minute call with Sam next week."}],
@@ -499,7 +499,7 @@ With the `compact-2026-09-04` beta you decide when a conversation is compacted: 
 
 ```ruby
 runner = client.beta.messages.tool_runner(
-  model: "claude-sonnet-5",
+  model: "claude-sonnet-5-5",
   max_tokens: 1024,
   betas: ["compact-2026-09-04"],
   messages: [{role: "user", content: "Find every page that mentions rate limits."}],
@@ -573,7 +573,7 @@ With the `inline-tools-2026-09-15` beta, a `tool_addition` block in a `role: :sy
 
 ```ruby
 message = client.beta.messages.create(
-  model: "claude-sonnet-5",
+  model: "claude-sonnet-5-5",
   max_tokens: 1024,
   betas: ["inline-tools-2026-09-15"],
   tools: [GetWeather.new],
@@ -609,7 +609,7 @@ class Output < Anthropic::BaseModel
 end
 
 message = anthropic.messages.create(
-  model: "claude-sonnet-5",
+  model: "claude-sonnet-5-5",
   max_tokens: 1024,
   messages: [{role: "user", content: "give me some famous numbers"}],
   output_config: {format: Output}
@@ -653,7 +653,7 @@ Structured outputs work with streaming. The parsed output is available after the
 
 ```ruby
 stream = anthropic.messages.stream(
-  model: "claude-sonnet-5",
+  model: "claude-sonnet-5-5",
   max_tokens: 1024,
   messages: [{role: "user", content: "give me some famous numbers"}],
   output_config: {format: Output}
@@ -673,7 +673,7 @@ The `count_tokens` method also supports `output_config`:
 
 ```ruby
 result = anthropic.messages.count_tokens(
-  model: "claude-sonnet-5",
+  model: "claude-sonnet-5-5",
   messages: [{role: "user", content: "give me some famous numbers"}],
   output_config: {format: Output}
 )

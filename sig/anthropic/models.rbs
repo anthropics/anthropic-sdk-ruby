@@ -469,6 +469,8 @@ module Anthropic
 
   class ThinkingConfigAdaptive = Anthropic::Models::ThinkingConfigAdaptive
 
+  class ThinkingConfigBetweenTools = Anthropic::Models::ThinkingConfigBetweenTools
+
   class ThinkingConfigDisabled = Anthropic::Models::ThinkingConfigDisabled
 
   class ThinkingConfigEnabled = Anthropic::Models::ThinkingConfigEnabled

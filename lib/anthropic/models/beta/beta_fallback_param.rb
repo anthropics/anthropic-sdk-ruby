@@ -33,7 +33,7 @@ module Anthropic
 
         # @!attribute thinking
         #
-        #   @return [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaFallbackParam::Thinking::BetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive, nil]
+        #   @return [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigBetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive, nil]
         optional :thinking, union: -> { Anthropic::Beta::BetaFallbackParam::Thinking }, nil?: true
 
         # @!method initialize(model:, max_tokens: nil, output_config: nil, speed: nil, thinking: nil)
@@ -55,7 +55,7 @@ module Anthropic
         #
         #   @param speed [Symbol, Anthropic::Models::Beta::BetaFallbackParam::Speed, nil] Inference speed mode. `fast` provides significantly faster output token generati
         #
-        #   @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaFallbackParam::Thinking::BetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive, nil]
+        #   @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigBetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive, nil]
 
         # Inference speed mode. `fast` provides significantly faster output token
         # generation at premium pricing. Not all models support `fast`; invalid
@@ -82,7 +82,7 @@ module Anthropic
 
           variant :disabled, -> { Anthropic::Beta::BetaThinkingConfigDisabled }
 
-          variant :between_tools, -> { Anthropic::Beta::BetaFallbackParam::Thinking::BetweenTools }
+          variant :between_tools, -> { Anthropic::Beta::BetaThinkingConfigBetweenTools }
 
           variant :adaptive, -> { Anthropic::Beta::BetaThinkingConfigAdaptive }
 
@@ -98,18 +98,8 @@ module Anthropic
             #   @return [Array<Symbol>]
           end
 
-          class BetweenTools < Anthropic::Internal::Type::BaseModel
-            # @!attribute type
-            #
-            #   @return [Symbol, :between_tools]
-            required :type, const: :between_tools
-
-            # @!method initialize(type: :between_tools)
-            #   @param type [Symbol, :between_tools]
-          end
-
           # @!method self.variants
-          #   @return [Array(Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaFallbackParam::Thinking::BetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive)]
+          #   @return [Array(Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigBetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive)]
 
           # Creates a new instance of the variant class whose `type` matches the given
           # value, passing the remaining arguments to its constructor.
@@ -128,7 +118,7 @@ module Anthropic
           #   @option args [Symbol, Anthropic::Models::Beta::BetaThinkingConfigEnabled::Display, nil, Symbol, Anthropic::Models::Beta::BetaThinkingConfigAdaptive::Display, nil] :display_ Controls how thinking content appears in the response. When set to `summarized`,
           #
           # @raise [ArgumentError]
-          # @return [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaFallbackParam::Thinking::BetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive]
+          # @return [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigBetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive]
           def self.new(type:, **args)
             case type.to_sym
             when :enabled
@@ -136,7 +126,7 @@ module Anthropic
             when :disabled
               Anthropic::Beta::BetaThinkingConfigDisabled.new(**args)
             when :between_tools
-              Anthropic::Beta::BetaFallbackParam::Thinking::BetweenTools.new(**args)
+              Anthropic::Beta::BetaThinkingConfigBetweenTools.new(**args)
             when :adaptive
               Anthropic::Beta::BetaThinkingConfigAdaptive.new(**args)
             else

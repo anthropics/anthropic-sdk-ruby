@@ -17,7 +17,7 @@ class Output < Anthropic::BaseModel
 end
 
 stream = anthropic.messages.stream(
-  model: "claude-sonnet-5",
+  model: "claude-sonnet-5-5",
   max_tokens: 9999,
   messages: [
     {

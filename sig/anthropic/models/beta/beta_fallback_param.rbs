@@ -53,7 +53,7 @@ module Anthropic
         type thinking =
           Anthropic::Beta::BetaThinkingConfigEnabled
           | Anthropic::Beta::BetaThinkingConfigDisabled
-          | Anthropic::Beta::BetaFallbackParam::Thinking::BetweenTools
+          | Anthropic::Beta::BetaThinkingConfigBetweenTools
           | Anthropic::Beta::BetaThinkingConfigAdaptive
 
         module Thinking
@@ -72,16 +72,6 @@ module Anthropic
             def self?.values: -> ::Array[Anthropic::Models::Beta::BetaFallbackParam::Thinking::type_]
           end
 
-          type between_tools = { type: :between_tools }
-
-          class BetweenTools < Anthropic::Internal::Type::BaseModel
-            attr_accessor type: :between_tools
-
-            def initialize: (?type: :between_tools) -> void
-
-            def to_hash: -> { type: :between_tools }
-          end
-
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaFallbackParam::thinking]
 
           def self.new:
@@ -96,7 +86,7 @@ module Anthropic
             ) -> Anthropic::Beta::BetaThinkingConfigDisabled
             | (
               type: :between_tools | "between_tools"
-            ) -> Anthropic::Beta::BetaFallbackParam::Thinking::BetweenTools
+            ) -> Anthropic::Beta::BetaThinkingConfigBetweenTools
             | (
               type: :adaptive | "adaptive",
               ?block_binding: Anthropic::Beta::BetaThinkingBlockBinding?,

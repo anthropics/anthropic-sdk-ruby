@@ -41,7 +41,7 @@ messages = [
 ]
 
 stream = anthropic.messages.stream(
-  model: :"claude-sonnet-5",
+  model: :"claude-sonnet-5-5",
   max_tokens: 1024,
   system_: "When answering the user's question, cite relevant information from the provided documents.",
   messages: messages

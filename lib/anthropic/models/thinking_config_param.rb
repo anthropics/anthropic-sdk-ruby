@@ -20,7 +20,7 @@ module Anthropic
 
       variant :disabled, -> { Anthropic::ThinkingConfigDisabled }
 
-      variant :between_tools, -> { Anthropic::ThinkingConfigParam::BetweenTools }
+      variant :between_tools, -> { Anthropic::ThinkingConfigBetweenTools }
 
       variant :adaptive, -> { Anthropic::ThinkingConfigAdaptive }
 
@@ -36,18 +36,8 @@ module Anthropic
         #   @return [Array<Symbol>]
       end
 
-      class BetweenTools < Anthropic::Internal::Type::BaseModel
-        # @!attribute type
-        #
-        #   @return [Symbol, :between_tools]
-        required :type, const: :between_tools
-
-        # @!method initialize(type: :between_tools)
-        #   @param type [Symbol, :between_tools]
-      end
-
       # @!method self.variants
-      #   @return [Array(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, Anthropic::Models::ThinkingConfigParam::BetweenTools, Anthropic::Models::ThinkingConfigAdaptive)]
+      #   @return [Array(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, Anthropic::Models::ThinkingConfigBetweenTools, Anthropic::Models::ThinkingConfigAdaptive)]
 
       # Creates a new instance of the variant class whose `type` matches the given
       # value, passing the remaining arguments to its constructor.
@@ -64,7 +54,7 @@ module Anthropic
       #   @option args [Symbol, Anthropic::Models::ThinkingConfigEnabled::Display, nil, Symbol, Anthropic::Models::ThinkingConfigAdaptive::Display, nil] :display_ Controls how thinking content appears in the response. When set to `summarized`,
       #
       # @raise [ArgumentError]
-      # @return [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, Anthropic::Models::ThinkingConfigParam::BetweenTools, Anthropic::Models::ThinkingConfigAdaptive]
+      # @return [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, Anthropic::Models::ThinkingConfigBetweenTools, Anthropic::Models::ThinkingConfigAdaptive]
       def self.new(type:, **args)
         case type.to_sym
         when :enabled
@@ -72,7 +62,7 @@ module Anthropic
         when :disabled
           Anthropic::ThinkingConfigDisabled.new(**args)
         when :between_tools
-          Anthropic::ThinkingConfigParam::BetweenTools.new(**args)
+          Anthropic::ThinkingConfigBetweenTools.new(**args)
         when :adaptive
           Anthropic::ThinkingConfigAdaptive.new(**args)
         else

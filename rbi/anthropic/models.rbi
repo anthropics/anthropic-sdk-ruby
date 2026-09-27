@@ -507,6 +507,8 @@ module Anthropic
 
   ThinkingConfigAdaptive = Anthropic::Models::ThinkingConfigAdaptive
 
+  ThinkingConfigBetweenTools = Anthropic::Models::ThinkingConfigBetweenTools
+
   ThinkingConfigDisabled = Anthropic::Models::ThinkingConfigDisabled
 
   ThinkingConfigEnabled = Anthropic::Models::ThinkingConfigEnabled

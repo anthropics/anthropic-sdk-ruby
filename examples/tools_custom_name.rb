@@ -25,7 +25,7 @@ user_message = {
 puts("--- you can specify a custom name for the tool ---\n")
 
 message = client.messages.create(
-  model: "claude-sonnet-5",
+  model: "claude-sonnet-5-5",
   max_tokens: 1024,
   messages: [user_message],
   tools: [{name: "get_weather_tool", input_schema: GetWeatherInput}]
