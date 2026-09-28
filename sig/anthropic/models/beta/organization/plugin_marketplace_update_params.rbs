@@ -1,0 +1,58 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type plugin_marketplace_update_params =
+          {
+            marketplace_id: String,
+            default_installation_preference: Anthropic::Models::Beta::Organization::PluginMarketplaceUpdateParams::default_installation_preference,
+            betas: ::Array[Anthropic::Models::anthropic_beta]
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class PluginMarketplaceUpdateParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor marketplace_id: String
+
+          attr_accessor default_installation_preference: Anthropic::Models::Beta::Organization::PluginMarketplaceUpdateParams::default_installation_preference
+
+          attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+          def betas=: (
+            ::Array[Anthropic::Models::anthropic_beta]
+          ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+          def initialize: (
+            marketplace_id: String,
+            default_installation_preference: Anthropic::Models::Beta::Organization::PluginMarketplaceUpdateParams::default_installation_preference,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            marketplace_id: String,
+            default_installation_preference: Anthropic::Models::Beta::Organization::PluginMarketplaceUpdateParams::default_installation_preference,
+            betas: ::Array[Anthropic::Models::anthropic_beta],
+            request_options: Anthropic::RequestOptions
+          }
+
+          type default_installation_preference =
+            :auto_install | :available | :not_available | :required
+
+          module DefaultInstallationPreference
+            extend Anthropic::Internal::Type::Enum
+
+            AUTO_INSTALL: :auto_install
+            AVAILABLE: :available
+            NOT_AVAILABLE: :not_available
+            REQUIRED: :required
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::PluginMarketplaceUpdateParams::default_installation_preference]
+          end
+        end
+      end
+    end
+  end
+end

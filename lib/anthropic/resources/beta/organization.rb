@@ -31,6 +31,12 @@ module Anthropic
         # @return [Anthropic::Resources::Beta::Organization::ComplianceSettings]
         attr_reader :compliance_settings
 
+        # @return [Anthropic::Resources::Beta::Organization::Plugins]
+        attr_reader :plugins
+
+        # @return [Anthropic::Resources::Beta::Organization::PluginMarketplaces]
+        attr_reader :plugin_marketplaces
+
         # Retrieve information about the organization associated with the authenticated
         # API key.
         #
@@ -64,6 +70,8 @@ module Anthropic
           @workspaces = Anthropic::Resources::Beta::Organization::Workspaces.new(client: client)
           @rate_limits = Anthropic::Resources::Beta::Organization::RateLimits.new(client: client)
           @compliance_settings = Anthropic::Resources::Beta::Organization::ComplianceSettings.new(client: client)
+          @plugins = Anthropic::Resources::Beta::Organization::Plugins.new(client: client)
+          @plugin_marketplaces = Anthropic::Resources::Beta::Organization::PluginMarketplaces.new(client: client)
         end
       end
     end

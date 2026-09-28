@@ -25,6 +25,9 @@ module Anthropic
             end
           end
 
+          module Plugins
+          end
+
           module ServiceAccounts
           end
 
@@ -67,11 +70,17 @@ module Anthropic
           end
         end
 
+        module Plugins
+        end
+
         module ServiceAccounts
         end
 
         module Workspaces
         end
+      end
+
+      module Plugins
       end
 
       module Rules

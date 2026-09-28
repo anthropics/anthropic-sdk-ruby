@@ -35,6 +35,14 @@ module Anthropic
         end
         attr_reader :compliance_settings
 
+        sig { returns(Anthropic::Resources::Beta::Organization::Plugins) }
+        attr_reader :plugins
+
+        sig do
+          returns(Anthropic::Resources::Beta::Organization::PluginMarketplaces)
+        end
+        attr_reader :plugin_marketplaces
+
         # Retrieve information about the organization associated with the authenticated
         # API key.
         sig do

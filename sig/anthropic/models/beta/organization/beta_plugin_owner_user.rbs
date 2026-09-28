@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_plugin_owner_user = { type: :user, user_id: String }
+
+        class BetaPluginOwnerUser < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :user
+
+          attr_accessor user_id: String
+
+          def initialize: (user_id: String, ?type: :user) -> void
+
+          def to_hash: -> { type: :user, user_id: String }
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_deleted_plugin = { id: String, type: :plugin_deleted }
+
+        class BetaDeletedPlugin < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor type: :plugin_deleted
+
+          def initialize: (id: String, ?type: :plugin_deleted) -> void
+
+          def to_hash: -> { id: String, type: :plugin_deleted }
+        end
+      end
+    end
+  end
+end

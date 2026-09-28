@@ -1,0 +1,49 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_plugin_component =
+          {
+            description: String?,
+            name: String,
+            type: Anthropic::Models::Beta::Organization::BetaPluginComponent::type_
+          }
+
+        class BetaPluginComponent < Anthropic::Internal::Type::BaseModel
+          attr_accessor description: String?
+
+          attr_accessor name: String
+
+          attr_accessor type: Anthropic::Models::Beta::Organization::BetaPluginComponent::type_
+
+          def initialize: (
+            description: String?,
+            name: String,
+            type: Anthropic::Models::Beta::Organization::BetaPluginComponent::type_
+          ) -> void
+
+          def to_hash: -> {
+            description: String?,
+            name: String,
+            type: Anthropic::Models::Beta::Organization::BetaPluginComponent::type_
+          }
+
+          type type_ = :agent | :cli | :command | :hook | :mcp_server | :skill
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            AGENT: :agent
+            CLI: :cli
+            COMMAND: :command
+            HOOK: :hook
+            MCP_SERVER: :mcp_server
+            SKILL: :skill
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaPluginComponent::type_]
+          end
+        end
+      end
+    end
+  end
+end

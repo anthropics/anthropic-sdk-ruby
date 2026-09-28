@@ -1,0 +1,23 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class Plugins
+          class Shares
+            def list: (
+              String plugin_id,
+              ?limit: Integer,
+              ?organization_id: String?,
+              ?page: String?,
+              ?target_type: Anthropic::Models::Beta::Organization::Plugins::ShareListParams::target_type?,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Organization::Plugins::BetaPluginShare]
+
+            def initialize: (client: Anthropic::Client) -> void
+          end
+        end
+      end
+    end
+  end
+end

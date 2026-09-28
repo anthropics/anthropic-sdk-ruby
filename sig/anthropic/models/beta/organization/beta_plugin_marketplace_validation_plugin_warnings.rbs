@@ -1,0 +1,29 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_plugin_marketplace_validation_plugin_warnings =
+          {
+            name: String,
+            warnings: ::Array[Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginWarning]
+          }
+
+        class BetaPluginMarketplaceValidationPluginWarnings < Anthropic::Internal::Type::BaseModel
+          attr_accessor name: String
+
+          attr_accessor warnings: ::Array[Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginWarning]
+
+          def initialize: (
+            name: String,
+            warnings: ::Array[Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginWarning]
+          ) -> void
+
+          def to_hash: -> {
+            name: String,
+            warnings: ::Array[Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginWarning]
+          }
+        end
+      end
+    end
+  end
+end

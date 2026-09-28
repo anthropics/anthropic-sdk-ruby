@@ -1,0 +1,97 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type plugin_list_params =
+          {
+            created_at_gt: Time?,
+            created_at_gte: Time?,
+            created_at_lt: Time?,
+            created_at_lte: Time?,
+            limit: Integer,
+            marketplace_id: String?,
+            organization_id: String?,
+            owner_type: Anthropic::Models::Beta::Organization::PluginListParams::owner_type?,
+            owner_user_id: String?,
+            page: String?,
+            betas: ::Array[Anthropic::Models::anthropic_beta]
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class PluginListParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor created_at_gt: Time?
+
+          attr_accessor created_at_gte: Time?
+
+          attr_accessor created_at_lt: Time?
+
+          attr_accessor created_at_lte: Time?
+
+          attr_reader limit: Integer?
+
+          def limit=: (Integer) -> Integer
+
+          attr_accessor marketplace_id: String?
+
+          attr_accessor organization_id: String?
+
+          attr_accessor owner_type: Anthropic::Models::Beta::Organization::PluginListParams::owner_type?
+
+          attr_accessor owner_user_id: String?
+
+          attr_accessor page: String?
+
+          attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+          def betas=: (
+            ::Array[Anthropic::Models::anthropic_beta]
+          ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+          def initialize: (
+            ?created_at_gt: Time?,
+            ?created_at_gte: Time?,
+            ?created_at_lt: Time?,
+            ?created_at_lte: Time?,
+            ?limit: Integer,
+            ?marketplace_id: String?,
+            ?organization_id: String?,
+            ?owner_type: Anthropic::Models::Beta::Organization::PluginListParams::owner_type?,
+            ?owner_user_id: String?,
+            ?page: String?,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            created_at_gt: Time?,
+            created_at_gte: Time?,
+            created_at_lt: Time?,
+            created_at_lte: Time?,
+            limit: Integer,
+            marketplace_id: String?,
+            organization_id: String?,
+            owner_type: Anthropic::Models::Beta::Organization::PluginListParams::owner_type?,
+            owner_user_id: String?,
+            page: String?,
+            betas: ::Array[Anthropic::Models::anthropic_beta],
+            request_options: Anthropic::RequestOptions
+          }
+
+          type owner_type = :organization | :user
+
+          module OwnerType
+            extend Anthropic::Internal::Type::Enum
+
+            ORGANIZATION: :organization
+            USER: :user
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::PluginListParams::owner_type]
+          end
+        end
+      end
+    end
+  end
+end

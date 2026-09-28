@@ -1,0 +1,38 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class Plugins
+          class InstallationSettings
+            def list: (
+              String plugin_id,
+              ?limit: Integer,
+              ?organization_id: String?,
+              ?page: String?,
+              ?target_type: Anthropic::Models::Beta::Organization::Plugins::InstallationSettingListParams::target_type?,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Organization::Plugins::BetaPluginInstallationSetting]
+
+            def remove: (
+              String target,
+              plugin_id: String,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Beta::Organization::Plugins::BetaDeletedPluginInstallationSetting
+
+            def set: (
+              String target,
+              plugin_id: String,
+              installation_preference: Anthropic::Models::Beta::Organization::Plugins::InstallationSettingSetParams::installation_preference,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Beta::Organization::Plugins::BetaPluginInstallationSetting
+
+            def initialize: (client: Anthropic::Client) -> void
+          end
+        end
+      end
+    end
+  end
+end

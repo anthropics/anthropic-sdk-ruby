@@ -1,0 +1,83 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Plugins
+          type beta_plugin_share =
+            {
+              granted_at: Time,
+              plugin_id: String,
+              target: Anthropic::Models::Beta::Organization::Plugins::BetaPluginShare::target,
+              type: :plugin_share
+            }
+
+          class BetaPluginShare < Anthropic::Internal::Type::BaseModel
+            attr_accessor granted_at: Time
+
+            attr_accessor plugin_id: String
+
+            attr_accessor target: Anthropic::Models::Beta::Organization::Plugins::BetaPluginShare::target
+
+            attr_accessor type: :plugin_share
+
+            def initialize: (
+              granted_at: Time,
+              plugin_id: String,
+              target: Anthropic::Models::Beta::Organization::Plugins::BetaPluginShare::target,
+              ?type: :plugin_share
+            ) -> void
+
+            def to_hash: -> {
+              granted_at: Time,
+              plugin_id: String,
+              target: Anthropic::Models::Beta::Organization::Plugins::BetaPluginShare::target,
+              type: :plugin_share
+            }
+
+            type target =
+              Anthropic::Beta::Organization::BetaPluginTargetOrganization
+              | Anthropic::Beta::Organization::BetaPluginTargetRBACGroup
+              | Anthropic::Beta::Organization::BetaPluginTargetOrganizationMember
+
+            module Target
+              extend Anthropic::Internal::Type::Union
+
+              type type_ = :organization | :rbac_group | :organization_member
+
+              module Type
+                extend Anthropic::Internal::Type::Enum
+
+                ORGANIZATION: :organization
+                RBAC_GROUP: :rbac_group
+                ORGANIZATION_MEMBER: :organization_member
+
+                def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Plugins::BetaPluginShare::Target::type_]
+              end
+
+              def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::Plugins::BetaPluginShare::target]
+
+              def self.new:
+                (
+                  type: :organization | "organization"
+                ) -> Anthropic::Beta::Organization::BetaPluginTargetOrganization
+                | (
+                  type: :rbac_group | "rbac_group",
+                  rbac_group_id: String
+                ) -> Anthropic::Beta::Organization::BetaPluginTargetRBACGroup
+                | (
+                  type: :organization_member | "organization_member",
+                  user_id: String
+                ) -> Anthropic::Beta::Organization::BetaPluginTargetOrganizationMember
+                | (
+                  type: Anthropic::Models::Beta::Organization::Plugins::BetaPluginShare::Target::type_
+                  | String,
+                  ?rbac_group_id: String,
+                  ?user_id: String
+                ) -> Anthropic::Models::Beta::Organization::Plugins::BetaPluginShare::target
+            end
+          end
+        end
+      end
+    end
+  end
+end

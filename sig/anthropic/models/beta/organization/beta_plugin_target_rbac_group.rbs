@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_plugin_target_rbac_group =
+          { rbac_group_id: String, type: :rbac_group }
+
+        class BetaPluginTargetRBACGroup < Anthropic::Internal::Type::BaseModel
+          attr_accessor rbac_group_id: String
+
+          attr_accessor type: :rbac_group
+
+          def initialize: (rbac_group_id: String, ?type: :rbac_group) -> void
+
+          def to_hash: -> { rbac_group_id: String, type: :rbac_group }
+        end
+      end
+    end
+  end
+end

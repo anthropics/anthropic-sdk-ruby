@@ -1,0 +1,86 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type plugin_marketplace_list_params =
+          {
+            limit: Integer,
+            organization_id: String?,
+            owner_type: Anthropic::Models::Beta::Organization::PluginMarketplaceListParams::owner_type?,
+            page: String?,
+            source: Anthropic::Models::Beta::Organization::PluginMarketplaceListParams::source?,
+            betas: ::Array[Anthropic::Models::anthropic_beta]
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class PluginMarketplaceListParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_reader limit: Integer?
+
+          def limit=: (Integer) -> Integer
+
+          attr_accessor organization_id: String?
+
+          attr_accessor owner_type: Anthropic::Models::Beta::Organization::PluginMarketplaceListParams::owner_type?
+
+          attr_accessor page: String?
+
+          attr_accessor source: Anthropic::Models::Beta::Organization::PluginMarketplaceListParams::source?
+
+          attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+          def betas=: (
+            ::Array[Anthropic::Models::anthropic_beta]
+          ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+          def initialize: (
+            ?limit: Integer,
+            ?organization_id: String?,
+            ?owner_type: Anthropic::Models::Beta::Organization::PluginMarketplaceListParams::owner_type?,
+            ?page: String?,
+            ?source: Anthropic::Models::Beta::Organization::PluginMarketplaceListParams::source?,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            limit: Integer,
+            organization_id: String?,
+            owner_type: Anthropic::Models::Beta::Organization::PluginMarketplaceListParams::owner_type?,
+            page: String?,
+            source: Anthropic::Models::Beta::Organization::PluginMarketplaceListParams::source?,
+            betas: ::Array[Anthropic::Models::anthropic_beta],
+            request_options: Anthropic::RequestOptions
+          }
+
+          type owner_type = :organization | :user
+
+          module OwnerType
+            extend Anthropic::Internal::Type::Enum
+
+            ORGANIZATION: :organization
+            USER: :user
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::PluginMarketplaceListParams::owner_type]
+          end
+
+          type source = :directory | :github | :gitlab | :manual | :public_git
+
+          module Source
+            extend Anthropic::Internal::Type::Enum
+
+            DIRECTORY: :directory
+            GITHUB: :github
+            GITLAB: :gitlab
+            MANUAL: :manual
+            PUBLIC_GIT: :public_git
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::PluginMarketplaceListParams::source]
+          end
+        end
+      end
+    end
+  end
+end

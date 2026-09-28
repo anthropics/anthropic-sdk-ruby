@@ -1,0 +1,214 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_plugin =
+          {
+            id: String,
+            components: ::Array[Anthropic::Beta::Organization::BetaPluginComponent]?,
+            content_scan: Anthropic::Beta::Organization::BetaPluginContentScan?,
+            created_at: Time,
+            created_by: Anthropic::Models::Beta::Organization::BetaPlugin::created_by?,
+            description: String?,
+            display_name: String?,
+            latest_version_id: String,
+            manifest_version: String?,
+            marketplace_id: String,
+            name: String,
+            organization_installation_preference: Anthropic::Models::Beta::Organization::BetaPlugin::organization_installation_preference?,
+            organization_installation_preference_inherited: bool?,
+            owner: Anthropic::Models::Beta::Organization::BetaPlugin::owner,
+            reach: Anthropic::Models::Beta::Organization::BetaPlugin::reach?,
+            served_version_id: String,
+            served_version_pinned: bool,
+            type: :plugin,
+            updated_at: Time
+          }
+
+        class BetaPlugin < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor components: ::Array[Anthropic::Beta::Organization::BetaPluginComponent]?
+
+          attr_accessor content_scan: Anthropic::Beta::Organization::BetaPluginContentScan?
+
+          attr_accessor created_at: Time
+
+          attr_accessor created_by: Anthropic::Models::Beta::Organization::BetaPlugin::created_by?
+
+          attr_accessor description: String?
+
+          attr_accessor display_name: String?
+
+          attr_accessor latest_version_id: String
+
+          attr_accessor manifest_version: String?
+
+          attr_accessor marketplace_id: String
+
+          attr_accessor name: String
+
+          attr_accessor organization_installation_preference: Anthropic::Models::Beta::Organization::BetaPlugin::organization_installation_preference?
+
+          attr_accessor organization_installation_preference_inherited: bool?
+
+          attr_accessor owner: Anthropic::Models::Beta::Organization::BetaPlugin::owner
+
+          attr_accessor reach: Anthropic::Models::Beta::Organization::BetaPlugin::reach?
+
+          attr_accessor served_version_id: String
+
+          attr_accessor served_version_pinned: bool
+
+          attr_accessor type: :plugin
+
+          attr_accessor updated_at: Time
+
+          def initialize: (
+            id: String,
+            components: ::Array[Anthropic::Beta::Organization::BetaPluginComponent]?,
+            content_scan: Anthropic::Beta::Organization::BetaPluginContentScan?,
+            created_at: Time,
+            created_by: Anthropic::Models::Beta::Organization::BetaPlugin::created_by?,
+            description: String?,
+            display_name: String?,
+            latest_version_id: String,
+            manifest_version: String?,
+            marketplace_id: String,
+            name: String,
+            organization_installation_preference: Anthropic::Models::Beta::Organization::BetaPlugin::organization_installation_preference?,
+            organization_installation_preference_inherited: bool?,
+            owner: Anthropic::Models::Beta::Organization::BetaPlugin::owner,
+            reach: Anthropic::Models::Beta::Organization::BetaPlugin::reach?,
+            served_version_id: String,
+            served_version_pinned: bool,
+            updated_at: Time,
+            ?type: :plugin
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            components: ::Array[Anthropic::Beta::Organization::BetaPluginComponent]?,
+            content_scan: Anthropic::Beta::Organization::BetaPluginContentScan?,
+            created_at: Time,
+            created_by: Anthropic::Models::Beta::Organization::BetaPlugin::created_by?,
+            description: String?,
+            display_name: String?,
+            latest_version_id: String,
+            manifest_version: String?,
+            marketplace_id: String,
+            name: String,
+            organization_installation_preference: Anthropic::Models::Beta::Organization::BetaPlugin::organization_installation_preference?,
+            organization_installation_preference_inherited: bool?,
+            owner: Anthropic::Models::Beta::Organization::BetaPlugin::owner,
+            reach: Anthropic::Models::Beta::Organization::BetaPlugin::reach?,
+            served_version_id: String,
+            served_version_pinned: bool,
+            type: :plugin,
+            updated_at: Time
+          }
+
+          type created_by =
+            Anthropic::Beta::Organization::BetaPluginUserActor
+            | Anthropic::Beta::Organization::BetaPluginAPIActor
+
+          module CreatedBy
+            extend Anthropic::Internal::Type::Union
+
+            type type_ = :user_actor | :api_actor
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              USER_ACTOR: :user_actor
+              API_ACTOR: :api_actor
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaPlugin::CreatedBy::type_]
+            end
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::BetaPlugin::created_by]
+
+            def self.new:
+              (
+                type: :user_actor | "user_actor",
+                email_address: String?,
+                user_id: String
+              ) -> Anthropic::Beta::Organization::BetaPluginUserActor
+              | (
+                type: :api_actor | "api_actor",
+                api_key_id: String
+              ) -> Anthropic::Beta::Organization::BetaPluginAPIActor
+              | (
+                type: Anthropic::Models::Beta::Organization::BetaPlugin::CreatedBy::type_
+                | String,
+                ?email_address: String?,
+                ?user_id: String,
+                ?api_key_id: String
+              ) -> Anthropic::Models::Beta::Organization::BetaPlugin::created_by
+          end
+
+          type organization_installation_preference =
+            :auto_install | :available | :not_available | :required | String
+
+          module OrganizationInstallationPreference
+            extend Anthropic::Internal::Type::Union
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::BetaPlugin::organization_installation_preference]
+
+            AUTO_INSTALL: :auto_install
+            AVAILABLE: :available
+            NOT_AVAILABLE: :not_available
+            REQUIRED: :required
+          end
+
+          type owner =
+            Anthropic::Beta::Organization::BetaPluginOwnerOrganization
+            | Anthropic::Beta::Organization::BetaPluginOwnerUser
+
+          module Owner
+            extend Anthropic::Internal::Type::Union
+
+            type type_ = :organization | :user
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              ORGANIZATION: :organization
+              USER: :user
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaPlugin::Owner::type_]
+            end
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::BetaPlugin::owner]
+
+            def self.new:
+              (
+                type: :organization | "organization"
+              ) -> Anthropic::Beta::Organization::BetaPluginOwnerOrganization
+              | (
+                type: :user | "user",
+                user_id: String
+              ) -> Anthropic::Beta::Organization::BetaPluginOwnerUser
+              | (
+                type: Anthropic::Models::Beta::Organization::BetaPlugin::Owner::type_
+                | String,
+                ?user_id: String
+              ) -> Anthropic::Models::Beta::Organization::BetaPlugin::owner
+          end
+
+          type reach = :contained | :privileged | :remote
+
+          module Reach
+            extend Anthropic::Internal::Type::Enum
+
+            CONTAINED: :contained
+            PRIVILEGED: :privileged
+            REMOTE: :remote
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaPlugin::reach]
+          end
+        end
+      end
+    end
+  end
+end

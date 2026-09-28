@@ -1,0 +1,76 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Plugins
+          type share_list_params =
+            {
+              plugin_id: String,
+              limit: Integer,
+              organization_id: String?,
+              page: String?,
+              target_type: Anthropic::Models::Beta::Organization::Plugins::ShareListParams::target_type?,
+              betas: ::Array[Anthropic::Models::anthropic_beta]
+            }
+            & Anthropic::Internal::Type::request_parameters
+
+          class ShareListParams < Anthropic::Internal::Type::BaseModel
+            extend Anthropic::Internal::Type::RequestParameters::Converter
+            include Anthropic::Internal::Type::RequestParameters
+
+            attr_accessor plugin_id: String
+
+            attr_reader limit: Integer?
+
+            def limit=: (Integer) -> Integer
+
+            attr_accessor organization_id: String?
+
+            attr_accessor page: String?
+
+            attr_accessor target_type: Anthropic::Models::Beta::Organization::Plugins::ShareListParams::target_type?
+
+            attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+            def betas=: (
+              ::Array[Anthropic::Models::anthropic_beta]
+            ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+            def initialize: (
+              plugin_id: String,
+              ?limit: Integer,
+              ?organization_id: String?,
+              ?page: String?,
+              ?target_type: Anthropic::Models::Beta::Organization::Plugins::ShareListParams::target_type?,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> void
+
+            def to_hash: -> {
+              plugin_id: String,
+              limit: Integer,
+              organization_id: String?,
+              page: String?,
+              target_type: Anthropic::Models::Beta::Organization::Plugins::ShareListParams::target_type?,
+              betas: ::Array[Anthropic::Models::anthropic_beta],
+              request_options: Anthropic::RequestOptions
+            }
+
+            type target_type =
+              :organization | :organization_member | :rbac_group
+
+            module TargetType
+              extend Anthropic::Internal::Type::Enum
+
+              ORGANIZATION: :organization
+              ORGANIZATION_MEMBER: :organization_member
+              RBAC_GROUP: :rbac_group
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Plugins::ShareListParams::target_type]
+            end
+          end
+        end
+      end
+    end
+  end
+end

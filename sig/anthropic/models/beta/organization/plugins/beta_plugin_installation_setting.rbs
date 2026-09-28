@@ -1,0 +1,107 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Plugins
+          type beta_plugin_installation_setting =
+            {
+              created_at: Time,
+              installation_preference: Anthropic::Models::Beta::Organization::Plugins::BetaPluginInstallationSetting::installation_preference,
+              plugin_id: String,
+              target: Anthropic::Models::Beta::Organization::Plugins::BetaPluginInstallationSetting::target,
+              type: :plugin_installation_setting,
+              updated_at: Time
+            }
+
+          class BetaPluginInstallationSetting < Anthropic::Internal::Type::BaseModel
+            attr_accessor created_at: Time
+
+            attr_accessor installation_preference: Anthropic::Models::Beta::Organization::Plugins::BetaPluginInstallationSetting::installation_preference
+
+            attr_accessor plugin_id: String
+
+            attr_accessor target: Anthropic::Models::Beta::Organization::Plugins::BetaPluginInstallationSetting::target
+
+            attr_accessor type: :plugin_installation_setting
+
+            attr_accessor updated_at: Time
+
+            def initialize: (
+              created_at: Time,
+              installation_preference: Anthropic::Models::Beta::Organization::Plugins::BetaPluginInstallationSetting::installation_preference,
+              plugin_id: String,
+              target: Anthropic::Models::Beta::Organization::Plugins::BetaPluginInstallationSetting::target,
+              updated_at: Time,
+              ?type: :plugin_installation_setting
+            ) -> void
+
+            def to_hash: -> {
+              created_at: Time,
+              installation_preference: Anthropic::Models::Beta::Organization::Plugins::BetaPluginInstallationSetting::installation_preference,
+              plugin_id: String,
+              target: Anthropic::Models::Beta::Organization::Plugins::BetaPluginInstallationSetting::target,
+              type: :plugin_installation_setting,
+              updated_at: Time
+            }
+
+            type installation_preference =
+              :auto_install | :available | :not_available | :required | String
+
+            module InstallationPreference
+              extend Anthropic::Internal::Type::Union
+
+              def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::Plugins::BetaPluginInstallationSetting::installation_preference]
+
+              AUTO_INSTALL: :auto_install
+              AVAILABLE: :available
+              NOT_AVAILABLE: :not_available
+              REQUIRED: :required
+            end
+
+            type target =
+              Anthropic::Beta::Organization::BetaPluginTargetOrganization
+              | Anthropic::Beta::Organization::BetaPluginTargetRBACGroup
+              | Anthropic::Beta::Organization::BetaPluginTargetOrganizationMember
+
+            module Target
+              extend Anthropic::Internal::Type::Union
+
+              type type_ = :organization | :rbac_group | :organization_member
+
+              module Type
+                extend Anthropic::Internal::Type::Enum
+
+                ORGANIZATION: :organization
+                RBAC_GROUP: :rbac_group
+                ORGANIZATION_MEMBER: :organization_member
+
+                def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Plugins::BetaPluginInstallationSetting::Target::type_]
+              end
+
+              def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::Plugins::BetaPluginInstallationSetting::target]
+
+              def self.new:
+                (
+                  type: :organization | "organization"
+                ) -> Anthropic::Beta::Organization::BetaPluginTargetOrganization
+                | (
+                  type: :rbac_group | "rbac_group",
+                  rbac_group_id: String
+                ) -> Anthropic::Beta::Organization::BetaPluginTargetRBACGroup
+                | (
+                  type: :organization_member | "organization_member",
+                  user_id: String
+                ) -> Anthropic::Beta::Organization::BetaPluginTargetOrganizationMember
+                | (
+                  type: Anthropic::Models::Beta::Organization::Plugins::BetaPluginInstallationSetting::Target::type_
+                  | String,
+                  ?rbac_group_id: String,
+                  ?user_id: String
+                ) -> Anthropic::Models::Beta::Organization::Plugins::BetaPluginInstallationSetting::target
+            end
+          end
+        end
+      end
+    end
+  end
+end
