@@ -17,6 +17,7 @@ class Anthropic::Test::Resources::Beta::TunnelsTest < Anthropic::Test::ResourceT
         created_at: Time,
         display_name: String | nil,
         domain: String,
+        transport: Anthropic::Beta::BetaTunnelTransport,
         type: Symbol
       }
     end
@@ -38,6 +39,7 @@ class Anthropic::Test::Resources::Beta::TunnelsTest < Anthropic::Test::ResourceT
         created_at: Time,
         display_name: String | nil,
         domain: String,
+        transport: Anthropic::Beta::BetaTunnelTransport,
         type: Symbol
       }
     end
@@ -66,6 +68,7 @@ class Anthropic::Test::Resources::Beta::TunnelsTest < Anthropic::Test::ResourceT
         created_at: Time,
         display_name: String | nil,
         domain: String,
+        transport: Anthropic::Beta::BetaTunnelTransport,
         type: Symbol
       }
     end
@@ -85,6 +88,7 @@ class Anthropic::Test::Resources::Beta::TunnelsTest < Anthropic::Test::ResourceT
         created_at: Time,
         display_name: String | nil,
         domain: String,
+        transport: Anthropic::Beta::BetaTunnelTransport,
         type: Symbol
       }
     end

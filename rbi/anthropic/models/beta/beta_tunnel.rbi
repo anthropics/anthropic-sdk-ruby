@@ -34,6 +34,15 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :domain
 
+        # How traffic reaches the tunnel. Chosen by Anthropic per organization when the
+        # tunnel is created; read-only and present on every tunnel, so automation can tell
+        # which connector to deploy. A union discriminated on `type`:
+        # `{"type": "cloudflare"}` or `{"type": "relay"}`. In the create response a
+        # `relay` tunnel's transport also carries `token`, its relay token, shown that
+        # once; no read carries a token.
+        sig { returns(Anthropic::Beta::BetaTunnelTransport::Variants) }
+        attr_accessor :transport
+
         sig { returns(Symbol) }
         attr_accessor :type
 
@@ -45,6 +54,11 @@ module Anthropic
             created_at: Time,
             display_name: T.nilable(String),
             domain: String,
+            transport:
+              T.any(
+                Anthropic::Beta::BetaCloudflareTunnelTransport::OrHash,
+                Anthropic::Beta::BetaRelayTunnelTransport::OrHash
+              ),
             type: Symbol
           ).returns(T.attached_class)
         end
@@ -62,6 +76,13 @@ module Anthropic
           # subdomain of this value are routed through the tunnel. Globally unique and never
           # reused, even after the tunnel is archived.
           domain:,
+          # How traffic reaches the tunnel. Chosen by Anthropic per organization when the
+          # tunnel is created; read-only and present on every tunnel, so automation can tell
+          # which connector to deploy. A union discriminated on `type`:
+          # `{"type": "cloudflare"}` or `{"type": "relay"}`. In the create response a
+          # `relay` tunnel's transport also carries `token`, its relay token, shown that
+          # once; no read carries a token.
+          transport:,
           type: :tunnel
         )
         end
@@ -74,6 +95,7 @@ module Anthropic
               created_at: Time,
               display_name: T.nilable(String),
               domain: String,
+              transport: Anthropic::Beta::BetaTunnelTransport::Variants,
               type: Symbol
             }
           )

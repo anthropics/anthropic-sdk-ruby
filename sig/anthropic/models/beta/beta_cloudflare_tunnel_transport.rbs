@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    class BetaCloudflareTunnelTransport = Beta::BetaCloudflareTunnelTransport
+
+    module Beta
+      type beta_cloudflare_tunnel_transport = { type: :cloudflare }
+
+      class BetaCloudflareTunnelTransport < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :cloudflare
+
+        def initialize: (?type: :cloudflare) -> void
+
+        def to_hash: -> { type: :cloudflare }
+      end
+    end
+  end
+end

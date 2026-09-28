@@ -10,6 +10,7 @@ module Anthropic
           created_at: Time,
           display_name: String?,
           domain: String,
+          transport: Anthropic::Models::Beta::beta_tunnel_transport,
           type: :tunnel
         }
 
@@ -24,6 +25,8 @@ module Anthropic
 
         attr_accessor domain: String
 
+        attr_accessor transport: Anthropic::Models::Beta::beta_tunnel_transport
+
         attr_accessor type: :tunnel
 
         def initialize: (
@@ -32,6 +35,7 @@ module Anthropic
           created_at: Time,
           display_name: String?,
           domain: String,
+          transport: Anthropic::Models::Beta::beta_tunnel_transport,
           ?type: :tunnel
         ) -> void
 
@@ -41,6 +45,7 @@ module Anthropic
           created_at: Time,
           display_name: String?,
           domain: String,
+          transport: Anthropic::Models::Beta::beta_tunnel_transport,
           type: :tunnel
         }
       end
