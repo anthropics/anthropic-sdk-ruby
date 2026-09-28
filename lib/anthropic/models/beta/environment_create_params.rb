@@ -118,7 +118,7 @@ module Anthropic
           #
           #   @option args [Anthropic::Models::Beta::BetaUnrestrictedNetwork, Anthropic::Models::Beta::BetaLimitedNetworkParams, nil] :networking Network configuration policy. Omit on update to preserve the existing value.
           #
-          #   @option args [Anthropic::Models::Beta::BetaPackagesParams, nil] :packages Specify packages (and optionally their versions) available in this environment.
+          #   @option args [Anthropic::Models::Beta::BetaPackagesParams, nil] :packages Package manager configuration. Under `limited` networking, requires `networking.
           #
           # @raise [ArgumentError]
           # @return [Anthropic::Models::Beta::BetaCloudConfigParams, Anthropic::Models::Beta::BetaSelfHostedConfigParams]

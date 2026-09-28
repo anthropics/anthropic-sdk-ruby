@@ -38,15 +38,11 @@ module Anthropic
           # Creates a new instance of the variant class whose `type` matches the given
           # value, passing the remaining arguments to its constructor.
           #
-          # Some parameter documentations has been truncated, see
-          # {Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluation} for
-          # more details.
-          #
           # @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluation::Type, String]
           #
           # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
           #
-          #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentAutoEvaluatedPermissionAllow, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentAutoEvaluatedPermissionAsk, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentAutoEvaluatedPermissionDeny] :evaluated_permission The server's per-invocation judgement under the auto permission policy. Its type
+          #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentAutoEvaluatedPermissionAllow, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentAutoEvaluatedPermissionAsk, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentAutoEvaluatedPermissionDeny] :evaluated_permission The server's judgement for this invocation.
           #
           # @raise [ArgumentError]
           # @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAllow, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAsk, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAuto]

@@ -15,7 +15,8 @@ module Anthropic
             )
           end
 
-        # A timestamp in RFC 3339 format
+        # When the outcome reached a terminal result. Null while
+        # `pending`/`running`/`evaluating`.
         sig { returns(T.nilable(Time)) }
         attr_accessor :completed_at
 
@@ -64,7 +65,8 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
-          # A timestamp in RFC 3339 format
+          # When the outcome reached a terminal result. Null while
+          # `pending`/`running`/`evaluating`.
           completed_at:,
           # What the agent should produce.
           description:,

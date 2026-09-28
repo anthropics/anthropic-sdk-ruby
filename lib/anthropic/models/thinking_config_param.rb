@@ -20,6 +20,8 @@ module Anthropic
 
       variant :disabled, -> { Anthropic::ThinkingConfigDisabled }
 
+      variant :between_tools, -> { Anthropic::ThinkingConfigBetweenTools }
+
       variant :adaptive, -> { Anthropic::ThinkingConfigAdaptive }
 
       module Type
@@ -27,6 +29,7 @@ module Anthropic
 
         ENABLED = :enabled
         DISABLED = :disabled
+        BETWEEN_TOOLS = :between_tools
         ADAPTIVE = :adaptive
 
         # @!method self.values
@@ -34,7 +37,7 @@ module Anthropic
       end
 
       # @!method self.variants
-      #   @return [Array(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, Anthropic::Models::ThinkingConfigAdaptive)]
+      #   @return [Array(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, Anthropic::Models::ThinkingConfigBetweenTools, Anthropic::Models::ThinkingConfigAdaptive)]
 
       # Creates a new instance of the variant class whose `type` matches the given
       # value, passing the remaining arguments to its constructor.
@@ -51,13 +54,15 @@ module Anthropic
       #   @option args [Symbol, Anthropic::Models::ThinkingConfigEnabled::Display, nil, Symbol, Anthropic::Models::ThinkingConfigAdaptive::Display, nil] :display_ Controls how thinking content appears in the response. When set to `summarized`,
       #
       # @raise [ArgumentError]
-      # @return [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, Anthropic::Models::ThinkingConfigAdaptive]
+      # @return [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, Anthropic::Models::ThinkingConfigBetweenTools, Anthropic::Models::ThinkingConfigAdaptive]
       def self.new(type:, **args)
         case type.to_sym
         when :enabled
           Anthropic::ThinkingConfigEnabled.new(**args)
         when :disabled
           Anthropic::ThinkingConfigDisabled.new(**args)
+        when :between_tools
+          Anthropic::ThinkingConfigBetweenTools.new(**args)
         when :adaptive
           Anthropic::ThinkingConfigAdaptive.new(**args)
         else

@@ -13,7 +13,7 @@ module Anthropic
           required :id, String
 
           # @!attribute created_at
-          #   A timestamp in RFC 3339 format
+          #   When this version was written, in RFC 3339 format.
           #
           #   @return [Time]
           required :created_at, Time
@@ -35,8 +35,7 @@ module Anthropic
           required :memory_store_id, String
 
           # @!attribute operation
-          #   The kind of mutation a `memory_version` records. Every non-no-op mutation to a
-          #   memory appends exactly one version row with one of these values.
+          #   The kind of mutation this version records: `created`, `modified`, or `deleted`.
           #
           #   @return [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryVersionOperation]
           required :operation, enum: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryVersionOperation }
@@ -69,11 +68,13 @@ module Anthropic
           optional :content_size_bytes, Integer, nil?: true
 
           # @!attribute created_by
-          #   Identifies who performed a write or redact operation. Captured at write time on
-          #   the `memory_version` row. The API key that created a session is not recorded on
-          #   agent writes; attribution answers who made the write, not who is ultimately
-          #   responsible. Look up session provenance separately via the
-          #   [Sessions API](/en/api/beta/sessions/retrieve).
+          #   Who performed this write: one of `session_actor`, `api_actor`, `user_actor`, or
+          #   `service_account_actor`; `null` when no writer is recorded. Captured at write
+          #   time and preserved through redaction. A `session_actor` is an agent writing
+          #   through the store's mounted filesystem at `/mnt/memory/`. The API key that
+          #   created that session is not recorded on agent writes, so attribution names who
+          #   made the write, not who is ultimately responsible; look up session provenance
+          #   via the [Sessions API](/en/api/beta/sessions/retrieve).
           #
           #   @return [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsAPIActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor, nil]
           optional :created_by, union: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsActor }
@@ -86,17 +87,18 @@ module Anthropic
           optional :path, String, nil?: true
 
           # @!attribute redacted_at
-          #   A timestamp in RFC 3339 format
+          #   When this version was redacted, in RFC 3339 format, or `null` if it has not been
+          #   redacted. When set, `content`, `path`, `content_size_bytes`, and
+          #   `content_sha256` are all `null`. See
+          #   [Redact a memory version](/en/api/beta/memory_stores/memory_versions/redact).
           #
           #   @return [Time, nil]
           optional :redacted_at, Time, nil?: true
 
           # @!attribute redacted_by
-          #   Identifies who performed a write or redact operation. Captured at write time on
-          #   the `memory_version` row. The API key that created a session is not recorded on
-          #   agent writes; attribution answers who made the write, not who is ultimately
-          #   responsible. Look up session provenance separately via the
-          #   [Sessions API](/en/api/beta/sessions/retrieve).
+          #   Who redacted this version, or `null` if it has not been redacted. In practice
+          #   always an `api_actor`, `user_actor`, or `service_account_actor` (agents do not
+          #   have a redact capability).
           #
           #   @return [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsAPIActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor, nil]
           optional :redacted_by, union: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsActor }
@@ -117,13 +119,13 @@ module Anthropic
           #
           #   @param id [String] Unique identifier for this version (a `memver_...` value).
           #
-          #   @param created_at [Time] A timestamp in RFC 3339 format
+          #   @param created_at [Time] When this version was written, in RFC 3339 format.
           #
           #   @param memory_id [String] ID of the memory this version snapshots (a `mem_...` value). Remains valid after
           #
           #   @param memory_store_id [String] ID of the memory store this version belongs to (a `memstore_...` value).
           #
-          #   @param operation [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryVersionOperation] The kind of mutation a `memory_version` records. Every non-no-op mutation to a m
+          #   @param operation [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryVersionOperation] The kind of mutation this version records: `created`, `modified`, or `deleted`.
           #
           #   @param type [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryVersion::Type]
           #
@@ -133,13 +135,13 @@ module Anthropic
           #
           #   @param content_size_bytes [Integer, nil] Size of `content` in bytes as of this version. `null` when `redacted_at` is set
           #
-          #   @param created_by [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsAPIActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor] Identifies who performed a write or redact operation. Captured at write time on
+          #   @param created_by [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsAPIActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor] Who performed this write: one of `session_actor`, `api_actor`, `user_actor`, or
           #
           #   @param path [String, nil] The memory's path at the time of this write. `null` if and only if `redacted_at`
           #
-          #   @param redacted_at [Time, nil] A timestamp in RFC 3339 format
+          #   @param redacted_at [Time, nil] When this version was redacted, in RFC 3339 format, or `null` if it has not been
           #
-          #   @param redacted_by [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsAPIActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor] Identifies who performed a write or redact operation. Captured at write time on
+          #   @param redacted_by [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsAPIActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor] Who redacted this version, or `null` if it has not been redacted. In practice al
 
           # @see Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryVersion#type
           module Type

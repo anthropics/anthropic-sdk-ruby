@@ -19,7 +19,7 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :id
 
-        # A timestamp in RFC 3339 format
+        # Timestamp when the snapshot was taken.
         sig { returns(Time) }
         attr_accessor :processed_at
 
@@ -30,7 +30,7 @@ module Anthropic
         end
         attr_accessor :type
 
-        # Point-in-time snapshot of a session's cumulative usage.
+        # The session's cumulative usage at the snapshot time.
         sig do
           returns(
             Anthropic::Beta::Sessions::BetaManagedAgentsSessionUsageSnapshot
@@ -46,8 +46,8 @@ module Anthropic
         end
         attr_writer :usage
 
-        # A hard spend ceiling. The session stops issuing new model requests once the
-        # tracked list cost reaches `max_list_cost`.
+        # The session's configured budget at the snapshot time, or null when the session
+        # has no budget.
         sig do
           returns(T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit))
         end
@@ -77,13 +77,13 @@ module Anthropic
         def self.new(
           # Unique identifier for this event.
           id:,
-          # A timestamp in RFC 3339 format
+          # Timestamp when the snapshot was taken.
           processed_at:,
           type:,
-          # Point-in-time snapshot of a session's cumulative usage.
+          # The session's cumulative usage at the snapshot time.
           usage:,
-          # A hard spend ceiling. The session stops issuing new model requests once the
-          # tracked list cost reaches `max_list_cost`.
+          # The session's configured budget at the snapshot time, or null when the session
+          # has no budget.
           budget: nil
         )
         end

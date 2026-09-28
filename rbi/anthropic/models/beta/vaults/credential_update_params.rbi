@@ -24,7 +24,8 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :credential_id
 
-          # Updated authentication details for a credential.
+          # Updated authentication configuration. The `type` is immutable; the variant sent
+          # must match the stored credential's type.
           sig do
             returns(
               T.nilable(
@@ -111,7 +112,8 @@ module Anthropic
             vault_id:,
             # Unique identifier of the credential to update.
             credential_id:,
-            # Updated authentication details for a credential.
+            # Updated authentication configuration. The `type` is immutable; the variant sent
+            # must match the stored credential's type.
             auth: nil,
             # Updated human-readable name for the credential. 1-255 characters.
             display_name: nil,
@@ -154,7 +156,8 @@ module Anthropic
           def to_hash
           end
 
-          # Updated authentication details for a credential.
+          # Updated authentication configuration. The `type` is immutable; the variant sent
+          # must match the stored credential's type.
           module Auth
             extend Anthropic::Internal::Type::Union
 
@@ -249,7 +252,7 @@ module Anthropic
               access_token: nil,
               # A timestamp in RFC 3339 format
               expires_at: nil,
-              # Parameters for updating OAuth refresh token configuration.
+              # Updated refresh token configuration.
               refresh: nil,
               # Updated static bearer token value.
               token: nil,

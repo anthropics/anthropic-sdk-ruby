@@ -19,7 +19,7 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :id
 
-        # A timestamp in RFC 3339 format
+        # Timestamp when the update was applied.
         sig { returns(Time) }
         attr_accessor :processed_at
 
@@ -30,8 +30,9 @@ module Anthropic
         end
         attr_accessor :type
 
-        # Resolved `agent` definition for a `session`. Snapshot of the `agent` at
-        # `session` creation time.
+        # The session's effective agent configuration after the update. Present only when
+        # the update changed `agent` (tools or mcp_servers); when present it is the full
+        # materialised snapshot, not a diff.
         sig do
           returns(T.nilable(Anthropic::Beta::BetaManagedAgentsSessionAgent))
         end
@@ -45,8 +46,9 @@ module Anthropic
         end
         attr_writer :agent
 
-        # A hard spend ceiling. The session stops issuing new model requests once the
-        # tracked list cost reaches `max_list_cost`.
+        # The session's budget after the update: the new budget when set or replaced, or
+        # null when the update removed it. Present only when the update changed the
+        # budget.
         sig do
           returns(T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit))
         end
@@ -92,14 +94,16 @@ module Anthropic
         def self.new(
           # Unique identifier for this event.
           id:,
-          # A timestamp in RFC 3339 format
+          # Timestamp when the update was applied.
           processed_at:,
           type:,
-          # Resolved `agent` definition for a `session`. Snapshot of the `agent` at
-          # `session` creation time.
+          # The session's effective agent configuration after the update. Present only when
+          # the update changed `agent` (tools or mcp_servers); when present it is the full
+          # materialised snapshot, not a diff.
           agent: nil,
-          # A hard spend ceiling. The session stops issuing new model requests once the
-          # tracked list cost reaches `max_list_cost`.
+          # The session's budget after the update: the new budget when set or replaced, or
+          # null when the update removed it. Present only when the update changed the
+          # budget.
           budget: nil,
           # The session's full metadata bag after the update. Present when the update set
           # non-empty metadata; absent when metadata was unchanged or cleared to empty.

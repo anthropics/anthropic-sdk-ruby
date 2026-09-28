@@ -22,7 +22,7 @@ module Anthropic
       # Some parameter documentations has been truncated, see
       # {Anthropic::Models::MessageCreateParams} for more details.
       #
-      # @overload create(max_tokens:, messages:, model:, cache_control: nil, container: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+      # @overload create(max_tokens:, messages:, model:, cache_control: nil, container: nil, diagnostics: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
       #
       # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
       #
@@ -33,6 +33,8 @@ module Anthropic
       # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Body param: Top-level cache control automatically applies a cache_control marker
       #
       # @param container [Anthropic::Models::ContainerParams, String, nil] Body param: Container identifier for reuse across requests.
+      #
+      # @param diagnostics [Anthropic::Models::DiagnosticsParam, nil] Body param: Request-level diagnostics. Supply `previous_message_id` to have the
       #
       # @param inference_geo [String, nil] Body param: Specifies the geographic region for inference processing. If not spe
       #
@@ -48,7 +50,7 @@ module Anthropic
       #
       # @param temperature [Float] Body param: Amount of randomness injected into the response.
       #
-      # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, Anthropic::Models::ThinkingConfigAdaptive] Body param: Configuration for enabling Claude's extended thinking.
+      # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, Anthropic::Models::ThinkingConfigBetweenTools, Anthropic::Models::ThinkingConfigAdaptive] Body param: Configuration for enabling Claude's extended thinking.
       #
       # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
       #
@@ -120,7 +122,7 @@ module Anthropic
       # Some parameter documentations has been truncated, see
       # {Anthropic::Models::MessageCreateParams} for more details.
       #
-      # @overload stream(max_tokens:, messages:, model:, cache_control: nil, container: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+      # @overload stream(max_tokens:, messages:, model:, cache_control: nil, container: nil, diagnostics: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
       #
       # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
       #
@@ -131,6 +133,8 @@ module Anthropic
       # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Body param: Top-level cache control automatically applies a cache_control marker
       #
       # @param container [Anthropic::Models::ContainerParams, String, nil] Body param: Container identifier for reuse across requests.
+      #
+      # @param diagnostics [Anthropic::Models::DiagnosticsParam, nil] Body param: Request-level diagnostics. Supply `previous_message_id` to have the
       #
       # @param inference_geo [String, nil] Body param: Specifies the geographic region for inference processing. If not spe
       #
@@ -208,7 +212,7 @@ module Anthropic
       # Some parameter documentations has been truncated, see
       # {Anthropic::Models::MessageCreateParams} for more details.
       #
-      # @overload stream_raw(max_tokens:, messages:, model:, cache_control: nil, container: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+      # @overload stream_raw(max_tokens:, messages:, model:, cache_control: nil, container: nil, diagnostics: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
       #
       # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
       #
@@ -219,6 +223,8 @@ module Anthropic
       # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Body param: Top-level cache control automatically applies a cache_control marker
       #
       # @param container [Anthropic::Models::ContainerParams, String, nil] Body param: Container identifier for reuse across requests.
+      #
+      # @param diagnostics [Anthropic::Models::DiagnosticsParam, nil] Body param: Request-level diagnostics. Supply `previous_message_id` to have the
       #
       # @param inference_geo [String, nil] Body param: Specifies the geographic region for inference processing. If not spe
       #
@@ -234,7 +240,7 @@ module Anthropic
       #
       # @param temperature [Float] Body param: Amount of randomness injected into the response.
       #
-      # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, Anthropic::Models::ThinkingConfigAdaptive] Body param: Configuration for enabling Claude's extended thinking.
+      # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, Anthropic::Models::ThinkingConfigBetweenTools, Anthropic::Models::ThinkingConfigAdaptive] Body param: Configuration for enabling Claude's extended thinking.
       #
       # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
       #
@@ -301,7 +307,7 @@ module Anthropic
       #
       # @param system_ [String, Array<Anthropic::Models::TextBlockParam>] Body param: System prompt.
       #
-      # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, Anthropic::Models::ThinkingConfigAdaptive] Body param: Configuration for enabling Claude's extended thinking.
+      # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, Anthropic::Models::ThinkingConfigBetweenTools, Anthropic::Models::ThinkingConfigAdaptive] Body param: Configuration for enabling Claude's extended thinking.
       #
       # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
       #

@@ -15,11 +15,7 @@ module Anthropic
         required :user_profile_id, String
 
         # @!attribute access_type
-        #   How the platform uses the API on behalf of the entity this profile represents.
-        #   `application`: the platform sells a product that uses the API behind the scenes,
-        #   and the profile represents an individual end-user of that product.
-        #   `passthrough`: the platform resells raw inference, and the profile identifies
-        #   the resold-to company.
+        #   If present, replaces the stored access type. Omit to leave unchanged.
         #
         #   @return [Symbol, Anthropic::Models::Beta::UserProfileUpdateParams::AccessType, nil]
         optional :access_type, enum: -> { Anthropic::Beta::UserProfileUpdateParams::AccessType }, nil?: true
@@ -43,7 +39,11 @@ module Anthropic
         optional :external_user_details, -> { Anthropic::Beta::BetaUserProfileExternalUserDetailsParams }
 
         # @!attribute external_user_onboarded_at
-        #   A timestamp in RFC 3339 format
+        #   If present, replaces the stored account creation time. Omit to leave unchanged;
+        #   once set, the value cannot be cleared and `null` is rejected. Must be a complete
+        #   RFC 3339 timestamp no more than 1 minute in the future. Accepted under the
+        #   `user-profiles-2026-08-18` beta header; under `user-profiles-2026-09-04` send
+        #   `external_user_details.onboarded_at` instead.
         #
         #   @return [Time, nil]
         optional :external_user_onboarded_at, Time
@@ -87,13 +87,13 @@ module Anthropic
         #
         #   @param user_profile_id [String] The ID of the user profile to update (`uprof_...`).
         #
-        #   @param access_type [Symbol, Anthropic::Models::Beta::UserProfileUpdateParams::AccessType, nil] How the platform uses the API on behalf of the entity this profile represents. `
+        #   @param access_type [Symbol, Anthropic::Models::Beta::UserProfileUpdateParams::AccessType, nil] If present, replaces the stored access type. Omit to leave unchanged.
         #
         #   @param external_id [String, nil] If present, replaces the stored external_id. Omit to leave unchanged. Maximum 25
         #
         #   @param external_user_details [Anthropic::Models::Beta::BetaUserProfileExternalUserDetailsParams] Details about the entity this profile represents, as the platform states them. E
         #
-        #   @param external_user_onboarded_at [Time] A timestamp in RFC 3339 format
+        #   @param external_user_onboarded_at [Time] If present, replaces the stored account creation time. Omit to leave unchanged;
         #
         #   @param metadata [Hash{Symbol=>String}] Key-value pairs to merge into the stored metadata. Keys provided overwrite exist
         #
@@ -105,11 +105,7 @@ module Anthropic
         #
         #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 
-        # How the platform uses the API on behalf of the entity this profile represents.
-        # `application`: the platform sells a product that uses the API behind the scenes,
-        # and the profile represents an individual end-user of that product.
-        # `passthrough`: the platform resells raw inference, and the profile identifies
-        # the resold-to company.
+        # If present, replaces the stored access type. Omit to leave unchanged.
         module AccessType
           extend Anthropic::Internal::Type::Enum
 

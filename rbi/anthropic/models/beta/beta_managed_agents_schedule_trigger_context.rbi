@@ -15,7 +15,9 @@ module Anthropic
             )
           end
 
-        # A timestamp in RFC 3339 format
+        # The UTC instant at which the cron expression matched in the configured timezone,
+        # before jitter is applied. At most one run is recorded per (`deployment_id`,
+        # `scheduled_at`) pair.
         sig { returns(Time) }
         attr_accessor :scheduled_at
 
@@ -35,7 +37,9 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
-          # A timestamp in RFC 3339 format
+          # The UTC instant at which the cron expression matched in the configured timezone,
+          # before jitter is applied. At most one run is recorded per (`deployment_id`,
+          # `scheduled_at`) pair.
           scheduled_at:,
           type:
         )

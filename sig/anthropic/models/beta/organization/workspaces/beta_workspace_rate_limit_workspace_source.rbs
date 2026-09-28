@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Workspaces
+          type beta_workspace_rate_limit_workspace_source = { type: :workspace }
+
+          class BetaWorkspaceRateLimitWorkspaceSource < Anthropic::Internal::Type::BaseModel
+            attr_accessor type: :workspace
+
+            def initialize: (?type: :workspace) -> void
+
+            def to_hash: -> { type: :workspace }
+          end
+        end
+      end
+    end
+  end
+end

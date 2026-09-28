@@ -85,11 +85,10 @@ module Anthropic
             case value
             in StringIO | String
               # https://datatracker.ietf.org/doc/html/rfc7578#section-4.2
-              # while not required, a filename is recommended, and in practice many servers do expect this
-              Anthropic::FilePart.new(value, filename: "upload")
+              Anthropic::FilePart.new(value, filename: "")
             in IO
               state[:can_retry] = false
-              value.to_path.nil? ? Anthropic::FilePart.new(value, filename: "upload") : value
+              value.to_path.nil? ? Anthropic::FilePart.new(value, filename: "") : value
             in Anthropic::FilePart if value.content.is_a?(IO)
               state[:can_retry] = false
               value

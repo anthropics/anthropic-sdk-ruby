@@ -19,7 +19,7 @@ module Anthropic
                    -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::Content] }
 
           # @!attribute processed_at
-          #   A timestamp in RFC 3339 format
+          #   Timestamp when this response was generated.
           #
           #   @return [Time]
           required :processed_at, Time
@@ -36,7 +36,7 @@ module Anthropic
           #
           #   @param content [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRedactedBlock>] Array of text blocks comprising the agent response.
           #
-          #   @param processed_at [Time] A timestamp in RFC 3339 format
+          #   @param processed_at [Time] Timestamp when this response was generated.
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::Type]
 

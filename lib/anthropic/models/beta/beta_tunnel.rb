@@ -12,13 +12,14 @@ module Anthropic
         required :id, String
 
         # @!attribute archived_at
-        #   A timestamp in RFC 3339 format
+        #   RFC 3339 datetime string indicating when the tunnel was archived. Null if it is
+        #   not archived.
         #
         #   @return [Time, nil]
         required :archived_at, Time, nil?: true
 
         # @!attribute created_at
-        #   A timestamp in RFC 3339 format
+        #   RFC 3339 datetime string indicating when the tunnel was created.
         #
         #   @return [Time]
         required :created_at, Time
@@ -50,9 +51,9 @@ module Anthropic
         #
         #   @param id [String] Unique identifier for the tunnel, prefixed with `tnl_`.
         #
-        #   @param archived_at [Time, nil] A timestamp in RFC 3339 format
+        #   @param archived_at [Time, nil] RFC 3339 datetime string indicating when the tunnel was archived. Null if it is
         #
-        #   @param created_at [Time] A timestamp in RFC 3339 format
+        #   @param created_at [Time] RFC 3339 datetime string indicating when the tunnel was created.
         #
         #   @param display_name [String, nil] Human-readable name for the tunnel (1-255 characters). Null if unset.
         #

@@ -1,0 +1,22 @@
+module Anthropic
+  module Models
+    type cache_miss_tools_changed =
+      { cache_missed_input_tokens: Integer, type: :tools_changed }
+
+    class CacheMissToolsChanged < Anthropic::Internal::Type::BaseModel
+      attr_accessor cache_missed_input_tokens: Integer
+
+      attr_accessor type: :tools_changed
+
+      def initialize: (
+        cache_missed_input_tokens: Integer,
+        ?type: :tools_changed
+      ) -> void
+
+      def to_hash: -> {
+        cache_missed_input_tokens: Integer,
+        type: :tools_changed
+      }
+    end
+  end
+end

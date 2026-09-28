@@ -13,7 +13,7 @@ module Anthropic
               )
             end
 
-          # UserToolConfirmationResult enum
+          # The confirmation result: 'allow' or 'deny'.
           sig do
             returns(
               Anthropic::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::Result::OrSymbol
@@ -52,7 +52,7 @@ module Anthropic
             ).returns(T.attached_class)
           end
           def self.new(
-            # UserToolConfirmationResult enum
+            # The confirmation result: 'allow' or 'deny'.
             result:,
             # The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result
             # corresponds to, which can be found in the last `session.status_idle`
@@ -81,7 +81,7 @@ module Anthropic
           def to_hash
           end
 
-          # UserToolConfirmationResult enum
+          # The confirmation result: 'allow' or 'deny'.
           module Result
             extend Anthropic::Internal::Type::Enum
 

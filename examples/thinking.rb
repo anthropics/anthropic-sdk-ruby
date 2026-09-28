@@ -8,7 +8,7 @@ require_relative "../lib/anthropic"
 anthropic = Anthropic::Client.new
 
 message = anthropic.messages.create(
-  model: "claude-sonnet-5",
+  model: "claude-sonnet-5-5",
   max_tokens: 16_000,
   thinking: {type: :adaptive, display_: :summarized},
   output_config: {effort: :high},

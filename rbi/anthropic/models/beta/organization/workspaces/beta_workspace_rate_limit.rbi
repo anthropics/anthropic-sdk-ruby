@@ -34,8 +34,10 @@ module Anthropic
             end
             attr_accessor :group_type
 
-            # The limiter values overridden for this group in this workspace. Limiter types
-            # without a workspace override are omitted and inherit the organization value.
+            # The workspace's limiter values for this group. By default only the limiter types
+            # with a workspace-level override are listed. With `include_inherited` set to
+            # `true`, the limiter types the workspace inherits from the organization are
+            # listed too, each marked by `source`.
             sig do
               returns(
                 T::Array[
@@ -50,7 +52,7 @@ module Anthropic
             sig { returns(T.nilable(T::Array[String])) }
             attr_accessor :models
 
-            # The `id` of the organization's RateLimit entry this override applies to.
+            # The `id` of the organization's RateLimit entry this entry applies to.
             sig { returns(String) }
             attr_accessor :rate_limit_id
 
@@ -58,7 +60,7 @@ module Anthropic
             sig { returns(Symbol) }
             attr_accessor :type
 
-            # ID of the Workspace this override applies to.
+            # ID of the Workspace this entry applies to.
             sig { returns(String) }
             attr_accessor :workspace_id
 
@@ -94,15 +96,17 @@ module Anthropic
               # `models`); other values apply to an API-surface category and have `models` set
               # to `null`. Always equal to `group.type`.
               group_type:,
-              # The limiter values overridden for this group in this workspace. Limiter types
-              # without a workspace override are omitted and inherit the organization value.
+              # The workspace's limiter values for this group. By default only the limiter types
+              # with a workspace-level override are listed. With `include_inherited` set to
+              # `true`, the limiter types the workspace inherits from the organization are
+              # listed too, each marked by `source`.
               limits:,
               # Model names this entry's limits apply to, including aliases. `null` when
               # `group_type` is not `"model_group"`.
               models:,
-              # The `id` of the organization's RateLimit entry this override applies to.
+              # The `id` of the organization's RateLimit entry this entry applies to.
               rate_limit_id:,
-              # ID of the Workspace this override applies to.
+              # ID of the Workspace this entry applies to.
               workspace_id:,
               # Object type. Always `workspace_rate_limit` for workspace rate-limit entries.
               type: :workspace_rate_limit

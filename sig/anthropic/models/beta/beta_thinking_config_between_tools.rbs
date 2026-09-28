@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    class BetaThinkingConfigBetweenTools = Beta::BetaThinkingConfigBetweenTools
+
+    module Beta
+      type beta_thinking_config_between_tools = { type: :between_tools }
+
+      class BetaThinkingConfigBetweenTools < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :between_tools
+
+        def initialize: (?type: :between_tools) -> void
+
+        def to_hash: -> { type: :between_tools }
+      end
+    end
+  end
+end

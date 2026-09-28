@@ -21,8 +21,9 @@ module Anthropic
         sig { returns(Anthropic::Beta::BetaManagedAgentsModel::Variants) }
         attr_accessor :id
 
-        # How hard Claude works on each turn. Sets `output_config.effort` on every
-        # Messages call the session makes.
+        # How hard Claude works on each inference call. One of `low`, `medium`, `high`,
+        # `xhigh`, `max`. Always present; resolved to the per-model default at save time
+        # when not supplied.
         sig do
           returns(
             T.nilable(
@@ -55,8 +56,8 @@ module Anthropic
         attr_writer :inference_geo
 
         # Inference speed mode. `fast` provides significantly faster output token
-        # generation at premium pricing. Not all models support `fast`; invalid
-        # combinations are rejected at create time.
+        # generation at premium pricing. Defaults to `standard`. Not all models support
+        # `fast`; invalid combinations are rejected at create time.
         sig do
           returns(
             T.nilable(
@@ -98,15 +99,16 @@ module Anthropic
           # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
           # details and options.
           id:,
-          # How hard Claude works on each turn. Sets `output_config.effort` on every
-          # Messages call the session makes.
+          # How hard Claude works on each inference call. One of `low`, `medium`, `high`,
+          # `xhigh`, `max`. Always present; resolved to the per-model default at save time
+          # when not supplied.
           effort: nil,
           # Geographic region for model inference. When unset, requests fall through to the
           # workspace's default_inference_geo.
           inference_geo: nil,
           # Inference speed mode. `fast` provides significantly faster output token
-          # generation at premium pricing. Not all models support `fast`; invalid
-          # combinations are rejected at create time.
+          # generation at premium pricing. Defaults to `standard`. Not all models support
+          # `fast`; invalid combinations are rejected at create time.
           speed: nil
         )
         end
@@ -126,8 +128,9 @@ module Anthropic
         def to_hash
         end
 
-        # How hard Claude works on each turn. Sets `output_config.effort` on every
-        # Messages call the session makes.
+        # How hard Claude works on each inference call. One of `low`, `medium`, `high`,
+        # `xhigh`, `max`. Always present; resolved to the per-model default at save time
+        # when not supplied.
         module Effort
           extend Anthropic::Internal::Type::Union
 
@@ -216,8 +219,8 @@ module Anthropic
         end
 
         # Inference speed mode. `fast` provides significantly faster output token
-        # generation at premium pricing. Not all models support `fast`; invalid
-        # combinations are rejected at create time.
+        # generation at premium pricing. Defaults to `standard`. Not all models support
+        # `fast`; invalid combinations are rejected at create time.
         module Speed
           extend Anthropic::Internal::Type::Enum
 

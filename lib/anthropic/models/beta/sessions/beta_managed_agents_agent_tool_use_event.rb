@@ -24,7 +24,7 @@ module Anthropic
           required :name, String
 
           # @!attribute processed_at
-          #   A timestamp in RFC 3339 format
+          #   Timestamp when this event was processed.
           #
           #   @return [Time]
           required :processed_at, Time
@@ -35,16 +35,20 @@ module Anthropic
           required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::Type }
 
           # @!attribute evaluated_permission
-          #   AgentEvaluatedPermission enum
+          #   The evaluated permission policy for this tool invocation.
           #
           #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentEvaluatedPermission, nil]
           optional :evaluated_permission,
                    enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsAgentEvaluatedPermission }
 
           # @!attribute evaluation
-          #   Names the resolved permission_policy that produced evaluated_permission, and
-          #   under auto carries the judgement. Open union: clients must tolerate unknown
-          #   variants.
+          #   Which resolved permission_policy produced evaluated_permission: always_allow,
+          #   always_ask, or auto (with the server's per-invocation judgement). Absent only
+          #   when the server refused the call before any policy applied (for example, the
+          #   named tool is not enabled in the session); such a refusal has
+          #   evaluated_permission deny. An event recorded before this field existed reads as
+          #   the arm its evaluated_permission implies (always_allow for allow, always_ask for
+          #   ask).
           #
           #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAllow, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAsk, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAuto, nil]
           optional :evaluation, union: -> { Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolEvaluation }
@@ -72,13 +76,13 @@ module Anthropic
           #
           #   @param name [String] Name of the agent tool being used.
           #
-          #   @param processed_at [Time] A timestamp in RFC 3339 format
+          #   @param processed_at [Time] Timestamp when this event was processed.
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::Type]
           #
-          #   @param evaluated_permission [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentEvaluatedPermission] AgentEvaluatedPermission enum
+          #   @param evaluated_permission [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentEvaluatedPermission] The evaluated permission policy for this tool invocation.
           #
-          #   @param evaluation [Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAllow, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAsk, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAuto] Names the resolved permission_policy that produced evaluated_permission, and und
+          #   @param evaluation [Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAllow, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAsk, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAuto] Which resolved permission_policy produced evaluated_permission: always_allow, al
           #
           #   @param session_thread_id [String, nil] When set, this event was cross-posted from a subagent's thread to surface its pe
 

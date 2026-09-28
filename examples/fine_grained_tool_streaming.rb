@@ -26,7 +26,7 @@ end
 # how fine-grained streaming affects array parameter chunking
 stream = anthropic.messages.stream(
   max_tokens: 1024,
-  model: "claude-sonnet-5",
+  model: "claude-sonnet-5-5",
   tools: [MakeFile],
   messages: [
     {

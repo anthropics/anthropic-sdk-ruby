@@ -35,7 +35,7 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :outcome_id
 
-          # A timestamp in RFC 3339 format
+          # Timestamp when outcome evaluation ended.
           sig { returns(Time) }
           attr_accessor :processed_at
 
@@ -56,7 +56,8 @@ module Anthropic
           end
           attr_accessor :type
 
-          # Token usage for a single model request.
+          # Aggregate token usage for this evaluation cycle. Sums across all grader model
+          # requests within the cycle.
           sig do
             returns(Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelUsage)
           end
@@ -102,7 +103,7 @@ module Anthropic
             outcome_evaluation_start_id:,
             # The `outc_` ID of the outcome being evaluated.
             outcome_id:,
-            # A timestamp in RFC 3339 format
+            # Timestamp when outcome evaluation ended.
             processed_at:,
             # Evaluation verdict. 'satisfied': criteria met, session goes idle.
             # 'needs_revision': criteria not met, another revision cycle follows.
@@ -113,7 +114,8 @@ module Anthropic
             # in progress.
             result:,
             type:,
-            # Token usage for a single model request.
+            # Aggregate token usage for this evaluation cycle. Sums across all grader model
+            # requests within the cycle.
             usage:
           )
           end

@@ -21,7 +21,7 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :message
 
-          # What the client should do next in response to this error.
+          # What the client should do next.
           sig do
             returns(
               Anthropic::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::RetryStatus::Variants
@@ -56,7 +56,7 @@ module Anthropic
             mcp_server_name:,
             # Human-readable error description.
             message:,
-            # What the client should do next in response to this error.
+            # What the client should do next.
             retry_status:,
             type:
           )
@@ -77,7 +77,7 @@ module Anthropic
           def to_hash
           end
 
-          # What the client should do next in response to this error.
+          # What the client should do next.
           module RetryStatus
             extend Anthropic::Internal::Type::Union
 

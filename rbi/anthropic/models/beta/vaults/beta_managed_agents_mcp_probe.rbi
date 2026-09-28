@@ -13,7 +13,8 @@ module Anthropic
               )
             end
 
-          # An HTTP response captured during a credential validation probe.
+          # The captured HTTP error response. Null when no HTTP response was received
+          # (timeout, DNS, TLS).
           sig do
             returns(
               T.nilable(
@@ -48,7 +49,8 @@ module Anthropic
             ).returns(T.attached_class)
           end
           def self.new(
-            # An HTTP response captured during a credential validation probe.
+            # The captured HTTP error response. Null when no HTTP response was received
+            # (timeout, DNS, TLS).
             http_response:,
             # The MCP method that failed (for example `initialize` or `tools/list`).
             method_:

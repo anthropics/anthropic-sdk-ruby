@@ -12,7 +12,7 @@ module Anthropic
           required :description, String
 
           # @!attribute rubric
-          #   Rubric for grading the quality of an outcome.
+          #   How to grade the outcome. Text or file reference.
           #
           #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubricParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubricParams]
           required :rubric,
@@ -36,13 +36,13 @@ module Anthropic
           #
           #   @param description [String] What the agent should produce. This is the task specification.
           #
-          #   @param rubric [Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubricParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubricParams] Rubric for grading the quality of an outcome.
+          #   @param rubric [Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubricParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubricParams] How to grade the outcome. Text or file reference.
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::Type]
           #
           #   @param max_iterations [Integer, nil] Eval→revision cycles before giving up. Default 3, max 20.
 
-          # Rubric for grading the quality of an outcome.
+          # How to grade the outcome. Text or file reference.
           #
           # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams#rubric
           module Rubric

@@ -6,7 +6,7 @@ module Anthropic
       # @see Anthropic::Resources::Beta::UserProfiles#create_enrollment_url
       class BetaUserProfileEnrollmentURL < Anthropic::Internal::Type::BaseModel
         # @!attribute expires_at
-        #   A timestamp in RFC 3339 format
+        #   When this enrollment URL expires, in RFC 3339 format.
         #
         #   @return [Time]
         required :expires_at, Time
@@ -27,7 +27,7 @@ module Anthropic
         #   A URL to give to the entity that a user profile represents, so that the entity
         #   can enroll for a trust grant.
         #
-        #   @param expires_at [Time] A timestamp in RFC 3339 format
+        #   @param expires_at [Time] When this enrollment URL expires, in RFC 3339 format.
         #
         #   @param type [Symbol, Anthropic::Models::Beta::BetaUserProfileEnrollmentURL::Type] Object type. Always `enrollment_url`.
         #

@@ -11,7 +11,7 @@ module Anthropic
           )
         end
 
-      # Indicates whether a capability is supported.
+      # Whether the clear_thinking_20251015 strategy is supported.
       sig { returns(T.nilable(Anthropic::CapabilitySupport)) }
       attr_reader :clear_thinking_20251015
 
@@ -23,7 +23,7 @@ module Anthropic
       end
       attr_writer :clear_thinking_20251015
 
-      # Indicates whether a capability is supported.
+      # Whether the clear_tool_uses_20250919 strategy is supported.
       sig { returns(T.nilable(Anthropic::CapabilitySupport)) }
       attr_reader :clear_tool_uses_20250919
 
@@ -35,7 +35,7 @@ module Anthropic
       end
       attr_writer :clear_tool_uses_20250919
 
-      # Indicates whether a capability is supported.
+      # Whether the compact_20260112 strategy is supported.
       sig { returns(T.nilable(Anthropic::CapabilitySupport)) }
       attr_reader :compact_20260112
 
@@ -62,11 +62,11 @@ module Anthropic
         ).returns(T.attached_class)
       end
       def self.new(
-        # Indicates whether a capability is supported.
+        # Whether the clear_thinking_20251015 strategy is supported.
         clear_thinking_20251015:,
-        # Indicates whether a capability is supported.
+        # Whether the clear_tool_uses_20250919 strategy is supported.
         clear_tool_uses_20250919:,
-        # Indicates whether a capability is supported.
+        # Whether the compact_20260112 strategy is supported.
         compact_20260112:,
         # Whether this capability is supported by the model.
         supported:

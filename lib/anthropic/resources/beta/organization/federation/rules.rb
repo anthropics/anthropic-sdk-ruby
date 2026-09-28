@@ -140,13 +140,13 @@ module Anthropic
             #
             # @param description [String, nil] Body param: Replaces the description. Omit to leave unchanged; send `null` to cl
             #
-            # @param match [Anthropic::Models::Beta::Organization::Federation::BetaFederationRuleMatch, nil] Body param: Does the incoming JWT qualify?
+            # @param match [Anthropic::Models::Beta::Organization::Federation::BetaFederationRuleMatch, nil] Body param: Replaces the entire match object. All populated matcher fields must
             #
             # @param name [String, nil] Body param: Replaces the slug identifier (lowercase, digits, hyphens). Unique wi
             #
             # @param oauth_scope [String, nil] Body param: Replaces the space-separated OAuth scopes granted on minted tokens.
             #
-            # @param target [Anthropic::Models::Beta::Organization::Federation::BetaServiceAccountTarget, nil] Body param: Bind to a fixed service account by ID.
+            # @param target [Anthropic::Models::Beta::Organization::Federation::BetaServiceAccountTarget, nil] Body param: Replaces the entire target object. Currently always a `service_accou
             #
             # @param token_lifetime_seconds [Integer, nil] Body param: Replaces the lifetime in seconds for access tokens minted via this r
             #

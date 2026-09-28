@@ -12,7 +12,7 @@ module Anthropic
           required :message, String
 
           # @!attribute retry_status
-          #   What the client should do next in response to this error.
+          #   What the client should do next.
           #
           #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal]
           required :retry_status,
@@ -29,11 +29,11 @@ module Anthropic
           #
           #   @param message [String] Human-readable error description.
           #
-          #   @param retry_status [Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal] What the client should do next in response to this error.
+          #   @param retry_status [Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal] What the client should do next.
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError::Type]
 
-          # What the client should do next in response to this error.
+          # What the client should do next.
           #
           # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError#retry_status
           module RetryStatus

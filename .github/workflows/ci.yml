@@ -60,7 +60,7 @@ jobs:
   lint:
     timeout-minutes: 30
     name: lint
-    runs-on: 'ubuntu-latest'
+    runs-on: ${{ github.repository == 'anthropics/anthropic-sdk-ruby' && 'ubuntu-latest-16core' || 'ubuntu-latest-16-core' }}
     if: github.event_name == 'push' || github.event.pull_request.head.repo.fork
 
     steps:
@@ -77,7 +77,7 @@ jobs:
   test:
     timeout-minutes: 10
     name: test
-    runs-on: 'ubuntu-latest'
+    runs-on: ${{ github.repository == 'anthropics/anthropic-sdk-ruby' && 'ubuntu-latest-16core' || 'ubuntu-latest-16-core' }}
     if: github.event_name == 'push' || github.event.pull_request.head.repo.fork
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -94,7 +94,7 @@ jobs:
   detect_breaking_changes:
     timeout-minutes: 35
     name: detect-breaking-changes
-    runs-on: 'ubuntu-latest'
+    runs-on: ${{ github.repository == 'anthropics/anthropic-sdk-ruby' && 'ubuntu-latest-16core' || 'ubuntu-latest-16-core' }}
     if: |-
       (github.event_name == 'push' &&
        !startsWith(github.ref, 'refs/heads/release-please--')) ||

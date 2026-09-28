@@ -24,9 +24,9 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :id
 
-        # Inference speed mode. `fast` provides significantly faster output token
-        # generation at premium pricing. Not all models support `fast`; invalid
-        # combinations are rejected at create time.
+        # How fast the model generates output for the dream. Defaults to `standard`.
+        #
+        # Dreams accept only `standard`.
         sig do
           returns(
             T.nilable(
@@ -55,9 +55,9 @@ module Anthropic
           # [limits table in the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams#limits)
           # lists the supported models.
           id:,
-          # Inference speed mode. `fast` provides significantly faster output token
-          # generation at premium pricing. Not all models support `fast`; invalid
-          # combinations are rejected at create time.
+          # How fast the model generates output for the dream. Defaults to `standard`.
+          #
+          # Dreams accept only `standard`.
           speed: nil
         )
         end
@@ -76,9 +76,9 @@ module Anthropic
         def to_hash
         end
 
-        # Inference speed mode. `fast` provides significantly faster output token
-        # generation at premium pricing. Not all models support `fast`; invalid
-        # combinations are rejected at create time.
+        # How fast the model generates output for the dream. Defaults to `standard`.
+        #
+        # Dreams accept only `standard`.
         module Speed
           extend Anthropic::Internal::Type::Enum
 

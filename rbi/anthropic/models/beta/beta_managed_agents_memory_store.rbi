@@ -20,7 +20,7 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :id
 
-        # A timestamp in RFC 3339 format
+        # Timestamp when the store was created.
         sig { returns(Time) }
         attr_accessor :created_at
 
@@ -36,11 +36,14 @@ module Anthropic
         end
         attr_accessor :type
 
-        # A timestamp in RFC 3339 format
+        # Timestamp when the store's `name`, `description`, or `metadata` was last
+        # modified. Memory writes inside the store do not advance this.
         sig { returns(Time) }
         attr_accessor :updated_at
 
-        # A timestamp in RFC 3339 format
+        # Timestamp when the store was archived, or `null` if active. Set once and never
+        # cleared; archiving is one-way. Archived stores are read-only and cannot be
+        # attached to new sessions.
         sig { returns(T.nilable(Time)) }
         attr_accessor :archived_at
 
@@ -82,15 +85,18 @@ module Anthropic
           # when attaching the store to a session, or in the `{memory_store_id}` path
           # parameter of subsequent calls.
           id:,
-          # A timestamp in RFC 3339 format
+          # Timestamp when the store was created.
           created_at:,
           # Human-readable name for the store. 1–255 characters. The store's mount-path slug
           # under `/mnt/memory/` is derived from this name.
           name:,
           type:,
-          # A timestamp in RFC 3339 format
+          # Timestamp when the store's `name`, `description`, or `metadata` was last
+          # modified. Memory writes inside the store do not advance this.
           updated_at:,
-          # A timestamp in RFC 3339 format
+          # Timestamp when the store was archived, or `null` if active. Set once and never
+          # cleared; archiving is one-way. Archived stores are read-only and cannot be
+          # attached to new sessions.
           archived_at: nil,
           # Free-text description of what the store contains, up to 1024 characters.
           # Included in the agent's system prompt when the store is attached, so word it to

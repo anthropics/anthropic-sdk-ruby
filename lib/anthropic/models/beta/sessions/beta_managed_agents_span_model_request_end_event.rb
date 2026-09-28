@@ -24,13 +24,13 @@ module Anthropic
           required :model_request_start_id, String
 
           # @!attribute model_usage
-          #   Token usage for a single model request.
+          #   Token usage for this model request.
           #
           #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelUsage]
           required :model_usage, -> { Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelUsage }
 
           # @!attribute processed_at
-          #   A timestamp in RFC 3339 format
+          #   Timestamp when the model request completed.
           #
           #   @return [Time]
           required :processed_at, Time
@@ -49,9 +49,9 @@ module Anthropic
           #
           #   @param model_request_start_id [String] The id of the corresponding `span.model_request_start` event.
           #
-          #   @param model_usage [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelUsage] Token usage for a single model request.
+          #   @param model_usage [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelUsage] Token usage for this model request.
           #
-          #   @param processed_at [Time] A timestamp in RFC 3339 format
+          #   @param processed_at [Time] Timestamp when the model request completed.
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelRequestEndEvent::Type]
 

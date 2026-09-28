@@ -5,7 +5,8 @@ module Anthropic
     module Beta
       class BetaManagedAgentsDeltaContent < Anthropic::Internal::Type::BaseModel
         # @!attribute content
-        #   Regular text content.
+        #   A partial element of the content array at index, typed like the element itself —
+        #   the same shape the buffered agent.message carries in content.
         #
         #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock]
         required :content, -> { Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock }
@@ -27,7 +28,7 @@ module Anthropic
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsDeltaContent} for more details.
         #
-        #   @param content [Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock] Regular text content.
+        #   @param content [Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock] A partial element of the content array at index, typed like the element itself —
         #
         #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeltaContent::Type]
         #

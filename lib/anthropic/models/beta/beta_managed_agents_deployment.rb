@@ -12,19 +12,19 @@ module Anthropic
         required :id, String
 
         # @!attribute agent
-        #   A resolved agent reference with a concrete version.
+        #   Reference to the agent this deployment runs, resolved to a concrete version.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsAgentReference]
         required :agent, -> { Anthropic::Beta::BetaManagedAgentsAgentReference }
 
         # @!attribute archived_at
-        #   A timestamp in RFC 3339 format
+        #   Time the deployment was archived. Null if not archived.
         #
         #   @return [Time, nil]
         required :archived_at, Time, nil?: true
 
         # @!attribute created_at
-        #   A timestamp in RFC 3339 format
+        #   Time the deployment was created.
         #
         #   @return [Time]
         required :created_at, Time
@@ -61,7 +61,8 @@ module Anthropic
         required :name, String
 
         # @!attribute paused_reason
-        #   Why a deployment is paused. Non-null exactly when `status` is `paused`.
+        #   Why the deployment is `paused`. Non-null exactly when `status` is `paused`; null
+        #   otherwise.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsManualDeploymentPausedReason, Anthropic::Models::Beta::BetaManagedAgentsErrorDeploymentPausedReason, nil]
         required :paused_reason,
@@ -77,13 +78,16 @@ module Anthropic
                  -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaManagedAgentsSessionResourceConfig] }
 
         # @!attribute schedule
-        #   5-field POSIX cron schedule with computed runtime timestamps.
+        #   Recurring cron schedule. Presence enables scheduled execution; null means
+        #   manual-only. Includes computed timestamps (next fire times, last run) on the
+        #   cron variant.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsSchedule, nil]
         required :schedule, -> { Anthropic::Beta::BetaManagedAgentsSchedule }, nil?: true
 
         # @!attribute status
-        #   Lifecycle status of a deployment.
+        #   Computed status of the deployment: `active` or `paused`. Archived deployments
+        #   report `active` with `archived_at` set.
         #
         #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeploymentStatus]
         required :status, enum: -> { Anthropic::Beta::BetaManagedAgentsDeploymentStatus }
@@ -94,7 +98,7 @@ module Anthropic
         required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsDeployment::Type }
 
         # @!attribute updated_at
-        #   A timestamp in RFC 3339 format
+        #   Time the deployment was last updated.
         #
         #   @return [Time]
         required :updated_at, Time
@@ -107,8 +111,8 @@ module Anthropic
         required :vault_ids, Anthropic::Internal::Type::ArrayOf[String]
 
         # @!attribute budget
-        #   A hard spend ceiling. The session stops issuing new model requests once the
-        #   tracked list cost reaches `max_list_cost`.
+        #   Spend ceiling stamped onto each session created from this deployment. Absent
+        #   when no budget is set.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil]
         optional :budget, -> { Anthropic::Beta::BetaManagedAgentsBudgetLimit }, nil?: true
@@ -123,11 +127,11 @@ module Anthropic
         #
         #   @param id [String] Unique identifier for this deployment.
         #
-        #   @param agent [Anthropic::Models::Beta::BetaManagedAgentsAgentReference] A resolved agent reference with a concrete version.
+        #   @param agent [Anthropic::Models::Beta::BetaManagedAgentsAgentReference] Reference to the agent this deployment runs, resolved to a concrete version.
         #
-        #   @param archived_at [Time, nil] A timestamp in RFC 3339 format
+        #   @param archived_at [Time, nil] Time the deployment was archived. Null if not archived.
         #
-        #   @param created_at [Time] A timestamp in RFC 3339 format
+        #   @param created_at [Time] Time the deployment was created.
         #
         #   @param description [String, nil] Description of what the deployment does.
         #
@@ -139,21 +143,21 @@ module Anthropic
         #
         #   @param name [String] Human-readable name.
         #
-        #   @param paused_reason [Anthropic::Models::Beta::BetaManagedAgentsManualDeploymentPausedReason, Anthropic::Models::Beta::BetaManagedAgentsErrorDeploymentPausedReason, nil] Why a deployment is paused. Non-null exactly when `status` is `paused`.
+        #   @param paused_reason [Anthropic::Models::Beta::BetaManagedAgentsManualDeploymentPausedReason, Anthropic::Models::Beta::BetaManagedAgentsErrorDeploymentPausedReason, nil] Why the deployment is `paused`. Non-null exactly when `status` is `paused`; null
         #
         #   @param resources [Array<Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceConfig, Anthropic::Models::Beta::BetaManagedAgentsFileResourceConfig, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceConfig>] Resources attached to sessions created from this deployment. Echoes the input mi
         #
-        #   @param schedule [Anthropic::Models::Beta::BetaManagedAgentsSchedule, nil] 5-field POSIX cron schedule with computed runtime timestamps.
+        #   @param schedule [Anthropic::Models::Beta::BetaManagedAgentsSchedule, nil] Recurring cron schedule. Presence enables scheduled execution; null means manual
         #
-        #   @param status [Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeploymentStatus] Lifecycle status of a deployment.
+        #   @param status [Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeploymentStatus] Computed status of the deployment: `active` or `paused`. Archived deployments re
         #
         #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeployment::Type]
         #
-        #   @param updated_at [Time] A timestamp in RFC 3339 format
+        #   @param updated_at [Time] Time the deployment was last updated.
         #
         #   @param vault_ids [Array<String>] Vault IDs supplying stored credentials for sessions created from this deployment
         #
-        #   @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] A hard spend ceiling. The session stops issuing new model requests once the trac
+        #   @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] Spend ceiling stamped onto each session created from this deployment. Absent whe
 
         # @see Anthropic::Models::Beta::BetaManagedAgentsDeployment#type
         module Type

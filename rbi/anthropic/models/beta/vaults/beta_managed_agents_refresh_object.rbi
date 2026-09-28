@@ -13,7 +13,8 @@ module Anthropic
               )
             end
 
-          # An HTTP response captured during a credential validation probe.
+          # The captured HTTP error response from the token endpoint. Populated only when
+          # `status` is `failed`.
           sig do
             returns(
               T.nilable(
@@ -33,7 +34,7 @@ module Anthropic
           end
           attr_writer :http_response
 
-          # Outcome of a refresh-token exchange attempted during credential validation.
+          # Outcome of the refresh attempt.
           sig do
             returns(
               Anthropic::Beta::Vaults::BetaManagedAgentsRefreshObject::Status::TaggedSymbol
@@ -53,9 +54,10 @@ module Anthropic
             ).returns(T.attached_class)
           end
           def self.new(
-            # An HTTP response captured during a credential validation probe.
+            # The captured HTTP error response from the token endpoint. Populated only when
+            # `status` is `failed`.
             http_response:,
-            # Outcome of a refresh-token exchange attempted during credential validation.
+            # Outcome of the refresh attempt.
             status:
           )
           end
@@ -75,7 +77,7 @@ module Anthropic
           def to_hash
           end
 
-          # Outcome of a refresh-token exchange attempted during credential validation.
+          # Outcome of the refresh attempt.
           module Status
             extend Anthropic::Internal::Type::Enum
 

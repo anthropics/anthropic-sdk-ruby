@@ -64,7 +64,7 @@ module Anthropic
         sig { returns(T.nilable(T::Boolean)) }
         attr_accessor :is_error
 
-        # A timestamp in RFC 3339 format
+        # Timestamp when this result was processed.
         sig { returns(T.nilable(Time)) }
         attr_accessor :processed_at
 
@@ -109,7 +109,7 @@ module Anthropic
           content: nil,
           # Whether the tool execution resulted in an error.
           is_error: nil,
-          # A timestamp in RFC 3339 format
+          # Timestamp when this result was processed.
           processed_at: nil,
           # Set by the server to the subagent thread this result was routed to. Omitted when
           # it was routed to the primary thread.
@@ -273,13 +273,13 @@ module Anthropic
             type:,
             # The text content.
             text: nil,
-            # Union type for image source variants.
+            # The source of the image data.
             source: nil,
             # Additional context about the document for the model.
             context: nil,
             # The title of the document.
             title: nil,
-            # Citation settings for a search result.
+            # Citation settings for this search result.
             citations: nil,
             # Array of text content blocks from the search result.
             content: nil

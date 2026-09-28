@@ -17,7 +17,7 @@ class Output < Anthropic::BaseModel
 end
 
 message = anthropic.messages.create(
-  model: "claude-sonnet-5",
+  model: "claude-sonnet-5-5",
   max_tokens: 9999,
   messages: [
     {

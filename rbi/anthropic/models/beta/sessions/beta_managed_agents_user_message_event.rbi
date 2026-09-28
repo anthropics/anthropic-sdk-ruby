@@ -34,7 +34,7 @@ module Anthropic
           end
           attr_accessor :type
 
-          # A timestamp in RFC 3339 format
+          # Timestamp when the agent finished processing this message.
           sig { returns(T.nilable(Time)) }
           attr_accessor :processed_at
 
@@ -62,7 +62,7 @@ module Anthropic
             # Array of content blocks comprising the user message.
             content:,
             type:,
-            # A timestamp in RFC 3339 format
+            # Timestamp when the agent finished processing this message.
             processed_at: nil
           )
           end
@@ -183,7 +183,7 @@ module Anthropic
               type:,
               # The text content.
               text: nil,
-              # Union type for image source variants.
+              # The source of the image data.
               source: nil,
               # Additional context about the document for the model.
               context: nil,

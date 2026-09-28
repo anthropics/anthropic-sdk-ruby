@@ -26,7 +26,8 @@ module Anthropic
         required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsSchedule::Type }
 
         # @!attribute last_run_at
-        #   A timestamp in RFC 3339 format
+        #   Time the most recent scheduled run actually started. Null until one completes;
+        #   preserved after the deployment is archived. Manual runs do not update this.
         #
         #   @return [Time, nil]
         optional :last_run_at, Time, nil?: true
@@ -42,7 +43,8 @@ module Anthropic
         optional :upcoming_runs_at, Anthropic::Internal::Type::ArrayOf[Time]
 
         # @!method initialize(expression:, timezone:, type:, last_run_at: nil, upcoming_runs_at: nil)
-        #   5-field POSIX cron schedule with computed runtime timestamps.
+        #   A recurring schedule with computed runtime timestamps. Discriminated union —
+        #   only cron is supported currently.
         #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsSchedule} for more details.
@@ -53,7 +55,7 @@ module Anthropic
         #
         #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSchedule::Type]
         #
-        #   @param last_run_at [Time, nil] A timestamp in RFC 3339 format
+        #   @param last_run_at [Time, nil] Time the most recent scheduled run actually started. Null until one completes; p
         #
         #   @param upcoming_runs_at [Array<Time>] Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused
 

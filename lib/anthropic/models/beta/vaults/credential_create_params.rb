@@ -16,7 +16,7 @@ module Anthropic
           required :vault_id, String
 
           # @!attribute auth
-          #   Authentication details for creating a credential.
+          #   Authentication configuration for the credential.
           #
           #   @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthCreateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerCreateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams]
           required :auth, union: -> { Anthropic::Beta::Vaults::CredentialCreateParams::Auth }
@@ -57,7 +57,7 @@ module Anthropic
           #
           #   @param vault_id [String] Identifier of the vault to create the credential in.
           #
-          #   @param auth [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthCreateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerCreateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams] Authentication details for creating a credential.
+          #   @param auth [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthCreateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerCreateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams] Authentication configuration for the credential.
           #
           #   @param display_name [String, nil] Human-readable name for the credential. Up to 255 characters.
           #
@@ -69,7 +69,7 @@ module Anthropic
           #
           #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 
-          # Authentication details for creating a credential.
+          # Authentication configuration for the credential.
           module Auth
             extend Anthropic::Internal::Type::Union
 
@@ -112,7 +112,7 @@ module Anthropic
             #
             #   @option args [Time, nil] :expires_at A timestamp in RFC 3339 format
             #
-            #   @option args [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshParams, nil] :refresh OAuth refresh token parameters for creating a credential with refresh support.
+            #   @option args [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshParams, nil] :refresh Refresh token configuration, if the credential supports token refresh.
             #
             #   @option args [String] :token Static bearer token value.
             #

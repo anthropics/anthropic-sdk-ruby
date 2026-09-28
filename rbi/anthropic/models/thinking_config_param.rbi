@@ -19,6 +19,7 @@ module Anthropic
           T.any(
             Anthropic::ThinkingConfigEnabled,
             Anthropic::ThinkingConfigDisabled,
+            Anthropic::ThinkingConfigBetweenTools,
             Anthropic::ThinkingConfigAdaptive
           )
         end
@@ -34,6 +35,11 @@ module Anthropic
           T.let(:enabled, Anthropic::ThinkingConfigParam::Type::TaggedSymbol)
         DISABLED =
           T.let(:disabled, Anthropic::ThinkingConfigParam::Type::TaggedSymbol)
+        BETWEEN_TOOLS =
+          T.let(
+            :between_tools,
+            Anthropic::ThinkingConfigParam::Type::TaggedSymbol
+          )
         ADAPTIVE =
           T.let(:adaptive, Anthropic::ThinkingConfigParam::Type::TaggedSymbol)
 

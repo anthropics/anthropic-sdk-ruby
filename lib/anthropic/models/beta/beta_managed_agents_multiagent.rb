@@ -18,7 +18,7 @@ module Anthropic
         required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsMultiagent::Type }
 
         # @!method initialize(agents:, type:)
-        #   Resolved coordinator topology with a concrete agent roster.
+        #   Resolved multiagent orchestration configuration as returned in API responses.
         #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsMultiagent} for more details.

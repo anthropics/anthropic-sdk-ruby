@@ -22,11 +22,8 @@ module Anthropic
       end
       attr_writer :cache_control
 
-      # Per-member configuration for `browser_toolset_20260801`: one optional field per
-      # member tool, keyed by the member name — the same name the member's `tool_use`
-      # blocks carry. Every member is an accepted key, and a member's defaults apply
-      # wherever its key is absent. Unknown keys are rejected: the field set is this
-      # toolset version's complete member set.
+      # Sparse per-member overrides, keyed by member name. Absent, null, and {} are
+      # equivalent; a member's defaults apply wherever its key is absent.
       sig { returns(T.nilable(Anthropic::BrowserToolsetConfigs)) }
       attr_reader :configs
 
@@ -50,11 +47,8 @@ module Anthropic
       def self.new(
         # Create a cache control breakpoint at this content block.
         cache_control: nil,
-        # Per-member configuration for `browser_toolset_20260801`: one optional field per
-        # member tool, keyed by the member name — the same name the member's `tool_use`
-        # blocks carry. Every member is an accepted key, and a member's defaults apply
-        # wherever its key is absent. Unknown keys are rejected: the field set is this
-        # toolset version's complete member set.
+        # Sparse per-member overrides, keyed by member name. Absent, null, and {} are
+        # equivalent; a member's defaults apply wherever its key is absent.
         configs: nil,
         type: :browser_toolset_20260801
       )

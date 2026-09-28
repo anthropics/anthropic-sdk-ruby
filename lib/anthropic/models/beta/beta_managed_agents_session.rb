@@ -18,14 +18,13 @@ module Anthropic
         required :agent, -> { Anthropic::Beta::BetaManagedAgentsSessionAgent }
 
         # @!attribute archived_at
-        #   A timestamp in RFC 3339 format
+        #   When the session was archived. Null if not archived.
         #
         #   @return [Time, nil]
         required :archived_at, Time, nil?: true
 
         # @!attribute budget
-        #   A hard spend ceiling. The session stops issuing new model requests once the
-        #   tracked list cost reaches `max_list_cost`.
+        #   The session's enforced spend ceiling, or null when no budget is set.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil]
         required :budget, -> { Anthropic::Beta::BetaManagedAgentsBudgetLimit }, nil?: true
@@ -61,7 +60,7 @@ module Anthropic
                  -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::Sessions::BetaManagedAgentsSessionResource] }
 
         # @!attribute stats
-        #   Timing statistics for a session.
+        #   Timing statistics for the session.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsSessionStats]
         required :stats, -> { Anthropic::Beta::BetaManagedAgentsSessionStats }
@@ -89,7 +88,7 @@ module Anthropic
         required :updated_at, Time
 
         # @!attribute usage
-        #   Cumulative token usage for a session across all turns.
+        #   Cumulative token usage for the session.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsSessionUsage]
         required :usage, -> { Anthropic::Beta::BetaManagedAgentsSessionUsage }
@@ -118,9 +117,9 @@ module Anthropic
         #
         #   @param agent [Anthropic::Models::Beta::BetaManagedAgentsSessionAgent] Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session
         #
-        #   @param archived_at [Time, nil] A timestamp in RFC 3339 format
+        #   @param archived_at [Time, nil] When the session was archived. Null if not archived.
         #
-        #   @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] A hard spend ceiling. The session stops issuing new model requests once the trac
+        #   @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] The session's enforced spend ceiling, or null when no budget is set.
         #
         #   @param created_at [Time] A timestamp in RFC 3339 format
         #
@@ -132,7 +131,7 @@ module Anthropic
         #
         #   @param resources [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileResource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMemoryStoreResource>]
         #
-        #   @param stats [Anthropic::Models::Beta::BetaManagedAgentsSessionStats] Timing statistics for a session.
+        #   @param stats [Anthropic::Models::Beta::BetaManagedAgentsSessionStats] Timing statistics for the session.
         #
         #   @param status [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSession::Status] SessionStatus enum
         #
@@ -142,7 +141,7 @@ module Anthropic
         #
         #   @param updated_at [Time] A timestamp in RFC 3339 format
         #
-        #   @param usage [Anthropic::Models::Beta::BetaManagedAgentsSessionUsage] Cumulative token usage for a session across all turns.
+        #   @param usage [Anthropic::Models::Beta::BetaManagedAgentsSessionUsage] Cumulative token usage for the session.
         #
         #   @param vault_ids [Array<String>] Vault IDs attached to the session at creation. Empty when no vaults were supplie
         #

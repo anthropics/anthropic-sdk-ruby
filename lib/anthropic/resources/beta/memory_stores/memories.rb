@@ -105,7 +105,7 @@ module Anthropic
           #
           # @param path [String, nil] Body param: New path for the memory (a rename). Must start with `/`, contain at
           #
-          # @param precondition [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsPrecondition] Body param: Optimistic-concurrency precondition: the update applies only if the
+          # @param precondition [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsPrecondition] Body param: Optional optimistic-concurrency precondition. When supplied, the upd
           #
           # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #

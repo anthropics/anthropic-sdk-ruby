@@ -14,8 +14,9 @@ module Anthropic
         required :id, union: -> { Anthropic::Beta::BetaManagedAgentsModel }
 
         # @!attribute effort
-        #   How hard Claude works on each turn. Sets `output_config.effort` on every
-        #   Messages call the session makes.
+        #   How hard Claude works on each inference call. One of `low`, `medium`, `high`,
+        #   `xhigh`, `max`. Always present; resolved to the per-model default at save time
+        #   when not supplied.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsEffortLow, Anthropic::Models::Beta::BetaManagedAgentsEffortMedium, Anthropic::Models::Beta::BetaManagedAgentsEffortHigh, Anthropic::Models::Beta::BetaManagedAgentsEffortXhigh, Anthropic::Models::Beta::BetaManagedAgentsEffortMax, nil]
         optional :effort, union: -> { Anthropic::Beta::BetaManagedAgentsModelConfig::Effort }
@@ -29,8 +30,8 @@ module Anthropic
 
         # @!attribute speed
         #   Inference speed mode. `fast` provides significantly faster output token
-        #   generation at premium pricing. Not all models support `fast`; invalid
-        #   combinations are rejected at create time.
+        #   generation at premium pricing. Defaults to `standard`. Not all models support
+        #   `fast`; invalid combinations are rejected at create time.
         #
         #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsModelConfig::Speed, nil]
         optional :speed, enum: -> { Anthropic::Beta::BetaManagedAgentsModelConfig::Speed }
@@ -43,14 +44,15 @@ module Anthropic
         #
         #   @param id [Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel] The model that will power your agent.
         #
-        #   @param effort [Anthropic::Models::Beta::BetaManagedAgentsEffortLow, Anthropic::Models::Beta::BetaManagedAgentsEffortMedium, Anthropic::Models::Beta::BetaManagedAgentsEffortHigh, Anthropic::Models::Beta::BetaManagedAgentsEffortXhigh, Anthropic::Models::Beta::BetaManagedAgentsEffortMax] How hard Claude works on each turn. Sets `output_config.effort` on every Message
+        #   @param effort [Anthropic::Models::Beta::BetaManagedAgentsEffortLow, Anthropic::Models::Beta::BetaManagedAgentsEffortMedium, Anthropic::Models::Beta::BetaManagedAgentsEffortHigh, Anthropic::Models::Beta::BetaManagedAgentsEffortXhigh, Anthropic::Models::Beta::BetaManagedAgentsEffortMax] How hard Claude works on each inference call. One of `low`, `medium`, `high`, `x
         #
         #   @param inference_geo [String] Geographic region for model inference. When unset, requests fall through to the
         #
         #   @param speed [Symbol, Anthropic::Models::Beta::BetaManagedAgentsModelConfig::Speed] Inference speed mode. `fast` provides significantly faster output token generati
 
-        # How hard Claude works on each turn. Sets `output_config.effort` on every
-        # Messages call the session makes.
+        # How hard Claude works on each inference call. One of `low`, `medium`, `high`,
+        # `xhigh`, `max`. Always present; resolved to the per-model default at save time
+        # when not supplied.
         #
         # @see Anthropic::Models::Beta::BetaManagedAgentsModelConfig#effort
         module Effort
@@ -117,8 +119,8 @@ module Anthropic
         end
 
         # Inference speed mode. `fast` provides significantly faster output token
-        # generation at premium pricing. Not all models support `fast`; invalid
-        # combinations are rejected at create time.
+        # generation at premium pricing. Defaults to `standard`. Not all models support
+        # `fast`; invalid combinations are rejected at create time.
         #
         # @see Anthropic::Models::Beta::BetaManagedAgentsModelConfig#speed
         module Speed

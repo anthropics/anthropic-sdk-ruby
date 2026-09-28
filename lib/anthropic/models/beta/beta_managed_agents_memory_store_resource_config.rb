@@ -17,7 +17,8 @@ module Anthropic
         required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsMemoryStoreResourceConfig::Type }
 
         # @!attribute access
-        #   Access mode for an attached memory store.
+        #   Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts
+        #   the store as a read-only filesystem.
         #
         #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceConfig::Access, nil]
         optional :access,
@@ -43,7 +44,7 @@ module Anthropic
         #
         #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceConfig::Type]
         #
-        #   @param access [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceConfig::Access, nil] Access mode for an attached memory store.
+        #   @param access [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceConfig::Access, nil] Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts
         #
         #   @param instructions [String, nil] Per-attachment guidance for the agent on how to use this store. Rendered into th
 
@@ -57,7 +58,8 @@ module Anthropic
           #   @return [Array<Symbol>]
         end
 
-        # Access mode for an attached memory store.
+        # Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts
+        # the store as a read-only filesystem.
         #
         # @see Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceConfig#access
         module Access

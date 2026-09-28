@@ -6,7 +6,7 @@ module Anthropic
       module Sessions
         class BetaManagedAgentsUserToolConfirmationEventParams < Anthropic::Internal::Type::BaseModel
           # @!attribute result
-          #   UserToolConfirmationResult enum
+          #   The confirmation result: 'allow' or 'deny'.
           #
           #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::Result]
           required :result,
@@ -41,7 +41,7 @@ module Anthropic
           #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams}
           #   for more details.
           #
-          #   @param result [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::Result] UserToolConfirmationResult enum
+          #   @param result [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::Result] The confirmation result: 'allow' or 'deny'.
           #
           #   @param tool_use_id [String] The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresp
           #
@@ -49,7 +49,7 @@ module Anthropic
           #
           #   @param deny_message [String, nil] Optional message providing context for a 'deny' decision. Only allowed when resu
 
-          # UserToolConfirmationResult enum
+          # The confirmation result: 'allow' or 'deny'.
           #
           # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams#result
           module Result

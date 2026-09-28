@@ -17,7 +17,7 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :id
 
-          # A timestamp in RFC 3339 format
+          # Timestamp when this event was processed.
           sig { returns(Time) }
           attr_accessor :processed_at
 
@@ -86,7 +86,7 @@ module Anthropic
           def self.new(
             # Unique identifier for this event.
             id:,
-            # A timestamp in RFC 3339 format
+            # Timestamp when this event was processed.
             processed_at:,
             # The id of the `agent.tool_use` event this result corresponds to.
             tool_use_id:,
@@ -253,13 +253,13 @@ module Anthropic
               type:,
               # The text content.
               text: nil,
-              # Union type for image source variants.
+              # The source of the image data.
               source: nil,
               # Additional context about the document for the model.
               context: nil,
               # The title of the document.
               title: nil,
-              # Citation settings for a search result.
+              # Citation settings for this search result.
               citations: nil,
               # Array of text content blocks from the search result.
               content: nil

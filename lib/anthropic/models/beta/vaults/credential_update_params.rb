@@ -22,7 +22,8 @@ module Anthropic
           required :credential_id, String
 
           # @!attribute auth
-          #   Updated authentication details for a credential.
+          #   Updated authentication configuration. The `type` is immutable; the variant sent
+          #   must match the stored credential's type.
           #
           #   @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams, nil]
           optional :auth, union: -> { Anthropic::Beta::Vaults::CredentialUpdateParams::Auth }
@@ -65,7 +66,7 @@ module Anthropic
           #
           #   @param credential_id [String] Unique identifier of the credential to update.
           #
-          #   @param auth [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams] Updated authentication details for a credential.
+          #   @param auth [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams] Updated authentication configuration. The `type` is immutable; the variant sent
           #
           #   @param display_name [String, nil] Updated human-readable name for the credential. 1-255 characters.
           #
@@ -77,7 +78,8 @@ module Anthropic
           #
           #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 
-          # Updated authentication details for a credential.
+          # Updated authentication configuration. The `type` is immutable; the variant sent
+          # must match the stored credential's type.
           module Auth
             extend Anthropic::Internal::Type::Union
 
@@ -118,7 +120,7 @@ module Anthropic
             #
             #   @option args [Time, nil] :expires_at A timestamp in RFC 3339 format
             #
-            #   @option args [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshUpdateParams, nil] :refresh Parameters for updating OAuth refresh token configuration.
+            #   @option args [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshUpdateParams, nil] :refresh Updated refresh token configuration.
             #
             #   @option args [String, nil] :token Updated static bearer token value.
             #

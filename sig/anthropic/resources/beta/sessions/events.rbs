@@ -12,7 +12,7 @@ module Anthropic
             ?limit: Integer,
             ?order: Anthropic::Models::Beta::Sessions::EventListParams::order,
             ?page: String,
-            ?types: ::Array[String],
+            ?types: ::Array[Anthropic::Models::Beta::Sessions::beta_managed_agents_session_event_type],
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?workspace_id: String,
             ?request_options: Anthropic::request_opts

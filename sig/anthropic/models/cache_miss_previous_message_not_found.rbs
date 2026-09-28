@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type cache_miss_previous_message_not_found =
+      { type: :previous_message_not_found }
+
+    class CacheMissPreviousMessageNotFound < Anthropic::Internal::Type::BaseModel
+      attr_accessor type: :previous_message_not_found
+
+      def initialize: (?type: :previous_message_not_found) -> void
+
+      def to_hash: -> { type: :previous_message_not_found }
+    end
+  end
+end

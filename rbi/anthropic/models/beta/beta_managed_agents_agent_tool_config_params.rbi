@@ -130,7 +130,8 @@ module Anthropic
           # Whether this tool is enabled and available to Claude. Overrides the
           # default_config setting.
           enabled: nil,
-          # Permission policy for tool execution.
+          # Permission policy for this tool. Controls whether tool calls are auto-approved
+          # or require confirmation.
           permission_policy: nil,
           # Only fetch URLs whose host is one of these domains or a subdomain of one. Each
           # entry is a plain hostname like "docs.example.com" (no scheme, port, or path). At

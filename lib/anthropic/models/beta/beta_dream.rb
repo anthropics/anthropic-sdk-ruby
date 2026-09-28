@@ -12,25 +12,28 @@ module Anthropic
         required :id, String
 
         # @!attribute archived_at
-        #   A timestamp in RFC 3339 format
+        #   When the dream was archived, in RFC 3339, or `null` if it hasn't been archived.
         #
         #   @return [Time, nil]
         required :archived_at, Time, nil?: true
 
         # @!attribute created_at
-        #   A timestamp in RFC 3339 format
+        #   When the dream was created, in RFC 3339.
+        #
+        #   Lists of dreams are sorted by this time, newest first.
         #
         #   @return [Time]
         required :created_at, Time
 
         # @!attribute ended_at
-        #   A timestamp in RFC 3339 format
+        #   When the dream reached `completed`, `failed`, or `canceled`, in RFC 3339, or
+        #   `null` if it is still `pending` or `running`.
         #
         #   @return [Time, nil]
         required :ended_at, Time, nil?: true
 
         # @!attribute error
-        #   Failure detail for a Dream whose `status` is `failed`.
+        #   Why the dream failed, or `null` if `status` isn't `failed`.
         #
         #   @return [Anthropic::Models::Beta::BetaDreamError, nil]
         required :error, -> { Anthropic::Beta::BetaDreamError }, nil?: true
@@ -57,8 +60,9 @@ module Anthropic
         required :model, -> { Anthropic::Beta::BetaDreamModelConfig }
 
         # @!attribute output_behavior
-        #   Which memory store a dream writes its result to. Defaults to `create_new` when
-        #   left out of a create request.
+        #   Where the dream writes its result, as set in the request that created the dream.
+        #   If that request left out `output_behavior`, the dream used the `create_new`
+        #   behavior.
         #
         #   @return [Anthropic::Models::Beta::BetaOutputBehaviorCreateNew, Anthropic::Models::Beta::BetaOutputBehaviorUpdateExisting]
         required :output_behavior, union: -> { Anthropic::Beta::BetaOutputBehavior }
@@ -111,16 +115,8 @@ module Anthropic
         required :type, enum: -> { Anthropic::Beta::BetaDream::Type }
 
         # @!attribute usage
-        #   The tokens that a dream has used so far.
-        #
-        #   The counts are zero while the dream is `pending` and update while it is
-        #   `running`. They can keep changing after a cancel.
-        #
-        #   See the
-        #   [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams#billing)
-        #   for how dreams are billed. See the
-        #   [prompt caching guide](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#tracking-cache-performance)
-        #   for how the input token counts add up.
+        #   The dream's token counts, which stop changing once its `status` is `completed`
+        #   or `failed`. After a cancel, they can keep changing.
         #
         #   @return [Anthropic::Models::Beta::BetaDreamUsage]
         required :usage, -> { Anthropic::Beta::BetaDreamUsage }
@@ -131,8 +127,11 @@ module Anthropic
         #
         #   By default the dream writes its result to a new memory store and doesn't change
         #   the input memory store. With `output_behavior` set to `update_existing`, it
-        #   writes its result into the input memory store instead. The Dreams API is in
-        #   research preview, so this resource can still change.
+        #   writes its result into the input memory store instead.
+        #
+        #   The Dreams API is in research preview: the request and response shapes are
+        #   volatile and may change without the deprecation period that applies to
+        #   generally-available endpoints.
         #
         #   See the
         #   [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams#how-it-works)
@@ -143,13 +142,13 @@ module Anthropic
         #
         #   @param id [String] The unique ID of the dream (`drm_...`).
         #
-        #   @param archived_at [Time, nil] A timestamp in RFC 3339 format
+        #   @param archived_at [Time, nil] When the dream was archived, in RFC 3339, or `null` if it hasn't been archived.
         #
-        #   @param created_at [Time] A timestamp in RFC 3339 format
+        #   @param created_at [Time] When the dream was created, in RFC 3339.
         #
-        #   @param ended_at [Time, nil] A timestamp in RFC 3339 format
+        #   @param ended_at [Time, nil] When the dream reached `completed`, `failed`, or `canceled`, in RFC 3339, or `nu
         #
-        #   @param error [Anthropic::Models::Beta::BetaDreamError, nil] Failure detail for a Dream whose `status` is `failed`.
+        #   @param error [Anthropic::Models::Beta::BetaDreamError, nil] Why the dream failed, or `null` if `status` isn't `failed`.
         #
         #   @param inputs [Array<Anthropic::Models::Beta::BetaDreamMemoryStoreInput, Anthropic::Models::Beta::BetaDreamSessionsInput>] The sources that the dream reads, from the request that created it.
         #
@@ -157,7 +156,7 @@ module Anthropic
         #
         #   @param model [Anthropic::Models::Beta::BetaDreamModelConfig] The model that runs a dream, from the request that created it.
         #
-        #   @param output_behavior [Anthropic::Models::Beta::BetaOutputBehaviorCreateNew, Anthropic::Models::Beta::BetaOutputBehaviorUpdateExisting] Which memory store a dream writes its result to. Defaults to `create_new` when l
+        #   @param output_behavior [Anthropic::Models::Beta::BetaOutputBehaviorCreateNew, Anthropic::Models::Beta::BetaOutputBehaviorUpdateExisting] Where the dream writes its result, as set in the request that created the dream.
         #
         #   @param outputs [Array<Anthropic::Models::Beta::BetaDreamOutput>] The memory store that holds the dream's result, as a one-item array, or an empty
         #
@@ -167,7 +166,7 @@ module Anthropic
         #
         #   @param type [Symbol, Anthropic::Models::Beta::BetaDream::Type]
         #
-        #   @param usage [Anthropic::Models::Beta::BetaDreamUsage] The tokens that a dream has used so far.
+        #   @param usage [Anthropic::Models::Beta::BetaDreamUsage] The dream's token counts, which stop changing once its `status` is `completed` o
 
         # @see Anthropic::Models::Beta::BetaDream#type
         module Type

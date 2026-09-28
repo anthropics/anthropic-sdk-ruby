@@ -6,18 +6,20 @@ module Anthropic
       type beta_thinking_config_param =
         Anthropic::Beta::BetaThinkingConfigEnabled
         | Anthropic::Beta::BetaThinkingConfigDisabled
+        | Anthropic::Beta::BetaThinkingConfigBetweenTools
         | Anthropic::Beta::BetaThinkingConfigAdaptive
 
       module BetaThinkingConfigParam
         extend Anthropic::Internal::Type::Union
 
-        type type_ = :enabled | :disabled | :adaptive
+        type type_ = :enabled | :disabled | :between_tools | :adaptive
 
         module Type
           extend Anthropic::Internal::Type::Enum
 
           ENABLED: :enabled
           DISABLED: :disabled
+          BETWEEN_TOOLS: :between_tools
           ADAPTIVE: :adaptive
 
           def self?.values: -> ::Array[Anthropic::Models::Beta::BetaThinkingConfigParam::type_]
@@ -35,6 +37,9 @@ module Anthropic
           | (
             type: :disabled | "disabled"
           ) -> Anthropic::Beta::BetaThinkingConfigDisabled
+          | (
+            type: :between_tools | "between_tools"
+          ) -> Anthropic::Beta::BetaThinkingConfigBetweenTools
           | (
             type: :adaptive | "adaptive",
             ?block_binding: Anthropic::Beta::BetaThinkingBlockBinding?,

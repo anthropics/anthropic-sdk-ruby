@@ -58,7 +58,7 @@ pp(Calculator)
 puts "---- the runner will keep calling the tools given until there is no more tool calls required ----\n"
 
 params = {
-  model: "claude-sonnet-5",
+  model: "claude-sonnet-5-5",
   max_tokens: 1024,
   messages: [
     {

@@ -23,6 +23,10 @@ module Anthropic
         attr_accessor :cache_read_input_tokens
 
         # Outcome of the `fallback_credit_token` presented on this request.
+        #
+        # Present on every response to a non-batch request that carried a
+        # `fallback_credit_token`, in either redemption mode; absent otherwise (batch
+        # items accept and ignore the token and carry no outcome object).
         sig { returns(T.nilable(Anthropic::Beta::BetaFallbackCreditUsage)) }
         attr_reader :fallback_credit
 
@@ -133,6 +137,10 @@ module Anthropic
           # The cumulative number of input tokens read from the cache.
           cache_read_input_tokens:,
           # Outcome of the `fallback_credit_token` presented on this request.
+          #
+          # Present on every response to a non-batch request that carried a
+          # `fallback_credit_token`, in either redemption mode; absent otherwise (batch
+          # items accept and ignore the token and carry no outcome object).
           fallback_credit:,
           # The cumulative number of input tokens which were used.
           input_tokens:,

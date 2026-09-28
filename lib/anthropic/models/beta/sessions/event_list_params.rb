@@ -64,8 +64,9 @@ module Anthropic
           #   Filter by event type. Values match the `type` field on returned events (for
           #   example, `user.message` or `agent.tool_use`). Omit to return all event types.
           #
-          #   @return [Array<String>, nil]
-          optional :types, Anthropic::Internal::Type::ArrayOf[String]
+          #   @return [Array<Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEventType>, nil]
+          optional :types,
+                   -> { Anthropic::Internal::Type::ArrayOf[enum: Anthropic::Beta::Sessions::BetaManagedAgentsSessionEventType] }
 
           # @!attribute betas
           #   Optional header to specify the beta version(s) you want to use.
@@ -104,7 +105,7 @@ module Anthropic
           #
           #   @param page [String] Opaque pagination cursor from a previous response's `next_page`.
           #
-          #   @param types [Array<String>] Filter by event type. Values match the `type` field on returned events (for exam
+          #   @param types [Array<Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEventType>] Filter by event type. Values match the `type` field on returned events (for exam
           #
           #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
           #

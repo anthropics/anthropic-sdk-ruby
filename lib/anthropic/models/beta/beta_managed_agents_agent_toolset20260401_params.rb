@@ -17,7 +17,7 @@ module Anthropic
                  -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaManagedAgentsAgentToolConfigParams] }
 
         # @!attribute default_config
-        #   Default configuration for all tools in a toolset.
+        #   Default configuration applied to all tools in this set.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsAgentToolsetDefaultConfigParams, nil]
         optional :default_config,
@@ -32,7 +32,7 @@ module Anthropic
         #
         #   @param configs [Array<Anthropic::Models::Beta::BetaManagedAgentsBashToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsEditToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsReadToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsWriteToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsGlobToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsGrepToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsWebSearchToolConfigParams>] Per-tool configuration overrides.
         #
-        #   @param default_config [Anthropic::Models::Beta::BetaManagedAgentsAgentToolsetDefaultConfigParams, nil] Default configuration for all tools in a toolset.
+        #   @param default_config [Anthropic::Models::Beta::BetaManagedAgentsAgentToolsetDefaultConfigParams, nil] Default configuration applied to all tools in this set.
 
         # @see Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401Params#type
         module Type

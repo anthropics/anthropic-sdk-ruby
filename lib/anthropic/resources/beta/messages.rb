@@ -14,16 +14,13 @@ module Anthropic
           params = params.to_h
           warn_thinking_enabled(params)
           max_iterations = params.delete(:max_iterations)
-          compaction_control = params.delete(:compaction_control)
-          if compaction_control&.dig(:enabled) || compaction_control&.dig("enabled")
-            warn(
-              "[DEPRECATION] The 'compaction_control' parameter is deprecated and will be removed in a future version. " \
-              "Use server-side compaction instead by passing edits: [{ type: 'compact_20260112' }] in the params passed to `tool_runner()`. " \
-              "See https://platform.claude.com/docs/en/build-with-claude/compaction",
-              category: :deprecated
+          unless params.delete(:compaction_control).nil?
+            raise ArgumentError.new(
+              "`compaction_control` has been removed from the tool runner. Use server-side compaction " \
+              "instead: call `#compact_before_next_turn` when the conversation should be compacted."
             )
           end
-          Anthropic::Helpers::Tools::Runner.new(@client, params:, max_iterations:, compaction_control:)
+          Anthropic::Helpers::Tools::Runner.new(@client, params:, max_iterations:)
         end
 
         # See {Anthropic::Resources::Beta::Messages#stream_raw} for streaming counterpart.
@@ -50,13 +47,13 @@ module Anthropic
         #
         # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Body param: Top-level cache control automatically applies a cache_control marker
         #
-        # @param compaction [Anthropic::Models::Beta::BetaCompactionConfig, nil] Body param: Compact the whole conversation and return a signed `compaction` bloc
+        # @param compaction [Anthropic::Models::Beta::BetaCompactionConfig, nil] Body param: Compaction configuration.
         #
         # @param container [Anthropic::Models::Beta::BetaContainerParams, String, nil] Body param: Container identifier for reuse across requests.
         #
         # @param context_management [Anthropic::Models::Beta::BetaContextManagementConfig, nil] Body param: Context management configuration.
         #
-        # @param diagnostics [Anthropic::Models::Beta::BetaDiagnosticsParam, nil] Body param: Request-level diagnostics. Currently carries the previous response
+        # @param diagnostics [Anthropic::Models::Beta::BetaDiagnosticsParam, nil] Body param: Request-level diagnostics. Supply `previous_message_id` to have the
         #
         # @param fallback_credit_token [Anthropic::Models::Beta::BetaFallbackCreditTokenParam, String, nil] Body param: The `fallback_credit_token` from a prior refusal's `stop_details`.
         #
@@ -74,7 +71,7 @@ module Anthropic
         #
         # @param service_tier [Symbol, Anthropic::Models::Beta::MessageCreateParams::ServiceTier] Body param: Determines whether to use priority capacity (if available) or standa
         #
-        # @param speed [Symbol, Anthropic::Models::Beta::MessageCreateParams::Speed, nil] Body param: Inference speed mode. `fast` provides significantly faster output to
+        # @param speed [Symbol, Anthropic::Models::Beta::MessageCreateParams::Speed, nil] Body param: The inference speed mode for this request. `"fast"` enables high out
         #
         # @param stop_sequences [Array<String>] Body param: Custom text sequences that will cause the model to stop generating.
         #
@@ -82,7 +79,7 @@ module Anthropic
         #
         # @param temperature [Float] Body param: Amount of randomness injected into the response.
         #
-        # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigAdaptive] Body param: Configuration for enabling Claude's extended thinking.
+        # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigBetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive] Body param: Configuration for enabling Claude's extended thinking.
         #
         # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
         #
@@ -288,13 +285,13 @@ module Anthropic
         #
         # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Body param: Top-level cache control automatically applies a cache_control marker
         #
-        # @param compaction [Anthropic::Models::Beta::BetaCompactionConfig, nil] Body param: Compact the whole conversation and return a signed `compaction` bloc
+        # @param compaction [Anthropic::Models::Beta::BetaCompactionConfig, nil] Body param: Compaction configuration.
         #
         # @param container [Anthropic::Models::Beta::BetaContainerParams, String, nil] Body param: Container identifier for reuse across requests.
         #
         # @param context_management [Anthropic::Models::Beta::BetaContextManagementConfig, nil] Body param: Context management configuration.
         #
-        # @param diagnostics [Anthropic::Models::Beta::BetaDiagnosticsParam, nil] Body param: Request-level diagnostics. Currently carries the previous response
+        # @param diagnostics [Anthropic::Models::Beta::BetaDiagnosticsParam, nil] Body param: Request-level diagnostics. Supply `previous_message_id` to have the
         #
         # @param fallback_credit_token [Anthropic::Models::Beta::BetaFallbackCreditTokenParam, String, nil] Body param: The `fallback_credit_token` from a prior refusal's `stop_details`.
         #
@@ -312,7 +309,7 @@ module Anthropic
         #
         # @param service_tier [Symbol, Anthropic::Models::Beta::MessageCreateParams::ServiceTier] Body param: Determines whether to use priority capacity (if available) or standa
         #
-        # @param speed [Symbol, Anthropic::Models::Beta::MessageCreateParams::Speed, nil] Body param: Inference speed mode. `fast` provides significantly faster output to
+        # @param speed [Symbol, Anthropic::Models::Beta::MessageCreateParams::Speed, nil] Body param: The inference speed mode for this request. `"fast"` enables high out
         #
         # @param stop_sequences [Array<String>] Body param: Custom text sequences that will cause the model to stop generating.
         #
@@ -320,7 +317,7 @@ module Anthropic
         #
         # @param temperature [Float] Body param: Amount of randomness injected into the response.
         #
-        # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigAdaptive] Body param: Configuration for enabling Claude's extended thinking.
+        # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigBetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive] Body param: Configuration for enabling Claude's extended thinking.
         #
         # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
         #
@@ -393,7 +390,7 @@ module Anthropic
         #
         # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Body param: Top-level cache control automatically applies a cache_control marker
         #
-        # @param compaction [Anthropic::Models::Beta::BetaCompactionConfig, nil] Body param: Compact the whole conversation and return a signed `compaction` bloc
+        # @param compaction [Anthropic::Models::Beta::BetaCompactionConfig, nil] Body param: Compaction configuration.
         #
         # @param context_management [Anthropic::Models::Beta::BetaContextManagementConfig, nil] Body param: Context management configuration.
         #
@@ -403,11 +400,11 @@ module Anthropic
         #
         # @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil] Body param: Deprecated: Use `output_config.format` instead. See [structured outp
         #
-        # @param speed [Symbol, Anthropic::Models::Beta::MessageCountTokensParams::Speed, nil] Body param: Inference speed mode. `fast` provides significantly faster output to
+        # @param speed [Symbol, Anthropic::Models::Beta::MessageCountTokensParams::Speed, nil] Body param: The inference speed mode for this request. `"fast"` enables high out
         #
         # @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>] Body param: System prompt.
         #
-        # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigAdaptive] Body param: Configuration for enabling Claude's extended thinking.
+        # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigBetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive] Body param: Configuration for enabling Claude's extended thinking.
         #
         # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
         #

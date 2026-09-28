@@ -27,7 +27,7 @@ module Anthropic
           end
           attr_accessor :content
 
-          # A timestamp in RFC 3339 format
+          # Timestamp when this response was generated.
           sig { returns(Time) }
           attr_accessor :processed_at
 
@@ -59,7 +59,7 @@ module Anthropic
             id:,
             # Array of text blocks comprising the agent response.
             content:,
-            # A timestamp in RFC 3339 format
+            # Timestamp when this response was generated.
             processed_at:,
             type:
           )

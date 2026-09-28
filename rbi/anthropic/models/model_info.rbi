@@ -12,7 +12,8 @@ module Anthropic
       sig { returns(String) }
       attr_accessor :id
 
-      # Model capability information.
+      # Object mapping capability names to their support details. Keys are always
+      # present for all known capabilities.
       sig { returns(T.nilable(Anthropic::ModelCapabilities)) }
       attr_reader :capabilities
 
@@ -60,7 +61,8 @@ module Anthropic
       def self.new(
         # Unique model identifier.
         id:,
-        # Model capability information.
+        # Object mapping capability names to their support details. Keys are always
+        # present for all known capabilities.
         capabilities:,
         # RFC 3339 datetime string representing the time at which the model was released.
         # May be set to an epoch value if the release date is unknown.

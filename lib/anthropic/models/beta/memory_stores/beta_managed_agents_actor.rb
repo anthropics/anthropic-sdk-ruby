@@ -4,26 +4,24 @@ module Anthropic
   module Models
     module Beta
       module MemoryStores
-        # Identifies who performed a write or redact operation. Captured at write time on
-        # the `memory_version` row. The API key that created a session is not recorded on
-        # agent writes; attribution answers who made the write, not who is ultimately
-        # responsible. Look up session provenance separately via the
-        # [Sessions API](/en/api/beta/sessions/retrieve).
+        # Identifies who performed an operation. Recorded when the operation happens and
+        # not updated afterwards, so the ID may refer to a user, service account, API key,
+        # or session that has since been deleted.
         module BetaManagedAgentsActor
           extend Anthropic::Internal::Type::Union
 
           discriminator :type
 
-          # Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
+          # An agent acting during a session, for example through the session's mounted filesystem. It names the session itself, not the user or API key that started the session.
           variant :session_actor, -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsSessionActor }
 
-          # Attribution for a write made directly via the public API (outside of any session).
+          # A direct caller of the public API, identified by the API key that authenticated the request.
           variant :api_actor, -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsAPIActor }
 
-          # Attribution for a write made by a human user through the Anthropic Console.
+          # A human user, for example acting through the Anthropic Console.
           variant :user_actor, -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsUserActor }
 
-          # Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+          # A workload authenticated as a service account, for example via Workload Identity Federation.
           variant :service_account_actor, -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor }
 
           module Type
@@ -52,13 +50,13 @@ module Anthropic
           #
           # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
           #
-          #   @option args [String] :session_id ID of the session that performed the write (a `sesn_...` value). Look up the ses
+          #   @option args [String] :session_id ID of the session (a `sesn_...` value). Look up the session via [Retrieve a sess
           #
-          #   @option args [String] :api_key_id ID of the API key that performed the write. This identifies the key, not the sec
+          #   @option args [String] :api_key_id ID of the API key (an `apikey_...` value). This identifies the key, not the secr
           #
-          #   @option args [String] :user_id ID of the user who performed the write (a `user_...` value).
+          #   @option args [String] :user_id ID of the user (a `user_...` value).
           #
-          #   @option args [String] :service_account_id ID of the service account that performed the write (a `svac_...` value).
+          #   @option args [String] :service_account_id ID of the service account (a `svac_...` value).
           #
           # @raise [ArgumentError]
           # @return [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsAPIActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor]

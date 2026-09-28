@@ -20,7 +20,7 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :vault_id
 
-          # Authentication details for creating a credential.
+          # Authentication configuration for the credential.
           sig do
             returns(
               T.any(
@@ -93,7 +93,7 @@ module Anthropic
           def self.new(
             # Identifier of the vault to create the credential in.
             vault_id:,
-            # Authentication details for creating a credential.
+            # Authentication configuration for the credential.
             auth:,
             # Human-readable name for the credential. Up to 255 characters.
             display_name: nil,
@@ -135,7 +135,7 @@ module Anthropic
           def to_hash
           end
 
-          # Authentication details for creating a credential.
+          # Authentication configuration for the credential.
           module Auth
             extend Anthropic::Internal::Type::Union
 
@@ -232,7 +232,7 @@ module Anthropic
               mcp_server_url: nil,
               # A timestamp in RFC 3339 format
               expires_at: nil,
-              # OAuth refresh token parameters for creating a credential with refresh support.
+              # Refresh token configuration, if the credential supports token refresh.
               refresh: nil,
               # Static bearer token value.
               token: nil,

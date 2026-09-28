@@ -6,7 +6,7 @@ module Anthropic
       module Sessions
         class BetaManagedAgentsImageBlock < Anthropic::Internal::Type::BaseModel
           # @!attribute source
-          #   Union type for image source variants.
+          #   The source of the image data.
           #
           #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64ImageSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsURLImageSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileImageSource]
           required :source, union: -> { Anthropic::Beta::Sessions::BetaManagedAgentsImageBlock::Source }
@@ -19,11 +19,11 @@ module Anthropic
           # @!method initialize(source:, type:)
           #   Image content specified directly as base64 data or as a reference via a URL.
           #
-          #   @param source [Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64ImageSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsURLImageSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileImageSource] Union type for image source variants.
+          #   @param source [Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64ImageSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsURLImageSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileImageSource] The source of the image data.
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock::Type]
 
-          # Union type for image source variants.
+          # The source of the image data.
           #
           # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock#source
           module Source

@@ -6,7 +6,8 @@ module Anthropic
       module Vaults
         class BetaManagedAgentsRefreshObject < Anthropic::Internal::Type::BaseModel
           # @!attribute http_response
-          #   An HTTP response captured during a credential validation probe.
+          #   The captured HTTP error response from the token endpoint. Populated only when
+          #   `status` is `failed`.
           #
           #   @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsRefreshHTTPResponse, nil]
           required :http_response,
@@ -16,7 +17,7 @@ module Anthropic
                    nil?: true
 
           # @!attribute status
-          #   Outcome of a refresh-token exchange attempted during credential validation.
+          #   Outcome of the refresh attempt.
           #
           #   @return [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsRefreshObject::Status]
           required :status, enum: -> { Anthropic::Beta::Vaults::BetaManagedAgentsRefreshObject::Status }
@@ -24,11 +25,15 @@ module Anthropic
           # @!method initialize(http_response:, status:)
           #   Outcome of a refresh-token exchange attempted during credential validation.
           #
-          #   @param http_response [Anthropic::Models::Beta::Vaults::BetaManagedAgentsRefreshHTTPResponse, nil] An HTTP response captured during a credential validation probe.
+          #   Some parameter documentations has been truncated, see
+          #   {Anthropic::Models::Beta::Vaults::BetaManagedAgentsRefreshObject} for more
+          #   details.
           #
-          #   @param status [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsRefreshObject::Status] Outcome of a refresh-token exchange attempted during credential validation.
+          #   @param http_response [Anthropic::Models::Beta::Vaults::BetaManagedAgentsRefreshHTTPResponse, nil] The captured HTTP error response from the token endpoint. Populated only when `s
+          #
+          #   @param status [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsRefreshObject::Status] Outcome of the refresh attempt.
 
-          # Outcome of a refresh-token exchange attempted during credential validation.
+          # Outcome of the refresh attempt.
           #
           # @see Anthropic::Models::Beta::Vaults::BetaManagedAgentsRefreshObject#status
           module Status

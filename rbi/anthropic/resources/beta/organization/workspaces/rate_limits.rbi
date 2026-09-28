@@ -6,11 +6,13 @@ module Anthropic
       class Organization
         class Workspaces
           class RateLimits
-            # List rate-limit overrides configured for a workspace.
+            # List a workspace's rate limits.
             #
-            # Returns only the groups and limiter types that have a workspace-level override.
-            # Groups without overrides inherit the organization limits and are not listed; use
-            # `GET /v1/organizations/rate_limits` to see those.
+            # By default, returns only the groups and limiter types that have a
+            # workspace-level override. With `include_inherited=true`, returns every group
+            # with organization-level limits the workspace can see, listing for each the
+            # values it inherits from the organization as well as its own overrides. Each
+            # value's `source` says which it is.
             #
             # When `limit` is omitted, every matching entry is returned in a single page; when
             # `limit` truncates the result, follow `next_page` to fetch the remaining entries.
@@ -21,6 +23,7 @@ module Anthropic
                   T.nilable(
                     Anthropic::Beta::Organization::Workspaces::RateLimitListParams::GroupType::OrSymbol
                   ),
+                include_inherited: T::Boolean,
                 limit: T.nilable(Integer),
                 page: T.nilable(String),
                 request_options: Anthropic::RequestOptions::OrHash
@@ -35,6 +38,9 @@ module Anthropic
               workspace_id,
               # Filter by group type.
               group_type: nil,
+              # Also list the limiter values the workspace inherits from the organization,
+              # including groups with no workspace-level override.
+              include_inherited: nil,
               # Maximum number of items to return per page. Ranges from `1` to `1000`.
               #
               # When omitted, every remaining entry is returned in a single page and `next_page`

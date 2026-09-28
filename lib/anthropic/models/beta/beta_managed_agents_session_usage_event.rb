@@ -11,7 +11,7 @@ module Anthropic
         required :id, String
 
         # @!attribute processed_at
-        #   A timestamp in RFC 3339 format
+        #   Timestamp when the snapshot was taken.
         #
         #   @return [Time]
         required :processed_at, Time
@@ -22,14 +22,14 @@ module Anthropic
         required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsSessionUsageEvent::Type }
 
         # @!attribute usage
-        #   Point-in-time snapshot of a session's cumulative usage.
+        #   The session's cumulative usage at the snapshot time.
         #
         #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionUsageSnapshot]
         required :usage, -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionUsageSnapshot }
 
         # @!attribute budget
-        #   A hard spend ceiling. The session stops issuing new model requests once the
-        #   tracked list cost reaches `max_list_cost`.
+        #   The session's configured budget at the snapshot time, or null when the session
+        #   has no budget.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil]
         optional :budget, -> { Anthropic::Beta::BetaManagedAgentsBudgetLimit }, nil?: true
@@ -42,13 +42,13 @@ module Anthropic
         #
         #   @param id [String] Unique identifier for this event.
         #
-        #   @param processed_at [Time] A timestamp in RFC 3339 format
+        #   @param processed_at [Time] Timestamp when the snapshot was taken.
         #
         #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSessionUsageEvent::Type]
         #
-        #   @param usage [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionUsageSnapshot] Point-in-time snapshot of a session's cumulative usage.
+        #   @param usage [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionUsageSnapshot] The session's cumulative usage at the snapshot time.
         #
-        #   @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] A hard spend ceiling. The session stops issuing new model requests once the trac
+        #   @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] The session's configured budget at the snapshot time, or null when the session h
 
         # @see Anthropic::Models::Beta::BetaManagedAgentsSessionUsageEvent#type
         module Type

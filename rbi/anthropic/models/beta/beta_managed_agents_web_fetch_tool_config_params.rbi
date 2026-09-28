@@ -49,7 +49,8 @@ module Anthropic
         sig { returns(T.nilable(Integer)) }
         attr_accessor :max_content_tokens
 
-        # Permission policy for tool execution.
+        # Permission policy for this tool. Controls whether tool calls are auto-approved
+        # or require confirmation.
         sig do
           returns(
             T.nilable(
@@ -117,7 +118,8 @@ module Anthropic
           # Maximum number of tokens of fetched text content to include in context per call.
           # Does not apply to binary content such as PDFs.
           max_content_tokens: nil,
-          # Permission policy for tool execution.
+          # Permission policy for this tool. Controls whether tool calls are auto-approved
+          # or require confirmation.
           permission_policy: nil,
           type: nil,
           # Must be "web_fetch".
@@ -149,7 +151,8 @@ module Anthropic
         def to_hash
         end
 
-        # Permission policy for tool execution.
+        # Permission policy for this tool. Controls whether tool calls are auto-approved
+        # or require confirmation.
         module PermissionPolicy
           extend Anthropic::Internal::Type::Union
 

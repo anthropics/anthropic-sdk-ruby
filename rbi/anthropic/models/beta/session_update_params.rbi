@@ -18,9 +18,9 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :session_id
 
-        # Mid-session agent configuration update. Only `tools` and `mcp_servers` are
-        # updatable. Full replacement: the provided array becomes the new value. To
-        # preserve existing entries, GET the session, modify the array, and POST it back.
+        # Agent configuration update. Only `tools` and `mcp_servers` are updatable
+        # mid-session. Only valid for sessions created from an agent or deployment
+        # reference. The session must not be running.
         sig do
           returns(
             T.nilable(Anthropic::Beta::BetaManagedAgentsSessionAgentUpdate)
@@ -35,8 +35,14 @@ module Anthropic
         end
         attr_writer :agent
 
-        # A hard spend ceiling. The session stops issuing new model requests once the
-        # tracked list cost reaches `max_list_cost`.
+        # Enforced spend ceiling for the session. Set an object to replace the budget of a
+        # session that was created with one, or `null` to remove it; omit to preserve. A
+        # budget cannot be added to a session created without one (rejected with reason
+        # `budget_create_only`), and a removed budget cannot be re-added. Allowed in any
+        # non-terminated status. Lowering `max_list_cost` to at or below the session's
+        # consumed list cost is rejected with reason `budget_not_raised`, and every model
+        # the session can run must have a public list price or the request is rejected
+        # with reason `model_not_budgetable`.
         sig do
           returns(T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit))
         end
@@ -112,12 +118,18 @@ module Anthropic
         end
         def self.new(
           session_id:,
-          # Mid-session agent configuration update. Only `tools` and `mcp_servers` are
-          # updatable. Full replacement: the provided array becomes the new value. To
-          # preserve existing entries, GET the session, modify the array, and POST it back.
+          # Agent configuration update. Only `tools` and `mcp_servers` are updatable
+          # mid-session. Only valid for sessions created from an agent or deployment
+          # reference. The session must not be running.
           agent: nil,
-          # A hard spend ceiling. The session stops issuing new model requests once the
-          # tracked list cost reaches `max_list_cost`.
+          # Enforced spend ceiling for the session. Set an object to replace the budget of a
+          # session that was created with one, or `null` to remove it; omit to preserve. A
+          # budget cannot be added to a session created without one (rejected with reason
+          # `budget_create_only`), and a removed budget cannot be re-added. Allowed in any
+          # non-terminated status. Lowering `max_list_cost` to at or below the session's
+          # consumed list cost is rejected with reason `budget_not_raised`, and every model
+          # the session can run must have a public list price or the request is rejected
+          # with reason `model_not_budgetable`.
           budget: nil,
           # Metadata patch. Set a key to a string to upsert it, or to null to delete it.
           # Omit the field to preserve.

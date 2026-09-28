@@ -17,7 +17,7 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :id
 
-          # A timestamp in RFC 3339 format
+          # Timestamp when the session was deleted.
           sig { returns(Time) }
           attr_accessor :processed_at
 
@@ -41,7 +41,7 @@ module Anthropic
           def self.new(
             # Unique identifier for this event.
             id:,
-            # A timestamp in RFC 3339 format
+            # Timestamp when the session was deleted.
             processed_at:,
             type:
           )

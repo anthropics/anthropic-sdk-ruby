@@ -26,7 +26,8 @@ module Anthropic
   # against the original params (a set field overrides, an explicit `nil`
   # unsets, an absent field keeps the original value) — passing along the
   # refusal's `fallback_credit_token` — until a model accepts or the chain is
-  # exhausted. A message served by a
+  # exhausted. A `between_tools` thinking config is sent to a fallback as
+  # `disabled` unless the entry sets `thinking` itself. A message served by a
   # fallback carries a `fallback` content block prepended at each model
   # boundary; an exhausted chain surfaces the final refusal verbatim.
   #
@@ -39,7 +40,8 @@ module Anthropic
   # model boundary, monotonic block indices, and per-hop `usage.iterations` on
   # the final `message_delta`. Only `model` is honored from each entry on this
   # path: the credit token is redeemable only against the refused request's
-  # body, so the other per-entry overrides would be rejected.
+  # body, so the other per-entry overrides would be rejected. A
+  # `between_tools` thinking config is always sent as `disabled` on this path.
   #
   # Credit tokens are sent in the object form with `mode: :best_effort`, so a
   # failing redemption never rejects the retry — it proceeds at normal price
@@ -69,7 +71,8 @@ module Anthropic
     #   the non-streaming path the remaining keys (`max_tokens:`, `thinking:`,
     #   …) patch the original request body for that hop — a value overrides
     #   the param, an explicit `nil` unsets it, an absent key keeps the
-    #   original value.
+    #   original value (an absent `thinking:` sends `between_tools` as
+    #   `disabled`).
     # @param betas [Array<String>] betas added to the `anthropic-beta` header
     #   of every `/v1/messages` request this middleware handles. Defaults to
     #   `["fallback-credit-2026-07-01"]`; pass `[]` to send none.
@@ -133,7 +136,7 @@ module Anthropic
           # Only `model` is honored on the streaming path so the credit token
           # — redeemable only against the refused request's body — stays valid
           # for the spliced hops.
-          body.merge(model: @fallbacks.fetch(start_index).fetch(:model))
+          degrade_between_tools(body.merge(model: @fallbacks.fetch(start_index).fetch(:model)))
         else
           apply_fallback(body, @fallbacks.fetch(start_index))
         end
@@ -165,11 +168,22 @@ module Anthropic
     # @return [Hash{Symbol=>Object}]
     def apply_fallback(body, entry)
       patched = patch(body, entry)
+      patched = degrade_between_tools(patched) unless entry.key?(:thinking)
       override = entry[:output_config]
       return patched if override.nil?
 
       merged = patch(hash_of(body[:output_config]), hash_of(override))
       merged.empty? ? patched.except(:output_config) : patched.merge(output_config: merged)
+    end
+
+    # The fallback model may not accept `between_tools` thinking, so a hop that
+    # carries it sends `disabled` instead.
+    #
+    # @param body [Hash{Symbol=>Object}]
+    # @return [Hash{Symbol=>Object}]
+    def degrade_between_tools(body)
+      return body unless hash_of(body[:thinking])[:type].to_s == "between_tools"
+      body.merge(thinking: {type: :disabled})
     end
 
     # @param base [Hash{Symbol=>Object}]
@@ -388,7 +402,7 @@ module Anthropic
         model = @fallbacks.fetch(hop).fetch(:model).to_s
         has_next = hop + 1 < @fallbacks.length
 
-        res_b, sent, failed = issue_hop(req, nxt, body, model, token, base, partial)
+        res_b, sent, failed = issue_hop(req, nxt, degrade_between_tools(body), model, token, base, partial)
 
         if failed
           next if has_next

@@ -3,18 +3,20 @@ module Anthropic
     type thinking_config_param =
       Anthropic::ThinkingConfigEnabled
       | Anthropic::ThinkingConfigDisabled
+      | Anthropic::ThinkingConfigBetweenTools
       | Anthropic::ThinkingConfigAdaptive
 
     module ThinkingConfigParam
       extend Anthropic::Internal::Type::Union
 
-      type type_ = :enabled | :disabled | :adaptive
+      type type_ = :enabled | :disabled | :between_tools | :adaptive
 
       module Type
         extend Anthropic::Internal::Type::Enum
 
         ENABLED: :enabled
         DISABLED: :disabled
+        BETWEEN_TOOLS: :between_tools
         ADAPTIVE: :adaptive
 
         def self?.values: -> ::Array[Anthropic::Models::ThinkingConfigParam::type_]
@@ -29,6 +31,9 @@ module Anthropic
           ?display_: Anthropic::Models::ThinkingConfigEnabled::display_?
         ) -> Anthropic::ThinkingConfigEnabled
         | (type: :disabled | "disabled") -> Anthropic::ThinkingConfigDisabled
+        | (
+          type: :between_tools | "between_tools"
+        ) -> Anthropic::ThinkingConfigBetweenTools
         | (
           type: :adaptive | "adaptive",
           ?display_: Anthropic::Models::ThinkingConfigAdaptive::display_?

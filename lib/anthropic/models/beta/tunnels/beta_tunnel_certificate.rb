@@ -13,19 +13,21 @@ module Anthropic
           required :id, String
 
           # @!attribute archived_at
-          #   A timestamp in RFC 3339 format
+          #   RFC 3339 datetime string indicating when the certificate was archived. Null if
+          #   it is still in the trusted set.
           #
           #   @return [Time, nil]
           required :archived_at, Time, nil?: true
 
           # @!attribute created_at
-          #   A timestamp in RFC 3339 format
+          #   RFC 3339 datetime string indicating when the certificate was registered.
           #
           #   @return [Time]
           required :created_at, Time
 
           # @!attribute expires_at
-          #   A timestamp in RFC 3339 format
+          #   RFC 3339 datetime string indicating when the certificate expires, or `null` if
+          #   it does not expire.
           #
           #   @return [Time, nil]
           required :expires_at, Time, nil?: true
@@ -50,13 +52,16 @@ module Anthropic
           # @!method initialize(id:, archived_at:, created_at:, expires_at:, fingerprint:, tunnel_id:, type: :tunnel_certificate)
           #   A CA certificate attached to a tunnel.
           #
+          #   Some parameter documentations has been truncated, see
+          #   {Anthropic::Models::Beta::Tunnels::BetaTunnelCertificate} for more details.
+          #
           #   @param id [String] Unique identifier for the certificate, prefixed with `tcrt_`.
           #
-          #   @param archived_at [Time, nil] A timestamp in RFC 3339 format
+          #   @param archived_at [Time, nil] RFC 3339 datetime string indicating when the certificate was archived. Null if i
           #
-          #   @param created_at [Time] A timestamp in RFC 3339 format
+          #   @param created_at [Time] RFC 3339 datetime string indicating when the certificate was registered.
           #
-          #   @param expires_at [Time, nil] A timestamp in RFC 3339 format
+          #   @param expires_at [Time, nil] RFC 3339 datetime string indicating when the certificate expires, or `null` if i
           #
           #   @param fingerprint [String] Lowercase hex SHA-256 fingerprint of the certificate's DER encoding.
           #

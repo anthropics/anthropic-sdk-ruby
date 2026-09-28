@@ -15,11 +15,12 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :id
 
-        # A timestamp in RFC 3339 format
+        # RFC 3339 datetime string indicating when the tunnel was archived. Null if it is
+        # not archived.
         sig { returns(T.nilable(Time)) }
         attr_accessor :archived_at
 
-        # A timestamp in RFC 3339 format
+        # RFC 3339 datetime string indicating when the tunnel was created.
         sig { returns(Time) }
         attr_accessor :created_at
 
@@ -50,9 +51,10 @@ module Anthropic
         def self.new(
           # Unique identifier for the tunnel, prefixed with `tnl_`.
           id:,
-          # A timestamp in RFC 3339 format
+          # RFC 3339 datetime string indicating when the tunnel was archived. Null if it is
+          # not archived.
           archived_at:,
-          # A timestamp in RFC 3339 format
+          # RFC 3339 datetime string indicating when the tunnel was created.
           created_at:,
           # Human-readable name for the tunnel (1-255 characters). Null if unset.
           display_name:,

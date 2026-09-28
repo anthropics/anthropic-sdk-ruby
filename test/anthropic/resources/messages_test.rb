@@ -20,6 +20,7 @@ class Anthropic::Test::Resources::MessagesTest < Anthropic::Test::ResourceTest
         id: String,
         container: Anthropic::Container | nil,
         content: ^(Anthropic::Internal::Type::ArrayOf[union: Anthropic::ContentBlock]),
+        diagnostics: Anthropic::Diagnostics | nil,
         model: Anthropic::Model,
         role: Symbol,
         stop_details: Anthropic::RefusalStopDetails | nil,

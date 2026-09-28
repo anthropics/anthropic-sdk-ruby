@@ -22,7 +22,7 @@ module Anthropic
           sig { params(active_seconds: Float).void }
           attr_writer :active_seconds
 
-          # Prompt-cache creation token usage broken down by cache lifetime.
+          # Tokens used to create prompt cache entries, broken down by cache TTL.
           sig do
             returns(
               T.nilable(Anthropic::Beta::BetaManagedAgentsCacheCreationUsage)
@@ -52,7 +52,12 @@ module Anthropic
           sig { params(input_tokens: Integer).void }
           attr_writer :input_tokens
 
-          # A monetary amount in a specific currency.
+          # Cumulative list cost of this thread across all turns, priced at public list
+          # rates. Absent until cost tracking is available for the thread. Each figure is
+          # rounded to the nearest cent independently and the session's aggregate
+          # `usage.list_cost` additionally includes session runtime, so per-thread costs do
+          # not sum exactly to the session figure; the session figure is authoritative and
+          # is what a budget is enforced against.
           sig { returns(T.nilable(Anthropic::BetaMonetaryAmount)) }
           attr_reader :list_cost
 
@@ -70,7 +75,8 @@ module Anthropic
           sig { params(output_tokens: Integer).void }
           attr_writer :output_tokens
 
-          # Cumulative count of server-executed tool invocations, broken down by tool.
+          # Cumulative server-executed tool usage across all turns of this thread. Absent
+          # until server-tool tracking is available for the thread.
           sig do
             returns(
               T.nilable(Anthropic::Beta::BetaManagedAgentsServerToolUsage)
@@ -109,17 +115,23 @@ module Anthropic
             # `stats.active_seconds`; surfaced here so a thread's usage carries every quantity
             # its cost is priced on.
             active_seconds: nil,
-            # Prompt-cache creation token usage broken down by cache lifetime.
+            # Tokens used to create prompt cache entries, broken down by cache TTL.
             cache_creation: nil,
             # Total tokens read from prompt cache.
             cache_read_input_tokens: nil,
             # Total input tokens consumed across all turns.
             input_tokens: nil,
-            # A monetary amount in a specific currency.
+            # Cumulative list cost of this thread across all turns, priced at public list
+            # rates. Absent until cost tracking is available for the thread. Each figure is
+            # rounded to the nearest cent independently and the session's aggregate
+            # `usage.list_cost` additionally includes session runtime, so per-thread costs do
+            # not sum exactly to the session figure; the session figure is authoritative and
+            # is what a budget is enforced against.
             list_cost: nil,
             # Total output tokens generated across all turns.
             output_tokens: nil,
-            # Cumulative count of server-executed tool invocations, broken down by tool.
+            # Cumulative server-executed tool usage across all turns of this thread. Absent
+            # until server-tool tracking is available for the thread.
             server_tool_use: nil
           )
           end

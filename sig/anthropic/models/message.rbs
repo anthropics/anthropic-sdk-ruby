@@ -5,6 +5,7 @@ module Anthropic
         id: String,
         container: Anthropic::Container?,
         content: ::Array[Anthropic::Models::content_block],
+        diagnostics: Anthropic::Diagnostics?,
         model: Anthropic::Models::model,
         role: :assistant,
         stop_details: Anthropic::RefusalStopDetails?,
@@ -20,6 +21,8 @@ module Anthropic
       attr_accessor container: Anthropic::Container?
 
       attr_accessor content: ::Array[Anthropic::Models::content_block]
+
+      attr_accessor diagnostics: Anthropic::Diagnostics?
 
       attr_accessor model: Anthropic::Models::model
 
@@ -39,6 +42,7 @@ module Anthropic
         id: String,
         container: Anthropic::Container?,
         content: ::Array[Anthropic::Models::content_block],
+        diagnostics: Anthropic::Diagnostics?,
         model: Anthropic::Models::model,
         stop_details: Anthropic::RefusalStopDetails?,
         stop_reason: Anthropic::Models::stop_reason?,
@@ -52,6 +56,7 @@ module Anthropic
         id: String,
         container: Anthropic::Container?,
         content: ::Array[Anthropic::Models::content_block],
+        diagnostics: Anthropic::Diagnostics?,
         model: Anthropic::Models::model,
         role: :assistant,
         stop_details: Anthropic::RefusalStopDetails?,

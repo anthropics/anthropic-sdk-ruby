@@ -24,7 +24,7 @@ module Anthropic
           required :name, String
 
           # @!attribute processed_at
-          #   A timestamp in RFC 3339 format
+          #   Timestamp when this tool use was processed.
           #
           #   @return [Time]
           required :processed_at, Time
@@ -58,7 +58,7 @@ module Anthropic
           #
           #   @param name [String] Name of the custom tool being called.
           #
-          #   @param processed_at [Time] A timestamp in RFC 3339 format
+          #   @param processed_at [Time] Timestamp when this tool use was processed.
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent::Type]
           #

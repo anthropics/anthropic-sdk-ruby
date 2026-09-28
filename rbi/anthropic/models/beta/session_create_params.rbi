@@ -32,8 +32,10 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :environment_id
 
-        # A hard spend ceiling. The session stops issuing new model requests once the
-        # tracked list cost reaches `max_list_cost`.
+        # Enforced spend ceiling for the session. Omit to create an uncapped session.
+        # Every model the session can run — the agent's model and each callable agent's
+        # model — must have a public list price, or the request is rejected with reason
+        # `model_not_budgetable`.
         sig do
           returns(T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit))
         end
@@ -192,8 +194,10 @@ module Anthropic
           agent:,
           # ID of the `environment` defining the container configuration for this session.
           environment_id:,
-          # A hard spend ceiling. The session stops issuing new model requests once the
-          # tracked list cost reaches `max_list_cost`.
+          # Enforced spend ceiling for the session. Omit to create an uncapped session.
+          # Every model the session can run — the agent's model and each callable agent's
+          # model — must have a public list price, or the request is rejected with reason
+          # `model_not_budgetable`.
           budget: nil,
           # Initial events to send to the `session` at creation, processed in order.
           # Supports `user.message` and `user.define_outcome` events. Maximum 50 events.
@@ -371,7 +375,7 @@ module Anthropic
             content: nil,
             # What the agent should produce. This is the task specification.
             description: nil,
-            # Rubric for grading the quality of an outcome.
+            # How to grade the outcome. Text or file reference.
             rubric: nil,
             # Eval→revision cycles before giving up. Default 3, max 20.
             max_iterations: nil
@@ -480,7 +484,8 @@ module Anthropic
             # The memory store ID (memstore\_...). Must belong to the caller's organization
             # and workspace.
             memory_store_id: nil,
-            # Access mode for an attached memory store.
+            # Access mode for the mounted store. Defaults to read_write. read_only mounts the
+            # store as a read-only filesystem.
             access: nil,
             # Per-attachment guidance for the agent on how to use this store. Rendered into
             # the memory section of the system prompt. Max 4096 chars.

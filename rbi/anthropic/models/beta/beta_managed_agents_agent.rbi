@@ -17,7 +17,7 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :id
 
-        # A timestamp in RFC 3339 format
+        # When the agent was archived. Null if not archived.
         sig { returns(T.nilable(Time)) }
         attr_accessor :archived_at
 
@@ -49,7 +49,7 @@ module Anthropic
         end
         attr_writer :model
 
-        # Resolved coordinator topology with a concrete agent roster.
+        # Multiagent orchestration configuration. Null when the agent is single-threaded.
         sig { returns(T.nilable(Anthropic::Beta::BetaManagedAgentsMultiagent)) }
         attr_reader :multiagent
 
@@ -134,7 +134,7 @@ module Anthropic
         end
         def self.new(
           id:,
-          # A timestamp in RFC 3339 format
+          # When the agent was archived. Null if not archived.
           archived_at:,
           # A timestamp in RFC 3339 format
           created_at:,
@@ -143,7 +143,7 @@ module Anthropic
           metadata:,
           # Model identifier and configuration.
           model:,
-          # Resolved coordinator topology with a concrete agent roster.
+          # Multiagent orchestration configuration. Null when the agent is single-threaded.
           multiagent:,
           name:,
           skills:,

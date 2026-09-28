@@ -9,6 +9,8 @@ module Anthropic
     module Model
       extend Anthropic::Internal::Type::Union
 
+      variant const: -> { Anthropic::Models::Model::CLAUDE_SONNET_5_5 }
+
       variant const: -> { Anthropic::Models::Model::CLAUDE_FABLE_5_1 }
 
       variant const: -> { Anthropic::Models::Model::CLAUDE_OPUS_5_5 }
@@ -56,6 +58,9 @@ module Anthropic
 
       # @!group
 
+      # Efficient model for coding and agents
+      CLAUDE_SONNET_5_5 = :"claude-sonnet-5-5"
+
       # Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
       CLAUDE_FABLE_5_1 = :"claude-fable-5-1"
 
@@ -65,7 +70,7 @@ module Anthropic
       # Our most capable model for cybersecurity and biology research, available through trusted access programs
       CLAUDE_MYTHOS_5_1 = :"claude-mythos-5-1"
 
-      # High-performance model for coding and agents
+      # Efficient model for coding and agents
       CLAUDE_SONNET_5 = :"claude-sonnet-5"
 
       # Next generation of intelligence for the hardest knowledge work and coding problems

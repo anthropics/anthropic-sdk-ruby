@@ -24,7 +24,8 @@ module Anthropic
         sig { returns(T.nilable(T::Boolean)) }
         attr_accessor :enabled
 
-        # Permission policy for tool execution.
+        # Permission policy for this tool. Controls whether tool calls are auto-approved
+        # or require confirmation.
         sig do
           returns(
             T.nilable(
@@ -76,7 +77,8 @@ module Anthropic
           # Whether this tool is enabled and available to Claude. Overrides the
           # default_config setting.
           enabled: nil,
-          # Permission policy for tool execution.
+          # Permission policy for this tool. Controls whether tool calls are auto-approved
+          # or require confirmation.
           permission_policy: nil,
           type: nil,
           # Must be "edit".
@@ -105,7 +107,8 @@ module Anthropic
         def to_hash
         end
 
-        # Permission policy for tool execution.
+        # Permission policy for this tool. Controls whether tool calls are auto-approved
+        # or require confirmation.
         module PermissionPolicy
           extend Anthropic::Internal::Type::Union
 

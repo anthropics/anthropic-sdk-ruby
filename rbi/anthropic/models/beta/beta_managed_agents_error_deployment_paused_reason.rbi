@@ -15,7 +15,7 @@ module Anthropic
             )
           end
 
-        # The error that triggered an auto-pause. Matches the failed run's `error.type`.
+        # The failed run's error.
         sig do
           returns(
             Anthropic::Beta::BetaManagedAgentsDeploymentPausedReasonError::Variants
@@ -55,7 +55,7 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
-          # The error that triggered an auto-pause. Matches the failed run's `error.type`.
+          # The failed run's error.
           error:,
           type:
         )

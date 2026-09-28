@@ -96,14 +96,15 @@ module Anthropic
         optional :cache_control, -> { Anthropic::Beta::BetaCacheControlEphemeral }, nil?: true
 
         # @!attribute compaction
-        #   Compact the whole conversation and return a signed `compaction` block, alone,
-        #   that a later request sends back first in `messages`, in place of the messages it
-        #   summarizes. There is no trigger and no pause flag: sending the parameter
-        #   compacts, and nothing is sampled after the block.
+        #   Compaction configuration.
         #
-        #   The summarization prompt is the server's own unless `instructions` are given,
-        #   which then replace it for this request; a value that is empty or only whitespace
-        #   counts as absent.
+        #   When set on `POST /v1/messages`, the request is a compaction request: the
+        #   conversation in `messages` is summarized and the response holds only the
+        #   resulting `compaction` block (`stop_reason` `"compaction"`), which later
+        #   requests send first in `messages` in place of the messages it summarizes.
+        #   `POST /v1/messages/count_tokens` accepts this parameter and ignores it: the
+        #   count it returns is for the conversation in `messages` as sent. Cannot be
+        #   combined with `context_management`.
         #
         #   @return [Anthropic::Models::Beta::BetaCompactionConfig, nil]
         optional :compaction, -> { Anthropic::Beta::BetaCompactionConfig }, nil?: true
@@ -143,9 +144,8 @@ module Anthropic
         optional :output_format, -> { Anthropic::Beta::BetaJSONOutputFormat }, nil?: true
 
         # @!attribute speed
-        #   Inference speed mode. `fast` provides significantly faster output token
-        #   generation at premium pricing. Not all models support `fast`; invalid
-        #   combinations are rejected at create time.
+        #   The inference speed mode for this request. `"fast"` enables high
+        #   output-tokens-per-second inference.
         #
         #   @return [Symbol, Anthropic::Models::Beta::MessageCountTokensParams::Speed, nil]
         optional :speed, enum: -> { Anthropic::Beta::MessageCountTokensParams::Speed }, nil?: true
@@ -171,7 +171,7 @@ module Anthropic
         #   [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking)
         #   for details.
         #
-        #   @return [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigAdaptive, nil]
+        #   @return [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigBetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive, nil]
         optional :thinking, union: -> { Anthropic::Beta::BetaThinkingConfigParam }
 
         # @!attribute tool_choice
@@ -298,7 +298,7 @@ module Anthropic
         #
         #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Top-level cache control automatically applies a cache_control marker to the last
         #
-        #   @param compaction [Anthropic::Models::Beta::BetaCompactionConfig, nil] Compact the whole conversation and return a signed `compaction` block,
+        #   @param compaction [Anthropic::Models::Beta::BetaCompactionConfig, nil] Compaction configuration.
         #
         #   @param context_management [Anthropic::Models::Beta::BetaContextManagementConfig, nil] Context management configuration.
         #
@@ -308,11 +308,11 @@ module Anthropic
         #
         #   @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil] Deprecated: Use `output_config.format` instead. See [structured outputs](https:/
         #
-        #   @param speed [Symbol, Anthropic::Models::Beta::MessageCountTokensParams::Speed, nil] Inference speed mode. `fast` provides significantly faster output token generati
+        #   @param speed [Symbol, Anthropic::Models::Beta::MessageCountTokensParams::Speed, nil] The inference speed mode for this request. `"fast"` enables high output-tokens-p
         #
         #   @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>] System prompt.
         #
-        #   @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigAdaptive] Configuration for enabling Claude's extended thinking.
+        #   @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigBetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive] Configuration for enabling Claude's extended thinking.
         #
         #   @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
         #
@@ -326,9 +326,8 @@ module Anthropic
         #
         #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 
-        # Inference speed mode. `fast` provides significantly faster output token
-        # generation at premium pricing. Not all models support `fast`; invalid
-        # combinations are rejected at create time.
+        # The inference speed mode for this request. `"fast"` enables high
+        # output-tokens-per-second inference.
         module Speed
           extend Anthropic::Internal::Type::Enum
 

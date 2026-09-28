@@ -23,8 +23,11 @@ module Anthropic
         optional :agent, union: -> { Anthropic::Beta::DeploymentUpdateParams::Agent }
 
         # @!attribute budget
-        #   A hard spend ceiling. The session stops issuing new model requests once the
-        #   tracked list cost reaches `max_list_cost`.
+        #   Spend ceiling for future sessions. Full replacement. Omit to preserve; send null
+        #   to clear (sessions created afterwards are uncapped). The deployment agent's
+        #   model must have a public list price, or the request is rejected; a multiagent
+        #   roster is re-validated in full when each fire copies the cap, which fails closed
+        #   the same way.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil]
         optional :budget, -> { Anthropic::Beta::BetaManagedAgentsBudgetLimit }, nil?: true
@@ -75,8 +78,8 @@ module Anthropic
                  nil?: true
 
         # @!attribute schedule
-        #   5-field POSIX cron schedule. Literal wall-clock matching in the configured
-        #   timezone.
+        #   Cron schedule. Full replacement. Omit to preserve; send null to clear (revert to
+        #   manual-only).
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsScheduleParams, nil]
         optional :schedule, -> { Anthropic::Beta::BetaManagedAgentsScheduleParams }, nil?: true
@@ -113,7 +116,7 @@ module Anthropic
         #
         #   @param agent [Anthropic::Models::Beta::BetaManagedAgentsAgentParams, String] Agent to deploy. Accepts the `agent` ID string, which re-pins to the latest vers
         #
-        #   @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] A hard spend ceiling. The session stops issuing new model requests once the trac
+        #   @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] Spend ceiling for future sessions. Full replacement. Omit to preserve; send null
         #
         #   @param description [String, nil] Description. Omit to preserve; send empty string or null to clear.
         #
@@ -127,7 +130,7 @@ module Anthropic
         #
         #   @param resources [Array<Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams, Anthropic::Models::Beta::BetaManagedAgentsFileResourceParams, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam>, nil] Session resources. Full replacement. Omit to preserve; send empty array or null
         #
-        #   @param schedule [Anthropic::Models::Beta::BetaManagedAgentsScheduleParams, nil] 5-field POSIX cron schedule. Literal wall-clock matching in the configured timez
+        #   @param schedule [Anthropic::Models::Beta::BetaManagedAgentsScheduleParams, nil] Cron schedule. Full replacement. Omit to preserve; send null to clear (revert to
         #
         #   @param vault_ids [Array<String>, nil] Vault IDs. Full replacement. Omit to preserve; send empty array or null to clear
         #
@@ -204,7 +207,7 @@ module Anthropic
           #   @option args [String] :memory_store_id The memory store ID (memstore\_...). Must belong to the caller's organization
           #   and
           #
-          #   @option args [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam::Access, nil] :access Access mode for an attached memory store.
+          #   @option args [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam::Access, nil] :access Access mode for the mounted store. Defaults to read_write. read_only mounts the
           #
           #   @option args [String, nil] :instructions Per-attachment guidance for the agent on how to use this store. Rendered into th
           #

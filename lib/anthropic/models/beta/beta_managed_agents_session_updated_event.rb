@@ -11,7 +11,7 @@ module Anthropic
         required :id, String
 
         # @!attribute processed_at
-        #   A timestamp in RFC 3339 format
+        #   Timestamp when the update was applied.
         #
         #   @return [Time]
         required :processed_at, Time
@@ -22,15 +22,17 @@ module Anthropic
         required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsSessionUpdatedEvent::Type }
 
         # @!attribute agent
-        #   Resolved `agent` definition for a `session`. Snapshot of the `agent` at
-        #   `session` creation time.
+        #   The session's effective agent configuration after the update. Present only when
+        #   the update changed `agent` (tools or mcp_servers); when present it is the full
+        #   materialised snapshot, not a diff.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsSessionAgent, nil]
         optional :agent, -> { Anthropic::Beta::BetaManagedAgentsSessionAgent }, nil?: true
 
         # @!attribute budget
-        #   A hard spend ceiling. The session stops issuing new model requests once the
-        #   tracked list cost reaches `max_list_cost`.
+        #   The session's budget after the update: the new budget when set or replaced, or
+        #   null when the update removed it. Present only when the update changed the
+        #   budget.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil]
         optional :budget, -> { Anthropic::Beta::BetaManagedAgentsBudgetLimit }, nil?: true
@@ -59,13 +61,13 @@ module Anthropic
         #
         #   @param id [String] Unique identifier for this event.
         #
-        #   @param processed_at [Time] A timestamp in RFC 3339 format
+        #   @param processed_at [Time] Timestamp when the update was applied.
         #
         #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSessionUpdatedEvent::Type]
         #
-        #   @param agent [Anthropic::Models::Beta::BetaManagedAgentsSessionAgent, nil] Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session
+        #   @param agent [Anthropic::Models::Beta::BetaManagedAgentsSessionAgent, nil] The session's effective agent configuration after the update. Present only when
         #
-        #   @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] A hard spend ceiling. The session stops issuing new model requests once the trac
+        #   @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] The session's budget after the update: the new budget when set or replaced, or n
         #
         #   @param metadata [Hash{Symbol=>String}] The session's full metadata bag after the update. Present when the update set no
         #

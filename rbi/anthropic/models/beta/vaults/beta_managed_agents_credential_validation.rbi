@@ -21,7 +21,7 @@ module Anthropic
           sig { returns(T::Boolean) }
           attr_accessor :has_refresh_token
 
-          # The failing step of an MCP validation probe.
+          # Details of the failing MCP probe step. Null when the probe succeeded.
           sig do
             returns(
               T.nilable(Anthropic::Beta::Vaults::BetaManagedAgentsMCPProbe)
@@ -39,7 +39,8 @@ module Anthropic
           end
           attr_writer :mcp_probe
 
-          # Outcome of a refresh-token exchange attempted during credential validation.
+          # Details of the refresh-token exchange attempted on a 401. Null when no refresh
+          # was attempted.
           sig do
             returns(
               T.nilable(Anthropic::Beta::Vaults::BetaManagedAgentsRefreshObject)
@@ -57,7 +58,7 @@ module Anthropic
           end
           attr_writer :refresh
 
-          # Overall verdict of a credential validation probe.
+          # Overall verdict of the validation probe.
           sig do
             returns(
               Anthropic::Beta::Vaults::BetaManagedAgentsCredentialValidationStatus::TaggedSymbol
@@ -72,7 +73,7 @@ module Anthropic
           end
           attr_accessor :type
 
-          # A timestamp in RFC 3339 format
+          # When the validation probe was performed.
           sig { returns(Time) }
           attr_accessor :validated_at
 
@@ -106,14 +107,15 @@ module Anthropic
             credential_id:,
             # Whether the credential has a refresh token configured.
             has_refresh_token:,
-            # The failing step of an MCP validation probe.
+            # Details of the failing MCP probe step. Null when the probe succeeded.
             mcp_probe:,
-            # Outcome of a refresh-token exchange attempted during credential validation.
+            # Details of the refresh-token exchange attempted on a 401. Null when no refresh
+            # was attempted.
             refresh:,
-            # Overall verdict of a credential validation probe.
+            # Overall verdict of the validation probe.
             status:,
             type:,
-            # A timestamp in RFC 3339 format
+            # When the validation probe was performed.
             validated_at:,
             # Identifier of the vault containing the credential.
             vault_id:

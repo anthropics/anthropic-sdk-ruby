@@ -24,7 +24,7 @@ module Anthropic
                  -> { Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaManagedAgentsMCPToolConfigParams] }
 
         # @!attribute default_config
-        #   Default configuration for all tools from an MCP server.
+        #   Default configuration for all tools from this server.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetDefaultConfigParams, nil]
         optional :default_config,
@@ -43,7 +43,7 @@ module Anthropic
         #
         #   @param configs [Array<Anthropic::Models::Beta::BetaManagedAgentsMCPToolConfigParams>] Per-tool configuration overrides.
         #
-        #   @param default_config [Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetDefaultConfigParams, nil] Default configuration for all tools from an MCP server.
+        #   @param default_config [Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetDefaultConfigParams, nil] Default configuration for all tools from this server.
 
         # @see Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetParams#type
         module Type

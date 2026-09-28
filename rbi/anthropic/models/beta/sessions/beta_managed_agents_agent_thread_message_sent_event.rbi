@@ -27,7 +27,7 @@ module Anthropic
           end
           attr_accessor :content
 
-          # A timestamp in RFC 3339 format
+          # Timestamp when the message was sent.
           sig { returns(Time) }
           attr_accessor :processed_at
 
@@ -73,7 +73,7 @@ module Anthropic
             id:,
             # Message content blocks.
             content:,
-            # A timestamp in RFC 3339 format
+            # Timestamp when the message was sent.
             processed_at:,
             # Public `sthr_` ID of the thread the message was sent to.
             to_session_thread_id:,
@@ -202,7 +202,7 @@ module Anthropic
               type:,
               # The text content.
               text: nil,
-              # Union type for image source variants.
+              # The source of the image data.
               source: nil,
               # Additional context about the document for the model.
               context: nil,

@@ -4,11 +4,9 @@ module Anthropic
   module Models
     module Beta
       module MemoryStores
-        # Identifies who performed a write or redact operation. Captured at write time on
-        # the `memory_version` row. The API key that created a session is not recorded on
-        # agent writes; attribution answers who made the write, not who is ultimately
-        # responsible. Look up session provenance separately via the
-        # [Sessions API](/en/api/beta/sessions/retrieve).
+        # Identifies who performed an operation. Recorded when the operation happens and
+        # not updated afterwards, so the ID may refer to a user, service account, API key,
+        # or session that has since been deleted.
         module BetaManagedAgentsActor
           extend Anthropic::Internal::Type::Union
 
@@ -92,16 +90,15 @@ module Anthropic
           end
           def self.new(
             type:,
-            # ID of the session that performed the write (a `sesn_...` value). Look up the
-            # session via [Retrieve a session](/en/api/beta/sessions/retrieve) for further
-            # provenance.
+            # ID of the session (a `sesn_...` value). Look up the session via
+            # [Retrieve a session](/en/api/beta/sessions/retrieve) for further provenance.
             session_id: nil,
-            # ID of the API key that performed the write. This identifies the key, not the
+            # ID of the API key (an `apikey_...` value). This identifies the key, not the
             # secret.
             api_key_id: nil,
-            # ID of the user who performed the write (a `user_...` value).
+            # ID of the user (a `user_...` value).
             user_id: nil,
-            # ID of the service account that performed the write (a `svac_...` value).
+            # ID of the service account (a `svac_...` value).
             service_account_id: nil
           )
           end

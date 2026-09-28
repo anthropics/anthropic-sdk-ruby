@@ -72,8 +72,8 @@ module Anthropic
         end
         attr_writer :model
 
-        # A coordinator topology: the session's primary thread orchestrates work by
-        # spawning session threads, each running an agent drawn from the `agents` roster.
+        # Multiagent orchestration configuration. Full replacement. Omit to preserve; send
+        # null to clear.
         sig do
           returns(T.nilable(Anthropic::Beta::BetaManagedAgentsMultiagentParams))
         end
@@ -240,8 +240,8 @@ module Anthropic
           # e.g. `claude-opus-5`, or a `model_config` object for additional configuration
           # control. Omit to preserve. Cannot be cleared.
           model: nil,
-          # A coordinator topology: the session's primary thread orchestrates work by
-          # spawning session threads, each running an agent drawn from the `agents` roster.
+          # Multiagent orchestration configuration. Full replacement. Omit to preserve; send
+          # null to clear.
           multiagent: nil,
           # Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
           name: nil,
@@ -445,7 +445,7 @@ module Anthropic
             type:,
             # Per-tool configuration overrides.
             configs: nil,
-            # Default configuration for all tools in a toolset.
+            # Default configuration applied to all tools in this set.
             default_config: nil,
             # Name of the MCP server. Must match a server name from the mcp_servers array.
             # 1-255 characters.
@@ -453,7 +453,7 @@ module Anthropic
             # Description of what the tool does, shown to the agent to help it decide when to
             # use the tool.
             description: nil,
-            # JSON Schema for custom tool input parameters.
+            # JSON Schema defining the expected input parameters for the tool.
             input_schema: nil,
             # Unique name for the tool. 1-128 characters; letters, digits, underscores, and
             # hyphens.

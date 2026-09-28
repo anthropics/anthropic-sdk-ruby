@@ -25,7 +25,8 @@ module Anthropic
           end
           attr_accessor :type
 
-          # Access mode for an attached memory store.
+          # Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts
+          # the store as a read-only filesystem.
           sig do
             returns(
               T.nilable(
@@ -79,7 +80,8 @@ module Anthropic
             # and workspace.
             memory_store_id:,
             type:,
-            # Access mode for an attached memory store.
+            # Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts
+            # the store as a read-only filesystem.
             access: nil,
             # Description of the memory store, snapshotted at attach time. Rendered into the
             # agent's system prompt. Empty string when the store has no description.
@@ -145,7 +147,8 @@ module Anthropic
             end
           end
 
-          # Access mode for an attached memory store.
+          # Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts
+          # the store as a read-only filesystem.
           module Access
             extend Anthropic::Internal::Type::Enum
 

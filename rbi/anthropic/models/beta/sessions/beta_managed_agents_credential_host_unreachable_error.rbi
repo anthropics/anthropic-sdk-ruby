@@ -21,7 +21,7 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :message
 
-          # What the client should do next in response to this error.
+          # What the client should do next.
           sig do
             returns(
               Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError::RetryStatus::Variants
@@ -62,7 +62,7 @@ module Anthropic
             credential_id:,
             # Human-readable error description.
             message:,
-            # What the client should do next in response to this error.
+            # What the client should do next.
             retry_status:,
             type:,
             # ID of the vault containing the affected credential.
@@ -86,7 +86,7 @@ module Anthropic
           def to_hash
           end
 
-          # What the client should do next in response to this error.
+          # What the client should do next.
           module RetryStatus
             extend Anthropic::Internal::Type::Union
 

@@ -38,8 +38,8 @@ module Anthropic
         end
         attr_writer :model
 
-        # Resolved coordinator topology with full agent definitions for each roster
-        # member.
+        # Resolved multiagent orchestration configuration. Null when the agent is
+        # single-threaded.
         sig do
           returns(
             T.nilable(
@@ -136,8 +136,8 @@ module Anthropic
           mcp_servers:,
           # Model identifier and configuration.
           model:,
-          # Resolved coordinator topology with full agent definitions for each roster
-          # member.
+          # Resolved multiagent orchestration configuration. Null when the agent is
+          # single-threaded.
           multiagent:,
           name:,
           skills:,

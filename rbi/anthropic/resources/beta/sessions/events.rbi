@@ -17,7 +17,10 @@ module Anthropic
               order:
                 Anthropic::Beta::Sessions::EventListParams::Order::OrSymbol,
               page: String,
-              types: T::Array[String],
+              types:
+                T::Array[
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionEventType::OrSymbol
+                ],
               betas:
                 T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               workspace_id: String,

@@ -14,7 +14,9 @@ module Anthropic
             )
           end
 
-        # The policy category that triggered a refusal.
+        # The policy category that triggered the refusal.
+        #
+        # `null` when the refusal doesn't map to a named category.
         sig do
           returns(
             T.nilable(
@@ -99,7 +101,9 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
-          # The policy category that triggered a refusal.
+          # The policy category that triggered the refusal.
+          #
+          # `null` when the refusal doesn't map to a named category.
           category:,
           # Human-readable explanation of the refusal.
           #
@@ -172,7 +176,9 @@ module Anthropic
         def to_hash
         end
 
-        # The policy category that triggered a refusal.
+        # The policy category that triggered the refusal.
+        #
+        # `null` when the refusal doesn't map to a named category.
         module Category
           extend Anthropic::Internal::Type::Enum
 

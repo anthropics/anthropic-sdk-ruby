@@ -106,7 +106,7 @@ module Anthropic
           content: nil,
           # What the agent should produce. This is the task specification.
           description: nil,
-          # Rubric for grading the quality of an outcome.
+          # How to grade the outcome. Text or file reference.
           rubric: nil,
           # Eval→revision cycles before giving up. Default 3, max 20.
           max_iterations: nil

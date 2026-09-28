@@ -12,13 +12,14 @@ module Anthropic
         required :id, String
 
         # @!attribute agent
-        #   A resolved agent reference with a concrete version.
+        #   Snapshot of the agent at fire time. Always fully resolved — deployments pin
+        #   agent + version.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsAgentReference]
         required :agent, -> { Anthropic::Beta::BetaManagedAgentsAgentReference }
 
         # @!attribute created_at
-        #   A timestamp in RFC 3339 format
+        #   Time this run record was persisted.
         #
         #   @return [Time]
         required :created_at, Time
@@ -30,8 +31,8 @@ module Anthropic
         required :deployment_id, String
 
         # @!attribute error
-        #   Why the run failed to create a session. The type identifies the failure; message
-        #   is human-readable detail.
+        #   Populated on creation failure. Null on success. Exactly one of `session_id` or
+        #   `error` is non-null.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsEnvironmentArchivedRunError, Anthropic::Models::Beta::BetaManagedAgentsAgentArchivedRunError, Anthropic::Models::Beta::BetaManagedAgentsEnvironmentNotFoundRunError, Anthropic::Models::Beta::BetaManagedAgentsVaultNotFoundRunError, Anthropic::Models::Beta::BetaManagedAgentsVaultArchivedRunError, Anthropic::Models::Beta::BetaManagedAgentsFileNotFoundRunError, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreArchivedRunError, Anthropic::Models::Beta::BetaManagedAgentsSkillNotFoundRunError, Anthropic::Models::Beta::BetaManagedAgentsSessionResourceNotFoundRunError, Anthropic::Models::Beta::BetaManagedAgentsWorkspaceArchivedRunError, Anthropic::Models::Beta::BetaManagedAgentsOrganizationDisabledRunError, Anthropic::Models::Beta::BetaManagedAgentsSessionRateLimitedRunError, Anthropic::Models::Beta::BetaManagedAgentsSessionCreationRejectedRunError, Anthropic::Models::Beta::BetaManagedAgentsUnknownRunError, Anthropic::Models::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedRunError, Anthropic::Models::Beta::BetaManagedAgentsMCPEgressBlockedRunError, nil]
         required :error, union: -> { Anthropic::Beta::BetaManagedAgentsDeploymentRun::Error }, nil?: true
@@ -44,7 +45,7 @@ module Anthropic
         required :session_id, String, nil?: true
 
         # @!attribute trigger_context
-        #   Describes what triggered a deployment run, with trigger-specific metadata.
+        #   What triggered this run and trigger-specific metadata.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsScheduleTriggerContext, Anthropic::Models::Beta::BetaManagedAgentsManualTriggerContext]
         required :trigger_context, union: -> { Anthropic::Beta::BetaManagedAgentsTriggerContext }
@@ -63,22 +64,22 @@ module Anthropic
         #
         #   @param id [String] Unique identifier for this run (`drun_...`).
         #
-        #   @param agent [Anthropic::Models::Beta::BetaManagedAgentsAgentReference] A resolved agent reference with a concrete version.
+        #   @param agent [Anthropic::Models::Beta::BetaManagedAgentsAgentReference] Snapshot of the agent at fire time. Always fully resolved — deployments pin agen
         #
-        #   @param created_at [Time] A timestamp in RFC 3339 format
+        #   @param created_at [Time] Time this run record was persisted.
         #
         #   @param deployment_id [String] ID of the deployment that produced this run.
         #
-        #   @param error [Anthropic::Models::Beta::BetaManagedAgentsEnvironmentArchivedRunError, Anthropic::Models::Beta::BetaManagedAgentsAgentArchivedRunError, Anthropic::Models::Beta::BetaManagedAgentsEnvironmentNotFoundRunError, Anthropic::Models::Beta::BetaManagedAgentsVaultNotFoundRunError, Anthropic::Models::Beta::BetaManagedAgentsVaultArchivedRunError, Anthropic::Models::Beta::BetaManagedAgentsFileNotFoundRunError, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreArchivedRunError, Anthropic::Models::Beta::BetaManagedAgentsSkillNotFoundRunError, Anthropic::Models::Beta::BetaManagedAgentsSessionResourceNotFoundRunError, Anthropic::Models::Beta::BetaManagedAgentsWorkspaceArchivedRunError, Anthropic::Models::Beta::BetaManagedAgentsOrganizationDisabledRunError, Anthropic::Models::Beta::BetaManagedAgentsSessionRateLimitedRunError, Anthropic::Models::Beta::BetaManagedAgentsSessionCreationRejectedRunError, Anthropic::Models::Beta::BetaManagedAgentsUnknownRunError, Anthropic::Models::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedRunError, Anthropic::Models::Beta::BetaManagedAgentsMCPEgressBlockedRunError, nil] Why the run failed to create a session. The type identifies the failure; message
+        #   @param error [Anthropic::Models::Beta::BetaManagedAgentsEnvironmentArchivedRunError, Anthropic::Models::Beta::BetaManagedAgentsAgentArchivedRunError, Anthropic::Models::Beta::BetaManagedAgentsEnvironmentNotFoundRunError, Anthropic::Models::Beta::BetaManagedAgentsVaultNotFoundRunError, Anthropic::Models::Beta::BetaManagedAgentsVaultArchivedRunError, Anthropic::Models::Beta::BetaManagedAgentsFileNotFoundRunError, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreArchivedRunError, Anthropic::Models::Beta::BetaManagedAgentsSkillNotFoundRunError, Anthropic::Models::Beta::BetaManagedAgentsSessionResourceNotFoundRunError, Anthropic::Models::Beta::BetaManagedAgentsWorkspaceArchivedRunError, Anthropic::Models::Beta::BetaManagedAgentsOrganizationDisabledRunError, Anthropic::Models::Beta::BetaManagedAgentsSessionRateLimitedRunError, Anthropic::Models::Beta::BetaManagedAgentsSessionCreationRejectedRunError, Anthropic::Models::Beta::BetaManagedAgentsUnknownRunError, Anthropic::Models::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedRunError, Anthropic::Models::Beta::BetaManagedAgentsMCPEgressBlockedRunError, nil] Populated on creation failure. Null on success. Exactly one of `session_id` or `
         #
         #   @param session_id [String, nil] Populated on success. Null on creation failure. Exactly one of `session_id` or `
         #
-        #   @param trigger_context [Anthropic::Models::Beta::BetaManagedAgentsScheduleTriggerContext, Anthropic::Models::Beta::BetaManagedAgentsManualTriggerContext] Describes what triggered a deployment run, with trigger-specific metadata.
+        #   @param trigger_context [Anthropic::Models::Beta::BetaManagedAgentsScheduleTriggerContext, Anthropic::Models::Beta::BetaManagedAgentsManualTriggerContext] What triggered this run and trigger-specific metadata.
         #
         #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeploymentRun::Type]
 
-        # Why the run failed to create a session. The type identifies the failure; message
-        # is human-readable detail.
+        # Populated on creation failure. Null on success. Exactly one of `session_id` or
+        # `error` is non-null.
         #
         # @see Anthropic::Models::Beta::BetaManagedAgentsDeploymentRun#error
         module Error

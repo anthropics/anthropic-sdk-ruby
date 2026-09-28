@@ -19,7 +19,8 @@ module Anthropic
         required :type, enum: -> { Anthropic::Beta::BetaDreamOutput::Type }
 
         # @!method initialize(memory_store_id:, type:)
-        #   The memory store that holds a dream's result, as an entry in `outputs`.
+        #   An entry in a dream's `outputs` that references the memory store holding its
+        #   result.
         #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaDreamOutput} for more details.

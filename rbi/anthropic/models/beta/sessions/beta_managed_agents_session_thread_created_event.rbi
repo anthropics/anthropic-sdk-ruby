@@ -21,7 +21,7 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :agent_name
 
-          # A timestamp in RFC 3339 format
+          # Timestamp when the thread was created.
           sig { returns(Time) }
           attr_accessor :processed_at
 
@@ -53,7 +53,7 @@ module Anthropic
             id:,
             # Name of the callable agent the thread runs.
             agent_name:,
-            # A timestamp in RFC 3339 format
+            # Timestamp when the thread was created.
             processed_at:,
             # Public `sthr_` ID of the newly created thread.
             session_thread_id:,

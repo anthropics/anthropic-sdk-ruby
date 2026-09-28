@@ -24,7 +24,7 @@ module Anthropic
         #
         # @param metadata [Hash{Symbol=>String}] Body param: Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars,
         #
-        # @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams, nil] Body param: A coordinator topology: the session's primary thread orchestrates wo
+        # @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams, nil] Body param: Multiagent orchestration configuration. Currently supports the `coor
         #
         # @param skills [Array<Anthropic::Models::Beta::BetaManagedAgentsAnthropicSkillParams, Anthropic::Models::Beta::BetaManagedAgentsCustomSkillParams>] Body param: Skills available to the agent.
         #
@@ -108,7 +108,7 @@ module Anthropic
         #
         # @param model [Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams, Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel] Body param: Model identifier. Accepts the [model string](https://platform.claude
         #
-        # @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams, nil] Body param: A coordinator topology: the session's primary thread orchestrates wo
+        # @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams, nil] Body param: Multiagent orchestration configuration. Full replacement. Omit to pr
         #
         # @param name [String] Body param: Human-readable name. Must be non-empty. Omit to preserve. Cannot be
         #

@@ -397,13 +397,13 @@ module Anthropic
             id: nil,
             # Array of content blocks comprising the user message.
             content: nil,
-            # A timestamp in RFC 3339 format
+            # Timestamp when the agent finished processing this message.
             processed_at: nil,
             # If absent, interrupts every non-archived thread in a multiagent session (or the
             # primary alone in a single-agent session). If present, interrupts only the named
             # thread.
             session_thread_id: nil,
-            # UserToolConfirmationResult enum
+            # The confirmation result: 'allow' or 'deny'.
             result: nil,
             # The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result
             # corresponds to, which can be found in the last `session.status_idle`
@@ -426,11 +426,15 @@ module Anthropic
             name: nil,
             # Name of the MCP server providing the tool.
             mcp_server_name: nil,
-            # AgentEvaluatedPermission enum
+            # The evaluated permission policy for this tool invocation.
             evaluated_permission: nil,
-            # Names the resolved permission_policy that produced evaluated_permission, and
-            # under auto carries the judgement. Open union: clients must tolerate unknown
-            # variants.
+            # Which resolved permission_policy produced evaluated_permission: always_allow,
+            # always_ask, or auto (with the server's per-invocation judgement). Absent only
+            # when the server refused the call before any policy applied (for example, the
+            # named tool is not enabled in the session); such a refusal has
+            # evaluated_permission deny. An event recorded before this field existed reads as
+            # the arm its evaluated_permission implies (always_allow for allow, always_ask for
+            # ask).
             evaluation: nil,
             # The id of the `agent.mcp_tool_use` event this result corresponds to.
             mcp_tool_use_id: nil,
@@ -458,23 +462,27 @@ module Anthropic
             explanation: nil,
             # The id of the corresponding `span.outcome_evaluation_start` event.
             outcome_evaluation_start_id: nil,
-            # Token usage for a single model request.
+            # Aggregate token usage for this evaluation cycle. Sums across all grader model
+            # requests within the cycle.
             usage: nil,
             # The id of the corresponding `span.model_request_start` event.
             model_request_start_id: nil,
-            # Token usage for a single model request.
+            # Token usage for this model request.
             model_usage: nil,
             # What the agent should produce. Copied from the input event.
             description: nil,
             # Evaluate-then-revise cycles before giving up. Default 3, max 20.
             max_iterations: nil,
-            # Rubric for grading the quality of an outcome.
+            # How to grade the outcome. File rubrics are currently resolved to their text
+            # content; clients should handle both variants.
             rubric: nil,
-            # Resolved `agent` definition for a `session`. Snapshot of the `agent` at
-            # `session` creation time.
+            # The session's effective agent configuration after the update. Present only when
+            # the update changed `agent` (tools or mcp_servers); when present it is the full
+            # materialised snapshot, not a diff.
             agent: nil,
-            # A hard spend ceiling. The session stops issuing new model requests once the
-            # tracked list cost reaches `max_list_cost`.
+            # The session's budget after the update: the new budget when set or replaced, or
+            # null when the update removed it. Present only when the update changed the
+            # budget.
             budget: nil,
             # The session's full metadata bag after the update. Present when the update set
             # non-empty metadata; absent when metadata was unchanged or cleared to empty.

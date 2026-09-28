@@ -181,6 +181,20 @@ module Anthropic
 
   CacheCreation = Anthropic::Models::CacheCreation
 
+  CacheMissMessagesChanged = Anthropic::Models::CacheMissMessagesChanged
+
+  CacheMissModelChanged = Anthropic::Models::CacheMissModelChanged
+
+  CacheMissPreviousMessageNotFound = Anthropic::Models::CacheMissPreviousMessageNotFound
+
+  CacheMissReason = Anthropic::Models::CacheMissReason
+
+  CacheMissSystemChanged = Anthropic::Models::CacheMissSystemChanged
+
+  CacheMissToolsChanged = Anthropic::Models::CacheMissToolsChanged
+
+  CacheMissUnavailable = Anthropic::Models::CacheMissUnavailable
+
   CapabilitySupport = Anthropic::Models::CapabilitySupport
 
   CitationCharLocation = Anthropic::Models::CitationCharLocation
@@ -304,6 +318,10 @@ module Anthropic
   DeletedFile = Anthropic::Models::DeletedFile
 
   DeletedSkill = Anthropic::Models::DeletedSkill
+
+  Diagnostics = Anthropic::Models::Diagnostics
+
+  DiagnosticsParam = Anthropic::Models::DiagnosticsParam
 
   DirectCaller = Anthropic::Models::DirectCaller
 
@@ -497,6 +515,8 @@ module Anthropic
   ThinkingCapability = Anthropic::Models::ThinkingCapability
 
   ThinkingConfigAdaptive = Anthropic::Models::ThinkingConfigAdaptive
+
+  ThinkingConfigBetweenTools = Anthropic::Models::ThinkingConfigBetweenTools
 
   ThinkingConfigDisabled = Anthropic::Models::ThinkingConfigDisabled
 

@@ -23,7 +23,7 @@ module Anthropic
           optional :expires_at, Time, nil?: true
 
           # @!attribute refresh
-          #   Parameters for updating OAuth refresh token configuration.
+          #   Updated refresh token configuration.
           #
           #   @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshUpdateParams, nil]
           optional :refresh,
@@ -40,7 +40,7 @@ module Anthropic
           #
           #   @param expires_at [Time, nil] A timestamp in RFC 3339 format
           #
-          #   @param refresh [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshUpdateParams, nil] Parameters for updating OAuth refresh token configuration.
+          #   @param refresh [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshUpdateParams, nil] Updated refresh token configuration.
 
           # @see Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams#type
           module Type

@@ -12,7 +12,7 @@ environment = client.beta.environments.create(name: "streaming-deltas-example")
 puts "Created environment: #{environment.id}"
 
 # Create an agent
-agent = client.beta.agents.create(name: "streaming-deltas-example", model: "claude-sonnet-5")
+agent = client.beta.agents.create(name: "streaming-deltas-example", model: "claude-sonnet-5-5")
 puts "Created agent: #{agent.id}"
 
 # Create a session

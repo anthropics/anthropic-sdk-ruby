@@ -360,7 +360,7 @@ class Anthropic::Test::UtilFormDataEncodingTest < Minitest::Test
     cases = {
       "abc" => ["", "abc"],
       StringIO.new("abc") => ["", "abc"],
-      fileinput => %w[upload abc],
+      fileinput => ["", "abc"],
       Anthropic::FilePart.new(StringIO.new("abc")) => ["", "abc"],
       file => [file.basename.to_path, /^class Anthropic/],
       # multipart filenames are quoted-strings: spaces stay literal (not %20)...

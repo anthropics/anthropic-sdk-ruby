@@ -34,7 +34,7 @@ module Anthropic
         end
         attr_accessor :type
 
-        # A timestamp in RFC 3339 format
+        # Timestamp when this system message was processed.
         sig { returns(T.nilable(Time)) }
         attr_accessor :processed_at
 
@@ -58,7 +58,7 @@ module Anthropic
           # System content blocks. Text-only.
           content:,
           type:,
-          # A timestamp in RFC 3339 format
+          # Timestamp when this system message was processed.
           processed_at: nil
         )
         end

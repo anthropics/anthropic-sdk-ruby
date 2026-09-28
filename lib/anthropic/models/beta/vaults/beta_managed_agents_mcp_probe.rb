@@ -6,7 +6,8 @@ module Anthropic
       module Vaults
         class BetaManagedAgentsMCPProbe < Anthropic::Internal::Type::BaseModel
           # @!attribute http_response
-          #   An HTTP response captured during a credential validation probe.
+          #   The captured HTTP error response. Null when no HTTP response was received
+          #   (timeout, DNS, TLS).
           #
           #   @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsRefreshHTTPResponse, nil]
           required :http_response,
@@ -24,7 +25,10 @@ module Anthropic
           # @!method initialize(http_response:, method_:)
           #   The failing step of an MCP validation probe.
           #
-          #   @param http_response [Anthropic::Models::Beta::Vaults::BetaManagedAgentsRefreshHTTPResponse, nil] An HTTP response captured during a credential validation probe.
+          #   Some parameter documentations has been truncated, see
+          #   {Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPProbe} for more details.
+          #
+          #   @param http_response [Anthropic::Models::Beta::Vaults::BetaManagedAgentsRefreshHTTPResponse, nil] The captured HTTP error response. Null when no HTTP response was received (timeo
           #
           #   @param method_ [String] The MCP method that failed (for example `initialize` or `tools/list`).
         end

@@ -27,8 +27,8 @@ module Anthropic
         required :model, -> { Anthropic::Beta::BetaManagedAgentsModelConfig }
 
         # @!attribute multiagent
-        #   Resolved coordinator topology with full agent definitions for each roster
-        #   member.
+        #   Resolved multiagent orchestration configuration. Null when the agent is
+        #   single-threaded.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator, nil]
         required :multiagent,
@@ -84,7 +84,7 @@ module Anthropic
         #
         #   @param model [Anthropic::Models::Beta::BetaManagedAgentsModelConfig] Model identifier and configuration.
         #
-        #   @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator, nil] Resolved coordinator topology with full agent definitions for each roster member
+        #   @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator, nil] Resolved multiagent orchestration configuration. Null when the agent is single-t
         #
         #   @param name [String]
         #

@@ -12,7 +12,7 @@ module Anthropic
           required :id, String
 
           # @!attribute result
-          #   UserToolConfirmationResult enum
+          #   The confirmation result: 'allow' or 'deny'.
           #
           #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::Result]
           required :result,
@@ -40,7 +40,7 @@ module Anthropic
           optional :deny_message, String, nil?: true
 
           # @!attribute processed_at
-          #   A timestamp in RFC 3339 format
+          #   Timestamp when the confirmation was processed.
           #
           #   @return [Time, nil]
           optional :processed_at, Time, nil?: true
@@ -61,7 +61,7 @@ module Anthropic
           #
           #   @param id [String] Unique identifier for this event.
           #
-          #   @param result [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::Result] UserToolConfirmationResult enum
+          #   @param result [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::Result] The confirmation result: 'allow' or 'deny'.
           #
           #   @param tool_use_id [String] The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresp
           #
@@ -69,11 +69,11 @@ module Anthropic
           #
           #   @param deny_message [String, nil] Optional message providing context for a 'deny' decision. Only allowed when resu
           #
-          #   @param processed_at [Time, nil] A timestamp in RFC 3339 format
+          #   @param processed_at [Time, nil] Timestamp when the confirmation was processed.
           #
           #   @param session_thread_id [String, nil] Set by the server to the subagent thread this confirmation was routed to. Omitte
 
-          # UserToolConfirmationResult enum
+          # The confirmation result: 'allow' or 'deny'.
           #
           # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent#result
           module Result

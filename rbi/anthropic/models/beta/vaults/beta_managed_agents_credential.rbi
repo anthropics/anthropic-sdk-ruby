@@ -17,11 +17,11 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :id
 
-          # A timestamp in RFC 3339 format
+          # When the credential was archived. Null if not archived.
           sig { returns(T.nilable(Time)) }
           attr_accessor :archived_at
 
-          # Authentication details for a credential.
+          # Authentication configuration for this credential.
           sig do
             returns(
               Anthropic::Beta::Vaults::BetaManagedAgentsCredential::Auth::Variants
@@ -80,9 +80,9 @@ module Anthropic
           def self.new(
             # Unique identifier for the credential.
             id:,
-            # A timestamp in RFC 3339 format
+            # When the credential was archived. Null if not archived.
             archived_at:,
-            # Authentication details for a credential.
+            # Authentication configuration for this credential.
             auth:,
             # A timestamp in RFC 3339 format
             created_at:,
@@ -118,7 +118,7 @@ module Anthropic
           def to_hash
           end
 
-          # Authentication details for a credential.
+          # Authentication configuration for this credential.
           module Auth
             extend Anthropic::Internal::Type::Union
 
@@ -210,7 +210,7 @@ module Anthropic
               mcp_server_url: nil,
               # A timestamp in RFC 3339 format
               expires_at: nil,
-              # OAuth refresh token configuration returned in credential responses.
+              # Refresh token configuration, if the credential supports token refresh.
               refresh: nil,
               # Where in the outbound request the secret value is substituted.
               injection_location: nil,

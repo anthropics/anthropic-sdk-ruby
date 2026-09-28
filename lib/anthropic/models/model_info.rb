@@ -11,7 +11,8 @@ module Anthropic
       required :id, String
 
       # @!attribute capabilities
-      #   Model capability information.
+      #   Object mapping capability names to their support details. Keys are always
+      #   present for all known capabilities.
       #
       #   @return [Anthropic::Models::ModelCapabilities, nil]
       required :capabilities, -> { Anthropic::ModelCapabilities }, nil?: true
@@ -55,7 +56,7 @@ module Anthropic
       #
       #   @param id [String] Unique model identifier.
       #
-      #   @param capabilities [Anthropic::Models::ModelCapabilities, nil] Model capability information.
+      #   @param capabilities [Anthropic::Models::ModelCapabilities, nil] Object mapping capability names to their support details. Keys are always presen
       #
       #   @param created_at [Time] RFC 3339 datetime string representing the time at which the model was released.
       #

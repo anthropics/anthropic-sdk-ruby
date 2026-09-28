@@ -6,9 +6,7 @@ module Anthropic
       module Sessions
         class BetaManagedAgentsAgentToolEvaluationAuto < Anthropic::Internal::Type::BaseModel
           # @!attribute evaluated_permission
-          #   The server's per-invocation judgement under the auto permission policy. Its type
-          #   always equals the event's top-level evaluated_permission. Open union: clients
-          #   must tolerate unknown variants.
+          #   The server's judgement for this invocation.
           #
           #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentAutoEvaluatedPermissionAllow, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentAutoEvaluatedPermissionAsk, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentAutoEvaluatedPermissionDeny]
           required :evaluated_permission,
@@ -23,11 +21,7 @@ module Anthropic
           #   The resolved permission_policy was auto: the server judged this invocation
           #   individually.
           #
-          #   Some parameter documentations has been truncated, see
-          #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAuto}
-          #   for more details.
-          #
-          #   @param evaluated_permission [Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentAutoEvaluatedPermissionAllow, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentAutoEvaluatedPermissionAsk, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentAutoEvaluatedPermissionDeny] The server's per-invocation judgement under the auto permission policy. Its type
+          #   @param evaluated_permission [Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentAutoEvaluatedPermissionAllow, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentAutoEvaluatedPermissionAsk, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentAutoEvaluatedPermissionDeny] The server's judgement for this invocation.
           #
           #   @param type [Symbol, :auto]
         end

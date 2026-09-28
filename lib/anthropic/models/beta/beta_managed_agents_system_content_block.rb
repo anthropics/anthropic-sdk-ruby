@@ -16,7 +16,7 @@ module Anthropic
         required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsSystemContentBlock::Type }
 
         # @!method initialize(text:, type:)
-        #   Regular text content.
+        #   Content block in a mid-conversation system message. Text-only.
         #
         #   @param text [String] The text content.
         #

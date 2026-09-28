@@ -26,7 +26,7 @@ module Anthropic
         end
         attr_accessor :type
 
-        # Regular text content.
+        # Content block in a mid-conversation system message. Text-only.
         sig do
           params(
             text: String,

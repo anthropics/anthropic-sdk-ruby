@@ -86,9 +86,7 @@ module Anthropic
           end
           def self.new(
             type:,
-            # The server's per-invocation judgement under the auto permission policy. Its type
-            # always equals the event's top-level evaluated_permission. Open union: clients
-            # must tolerate unknown variants.
+            # The server's judgement for this invocation.
             evaluated_permission: nil
           )
           end

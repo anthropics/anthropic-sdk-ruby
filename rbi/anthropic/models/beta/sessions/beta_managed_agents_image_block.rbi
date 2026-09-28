@@ -13,7 +13,7 @@ module Anthropic
               )
             end
 
-          # Union type for image source variants.
+          # The source of the image data.
           sig do
             returns(
               T.any(
@@ -46,7 +46,7 @@ module Anthropic
             ).returns(T.attached_class)
           end
           def self.new(
-            # Union type for image source variants.
+            # The source of the image data.
             source:,
             type:
           )
@@ -69,7 +69,7 @@ module Anthropic
           def to_hash
           end
 
-          # Union type for image source variants.
+          # The source of the image data.
           module Source
             extend Anthropic::Internal::Type::Union
 

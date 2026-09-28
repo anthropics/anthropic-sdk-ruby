@@ -19,19 +19,20 @@ module Anthropic
           required :has_refresh_token, Anthropic::Internal::Type::Boolean
 
           # @!attribute mcp_probe
-          #   The failing step of an MCP validation probe.
+          #   Details of the failing MCP probe step. Null when the probe succeeded.
           #
           #   @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPProbe, nil]
           required :mcp_probe, -> { Anthropic::Beta::Vaults::BetaManagedAgentsMCPProbe }, nil?: true
 
           # @!attribute refresh
-          #   Outcome of a refresh-token exchange attempted during credential validation.
+          #   Details of the refresh-token exchange attempted on a 401. Null when no refresh
+          #   was attempted.
           #
           #   @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsRefreshObject, nil]
           required :refresh, -> { Anthropic::Beta::Vaults::BetaManagedAgentsRefreshObject }, nil?: true
 
           # @!attribute status
-          #   Overall verdict of a credential validation probe.
+          #   Overall verdict of the validation probe.
           #
           #   @return [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsCredentialValidationStatus]
           required :status, enum: -> { Anthropic::Beta::Vaults::BetaManagedAgentsCredentialValidationStatus }
@@ -42,7 +43,7 @@ module Anthropic
           required :type, enum: -> { Anthropic::Beta::Vaults::BetaManagedAgentsCredentialValidation::Type }
 
           # @!attribute validated_at
-          #   A timestamp in RFC 3339 format
+          #   When the validation probe was performed.
           #
           #   @return [Time]
           required :validated_at, Time
@@ -56,19 +57,23 @@ module Anthropic
           # @!method initialize(credential_id:, has_refresh_token:, mcp_probe:, refresh:, status:, type:, validated_at:, vault_id:)
           #   Result of live-probing a credential against its configured MCP server.
           #
+          #   Some parameter documentations has been truncated, see
+          #   {Anthropic::Models::Beta::Vaults::BetaManagedAgentsCredentialValidation} for
+          #   more details.
+          #
           #   @param credential_id [String] Unique identifier of the credential that was validated.
           #
           #   @param has_refresh_token [Boolean] Whether the credential has a refresh token configured.
           #
-          #   @param mcp_probe [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPProbe, nil] The failing step of an MCP validation probe.
+          #   @param mcp_probe [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPProbe, nil] Details of the failing MCP probe step. Null when the probe succeeded.
           #
-          #   @param refresh [Anthropic::Models::Beta::Vaults::BetaManagedAgentsRefreshObject, nil] Outcome of a refresh-token exchange attempted during credential validation.
+          #   @param refresh [Anthropic::Models::Beta::Vaults::BetaManagedAgentsRefreshObject, nil] Details of the refresh-token exchange attempted on a 401. Null when no refresh w
           #
-          #   @param status [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsCredentialValidationStatus] Overall verdict of a credential validation probe.
+          #   @param status [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsCredentialValidationStatus] Overall verdict of the validation probe.
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsCredentialValidation::Type]
           #
-          #   @param validated_at [Time] A timestamp in RFC 3339 format
+          #   @param validated_at [Time] When the validation probe was performed.
           #
           #   @param vault_id [String] Identifier of the vault containing the credential.
 

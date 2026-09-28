@@ -9,11 +9,10 @@ module Anthropic
         include Anthropic::Internal::Type::RequestParameters
 
         # @!attribute access_type
-        #   How the platform uses the API on behalf of the entity this profile represents.
-        #   `application`: the platform sells a product that uses the API behind the scenes,
-        #   and the profile represents an individual end-user of that product.
-        #   `passthrough`: the platform resells raw inference, and the profile identifies
-        #   the resold-to company.
+        #   How the platform uses the API for this entity. `application` (default): the
+        #   profile represents an individual end-user of the platform's product.
+        #   `passthrough`: the profile identifies a company the platform resells Claude
+        #   access to.
         #
         #   @return [Symbol, Anthropic::Models::Beta::UserProfileCreateParams::AccessType, nil]
         optional :access_type, enum: -> { Anthropic::Beta::UserProfileCreateParams::AccessType }
@@ -36,7 +35,12 @@ module Anthropic
         optional :external_user_details, -> { Anthropic::Beta::BetaUserProfileExternalUserDetailsParams }
 
         # @!attribute external_user_onboarded_at
-        #   A timestamp in RFC 3339 format
+        #   When the entity this profile represents opened its account with the platform, in
+        #   RFC 3339 format: for an `application` profile, when the end-user signed up; for
+        #   a `passthrough` profile, when the company became the platform's customer. Must
+        #   be a complete timestamp no more than 1 minute in the future. Optional. Accepted
+        #   under the `user-profiles-2026-08-18` beta header; under
+        #   `user-profiles-2026-09-04` send `external_user_details.onboarded_at` instead.
         #
         #   @return [Time, nil]
         optional :external_user_onboarded_at, Time
@@ -79,13 +83,13 @@ module Anthropic
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::UserProfileCreateParams} for more details.
         #
-        #   @param access_type [Symbol, Anthropic::Models::Beta::UserProfileCreateParams::AccessType] How the platform uses the API on behalf of the entity this profile represents. `
+        #   @param access_type [Symbol, Anthropic::Models::Beta::UserProfileCreateParams::AccessType] How the platform uses the API for this entity. `application` (default): the prof
         #
         #   @param external_id [String, nil] Platform's own identifier for this user. Not enforced unique. Maximum 255 charac
         #
         #   @param external_user_details [Anthropic::Models::Beta::BetaUserProfileExternalUserDetailsParams] Details about the entity this profile represents, as the platform states them. E
         #
-        #   @param external_user_onboarded_at [Time] A timestamp in RFC 3339 format
+        #   @param external_user_onboarded_at [Time] When the entity this profile represents opened its account with the platform, in
         #
         #   @param metadata [Hash{Symbol=>String}] Free-form key-value data to attach to this user profile. Maximum 16 keys, with k
         #
@@ -97,11 +101,10 @@ module Anthropic
         #
         #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 
-        # How the platform uses the API on behalf of the entity this profile represents.
-        # `application`: the platform sells a product that uses the API behind the scenes,
-        # and the profile represents an individual end-user of that product.
-        # `passthrough`: the platform resells raw inference, and the profile identifies
-        # the resold-to company.
+        # How the platform uses the API for this entity. `application` (default): the
+        # profile represents an individual end-user of the platform's product.
+        # `passthrough`: the profile identifies a company the platform resells Claude
+        # access to.
         module AccessType
           extend Anthropic::Internal::Type::Enum
 

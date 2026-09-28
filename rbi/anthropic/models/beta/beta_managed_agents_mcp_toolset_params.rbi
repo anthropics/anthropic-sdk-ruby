@@ -46,7 +46,7 @@ module Anthropic
         end
         attr_writer :configs
 
-        # Default configuration for all tools from an MCP server.
+        # Default configuration for all tools from this server.
         sig do
           returns(
             T.nilable(
@@ -89,7 +89,7 @@ module Anthropic
           type:,
           # Per-tool configuration overrides.
           configs: nil,
-          # Default configuration for all tools from an MCP server.
+          # Default configuration for all tools from this server.
           default_config: nil
         )
         end

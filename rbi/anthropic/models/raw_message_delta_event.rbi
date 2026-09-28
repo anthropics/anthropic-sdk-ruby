@@ -88,15 +88,18 @@ module Anthropic
             )
           end
 
-        # Information about the container used in the request (for the code execution
-        # tool)
+        # Information about the container used in this request.
+        #
+        # This will be non-null if a container tool (e.g. code execution) was used.
         sig { returns(T.nilable(Anthropic::Container)) }
         attr_reader :container
 
         sig { params(container: T.nilable(Anthropic::Container::OrHash)).void }
         attr_writer :container
 
-        # Structured information about a refusal.
+        # Structured information about why model output stopped.
+        #
+        # This is `null` when the `stop_reason` has no additional detail to report.
         sig { returns(T.nilable(Anthropic::RefusalStopDetails)) }
         attr_reader :stop_details
 
@@ -122,10 +125,13 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
-          # Information about the container used in the request (for the code execution
-          # tool)
+          # Information about the container used in this request.
+          #
+          # This will be non-null if a container tool (e.g. code execution) was used.
           container:,
-          # Structured information about a refusal.
+          # Structured information about why model output stopped.
+          #
+          # This is `null` when the `stop_reason` has no additional detail to report.
           stop_details:,
           stop_reason:,
           stop_sequence:

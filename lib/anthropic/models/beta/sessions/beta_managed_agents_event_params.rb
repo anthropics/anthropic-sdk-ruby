@@ -67,7 +67,7 @@ module Anthropic
           #
           #   @option args [String, nil] :session_thread_id If absent, interrupts every non-archived thread in a multiagent session (or the
           #
-          #   @option args [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::Result] :result UserToolConfirmationResult enum
+          #   @option args [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::Result] :result The confirmation result: 'allow' or 'deny'.
           #
           #   @option args [String] :tool_use_id The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresp
           #
@@ -79,7 +79,7 @@ module Anthropic
           #
           #   @option args [String] :description What the agent should produce. This is the task specification.
           #
-          #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubricParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubricParams] :rubric Rubric for grading the quality of an outcome.
+          #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubricParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubricParams] :rubric How to grade the outcome. Text or file reference.
           #
           #   @option args [Integer, nil] :max_iterations Eval→revision cycles before giving up. Default 3, max 20.
           #

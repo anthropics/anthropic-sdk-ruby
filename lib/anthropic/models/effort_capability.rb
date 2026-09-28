@@ -34,7 +34,7 @@ module Anthropic
       required :supported, Anthropic::Internal::Type::Boolean
 
       # @!attribute xhigh
-      #   Indicates whether a capability is supported.
+      #   Whether the model supports xhigh effort level.
       #
       #   @return [Anthropic::Models::CapabilitySupport, nil]
       required :xhigh, -> { Anthropic::CapabilitySupport }, nil?: true
@@ -52,7 +52,7 @@ module Anthropic
       #
       #   @param supported [Boolean] Whether this capability is supported by the model.
       #
-      #   @param xhigh [Anthropic::Models::CapabilitySupport, nil] Indicates whether a capability is supported.
+      #   @param xhigh [Anthropic::Models::CapabilitySupport, nil] Whether the model supports xhigh effort level.
     end
   end
 end

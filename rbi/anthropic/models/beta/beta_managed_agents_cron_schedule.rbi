@@ -33,7 +33,8 @@ module Anthropic
         end
         attr_accessor :type
 
-        # A timestamp in RFC 3339 format
+        # Time the most recent scheduled run actually started. Null until one completes;
+        # preserved after the deployment is archived. Manual runs do not update this.
         sig { returns(T.nilable(Time)) }
         attr_accessor :last_run_at
 
@@ -69,7 +70,8 @@ module Anthropic
           # IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
           timezone:,
           type:,
-          # A timestamp in RFC 3339 format
+          # Time the most recent scheduled run actually started. Null until one completes;
+          # preserved after the deployment is archived. Manual runs do not update this.
           last_run_at: nil,
           # Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused
           # deployments (reflects what the schedule would do if unpaused); empty once the

@@ -18,7 +18,7 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :id
 
-        # A resolved agent reference with a concrete version.
+        # Reference to the agent this deployment runs, resolved to a concrete version.
         sig { returns(Anthropic::Beta::BetaManagedAgentsAgentReference) }
         attr_reader :agent
 
@@ -29,11 +29,11 @@ module Anthropic
         end
         attr_writer :agent
 
-        # A timestamp in RFC 3339 format
+        # Time the deployment was archived. Null if not archived.
         sig { returns(T.nilable(Time)) }
         attr_accessor :archived_at
 
-        # A timestamp in RFC 3339 format
+        # Time the deployment was created.
         sig { returns(Time) }
         attr_accessor :created_at
 
@@ -63,7 +63,8 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :name
 
-        # Why a deployment is paused. Non-null exactly when `status` is `paused`.
+        # Why the deployment is `paused`. Non-null exactly when `status` is `paused`; null
+        # otherwise.
         sig do
           returns(
             T.nilable(
@@ -84,7 +85,9 @@ module Anthropic
         end
         attr_accessor :resources
 
-        # 5-field POSIX cron schedule with computed runtime timestamps.
+        # Recurring cron schedule. Presence enables scheduled execution; null means
+        # manual-only. Includes computed timestamps (next fire times, last run) on the
+        # cron variant.
         sig { returns(T.nilable(Anthropic::Beta::BetaManagedAgentsSchedule)) }
         attr_reader :schedule
 
@@ -96,7 +99,8 @@ module Anthropic
         end
         attr_writer :schedule
 
-        # Lifecycle status of a deployment.
+        # Computed status of the deployment: `active` or `paused`. Archived deployments
+        # report `active` with `archived_at` set.
         sig do
           returns(
             Anthropic::Beta::BetaManagedAgentsDeploymentStatus::TaggedSymbol
@@ -111,7 +115,7 @@ module Anthropic
         end
         attr_accessor :type
 
-        # A timestamp in RFC 3339 format
+        # Time the deployment was last updated.
         sig { returns(Time) }
         attr_accessor :updated_at
 
@@ -120,8 +124,8 @@ module Anthropic
         sig { returns(T::Array[String]) }
         attr_accessor :vault_ids
 
-        # A hard spend ceiling. The session stops issuing new model requests once the
-        # tracked list cost reaches `max_list_cost`.
+        # Spend ceiling stamped onto each session created from this deployment. Absent
+        # when no budget is set.
         sig do
           returns(T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit))
         end
@@ -185,11 +189,11 @@ module Anthropic
         def self.new(
           # Unique identifier for this deployment.
           id:,
-          # A resolved agent reference with a concrete version.
+          # Reference to the agent this deployment runs, resolved to a concrete version.
           agent:,
-          # A timestamp in RFC 3339 format
+          # Time the deployment was archived. Null if not archived.
           archived_at:,
-          # A timestamp in RFC 3339 format
+          # Time the deployment was created.
           created_at:,
           # Description of what the deployment does.
           description:,
@@ -201,23 +205,27 @@ module Anthropic
           metadata:,
           # Human-readable name.
           name:,
-          # Why a deployment is paused. Non-null exactly when `status` is `paused`.
+          # Why the deployment is `paused`. Non-null exactly when `status` is `paused`; null
+          # otherwise.
           paused_reason:,
           # Resources attached to sessions created from this deployment. Echoes the input
           # minus write-only credentials.
           resources:,
-          # 5-field POSIX cron schedule with computed runtime timestamps.
+          # Recurring cron schedule. Presence enables scheduled execution; null means
+          # manual-only. Includes computed timestamps (next fire times, last run) on the
+          # cron variant.
           schedule:,
-          # Lifecycle status of a deployment.
+          # Computed status of the deployment: `active` or `paused`. Archived deployments
+          # report `active` with `archived_at` set.
           status:,
           type:,
-          # A timestamp in RFC 3339 format
+          # Time the deployment was last updated.
           updated_at:,
           # Vault IDs supplying stored credentials for sessions created from this
           # deployment.
           vault_ids:,
-          # A hard spend ceiling. The session stops issuing new model requests once the
-          # tracked list cost reaches `max_list_cost`.
+          # Spend ceiling stamped onto each session created from this deployment. Absent
+          # when no budget is set.
           budget: nil
         )
         end

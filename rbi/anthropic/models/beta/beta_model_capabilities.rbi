@@ -43,9 +43,8 @@ module Anthropic
         end
         attr_writer :code_execution
 
-        # Compaction capability details: whether the model accepts the top-level
-        # `compaction` request parameter, with one entry per supported `compaction.type`
-        # value.
+        # Server-side compaction support (the top-level `compaction` parameter) and the
+        # accepted `compaction.type` values.
         sig { returns(T.nilable(Anthropic::Beta::BetaCompactionCapability)) }
         attr_reader :compaction
 
@@ -142,9 +141,8 @@ module Anthropic
           citations:,
           # Whether the model supports code execution tools.
           code_execution:,
-          # Compaction capability details: whether the model accepts the top-level
-          # `compaction` request parameter, with one entry per supported `compaction.type`
-          # value.
+          # Server-side compaction support (the top-level `compaction` parameter) and the
+          # accepted `compaction.type` values.
           compaction:,
           # Context management support and available strategies.
           context_management:,

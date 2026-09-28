@@ -414,6 +414,14 @@ class Anthropic::Test::Helpers::ToolRunner::CompactBeforeNextTurnTest < Minitest
     )
   end
 
+  def test_removed_compaction_control_option_is_refused
+    error = assert_raises(ArgumentError) do
+      @client.beta.messages.tool_runner({**basic_params, compaction_control: {enabled: true}})
+    end
+
+    assert_match(/`compaction_control` has been removed.*`#compact_before_next_turn`/, error.message)
+  end
+
   def test_compaction_param_is_refused_on_a_tool_runner
     refusal =
       "`compaction` cannot be set on a tool runner: every request in the loop would compact again. " \

@@ -118,6 +118,17 @@ module Anthropic
       sig { returns(T.nilable(T.any(Anthropic::ContainerParams, String))) }
       attr_accessor :container
 
+      # Request-level diagnostics. Supply `previous_message_id` to have the response
+      # include `diagnostics.cache_miss_reason` explaining any prompt-cache divergence
+      # from that prior request.
+      sig { returns(T.nilable(Anthropic::DiagnosticsParam)) }
+      attr_reader :diagnostics
+
+      sig do
+        params(diagnostics: T.nilable(Anthropic::DiagnosticsParam::OrHash)).void
+      end
+      attr_writer :diagnostics
+
       # Specifies the geographic region for inference processing. If not specified, the
       # workspace's `default_inference_geo` is used.
       sig { returns(T.nilable(String)) }
@@ -216,6 +227,7 @@ module Anthropic
             T.any(
               Anthropic::ThinkingConfigEnabled,
               Anthropic::ThinkingConfigDisabled,
+              Anthropic::ThinkingConfigBetweenTools,
               Anthropic::ThinkingConfigAdaptive
             )
           )
@@ -229,6 +241,7 @@ module Anthropic
             T.any(
               Anthropic::ThinkingConfigEnabled::OrHash,
               Anthropic::ThinkingConfigDisabled::OrHash,
+              Anthropic::ThinkingConfigBetweenTools::OrHash,
               Anthropic::ThinkingConfigAdaptive::OrHash
             )
         ).void
@@ -459,6 +472,7 @@ module Anthropic
           cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash),
           container:
             T.nilable(T.any(Anthropic::ContainerParams::OrHash, String)),
+          diagnostics: T.nilable(Anthropic::DiagnosticsParam::OrHash),
           inference_geo: T.nilable(String),
           metadata: Anthropic::Metadata::OrHash,
           output_config: Anthropic::OutputConfig::OrHash,
@@ -470,6 +484,7 @@ module Anthropic
             T.any(
               Anthropic::ThinkingConfigEnabled::OrHash,
               Anthropic::ThinkingConfigDisabled::OrHash,
+              Anthropic::ThinkingConfigBetweenTools::OrHash,
               Anthropic::ThinkingConfigAdaptive::OrHash
             ),
           tool_choice:
@@ -603,6 +618,10 @@ module Anthropic
         cache_control: nil,
         # Container identifier for reuse across requests.
         container: nil,
+        # Request-level diagnostics. Supply `previous_message_id` to have the response
+        # include `diagnostics.cache_miss_reason` explaining any prompt-cache divergence
+        # from that prior request.
+        diagnostics: nil,
         # Specifies the geographic region for inference processing. If not specified, the
         # workspace's `default_inference_geo` is used.
         inference_geo: nil,
@@ -770,6 +789,7 @@ module Anthropic
             model: T.any(Anthropic::Model::OrSymbol, String),
             cache_control: T.nilable(Anthropic::CacheControlEphemeral),
             container: T.nilable(T.any(Anthropic::ContainerParams, String)),
+            diagnostics: T.nilable(Anthropic::DiagnosticsParam),
             inference_geo: T.nilable(String),
             metadata: Anthropic::Metadata,
             output_config: Anthropic::OutputConfig,
@@ -781,6 +801,7 @@ module Anthropic
               T.any(
                 Anthropic::ThinkingConfigEnabled,
                 Anthropic::ThinkingConfigDisabled,
+                Anthropic::ThinkingConfigBetweenTools,
                 Anthropic::ThinkingConfigAdaptive
               ),
             tool_choice:

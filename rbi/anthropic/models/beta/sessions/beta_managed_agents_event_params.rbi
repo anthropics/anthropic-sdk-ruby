@@ -144,7 +144,7 @@ module Anthropic
             # primary alone in a single-agent session). If present, interrupts only the named
             # thread.
             session_thread_id: nil,
-            # UserToolConfirmationResult enum
+            # The confirmation result: 'allow' or 'deny'.
             result: nil,
             # The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result
             # corresponds to, which can be found in the last `session.status_idle`
@@ -163,7 +163,7 @@ module Anthropic
             is_error: nil,
             # What the agent should produce. This is the task specification.
             description: nil,
-            # Rubric for grading the quality of an outcome.
+            # How to grade the outcome. Text or file reference.
             rubric: nil,
             # Eval→revision cycles before giving up. Default 3, max 20.
             max_iterations: nil

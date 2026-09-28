@@ -40,7 +40,7 @@ module Anthropic
       sig { returns(T::Boolean) }
       attr_accessor :supported
 
-      # Indicates whether a capability is supported.
+      # Whether the model supports xhigh effort level.
       sig { returns(T.nilable(Anthropic::CapabilitySupport)) }
       attr_reader :xhigh
 
@@ -71,7 +71,7 @@ module Anthropic
         medium:,
         # Whether this capability is supported by the model.
         supported:,
-        # Indicates whether a capability is supported.
+        # Whether the model supports xhigh effort level.
         xhigh:
       )
       end

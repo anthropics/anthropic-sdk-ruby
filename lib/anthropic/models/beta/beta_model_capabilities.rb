@@ -23,9 +23,8 @@ module Anthropic
         required :code_execution, -> { Anthropic::Beta::BetaCapabilitySupport }
 
         # @!attribute compaction
-        #   Compaction capability details: whether the model accepts the top-level
-        #   `compaction` request parameter, with one entry per supported `compaction.type`
-        #   value.
+        #   Server-side compaction support (the top-level `compaction` parameter) and the
+        #   accepted `compaction.type` values.
         #
         #   @return [Anthropic::Models::Beta::BetaCompactionCapability, nil]
         required :compaction, -> { Anthropic::Beta::BetaCompactionCapability }, nil?: true
@@ -78,7 +77,7 @@ module Anthropic
         #
         #   @param code_execution [Anthropic::Models::Beta::BetaCapabilitySupport] Whether the model supports code execution tools.
         #
-        #   @param compaction [Anthropic::Models::Beta::BetaCompactionCapability, nil] Compaction capability details: whether the model accepts the top-level
+        #   @param compaction [Anthropic::Models::Beta::BetaCompactionCapability, nil] Server-side compaction support (the top-level `compaction` parameter) and the ac
         #
         #   @param context_management [Anthropic::Models::Beta::BetaContextManagementCapability] Context management support and available strategies.
         #

@@ -38,8 +38,11 @@ module Anthropic
         required :name, String
 
         # @!attribute budget
-        #   A hard spend ceiling. The session stops issuing new model requests once the
-        #   tracked list cost reaches `max_list_cost`.
+        #   Enforced spend ceiling stamped onto each session created from this deployment,
+        #   copied at session-creation time. Omit to leave sessions uncapped. The deployment
+        #   agent's model must have a public list price, or the request is rejected; a
+        #   multiagent roster is re-validated in full when each fire copies the cap, which
+        #   fails closed the same way.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil]
         optional :budget, -> { Anthropic::Beta::BetaManagedAgentsBudgetLimit }, nil?: true
@@ -66,8 +69,8 @@ module Anthropic
                  -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::DeploymentCreateParams::Resource] }
 
         # @!attribute schedule
-        #   5-field POSIX cron schedule. Literal wall-clock matching in the configured
-        #   timezone.
+        #   Optional recurring cron schedule. When present, the deployment fires
+        #   automatically. Both expression and timezone are required when schedule is set.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsScheduleParams, nil]
         optional :schedule, -> { Anthropic::Beta::BetaManagedAgentsScheduleParams }, nil?: true
@@ -108,7 +111,7 @@ module Anthropic
         #
         #   @param name [String] Human-readable name for the deployment.
         #
-        #   @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] A hard spend ceiling. The session stops issuing new model requests once the trac
+        #   @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] Enforced spend ceiling stamped onto each session created from this deployment, c
         #
         #   @param description [String, nil] Description of what the deployment does.
         #
@@ -116,7 +119,7 @@ module Anthropic
         #
         #   @param resources [Array<Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams, Anthropic::Models::Beta::BetaManagedAgentsFileResourceParams, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam>] Resources (e.g. repositories, files) to mount into each session's container. Max
         #
-        #   @param schedule [Anthropic::Models::Beta::BetaManagedAgentsScheduleParams, nil] 5-field POSIX cron schedule. Literal wall-clock matching in the configured timez
+        #   @param schedule [Anthropic::Models::Beta::BetaManagedAgentsScheduleParams, nil] Optional recurring cron schedule. When present, the deployment fires automatical
         #
         #   @param vault_ids [Array<String>] Vault IDs for stored credentials the agent can use during sessions created from
         #
@@ -193,7 +196,7 @@ module Anthropic
           #   @option args [String] :memory_store_id The memory store ID (memstore\_...). Must belong to the caller's organization
           #   and
           #
-          #   @option args [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam::Access, nil] :access Access mode for an attached memory store.
+          #   @option args [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam::Access, nil] :access Access mode for the mounted store. Defaults to read_write. read_only mounts the
           #
           #   @option args [String, nil] :instructions Per-attachment guidance for the agent on how to use this store. Rendered into th
           #

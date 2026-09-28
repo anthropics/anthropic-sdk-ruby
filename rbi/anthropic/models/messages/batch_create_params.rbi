@@ -273,6 +273,19 @@ module Anthropic
             end
             attr_accessor :container
 
+            # Request-level diagnostics. Supply `previous_message_id` to have the response
+            # include `diagnostics.cache_miss_reason` explaining any prompt-cache divergence
+            # from that prior request.
+            sig { returns(T.nilable(Anthropic::DiagnosticsParam)) }
+            attr_reader :diagnostics
+
+            sig do
+              params(
+                diagnostics: T.nilable(Anthropic::DiagnosticsParam::OrHash)
+              ).void
+            end
+            attr_writer :diagnostics
+
             # Specifies the geographic region for inference processing. If not specified, the
             # workspace's `default_inference_geo` is used.
             sig { returns(T.nilable(String)) }
@@ -330,10 +343,14 @@ module Anthropic
             sig { params(stop_sequences: T::Array[String]).void }
             attr_writer :stop_sequences
 
-            # Whether to incrementally stream the response using server-sent events.
+            # Whether to incrementally stream the response using server-sent events. When
+            # `true`, SDKs return a raw event stream.
             #
-            # See [streaming](https://platform.claude.com/docs/en/build-with-claude/streaming)
-            # for details.
+            # In the TypeScript, Python and Ruby SDKs, the recommended way to stream is
+            # `messages.stream()`. It sets `stream` for you and accumulates the events into
+            # the final message. See
+            # [Streaming with SDKs](https://platform.claude.com/docs/en/build-with-claude/streaming#streaming-with-sdks)
+            # for an example in each language.
             sig { returns(T.nilable(T::Boolean)) }
             attr_reader :stream
 
@@ -391,6 +408,7 @@ module Anthropic
                   T.any(
                     Anthropic::ThinkingConfigEnabled,
                     Anthropic::ThinkingConfigDisabled,
+                    Anthropic::ThinkingConfigBetweenTools,
                     Anthropic::ThinkingConfigAdaptive
                   )
                 )
@@ -404,6 +422,7 @@ module Anthropic
                   T.any(
                     Anthropic::ThinkingConfigEnabled::OrHash,
                     Anthropic::ThinkingConfigDisabled::OrHash,
+                    Anthropic::ThinkingConfigBetweenTools::OrHash,
                     Anthropic::ThinkingConfigAdaptive::OrHash
                   )
               ).void
@@ -620,6 +639,7 @@ module Anthropic
                   T.nilable(Anthropic::CacheControlEphemeral::OrHash),
                 container:
                   T.nilable(T.any(Anthropic::ContainerParams::OrHash, String)),
+                diagnostics: T.nilable(Anthropic::DiagnosticsParam::OrHash),
                 inference_geo: T.nilable(String),
                 metadata: Anthropic::Metadata::OrHash,
                 output_config: Anthropic::OutputConfig::OrHash,
@@ -634,6 +654,7 @@ module Anthropic
                   T.any(
                     Anthropic::ThinkingConfigEnabled::OrHash,
                     Anthropic::ThinkingConfigDisabled::OrHash,
+                    Anthropic::ThinkingConfigBetweenTools::OrHash,
                     Anthropic::ThinkingConfigAdaptive::OrHash
                   ),
                 tool_choice:
@@ -764,6 +785,10 @@ module Anthropic
               cache_control: nil,
               # Container identifier for reuse across requests.
               container: nil,
+              # Request-level diagnostics. Supply `previous_message_id` to have the response
+              # include `diagnostics.cache_miss_reason` explaining any prompt-cache divergence
+              # from that prior request.
+              diagnostics: nil,
               # Specifies the geographic region for inference processing. If not specified, the
               # workspace's `default_inference_geo` is used.
               inference_geo: nil,
@@ -788,10 +813,14 @@ module Anthropic
               # the custom sequences, the response `stop_reason` value will be `"stop_sequence"`
               # and the response `stop_sequence` value will contain the matched stop sequence.
               stop_sequences: nil,
-              # Whether to incrementally stream the response using server-sent events.
+              # Whether to incrementally stream the response using server-sent events. When
+              # `true`, SDKs return a raw event stream.
               #
-              # See [streaming](https://platform.claude.com/docs/en/build-with-claude/streaming)
-              # for details.
+              # In the TypeScript, Python and Ruby SDKs, the recommended way to stream is
+              # `messages.stream()`. It sets `stream` for you and accumulates the events into
+              # the final message. See
+              # [Streaming with SDKs](https://platform.claude.com/docs/en/build-with-claude/streaming#streaming-with-sdks)
+              # for an example in each language.
               stream: nil,
               # System prompt.
               #
@@ -926,6 +955,7 @@ module Anthropic
                   cache_control: T.nilable(Anthropic::CacheControlEphemeral),
                   container:
                     T.nilable(T.any(Anthropic::ContainerParams, String)),
+                  diagnostics: T.nilable(Anthropic::DiagnosticsParam),
                   inference_geo: T.nilable(String),
                   metadata: Anthropic::Metadata,
                   output_config: Anthropic::OutputConfig,
@@ -940,6 +970,7 @@ module Anthropic
                     T.any(
                       Anthropic::ThinkingConfigEnabled,
                       Anthropic::ThinkingConfigDisabled,
+                      Anthropic::ThinkingConfigBetweenTools,
                       Anthropic::ThinkingConfigAdaptive
                     ),
                   tool_choice:

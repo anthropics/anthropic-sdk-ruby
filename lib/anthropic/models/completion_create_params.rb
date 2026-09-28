@@ -110,6 +110,9 @@ module Anthropic
       optional :top_p, Float
 
       # @!attribute betas
+      #   @deprecated Deprecated. This parameter has no effect on this method and will be removed in a
+      #   future release.
+      #
       #   Optional header to specify the beta version(s) you want to use.
       #
       #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]

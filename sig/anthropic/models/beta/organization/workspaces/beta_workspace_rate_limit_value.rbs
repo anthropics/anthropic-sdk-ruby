@@ -4,10 +4,17 @@ module Anthropic
       module Organization
         module Workspaces
           type beta_workspace_rate_limit_value =
-            { org_limit: Integer?, type: String, value: Integer }
+            {
+              org_limit: Integer?,
+              source: Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimitValue::source,
+              type: String,
+              value: Integer
+            }
 
           class BetaWorkspaceRateLimitValue < Anthropic::Internal::Type::BaseModel
             attr_accessor org_limit: Integer?
+
+            attr_accessor source: Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimitValue::source
 
             attr_accessor type: String
 
@@ -15,15 +22,50 @@ module Anthropic
 
             def initialize: (
               org_limit: Integer?,
+              source: Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimitValue::source,
               type: String,
               value: Integer
             ) -> void
 
             def to_hash: -> {
               org_limit: Integer?,
+              source: Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimitValue::source,
               type: String,
               value: Integer
             }
+
+            type source =
+              Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimitWorkspaceSource
+              | Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimitOrganizationSource
+
+            module Source
+              extend Anthropic::Internal::Type::Union
+
+              type type_ = :workspace | :organization
+
+              module Type
+                extend Anthropic::Internal::Type::Enum
+
+                WORKSPACE: :workspace
+                ORGANIZATION: :organization
+
+                def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimitValue::Source::type_]
+              end
+
+              def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimitValue::source]
+
+              def self.new:
+                (
+                  type: :workspace | "workspace"
+                ) -> Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimitWorkspaceSource
+                | (
+                  type: :organization | "organization"
+                ) -> Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimitOrganizationSource
+                | (
+                  type: Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimitValue::Source::type_
+                  | String
+                ) -> Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimitValue::source
+            end
           end
         end
       end

@@ -57,8 +57,11 @@ module Anthropic
           initial_events:,
           # Body param: Human-readable name for the deployment.
           name:,
-          # Body param: A hard spend ceiling. The session stops issuing new model requests
-          # once the tracked list cost reaches `max_list_cost`.
+          # Body param: Enforced spend ceiling stamped onto each session created from this
+          # deployment, copied at session-creation time. Omit to leave sessions uncapped.
+          # The deployment agent's model must have a public list price, or the request is
+          # rejected; a multiagent roster is re-validated in full when each fire copies the
+          # cap, which fails closed the same way.
           budget: nil,
           # Body param: Description of what the deployment does.
           description: nil,
@@ -68,8 +71,8 @@ module Anthropic
           # Body param: Resources (e.g. repositories, files) to mount into each session's
           # container. Maximum 500.
           resources: nil,
-          # Body param: 5-field POSIX cron schedule. Literal wall-clock matching in the
-          # configured timezone.
+          # Body param: Optional recurring cron schedule. When present, the deployment fires
+          # automatically. Both expression and timezone are required when schedule is set.
           schedule: nil,
           # Body param: Vault IDs for stored credentials the agent can use during sessions
           # created from this deployment. Maximum 50.
@@ -162,8 +165,11 @@ module Anthropic
           # latest version, or an `agent` object with both id and version specified. Omit to
           # preserve. Cannot be cleared.
           agent: nil,
-          # Body param: A hard spend ceiling. The session stops issuing new model requests
-          # once the tracked list cost reaches `max_list_cost`.
+          # Body param: Spend ceiling for future sessions. Full replacement. Omit to
+          # preserve; send null to clear (sessions created afterwards are uncapped). The
+          # deployment agent's model must have a public list price, or the request is
+          # rejected; a multiagent roster is re-validated in full when each fire copies the
+          # cap, which fails closed the same way.
           budget: nil,
           # Body param: Description. Omit to preserve; send empty string or null to clear.
           description: nil,
@@ -183,8 +189,8 @@ module Anthropic
           # Body param: Session resources. Full replacement. Omit to preserve; send empty
           # array or null to clear. Maximum 500.
           resources: nil,
-          # Body param: 5-field POSIX cron schedule. Literal wall-clock matching in the
-          # configured timezone.
+          # Body param: Cron schedule. Full replacement. Omit to preserve; send null to
+          # clear (revert to manual-only).
           schedule: nil,
           # Body param: Vault IDs. Full replacement. Omit to preserve; send empty array or
           # null to clear. Maximum 50.

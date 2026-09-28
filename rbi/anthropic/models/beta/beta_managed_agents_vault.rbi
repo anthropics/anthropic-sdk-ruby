@@ -18,7 +18,7 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :id
 
-        # A timestamp in RFC 3339 format
+        # When the vault was archived. Null if not archived.
         sig { returns(T.nilable(Time)) }
         attr_accessor :archived_at
 
@@ -58,7 +58,7 @@ module Anthropic
         def self.new(
           # Unique identifier for the vault.
           id:,
-          # A timestamp in RFC 3339 format
+          # When the vault was archived. Null if not archived.
           archived_at:,
           # A timestamp in RFC 3339 format
           created_at:,

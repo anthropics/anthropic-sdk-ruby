@@ -25,7 +25,7 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :model_request_start_id
 
-          # Token usage for a single model request.
+          # Token usage for this model request.
           sig do
             returns(Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelUsage)
           end
@@ -39,7 +39,7 @@ module Anthropic
           end
           attr_writer :model_usage
 
-          # A timestamp in RFC 3339 format
+          # Timestamp when the model request completed.
           sig { returns(Time) }
           attr_accessor :processed_at
 
@@ -70,9 +70,9 @@ module Anthropic
             is_error:,
             # The id of the corresponding `span.model_request_start` event.
             model_request_start_id:,
-            # Token usage for a single model request.
+            # Token usage for this model request.
             model_usage:,
-            # A timestamp in RFC 3339 format
+            # Timestamp when the model request completed.
             processed_at:,
             type:
           )

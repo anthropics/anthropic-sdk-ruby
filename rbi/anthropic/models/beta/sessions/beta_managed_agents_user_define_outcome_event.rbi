@@ -30,11 +30,12 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :outcome_id
 
-          # A timestamp in RFC 3339 format
+          # Timestamp when the outcome was accepted.
           sig { returns(Time) }
           attr_accessor :processed_at
 
-          # Rubric for grading the quality of an outcome.
+          # How to grade the outcome. File rubrics are currently resolved to their text
+          # content; clients should handle both variants.
           sig do
             returns(
               Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::Rubric::Variants
@@ -77,9 +78,10 @@ module Anthropic
             # Server-generated `outc_` ID for this outcome. Referenced by
             # `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
             outcome_id:,
-            # A timestamp in RFC 3339 format
+            # Timestamp when the outcome was accepted.
             processed_at:,
-            # Rubric for grading the quality of an outcome.
+            # How to grade the outcome. File rubrics are currently resolved to their text
+            # content; clients should handle both variants.
             rubric:,
             type:
           )
@@ -103,7 +105,8 @@ module Anthropic
           def to_hash
           end
 
-          # Rubric for grading the quality of an outcome.
+          # How to grade the outcome. File rubrics are currently resolved to their text
+          # content; clients should handle both variants.
           module Rubric
             extend Anthropic::Internal::Type::Union
 

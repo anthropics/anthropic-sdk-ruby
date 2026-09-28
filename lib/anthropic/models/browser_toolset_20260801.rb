@@ -15,11 +15,8 @@ module Anthropic
       optional :cache_control, -> { Anthropic::CacheControlEphemeral }, nil?: true
 
       # @!attribute configs
-      #   Per-member configuration for `browser_toolset_20260801`: one optional field per
-      #   member tool, keyed by the member name — the same name the member's `tool_use`
-      #   blocks carry. Every member is an accepted key, and a member's defaults apply
-      #   wherever its key is absent. Unknown keys are rejected: the field set is this
-      #   toolset version's complete member set.
+      #   Sparse per-member overrides, keyed by member name. Absent, null, and {} are
+      #   equivalent; a member's defaults apply wherever its key is absent.
       #
       #   @return [Anthropic::Models::BrowserToolsetConfigs, nil]
       optional :configs, -> { Anthropic::BrowserToolsetConfigs }, nil?: true
@@ -34,7 +31,7 @@ module Anthropic
       #
       #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
       #
-      #   @param configs [Anthropic::Models::BrowserToolsetConfigs, nil] Per-member configuration for `browser_toolset_20260801`: one
+      #   @param configs [Anthropic::Models::BrowserToolsetConfigs, nil] Sparse per-member overrides, keyed by member name. Absent, null, and {} are equi
       #
       #   @param type [Symbol, :browser_toolset_20260801]
     end

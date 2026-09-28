@@ -62,7 +62,7 @@ module Anthropic
         end
         attr_writer :configs
 
-        # Default configuration for all tools in a toolset.
+        # Default configuration applied to all tools in this set.
         sig do
           returns(
             T.nilable(
@@ -111,7 +111,7 @@ module Anthropic
           type:,
           # Per-tool configuration overrides.
           configs: nil,
-          # Default configuration for all tools in a toolset.
+          # Default configuration applied to all tools in this set.
           default_config: nil
         )
         end

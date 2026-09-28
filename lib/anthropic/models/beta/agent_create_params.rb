@@ -47,8 +47,8 @@ module Anthropic
         optional :metadata, Anthropic::Internal::Type::HashOf[String]
 
         # @!attribute multiagent
-        #   A coordinator topology: the session's primary thread orchestrates work by
-        #   spawning session threads, each running an agent drawn from the `agents` roster.
+        #   Multiagent orchestration configuration. Currently supports the `coordinator`
+        #   topology with a roster of 1-20 agents.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams, nil]
         optional :multiagent, -> { Anthropic::Beta::BetaManagedAgentsMultiagentParams }, nil?: true
@@ -105,7 +105,7 @@ module Anthropic
         #
         #   @param metadata [Hash{Symbol=>String}] Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up t
         #
-        #   @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams, nil] A coordinator topology: the session's primary thread orchestrates work by spawni
+        #   @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams, nil] Multiagent orchestration configuration. Currently supports the `coordinator` top
         #
         #   @param skills [Array<Anthropic::Models::Beta::BetaManagedAgentsAnthropicSkillParams, Anthropic::Models::Beta::BetaManagedAgentsCustomSkillParams>] Skills available to the agent.
         #
@@ -179,13 +179,13 @@ module Anthropic
           #
           #   @option args [Array<Anthropic::Models::Beta::BetaManagedAgentsBashToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsEditToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsReadToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsWriteToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsGlobToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsGrepToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsWebSearchToolConfigParams>, Array<Anthropic::Models::Beta::BetaManagedAgentsMCPToolConfigParams>] :configs Per-tool configuration overrides.
           #
-          #   @option args [Anthropic::Models::Beta::BetaManagedAgentsAgentToolsetDefaultConfigParams, nil, Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetDefaultConfigParams, nil] :default_config Default configuration for all tools in a toolset.
+          #   @option args [Anthropic::Models::Beta::BetaManagedAgentsAgentToolsetDefaultConfigParams, nil, Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetDefaultConfigParams, nil] :default_config Default configuration applied to all tools in this set.
           #
           #   @option args [String] :mcp_server_name Name of the MCP server. Must match a server name from the mcp_servers array. 1-2
           #
           #   @option args [String] :description Description of what the tool does, shown to the agent to help it decide when to
           #
-          #   @option args [Anthropic::Models::Beta::BetaManagedAgentsCustomToolInputSchema] :input_schema JSON Schema for custom tool input parameters.
+          #   @option args [Anthropic::Models::Beta::BetaManagedAgentsCustomToolInputSchema] :input_schema JSON Schema defining the expected input parameters for the tool.
           #
           #   @option args [String] :name Unique name for the tool. 1-128 characters; letters, digits, underscores, and hy
           #

@@ -25,6 +25,10 @@ module Anthropic
         # @!attribute fallback_credit
         #   Outcome of the `fallback_credit_token` presented on this request.
         #
+        #   Present on every response to a non-batch request that carried a
+        #   `fallback_credit_token`, in either redemption mode; absent otherwise (batch
+        #   items accept and ignore the token and carry no outcome object).
+        #
         #   @return [Anthropic::Models::Beta::BetaFallbackCreditUsage, nil]
         required :fallback_credit, -> { Anthropic::Beta::BetaFallbackCreditUsage }, nil?: true
 
@@ -99,9 +103,7 @@ module Anthropic
         required :service_tier, enum: -> { Anthropic::Beta::BetaUsage::ServiceTier }, nil?: true
 
         # @!attribute speed
-        #   Inference speed mode. `fast` provides significantly faster output token
-        #   generation at premium pricing. Not all models support `fast`; invalid
-        #   combinations are rejected at create time.
+        #   The inference speed mode used for this request.
         #
         #   @return [Symbol, Anthropic::Models::Beta::BetaUsage::Speed, nil]
         required :speed, enum: -> { Anthropic::Beta::BetaUsage::Speed }, nil?: true
@@ -132,7 +134,7 @@ module Anthropic
         #
         #   @param service_tier [Symbol, Anthropic::Models::Beta::BetaUsage::ServiceTier, nil] If the request used the priority, standard, or batch tier.
         #
-        #   @param speed [Symbol, Anthropic::Models::Beta::BetaUsage::Speed, nil] Inference speed mode. `fast` provides significantly faster output token generati
+        #   @param speed [Symbol, Anthropic::Models::Beta::BetaUsage::Speed, nil] The inference speed mode used for this request.
 
         # If the request used the priority, standard, or batch tier.
         #
@@ -148,9 +150,7 @@ module Anthropic
           #   @return [Array<Symbol>]
         end
 
-        # Inference speed mode. `fast` provides significantly faster output token
-        # generation at premium pricing. Not all models support `fast`; invalid
-        # combinations are rejected at create time.
+        # The inference speed mode used for this request.
         #
         # @see Anthropic::Models::Beta::BetaUsage#speed
         module Speed

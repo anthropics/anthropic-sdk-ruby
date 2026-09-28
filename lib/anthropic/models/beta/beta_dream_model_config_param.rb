@@ -17,9 +17,9 @@ module Anthropic
         required :id, String
 
         # @!attribute speed
-        #   Inference speed mode. `fast` provides significantly faster output token
-        #   generation at premium pricing. Not all models support `fast`; invalid
-        #   combinations are rejected at create time.
+        #   How fast the model generates output for the dream. Defaults to `standard`.
+        #
+        #   Dreams accept only `standard`.
         #
         #   @return [Symbol, Anthropic::Models::Beta::BetaDreamModelConfigParam::Speed, nil]
         optional :speed, enum: -> { Anthropic::Beta::BetaDreamModelConfigParam::Speed }, nil?: true
@@ -32,11 +32,11 @@ module Anthropic
         #
         #   @param id [String] The ID of the model to run the dream with.
         #
-        #   @param speed [Symbol, Anthropic::Models::Beta::BetaDreamModelConfigParam::Speed, nil] Inference speed mode. `fast` provides significantly faster output token generati
+        #   @param speed [Symbol, Anthropic::Models::Beta::BetaDreamModelConfigParam::Speed, nil] How fast the model generates output for the dream. Defaults to `standard`.
 
-        # Inference speed mode. `fast` provides significantly faster output token
-        # generation at premium pricing. Not all models support `fast`; invalid
-        # combinations are rejected at create time.
+        # How fast the model generates output for the dream. Defaults to `standard`.
+        #
+        # Dreams accept only `standard`.
         #
         # @see Anthropic::Models::Beta::BetaDreamModelConfigParam#speed
         module Speed

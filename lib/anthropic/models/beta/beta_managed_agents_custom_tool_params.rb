@@ -12,7 +12,7 @@ module Anthropic
         required :description, String
 
         # @!attribute input_schema
-        #   JSON Schema for custom tool input parameters.
+        #   JSON Schema defining the expected input parameters for the tool.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsCustomToolInputSchema]
         required :input_schema, -> { Anthropic::Beta::BetaManagedAgentsCustomToolInputSchema }
@@ -40,7 +40,7 @@ module Anthropic
         #
         #   @param description [String] Description of what the tool does, shown to the agent to help it decide when to
         #
-        #   @param input_schema [Anthropic::Models::Beta::BetaManagedAgentsCustomToolInputSchema] JSON Schema for custom tool input parameters.
+        #   @param input_schema [Anthropic::Models::Beta::BetaManagedAgentsCustomToolInputSchema] JSON Schema defining the expected input parameters for the tool.
         #
         #   @param name [String] Unique name for the tool. 1-128 characters; letters, digits, underscores, and hy
         #

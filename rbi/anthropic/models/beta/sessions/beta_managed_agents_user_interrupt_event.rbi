@@ -24,7 +24,7 @@ module Anthropic
           end
           attr_accessor :type
 
-          # A timestamp in RFC 3339 format
+          # Timestamp when the interrupt was processed.
           sig { returns(T.nilable(Time)) }
           attr_accessor :processed_at
 
@@ -48,7 +48,7 @@ module Anthropic
             # Unique identifier for this event.
             id:,
             type:,
-            # A timestamp in RFC 3339 format
+            # Timestamp when the interrupt was processed.
             processed_at: nil,
             # If absent, interrupts every non-archived thread in a multiagent session (or the
             # primary alone in a single-agent session). If present, interrupts only the named

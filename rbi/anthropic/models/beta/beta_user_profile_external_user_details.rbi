@@ -15,11 +15,8 @@ module Anthropic
             )
           end
 
-        # The status of the entity's account on the platform, as the platform states it:
-        # `active`; `suspended`, when the platform has restricted the account and may
-        # restore it; or `blocked`, when the platform has barred it. It records the
-        # platform's decision only; the statuses in `trust_grants` are Anthropic's and do
-        # not follow it.
+        # The status of the entity's account on the platform: `active`, `suspended` or
+        # `blocked`. `null` until the platform supplies one.
         sig do
           returns(
             T.nilable(
@@ -39,8 +36,8 @@ module Anthropic
         sig { returns(T.nilable(String)) }
         attr_accessor :email_hash
 
-        # What kind of entity the profile represents, as the platform states it:
-        # `individual`, `business`, `non_profit` or `government`.
+        # What kind of entity the profile represents: `individual`, `business`,
+        # `non_profit` or `government`. `null` until the platform supplies one.
         sig do
           returns(
             T.nilable(
@@ -55,7 +52,8 @@ module Anthropic
         sig { returns(T.nilable(String)) }
         attr_accessor :name_hash
 
-        # A timestamp in RFC 3339 format
+        # When the entity opened its account with the platform, as stated by the platform,
+        # in RFC 3339 format (UTC). `null` until the platform supplies one.
         sig { returns(T.nilable(Time)) }
         attr_accessor :onboarded_at
 
@@ -85,11 +83,8 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
-          # The status of the entity's account on the platform, as the platform states it:
-          # `active`; `suspended`, when the platform has restricted the account and may
-          # restore it; or `blocked`, when the platform has barred it. It records the
-          # platform's decision only; the statuses in `trust_grants` are Anthropic's and do
-          # not follow it.
+          # The status of the entity's account on the platform: `active`, `suspended` or
+          # `blocked`. `null` until the platform supplies one.
           account_status:,
           # The country the platform associates with the entity, as an ISO 3166-1 alpha-2
           # code. `null` until the platform supplies one.
@@ -97,13 +92,14 @@ module Anthropic
           # The platform-computed hash of the entity's email address. `null` until the
           # platform supplies one.
           email_hash:,
-          # What kind of entity the profile represents, as the platform states it:
-          # `individual`, `business`, `non_profit` or `government`.
+          # What kind of entity the profile represents: `individual`, `business`,
+          # `non_profit` or `government`. `null` until the platform supplies one.
           entity_type:,
           # The platform-computed hash of the entity's name. `null` until the platform
           # supplies one.
           name_hash:,
-          # A timestamp in RFC 3339 format
+          # When the entity opened its account with the platform, as stated by the platform,
+          # in RFC 3339 format (UTC). `null` until the platform supplies one.
           onboarded_at:,
           # The platform's own reference for the entity. `null` until the platform supplies
           # one.
@@ -133,11 +129,8 @@ module Anthropic
         def to_hash
         end
 
-        # The status of the entity's account on the platform, as the platform states it:
-        # `active`; `suspended`, when the platform has restricted the account and may
-        # restore it; or `blocked`, when the platform has barred it. It records the
-        # platform's decision only; the statuses in `trust_grants` are Anthropic's and do
-        # not follow it.
+        # The status of the entity's account on the platform: `active`, `suspended` or
+        # `blocked`. `null` until the platform supplies one.
         module AccountStatus
           extend Anthropic::Internal::Type::Enum
 
@@ -182,8 +175,8 @@ module Anthropic
           end
         end
 
-        # What kind of entity the profile represents, as the platform states it:
-        # `individual`, `business`, `non_profit` or `government`.
+        # What kind of entity the profile represents: `individual`, `business`,
+        # `non_profit` or `government`. `null` until the platform supplies one.
         module EntityType
           extend Anthropic::Internal::Type::Enum
 

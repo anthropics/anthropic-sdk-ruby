@@ -11,7 +11,7 @@ module Anthropic
         required :id, String
 
         # @!attribute archived_at
-        #   A timestamp in RFC 3339 format
+        #   When the agent was archived. Null if not archived.
         #
         #   @return [Time, nil]
         required :archived_at, Time, nil?: true
@@ -45,7 +45,7 @@ module Anthropic
         required :model, -> { Anthropic::Beta::BetaManagedAgentsModelConfig }
 
         # @!attribute multiagent
-        #   Resolved coordinator topology with a concrete agent roster.
+        #   Multiagent orchestration configuration. Null when the agent is single-threaded.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsMultiagent, nil]
         required :multiagent, -> { Anthropic::Beta::BetaManagedAgentsMultiagent }, nil?: true
@@ -98,7 +98,7 @@ module Anthropic
         #
         #   @param id [String]
         #
-        #   @param archived_at [Time, nil] A timestamp in RFC 3339 format
+        #   @param archived_at [Time, nil] When the agent was archived. Null if not archived.
         #
         #   @param created_at [Time] A timestamp in RFC 3339 format
         #
@@ -110,7 +110,7 @@ module Anthropic
         #
         #   @param model [Anthropic::Models::Beta::BetaManagedAgentsModelConfig] Model identifier and configuration.
         #
-        #   @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsMultiagent, nil] Resolved coordinator topology with a concrete agent roster.
+        #   @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsMultiagent, nil] Multiagent orchestration configuration. Null when the agent is single-threaded.
         #
         #   @param name [String]
         #

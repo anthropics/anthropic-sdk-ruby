@@ -31,14 +31,9 @@ module Anthropic
         end
         attr_accessor :networking
 
-        # Specify packages (and optionally their versions) available in this environment.
-        #
-        # When versioning, use the version semantics relevant for the package manager,
-        # e.g. for `pip` use `package==1.0.0`. You are responsible for validating the
-        # package and version exist. Unversioned installs the latest.
-        #
-        # Under `limited` networking, requires `networking.allow_package_managers` to be
-        # `true`.
+        # Package manager configuration. Under `limited` networking, requires
+        # `networking.allow_package_managers` to be `true`. Omit on update to preserve the
+        # existing value.
         sig { returns(T.nilable(Anthropic::Beta::BetaPackagesParams)) }
         attr_reader :packages
 
@@ -68,14 +63,9 @@ module Anthropic
         def self.new(
           # Network configuration policy. Omit on update to preserve the existing value.
           networking: nil,
-          # Specify packages (and optionally their versions) available in this environment.
-          #
-          # When versioning, use the version semantics relevant for the package manager,
-          # e.g. for `pip` use `package==1.0.0`. You are responsible for validating the
-          # package and version exist. Unversioned installs the latest.
-          #
-          # Under `limited` networking, requires `networking.allow_package_managers` to be
-          # `true`.
+          # Package manager configuration. Under `limited` networking, requires
+          # `networking.allow_package_managers` to be `true`. Omit on update to preserve the
+          # existing value.
           packages: nil,
           # Environment type
           type: :cloud

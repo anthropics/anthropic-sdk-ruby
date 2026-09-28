@@ -113,7 +113,8 @@ module Anthropic
             # The memory store ID (memstore\_...). Must belong to the caller's organization
             # and workspace.
             memory_store_id: nil,
-            # Access mode for an attached memory store.
+            # Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts
+            # the store as a read-only filesystem.
             access: nil,
             # Description of the memory store, snapshotted at attach time. Rendered into the
             # agent's system prompt. Empty string when the store has no description.
