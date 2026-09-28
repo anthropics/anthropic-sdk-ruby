@@ -1,5 +1,40 @@
 # Changelog
 
+## 1.74.0 (2026-09-28)
+
+Full Changelog: [v1.73.0...v1.74.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.73.0...v1.74.0)
+
+### Features
+
+* **api:** add between_tools thinking type ([9b24118](https://github.com/anthropics/anthropic-sdk-ruby/commit/9b24118fb51616ba540d461db518dac5daf12f4b))
+* **api:** add claude-sonnet-5-5 ([d4c258e](https://github.com/anthropics/anthropic-sdk-ruby/commit/d4c258e340ccb9b459f5de72c6dbbd0e0c4ad049))
+* **api:** add include_inherited and source to workspace rate limits ([fb110e9](https://github.com/anthropics/anthropic-sdk-ruby/commit/fb110e9a38e7f60e12079a7b88db302c3c767182))
+* **api:** add typed event type values to the Managed Agents events list filter ([38ead1d](https://github.com/anthropics/anthropic-sdk-ruby/commit/38ead1d22356559e0f16149f6208930f6f5342c8))
+* **api:** cache diagnostics GA — diagnostics on Message / MessageCreateParams ([0bee370](https://github.com/anthropics/anthropic-sdk-ruby/commit/0bee370f64c82f51dbd8ed3d4fc03bfa7c8ad9d1))
+
+
+### Bug Fixes
+
+* **client:** keep base URL path for `request` paths starting with `/` ([2e70130](https://github.com/anthropics/anthropic-sdk-ruby/commit/2e70130a8b68e250fbdd7574ada78581c8f48cd5))
+* **client:** send no placeholder filename for unnamed file uploads ([d870615](https://github.com/anthropics/anthropic-sdk-ruby/commit/d870615ecb13e85cb190a1982ceb92856b7b0726))
+* **helpers:** degrade between_tools thinking to disabled on fallback hops ([#276](https://github.com/anthropics/anthropic-sdk-ruby/issues/276)) ([00fa84e](https://github.com/anthropics/anthropic-sdk-ruby/commit/00fa84e4063124357e7e16cbb5242086ddf1f108))
+* **messages:** add the diagnostics parameter to sig and def ([#272](https://github.com/anthropics/anthropic-sdk-ruby/issues/272)) ([ec8e144](https://github.com/anthropics/anthropic-sdk-ruby/commit/ec8e144410c4e59114e1d6ad74edd436113ed7ef))
+
+
+### Chores
+
+* **api:** deprecate the betas param on GA models and completions methods ([d5426bc](https://github.com/anthropics/anthropic-sdk-ruby/commit/d5426bc99a1504957ae6f7c1b5703c88aa3c6c93))
+* **ci:** run CI on larger runners ([07801fb](https://github.com/anthropics/anthropic-sdk-ruby/commit/07801fbdf64e515bc502e41d953689cf714860dd))
+* **docs:** clarify that stream: true returns the raw event stream ([30fd670](https://github.com/anthropics/anthropic-sdk-ruby/commit/30fd670fb5d63fc98842e728b0694435b0ecc684))
+* **docs:** make Managed Agents actor descriptions resource-neutral ([b1d2865](https://github.com/anthropics/anthropic-sdk-ruby/commit/b1d2865d7acbaf7d26e0053740550213ae66377b))
+* **docs:** restore the research-preview notice on the Dream type ([7f1a792](https://github.com/anthropics/anthropic-sdk-ruby/commit/7f1a7924d4c43bb185892c5873f6f2335759ae32))
+* **tools:** remove client-side compaction control ([#271](https://github.com/anthropics/anthropic-sdk-ruby/issues/271)) ([bdfa3ad](https://github.com/anthropics/anthropic-sdk-ruby/commit/bdfa3ad52df49e4de76fc68d490870eea7464cc0))
+
+
+### Documentation
+
+* **api:** prefer each field's own description over its shared type's ([e5b841b](https://github.com/anthropics/anthropic-sdk-ruby/commit/e5b841bbd6bda136fa47c052cd943e9025515692))
+
 ## 1.73.0 (2026-09-22)
 
 Full Changelog: [v1.72.0...v1.73.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.72.0...v1.73.0)
