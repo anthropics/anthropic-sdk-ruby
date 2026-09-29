@@ -42,6 +42,11 @@ module Anthropic
             | Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError
             | Anthropic::Beta::Sessions::BetaManagedAgentsBillingError
             | Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError
+            | Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError
+            | Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError
+            | Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError
+            | Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutError
+            | Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCloneError
 
           module Error
             extend Anthropic::Internal::Type::Union
@@ -55,6 +60,11 @@ module Anthropic
               | :mcp_authentication_failed_error
               | :billing_error
               | :credential_host_unreachable_error
+              | :repository_authentication_error
+              | :repository_forbidden_error
+              | :repository_not_found_error
+              | :repository_checkout_error
+              | :repository_clone_error
 
             module Type
               extend Anthropic::Internal::Type::Enum
@@ -67,6 +77,11 @@ module Anthropic
               MCP_AUTHENTICATION_FAILED_ERROR: :mcp_authentication_failed_error
               BILLING_ERROR: :billing_error
               CREDENTIAL_HOST_UNREACHABLE_ERROR: :credential_host_unreachable_error
+              REPOSITORY_AUTHENTICATION_ERROR: :repository_authentication_error
+              REPOSITORY_FORBIDDEN_ERROR: :repository_forbidden_error
+              REPOSITORY_NOT_FOUND_ERROR: :repository_not_found_error
+              REPOSITORY_CHECKOUT_ERROR: :repository_checkout_error
+              REPOSITORY_CLONE_ERROR: :repository_clone_error
 
               def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error::type_]
             end
@@ -123,6 +138,39 @@ module Anthropic
                 vault_id: String
               ) -> Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError
               | (
+                type: :repository_authentication_error
+                | "repository_authentication_error",
+                message: String,
+                repository_url: String?,
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError::retry_status
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError
+              | (
+                type: :repository_forbidden_error
+                | "repository_forbidden_error",
+                message: String,
+                repository_url: String?,
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError::retry_status
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError
+              | (
+                type: :repository_not_found_error
+                | "repository_not_found_error",
+                message: String,
+                repository_url: String?,
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError::retry_status
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError
+              | (
+                type: :repository_checkout_error | "repository_checkout_error",
+                message: String,
+                repository_url: String?,
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutError::retry_status
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutError
+              | (
+                type: :repository_clone_error | "repository_clone_error",
+                message: String,
+                repository_url: String?,
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCloneError::retry_status
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCloneError
+              | (
                 type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error::type_
                 | String,
                 message: String,
@@ -133,10 +181,16 @@ module Anthropic
                 | Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::retry_status
                 | Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError::retry_status
                 | Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError::retry_status
-                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError::retry_status,
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError::retry_status
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError::retry_status
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError::retry_status
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError::retry_status
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutError::retry_status
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCloneError::retry_status,
                 ?mcp_server_name: String,
                 ?credential_id: String,
-                ?vault_id: String
+                ?vault_id: String,
+                ?repository_url: String?
               ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::error
           end
 

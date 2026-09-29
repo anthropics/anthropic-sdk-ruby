@@ -341,7 +341,12 @@ module Anthropic
                   Anthropic::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::OrHash,
                   Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError::OrHash,
                   Anthropic::Beta::Sessions::BetaManagedAgentsBillingError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError::OrHash
+                  Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutError::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCloneError::OrHash
                 ),
               stop_reason:
                 T.any(

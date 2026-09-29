@@ -1,0 +1,77 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_repository_forbidden_error =
+          {
+            message: String,
+            repository_url: String?,
+            retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError::retry_status,
+            type: :repository_forbidden_error
+          }
+
+        class BetaManagedAgentsRepositoryForbiddenError < Anthropic::Internal::Type::BaseModel
+          attr_accessor message: String
+
+          attr_accessor repository_url: String?
+
+          attr_accessor retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError::retry_status
+
+          attr_accessor type: :repository_forbidden_error
+
+          def initialize: (
+            message: String,
+            repository_url: String?,
+            retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError::retry_status,
+            ?type: :repository_forbidden_error
+          ) -> void
+
+          def to_hash: -> {
+            message: String,
+            repository_url: String?,
+            retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError::retry_status,
+            type: :repository_forbidden_error
+          }
+
+          type retry_status =
+            Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying
+            | Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted
+            | Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal
+
+          module RetryStatus
+            extend Anthropic::Internal::Type::Union
+
+            type type_ = :retrying | :exhausted | :terminal
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              RETRYING: :retrying
+              EXHAUSTED: :exhausted
+              TERMINAL: :terminal
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError::RetryStatus::type_]
+            end
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError::retry_status]
+
+            def self.new:
+              (
+                type: :retrying | "retrying"
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying
+              | (
+                type: :exhausted | "exhausted"
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted
+              | (
+                type: :terminal | "terminal"
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal
+              | (
+                type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError::RetryStatus::type_
+                | String
+              ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError::retry_status
+          end
+        end
+      end
+    end
+  end
+end
