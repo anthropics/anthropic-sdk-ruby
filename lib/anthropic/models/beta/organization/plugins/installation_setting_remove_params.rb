@@ -17,9 +17,10 @@ module Anthropic
             required :plugin_id, String
 
             # @!attribute target
-            #   The RBAC Group (ID prefixed `rbac_group_`) whose own setting is removed. The
-            #   literal `organization` is refused with a 400: an organization-wide setting
-            #   cannot be removed.
+            #   The target whose own setting is removed: the literal `organization` for the
+            #   Plugin's organization-wide setting, or an RBAC Group's ID (prefixed
+            #   `rbac_group_`) for that group's own setting. Removing the `organization` setting
+            #   returns the Plugin to its marketplace's default.
             #
             #   @return [String]
             required :target, String
@@ -38,7 +39,7 @@ module Anthropic
             #
             #   @param plugin_id [String] ID of the Plugin (prefixed `plugin_`).
             #
-            #   @param target [String] The RBAC Group (ID prefixed `rbac_group_`) whose own setting is removed. The lit
+            #   @param target [String] The target whose own setting is removed: the literal `organization` for the Plug
             #
             #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this hea
             #
