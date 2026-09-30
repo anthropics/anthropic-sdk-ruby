@@ -1,0 +1,32 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class RBACGroups
+          class Members
+            def list: (
+              String rbac_group_id,
+              ?limit: Integer,
+              ?page: String?,
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Organization::RBACGroups::BetaRBACGroupMember]
+
+            def add: (
+              String rbac_group_id,
+              user_id: String,
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Beta::Organization::RBACGroups::BetaRBACGroupMember
+
+            def remove: (
+              String user_id,
+              rbac_group_id: String,
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Models::Beta::Organization::RBACGroups::MemberRemoveResponse
+
+            def initialize: (client: Anthropic::Client) -> void
+          end
+        end
+      end
+    end
+  end
+end

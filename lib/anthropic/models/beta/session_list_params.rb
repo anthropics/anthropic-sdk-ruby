@@ -155,7 +155,6 @@ module Anthropic
           #   @return [Array<Symbol>]
         end
 
-        # SessionStatus enum
         module Status
           extend Anthropic::Internal::Type::Enum
 

@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_spend_limit_period = :daily | :monthly | :weekly
+
+        module BetaSpendLimitPeriod
+          extend Anthropic::Internal::Type::Enum
+
+          DAILY: :daily
+          MONTHLY: :monthly
+          WEEKLY: :weekly
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::beta_spend_limit_period]
+        end
+      end
+    end
+  end
+end

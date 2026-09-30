@@ -1,0 +1,48 @@
+# frozen_string_literal: true
+
+require_relative "../../../test_helper"
+
+class Anthropic::Test::Resources::Beta::Organization::RBACRolesTest < Anthropic::Test::ResourceTest
+  def test_retrieve
+    response = @anthropic.beta.organization.rbac_roles.retrieve("rbac_role_id")
+
+    assert_pattern do
+      response => Anthropic::Beta::Organization::BetaRBACRole
+    end
+
+    assert_pattern do
+      response => {
+        id: String,
+        created_at: Time,
+        name: String,
+        type: Symbol,
+        updated_at: Time
+      }
+    end
+  end
+
+  def test_list
+    response = @anthropic.beta.organization.rbac_roles.list
+
+    assert_pattern do
+      response => Anthropic::Internal::PageCursor
+    end
+
+    row = response.to_enum.first
+    return if row.nil?
+
+    assert_pattern do
+      row => Anthropic::Beta::Organization::BetaRBACRole
+    end
+
+    assert_pattern do
+      row => {
+        id: String,
+        created_at: Time,
+        name: String,
+        type: Symbol,
+        updated_at: Time
+      }
+    end
+  end
+end

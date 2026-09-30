@@ -66,7 +66,6 @@ module Anthropic
         required :stats, -> { Anthropic::Beta::BetaManagedAgentsSessionStats }
 
         # @!attribute status
-        #   SessionStatus enum
         #
         #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSession::Status]
         required :status, enum: -> { Anthropic::Beta::BetaManagedAgentsSession::Status }
@@ -133,7 +132,7 @@ module Anthropic
         #
         #   @param stats [Anthropic::Models::Beta::BetaManagedAgentsSessionStats] Timing statistics for the session.
         #
-        #   @param status [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSession::Status] SessionStatus enum
+        #   @param status [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSession::Status]
         #
         #   @param title [String, nil]
         #
@@ -147,8 +146,6 @@ module Anthropic
         #
         #   @param deployment_id [String, nil] Deployment ID when the session was created from a deployment reference. Null oth
 
-        # SessionStatus enum
-        #
         # @see Anthropic::Models::Beta::BetaManagedAgentsSession#status
         module Status
           extend Anthropic::Internal::Type::Enum

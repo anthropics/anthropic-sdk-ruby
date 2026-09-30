@@ -1,0 +1,17 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class Analytics
+          class Apps
+            class Chat
+              attr_reader projects: Anthropic::Resources::Beta::Organization::Analytics::Apps::Chat::Projects
+
+              def initialize: (client: Anthropic::Client) -> void
+            end
+          end
+        end
+      end
+    end
+  end
+end

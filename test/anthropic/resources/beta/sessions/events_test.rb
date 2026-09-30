@@ -167,6 +167,7 @@ class Anthropic::Test::Resources::Beta::Sessions::EventsTest < Anthropic::Test::
         type: :"session.status_idle",
         id: String,
         processed_at: Time,
+        stop_details: Anthropic::Beta::Sessions::BetaManagedAgentsSessionRefusalStopDetails | nil,
         stop_reason: Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent::StopReason
       }
       in {type: :"session.status_terminated", id: String, processed_at: Time}
@@ -216,6 +217,7 @@ class Anthropic::Test::Resources::Beta::Sessions::EventsTest < Anthropic::Test::
         agent_name: String,
         processed_at: Time,
         session_thread_id: String,
+        stop_details: Anthropic::Beta::Sessions::BetaManagedAgentsSessionRefusalStopDetails | nil,
         stop_reason: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::StopReason
       }
       in {

@@ -1,0 +1,116 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_skill_activity =
+          {
+            chat_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillChatMetrics,
+            claude_code_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillClaudeCodeMetrics,
+            cowork_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillCoworkMetrics,
+            distinct_user_count: Integer,
+            office_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillOfficeMetrics,
+            skill_name: String,
+            attributed_list_price: String?,
+            currency: String?,
+            enable_count: Integer?,
+            estimated_overage_spend: String?,
+            invocation_count: Integer?,
+            product: String?,
+            rbac_group_id: String?,
+            rbac_group_name: String?,
+            share_status: Anthropic::Models::Beta::Organization::BetaAnalyticsSkillActivity::share_status?,
+            skill_display_name: String?,
+            user_id: String?
+          }
+
+        class BetaAnalyticsSkillActivity < Anthropic::Internal::Type::BaseModel
+          attr_accessor chat_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillChatMetrics
+
+          attr_accessor claude_code_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillClaudeCodeMetrics
+
+          attr_accessor cowork_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillCoworkMetrics
+
+          attr_accessor distinct_user_count: Integer
+
+          attr_accessor office_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillOfficeMetrics
+
+          attr_accessor skill_name: String
+
+          attr_accessor attributed_list_price: String?
+
+          attr_accessor currency: String?
+
+          attr_accessor enable_count: Integer?
+
+          attr_accessor estimated_overage_spend: String?
+
+          attr_accessor invocation_count: Integer?
+
+          attr_accessor product: String?
+
+          attr_accessor rbac_group_id: String?
+
+          attr_accessor rbac_group_name: String?
+
+          attr_accessor share_status: Anthropic::Models::Beta::Organization::BetaAnalyticsSkillActivity::share_status?
+
+          attr_accessor skill_display_name: String?
+
+          attr_accessor user_id: String?
+
+          def initialize: (
+            chat_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillChatMetrics,
+            claude_code_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillClaudeCodeMetrics,
+            cowork_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillCoworkMetrics,
+            distinct_user_count: Integer,
+            office_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillOfficeMetrics,
+            skill_name: String,
+            ?attributed_list_price: String?,
+            ?currency: String?,
+            ?enable_count: Integer?,
+            ?estimated_overage_spend: String?,
+            ?invocation_count: Integer?,
+            ?product: String?,
+            ?rbac_group_id: String?,
+            ?rbac_group_name: String?,
+            ?share_status: Anthropic::Models::Beta::Organization::BetaAnalyticsSkillActivity::share_status?,
+            ?skill_display_name: String?,
+            ?user_id: String?
+          ) -> void
+
+          def to_hash: -> {
+            chat_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillChatMetrics,
+            claude_code_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillClaudeCodeMetrics,
+            cowork_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillCoworkMetrics,
+            distinct_user_count: Integer,
+            office_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillOfficeMetrics,
+            skill_name: String,
+            attributed_list_price: String?,
+            currency: String?,
+            enable_count: Integer?,
+            estimated_overage_spend: String?,
+            invocation_count: Integer?,
+            product: String?,
+            rbac_group_id: String?,
+            rbac_group_name: String?,
+            share_status: Anthropic::Models::Beta::Organization::BetaAnalyticsSkillActivity::share_status?,
+            skill_display_name: String?,
+            user_id: String?
+          }
+
+          type share_status = :organization | :private | :public
+
+          module ShareStatus
+            extend Anthropic::Internal::Type::Enum
+
+            ORGANIZATION: :organization
+            PRIVATE: :private
+            PUBLIC: :public
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaAnalyticsSkillActivity::share_status]
+          end
+        end
+      end
+    end
+  end
+end

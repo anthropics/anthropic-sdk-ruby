@@ -1,0 +1,131 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_cost_users_item =
+          {
+            actor: Anthropic::Beta::Organization::BetaAnalyticsUserActor,
+            amount: String,
+            claude_tag_category: Anthropic::Models::Beta::Organization::beta_analytics_claude_tag_category?,
+            claude_tag_user_id: String?,
+            context_window: Anthropic::Models::Beta::Organization::beta_analytics_context_window?,
+            cost_type: Anthropic::Models::Beta::Organization::beta_analytics_cost_type?,
+            currency: String,
+            ending_at: Time?,
+            inference_geo: Anthropic::Models::Beta::Organization::BetaAnalyticsCostUsersItem::inference_geo?,
+            list_amount: String,
+            model: String?,
+            product: String?,
+            rbac_group_id: String?,
+            requests: Integer?,
+            slack_channel_id: String?,
+            speed: Anthropic::Models::Beta::Organization::BetaAnalyticsCostUsersItem::speed?,
+            starting_at: Time?,
+            token_type: Anthropic::Models::Beta::Organization::beta_analytics_token_type?
+          }
+
+        class BetaAnalyticsCostUsersItem < Anthropic::Internal::Type::BaseModel
+          attr_accessor actor: Anthropic::Beta::Organization::BetaAnalyticsUserActor
+
+          attr_accessor amount: String
+
+          attr_accessor claude_tag_category: Anthropic::Models::Beta::Organization::beta_analytics_claude_tag_category?
+
+          attr_accessor claude_tag_user_id: String?
+
+          attr_accessor context_window: Anthropic::Models::Beta::Organization::beta_analytics_context_window?
+
+          attr_accessor cost_type: Anthropic::Models::Beta::Organization::beta_analytics_cost_type?
+
+          attr_accessor currency: String
+
+          attr_accessor ending_at: Time?
+
+          attr_accessor inference_geo: Anthropic::Models::Beta::Organization::BetaAnalyticsCostUsersItem::inference_geo?
+
+          attr_accessor list_amount: String
+
+          attr_accessor model: String?
+
+          attr_accessor product: String?
+
+          attr_accessor rbac_group_id: String?
+
+          attr_accessor requests: Integer?
+
+          attr_accessor slack_channel_id: String?
+
+          attr_accessor speed: Anthropic::Models::Beta::Organization::BetaAnalyticsCostUsersItem::speed?
+
+          attr_accessor starting_at: Time?
+
+          attr_accessor token_type: Anthropic::Models::Beta::Organization::beta_analytics_token_type?
+
+          def initialize: (
+            actor: Anthropic::Beta::Organization::BetaAnalyticsUserActor,
+            amount: String,
+            claude_tag_category: Anthropic::Models::Beta::Organization::beta_analytics_claude_tag_category?,
+            claude_tag_user_id: String?,
+            context_window: Anthropic::Models::Beta::Organization::beta_analytics_context_window?,
+            cost_type: Anthropic::Models::Beta::Organization::beta_analytics_cost_type?,
+            currency: String,
+            ending_at: Time?,
+            inference_geo: Anthropic::Models::Beta::Organization::BetaAnalyticsCostUsersItem::inference_geo?,
+            list_amount: String,
+            model: String?,
+            product: String?,
+            rbac_group_id: String?,
+            requests: Integer?,
+            slack_channel_id: String?,
+            speed: Anthropic::Models::Beta::Organization::BetaAnalyticsCostUsersItem::speed?,
+            starting_at: Time?,
+            token_type: Anthropic::Models::Beta::Organization::beta_analytics_token_type?
+          ) -> void
+
+          def to_hash: -> {
+            actor: Anthropic::Beta::Organization::BetaAnalyticsUserActor,
+            amount: String,
+            claude_tag_category: Anthropic::Models::Beta::Organization::beta_analytics_claude_tag_category?,
+            claude_tag_user_id: String?,
+            context_window: Anthropic::Models::Beta::Organization::beta_analytics_context_window?,
+            cost_type: Anthropic::Models::Beta::Organization::beta_analytics_cost_type?,
+            currency: String,
+            ending_at: Time?,
+            inference_geo: Anthropic::Models::Beta::Organization::BetaAnalyticsCostUsersItem::inference_geo?,
+            list_amount: String,
+            model: String?,
+            product: String?,
+            rbac_group_id: String?,
+            requests: Integer?,
+            slack_channel_id: String?,
+            speed: Anthropic::Models::Beta::Organization::BetaAnalyticsCostUsersItem::speed?,
+            starting_at: Time?,
+            token_type: Anthropic::Models::Beta::Organization::beta_analytics_token_type?
+          }
+
+          type inference_geo = :global | :us
+
+          module InferenceGeo
+            extend Anthropic::Internal::Type::Enum
+
+            GLOBAL: :global
+            US: :us
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaAnalyticsCostUsersItem::inference_geo]
+          end
+
+          type speed = :fast | :standard
+
+          module Speed
+            extend Anthropic::Internal::Type::Enum
+
+            FAST: :fast
+            STANDARD: :standard
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaAnalyticsCostUsersItem::speed]
+          end
+        end
+      end
+    end
+  end
+end

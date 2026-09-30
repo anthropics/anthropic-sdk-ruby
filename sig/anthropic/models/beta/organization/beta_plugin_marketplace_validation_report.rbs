@@ -1,0 +1,64 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_plugin_marketplace_validation_report =
+          {
+            commit_sha: String?,
+            manifest_error: String?,
+            manifest_error_code: String?,
+            plugin_errors: ::Array[Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginError],
+            plugin_warnings: ::Array[Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginWarnings],
+            ref: String?,
+            total_plugin_count: Integer,
+            type: :plugin_marketplace_validation_report,
+            valid: bool
+          }
+
+        class BetaPluginMarketplaceValidationReport < Anthropic::Internal::Type::BaseModel
+          attr_accessor commit_sha: String?
+
+          attr_accessor manifest_error: String?
+
+          attr_accessor manifest_error_code: String?
+
+          attr_accessor plugin_errors: ::Array[Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginError]
+
+          attr_accessor plugin_warnings: ::Array[Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginWarnings]
+
+          attr_accessor ref: String?
+
+          attr_accessor total_plugin_count: Integer
+
+          attr_accessor type: :plugin_marketplace_validation_report
+
+          attr_accessor valid: bool
+
+          def initialize: (
+            commit_sha: String?,
+            manifest_error: String?,
+            manifest_error_code: String?,
+            plugin_errors: ::Array[Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginError],
+            plugin_warnings: ::Array[Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginWarnings],
+            ref: String?,
+            total_plugin_count: Integer,
+            valid: bool,
+            ?type: :plugin_marketplace_validation_report
+          ) -> void
+
+          def to_hash: -> {
+            commit_sha: String?,
+            manifest_error: String?,
+            manifest_error_code: String?,
+            plugin_errors: ::Array[Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginError],
+            plugin_warnings: ::Array[Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginWarnings],
+            ref: String?,
+            total_plugin_count: Integer,
+            type: :plugin_marketplace_validation_report,
+            valid: bool
+          }
+        end
+      end
+    end
+  end
+end

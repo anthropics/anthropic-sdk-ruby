@@ -1,0 +1,53 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_session_refusal_stop_details =
+          {
+            category: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRefusalStopDetails::category?,
+            explanation: String?,
+            type: :refusal
+          }
+
+        class BetaManagedAgentsSessionRefusalStopDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor category: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRefusalStopDetails::category?
+
+          attr_accessor explanation: String?
+
+          attr_accessor type: :refusal
+
+          def initialize: (
+            category: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRefusalStopDetails::category?,
+            explanation: String?,
+            ?type: :refusal
+          ) -> void
+
+          def to_hash: -> {
+            category: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRefusalStopDetails::category?,
+            explanation: String?,
+            type: :refusal
+          }
+
+          type category =
+            :cyber
+            | :bio
+            | :frontier_llm
+            | :reasoning_extraction
+            | :general_harms
+
+          module Category
+            extend Anthropic::Internal::Type::Enum
+
+            CYBER: :cyber
+            BIO: :bio
+            FRONTIER_LLM: :frontier_llm
+            REASONING_EXTRACTION: :reasoning_extraction
+            GENERAL_HARMS: :general_harms
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRefusalStopDetails::category]
+          end
+        end
+      end
+    end
+  end
+end

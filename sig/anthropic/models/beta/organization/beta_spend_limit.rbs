@@ -1,0 +1,128 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_spend_limit =
+          {
+            id: String,
+            amount: String?,
+            created_at: Time,
+            currency: String,
+            period: Anthropic::Models::Beta::Organization::beta_spend_limit_period,
+            scope: Anthropic::Models::Beta::Organization::BetaSpendLimit::scope,
+            type: :spend_limit,
+            updated_at: Time
+          }
+
+        class BetaSpendLimit < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor amount: String?
+
+          attr_accessor created_at: Time
+
+          attr_accessor currency: String
+
+          attr_accessor period: Anthropic::Models::Beta::Organization::beta_spend_limit_period
+
+          attr_accessor scope: Anthropic::Models::Beta::Organization::BetaSpendLimit::scope
+
+          attr_accessor type: :spend_limit
+
+          attr_accessor updated_at: Time
+
+          def initialize: (
+            id: String,
+            amount: String?,
+            created_at: Time,
+            currency: String,
+            period: Anthropic::Models::Beta::Organization::beta_spend_limit_period,
+            scope: Anthropic::Models::Beta::Organization::BetaSpendLimit::scope,
+            updated_at: Time,
+            ?type: :spend_limit
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            amount: String?,
+            created_at: Time,
+            currency: String,
+            period: Anthropic::Models::Beta::Organization::beta_spend_limit_period,
+            scope: Anthropic::Models::Beta::Organization::BetaSpendLimit::scope,
+            type: :spend_limit,
+            updated_at: Time
+          }
+
+          type scope =
+            Anthropic::Beta::Organization::BetaSpendLimitUserScope
+            | Anthropic::Beta::Organization::BetaSpendLimitSeatTierScope
+            | Anthropic::Beta::Organization::BetaSpendLimitRBACGroupScope
+            | Anthropic::Beta::Organization::BetaSpendLimitOrganizationServiceScope
+            | Anthropic::Beta::Organization::BetaSpendLimitOrganizationScope
+            | Anthropic::Beta::Organization::BetaSpendLimitWorkspaceScope
+
+          module Scope
+            extend Anthropic::Internal::Type::Union
+
+            type type_ =
+              :user
+              | :seat_tier
+              | :rbac_group
+              | :organization_service
+              | :organization
+              | :workspace
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              USER: :user
+              SEAT_TIER: :seat_tier
+              RBAC_GROUP: :rbac_group
+              ORGANIZATION_SERVICE: :organization_service
+              ORGANIZATION: :organization
+              WORKSPACE: :workspace
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaSpendLimit::Scope::type_]
+            end
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::BetaSpendLimit::scope]
+
+            def self.new:
+              (
+                type: :user | "user",
+                user_id: String
+              ) -> Anthropic::Beta::Organization::BetaSpendLimitUserScope
+              | (
+                type: :seat_tier | "seat_tier",
+                seat_tier: String
+              ) -> Anthropic::Beta::Organization::BetaSpendLimitSeatTierScope
+              | (
+                type: :rbac_group | "rbac_group",
+                rbac_group_id: String
+              ) -> Anthropic::Beta::Organization::BetaSpendLimitRBACGroupScope
+              | (
+                type: :organization_service | "organization_service",
+                service: String
+              ) -> Anthropic::Beta::Organization::BetaSpendLimitOrganizationServiceScope
+              | (
+                type: :organization | "organization"
+              ) -> Anthropic::Beta::Organization::BetaSpendLimitOrganizationScope
+              | (
+                type: :workspace | "workspace",
+                workspace_id: String
+              ) -> Anthropic::Beta::Organization::BetaSpendLimitWorkspaceScope
+              | (
+                type: Anthropic::Models::Beta::Organization::BetaSpendLimit::Scope::type_
+                | String,
+                ?user_id: String,
+                ?seat_tier: String,
+                ?rbac_group_id: String,
+                ?service: String,
+                ?workspace_id: String
+              ) -> Anthropic::Models::Beta::Organization::BetaSpendLimit::scope
+          end
+        end
+      end
+    end
+  end
+end

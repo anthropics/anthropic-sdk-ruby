@@ -367,7 +367,7 @@ module Anthropic
             body: parsed.except(*header_params.keys),
             stream: Anthropic::Internal::Stream,
             model: Anthropic::Beta::BetaRawMessageStreamEvent,
-            options: {timeout: 600, **options}
+            options: {timeout: (@client.timeout_overridden? ? @client.timeout : 600), **options}
           )
         end
 

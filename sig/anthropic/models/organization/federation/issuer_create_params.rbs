@@ -1,0 +1,101 @@
+module Anthropic
+  module Models
+    module Organization
+      module Federation
+        type issuer_create_params =
+          {
+            issuer_url: String,
+            name: String,
+            check_jti: bool?,
+            jwks: Anthropic::Models::Organization::Federation::IssuerCreateParams::jwks,
+            max_jwt_lifetime_seconds: Integer?
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class IssuerCreateParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor issuer_url: String
+
+          attr_accessor name: String
+
+          attr_accessor check_jti: bool?
+
+          attr_reader jwks: Anthropic::Models::Organization::Federation::IssuerCreateParams::jwks?
+
+          def jwks=: (
+            Anthropic::Models::Organization::Federation::IssuerCreateParams::jwks
+          ) -> Anthropic::Models::Organization::Federation::IssuerCreateParams::jwks
+
+          attr_accessor max_jwt_lifetime_seconds: Integer?
+
+          def initialize: (
+            issuer_url: String,
+            name: String,
+            ?check_jti: bool?,
+            ?jwks: Anthropic::Models::Organization::Federation::IssuerCreateParams::jwks,
+            ?max_jwt_lifetime_seconds: Integer?,
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            issuer_url: String,
+            name: String,
+            check_jti: bool?,
+            jwks: Anthropic::Models::Organization::Federation::IssuerCreateParams::jwks,
+            max_jwt_lifetime_seconds: Integer?,
+            request_options: Anthropic::RequestOptions
+          }
+
+          type jwks =
+            Anthropic::Organization::Federation::JWKSDiscovery
+            | Anthropic::Organization::Federation::JWKSExplicitURL
+            | Anthropic::Organization::Federation::JWKSInline
+
+          module JWKS
+            extend Anthropic::Internal::Type::Union
+
+            type type_ = :discovery | :explicit_url | :inline
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              DISCOVERY: :discovery
+              EXPLICIT_URL: :explicit_url
+              INLINE: :inline
+
+              def self?.values: -> ::Array[Anthropic::Models::Organization::Federation::IssuerCreateParams::JWKS::type_]
+            end
+
+            def self?.variants: -> ::Array[Anthropic::Models::Organization::Federation::IssuerCreateParams::jwks]
+
+            def self.new:
+              (
+                type: :discovery | "discovery",
+                ?ca_cert_pem: String?,
+                ?discovery_base: String?
+              ) -> Anthropic::Organization::Federation::JWKSDiscovery
+              | (
+                type: :explicit_url | "explicit_url",
+                url: String,
+                ?ca_cert_pem: String?
+              ) -> Anthropic::Organization::Federation::JWKSExplicitURL
+              | (
+                type: :inline | "inline",
+                keys: ::Array[::Hash[Symbol, top]]
+              ) -> Anthropic::Organization::Federation::JWKSInline
+              | (
+                type: Anthropic::Models::Organization::Federation::IssuerCreateParams::JWKS::type_
+                | String,
+                ?ca_cert_pem: String?,
+                ?discovery_base: String?,
+                ?url: String,
+                ?keys: ::Array[::Hash[Symbol, top]]
+              ) -> Anthropic::Models::Organization::Federation::IssuerCreateParams::jwks
+          end
+        end
+      end
+    end
+  end
+end

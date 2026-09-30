@@ -1,0 +1,65 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Plugins
+          type installation_setting_set_params =
+            {
+              plugin_id: String,
+              target: String,
+              installation_preference: Anthropic::Models::Beta::Organization::Plugins::InstallationSettingSetParams::installation_preference,
+              betas: ::Array[Anthropic::Models::anthropic_beta]
+            }
+            & Anthropic::Internal::Type::request_parameters
+
+          class InstallationSettingSetParams < Anthropic::Internal::Type::BaseModel
+            extend Anthropic::Internal::Type::RequestParameters::Converter
+            include Anthropic::Internal::Type::RequestParameters
+
+            attr_accessor plugin_id: String
+
+            attr_accessor target: String
+
+            attr_accessor installation_preference: Anthropic::Models::Beta::Organization::Plugins::InstallationSettingSetParams::installation_preference
+
+            attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+            def betas=: (
+              ::Array[Anthropic::Models::anthropic_beta]
+            ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+            def initialize: (
+              plugin_id: String,
+              target: String,
+              installation_preference: Anthropic::Models::Beta::Organization::Plugins::InstallationSettingSetParams::installation_preference,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> void
+
+            def to_hash: -> {
+              plugin_id: String,
+              target: String,
+              installation_preference: Anthropic::Models::Beta::Organization::Plugins::InstallationSettingSetParams::installation_preference,
+              betas: ::Array[Anthropic::Models::anthropic_beta],
+              request_options: Anthropic::RequestOptions
+            }
+
+            type installation_preference =
+              :auto_install | :available | :not_available | :required
+
+            module InstallationPreference
+              extend Anthropic::Internal::Type::Enum
+
+              AUTO_INSTALL: :auto_install
+              AVAILABLE: :available
+              NOT_AVAILABLE: :not_available
+              REQUIRED: :required
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Plugins::InstallationSettingSetParams::installation_preference]
+            end
+          end
+        end
+      end
+    end
+  end
+end

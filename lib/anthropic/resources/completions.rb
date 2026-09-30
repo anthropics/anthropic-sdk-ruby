@@ -58,7 +58,7 @@ module Anthropic
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
           body: parsed.except(*header_params.keys),
           model: Anthropic::Completion,
-          options: {timeout: 600, **options}
+          options: {timeout: (@client.timeout_overridden? ? @client.timeout : 600), **options}
         )
       end
 
@@ -124,7 +124,7 @@ module Anthropic
           body: parsed.except(*header_params.keys),
           stream: Anthropic::Internal::Stream,
           model: Anthropic::Completion,
-          options: {timeout: 600, **options}
+          options: {timeout: (@client.timeout_overridden? ? @client.timeout : 600), **options}
         )
       end
 

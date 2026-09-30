@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_cost_type = :code_execution | :tokens | :web_search
+
+        module BetaAnalyticsCostType
+          extend Anthropic::Internal::Type::Enum
+
+          CODE_EXECUTION: :code_execution
+          TOKENS: :tokens
+          WEB_SEARCH: :web_search
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::beta_analytics_cost_type]
+        end
+      end
+    end
+  end
+end

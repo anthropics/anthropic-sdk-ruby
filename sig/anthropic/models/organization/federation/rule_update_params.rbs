@@ -1,0 +1,70 @@
+module Anthropic
+  module Models
+    module Organization
+      module Federation
+        type rule_update_params =
+          {
+            federation_rule_id: String,
+            applies_to_all_workspaces: bool?,
+            description: String?,
+            match: Anthropic::Organization::Federation::FederationRuleMatch?,
+            name: String?,
+            oauth_scope: String?,
+            target: Anthropic::Organization::Federation::ServiceAccountTarget?,
+            token_lifetime_seconds: Integer?,
+            workspace_id: String?
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class RuleUpdateParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor federation_rule_id: String
+
+          attr_accessor applies_to_all_workspaces: bool?
+
+          attr_accessor description: String?
+
+          attr_accessor match: Anthropic::Organization::Federation::FederationRuleMatch?
+
+          attr_accessor name: String?
+
+          attr_accessor oauth_scope: String?
+
+          attr_accessor target: Anthropic::Organization::Federation::ServiceAccountTarget?
+
+          attr_accessor token_lifetime_seconds: Integer?
+
+          attr_accessor workspace_id: String?
+
+          def initialize: (
+            federation_rule_id: String,
+            ?applies_to_all_workspaces: bool?,
+            ?description: String?,
+            ?match: Anthropic::Organization::Federation::FederationRuleMatch?,
+            ?name: String?,
+            ?oauth_scope: String?,
+            ?target: Anthropic::Organization::Federation::ServiceAccountTarget?,
+            ?token_lifetime_seconds: Integer?,
+            ?workspace_id: String?,
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            federation_rule_id: String,
+            applies_to_all_workspaces: bool?,
+            description: String?,
+            match: Anthropic::Organization::Federation::FederationRuleMatch?,
+            name: String?,
+            oauth_scope: String?,
+            target: Anthropic::Organization::Federation::ServiceAccountTarget?,
+            token_lifetime_seconds: Integer?,
+            workspace_id: String?,
+            request_options: Anthropic::RequestOptions
+          }
+        end
+      end
+    end
+  end
+end

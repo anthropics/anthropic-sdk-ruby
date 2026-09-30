@@ -48,7 +48,12 @@ module Anthropic
                   Anthropic::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::OrHash,
                   Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError::OrHash,
                   Anthropic::Beta::Sessions::BetaManagedAgentsBillingError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError::OrHash
+                  Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutError::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCloneError::OrHash
                 ),
               processed_at: Time,
               type:
@@ -93,7 +98,12 @@ module Anthropic
                   Anthropic::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError,
                   Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError,
                   Anthropic::Beta::Sessions::BetaManagedAgentsBillingError,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError
+                  Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutError,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCloneError
                 )
               end
 
@@ -149,6 +159,31 @@ module Anthropic
                   :credential_host_unreachable_error,
                   Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error::Type::TaggedSymbol
                 )
+              REPOSITORY_AUTHENTICATION_ERROR =
+                T.let(
+                  :repository_authentication_error,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error::Type::TaggedSymbol
+                )
+              REPOSITORY_FORBIDDEN_ERROR =
+                T.let(
+                  :repository_forbidden_error,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error::Type::TaggedSymbol
+                )
+              REPOSITORY_NOT_FOUND_ERROR =
+                T.let(
+                  :repository_not_found_error,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error::Type::TaggedSymbol
+                )
+              REPOSITORY_CHECKOUT_ERROR =
+                T.let(
+                  :repository_checkout_error,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error::Type::TaggedSymbol
+                )
+              REPOSITORY_CLONE_ERROR =
+                T.let(
+                  :repository_clone_error,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error::Type::TaggedSymbol
+                )
 
               sig do
                 override.returns(
@@ -186,7 +221,8 @@ module Anthropic
                   ),
                 mcp_server_name: String,
                 credential_id: String,
-                vault_id: String
+                vault_id: String,
+                repository_url: T.nilable(String)
               ).returns(
                 Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error::Variants
               )
@@ -202,7 +238,10 @@ module Anthropic
               # ID of the affected credential.
               credential_id: nil,
               # ID of the vault containing the affected credential.
-              vault_id: nil
+              vault_id: nil,
+              # URL of the repository that could not be cloned. Null when it could not be
+              # identified.
+              repository_url: nil
             )
             end
           end

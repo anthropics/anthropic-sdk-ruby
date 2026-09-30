@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    module Beta
+      class BetaPluginTargetOrganization = Organization::BetaPluginTargetOrganization
+
+      module Organization
+        type beta_plugin_target_organization = { type: :organization }
+
+        class BetaPluginTargetOrganization < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :organization
+
+          def initialize: (?type: :organization) -> void
+
+          def to_hash: -> { type: :organization }
+        end
+      end
+    end
+  end
+end

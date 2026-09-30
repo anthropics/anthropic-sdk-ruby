@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    class OrganizationRateLimitWebSearchGroup = Organization::OrganizationRateLimitWebSearchGroup
+
+    module Organization
+      type organization_rate_limit_web_search_group =
+        { id: String, type: :web_search }
+
+      class OrganizationRateLimitWebSearchGroup < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor type: :web_search
+
+        def initialize: (id: String, ?type: :web_search) -> void
+
+        def to_hash: -> { id: String, type: :web_search }
+      end
+    end
+  end
+end

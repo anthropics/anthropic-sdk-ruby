@@ -1,0 +1,116 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_usage_bucketed_result =
+          {
+            cache_creation: Anthropic::Beta::BetaCacheCreation,
+            cache_read_input_tokens: Integer,
+            claude_tag_category: Anthropic::Models::Beta::Organization::beta_analytics_claude_tag_category?,
+            claude_tag_user_id: String?,
+            context_window: Anthropic::Models::Beta::Organization::beta_analytics_context_window?,
+            inference_geo: Anthropic::Models::Beta::Organization::BetaAnalyticsUsageBucketedResult::inference_geo?,
+            model: String?,
+            output_tokens: Integer,
+            product: String?,
+            rbac_group_id: String?,
+            requests: Integer?,
+            server_tool_use: Anthropic::Beta::Organization::BetaAnalyticsServerToolUse,
+            slack_channel_id: String?,
+            speed: Anthropic::Models::Beta::Organization::BetaAnalyticsUsageBucketedResult::speed?,
+            uncached_input_tokens: Integer
+          }
+
+        class BetaAnalyticsUsageBucketedResult < Anthropic::Internal::Type::BaseModel
+          attr_accessor cache_creation: Anthropic::Beta::BetaCacheCreation
+
+          attr_accessor cache_read_input_tokens: Integer
+
+          attr_accessor claude_tag_category: Anthropic::Models::Beta::Organization::beta_analytics_claude_tag_category?
+
+          attr_accessor claude_tag_user_id: String?
+
+          attr_accessor context_window: Anthropic::Models::Beta::Organization::beta_analytics_context_window?
+
+          attr_accessor inference_geo: Anthropic::Models::Beta::Organization::BetaAnalyticsUsageBucketedResult::inference_geo?
+
+          attr_accessor model: String?
+
+          attr_accessor output_tokens: Integer
+
+          attr_accessor product: String?
+
+          attr_accessor rbac_group_id: String?
+
+          attr_accessor requests: Integer?
+
+          attr_accessor server_tool_use: Anthropic::Beta::Organization::BetaAnalyticsServerToolUse
+
+          attr_accessor slack_channel_id: String?
+
+          attr_accessor speed: Anthropic::Models::Beta::Organization::BetaAnalyticsUsageBucketedResult::speed?
+
+          attr_accessor uncached_input_tokens: Integer
+
+          def initialize: (
+            cache_creation: Anthropic::Beta::BetaCacheCreation,
+            cache_read_input_tokens: Integer,
+            claude_tag_category: Anthropic::Models::Beta::Organization::beta_analytics_claude_tag_category?,
+            claude_tag_user_id: String?,
+            context_window: Anthropic::Models::Beta::Organization::beta_analytics_context_window?,
+            inference_geo: Anthropic::Models::Beta::Organization::BetaAnalyticsUsageBucketedResult::inference_geo?,
+            model: String?,
+            output_tokens: Integer,
+            product: String?,
+            rbac_group_id: String?,
+            requests: Integer?,
+            server_tool_use: Anthropic::Beta::Organization::BetaAnalyticsServerToolUse,
+            slack_channel_id: String?,
+            speed: Anthropic::Models::Beta::Organization::BetaAnalyticsUsageBucketedResult::speed?,
+            uncached_input_tokens: Integer
+          ) -> void
+
+          def to_hash: -> {
+            cache_creation: Anthropic::Beta::BetaCacheCreation,
+            cache_read_input_tokens: Integer,
+            claude_tag_category: Anthropic::Models::Beta::Organization::beta_analytics_claude_tag_category?,
+            claude_tag_user_id: String?,
+            context_window: Anthropic::Models::Beta::Organization::beta_analytics_context_window?,
+            inference_geo: Anthropic::Models::Beta::Organization::BetaAnalyticsUsageBucketedResult::inference_geo?,
+            model: String?,
+            output_tokens: Integer,
+            product: String?,
+            rbac_group_id: String?,
+            requests: Integer?,
+            server_tool_use: Anthropic::Beta::Organization::BetaAnalyticsServerToolUse,
+            slack_channel_id: String?,
+            speed: Anthropic::Models::Beta::Organization::BetaAnalyticsUsageBucketedResult::speed?,
+            uncached_input_tokens: Integer
+          }
+
+          type inference_geo = :global | :us
+
+          module InferenceGeo
+            extend Anthropic::Internal::Type::Enum
+
+            GLOBAL: :global
+            US: :us
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaAnalyticsUsageBucketedResult::inference_geo]
+          end
+
+          type speed = :fast | :standard
+
+          module Speed
+            extend Anthropic::Internal::Type::Enum
+
+            FAST: :fast
+            STANDARD: :standard
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaAnalyticsUsageBucketedResult::speed]
+          end
+        end
+      end
+    end
+  end
+end

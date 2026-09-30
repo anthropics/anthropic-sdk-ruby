@@ -1,0 +1,64 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_artifact_activity =
+          {
+            artifact_type: String,
+            artifacts_created_count: Integer,
+            distinct_user_count: Integer,
+            is_shared: bool,
+            published_artifacts_created_count: Integer,
+            product: String?,
+            rbac_group_id: String?,
+            rbac_group_name: String?,
+            user_id: String?
+          }
+
+        class BetaAnalyticsArtifactActivity < Anthropic::Internal::Type::BaseModel
+          attr_accessor artifact_type: String
+
+          attr_accessor artifacts_created_count: Integer
+
+          attr_accessor distinct_user_count: Integer
+
+          attr_accessor is_shared: bool
+
+          attr_accessor published_artifacts_created_count: Integer
+
+          attr_accessor product: String?
+
+          attr_accessor rbac_group_id: String?
+
+          attr_accessor rbac_group_name: String?
+
+          attr_accessor user_id: String?
+
+          def initialize: (
+            artifact_type: String,
+            artifacts_created_count: Integer,
+            distinct_user_count: Integer,
+            is_shared: bool,
+            published_artifacts_created_count: Integer,
+            ?product: String?,
+            ?rbac_group_id: String?,
+            ?rbac_group_name: String?,
+            ?user_id: String?
+          ) -> void
+
+          def to_hash: -> {
+            artifact_type: String,
+            artifacts_created_count: Integer,
+            distinct_user_count: Integer,
+            is_shared: bool,
+            published_artifacts_created_count: Integer,
+            product: String?,
+            rbac_group_id: String?,
+            rbac_group_name: String?,
+            user_id: String?
+          }
+        end
+      end
+    end
+  end
+end

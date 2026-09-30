@@ -1,0 +1,65 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_rbac_group =
+          {
+            id: String,
+            created_at: Time,
+            name: String,
+            role_ids: ::Array[String]?,
+            source_type: Anthropic::Models::Beta::Organization::BetaRBACGroup::source_type,
+            type: :rbac_group,
+            updated_at: Time
+          }
+
+        class BetaRBACGroup < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor created_at: Time
+
+          attr_accessor name: String
+
+          attr_accessor role_ids: ::Array[String]?
+
+          attr_accessor source_type: Anthropic::Models::Beta::Organization::BetaRBACGroup::source_type
+
+          attr_accessor type: :rbac_group
+
+          attr_accessor updated_at: Time
+
+          def initialize: (
+            id: String,
+            created_at: Time,
+            name: String,
+            role_ids: ::Array[String]?,
+            source_type: Anthropic::Models::Beta::Organization::BetaRBACGroup::source_type,
+            updated_at: Time,
+            ?type: :rbac_group
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            created_at: Time,
+            name: String,
+            role_ids: ::Array[String]?,
+            source_type: Anthropic::Models::Beta::Organization::BetaRBACGroup::source_type,
+            type: :rbac_group,
+            updated_at: Time
+          }
+
+          type source_type = :direct | :scim
+
+          module SourceType
+            extend Anthropic::Internal::Type::Enum
+
+            DIRECT: :direct
+            SCIM: :scim
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaRBACGroup::source_type]
+          end
+        end
+      end
+    end
+  end
+end

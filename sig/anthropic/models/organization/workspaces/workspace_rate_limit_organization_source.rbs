@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    module Organization
+      class WorkspaceRateLimitOrganizationSource = Workspaces::WorkspaceRateLimitOrganizationSource
+
+      module Workspaces
+        type workspace_rate_limit_organization_source = { type: :organization }
+
+        class WorkspaceRateLimitOrganizationSource < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :organization
+
+          def initialize: (?type: :organization) -> void
+
+          def to_hash: -> { type: :organization }
+        end
+      end
+    end
+  end
+end

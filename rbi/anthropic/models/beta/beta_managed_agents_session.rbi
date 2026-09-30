@@ -88,7 +88,6 @@ module Anthropic
         end
         attr_writer :stats
 
-        # SessionStatus enum
         sig do
           returns(
             Anthropic::Beta::BetaManagedAgentsSession::Status::TaggedSymbol
@@ -181,7 +180,6 @@ module Anthropic
           resources:,
           # Timing statistics for the session.
           stats:,
-          # SessionStatus enum
           status:,
           title:,
           type:,
@@ -232,7 +230,6 @@ module Anthropic
         def to_hash
         end
 
-        # SessionStatus enum
         module Status
           extend Anthropic::Internal::Type::Enum
 

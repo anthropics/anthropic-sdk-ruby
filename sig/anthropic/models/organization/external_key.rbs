@@ -1,0 +1,141 @@
+module Anthropic
+  module Models
+    module Organization
+      type external_key =
+        {
+          id: String,
+          attachment: Anthropic::Models::Organization::ExternalKey::attachment,
+          created_at: Time,
+          display_name: String?,
+          geo: String,
+          provider_config: Anthropic::Models::Organization::ExternalKey::provider_config,
+          type: :external_key,
+          updated_at: Time
+        }
+
+      class ExternalKey < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor attachment: Anthropic::Models::Organization::ExternalKey::attachment
+
+        attr_accessor created_at: Time
+
+        attr_accessor display_name: String?
+
+        attr_accessor geo: String
+
+        attr_accessor provider_config: Anthropic::Models::Organization::ExternalKey::provider_config
+
+        attr_accessor type: :external_key
+
+        attr_accessor updated_at: Time
+
+        def initialize: (
+          id: String,
+          attachment: Anthropic::Models::Organization::ExternalKey::attachment,
+          created_at: Time,
+          display_name: String?,
+          geo: String,
+          provider_config: Anthropic::Models::Organization::ExternalKey::provider_config,
+          updated_at: Time,
+          ?type: :external_key
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          attachment: Anthropic::Models::Organization::ExternalKey::attachment,
+          created_at: Time,
+          display_name: String?,
+          geo: String,
+          provider_config: Anthropic::Models::Organization::ExternalKey::provider_config,
+          type: :external_key,
+          updated_at: Time
+        }
+
+        type attachment =
+          Anthropic::Organization::ExternalKeyAttachedAttachment
+          | Anthropic::Organization::ExternalKeyUnattachedAttachment
+
+        module Attachment
+          extend Anthropic::Internal::Type::Union
+
+          type type_ = :attached | :unattached
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            ATTACHED: :attached
+            UNATTACHED: :unattached
+
+            def self?.values: -> ::Array[Anthropic::Models::Organization::ExternalKey::Attachment::type_]
+          end
+
+          def self?.variants: -> ::Array[Anthropic::Models::Organization::ExternalKey::attachment]
+
+          def self.new:
+            (
+              type: :attached | "attached"
+            ) -> Anthropic::Organization::ExternalKeyAttachedAttachment
+            | (
+              type: :unattached | "unattached"
+            ) -> Anthropic::Organization::ExternalKeyUnattachedAttachment
+            | (
+              type: Anthropic::Models::Organization::ExternalKey::Attachment::type_
+              | String
+            ) -> Anthropic::Models::Organization::ExternalKey::attachment
+        end
+
+        type provider_config =
+          Anthropic::Organization::AWSExternalKeyConfig
+          | Anthropic::Organization::GCPExternalKeyConfig
+          | Anthropic::Organization::AzureExternalKeyConfig
+
+        module ProviderConfig
+          extend Anthropic::Internal::Type::Union
+
+          type type_ = :aws | :gcp | :azure
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            AWS: :aws
+            GCP: :gcp
+            AZURE: :azure
+
+            def self?.values: -> ::Array[Anthropic::Models::Organization::ExternalKey::ProviderConfig::type_]
+          end
+
+          def self?.variants: -> ::Array[Anthropic::Models::Organization::ExternalKey::provider_config]
+
+          def self.new:
+            (
+              type: :aws | "aws",
+              kms_arn: String,
+              ?region: String?
+            ) -> Anthropic::Organization::AWSExternalKeyConfig
+            | (
+              type: :gcp | "gcp",
+              key_name: String
+            ) -> Anthropic::Organization::GCPExternalKeyConfig
+            | (
+              type: :azure | "azure",
+              key_name: String,
+              tenant_id: String,
+              vault_uri: String,
+              ?client_id: String?
+            ) -> Anthropic::Organization::AzureExternalKeyConfig
+            | (
+              type: Anthropic::Models::Organization::ExternalKey::ProviderConfig::type_
+              | String,
+              ?kms_arn: String,
+              ?region: String?,
+              ?key_name: String,
+              ?tenant_id: String,
+              ?vault_uri: String,
+              ?client_id: String?
+            ) -> Anthropic::Models::Organization::ExternalKey::provider_config
+        end
+      end
+    end
+  end
+end

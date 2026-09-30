@@ -1,0 +1,28 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type spend_limit_delete_params =
+          { spend_limit_id: String }
+          & Anthropic::Internal::Type::request_parameters
+
+        class SpendLimitDeleteParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor spend_limit_id: String
+
+          def initialize: (
+            spend_limit_id: String,
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            spend_limit_id: String,
+            request_options: Anthropic::RequestOptions
+          }
+        end
+      end
+    end
+  end
+end

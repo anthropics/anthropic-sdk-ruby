@@ -13,7 +13,7 @@ module Anthropic
 
           # @!attribute error
           #
-          #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError]
+          #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCloneError]
           required :error, union: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error }
 
           # @!attribute processed_at
@@ -32,7 +32,7 @@ module Anthropic
           #
           #   @param id [String] Unique identifier for this event.
           #
-          #   @param error [Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError]
+          #   @param error [Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCloneError]
           #
           #   @param processed_at [Time] Timestamp when the error occurred.
           #
@@ -73,6 +73,25 @@ module Anthropic
             variant :credential_host_unreachable_error,
                     -> { Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError }
 
+            # The repository host rejected the credentials, or required credentials and received none.
+            variant :repository_authentication_error,
+                    -> { Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError }
+
+            # The repository host refused access to the repository.
+            variant :repository_forbidden_error,
+                    -> { Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError }
+
+            # The repository host reported the repository as not found.
+            variant :repository_not_found_error,
+                    -> { Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError }
+
+            # The requested branch or commit does not exist in the repository.
+            variant :repository_checkout_error,
+                    -> { Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutError }
+
+            # The repository could not be cloned.
+            variant :repository_clone_error, -> { Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCloneError }
+
             module Type
               extend Anthropic::Internal::Type::Enum
 
@@ -84,16 +103,25 @@ module Anthropic
               MCP_AUTHENTICATION_FAILED_ERROR = :mcp_authentication_failed_error
               BILLING_ERROR = :billing_error
               CREDENTIAL_HOST_UNREACHABLE_ERROR = :credential_host_unreachable_error
+              REPOSITORY_AUTHENTICATION_ERROR = :repository_authentication_error
+              REPOSITORY_FORBIDDEN_ERROR = :repository_forbidden_error
+              REPOSITORY_NOT_FOUND_ERROR = :repository_not_found_error
+              REPOSITORY_CHECKOUT_ERROR = :repository_checkout_error
+              REPOSITORY_CLONE_ERROR = :repository_clone_error
 
               # @!method self.values
               #   @return [Array<Symbol>]
             end
 
             # @!method self.variants
-            #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError)]
+            #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCloneError)]
 
             # Creates a new instance of the variant class whose `type` matches the given
             # value, passing the remaining arguments to its constructor.
+            #
+            # Some parameter documentations has been truncated, see
+            # {Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error}
+            # for more details.
             #
             # @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error::Type, String]
             #
@@ -109,8 +137,10 @@ module Anthropic
             #
             #   @option args [String] :vault_id ID of the vault containing the affected credential.
             #
+            #   @option args [String, nil] :repository_url URL of the repository that could not be cloned. Null when it could not be identi
+            #
             # @raise [ArgumentError]
-            # @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError]
+            # @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCloneError]
             def self.new(type:, **args)
               case type.to_sym
               when :unknown_error
@@ -129,6 +159,16 @@ module Anthropic
                 Anthropic::Beta::Sessions::BetaManagedAgentsBillingError.new(**args)
               when :credential_host_unreachable_error
                 Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError.new(**args)
+              when :repository_authentication_error
+                Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError.new(**args)
+              when :repository_forbidden_error
+                Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError.new(**args)
+              when :repository_not_found_error
+                Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError.new(**args)
+              when :repository_checkout_error
+                Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutError.new(**args)
+              when :repository_clone_error
+                Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCloneError.new(**args)
               else
                 raise ArgumentError, "unknown type: #{type}"
               end

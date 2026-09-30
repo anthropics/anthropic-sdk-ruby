@@ -1,0 +1,40 @@
+module Anthropic
+  module Models
+    module Organization
+      module ServiceAccounts
+        type workspace_add_params =
+          {
+            service_account_id: String,
+            workspace_id: String,
+            workspace_role: Anthropic::Models::Organization::no_billing_workspace_role
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class WorkspaceAddParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor service_account_id: String
+
+          attr_accessor workspace_id: String
+
+          attr_accessor workspace_role: Anthropic::Models::Organization::no_billing_workspace_role
+
+          def initialize: (
+            service_account_id: String,
+            workspace_id: String,
+            workspace_role: Anthropic::Models::Organization::no_billing_workspace_role,
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            service_account_id: String,
+            workspace_id: String,
+            workspace_role: Anthropic::Models::Organization::no_billing_workspace_role,
+            request_options: Anthropic::RequestOptions
+          }
+        end
+      end
+    end
+  end
+end

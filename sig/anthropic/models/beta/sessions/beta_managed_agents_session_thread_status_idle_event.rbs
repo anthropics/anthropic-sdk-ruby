@@ -8,6 +8,7 @@ module Anthropic
             agent_name: String,
             processed_at: Time,
             session_thread_id: String,
+            stop_details: Anthropic::Beta::Sessions::BetaManagedAgentsSessionRefusalStopDetails?,
             stop_reason: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::stop_reason,
             type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::type_
           }
@@ -21,6 +22,8 @@ module Anthropic
 
           attr_accessor session_thread_id: String
 
+          attr_accessor stop_details: Anthropic::Beta::Sessions::BetaManagedAgentsSessionRefusalStopDetails?
+
           attr_accessor stop_reason: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::stop_reason
 
           attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::type_
@@ -30,6 +33,7 @@ module Anthropic
             agent_name: String,
             processed_at: Time,
             session_thread_id: String,
+            stop_details: Anthropic::Beta::Sessions::BetaManagedAgentsSessionRefusalStopDetails?,
             stop_reason: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::stop_reason,
             type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::type_
           ) -> void
@@ -39,6 +43,7 @@ module Anthropic
             agent_name: String,
             processed_at: Time,
             session_thread_id: String,
+            stop_details: Anthropic::Beta::Sessions::BetaManagedAgentsSessionRefusalStopDetails?,
             stop_reason: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::stop_reason,
             type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::type_
           }
@@ -48,6 +53,7 @@ module Anthropic
             | Anthropic::Beta::Sessions::BetaManagedAgentsSessionRequiresAction
             | Anthropic::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted
             | Anthropic::Beta::Sessions::BetaManagedAgentsSessionBudgetReached
+            | Anthropic::Beta::Sessions::BetaManagedAgentsSessionRefusal
 
           module StopReason
             extend Anthropic::Internal::Type::Union
@@ -57,6 +63,7 @@ module Anthropic
               | :requires_action
               | :retries_exhausted
               | :budget_reached
+              | :refusal
 
             module Type
               extend Anthropic::Internal::Type::Enum
@@ -65,6 +72,7 @@ module Anthropic
               REQUIRES_ACTION: :requires_action
               RETRIES_EXHAUSTED: :retries_exhausted
               BUDGET_REACHED: :budget_reached
+              REFUSAL: :refusal
 
               def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::StopReason::type_]
             end
@@ -85,6 +93,9 @@ module Anthropic
               | (
                 type: :budget_reached | "budget_reached"
               ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSessionBudgetReached
+              | (
+                type: :refusal | "refusal"
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSessionRefusal
               | (
                 type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::StopReason::type_
                 | String,

@@ -6,6 +6,18 @@ module Anthropic
       module Agents
       end
 
+      module Analytics
+        module Apps
+          module Chat
+          end
+        end
+      end
+
+      module Apps
+        module Chat
+        end
+      end
+
       module Beta
         module Agents
         end
@@ -20,12 +32,31 @@ module Anthropic
         end
 
         module Organization
+          module Analytics
+            module Apps
+              module Chat
+              end
+            end
+          end
+
           module Federation
             module Rules
             end
           end
 
+          module Plugins
+          end
+
+          module RBACGroups
+          end
+
+          module RBACRoles
+          end
+
           module ServiceAccounts
+          end
+
+          module SpendLimits
           end
 
           module Workspaces
@@ -47,6 +78,9 @@ module Anthropic
         end
       end
 
+      module Chat
+      end
+
       module Environments
       end
 
@@ -62,16 +96,44 @@ module Anthropic
       end
 
       module Organization
+        module Analytics
+          module Apps
+            module Chat
+            end
+          end
+        end
+
         module Federation
           module Rules
           end
         end
 
+        module Plugins
+        end
+
+        module RBACGroups
+        end
+
+        module RBACRoles
+        end
+
         module ServiceAccounts
+        end
+
+        module SpendLimits
         end
 
         module Workspaces
         end
+      end
+
+      module Plugins
+      end
+
+      module RBACGroups
+      end
+
+      module RBACRoles
       end
 
       module Rules
@@ -86,6 +148,9 @@ module Anthropic
       end
 
       module Skills
+      end
+
+      module SpendLimits
       end
 
       module Threads

@@ -1,0 +1,74 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_project_activity =
+          {
+            distinct_user_count: Integer,
+            message_count: Integer,
+            project_id: String,
+            project_name: String,
+            created_at: Time?,
+            created_by: Anthropic::Beta::Organization::BetaAnalyticsUser?,
+            distinct_conversation_count: Integer?,
+            product: String?,
+            rbac_group_id: String?,
+            rbac_group_name: String?,
+            user_id: String?
+          }
+
+        class BetaAnalyticsProjectActivity < Anthropic::Internal::Type::BaseModel
+          attr_accessor distinct_user_count: Integer
+
+          attr_accessor message_count: Integer
+
+          attr_accessor project_id: String
+
+          attr_accessor project_name: String
+
+          attr_accessor created_at: Time?
+
+          attr_accessor created_by: Anthropic::Beta::Organization::BetaAnalyticsUser?
+
+          attr_accessor distinct_conversation_count: Integer?
+
+          attr_accessor product: String?
+
+          attr_accessor rbac_group_id: String?
+
+          attr_accessor rbac_group_name: String?
+
+          attr_accessor user_id: String?
+
+          def initialize: (
+            distinct_user_count: Integer,
+            message_count: Integer,
+            project_id: String,
+            project_name: String,
+            ?created_at: Time?,
+            ?created_by: Anthropic::Beta::Organization::BetaAnalyticsUser?,
+            ?distinct_conversation_count: Integer?,
+            ?product: String?,
+            ?rbac_group_id: String?,
+            ?rbac_group_name: String?,
+            ?user_id: String?
+          ) -> void
+
+          def to_hash: -> {
+            distinct_user_count: Integer,
+            message_count: Integer,
+            project_id: String,
+            project_name: String,
+            created_at: Time?,
+            created_by: Anthropic::Beta::Organization::BetaAnalyticsUser?,
+            distinct_conversation_count: Integer?,
+            product: String?,
+            rbac_group_id: String?,
+            rbac_group_name: String?,
+            user_id: String?
+          }
+        end
+      end
+    end
+  end
+end

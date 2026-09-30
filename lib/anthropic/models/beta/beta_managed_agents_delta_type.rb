@@ -3,7 +3,6 @@
 module Anthropic
   module Models
     module Beta
-      # EventDeltaType enum
       module BetaManagedAgentsDeltaType
         extend Anthropic::Internal::Type::Enum
 

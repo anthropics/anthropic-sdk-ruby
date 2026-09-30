@@ -43,7 +43,9 @@ accumulator.wrap(stream).each do |event|
     puts
     puts("[final] #{accumulator.agent_message_text(event.id)}")
   when Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent
-    break if event.stop_reason.is_a?(Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn)
+    # The session is no longer doing work (whatever the stop reason) and the
+    # stream stays open, so stop reading.
+    break
   when Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent
     puts("[error] #{event.error.type}: #{event.error.message}")
   end

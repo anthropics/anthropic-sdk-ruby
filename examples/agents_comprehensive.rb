@@ -117,8 +117,10 @@ stream.each do |event|
     )
   end
 
+  # A `requires_action` idle waits on the tool result sent above; after any other
+  # idle nothing more arrives, so stop reading.
   if event.is_a?(Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent) &&
-     event.stop_reason.is_a?(Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn)
+     !event.stop_reason.is_a?(Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction)
     break
   end
 end

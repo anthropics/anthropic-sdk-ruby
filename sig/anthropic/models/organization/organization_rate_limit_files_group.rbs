@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    class OrganizationRateLimitFilesGroup = Organization::OrganizationRateLimitFilesGroup
+
+    module Organization
+      type organization_rate_limit_files_group = { id: String, type: :files }
+
+      class OrganizationRateLimitFilesGroup < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor type: :files
+
+        def initialize: (id: String, ?type: :files) -> void
+
+        def to_hash: -> { id: String, type: :files }
+      end
+    end
+  end
+end

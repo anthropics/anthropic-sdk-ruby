@@ -1,0 +1,23 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_spend_limit_organization_service_scope =
+          { service: String, type: :organization_service }
+
+        class BetaSpendLimitOrganizationServiceScope < Anthropic::Internal::Type::BaseModel
+          attr_accessor service: String
+
+          attr_accessor type: :organization_service
+
+          def initialize: (
+            service: String,
+            ?type: :organization_service
+          ) -> void
+
+          def to_hash: -> { service: String, type: :organization_service }
+        end
+      end
+    end
+  end
+end

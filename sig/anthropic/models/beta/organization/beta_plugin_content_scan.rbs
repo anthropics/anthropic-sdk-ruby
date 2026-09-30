@@ -1,0 +1,59 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_plugin_content_scan =
+          {
+            assessment: Anthropic::Models::Beta::Organization::BetaPluginContentScan::assessment?,
+            reason: String?,
+            status: Anthropic::Models::Beta::Organization::BetaPluginContentScan::status
+          }
+
+        class BetaPluginContentScan < Anthropic::Internal::Type::BaseModel
+          attr_accessor assessment: Anthropic::Models::Beta::Organization::BetaPluginContentScan::assessment?
+
+          attr_accessor reason: String?
+
+          attr_accessor status: Anthropic::Models::Beta::Organization::BetaPluginContentScan::status
+
+          def initialize: (
+            assessment: Anthropic::Models::Beta::Organization::BetaPluginContentScan::assessment?,
+            reason: String?,
+            status: Anthropic::Models::Beta::Organization::BetaPluginContentScan::status
+          ) -> void
+
+          def to_hash: -> {
+            assessment: Anthropic::Models::Beta::Organization::BetaPluginContentScan::assessment?,
+            reason: String?,
+            status: Anthropic::Models::Beta::Organization::BetaPluginContentScan::status
+          }
+
+          type assessment = :fail | :pass | :unknown | :warn
+
+          module Assessment
+            extend Anthropic::Internal::Type::Enum
+
+            FAIL: :fail
+            PASS: :pass
+            UNKNOWN: :unknown
+            WARN: :warn
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaPluginContentScan::assessment]
+          end
+
+          type status = :completed | :errored | :processing
+
+          module Status
+            extend Anthropic::Internal::Type::Enum
+
+            COMPLETED: :completed
+            ERRORED: :errored
+            PROCESSING: :processing
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaPluginContentScan::status]
+          end
+        end
+      end
+    end
+  end
+end

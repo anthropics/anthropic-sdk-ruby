@@ -1,0 +1,40 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module RBACGroups
+          type member_list_params =
+            { rbac_group_id: String, limit: Integer, page: String? }
+            & Anthropic::Internal::Type::request_parameters
+
+          class MemberListParams < Anthropic::Internal::Type::BaseModel
+            extend Anthropic::Internal::Type::RequestParameters::Converter
+            include Anthropic::Internal::Type::RequestParameters
+
+            attr_accessor rbac_group_id: String
+
+            attr_reader limit: Integer?
+
+            def limit=: (Integer) -> Integer
+
+            attr_accessor page: String?
+
+            def initialize: (
+              rbac_group_id: String,
+              ?limit: Integer,
+              ?page: String?,
+              ?request_options: Anthropic::request_opts
+            ) -> void
+
+            def to_hash: -> {
+              rbac_group_id: String,
+              limit: Integer,
+              page: String?,
+              request_options: Anthropic::RequestOptions
+            }
+          end
+        end
+      end
+    end
+  end
+end

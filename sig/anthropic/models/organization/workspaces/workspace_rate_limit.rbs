@@ -1,0 +1,119 @@
+module Anthropic
+  module Models
+    module Organization
+      class WorkspaceRateLimit = Workspaces::WorkspaceRateLimit
+
+      module Workspaces
+        type workspace_rate_limit =
+          {
+            group: Anthropic::Models::Organization::Workspaces::WorkspaceRateLimit::group,
+            limits: ::Array[Anthropic::Organization::Workspaces::WorkspaceRateLimitValue],
+            models: ::Array[String]?,
+            rate_limit_id: String,
+            type: :workspace_rate_limit,
+            workspace_id: String
+          }
+
+        class WorkspaceRateLimit < Anthropic::Internal::Type::BaseModel
+          attr_accessor group: Anthropic::Models::Organization::Workspaces::WorkspaceRateLimit::group
+
+          attr_accessor limits: ::Array[Anthropic::Organization::Workspaces::WorkspaceRateLimitValue]
+
+          attr_accessor models: ::Array[String]?
+
+          attr_accessor rate_limit_id: String
+
+          attr_accessor type: :workspace_rate_limit
+
+          attr_accessor workspace_id: String
+
+          def initialize: (
+            group: Anthropic::Models::Organization::Workspaces::WorkspaceRateLimit::group,
+            limits: ::Array[Anthropic::Organization::Workspaces::WorkspaceRateLimitValue],
+            models: ::Array[String]?,
+            rate_limit_id: String,
+            workspace_id: String,
+            ?type: :workspace_rate_limit
+          ) -> void
+
+          def to_hash: -> {
+            group: Anthropic::Models::Organization::Workspaces::WorkspaceRateLimit::group,
+            limits: ::Array[Anthropic::Organization::Workspaces::WorkspaceRateLimitValue],
+            models: ::Array[String]?,
+            rate_limit_id: String,
+            type: :workspace_rate_limit,
+            workspace_id: String
+          }
+
+          type group =
+            Anthropic::Organization::OrganizationRateLimitModelGroup
+            | Anthropic::Organization::OrganizationRateLimitBatchGroup
+            | Anthropic::Organization::OrganizationRateLimitTokenCountGroup
+            | Anthropic::Organization::OrganizationRateLimitFilesGroup
+            | Anthropic::Organization::OrganizationRateLimitSkillsGroup
+            | Anthropic::Organization::OrganizationRateLimitWebSearchGroup
+
+          module Group
+            extend Anthropic::Internal::Type::Union
+
+            type type_ =
+              :model_group
+              | :batch
+              | :token_count
+              | :files
+              | :skills
+              | :web_search
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              MODEL_GROUP: :model_group
+              BATCH: :batch
+              TOKEN_COUNT: :token_count
+              FILES: :files
+              SKILLS: :skills
+              WEB_SEARCH: :web_search
+
+              def self?.values: -> ::Array[Anthropic::Models::Organization::Workspaces::WorkspaceRateLimit::Group::type_]
+            end
+
+            def self?.variants: -> ::Array[Anthropic::Models::Organization::Workspaces::WorkspaceRateLimit::group]
+
+            def self.new:
+              (
+                type: :model_group | "model_group",
+                id: String,
+                display_name: String
+              ) -> Anthropic::Organization::OrganizationRateLimitModelGroup
+              | (
+                type: :batch | "batch",
+                id: String
+              ) -> Anthropic::Organization::OrganizationRateLimitBatchGroup
+              | (
+                type: :token_count | "token_count",
+                id: String
+              ) -> Anthropic::Organization::OrganizationRateLimitTokenCountGroup
+              | (
+                type: :files | "files",
+                id: String
+              ) -> Anthropic::Organization::OrganizationRateLimitFilesGroup
+              | (
+                type: :skills | "skills",
+                id: String
+              ) -> Anthropic::Organization::OrganizationRateLimitSkillsGroup
+              | (
+                type: :web_search | "web_search",
+                id: String
+              ) -> Anthropic::Organization::OrganizationRateLimitWebSearchGroup
+              | (
+                type: Anthropic::Models::Organization::Workspaces::WorkspaceRateLimit::Group::type_
+                | String,
+                id: String,
+                ?display_name: String
+              ) -> Anthropic::Models::Organization::Workspaces::WorkspaceRateLimit::group
+          end
+        end
+      end
+    end
+  end
+end

@@ -101,6 +101,8 @@ module Anthropic
 
       variant const: -> { Anthropic::Models::AnthropicBeta::MCP_CLIENT_2026_09_15 }
 
+      variant const: -> { Anthropic::Models::AnthropicBeta::CE_PLUGINS_2026_09_01 }
+
       variant String
 
       # @!method self.variants
@@ -160,6 +162,7 @@ module Anthropic
       COMPACT_2026_09_04 = :"compact-2026-09-04"
       INLINE_TOOLS_2026_09_15 = :"inline-tools-2026-09-15"
       MCP_CLIENT_2026_09_15 = :"mcp-client-2026-09-15"
+      CE_PLUGINS_2026_09_01 = :"ce-plugins-2026-09-01"
 
       # @!endgroup
     end

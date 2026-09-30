@@ -1,0 +1,26 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class Analytics
+          class Plugins
+            def list: (
+              ?date: Date?,
+              ?ending_date: Date?,
+              ?filter: ::Array[String]?,
+              ?group_by: ::Array[Anthropic::Models::Beta::Organization::Analytics::PluginListParams::group_by]?,
+              ?limit: Integer?,
+              ?order: Anthropic::Models::Beta::Organization::Analytics::PluginListParams::order?,
+              ?order_by: String?,
+              ?page: String?,
+              ?starting_date: Date?,
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Organization::BetaAnalyticsPluginActivity]
+
+            def initialize: (client: Anthropic::Client) -> void
+          end
+        end
+      end
+    end
+  end
+end

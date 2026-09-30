@@ -1,0 +1,152 @@
+module Anthropic
+  module Models
+    module Organization
+      type api_key =
+        {
+          id: String,
+          created_at: Time,
+          created_by: Anthropic::Organization::APIKeyCreatedBy?,
+          expires_at: Time?,
+          name: String,
+          partial_key_hint: String?,
+          principal: Anthropic::Models::Organization::APIKey::principal?,
+          scope: Anthropic::Models::Organization::APIKey::scope,
+          status: Anthropic::Models::Organization::APIKey::status,
+          type: :api_key
+        }
+
+      class APIKey < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor created_at: Time
+
+        attr_accessor created_by: Anthropic::Organization::APIKeyCreatedBy?
+
+        attr_accessor expires_at: Time?
+
+        attr_accessor name: String
+
+        attr_accessor partial_key_hint: String?
+
+        attr_accessor principal: Anthropic::Models::Organization::APIKey::principal?
+
+        attr_accessor scope: Anthropic::Models::Organization::APIKey::scope
+
+        attr_accessor status: Anthropic::Models::Organization::APIKey::status
+
+        attr_accessor type: :api_key
+
+        def initialize: (
+          id: String,
+          created_at: Time,
+          created_by: Anthropic::Organization::APIKeyCreatedBy?,
+          expires_at: Time?,
+          name: String,
+          partial_key_hint: String?,
+          principal: Anthropic::Models::Organization::APIKey::principal?,
+          scope: Anthropic::Models::Organization::APIKey::scope,
+          status: Anthropic::Models::Organization::APIKey::status,
+          ?type: :api_key
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          created_at: Time,
+          created_by: Anthropic::Organization::APIKeyCreatedBy?,
+          expires_at: Time?,
+          name: String,
+          partial_key_hint: String?,
+          principal: Anthropic::Models::Organization::APIKey::principal?,
+          scope: Anthropic::Models::Organization::APIKey::scope,
+          status: Anthropic::Models::Organization::APIKey::status,
+          type: :api_key
+        }
+
+        type principal =
+          Anthropic::Organization::APIKeyUserActor
+          | Anthropic::Organization::APIKeyServiceAccountActor
+
+        module Principal
+          extend Anthropic::Internal::Type::Union
+
+          type type_ = :user_actor | :service_account_actor
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            USER_ACTOR: :user_actor
+            SERVICE_ACCOUNT_ACTOR: :service_account_actor
+
+            def self?.values: -> ::Array[Anthropic::Models::Organization::APIKey::Principal::type_]
+          end
+
+          def self?.variants: -> ::Array[Anthropic::Models::Organization::APIKey::principal]
+
+          def self.new:
+            (
+              type: :user_actor | "user_actor",
+              user_id: String
+            ) -> Anthropic::Organization::APIKeyUserActor
+            | (
+              type: :service_account_actor | "service_account_actor",
+              service_account_id: String
+            ) -> Anthropic::Organization::APIKeyServiceAccountActor
+            | (
+              type: Anthropic::Models::Organization::APIKey::Principal::type_
+              | String,
+              ?user_id: String,
+              ?service_account_id: String
+            ) -> Anthropic::Models::Organization::APIKey::principal
+        end
+
+        type scope =
+          Anthropic::Organization::APIKeyOrganizationScope
+          | Anthropic::Organization::APIKeyWorkspaceScope
+
+        module Scope
+          extend Anthropic::Internal::Type::Union
+
+          type type_ = :organization | :workspace
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            ORGANIZATION: :organization
+            WORKSPACE: :workspace
+
+            def self?.values: -> ::Array[Anthropic::Models::Organization::APIKey::Scope::type_]
+          end
+
+          def self?.variants: -> ::Array[Anthropic::Models::Organization::APIKey::scope]
+
+          def self.new:
+            (
+              type: :organization | "organization"
+            ) -> Anthropic::Organization::APIKeyOrganizationScope
+            | (
+              type: :workspace | "workspace",
+              workspace_id: String
+            ) -> Anthropic::Organization::APIKeyWorkspaceScope
+            | (
+              type: Anthropic::Models::Organization::APIKey::Scope::type_
+              | String,
+              ?workspace_id: String
+            ) -> Anthropic::Models::Organization::APIKey::scope
+        end
+
+        type status = :active | :archived | :expired | :inactive
+
+        module Status
+          extend Anthropic::Internal::Type::Enum
+
+          ACTIVE: :active
+          ARCHIVED: :archived
+          EXPIRED: :expired
+          INACTIVE: :inactive
+
+          def self?.values: -> ::Array[Anthropic::Models::Organization::APIKey::status]
+        end
+      end
+    end
+  end
+end

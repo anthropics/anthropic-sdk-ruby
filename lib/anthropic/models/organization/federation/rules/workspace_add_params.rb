@@ -1,0 +1,36 @@
+# frozen_string_literal: true
+
+module Anthropic
+  module Models
+    module Organization
+      module Federation
+        module Rules
+          # @see Anthropic::Resources::Organization::Federation::Rules::Workspaces#add
+          class WorkspaceAddParams < Anthropic::Internal::Type::BaseModel
+            extend Anthropic::Internal::Type::RequestParameters::Converter
+            include Anthropic::Internal::Type::RequestParameters
+
+            # @!attribute federation_rule_id
+            #   ID of the federation rule.
+            #
+            #   @return [String]
+            required :federation_rule_id, String
+
+            # @!attribute workspace_id
+            #   Tagged ID of the workspace to enable this rule for.
+            #
+            #   @return [String]
+            required :workspace_id, String
+
+            # @!method initialize(federation_rule_id:, workspace_id:, request_options: {})
+            #   @param federation_rule_id [String] ID of the federation rule.
+            #
+            #   @param workspace_id [String] Tagged ID of the workspace to enable this rule for.
+            #
+            #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
+          end
+        end
+      end
+    end
+  end
+end

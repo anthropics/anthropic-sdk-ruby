@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_lines_of_code =
+          { added_count: Integer, removed_count: Integer }
+
+        class BetaAnalyticsLinesOfCode < Anthropic::Internal::Type::BaseModel
+          attr_accessor added_count: Integer
+
+          attr_accessor removed_count: Integer
+
+          def initialize: (added_count: Integer, removed_count: Integer) -> void
+
+          def to_hash: -> { added_count: Integer, removed_count: Integer }
+        end
+      end
+    end
+  end
+end

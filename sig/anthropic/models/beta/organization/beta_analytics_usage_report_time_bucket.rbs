@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_usage_report_time_bucket =
+          {
+            ending_at: Time,
+            results: ::Array[Anthropic::Beta::Organization::BetaAnalyticsUsageBucketedResult],
+            starting_at: Time
+          }
+
+        class BetaAnalyticsUsageReportTimeBucket < Anthropic::Internal::Type::BaseModel
+          attr_accessor ending_at: Time
+
+          attr_accessor results: ::Array[Anthropic::Beta::Organization::BetaAnalyticsUsageBucketedResult]
+
+          attr_accessor starting_at: Time
+
+          def initialize: (
+            ending_at: Time,
+            results: ::Array[Anthropic::Beta::Organization::BetaAnalyticsUsageBucketedResult],
+            starting_at: Time
+          ) -> void
+
+          def to_hash: -> {
+            ending_at: Time,
+            results: ::Array[Anthropic::Beta::Organization::BetaAnalyticsUsageBucketedResult],
+            starting_at: Time
+          }
+        end
+      end
+    end
+  end
+end

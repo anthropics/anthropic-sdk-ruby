@@ -1,0 +1,49 @@
+module Anthropic
+  module Models
+    module Organization
+      module Federation
+        type rule_list_params =
+          {
+            include_archived: bool,
+            issuer_id: String?,
+            limit: Integer,
+            page: String?
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class RuleListParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_reader include_archived: bool?
+
+          def include_archived=: (bool) -> bool
+
+          attr_accessor issuer_id: String?
+
+          attr_reader limit: Integer?
+
+          def limit=: (Integer) -> Integer
+
+          attr_accessor page: String?
+
+          def initialize: (
+            ?include_archived: bool,
+            ?issuer_id: String?,
+            ?limit: Integer,
+            ?page: String?,
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            include_archived: bool,
+            issuer_id: String?,
+            limit: Integer,
+            page: String?,
+            request_options: Anthropic::RequestOptions
+          }
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,132 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Plugins
+          type beta_plugin_version =
+            {
+              id: String,
+              components: ::Array[Anthropic::Beta::Organization::BetaPluginComponent]?,
+              content_scan: Anthropic::Beta::Organization::BetaPluginContentScan?,
+              created_at: Time,
+              created_by: Anthropic::Models::Beta::Organization::Plugins::BetaPluginVersion::created_by?,
+              description: String?,
+              display_name: String?,
+              manifest_version: String?,
+              plugin_id: String,
+              reach: Anthropic::Models::Beta::Organization::Plugins::BetaPluginVersion::reach?,
+              release_notes: String?,
+              type: :plugin_version
+            }
+
+          class BetaPluginVersion < Anthropic::Internal::Type::BaseModel
+            attr_accessor id: String
+
+            attr_accessor components: ::Array[Anthropic::Beta::Organization::BetaPluginComponent]?
+
+            attr_accessor content_scan: Anthropic::Beta::Organization::BetaPluginContentScan?
+
+            attr_accessor created_at: Time
+
+            attr_accessor created_by: Anthropic::Models::Beta::Organization::Plugins::BetaPluginVersion::created_by?
+
+            attr_accessor description: String?
+
+            attr_accessor display_name: String?
+
+            attr_accessor manifest_version: String?
+
+            attr_accessor plugin_id: String
+
+            attr_accessor reach: Anthropic::Models::Beta::Organization::Plugins::BetaPluginVersion::reach?
+
+            attr_accessor release_notes: String?
+
+            attr_accessor type: :plugin_version
+
+            def initialize: (
+              id: String,
+              components: ::Array[Anthropic::Beta::Organization::BetaPluginComponent]?,
+              content_scan: Anthropic::Beta::Organization::BetaPluginContentScan?,
+              created_at: Time,
+              created_by: Anthropic::Models::Beta::Organization::Plugins::BetaPluginVersion::created_by?,
+              description: String?,
+              display_name: String?,
+              manifest_version: String?,
+              plugin_id: String,
+              reach: Anthropic::Models::Beta::Organization::Plugins::BetaPluginVersion::reach?,
+              release_notes: String?,
+              ?type: :plugin_version
+            ) -> void
+
+            def to_hash: -> {
+              id: String,
+              components: ::Array[Anthropic::Beta::Organization::BetaPluginComponent]?,
+              content_scan: Anthropic::Beta::Organization::BetaPluginContentScan?,
+              created_at: Time,
+              created_by: Anthropic::Models::Beta::Organization::Plugins::BetaPluginVersion::created_by?,
+              description: String?,
+              display_name: String?,
+              manifest_version: String?,
+              plugin_id: String,
+              reach: Anthropic::Models::Beta::Organization::Plugins::BetaPluginVersion::reach?,
+              release_notes: String?,
+              type: :plugin_version
+            }
+
+            type created_by =
+              Anthropic::Beta::Organization::BetaPluginUserActor
+              | Anthropic::Beta::Organization::BetaPluginAPIActor
+
+            module CreatedBy
+              extend Anthropic::Internal::Type::Union
+
+              type type_ = :user_actor | :api_actor
+
+              module Type
+                extend Anthropic::Internal::Type::Enum
+
+                USER_ACTOR: :user_actor
+                API_ACTOR: :api_actor
+
+                def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Plugins::BetaPluginVersion::CreatedBy::type_]
+              end
+
+              def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::Plugins::BetaPluginVersion::created_by]
+
+              def self.new:
+                (
+                  type: :user_actor | "user_actor",
+                  email_address: String?,
+                  user_id: String
+                ) -> Anthropic::Beta::Organization::BetaPluginUserActor
+                | (
+                  type: :api_actor | "api_actor",
+                  api_key_id: String
+                ) -> Anthropic::Beta::Organization::BetaPluginAPIActor
+                | (
+                  type: Anthropic::Models::Beta::Organization::Plugins::BetaPluginVersion::CreatedBy::type_
+                  | String,
+                  ?email_address: String?,
+                  ?user_id: String,
+                  ?api_key_id: String
+                ) -> Anthropic::Models::Beta::Organization::Plugins::BetaPluginVersion::created_by
+            end
+
+            type reach = :contained | :privileged | :remote
+
+            module Reach
+              extend Anthropic::Internal::Type::Enum
+
+              CONTAINED: :contained
+              PRIVILEGED: :privileged
+              REMOTE: :remote
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Plugins::BetaPluginVersion::reach]
+            end
+          end
+        end
+      end
+    end
+  end
+end

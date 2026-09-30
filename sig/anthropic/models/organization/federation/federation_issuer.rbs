@@ -1,0 +1,143 @@
+module Anthropic
+  module Models
+    module Organization
+      class FederationIssuer = Federation::FederationIssuer
+
+      module Federation
+        type federation_issuer =
+          {
+            id: String,
+            archived_at: Time?,
+            archived_by_actor_id: String?,
+            check_jti: bool,
+            created_at: Time,
+            created_by_actor_id: String?,
+            issuer_url: String,
+            jwks: Anthropic::Models::Organization::Federation::FederationIssuer::jwks,
+            jwks_polling_disabled_at: Time?,
+            max_jwt_lifetime_seconds: Integer,
+            name: String,
+            poll_status: Anthropic::Organization::Federation::FederationIssuerPollStatus?,
+            type: :federation_issuer,
+            updated_at: Time,
+            updated_by_actor_id: String?
+          }
+
+        class FederationIssuer < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor archived_at: Time?
+
+          attr_accessor archived_by_actor_id: String?
+
+          attr_accessor check_jti: bool
+
+          attr_accessor created_at: Time
+
+          attr_accessor created_by_actor_id: String?
+
+          attr_accessor issuer_url: String
+
+          attr_accessor jwks: Anthropic::Models::Organization::Federation::FederationIssuer::jwks
+
+          attr_accessor jwks_polling_disabled_at: Time?
+
+          attr_accessor max_jwt_lifetime_seconds: Integer
+
+          attr_accessor name: String
+
+          attr_accessor poll_status: Anthropic::Organization::Federation::FederationIssuerPollStatus?
+
+          attr_accessor type: :federation_issuer
+
+          attr_accessor updated_at: Time
+
+          attr_accessor updated_by_actor_id: String?
+
+          def initialize: (
+            id: String,
+            archived_at: Time?,
+            archived_by_actor_id: String?,
+            check_jti: bool,
+            created_at: Time,
+            created_by_actor_id: String?,
+            issuer_url: String,
+            jwks: Anthropic::Models::Organization::Federation::FederationIssuer::jwks,
+            jwks_polling_disabled_at: Time?,
+            max_jwt_lifetime_seconds: Integer,
+            name: String,
+            poll_status: Anthropic::Organization::Federation::FederationIssuerPollStatus?,
+            updated_at: Time,
+            updated_by_actor_id: String?,
+            ?type: :federation_issuer
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            archived_at: Time?,
+            archived_by_actor_id: String?,
+            check_jti: bool,
+            created_at: Time,
+            created_by_actor_id: String?,
+            issuer_url: String,
+            jwks: Anthropic::Models::Organization::Federation::FederationIssuer::jwks,
+            jwks_polling_disabled_at: Time?,
+            max_jwt_lifetime_seconds: Integer,
+            name: String,
+            poll_status: Anthropic::Organization::Federation::FederationIssuerPollStatus?,
+            type: :federation_issuer,
+            updated_at: Time,
+            updated_by_actor_id: String?
+          }
+
+          type jwks =
+            Anthropic::Organization::Federation::JWKSDiscovery
+            | Anthropic::Organization::Federation::JWKSExplicitURL
+            | Anthropic::Organization::Federation::JWKSInline
+
+          module JWKS
+            extend Anthropic::Internal::Type::Union
+
+            type type_ = :discovery | :explicit_url | :inline
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              DISCOVERY: :discovery
+              EXPLICIT_URL: :explicit_url
+              INLINE: :inline
+
+              def self?.values: -> ::Array[Anthropic::Models::Organization::Federation::FederationIssuer::JWKS::type_]
+            end
+
+            def self?.variants: -> ::Array[Anthropic::Models::Organization::Federation::FederationIssuer::jwks]
+
+            def self.new:
+              (
+                type: :discovery | "discovery",
+                ?ca_cert_pem: String?,
+                ?discovery_base: String?
+              ) -> Anthropic::Organization::Federation::JWKSDiscovery
+              | (
+                type: :explicit_url | "explicit_url",
+                url: String,
+                ?ca_cert_pem: String?
+              ) -> Anthropic::Organization::Federation::JWKSExplicitURL
+              | (
+                type: :inline | "inline",
+                keys: ::Array[::Hash[Symbol, top]]
+              ) -> Anthropic::Organization::Federation::JWKSInline
+              | (
+                type: Anthropic::Models::Organization::Federation::FederationIssuer::JWKS::type_
+                | String,
+                ?ca_cert_pem: String?,
+                ?discovery_base: String?,
+                ?url: String,
+                ?keys: ::Array[::Hash[Symbol, top]]
+              ) -> Anthropic::Models::Organization::Federation::FederationIssuer::jwks
+          end
+        end
+      end
+    end
+  end
+end

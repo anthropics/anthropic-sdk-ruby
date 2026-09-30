@@ -1,0 +1,36 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module RBACGroups
+          type member_remove_response =
+            {
+              rbac_group_id: String,
+              type: :rbac_group_member_deleted,
+              user_id: String
+            }
+
+          class MemberRemoveResponse < Anthropic::Internal::Type::BaseModel
+            attr_accessor rbac_group_id: String
+
+            attr_accessor type: :rbac_group_member_deleted
+
+            attr_accessor user_id: String
+
+            def initialize: (
+              rbac_group_id: String,
+              user_id: String,
+              ?type: :rbac_group_member_deleted
+            ) -> void
+
+            def to_hash: -> {
+              rbac_group_id: String,
+              type: :rbac_group_member_deleted,
+              user_id: String
+            }
+          end
+        end
+      end
+    end
+  end
+end

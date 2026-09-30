@@ -1,0 +1,45 @@
+module Anthropic
+  module Resources
+    class Organization
+      class Workspaces
+        class Members
+          def retrieve: (
+            String user_id,
+            workspace_id: String,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Organization::WorkspaceMember
+
+          def update: (
+            String user_id,
+            workspace_id: String,
+            workspace_role: Anthropic::Models::Organization::workspace_role,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Organization::WorkspaceMember
+
+          def list: (
+            String workspace_id,
+            ?after_id: String,
+            ?before_id: String,
+            ?limit: Integer,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Internal::Page[Anthropic::Organization::WorkspaceMember]
+
+          def add: (
+            String workspace_id,
+            user_id: String,
+            workspace_role: Anthropic::Models::Organization::no_billing_workspace_role,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Organization::WorkspaceMember
+
+          def remove: (
+            String user_id,
+            workspace_id: String,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Models::Organization::Workspaces::MemberRemoveResponse
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

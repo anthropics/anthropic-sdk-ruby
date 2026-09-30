@@ -1,0 +1,153 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_plugin_marketplace =
+          {
+            id: String,
+            created_at: Time,
+            default_installation_preference: Anthropic::Models::Beta::Organization::BetaPluginMarketplace::default_installation_preference?,
+            last_sync_ended_at: Time?,
+            last_sync_read_sha: String?,
+            name: String,
+            owner: Anthropic::Models::Beta::Organization::BetaPluginMarketplace::owner,
+            source: Anthropic::Models::Beta::Organization::BetaPluginMarketplace::source,
+            sync_status: Anthropic::Models::Beta::Organization::BetaPluginMarketplace::sync_status?,
+            type: :plugin_marketplace
+          }
+
+        class BetaPluginMarketplace < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor created_at: Time
+
+          attr_accessor default_installation_preference: Anthropic::Models::Beta::Organization::BetaPluginMarketplace::default_installation_preference?
+
+          attr_accessor last_sync_ended_at: Time?
+
+          attr_accessor last_sync_read_sha: String?
+
+          attr_accessor name: String
+
+          attr_accessor owner: Anthropic::Models::Beta::Organization::BetaPluginMarketplace::owner
+
+          attr_accessor source: Anthropic::Models::Beta::Organization::BetaPluginMarketplace::source
+
+          attr_accessor sync_status: Anthropic::Models::Beta::Organization::BetaPluginMarketplace::sync_status?
+
+          attr_accessor type: :plugin_marketplace
+
+          def initialize: (
+            id: String,
+            created_at: Time,
+            default_installation_preference: Anthropic::Models::Beta::Organization::BetaPluginMarketplace::default_installation_preference?,
+            last_sync_ended_at: Time?,
+            last_sync_read_sha: String?,
+            name: String,
+            owner: Anthropic::Models::Beta::Organization::BetaPluginMarketplace::owner,
+            source: Anthropic::Models::Beta::Organization::BetaPluginMarketplace::source,
+            sync_status: Anthropic::Models::Beta::Organization::BetaPluginMarketplace::sync_status?,
+            ?type: :plugin_marketplace
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            created_at: Time,
+            default_installation_preference: Anthropic::Models::Beta::Organization::BetaPluginMarketplace::default_installation_preference?,
+            last_sync_ended_at: Time?,
+            last_sync_read_sha: String?,
+            name: String,
+            owner: Anthropic::Models::Beta::Organization::BetaPluginMarketplace::owner,
+            source: Anthropic::Models::Beta::Organization::BetaPluginMarketplace::source,
+            sync_status: Anthropic::Models::Beta::Organization::BetaPluginMarketplace::sync_status?,
+            type: :plugin_marketplace
+          }
+
+          type default_installation_preference =
+            :auto_install | :available | :not_available | :required
+
+          module DefaultInstallationPreference
+            extend Anthropic::Internal::Type::Enum
+
+            AUTO_INSTALL: :auto_install
+            AVAILABLE: :available
+            NOT_AVAILABLE: :not_available
+            REQUIRED: :required
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaPluginMarketplace::default_installation_preference]
+          end
+
+          type owner =
+            Anthropic::Beta::Organization::BetaPluginOwnerOrganization
+            | Anthropic::Beta::Organization::BetaPluginOwnerUser
+
+          module Owner
+            extend Anthropic::Internal::Type::Union
+
+            type type_ = :organization | :user
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              ORGANIZATION: :organization
+              USER: :user
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaPluginMarketplace::Owner::type_]
+            end
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::BetaPluginMarketplace::owner]
+
+            def self.new:
+              (
+                type: :organization | "organization"
+              ) -> Anthropic::Beta::Organization::BetaPluginOwnerOrganization
+              | (
+                type: :user | "user",
+                user_id: String
+              ) -> Anthropic::Beta::Organization::BetaPluginOwnerUser
+              | (
+                type: Anthropic::Models::Beta::Organization::BetaPluginMarketplace::Owner::type_
+                | String,
+                ?user_id: String
+              ) -> Anthropic::Models::Beta::Organization::BetaPluginMarketplace::owner
+          end
+
+          type source = :directory | :github | :gitlab | :manual | :public_git
+
+          module Source
+            extend Anthropic::Internal::Type::Enum
+
+            DIRECTORY: :directory
+            GITHUB: :github
+            GITLAB: :gitlab
+            MANUAL: :manual
+            PUBLIC_GIT: :public_git
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaPluginMarketplace::source]
+          end
+
+          type sync_status =
+            :failed_auth
+            | :failed_content
+            | :failed_limits
+            | :failed_transient
+            | :in_progress
+            | :success
+
+          module SyncStatus
+            extend Anthropic::Internal::Type::Enum
+
+            FAILED_AUTH: :failed_auth
+            FAILED_CONTENT: :failed_content
+            FAILED_LIMITS: :failed_limits
+            FAILED_TRANSIENT: :failed_transient
+            IN_PROGRESS: :in_progress
+            SUCCESS: :success
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaPluginMarketplace::sync_status]
+          end
+        end
+      end
+    end
+  end
+end

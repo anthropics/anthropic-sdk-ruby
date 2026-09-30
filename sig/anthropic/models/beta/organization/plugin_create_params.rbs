@@ -1,0 +1,53 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type plugin_create_params =
+          {
+            files: ::Array[Anthropic::Internal::file_input],
+            marketplace_id: String,
+            release_notes: String,
+            betas: ::Array[Anthropic::Models::anthropic_beta]
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class PluginCreateParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor files: ::Array[Anthropic::Internal::file_input]
+
+          attr_reader marketplace_id: String?
+
+          def marketplace_id=: (String) -> String
+
+          attr_reader release_notes: String?
+
+          def release_notes=: (String) -> String
+
+          attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+          def betas=: (
+            ::Array[Anthropic::Models::anthropic_beta]
+          ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+          def initialize: (
+            files: ::Array[Anthropic::Internal::file_input],
+            ?marketplace_id: String,
+            ?release_notes: String,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            files: ::Array[Anthropic::Internal::file_input],
+            marketplace_id: String,
+            release_notes: String,
+            betas: ::Array[Anthropic::Models::anthropic_beta],
+            request_options: Anthropic::RequestOptions
+          }
+        end
+      end
+    end
+  end
+end

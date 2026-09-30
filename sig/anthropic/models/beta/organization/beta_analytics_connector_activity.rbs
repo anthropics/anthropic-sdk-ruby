@@ -1,0 +1,99 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_connector_activity =
+          {
+            chat_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatMetrics,
+            claude_code_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorClaudeCodeMetrics,
+            connector_name: String,
+            cowork_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorCoworkMetrics,
+            distinct_user_count: Integer,
+            office_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeMetrics,
+            connector_display_name: String?,
+            individual_auth_distinct_user_count: Integer?,
+            managed_auth_distinct_user_count: Integer?,
+            product: String?,
+            rbac_group_id: String?,
+            rbac_group_name: String?,
+            read_call_count: Integer?,
+            unclassified_call_count: Integer?,
+            user_id: String?,
+            write_call_count: Integer?
+          }
+
+        class BetaAnalyticsConnectorActivity < Anthropic::Internal::Type::BaseModel
+          attr_accessor chat_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatMetrics
+
+          attr_accessor claude_code_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorClaudeCodeMetrics
+
+          attr_accessor connector_name: String
+
+          attr_accessor cowork_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorCoworkMetrics
+
+          attr_accessor distinct_user_count: Integer
+
+          attr_accessor office_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeMetrics
+
+          attr_accessor connector_display_name: String?
+
+          attr_accessor individual_auth_distinct_user_count: Integer?
+
+          attr_accessor managed_auth_distinct_user_count: Integer?
+
+          attr_accessor product: String?
+
+          attr_accessor rbac_group_id: String?
+
+          attr_accessor rbac_group_name: String?
+
+          attr_accessor read_call_count: Integer?
+
+          attr_accessor unclassified_call_count: Integer?
+
+          attr_accessor user_id: String?
+
+          attr_accessor write_call_count: Integer?
+
+          def initialize: (
+            chat_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatMetrics,
+            claude_code_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorClaudeCodeMetrics,
+            connector_name: String,
+            cowork_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorCoworkMetrics,
+            distinct_user_count: Integer,
+            office_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeMetrics,
+            ?connector_display_name: String?,
+            ?individual_auth_distinct_user_count: Integer?,
+            ?managed_auth_distinct_user_count: Integer?,
+            ?product: String?,
+            ?rbac_group_id: String?,
+            ?rbac_group_name: String?,
+            ?read_call_count: Integer?,
+            ?unclassified_call_count: Integer?,
+            ?user_id: String?,
+            ?write_call_count: Integer?
+          ) -> void
+
+          def to_hash: -> {
+            chat_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatMetrics,
+            claude_code_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorClaudeCodeMetrics,
+            connector_name: String,
+            cowork_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorCoworkMetrics,
+            distinct_user_count: Integer,
+            office_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeMetrics,
+            connector_display_name: String?,
+            individual_auth_distinct_user_count: Integer?,
+            managed_auth_distinct_user_count: Integer?,
+            product: String?,
+            rbac_group_id: String?,
+            rbac_group_name: String?,
+            read_call_count: Integer?,
+            unclassified_call_count: Integer?,
+            user_id: String?,
+            write_call_count: Integer?
+          }
+        end
+      end
+    end
+  end
+end

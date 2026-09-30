@@ -1,0 +1,52 @@
+module Anthropic
+  module Resources
+    class Organization
+      class Workspaces
+        attr_reader rate_limits: Anthropic::Resources::Organization::Workspaces::RateLimits
+
+        attr_reader members: Anthropic::Resources::Organization::Workspaces::Members
+
+        attr_reader service_accounts: Anthropic::Resources::Organization::Workspaces::ServiceAccounts
+
+        def create: (
+          name: String,
+          ?data_residency: Anthropic::Organization::DataResidencyCreateConfig?,
+          ?display_color: String?,
+          ?external_key_id: String?,
+          ?tags: ::Hash[Symbol, String]?,
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Organization::Workspace
+
+        def retrieve: (
+          String workspace_id,
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Organization::Workspace
+
+        def update: (
+          String workspace_id,
+          ?data_residency: Anthropic::Organization::DataResidencyUpdateConfig?,
+          ?display_color: String,
+          ?external_key_id: String,
+          ?name: String,
+          ?tags: ::Hash[Symbol, String?]?,
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Organization::Workspace
+
+        def list: (
+          ?after_id: String,
+          ?before_id: String,
+          ?include_archived: bool,
+          ?limit: Integer,
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Internal::Page[Anthropic::Organization::Workspace]
+
+        def archive: (
+          String workspace_id,
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Organization::Workspace
+
+        def initialize: (client: Anthropic::Client) -> void
+      end
+    end
+  end
+end

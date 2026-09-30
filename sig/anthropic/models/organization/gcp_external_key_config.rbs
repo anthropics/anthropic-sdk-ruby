@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module Organization
+      type gcp_external_key_config = { key_name: String, type: :gcp }
+
+      class GCPExternalKeyConfig < Anthropic::Internal::Type::BaseModel
+        attr_accessor key_name: String
+
+        attr_accessor type: :gcp
+
+        def initialize: (key_name: String, ?type: :gcp) -> void
+
+        def to_hash: -> { key_name: String, type: :gcp }
+      end
+    end
+  end
+end

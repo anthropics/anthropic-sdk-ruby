@@ -1,0 +1,53 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Plugins
+          type version_create_params =
+            {
+              plugin_id: String,
+              files: ::Array[Anthropic::Internal::file_input],
+              release_notes: String,
+              betas: ::Array[Anthropic::Models::anthropic_beta]
+            }
+            & Anthropic::Internal::Type::request_parameters
+
+          class VersionCreateParams < Anthropic::Internal::Type::BaseModel
+            extend Anthropic::Internal::Type::RequestParameters::Converter
+            include Anthropic::Internal::Type::RequestParameters
+
+            attr_accessor plugin_id: String
+
+            attr_accessor files: ::Array[Anthropic::Internal::file_input]
+
+            attr_reader release_notes: String?
+
+            def release_notes=: (String) -> String
+
+            attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+            def betas=: (
+              ::Array[Anthropic::Models::anthropic_beta]
+            ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+            def initialize: (
+              plugin_id: String,
+              files: ::Array[Anthropic::Internal::file_input],
+              ?release_notes: String,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> void
+
+            def to_hash: -> {
+              plugin_id: String,
+              files: ::Array[Anthropic::Internal::file_input],
+              release_notes: String,
+              betas: ::Array[Anthropic::Models::anthropic_beta],
+              request_options: Anthropic::RequestOptions
+            }
+          end
+        end
+      end
+    end
+  end
+end

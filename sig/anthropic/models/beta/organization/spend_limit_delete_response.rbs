@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type spend_limit_delete_response =
+          { id: String, type: :spend_limit_deleted }
+
+        class SpendLimitDeleteResponse < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor type: :spend_limit_deleted
+
+          def initialize: (id: String, ?type: :spend_limit_deleted) -> void
+
+          def to_hash: -> { id: String, type: :spend_limit_deleted }
+        end
+      end
+    end
+  end
+end

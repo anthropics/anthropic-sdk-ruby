@@ -1,0 +1,49 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module SpendLimits
+          type increase_request_list_params =
+            {
+              actor_ids: ::Array[String]?,
+              limit: Integer,
+              page: String?,
+              status: ::Array[Anthropic::Models::Beta::Organization::SpendLimits::beta_spend_limit_increase_request_status]?
+            }
+            & Anthropic::Internal::Type::request_parameters
+
+          class IncreaseRequestListParams < Anthropic::Internal::Type::BaseModel
+            extend Anthropic::Internal::Type::RequestParameters::Converter
+            include Anthropic::Internal::Type::RequestParameters
+
+            attr_accessor actor_ids: ::Array[String]?
+
+            attr_reader limit: Integer?
+
+            def limit=: (Integer) -> Integer
+
+            attr_accessor page: String?
+
+            attr_accessor status: ::Array[Anthropic::Models::Beta::Organization::SpendLimits::beta_spend_limit_increase_request_status]?
+
+            def initialize: (
+              ?actor_ids: ::Array[String]?,
+              ?limit: Integer,
+              ?page: String?,
+              ?status: ::Array[Anthropic::Models::Beta::Organization::SpendLimits::beta_spend_limit_increase_request_status]?,
+              ?request_options: Anthropic::request_opts
+            ) -> void
+
+            def to_hash: -> {
+              actor_ids: ::Array[String]?,
+              limit: Integer,
+              page: String?,
+              status: ::Array[Anthropic::Models::Beta::Organization::SpendLimits::beta_spend_limit_increase_request_status]?,
+              request_options: Anthropic::RequestOptions
+            }
+          end
+        end
+      end
+    end
+  end
+end

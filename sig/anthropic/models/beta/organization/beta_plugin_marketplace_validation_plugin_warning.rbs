@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_plugin_marketplace_validation_plugin_warning =
+          { error_code: String, message: String }
+
+        class BetaPluginMarketplaceValidationPluginWarning < Anthropic::Internal::Type::BaseModel
+          attr_accessor error_code: String
+
+          attr_accessor message: String
+
+          def initialize: (error_code: String, message: String) -> void
+
+          def to_hash: -> { error_code: String, message: String }
+        end
+      end
+    end
+  end
+end

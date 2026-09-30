@@ -1,0 +1,99 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module RBACRoles
+          type beta_rbac_role_permission =
+            {
+              action: String,
+              resource: Anthropic::Models::Beta::Organization::RBACRoles::BetaRBACRolePermission::resource,
+              type: :rbac_role_permission
+            }
+
+          class BetaRBACRolePermission < Anthropic::Internal::Type::BaseModel
+            attr_accessor action: String
+
+            attr_accessor resource: Anthropic::Models::Beta::Organization::RBACRoles::BetaRBACRolePermission::resource
+
+            attr_accessor type: :rbac_role_permission
+
+            def initialize: (
+              action: String,
+              resource: Anthropic::Models::Beta::Organization::RBACRoles::BetaRBACRolePermission::resource,
+              ?type: :rbac_role_permission
+            ) -> void
+
+            def to_hash: -> {
+              action: String,
+              resource: Anthropic::Models::Beta::Organization::RBACRoles::BetaRBACRolePermission::resource,
+              type: :rbac_role_permission
+            }
+
+            type resource =
+              Anthropic::Beta::Organization::RBACRoles::BetaRBACOrganizationPermissionResource
+              | Anthropic::Beta::Organization::RBACRoles::BetaRBACConnectorToolPermissionResource
+              | Anthropic::Beta::Organization::RBACRoles::BetaRBACConnectorScopePermissionResource
+              | Anthropic::Beta::Organization::RBACRoles::BetaRBACConnectorPermissionResource
+              | Anthropic::Beta::Organization::RBACRoles::BetaRBACAllConnectorsPermissionResource
+
+            module Resource
+              extend Anthropic::Internal::Type::Union
+
+              type type_ =
+                :organization
+                | :connector_tool
+                | :connector_scope
+                | :connector
+                | :all_connectors
+
+              module Type
+                extend Anthropic::Internal::Type::Enum
+
+                ORGANIZATION: :organization
+                CONNECTOR_TOOL: :connector_tool
+                CONNECTOR_SCOPE: :connector_scope
+                CONNECTOR: :connector
+                ALL_CONNECTORS: :all_connectors
+
+                def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::RBACRoles::BetaRBACRolePermission::Resource::type_]
+              end
+
+              def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::RBACRoles::BetaRBACRolePermission::resource]
+
+              def self.new:
+                (
+                  type: :organization | "organization",
+                  organization_id: String
+                ) -> Anthropic::Beta::Organization::RBACRoles::BetaRBACOrganizationPermissionResource
+                | (
+                  type: :connector_tool | "connector_tool",
+                  connector_id: String,
+                  tool_name: String
+                ) -> Anthropic::Beta::Organization::RBACRoles::BetaRBACConnectorToolPermissionResource
+                | (
+                  type: :connector_scope | "connector_scope",
+                  connector_id: String,
+                  scope: String
+                ) -> Anthropic::Beta::Organization::RBACRoles::BetaRBACConnectorScopePermissionResource
+                | (
+                  type: :connector | "connector",
+                  connector_id: String
+                ) -> Anthropic::Beta::Organization::RBACRoles::BetaRBACConnectorPermissionResource
+                | (
+                  type: :all_connectors | "all_connectors"
+                ) -> Anthropic::Beta::Organization::RBACRoles::BetaRBACAllConnectorsPermissionResource
+                | (
+                  type: Anthropic::Models::Beta::Organization::RBACRoles::BetaRBACRolePermission::Resource::type_
+                  | String,
+                  ?organization_id: String,
+                  ?connector_id: String,
+                  ?tool_name: String,
+                  ?scope: String
+                ) -> Anthropic::Models::Beta::Organization::RBACRoles::BetaRBACRolePermission::resource
+            end
+          end
+        end
+      end
+    end
+  end
+end

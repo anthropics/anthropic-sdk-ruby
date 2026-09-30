@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_skill_chat_metrics =
+          { distinct_conversation_skill_used_count: Integer? }
+
+        class BetaAnalyticsSkillChatMetrics < Anthropic::Internal::Type::BaseModel
+          attr_accessor distinct_conversation_skill_used_count: Integer?
+
+          def initialize: (
+            distinct_conversation_skill_used_count: Integer?
+          ) -> void
+
+          def to_hash: -> { distinct_conversation_skill_used_count: Integer? }
+        end
+      end
+    end
+  end
+end

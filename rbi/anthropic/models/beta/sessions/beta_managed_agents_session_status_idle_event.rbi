@@ -21,6 +21,27 @@ module Anthropic
           sig { returns(Time) }
           attr_accessor :processed_at
 
+          # Structured information about why the session stopped. `null` when there is
+          # nothing more to report.
+          sig do
+            returns(
+              T.nilable(
+                Anthropic::Beta::Sessions::BetaManagedAgentsSessionRefusalStopDetails
+              )
+            )
+          end
+          attr_reader :stop_details
+
+          sig do
+            params(
+              stop_details:
+                T.nilable(
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionRefusalStopDetails::OrHash
+                )
+            ).void
+          end
+          attr_writer :stop_details
+
           sig do
             returns(
               Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent::StopReason::Variants
@@ -40,12 +61,17 @@ module Anthropic
             params(
               id: String,
               processed_at: Time,
+              stop_details:
+                T.nilable(
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionRefusalStopDetails::OrHash
+                ),
               stop_reason:
                 T.any(
                   Anthropic::Beta::Sessions::BetaManagedAgentsSessionEndTurn::OrHash,
                   Anthropic::Beta::Sessions::BetaManagedAgentsSessionRequiresAction::OrHash,
                   Anthropic::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionBudgetReached::OrHash
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionBudgetReached::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionRefusal::OrHash
                 ),
               type:
                 Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent::Type::OrSymbol
@@ -56,6 +82,9 @@ module Anthropic
             id:,
             # Timestamp of status change.
             processed_at:,
+            # Structured information about why the session stopped. `null` when there is
+            # nothing more to report.
+            stop_details:,
             stop_reason:,
             type:
           )
@@ -66,6 +95,10 @@ module Anthropic
               {
                 id: String,
                 processed_at: Time,
+                stop_details:
+                  T.nilable(
+                    Anthropic::Beta::Sessions::BetaManagedAgentsSessionRefusalStopDetails
+                  ),
                 stop_reason:
                   Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent::StopReason::Variants,
                 type:
@@ -85,7 +118,8 @@ module Anthropic
                   Anthropic::Beta::Sessions::BetaManagedAgentsSessionEndTurn,
                   Anthropic::Beta::Sessions::BetaManagedAgentsSessionRequiresAction,
                   Anthropic::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionBudgetReached
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionBudgetReached,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionRefusal
                 )
               end
 
@@ -119,6 +153,11 @@ module Anthropic
               BUDGET_REACHED =
                 T.let(
                   :budget_reached,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent::StopReason::Type::TaggedSymbol
+                )
+              REFUSAL =
+                T.let(
+                  :refusal,
                   Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent::StopReason::Type::TaggedSymbol
                 )
 

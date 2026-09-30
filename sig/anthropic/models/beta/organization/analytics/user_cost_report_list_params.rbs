@@ -1,0 +1,210 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Analytics
+          type user_cost_report_list_params =
+            {
+              starting_at: Time,
+              bucket_width: Anthropic::Models::Beta::Organization::Analytics::UserCostReportListParams::bucket_width?,
+              claude_tag_categories: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_claude_tag_category]?,
+              claude_tag_user_ids: ::Array[String]?,
+              context_windows: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_context_window]?,
+              ending_at: Time?,
+              exclude_deleted_users: bool,
+              group_by: ::Array[Anthropic::Models::Beta::Organization::Analytics::UserCostReportListParams::group_by]?,
+              inference_geos: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_inference_geo_filter]?,
+              limit: Integer,
+              models: ::Array[String]?,
+              order: Anthropic::Models::Beta::Organization::Analytics::UserCostReportListParams::order,
+              order_by: Anthropic::Models::Beta::Organization::Analytics::UserCostReportListParams::order_by,
+              page: String?,
+              products: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_product_filter]?,
+              rbac_group_ids: ::Array[String]?,
+              slack_channel_ids: ::Array[String]?,
+              speeds: ::Array[Anthropic::Models::Beta::Organization::Analytics::UserCostReportListParams::speed]?,
+              user_ids: ::Array[String]?
+            }
+            & Anthropic::Internal::Type::request_parameters
+
+          class UserCostReportListParams < Anthropic::Internal::Type::BaseModel
+            extend Anthropic::Internal::Type::RequestParameters::Converter
+            include Anthropic::Internal::Type::RequestParameters
+
+            attr_accessor starting_at: Time
+
+            attr_accessor bucket_width: Anthropic::Models::Beta::Organization::Analytics::UserCostReportListParams::bucket_width?
+
+            attr_accessor claude_tag_categories: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_claude_tag_category]?
+
+            attr_accessor claude_tag_user_ids: ::Array[String]?
+
+            attr_accessor context_windows: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_context_window]?
+
+            attr_accessor ending_at: Time?
+
+            attr_reader exclude_deleted_users: bool?
+
+            def exclude_deleted_users=: (bool) -> bool
+
+            attr_accessor group_by: ::Array[Anthropic::Models::Beta::Organization::Analytics::UserCostReportListParams::group_by]?
+
+            attr_accessor inference_geos: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_inference_geo_filter]?
+
+            attr_reader limit: Integer?
+
+            def limit=: (Integer) -> Integer
+
+            attr_accessor models: ::Array[String]?
+
+            attr_reader order: Anthropic::Models::Beta::Organization::Analytics::UserCostReportListParams::order?
+
+            def order=: (
+              Anthropic::Models::Beta::Organization::Analytics::UserCostReportListParams::order
+            ) -> Anthropic::Models::Beta::Organization::Analytics::UserCostReportListParams::order
+
+            attr_reader order_by: Anthropic::Models::Beta::Organization::Analytics::UserCostReportListParams::order_by?
+
+            def order_by=: (
+              Anthropic::Models::Beta::Organization::Analytics::UserCostReportListParams::order_by
+            ) -> Anthropic::Models::Beta::Organization::Analytics::UserCostReportListParams::order_by
+
+            attr_accessor page: String?
+
+            attr_accessor products: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_product_filter]?
+
+            attr_accessor rbac_group_ids: ::Array[String]?
+
+            attr_accessor slack_channel_ids: ::Array[String]?
+
+            attr_accessor speeds: ::Array[Anthropic::Models::Beta::Organization::Analytics::UserCostReportListParams::speed]?
+
+            attr_accessor user_ids: ::Array[String]?
+
+            def initialize: (
+              starting_at: Time,
+              ?bucket_width: Anthropic::Models::Beta::Organization::Analytics::UserCostReportListParams::bucket_width?,
+              ?claude_tag_categories: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_claude_tag_category]?,
+              ?claude_tag_user_ids: ::Array[String]?,
+              ?context_windows: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_context_window]?,
+              ?ending_at: Time?,
+              ?exclude_deleted_users: bool,
+              ?group_by: ::Array[Anthropic::Models::Beta::Organization::Analytics::UserCostReportListParams::group_by]?,
+              ?inference_geos: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_inference_geo_filter]?,
+              ?limit: Integer,
+              ?models: ::Array[String]?,
+              ?order: Anthropic::Models::Beta::Organization::Analytics::UserCostReportListParams::order,
+              ?order_by: Anthropic::Models::Beta::Organization::Analytics::UserCostReportListParams::order_by,
+              ?page: String?,
+              ?products: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_product_filter]?,
+              ?rbac_group_ids: ::Array[String]?,
+              ?slack_channel_ids: ::Array[String]?,
+              ?speeds: ::Array[Anthropic::Models::Beta::Organization::Analytics::UserCostReportListParams::speed]?,
+              ?user_ids: ::Array[String]?,
+              ?request_options: Anthropic::request_opts
+            ) -> void
+
+            def to_hash: -> {
+              starting_at: Time,
+              bucket_width: Anthropic::Models::Beta::Organization::Analytics::UserCostReportListParams::bucket_width?,
+              claude_tag_categories: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_claude_tag_category]?,
+              claude_tag_user_ids: ::Array[String]?,
+              context_windows: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_context_window]?,
+              ending_at: Time?,
+              exclude_deleted_users: bool,
+              group_by: ::Array[Anthropic::Models::Beta::Organization::Analytics::UserCostReportListParams::group_by]?,
+              inference_geos: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_inference_geo_filter]?,
+              limit: Integer,
+              models: ::Array[String]?,
+              order: Anthropic::Models::Beta::Organization::Analytics::UserCostReportListParams::order,
+              order_by: Anthropic::Models::Beta::Organization::Analytics::UserCostReportListParams::order_by,
+              page: String?,
+              products: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_product_filter]?,
+              rbac_group_ids: ::Array[String]?,
+              slack_channel_ids: ::Array[String]?,
+              speeds: ::Array[Anthropic::Models::Beta::Organization::Analytics::UserCostReportListParams::speed]?,
+              user_ids: ::Array[String]?,
+              request_options: Anthropic::RequestOptions
+            }
+
+            type bucket_width = :"1d" | :"1h" | :"1m"
+
+            module BucketWidth
+              extend Anthropic::Internal::Type::Enum
+
+              DAY: :"1d"
+              HOUR: :"1h"
+              MINUTE: :"1m"
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Analytics::UserCostReportListParams::bucket_width]
+            end
+
+            type group_by =
+              :claude_tag_category
+              | :claude_tag_user_id
+              | :context_window
+              | :cost_type
+              | :inference_geo
+              | :model
+              | :product
+              | :rbac_group_id
+              | :slack_channel_id
+              | :speed
+              | :token_type
+
+            module GroupBy
+              extend Anthropic::Internal::Type::Enum
+
+              CLAUDE_TAG_CATEGORY: :claude_tag_category
+              CLAUDE_TAG_USER_ID: :claude_tag_user_id
+              CONTEXT_WINDOW: :context_window
+              COST_TYPE: :cost_type
+              INFERENCE_GEO: :inference_geo
+              MODEL: :model
+              PRODUCT: :product
+              RBAC_GROUP_ID: :rbac_group_id
+              SLACK_CHANNEL_ID: :slack_channel_id
+              SPEED: :speed
+              TOKEN_TYPE: :token_type
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Analytics::UserCostReportListParams::group_by]
+            end
+
+            type order = :asc | :desc
+
+            module Order
+              extend Anthropic::Internal::Type::Enum
+
+              ASC: :asc
+              DESC: :desc
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Analytics::UserCostReportListParams::order]
+            end
+
+            type order_by = :amount | :list_amount
+
+            module OrderBy
+              extend Anthropic::Internal::Type::Enum
+
+              AMOUNT: :amount
+              LIST_AMOUNT: :list_amount
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Analytics::UserCostReportListParams::order_by]
+            end
+
+            type speed = :fast | :standard
+
+            module Speed
+              extend Anthropic::Internal::Type::Enum
+
+              FAST: :fast
+              STANDARD: :standard
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Analytics::UserCostReportListParams::speed]
+            end
+          end
+        end
+      end
+    end
+  end
+end

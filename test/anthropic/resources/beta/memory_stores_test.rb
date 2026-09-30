@@ -13,13 +13,13 @@ class Anthropic::Test::Resources::Beta::MemoryStoresTest < Anthropic::Test::Reso
     assert_pattern do
       response => {
         id: String,
+        archived_at: Time | nil,
         created_at: Time,
+        description: String,
+        metadata: ^(Anthropic::Internal::Type::HashOf[String]),
         name: String,
         type: Anthropic::Beta::BetaManagedAgentsMemoryStore::Type,
-        updated_at: Time,
-        archived_at: Time | nil,
-        description: String | nil,
-        metadata: ^(Anthropic::Internal::Type::HashOf[String]) | nil
+        updated_at: Time
       }
     end
   end
@@ -34,13 +34,13 @@ class Anthropic::Test::Resources::Beta::MemoryStoresTest < Anthropic::Test::Reso
     assert_pattern do
       response => {
         id: String,
+        archived_at: Time | nil,
         created_at: Time,
+        description: String,
+        metadata: ^(Anthropic::Internal::Type::HashOf[String]),
         name: String,
         type: Anthropic::Beta::BetaManagedAgentsMemoryStore::Type,
-        updated_at: Time,
-        archived_at: Time | nil,
-        description: String | nil,
-        metadata: ^(Anthropic::Internal::Type::HashOf[String]) | nil
+        updated_at: Time
       }
     end
   end
@@ -55,13 +55,13 @@ class Anthropic::Test::Resources::Beta::MemoryStoresTest < Anthropic::Test::Reso
     assert_pattern do
       response => {
         id: String,
+        archived_at: Time | nil,
         created_at: Time,
+        description: String,
+        metadata: ^(Anthropic::Internal::Type::HashOf[String]),
         name: String,
         type: Anthropic::Beta::BetaManagedAgentsMemoryStore::Type,
-        updated_at: Time,
-        archived_at: Time | nil,
-        description: String | nil,
-        metadata: ^(Anthropic::Internal::Type::HashOf[String]) | nil
+        updated_at: Time
       }
     end
   end
@@ -85,13 +85,13 @@ class Anthropic::Test::Resources::Beta::MemoryStoresTest < Anthropic::Test::Reso
     assert_pattern do
       row => {
         id: String,
+        archived_at: Time | nil,
         created_at: Time,
+        description: String,
+        metadata: ^(Anthropic::Internal::Type::HashOf[String]),
         name: String,
         type: Anthropic::Beta::BetaManagedAgentsMemoryStore::Type,
-        updated_at: Time,
-        archived_at: Time | nil,
-        description: String | nil,
-        metadata: ^(Anthropic::Internal::Type::HashOf[String]) | nil
+        updated_at: Time
       }
     end
   end
@@ -121,13 +121,13 @@ class Anthropic::Test::Resources::Beta::MemoryStoresTest < Anthropic::Test::Reso
     assert_pattern do
       response => {
         id: String,
+        archived_at: Time | nil,
         created_at: Time,
+        description: String,
+        metadata: ^(Anthropic::Internal::Type::HashOf[String]),
         name: String,
         type: Anthropic::Beta::BetaManagedAgentsMemoryStore::Type,
-        updated_at: Time,
-        archived_at: Time | nil,
-        description: String | nil,
-        metadata: ^(Anthropic::Internal::Type::HashOf[String]) | nil
+        updated_at: Time
       }
     end
   end

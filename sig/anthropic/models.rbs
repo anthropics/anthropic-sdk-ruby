@@ -363,6 +363,14 @@ module Anthropic
 
   class NotFoundError = Anthropic::Models::NotFoundError
 
+  module Organization = Anthropic::Models::Organization
+
+  class OrganizationInfo = Anthropic::Models::OrganizationInfo
+
+  class OrganizationRetrieveParams = Anthropic::Models::OrganizationRetrieveParams
+
+  module OrganizationRole = Anthropic::Models::OrganizationRole
+
   class OutputConfig = Anthropic::Models::OutputConfig
 
   class OutputTokensDetails = Anthropic::Models::OutputTokensDetails

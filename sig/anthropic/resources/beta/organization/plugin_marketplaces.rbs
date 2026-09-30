@@ -1,0 +1,48 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class PluginMarketplaces
+          def retrieve: (
+            String marketplace_id,
+            ?organization_id: String?,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaPluginMarketplace
+
+          def update: (
+            String marketplace_id,
+            default_installation_preference: Anthropic::Models::Beta::Organization::PluginMarketplaceUpdateParams::default_installation_preference,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaPluginMarketplace
+
+          def list: (
+            ?limit: Integer,
+            ?organization_id: String?,
+            ?owner_type: Anthropic::Models::Beta::Organization::PluginMarketplaceListParams::owner_type?,
+            ?page: String?,
+            ?source: Anthropic::Models::Beta::Organization::PluginMarketplaceListParams::source?,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Organization::BetaPluginMarketplace]
+
+          def validate_archive: (
+            archive: Anthropic::Internal::file_input,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaPluginMarketplaceValidationReport
+
+          def validate_repository: (
+            repository_url: String,
+            ?ref: String?,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaPluginMarketplaceValidationReport
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,33 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class Analytics
+          class UsageReport
+            def list: (
+              starting_at: Time,
+              ?bucket_width: Anthropic::Models::Beta::Organization::Analytics::UsageReportListParams::bucket_width,
+              ?claude_tag_categories: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_claude_tag_category]?,
+              ?claude_tag_user_ids: ::Array[String]?,
+              ?context_windows: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_context_window]?,
+              ?ending_at: Time?,
+              ?group_by: ::Array[Anthropic::Models::Beta::Organization::Analytics::UsageReportListParams::group_by]?,
+              ?inference_geos: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_inference_geo_filter]?,
+              ?limit: Integer?,
+              ?models: ::Array[String]?,
+              ?page: String?,
+              ?products: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_product_filter]?,
+              ?rbac_group_ids: ::Array[String]?,
+              ?slack_channel_ids: ::Array[String]?,
+              ?speeds: ::Array[Anthropic::Models::Beta::Organization::Analytics::UsageReportListParams::speed]?,
+              ?user_ids: ::Array[String]?,
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Organization::BetaAnalyticsUsageReportTimeBucket]
+
+            def initialize: (client: Anthropic::Client) -> void
+          end
+        end
+      end
+    end
+  end
+end

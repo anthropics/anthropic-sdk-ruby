@@ -37,6 +37,9 @@ module Anthropic
     sig { returns(Anthropic::Resources::Skills) }
     attr_reader :skills
 
+    sig { returns(Anthropic::Resources::Organization) }
+    attr_reader :organization
+
     sig { returns(Anthropic::Resources::Beta) }
     attr_reader :beta
 
@@ -60,6 +63,11 @@ module Anthropic
     private def resolve_default_credentials?
     end
 
+    # @api private
+    sig { returns(T::Boolean) }
+    def timeout_overridden?
+    end
+
     # Creates and returns a new client for interacting with the API.
     sig do
       params(
@@ -69,7 +77,7 @@ module Anthropic
         base_url: T.nilable(String),
         proxy: T.nilable(T.any(String, URI::Generic)),
         max_retries: Integer,
-        timeout: Float,
+        timeout: T.nilable(Float),
         initial_retry_delay: Float,
         max_retry_delay: Float,
         middleware: T.nilable(Anthropic::Middleware::EntryOrArray)
@@ -91,7 +99,9 @@ module Anthropic
       proxy: nil,
       # Max number of retries to attempt after a failed retryable request.
       max_retries: Anthropic::Client::DEFAULT_MAX_RETRIES,
-      timeout: Anthropic::Client::DEFAULT_TIMEOUT_IN_SECONDS,
+      # Request timeout in seconds. Defaults to
+      # `Anthropic::Client::DEFAULT_TIMEOUT_IN_SECONDS` when `nil`.
+      timeout: nil,
       initial_retry_delay: Anthropic::Client::DEFAULT_INITIAL_RETRY_DELAY,
       max_retry_delay: Anthropic::Client::DEFAULT_MAX_RETRY_DELAY,
       # Per-attempt HTTP around-middleware. Each entry is a

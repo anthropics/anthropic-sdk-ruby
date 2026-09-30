@@ -1,0 +1,30 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_product_filter =
+          :chat
+          | :"claude-tag"
+          | :claude_code
+          | :claude_design
+          | :claude_in_chrome
+          | :cowork
+          | :office_agent
+
+        module BetaAnalyticsProductFilter
+          extend Anthropic::Internal::Type::Enum
+
+          CHAT: :chat
+          CLAUDE_TAG: :"claude-tag"
+          CLAUDE_CODE: :claude_code
+          CLAUDE_DESIGN: :claude_design
+          CLAUDE_IN_CHROME: :claude_in_chrome
+          COWORK: :cowork
+          OFFICE_AGENT: :office_agent
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::beta_analytics_product_filter]
+        end
+      end
+    end
+  end
+end

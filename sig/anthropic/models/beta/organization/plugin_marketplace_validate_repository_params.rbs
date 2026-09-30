@@ -1,0 +1,44 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type plugin_marketplace_validate_repository_params =
+          {
+            repository_url: String,
+            ref: String?,
+            betas: ::Array[Anthropic::Models::anthropic_beta]
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class PluginMarketplaceValidateRepositoryParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor repository_url: String
+
+          attr_accessor ref: String?
+
+          attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+          def betas=: (
+            ::Array[Anthropic::Models::anthropic_beta]
+          ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+          def initialize: (
+            repository_url: String,
+            ?ref: String?,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            repository_url: String,
+            ref: String?,
+            betas: ::Array[Anthropic::Models::anthropic_beta],
+            request_options: Anthropic::RequestOptions
+          }
+        end
+      end
+    end
+  end
+end

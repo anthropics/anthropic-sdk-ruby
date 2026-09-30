@@ -1,0 +1,33 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class Analytics
+          attr_reader summaries: Anthropic::Resources::Beta::Organization::Analytics::Summaries
+
+          attr_reader users: Anthropic::Resources::Beta::Organization::Analytics::Users
+
+          attr_reader apps: Anthropic::Resources::Beta::Organization::Analytics::Apps
+
+          attr_reader connectors: Anthropic::Resources::Beta::Organization::Analytics::Connectors
+
+          attr_reader plugins: Anthropic::Resources::Beta::Organization::Analytics::Plugins
+
+          attr_reader skills: Anthropic::Resources::Beta::Organization::Analytics::Skills
+
+          attr_reader artifacts: Anthropic::Resources::Beta::Organization::Analytics::Artifacts
+
+          attr_reader usage_report: Anthropic::Resources::Beta::Organization::Analytics::UsageReport
+
+          attr_reader user_usage_report: Anthropic::Resources::Beta::Organization::Analytics::UserUsageReport
+
+          attr_reader cost_report: Anthropic::Resources::Beta::Organization::Analytics::CostReport
+
+          attr_reader user_cost_report: Anthropic::Resources::Beta::Organization::Analytics::UserCostReport
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

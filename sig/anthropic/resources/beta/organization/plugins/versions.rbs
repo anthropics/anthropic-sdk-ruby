@@ -1,0 +1,46 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class Plugins
+          class Versions
+            def create: (
+              String plugin_id,
+              files: ::Array[Anthropic::Internal::file_input],
+              ?release_notes: String,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Beta::Organization::Plugins::BetaPluginVersion
+
+            def retrieve: (
+              String version,
+              plugin_id: String,
+              ?organization_id: String?,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Beta::Organization::Plugins::BetaPluginVersion
+
+            def list: (
+              String plugin_id,
+              ?limit: Integer,
+              ?organization_id: String?,
+              ?page: String?,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Organization::Plugins::BetaPluginVersion]
+
+            def download: (
+              String version,
+              plugin_id: String,
+              ?organization_id: String?,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> StringIO
+
+            def initialize: (client: Anthropic::Client) -> void
+          end
+        end
+      end
+    end
+  end
+end

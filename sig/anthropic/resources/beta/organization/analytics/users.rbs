@@ -1,0 +1,26 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class Analytics
+          class Users
+            def list: (
+              ?date: Date?,
+              ?ending_date: Date?,
+              ?filter: ::Array[String]?,
+              ?group_by: ::Array[Anthropic::Models::Beta::Organization::Analytics::UserListParams::group_by]?,
+              ?limit: Integer?,
+              ?order: Anthropic::Models::Beta::Organization::Analytics::UserListParams::order?,
+              ?order_by: String?,
+              ?page: String?,
+              ?starting_date: Date?,
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Organization::BetaAnalyticsUserActivity]
+
+            def initialize: (client: Anthropic::Client) -> void
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,40 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class SpendLimits
+          class IncreaseRequests
+            def retrieve: (
+              String spend_limit_increase_request_id,
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Beta::Organization::SpendLimits::BetaSpendLimitIncreaseRequest
+
+            def list: (
+              ?actor_ids: ::Array[String]?,
+              ?limit: Integer,
+              ?page: String?,
+              ?status: ::Array[Anthropic::Models::Beta::Organization::SpendLimits::beta_spend_limit_increase_request_status]?,
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Organization::SpendLimits::BetaSpendLimitIncreaseRequest]
+
+            def approve: (
+              String spend_limit_increase_request_id,
+              amount: String,
+              ?period: Anthropic::Models::Beta::Organization::beta_spend_limit_period?,
+              ?suppress_notification: bool,
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Models::Beta::Organization::SpendLimits::IncreaseRequestApproveResponse
+
+            def deny: (
+              String spend_limit_increase_request_id,
+              ?suppress_notification: bool,
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Beta::Organization::SpendLimits::BetaSpendLimitIncreaseRequest
+
+            def initialize: (client: Anthropic::Client) -> void
+          end
+        end
+      end
+    end
+  end
+end

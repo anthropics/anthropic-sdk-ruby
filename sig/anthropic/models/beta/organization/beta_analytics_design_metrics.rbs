@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_design_metrics =
+          {
+            distinct_projects_created_count: Integer,
+            distinct_projects_used_count: Integer?,
+            distinct_session_count: Integer?,
+            message_count: Integer
+          }
+
+        class BetaAnalyticsDesignMetrics < Anthropic::Internal::Type::BaseModel
+          attr_accessor distinct_projects_created_count: Integer
+
+          attr_accessor distinct_projects_used_count: Integer?
+
+          attr_accessor distinct_session_count: Integer?
+
+          attr_accessor message_count: Integer
+
+          def initialize: (
+            distinct_projects_created_count: Integer,
+            distinct_projects_used_count: Integer?,
+            distinct_session_count: Integer?,
+            message_count: Integer
+          ) -> void
+
+          def to_hash: -> {
+            distinct_projects_created_count: Integer,
+            distinct_projects_used_count: Integer?,
+            distinct_session_count: Integer?,
+            message_count: Integer
+          }
+        end
+      end
+    end
+  end
+end

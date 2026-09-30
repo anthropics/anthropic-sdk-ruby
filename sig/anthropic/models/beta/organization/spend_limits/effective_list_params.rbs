@@ -1,0 +1,61 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module SpendLimits
+          type effective_list_params =
+            {
+              limit: Integer,
+              page: String?,
+              period: ::Array[Anthropic::Models::Beta::Organization::SpendLimits::EffectiveListParams::period]?,
+              user_ids: ::Array[String]?
+            }
+            & Anthropic::Internal::Type::request_parameters
+
+          class EffectiveListParams < Anthropic::Internal::Type::BaseModel
+            extend Anthropic::Internal::Type::RequestParameters::Converter
+            include Anthropic::Internal::Type::RequestParameters
+
+            attr_reader limit: Integer?
+
+            def limit=: (Integer) -> Integer
+
+            attr_accessor page: String?
+
+            attr_accessor period: ::Array[Anthropic::Models::Beta::Organization::SpendLimits::EffectiveListParams::period]?
+
+            attr_accessor user_ids: ::Array[String]?
+
+            def initialize: (
+              ?limit: Integer,
+              ?page: String?,
+              ?period: ::Array[Anthropic::Models::Beta::Organization::SpendLimits::EffectiveListParams::period]?,
+              ?user_ids: ::Array[String]?,
+              ?request_options: Anthropic::request_opts
+            ) -> void
+
+            def to_hash: -> {
+              limit: Integer,
+              page: String?,
+              period: ::Array[Anthropic::Models::Beta::Organization::SpendLimits::EffectiveListParams::period]?,
+              user_ids: ::Array[String]?,
+              request_options: Anthropic::RequestOptions
+            }
+
+            type period = :daily | :monthly | :weekly
+
+            module Period
+              extend Anthropic::Internal::Type::Enum
+
+              DAILY: :daily
+              MONTHLY: :monthly
+              WEEKLY: :weekly
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::SpendLimits::EffectiveListParams::period]
+            end
+          end
+        end
+      end
+    end
+  end
+end

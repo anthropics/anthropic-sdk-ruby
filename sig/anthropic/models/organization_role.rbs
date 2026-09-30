@@ -1,0 +1,30 @@
+module Anthropic
+  module Models
+    type organization_role =
+      :admin
+      | :billing
+      | :claude_code_user
+      | :developer
+      | :managed
+      | :membership_admin
+      | :owner
+      | :primary_owner
+      | :user
+
+    module OrganizationRole
+      extend Anthropic::Internal::Type::Enum
+
+      ADMIN: :admin
+      BILLING: :billing
+      CLAUDE_CODE_USER: :claude_code_user
+      DEVELOPER: :developer
+      MANAGED: :managed
+      MEMBERSHIP_ADMIN: :membership_admin
+      OWNER: :owner
+      PRIMARY_OWNER: :primary_owner
+      USER: :user
+
+      def self?.values: -> ::Array[Anthropic::Models::organization_role]
+    end
+  end
+end

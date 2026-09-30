@@ -1,0 +1,29 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_claude_code_metrics =
+          {
+            core_metrics: Anthropic::Beta::Organization::BetaAnalyticsCoreCodeMetrics,
+            tool_actions: Anthropic::Beta::Organization::BetaAnalyticsToolActions
+          }
+
+        class BetaAnalyticsClaudeCodeMetrics < Anthropic::Internal::Type::BaseModel
+          attr_accessor core_metrics: Anthropic::Beta::Organization::BetaAnalyticsCoreCodeMetrics
+
+          attr_accessor tool_actions: Anthropic::Beta::Organization::BetaAnalyticsToolActions
+
+          def initialize: (
+            core_metrics: Anthropic::Beta::Organization::BetaAnalyticsCoreCodeMetrics,
+            tool_actions: Anthropic::Beta::Organization::BetaAnalyticsToolActions
+          ) -> void
+
+          def to_hash: -> {
+            core_metrics: Anthropic::Beta::Organization::BetaAnalyticsCoreCodeMetrics,
+            tool_actions: Anthropic::Beta::Organization::BetaAnalyticsToolActions
+          }
+        end
+      end
+    end
+  end
+end

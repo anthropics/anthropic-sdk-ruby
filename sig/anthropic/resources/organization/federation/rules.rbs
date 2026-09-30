@@ -1,0 +1,57 @@
+module Anthropic
+  module Resources
+    class Organization
+      class Federation
+        class Rules
+          attr_reader workspaces: Anthropic::Resources::Organization::Federation::Rules::Workspaces
+
+          def create: (
+            issuer_id: String,
+            match: Anthropic::Organization::Federation::FederationRuleMatch,
+            name: String,
+            oauth_scope: String,
+            target: Anthropic::Organization::Federation::ServiceAccountTarget,
+            ?applies_to_all_workspaces: bool,
+            ?description: String?,
+            ?token_lifetime_seconds: Integer,
+            ?workspace_id: String?,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Organization::Federation::FederationRule
+
+          def retrieve: (
+            String federation_rule_id,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Organization::Federation::FederationRule
+
+          def update: (
+            String federation_rule_id,
+            ?applies_to_all_workspaces: bool?,
+            ?description: String?,
+            ?match: Anthropic::Organization::Federation::FederationRuleMatch?,
+            ?name: String?,
+            ?oauth_scope: String?,
+            ?target: Anthropic::Organization::Federation::ServiceAccountTarget?,
+            ?token_lifetime_seconds: Integer?,
+            ?workspace_id: String?,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Organization::Federation::FederationRule
+
+          def list: (
+            ?include_archived: bool,
+            ?issuer_id: String?,
+            ?limit: Integer,
+            ?page: String?,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Internal::PageCursor[Anthropic::Organization::Federation::FederationRule]
+
+          def archive: (
+            String federation_rule_id,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Organization::Federation::FederationRule
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

@@ -31,6 +31,24 @@ module Anthropic
         # @return [Anthropic::Resources::Beta::Organization::ComplianceSettings]
         attr_reader :compliance_settings
 
+        # @return [Anthropic::Resources::Beta::Organization::Analytics]
+        attr_reader :analytics
+
+        # @return [Anthropic::Resources::Beta::Organization::SpendLimits]
+        attr_reader :spend_limits
+
+        # @return [Anthropic::Resources::Beta::Organization::RBACGroups]
+        attr_reader :rbac_groups
+
+        # @return [Anthropic::Resources::Beta::Organization::RBACRoles]
+        attr_reader :rbac_roles
+
+        # @return [Anthropic::Resources::Beta::Organization::Plugins]
+        attr_reader :plugins
+
+        # @return [Anthropic::Resources::Beta::Organization::PluginMarketplaces]
+        attr_reader :plugin_marketplaces
+
         # Retrieve information about the organization associated with the authenticated
         # API key.
         #
@@ -64,6 +82,12 @@ module Anthropic
           @workspaces = Anthropic::Resources::Beta::Organization::Workspaces.new(client: client)
           @rate_limits = Anthropic::Resources::Beta::Organization::RateLimits.new(client: client)
           @compliance_settings = Anthropic::Resources::Beta::Organization::ComplianceSettings.new(client: client)
+          @analytics = Anthropic::Resources::Beta::Organization::Analytics.new(client: client)
+          @spend_limits = Anthropic::Resources::Beta::Organization::SpendLimits.new(client: client)
+          @rbac_groups = Anthropic::Resources::Beta::Organization::RBACGroups.new(client: client)
+          @rbac_roles = Anthropic::Resources::Beta::Organization::RBACRoles.new(client: client)
+          @plugins = Anthropic::Resources::Beta::Organization::Plugins.new(client: client)
+          @plugin_marketplaces = Anthropic::Resources::Beta::Organization::PluginMarketplaces.new(client: client)
         end
       end
     end

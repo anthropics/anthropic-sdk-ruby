@@ -5,7 +5,6 @@ module Anthropic
     BetaManagedAgentsDeltaType = Beta::BetaManagedAgentsDeltaType
 
     module Beta
-      # EventDeltaType enum
       module BetaManagedAgentsDeltaType
         extend Anthropic::Internal::Type::Enum
 

@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type plugin_marketplace_validate_archive_params =
+          {
+            archive: Anthropic::Internal::file_input,
+            betas: ::Array[Anthropic::Models::anthropic_beta]
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class PluginMarketplaceValidateArchiveParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor archive: Anthropic::Internal::file_input
+
+          attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+          def betas=: (
+            ::Array[Anthropic::Models::anthropic_beta]
+          ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+          def initialize: (
+            archive: Anthropic::Internal::file_input,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            archive: Anthropic::Internal::file_input,
+            betas: ::Array[Anthropic::Models::anthropic_beta],
+            request_options: Anthropic::RequestOptions
+          }
+        end
+      end
+    end
+  end
+end

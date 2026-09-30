@@ -4,7 +4,6 @@ module Anthropic
   module Models
     module Beta
       module Sessions
-        # AgentEvaluatedPermission enum
         module BetaManagedAgentsAgentEvaluatedPermission
           extend Anthropic::Internal::Type::Enum
 

@@ -1,0 +1,60 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class Plugins
+          attr_reader versions: Anthropic::Resources::Beta::Organization::Plugins::Versions
+
+          attr_reader installation_settings: Anthropic::Resources::Beta::Organization::Plugins::InstallationSettings
+
+          attr_reader shares: Anthropic::Resources::Beta::Organization::Plugins::Shares
+
+          def create: (
+            files: ::Array[Anthropic::Internal::file_input],
+            ?marketplace_id: String,
+            ?release_notes: String,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaPlugin
+
+          def retrieve: (
+            String plugin_id,
+            ?organization_id: String?,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaPlugin
+
+          def update: (
+            String plugin_id,
+            served_version_id: String,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaPlugin
+
+          def list: (
+            ?created_at_gt: Time?,
+            ?created_at_gte: Time?,
+            ?created_at_lt: Time?,
+            ?created_at_lte: Time?,
+            ?limit: Integer,
+            ?marketplace_id: String?,
+            ?organization_id: String?,
+            ?owner_type: Anthropic::Models::Beta::Organization::PluginListParams::owner_type?,
+            ?owner_user_id: String?,
+            ?page: String?,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Organization::BetaPlugin]
+
+          def delete: (
+            String plugin_id,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaDeletedPlugin
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

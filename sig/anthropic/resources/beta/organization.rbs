@@ -20,6 +20,18 @@ module Anthropic
 
         attr_reader compliance_settings: Anthropic::Resources::Beta::Organization::ComplianceSettings
 
+        attr_reader analytics: Anthropic::Resources::Beta::Organization::Analytics
+
+        attr_reader spend_limits: Anthropic::Resources::Beta::Organization::SpendLimits
+
+        attr_reader rbac_groups: Anthropic::Resources::Beta::Organization::RBACGroups
+
+        attr_reader rbac_roles: Anthropic::Resources::Beta::Organization::RBACRoles
+
+        attr_reader plugins: Anthropic::Resources::Beta::Organization::Plugins
+
+        attr_reader plugin_marketplaces: Anthropic::Resources::Beta::Organization::PluginMarketplaces
+
         def retrieve: (
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaOrganization

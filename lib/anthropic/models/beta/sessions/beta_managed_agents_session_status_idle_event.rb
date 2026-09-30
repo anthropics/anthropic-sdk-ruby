@@ -17,9 +17,18 @@ module Anthropic
           #   @return [Time]
           required :processed_at, Time
 
+          # @!attribute stop_details
+          #   Structured information about why the session stopped. `null` when there is
+          #   nothing more to report.
+          #
+          #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRefusalStopDetails, nil]
+          required :stop_details,
+                   -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionRefusalStopDetails },
+                   nil?: true
+
           # @!attribute stop_reason
           #
-          #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionBudgetReached]
+          #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionBudgetReached, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRefusal]
           required :stop_reason,
                    union: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent::StopReason }
 
@@ -28,14 +37,20 @@ module Anthropic
           #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent::Type]
           required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent::Type }
 
-          # @!method initialize(id:, processed_at:, stop_reason:, type:)
+          # @!method initialize(id:, processed_at:, stop_details:, stop_reason:, type:)
           #   Indicates the agent has paused and is awaiting user input.
+          #
+          #   Some parameter documentations has been truncated, see
+          #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent} for
+          #   more details.
           #
           #   @param id [String] Unique identifier for this event.
           #
           #   @param processed_at [Time] Timestamp of status change.
           #
-          #   @param stop_reason [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionBudgetReached]
+          #   @param stop_details [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRefusalStopDetails, nil] Structured information about why the session stopped. `null` when there is nothi
+          #
+          #   @param stop_reason [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionBudgetReached, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRefusal]
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent::Type]
 
@@ -57,6 +72,9 @@ module Anthropic
             # The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
             variant :budget_reached, -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionBudgetReached }
 
+            # The turn ended because the model's response was refused, for example by a safety classifier.
+            variant :refusal, -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionRefusal }
+
             module Type
               extend Anthropic::Internal::Type::Enum
 
@@ -64,13 +82,14 @@ module Anthropic
               REQUIRES_ACTION = :requires_action
               RETRIES_EXHAUSTED = :retries_exhausted
               BUDGET_REACHED = :budget_reached
+              REFUSAL = :refusal
 
               # @!method self.values
               #   @return [Array<Symbol>]
             end
 
             # @!method self.variants
-            #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionBudgetReached)]
+            #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionBudgetReached, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRefusal)]
 
             # Creates a new instance of the variant class whose `type` matches the given
             # value, passing the remaining arguments to its constructor.
@@ -86,7 +105,7 @@ module Anthropic
             #   @option args [Array<String>] :event_ids The ids of events the agent is blocked on. Resolving fewer than all re-emits `se
             #
             # @raise [ArgumentError]
-            # @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionBudgetReached]
+            # @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionBudgetReached, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRefusal]
             def self.new(type:, **args)
               case type.to_sym
               when :end_turn
@@ -97,6 +116,8 @@ module Anthropic
                 Anthropic::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted.new(**args)
               when :budget_reached
                 Anthropic::Beta::Sessions::BetaManagedAgentsSessionBudgetReached.new(**args)
+              when :refusal
+                Anthropic::Beta::Sessions::BetaManagedAgentsSessionRefusal.new(**args)
               else
                 raise ArgumentError, "unknown type: #{type}"
               end
