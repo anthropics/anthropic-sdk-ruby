@@ -1,0 +1,74 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_plugin_activity =
+          {
+            claude_code_metrics: Anthropic::Beta::Organization::BetaAnalyticsPluginClaudeCodeMetrics,
+            cowork_metrics: Anthropic::Beta::Organization::BetaAnalyticsPluginCoworkMetrics,
+            distinct_user_count: Integer,
+            install_count: Integer?,
+            invocation_count: Integer,
+            plugin_name: String,
+            plugin_id: String?,
+            product: String?,
+            rbac_group_id: String?,
+            rbac_group_name: String?,
+            user_id: String?
+          }
+
+        class BetaAnalyticsPluginActivity < Anthropic::Internal::Type::BaseModel
+          attr_accessor claude_code_metrics: Anthropic::Beta::Organization::BetaAnalyticsPluginClaudeCodeMetrics
+
+          attr_accessor cowork_metrics: Anthropic::Beta::Organization::BetaAnalyticsPluginCoworkMetrics
+
+          attr_accessor distinct_user_count: Integer
+
+          attr_accessor install_count: Integer?
+
+          attr_accessor invocation_count: Integer
+
+          attr_accessor plugin_name: String
+
+          attr_accessor plugin_id: String?
+
+          attr_accessor product: String?
+
+          attr_accessor rbac_group_id: String?
+
+          attr_accessor rbac_group_name: String?
+
+          attr_accessor user_id: String?
+
+          def initialize: (
+            claude_code_metrics: Anthropic::Beta::Organization::BetaAnalyticsPluginClaudeCodeMetrics,
+            cowork_metrics: Anthropic::Beta::Organization::BetaAnalyticsPluginCoworkMetrics,
+            distinct_user_count: Integer,
+            install_count: Integer?,
+            invocation_count: Integer,
+            plugin_name: String,
+            ?plugin_id: String?,
+            ?product: String?,
+            ?rbac_group_id: String?,
+            ?rbac_group_name: String?,
+            ?user_id: String?
+          ) -> void
+
+          def to_hash: -> {
+            claude_code_metrics: Anthropic::Beta::Organization::BetaAnalyticsPluginClaudeCodeMetrics,
+            cowork_metrics: Anthropic::Beta::Organization::BetaAnalyticsPluginCoworkMetrics,
+            distinct_user_count: Integer,
+            install_count: Integer?,
+            invocation_count: Integer,
+            plugin_name: String,
+            plugin_id: String?,
+            product: String?,
+            rbac_group_id: String?,
+            rbac_group_name: String?,
+            user_id: String?
+          }
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_tool_actions =
+          {
+            edit_tool: Anthropic::Beta::Organization::BetaAnalyticsToolActionCounts,
+            multi_edit_tool: Anthropic::Beta::Organization::BetaAnalyticsToolActionCounts,
+            notebook_edit_tool: Anthropic::Beta::Organization::BetaAnalyticsToolActionCounts,
+            write_tool: Anthropic::Beta::Organization::BetaAnalyticsToolActionCounts
+          }
+
+        class BetaAnalyticsToolActions < Anthropic::Internal::Type::BaseModel
+          attr_accessor edit_tool: Anthropic::Beta::Organization::BetaAnalyticsToolActionCounts
+
+          attr_accessor multi_edit_tool: Anthropic::Beta::Organization::BetaAnalyticsToolActionCounts
+
+          attr_accessor notebook_edit_tool: Anthropic::Beta::Organization::BetaAnalyticsToolActionCounts
+
+          attr_accessor write_tool: Anthropic::Beta::Organization::BetaAnalyticsToolActionCounts
+
+          def initialize: (
+            edit_tool: Anthropic::Beta::Organization::BetaAnalyticsToolActionCounts,
+            multi_edit_tool: Anthropic::Beta::Organization::BetaAnalyticsToolActionCounts,
+            notebook_edit_tool: Anthropic::Beta::Organization::BetaAnalyticsToolActionCounts,
+            write_tool: Anthropic::Beta::Organization::BetaAnalyticsToolActionCounts
+          ) -> void
+
+          def to_hash: -> {
+            edit_tool: Anthropic::Beta::Organization::BetaAnalyticsToolActionCounts,
+            multi_edit_tool: Anthropic::Beta::Organization::BetaAnalyticsToolActionCounts,
+            notebook_edit_tool: Anthropic::Beta::Organization::BetaAnalyticsToolActionCounts,
+            write_tool: Anthropic::Beta::Organization::BetaAnalyticsToolActionCounts
+          }
+        end
+      end
+    end
+  end
+end

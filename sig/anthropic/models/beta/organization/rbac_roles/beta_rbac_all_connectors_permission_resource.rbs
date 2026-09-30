@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module RBACRoles
+          type beta_rbac_all_connectors_permission_resource =
+            { type: :all_connectors }
+
+          class BetaRBACAllConnectorsPermissionResource < Anthropic::Internal::Type::BaseModel
+            attr_accessor type: :all_connectors
+
+            def initialize: (?type: :all_connectors) -> void
+
+            def to_hash: -> { type: :all_connectors }
+          end
+        end
+      end
+    end
+  end
+end

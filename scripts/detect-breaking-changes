@@ -77,6 +77,25 @@ TEST_PATHS=(
 	test/anthropic/resources/beta/organization/workspaces/service_accounts_test.rb
 	test/anthropic/resources/beta/organization/rate_limits_test.rb
 	test/anthropic/resources/beta/organization/compliance_settings_test.rb
+	test/anthropic/resources/beta/organization/analytics_test.rb
+	test/anthropic/resources/beta/organization/analytics/summaries_test.rb
+	test/anthropic/resources/beta/organization/analytics/users_test.rb
+	test/anthropic/resources/beta/organization/analytics/apps_test.rb
+	test/anthropic/resources/beta/organization/analytics/apps/chat_test.rb
+	test/anthropic/resources/beta/organization/analytics/apps/chat/projects_test.rb
+	test/anthropic/resources/beta/organization/analytics/connectors_test.rb
+	test/anthropic/resources/beta/organization/analytics/plugins_test.rb
+	test/anthropic/resources/beta/organization/analytics/skills_test.rb
+	test/anthropic/resources/beta/organization/analytics/artifacts_test.rb
+	test/anthropic/resources/beta/organization/analytics/usage_report_test.rb
+	test/anthropic/resources/beta/organization/analytics/cost_report_test.rb
+	test/anthropic/resources/beta/organization/spend_limits_test.rb
+	test/anthropic/resources/beta/organization/spend_limits/effective_test.rb
+	test/anthropic/resources/beta/organization/spend_limits/increase_requests_test.rb
+	test/anthropic/resources/beta/organization/rbac_groups_test.rb
+	test/anthropic/resources/beta/organization/rbac_groups/members_test.rb
+	test/anthropic/resources/beta/organization/rbac_roles_test.rb
+	test/anthropic/resources/beta/organization/rbac_roles/permissions_test.rb
 	test/anthropic/resources/beta/organization/plugins_test.rb
 	test/anthropic/resources/beta/organization/plugins/versions_test.rb
 	test/anthropic/resources/beta/organization/plugins/installation_settings_test.rb

@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_context_window = :"0-200k" | :"200k-1M"
+
+        module BetaAnalyticsContextWindow
+          extend Anthropic::Internal::Type::Enum
+
+          FROM_0_TO_200K: :"0-200k"
+          FROM_200K_TO_1_M: :"200k-1M"
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::beta_analytics_context_window]
+        end
+      end
+    end
+  end
+end

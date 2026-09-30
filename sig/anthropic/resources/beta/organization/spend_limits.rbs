@@ -1,0 +1,32 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class SpendLimits
+          attr_reader effective: Anthropic::Resources::Beta::Organization::SpendLimits::Effective
+
+          attr_reader increase_requests: Anthropic::Resources::Beta::Organization::SpendLimits::IncreaseRequests
+
+          def retrieve: (
+            String spend_limit_id,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaSpendLimit
+
+          def delete: (
+            String spend_limit_id,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Models::Beta::Organization::SpendLimitDeleteResponse
+
+          def set: (
+            amount: String?,
+            scope: Anthropic::Models::Beta::Organization::SpendLimitSetParams::scope,
+            ?period: Anthropic::Models::Beta::Organization::beta_spend_limit_period,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaSpendLimit
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

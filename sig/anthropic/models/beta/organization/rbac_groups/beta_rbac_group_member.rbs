@@ -1,0 +1,46 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module RBACGroups
+          type beta_rbac_group_member =
+            {
+              created_at: Time,
+              email: String,
+              rbac_group_id: String,
+              type: :rbac_group_member,
+              user_id: String
+            }
+
+          class BetaRBACGroupMember < Anthropic::Internal::Type::BaseModel
+            attr_accessor created_at: Time
+
+            attr_accessor email: String
+
+            attr_accessor rbac_group_id: String
+
+            attr_accessor type: :rbac_group_member
+
+            attr_accessor user_id: String
+
+            def initialize: (
+              created_at: Time,
+              email: String,
+              rbac_group_id: String,
+              user_id: String,
+              ?type: :rbac_group_member
+            ) -> void
+
+            def to_hash: -> {
+              created_at: Time,
+              email: String,
+              rbac_group_id: String,
+              type: :rbac_group_member,
+              user_id: String
+            }
+          end
+        end
+      end
+    end
+  end
+end

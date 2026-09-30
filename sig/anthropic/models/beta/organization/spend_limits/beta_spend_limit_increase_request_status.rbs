@@ -1,0 +1,22 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module SpendLimits
+          type beta_spend_limit_increase_request_status =
+            :approved | :denied | :pending
+
+          module BetaSpendLimitIncreaseRequestStatus
+            extend Anthropic::Internal::Type::Enum
+
+            APPROVED: :approved
+            DENIED: :denied
+            PENDING: :pending
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::SpendLimits::beta_spend_limit_increase_request_status]
+          end
+        end
+      end
+    end
+  end
+end

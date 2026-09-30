@@ -1,0 +1,104 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_cowork_metrics =
+          {
+            action_count: Integer,
+            artifacts_created_count: Integer,
+            connectors_used_count: Integer,
+            dispatch_turn_count: Integer,
+            distinct_connectors_used_count: Integer?,
+            distinct_session_count: Integer?,
+            distinct_skills_used_count: Integer?,
+            message_count: Integer,
+            skills_used_count: Integer,
+            distinct_plugins_used_count: Integer?,
+            edit_tool_count: Integer?,
+            file_edit_count: Integer?,
+            multi_edit_tool_count: Integer?,
+            notebook_edit_tool_count: Integer?,
+            plugins_used_count: Integer?,
+            sessions_with_file_edits_count: Integer?,
+            write_tool_count: Integer?
+          }
+
+        class BetaAnalyticsCoworkMetrics < Anthropic::Internal::Type::BaseModel
+          attr_accessor action_count: Integer
+
+          attr_accessor artifacts_created_count: Integer
+
+          attr_accessor connectors_used_count: Integer
+
+          attr_accessor dispatch_turn_count: Integer
+
+          attr_accessor distinct_connectors_used_count: Integer?
+
+          attr_accessor distinct_session_count: Integer?
+
+          attr_accessor distinct_skills_used_count: Integer?
+
+          attr_accessor message_count: Integer
+
+          attr_accessor skills_used_count: Integer
+
+          attr_accessor distinct_plugins_used_count: Integer?
+
+          attr_accessor edit_tool_count: Integer?
+
+          attr_accessor file_edit_count: Integer?
+
+          attr_accessor multi_edit_tool_count: Integer?
+
+          attr_accessor notebook_edit_tool_count: Integer?
+
+          attr_accessor plugins_used_count: Integer?
+
+          attr_accessor sessions_with_file_edits_count: Integer?
+
+          attr_accessor write_tool_count: Integer?
+
+          def initialize: (
+            action_count: Integer,
+            artifacts_created_count: Integer,
+            connectors_used_count: Integer,
+            dispatch_turn_count: Integer,
+            distinct_connectors_used_count: Integer?,
+            distinct_session_count: Integer?,
+            distinct_skills_used_count: Integer?,
+            message_count: Integer,
+            skills_used_count: Integer,
+            ?distinct_plugins_used_count: Integer?,
+            ?edit_tool_count: Integer?,
+            ?file_edit_count: Integer?,
+            ?multi_edit_tool_count: Integer?,
+            ?notebook_edit_tool_count: Integer?,
+            ?plugins_used_count: Integer?,
+            ?sessions_with_file_edits_count: Integer?,
+            ?write_tool_count: Integer?
+          ) -> void
+
+          def to_hash: -> {
+            action_count: Integer,
+            artifacts_created_count: Integer,
+            connectors_used_count: Integer,
+            dispatch_turn_count: Integer,
+            distinct_connectors_used_count: Integer?,
+            distinct_session_count: Integer?,
+            distinct_skills_used_count: Integer?,
+            message_count: Integer,
+            skills_used_count: Integer,
+            distinct_plugins_used_count: Integer?,
+            edit_tool_count: Integer?,
+            file_edit_count: Integer?,
+            multi_edit_tool_count: Integer?,
+            notebook_edit_tool_count: Integer?,
+            plugins_used_count: Integer?,
+            sessions_with_file_edits_count: Integer?,
+            write_tool_count: Integer?
+          }
+        end
+      end
+    end
+  end
+end

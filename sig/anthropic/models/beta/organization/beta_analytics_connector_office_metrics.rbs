@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_connector_office_metrics =
+          {
+            excel: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeProductMetrics,
+            outlook: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeProductMetrics,
+            powerpoint: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeProductMetrics,
+            word: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeProductMetrics
+          }
+
+        class BetaAnalyticsConnectorOfficeMetrics < Anthropic::Internal::Type::BaseModel
+          attr_accessor excel: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeProductMetrics
+
+          attr_accessor outlook: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeProductMetrics
+
+          attr_accessor powerpoint: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeProductMetrics
+
+          attr_accessor word: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeProductMetrics
+
+          def initialize: (
+            excel: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeProductMetrics,
+            outlook: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeProductMetrics,
+            powerpoint: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeProductMetrics,
+            word: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeProductMetrics
+          ) -> void
+
+          def to_hash: -> {
+            excel: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeProductMetrics,
+            outlook: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeProductMetrics,
+            powerpoint: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeProductMetrics,
+            word: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeProductMetrics
+          }
+        end
+      end
+    end
+  end
+end

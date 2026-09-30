@@ -1,0 +1,27 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type rbac_group_create_params =
+          { name: String } & Anthropic::Internal::Type::request_parameters
+
+        class RBACGroupCreateParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor name: String
+
+          def initialize: (
+            name: String,
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            name: String,
+            request_options: Anthropic::RequestOptions
+          }
+        end
+      end
+    end
+  end
+end

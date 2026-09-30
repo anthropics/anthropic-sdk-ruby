@@ -1,0 +1,44 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_science_metrics =
+          {
+            delegation_count: Integer,
+            distinct_session_count: Integer?,
+            message_count: Integer,
+            remote_compute_job_count: Integer,
+            skills_used_count: Integer
+          }
+
+        class BetaAnalyticsScienceMetrics < Anthropic::Internal::Type::BaseModel
+          attr_accessor delegation_count: Integer
+
+          attr_accessor distinct_session_count: Integer?
+
+          attr_accessor message_count: Integer
+
+          attr_accessor remote_compute_job_count: Integer
+
+          attr_accessor skills_used_count: Integer
+
+          def initialize: (
+            delegation_count: Integer,
+            distinct_session_count: Integer?,
+            message_count: Integer,
+            remote_compute_job_count: Integer,
+            skills_used_count: Integer
+          ) -> void
+
+          def to_hash: -> {
+            delegation_count: Integer,
+            distinct_session_count: Integer?,
+            message_count: Integer,
+            remote_compute_job_count: Integer,
+            skills_used_count: Integer
+          }
+        end
+      end
+    end
+  end
+end

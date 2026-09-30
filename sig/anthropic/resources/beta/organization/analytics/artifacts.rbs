@@ -1,0 +1,22 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class Analytics
+          class Artifacts
+            def list: (
+              date: Date,
+              ?filter: ::Array[String]?,
+              ?group_by: ::Array[Anthropic::Models::Beta::Organization::Analytics::ArtifactListParams::group_by]?,
+              ?limit: Integer?,
+              ?page: String?,
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Organization::BetaAnalyticsArtifactActivity]
+
+            def initialize: (client: Anthropic::Client) -> void
+          end
+        end
+      end
+    end
+  end
+end

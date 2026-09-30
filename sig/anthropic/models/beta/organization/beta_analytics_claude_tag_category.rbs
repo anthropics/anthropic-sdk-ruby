@@ -1,0 +1,22 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_claude_tag_category =
+          :dm | :engaged | :monitoring | :proactive | :scheduled
+
+        module BetaAnalyticsClaudeTagCategory
+          extend Anthropic::Internal::Type::Enum
+
+          DM: :dm
+          ENGAGED: :engaged
+          MONITORING: :monitoring
+          PROACTIVE: :proactive
+          SCHEDULED: :scheduled
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::beta_analytics_claude_tag_category]
+        end
+      end
+    end
+  end
+end

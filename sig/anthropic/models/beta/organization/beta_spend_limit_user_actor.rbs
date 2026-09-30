@@ -1,0 +1,44 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_spend_limit_user_actor =
+          {
+            deleted: bool,
+            email_address: String?,
+            name: String?,
+            type: :user_actor,
+            user_id: String
+          }
+
+        class BetaSpendLimitUserActor < Anthropic::Internal::Type::BaseModel
+          attr_accessor deleted: bool
+
+          attr_accessor email_address: String?
+
+          attr_accessor name: String?
+
+          attr_accessor type: :user_actor
+
+          attr_accessor user_id: String
+
+          def initialize: (
+            deleted: bool,
+            email_address: String?,
+            name: String?,
+            user_id: String,
+            ?type: :user_actor
+          ) -> void
+
+          def to_hash: -> {
+            deleted: bool,
+            email_address: String?,
+            name: String?,
+            type: :user_actor,
+            user_id: String
+          }
+        end
+      end
+    end
+  end
+end

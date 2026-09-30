@@ -1,0 +1,32 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module RBACRoles
+          type beta_rbac_connector_scope_permission_resource =
+            { connector_id: String, scope: String, type: :connector_scope }
+
+          class BetaRBACConnectorScopePermissionResource < Anthropic::Internal::Type::BaseModel
+            attr_accessor connector_id: String
+
+            attr_accessor scope: String
+
+            attr_accessor type: :connector_scope
+
+            def initialize: (
+              connector_id: String,
+              scope: String,
+              ?type: :connector_scope
+            ) -> void
+
+            def to_hash: -> {
+              connector_id: String,
+              scope: String,
+              type: :connector_scope
+            }
+          end
+        end
+      end
+    end
+  end
+end

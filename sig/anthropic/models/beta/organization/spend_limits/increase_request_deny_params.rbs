@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module SpendLimits
+          type increase_request_deny_params =
+            {
+              spend_limit_increase_request_id: String,
+              suppress_notification: bool
+            }
+            & Anthropic::Internal::Type::request_parameters
+
+          class IncreaseRequestDenyParams < Anthropic::Internal::Type::BaseModel
+            extend Anthropic::Internal::Type::RequestParameters::Converter
+            include Anthropic::Internal::Type::RequestParameters
+
+            attr_accessor spend_limit_increase_request_id: String
+
+            attr_reader suppress_notification: bool?
+
+            def suppress_notification=: (bool) -> bool
+
+            def initialize: (
+              spend_limit_increase_request_id: String,
+              ?suppress_notification: bool,
+              ?request_options: Anthropic::request_opts
+            ) -> void
+
+            def to_hash: -> {
+              spend_limit_increase_request_id: String,
+              suppress_notification: bool,
+              request_options: Anthropic::RequestOptions
+            }
+          end
+        end
+      end
+    end
+  end
+end

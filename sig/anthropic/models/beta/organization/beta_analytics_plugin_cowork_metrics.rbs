@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_plugin_cowork_metrics =
+          { distinct_session_plugin_used_count: Integer? }
+
+        class BetaAnalyticsPluginCoworkMetrics < Anthropic::Internal::Type::BaseModel
+          attr_accessor distinct_session_plugin_used_count: Integer?
+
+          def initialize: (distinct_session_plugin_used_count: Integer?) -> void
+
+          def to_hash: -> { distinct_session_plugin_used_count: Integer? }
+        end
+      end
+    end
+  end
+end

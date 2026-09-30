@@ -1,0 +1,86 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type spend_limit_set_params =
+          {
+            amount: String?,
+            scope: Anthropic::Models::Beta::Organization::SpendLimitSetParams::scope,
+            period: Anthropic::Models::Beta::Organization::beta_spend_limit_period
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class SpendLimitSetParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor amount: String?
+
+          attr_accessor scope: Anthropic::Models::Beta::Organization::SpendLimitSetParams::scope
+
+          attr_reader period: Anthropic::Models::Beta::Organization::beta_spend_limit_period?
+
+          def period=: (
+            Anthropic::Models::Beta::Organization::beta_spend_limit_period
+          ) -> Anthropic::Models::Beta::Organization::beta_spend_limit_period
+
+          def initialize: (
+            amount: String?,
+            scope: Anthropic::Models::Beta::Organization::SpendLimitSetParams::scope,
+            ?period: Anthropic::Models::Beta::Organization::beta_spend_limit_period,
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            amount: String?,
+            scope: Anthropic::Models::Beta::Organization::SpendLimitSetParams::scope,
+            period: Anthropic::Models::Beta::Organization::beta_spend_limit_period,
+            request_options: Anthropic::RequestOptions
+          }
+
+          type scope =
+            Anthropic::Beta::Organization::BetaSpendLimitUserScope
+            | Anthropic::Beta::Organization::BetaSpendLimitOrganizationScope
+            | Anthropic::Beta::Organization::BetaSpendLimitWorkspaceScope
+
+          module Scope
+            extend Anthropic::Internal::Type::Union
+
+            type type_ = :user | :organization | :workspace
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              USER: :user
+              ORGANIZATION: :organization
+              WORKSPACE: :workspace
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::SpendLimitSetParams::Scope::type_]
+            end
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::SpendLimitSetParams::scope]
+
+            def self.new:
+              (
+                type: :user | "user",
+                user_id: String
+              ) -> Anthropic::Beta::Organization::BetaSpendLimitUserScope
+              | (
+                type: :organization | "organization"
+              ) -> Anthropic::Beta::Organization::BetaSpendLimitOrganizationScope
+              | (
+                type: :workspace | "workspace",
+                workspace_id: String
+              ) -> Anthropic::Beta::Organization::BetaSpendLimitWorkspaceScope
+              | (
+                type: Anthropic::Models::Beta::Organization::SpendLimitSetParams::Scope::type_
+                | String,
+                ?user_id: String,
+                ?workspace_id: String
+              ) -> Anthropic::Models::Beta::Organization::SpendLimitSetParams::scope
+          end
+        end
+      end
+    end
+  end
+end

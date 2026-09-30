@@ -1,0 +1,26 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_token_type =
+          :"cache_creation.ephemeral_1h_input_tokens"
+          | :"cache_creation.ephemeral_5m_input_tokens"
+          | :cache_read_input_tokens
+          | :output_tokens
+          | :uncached_input_tokens
+
+        module BetaAnalyticsTokenType
+          extend Anthropic::Internal::Type::Enum
+
+          CACHE_CREATION_EPHEMERAL_1H_INPUT_TOKENS: :"cache_creation.ephemeral_1h_input_tokens"
+          CACHE_CREATION_EPHEMERAL_5M_INPUT_TOKENS: :"cache_creation.ephemeral_5m_input_tokens"
+          CACHE_READ_INPUT_TOKENS: :cache_read_input_tokens
+          OUTPUT_TOKENS: :output_tokens
+          UNCACHED_INPUT_TOKENS: :uncached_input_tokens
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::beta_analytics_token_type]
+        end
+      end
+    end
+  end
+end

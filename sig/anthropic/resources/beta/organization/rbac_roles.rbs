@@ -1,0 +1,24 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class RBACRoles
+          attr_reader permissions: Anthropic::Resources::Beta::Organization::RBACRoles::Permissions
+
+          def retrieve: (
+            String rbac_role_id,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaRBACRole
+
+          def list: (
+            ?limit: Integer,
+            ?page: String?,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Organization::BetaRBACRole]
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

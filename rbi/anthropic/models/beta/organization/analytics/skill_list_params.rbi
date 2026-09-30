@@ -1,0 +1,301 @@
+# typed: strong
+
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Analytics
+          class SkillListParams < Anthropic::Internal::Type::BaseModel
+            extend Anthropic::Internal::Type::RequestParameters::Converter
+            include Anthropic::Internal::Type::RequestParameters
+
+            OrHash =
+              T.type_alias do
+                T.any(
+                  Anthropic::Beta::Organization::Analytics::SkillListParams,
+                  Anthropic::Internal::AnyHash
+                )
+              end
+
+            # UTC date in YYYY-MM-DD format. The day to get skill usage for. Data is typically
+            # available with a 1-day lag (varies by query; the error for a too-recent date
+            # names the latest available day) and may be revised by a few percent over the
+            # following days. No earlier than 2026-01-01.
+            sig { returns(T.nilable(Date)) }
+            attr_accessor :date
+
+            # UTC date in YYYY-MM-DD format. End of the date range (exclusive); only valid
+            # with `starting_date`. Data is typically available with a 1-day lag (varies by
+            # query; the error for a too-recent date names the latest available day), so this
+            # can be at most today — which is also the default when omitted, resolved once
+            # when the first page is served and reused for the rest of the pagination
+            # sequence. At most 366 days after `starting_date`.
+            sig { returns(T.nilable(Date)) }
+            attr_accessor :ending_date
+
+            # Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the
+            # param for OR within a dimension and across dimensions for AND. Supported
+            # dimensions on this endpoint: `product`, `rbac_group_id`, `share_status`,
+            # `skill_name`, `user_id`. Value forms: `product` is one of `chat`, `claude_code`,
+            # `cowork`, or `office_agent`; `rbac_group_id` takes the tagged id
+            # (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a
+            # bare group UUID, and matches users who held the group at any point during each
+            # covered UTC day (time-of-usage attribution); `share_status` is one of
+            # `organization`, `private`, or `public`; `skill_name` matches case-insensitively;
+            # `user_id` takes a tagged user id (`user_...`), as emitted in responses. An
+            # unsupported dimension returns 400. At most 100 entries.
+            sig { returns(T.nilable(T::Array[String])) }
+            attr_accessor :filter
+
+            # Dimensions to break results out by (e.g. `group_by[]=user_id`). Supported on
+            # this endpoint: `product`, `rbac_group_id`, `user_id`. Grouped rows carry the
+            # requested dimension values as additional fields and paginate like ungrouped
+            # responses via `next_page`; an unsupported dimension returns 400. `rbac_group_id`
+            # attributes a user to every group they held at any point during each covered UTC
+            # day, so grouped rows are not an exclusive partition and can sum above org-level
+            # totals. At most 100 entries.
+            sig do
+              returns(
+                T.nilable(
+                  T::Array[
+                    Anthropic::Beta::Organization::Analytics::SkillListParams::GroupBy::OrSymbol
+                  ]
+                )
+              )
+            end
+            attr_accessor :group_by
+
+            # Number of results per page (1-1000, default 100).
+            sig { returns(T.nilable(Integer)) }
+            attr_accessor :limit
+
+            # Sort direction: `asc` or `desc`. Defaults to `asc` for the endpoint's sort
+            # column and to `desc` when `order_by` names a metric (a top-N ranking). Applies
+            # to `order_by`, or to the endpoint's default sort field when `order_by` is
+            # omitted.
+            sig do
+              returns(
+                T.nilable(
+                  Anthropic::Beta::Organization::Analytics::SkillListParams::Order::OrSymbol
+                )
+              )
+            end
+            attr_accessor :order
+
+            # Sort field. Restricted to the endpoint's sort column plus its rankable metrics
+            # (metrics default to descending; a few metrics rank in date-range mode only, per
+            # the endpoint's documented orderable set).
+            sig { returns(T.nilable(String)) }
+            attr_accessor :order_by
+
+            # Opaque cursor from a previous response's `next_page` field.
+            sig { returns(T.nilable(String)) }
+            attr_accessor :page
+
+            # UTC date in YYYY-MM-DD format. Start of a date range (inclusive). Enables rollup
+            # mode: one row per entity aggregated over the whole range — addable counters are
+            # summed across days, and a distinct count is never summed where summing could
+            # double-count (a field's range value is recomputed exactly over the window,
+            # approximate via HLL with typical error under 2%, null, or — for the
+            # creation-event counts, whose per-day values cannot overlap — a per-day sum that
+            # is itself exact; each field's own description says which). Use either `date` or
+            # `starting_date`, not both. Data is typically available with a 1-day lag (varies
+            # by query; the error for a too-recent date names the latest available day) and
+            # may be revised by a few percent over the following days. No earlier than
+            # 2026-01-01.
+            sig { returns(T.nilable(Date)) }
+            attr_accessor :starting_date
+
+            sig do
+              params(
+                date: T.nilable(Date),
+                ending_date: T.nilable(Date),
+                filter: T.nilable(T::Array[String]),
+                group_by:
+                  T.nilable(
+                    T::Array[
+                      Anthropic::Beta::Organization::Analytics::SkillListParams::GroupBy::OrSymbol
+                    ]
+                  ),
+                limit: T.nilable(Integer),
+                order:
+                  T.nilable(
+                    Anthropic::Beta::Organization::Analytics::SkillListParams::Order::OrSymbol
+                  ),
+                order_by: T.nilable(String),
+                page: T.nilable(String),
+                starting_date: T.nilable(Date),
+                request_options: Anthropic::RequestOptions::OrHash
+              ).returns(T.attached_class)
+            end
+            def self.new(
+              # UTC date in YYYY-MM-DD format. The day to get skill usage for. Data is typically
+              # available with a 1-day lag (varies by query; the error for a too-recent date
+              # names the latest available day) and may be revised by a few percent over the
+              # following days. No earlier than 2026-01-01.
+              date: nil,
+              # UTC date in YYYY-MM-DD format. End of the date range (exclusive); only valid
+              # with `starting_date`. Data is typically available with a 1-day lag (varies by
+              # query; the error for a too-recent date names the latest available day), so this
+              # can be at most today — which is also the default when omitted, resolved once
+              # when the first page is served and reused for the rest of the pagination
+              # sequence. At most 366 days after `starting_date`.
+              ending_date: nil,
+              # Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the
+              # param for OR within a dimension and across dimensions for AND. Supported
+              # dimensions on this endpoint: `product`, `rbac_group_id`, `share_status`,
+              # `skill_name`, `user_id`. Value forms: `product` is one of `chat`, `claude_code`,
+              # `cowork`, or `office_agent`; `rbac_group_id` takes the tagged id
+              # (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a
+              # bare group UUID, and matches users who held the group at any point during each
+              # covered UTC day (time-of-usage attribution); `share_status` is one of
+              # `organization`, `private`, or `public`; `skill_name` matches case-insensitively;
+              # `user_id` takes a tagged user id (`user_...`), as emitted in responses. An
+              # unsupported dimension returns 400. At most 100 entries.
+              filter: nil,
+              # Dimensions to break results out by (e.g. `group_by[]=user_id`). Supported on
+              # this endpoint: `product`, `rbac_group_id`, `user_id`. Grouped rows carry the
+              # requested dimension values as additional fields and paginate like ungrouped
+              # responses via `next_page`; an unsupported dimension returns 400. `rbac_group_id`
+              # attributes a user to every group they held at any point during each covered UTC
+              # day, so grouped rows are not an exclusive partition and can sum above org-level
+              # totals. At most 100 entries.
+              group_by: nil,
+              # Number of results per page (1-1000, default 100).
+              limit: nil,
+              # Sort direction: `asc` or `desc`. Defaults to `asc` for the endpoint's sort
+              # column and to `desc` when `order_by` names a metric (a top-N ranking). Applies
+              # to `order_by`, or to the endpoint's default sort field when `order_by` is
+              # omitted.
+              order: nil,
+              # Sort field. Restricted to the endpoint's sort column plus its rankable metrics
+              # (metrics default to descending; a few metrics rank in date-range mode only, per
+              # the endpoint's documented orderable set).
+              order_by: nil,
+              # Opaque cursor from a previous response's `next_page` field.
+              page: nil,
+              # UTC date in YYYY-MM-DD format. Start of a date range (inclusive). Enables rollup
+              # mode: one row per entity aggregated over the whole range — addable counters are
+              # summed across days, and a distinct count is never summed where summing could
+              # double-count (a field's range value is recomputed exactly over the window,
+              # approximate via HLL with typical error under 2%, null, or — for the
+              # creation-event counts, whose per-day values cannot overlap — a per-day sum that
+              # is itself exact; each field's own description says which). Use either `date` or
+              # `starting_date`, not both. Data is typically available with a 1-day lag (varies
+              # by query; the error for a too-recent date names the latest available day) and
+              # may be revised by a few percent over the following days. No earlier than
+              # 2026-01-01.
+              starting_date: nil,
+              request_options: {}
+            )
+            end
+
+            sig do
+              override.returns(
+                {
+                  date: T.nilable(Date),
+                  ending_date: T.nilable(Date),
+                  filter: T.nilable(T::Array[String]),
+                  group_by:
+                    T.nilable(
+                      T::Array[
+                        Anthropic::Beta::Organization::Analytics::SkillListParams::GroupBy::OrSymbol
+                      ]
+                    ),
+                  limit: T.nilable(Integer),
+                  order:
+                    T.nilable(
+                      Anthropic::Beta::Organization::Analytics::SkillListParams::Order::OrSymbol
+                    ),
+                  order_by: T.nilable(String),
+                  page: T.nilable(String),
+                  starting_date: T.nilable(Date),
+                  request_options: Anthropic::RequestOptions
+                }
+              )
+            end
+            def to_hash
+            end
+
+            module GroupBy
+              extend Anthropic::Internal::Type::Enum
+
+              TaggedSymbol =
+                T.type_alias do
+                  T.all(
+                    Symbol,
+                    Anthropic::Beta::Organization::Analytics::SkillListParams::GroupBy
+                  )
+                end
+              OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+              PRODUCT =
+                T.let(
+                  :product,
+                  Anthropic::Beta::Organization::Analytics::SkillListParams::GroupBy::TaggedSymbol
+                )
+              RBAC_GROUP_ID =
+                T.let(
+                  :rbac_group_id,
+                  Anthropic::Beta::Organization::Analytics::SkillListParams::GroupBy::TaggedSymbol
+                )
+              USER_ID =
+                T.let(
+                  :user_id,
+                  Anthropic::Beta::Organization::Analytics::SkillListParams::GroupBy::TaggedSymbol
+                )
+
+              sig do
+                override.returns(
+                  T::Array[
+                    Anthropic::Beta::Organization::Analytics::SkillListParams::GroupBy::TaggedSymbol
+                  ]
+                )
+              end
+              def self.values
+              end
+            end
+
+            # Sort direction: `asc` or `desc`. Defaults to `asc` for the endpoint's sort
+            # column and to `desc` when `order_by` names a metric (a top-N ranking). Applies
+            # to `order_by`, or to the endpoint's default sort field when `order_by` is
+            # omitted.
+            module Order
+              extend Anthropic::Internal::Type::Enum
+
+              TaggedSymbol =
+                T.type_alias do
+                  T.all(
+                    Symbol,
+                    Anthropic::Beta::Organization::Analytics::SkillListParams::Order
+                  )
+                end
+              OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+              ASC =
+                T.let(
+                  :asc,
+                  Anthropic::Beta::Organization::Analytics::SkillListParams::Order::TaggedSymbol
+                )
+              DESC =
+                T.let(
+                  :desc,
+                  Anthropic::Beta::Organization::Analytics::SkillListParams::Order::TaggedSymbol
+                )
+
+              sig do
+                override.returns(
+                  T::Array[
+                    Anthropic::Beta::Organization::Analytics::SkillListParams::Order::TaggedSymbol
+                  ]
+                )
+              end
+              def self.values
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end

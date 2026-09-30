@@ -1,0 +1,64 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Analytics
+          type artifact_list_params =
+            {
+              date: Date,
+              filter: ::Array[String]?,
+              group_by: ::Array[Anthropic::Models::Beta::Organization::Analytics::ArtifactListParams::group_by]?,
+              limit: Integer?,
+              page: String?
+            }
+            & Anthropic::Internal::Type::request_parameters
+
+          class ArtifactListParams < Anthropic::Internal::Type::BaseModel
+            extend Anthropic::Internal::Type::RequestParameters::Converter
+            include Anthropic::Internal::Type::RequestParameters
+
+            attr_accessor date: Date
+
+            attr_accessor filter: ::Array[String]?
+
+            attr_accessor group_by: ::Array[Anthropic::Models::Beta::Organization::Analytics::ArtifactListParams::group_by]?
+
+            attr_accessor limit: Integer?
+
+            attr_accessor page: String?
+
+            def initialize: (
+              date: Date,
+              ?filter: ::Array[String]?,
+              ?group_by: ::Array[Anthropic::Models::Beta::Organization::Analytics::ArtifactListParams::group_by]?,
+              ?limit: Integer?,
+              ?page: String?,
+              ?request_options: Anthropic::request_opts
+            ) -> void
+
+            def to_hash: -> {
+              date: Date,
+              filter: ::Array[String]?,
+              group_by: ::Array[Anthropic::Models::Beta::Organization::Analytics::ArtifactListParams::group_by]?,
+              limit: Integer?,
+              page: String?,
+              request_options: Anthropic::RequestOptions
+            }
+
+            type group_by = :product | :rbac_group_id | :user_id
+
+            module GroupBy
+              extend Anthropic::Internal::Type::Enum
+
+              PRODUCT: :product
+              RBAC_GROUP_ID: :rbac_group_id
+              USER_ID: :user_id
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Analytics::ArtifactListParams::group_by]
+            end
+          end
+        end
+      end
+    end
+  end
+end

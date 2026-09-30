@@ -1,0 +1,79 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_user_activity =
+          {
+            chat_metrics: Anthropic::Beta::Organization::BetaAnalyticsChatMetrics,
+            claude_code_metrics: Anthropic::Beta::Organization::BetaAnalyticsClaudeCodeMetrics,
+            cowork_metrics: Anthropic::Beta::Organization::BetaAnalyticsCoworkMetrics,
+            design_metrics: Anthropic::Beta::Organization::BetaAnalyticsDesignMetrics,
+            office_metrics: Anthropic::Beta::Organization::BetaAnalyticsOfficeMetrics,
+            science_metrics: Anthropic::Beta::Organization::BetaAnalyticsScienceMetrics,
+            web_search_count: Integer,
+            distinct_user_count: Integer?,
+            last_activity_date: Date?,
+            rbac_group_id: String?,
+            rbac_group_name: String?,
+            user: Anthropic::Beta::Organization::BetaAnalyticsUser?
+          }
+
+        class BetaAnalyticsUserActivity < Anthropic::Internal::Type::BaseModel
+          attr_accessor chat_metrics: Anthropic::Beta::Organization::BetaAnalyticsChatMetrics
+
+          attr_accessor claude_code_metrics: Anthropic::Beta::Organization::BetaAnalyticsClaudeCodeMetrics
+
+          attr_accessor cowork_metrics: Anthropic::Beta::Organization::BetaAnalyticsCoworkMetrics
+
+          attr_accessor design_metrics: Anthropic::Beta::Organization::BetaAnalyticsDesignMetrics
+
+          attr_accessor office_metrics: Anthropic::Beta::Organization::BetaAnalyticsOfficeMetrics
+
+          attr_accessor science_metrics: Anthropic::Beta::Organization::BetaAnalyticsScienceMetrics
+
+          attr_accessor web_search_count: Integer
+
+          attr_accessor distinct_user_count: Integer?
+
+          attr_accessor last_activity_date: Date?
+
+          attr_accessor rbac_group_id: String?
+
+          attr_accessor rbac_group_name: String?
+
+          attr_accessor user: Anthropic::Beta::Organization::BetaAnalyticsUser?
+
+          def initialize: (
+            chat_metrics: Anthropic::Beta::Organization::BetaAnalyticsChatMetrics,
+            claude_code_metrics: Anthropic::Beta::Organization::BetaAnalyticsClaudeCodeMetrics,
+            cowork_metrics: Anthropic::Beta::Organization::BetaAnalyticsCoworkMetrics,
+            design_metrics: Anthropic::Beta::Organization::BetaAnalyticsDesignMetrics,
+            office_metrics: Anthropic::Beta::Organization::BetaAnalyticsOfficeMetrics,
+            science_metrics: Anthropic::Beta::Organization::BetaAnalyticsScienceMetrics,
+            web_search_count: Integer,
+            ?distinct_user_count: Integer?,
+            ?last_activity_date: Date?,
+            ?rbac_group_id: String?,
+            ?rbac_group_name: String?,
+            ?user: Anthropic::Beta::Organization::BetaAnalyticsUser?
+          ) -> void
+
+          def to_hash: -> {
+            chat_metrics: Anthropic::Beta::Organization::BetaAnalyticsChatMetrics,
+            claude_code_metrics: Anthropic::Beta::Organization::BetaAnalyticsClaudeCodeMetrics,
+            cowork_metrics: Anthropic::Beta::Organization::BetaAnalyticsCoworkMetrics,
+            design_metrics: Anthropic::Beta::Organization::BetaAnalyticsDesignMetrics,
+            office_metrics: Anthropic::Beta::Organization::BetaAnalyticsOfficeMetrics,
+            science_metrics: Anthropic::Beta::Organization::BetaAnalyticsScienceMetrics,
+            web_search_count: Integer,
+            distinct_user_count: Integer?,
+            last_activity_date: Date?,
+            rbac_group_id: String?,
+            rbac_group_name: String?,
+            user: Anthropic::Beta::Organization::BetaAnalyticsUser?
+          }
+        end
+      end
+    end
+  end
+end

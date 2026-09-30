@@ -35,6 +35,18 @@ module Anthropic
         end
         attr_reader :compliance_settings
 
+        sig { returns(Anthropic::Resources::Beta::Organization::Analytics) }
+        attr_reader :analytics
+
+        sig { returns(Anthropic::Resources::Beta::Organization::SpendLimits) }
+        attr_reader :spend_limits
+
+        sig { returns(Anthropic::Resources::Beta::Organization::RBACGroups) }
+        attr_reader :rbac_groups
+
+        sig { returns(Anthropic::Resources::Beta::Organization::RBACRoles) }
+        attr_reader :rbac_roles
+
         sig { returns(Anthropic::Resources::Beta::Organization::Plugins) }
         attr_reader :plugins
 

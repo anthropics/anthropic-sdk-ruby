@@ -1,0 +1,32 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type rbac_group_update_params =
+          { rbac_group_id: String, name: String? }
+          & Anthropic::Internal::Type::request_parameters
+
+        class RBACGroupUpdateParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor rbac_group_id: String
+
+          attr_accessor name: String?
+
+          def initialize: (
+            rbac_group_id: String,
+            ?name: String?,
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            rbac_group_id: String,
+            name: String?,
+            request_options: Anthropic::RequestOptions
+          }
+        end
+      end
+    end
+  end
+end

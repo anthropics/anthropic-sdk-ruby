@@ -1,0 +1,21 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class SpendLimits
+          class Effective
+            def list: (
+              ?limit: Integer,
+              ?page: String?,
+              ?period: ::Array[Anthropic::Models::Beta::Organization::SpendLimits::EffectiveListParams::period]?,
+              ?user_ids: ::Array[String]?,
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Organization::BetaSpendSummary]
+
+            def initialize: (client: Anthropic::Client) -> void
+          end
+        end
+      end
+    end
+  end
+end

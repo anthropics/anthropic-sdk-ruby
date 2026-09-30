@@ -1,0 +1,26 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_user =
+          { id: String, email_address: String, type: :user }
+
+        class BetaAnalyticsUser < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor email_address: String
+
+          attr_accessor type: :user
+
+          def initialize: (
+            id: String,
+            email_address: String,
+            ?type: :user
+          ) -> void
+
+          def to_hash: -> { id: String, email_address: String, type: :user }
+        end
+      end
+    end
+  end
+end

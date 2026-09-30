@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_server_tool_use = { web_search_requests: Integer }
+
+        class BetaAnalyticsServerToolUse < Anthropic::Internal::Type::BaseModel
+          attr_accessor web_search_requests: Integer
+
+          def initialize: (web_search_requests: Integer) -> void
+
+          def to_hash: -> { web_search_requests: Integer }
+        end
+      end
+    end
+  end
+end

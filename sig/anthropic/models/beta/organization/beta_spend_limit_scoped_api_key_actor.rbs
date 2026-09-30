@@ -1,0 +1,26 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_spend_limit_scoped_api_key_actor =
+          { scoped_api_key_id: String, type: :scoped_api_key_actor }
+
+        class BetaSpendLimitScopedAPIKeyActor < Anthropic::Internal::Type::BaseModel
+          attr_accessor scoped_api_key_id: String
+
+          attr_accessor type: :scoped_api_key_actor
+
+          def initialize: (
+            scoped_api_key_id: String,
+            ?type: :scoped_api_key_actor
+          ) -> void
+
+          def to_hash: -> {
+            scoped_api_key_id: String,
+            type: :scoped_api_key_actor
+          }
+        end
+      end
+    end
+  end
+end

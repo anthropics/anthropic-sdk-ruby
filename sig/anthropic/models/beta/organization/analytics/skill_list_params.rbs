@@ -1,0 +1,95 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Analytics
+          type skill_list_params =
+            {
+              date: Date?,
+              ending_date: Date?,
+              filter: ::Array[String]?,
+              group_by: ::Array[Anthropic::Models::Beta::Organization::Analytics::SkillListParams::group_by]?,
+              limit: Integer?,
+              order: Anthropic::Models::Beta::Organization::Analytics::SkillListParams::order?,
+              order_by: String?,
+              page: String?,
+              starting_date: Date?
+            }
+            & Anthropic::Internal::Type::request_parameters
+
+          class SkillListParams < Anthropic::Internal::Type::BaseModel
+            extend Anthropic::Internal::Type::RequestParameters::Converter
+            include Anthropic::Internal::Type::RequestParameters
+
+            attr_accessor date: Date?
+
+            attr_accessor ending_date: Date?
+
+            attr_accessor filter: ::Array[String]?
+
+            attr_accessor group_by: ::Array[Anthropic::Models::Beta::Organization::Analytics::SkillListParams::group_by]?
+
+            attr_accessor limit: Integer?
+
+            attr_accessor order: Anthropic::Models::Beta::Organization::Analytics::SkillListParams::order?
+
+            attr_accessor order_by: String?
+
+            attr_accessor page: String?
+
+            attr_accessor starting_date: Date?
+
+            def initialize: (
+              ?date: Date?,
+              ?ending_date: Date?,
+              ?filter: ::Array[String]?,
+              ?group_by: ::Array[Anthropic::Models::Beta::Organization::Analytics::SkillListParams::group_by]?,
+              ?limit: Integer?,
+              ?order: Anthropic::Models::Beta::Organization::Analytics::SkillListParams::order?,
+              ?order_by: String?,
+              ?page: String?,
+              ?starting_date: Date?,
+              ?request_options: Anthropic::request_opts
+            ) -> void
+
+            def to_hash: -> {
+              date: Date?,
+              ending_date: Date?,
+              filter: ::Array[String]?,
+              group_by: ::Array[Anthropic::Models::Beta::Organization::Analytics::SkillListParams::group_by]?,
+              limit: Integer?,
+              order: Anthropic::Models::Beta::Organization::Analytics::SkillListParams::order?,
+              order_by: String?,
+              page: String?,
+              starting_date: Date?,
+              request_options: Anthropic::RequestOptions
+            }
+
+            type group_by = :product | :rbac_group_id | :user_id
+
+            module GroupBy
+              extend Anthropic::Internal::Type::Enum
+
+              PRODUCT: :product
+              RBAC_GROUP_ID: :rbac_group_id
+              USER_ID: :user_id
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Analytics::SkillListParams::group_by]
+            end
+
+            type order = :asc | :desc
+
+            module Order
+              extend Anthropic::Internal::Type::Enum
+
+              ASC: :asc
+              DESC: :desc
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Analytics::SkillListParams::order]
+            end
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,472 @@
+# typed: strong
+
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        class BetaAnalyticsSkillActivity < Anthropic::Internal::Type::BaseModel
+          OrHash =
+            T.type_alias do
+              T.any(
+                Anthropic::Beta::Organization::BetaAnalyticsSkillActivity,
+                Anthropic::Internal::AnyHash
+              )
+            end
+
+          # Claude.ai activity metrics for a single skill on a given day.
+          sig do
+            returns(
+              Anthropic::Beta::Organization::BetaAnalyticsSkillChatMetrics
+            )
+          end
+          attr_reader :chat_metrics
+
+          sig do
+            params(
+              chat_metrics:
+                Anthropic::Beta::Organization::BetaAnalyticsSkillChatMetrics::OrHash
+            ).void
+          end
+          attr_writer :chat_metrics
+
+          # Claude Code activity metrics for a single skill on a given day.
+          sig do
+            returns(
+              Anthropic::Beta::Organization::BetaAnalyticsSkillClaudeCodeMetrics
+            )
+          end
+          attr_reader :claude_code_metrics
+
+          sig do
+            params(
+              claude_code_metrics:
+                Anthropic::Beta::Organization::BetaAnalyticsSkillClaudeCodeMetrics::OrHash
+            ).void
+          end
+          attr_writer :claude_code_metrics
+
+          # Cowork activity metrics for a single skill on a given day.
+          sig do
+            returns(
+              Anthropic::Beta::Organization::BetaAnalyticsSkillCoworkMetrics
+            )
+          end
+          attr_reader :cowork_metrics
+
+          sig do
+            params(
+              cowork_metrics:
+                Anthropic::Beta::Organization::BetaAnalyticsSkillCoworkMetrics::OrHash
+            ).void
+          end
+          attr_writer :cowork_metrics
+
+          # Number of distinct users who used the skill on the requested day, or, in
+          # date-range mode, over the requested window — recomputed as an exact distinct
+          # count over the window's per-member daily rows, never a sum of per-day values. A
+          # skill counts as used only when it is explicitly activated — the model (or the
+          # user, via the skill's slash command) invokes it, reading its instructions into
+          # context as part of that activation. Skills that are merely installed or listed
+          # as available, or whose content reaches the context without an activation
+          # (preloaded, hook-injected, or read as a plain file), are not counted.
+          sig { returns(Integer) }
+          attr_accessor :distinct_user_count
+
+          # Office Agent activity metrics for a single skill on a given day, broken out by
+          # Office product.
+          sig do
+            returns(
+              Anthropic::Beta::Organization::BetaAnalyticsSkillOfficeMetrics
+            )
+          end
+          attr_reader :office_metrics
+
+          sig do
+            params(
+              office_metrics:
+                Anthropic::Beta::Organization::BetaAnalyticsSkillOfficeMetrics::OrHash
+            ).void
+          end
+          attr_writer :office_metrics
+
+          # Name of the skill
+          sig { returns(String) }
+          attr_accessor :skill_name
+
+          # List-price (rate-card) value of the member requests attributed to this skill, as
+          # a decimal string in the minor unit of `currency` (cents for USD), from Claude
+          # Code, Cowork, and Office Agent request-level attribution — the value of requests
+          # that involved the skill, not the skill's incremental cost. Unlike
+          # `estimated_overage_spend` this reflects usage value regardless of how it was
+          # funded — seat-covered usage counts — but it is undiscounted and does not tie to
+          # billed spend or the organization's spend reporting. claude.ai chat usage carries
+          # no request-level attribution and contributes nothing: the field is null on
+          # `chat` product rows and on `office_agent` product cuts dated before 2026-06-18
+          # (the Office Agent attribution data-start), and on ungrouped rows it covers the
+          # Claude Code + Cowork + Office Agent share only (null when no attributable usage
+          # exists). Also null under the same conditions as `estimated_overage_spend` (spend
+          # reporting not enabled for this organization, `office_agent` product cuts before
+          # the 2026-06-18 data-start). "0" means attributable usage existed but none was
+          # attributed to this skill. Addable across days: date-range rollup mode returns
+          # the window's sum. On `group_by[]` and `filter[]` shapes both amounts can total
+          # below the ungrouped value for the same skill over the same date or range: spend
+          # attributed to a member–skill pair with no counted usage on that day is excluded
+          # from those cuts.
+          sig { returns(T.nilable(String)) }
+          attr_accessor :attributed_list_price
+
+          # Currency for this row's monetary fields (`estimated_overage_spend` and
+          # `attributed_list_price`), as an uppercase ISO-4217 code. Always "USD" when
+          # either amount is populated; null whenever both amounts are null.
+          sig { returns(T.nilable(String)) }
+          attr_accessor :currency
+
+          # Distinct accounts that enabled this skill on the requested day (claude.ai only —
+          # the skill analog of plugin `install_count`). The count is org-wide: null when
+          # enable reporting is not enabled for this organization, or when the request
+          # scopes to `user_id` / `rbac_group_id` / `product` via `group_by[]` or `filter[]`
+          # (an org-wide count would be misleading on per-cut rows). A distinct count, not
+          # an event count: summing across days double-counts members who enable the skill
+          # on more than one day, so it is also null in date-range rollup mode
+          # (`starting_date`/`ending_date`).
+          sig { returns(T.nilable(Integer)) }
+          attr_accessor :enable_count
+
+          # Estimated overage spend attributed to this skill, as a decimal string in the
+          # minor unit of `currency` (cents for USD; "1250" is $12.50, fractional cents
+          # possible) — an allocation of each member's daily post-discount, pre-credit
+          # metered overage spend (the same cost basis as the organization's spend reporting
+          # and the Cost & Usage API, so per-skill figures are directly comparable; spend
+          # with no skill attribution — including any member-day without skill invocations —
+          # is not represented, so skill rows sum to at most those totals) across the skills
+          # the member used. Overage only: usage covered by included seat allowances bills
+          # nothing and allocates $0 here — see `attributed_list_price` for the
+          # funding-independent usage-value companion. Claude Code, Cowork, and Office Agent
+          # spend use request-level skill attribution; claude.ai chat spend is approximated
+          # proportionally to skill-invoking messages. An estimate, not a billing number —
+          # and the cost of the requests/messages that involved the skill, not the skill's
+          # incremental cost (the same request would still have cost something without the
+          # skill active). "0" means no overage spend was attributed; null when spend
+          # reporting is not enabled for this organization, on `office_agent` product cuts
+          # dated before 2026-06-18 (the Office Agent attribution data-start). Addable
+          # across days: date-range rollup mode (`starting_date`/`ending_date`) returns the
+          # window's sum. With `group_by[]=user_id` each row carries the user's own
+          # attributed spend. On `group_by[]` and `filter[]` shapes both amounts can total
+          # below the ungrouped value for the same skill over the same date or range: spend
+          # attributed to a member–skill pair with no counted usage on that day is excluded
+          # from those cuts.
+          sig { returns(T.nilable(String)) }
+          attr_accessor :estimated_overage_spend
+
+          # Total number of times this skill was invoked on the requested day (the skill
+          # analog of plugin `invocation_count`). Unlike `distinct_user_count` — which
+          # answers '# of users' — this is the true '# of uses'. A skill counts as used only
+          # when it is explicitly activated — the model (or the user, via the skill's slash
+          # command) invokes it, reading its instructions into context as part of that
+          # activation. Skills that are merely installed or listed as available, or whose
+          # content reaches the context without an activation (preloaded, hook-injected, or
+          # read as a plain file), are not counted. Null when invocation reporting is not
+          # enabled for this organization. Sum across a date range for total uses in the
+          # window — date-range rollup mode (`starting_date`/`ending_date`) returns this sum
+          # directly.
+          sig { returns(T.nilable(Integer)) }
+          attr_accessor :invocation_count
+
+          # Product that produced this row's activity: one of `chat`, `claude_code`,
+          # `cowork`, or `office_agent` (the canonical Cost & Usage product naming; an
+          # `office_agent` row's per-surface breakdown is in its `office_metrics`). On
+          # `/plugins` only `cowork` and `claude_code` occur (the only surfaces with plugin
+          # attribution); on `/artifacts` only `chat`, `claude_code`, and `cowork` occur
+          # (the surfaces that create artifacts); `/apps/chat/projects` does not support the
+          # product dimension (a `product` entry in `group_by[]` or `filter[]` there is
+          # rejected). Present only when the request grouped by `product`.
+          sig { returns(T.nilable(String)) }
+          attr_accessor :product
+
+          # Tagged RBAC group identifier (`rbac_group_...`), matching the spend-limits API
+          # spelling. Present only when the request grouped by `rbac_group_id`.
+          sig { returns(T.nilable(String)) }
+          attr_accessor :rbac_group_id
+
+          # Resolved RBAC group display name, alongside `rbac_group_id` when name resolution
+          # is available. Null if the group has been deleted or its name could not be
+          # resolved; `rbac_group_id` remains the stable key.
+          sig { returns(T.nilable(String)) }
+          attr_accessor :rbac_group_name
+
+          # Skill share status (claude.ai only): one of `private`, `organization`, or
+          # `public`. Null for skills used only in Claude Code or Office (no per-skill
+          # share-status concept) and when share-status reporting is not yet available for
+          # the organization. Filterable via `filter[]=share_status:{value}`.
+          sig do
+            returns(
+              T.nilable(
+                Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ShareStatus::TaggedSymbol
+              )
+            )
+          end
+          attr_accessor :share_status
+
+          # Human-readable display name for rows whose `skill_name` is an opaque skill id
+          # (user/organization skill types and plugin-delivered skills, whose user-defined
+          # names usage reports generally withhold). Organization-shared skills and skills
+          # delivered by the organization's own plugins (its plugin marketplaces and its
+          # library) resolve; plugin skill names are shown without their 'plugin:' prefix.
+          # The literal 'unknown' bucket row gets a fixed 'Unknown skill' label. For a
+          # member's own skill (private or personal-plugin) it is null, except when the
+          # skill's owner used it from Claude Code or Cowork in the requested period: then
+          # it shows the name that client reported at the time. Apart from that, the names
+          # of members' own skills are not disclosed to analytics-key holders. Also null for
+          # Anthropic-provided plugin skills (not resolved), for an organization skill or
+          # plugin whose name can no longer be found (for example, one since deleted), when
+          # `skill_name` is already a display name, or when display-name resolution is not
+          # enabled for this organization.
+          sig { returns(T.nilable(String)) }
+          attr_accessor :skill_display_name
+
+          # Tagged user identifier (e.g. `user_...`). Present only when the request grouped
+          # by `user_id`.
+          sig { returns(T.nilable(String)) }
+          attr_accessor :user_id
+
+          # Per-skill activity data for a given day.
+          sig do
+            params(
+              chat_metrics:
+                Anthropic::Beta::Organization::BetaAnalyticsSkillChatMetrics::OrHash,
+              claude_code_metrics:
+                Anthropic::Beta::Organization::BetaAnalyticsSkillClaudeCodeMetrics::OrHash,
+              cowork_metrics:
+                Anthropic::Beta::Organization::BetaAnalyticsSkillCoworkMetrics::OrHash,
+              distinct_user_count: Integer,
+              office_metrics:
+                Anthropic::Beta::Organization::BetaAnalyticsSkillOfficeMetrics::OrHash,
+              skill_name: String,
+              attributed_list_price: T.nilable(String),
+              currency: T.nilable(String),
+              enable_count: T.nilable(Integer),
+              estimated_overage_spend: T.nilable(String),
+              invocation_count: T.nilable(Integer),
+              product: T.nilable(String),
+              rbac_group_id: T.nilable(String),
+              rbac_group_name: T.nilable(String),
+              share_status:
+                T.nilable(
+                  Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ShareStatus::OrSymbol
+                ),
+              skill_display_name: T.nilable(String),
+              user_id: T.nilable(String)
+            ).returns(T.attached_class)
+          end
+          def self.new(
+            # Claude.ai activity metrics for a single skill on a given day.
+            chat_metrics:,
+            # Claude Code activity metrics for a single skill on a given day.
+            claude_code_metrics:,
+            # Cowork activity metrics for a single skill on a given day.
+            cowork_metrics:,
+            # Number of distinct users who used the skill on the requested day, or, in
+            # date-range mode, over the requested window — recomputed as an exact distinct
+            # count over the window's per-member daily rows, never a sum of per-day values. A
+            # skill counts as used only when it is explicitly activated — the model (or the
+            # user, via the skill's slash command) invokes it, reading its instructions into
+            # context as part of that activation. Skills that are merely installed or listed
+            # as available, or whose content reaches the context without an activation
+            # (preloaded, hook-injected, or read as a plain file), are not counted.
+            distinct_user_count:,
+            # Office Agent activity metrics for a single skill on a given day, broken out by
+            # Office product.
+            office_metrics:,
+            # Name of the skill
+            skill_name:,
+            # List-price (rate-card) value of the member requests attributed to this skill, as
+            # a decimal string in the minor unit of `currency` (cents for USD), from Claude
+            # Code, Cowork, and Office Agent request-level attribution — the value of requests
+            # that involved the skill, not the skill's incremental cost. Unlike
+            # `estimated_overage_spend` this reflects usage value regardless of how it was
+            # funded — seat-covered usage counts — but it is undiscounted and does not tie to
+            # billed spend or the organization's spend reporting. claude.ai chat usage carries
+            # no request-level attribution and contributes nothing: the field is null on
+            # `chat` product rows and on `office_agent` product cuts dated before 2026-06-18
+            # (the Office Agent attribution data-start), and on ungrouped rows it covers the
+            # Claude Code + Cowork + Office Agent share only (null when no attributable usage
+            # exists). Also null under the same conditions as `estimated_overage_spend` (spend
+            # reporting not enabled for this organization, `office_agent` product cuts before
+            # the 2026-06-18 data-start). "0" means attributable usage existed but none was
+            # attributed to this skill. Addable across days: date-range rollup mode returns
+            # the window's sum. On `group_by[]` and `filter[]` shapes both amounts can total
+            # below the ungrouped value for the same skill over the same date or range: spend
+            # attributed to a member–skill pair with no counted usage on that day is excluded
+            # from those cuts.
+            attributed_list_price: nil,
+            # Currency for this row's monetary fields (`estimated_overage_spend` and
+            # `attributed_list_price`), as an uppercase ISO-4217 code. Always "USD" when
+            # either amount is populated; null whenever both amounts are null.
+            currency: nil,
+            # Distinct accounts that enabled this skill on the requested day (claude.ai only —
+            # the skill analog of plugin `install_count`). The count is org-wide: null when
+            # enable reporting is not enabled for this organization, or when the request
+            # scopes to `user_id` / `rbac_group_id` / `product` via `group_by[]` or `filter[]`
+            # (an org-wide count would be misleading on per-cut rows). A distinct count, not
+            # an event count: summing across days double-counts members who enable the skill
+            # on more than one day, so it is also null in date-range rollup mode
+            # (`starting_date`/`ending_date`).
+            enable_count: nil,
+            # Estimated overage spend attributed to this skill, as a decimal string in the
+            # minor unit of `currency` (cents for USD; "1250" is $12.50, fractional cents
+            # possible) — an allocation of each member's daily post-discount, pre-credit
+            # metered overage spend (the same cost basis as the organization's spend reporting
+            # and the Cost & Usage API, so per-skill figures are directly comparable; spend
+            # with no skill attribution — including any member-day without skill invocations —
+            # is not represented, so skill rows sum to at most those totals) across the skills
+            # the member used. Overage only: usage covered by included seat allowances bills
+            # nothing and allocates $0 here — see `attributed_list_price` for the
+            # funding-independent usage-value companion. Claude Code, Cowork, and Office Agent
+            # spend use request-level skill attribution; claude.ai chat spend is approximated
+            # proportionally to skill-invoking messages. An estimate, not a billing number —
+            # and the cost of the requests/messages that involved the skill, not the skill's
+            # incremental cost (the same request would still have cost something without the
+            # skill active). "0" means no overage spend was attributed; null when spend
+            # reporting is not enabled for this organization, on `office_agent` product cuts
+            # dated before 2026-06-18 (the Office Agent attribution data-start). Addable
+            # across days: date-range rollup mode (`starting_date`/`ending_date`) returns the
+            # window's sum. With `group_by[]=user_id` each row carries the user's own
+            # attributed spend. On `group_by[]` and `filter[]` shapes both amounts can total
+            # below the ungrouped value for the same skill over the same date or range: spend
+            # attributed to a member–skill pair with no counted usage on that day is excluded
+            # from those cuts.
+            estimated_overage_spend: nil,
+            # Total number of times this skill was invoked on the requested day (the skill
+            # analog of plugin `invocation_count`). Unlike `distinct_user_count` — which
+            # answers '# of users' — this is the true '# of uses'. A skill counts as used only
+            # when it is explicitly activated — the model (or the user, via the skill's slash
+            # command) invokes it, reading its instructions into context as part of that
+            # activation. Skills that are merely installed or listed as available, or whose
+            # content reaches the context without an activation (preloaded, hook-injected, or
+            # read as a plain file), are not counted. Null when invocation reporting is not
+            # enabled for this organization. Sum across a date range for total uses in the
+            # window — date-range rollup mode (`starting_date`/`ending_date`) returns this sum
+            # directly.
+            invocation_count: nil,
+            # Product that produced this row's activity: one of `chat`, `claude_code`,
+            # `cowork`, or `office_agent` (the canonical Cost & Usage product naming; an
+            # `office_agent` row's per-surface breakdown is in its `office_metrics`). On
+            # `/plugins` only `cowork` and `claude_code` occur (the only surfaces with plugin
+            # attribution); on `/artifacts` only `chat`, `claude_code`, and `cowork` occur
+            # (the surfaces that create artifacts); `/apps/chat/projects` does not support the
+            # product dimension (a `product` entry in `group_by[]` or `filter[]` there is
+            # rejected). Present only when the request grouped by `product`.
+            product: nil,
+            # Tagged RBAC group identifier (`rbac_group_...`), matching the spend-limits API
+            # spelling. Present only when the request grouped by `rbac_group_id`.
+            rbac_group_id: nil,
+            # Resolved RBAC group display name, alongside `rbac_group_id` when name resolution
+            # is available. Null if the group has been deleted or its name could not be
+            # resolved; `rbac_group_id` remains the stable key.
+            rbac_group_name: nil,
+            # Skill share status (claude.ai only): one of `private`, `organization`, or
+            # `public`. Null for skills used only in Claude Code or Office (no per-skill
+            # share-status concept) and when share-status reporting is not yet available for
+            # the organization. Filterable via `filter[]=share_status:{value}`.
+            share_status: nil,
+            # Human-readable display name for rows whose `skill_name` is an opaque skill id
+            # (user/organization skill types and plugin-delivered skills, whose user-defined
+            # names usage reports generally withhold). Organization-shared skills and skills
+            # delivered by the organization's own plugins (its plugin marketplaces and its
+            # library) resolve; plugin skill names are shown without their 'plugin:' prefix.
+            # The literal 'unknown' bucket row gets a fixed 'Unknown skill' label. For a
+            # member's own skill (private or personal-plugin) it is null, except when the
+            # skill's owner used it from Claude Code or Cowork in the requested period: then
+            # it shows the name that client reported at the time. Apart from that, the names
+            # of members' own skills are not disclosed to analytics-key holders. Also null for
+            # Anthropic-provided plugin skills (not resolved), for an organization skill or
+            # plugin whose name can no longer be found (for example, one since deleted), when
+            # `skill_name` is already a display name, or when display-name resolution is not
+            # enabled for this organization.
+            skill_display_name: nil,
+            # Tagged user identifier (e.g. `user_...`). Present only when the request grouped
+            # by `user_id`.
+            user_id: nil
+          )
+          end
+
+          sig do
+            override.returns(
+              {
+                chat_metrics:
+                  Anthropic::Beta::Organization::BetaAnalyticsSkillChatMetrics,
+                claude_code_metrics:
+                  Anthropic::Beta::Organization::BetaAnalyticsSkillClaudeCodeMetrics,
+                cowork_metrics:
+                  Anthropic::Beta::Organization::BetaAnalyticsSkillCoworkMetrics,
+                distinct_user_count: Integer,
+                office_metrics:
+                  Anthropic::Beta::Organization::BetaAnalyticsSkillOfficeMetrics,
+                skill_name: String,
+                attributed_list_price: T.nilable(String),
+                currency: T.nilable(String),
+                enable_count: T.nilable(Integer),
+                estimated_overage_spend: T.nilable(String),
+                invocation_count: T.nilable(Integer),
+                product: T.nilable(String),
+                rbac_group_id: T.nilable(String),
+                rbac_group_name: T.nilable(String),
+                share_status:
+                  T.nilable(
+                    Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ShareStatus::TaggedSymbol
+                  ),
+                skill_display_name: T.nilable(String),
+                user_id: T.nilable(String)
+              }
+            )
+          end
+          def to_hash
+          end
+
+          # Skill share status (claude.ai only): one of `private`, `organization`, or
+          # `public`. Null for skills used only in Claude Code or Office (no per-skill
+          # share-status concept) and when share-status reporting is not yet available for
+          # the organization. Filterable via `filter[]=share_status:{value}`.
+          module ShareStatus
+            extend Anthropic::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ShareStatus
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            ORGANIZATION =
+              T.let(
+                :organization,
+                Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ShareStatus::TaggedSymbol
+              )
+            PRIVATE =
+              T.let(
+                :private,
+                Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ShareStatus::TaggedSymbol
+              )
+            PUBLIC =
+              T.let(
+                :public,
+                Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ShareStatus::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ShareStatus::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+        end
+      end
+    end
+  end
+end

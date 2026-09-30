@@ -1,0 +1,44 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_core_code_metrics =
+          {
+            artifacts_created_count: Integer,
+            commit_count: Integer,
+            distinct_session_count: Integer?,
+            lines_of_code: Anthropic::Beta::Organization::BetaAnalyticsLinesOfCode,
+            pull_request_count: Integer
+          }
+
+        class BetaAnalyticsCoreCodeMetrics < Anthropic::Internal::Type::BaseModel
+          attr_accessor artifacts_created_count: Integer
+
+          attr_accessor commit_count: Integer
+
+          attr_accessor distinct_session_count: Integer?
+
+          attr_accessor lines_of_code: Anthropic::Beta::Organization::BetaAnalyticsLinesOfCode
+
+          attr_accessor pull_request_count: Integer
+
+          def initialize: (
+            artifacts_created_count: Integer,
+            commit_count: Integer,
+            distinct_session_count: Integer?,
+            lines_of_code: Anthropic::Beta::Organization::BetaAnalyticsLinesOfCode,
+            pull_request_count: Integer
+          ) -> void
+
+          def to_hash: -> {
+            artifacts_created_count: Integer,
+            commit_count: Integer,
+            distinct_session_count: Integer?,
+            lines_of_code: Anthropic::Beta::Organization::BetaAnalyticsLinesOfCode,
+            pull_request_count: Integer
+          }
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,23 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_tool_action_counts =
+          { accepted_count: Integer, rejected_count: Integer }
+
+        class BetaAnalyticsToolActionCounts < Anthropic::Internal::Type::BaseModel
+          attr_accessor accepted_count: Integer
+
+          attr_accessor rejected_count: Integer
+
+          def initialize: (
+            accepted_count: Integer,
+            rejected_count: Integer
+          ) -> void
+
+          def to_hash: -> { accepted_count: Integer, rejected_count: Integer }
+        end
+      end
+    end
+  end
+end

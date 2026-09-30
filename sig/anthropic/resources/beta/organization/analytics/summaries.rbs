@@ -1,0 +1,22 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class Analytics
+          class Summaries
+            def list: (
+              starting_date: Date,
+              ?ending_date: Date?,
+              ?filter: ::Array[String]?,
+              ?limit: Integer?,
+              ?page: String?,
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Organization::BetaAnalyticsSingleDayActivitySummary]
+
+            def initialize: (client: Anthropic::Client) -> void
+          end
+        end
+      end
+    end
+  end
+end

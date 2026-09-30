@@ -1,0 +1,49 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_office_product_metrics =
+          {
+            connectors_used_count: Integer,
+            distinct_connectors_used_count: Integer?,
+            distinct_session_count: Integer?,
+            distinct_skills_used_count: Integer?,
+            message_count: Integer,
+            skills_used_count: Integer
+          }
+
+        class BetaAnalyticsOfficeProductMetrics < Anthropic::Internal::Type::BaseModel
+          attr_accessor connectors_used_count: Integer
+
+          attr_accessor distinct_connectors_used_count: Integer?
+
+          attr_accessor distinct_session_count: Integer?
+
+          attr_accessor distinct_skills_used_count: Integer?
+
+          attr_accessor message_count: Integer
+
+          attr_accessor skills_used_count: Integer
+
+          def initialize: (
+            connectors_used_count: Integer,
+            distinct_connectors_used_count: Integer?,
+            distinct_session_count: Integer?,
+            distinct_skills_used_count: Integer?,
+            message_count: Integer,
+            skills_used_count: Integer
+          ) -> void
+
+          def to_hash: -> {
+            connectors_used_count: Integer,
+            distinct_connectors_used_count: Integer?,
+            distinct_session_count: Integer?,
+            distinct_skills_used_count: Integer?,
+            message_count: Integer,
+            skills_used_count: Integer
+          }
+        end
+      end
+    end
+  end
+end

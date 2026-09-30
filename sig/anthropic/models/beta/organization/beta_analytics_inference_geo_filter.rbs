@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_inference_geo_filter =
+          :global | :not_available | :us
+
+        module BetaAnalyticsInferenceGeoFilter
+          extend Anthropic::Internal::Type::Enum
+
+          GLOBAL: :global
+          NOT_AVAILABLE: :not_available
+          US: :us
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::beta_analytics_inference_geo_filter]
+        end
+      end
+    end
+  end
+end

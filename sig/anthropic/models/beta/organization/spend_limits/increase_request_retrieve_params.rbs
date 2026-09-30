@@ -1,0 +1,30 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module SpendLimits
+          type increase_request_retrieve_params =
+            { spend_limit_increase_request_id: String }
+            & Anthropic::Internal::Type::request_parameters
+
+          class IncreaseRequestRetrieveParams < Anthropic::Internal::Type::BaseModel
+            extend Anthropic::Internal::Type::RequestParameters::Converter
+            include Anthropic::Internal::Type::RequestParameters
+
+            attr_accessor spend_limit_increase_request_id: String
+
+            def initialize: (
+              spend_limit_increase_request_id: String,
+              ?request_options: Anthropic::request_opts
+            ) -> void
+
+            def to_hash: -> {
+              spend_limit_increase_request_id: String,
+              request_options: Anthropic::RequestOptions
+            }
+          end
+        end
+      end
+    end
+  end
+end

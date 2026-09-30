@@ -1,0 +1,52 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Analytics
+          type summary_list_params =
+            {
+              starting_date: Date,
+              ending_date: Date?,
+              filter: ::Array[String]?,
+              limit: Integer?,
+              page: String?
+            }
+            & Anthropic::Internal::Type::request_parameters
+
+          class SummaryListParams < Anthropic::Internal::Type::BaseModel
+            extend Anthropic::Internal::Type::RequestParameters::Converter
+            include Anthropic::Internal::Type::RequestParameters
+
+            attr_accessor starting_date: Date
+
+            attr_accessor ending_date: Date?
+
+            attr_accessor filter: ::Array[String]?
+
+            attr_accessor limit: Integer?
+
+            attr_accessor page: String?
+
+            def initialize: (
+              starting_date: Date,
+              ?ending_date: Date?,
+              ?filter: ::Array[String]?,
+              ?limit: Integer?,
+              ?page: String?,
+              ?request_options: Anthropic::request_opts
+            ) -> void
+
+            def to_hash: -> {
+              starting_date: Date,
+              ending_date: Date?,
+              filter: ::Array[String]?,
+              limit: Integer?,
+              page: String?,
+              request_options: Anthropic::RequestOptions
+            }
+          end
+        end
+      end
+    end
+  end
+end
