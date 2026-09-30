@@ -33,6 +33,8 @@ module Anthropic
     private def bearer_auth: -> ::Hash[String, String]
     private def resolve_default_credentials?: -> bool
 
+    def timeout_overridden?: -> bool
+
     def initialize: (
       ?api_key: String?,
       ?auth_token: String?,
@@ -40,7 +42,7 @@ module Anthropic
       ?base_url: String?,
       ?proxy: (String | URI::Generic)?,
       ?max_retries: Integer,
-      ?timeout: Float,
+      ?timeout: Float?,
       ?initial_retry_delay: Float,
       ?max_retry_delay: Float,
       ?middleware: Anthropic::Middleware::entry_or_array?

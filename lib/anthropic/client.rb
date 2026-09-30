@@ -125,6 +125,11 @@ module Anthropic
       DEFAULT_TIMEOUT_IN_SECONDS
     end
 
+    # @api private
+    #
+    # @return [Boolean]
+    def timeout_overridden? = @timeout_overridden
+
     # Creates and returns a new client for interacting with the API.
     #
     # Credential precedence, matching the credential-resolution spec and
@@ -179,7 +184,8 @@ module Anthropic
     #
     # @param max_retries [Integer] Max number of retries to attempt after a failed retryable request.
     #
-    # @param timeout [Float]
+    # @param timeout [Float, nil] Request timeout in seconds. Defaults to
+    # `Anthropic::Client::DEFAULT_TIMEOUT_IN_SECONDS` when `nil`.
     #
     # @param initial_retry_delay [Float]
     #
@@ -197,11 +203,14 @@ module Anthropic
       base_url: nil,
       proxy: nil,
       max_retries: self.class::DEFAULT_MAX_RETRIES,
-      timeout: self.class::DEFAULT_TIMEOUT_IN_SECONDS,
+      timeout: nil,
       initial_retry_delay: self.class::DEFAULT_INITIAL_RETRY_DELAY,
       max_retry_delay: self.class::DEFAULT_MAX_RETRY_DELAY,
       middleware: nil
     )
+      @timeout_overridden = !timeout.nil?
+      timeout ||= self.class::DEFAULT_TIMEOUT_IN_SECONDS
+
       if config && credentials
         raise ArgumentError, "Pass at most one of `credentials:` or `config:`."
       end
