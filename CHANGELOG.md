@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.76.0 (2026-09-30)
+
+Full Changelog: [v1.75.0...v1.76.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.75.0...v1.76.0)
+
+### Features
+
+* **api:** add list spend limits endpoint ([06d65a0](https://github.com/anthropics/anthropic-sdk-ruby/commit/06d65a06b8217f2149717059ff4b2290174fee1a))
+
+
+### Bug Fixes
+
+* **client:** let the client timeout apply to messages.create and the streaming methods ([#249](https://github.com/anthropics/anthropic-sdk-ruby/issues/249)) ([78e491d](https://github.com/anthropics/anthropic-sdk-ruby/commit/78e491d8c231f6e5b0ab1c190a6078b038ebb470))
+* **client:** treat a timeout the caller passed as set even when it equals the default ([#282](https://github.com/anthropics/anthropic-sdk-ruby/issues/282)) ([8484c29](https://github.com/anthropics/anthropic-sdk-ruby/commit/8484c29736916b55eb35c53e0138700f26734051))
+
+
+### Chores
+
+* **api:** mark Claude Sonnet 4.5 as deprecated (end-of-life November 30, 2026) ([f7277ac](https://github.com/anthropics/anthropic-sdk-ruby/commit/f7277ac8bdfd66841ed3c8ba77fb6d9c98ada3d6))
+
 ## 1.75.0 (2026-09-30)
 
 Full Changelog: [v1.74.0...v1.75.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.74.0...v1.75.0)
