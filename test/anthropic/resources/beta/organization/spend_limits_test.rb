@@ -16,6 +16,36 @@ class Anthropic::Test::Resources::Beta::Organization::SpendLimitsTest < Anthropi
         amount: String | nil,
         created_at: Time,
         currency: String,
+        is_enabled: Anthropic::Internal::Type::Boolean,
+        period: Anthropic::Beta::Organization::BetaSpendLimitPeriod,
+        scope: Anthropic::Beta::Organization::BetaSpendLimit::Scope,
+        type: Symbol,
+        updated_at: Time
+      }
+    end
+  end
+
+  def test_list
+    response = @anthropic.beta.organization.spend_limits.list
+
+    assert_pattern do
+      response => Anthropic::Internal::PageCursor
+    end
+
+    row = response.to_enum.first
+    return if row.nil?
+
+    assert_pattern do
+      row => Anthropic::Beta::Organization::BetaSpendLimit
+    end
+
+    assert_pattern do
+      row => {
+        id: String,
+        amount: String | nil,
+        created_at: Time,
+        currency: String,
+        is_enabled: Anthropic::Internal::Type::Boolean,
         period: Anthropic::Beta::Organization::BetaSpendLimitPeriod,
         scope: Anthropic::Beta::Organization::BetaSpendLimit::Scope,
         type: Symbol,
@@ -56,6 +86,7 @@ class Anthropic::Test::Resources::Beta::Organization::SpendLimitsTest < Anthropi
         amount: String | nil,
         created_at: Time,
         currency: String,
+        is_enabled: Anthropic::Internal::Type::Boolean,
         period: Anthropic::Beta::Organization::BetaSpendLimitPeriod,
         scope: Anthropic::Beta::Organization::BetaSpendLimit::Scope,
         type: Symbol,

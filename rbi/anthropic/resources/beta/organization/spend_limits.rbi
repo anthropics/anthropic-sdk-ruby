@@ -33,6 +33,48 @@ module Anthropic
           )
           end
 
+          # List the organization's spend limits.
+          #
+          # A Claude Console organization's limits come in an order that is stable across
+          # pages. A Claude Enterprise organization's are grouped by scope type, in the
+          # order `organization`, `seat_tier`, `rbac_group`, `organization_service`, `user`;
+          # within a type they come in a fixed order that is not creation order.
+          sig do
+            params(
+              limit: Integer,
+              page: T.nilable(String),
+              scope_type:
+                T.nilable(
+                  T::Array[
+                    Anthropic::Beta::Organization::SpendLimitListParams::ScopeType::OrSymbol
+                  ]
+                ),
+              betas:
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
+              request_options: Anthropic::RequestOptions::OrHash
+            ).returns(
+              Anthropic::Internal::PageCursor[
+                Anthropic::Beta::Organization::BetaSpendLimit
+              ]
+            )
+          end
+          def list(
+            # Query param: Maximum number of limits per page. Defaults to `20`.
+            limit: nil,
+            # Query param: Opaque cursor from a previous response's `next_page` field.
+            page: nil,
+            # Query param: Return only limits with these scope types. A Claude Console
+            # organization has `organization` and `workspace` limits; a Claude Enterprise
+            # organization has `organization`, `seat_tier`, `rbac_group`,
+            # `organization_service` and `user` limits. Omit for all.
+            scope_type: nil,
+            # Header param: This endpoint is in beta: requests must send
+            # `spend-limit-reads-2026-09-26` in this header.
+            betas: nil,
+            request_options: {}
+          )
+          end
+
           # Delete a spend limit.
           #
           # For a Claude Enterprise organization, this deletes a per-user override, and the

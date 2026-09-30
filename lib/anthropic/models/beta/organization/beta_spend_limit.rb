@@ -32,6 +32,14 @@ module Anthropic
           #   @return [String]
           required :currency, String
 
+          # @!attribute is_enabled
+          #   Read-only. `false` when extra usage is switched off for this organization
+          #   (`organization` limit) or for this member (`user` limit); `amount` is kept and
+          #   applies again when it's switched back on. Always `true` for other limits.
+          #
+          #   @return [Boolean]
+          required :is_enabled, Anthropic::Internal::Type::Boolean
+
           # @!attribute period
           #   Length of the window the limit resets over. `amount` caps spend within each
           #   period.
@@ -58,7 +66,7 @@ module Anthropic
           #   @return [Time]
           required :updated_at, Time
 
-          # @!method initialize(id:, amount:, created_at:, currency:, period:, scope:, updated_at:, type: :spend_limit)
+          # @!method initialize(id:, amount:, created_at:, currency:, is_enabled:, period:, scope:, updated_at:, type: :spend_limit)
           #   A configured spend limit: a cap on metered spend for one scope and period.
           #
           #   Some parameter documentations has been truncated, see
@@ -71,6 +79,8 @@ module Anthropic
           #   @param created_at [Time] RFC 3339 datetime at which the spend limit was created.
           #
           #   @param currency [String] ISO 4217 code of the organization's billing currency; the unit for `amount`.
+          #
+          #   @param is_enabled [Boolean] Read-only. `false` when extra usage is switched off for this organization (`orga
           #
           #   @param period [Symbol, Anthropic::Models::Beta::Organization::BetaSpendLimitPeriod] Length of the window the limit resets over. `amount` caps spend within each peri
           #
