@@ -1,0 +1,112 @@
+module Anthropic
+  module Models
+    class OrganizationRateLimit = Organization::OrganizationRateLimit
+
+    module Organization
+      type organization_rate_limit =
+        {
+          id: String,
+          group: Anthropic::Models::Organization::OrganizationRateLimit::group,
+          limits: ::Array[Anthropic::Organization::OrganizationRateLimitValue],
+          models: ::Array[String]?,
+          type: :rate_limit
+        }
+
+      class OrganizationRateLimit < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor group: Anthropic::Models::Organization::OrganizationRateLimit::group
+
+        attr_accessor limits: ::Array[Anthropic::Organization::OrganizationRateLimitValue]
+
+        attr_accessor models: ::Array[String]?
+
+        attr_accessor type: :rate_limit
+
+        def initialize: (
+          id: String,
+          group: Anthropic::Models::Organization::OrganizationRateLimit::group,
+          limits: ::Array[Anthropic::Organization::OrganizationRateLimitValue],
+          models: ::Array[String]?,
+          ?type: :rate_limit
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          group: Anthropic::Models::Organization::OrganizationRateLimit::group,
+          limits: ::Array[Anthropic::Organization::OrganizationRateLimitValue],
+          models: ::Array[String]?,
+          type: :rate_limit
+        }
+
+        type group =
+          Anthropic::Organization::OrganizationRateLimitModelGroup
+          | Anthropic::Organization::OrganizationRateLimitBatchGroup
+          | Anthropic::Organization::OrganizationRateLimitTokenCountGroup
+          | Anthropic::Organization::OrganizationRateLimitFilesGroup
+          | Anthropic::Organization::OrganizationRateLimitSkillsGroup
+          | Anthropic::Organization::OrganizationRateLimitWebSearchGroup
+
+        module Group
+          extend Anthropic::Internal::Type::Union
+
+          type type_ =
+            :model_group
+            | :batch
+            | :token_count
+            | :files
+            | :skills
+            | :web_search
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            MODEL_GROUP: :model_group
+            BATCH: :batch
+            TOKEN_COUNT: :token_count
+            FILES: :files
+            SKILLS: :skills
+            WEB_SEARCH: :web_search
+
+            def self?.values: -> ::Array[Anthropic::Models::Organization::OrganizationRateLimit::Group::type_]
+          end
+
+          def self?.variants: -> ::Array[Anthropic::Models::Organization::OrganizationRateLimit::group]
+
+          def self.new:
+            (
+              type: :model_group | "model_group",
+              id: String,
+              display_name: String
+            ) -> Anthropic::Organization::OrganizationRateLimitModelGroup
+            | (
+              type: :batch | "batch",
+              id: String
+            ) -> Anthropic::Organization::OrganizationRateLimitBatchGroup
+            | (
+              type: :token_count | "token_count",
+              id: String
+            ) -> Anthropic::Organization::OrganizationRateLimitTokenCountGroup
+            | (
+              type: :files | "files",
+              id: String
+            ) -> Anthropic::Organization::OrganizationRateLimitFilesGroup
+            | (
+              type: :skills | "skills",
+              id: String
+            ) -> Anthropic::Organization::OrganizationRateLimitSkillsGroup
+            | (
+              type: :web_search | "web_search",
+              id: String
+            ) -> Anthropic::Organization::OrganizationRateLimitWebSearchGroup
+            | (
+              type: Anthropic::Models::Organization::OrganizationRateLimit::Group::type_
+              | String,
+              id: String,
+              ?display_name: String
+            ) -> Anthropic::Models::Organization::OrganizationRateLimit::group
+        end
+      end
+    end
+  end
+end

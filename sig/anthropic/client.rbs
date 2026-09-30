@@ -24,6 +24,8 @@ module Anthropic
 
     attr_reader skills: Anthropic::Resources::Skills
 
+    attr_reader organization: Anthropic::Resources::Organization
+
     attr_reader beta: Anthropic::Resources::Beta
 
     private def auth_headers: -> ::Hash[String, String]

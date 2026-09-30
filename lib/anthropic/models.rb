@@ -403,6 +403,14 @@ module Anthropic
 
   NotFoundError = Anthropic::Models::NotFoundError
 
+  Organization = Anthropic::Models::Organization
+
+  OrganizationInfo = Anthropic::Models::OrganizationInfo
+
+  OrganizationRetrieveParams = Anthropic::Models::OrganizationRetrieveParams
+
+  OrganizationRole = Anthropic::Models::OrganizationRole
+
   OutputConfig = Anthropic::Models::OutputConfig
 
   OutputTokensDetails = Anthropic::Models::OutputTokensDetails

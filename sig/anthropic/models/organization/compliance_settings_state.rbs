@@ -1,0 +1,38 @@
+module Anthropic
+  module Models
+    module Organization
+      type compliance_settings_state =
+        Anthropic::Organization::ComplianceSettingsStateEnabled
+        | Anthropic::Organization::ComplianceSettingsStateDisabled
+
+      module ComplianceSettingsState
+        extend Anthropic::Internal::Type::Union
+
+        type type_ = :enabled | :disabled
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          ENABLED: :enabled
+          DISABLED: :disabled
+
+          def self?.values: -> ::Array[Anthropic::Models::Organization::ComplianceSettingsState::type_]
+        end
+
+        def self?.variants: -> ::Array[Anthropic::Models::Organization::compliance_settings_state]
+
+        def self.new:
+          (
+            type: :enabled | "enabled"
+          ) -> Anthropic::Organization::ComplianceSettingsStateEnabled
+          | (
+            type: :disabled | "disabled"
+          ) -> Anthropic::Organization::ComplianceSettingsStateDisabled
+          | (
+            type: Anthropic::Models::Organization::ComplianceSettingsState::type_
+            | String
+          ) -> Anthropic::Models::Organization::compliance_settings_state
+      end
+    end
+  end
+end

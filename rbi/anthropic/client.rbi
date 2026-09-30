@@ -37,6 +37,9 @@ module Anthropic
     sig { returns(Anthropic::Resources::Skills) }
     attr_reader :skills
 
+    sig { returns(Anthropic::Resources::Organization) }
+    attr_reader :organization
+
     sig { returns(Anthropic::Resources::Beta) }
     attr_reader :beta
 

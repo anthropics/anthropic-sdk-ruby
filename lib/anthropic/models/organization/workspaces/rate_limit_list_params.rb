@@ -1,0 +1,83 @@
+# frozen_string_literal: true
+
+module Anthropic
+  module Models
+    module Organization
+      module Workspaces
+        # @see Anthropic::Resources::Organization::Workspaces::RateLimits#list
+        class RateLimitListParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          # @!attribute workspace_id
+          #   The ID of the workspace.
+          #
+          #   @return [String]
+          required :workspace_id, String
+
+          # @!attribute group_type
+          #   Filter by group type.
+          #
+          #   @return [Symbol, Anthropic::Models::Organization::Workspaces::RateLimitListParams::GroupType, nil]
+          optional :group_type,
+                   enum: -> { Anthropic::Organization::Workspaces::RateLimitListParams::GroupType },
+                   nil?: true
+
+          # @!attribute include_inherited
+          #   Also list the limiter values the workspace inherits from the organization,
+          #   including groups with no workspace-level override.
+          #
+          #   @return [Boolean, nil]
+          optional :include_inherited, Anthropic::Internal::Type::Boolean
+
+          # @!attribute limit
+          #   Maximum number of items to return per page. Ranges from `1` to `1000`.
+          #
+          #   When omitted, every remaining entry is returned in a single page and `next_page`
+          #   is `null`.
+          #
+          #   @return [Integer, nil]
+          optional :limit, Integer, nil?: true
+
+          # @!attribute page
+          #   Opaque cursor from a previous response's `next_page`.
+          #
+          #   @return [String, nil]
+          optional :page, String, nil?: true
+
+          # @!method initialize(workspace_id:, group_type: nil, include_inherited: nil, limit: nil, page: nil, request_options: {})
+          #   Some parameter documentations has been truncated, see
+          #   {Anthropic::Models::Organization::Workspaces::RateLimitListParams} for more
+          #   details.
+          #
+          #   @param workspace_id [String] The ID of the workspace.
+          #
+          #   @param group_type [Symbol, Anthropic::Models::Organization::Workspaces::RateLimitListParams::GroupType, nil] Filter by group type.
+          #
+          #   @param include_inherited [Boolean] Also list the limiter values the workspace inherits from the organization, inclu
+          #
+          #   @param limit [Integer, nil] Maximum number of items to return per page. Ranges from `1` to `1000`.
+          #
+          #   @param page [String, nil] Opaque cursor from a previous response's `next_page`.
+          #
+          #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
+
+          # Filter by group type.
+          module GroupType
+            extend Anthropic::Internal::Type::Enum
+
+            BATCH = :batch
+            FILES = :files
+            MODEL_GROUP = :model_group
+            SKILLS = :skills
+            TOKEN_COUNT = :token_count
+            WEB_SEARCH = :web_search
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    module Organization
+      type aws_external_key_config =
+        { kms_arn: String, type: :aws, region: String? }
+
+      class AWSExternalKeyConfig < Anthropic::Internal::Type::BaseModel
+        attr_accessor kms_arn: String
+
+        attr_accessor type: :aws
+
+        attr_accessor region: String?
+
+        def initialize: (kms_arn: String, ?region: String?, ?type: :aws) -> void
+
+        def to_hash: -> { kms_arn: String, type: :aws, region: String? }
+      end
+    end
+  end
+end

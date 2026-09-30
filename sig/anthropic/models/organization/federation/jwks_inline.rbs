@@ -1,0 +1,22 @@
+module Anthropic
+  module Models
+    module Organization
+      module Federation
+        type jwks_inline = { keys: ::Array[::Hash[Symbol, top]], type: :inline }
+
+        class JWKSInline < Anthropic::Internal::Type::BaseModel
+          attr_accessor keys: ::Array[::Hash[Symbol, top]]
+
+          attr_accessor type: :inline
+
+          def initialize: (
+            keys: ::Array[::Hash[Symbol, top]],
+            ?type: :inline
+          ) -> void
+
+          def to_hash: -> { keys: ::Array[::Hash[Symbol, top]], type: :inline }
+        end
+      end
+    end
+  end
+end

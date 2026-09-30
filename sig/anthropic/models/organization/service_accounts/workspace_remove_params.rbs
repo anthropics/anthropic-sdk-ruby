@@ -1,0 +1,32 @@
+module Anthropic
+  module Models
+    module Organization
+      module ServiceAccounts
+        type workspace_remove_params =
+          { service_account_id: String, workspace_id: String }
+          & Anthropic::Internal::Type::request_parameters
+
+        class WorkspaceRemoveParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor service_account_id: String
+
+          attr_accessor workspace_id: String
+
+          def initialize: (
+            service_account_id: String,
+            workspace_id: String,
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            service_account_id: String,
+            workspace_id: String,
+            request_options: Anthropic::RequestOptions
+          }
+        end
+      end
+    end
+  end
+end

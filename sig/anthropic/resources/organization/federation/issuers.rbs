@@ -1,0 +1,48 @@
+module Anthropic
+  module Resources
+    class Organization
+      class Federation
+        class Issuers
+          def create: (
+            issuer_url: String,
+            name: String,
+            ?check_jti: bool?,
+            ?jwks: Anthropic::Models::Organization::Federation::IssuerCreateParams::jwks,
+            ?max_jwt_lifetime_seconds: Integer?,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Organization::Federation::FederationIssuer
+
+          def retrieve: (
+            String federation_issuer_id,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Organization::Federation::FederationIssuer
+
+          def update: (
+            String federation_issuer_id,
+            ?check_jti: bool?,
+            ?issuer_url: String?,
+            ?jwks: Anthropic::Models::Organization::Federation::IssuerUpdateParams::jwks?,
+            ?jwks_polling_disabled: bool?,
+            ?max_jwt_lifetime_seconds: Integer?,
+            ?name: String?,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Organization::Federation::FederationIssuer
+
+          def list: (
+            ?include_archived: bool,
+            ?limit: Integer,
+            ?page: String?,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Internal::PageCursor[Anthropic::Organization::Federation::FederationIssuer]
+
+          def archive: (
+            String federation_issuer_id,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Organization::Federation::FederationIssuer
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

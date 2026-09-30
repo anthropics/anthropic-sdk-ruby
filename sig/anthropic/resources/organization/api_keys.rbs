@@ -1,0 +1,31 @@
+module Anthropic
+  module Resources
+    class Organization
+      class APIKeys
+        def retrieve: (
+          String api_key_id,
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Organization::APIKey
+
+        def update: (
+          String api_key_id,
+          ?name: String?,
+          ?status: Anthropic::Models::Organization::APIKeyUpdateParams::status?,
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Organization::APIKey
+
+        def list: (
+          ?after_id: String,
+          ?before_id: String,
+          ?created_by_user_id: String?,
+          ?limit: Integer,
+          ?status: Anthropic::Models::Organization::APIKeyListParams::status?,
+          ?workspace_id: String?,
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Internal::Page[Anthropic::Organization::APIKey]
+
+        def initialize: (client: Anthropic::Client) -> void
+      end
+    end
+  end
+end

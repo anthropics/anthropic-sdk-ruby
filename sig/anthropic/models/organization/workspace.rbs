@@ -1,0 +1,67 @@
+module Anthropic
+  module Models
+    module Organization
+      type workspace =
+        {
+          id: String,
+          archived_at: Time?,
+          compartment_id: String,
+          created_at: Time,
+          data_residency: Anthropic::Organization::DataResidency,
+          display_color: String,
+          external_key_id: String?,
+          name: String,
+          tags: ::Hash[Symbol, String],
+          type: :workspace
+        }
+
+      class Workspace < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor archived_at: Time?
+
+        attr_accessor compartment_id: String
+
+        attr_accessor created_at: Time
+
+        attr_accessor data_residency: Anthropic::Organization::DataResidency
+
+        attr_accessor display_color: String
+
+        attr_accessor external_key_id: String?
+
+        attr_accessor name: String
+
+        attr_accessor tags: ::Hash[Symbol, String]
+
+        attr_accessor type: :workspace
+
+        def initialize: (
+          id: String,
+          archived_at: Time?,
+          compartment_id: String,
+          created_at: Time,
+          data_residency: Anthropic::Organization::DataResidency,
+          display_color: String,
+          external_key_id: String?,
+          name: String,
+          tags: ::Hash[Symbol, String],
+          ?type: :workspace
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          archived_at: Time?,
+          compartment_id: String,
+          created_at: Time,
+          data_residency: Anthropic::Organization::DataResidency,
+          display_color: String,
+          external_key_id: String?,
+          name: String,
+          tags: ::Hash[Symbol, String],
+          type: :workspace
+        }
+      end
+    end
+  end
+end

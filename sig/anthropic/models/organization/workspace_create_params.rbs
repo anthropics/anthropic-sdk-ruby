@@ -1,0 +1,48 @@
+module Anthropic
+  module Models
+    module Organization
+      type workspace_create_params =
+        {
+          name: String,
+          data_residency: Anthropic::Organization::DataResidencyCreateConfig?,
+          display_color: String?,
+          external_key_id: String?,
+          tags: ::Hash[Symbol, String]?
+        }
+        & Anthropic::Internal::Type::request_parameters
+
+      class WorkspaceCreateParams < Anthropic::Internal::Type::BaseModel
+        extend Anthropic::Internal::Type::RequestParameters::Converter
+        include Anthropic::Internal::Type::RequestParameters
+
+        attr_accessor name: String
+
+        attr_accessor data_residency: Anthropic::Organization::DataResidencyCreateConfig?
+
+        attr_accessor display_color: String?
+
+        attr_accessor external_key_id: String?
+
+        attr_accessor tags: ::Hash[Symbol, String]?
+
+        def initialize: (
+          name: String,
+          ?data_residency: Anthropic::Organization::DataResidencyCreateConfig?,
+          ?display_color: String?,
+          ?external_key_id: String?,
+          ?tags: ::Hash[Symbol, String]?,
+          ?request_options: Anthropic::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          name: String,
+          data_residency: Anthropic::Organization::DataResidencyCreateConfig?,
+          display_color: String?,
+          external_key_id: String?,
+          tags: ::Hash[Symbol, String]?,
+          request_options: Anthropic::RequestOptions
+        }
+      end
+    end
+  end
+end

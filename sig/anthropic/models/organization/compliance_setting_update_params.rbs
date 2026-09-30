@@ -1,0 +1,28 @@
+module Anthropic
+  module Models
+    module Organization
+      type compliance_setting_update_params =
+        {
+          state: Anthropic::Models::Organization::compliance_settings_state_param
+        }
+        & Anthropic::Internal::Type::request_parameters
+
+      class ComplianceSettingUpdateParams < Anthropic::Internal::Type::BaseModel
+        extend Anthropic::Internal::Type::RequestParameters::Converter
+        include Anthropic::Internal::Type::RequestParameters
+
+        attr_accessor state: Anthropic::Models::Organization::compliance_settings_state_param
+
+        def initialize: (
+          state: Anthropic::Models::Organization::compliance_settings_state_param,
+          ?request_options: Anthropic::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          state: Anthropic::Models::Organization::compliance_settings_state_param,
+          request_options: Anthropic::RequestOptions
+        }
+      end
+    end
+  end
+end

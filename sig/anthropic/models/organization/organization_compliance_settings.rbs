@@ -1,0 +1,29 @@
+module Anthropic
+  module Models
+    class OrganizationComplianceSettings = Organization::OrganizationComplianceSettings
+
+    module Organization
+      type organization_compliance_settings =
+        {
+          state: Anthropic::Models::Organization::compliance_settings_state,
+          type: :compliance_settings
+        }
+
+      class OrganizationComplianceSettings < Anthropic::Internal::Type::BaseModel
+        attr_accessor state: Anthropic::Models::Organization::compliance_settings_state
+
+        attr_accessor type: :compliance_settings
+
+        def initialize: (
+          state: Anthropic::Models::Organization::compliance_settings_state,
+          ?type: :compliance_settings
+        ) -> void
+
+        def to_hash: -> {
+          state: Anthropic::Models::Organization::compliance_settings_state,
+          type: :compliance_settings
+        }
+      end
+    end
+  end
+end

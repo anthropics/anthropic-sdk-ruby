@@ -1,0 +1,34 @@
+module Anthropic
+  module Resources
+    class Organization
+      class Users
+        def retrieve: (
+          String user_id,
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Organization::OrganizationUser
+
+        def update: (
+          String user_id,
+          role: Anthropic::Models::Organization::UserUpdateParams::role,
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Organization::OrganizationUser
+
+        def list: (
+          ?after_id: String,
+          ?before_id: String,
+          ?email: String,
+          ?limit: Integer,
+          ?roles: ::Array[String],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Internal::Page[Anthropic::Organization::OrganizationUser]
+
+        def remove: (
+          String user_id,
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Models::Organization::UserRemoveResponse
+
+        def initialize: (client: Anthropic::Client) -> void
+      end
+    end
+  end
+end

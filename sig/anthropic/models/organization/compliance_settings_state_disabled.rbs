@@ -1,0 +1,15 @@
+module Anthropic
+  module Models
+    module Organization
+      type compliance_settings_state_disabled = { type: :disabled }
+
+      class ComplianceSettingsStateDisabled < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :disabled
+
+        def initialize: (?type: :disabled) -> void
+
+        def to_hash: -> { type: :disabled }
+      end
+    end
+  end
+end

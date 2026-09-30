@@ -1,0 +1,74 @@
+module Anthropic
+  module Models
+    module Organization
+      class WorkspaceRateLimitValue = Workspaces::WorkspaceRateLimitValue
+
+      module Workspaces
+        type workspace_rate_limit_value =
+          {
+            org_limit: Integer?,
+            source: Anthropic::Models::Organization::Workspaces::WorkspaceRateLimitValue::source,
+            type: String,
+            value: Integer
+          }
+
+        class WorkspaceRateLimitValue < Anthropic::Internal::Type::BaseModel
+          attr_accessor org_limit: Integer?
+
+          attr_accessor source: Anthropic::Models::Organization::Workspaces::WorkspaceRateLimitValue::source
+
+          attr_accessor type: String
+
+          attr_accessor value: Integer
+
+          def initialize: (
+            org_limit: Integer?,
+            source: Anthropic::Models::Organization::Workspaces::WorkspaceRateLimitValue::source,
+            type: String,
+            value: Integer
+          ) -> void
+
+          def to_hash: -> {
+            org_limit: Integer?,
+            source: Anthropic::Models::Organization::Workspaces::WorkspaceRateLimitValue::source,
+            type: String,
+            value: Integer
+          }
+
+          type source =
+            Anthropic::Organization::Workspaces::WorkspaceRateLimitWorkspaceSource
+            | Anthropic::Organization::Workspaces::WorkspaceRateLimitOrganizationSource
+
+          module Source
+            extend Anthropic::Internal::Type::Union
+
+            type type_ = :workspace | :organization
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              WORKSPACE: :workspace
+              ORGANIZATION: :organization
+
+              def self?.values: -> ::Array[Anthropic::Models::Organization::Workspaces::WorkspaceRateLimitValue::Source::type_]
+            end
+
+            def self?.variants: -> ::Array[Anthropic::Models::Organization::Workspaces::WorkspaceRateLimitValue::source]
+
+            def self.new:
+              (
+                type: :workspace | "workspace"
+              ) -> Anthropic::Organization::Workspaces::WorkspaceRateLimitWorkspaceSource
+              | (
+                type: :organization | "organization"
+              ) -> Anthropic::Organization::Workspaces::WorkspaceRateLimitOrganizationSource
+              | (
+                type: Anthropic::Models::Organization::Workspaces::WorkspaceRateLimitValue::Source::type_
+                | String
+              ) -> Anthropic::Models::Organization::Workspaces::WorkspaceRateLimitValue::source
+          end
+        end
+      end
+    end
+  end
+end

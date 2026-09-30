@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    class OrganizationRateLimitSkillsGroup = Organization::OrganizationRateLimitSkillsGroup
+
+    module Organization
+      type organization_rate_limit_skills_group = { id: String, type: :skills }
+
+      class OrganizationRateLimitSkillsGroup < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor type: :skills
+
+        def initialize: (id: String, ?type: :skills) -> void
+
+        def to_hash: -> { id: String, type: :skills }
+      end
+    end
+  end
+end

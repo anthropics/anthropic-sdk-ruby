@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    module Organization
+      module Federation
+        module Rules
+          type workspace_add_params =
+            { federation_rule_id: String, workspace_id: String }
+            & Anthropic::Internal::Type::request_parameters
+
+          class WorkspaceAddParams < Anthropic::Internal::Type::BaseModel
+            extend Anthropic::Internal::Type::RequestParameters::Converter
+            include Anthropic::Internal::Type::RequestParameters
+
+            attr_accessor federation_rule_id: String
+
+            attr_accessor workspace_id: String
+
+            def initialize: (
+              federation_rule_id: String,
+              workspace_id: String,
+              ?request_options: Anthropic::request_opts
+            ) -> void
+
+            def to_hash: -> {
+              federation_rule_id: String,
+              workspace_id: String,
+              request_options: Anthropic::RequestOptions
+            }
+          end
+        end
+      end
+    end
+  end
+end
