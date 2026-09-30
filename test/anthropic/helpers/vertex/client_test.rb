@@ -2,11 +2,14 @@
 
 require_relative "../../test_helper"
 require_relative "../support/platform_client_env"
+require_relative "../support/platform_client_timeout"
+require "googleauth"
 
 class Anthropic::Test::VertexClientTest < Minitest::Test
   extend Minitest::Serial
   include WebMock::API
   include Anthropic::Test::PlatformClientEnv
+  include Anthropic::Test::PlatformClientTimeout
 
   i_suck_and_my_tests_are_order_dependent!
 
@@ -452,6 +455,19 @@ class Anthropic::Test::VertexClientTest < Minitest::Test
   def test_skills_raises_not_implemented
     client = Anthropic::VertexClient.new(region: "us-east5", project_id: "proj")
     assert_raises(NotImplementedError) { client.skills }
+  end
+
+  def test_long_request_check_applies_unless_timeout_is_passed
+    uri = "https://us-east5-aiplatform.googleapis.com/v1/projects/proj/locations/us-east5/" \
+          "publishers/anthropic/models/m:rawPredict"
+    creds = Object.new
+    creds.define_singleton_method(:apply) { _1.merge("authorization" => "Bearer tok") }
+
+    Google::Auth.stub(:get_application_default, creds) do
+      assert_long_request_check_unless_timeout_passed(uri) do |kw|
+        Anthropic::VertexClient.new(region: "us-east5", project_id: "proj", **kw)
+      end
+    end
   end
 
   # The 1p config store (`~/.config/anthropic`, `ANTHROPIC_CONFIG_DIR`) must

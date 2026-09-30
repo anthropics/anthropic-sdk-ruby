@@ -82,6 +82,20 @@ class Anthropic::Test::MessagesTimeoutTest < Minitest::Test
     assert_not_requested(:post, %r{http://localhost/v1/messages})
 
     client.messages.create(**PARAMS)
-    assert_equal([600.0], sent_timeouts)
+    client.beta.messages.create(**PARAMS)
+    assert_equal([600.0, 600.0], sent_timeouts)
+  end
+
+  def test_client_timeout_equal_to_the_default_still_counts_as_set
+    client = Anthropic::Client.new(
+      base_url: "http://localhost",
+      api_key: "my-anthropic-api-key",
+      timeout: 600
+    )
+
+    client.messages.create(**PARAMS, max_tokens: 128_000)
+    client.beta.messages.create(**PARAMS, max_tokens: 128_000)
+
+    assert_equal([600.0, 600.0], sent_timeouts)
   end
 end

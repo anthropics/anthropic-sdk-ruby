@@ -2,12 +2,14 @@
 
 require_relative "../../test_helper"
 require_relative "../support/platform_client_env"
+require_relative "../support/platform_client_timeout"
 require "googleauth"
 
 class Anthropic::Test::GoogleCloudClientTest < Minitest::Test
   extend Minitest::Serial
   include WebMock::API
   include Anthropic::Test::PlatformClientEnv
+  include Anthropic::Test::PlatformClientTimeout
 
   i_suck_and_my_tests_are_order_dependent!
 
@@ -490,6 +492,10 @@ class Anthropic::Test::GoogleCloudClientTest < Minitest::Test
   def test_webhook_key_env_default
     ENV["ANTHROPIC_WEBHOOK_SIGNING_KEY"] = "whsec_fake_env_value"
     assert_equal("whsec_fake_env_value", make_client.webhook_key)
+  end
+
+  def test_long_request_check_applies_unless_timeout_is_passed
+    assert_long_request_check_unless_timeout_passed("#{derived_base_url}/v1/messages") { make_client(**_1) }
   end
 
   # ---------------------------------------------------------------------------

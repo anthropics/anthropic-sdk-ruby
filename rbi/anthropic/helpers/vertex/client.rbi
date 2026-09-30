@@ -76,7 +76,7 @@ module Anthropic
             project_id: T.nilable(String),
             base_url: T.nilable(String),
             max_retries: Integer,
-            timeout: Float,
+            timeout: T.nilable(Float),
             initial_retry_delay: Float,
             max_retry_delay: Float,
             middleware: T.nilable(Anthropic::Middleware::EntryOrArray)
@@ -87,7 +87,9 @@ module Anthropic
           project_id: ENV["ANTHROPIC_VERTEX_PROJECT_ID"],
           base_url: nil,
           max_retries: Anthropic::Client::DEFAULT_MAX_RETRIES,
-          timeout: Anthropic::Client::DEFAULT_TIMEOUT_IN_SECONDS,
+          # Request timeout in seconds. Defaults to
+          # `Anthropic::Client::DEFAULT_TIMEOUT_IN_SECONDS` when `nil`.
+          timeout: nil,
           initial_retry_delay: Anthropic::Client::DEFAULT_INITIAL_RETRY_DELAY,
           max_retry_delay: Anthropic::Client::DEFAULT_MAX_RETRY_DELAY,
           # Per-attempt HTTP around-middleware. Middleware sees the canonical

@@ -117,7 +117,7 @@ module Anthropic
 
           unwrap = ->(raw) { Anthropic::Helpers::Messages.parse_input_schemas!(raw, tools:, models:) }
 
-          if options.empty? && @client.timeout == Anthropic::Client::DEFAULT_TIMEOUT_IN_SECONDS
+          if options.empty? && !@client.timeout_overridden?
             model = parsed[:model]&.to_sym
             max_tokens = parsed[:max_tokens].to_i
             timeout = @client.calculate_nonstreaming_timeout(

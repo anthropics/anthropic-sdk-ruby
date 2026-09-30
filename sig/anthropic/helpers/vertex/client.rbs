@@ -44,7 +44,7 @@ module Anthropic
           project_id: String?,
           base_url: String?,
           max_retries: Integer,
-          timeout: Float,
+          timeout: Float?,
           initial_retry_delay: Float,
           max_retry_delay: Float,
           middleware: Anthropic::Middleware::entry_or_array?

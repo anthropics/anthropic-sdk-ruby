@@ -81,7 +81,7 @@ module Anthropic
             aws_region: T.nilable(String),
             base_url: T.nilable(String),
             max_retries: Integer,
-            timeout: Float,
+            timeout: T.nilable(Float),
             initial_retry_delay: Float,
             max_retry_delay: Float,
             aws_access_key: T.nilable(String),
@@ -96,7 +96,9 @@ module Anthropic
           aws_region: nil,
           base_url: nil,
           max_retries: Anthropic::Client::DEFAULT_MAX_RETRIES,
-          timeout: Anthropic::Client::DEFAULT_TIMEOUT_IN_SECONDS,
+          # Request timeout in seconds. Defaults to
+          # `Anthropic::Client::DEFAULT_TIMEOUT_IN_SECONDS` when `nil`.
+          timeout: nil,
           initial_retry_delay: Anthropic::Client::DEFAULT_INITIAL_RETRY_DELAY,
           max_retry_delay: Anthropic::Client::DEFAULT_MAX_RETRY_DELAY,
           aws_access_key: nil,

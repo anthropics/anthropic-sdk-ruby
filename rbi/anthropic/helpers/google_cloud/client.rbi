@@ -54,7 +54,7 @@ module Anthropic
             token_provider: T.nilable(T.proc.returns(String)),
             skip_auth: T::Boolean,
             max_retries: Integer,
-            timeout: Float,
+            timeout: T.nilable(Float),
             initial_retry_delay: Float,
             max_retry_delay: Float,
             middleware: T.nilable(Anthropic::Middleware::EntryOrArray)
@@ -69,7 +69,9 @@ module Anthropic
           token_provider: nil,
           skip_auth: false,
           max_retries: Anthropic::Client::DEFAULT_MAX_RETRIES,
-          timeout: Anthropic::Client::DEFAULT_TIMEOUT_IN_SECONDS,
+          # Request timeout in seconds. Defaults to
+          # `Anthropic::Client::DEFAULT_TIMEOUT_IN_SECONDS` when `nil`.
+          timeout: nil,
           initial_retry_delay: Anthropic::Client::DEFAULT_INITIAL_RETRY_DELAY,
           max_retry_delay: Anthropic::Client::DEFAULT_MAX_RETRY_DELAY,
           # Per-attempt HTTP around-middleware. The Google bearer is applied

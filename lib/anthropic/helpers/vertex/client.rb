@@ -31,7 +31,8 @@ module Anthropic
         #
         # @param max_retries [Integer] The maximum number of times to retry a request if it fails
         #
-        # @param timeout [Float] The number of seconds to wait for a response before timing out
+        # @param timeout [Float, nil] Request timeout in seconds. Defaults to
+        #   `Anthropic::Client::DEFAULT_TIMEOUT_IN_SECONDS` when `nil`.
         #
         # @param initial_retry_delay [Float] The number of seconds to wait before retrying a request
         #
@@ -47,7 +48,7 @@ module Anthropic
           project_id: ENV["ANTHROPIC_VERTEX_PROJECT_ID"],
           base_url: nil,
           max_retries: DEFAULT_MAX_RETRIES,
-          timeout: DEFAULT_TIMEOUT_IN_SECONDS,
+          timeout: nil,
           initial_retry_delay: DEFAULT_INITIAL_RETRY_DELAY,
           max_retry_delay: DEFAULT_MAX_RETRY_DELAY,
           middleware: nil
