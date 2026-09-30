@@ -260,6 +260,7 @@ module Anthropic
               type: :"session.status_idle" | "session.status_idle",
               id: String,
               processed_at: Time,
+              stop_details: Anthropic::Beta::Sessions::BetaManagedAgentsSessionRefusalStopDetails?,
               stop_reason: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent::stop_reason
             ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent
             | (
@@ -344,6 +345,7 @@ module Anthropic
               agent_name: String,
               processed_at: Time,
               session_thread_id: String,
+              stop_details: Anthropic::Beta::Sessions::BetaManagedAgentsSessionRefusalStopDetails?,
               stop_reason: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::stop_reason
             ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent
             | (
@@ -434,6 +436,7 @@ module Anthropic
               ?to_session_thread_id: String,
               ?to_agent_name: String?,
               ?error: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::error,
+              ?stop_details: Anthropic::Beta::Sessions::BetaManagedAgentsSessionRefusalStopDetails?,
               ?stop_reason: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent::stop_reason
               | Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::stop_reason,
               ?agent_name: String,

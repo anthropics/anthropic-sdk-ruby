@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_session_refusal = { type: :refusal }
+
+        class BetaManagedAgentsSessionRefusal < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :refusal
+
+          def initialize: (?type: :refusal) -> void
+
+          def to_hash: -> { type: :refusal }
+        end
+      end
+    end
+  end
+end

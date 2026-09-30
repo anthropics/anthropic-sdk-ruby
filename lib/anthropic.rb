@@ -1009,6 +1009,8 @@ require_relative "anthropic/models/beta/sessions/beta_managed_agents_session_end
 require_relative "anthropic/models/beta/sessions/beta_managed_agents_session_error_event"
 require_relative "anthropic/models/beta/sessions/beta_managed_agents_session_event"
 require_relative "anthropic/models/beta/sessions/beta_managed_agents_session_event_type"
+require_relative "anthropic/models/beta/sessions/beta_managed_agents_session_refusal"
+require_relative "anthropic/models/beta/sessions/beta_managed_agents_session_refusal_stop_details"
 require_relative "anthropic/models/beta/sessions/beta_managed_agents_session_requires_action"
 require_relative "anthropic/models/beta/sessions/beta_managed_agents_session_resource"
 require_relative "anthropic/models/beta/sessions/beta_managed_agents_session_retries_exhausted"

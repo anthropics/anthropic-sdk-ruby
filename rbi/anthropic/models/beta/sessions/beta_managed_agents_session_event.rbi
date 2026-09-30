@@ -336,12 +336,17 @@ module Anthropic
                   Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutError::OrHash,
                   Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCloneError::OrHash
                 ),
+              stop_details:
+                T.nilable(
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionRefusalStopDetails::OrHash
+                ),
               stop_reason:
                 T.any(
                   Anthropic::Beta::Sessions::BetaManagedAgentsSessionEndTurn::OrHash,
                   Anthropic::Beta::Sessions::BetaManagedAgentsSessionRequiresAction::OrHash,
                   Anthropic::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionBudgetReached::OrHash
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionBudgetReached::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionRefusal::OrHash
                 ),
               agent_name: String,
               iteration: Integer,
@@ -435,6 +440,9 @@ module Anthropic
             # primary agent.
             to_agent_name: nil,
             error: nil,
+            # Structured information about why the session stopped. `null` when there is
+            # nothing more to report.
+            stop_details: nil,
             stop_reason: nil,
             # Name of the callable agent the thread runs.
             agent_name: nil,
