@@ -23,7 +23,7 @@ module Anthropic
             # stored.
             sig do
               returns(
-                Anthropic::Beta::Organization::Plugins::BetaPluginInstallationSetting::InstallationPreference::Variants
+                Anthropic::Beta::Organization::Plugins::BetaPluginInstallationSetting::InstallationPreference::TaggedSymbol
               )
             end
             attr_accessor :installation_preference
@@ -56,10 +56,7 @@ module Anthropic
               params(
                 created_at: Time,
                 installation_preference:
-                  T.any(
-                    Anthropic::Beta::Organization::Plugins::BetaPluginInstallationSetting::InstallationPreference::OrSymbol,
-                    String
-                  ),
+                  Anthropic::Beta::Organization::Plugins::BetaPluginInstallationSetting::InstallationPreference::OrSymbol,
                 plugin_id: String,
                 target:
                   T.any(
@@ -96,7 +93,7 @@ module Anthropic
                 {
                   created_at: Time,
                   installation_preference:
-                    Anthropic::Beta::Organization::Plugins::BetaPluginInstallationSetting::InstallationPreference::Variants,
+                    Anthropic::Beta::Organization::Plugins::BetaPluginInstallationSetting::InstallationPreference::TaggedSymbol,
                   plugin_id: String,
                   target:
                     Anthropic::Beta::Organization::Plugins::BetaPluginInstallationSetting::Target::Variants,
@@ -112,25 +109,7 @@ module Anthropic
             # `available`, `not_available`; a value this API does not yet name is returned as
             # stored.
             module InstallationPreference
-              extend Anthropic::Internal::Type::Union
-
-              Variants =
-                T.type_alias do
-                  T.any(
-                    Anthropic::Beta::Organization::Plugins::BetaPluginInstallationSetting::InstallationPreference::TaggedSymbol,
-                    String
-                  )
-                end
-
-              sig do
-                override.returns(
-                  T::Array[
-                    Anthropic::Beta::Organization::Plugins::BetaPluginInstallationSetting::InstallationPreference::Variants
-                  ]
-                )
-              end
-              def self.variants
-              end
+              extend Anthropic::Internal::Type::Enum
 
               TaggedSymbol =
                 T.type_alias do
@@ -161,6 +140,16 @@ module Anthropic
                   :required,
                   Anthropic::Beta::Organization::Plugins::BetaPluginInstallationSetting::InstallationPreference::TaggedSymbol
                 )
+
+              sig do
+                override.returns(
+                  T::Array[
+                    Anthropic::Beta::Organization::Plugins::BetaPluginInstallationSetting::InstallationPreference::TaggedSymbol
+                  ]
+                )
+              end
+              def self.values
+              end
             end
 
             # Whose setting this is: `organization` (the Plugin's own organization-wide

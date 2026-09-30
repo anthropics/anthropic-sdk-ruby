@@ -28,7 +28,7 @@ module Anthropic
           sig do
             returns(
               T.nilable(
-                Anthropic::Beta::Organization::BetaPluginMarketplace::DefaultInstallationPreference::Variants
+                Anthropic::Beta::Organization::BetaPluginMarketplace::DefaultInstallationPreference::TaggedSymbol
               )
             )
           end
@@ -68,7 +68,7 @@ module Anthropic
           # this API does not yet name is returned as stored.
           sig do
             returns(
-              Anthropic::Beta::Organization::BetaPluginMarketplace::Source::Variants
+              Anthropic::Beta::Organization::BetaPluginMarketplace::Source::TaggedSymbol
             )
           end
           attr_accessor :source
@@ -81,7 +81,7 @@ module Anthropic
           sig do
             returns(
               T.nilable(
-                Anthropic::Beta::Organization::BetaPluginMarketplace::SyncStatus::Variants
+                Anthropic::Beta::Organization::BetaPluginMarketplace::SyncStatus::TaggedSymbol
               )
             )
           end
@@ -97,10 +97,7 @@ module Anthropic
               created_at: Time,
               default_installation_preference:
                 T.nilable(
-                  T.any(
-                    Anthropic::Beta::Organization::BetaPluginMarketplace::DefaultInstallationPreference::OrSymbol,
-                    String
-                  )
+                  Anthropic::Beta::Organization::BetaPluginMarketplace::DefaultInstallationPreference::OrSymbol
                 ),
               last_sync_ended_at: T.nilable(Time),
               last_sync_read_sha: T.nilable(String),
@@ -111,16 +108,10 @@ module Anthropic
                   Anthropic::Beta::Organization::BetaPluginOwnerUser::OrHash
                 ),
               source:
-                T.any(
-                  Anthropic::Beta::Organization::BetaPluginMarketplace::Source::OrSymbol,
-                  String
-                ),
+                Anthropic::Beta::Organization::BetaPluginMarketplace::Source::OrSymbol,
               sync_status:
                 T.nilable(
-                  T.any(
-                    Anthropic::Beta::Organization::BetaPluginMarketplace::SyncStatus::OrSymbol,
-                    String
-                  )
+                  Anthropic::Beta::Organization::BetaPluginMarketplace::SyncStatus::OrSymbol
                 ),
               type: Symbol
             ).returns(T.attached_class)
@@ -174,7 +165,7 @@ module Anthropic
                 created_at: Time,
                 default_installation_preference:
                   T.nilable(
-                    Anthropic::Beta::Organization::BetaPluginMarketplace::DefaultInstallationPreference::Variants
+                    Anthropic::Beta::Organization::BetaPluginMarketplace::DefaultInstallationPreference::TaggedSymbol
                   ),
                 last_sync_ended_at: T.nilable(Time),
                 last_sync_read_sha: T.nilable(String),
@@ -182,10 +173,10 @@ module Anthropic
                 owner:
                   Anthropic::Beta::Organization::BetaPluginMarketplace::Owner::Variants,
                 source:
-                  Anthropic::Beta::Organization::BetaPluginMarketplace::Source::Variants,
+                  Anthropic::Beta::Organization::BetaPluginMarketplace::Source::TaggedSymbol,
                 sync_status:
                   T.nilable(
-                    Anthropic::Beta::Organization::BetaPluginMarketplace::SyncStatus::Variants
+                    Anthropic::Beta::Organization::BetaPluginMarketplace::SyncStatus::TaggedSymbol
                   ),
                 type: Symbol
               }
@@ -199,25 +190,7 @@ module Anthropic
           # marketplace. One of `required`, `auto_install`, `available`, `not_available`; a
           # value this API does not yet name is returned as stored.
           module DefaultInstallationPreference
-            extend Anthropic::Internal::Type::Union
-
-            Variants =
-              T.type_alias do
-                T.any(
-                  Anthropic::Beta::Organization::BetaPluginMarketplace::DefaultInstallationPreference::TaggedSymbol,
-                  String
-                )
-              end
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Organization::BetaPluginMarketplace::DefaultInstallationPreference::Variants
-                ]
-              )
-            end
-            def self.variants
-            end
+            extend Anthropic::Internal::Type::Enum
 
             TaggedSymbol =
               T.type_alias do
@@ -248,6 +221,16 @@ module Anthropic
                 :required,
                 Anthropic::Beta::Organization::BetaPluginMarketplace::DefaultInstallationPreference::TaggedSymbol
               )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Anthropic::Beta::Organization::BetaPluginMarketplace::DefaultInstallationPreference::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
           end
 
           # The organization, or the member whose personal plugin marketplace it is.
@@ -331,25 +314,7 @@ module Anthropic
           # `directory` is Anthropic's own catalog, which this API does not list. A value
           # this API does not yet name is returned as stored.
           module Source
-            extend Anthropic::Internal::Type::Union
-
-            Variants =
-              T.type_alias do
-                T.any(
-                  Anthropic::Beta::Organization::BetaPluginMarketplace::Source::TaggedSymbol,
-                  String
-                )
-              end
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Organization::BetaPluginMarketplace::Source::Variants
-                ]
-              )
-            end
-            def self.variants
-            end
+            extend Anthropic::Internal::Type::Enum
 
             TaggedSymbol =
               T.type_alias do
@@ -385,6 +350,16 @@ module Anthropic
                 :public_git,
                 Anthropic::Beta::Organization::BetaPluginMarketplace::Source::TaggedSymbol
               )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Anthropic::Beta::Organization::BetaPluginMarketplace::Source::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
           end
 
           # Outcome of the plugin marketplace's most recent synchronization: one of
@@ -393,25 +368,7 @@ module Anthropic
           # until a synchronization is first attempted — so always for a `manual` plugin
           # marketplace.
           module SyncStatus
-            extend Anthropic::Internal::Type::Union
-
-            Variants =
-              T.type_alias do
-                T.any(
-                  Anthropic::Beta::Organization::BetaPluginMarketplace::SyncStatus::TaggedSymbol,
-                  String
-                )
-              end
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Organization::BetaPluginMarketplace::SyncStatus::Variants
-                ]
-              )
-            end
-            def self.variants
-            end
+            extend Anthropic::Internal::Type::Enum
 
             TaggedSymbol =
               T.type_alias do
@@ -452,6 +409,16 @@ module Anthropic
                 :success,
                 Anthropic::Beta::Organization::BetaPluginMarketplace::SyncStatus::TaggedSymbol
               )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Anthropic::Beta::Organization::BetaPluginMarketplace::SyncStatus::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
           end
         end
       end

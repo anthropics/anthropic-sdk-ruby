@@ -85,11 +85,9 @@ module Anthropic
           #   which has shares instead. One of `required`, `auto_install`, `available`,
           #   `not_available`; a value this API does not yet name is returned as stored.
           #
-          #   @return [Symbol, String, Anthropic::Models::Beta::Organization::BetaPlugin::OrganizationInstallationPreference, nil]
+          #   @return [Symbol, Anthropic::Models::Beta::Organization::BetaPlugin::OrganizationInstallationPreference, nil]
           required :organization_installation_preference,
-                   union: -> {
-                     Anthropic::Beta::Organization::BetaPlugin::OrganizationInstallationPreference
-                   },
+                   enum: -> { Anthropic::Beta::Organization::BetaPlugin::OrganizationInstallationPreference },
                    nil?: true
 
           # @!attribute organization_installation_preference_inherited
@@ -169,7 +167,7 @@ module Anthropic
           #
           #   @param name [String] Lowercase identifier, unique within its plugin marketplace. Fixed for an organiz
           #
-          #   @param organization_installation_preference [Symbol, String, Anthropic::Models::Beta::Organization::BetaPlugin::OrganizationInstallationPreference, nil] Organization-owned Plugin: the organization-wide installation setting every memb
+          #   @param organization_installation_preference [Symbol, Anthropic::Models::Beta::Organization::BetaPlugin::OrganizationInstallationPreference, nil] Organization-owned Plugin: the organization-wide installation setting every memb
           #
           #   @param organization_installation_preference_inherited [Boolean, nil] Organization-owned Plugin: true while it has no organization-wide setting of its
           #
@@ -248,33 +246,15 @@ module Anthropic
           #
           # @see Anthropic::Models::Beta::Organization::BetaPlugin#organization_installation_preference
           module OrganizationInstallationPreference
-            extend Anthropic::Internal::Type::Union
-
-            variant const: -> { Anthropic::Models::Beta::Organization::BetaPlugin::OrganizationInstallationPreference::AUTO_INSTALL }
-
-            variant const: -> { Anthropic::Models::Beta::Organization::BetaPlugin::OrganizationInstallationPreference::AVAILABLE }
-
-            variant const: -> { Anthropic::Models::Beta::Organization::BetaPlugin::OrganizationInstallationPreference::NOT_AVAILABLE }
-
-            variant const: -> { Anthropic::Models::Beta::Organization::BetaPlugin::OrganizationInstallationPreference::REQUIRED }
-
-            variant String
-
-            # @!method self.variants
-            #   @return [Array(Symbol, String)]
-
-            define_sorbet_constant!(:Variants) do
-              T.type_alias { T.any(Anthropic::Beta::Organization::BetaPlugin::OrganizationInstallationPreference::TaggedSymbol, String) }
-            end
-
-            # @!group
+            extend Anthropic::Internal::Type::Enum
 
             AUTO_INSTALL = :auto_install
             AVAILABLE = :available
             NOT_AVAILABLE = :not_available
             REQUIRED = :required
 
-            # @!endgroup
+            # @!method self.values
+            #   @return [Array<Symbol>]
           end
 
           # Who owns the Plugin: the organization, or the member whose personal plugin

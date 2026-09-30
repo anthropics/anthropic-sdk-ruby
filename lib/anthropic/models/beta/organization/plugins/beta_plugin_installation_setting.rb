@@ -18,9 +18,9 @@ module Anthropic
             #   `available`, `not_available`; a value this API does not yet name is returned as
             #   stored.
             #
-            #   @return [Symbol, String, Anthropic::Models::Beta::Organization::Plugins::BetaPluginInstallationSetting::InstallationPreference]
+            #   @return [Symbol, Anthropic::Models::Beta::Organization::Plugins::BetaPluginInstallationSetting::InstallationPreference]
             required :installation_preference,
-                     union: -> { Anthropic::Beta::Organization::Plugins::BetaPluginInstallationSetting::InstallationPreference }
+                     enum: -> { Anthropic::Beta::Organization::Plugins::BetaPluginInstallationSetting::InstallationPreference }
 
             # @!attribute plugin_id
             #   The Plugin's ID.
@@ -59,7 +59,7 @@ module Anthropic
             #
             #   @param created_at [Time] When the target was first given a setting for this Plugin.
             #
-            #   @param installation_preference [Symbol, String, Anthropic::Models::Beta::Organization::Plugins::BetaPluginInstallationSetting::InstallationPreference] The setting the target holds for this Plugin. One of `required`, `auto_install`,
+            #   @param installation_preference [Symbol, Anthropic::Models::Beta::Organization::Plugins::BetaPluginInstallationSetting::InstallationPreference] The setting the target holds for this Plugin. One of `required`, `auto_install`,
             #
             #   @param plugin_id [String] The Plugin's ID.
             #
@@ -75,38 +75,15 @@ module Anthropic
             #
             # @see Anthropic::Models::Beta::Organization::Plugins::BetaPluginInstallationSetting#installation_preference
             module InstallationPreference
-              extend Anthropic::Internal::Type::Union
-
-              variant const: -> { Anthropic::Models::Beta::Organization::Plugins::BetaPluginInstallationSetting::InstallationPreference::AUTO_INSTALL }
-
-              variant const: -> { Anthropic::Models::Beta::Organization::Plugins::BetaPluginInstallationSetting::InstallationPreference::AVAILABLE }
-
-              variant const: -> { Anthropic::Models::Beta::Organization::Plugins::BetaPluginInstallationSetting::InstallationPreference::NOT_AVAILABLE }
-
-              variant const: -> { Anthropic::Models::Beta::Organization::Plugins::BetaPluginInstallationSetting::InstallationPreference::REQUIRED }
-
-              variant String
-
-              # @!method self.variants
-              #   @return [Array(Symbol, String)]
-
-              define_sorbet_constant!(:Variants) do
-                T.type_alias do
-                  T.any(
-                    Anthropic::Beta::Organization::Plugins::BetaPluginInstallationSetting::InstallationPreference::TaggedSymbol,
-                    String
-                  )
-                end
-              end
-
-              # @!group
+              extend Anthropic::Internal::Type::Enum
 
               AUTO_INSTALL = :auto_install
               AVAILABLE = :available
               NOT_AVAILABLE = :not_available
               REQUIRED = :required
 
-              # @!endgroup
+              # @!method self.values
+              #   @return [Array<Symbol>]
             end
 
             # Whose setting this is: `organization` (the Plugin's own organization-wide

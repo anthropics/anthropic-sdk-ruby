@@ -45,17 +45,17 @@ module Anthropic
             }
 
             type installation_preference =
-              :auto_install | :available | :not_available | :required | String
+              :auto_install | :available | :not_available | :required
 
             module InstallationPreference
-              extend Anthropic::Internal::Type::Union
-
-              def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::Plugins::BetaPluginInstallationSetting::installation_preference]
+              extend Anthropic::Internal::Type::Enum
 
               AUTO_INSTALL: :auto_install
               AVAILABLE: :available
               NOT_AVAILABLE: :not_available
               REQUIRED: :required
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Plugins::BetaPluginInstallationSetting::installation_preference]
             end
 
             type target =

@@ -24,9 +24,9 @@ module Anthropic
           #   marketplace. One of `required`, `auto_install`, `available`, `not_available`; a
           #   value this API does not yet name is returned as stored.
           #
-          #   @return [Symbol, String, Anthropic::Models::Beta::Organization::BetaPluginMarketplace::DefaultInstallationPreference, nil]
+          #   @return [Symbol, Anthropic::Models::Beta::Organization::BetaPluginMarketplace::DefaultInstallationPreference, nil]
           required :default_installation_preference,
-                   union: -> {
+                   enum: -> {
                      Anthropic::Beta::Organization::BetaPluginMarketplace::DefaultInstallationPreference
                    },
                    nil?: true
@@ -69,8 +69,8 @@ module Anthropic
           #   `directory` is Anthropic's own catalog, which this API does not list. A value
           #   this API does not yet name is returned as stored.
           #
-          #   @return [Symbol, String, Anthropic::Models::Beta::Organization::BetaPluginMarketplace::Source]
-          required :source, union: -> { Anthropic::Beta::Organization::BetaPluginMarketplace::Source }
+          #   @return [Symbol, Anthropic::Models::Beta::Organization::BetaPluginMarketplace::Source]
+          required :source, enum: -> { Anthropic::Beta::Organization::BetaPluginMarketplace::Source }
 
           # @!attribute sync_status
           #   Outcome of the plugin marketplace's most recent synchronization: one of
@@ -79,9 +79,9 @@ module Anthropic
           #   until a synchronization is first attempted — so always for a `manual` plugin
           #   marketplace.
           #
-          #   @return [Symbol, String, Anthropic::Models::Beta::Organization::BetaPluginMarketplace::SyncStatus, nil]
+          #   @return [Symbol, Anthropic::Models::Beta::Organization::BetaPluginMarketplace::SyncStatus, nil]
           required :sync_status,
-                   union: -> { Anthropic::Beta::Organization::BetaPluginMarketplace::SyncStatus },
+                   enum: -> { Anthropic::Beta::Organization::BetaPluginMarketplace::SyncStatus },
                    nil?: true
 
           # @!attribute type
@@ -98,7 +98,7 @@ module Anthropic
           #
           #   @param created_at [Time] RFC 3339.
           #
-          #   @param default_installation_preference [Symbol, String, Anthropic::Models::Beta::Organization::BetaPluginMarketplace::DefaultInstallationPreference, nil] Organization plugin marketplace: the organization-wide setting every Plugin in i
+          #   @param default_installation_preference [Symbol, Anthropic::Models::Beta::Organization::BetaPluginMarketplace::DefaultInstallationPreference, nil] Organization plugin marketplace: the organization-wide setting every Plugin in i
           #
           #   @param last_sync_ended_at [Time, nil] RFC 3339. When the most recent synchronization attempt to finish did so, whateve
           #
@@ -108,9 +108,9 @@ module Anthropic
           #
           #   @param owner [Anthropic::Models::Beta::Organization::BetaPluginOwnerOrganization, Anthropic::Models::Beta::Organization::BetaPluginOwnerUser] The organization, or the member whose personal plugin marketplace it is.
           #
-          #   @param source [Symbol, String, Anthropic::Models::Beta::Organization::BetaPluginMarketplace::Source] Where the plugin marketplace's Plugins come from: `manual` when they are uploade
+          #   @param source [Symbol, Anthropic::Models::Beta::Organization::BetaPluginMarketplace::Source] Where the plugin marketplace's Plugins come from: `manual` when they are uploade
           #
-          #   @param sync_status [Symbol, String, Anthropic::Models::Beta::Organization::BetaPluginMarketplace::SyncStatus, nil] Outcome of the plugin marketplace's most recent synchronization: one of `success
+          #   @param sync_status [Symbol, Anthropic::Models::Beta::Organization::BetaPluginMarketplace::SyncStatus, nil] Outcome of the plugin marketplace's most recent synchronization: one of `success
           #
           #   @param type [Symbol, :plugin_marketplace] Always `plugin_marketplace`.
 
@@ -121,38 +121,15 @@ module Anthropic
           #
           # @see Anthropic::Models::Beta::Organization::BetaPluginMarketplace#default_installation_preference
           module DefaultInstallationPreference
-            extend Anthropic::Internal::Type::Union
-
-            variant const: -> { Anthropic::Models::Beta::Organization::BetaPluginMarketplace::DefaultInstallationPreference::AUTO_INSTALL }
-
-            variant const: -> { Anthropic::Models::Beta::Organization::BetaPluginMarketplace::DefaultInstallationPreference::AVAILABLE }
-
-            variant const: -> { Anthropic::Models::Beta::Organization::BetaPluginMarketplace::DefaultInstallationPreference::NOT_AVAILABLE }
-
-            variant const: -> { Anthropic::Models::Beta::Organization::BetaPluginMarketplace::DefaultInstallationPreference::REQUIRED }
-
-            variant String
-
-            # @!method self.variants
-            #   @return [Array(Symbol, String)]
-
-            define_sorbet_constant!(:Variants) do
-              T.type_alias do
-                T.any(
-                  Anthropic::Beta::Organization::BetaPluginMarketplace::DefaultInstallationPreference::TaggedSymbol,
-                  String
-                )
-              end
-            end
-
-            # @!group
+            extend Anthropic::Internal::Type::Enum
 
             AUTO_INSTALL = :auto_install
             AVAILABLE = :available
             NOT_AVAILABLE = :not_available
             REQUIRED = :required
 
-            # @!endgroup
+            # @!method self.values
+            #   @return [Array<Symbol>]
           end
 
           # The organization, or the member whose personal plugin marketplace it is.
@@ -211,28 +188,7 @@ module Anthropic
           #
           # @see Anthropic::Models::Beta::Organization::BetaPluginMarketplace#source
           module Source
-            extend Anthropic::Internal::Type::Union
-
-            variant const: -> { Anthropic::Models::Beta::Organization::BetaPluginMarketplace::Source::DIRECTORY }
-
-            variant const: -> { Anthropic::Models::Beta::Organization::BetaPluginMarketplace::Source::GITHUB }
-
-            variant const: -> { Anthropic::Models::Beta::Organization::BetaPluginMarketplace::Source::GITLAB }
-
-            variant const: -> { Anthropic::Models::Beta::Organization::BetaPluginMarketplace::Source::MANUAL }
-
-            variant const: -> { Anthropic::Models::Beta::Organization::BetaPluginMarketplace::Source::PUBLIC_GIT }
-
-            variant String
-
-            # @!method self.variants
-            #   @return [Array(Symbol, String)]
-
-            define_sorbet_constant!(:Variants) do
-              T.type_alias { T.any(Anthropic::Beta::Organization::BetaPluginMarketplace::Source::TaggedSymbol, String) }
-            end
-
-            # @!group
+            extend Anthropic::Internal::Type::Enum
 
             DIRECTORY = :directory
             GITHUB = :github
@@ -240,7 +196,8 @@ module Anthropic
             MANUAL = :manual
             PUBLIC_GIT = :public_git
 
-            # @!endgroup
+            # @!method self.values
+            #   @return [Array<Symbol>]
           end
 
           # Outcome of the plugin marketplace's most recent synchronization: one of
@@ -251,30 +208,7 @@ module Anthropic
           #
           # @see Anthropic::Models::Beta::Organization::BetaPluginMarketplace#sync_status
           module SyncStatus
-            extend Anthropic::Internal::Type::Union
-
-            variant const: -> { Anthropic::Models::Beta::Organization::BetaPluginMarketplace::SyncStatus::FAILED_AUTH }
-
-            variant const: -> { Anthropic::Models::Beta::Organization::BetaPluginMarketplace::SyncStatus::FAILED_CONTENT }
-
-            variant const: -> { Anthropic::Models::Beta::Organization::BetaPluginMarketplace::SyncStatus::FAILED_LIMITS }
-
-            variant const: -> { Anthropic::Models::Beta::Organization::BetaPluginMarketplace::SyncStatus::FAILED_TRANSIENT }
-
-            variant const: -> { Anthropic::Models::Beta::Organization::BetaPluginMarketplace::SyncStatus::IN_PROGRESS }
-
-            variant const: -> { Anthropic::Models::Beta::Organization::BetaPluginMarketplace::SyncStatus::SUCCESS }
-
-            variant String
-
-            # @!method self.variants
-            #   @return [Array(Symbol, String)]
-
-            define_sorbet_constant!(:Variants) do
-              T.type_alias { T.any(Anthropic::Beta::Organization::BetaPluginMarketplace::SyncStatus::TaggedSymbol, String) }
-            end
-
-            # @!group
+            extend Anthropic::Internal::Type::Enum
 
             FAILED_AUTH = :failed_auth
             FAILED_CONTENT = :failed_content
@@ -283,7 +217,8 @@ module Anthropic
             IN_PROGRESS = :in_progress
             SUCCESS = :success
 
-            # @!endgroup
+            # @!method self.values
+            #   @return [Array<Symbol>]
           end
         end
       end

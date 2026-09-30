@@ -64,17 +64,17 @@ module Anthropic
           }
 
           type default_installation_preference =
-            :auto_install | :available | :not_available | :required | String
+            :auto_install | :available | :not_available | :required
 
           module DefaultInstallationPreference
-            extend Anthropic::Internal::Type::Union
-
-            def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::BetaPluginMarketplace::default_installation_preference]
+            extend Anthropic::Internal::Type::Enum
 
             AUTO_INSTALL: :auto_install
             AVAILABLE: :available
             NOT_AVAILABLE: :not_available
             REQUIRED: :required
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaPluginMarketplace::default_installation_preference]
           end
 
           type owner =
@@ -112,19 +112,18 @@ module Anthropic
               ) -> Anthropic::Models::Beta::Organization::BetaPluginMarketplace::owner
           end
 
-          type source =
-            :directory | :github | :gitlab | :manual | :public_git | String
+          type source = :directory | :github | :gitlab | :manual | :public_git
 
           module Source
-            extend Anthropic::Internal::Type::Union
-
-            def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::BetaPluginMarketplace::source]
+            extend Anthropic::Internal::Type::Enum
 
             DIRECTORY: :directory
             GITHUB: :github
             GITLAB: :gitlab
             MANUAL: :manual
             PUBLIC_GIT: :public_git
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaPluginMarketplace::source]
           end
 
           type sync_status =
@@ -134,12 +133,9 @@ module Anthropic
             | :failed_transient
             | :in_progress
             | :success
-            | String
 
           module SyncStatus
-            extend Anthropic::Internal::Type::Union
-
-            def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::BetaPluginMarketplace::sync_status]
+            extend Anthropic::Internal::Type::Enum
 
             FAILED_AUTH: :failed_auth
             FAILED_CONTENT: :failed_content
@@ -147,6 +143,8 @@ module Anthropic
             FAILED_TRANSIENT: :failed_transient
             IN_PROGRESS: :in_progress
             SUCCESS: :success
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaPluginMarketplace::sync_status]
           end
         end
       end
