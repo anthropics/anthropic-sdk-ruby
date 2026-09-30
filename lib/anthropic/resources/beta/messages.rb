@@ -125,8 +125,6 @@ module Anthropic
               Anthropic::Client::MODEL_NONSTREAMING_TOKENS[model]
             )
             options = {timeout: timeout}
-          else
-            options = {timeout: 600, **options}
           end
 
           header_params =
@@ -256,7 +254,7 @@ module Anthropic
             body: parsed.except(*header_params.keys),
             stream: Anthropic::Internal::Stream,
             model: Anthropic::Beta::BetaRawMessageStreamEvent,
-            options: {timeout: 600, **options}
+            options: options
           )
           Anthropic::Streaming::MessageStream.new(raw_stream:, tools:, models:)
         end
