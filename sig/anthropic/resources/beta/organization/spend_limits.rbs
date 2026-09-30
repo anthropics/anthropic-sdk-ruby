@@ -12,6 +12,14 @@ module Anthropic
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Beta::Organization::BetaSpendLimit
 
+          def list: (
+            ?limit: Integer,
+            ?page: String?,
+            ?scope_type: ::Array[Anthropic::Models::Beta::Organization::SpendLimitListParams::scope_type]?,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Organization::BetaSpendLimit]
+
           def delete: (
             String spend_limit_id,
             ?request_options: Anthropic::request_opts

@@ -24,7 +24,7 @@ module Anthropic
             skip_auth: T::Boolean,
             base_url: T.nilable(String),
             max_retries: Integer,
-            timeout: Float,
+            timeout: T.nilable(Float),
             initial_retry_delay: Float,
             max_retry_delay: Float
           ).returns(T.attached_class)
@@ -39,7 +39,9 @@ module Anthropic
           skip_auth: false,
           base_url: nil,
           max_retries: Anthropic::Client::DEFAULT_MAX_RETRIES,
-          timeout: Anthropic::Client::DEFAULT_TIMEOUT_IN_SECONDS,
+          # Request timeout in seconds. Defaults to
+          # `Anthropic::Client::DEFAULT_TIMEOUT_IN_SECONDS` when `nil`.
+          timeout: nil,
           initial_retry_delay: Anthropic::Client::DEFAULT_INITIAL_RETRY_DELAY,
           max_retry_delay: Anthropic::Client::DEFAULT_MAX_RETRY_DELAY
         )

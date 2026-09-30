@@ -2,12 +2,14 @@
 
 require_relative "../../test_helper"
 require_relative "../support/platform_client_env"
+require_relative "../support/platform_client_timeout"
 require "aws-sdk-core"
 
 class Anthropic::Test::AWSClientTest < Minitest::Test
   extend Minitest::Serial
   include WebMock::API
   include Anthropic::Test::PlatformClientEnv
+  include Anthropic::Test::PlatformClientTimeout
 
   PLATFORM_ENV_KEYS = %w[
     AWS_REGION
@@ -565,6 +567,12 @@ class Anthropic::Test::AWSClientTest < Minitest::Test
     with_env("ANTHROPIC_WEBHOOK_SIGNING_KEY" => "whsec_fake_env_value") do
       client = Anthropic::AWSClient.new(api_key: "sk-ant-xxx", workspace_id: "ws-xxx", base_url: "http://localhost")
       assert_equal("whsec_fake_env_value", client.webhook_key)
+    end
+  end
+
+  def test_long_request_check_applies_unless_timeout_is_passed
+    assert_long_request_check_unless_timeout_passed("http://localhost/v1/messages") do |kw|
+      Anthropic::AWSClient.new(skip_auth: true, base_url: "http://localhost", **kw)
     end
   end
 

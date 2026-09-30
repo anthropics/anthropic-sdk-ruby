@@ -75,7 +75,8 @@ module Anthropic
         # @param max_retries [Integer] Max number of retries to attempt after a
         #   failed retryable request.
         #
-        # @param timeout [Float]
+        # @param timeout [Float, nil] Request timeout in seconds. Defaults to
+        #   `Anthropic::Client::DEFAULT_TIMEOUT_IN_SECONDS` when `nil`.
         #
         # @param initial_retry_delay [Float]
         #
@@ -95,7 +96,7 @@ module Anthropic
           token_provider: nil,
           skip_auth: false,
           max_retries: self.class::DEFAULT_MAX_RETRIES,
-          timeout: self.class::DEFAULT_TIMEOUT_IN_SECONDS,
+          timeout: nil,
           initial_retry_delay: self.class::DEFAULT_INITIAL_RETRY_DELAY,
           max_retry_delay: self.class::DEFAULT_MAX_RETRY_DELAY,
           middleware: nil

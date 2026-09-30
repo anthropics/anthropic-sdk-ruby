@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 require_relative "../../test_helper"
+require_relative "../support/platform_client_timeout"
 
 class Anthropic::Test::BedrockClientTest < Minitest::Test
   extend Minitest::Serial
   include WebMock::API
+  include Anthropic::Test::PlatformClientTimeout
 
   def before_all
     super
@@ -560,6 +562,11 @@ class Anthropic::Test::BedrockClientTest < Minitest::Test
     assert_equal("whsec_fake_env_value", make_client.webhook_key)
   ensure
     original.nil? ? ENV.delete("ANTHROPIC_WEBHOOK_SIGNING_KEY") : ENV["ANTHROPIC_WEBHOOK_SIGNING_KEY"] = original
+  end
+
+  def test_long_request_check_applies_unless_timeout_is_passed
+    uri = "https://bedrock-runtime.us-east-1.amazonaws.com/model/m/invoke"
+    assert_long_request_check_unless_timeout_passed(uri) { make_client(**_1) }
   end
 
   # The Models API is not available on Bedrock — the resource must stay

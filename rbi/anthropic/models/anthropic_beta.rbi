@@ -215,6 +215,11 @@ module Anthropic
         T.let(:"mcp-client-2026-09-15", Anthropic::AnthropicBeta::TaggedSymbol)
       CE_PLUGINS_2026_09_01 =
         T.let(:"ce-plugins-2026-09-01", Anthropic::AnthropicBeta::TaggedSymbol)
+      SPEND_LIMIT_READS_2026_09_26 =
+        T.let(
+          :"spend-limit-reads-2026-09-26",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
     end
   end
 end

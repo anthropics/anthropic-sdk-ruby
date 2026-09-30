@@ -37,7 +37,7 @@ module Anthropic
           ?token_provider: (^-> String)?,
           ?skip_auth: bool,
           ?max_retries: Integer,
-          ?timeout: Float,
+          ?timeout: Float?,
           ?initial_retry_delay: Float,
           ?max_retry_delay: Float,
           ?middleware: Anthropic::Middleware::entry_or_array?

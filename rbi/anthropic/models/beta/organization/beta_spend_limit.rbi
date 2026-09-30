@@ -31,6 +31,12 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :currency
 
+          # Read-only. `false` when extra usage is switched off for this organization
+          # (`organization` limit) or for this member (`user` limit); `amount` is kept and
+          # applies again when it's switched back on. Always `true` for other limits.
+          sig { returns(T::Boolean) }
+          attr_accessor :is_enabled
+
           # Length of the window the limit resets over. `amount` caps spend within each
           # period.
           sig do
@@ -64,6 +70,7 @@ module Anthropic
               amount: T.nilable(String),
               created_at: Time,
               currency: String,
+              is_enabled: T::Boolean,
               period:
                 Anthropic::Beta::Organization::BetaSpendLimitPeriod::OrSymbol,
               scope:
@@ -90,6 +97,10 @@ module Anthropic
             created_at:,
             # ISO 4217 code of the organization's billing currency; the unit for `amount`.
             currency:,
+            # Read-only. `false` when extra usage is switched off for this organization
+            # (`organization` limit) or for this member (`user` limit); `amount` is kept and
+            # applies again when it's switched back on. Always `true` for other limits.
+            is_enabled:,
             # Length of the window the limit resets over. `amount` caps spend within each
             # period.
             period:,
@@ -110,6 +121,7 @@ module Anthropic
                 amount: T.nilable(String),
                 created_at: Time,
                 currency: String,
+                is_enabled: T::Boolean,
                 period:
                   Anthropic::Beta::Organization::BetaSpendLimitPeriod::TaggedSymbol,
                 scope:

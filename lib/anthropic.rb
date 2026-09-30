@@ -1008,6 +1008,7 @@ require_relative "anthropic/models/beta/organization/service_accounts/workspace_
 require_relative "anthropic/models/beta/organization/service_account_update_params"
 require_relative "anthropic/models/beta/organization/spend_limit_delete_params"
 require_relative "anthropic/models/beta/organization/spend_limit_delete_response"
+require_relative "anthropic/models/beta/organization/spend_limit_list_params"
 require_relative "anthropic/models/beta/organization/spend_limit_retrieve_params"
 require_relative "anthropic/models/beta/organization/spend_limits/beta_spend_limit_increase_request"
 require_relative "anthropic/models/beta/organization/spend_limits/beta_spend_limit_increase_request_status"

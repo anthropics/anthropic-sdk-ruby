@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
 require_relative "../../test_helper"
+require_relative "../support/platform_client_timeout"
 require "aws-sdk-core"
 require "tmpdir"
 
 class Anthropic::Test::BedrockMantleClientTest < Minitest::Test
   extend Minitest::Serial
   include WebMock::API
+  include Anthropic::Test::PlatformClientTimeout
 
   def before_all
     super
@@ -172,6 +174,12 @@ class Anthropic::Test::BedrockMantleClientTest < Minitest::Test
       auth = req.headers.fetch("Authorization")
       assert_match(/^AWS4-HMAC-SHA256/, auth)
       assert_match(/bedrock-mantle/, auth)
+    end
+  end
+
+  def test_long_request_check_applies_unless_timeout_is_passed
+    assert_long_request_check_unless_timeout_passed("http://localhost/v1/messages") do |kw|
+      Anthropic::BedrockMantleClient.new(skip_auth: true, base_url: "http://localhost", **kw)
     end
   end
 

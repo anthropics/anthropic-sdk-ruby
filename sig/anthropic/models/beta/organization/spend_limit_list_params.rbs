@@ -1,0 +1,72 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type spend_limit_list_params =
+          {
+            limit: Integer,
+            page: String?,
+            scope_type: ::Array[Anthropic::Models::Beta::Organization::SpendLimitListParams::scope_type]?,
+            betas: ::Array[Anthropic::Models::anthropic_beta]
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class SpendLimitListParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_reader limit: Integer?
+
+          def limit=: (Integer) -> Integer
+
+          attr_accessor page: String?
+
+          attr_accessor scope_type: ::Array[Anthropic::Models::Beta::Organization::SpendLimitListParams::scope_type]?
+
+          attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+          def betas=: (
+            ::Array[Anthropic::Models::anthropic_beta]
+          ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+          def initialize: (
+            ?limit: Integer,
+            ?page: String?,
+            ?scope_type: ::Array[Anthropic::Models::Beta::Organization::SpendLimitListParams::scope_type]?,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            limit: Integer,
+            page: String?,
+            scope_type: ::Array[Anthropic::Models::Beta::Organization::SpendLimitListParams::scope_type]?,
+            betas: ::Array[Anthropic::Models::anthropic_beta],
+            request_options: Anthropic::RequestOptions
+          }
+
+          type scope_type =
+            :organization
+            | :organization_service
+            | :rbac_group
+            | :seat_tier
+            | :user
+            | :workspace
+
+          module ScopeType
+            extend Anthropic::Internal::Type::Enum
+
+            ORGANIZATION: :organization
+            ORGANIZATION_SERVICE: :organization_service
+            RBAC_GROUP: :rbac_group
+            SEAT_TIER: :seat_tier
+            USER: :user
+            WORKSPACE: :workspace
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::SpendLimitListParams::scope_type]
+          end
+        end
+      end
+    end
+  end
+end
