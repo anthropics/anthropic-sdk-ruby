@@ -29,8 +29,14 @@ module Anthropic
           # @return [Anthropic::Resources::Beta::Organization::Analytics::UsageReport]
           attr_reader :usage_report
 
+          # @return [Anthropic::Resources::Beta::Organization::Analytics::UserUsageReport]
+          attr_reader :user_usage_report
+
           # @return [Anthropic::Resources::Beta::Organization::Analytics::CostReport]
           attr_reader :cost_report
+
+          # @return [Anthropic::Resources::Beta::Organization::Analytics::UserCostReport]
+          attr_reader :user_cost_report
 
           # @api private
           #
@@ -45,7 +51,11 @@ module Anthropic
             @skills = Anthropic::Resources::Beta::Organization::Analytics::Skills.new(client: client)
             @artifacts = Anthropic::Resources::Beta::Organization::Analytics::Artifacts.new(client: client)
             @usage_report = Anthropic::Resources::Beta::Organization::Analytics::UsageReport.new(client: client)
+            @user_usage_report =
+              Anthropic::Resources::Beta::Organization::Analytics::UserUsageReport.new(client: client)
             @cost_report = Anthropic::Resources::Beta::Organization::Analytics::CostReport.new(client: client)
+            @user_cost_report =
+              Anthropic::Resources::Beta::Organization::Analytics::UserCostReport.new(client: client)
           end
         end
       end

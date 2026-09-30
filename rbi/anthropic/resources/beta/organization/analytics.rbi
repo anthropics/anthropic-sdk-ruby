@@ -57,10 +57,24 @@ module Anthropic
 
           sig do
             returns(
+              Anthropic::Resources::Beta::Organization::Analytics::UserUsageReport
+            )
+          end
+          attr_reader :user_usage_report
+
+          sig do
+            returns(
               Anthropic::Resources::Beta::Organization::Analytics::CostReport
             )
           end
           attr_reader :cost_report
+
+          sig do
+            returns(
+              Anthropic::Resources::Beta::Organization::Analytics::UserCostReport
+            )
+          end
+          attr_reader :user_cost_report
 
           # @api private
           sig { params(client: Anthropic::Client).returns(T.attached_class) }

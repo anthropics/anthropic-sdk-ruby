@@ -88,7 +88,9 @@ TEST_PATHS=(
 	test/anthropic/resources/beta/organization/analytics/skills_test.rb
 	test/anthropic/resources/beta/organization/analytics/artifacts_test.rb
 	test/anthropic/resources/beta/organization/analytics/usage_report_test.rb
+	test/anthropic/resources/beta/organization/analytics/user_usage_report_test.rb
 	test/anthropic/resources/beta/organization/analytics/cost_report_test.rb
+	test/anthropic/resources/beta/organization/analytics/user_cost_report_test.rb
 	test/anthropic/resources/beta/organization/spend_limits_test.rb
 	test/anthropic/resources/beta/organization/spend_limits/effective_test.rb
 	test/anthropic/resources/beta/organization/spend_limits/increase_requests_test.rb
