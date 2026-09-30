@@ -1,5 +1,39 @@
 # Changelog
 
+## 1.75.0 (2026-09-30)
+
+Full Changelog: [v1.74.0...v1.75.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.74.0...v1.75.0)
+
+### Features
+
+* **api:** add a refusal stop reason and stop_details to Managed Agents session idle events ([a5587ce](https://github.com/anthropics/anthropic-sdk-ruby/commit/a5587ceb0b14fb7935066765062ac5c952c8c5a4))
+* **api:** add Claude Enterprise analytics, spend limits, and RBAC groups and roles to the Admin API ([a9d2688](https://github.com/anthropics/anthropic-sdk-ruby/commit/a9d2688be21ec6e92d05a1a789fd14db82e802e4))
+* **api:** add per-user usage and cost reports to the Admin API analytics ([eee8b24](https://github.com/anthropics/anthropic-sdk-ruby/commit/eee8b2456ce492f6defe0c3167842892db58b2d6))
+* **api:** add Plugins and Plugin Marketplaces to the Admin API ([0f337ed](https://github.com/anthropics/anthropic-sdk-ruby/commit/0f337edfc7c1c2eb6458edf3d71957099d9df1e5))
+* **api:** add repository error types to Managed Agents session errors ([a20b377](https://github.com/anthropics/anthropic-sdk-ruby/commit/a20b3775dfb3d54c2ba06237cb252cb8d3bf10e2))
+* **api:** allow removing a plugin's org-wide installation setting ([3abdc63](https://github.com/anthropics/anthropic-sdk-ruby/commit/3abdc639c68a517ce3d2562edf369c288c4b4d3d))
+* **api:** MCP tunnels beta: add read-only `transport` object to Tunnel and return the one-time relay `token` in the create response ([96baeba](https://github.com/anthropics/anthropic-sdk-ruby/commit/96baebad52edd7025cc280247c285574a1390cf3))
+* **api:** Organization API endpoints are now GA ([82192cb](https://github.com/anthropics/anthropic-sdk-ruby/commit/82192cbd9bc41a89e73873d0bfa59452035540ff))
+
+
+### Bug Fixes
+
+* **api:** make memory store description, metadata, archived_at required ([7cc1024](https://github.com/anthropics/anthropic-sdk-ruby/commit/7cc1024dc7994dd747b8b6d42f4e3beca41952a4))
+* **api:** type admin plugin preference and marketplace fields as enums ([735f79c](https://github.com/anthropics/anthropic-sdk-ruby/commit/735f79c3be5f9a38530aeaaa289518eab42e91ca))
+* **client:** respect a client-level timeout instead of the per-method default ([20c7d65](https://github.com/anthropics/anthropic-sdk-ruby/commit/20c7d659ff96a752985df2f800c1449c1a90f5e5))
+* **pagination:** auto-paging continues past an empty page while next_page is set ([e2817b4](https://github.com/anthropics/anthropic-sdk-ruby/commit/e2817b4ea1165ed808359e4007f7d16a4e53f75d))
+
+
+### Chores
+
+* **api:** update MCP Tunnels types and descriptions ([9091ecf](https://github.com/anthropics/anthropic-sdk-ruby/commit/9091ecf0aab16ba3dac3c7418e350a9f087adcd2))
+* **docs:** remove placeholder enum descriptions ([489541b](https://github.com/anthropics/anthropic-sdk-ruby/commit/489541b6efa8d9a422cdee2a1a24922691c0a6fe))
+
+
+### Documentation
+
+* **examples:** stop reading session events on any idle that needs no action ([#278](https://github.com/anthropics/anthropic-sdk-ruby/issues/278)) ([5143cfd](https://github.com/anthropics/anthropic-sdk-ruby/commit/5143cfdd19a0905e69bf3c9de2c97f39dd5b32bf))
+
 ## 1.74.0 (2026-09-28)
 
 Full Changelog: [v1.73.0...v1.74.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.73.0...v1.74.0)
