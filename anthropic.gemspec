@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
   s.license = "MIT"
   s.metadata["homepage_uri"] = s.homepage
   s.metadata["source_code_uri"] = "https://github.com/anthropics/anthropic-sdk-ruby"
+  s.metadata["changelog_uri"] = "https://github.com/anthropics/anthropic-sdk-ruby/blob/main/CHANGELOG.md"
   s.metadata["rubygems_mfa_required"] = false.to_s
   s.required_ruby_version = ">= 3.2.0"
 
