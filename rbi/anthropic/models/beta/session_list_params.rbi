@@ -276,7 +276,6 @@ module Anthropic
           end
         end
 
-        # SessionStatus enum
         module Status
           extend Anthropic::Internal::Type::Enum
 
