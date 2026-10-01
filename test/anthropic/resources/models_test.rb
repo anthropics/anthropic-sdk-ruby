@@ -16,6 +16,7 @@ class Anthropic::Test::Resources::ModelsTest < Anthropic::Test::ResourceTest
         capabilities: Anthropic::ModelCapabilities | nil,
         created_at: Time,
         display_name: String,
+        line: Anthropic::ModelLine | nil,
         max_input_tokens: Integer | nil,
         max_tokens: Integer | nil,
         type: Symbol
@@ -43,6 +44,7 @@ class Anthropic::Test::Resources::ModelsTest < Anthropic::Test::ResourceTest
         capabilities: Anthropic::ModelCapabilities | nil,
         created_at: Time,
         display_name: String,
+        line: Anthropic::ModelLine | nil,
         max_input_tokens: Integer | nil,
         max_tokens: Integer | nil,
         type: Symbol

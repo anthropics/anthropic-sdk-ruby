@@ -10,6 +10,7 @@ module Anthropic
           capabilities: Anthropic::Beta::BetaModelCapabilities?,
           created_at: Time,
           display_name: String,
+          line: Anthropic::Models::Beta::beta_model_line?,
           max_input_tokens: Integer?,
           max_tokens: Integer?,
           type: :model
@@ -26,6 +27,8 @@ module Anthropic
 
         attr_accessor display_name: String
 
+        attr_accessor line: Anthropic::Models::Beta::beta_model_line?
+
         attr_accessor max_input_tokens: Integer?
 
         attr_accessor max_tokens: Integer?
@@ -38,6 +41,7 @@ module Anthropic
           capabilities: Anthropic::Beta::BetaModelCapabilities?,
           created_at: Time,
           display_name: String,
+          line: Anthropic::Models::Beta::beta_model_line?,
           max_input_tokens: Integer?,
           max_tokens: Integer?,
           ?type: :model
@@ -49,6 +53,7 @@ module Anthropic
           capabilities: Anthropic::Beta::BetaModelCapabilities?,
           created_at: Time,
           display_name: String,
+          line: Anthropic::Models::Beta::beta_model_line?,
           max_input_tokens: Integer?,
           max_tokens: Integer?,
           type: :model

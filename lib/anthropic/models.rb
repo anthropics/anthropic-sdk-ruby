@@ -397,6 +397,8 @@ module Anthropic
 
   ModelInfo = Anthropic::Models::ModelInfo
 
+  ModelLine = Anthropic::Models::ModelLine
+
   ModelListParams = Anthropic::Models::ModelListParams
 
   ModelRetrieveParams = Anthropic::Models::ModelRetrieveParams

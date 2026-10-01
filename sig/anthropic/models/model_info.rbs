@@ -6,6 +6,7 @@ module Anthropic
         capabilities: Anthropic::ModelCapabilities?,
         created_at: Time,
         display_name: String,
+        line: Anthropic::Models::model_line?,
         max_input_tokens: Integer?,
         max_tokens: Integer?,
         type: :model
@@ -20,6 +21,8 @@ module Anthropic
 
       attr_accessor display_name: String
 
+      attr_accessor line: Anthropic::Models::model_line?
+
       attr_accessor max_input_tokens: Integer?
 
       attr_accessor max_tokens: Integer?
@@ -31,6 +34,7 @@ module Anthropic
         capabilities: Anthropic::ModelCapabilities?,
         created_at: Time,
         display_name: String,
+        line: Anthropic::Models::model_line?,
         max_input_tokens: Integer?,
         max_tokens: Integer?,
         ?type: :model
@@ -41,6 +45,7 @@ module Anthropic
         capabilities: Anthropic::ModelCapabilities?,
         created_at: Time,
         display_name: String,
+        line: Anthropic::Models::model_line?,
         max_input_tokens: Integer?,
         max_tokens: Integer?,
         type: :model

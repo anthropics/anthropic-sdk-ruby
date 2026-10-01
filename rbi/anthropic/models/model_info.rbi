@@ -33,6 +33,12 @@ module Anthropic
       sig { returns(String) }
       attr_accessor :display_name
 
+      # The model line this model belongs to, such as `opus` for both Claude Opus 4.5
+      # and Claude Opus 4.6. More lines may be added. `null` when the model belongs to
+      # no line, as a fine-tuned model does; do not infer a line from the `id`.
+      sig { returns(T.nilable(Anthropic::ModelLine::TaggedSymbol)) }
+      attr_accessor :line
+
       # Maximum input context window size in tokens for this model.
       sig { returns(T.nilable(Integer)) }
       attr_accessor :max_input_tokens
@@ -53,6 +59,7 @@ module Anthropic
           capabilities: T.nilable(Anthropic::ModelCapabilities::OrHash),
           created_at: Time,
           display_name: String,
+          line: T.nilable(Anthropic::ModelLine::OrSymbol),
           max_input_tokens: T.nilable(Integer),
           max_tokens: T.nilable(Integer),
           type: Symbol
@@ -69,6 +76,10 @@ module Anthropic
         created_at:,
         # A human-readable name for the model.
         display_name:,
+        # The model line this model belongs to, such as `opus` for both Claude Opus 4.5
+        # and Claude Opus 4.6. More lines may be added. `null` when the model belongs to
+        # no line, as a fine-tuned model does; do not infer a line from the `id`.
+        line:,
         # Maximum input context window size in tokens for this model.
         max_input_tokens:,
         # Maximum value for the `max_tokens` parameter when using this model.
@@ -87,6 +98,7 @@ module Anthropic
             capabilities: T.nilable(Anthropic::ModelCapabilities),
             created_at: Time,
             display_name: String,
+            line: T.nilable(Anthropic::ModelLine::TaggedSymbol),
             max_input_tokens: T.nilable(Integer),
             max_tokens: T.nilable(Integer),
             type: Symbol

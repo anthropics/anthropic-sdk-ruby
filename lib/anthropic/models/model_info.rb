@@ -30,6 +30,14 @@ module Anthropic
       #   @return [String]
       required :display_name, String
 
+      # @!attribute line
+      #   The model line this model belongs to, such as `opus` for both Claude Opus 4.5
+      #   and Claude Opus 4.6. More lines may be added. `null` when the model belongs to
+      #   no line, as a fine-tuned model does; do not infer a line from the `id`.
+      #
+      #   @return [Symbol, Anthropic::Models::ModelLine, nil]
+      required :line, enum: -> { Anthropic::ModelLine }, nil?: true
+
       # @!attribute max_input_tokens
       #   Maximum input context window size in tokens for this model.
       #
@@ -50,7 +58,7 @@ module Anthropic
       #   @return [Symbol, :model]
       required :type, const: :model
 
-      # @!method initialize(id:, capabilities:, created_at:, display_name:, max_input_tokens:, max_tokens:, type: :model)
+      # @!method initialize(id:, capabilities:, created_at:, display_name:, line:, max_input_tokens:, max_tokens:, type: :model)
       #   Some parameter documentations has been truncated, see
       #   {Anthropic::Models::ModelInfo} for more details.
       #
@@ -61,6 +69,8 @@ module Anthropic
       #   @param created_at [Time] RFC 3339 datetime string representing the time at which the model was released.
       #
       #   @param display_name [String] A human-readable name for the model.
+      #
+      #   @param line [Symbol, Anthropic::Models::ModelLine, nil] The model line this model belongs to, such as `opus` for both Claude Opus 4.5 an
       #
       #   @param max_input_tokens [Integer, nil] Maximum input context window size in tokens for this model.
       #

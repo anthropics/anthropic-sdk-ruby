@@ -17,6 +17,7 @@ class Anthropic::Test::Resources::Beta::ModelsTest < Anthropic::Test::ResourceTe
         capabilities: Anthropic::Beta::BetaModelCapabilities | nil,
         created_at: Time,
         display_name: String,
+        line: Anthropic::Beta::BetaModelLine | nil,
         max_input_tokens: Integer | nil,
         max_tokens: Integer | nil,
         type: Symbol
@@ -45,6 +46,7 @@ class Anthropic::Test::Resources::Beta::ModelsTest < Anthropic::Test::ResourceTe
         capabilities: Anthropic::Beta::BetaModelCapabilities | nil,
         created_at: Time,
         display_name: String,
+        line: Anthropic::Beta::BetaModelLine | nil,
         max_input_tokens: Integer | nil,
         max_tokens: Integer | nil,
         type: Symbol
