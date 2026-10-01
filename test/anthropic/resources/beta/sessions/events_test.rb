@@ -4,8 +4,6 @@ require_relative "../../../test_helper"
 
 class Anthropic::Test::Resources::Beta::Sessions::EventsTest < Anthropic::Test::ResourceTest
   def test_list
-    skip("buildURL drops path-level query params")
-
     response = @anthropic.beta.sessions.events.list("sesn_011CZkZAtmR3yMPDzynEDxu7")
 
     assert_pattern do

@@ -75,8 +75,6 @@ class Anthropic::Test::Resources::Beta::MemoryStores::MemoriesTest < Anthropic::
   end
 
   def test_list
-    skip("buildURL drops path-level query params")
-
     response = @anthropic.beta.memory_stores.memories.list("memory_store_id")
 
     assert_pattern do

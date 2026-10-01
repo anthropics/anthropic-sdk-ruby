@@ -4,8 +4,6 @@ require_relative "../../test_helper"
 
 class Anthropic::Test::Resources::Beta::DeploymentRunsTest < Anthropic::Test::ResourceTest
   def test_retrieve
-    skip("buildURL drops path-level query params")
-
     response = @anthropic.beta.deployment_runs.retrieve("deployment_run_id")
 
     assert_pattern do
@@ -27,8 +25,6 @@ class Anthropic::Test::Resources::Beta::DeploymentRunsTest < Anthropic::Test::Re
   end
 
   def test_list
-    skip("buildURL drops path-level query params")
-
     response = @anthropic.beta.deployment_runs.list
 
     assert_pattern do

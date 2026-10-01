@@ -32,8 +32,6 @@ class Anthropic::Test::Resources::Beta::Sessions::ThreadsTest < Anthropic::Test:
   end
 
   def test_list
-    skip("buildURL drops path-level query params")
-
     response = @anthropic.beta.sessions.threads.list("sesn_011CZkZAtmR3yMPDzynEDxu7")
 
     assert_pattern do
