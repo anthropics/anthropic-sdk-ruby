@@ -160,8 +160,6 @@ class Anthropic::Test::Resources::Beta::Vaults::CredentialsTest < Anthropic::Tes
   end
 
   def test_mcp_oauth_validate_required_params
-    skip("prism can't find endpoint with beta only tag")
-
     response =
       @anthropic.beta.vaults.credentials.mcp_oauth_validate(
         "vcrd_011CZkZEMt8gZan2iYOQfSkw",
