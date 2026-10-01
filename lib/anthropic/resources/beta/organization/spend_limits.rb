@@ -67,7 +67,7 @@ module Anthropic
               headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
               page: Anthropic::Internal::PageCursor,
               model: Anthropic::Beta::Organization::BetaSpendLimit,
-              options: options
+              options: {extra_headers: {"anthropic-beta" => "spend-limit-reads-2026-09-26"}, **options}
             )
           end
 
