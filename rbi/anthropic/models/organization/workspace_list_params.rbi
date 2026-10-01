@@ -38,6 +38,13 @@ module Anthropic
         sig { params(include_archived: T::Boolean).void }
         attr_writer :include_archived
 
+        # Whether to include the organization's default Workspace in the response
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :include_default
+
+        sig { params(include_default: T::Boolean).void }
+        attr_writer :include_default
+
         # Number of items to return per page.
         #
         # Defaults to `20`. Ranges from `1` to `1000`.
@@ -52,6 +59,7 @@ module Anthropic
             after_id: String,
             before_id: String,
             include_archived: T::Boolean,
+            include_default: T::Boolean,
             limit: Integer,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(T.attached_class)
@@ -65,6 +73,8 @@ module Anthropic
           before_id: nil,
           # Whether to include Workspaces that have been archived in the response
           include_archived: nil,
+          # Whether to include the organization's default Workspace in the response
+          include_default: nil,
           # Number of items to return per page.
           #
           # Defaults to `20`. Ranges from `1` to `1000`.
@@ -79,6 +89,7 @@ module Anthropic
               after_id: String,
               before_id: String,
               include_archived: T::Boolean,
+              include_default: T::Boolean,
               limit: Integer,
               request_options: Anthropic::RequestOptions
             }

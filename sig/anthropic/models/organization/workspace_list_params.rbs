@@ -6,6 +6,7 @@ module Anthropic
           after_id: String,
           before_id: String,
           include_archived: bool,
+          include_default: bool,
           limit: Integer
         }
         & Anthropic::Internal::Type::request_parameters
@@ -26,6 +27,10 @@ module Anthropic
 
         def include_archived=: (bool) -> bool
 
+        attr_reader include_default: bool?
+
+        def include_default=: (bool) -> bool
+
         attr_reader limit: Integer?
 
         def limit=: (Integer) -> Integer
@@ -34,6 +39,7 @@ module Anthropic
           ?after_id: String,
           ?before_id: String,
           ?include_archived: bool,
+          ?include_default: bool,
           ?limit: Integer,
           ?request_options: Anthropic::request_opts
         ) -> void
@@ -42,6 +48,7 @@ module Anthropic
           after_id: String,
           before_id: String,
           include_archived: bool,
+          include_default: bool,
           limit: Integer,
           request_options: Anthropic::RequestOptions
         }

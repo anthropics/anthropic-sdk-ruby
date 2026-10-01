@@ -28,6 +28,12 @@ module Anthropic
         #   @return [Boolean, nil]
         optional :include_archived, Anthropic::Internal::Type::Boolean
 
+        # @!attribute include_default
+        #   Whether to include the organization's default Workspace in the response
+        #
+        #   @return [Boolean, nil]
+        optional :include_default, Anthropic::Internal::Type::Boolean
+
         # @!attribute limit
         #   Number of items to return per page.
         #
@@ -36,7 +42,7 @@ module Anthropic
         #   @return [Integer, nil]
         optional :limit, Integer
 
-        # @!method initialize(after_id: nil, before_id: nil, include_archived: nil, limit: nil, request_options: {})
+        # @!method initialize(after_id: nil, before_id: nil, include_archived: nil, include_default: nil, limit: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Organization::WorkspaceListParams} for more details.
         #
@@ -45,6 +51,8 @@ module Anthropic
         #   @param before_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
         #
         #   @param include_archived [Boolean] Whether to include Workspaces that have been archived in the response
+        #
+        #   @param include_default [Boolean] Whether to include the organization's default Workspace in the response
         #
         #   @param limit [Integer] Number of items to return per page.
         #
