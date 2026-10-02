@@ -118,7 +118,7 @@ module Anthropic
         sig { returns(T.nilable(String)) }
         attr_accessor :system_
 
-        # Tool configurations available to the agent. Maximum of 128 tools across all
+        # Tool configurations available to the agent. Maximum of 256 tools across all
         # toolsets allowed.
         sig do
           returns(
@@ -243,7 +243,7 @@ module Anthropic
           skills: nil,
           # System prompt for the agent.
           system_: nil,
-          # Tool configurations available to the agent. Maximum of 128 tools across all
+          # Tool configurations available to the agent. Maximum of 256 tools across all
           # toolsets allowed.
           tools: nil,
           # Optional header to specify the beta version(s) you want to use.

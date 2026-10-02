@@ -67,7 +67,7 @@ module Anthropic
         optional :system_, String, api_name: :system, nil?: true
 
         # @!attribute tools
-        #   Tool configurations available to the agent. Maximum of 128 tools across all
+        #   Tool configurations available to the agent. Maximum of 256 tools across all
         #   toolsets allowed.
         #
         #   @return [Array<Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401Params, Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetParams, Anthropic::Models::Beta::BetaManagedAgentsCustomToolParams>, nil]
@@ -111,7 +111,7 @@ module Anthropic
         #
         #   @param system_ [String, nil] System prompt for the agent.
         #
-        #   @param tools [Array<Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401Params, Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetParams, Anthropic::Models::Beta::BetaManagedAgentsCustomToolParams>] Tool configurations available to the agent. Maximum of 128 tools across all tool
+        #   @param tools [Array<Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401Params, Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetParams, Anthropic::Models::Beta::BetaManagedAgentsCustomToolParams>] Tool configurations available to the agent. Maximum of 256 tools across all tool
         #
         #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #

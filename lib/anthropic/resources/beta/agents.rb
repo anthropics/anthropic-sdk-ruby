@@ -30,7 +30,7 @@ module Anthropic
         #
         # @param system_ [String, nil] Body param: System prompt for the agent.
         #
-        # @param tools [Array<Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401Params, Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetParams, Anthropic::Models::Beta::BetaManagedAgentsCustomToolParams>] Body param: Tool configurations available to the agent. Maximum of 128 tools acr
+        # @param tools [Array<Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401Params, Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetParams, Anthropic::Models::Beta::BetaManagedAgentsCustomToolParams>] Body param: Tool configurations available to the agent. Maximum of 256 tools acr
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
