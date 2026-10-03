@@ -43,9 +43,11 @@ module Anthropic
           def to_nilable(schema)
             null = "null"
             case schema
-            in {"$ref": String} | {allOf: _}
+            in {"$ref": String} | {allOf: _} | {const: _}
               # For references (simple or with allOf pattern for descriptions),
-              # wrap in anyOf with null. The allOf pattern is used when we need
+              # wrap in anyOf with null. A const must be wrapped too: adding a
+              # null type alone would leave the constant constraint in force.
+              # The allOf pattern is used when we need
               # to add a description to a $ref (JSON Schema doesn't allow
               # additional properties alongside $ref).
               {anyOf: [schema, {type: null}]}
