@@ -99,7 +99,8 @@ module Anthropic
               }
               defs.store(type, stored)
               schema = blk.call
-              ref_path.replace("#/$defs/#{path.join('/')}")
+              # A definition name is one JSON Pointer token, even when its path is nested.
+              ref_path.replace("#/$defs/#{path.join('/').gsub('~', '~0').gsub('/', '~1')}")
               stored.update(schema)
               ref
             end
@@ -142,7 +143,9 @@ module Anthropic
               no_refs.each { _1.replace(_1.except(:$ref).merge(sch)) }
             end
 
-            xformed = reused_defs.transform_keys { _1.delete_prefix("#/$defs/") }
+            xformed = reused_defs.transform_keys do
+              _1.delete_prefix("#/$defs/").gsub("~1", "/").gsub("~0", "~")
+            end
             unconformed = xformed.empty? ? schema : {"$defs": xformed}.update(schema)
             unconformed.tap { Anthropic::Helpers::InputSchema::SupportedSchemas.transform_schema!(_1) }
           end
