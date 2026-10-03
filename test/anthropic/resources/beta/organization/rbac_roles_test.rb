@@ -14,6 +14,7 @@ class Anthropic::Test::Resources::Beta::Organization::RBACRolesTest < Anthropic:
       response => {
         id: String,
         created_at: Time,
+        display_name: String,
         name: String,
         type: Symbol,
         updated_at: Time
@@ -39,6 +40,7 @@ class Anthropic::Test::Resources::Beta::Organization::RBACRolesTest < Anthropic:
       row => {
         id: String,
         created_at: Time,
+        display_name: String,
         name: String,
         type: Symbol,
         updated_at: Time

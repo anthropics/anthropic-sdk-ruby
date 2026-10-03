@@ -6,6 +6,7 @@ module Anthropic
           {
             id: String,
             created_at: Time,
+            display_name: String,
             name: String,
             type: :rbac_role,
             updated_at: Time
@@ -16,6 +17,8 @@ module Anthropic
 
           attr_accessor created_at: Time
 
+          attr_accessor display_name: String
+
           attr_accessor name: String
 
           attr_accessor type: :rbac_role
@@ -25,6 +28,7 @@ module Anthropic
           def initialize: (
             id: String,
             created_at: Time,
+            display_name: String,
             name: String,
             updated_at: Time,
             ?type: :rbac_role
@@ -33,6 +37,7 @@ module Anthropic
           def to_hash: -> {
             id: String,
             created_at: Time,
+            display_name: String,
             name: String,
             type: :rbac_role,
             updated_at: Time
