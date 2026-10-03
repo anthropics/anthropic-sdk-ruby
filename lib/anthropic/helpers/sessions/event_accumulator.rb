@@ -95,6 +95,9 @@ module Anthropic
           return unless event.event.type == :"agent.message"
 
           id = event.event.id
+          # Replayed preview starts must not reopen an already canonical event.
+          return unless @agent_messages[id]&.processed_at.nil?
+
           # `processed_at` is left unset: that is what marks the snapshot as an
           # open preview until the buffered final event reconciles it.
           @agent_messages[id] = Anthropic::Beta::Sessions::BetaManagedAgentsAgentMessageEvent.new(

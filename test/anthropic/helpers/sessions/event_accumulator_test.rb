@@ -254,4 +254,100 @@ class Anthropic::Test::Helpers::Sessions::EventAccumulatorTest < Minitest::Test
     end
     assert_equal("event_delta for evt_1 received before its event_start", error.message)
   end
+
+  def test_replayed_start_cannot_replace_a_final_message
+    acc = accumulator
+    final = final_event("evt_1", "complete")
+    acc.accumulate(final)
+    start = start_event("evt_1")
+    assert_same(start, acc.accumulate(start))
+    assert_same(final, acc.agent_messages.fetch("evt_1"))
+    assert_equal("complete", acc.agent_message_text("evt_1"))
+  end
+
+  def test_late_restart_and_deltas_cannot_make_final_content_disappear
+    acc = accumulator
+    final = final_event("evt_1", "complete")
+    events = [
+      start_event("evt_1"),
+      delta_event("evt_1", "partial"),
+      final,
+      start_event("evt_1"),
+      delta_event("evt_1", "stale"),
+      model_request_end_event
+    ]
+    assert_equal(events, acc.wrap(events).to_a)
+    assert_same(final, acc.agent_messages.fetch("evt_1"))
+    assert_equal("complete", acc.agent_message_text("evt_1"))
+  end
+
+  def test_restart_preserves_final_order_and_other_previews_keep_working
+    acc = accumulator
+    first = final_event("evt_1", "one")
+    second = final_event("evt_2", "two")
+    acc.accumulate(first)
+    acc.accumulate(second)
+    acc.accumulate(start_event("evt_1"))
+    acc.accumulate(start_event("evt_3"))
+    acc.accumulate(delta_event("evt_3", "three"))
+    assert_equal(%w[evt_1 evt_2 evt_3], acc.agent_messages.keys)
+    assert_same(first, acc.agent_messages["evt_1"])
+    assert_equal("three", acc.agent_message_text("evt_3"))
+    replacement = final_event("evt_1", "new canonical value")
+    acc.accumulate(replacement)
+    acc.accumulate(model_request_end_event)
+    assert_equal(%w[evt_1 evt_2], acc.agent_messages.keys)
+    assert_same(replacement, acc.agent_messages["evt_1"])
+  end
+
+  def test_open_previews_can_still_restart
+    acc = accumulator
+    acc.accumulate(start_event("evt_1"))
+    acc.accumulate(delta_event("evt_1", "discarded preview"))
+    acc.accumulate(start_event("evt_1"))
+    acc.accumulate(delta_event("evt_1", "replacement preview"))
+    assert_equal("replacement preview", acc.agent_message_text("evt_1"))
+    assert_nil(acc.agent_messages["evt_1"].processed_at)
+  end
+end
+
+class Anthropic::Test::Helpers::Sessions::EventAccumulatorStreamTest < Minitest::Test
+  extend Minitest::Serial
+  include WebMock::API
+
+  def before_all
+    super
+    WebMock.enable!
+  end
+
+  def after_all
+    WebMock.disable!
+    super
+  end
+
+  def teardown
+    WebMock.reset!
+    super
+  end
+
+  def test_decoded_session_stream_preserves_final_message_after_replayed_start
+    events = [
+      {type: "agent.message", id: "evt_1", content: [{type: "text", text: "complete"}], processed_at: "2026-01-01T00:00:00Z"},
+      {type: "event_start", event: {type: "agent.message", id: "evt_1"}},
+      {type: "event_delta", event_id: "evt_1", delta: {type: "content_delta", index: 0, content: {type: "text", text: "stale"}}},
+      {type: "span.model_request_end", id: "span_1", processed_at: "2026-01-01T00:00:00Z"}
+    ]
+    wire = events.map { "event: #{_1.fetch(:type)}\ndata: #{JSON.generate(_1)}\n\n" }.join
+    stub_request(:get, %r{http://localhost/v1/sessions/sesn_test/events/stream})
+      .to_return(status: 200, headers: {"Content-Type" => "text/event-stream"}, body: wire)
+    client = Anthropic::Client.new(api_key: "test-key", base_url: "http://localhost")
+    stream = client.beta.sessions.events.stream_events("sesn_test")
+    accumulator = Anthropic::Helpers::Sessions::EventAccumulator.new
+    received = accumulator.wrap(stream).to_a
+    assert_equal(events.length, received.length)
+    assert_same(received.first, accumulator.agent_messages.fetch("evt_1"))
+    assert_equal("complete", accumulator.agent_message_text("evt_1"))
+  ensure
+    stream&.close
+  end
 end
