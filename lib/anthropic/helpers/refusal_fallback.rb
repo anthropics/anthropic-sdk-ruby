@@ -309,6 +309,7 @@ module Anthropic
         end
 
         if hop_res.nil? || hop_res.status >= 300
+          Anthropic::Internal::Util.close_fused!(hop_res.body) unless hop_res.nil?
           next if index < @fallbacks.length - 1
           return last_refusal
         end
@@ -487,22 +488,26 @@ module Anthropic
         end
         return [res, continuation, false] if res.status < 300
 
-        if attempt.zero? && res.status == 400 && !partial.empty?
-          err_body =
-            begin
-              JSON.parse(res.buffer!(force: true).body.to_a.join)
-            rescue JSON::ParserError, ArgumentError
-              nil
-            end
-          warn(
-            "anthropic-sdk: BetaRefusalFallbackMiddleware: fallback request with the partial " \
-            "output appended was rejected (HTTP 400: #{JSON.generate(err_body)}); retrying without it"
-          )
-          continuation = base
-          partial = []
-          next
+        begin
+          if attempt.zero? && res.status == 400 && !partial.empty?
+            err_body =
+              begin
+                JSON.parse(res.buffer!(force: true).body.to_a.join)
+              rescue JSON::ParserError, ArgumentError
+                nil
+              end
+            warn(
+              "anthropic-sdk: BetaRefusalFallbackMiddleware: fallback request with the partial " \
+              "output appended was rejected (HTTP 400: #{JSON.generate(err_body)}); retrying without it"
+            )
+            continuation = base
+            partial = []
+            next
+          end
+          return [nil, continuation, true]
+        ensure
+          Anthropic::Internal::Util.close_fused!(res.body)
         end
-        return [nil, continuation, true]
       end
     end
 
