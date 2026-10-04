@@ -60,10 +60,6 @@ module Anthropic
             # rubocop:disable Metrics/BlockLength
             xform = ->(s) do
               case s
-              in {type: "string" | ["string", "null"], format: "date-time" | "time" | "date" | "duration" | "email" | "hostname" | "uri" | "ipv4" | "ipv6" | "uuid"} | {type: "array", minItems: 0 | 1}
-                # these are the currently supported cases
-                next
-
               in {oneOf: Array => schemas, **rest}
                 {anyOf: schemas, **rest}
 
@@ -84,9 +80,15 @@ module Anthropic
                   end
                   schemas << {description: doc}
                 end
-              in {type: "integer" | "number" | "string" | ["integer", "null"] | ["number", "null"] | ["string", "null"], **unsupported}
+              in {type: "integer" | "number" | "string" |
+                        ["integer", "null"] | ["number", "null"] | ["string", "null"], **unsupported}
+                formats = %w[date-time time date duration email hostname uri ipv4 ipv6 uuid]
+                if ["string", %w[string null]].include?(s[:type]) && formats.include?(unsupported[:format])
+                  unsupported.delete(:format)
+                end
                 describe!(s, unsupported: unsupported.except(:enum))
               in {type: "array",  **unsupported}
+                unsupported.delete(:minItems) if [0, 1].include?(unsupported[:minItems])
                 describe!(s, unsupported: unsupported.except(:items))
               in {type: "object", **unsupported}
                 unsupported.delete(:additionalProperties) if unsupported[:additionalProperties] == false
