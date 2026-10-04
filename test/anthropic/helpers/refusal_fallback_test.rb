@@ -1107,4 +1107,156 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
     assert(@bodies[1]["messages"].any? { _1["role"] == "assistant" })
     refute(@bodies[2]["messages"].any? { _1["role"] == "assistant" })
   end
+
+  # Real fused response bodies expose whether a discarded hop still owns its stream.
+  def tracked_response(status, payload, streaming: false)
+    tracking = {pulls: 0, closes: 0}
+    body = Anthropic::Internal::Util.fused_enum(
+      Enumerator.new do |y|
+        tracking[:pulls] += 1
+        y << payload
+      end
+    ) { tracking[:closes] += 1 }
+    response = Anthropic::APIResponse.new(status: status, body: body, streaming: streaming)
+    [response, tracking]
+  end
+
+  def lifecycle_request(streaming: false)
+    Anthropic::APIRequest.new(
+      method: :post,
+      url: URI("http://localhost/v1/messages?beta=true"),
+      headers: {},
+      body: PARAMS,
+      stream: streaming ? Object : nil,
+      cast_to: nil,
+      unwrap: nil,
+      options: {fallback_state: Anthropic::BetaFallbackState.new},
+      retry_count: 0,
+      metadata: {}
+    )
+  end
+
+  def lifecycle_sender(responses, tracking, status)
+    calls = 0
+    lambda do |_req|
+      assert_equal(1, tracking[:closes], "HTTP #{status} hop still open before next request") if calls == 2
+      calls += 1
+      responses.shift
+    end
+  end
+
+  def test_discarded_non_streaming_hops_close_before_the_next_request
+    [400, 503].each do |status|
+      failed, tracking = tracked_response(status, "unread failure")
+      responses = [
+        Anthropic::APIResponse.new(status: 200, body: JSON.generate(refusal_body("primary-model"))),
+        failed,
+        Anthropic::APIResponse.new(status: 200, body: JSON.generate(message_body("accepted-model")))
+      ]
+      nxt = lifecycle_sender(responses, tracking, status)
+      middleware = Anthropic::BetaRefusalFallbackMiddleware.new(
+        [
+          {model: "failed-model"},
+          {model: "accepted-model"}
+        ]
+      )
+      result = middleware.call(lifecycle_request, nxt)
+      assert_equal("accepted-model", JSON.parse(result.body.to_a.join)["model"])
+      assert_equal({pulls: 0, closes: 1}, tracking)
+    end
+  end
+
+  def test_discarded_terminal_non_streaming_hop_closes_without_reading
+    failed, tracking = tracked_response(503, "unread failure")
+    refusal = Anthropic::APIResponse.new(status: 200, body: JSON.generate(refusal_body("primary-model")))
+    responses = [refusal, failed]
+    middleware = Anthropic::BetaRefusalFallbackMiddleware.new([{model: "failed-model"}])
+    result = middleware.call(lifecycle_request, ->(_req) { responses.shift })
+    assert_same(refusal, result)
+    assert_equal({pulls: 0, closes: 1}, tracking)
+  end
+
+  def test_discarded_streaming_hops_close_before_the_next_request
+    [400, 503].each do |status|
+      failed, tracking = tracked_response(status, "unread failure", streaming: true)
+      responses = [
+        Anthropic::APIResponse.new(
+          status: 200,
+          body: refusal_stream("primary-model", token: "tok"),
+          streaming: true
+        ),
+        failed,
+        Anthropic::APIResponse.new(
+          status: 200,
+          body: accept_stream("accepted-model", text: "ok"),
+          streaming: true
+        )
+      ]
+      nxt = lifecycle_sender(responses, tracking, status)
+      middleware = Anthropic::BetaRefusalFallbackMiddleware.new(
+        [
+          {model: "failed-model"},
+          {model: "accepted-model"}
+        ]
+      )
+      result = middleware.call(lifecycle_request(streaming: true), nxt)
+      output = result.body.to_a.join
+      assert_includes(output, "accepted-model")
+      assert_equal({pulls: 0, closes: 1}, tracking)
+    end
+  end
+
+  def test_discarded_terminal_streaming_hop_closes_without_reading
+    failed, tracking = tracked_response(503, "unread failure", streaming: true)
+    responses = [
+      Anthropic::APIResponse.new(
+        status: 200,
+        body: refusal_stream("primary-model", token: "tok"),
+        streaming: true
+      ),
+      failed
+    ]
+    middleware = Anthropic::BetaRefusalFallbackMiddleware.new([{model: "failed-model"}])
+    result = middleware.call(lifecycle_request(streaming: true), ->(_req) { responses.shift })
+    assert_includes(result.body.to_a.join, '"stop_reason":"refusal"')
+    assert_equal({pulls: 0, closes: 1}, tracking)
+  end
+
+  def test_discarded_prefill_rejection_is_closed_once_before_retry
+    failed, tracking = tracked_response(400, '{"error":{"message":"prefill rejected"}}', streaming: true)
+    responses = [
+      Anthropic::APIResponse.new(
+        status: 200,
+        body: refusal_stream(
+          "primary-model",
+          token: "tok",
+          partial_text: "prefix",
+          has_prefill_claim: true
+        ),
+        streaming: true
+      ),
+      failed,
+      Anthropic::APIResponse.new(
+        status: 200,
+        body: accept_stream("accepted-model", text: "ok"),
+        streaming: true
+      )
+    ]
+    middleware = Anthropic::BetaRefusalFallbackMiddleware.new([{model: "accepted-model"}])
+    capture_io do
+      result = middleware.call(lifecycle_request(streaming: true), ->(_req) { responses.shift })
+      assert_includes(result.body.to_a.join, '"stop_reason":"end_turn"')
+    end
+    assert_equal({pulls: 1, closes: 1}, tracking)
+  end
+
+  def test_passed_through_error_response_remains_owned_by_the_caller
+    response, tracking = tracked_response(503, "caller-owned")
+    middleware = Anthropic::BetaRefusalFallbackMiddleware.new([{model: "unused"}])
+    result = middleware.call(lifecycle_request, ->(_req) { response })
+    assert_same(response, result)
+    assert_equal({pulls: 0, closes: 0}, tracking)
+    Anthropic::Internal::Util.close_fused!(result.body)
+    assert_equal({pulls: 0, closes: 1}, tracking)
+  end
 end
