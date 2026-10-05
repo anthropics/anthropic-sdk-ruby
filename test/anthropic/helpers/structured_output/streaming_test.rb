@@ -61,6 +61,67 @@ module Anthropic
             )
         end
 
+        def test_parsed_stream_preserves_block_wire_fields
+          assert_parsed_stream_wire_fields(false)
+          assert_parsed_stream_wire_fields(true)
+        end
+
+        def assert_parsed_stream_wire_fields(beta)
+          initial = {
+            type: "text",
+            text: '{"name":"Ada","age":37}',
+            citations: [],
+            future_field: {sequence: 7}
+          }
+          @response_body = sse_response(
+            {
+              type: "message_start",
+              message: {
+                id: "msg_metadata",
+                type: "message",
+                role: "assistant",
+                content: [],
+                model: "claude-opus-4-6",
+                usage: {input_tokens: 1, output_tokens: 0}
+              }
+            },
+            {type: "content_block_start", index: 0, content_block: initial},
+            {type: "content_block_stop", index: 0},
+            {type: "message_delta", delta: {stop_reason: "end_turn"}, usage: {output_tokens: 1}},
+            {type: "message_stop"}
+          )
+          url = beta ? "http://localhost/v1/messages?beta=true" : "http://localhost/v1/messages"
+          stub_request(:post, url).to_return(
+            status: 200, body: @response_body, headers: {"content-type" => "text/event-stream"}
+          )
+          service = beta ? @client.beta.messages : @client.messages
+          stream = service.stream(
+            model: "claude-opus-4-6",
+            max_tokens: 100,
+            messages: [{role: "user", content: "Test"}],
+            output_config: {format: SimpleOutput}
+          )
+          begin
+            events = stream.to_a
+            original = events.find { _1.type == :content_block_stop }.content_block
+            before = JSON.parse(original.to_json)
+            message = stream.accumulated_message
+            block = message.content.first
+            assert_equal("Ada", block.parsed.name)
+            assert_equal(37, block.parsed.age)
+            assert_equal({"sequence" => 7}, JSON.parse(block.to_json)["future_field"])
+            actual = JSON.parse(block.to_json).except("parsed")
+            assert_equal(before, actual, "parsed block changed wire fields (beta=#{beta})")
+            assert_equal(before, JSON.parse(original.to_json))
+            assert_equal(
+              actual,
+              JSON.parse(stream.accumulated_message.content.first.to_json).except("parsed")
+            )
+          ensure
+            stream.close
+          end
+        end
+
         # Test streaming with output_config (GA structured output)
         def test_stream_with_output_config
           @response_body = sse_response(
