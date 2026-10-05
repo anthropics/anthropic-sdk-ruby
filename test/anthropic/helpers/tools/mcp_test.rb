@@ -457,4 +457,99 @@ class Anthropic::Test::Helpers::Tools::McpTest < Minitest::Test
       }.to_json
     }
   end
+
+  def union_tool(schema)
+    definition = MCP::Client::Tool.new(name: "choose", description: nil, input_schema: schema)
+    Anthropic::Mcp.tool(definition, FakeMcpClient.new)
+  end
+
+  def test_one_of_conversion_updates_the_returned_schema_and_keeps_input
+    input = {
+      "type" => "object",
+      "properties" => {"value" => {"oneOf" => [{"type" => "string"}, {"type" => "integer"}]}},
+      "required" => ["value"]
+    }
+    before = Marshal.load(Marshal.dump(input))
+    tool = union_tool(input)
+    converted = tool.to_json_schema
+    assert_equal({anyOf: [{type: "string"}, {type: "integer"}]}, converted[:properties][:value])
+    assert_equal(before, input)
+    assert_equal(converted, tool.to_json_schema)
+  end
+
+  def test_one_of_conversion_keeps_existing_union_and_conjunction
+    input = {
+      "type" => "object",
+      "properties" => {
+        "value" => {
+          "anyOf" => [{"type" => "string", "enum" => %w[a b]}],
+          "oneOf" => [{"type" => "string", "enum" => ["b"]}, {"type" => "string", "enum" => ["c"]}],
+          "allOf" => [{"type" => "string"}]
+        }
+      }
+    }
+    actual = union_tool(input).to_json_schema[:properties][:value]
+    refute_includes(actual, :oneOf)
+    assert_equal([{type: "string", enum: %w[a b]}], actual[:anyOf])
+    assert_equal(
+      [
+        {type: "string"},
+        {anyOf: [{type: "string", enum: ["b"]}, {type: "string", enum: ["c"]}]}
+      ],
+      actual[:allOf]
+    )
+  end
+
+  def test_one_of_conversion_recurses_and_does_not_create_hash_descriptions
+    input = {
+      "type" => "object",
+      "properties" => {
+        "value" => {
+          "allOf" => [
+            {
+              "oneOf" => [
+                {"type" => "string", "minLength" => 3},
+                {
+                  "type" => "array",
+                  "items" => {"oneOf" => [{"type" => "integer"}, {"type" => "boolean"}]}
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+    converted = union_tool(input).to_json_schema
+    variants = converted[:properties][:value][:allOf].first[:anyOf]
+    refute_nil(variants)
+    refute_includes(variants[0], :minLength)
+    assert_includes(variants[0][:description], "minLength=3")
+    assert_equal({anyOf: [{type: "integer"}, {type: "boolean"}]}, variants[1][:items])
+    refute_includes(converted[:properties][:value], :description)
+  end
+
+  def test_one_of_conversion_reaches_the_tool_request
+    tool = union_tool(
+      {
+        "type" => "object",
+        "properties" => {
+          "value" => {"oneOf" => [{"type" => "string"}, {"type" => "integer"}]}
+        }
+      }
+    )
+    captured = nil
+    stub_anthropic_with_capture(
+      ->(req) { captured = JSON.parse(req.body) },
+      text_response(id: "msg_union", text: "Done")
+    )
+    client = Anthropic::Client.new(base_url: "http://localhost", api_key: "test-key")
+    client.beta.messages.tool_runner(
+      max_tokens: 128,
+      messages: [{role: :user, content: "choose"}],
+      model: :"claude-sonnet-4-5",
+      tools: [tool]
+    ).each_message { _1 }
+    schema = captured.fetch("tools").first.fetch("input_schema")
+    assert_equal({"anyOf" => [{"type" => "string"}, {"type" => "integer"}]}, schema["properties"]["value"])
+  end
 end
