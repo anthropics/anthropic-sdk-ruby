@@ -130,4 +130,120 @@ class Anthropic::Credentials::TokenCacheTest < Minitest::Test
     assert_equal("no-kwarg-token", cache.get_token)
     assert_equal(1, call_count)
   end
+
+  class ControlledProvider
+    attr_reader :started, :release, :forces
+
+    def initialize(expires_at:)
+      @started = Queue.new
+      @release = Queue.new
+      @forces = []
+      @expires_at = expires_at
+    end
+
+    def call(force_refresh: false)
+      @forces << force_refresh
+      index = @forces.length
+      @started << index
+      @release.pop
+      Anthropic::Credentials::AccessToken.new(token: "token-#{index}", expires_at: @expires_at)
+    end
+  end
+
+  def join_cache_thread(thread)
+    assert(thread.join(3), "token-cache caller did not finish")
+    thread.value
+  end
+
+  def test_invalidation_during_fetch_preserves_the_next_forced_refresh
+    [nil, Time.now.to_i + 3600].each do |expires_at|
+      provider = ControlledProvider.new(expires_at: expires_at)
+      cache = Anthropic::Credentials::TokenCache.new(provider)
+      first = Thread.new { cache.get_token }
+      assert_equal(1, provider.started.pop(timeout: 3))
+      cache.invalidate
+      provider.release << true
+      assert_equal("token-1", join_cache_thread(first))
+
+      provider.release << true
+      assert_equal("token-2", cache.get_token)
+      assert_equal([false, true], provider.forces)
+      assert_equal("token-2", cache.get_token)
+      assert_equal(2, provider.forces.length)
+    ensure
+      provider.release << true
+      first&.join(3)
+    end
+  end
+
+  def test_invalidation_during_a_forced_refresh_keeps_the_later_invalidation
+    provider = ControlledProvider.new(expires_at: nil)
+    cache = Anthropic::Credentials::TokenCache.new(provider)
+    cache.invalidate
+    first = Thread.new { cache.get_token }
+    assert_equal(1, provider.started.pop(timeout: 3))
+    cache.invalidate
+    cache.invalidate
+    provider.release << true
+    assert_equal("token-1", join_cache_thread(first))
+    provider.release << true
+    assert_equal("token-2", cache.get_token)
+    assert_equal([true, true], provider.forces)
+  ensure
+    provider.release << true
+    first&.join(3)
+  end
+
+  def test_waiter_after_invalidation_fetches_a_new_token
+    provider = ControlledProvider.new(expires_at: nil)
+    cache = Anthropic::Credentials::TokenCache.new(provider)
+    first = Thread.new { cache.get_token }
+    assert_equal(1, provider.started.pop(timeout: 3))
+    cache.invalidate
+    waiting = Thread.new { cache.get_token }
+    provider.release << true
+    assert_equal("token-1", join_cache_thread(first))
+    # The waiter must become the next leader instead of reusing the older result.
+    assert_equal(2, provider.started.pop(timeout: 3))
+    provider.release << true
+    assert_equal("token-2", join_cache_thread(waiting))
+    assert_equal([false, true], provider.forces)
+  ensure
+    2.times { provider.release << true }
+    first&.join(3)
+    waiting&.join(3)
+  end
+
+  def test_invalidation_during_advisory_refresh_forces_the_next_fetch
+    provider = ControlledProvider.new(expires_at: 1090)
+    cache = Anthropic::Credentials::TokenCache.new(provider, time_source: -> { 1000 })
+    provider.release << true
+    assert_equal("token-1", cache.get_token)
+    assert_equal(1, provider.started.pop(timeout: 3))
+    refresh = Thread.new { cache.get_token }
+    assert_equal(2, provider.started.pop(timeout: 3))
+    cache.invalidate
+    provider.release << true
+    assert_equal("token-2", join_cache_thread(refresh))
+    provider.release << true
+    assert_equal("token-3", cache.get_token)
+    assert_equal([false, false, true], provider.forces)
+  ensure
+    provider.release << true
+    refresh&.join(3)
+  end
+
+  def test_failed_refresh_after_invalidation_does_not_consume_force
+    forces = []
+    provider = lambda do |force_refresh: false|
+      forces << force_refresh
+      raise IOError, "first exchange failed" if forces.length == 1
+      Anthropic::Credentials::AccessToken.new(token: "recovered", expires_at: nil)
+    end
+    cache = Anthropic::Credentials::TokenCache.new(provider)
+    cache.invalidate
+    assert_raises(IOError) { cache.get_token }
+    assert_equal("recovered", cache.get_token)
+    assert_equal([true, true], forces)
+  end
 end

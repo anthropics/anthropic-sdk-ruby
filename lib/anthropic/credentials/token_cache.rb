@@ -49,6 +49,7 @@ module Anthropic
         @refresh_in_progress = false
         @refresh_condition = @lock.new_cond
         @next_force = false
+        @generation = 0
         @last_advisory_failure_time = 0.0
         @provider_accepts_force_refresh = detect_force_refresh_support
       end
@@ -63,7 +64,8 @@ module Anthropic
       def get_token
         loop do # rubocop:disable Metrics/BlockLength
           advisory_fallback = nil
-          should_refresh = false
+          generation = nil
+          force = false
 
           @lock.synchronize do
             if @cached
@@ -93,17 +95,20 @@ module Anthropic
             end
 
             @refresh_in_progress = true
-            should_refresh = true
+            generation = @generation
+            force = @next_force
           end
 
-          next unless should_refresh
+          next if generation.nil?
 
           begin
-            force = @lock.synchronize { @next_force }
             fresh = invoke_provider(force: force)
             @lock.synchronize do
-              @next_force = false
-              @cached = fresh
+              # An older refresh may finish for its caller without undoing invalidate.
+              if generation == @generation
+                @next_force = false
+                @cached = fresh
+              end
             end
             return fresh.token
           rescue Anthropic::Errors::Error, IOError
@@ -128,6 +133,7 @@ module Anthropic
       # @return [void]
       def invalidate
         @lock.synchronize do
+          @generation += 1
           @cached = nil
           @next_force = true
         end
