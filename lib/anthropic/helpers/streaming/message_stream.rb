@@ -349,13 +349,7 @@ module Anthropic
                 else
                   Anthropic::Models::BetaToolUseBlock
                 end
-              message.content[index] = cls.new(
-                id: content.id,
-                input: content.input,
-                name: content.name,
-                type: content.type,
-                parsed: parsed
-              )
+              message.content[index] = cls.new(**content.to_h, parsed: parsed)
             when :text
               next unless (model = @models.first&.last)
 
@@ -374,12 +368,7 @@ module Anthropic
                 else
                   Anthropic::Models::BetaTextBlock
                 end
-              message.content[index] = cls.new(
-                citations: content.citations,
-                text: content.text,
-                type: content.type,
-                parsed: parsed
-              )
+              message.content[index] = cls.new(**content.to_h, parsed: parsed)
             end
           end
           # rubocop:enable Metrics/BlockLength
