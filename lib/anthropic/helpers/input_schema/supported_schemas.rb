@@ -64,8 +64,15 @@ module Anthropic
                 # these are the currently supported cases
                 next
 
-              in {oneOf: Array => schemas, **rest}
-                {anyOf: schemas, **rest}
+              in {oneOf: Array => schemas}
+                s.delete(:oneOf)
+                if s.key?(:anyOf)
+                  (s[:allOf] ||= []) << {anyOf: schemas}
+                else
+                  s[:anyOf] = schemas
+                end
+                # The allOf caller treats a return value as description text.
+                nil
 
               in {allOf: Array => schemas}
                 derefed = schemas.lazy.grep(Hash).map do
