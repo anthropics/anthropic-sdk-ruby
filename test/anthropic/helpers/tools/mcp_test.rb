@@ -405,6 +405,87 @@ class Anthropic::Test::Helpers::Tools::McpTest < Minitest::Test
     assert_equal('{"answer":42}', result)
   end
 
+  def test_structured_error_content_survives_conversion
+    [{"code" => "unavailable", "retryable" => false, "detail" => {"attempt" => 0}}, {}].each do |details|
+      ["content", nil].each do |content_key|
+        result = {"isError" => true, "structuredContent" => details}
+        result[content_key] = [] if content_key
+        [result, {"result" => result}].each do |response|
+          original = Marshal.load(Marshal.dump(response))
+          error = assert_raises(Anthropic::Errors::Error) do
+            Anthropic::Helpers::Tools::Mcp.send(:convert_tool_result, response)
+          end
+          assert_equal(details, JSON.parse(error.message))
+          assert_equal(original, response)
+        end
+      end
+    end
+  end
+
+  def test_structured_error_with_symbol_keys_and_existing_text_precedence
+    details = {code: "quota", remaining: 0}
+    error = assert_raises(Anthropic::Errors::Error) do
+      Anthropic::Helpers::Tools::Mcp.send(
+        :convert_tool_result, {result: {isError: true, content: [], structuredContent: details}}
+      )
+    end
+    assert_equal({"code" => "quota", "remaining" => 0}, JSON.parse(error.message))
+    error = assert_raises(Anthropic::Errors::Error) do
+      Anthropic::Helpers::Tools::Mcp.send(
+        :convert_tool_result,
+        {isError: true, content: [{type: "text", text: "explicit error"}], structuredContent: details}
+      )
+    end
+    assert_equal("explicit error", error.message)
+  end
+
+  def test_structured_error_missing_payload_keeps_generic_message
+    [nil, {}].each do |extra|
+      result = {isError: true, content: []}
+      result[:structuredContent] = nil if extra
+      error = assert_raises(Anthropic::Errors::Error) do
+        Anthropic::Helpers::Tools::Mcp.send(:convert_tool_result, result)
+      end
+      assert_equal("MCP tool reported an error", error.message)
+    end
+  end
+
+  def test_runner_returns_structured_error_details_to_the_model
+    details = {"code" => "unavailable", "retryable" => false, "attempt" => 0}
+    fake_mcp = FakeMcpClient.new(
+      responses: {
+        "boom" => {
+          "isError" => true,
+          "content" => [],
+          "structuredContent" => details
+        }
+      }
+    )
+    tool = Anthropic::Mcp.tool(
+      {name: "boom", inputSchema: {type: "object", properties: {}, required: []}}, fake_mcp
+    )
+    anthropic = Anthropic::Client.new(base_url: "http://localhost", api_key: "test-key")
+    requests = []
+    stub_anthropic_with_capture(
+      ->(request) { requests << JSON.parse(request.body) },
+      tool_use_response(id: "m1", tool_use: {id: "t1", name: "boom", input: {}}),
+      text_response(id: "m2", text: "handled")
+    )
+    anthropic.beta.messages.tool_runner(
+      max_tokens: 1024,
+      messages: [{role: :user, content: "run boom"}],
+      model: :"claude-sonnet-4-5",
+      tools: [tool]
+    ).each_message { _1 }
+    assert_equal(2, requests.length)
+    result = requests.last.fetch("messages").last.fetch("content").first
+    assert_equal("tool_result", result.fetch("type"))
+    assert_equal("t1", result.fetch("tool_use_id"))
+    assert_equal(true, result.fetch("is_error"))
+    assert_equal(details, JSON.parse(result.fetch("content")))
+    assert_equal([{name: "boom", arguments: {}}], fake_mcp.calls)
+  end
+
   # -- helpers ---------------------------------------------------------------
 
   def stub_anthropic(*responses)

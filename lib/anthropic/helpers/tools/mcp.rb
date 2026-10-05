@@ -261,6 +261,9 @@ module Anthropic
             structured = hkey(result, :structuredContent)
 
             if is_error
+              if content_items.empty? && !structured.nil?
+                raise Anthropic::Errors::Error, JSON.generate(structured)
+              end
               blocks = content_items.map { content(_1) }
               raise Anthropic::Errors::Error, render_error_blocks(blocks)
             end
