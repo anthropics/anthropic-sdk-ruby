@@ -405,6 +405,113 @@ class Anthropic::Test::Helpers::Tools::McpTest < Minitest::Test
     assert_equal('{"answer":42}', result)
   end
 
+  def test_image_media_type_variants_preserve_data_and_cache_control
+    %w[image/jpeg image/png image/gif image/webp].each do |expected|
+      [
+        expected,
+        expected.upcase,
+        "#{expected}; charset=binary",
+        " #{expected.upcase} ; profile=\"A;B\" "
+      ].each do |mime|
+        input = {"type" => "image", "data" => "AQID", "mimeType" => mime.freeze}.freeze
+        block = Anthropic::Mcp.content(input, cache_control: {type: "ephemeral"})
+        assert_equal(
+          {
+            type: :image,
+            source: {type: :base64, data: "AQID", media_type: expected},
+            cache_control: {type: "ephemeral"}
+          },
+          block
+        )
+        assert_equal(mime, input["mimeType"])
+        message = Anthropic::Mcp.message({role: :user, content: input})
+        assert_equal(expected, message[:content][0][:source][:media_type])
+      end
+    end
+  end
+
+  def test_resource_media_type_variants_preserve_all_resources_and_file_metadata
+    resources = [
+      {uri: "file:///image.png", mimeType: ' IMAGE/PNG ; profile="A;B" ', blob: "AQID"},
+      {uri: "file:///doc.pdf", mimeType: "Application/PDF; version=1.7", blob: "AQID"},
+      {uri: "file:///note.txt", mimeType: "TEXT/PLAIN; charset=utf-8", text: "héllo"}
+    ]
+    original = Marshal.load(Marshal.dump(resources))
+    blocks = Anthropic::Mcp.resource_to_contents(resources, cache_control: {type: "ephemeral"})
+    assert_equal([:image, :document, :document], blocks.map { _1[:type] })
+    assert_equal(%w[image/png application/pdf text/plain], blocks.map { _1[:source][:media_type] })
+    assert_equal(%w[AQID AQID héllo], blocks.map { _1[:source][:data] })
+    assert_equal([{type: "ephemeral"}] * 3, blocks.map { _1[:cache_control] })
+    resources.each_with_index do |resource, i|
+      embedded = Anthropic::Mcp.content({type: "resource", resource: resource})
+      assert_equal(blocks[i][:source], embedded[:source])
+    end
+    files = Anthropic::Mcp.resource_to_files(resources)
+    assert_equal(resources.map { _1[:mimeType] }, files.map(&:content_type))
+    assert_equal(["\x01\x02\x03", "\x01\x02\x03", "héllo"], files.map { _1.content.string })
+    assert_equal(original, resources)
+  end
+
+  def test_normalized_media_types_keep_unsupported_and_missing_blob_checks
+    ["IMAGE/BMP; version=1", "application/octet-stream", "", "; charset=utf-8"].each do |mime|
+      assert_raises(Anthropic::Mcp::UnsupportedMCPValueError) do
+        Anthropic::Mcp.content({type: "image", data: "AQID", mimeType: mime})
+      end
+      assert_raises(Anthropic::Mcp::UnsupportedMCPValueError) do
+        Anthropic::Mcp.resource_to_contents([{uri: "file:///x", mimeType: mime, blob: "AQID"}])
+      end
+    end
+    ["IMAGE/PNG; version=1", "APPLICATION/PDF; version=1"].each do |mime|
+      error = assert_raises(Anthropic::Mcp::UnsupportedMCPValueError) do
+        Anthropic::Mcp.resource_to_contents([{uri: "file:///x", mimeType: mime, text: "not a blob"}])
+      end
+      assert_match(/must have blob data/, error.message)
+    end
+    blocks = Anthropic::Mcp.resource_to_contents([{uri: "file:///x", text: "default"}])
+    assert_equal("default", blocks[0][:source][:data])
+  end
+
+  def test_runner_returns_normalized_mcp_image_results
+    fake = FakeMcpClient.new(
+      responses: {
+        "image" => {
+          "result" => {
+            "content" => [
+              {
+                "type" => "image",
+                "data" => "AQID",
+                "mimeType" => "IMAGE/PNG; profile=srgb"
+              }
+            ]
+          }
+        }
+      }
+    )
+    definition = MCP::Client::Tool.new(name: "image", description: nil, input_schema: {"type" => "object"})
+    tool = Anthropic::Mcp.tool(definition, fake)
+    client = Anthropic::Client.new(base_url: "http://localhost", api_key: "test-key")
+    bodies = []
+    stub_anthropic_with_capture(
+      ->(req) { bodies << JSON.parse(req.body) },
+      tool_use_response(id: "m1", tool_use: {id: "t1", name: "image", input: {}}),
+      text_response(id: "m2", text: "done")
+    )
+    client.beta.messages.tool_runner(
+      max_tokens: 1024,
+      messages: [{role: :user, content: "get image"}],
+      model: :"claude-sonnet-4-5",
+      tools: [tool]
+    ).each_message { _1 }
+    result = bodies.last["messages"].last["content"].first
+    assert_equal("t1", result["tool_use_id"])
+    refute(result["is_error"])
+    assert_equal(
+      [{"type" => "image", "source" => {"type" => "base64", "data" => "AQID", "media_type" => "image/png"}}],
+      result["content"]
+    )
+    assert_equal([{name: "image", arguments: {}}], fake.calls)
+  end
+
   # -- helpers ---------------------------------------------------------------
 
   def stub_anthropic(*responses)

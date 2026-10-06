@@ -280,9 +280,10 @@ module Anthropic
               {type: :text, text: text.to_s}
             when "image"
               data = hkey(h, :data)
-              mime = hkey(h, :mimeType)
+              raw_mime = hkey(h, :mimeType)
+              mime = normalize_mime_type(raw_mime)
               unless supported_image_mime?(mime)
-                raise UnsupportedMCPValueError, "Unsupported image MIME type: #{mime}"
+                raise UnsupportedMCPValueError, "Unsupported image MIME type: #{raw_mime}"
               end
               {type: :image, source: {type: :base64, data: data, media_type: mime}}
             when "resource"
@@ -295,7 +296,8 @@ module Anthropic
           end
 
           private def resource_contents_to_block(resource)
-            mime = hkey(resource, :mimeType)
+            raw_mime = hkey(resource, :mimeType)
+            mime = normalize_mime_type(raw_mime)
             uri = hkey(resource, :uri)
             text = hkey(resource, :text)
             # `mcp/sdk` schema uses `blob`; the Ruby `mcp` gem's BlobContents#to_h also uses `blob`.
@@ -328,7 +330,7 @@ module Anthropic
               return {type: :document, source: {type: :text, data: data, media_type: "text/plain"}}
             end
 
-            raise UnsupportedMCPValueError, "Unsupported MIME type \"#{mime}\" for resource: #{uri}"
+            raise UnsupportedMCPValueError, "Unsupported MIME type \"#{raw_mime}\" for resource: #{uri}"
           end
 
           private def extract_resource_contents(result)
@@ -459,6 +461,12 @@ module Anthropic
 
             raise UnsupportedMCPValueError,
                   "Expected #{label} to be a Hash or to-hashable object, got #{obj.class}"
+          end
+
+          private def normalize_mime_type(mime)
+            return mime unless mime.is_a?(String)
+
+            mime.partition(";").first.strip.downcase
           end
 
           private def supported_image_mime?(mime)
