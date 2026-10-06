@@ -413,6 +413,8 @@ module Anthropic
 
   class ServerToolCaller20260120 = Anthropic::Models::ServerToolCaller20260120
 
+  class ServerToolsCapability = Anthropic::Models::ServerToolsCapability
+
   class ServerToolUsage = Anthropic::Models::ServerToolUsage
 
   class ServerToolUseBlock = Anthropic::Models::ServerToolUseBlock

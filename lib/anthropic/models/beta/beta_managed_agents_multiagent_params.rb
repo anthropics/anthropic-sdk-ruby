@@ -22,8 +22,7 @@ module Anthropic
         required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsMultiagentParams::Type }
 
         # @!method initialize(agents:, type:)
-        #   Multiagent orchestration configuration. Currently supports the `coordinator`
-        #   topology.
+        #   Multiagent orchestration configuration.
         #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams} for more details.

@@ -47,8 +47,7 @@ module Anthropic
         optional :metadata, Anthropic::Internal::Type::HashOf[String]
 
         # @!attribute multiagent
-        #   Multiagent orchestration configuration. Currently supports the `coordinator`
-        #   topology with a roster of 1-20 agents.
+        #   Multiagent orchestration configuration.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams, nil]
         optional :multiagent, -> { Anthropic::Beta::BetaManagedAgentsMultiagentParams }, nil?: true
@@ -105,7 +104,7 @@ module Anthropic
         #
         #   @param metadata [Hash{Symbol=>String}] Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up t
         #
-        #   @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams, nil] Multiagent orchestration configuration. Currently supports the `coordinator` top
+        #   @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams, nil] Multiagent orchestration configuration.
         #
         #   @param skills [Array<Anthropic::Models::Beta::BetaManagedAgentsAnthropicSkillParams, Anthropic::Models::Beta::BetaManagedAgentsCustomSkillParams>] Skills available to the agent.
         #

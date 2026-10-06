@@ -87,6 +87,7 @@ module Anthropic
             ?enabled: bool?,
             ?max_content_tokens: Integer?,
             ?permission_policy: Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfigParams::permission_policy?,
+            ?url_sources: Anthropic::Beta::BetaManagedAgentsWebFetchURLSourcesParams?,
             ?name: :web_fetch
           ) -> Anthropic::Beta::BetaManagedAgentsWebFetchToolConfigParams
           | (
@@ -121,6 +122,7 @@ module Anthropic
             ?allowed_domains: ::Array[String],
             ?blocked_domains: ::Array[String],
             ?max_content_tokens: Integer?,
+            ?url_sources: Anthropic::Beta::BetaManagedAgentsWebFetchURLSourcesParams?,
             ?user_location: Anthropic::Beta::BetaManagedAgentsUserLocation?
           ) -> Anthropic::Models::Beta::beta_managed_agents_agent_tool_config_params
       end

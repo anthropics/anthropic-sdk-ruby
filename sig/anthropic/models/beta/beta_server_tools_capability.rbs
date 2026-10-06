@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    class BetaServerToolsCapability = Beta::BetaServerToolsCapability
+
+    module Beta
+      type beta_server_tools_capability =
+        {
+          code_execution: Anthropic::Beta::BetaCapabilitySupport,
+          supported: bool,
+          web_search: Anthropic::Beta::BetaCapabilitySupport
+        }
+
+      class BetaServerToolsCapability < Anthropic::Internal::Type::BaseModel
+        attr_accessor code_execution: Anthropic::Beta::BetaCapabilitySupport
+
+        attr_accessor supported: bool
+
+        attr_accessor web_search: Anthropic::Beta::BetaCapabilitySupport
+
+        def initialize: (
+          code_execution: Anthropic::Beta::BetaCapabilitySupport,
+          supported: bool,
+          web_search: Anthropic::Beta::BetaCapabilitySupport
+        ) -> void
+
+        def to_hash: -> {
+          code_execution: Anthropic::Beta::BetaCapabilitySupport,
+          supported: bool,
+          web_search: Anthropic::Beta::BetaCapabilitySupport
+        }
+      end
+    end
+  end
+end

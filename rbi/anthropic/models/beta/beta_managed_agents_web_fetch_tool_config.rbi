@@ -32,6 +32,25 @@ module Anthropic
         sig { returns(Symbol) }
         attr_accessor :type
 
+        # Which sources contribute URLs the tool may fetch, always in the object form.
+        # Null when not set, which allows every source.
+        sig do
+          returns(
+            T.nilable(Anthropic::Beta::BetaManagedAgentsWebFetchURLSources)
+          )
+        end
+        attr_reader :url_sources
+
+        sig do
+          params(
+            url_sources:
+              T.nilable(
+                Anthropic::Beta::BetaManagedAgentsWebFetchURLSources::OrHash
+              )
+          ).void
+        end
+        attr_writer :url_sources
+
         sig { returns(T.nilable(T::Array[String])) }
         attr_reader :allowed_domains
 
@@ -57,6 +76,10 @@ module Anthropic
                 Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy::OrHash,
                 Anthropic::Beta::BetaManagedAgentsAutoPolicy::OrHash
               ),
+            url_sources:
+              T.nilable(
+                Anthropic::Beta::BetaManagedAgentsWebFetchURLSources::OrHash
+              ),
             allowed_domains: T::Array[String],
             blocked_domains: T::Array[String],
             max_content_tokens: T.nilable(Integer),
@@ -68,6 +91,9 @@ module Anthropic
           enabled:,
           # Permission policy for tool execution.
           permission_policy:,
+          # Which sources contribute URLs the tool may fetch, always in the object form.
+          # Null when not set, which allows every source.
+          url_sources:,
           allowed_domains: nil,
           blocked_domains: nil,
           max_content_tokens: nil,
@@ -84,6 +110,8 @@ module Anthropic
               permission_policy:
                 Anthropic::Beta::BetaManagedAgentsWebFetchToolConfig::PermissionPolicy::Variants,
               type: Symbol,
+              url_sources:
+                T.nilable(Anthropic::Beta::BetaManagedAgentsWebFetchURLSources),
               allowed_domains: T::Array[String],
               blocked_domains: T::Array[String],
               max_content_tokens: T.nilable(Integer)

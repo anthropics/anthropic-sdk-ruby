@@ -339,6 +339,9 @@ module Anthropic
       )
       end
 
+      # Hand-written: Anthropic::Resources::Messages#stream (custom code, not generated).
+      # Its sig and parameters copy #stream_raw's below; update them by hand when those change.
+
       # See {Anthropic::Resources::Messages#create} for non-streaming counterpart.
       #
       # Send a structured list of input messages with text and/or image content, and the
@@ -671,6 +674,18 @@ module Anthropic
         request_options: {}
       )
       end
+      # End of hand-written Anthropic::Resources::Messages#stream.
+
+      # See {Anthropic::Resources::Messages#create} for non-streaming counterpart.
+      #
+      # Send a structured list of input messages with text and/or image content, and the
+      # model will generate the next message in the conversation.
+      #
+      # The Messages API can be used for either single queries or stateless multi-turn
+      # conversations.
+      #
+      # Learn more about the Messages API in our
+      # [user guide](https://platform.claude.com/docs/en/get-started)
       sig do
         params(
           max_tokens: Integer,
@@ -691,6 +706,7 @@ module Anthropic
             T.any(
               Anthropic::ThinkingConfigEnabled::OrHash,
               Anthropic::ThinkingConfigDisabled::OrHash,
+              Anthropic::ThinkingConfigBetweenTools::OrHash,
               Anthropic::ThinkingConfigAdaptive::OrHash
             ),
           tool_choice:

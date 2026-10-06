@@ -14,6 +14,10 @@ on:
       - 'stl-preview-head/**'
       - 'stl-preview-base/**'
 
+# Keep this read-only: some jobs below run gems from a cache that an earlier run could have altered.
+permissions:
+  contents: read
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref == 'refs/heads/main' && github.sha || github.ref }}
   cancel-in-progress: true
@@ -68,9 +72,11 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@c4e5b1316158f92e3d49443a9d58b31d25ac0f8f # v1.306.0
         with:
-          bundler-cache: false
-      - run: |-
-          bundle install
+          ruby-version: '3.4'
+          bundler-cache: true
+        env:
+          BUNDLE_GEMFILE: lint/Gemfile
+          BUNDLE_APP_CONFIG: ${{ github.workspace }}/.bundle
 
       - name: Run lints
         run: ./scripts/lint
@@ -84,9 +90,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@c4e5b1316158f92e3d49443a9d58b31d25ac0f8f # v1.306.0
         with:
-          bundler-cache: false
-      - run: |-
-          bundle install
+          bundler-cache: true
 
       - name: Run tests
         run: ./scripts/test
@@ -113,10 +117,11 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@c4e5b1316158f92e3d49443a9d58b31d25ac0f8f # v1.306.0
         with:
-          bundler-cache: false
-
-      - run: |-
-          bundle install
+          ruby-version: '3.4'
+          bundler-cache: true
+        env:
+          BUNDLE_GEMFILE: lint/Gemfile
+          BUNDLE_APP_CONFIG: ${{ github.workspace }}/.bundle
 
       - name: Determine base SHA
         run: |

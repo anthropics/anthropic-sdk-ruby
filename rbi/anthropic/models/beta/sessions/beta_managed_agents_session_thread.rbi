@@ -104,7 +104,7 @@ module Anthropic
           attr_writer :usage
 
           # An execution thread within a `session`. Each session has one primary thread plus
-          # zero or more child threads spawned by the coordinator.
+          # zero or more child threads.
           sig do
             params(
               id: String,

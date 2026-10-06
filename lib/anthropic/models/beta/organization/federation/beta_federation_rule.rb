@@ -89,8 +89,9 @@ module Anthropic
             required :oauth_scope, String
 
             # @!attribute target
-            #   Identity that tokens minted via this rule act as. Currently always a
-            #   `service_account` target.
+            #   What this rule targets. Check `type` before reading the other fields. Tokens
+            #   minted via a rule whose target `type` is `service_account` act as that service
+            #   account.
             #
             #   @return [Anthropic::Models::Beta::Organization::Federation::BetaServiceAccountTarget]
             required :target, -> { Anthropic::Beta::Organization::Federation::BetaServiceAccountTarget }
@@ -176,7 +177,7 @@ module Anthropic
             #
             #   @param oauth_scope [String] Space-separated OAuth scopes granted on the minted token.
             #
-            #   @param target [Anthropic::Models::Beta::Organization::Federation::BetaServiceAccountTarget] Identity that tokens minted via this rule act as. Currently always a `service_ac
+            #   @param target [Anthropic::Models::Beta::Organization::Federation::BetaServiceAccountTarget] What this rule targets. Check `type` before reading the other fields. Tokens min
             #
             #   @param token_lifetime_seconds [Integer] Lifetime in seconds of access tokens minted via this rule. Minted tokens are cap
             #

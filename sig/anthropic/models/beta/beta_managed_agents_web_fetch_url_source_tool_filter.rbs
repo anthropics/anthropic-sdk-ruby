@@ -1,0 +1,53 @@
+module Anthropic
+  module Models
+    module BetaManagedAgentsWebFetchURLSourceToolFilter = Beta::BetaManagedAgentsWebFetchURLSourceToolFilter
+
+    module Beta
+      type beta_managed_agents_web_fetch_url_source_tool_filter =
+        Anthropic::Beta::BetaManagedAgentsWebFetchURLSourceAll
+        | Anthropic::Beta::BetaManagedAgentsWebFetchURLSourceNone
+        | Anthropic::Beta::BetaManagedAgentsWebFetchURLSourceOnly
+        | Anthropic::Beta::BetaManagedAgentsWebFetchURLSourceExcept
+
+      module BetaManagedAgentsWebFetchURLSourceToolFilter
+        extend Anthropic::Internal::Type::Union
+
+        type type_ = :all | :none | :only | :except
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          ALL: :all
+          NONE: :none
+          ONLY: :only
+          EXCEPT: :except
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsWebFetchURLSourceToolFilter::type_]
+        end
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_web_fetch_url_source_tool_filter]
+
+        def self.new:
+          (
+            type: :all | "all"
+          ) -> Anthropic::Beta::BetaManagedAgentsWebFetchURLSourceAll
+          | (
+            type: :none | "none"
+          ) -> Anthropic::Beta::BetaManagedAgentsWebFetchURLSourceNone
+          | (
+            type: :only | "only",
+            tools: ::Array[Anthropic::Beta::BetaManagedAgentsWebFetchURLSourceToolReference]
+          ) -> Anthropic::Beta::BetaManagedAgentsWebFetchURLSourceOnly
+          | (
+            type: :except | "except",
+            tools: ::Array[Anthropic::Beta::BetaManagedAgentsWebFetchURLSourceToolReference]
+          ) -> Anthropic::Beta::BetaManagedAgentsWebFetchURLSourceExcept
+          | (
+            type: Anthropic::Models::Beta::BetaManagedAgentsWebFetchURLSourceToolFilter::type_
+            | String,
+            ?tools: ::Array[Anthropic::Beta::BetaManagedAgentsWebFetchURLSourceToolReference]
+          ) -> Anthropic::Models::Beta::beta_managed_agents_web_fetch_url_source_tool_filter
+      end
+    end
+  end
+end

@@ -116,22 +116,27 @@ module Anthropic
                 ),
               period:
                 Anthropic::Beta::Organization::BetaSpendLimitPeriod::OrSymbol,
+              betas:
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(Anthropic::Beta::Organization::BetaSpendLimit)
           end
           def set(
-            # Limit amount as a non-negative integer decimal string in the minor unit of the
-            # organization's billing currency (cents for USD): "50000" is $500.00. `null` sets
-            # an explicit no-limit override for this scope and `period` only — each period
-            # resolves independently, so caps for other periods still apply.
+            # Body param: Limit amount as a non-negative integer decimal string in the minor
+            # unit of the organization's billing currency (cents for USD): "50000" is $500.00.
+            # `null` sets an explicit no-limit override for this scope and `period` only —
+            # each period resolves independently, so caps for other periods still apply.
             amount:,
-            # What the limit applies to. Claude Enterprise organizations set `user` limits.
-            # Claude Console organizations set `organization` and `workspace` limits. Any
-            # other combination returns 400. Setting `organization` and `workspace` limits
-            # through the API is in an early access preview. To request access, contact your
-            # Anthropic account team.
+            # Body param: What the limit applies to. Claude Enterprise organizations set
+            # `user` limits. Claude Console organizations set `organization` and `workspace`
+            # limits. Any other combination returns 400. Setting `organization` and
+            # `workspace` limits through the API is in an early access preview. To request
+            # access, contact your Anthropic account team.
             scope:,
+            # Body param
             period: nil,
+            # Header param: Optional header to specify the beta version(s) you want to use.
+            betas: nil,
             request_options: {}
           )
           end

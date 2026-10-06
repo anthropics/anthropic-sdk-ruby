@@ -29,6 +29,7 @@ module Anthropic
             amount: String?,
             scope: Anthropic::Models::Beta::Organization::SpendLimitSetParams::scope,
             ?period: Anthropic::Models::Beta::Organization::beta_spend_limit_period,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Beta::Organization::BetaSpendLimit
 

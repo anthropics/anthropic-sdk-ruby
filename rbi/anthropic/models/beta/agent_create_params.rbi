@@ -69,8 +69,7 @@ module Anthropic
         sig { params(metadata: T::Hash[Symbol, String]).void }
         attr_writer :metadata
 
-        # Multiagent orchestration configuration. Currently supports the `coordinator`
-        # topology with a roster of 1-20 agents.
+        # Multiagent orchestration configuration.
         sig do
           returns(T.nilable(Anthropic::Beta::BetaManagedAgentsMultiagentParams))
         end
@@ -236,8 +235,7 @@ module Anthropic
           # Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up
           # to 512 chars.
           metadata: nil,
-          # Multiagent orchestration configuration. Currently supports the `coordinator`
-          # topology with a roster of 1-20 agents.
+          # Multiagent orchestration configuration.
           multiagent: nil,
           # Skills available to the agent.
           skills: nil,

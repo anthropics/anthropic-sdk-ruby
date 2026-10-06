@@ -1,0 +1,29 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsWebFetchURLSourceOnly = Beta::BetaManagedAgentsWebFetchURLSourceOnly
+
+    module Beta
+      type beta_managed_agents_web_fetch_url_source_only =
+        {
+          tools: ::Array[Anthropic::Beta::BetaManagedAgentsWebFetchURLSourceToolReference],
+          type: :only
+        }
+
+      class BetaManagedAgentsWebFetchURLSourceOnly < Anthropic::Internal::Type::BaseModel
+        attr_accessor tools: ::Array[Anthropic::Beta::BetaManagedAgentsWebFetchURLSourceToolReference]
+
+        attr_accessor type: :only
+
+        def initialize: (
+          tools: ::Array[Anthropic::Beta::BetaManagedAgentsWebFetchURLSourceToolReference],
+          ?type: :only
+        ) -> void
+
+        def to_hash: -> {
+          tools: ::Array[Anthropic::Beta::BetaManagedAgentsWebFetchURLSourceToolReference],
+          type: :only
+        }
+      end
+    end
+  end
+end

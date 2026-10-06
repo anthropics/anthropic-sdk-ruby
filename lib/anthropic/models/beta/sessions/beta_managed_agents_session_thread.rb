@@ -76,7 +76,7 @@ module Anthropic
 
           # @!method initialize(id:, agent:, archived_at:, created_at:, parent_thread_id:, session_id:, stats:, status:, type:, updated_at:, usage:)
           #   An execution thread within a `session`. Each session has one primary thread plus
-          #   zero or more child threads spawned by the coordinator.
+          #   zero or more child threads.
           #
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread} for more

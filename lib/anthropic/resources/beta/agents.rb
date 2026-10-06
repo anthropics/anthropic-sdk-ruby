@@ -24,7 +24,7 @@ module Anthropic
         #
         # @param metadata [Hash{Symbol=>String}] Body param: Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars,
         #
-        # @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams, nil] Body param: Multiagent orchestration configuration. Currently supports the `coor
+        # @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams, nil] Body param: Multiagent orchestration configuration.
         #
         # @param skills [Array<Anthropic::Models::Beta::BetaManagedAgentsAnthropicSkillParams, Anthropic::Models::Beta::BetaManagedAgentsCustomSkillParams>] Body param: Skills available to the agent.
         #

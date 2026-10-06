@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module BetaManagedAgentsWebFetchURLSourceUserInputParams = Beta::BetaManagedAgentsWebFetchURLSourceUserInputParams
+
+    module Beta
+      type beta_managed_agents_web_fetch_url_source_user_input_params =
+        Anthropic::Models::Beta::beta_managed_agents_web_fetch_url_source_shorthand
+        | Anthropic::Models::Beta::beta_managed_agents_web_fetch_url_source_user_input
+
+      module BetaManagedAgentsWebFetchURLSourceUserInputParams
+        extend Anthropic::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_web_fetch_url_source_user_input_params]
+      end
+    end
+  end
+end

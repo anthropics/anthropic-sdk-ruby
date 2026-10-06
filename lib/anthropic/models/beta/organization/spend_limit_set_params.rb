@@ -33,7 +33,13 @@ module Anthropic
           #   @return [Symbol, Anthropic::Models::Beta::Organization::BetaSpendLimitPeriod, nil]
           optional :period, enum: -> { Anthropic::Beta::Organization::BetaSpendLimitPeriod }
 
-          # @!method initialize(amount:, scope:, period: nil, request_options: {})
+          # @!attribute betas
+          #   Optional header to specify the beta version(s) you want to use.
+          #
+          #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
+          optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
+
+          # @!method initialize(amount:, scope:, period: nil, betas: nil, request_options: {})
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Organization::SpendLimitSetParams} for more details.
           #
@@ -42,6 +48,8 @@ module Anthropic
           #   @param scope [Anthropic::Models::Beta::Organization::BetaSpendLimitUserScope, Anthropic::Models::Beta::Organization::BetaSpendLimitOrganizationScope, Anthropic::Models::Beta::Organization::BetaSpendLimitWorkspaceScope] What the limit applies to. Claude Enterprise organizations set `user` limits. Cl
           #
           #   @param period [Symbol, Anthropic::Models::Beta::Organization::BetaSpendLimitPeriod]
+          #
+          #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
           #
           #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 

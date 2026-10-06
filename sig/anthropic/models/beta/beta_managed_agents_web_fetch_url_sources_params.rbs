@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsWebFetchURLSourcesParams = Beta::BetaManagedAgentsWebFetchURLSourcesParams
+
+    module Beta
+      type beta_managed_agents_web_fetch_url_sources_params =
+        {
+          client_tool_results: Anthropic::Models::Beta::beta_managed_agents_web_fetch_url_source_tool_filter_params?,
+          server_tool_results: Anthropic::Models::Beta::beta_managed_agents_web_fetch_url_source_tool_filter_params?,
+          user_input: Anthropic::Models::Beta::beta_managed_agents_web_fetch_url_source_user_input_params?
+        }
+
+      class BetaManagedAgentsWebFetchURLSourcesParams < Anthropic::Internal::Type::BaseModel
+        attr_accessor client_tool_results: Anthropic::Models::Beta::beta_managed_agents_web_fetch_url_source_tool_filter_params?
+
+        attr_accessor server_tool_results: Anthropic::Models::Beta::beta_managed_agents_web_fetch_url_source_tool_filter_params?
+
+        attr_accessor user_input: Anthropic::Models::Beta::beta_managed_agents_web_fetch_url_source_user_input_params?
+
+        def initialize: (
+          ?client_tool_results: Anthropic::Models::Beta::beta_managed_agents_web_fetch_url_source_tool_filter_params?,
+          ?server_tool_results: Anthropic::Models::Beta::beta_managed_agents_web_fetch_url_source_tool_filter_params?,
+          ?user_input: Anthropic::Models::Beta::beta_managed_agents_web_fetch_url_source_user_input_params?
+        ) -> void
+
+        def to_hash: -> {
+          client_tool_results: Anthropic::Models::Beta::beta_managed_agents_web_fetch_url_source_tool_filter_params?,
+          server_tool_results: Anthropic::Models::Beta::beta_managed_agents_web_fetch_url_source_tool_filter_params?,
+          user_input: Anthropic::Models::Beta::beta_managed_agents_web_fetch_url_source_user_input_params?
+        }
+      end
+    end
+  end
+end

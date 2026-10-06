@@ -109,13 +109,15 @@ module Anthropic
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Organization::SpendLimitSetParams} for more details.
           #
-          # @overload set(amount:, scope:, period: nil, request_options: {})
+          # @overload set(amount:, scope:, period: nil, betas: nil, request_options: {})
           #
-          # @param amount [String, nil] Limit amount as a non-negative integer decimal string in the minor unit of the o
+          # @param amount [String, nil] Body param: Limit amount as a non-negative integer decimal string in the minor u
           #
-          # @param scope [Anthropic::Models::Beta::Organization::BetaSpendLimitUserScope, Anthropic::Models::Beta::Organization::BetaSpendLimitOrganizationScope, Anthropic::Models::Beta::Organization::BetaSpendLimitWorkspaceScope] What the limit applies to. Claude Enterprise organizations set `user` limits. Cl
+          # @param scope [Anthropic::Models::Beta::Organization::BetaSpendLimitUserScope, Anthropic::Models::Beta::Organization::BetaSpendLimitOrganizationScope, Anthropic::Models::Beta::Organization::BetaSpendLimitWorkspaceScope] Body param: What the limit applies to. Claude Enterprise organizations set `user
           #
-          # @param period [Symbol, Anthropic::Models::Beta::Organization::BetaSpendLimitPeriod]
+          # @param period [Symbol, Anthropic::Models::Beta::Organization::BetaSpendLimitPeriod] Body param
+          #
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -124,10 +126,12 @@ module Anthropic
           # @see Anthropic::Models::Beta::Organization::SpendLimitSetParams
           def set(params)
             parsed, options = Anthropic::Beta::Organization::SpendLimitSetParams.dump_request(params)
+            header_params = {betas: "anthropic-beta"}
             @client.request(
               method: :post,
               path: "v1/organizations/spend_limits?beta=true",
-              body: parsed,
+              headers: parsed.slice(*header_params.keys).transform_keys(header_params),
+              body: parsed.except(*header_params.keys),
               model: Anthropic::Beta::Organization::BetaSpendLimit,
               options: options
             )

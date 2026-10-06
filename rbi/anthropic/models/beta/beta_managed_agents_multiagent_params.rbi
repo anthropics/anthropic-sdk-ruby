@@ -41,8 +41,7 @@ module Anthropic
         end
         attr_accessor :type
 
-        # Multiagent orchestration configuration. Currently supports the `coordinator`
-        # topology.
+        # Multiagent orchestration configuration.
         sig do
           params(
             agents:

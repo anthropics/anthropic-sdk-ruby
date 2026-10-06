@@ -6,7 +6,7 @@ class Anthropic::Test::Resources::Beta::Sessions::ThreadsTest < Anthropic::Test:
   def test_retrieve_required_params
     response =
       @anthropic.beta.sessions.threads.retrieve(
-        "sthr_011CZkZVWa6oIjw0rgXZpnBt",
+        "sthr_011CZkZVWa6oJjw1rgXZpnBt",
         session_id: "sesn_011CZkZAtmR3yMPDzynEDxu7"
       )
 
@@ -65,7 +65,7 @@ class Anthropic::Test::Resources::Beta::Sessions::ThreadsTest < Anthropic::Test:
   def test_archive_required_params
     response =
       @anthropic.beta.sessions.threads.archive(
-        "sthr_011CZkZVWa6oIjw0rgXZpnBt",
+        "sthr_011CZkZVWa6oJjw1rgXZpnBt",
         session_id: "sesn_011CZkZAtmR3yMPDzynEDxu7"
       )
 

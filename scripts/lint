@@ -4,6 +4,15 @@ set -e
 
 cd -- "$(dirname -- "$0")/.."
 
+# the linters have their own bundle; `lint/Gemfile` says why
+export BUNDLE_GEMFILE="lint/Gemfile"
+# Bundler would look for its settings beside that `Gemfile`: keep it reading this repository's `.bundle/config`
+export BUNDLE_APP_CONFIG="${BUNDLE_APP_CONFIG:-$PWD/.bundle}"
+# with no `tapioca` in the bundle, `srb` would also check the `rbi` folder of every gem in it, and some fail
+export SRB_SKIP_GEM_RBIS=1
+
+bundle check >/dev/null 2>&1 || bundle install
+
 echo "==> Running linters"
 
 exec -- bundle exec rake lint "$@"

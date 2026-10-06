@@ -56,6 +56,23 @@ module Anthropic
           end
           attr_writer :period
 
+          # Optional header to specify the beta version(s) you want to use.
+          sig do
+            returns(
+              T.nilable(
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)]
+              )
+            )
+          end
+          attr_reader :betas
+
+          sig do
+            params(
+              betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)]
+            ).void
+          end
+          attr_writer :betas
+
           sig do
             params(
               amount: T.nilable(String),
@@ -67,6 +84,8 @@ module Anthropic
                 ),
               period:
                 Anthropic::Beta::Organization::BetaSpendLimitPeriod::OrSymbol,
+              betas:
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(T.attached_class)
           end
@@ -83,6 +102,8 @@ module Anthropic
             # Anthropic account team.
             scope:,
             period: nil,
+            # Optional header to specify the beta version(s) you want to use.
+            betas: nil,
             request_options: {}
           )
           end
@@ -99,6 +120,8 @@ module Anthropic
                   ),
                 period:
                   Anthropic::Beta::Organization::BetaSpendLimitPeriod::OrSymbol,
+                betas:
+                  T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
                 request_options: Anthropic::RequestOptions
               }
             )

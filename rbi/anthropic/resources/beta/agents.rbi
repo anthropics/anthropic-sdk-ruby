@@ -66,8 +66,7 @@ module Anthropic
           # Body param: Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars,
           # values up to 512 chars.
           metadata: nil,
-          # Body param: Multiagent orchestration configuration. Currently supports the
-          # `coordinator` topology with a roster of 1-20 agents.
+          # Body param: Multiagent orchestration configuration.
           multiagent: nil,
           # Body param: Skills available to the agent.
           skills: nil,

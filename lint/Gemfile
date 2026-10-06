@@ -1,0 +1,19 @@
+# frozen_string_literal: true
+
+# The gems that `./scripts/lint` uses. They have a `Gemfile` of their own so that they may require a newer
+# Ruby than the oldest one this library supports.
+
+source "https://rubygems.org"
+
+# `steep` takes the type signatures for `base64` from the `base64` gem
+gem "base64"
+# same minimum version as in the main `Gemfile`, which gives the reason
+gem "concurrent-ruby", ">= 1.3.7"
+# not a linter: the Rakefile requires `minitest/test_task` as it loads
+gem "minitest"
+
+gem "rake"
+gem "rbs"
+gem "rubocop"
+gem "sorbet"
+gem "steep"
