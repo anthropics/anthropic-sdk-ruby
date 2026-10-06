@@ -726,6 +726,10 @@ module Anthropic
           block["thinking"] = (block["thinking"] || +"") << delta["thinking"]
         when "signature_delta"
           block["signature"] = delta["signature"]
+        when "compaction_delta"
+          # Compaction deltas replace the start shell with complete values.
+          block["content"] = delta["content"] if delta.key?("content")
+          block["encrypted_content"] = delta["encrypted_content"] if delta.key?("encrypted_content")
         end
       end
 
