@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    type browser_coordinate_target =
+      { type: :coordinate, x: Integer, y_: Integer }
+
+    class BrowserCoordinateTarget < Anthropic::Internal::Type::BaseModel
+      attr_accessor type: :coordinate
+
+      attr_accessor x: Integer
+
+      attr_accessor y_: Integer
+
+      def initialize: (x: Integer, y_: Integer, ?type: :coordinate) -> void
+
+      def to_hash: -> { type: :coordinate, x: Integer, y_: Integer }
+    end
+  end
+end

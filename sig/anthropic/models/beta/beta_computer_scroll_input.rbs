@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaComputerScrollInput = Beta::BetaComputerScrollInput
+
+    module Beta
+      type beta_computer_scroll_input =
+        {
+          scroll_amount: Integer,
+          scroll_direction: Anthropic::Models::Beta::beta_computer_scroll_direction,
+          coordinate: ::Array[Integer]?,
+          text: String?
+        }
+
+      class BetaComputerScrollInput < Anthropic::Internal::Type::BaseModel
+        attr_accessor scroll_amount: Integer
+
+        attr_accessor scroll_direction: Anthropic::Models::Beta::beta_computer_scroll_direction
+
+        attr_accessor coordinate: ::Array[Integer]?
+
+        attr_accessor text: String?
+
+        def initialize: (
+          scroll_amount: Integer,
+          scroll_direction: Anthropic::Models::Beta::beta_computer_scroll_direction,
+          ?coordinate: ::Array[Integer]?,
+          ?text: String?
+        ) -> void
+
+        def to_hash: -> {
+          scroll_amount: Integer,
+          scroll_direction: Anthropic::Models::Beta::beta_computer_scroll_direction,
+          coordinate: ::Array[Integer]?,
+          text: String?
+        }
+      end
+    end
+  end
+end

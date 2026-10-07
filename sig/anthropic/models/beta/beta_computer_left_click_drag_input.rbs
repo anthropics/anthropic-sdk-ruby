@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    class BetaComputerLeftClickDragInput = Beta::BetaComputerLeftClickDragInput
+
+    module Beta
+      type beta_computer_left_click_drag_input =
+        {
+          coordinate: ::Array[Integer],
+          start_coordinate: ::Array[Integer],
+          text: String?
+        }
+
+      class BetaComputerLeftClickDragInput < Anthropic::Internal::Type::BaseModel
+        attr_accessor coordinate: ::Array[Integer]
+
+        attr_accessor start_coordinate: ::Array[Integer]
+
+        attr_accessor text: String?
+
+        def initialize: (
+          coordinate: ::Array[Integer],
+          start_coordinate: ::Array[Integer],
+          ?text: String?
+        ) -> void
+
+        def to_hash: -> {
+          coordinate: ::Array[Integer],
+          start_coordinate: ::Array[Integer],
+          text: String?
+        }
+      end
+    end
+  end
+end

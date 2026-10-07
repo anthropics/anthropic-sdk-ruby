@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaBrowserFileUploadInput = Beta::BetaBrowserFileUploadInput
+
+    module Beta
+      type beta_browser_file_upload_input =
+        {
+          target: Anthropic::Beta::BetaBrowserRefTarget,
+          document_ids: ::Array[String]?,
+          paths: ::Array[String]?,
+          tab_id: String?
+        }
+
+      class BetaBrowserFileUploadInput < Anthropic::Internal::Type::BaseModel
+        attr_accessor target: Anthropic::Beta::BetaBrowserRefTarget
+
+        attr_accessor document_ids: ::Array[String]?
+
+        attr_accessor paths: ::Array[String]?
+
+        attr_accessor tab_id: String?
+
+        def initialize: (
+          target: Anthropic::Beta::BetaBrowserRefTarget,
+          ?document_ids: ::Array[String]?,
+          ?paths: ::Array[String]?,
+          ?tab_id: String?
+        ) -> void
+
+        def to_hash: -> {
+          target: Anthropic::Beta::BetaBrowserRefTarget,
+          document_ids: ::Array[String]?,
+          paths: ::Array[String]?,
+          tab_id: String?
+        }
+      end
+    end
+  end
+end

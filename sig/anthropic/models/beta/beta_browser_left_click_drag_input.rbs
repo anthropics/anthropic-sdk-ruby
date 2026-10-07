@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    class BetaBrowserLeftClickDragInput = Beta::BetaBrowserLeftClickDragInput
+
+    module Beta
+      type beta_browser_left_click_drag_input =
+        {
+          from: Anthropic::Beta::BetaBrowserCoordinateTarget,
+          target: Anthropic::Beta::BetaBrowserCoordinateTarget,
+          tab_id: String?
+        }
+
+      class BetaBrowserLeftClickDragInput < Anthropic::Internal::Type::BaseModel
+        attr_accessor from: Anthropic::Beta::BetaBrowserCoordinateTarget
+
+        attr_accessor target: Anthropic::Beta::BetaBrowserCoordinateTarget
+
+        attr_accessor tab_id: String?
+
+        def initialize: (
+          from: Anthropic::Beta::BetaBrowserCoordinateTarget,
+          target: Anthropic::Beta::BetaBrowserCoordinateTarget,
+          ?tab_id: String?
+        ) -> void
+
+        def to_hash: -> {
+          from: Anthropic::Beta::BetaBrowserCoordinateTarget,
+          target: Anthropic::Beta::BetaBrowserCoordinateTarget,
+          tab_id: String?
+        }
+      end
+    end
+  end
+end

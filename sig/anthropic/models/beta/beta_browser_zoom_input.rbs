@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    class BetaBrowserZoomInput = Beta::BetaBrowserZoomInput
+
+    module Beta
+      type beta_browser_zoom_input =
+        { region: ::Array[Integer], tab_id: String? }
+
+      class BetaBrowserZoomInput < Anthropic::Internal::Type::BaseModel
+        attr_accessor region: ::Array[Integer]
+
+        attr_accessor tab_id: String?
+
+        def initialize: (region: ::Array[Integer], ?tab_id: String?) -> void
+
+        def to_hash: -> { region: ::Array[Integer], tab_id: String? }
+      end
+    end
+  end
+end

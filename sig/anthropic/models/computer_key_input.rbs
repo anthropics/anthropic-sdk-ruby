@@ -1,0 +1,15 @@
+module Anthropic
+  module Models
+    type computer_key_input = { text: String, repeat: Integer? }
+
+    class ComputerKeyInput < Anthropic::Internal::Type::BaseModel
+      attr_accessor text: String
+
+      attr_accessor repeat: Integer?
+
+      def initialize: (text: String, ?repeat: Integer?) -> void
+
+      def to_hash: -> { text: String, repeat: Integer? }
+    end
+  end
+end

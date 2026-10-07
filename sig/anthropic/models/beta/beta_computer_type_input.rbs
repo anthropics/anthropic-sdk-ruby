@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    class BetaComputerTypeInput = Beta::BetaComputerTypeInput
+
+    module Beta
+      type beta_computer_type_input = { text: String }
+
+      class BetaComputerTypeInput < Anthropic::Internal::Type::BaseModel
+        attr_accessor text: String
+
+        def initialize: (text: String) -> void
+
+        def to_hash: -> { text: String }
+      end
+    end
+  end
+end

@@ -1,0 +1,53 @@
+module Anthropic
+  module Models
+    class BetaBrowserHoldKeyToolUseBlock = Beta::BetaBrowserHoldKeyToolUseBlock
+
+    module Beta
+      type beta_browser_hold_key_tool_use_block =
+        {
+          id: String,
+          input: Anthropic::Beta::BetaBrowserHoldKeyInput,
+          name: :hold_key,
+          toolset_name: :browser,
+          type: :tool_use,
+          caller_: Anthropic::Models::Beta::beta_tool_use_caller
+        }
+
+      class BetaBrowserHoldKeyToolUseBlock < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor input: Anthropic::Beta::BetaBrowserHoldKeyInput
+
+        attr_accessor name: :hold_key
+
+        attr_accessor toolset_name: :browser
+
+        attr_accessor type: :tool_use
+
+        attr_reader caller_: Anthropic::Models::Beta::beta_tool_use_caller?
+
+        def caller_=: (
+          Anthropic::Models::Beta::beta_tool_use_caller
+        ) -> Anthropic::Models::Beta::beta_tool_use_caller
+
+        def initialize: (
+          id: String,
+          input: Anthropic::Beta::BetaBrowserHoldKeyInput,
+          ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+          ?name: :hold_key,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          input: Anthropic::Beta::BetaBrowserHoldKeyInput,
+          name: :hold_key,
+          toolset_name: :browser,
+          type: :tool_use,
+          caller_: Anthropic::Models::Beta::beta_tool_use_caller
+        }
+      end
+    end
+  end
+end

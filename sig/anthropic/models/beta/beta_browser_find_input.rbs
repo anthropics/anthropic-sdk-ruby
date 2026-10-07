@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    class BetaBrowserFindInput = Beta::BetaBrowserFindInput
+
+    module Beta
+      type beta_browser_find_input = { query: String, tab_id: String? }
+
+      class BetaBrowserFindInput < Anthropic::Internal::Type::BaseModel
+        attr_accessor query: String
+
+        attr_accessor tab_id: String?
+
+        def initialize: (query: String, ?tab_id: String?) -> void
+
+        def to_hash: -> { query: String, tab_id: String? }
+      end
+    end
+  end
+end

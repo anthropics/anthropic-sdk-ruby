@@ -1,0 +1,406 @@
+module Anthropic
+  module Models
+    module BetaBrowserToolUseBlock = Beta::BetaBrowserToolUseBlock
+
+    module Beta
+      type beta_browser_tool_use_block =
+        Anthropic::Beta::BetaBrowserNavigateToolUseBlock
+        | Anthropic::Beta::BetaBrowserListTabsToolUseBlock
+        | Anthropic::Beta::BetaBrowserNewTabToolUseBlock
+        | Anthropic::Beta::BetaBrowserSwitchTabToolUseBlock
+        | Anthropic::Beta::BetaBrowserCloseTabToolUseBlock
+        | Anthropic::Beta::BetaBrowserReadPageToolUseBlock
+        | Anthropic::Beta::BetaBrowserGetPageTextToolUseBlock
+        | Anthropic::Beta::BetaBrowserReadConsoleToolUseBlock
+        | Anthropic::Beta::BetaBrowserReadNetworkToolUseBlock
+        | Anthropic::Beta::BetaBrowserFindToolUseBlock
+        | Anthropic::Beta::BetaBrowserFormInputToolUseBlock
+        | Anthropic::Beta::BetaBrowserFileUploadToolUseBlock
+        | Anthropic::Beta::BetaBrowserScrollToToolUseBlock
+        | Anthropic::Beta::BetaBrowserScreenshotToolUseBlock
+        | Anthropic::Beta::BetaBrowserZoomToolUseBlock
+        | Anthropic::Beta::BetaBrowserLeftClickToolUseBlock
+        | Anthropic::Beta::BetaBrowserRightClickToolUseBlock
+        | Anthropic::Beta::BetaBrowserMiddleClickToolUseBlock
+        | Anthropic::Beta::BetaBrowserDoubleClickToolUseBlock
+        | Anthropic::Beta::BetaBrowserTripleClickToolUseBlock
+        | Anthropic::Beta::BetaBrowserHoverToolUseBlock
+        | Anthropic::Beta::BetaBrowserLeftClickDragToolUseBlock
+        | Anthropic::Beta::BetaBrowserLeftMouseDownToolUseBlock
+        | Anthropic::Beta::BetaBrowserLeftMouseUpToolUseBlock
+        | Anthropic::Beta::BetaBrowserMouseMoveToolUseBlock
+        | Anthropic::Beta::BetaBrowserScrollToolUseBlock
+        | Anthropic::Beta::BetaBrowserTypeToolUseBlock
+        | Anthropic::Beta::BetaBrowserKeyToolUseBlock
+        | Anthropic::Beta::BetaBrowserHoldKeyToolUseBlock
+        | Anthropic::Beta::BetaBrowserWaitToolUseBlock
+        | Anthropic::Beta::BetaBrowserJavascriptExecToolUseBlock
+
+      module BetaBrowserToolUseBlock
+        extend Anthropic::Internal::Type::Union
+
+        type name_ =
+          :navigate
+          | :list_tabs
+          | :new_tab
+          | :switch_tab
+          | :close_tab
+          | :read_page
+          | :get_page_text
+          | :read_console
+          | :read_network
+          | :find
+          | :form_input
+          | :file_upload
+          | :scroll_to
+          | :screenshot
+          | :zoom
+          | :left_click
+          | :right_click
+          | :middle_click
+          | :double_click
+          | :triple_click
+          | :hover
+          | :left_click_drag
+          | :left_mouse_down
+          | :left_mouse_up
+          | :mouse_move
+          | :scroll
+          | :type
+          | :key
+          | :hold_key
+          | :wait
+          | :javascript_exec
+
+        module Name
+          extend Anthropic::Internal::Type::Enum
+
+          NAVIGATE: :navigate
+          LIST_TABS: :list_tabs
+          NEW_TAB: :new_tab
+          SWITCH_TAB: :switch_tab
+          CLOSE_TAB: :close_tab
+          READ_PAGE: :read_page
+          GET_PAGE_TEXT: :get_page_text
+          READ_CONSOLE: :read_console
+          READ_NETWORK: :read_network
+          FIND: :find
+          FORM_INPUT: :form_input
+          FILE_UPLOAD: :file_upload
+          SCROLL_TO: :scroll_to
+          SCREENSHOT: :screenshot
+          ZOOM: :zoom
+          LEFT_CLICK: :left_click
+          RIGHT_CLICK: :right_click
+          MIDDLE_CLICK: :middle_click
+          DOUBLE_CLICK: :double_click
+          TRIPLE_CLICK: :triple_click
+          HOVER: :hover
+          LEFT_CLICK_DRAG: :left_click_drag
+          LEFT_MOUSE_DOWN: :left_mouse_down
+          LEFT_MOUSE_UP: :left_mouse_up
+          MOUSE_MOVE: :mouse_move
+          SCROLL: :scroll
+          TYPE: :type
+          KEY: :key
+          HOLD_KEY: :hold_key
+          WAIT: :wait
+          JAVASCRIPT_EXEC: :javascript_exec
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaBrowserToolUseBlock::name_]
+        end
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_browser_tool_use_block]
+
+        def self.new:
+          (
+            name: :navigate | "navigate",
+            id: String,
+            input: Anthropic::Beta::BetaBrowserNavigateInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaBrowserNavigateToolUseBlock
+          | (
+            name: :list_tabs | "list_tabs",
+            id: String,
+            input: Anthropic::Beta::BetaBrowserListTabsInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaBrowserListTabsToolUseBlock
+          | (
+            name: :new_tab | "new_tab",
+            id: String,
+            input: Anthropic::Beta::BetaBrowserNewTabInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaBrowserNewTabToolUseBlock
+          | (
+            name: :switch_tab | "switch_tab",
+            id: String,
+            input: Anthropic::Beta::BetaBrowserSwitchTabInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaBrowserSwitchTabToolUseBlock
+          | (
+            name: :close_tab | "close_tab",
+            id: String,
+            input: Anthropic::Beta::BetaBrowserCloseTabInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaBrowserCloseTabToolUseBlock
+          | (
+            name: :read_page | "read_page",
+            id: String,
+            input: Anthropic::Beta::BetaBrowserReadPageInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaBrowserReadPageToolUseBlock
+          | (
+            name: :get_page_text | "get_page_text",
+            id: String,
+            input: Anthropic::Beta::BetaBrowserGetPageTextInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaBrowserGetPageTextToolUseBlock
+          | (
+            name: :read_console | "read_console",
+            id: String,
+            input: Anthropic::Beta::BetaBrowserReadConsoleInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaBrowserReadConsoleToolUseBlock
+          | (
+            name: :read_network | "read_network",
+            id: String,
+            input: Anthropic::Beta::BetaBrowserReadNetworkInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaBrowserReadNetworkToolUseBlock
+          | (
+            name: :find | "find",
+            id: String,
+            input: Anthropic::Beta::BetaBrowserFindInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaBrowserFindToolUseBlock
+          | (
+            name: :form_input | "form_input",
+            id: String,
+            input: Anthropic::Beta::BetaBrowserFormInputInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaBrowserFormInputToolUseBlock
+          | (
+            name: :file_upload | "file_upload",
+            id: String,
+            input: Anthropic::Beta::BetaBrowserFileUploadInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaBrowserFileUploadToolUseBlock
+          | (
+            name: :scroll_to | "scroll_to",
+            id: String,
+            input: Anthropic::Beta::BetaBrowserScrollToInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaBrowserScrollToToolUseBlock
+          | (
+            name: :screenshot | "screenshot",
+            id: String,
+            input: Anthropic::Beta::BetaBrowserScreenshotInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaBrowserScreenshotToolUseBlock
+          | (
+            name: :zoom | "zoom",
+            id: String,
+            input: Anthropic::Beta::BetaBrowserZoomInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaBrowserZoomToolUseBlock
+          | (
+            name: :left_click | "left_click",
+            id: String,
+            input: Anthropic::Beta::BetaBrowserLeftClickInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaBrowserLeftClickToolUseBlock
+          | (
+            name: :right_click | "right_click",
+            id: String,
+            input: Anthropic::Beta::BetaBrowserRightClickInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaBrowserRightClickToolUseBlock
+          | (
+            name: :middle_click | "middle_click",
+            id: String,
+            input: Anthropic::Beta::BetaBrowserMiddleClickInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaBrowserMiddleClickToolUseBlock
+          | (
+            name: :double_click | "double_click",
+            id: String,
+            input: Anthropic::Beta::BetaBrowserDoubleClickInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaBrowserDoubleClickToolUseBlock
+          | (
+            name: :triple_click | "triple_click",
+            id: String,
+            input: Anthropic::Beta::BetaBrowserTripleClickInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaBrowserTripleClickToolUseBlock
+          | (
+            name: :hover | "hover",
+            id: String,
+            input: Anthropic::Beta::BetaBrowserHoverInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaBrowserHoverToolUseBlock
+          | (
+            name: :left_click_drag | "left_click_drag",
+            id: String,
+            input: Anthropic::Beta::BetaBrowserLeftClickDragInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaBrowserLeftClickDragToolUseBlock
+          | (
+            name: :left_mouse_down | "left_mouse_down",
+            id: String,
+            input: Anthropic::Beta::BetaBrowserLeftMouseDownInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaBrowserLeftMouseDownToolUseBlock
+          | (
+            name: :left_mouse_up | "left_mouse_up",
+            id: String,
+            input: Anthropic::Beta::BetaBrowserLeftMouseUpInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaBrowserLeftMouseUpToolUseBlock
+          | (
+            name: :mouse_move | "mouse_move",
+            id: String,
+            input: Anthropic::Beta::BetaBrowserMouseMoveInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaBrowserMouseMoveToolUseBlock
+          | (
+            name: :scroll | "scroll",
+            id: String,
+            input: Anthropic::Beta::BetaBrowserScrollInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaBrowserScrollToolUseBlock
+          | (
+            name: :type | "type",
+            id: String,
+            input: Anthropic::Beta::BetaBrowserTypeInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaBrowserTypeToolUseBlock
+          | (
+            name: :key | "key",
+            id: String,
+            input: Anthropic::Beta::BetaBrowserKeyInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaBrowserKeyToolUseBlock
+          | (
+            name: :hold_key | "hold_key",
+            id: String,
+            input: Anthropic::Beta::BetaBrowserHoldKeyInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaBrowserHoldKeyToolUseBlock
+          | (
+            name: :wait | "wait",
+            id: String,
+            input: Anthropic::Beta::BetaBrowserWaitInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaBrowserWaitToolUseBlock
+          | (
+            name: :javascript_exec | "javascript_exec",
+            id: String,
+            input: Anthropic::Beta::BetaBrowserJavascriptExecInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaBrowserJavascriptExecToolUseBlock
+          | (
+            name: Anthropic::Models::Beta::BetaBrowserToolUseBlock::name_
+            | String,
+            id: String,
+            input: Anthropic::Beta::BetaBrowserNavigateInput
+            | Anthropic::Beta::BetaBrowserListTabsInput
+            | Anthropic::Beta::BetaBrowserNewTabInput
+            | Anthropic::Beta::BetaBrowserSwitchTabInput
+            | Anthropic::Beta::BetaBrowserCloseTabInput
+            | Anthropic::Beta::BetaBrowserReadPageInput
+            | Anthropic::Beta::BetaBrowserGetPageTextInput
+            | Anthropic::Beta::BetaBrowserReadConsoleInput
+            | Anthropic::Beta::BetaBrowserReadNetworkInput
+            | Anthropic::Beta::BetaBrowserFindInput
+            | Anthropic::Beta::BetaBrowserFormInputInput
+            | Anthropic::Beta::BetaBrowserFileUploadInput
+            | Anthropic::Beta::BetaBrowserScrollToInput
+            | Anthropic::Beta::BetaBrowserScreenshotInput
+            | Anthropic::Beta::BetaBrowserZoomInput
+            | Anthropic::Beta::BetaBrowserLeftClickInput
+            | Anthropic::Beta::BetaBrowserRightClickInput
+            | Anthropic::Beta::BetaBrowserMiddleClickInput
+            | Anthropic::Beta::BetaBrowserDoubleClickInput
+            | Anthropic::Beta::BetaBrowserTripleClickInput
+            | Anthropic::Beta::BetaBrowserHoverInput
+            | Anthropic::Beta::BetaBrowserLeftClickDragInput
+            | Anthropic::Beta::BetaBrowserLeftMouseDownInput
+            | Anthropic::Beta::BetaBrowserLeftMouseUpInput
+            | Anthropic::Beta::BetaBrowserMouseMoveInput
+            | Anthropic::Beta::BetaBrowserScrollInput
+            | Anthropic::Beta::BetaBrowserTypeInput
+            | Anthropic::Beta::BetaBrowserKeyInput
+            | Anthropic::Beta::BetaBrowserHoldKeyInput
+            | Anthropic::Beta::BetaBrowserWaitInput
+            | Anthropic::Beta::BetaBrowserJavascriptExecInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :browser,
+            ?type: :tool_use
+          ) -> Anthropic::Models::Beta::beta_browser_tool_use_block
+      end
+    end
+  end
+end

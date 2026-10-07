@@ -1,0 +1,46 @@
+module Anthropic
+  module Models
+    module BetaBrowserClickTarget = Beta::BetaBrowserClickTarget
+
+    module Beta
+      type beta_browser_click_target =
+        Anthropic::Beta::BetaBrowserCoordinateTarget
+        | Anthropic::Beta::BetaBrowserRefTarget
+
+      module BetaBrowserClickTarget
+        extend Anthropic::Internal::Type::Union
+
+        type type_ = :coordinate | :ref
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          COORDINATE: :coordinate
+          REF: :ref
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaBrowserClickTarget::type_]
+        end
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_browser_click_target]
+
+        def self.new:
+          (
+            type: :coordinate | "coordinate",
+            x: Integer,
+            y_: Integer
+          ) -> Anthropic::Beta::BetaBrowserCoordinateTarget
+          | (
+            type: :ref | "ref",
+            ref: String
+          ) -> Anthropic::Beta::BetaBrowserRefTarget
+          | (
+            type: Anthropic::Models::Beta::BetaBrowserClickTarget::type_
+            | String,
+            ?x: Integer,
+            ?y_: Integer,
+            ?ref: String
+          ) -> Anthropic::Models::Beta::beta_browser_click_target
+      end
+    end
+  end
+end

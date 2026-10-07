@@ -1,0 +1,29 @@
+module Anthropic
+  module Models
+    class BetaBrowserMouseMoveInput = Beta::BetaBrowserMouseMoveInput
+
+    module Beta
+      type beta_browser_mouse_move_input =
+        {
+          target: Anthropic::Beta::BetaBrowserCoordinateTarget,
+          tab_id: String?
+        }
+
+      class BetaBrowserMouseMoveInput < Anthropic::Internal::Type::BaseModel
+        attr_accessor target: Anthropic::Beta::BetaBrowserCoordinateTarget
+
+        attr_accessor tab_id: String?
+
+        def initialize: (
+          target: Anthropic::Beta::BetaBrowserCoordinateTarget,
+          ?tab_id: String?
+        ) -> void
+
+        def to_hash: -> {
+          target: Anthropic::Beta::BetaBrowserCoordinateTarget,
+          tab_id: String?
+        }
+      end
+    end
+  end
+end

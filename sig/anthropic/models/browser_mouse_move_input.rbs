@@ -1,0 +1,22 @@
+module Anthropic
+  module Models
+    type browser_mouse_move_input =
+      { target: Anthropic::BrowserCoordinateTarget, tab_id: String? }
+
+    class BrowserMouseMoveInput < Anthropic::Internal::Type::BaseModel
+      attr_accessor target: Anthropic::BrowserCoordinateTarget
+
+      attr_accessor tab_id: String?
+
+      def initialize: (
+        target: Anthropic::BrowserCoordinateTarget,
+        ?tab_id: String?
+      ) -> void
+
+      def to_hash: -> {
+        target: Anthropic::BrowserCoordinateTarget,
+        tab_id: String?
+      }
+    end
+  end
+end

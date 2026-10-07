@@ -1,0 +1,11 @@
+module Anthropic
+  module Models
+    type computer_left_mouse_up_input = {  }
+
+    class ComputerLeftMouseUpInput < Anthropic::Internal::Type::BaseModel
+      def initialize: -> void
+
+      def to_hash: -> {  }
+    end
+  end
+end

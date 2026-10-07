@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    type browser_scroll_to_input =
+      { target: Anthropic::BrowserRefTarget, tab_id: String? }
+
+    class BrowserScrollToInput < Anthropic::Internal::Type::BaseModel
+      attr_accessor target: Anthropic::BrowserRefTarget
+
+      attr_accessor tab_id: String?
+
+      def initialize: (
+        target: Anthropic::BrowserRefTarget,
+        ?tab_id: String?
+      ) -> void
+
+      def to_hash: -> { target: Anthropic::BrowserRefTarget, tab_id: String? }
+    end
+  end
+end

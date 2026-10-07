@@ -1,0 +1,15 @@
+module Anthropic
+  module Models
+    class BetaBrowserNewTabInput = Beta::BetaBrowserNewTabInput
+
+    module Beta
+      type beta_browser_new_tab_input = {  }
+
+      class BetaBrowserNewTabInput < Anthropic::Internal::Type::BaseModel
+        def initialize: -> void
+
+        def to_hash: -> {  }
+      end
+    end
+  end
+end

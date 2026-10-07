@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    type browser_switch_tab_input = { tab_id: String }
+
+    class BrowserSwitchTabInput < Anthropic::Internal::Type::BaseModel
+      attr_accessor tab_id: String
+
+      def initialize: (tab_id: String) -> void
+
+      def to_hash: -> { tab_id: String }
+    end
+  end
+end

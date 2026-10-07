@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    class BetaBrowserFormInputInput = Beta::BetaBrowserFormInputInput
+
+    module Beta
+      type beta_browser_form_input_input =
+        {
+          target: Anthropic::Beta::BetaBrowserRefTarget,
+          value: Anthropic::Models::Beta::beta_browser_form_input_value,
+          tab_id: String?
+        }
+
+      class BetaBrowserFormInputInput < Anthropic::Internal::Type::BaseModel
+        attr_accessor target: Anthropic::Beta::BetaBrowserRefTarget
+
+        attr_accessor value: Anthropic::Models::Beta::beta_browser_form_input_value
+
+        attr_accessor tab_id: String?
+
+        def initialize: (
+          target: Anthropic::Beta::BetaBrowserRefTarget,
+          value: Anthropic::Models::Beta::beta_browser_form_input_value,
+          ?tab_id: String?
+        ) -> void
+
+        def to_hash: -> {
+          target: Anthropic::Beta::BetaBrowserRefTarget,
+          value: Anthropic::Models::Beta::beta_browser_form_input_value,
+          tab_id: String?
+        }
+      end
+    end
+  end
+end

@@ -1,0 +1,15 @@
+module Anthropic
+  module Models
+    type computer_hold_key_input = { duration: Integer, text: String }
+
+    class ComputerHoldKeyInput < Anthropic::Internal::Type::BaseModel
+      attr_accessor duration: Integer
+
+      attr_accessor text: String
+
+      def initialize: (duration: Integer, text: String) -> void
+
+      def to_hash: -> { duration: Integer, text: String }
+    end
+  end
+end

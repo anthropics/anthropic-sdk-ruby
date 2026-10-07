@@ -18,6 +18,10 @@ module Anthropic
       TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Model) }
       OrSymbol = T.type_alias { T.any(Symbol, String) }
 
+      # Fastest model for high-volume, real-time tasks
+      CLAUDE_HAIKU_5_5 =
+        T.let(:"claude-haiku-5-5", Anthropic::Model::TaggedSymbol)
+
       # Efficient model for coding and agents
       CLAUDE_SONNET_5_5 =
         T.let(:"claude-sonnet-5-5", Anthropic::Model::TaggedSymbol)

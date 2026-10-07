@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaBrowserReadPageInput = Beta::BetaBrowserReadPageInput
+
+    module Beta
+      type beta_browser_read_page_input =
+        {
+          depth: Integer?,
+          filter: Anthropic::Models::Beta::beta_browser_read_page_filter?,
+          ref: String?,
+          tab_id: String?
+        }
+
+      class BetaBrowserReadPageInput < Anthropic::Internal::Type::BaseModel
+        attr_accessor depth: Integer?
+
+        attr_accessor filter: Anthropic::Models::Beta::beta_browser_read_page_filter?
+
+        attr_accessor ref: String?
+
+        attr_accessor tab_id: String?
+
+        def initialize: (
+          ?depth: Integer?,
+          ?filter: Anthropic::Models::Beta::beta_browser_read_page_filter?,
+          ?ref: String?,
+          ?tab_id: String?
+        ) -> void
+
+        def to_hash: -> {
+          depth: Integer?,
+          filter: Anthropic::Models::Beta::beta_browser_read_page_filter?,
+          ref: String?,
+          tab_id: String?
+        }
+      end
+    end
+  end
+end

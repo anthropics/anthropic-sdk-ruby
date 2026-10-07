@@ -1,0 +1,53 @@
+module Anthropic
+  module Models
+    class BetaBrowserZoomToolUseBlock = Beta::BetaBrowserZoomToolUseBlock
+
+    module Beta
+      type beta_browser_zoom_tool_use_block =
+        {
+          id: String,
+          input: Anthropic::Beta::BetaBrowserZoomInput,
+          name: :zoom,
+          toolset_name: :browser,
+          type: :tool_use,
+          caller_: Anthropic::Models::Beta::beta_tool_use_caller
+        }
+
+      class BetaBrowserZoomToolUseBlock < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor input: Anthropic::Beta::BetaBrowserZoomInput
+
+        attr_accessor name: :zoom
+
+        attr_accessor toolset_name: :browser
+
+        attr_accessor type: :tool_use
+
+        attr_reader caller_: Anthropic::Models::Beta::beta_tool_use_caller?
+
+        def caller_=: (
+          Anthropic::Models::Beta::beta_tool_use_caller
+        ) -> Anthropic::Models::Beta::beta_tool_use_caller
+
+        def initialize: (
+          id: String,
+          input: Anthropic::Beta::BetaBrowserZoomInput,
+          ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+          ?name: :zoom,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          input: Anthropic::Beta::BetaBrowserZoomInput,
+          name: :zoom,
+          toolset_name: :browser,
+          type: :tool_use,
+          caller_: Anthropic::Models::Beta::beta_tool_use_caller
+        }
+      end
+    end
+  end
+end

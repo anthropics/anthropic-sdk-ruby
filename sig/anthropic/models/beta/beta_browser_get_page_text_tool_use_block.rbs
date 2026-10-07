@@ -1,0 +1,53 @@
+module Anthropic
+  module Models
+    class BetaBrowserGetPageTextToolUseBlock = Beta::BetaBrowserGetPageTextToolUseBlock
+
+    module Beta
+      type beta_browser_get_page_text_tool_use_block =
+        {
+          id: String,
+          input: Anthropic::Beta::BetaBrowserGetPageTextInput,
+          name: :get_page_text,
+          toolset_name: :browser,
+          type: :tool_use,
+          caller_: Anthropic::Models::Beta::beta_tool_use_caller
+        }
+
+      class BetaBrowserGetPageTextToolUseBlock < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor input: Anthropic::Beta::BetaBrowserGetPageTextInput
+
+        attr_accessor name: :get_page_text
+
+        attr_accessor toolset_name: :browser
+
+        attr_accessor type: :tool_use
+
+        attr_reader caller_: Anthropic::Models::Beta::beta_tool_use_caller?
+
+        def caller_=: (
+          Anthropic::Models::Beta::beta_tool_use_caller
+        ) -> Anthropic::Models::Beta::beta_tool_use_caller
+
+        def initialize: (
+          id: String,
+          input: Anthropic::Beta::BetaBrowserGetPageTextInput,
+          ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+          ?name: :get_page_text,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          input: Anthropic::Beta::BetaBrowserGetPageTextInput,
+          name: :get_page_text,
+          toolset_name: :browser,
+          type: :tool_use,
+          caller_: Anthropic::Models::Beta::beta_tool_use_caller
+        }
+      end
+    end
+  end
+end

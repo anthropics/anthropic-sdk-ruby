@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    class BetaComputerKeyInput = Beta::BetaComputerKeyInput
+
+    module Beta
+      type beta_computer_key_input = { text: String, repeat: Integer? }
+
+      class BetaComputerKeyInput < Anthropic::Internal::Type::BaseModel
+        attr_accessor text: String
+
+        attr_accessor repeat: Integer?
+
+        def initialize: (text: String, ?repeat: Integer?) -> void
+
+        def to_hash: -> { text: String, repeat: Integer? }
+      end
+    end
+  end
+end

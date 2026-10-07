@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type toolset_tool_use_block =
+      Anthropic::Models::browser_tool_use_block
+      | Anthropic::Models::computer_tool_use_block
+      | Anthropic::ToolUseBlock
+
+    module ToolsetToolUseBlock
+      extend Anthropic::Internal::Type::Union
+
+      def self?.variants: -> ::Array[Anthropic::Models::toolset_tool_use_block]
+    end
+  end
+end

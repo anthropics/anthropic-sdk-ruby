@@ -1,0 +1,53 @@
+module Anthropic
+  module Models
+    class BetaBrowserNavigateToolUseBlock = Beta::BetaBrowserNavigateToolUseBlock
+
+    module Beta
+      type beta_browser_navigate_tool_use_block =
+        {
+          id: String,
+          input: Anthropic::Beta::BetaBrowserNavigateInput,
+          name: :navigate,
+          toolset_name: :browser,
+          type: :tool_use,
+          caller_: Anthropic::Models::Beta::beta_tool_use_caller
+        }
+
+      class BetaBrowserNavigateToolUseBlock < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor input: Anthropic::Beta::BetaBrowserNavigateInput
+
+        attr_accessor name: :navigate
+
+        attr_accessor toolset_name: :browser
+
+        attr_accessor type: :tool_use
+
+        attr_reader caller_: Anthropic::Models::Beta::beta_tool_use_caller?
+
+        def caller_=: (
+          Anthropic::Models::Beta::beta_tool_use_caller
+        ) -> Anthropic::Models::Beta::beta_tool_use_caller
+
+        def initialize: (
+          id: String,
+          input: Anthropic::Beta::BetaBrowserNavigateInput,
+          ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+          ?name: :navigate,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          input: Anthropic::Beta::BetaBrowserNavigateInput,
+          name: :navigate,
+          toolset_name: :browser,
+          type: :tool_use,
+          caller_: Anthropic::Models::Beta::beta_tool_use_caller
+        }
+      end
+    end
+  end
+end

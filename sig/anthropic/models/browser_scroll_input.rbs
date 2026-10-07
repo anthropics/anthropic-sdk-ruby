@@ -1,0 +1,35 @@
+module Anthropic
+  module Models
+    type browser_scroll_input =
+      {
+        scroll_direction: Anthropic::Models::browser_scroll_direction,
+        target: Anthropic::BrowserCoordinateTarget,
+        scroll_amount: Integer?,
+        tab_id: String?
+      }
+
+    class BrowserScrollInput < Anthropic::Internal::Type::BaseModel
+      attr_accessor scroll_direction: Anthropic::Models::browser_scroll_direction
+
+      attr_accessor target: Anthropic::BrowserCoordinateTarget
+
+      attr_accessor scroll_amount: Integer?
+
+      attr_accessor tab_id: String?
+
+      def initialize: (
+        scroll_direction: Anthropic::Models::browser_scroll_direction,
+        target: Anthropic::BrowserCoordinateTarget,
+        ?scroll_amount: Integer?,
+        ?tab_id: String?
+      ) -> void
+
+      def to_hash: -> {
+        scroll_direction: Anthropic::Models::browser_scroll_direction,
+        target: Anthropic::BrowserCoordinateTarget,
+        scroll_amount: Integer?,
+        tab_id: String?
+      }
+    end
+  end
+end

@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type browser_read_page_filter = :all | :interactive
+
+    module BrowserReadPageFilter
+      extend Anthropic::Internal::Type::Enum
+
+      ALL: :all
+      INTERACTIVE: :interactive
+
+      def self?.values: -> ::Array[Anthropic::Models::browser_read_page_filter]
+    end
+  end
+end

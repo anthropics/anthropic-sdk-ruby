@@ -1,0 +1,29 @@
+module Anthropic
+  module Models
+    class BetaBrowserLeftMouseUpInput = Beta::BetaBrowserLeftMouseUpInput
+
+    module Beta
+      type beta_browser_left_mouse_up_input =
+        {
+          target: Anthropic::Beta::BetaBrowserCoordinateTarget,
+          tab_id: String?
+        }
+
+      class BetaBrowserLeftMouseUpInput < Anthropic::Internal::Type::BaseModel
+        attr_accessor target: Anthropic::Beta::BetaBrowserCoordinateTarget
+
+        attr_accessor tab_id: String?
+
+        def initialize: (
+          target: Anthropic::Beta::BetaBrowserCoordinateTarget,
+          ?tab_id: String?
+        ) -> void
+
+        def to_hash: -> {
+          target: Anthropic::Beta::BetaBrowserCoordinateTarget,
+          tab_id: String?
+        }
+      end
+    end
+  end
+end

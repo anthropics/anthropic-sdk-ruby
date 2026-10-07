@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    type browser_hold_key_input =
+      { duration: Float, text: String, tab_id: String? }
+
+    class BrowserHoldKeyInput < Anthropic::Internal::Type::BaseModel
+      attr_accessor duration: Float
+
+      attr_accessor text: String
+
+      attr_accessor tab_id: String?
+
+      def initialize: (duration: Float, text: String, ?tab_id: String?) -> void
+
+      def to_hash: -> { duration: Float, text: String, tab_id: String? }
+    end
+  end
+end

@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    type computer_wait_input = { duration: Integer }
+
+    class ComputerWaitInput < Anthropic::Internal::Type::BaseModel
+      attr_accessor duration: Integer
+
+      def initialize: (duration: Integer) -> void
+
+      def to_hash: -> { duration: Integer }
+    end
+  end
+end

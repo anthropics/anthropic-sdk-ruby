@@ -1,0 +1,53 @@
+module Anthropic
+  module Models
+    class BetaComputerScrollToolUseBlock = Beta::BetaComputerScrollToolUseBlock
+
+    module Beta
+      type beta_computer_scroll_tool_use_block =
+        {
+          id: String,
+          input: Anthropic::Beta::BetaComputerScrollInput,
+          name: :scroll,
+          toolset_name: :computer,
+          type: :tool_use,
+          caller_: Anthropic::Models::Beta::beta_tool_use_caller
+        }
+
+      class BetaComputerScrollToolUseBlock < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor input: Anthropic::Beta::BetaComputerScrollInput
+
+        attr_accessor name: :scroll
+
+        attr_accessor toolset_name: :computer
+
+        attr_accessor type: :tool_use
+
+        attr_reader caller_: Anthropic::Models::Beta::beta_tool_use_caller?
+
+        def caller_=: (
+          Anthropic::Models::Beta::beta_tool_use_caller
+        ) -> Anthropic::Models::Beta::beta_tool_use_caller
+
+        def initialize: (
+          id: String,
+          input: Anthropic::Beta::BetaComputerScrollInput,
+          ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+          ?name: :scroll,
+          ?toolset_name: :computer,
+          ?type: :tool_use
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          input: Anthropic::Beta::BetaComputerScrollInput,
+          name: :scroll,
+          toolset_name: :computer,
+          type: :tool_use,
+          caller_: Anthropic::Models::Beta::beta_tool_use_caller
+        }
+      end
+    end
+  end
+end

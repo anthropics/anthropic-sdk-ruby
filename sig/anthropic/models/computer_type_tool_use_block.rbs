@@ -1,0 +1,45 @@
+module Anthropic
+  module Models
+    type computer_type_tool_use_block =
+      {
+        id: String,
+        caller_: Anthropic::Models::tool_use_caller,
+        input: Anthropic::ComputerTypeInput,
+        name: :type,
+        toolset_name: :computer,
+        type: :tool_use
+      }
+
+    class ComputerTypeToolUseBlock < Anthropic::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor caller_: Anthropic::Models::tool_use_caller
+
+      attr_accessor input: Anthropic::ComputerTypeInput
+
+      attr_accessor name: :type
+
+      attr_accessor toolset_name: :computer
+
+      attr_accessor type: :tool_use
+
+      def initialize: (
+        id: String,
+        caller_: Anthropic::Models::tool_use_caller,
+        input: Anthropic::ComputerTypeInput,
+        ?name: :type,
+        ?toolset_name: :computer,
+        ?type: :tool_use
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        caller_: Anthropic::Models::tool_use_caller,
+        input: Anthropic::ComputerTypeInput,
+        name: :type,
+        toolset_name: :computer,
+        type: :tool_use
+      }
+    end
+  end
+end

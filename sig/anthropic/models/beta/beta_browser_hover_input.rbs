@@ -1,0 +1,29 @@
+module Anthropic
+  module Models
+    class BetaBrowserHoverInput = Beta::BetaBrowserHoverInput
+
+    module Beta
+      type beta_browser_hover_input =
+        {
+          target: Anthropic::Models::Beta::beta_browser_click_target,
+          tab_id: String?
+        }
+
+      class BetaBrowserHoverInput < Anthropic::Internal::Type::BaseModel
+        attr_accessor target: Anthropic::Models::Beta::beta_browser_click_target
+
+        attr_accessor tab_id: String?
+
+        def initialize: (
+          target: Anthropic::Models::Beta::beta_browser_click_target,
+          ?tab_id: String?
+        ) -> void
+
+        def to_hash: -> {
+          target: Anthropic::Models::Beta::beta_browser_click_target,
+          tab_id: String?
+        }
+      end
+    end
+  end
+end

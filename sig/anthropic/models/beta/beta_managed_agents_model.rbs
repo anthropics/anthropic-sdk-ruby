@@ -4,7 +4,8 @@ module Anthropic
 
     module Beta
       type beta_managed_agents_model =
-        :"claude-sonnet-5-5"
+        :"claude-haiku-5-5"
+        | :"claude-sonnet-5-5"
         | :"claude-opus-5-5"
         | :"claude-fable-5-1"
         | :"claude-sonnet-5"
@@ -26,6 +27,9 @@ module Anthropic
         extend Anthropic::Internal::Type::Union
 
         def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_model]
+
+        # Fastest model for high-volume, real-time tasks
+        CLAUDE_HAIKU_5_5: :"claude-haiku-5-5"
 
         # Efficient model for coding and agents
         CLAUDE_SONNET_5_5: :"claude-sonnet-5-5"

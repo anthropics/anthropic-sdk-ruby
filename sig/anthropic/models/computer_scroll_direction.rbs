@@ -1,0 +1,16 @@
+module Anthropic
+  module Models
+    type computer_scroll_direction = :up | :down | :left | :right
+
+    module ComputerScrollDirection
+      extend Anthropic::Internal::Type::Enum
+
+      UP: :up
+      DOWN: :down
+      LEFT: :left
+      RIGHT: :right
+
+      def self?.values: -> ::Array[Anthropic::Models::computer_scroll_direction]
+    end
+  end
+end

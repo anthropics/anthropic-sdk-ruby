@@ -1,0 +1,15 @@
+module Anthropic
+  module Models
+    module BetaBrowserFormInputValue = Beta::BetaBrowserFormInputValue
+
+    module Beta
+      type beta_browser_form_input_value = String | Float | bool
+
+      module BetaBrowserFormInputValue
+        extend Anthropic::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_browser_form_input_value]
+      end
+    end
+  end
+end

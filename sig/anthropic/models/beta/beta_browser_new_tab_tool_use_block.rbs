@@ -1,0 +1,53 @@
+module Anthropic
+  module Models
+    class BetaBrowserNewTabToolUseBlock = Beta::BetaBrowserNewTabToolUseBlock
+
+    module Beta
+      type beta_browser_new_tab_tool_use_block =
+        {
+          id: String,
+          input: Anthropic::Beta::BetaBrowserNewTabInput,
+          name: :new_tab,
+          toolset_name: :browser,
+          type: :tool_use,
+          caller_: Anthropic::Models::Beta::beta_tool_use_caller
+        }
+
+      class BetaBrowserNewTabToolUseBlock < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor input: Anthropic::Beta::BetaBrowserNewTabInput
+
+        attr_accessor name: :new_tab
+
+        attr_accessor toolset_name: :browser
+
+        attr_accessor type: :tool_use
+
+        attr_reader caller_: Anthropic::Models::Beta::beta_tool_use_caller?
+
+        def caller_=: (
+          Anthropic::Models::Beta::beta_tool_use_caller
+        ) -> Anthropic::Models::Beta::beta_tool_use_caller
+
+        def initialize: (
+          id: String,
+          input: Anthropic::Beta::BetaBrowserNewTabInput,
+          ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+          ?name: :new_tab,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          input: Anthropic::Beta::BetaBrowserNewTabInput,
+          name: :new_tab,
+          toolset_name: :browser,
+          type: :tool_use,
+          caller_: Anthropic::Models::Beta::beta_tool_use_caller
+        }
+      end
+    end
+  end
+end

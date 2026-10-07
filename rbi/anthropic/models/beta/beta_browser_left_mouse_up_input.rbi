@@ -1,0 +1,62 @@
+# typed: strong
+
+module Anthropic
+  module Models
+    BetaBrowserLeftMouseUpInput = Beta::BetaBrowserLeftMouseUpInput
+
+    module Beta
+      class BetaBrowserLeftMouseUpInput < Anthropic::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Anthropic::Beta::BetaBrowserLeftMouseUpInput,
+              Anthropic::Internal::AnyHash
+            )
+          end
+
+        # A point in the browser viewport, in viewport pixels (the same frame as a
+        # full-viewport screenshot).
+        sig { returns(Anthropic::Beta::BetaBrowserCoordinateTarget) }
+        attr_reader :target
+
+        sig do
+          params(
+            target: Anthropic::Beta::BetaBrowserCoordinateTarget::OrHash
+          ).void
+        end
+        attr_writer :target
+
+        # Tab to act on. Defaults to the active tab when omitted.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :tab_id
+
+        # Release the left mouse button at a viewport coordinate.
+        sig do
+          params(
+            target: Anthropic::Beta::BetaBrowserCoordinateTarget::OrHash,
+            tab_id: T.nilable(String)
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          # A point in the browser viewport, in viewport pixels (the same frame as a
+          # full-viewport screenshot).
+          target:,
+          # Tab to act on. Defaults to the active tab when omitted.
+          tab_id: nil
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              target: Anthropic::Beta::BetaBrowserCoordinateTarget,
+              tab_id: T.nilable(String)
+            }
+          )
+        end
+        def to_hash
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,35 @@
+module Anthropic
+  module Models
+    type browser_file_upload_input =
+      {
+        target: Anthropic::BrowserRefTarget,
+        document_ids: ::Array[String]?,
+        paths: ::Array[String]?,
+        tab_id: String?
+      }
+
+    class BrowserFileUploadInput < Anthropic::Internal::Type::BaseModel
+      attr_accessor target: Anthropic::BrowserRefTarget
+
+      attr_accessor document_ids: ::Array[String]?
+
+      attr_accessor paths: ::Array[String]?
+
+      attr_accessor tab_id: String?
+
+      def initialize: (
+        target: Anthropic::BrowserRefTarget,
+        ?document_ids: ::Array[String]?,
+        ?paths: ::Array[String]?,
+        ?tab_id: String?
+      ) -> void
+
+      def to_hash: -> {
+        target: Anthropic::BrowserRefTarget,
+        document_ids: ::Array[String]?,
+        paths: ::Array[String]?,
+        tab_id: String?
+      }
+    end
+  end
+end
