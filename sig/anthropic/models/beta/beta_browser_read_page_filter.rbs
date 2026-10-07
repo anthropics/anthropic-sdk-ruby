@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module BetaBrowserReadPageFilter = Beta::BetaBrowserReadPageFilter
+
+    module Beta
+      type beta_browser_read_page_filter = :all | :interactive
+
+      module BetaBrowserReadPageFilter
+        extend Anthropic::Internal::Type::Enum
+
+        ALL: :all
+        INTERACTIVE: :interactive
+
+        def self?.values: -> ::Array[Anthropic::Models::Beta::beta_browser_read_page_filter]
+      end
+    end
+  end
+end

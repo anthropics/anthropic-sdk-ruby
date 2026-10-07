@@ -11,7 +11,8 @@ module Anthropic
           enabled: bool?,
           max_content_tokens: Integer?,
           permission_policy: Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfigParams::permission_policy?,
-          type: Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfigParams::type_
+          type: Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfigParams::type_,
+          url_sources: Anthropic::Beta::BetaManagedAgentsWebFetchURLSourcesParams?
         }
 
       class BetaManagedAgentsWebFetchToolConfigParams < Anthropic::Internal::Type::BaseModel
@@ -37,6 +38,8 @@ module Anthropic
           Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfigParams::type_
         ) -> Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfigParams::type_
 
+        attr_accessor url_sources: Anthropic::Beta::BetaManagedAgentsWebFetchURLSourcesParams?
+
         def initialize: (
           ?allowed_domains: ::Array[String],
           ?blocked_domains: ::Array[String],
@@ -44,6 +47,7 @@ module Anthropic
           ?max_content_tokens: Integer?,
           ?permission_policy: Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfigParams::permission_policy?,
           ?type: Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfigParams::type_,
+          ?url_sources: Anthropic::Beta::BetaManagedAgentsWebFetchURLSourcesParams?,
           ?name: :web_fetch
         ) -> void
 
@@ -54,7 +58,8 @@ module Anthropic
           enabled: bool?,
           max_content_tokens: Integer?,
           permission_policy: Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfigParams::permission_policy?,
-          type: Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfigParams::type_
+          type: Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfigParams::type_,
+          url_sources: Anthropic::Beta::BetaManagedAgentsWebFetchURLSourcesParams?
         }
 
         type permission_policy =

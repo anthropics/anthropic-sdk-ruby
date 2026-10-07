@@ -1,0 +1,15 @@
+module Anthropic
+  module Models
+    type browser_navigate_input = { url: String, tab_id: String? }
+
+    class BrowserNavigateInput < Anthropic::Internal::Type::BaseModel
+      attr_accessor url: String
+
+      attr_accessor tab_id: String?
+
+      def initialize: (url: String, ?tab_id: String?) -> void
+
+      def to_hash: -> { url: String, tab_id: String? }
+    end
+  end
+end

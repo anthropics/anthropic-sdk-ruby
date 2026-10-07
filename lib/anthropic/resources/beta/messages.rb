@@ -144,6 +144,9 @@ module Anthropic
           )
         end
 
+        # Hand-written: Anthropic::Resources::Beta::Messages#stream (custom code, not generated).
+        # Its doc comment is kept by hand; compare it with #stream_raw's generated one below when that changes.
+
         # See {Anthropic::Resources::Beta::Messages#create} for non-streaming counterpart.
         #
         # Send a structured list of input messages with text and/or image content, and the
@@ -258,6 +261,7 @@ module Anthropic
           )
           Anthropic::Streaming::MessageStream.new(raw_stream:, tools:, models:)
         end
+        # End of hand-written Anthropic::Resources::Beta::Messages#stream.
 
         # See {Anthropic::Resources::Beta::Messages#create} for non-streaming counterpart.
         #

@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    module BetaComputerScrollDirection = Beta::BetaComputerScrollDirection
+
+    module Beta
+      type beta_computer_scroll_direction = :up | :down | :left | :right
+
+      module BetaComputerScrollDirection
+        extend Anthropic::Internal::Type::Enum
+
+        UP: :up
+        DOWN: :down
+        LEFT: :left
+        RIGHT: :right
+
+        def self?.values: -> ::Array[Anthropic::Models::Beta::beta_computer_scroll_direction]
+      end
+    end
+  end
+end

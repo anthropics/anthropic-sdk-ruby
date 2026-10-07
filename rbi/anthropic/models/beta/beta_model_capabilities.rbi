@@ -32,7 +32,10 @@ module Anthropic
         end
         attr_writer :citations
 
-        # Whether the model supports code execution tools.
+        # Whether code that the model runs in the code execution tool can call the
+        # request's other tools, as in programmatic tool calling and dynamic filtering for
+        # web search and web fetch. Support for the code execution tool itself is in
+        # `server_tools.code_execution`.
         sig { returns(Anthropic::Beta::BetaCapabilitySupport) }
         attr_reader :code_execution
 
@@ -97,6 +100,20 @@ module Anthropic
         end
         attr_writer :pdf_input
 
+        # Whether this model supports the web search and code execution server tools.
+        # `supported` is true when the model supports at least one of the tools. A
+        # supported tool can still be rejected for your organization, for example when an
+        # admin has turned web search off.
+        sig { returns(Anthropic::Beta::BetaServerToolsCapability) }
+        attr_reader :server_tools
+
+        sig do
+          params(
+            server_tools: Anthropic::Beta::BetaServerToolsCapability::OrHash
+          ).void
+        end
+        attr_writer :server_tools
+
         # Whether the model supports structured output / JSON mode / strict tool schemas.
         sig { returns(Anthropic::Beta::BetaCapabilitySupport) }
         attr_reader :structured_outputs
@@ -130,6 +147,7 @@ module Anthropic
             effort: Anthropic::Beta::BetaEffortCapability::OrHash,
             image_input: Anthropic::Beta::BetaCapabilitySupport::OrHash,
             pdf_input: Anthropic::Beta::BetaCapabilitySupport::OrHash,
+            server_tools: Anthropic::Beta::BetaServerToolsCapability::OrHash,
             structured_outputs: Anthropic::Beta::BetaCapabilitySupport::OrHash,
             thinking: Anthropic::Beta::BetaThinkingCapability::OrHash
           ).returns(T.attached_class)
@@ -139,7 +157,10 @@ module Anthropic
           batch:,
           # Whether the model supports citation generation.
           citations:,
-          # Whether the model supports code execution tools.
+          # Whether code that the model runs in the code execution tool can call the
+          # request's other tools, as in programmatic tool calling and dynamic filtering for
+          # web search and web fetch. Support for the code execution tool itself is in
+          # `server_tools.code_execution`.
           code_execution:,
           # Server-side compaction support (the top-level `compaction` parameter) and the
           # accepted `compaction.type` values.
@@ -152,6 +173,11 @@ module Anthropic
           image_input:,
           # Whether the model accepts PDF content blocks.
           pdf_input:,
+          # Whether this model supports the web search and code execution server tools.
+          # `supported` is true when the model supports at least one of the tools. A
+          # supported tool can still be rejected for your organization, for example when an
+          # admin has turned web search off.
+          server_tools:,
           # Whether the model supports structured output / JSON mode / strict tool schemas.
           structured_outputs:,
           # Thinking capability and supported type configurations.
@@ -171,6 +197,7 @@ module Anthropic
               effort: Anthropic::Beta::BetaEffortCapability,
               image_input: Anthropic::Beta::BetaCapabilitySupport,
               pdf_input: Anthropic::Beta::BetaCapabilitySupport,
+              server_tools: Anthropic::Beta::BetaServerToolsCapability,
               structured_outputs: Anthropic::Beta::BetaCapabilitySupport,
               thinking: Anthropic::Beta::BetaThinkingCapability
             }

@@ -1,5 +1,48 @@
 # Changelog
 
+## 1.77.0 (2026-10-07)
+
+Full Changelog: [v1.76.0...v1.77.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.76.0...v1.77.0)
+
+### Features
+
+* **api:** add claude-haiku-5-5 and typed computer and browser toolset tool calls ([1236cfa](https://github.com/anthropics/anthropic-sdk-ruby/commit/1236cfaec020223e352f4a39e1ad480a9c1673cc))
+* **api:** add display_name to RBAC roles and deprecate name ([8b4b105](https://github.com/anthropics/anthropic-sdk-ruby/commit/8b4b105142bce7d88416ffbb9d4c44397ea92030))
+* **api:** add include_default parameter to list workspaces ([50b4f86](https://github.com/anthropics/anthropic-sdk-ruby/commit/50b4f86f10742132550c87815445a41df28fc1f9))
+* **api:** add lifecycle stage fields and filter to /v1/models ([0540b11](https://github.com/anthropics/anthropic-sdk-ruby/commit/0540b110b334c976531ac08ad656d39dddb37388))
+* **api:** add line to model objects ([b505f03](https://github.com/anthropics/anthropic-sdk-ruby/commit/b505f0382cb16955b9dd6970057f37f47f7621a2))
+* **api:** add url_sources to the Managed Agents web_fetch tool config ([21ddce2](https://github.com/anthropics/anthropic-sdk-ruby/commit/21ddce2f01c766b3bfc2ca387a94ee1d490b364b))
+* **api:** add web search and code execution support to model capabilities ([21ddce2](https://github.com/anthropics/anthropic-sdk-ruby/commit/21ddce2f01c766b3bfc2ca387a94ee1d490b364b))
+
+
+### Bug Fixes
+
+* **api:** send the beta header by default when listing spend limits ([b8475eb](https://github.com/anthropics/anthropic-sdk-ruby/commit/b8475eb8281b203ed973532661ec7b51ed3cacd5))
+* **client:** raise an error when a path parameter is "." or ".." ([21ddce2](https://github.com/anthropics/anthropic-sdk-ruby/commit/21ddce2f01c766b3bfc2ca387a94ee1d490b364b))
+
+
+### Chores
+
+* **api:** mark the Text Completions API as deprecated ([21ddce2](https://github.com/anthropics/anthropic-sdk-ruby/commit/21ddce2f01c766b3bfc2ca387a94ee1d490b364b))
+* **ci:** cache installed gems in the test and lint jobs ([21ddce2](https://github.com/anthropics/anthropic-sdk-ruby/commit/21ddce2f01c766b3bfc2ca387a94ee1d490b364b))
+* **docs:** correct example groups in rate limit list description ([0059b95](https://github.com/anthropics/anthropic-sdk-ruby/commit/0059b9525b1616e08f5a9465b6a2b4b44809c361))
+* **docs:** correct when usage and cost report data becomes final ([21ddce2](https://github.com/anthropics/anthropic-sdk-ruby/commit/21ddce2f01c766b3bfc2ca387a94ee1d490b364b))
+* **docs:** describe a federation rule's target by its type ([21ddce2](https://github.com/anthropics/anthropic-sdk-ruby/commit/21ddce2f01c766b3bfc2ca387a94ee1d490b364b))
+* **docs:** fix example IDs in sessions, agents and vault credentials ([21ddce2](https://github.com/anthropics/anthropic-sdk-ruby/commit/21ddce2f01c766b3bfc2ca387a94ee1d490b364b))
+* **docs:** update Managed Agents multiagent and thread descriptions ([21ddce2](https://github.com/anthropics/anthropic-sdk-ruby/commit/21ddce2f01c766b3bfc2ca387a94ee1d490b364b))
+* **docs:** update the activity summaries endpoint description ([5c31991](https://github.com/anthropics/anthropic-sdk-ruby/commit/5c3199142c9da96d939358bc807a8df6c1a3a17f))
+* **docs:** update the description of the Model line field ([c3c9821](https://github.com/anthropics/anthropic-sdk-ruby/commit/c3c982126ce9682e665b8497d17545be4827c55a))
+* **internal:** add REVIEW.md with review instructions ([21ddce2](https://github.com/anthropics/anthropic-sdk-ruby/commit/21ddce2f01c766b3bfc2ca387a94ee1d490b364b))
+* **tests:** fix a race in the thread interrupt test ([21ddce2](https://github.com/anthropics/anthropic-sdk-ruby/commit/21ddce2f01c766b3bfc2ca387a94ee1d490b364b))
+* **tests:** run tests skipped for a query param bug that is now fixed ([498e601](https://github.com/anthropics/anthropic-sdk-ruby/commit/498e601c601993d71975c2328743bb61115a1249))
+* **tests:** run tests that an older mock server could not serve ([d32d008](https://github.com/anthropics/anthropic-sdk-ruby/commit/d32d00846cd77028d9a32a9843054c73379ca190))
+* **tests:** run the tests skipped for incomplete example responses ([b75200d](https://github.com/anthropics/anthropic-sdk-ruby/commit/b75200d21681d55881eb79e4e27dae12ea75faac))
+
+
+### Documentation
+
+* **api:** state the agent tools limit as 256 ([6371b8c](https://github.com/anthropics/anthropic-sdk-ruby/commit/6371b8c1365bbad0411474372234b951df65abad))
+
 ## 1.76.0 (2026-09-30)
 
 Full Changelog: [v1.75.0...v1.76.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.75.0...v1.76.0)

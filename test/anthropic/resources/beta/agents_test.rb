@@ -36,8 +36,6 @@ class Anthropic::Test::Resources::Beta::AgentsTest < Anthropic::Test::ResourceTe
   end
 
   def test_retrieve
-    skip("buildURL drops path-level query params")
-
     response = @anthropic.beta.agents.retrieve("agent_011CZkYpogX7uDKUyvBTophP")
 
     assert_pattern do
@@ -94,8 +92,6 @@ class Anthropic::Test::Resources::Beta::AgentsTest < Anthropic::Test::ResourceTe
   end
 
   def test_list
-    skip("buildURL drops path-level query params")
-
     response = @anthropic.beta.agents.list
 
     assert_pattern do

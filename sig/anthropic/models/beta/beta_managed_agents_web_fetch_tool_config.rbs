@@ -9,6 +9,7 @@ module Anthropic
           name: :web_fetch,
           permission_policy: Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfig::permission_policy,
           type: :web_fetch,
+          url_sources: Anthropic::Beta::BetaManagedAgentsWebFetchURLSources?,
           allowed_domains: ::Array[String],
           blocked_domains: ::Array[String],
           max_content_tokens: Integer?
@@ -23,6 +24,8 @@ module Anthropic
 
         attr_accessor type: :web_fetch
 
+        attr_accessor url_sources: Anthropic::Beta::BetaManagedAgentsWebFetchURLSources?
+
         attr_reader allowed_domains: ::Array[String]?
 
         def allowed_domains=: (::Array[String]) -> ::Array[String]
@@ -36,6 +39,7 @@ module Anthropic
         def initialize: (
           enabled: bool,
           permission_policy: Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfig::permission_policy,
+          url_sources: Anthropic::Beta::BetaManagedAgentsWebFetchURLSources?,
           ?allowed_domains: ::Array[String],
           ?blocked_domains: ::Array[String],
           ?max_content_tokens: Integer?,
@@ -48,6 +52,7 @@ module Anthropic
           name: :web_fetch,
           permission_policy: Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfig::permission_policy,
           type: :web_fetch,
+          url_sources: Anthropic::Beta::BetaManagedAgentsWebFetchURLSources?,
           allowed_domains: ::Array[String],
           blocked_domains: ::Array[String],
           max_content_tokens: Integer?

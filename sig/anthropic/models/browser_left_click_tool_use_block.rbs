@@ -1,0 +1,45 @@
+module Anthropic
+  module Models
+    type browser_left_click_tool_use_block =
+      {
+        id: String,
+        caller_: Anthropic::Models::tool_use_caller,
+        input: Anthropic::BrowserLeftClickInput,
+        name: :left_click,
+        toolset_name: :browser,
+        type: :tool_use
+      }
+
+    class BrowserLeftClickToolUseBlock < Anthropic::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor caller_: Anthropic::Models::tool_use_caller
+
+      attr_accessor input: Anthropic::BrowserLeftClickInput
+
+      attr_accessor name: :left_click
+
+      attr_accessor toolset_name: :browser
+
+      attr_accessor type: :tool_use
+
+      def initialize: (
+        id: String,
+        caller_: Anthropic::Models::tool_use_caller,
+        input: Anthropic::BrowserLeftClickInput,
+        ?name: :left_click,
+        ?toolset_name: :browser,
+        ?type: :tool_use
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        caller_: Anthropic::Models::tool_use_caller,
+        input: Anthropic::BrowserLeftClickInput,
+        name: :left_click,
+        toolset_name: :browser,
+        type: :tool_use
+      }
+    end
+  end
+end

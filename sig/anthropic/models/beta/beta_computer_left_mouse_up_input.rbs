@@ -1,0 +1,15 @@
+module Anthropic
+  module Models
+    class BetaComputerLeftMouseUpInput = Beta::BetaComputerLeftMouseUpInput
+
+    module Beta
+      type beta_computer_left_mouse_up_input = {  }
+
+      class BetaComputerLeftMouseUpInput < Anthropic::Internal::Type::BaseModel
+        def initialize: -> void
+
+        def to_hash: -> {  }
+      end
+    end
+  end
+end

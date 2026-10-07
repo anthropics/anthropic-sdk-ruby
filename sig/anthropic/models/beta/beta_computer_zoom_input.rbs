@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    class BetaComputerZoomInput = Beta::BetaComputerZoomInput
+
+    module Beta
+      type beta_computer_zoom_input = { region: ::Array[Integer] }
+
+      class BetaComputerZoomInput < Anthropic::Internal::Type::BaseModel
+        attr_accessor region: ::Array[Integer]
+
+        def initialize: (region: ::Array[Integer]) -> void
+
+        def to_hash: -> { region: ::Array[Integer] }
+      end
+    end
+  end
+end

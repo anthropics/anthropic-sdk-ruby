@@ -1,0 +1,30 @@
+module Anthropic
+  module Models
+    type server_tools_capability =
+      {
+        code_execution: Anthropic::CapabilitySupport,
+        supported: bool,
+        web_search: Anthropic::CapabilitySupport
+      }
+
+    class ServerToolsCapability < Anthropic::Internal::Type::BaseModel
+      attr_accessor code_execution: Anthropic::CapabilitySupport
+
+      attr_accessor supported: bool
+
+      attr_accessor web_search: Anthropic::CapabilitySupport
+
+      def initialize: (
+        code_execution: Anthropic::CapabilitySupport,
+        supported: bool,
+        web_search: Anthropic::CapabilitySupport
+      ) -> void
+
+      def to_hash: -> {
+        code_execution: Anthropic::CapabilitySupport,
+        supported: bool,
+        web_search: Anthropic::CapabilitySupport
+      }
+    end
+  end
+end

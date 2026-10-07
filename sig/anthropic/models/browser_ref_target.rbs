@@ -1,0 +1,15 @@
+module Anthropic
+  module Models
+    type browser_ref_target = { ref: String, type: :ref }
+
+    class BrowserRefTarget < Anthropic::Internal::Type::BaseModel
+      attr_accessor ref: String
+
+      attr_accessor type: :ref
+
+      def initialize: (ref: String, ?type: :ref) -> void
+
+      def to_hash: -> { ref: String, type: :ref }
+    end
+  end
+end

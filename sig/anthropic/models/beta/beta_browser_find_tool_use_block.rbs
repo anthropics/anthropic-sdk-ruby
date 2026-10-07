@@ -1,0 +1,53 @@
+module Anthropic
+  module Models
+    class BetaBrowserFindToolUseBlock = Beta::BetaBrowserFindToolUseBlock
+
+    module Beta
+      type beta_browser_find_tool_use_block =
+        {
+          id: String,
+          input: Anthropic::Beta::BetaBrowserFindInput,
+          name: :find,
+          toolset_name: :browser,
+          type: :tool_use,
+          caller_: Anthropic::Models::Beta::beta_tool_use_caller
+        }
+
+      class BetaBrowserFindToolUseBlock < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor input: Anthropic::Beta::BetaBrowserFindInput
+
+        attr_accessor name: :find
+
+        attr_accessor toolset_name: :browser
+
+        attr_accessor type: :tool_use
+
+        attr_reader caller_: Anthropic::Models::Beta::beta_tool_use_caller?
+
+        def caller_=: (
+          Anthropic::Models::Beta::beta_tool_use_caller
+        ) -> Anthropic::Models::Beta::beta_tool_use_caller
+
+        def initialize: (
+          id: String,
+          input: Anthropic::Beta::BetaBrowserFindInput,
+          ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+          ?name: :find,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          input: Anthropic::Beta::BetaBrowserFindInput,
+          name: :find,
+          toolset_name: :browser,
+          type: :tool_use,
+          caller_: Anthropic::Models::Beta::beta_tool_use_caller
+        }
+      end
+    end
+  end
+end

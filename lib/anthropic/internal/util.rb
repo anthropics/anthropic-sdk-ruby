@@ -297,6 +297,7 @@ module Anthropic
         #
         # @param path [String, Array<String>]
         #
+        # @raise [ArgumentError]
         # @return [String]
         def interpolate_path(path)
           case path
@@ -306,7 +307,13 @@ module Anthropic
             ""
           in [String => p, *interpolations]
             encoded = interpolations.map { encode_path(_1) }
-            format(p, *encoded)
+            interpolated = format(p, *encoded)
+            path_part = interpolated.partition(/[?#]/).first
+            dot_segment = path_part.split("/").find { _1.match?(/\A(?:\.|%2e){1,2}\z/i) }
+            if dot_segment
+              raise ArgumentError.new("The request was not sent: path #{path_part.inspect} has the dot segment #{dot_segment.inspect}, which would send it to a different URL")
+            end
+            interpolated
           end
         end
       end

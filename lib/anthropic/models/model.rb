@@ -9,6 +9,8 @@ module Anthropic
     module Model
       extend Anthropic::Internal::Type::Union
 
+      variant const: -> { Anthropic::Models::Model::CLAUDE_HAIKU_5_5 }
+
       variant const: -> { Anthropic::Models::Model::CLAUDE_SONNET_5_5 }
 
       variant const: -> { Anthropic::Models::Model::CLAUDE_FABLE_5_1 }
@@ -57,6 +59,9 @@ module Anthropic
       end
 
       # @!group
+
+      # Fastest model for high-volume, real-time tasks
+      CLAUDE_HAIKU_5_5 = :"claude-haiku-5-5"
 
       # Efficient model for coding and agents
       CLAUDE_SONNET_5_5 = :"claude-sonnet-5-5"

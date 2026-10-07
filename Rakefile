@@ -3,6 +3,7 @@
 require "pathname"
 require "securerandom"
 require "shellwords"
+require "tmpdir"
 
 require "minitest/test_task"
 require "rake/clean"
@@ -14,7 +15,7 @@ ignore_file = ".ignore"
 
 FILES_ENV = "FORMAT_FILE"
 
-CLEAN.push(*%w[.idea/ .ruby-lsp/ .yardoc/ doc/], *FileList["*.gem"], ignore_file)
+CLEAN.push(*%w[.idea/ .ruby-lsp/ .yardoc/ doc/], *FileList["*.gem", "sig-joined-*/"], ignore_file)
 
 CLOBBER.push(*%w[sorbet/rbi/annotations/ sorbet/rbi/gems/], tapioca)
 
@@ -127,16 +128,89 @@ end
 desc("Format everything")
 multitask(format: [:"format:rb", :"format:rbi", :"format:rbs"])
 
-desc("Typecheck `*.rbs`; use `STEEP_JOBS=<N>` to set the number of workers")
-multitask(:"typecheck:steep") do
-  # without `--jobs`, `steep` starts at most 2 workers when the `CI` environment variable is set
-  jobs = ENV["STEEP_JOBS"].to_i
-  unless jobs.positive?
-    require "concurrent/utility/processor_counter"
-    # capped: in a container this counts the host's cores, and each worker holds every `*.rbs` file in its own memory
-    jobs = [Concurrent.physical_processor_count, 16].min
+# the text of one file in `sig`, ending in a newline, and the declarations in it
+read_signature = ->(path) do
+  text = path.read(encoding: "UTF-8")
+  fail("#{path} is not valid UTF-8: save it as UTF-8") unless text.valid_encoding?
+  # parse each file alone: once joined, a `class A` left open in one file and an `end` in the next would pass
+  _, directives, declarations = RBS::Parser.parse_signature(RBS::Buffer.new(name: path, content: text))
+  if directives.any? || text.include?("\0")
+    fail(
+      "#{path} has a `use` line, a `# resolve-type-names` comment or a NUL byte: remove it and write type " \
+      "names in full, since all of `sig` is checked as one joined file, where it would act on other files too"
+    )
   end
-  sh(*%w[steep check --jobs], jobs.to_s)
+
+  [text.end_with?("\n") ? text : "#{text}\n", declarations]
+end
+
+# Temporary: `steep` validates a module again for each file that adds to it, and most files in `sig` add to
+# the same few, so its time far outgrows `sig`. For now `steep` gets one file that joins them all, in its
+# loading order. Once `steep` fixes that and `rbs` ships ruby/rbs#3143, upgrade and run plain `steep check`.
+join_signatures = -> do
+  require("rbs")
+
+  joined = +""
+  lines = 0
+  lines_before = {}
+  declarations = Pathname.glob("sig/**/*.rbs").select(&:file?).sort.flat_map do |path|
+    text, parsed = read_signature.call(path)
+    lines_before[lines] = path
+    lines += text.count("\n")
+    joined << text
+    parsed
+  end
+  # `steep` must get the declarations that the files hold one by one, and no `use` line or
+  # `# resolve-type-names` comment, which would act on the whole joined file
+  _, directives, parsed = RBS::Parser.parse_signature(RBS::Buffer.new(name: "sig (joined)", content: joined))
+  unless directives.empty? && parsed == declarations
+    fail(
+      "this task checks all of `sig` joined into one file, and the joined file parses differently from the " \
+      "files taken one by one, so its result cannot be trusted: run `steep check` instead, which is " \
+      "slower, and please open an issue"
+    )
+  end
+
+  [joined, lines_before]
+rescue RBS::ParsingError => e
+  # without its cause, which `rake` cannot print
+  fail(e.message, cause: nil)
+end
+
+desc("Typecheck `*.rbs`")
+multitask(:"typecheck:steep") do
+  joined, lines_before = join_signatures.call
+  # made in the repository, not the system's temporary folder: `steep` finds no file in a folder named by an
+  # absolute path
+  Dir.mktmpdir("sig-joined-", ".") do |dir|
+    dir = File.basename(dir)
+    File.write("#{dir}/joined.rbs", joined)
+    success = false
+    # the command is not echoed: pasted by hand it would find the folder gone, check nothing and pass
+    warn("steep check (on all of `sig`, joined into one file)")
+    env = {"STEEP_SIGNATURE_DIR" => dir}
+    sh(env, *%w[steep check --jobs 1], out: "#{dir}/report", verbose: false) { success = _1 }
+
+    report = File.read("#{dir}/report", encoding: "UTF-8")
+    report.gsub!(%r{#{Regexp.escape(dir)}/joined\.rbs:(\d+)}) do
+      line = Regexp.last_match(1).to_i
+      before, path = lines_before.reverse_each.find { |count, _| count < line }
+      "#{path}:#{line - before}"
+    end
+    # `steep` repeats a finding for every class that inherits the mistake: drop the repeats, and its line
+    # `Detected N problems`, which counts them
+    puts(report.split("\n\n").uniq.grep_v(/\ADetected \d+ problem/).join("\n\n"))
+    fail("`steep check` failed") unless success
+    # `steep` passes when it finds nothing to check, and prints a dot per file: a lone dot is the joined file
+    unless report.match?(/^\.$/)
+      fail(
+        "`steep check` passed, but did not check just the one file that joins all of `sig`, so the pass " \
+        "means nothing: the Steepfile's only `signature` line must be " \
+        "`signature(ENV.fetch(\"STEEP_SIGNATURE_DIR\", \"sig\"))`, it must have no `check` line, and the " \
+        "path of this repository must hold none of `[]{}*?\\`"
+      )
+    end
+  end
 end
 
 directory(examples)

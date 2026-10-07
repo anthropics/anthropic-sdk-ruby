@@ -1,0 +1,53 @@
+module Anthropic
+  module Models
+    class BetaComputerLeftClickDragToolUseBlock = Beta::BetaComputerLeftClickDragToolUseBlock
+
+    module Beta
+      type beta_computer_left_click_drag_tool_use_block =
+        {
+          id: String,
+          input: Anthropic::Beta::BetaComputerLeftClickDragInput,
+          name: :left_click_drag,
+          toolset_name: :computer,
+          type: :tool_use,
+          caller_: Anthropic::Models::Beta::beta_tool_use_caller
+        }
+
+      class BetaComputerLeftClickDragToolUseBlock < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor input: Anthropic::Beta::BetaComputerLeftClickDragInput
+
+        attr_accessor name: :left_click_drag
+
+        attr_accessor toolset_name: :computer
+
+        attr_accessor type: :tool_use
+
+        attr_reader caller_: Anthropic::Models::Beta::beta_tool_use_caller?
+
+        def caller_=: (
+          Anthropic::Models::Beta::beta_tool_use_caller
+        ) -> Anthropic::Models::Beta::beta_tool_use_caller
+
+        def initialize: (
+          id: String,
+          input: Anthropic::Beta::BetaComputerLeftClickDragInput,
+          ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+          ?name: :left_click_drag,
+          ?toolset_name: :computer,
+          ?type: :tool_use
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          input: Anthropic::Beta::BetaComputerLeftClickDragInput,
+          name: :left_click_drag,
+          toolset_name: :computer,
+          type: :tool_use,
+          caller_: Anthropic::Models::Beta::beta_tool_use_caller
+        }
+      end
+    end
+  end
+end

@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    class BetaBrowserGetPageTextInput = Beta::BetaBrowserGetPageTextInput
+
+    module Beta
+      type beta_browser_get_page_text_input = { tab_id: String? }
+
+      class BetaBrowserGetPageTextInput < Anthropic::Internal::Type::BaseModel
+        attr_accessor tab_id: String?
+
+        def initialize: (?tab_id: String?) -> void
+
+        def to_hash: -> { tab_id: String? }
+      end
+    end
+  end
+end

@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    class BetaBrowserRefTarget = Beta::BetaBrowserRefTarget
+
+    module Beta
+      type beta_browser_ref_target = { ref: String, type: :ref }
+
+      class BetaBrowserRefTarget < Anthropic::Internal::Type::BaseModel
+        attr_accessor ref: String
+
+        attr_accessor type: :ref
+
+        def initialize: (ref: String, ?type: :ref) -> void
+
+        def to_hash: -> { ref: String, type: :ref }
+      end
+    end
+  end
+end

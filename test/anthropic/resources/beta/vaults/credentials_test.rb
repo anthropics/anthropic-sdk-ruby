@@ -36,7 +36,7 @@ class Anthropic::Test::Resources::Beta::Vaults::CredentialsTest < Anthropic::Tes
   def test_retrieve_required_params
     response =
       @anthropic.beta.vaults.credentials.retrieve(
-        "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+        "vcrd_011CZkZEMt8gZan2iYPQfSkw",
         vault_id: "vlt_011CZkZDLs7fYzm1hXNPeRjv"
       )
 
@@ -62,7 +62,7 @@ class Anthropic::Test::Resources::Beta::Vaults::CredentialsTest < Anthropic::Tes
   def test_update_required_params
     response =
       @anthropic.beta.vaults.credentials.update(
-        "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+        "vcrd_011CZkZEMt8gZan2iYPQfSkw",
         vault_id: "vlt_011CZkZDLs7fYzm1hXNPeRjv"
       )
 
@@ -86,8 +86,6 @@ class Anthropic::Test::Resources::Beta::Vaults::CredentialsTest < Anthropic::Tes
   end
 
   def test_list
-    skip("buildURL drops path-level query params")
-
     response = @anthropic.beta.vaults.credentials.list("vlt_011CZkZDLs7fYzm1hXNPeRjv")
 
     assert_pattern do
@@ -119,7 +117,7 @@ class Anthropic::Test::Resources::Beta::Vaults::CredentialsTest < Anthropic::Tes
   def test_delete_required_params
     response =
       @anthropic.beta.vaults.credentials.delete(
-        "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+        "vcrd_011CZkZEMt8gZan2iYPQfSkw",
         vault_id: "vlt_011CZkZDLs7fYzm1hXNPeRjv"
       )
 
@@ -138,7 +136,7 @@ class Anthropic::Test::Resources::Beta::Vaults::CredentialsTest < Anthropic::Tes
   def test_archive_required_params
     response =
       @anthropic.beta.vaults.credentials.archive(
-        "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+        "vcrd_011CZkZEMt8gZan2iYPQfSkw",
         vault_id: "vlt_011CZkZDLs7fYzm1hXNPeRjv"
       )
 
@@ -162,11 +160,9 @@ class Anthropic::Test::Resources::Beta::Vaults::CredentialsTest < Anthropic::Tes
   end
 
   def test_mcp_oauth_validate_required_params
-    skip("prism can't find endpoint with beta only tag")
-
     response =
       @anthropic.beta.vaults.credentials.mcp_oauth_validate(
-        "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+        "vcrd_011CZkZEMt8gZan2iYPQfSkw",
         vault_id: "vlt_011CZkZDLs7fYzm1hXNPeRjv"
       )
 

@@ -15,7 +15,7 @@ module Anthropic
           end
 
         # A Claude model id. The model must be permitted as an advisor for this agent's
-        # model — see the sessions/threads/advisor spec.
+        # model.
         sig { returns(String) }
         attr_accessor :model
 
@@ -38,7 +38,7 @@ module Anthropic
         end
         def self.new(
           # A Claude model id. The model must be permitted as an advisor for this agent's
-          # model — see the sessions/threads/advisor spec.
+          # model.
           model:,
           type:
         )

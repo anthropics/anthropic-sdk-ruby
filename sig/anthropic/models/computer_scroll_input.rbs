@@ -1,0 +1,35 @@
+module Anthropic
+  module Models
+    type computer_scroll_input =
+      {
+        scroll_amount: Integer,
+        scroll_direction: Anthropic::Models::computer_scroll_direction,
+        coordinate: ::Array[Integer]?,
+        text: String?
+      }
+
+    class ComputerScrollInput < Anthropic::Internal::Type::BaseModel
+      attr_accessor scroll_amount: Integer
+
+      attr_accessor scroll_direction: Anthropic::Models::computer_scroll_direction
+
+      attr_accessor coordinate: ::Array[Integer]?
+
+      attr_accessor text: String?
+
+      def initialize: (
+        scroll_amount: Integer,
+        scroll_direction: Anthropic::Models::computer_scroll_direction,
+        ?coordinate: ::Array[Integer]?,
+        ?text: String?
+      ) -> void
+
+      def to_hash: -> {
+        scroll_amount: Integer,
+        scroll_direction: Anthropic::Models::computer_scroll_direction,
+        coordinate: ::Array[Integer]?,
+        text: String?
+      }
+    end
+  end
+end

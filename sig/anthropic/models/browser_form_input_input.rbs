@@ -1,0 +1,30 @@
+module Anthropic
+  module Models
+    type browser_form_input_input =
+      {
+        target: Anthropic::BrowserRefTarget,
+        value: Anthropic::Models::browser_form_input_value,
+        tab_id: String?
+      }
+
+    class BrowserFormInputInput < Anthropic::Internal::Type::BaseModel
+      attr_accessor target: Anthropic::BrowserRefTarget
+
+      attr_accessor value: Anthropic::Models::browser_form_input_value
+
+      attr_accessor tab_id: String?
+
+      def initialize: (
+        target: Anthropic::BrowserRefTarget,
+        value: Anthropic::Models::browser_form_input_value,
+        ?tab_id: String?
+      ) -> void
+
+      def to_hash: -> {
+        target: Anthropic::BrowserRefTarget,
+        value: Anthropic::Models::browser_form_input_value,
+        tab_id: String?
+      }
+    end
+  end
+end

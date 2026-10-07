@@ -55,6 +55,9 @@ module Anthropic
         # Creates a new instance of the variant class whose `type` matches the given
         # value, passing the remaining arguments to its constructor.
         #
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfig} for more details.
+        #
         # @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfig::Type, String]
         #
         # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
@@ -64,6 +67,8 @@ module Anthropic
         #   @option args [Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy, Anthropic::Models::Beta::BetaManagedAgentsAutoPolicy] :permission_policy Permission policy for tool execution.
         #
         #   @option args [Symbol, :bash, Symbol, :edit, Symbol, :read, Symbol, :write, Symbol, :glob, Symbol, :grep, Symbol, :web_fetch, Symbol, :web_search] :name
+        #
+        #   @option args [Anthropic::Models::Beta::BetaManagedAgentsWebFetchURLSources, nil] :url_sources Which sources contribute URLs the tool may fetch, always in the object form. Nul
         #
         #   @option args [Array<String>] :allowed_domains
         #

@@ -728,6 +728,9 @@ module Anthropic
         )
         end
 
+        # Hand-written: Anthropic::Resources::Beta::Messages#stream (custom code, not generated).
+        # Its sig and parameters copy #stream_raw's below; update them by hand when those change.
+
         # See {Anthropic::Resources::Beta::Messages#create} for non-streaming counterpart.
         #
         # Send a structured list of input messages with text and/or image content, and the
@@ -1151,6 +1154,7 @@ module Anthropic
           request_options: {}
         )
         end
+        # End of hand-written Anthropic::Resources::Beta::Messages#stream.
 
         # See {Anthropic::Resources::Beta::Messages#create} for non-streaming counterpart.
         #
@@ -1213,6 +1217,7 @@ module Anthropic
               T.any(
                 Anthropic::Beta::BetaThinkingConfigEnabled::OrHash,
                 Anthropic::Beta::BetaThinkingConfigDisabled::OrHash,
+                Anthropic::Beta::BetaThinkingConfigBetweenTools::OrHash,
                 Anthropic::Beta::BetaThinkingConfigAdaptive::OrHash
               ),
             tool_choice:

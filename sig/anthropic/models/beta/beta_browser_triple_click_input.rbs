@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    class BetaBrowserTripleClickInput = Beta::BetaBrowserTripleClickInput
+
+    module Beta
+      type beta_browser_triple_click_input =
+        {
+          target: Anthropic::Models::Beta::beta_browser_click_target,
+          modifiers: String?,
+          tab_id: String?
+        }
+
+      class BetaBrowserTripleClickInput < Anthropic::Internal::Type::BaseModel
+        attr_accessor target: Anthropic::Models::Beta::beta_browser_click_target
+
+        attr_accessor modifiers: String?
+
+        attr_accessor tab_id: String?
+
+        def initialize: (
+          target: Anthropic::Models::Beta::beta_browser_click_target,
+          ?modifiers: String?,
+          ?tab_id: String?
+        ) -> void
+
+        def to_hash: -> {
+          target: Anthropic::Models::Beta::beta_browser_click_target,
+          modifiers: String?,
+          tab_id: String?
+        }
+      end
+    end
+  end
+end

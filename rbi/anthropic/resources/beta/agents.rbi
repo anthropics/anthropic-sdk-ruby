@@ -66,14 +66,13 @@ module Anthropic
           # Body param: Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars,
           # values up to 512 chars.
           metadata: nil,
-          # Body param: Multiagent orchestration configuration. Currently supports the
-          # `coordinator` topology with a roster of 1-20 agents.
+          # Body param: Multiagent orchestration configuration.
           multiagent: nil,
           # Body param: Skills available to the agent.
           skills: nil,
           # Body param: System prompt for the agent.
           system_: nil,
-          # Body param: Tool configurations available to the agent. Maximum of 128 tools
+          # Body param: Tool configurations available to the agent. Maximum of 256 tools
           # across all toolsets allowed.
           tools: nil,
           # Header param: Optional header to specify the beta version(s) you want to use.
@@ -199,7 +198,7 @@ module Anthropic
           # Body param: System prompt. Omit to preserve; send empty string or null to clear.
           system_: nil,
           # Body param: Tool configurations available to the agent. Full replacement. Omit
-          # to preserve; send empty array or null to clear. Maximum of 128 tools across all
+          # to preserve; send empty array or null to clear. Maximum of 256 tools across all
           # toolsets allowed.
           tools: nil,
           # Body param: The agent's current version, used to prevent concurrent overwrites.

@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    type computer_zoom_input = { region: ::Array[Integer] }
+
+    class ComputerZoomInput < Anthropic::Internal::Type::BaseModel
+      attr_accessor region: ::Array[Integer]
+
+      def initialize: (region: ::Array[Integer]) -> void
+
+      def to_hash: -> { region: ::Array[Integer] }
+    end
+  end
+end

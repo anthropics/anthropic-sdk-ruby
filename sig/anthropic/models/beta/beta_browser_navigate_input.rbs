@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    class BetaBrowserNavigateInput = Beta::BetaBrowserNavigateInput
+
+    module Beta
+      type beta_browser_navigate_input = { url: String, tab_id: String? }
+
+      class BetaBrowserNavigateInput < Anthropic::Internal::Type::BaseModel
+        attr_accessor url: String
+
+        attr_accessor tab_id: String?
+
+        def initialize: (url: String, ?tab_id: String?) -> void
+
+        def to_hash: -> { url: String, tab_id: String? }
+      end
+    end
+  end
+end

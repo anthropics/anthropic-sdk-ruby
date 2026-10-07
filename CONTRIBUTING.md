@@ -89,8 +89,10 @@ There are two separate type checkers supported by this library: [sorbet](https:/
 To lint and typecheck:
 
 ```bash
-$ bundle exec rake lint
+$ ./scripts/lint
 ```
+
+`./scripts/lint` runs the linters and type checkers from a separate bundle, `lint/Gemfile` and `lint/Gemfile.lock`, whose gems it installs if they are missing. It works on the version in the `.ruby-version` file, the oldest Ruby that this library supports and the one that CI tests on. GitHub CI lints on Ruby 3.4.
 
 To format and fix all lint issues automatically:
 

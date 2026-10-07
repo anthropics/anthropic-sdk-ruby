@@ -6,7 +6,8 @@ module Anthropic
           {
             amount: String?,
             scope: Anthropic::Models::Beta::Organization::SpendLimitSetParams::scope,
-            period: Anthropic::Models::Beta::Organization::beta_spend_limit_period
+            period: Anthropic::Models::Beta::Organization::beta_spend_limit_period,
+            betas: ::Array[Anthropic::Models::anthropic_beta]
           }
           & Anthropic::Internal::Type::request_parameters
 
@@ -24,10 +25,17 @@ module Anthropic
             Anthropic::Models::Beta::Organization::beta_spend_limit_period
           ) -> Anthropic::Models::Beta::Organization::beta_spend_limit_period
 
+          attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+          def betas=: (
+            ::Array[Anthropic::Models::anthropic_beta]
+          ) -> ::Array[Anthropic::Models::anthropic_beta]
+
           def initialize: (
             amount: String?,
             scope: Anthropic::Models::Beta::Organization::SpendLimitSetParams::scope,
             ?period: Anthropic::Models::Beta::Organization::beta_spend_limit_period,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?request_options: Anthropic::request_opts
           ) -> void
 
@@ -35,6 +43,7 @@ module Anthropic
             amount: String?,
             scope: Anthropic::Models::Beta::Organization::SpendLimitSetParams::scope,
             period: Anthropic::Models::Beta::Organization::beta_spend_limit_period,
+            betas: ::Array[Anthropic::Models::anthropic_beta],
             request_options: Anthropic::RequestOptions
           }
 

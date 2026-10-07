@@ -1,0 +1,53 @@
+module Anthropic
+  module Models
+    class BetaBrowserRightClickToolUseBlock = Beta::BetaBrowserRightClickToolUseBlock
+
+    module Beta
+      type beta_browser_right_click_tool_use_block =
+        {
+          id: String,
+          input: Anthropic::Beta::BetaBrowserRightClickInput,
+          name: :right_click,
+          toolset_name: :browser,
+          type: :tool_use,
+          caller_: Anthropic::Models::Beta::beta_tool_use_caller
+        }
+
+      class BetaBrowserRightClickToolUseBlock < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor input: Anthropic::Beta::BetaBrowserRightClickInput
+
+        attr_accessor name: :right_click
+
+        attr_accessor toolset_name: :browser
+
+        attr_accessor type: :tool_use
+
+        attr_reader caller_: Anthropic::Models::Beta::beta_tool_use_caller?
+
+        def caller_=: (
+          Anthropic::Models::Beta::beta_tool_use_caller
+        ) -> Anthropic::Models::Beta::beta_tool_use_caller
+
+        def initialize: (
+          id: String,
+          input: Anthropic::Beta::BetaBrowserRightClickInput,
+          ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+          ?name: :right_click,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          input: Anthropic::Beta::BetaBrowserRightClickInput,
+          name: :right_click,
+          toolset_name: :browser,
+          type: :tool_use,
+          caller_: Anthropic::Models::Beta::beta_tool_use_caller
+        }
+      end
+    end
+  end
+end

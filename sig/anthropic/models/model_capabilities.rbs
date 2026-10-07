@@ -9,6 +9,7 @@ module Anthropic
         effort: Anthropic::EffortCapability,
         image_input: Anthropic::CapabilitySupport,
         pdf_input: Anthropic::CapabilitySupport,
+        server_tools: Anthropic::ServerToolsCapability,
         structured_outputs: Anthropic::CapabilitySupport,
         thinking: Anthropic::ThinkingCapability
       }
@@ -28,6 +29,8 @@ module Anthropic
 
       attr_accessor pdf_input: Anthropic::CapabilitySupport
 
+      attr_accessor server_tools: Anthropic::ServerToolsCapability
+
       attr_accessor structured_outputs: Anthropic::CapabilitySupport
 
       attr_accessor thinking: Anthropic::ThinkingCapability
@@ -40,6 +43,7 @@ module Anthropic
         effort: Anthropic::EffortCapability,
         image_input: Anthropic::CapabilitySupport,
         pdf_input: Anthropic::CapabilitySupport,
+        server_tools: Anthropic::ServerToolsCapability,
         structured_outputs: Anthropic::CapabilitySupport,
         thinking: Anthropic::ThinkingCapability
       ) -> void
@@ -52,6 +56,7 @@ module Anthropic
         effort: Anthropic::EffortCapability,
         image_input: Anthropic::CapabilitySupport,
         pdf_input: Anthropic::CapabilitySupport,
+        server_tools: Anthropic::ServerToolsCapability,
         structured_outputs: Anthropic::CapabilitySupport,
         thinking: Anthropic::ThinkingCapability
       }

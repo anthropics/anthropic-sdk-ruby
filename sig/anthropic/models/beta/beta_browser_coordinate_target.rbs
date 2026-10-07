@@ -1,0 +1,22 @@
+module Anthropic
+  module Models
+    class BetaBrowserCoordinateTarget = Beta::BetaBrowserCoordinateTarget
+
+    module Beta
+      type beta_browser_coordinate_target =
+        { type: :coordinate, x: Integer, y_: Integer }
+
+      class BetaBrowserCoordinateTarget < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :coordinate
+
+        attr_accessor x: Integer
+
+        attr_accessor y_: Integer
+
+        def initialize: (x: Integer, y_: Integer, ?type: :coordinate) -> void
+
+        def to_hash: -> { type: :coordinate, x: Integer, y_: Integer }
+      end
+    end
+  end
+end

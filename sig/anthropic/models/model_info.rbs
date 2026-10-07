@@ -5,9 +5,13 @@ module Anthropic
         id: String,
         capabilities: Anthropic::ModelCapabilities?,
         created_at: Time,
+        deprecated_at: Time?,
         display_name: String,
+        lifecycle: Anthropic::Models::ModelInfo::lifecycle,
+        line: Anthropic::Models::model_line?,
         max_input_tokens: Integer?,
         max_tokens: Integer?,
+        retires_at: Time?,
         type: :model
       }
 
@@ -18,11 +22,19 @@ module Anthropic
 
       attr_accessor created_at: Time
 
+      attr_accessor deprecated_at: Time?
+
       attr_accessor display_name: String
+
+      attr_accessor lifecycle: Anthropic::Models::ModelInfo::lifecycle
+
+      attr_accessor line: Anthropic::Models::model_line?
 
       attr_accessor max_input_tokens: Integer?
 
       attr_accessor max_tokens: Integer?
+
+      attr_accessor retires_at: Time?
 
       attr_accessor type: :model
 
@@ -30,9 +42,13 @@ module Anthropic
         id: String,
         capabilities: Anthropic::ModelCapabilities?,
         created_at: Time,
+        deprecated_at: Time?,
         display_name: String,
+        lifecycle: Anthropic::Models::ModelInfo::lifecycle,
+        line: Anthropic::Models::model_line?,
         max_input_tokens: Integer?,
         max_tokens: Integer?,
+        retires_at: Time?,
         ?type: :model
       ) -> void
 
@@ -40,11 +56,27 @@ module Anthropic
         id: String,
         capabilities: Anthropic::ModelCapabilities?,
         created_at: Time,
+        deprecated_at: Time?,
         display_name: String,
+        lifecycle: Anthropic::Models::ModelInfo::lifecycle,
+        line: Anthropic::Models::model_line?,
         max_input_tokens: Integer?,
         max_tokens: Integer?,
+        retires_at: Time?,
         type: :model
       }
+
+      type lifecycle = :active | :deprecated | :retired
+
+      module Lifecycle
+        extend Anthropic::Internal::Type::Enum
+
+        ACTIVE: :active
+        DEPRECATED: :deprecated
+        RETIRED: :retired
+
+        def self?.values: -> ::Array[Anthropic::Models::ModelInfo::lifecycle]
+      end
     end
   end
 end

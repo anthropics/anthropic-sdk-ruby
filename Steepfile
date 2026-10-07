@@ -5,7 +5,8 @@ require "yaml"
 target(:lib) do
   configure_code_diagnostics(Steep::Diagnostic::Ruby.strict)
 
-  signature("sig")
+  # `rake typecheck:steep` sets this variable to a folder that holds all of `sig` joined into one file
+  signature(ENV.fetch("STEEP_SIGNATURE_DIR", "sig"))
 
   YAML.safe_load_file("./manifest.yaml", symbolize_names: true) => {dependencies:}
   # currently these libraries lack the `*.rbs` annotations required by `steep`

@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    type computer_mouse_move_input = { coordinate: ::Array[Integer] }
+
+    class ComputerMouseMoveInput < Anthropic::Internal::Type::BaseModel
+      attr_accessor coordinate: ::Array[Integer]
+
+      def initialize: (coordinate: ::Array[Integer]) -> void
+
+      def to_hash: -> { coordinate: ::Array[Integer] }
+    end
+  end
+end

@@ -62,8 +62,6 @@ class Anthropic::Test::Resources::Beta::Environments::WorkTest < Anthropic::Test
   end
 
   def test_list
-    skip("buildURL drops path-level query params")
-
     response = @anthropic.beta.environments.work.list("env_011CZkZ9X2dpNyB7HsEFoRfW")
 
     assert_pattern do
@@ -169,8 +167,6 @@ class Anthropic::Test::Resources::Beta::Environments::WorkTest < Anthropic::Test
   end
 
   def test_stats
-    skip("buildURL drops path-level query params")
-
     response = @anthropic.beta.environments.work.stats("env_011CZkZ9X2dpNyB7HsEFoRfW")
 
     assert_pattern do

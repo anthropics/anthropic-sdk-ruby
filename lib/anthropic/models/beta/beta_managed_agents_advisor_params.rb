@@ -6,7 +6,7 @@ module Anthropic
       class BetaManagedAgentsAdvisorParams < Anthropic::Internal::Type::BaseModel
         # @!attribute model
         #   A Claude model id. The model must be permitted as an advisor for this agent's
-        #   model — see the sessions/threads/advisor spec.
+        #   model.
         #
         #   @return [String]
         required :model, String

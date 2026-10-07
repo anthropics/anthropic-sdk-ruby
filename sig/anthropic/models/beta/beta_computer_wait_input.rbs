@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    class BetaComputerWaitInput = Beta::BetaComputerWaitInput
+
+    module Beta
+      type beta_computer_wait_input = { duration: Integer }
+
+      class BetaComputerWaitInput < Anthropic::Internal::Type::BaseModel
+        attr_accessor duration: Integer
+
+        def initialize: (duration: Integer) -> void
+
+        def to_hash: -> { duration: Integer }
+      end
+    end
+  end
+end

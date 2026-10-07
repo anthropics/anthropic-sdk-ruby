@@ -21,7 +21,14 @@ module Anthropic
           sig { returns(Time) }
           attr_accessor :created_at
 
-          # Name of the RBAC Role.
+          # Name of the RBAC Role. For a role created by Anthropic, this name can differ
+          # from the label claude.ai shows, and Anthropic may change the name. To keep a
+          # lasting reference to a role, store its `id`.
+          sig { returns(String) }
+          attr_accessor :display_name
+
+          # Deprecated: use `display_name` instead. Name of the RBAC Role; always the same
+          # value as `display_name`.
           sig { returns(String) }
           attr_accessor :name
 
@@ -39,6 +46,7 @@ module Anthropic
             params(
               id: String,
               created_at: Time,
+              display_name: String,
               name: String,
               updated_at: Time,
               type: Symbol
@@ -49,7 +57,12 @@ module Anthropic
             id:,
             # RFC 3339 datetime string indicating when the RBAC Role was created.
             created_at:,
-            # Name of the RBAC Role.
+            # Name of the RBAC Role. For a role created by Anthropic, this name can differ
+            # from the label claude.ai shows, and Anthropic may change the name. To keep a
+            # lasting reference to a role, store its `id`.
+            display_name:,
+            # Deprecated: use `display_name` instead. Name of the RBAC Role; always the same
+            # value as `display_name`.
             name:,
             # RFC 3339 datetime string indicating when the RBAC Role was last updated.
             updated_at:,
@@ -65,6 +78,7 @@ module Anthropic
               {
                 id: String,
                 created_at: Time,
+                display_name: String,
                 name: String,
                 type: Symbol,
                 updated_at: Time

@@ -35,8 +35,8 @@ module Anthropic
           required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent::Type }
 
           # @!method initialize(id:, agent_name:, processed_at:, session_thread_id:, type:)
-          #   Emitted when a subagent is spawned as a new thread. Written to the parent
-          #   thread's output stream so clients observing the session see child creation.
+          #   Emitted when a child thread is created. Written to the parent thread's output
+          #   stream so clients observing the session see child creation.
           #
           #   @param id [String] Unique identifier for this event.
           #

@@ -1,0 +1,21 @@
+module Anthropic
+  module Models
+    type browser_key_input = { text: String, repeat: Integer?, tab_id: String? }
+
+    class BrowserKeyInput < Anthropic::Internal::Type::BaseModel
+      attr_accessor text: String
+
+      attr_accessor repeat: Integer?
+
+      attr_accessor tab_id: String?
+
+      def initialize: (
+        text: String,
+        ?repeat: Integer?,
+        ?tab_id: String?
+      ) -> void
+
+      def to_hash: -> { text: String, repeat: Integer?, tab_id: String? }
+    end
+  end
+end

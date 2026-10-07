@@ -82,7 +82,7 @@ module Anthropic
 
         # @!attribute tools
         #   Tool configurations available to the agent. Full replacement. Omit to preserve;
-        #   send empty array or null to clear. Maximum of 128 tools across all toolsets
+        #   send empty array or null to clear. Maximum of 256 tools across all toolsets
         #   allowed.
         #
         #   @return [Array<Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401Params, Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetParams, Anthropic::Models::Beta::BetaManagedAgentsCustomToolParams>, nil]

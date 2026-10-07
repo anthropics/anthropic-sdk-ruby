@@ -106,13 +106,15 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Organization::WorkspaceListParams} for more details.
         #
-        # @overload list(after_id: nil, before_id: nil, include_archived: nil, limit: nil, request_options: {})
+        # @overload list(after_id: nil, before_id: nil, include_archived: nil, include_default: nil, limit: nil, request_options: {})
         #
         # @param after_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
         #
         # @param before_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
         #
         # @param include_archived [Boolean] Whether to include Workspaces that have been archived in the response
+        #
+        # @param include_default [Boolean] Whether to include the organization's default Workspace in the response
         #
         # @param limit [Integer] Number of items to return per page.
         #

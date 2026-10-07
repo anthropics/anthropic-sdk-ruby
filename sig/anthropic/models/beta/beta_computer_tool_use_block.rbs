@@ -1,0 +1,238 @@
+module Anthropic
+  module Models
+    module BetaComputerToolUseBlock = Beta::BetaComputerToolUseBlock
+
+    module Beta
+      type beta_computer_tool_use_block =
+        Anthropic::Beta::BetaComputerKeyToolUseBlock
+        | Anthropic::Beta::BetaComputerHoldKeyToolUseBlock
+        | Anthropic::Beta::BetaComputerTypeToolUseBlock
+        | Anthropic::Beta::BetaComputerCursorPositionToolUseBlock
+        | Anthropic::Beta::BetaComputerMouseMoveToolUseBlock
+        | Anthropic::Beta::BetaComputerLeftMouseDownToolUseBlock
+        | Anthropic::Beta::BetaComputerLeftMouseUpToolUseBlock
+        | Anthropic::Beta::BetaComputerLeftClickToolUseBlock
+        | Anthropic::Beta::BetaComputerLeftClickDragToolUseBlock
+        | Anthropic::Beta::BetaComputerRightClickToolUseBlock
+        | Anthropic::Beta::BetaComputerMiddleClickToolUseBlock
+        | Anthropic::Beta::BetaComputerDoubleClickToolUseBlock
+        | Anthropic::Beta::BetaComputerTripleClickToolUseBlock
+        | Anthropic::Beta::BetaComputerScrollToolUseBlock
+        | Anthropic::Beta::BetaComputerWaitToolUseBlock
+        | Anthropic::Beta::BetaComputerScreenshotToolUseBlock
+        | Anthropic::Beta::BetaComputerZoomToolUseBlock
+
+      module BetaComputerToolUseBlock
+        extend Anthropic::Internal::Type::Union
+
+        type name_ =
+          :key
+          | :hold_key
+          | :type
+          | :cursor_position
+          | :mouse_move
+          | :left_mouse_down
+          | :left_mouse_up
+          | :left_click
+          | :left_click_drag
+          | :right_click
+          | :middle_click
+          | :double_click
+          | :triple_click
+          | :scroll
+          | :wait
+          | :screenshot
+          | :zoom
+
+        module Name
+          extend Anthropic::Internal::Type::Enum
+
+          KEY: :key
+          HOLD_KEY: :hold_key
+          TYPE: :type
+          CURSOR_POSITION: :cursor_position
+          MOUSE_MOVE: :mouse_move
+          LEFT_MOUSE_DOWN: :left_mouse_down
+          LEFT_MOUSE_UP: :left_mouse_up
+          LEFT_CLICK: :left_click
+          LEFT_CLICK_DRAG: :left_click_drag
+          RIGHT_CLICK: :right_click
+          MIDDLE_CLICK: :middle_click
+          DOUBLE_CLICK: :double_click
+          TRIPLE_CLICK: :triple_click
+          SCROLL: :scroll
+          WAIT: :wait
+          SCREENSHOT: :screenshot
+          ZOOM: :zoom
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaComputerToolUseBlock::name_]
+        end
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_computer_tool_use_block]
+
+        def self.new:
+          (
+            name: :key | "key",
+            id: String,
+            input: Anthropic::Beta::BetaComputerKeyInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :computer,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaComputerKeyToolUseBlock
+          | (
+            name: :hold_key | "hold_key",
+            id: String,
+            input: Anthropic::Beta::BetaComputerHoldKeyInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :computer,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaComputerHoldKeyToolUseBlock
+          | (
+            name: :type | "type",
+            id: String,
+            input: Anthropic::Beta::BetaComputerTypeInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :computer,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaComputerTypeToolUseBlock
+          | (
+            name: :cursor_position | "cursor_position",
+            id: String,
+            input: Anthropic::Beta::BetaComputerCursorPositionInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :computer,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaComputerCursorPositionToolUseBlock
+          | (
+            name: :mouse_move | "mouse_move",
+            id: String,
+            input: Anthropic::Beta::BetaComputerMouseMoveInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :computer,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaComputerMouseMoveToolUseBlock
+          | (
+            name: :left_mouse_down | "left_mouse_down",
+            id: String,
+            input: Anthropic::Beta::BetaComputerLeftMouseDownInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :computer,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaComputerLeftMouseDownToolUseBlock
+          | (
+            name: :left_mouse_up | "left_mouse_up",
+            id: String,
+            input: Anthropic::Beta::BetaComputerLeftMouseUpInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :computer,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaComputerLeftMouseUpToolUseBlock
+          | (
+            name: :left_click | "left_click",
+            id: String,
+            input: Anthropic::Beta::BetaComputerLeftClickInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :computer,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaComputerLeftClickToolUseBlock
+          | (
+            name: :left_click_drag | "left_click_drag",
+            id: String,
+            input: Anthropic::Beta::BetaComputerLeftClickDragInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :computer,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaComputerLeftClickDragToolUseBlock
+          | (
+            name: :right_click | "right_click",
+            id: String,
+            input: Anthropic::Beta::BetaComputerRightClickInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :computer,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaComputerRightClickToolUseBlock
+          | (
+            name: :middle_click | "middle_click",
+            id: String,
+            input: Anthropic::Beta::BetaComputerMiddleClickInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :computer,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaComputerMiddleClickToolUseBlock
+          | (
+            name: :double_click | "double_click",
+            id: String,
+            input: Anthropic::Beta::BetaComputerDoubleClickInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :computer,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaComputerDoubleClickToolUseBlock
+          | (
+            name: :triple_click | "triple_click",
+            id: String,
+            input: Anthropic::Beta::BetaComputerTripleClickInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :computer,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaComputerTripleClickToolUseBlock
+          | (
+            name: :scroll | "scroll",
+            id: String,
+            input: Anthropic::Beta::BetaComputerScrollInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :computer,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaComputerScrollToolUseBlock
+          | (
+            name: :wait | "wait",
+            id: String,
+            input: Anthropic::Beta::BetaComputerWaitInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :computer,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaComputerWaitToolUseBlock
+          | (
+            name: :screenshot | "screenshot",
+            id: String,
+            input: Anthropic::Beta::BetaComputerScreenshotInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :computer,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaComputerScreenshotToolUseBlock
+          | (
+            name: :zoom | "zoom",
+            id: String,
+            input: Anthropic::Beta::BetaComputerZoomInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :computer,
+            ?type: :tool_use
+          ) -> Anthropic::Beta::BetaComputerZoomToolUseBlock
+          | (
+            name: Anthropic::Models::Beta::BetaComputerToolUseBlock::name_
+            | String,
+            id: String,
+            input: Anthropic::Beta::BetaComputerKeyInput
+            | Anthropic::Beta::BetaComputerHoldKeyInput
+            | Anthropic::Beta::BetaComputerTypeInput
+            | Anthropic::Beta::BetaComputerCursorPositionInput
+            | Anthropic::Beta::BetaComputerMouseMoveInput
+            | Anthropic::Beta::BetaComputerLeftMouseDownInput
+            | Anthropic::Beta::BetaComputerLeftMouseUpInput
+            | Anthropic::Beta::BetaComputerLeftClickInput
+            | Anthropic::Beta::BetaComputerLeftClickDragInput
+            | Anthropic::Beta::BetaComputerRightClickInput
+            | Anthropic::Beta::BetaComputerMiddleClickInput
+            | Anthropic::Beta::BetaComputerDoubleClickInput
+            | Anthropic::Beta::BetaComputerTripleClickInput
+            | Anthropic::Beta::BetaComputerScrollInput
+            | Anthropic::Beta::BetaComputerWaitInput
+            | Anthropic::Beta::BetaComputerScreenshotInput
+            | Anthropic::Beta::BetaComputerZoomInput,
+            ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+            ?toolset_name: :computer,
+            ?type: :tool_use
+          ) -> Anthropic::Models::Beta::beta_computer_tool_use_block
+      end
+    end
+  end
+end

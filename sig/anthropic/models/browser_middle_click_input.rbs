@@ -1,0 +1,30 @@
+module Anthropic
+  module Models
+    type browser_middle_click_input =
+      {
+        target: Anthropic::Models::browser_click_target,
+        modifiers: String?,
+        tab_id: String?
+      }
+
+    class BrowserMiddleClickInput < Anthropic::Internal::Type::BaseModel
+      attr_accessor target: Anthropic::Models::browser_click_target
+
+      attr_accessor modifiers: String?
+
+      attr_accessor tab_id: String?
+
+      def initialize: (
+        target: Anthropic::Models::browser_click_target,
+        ?modifiers: String?,
+        ?tab_id: String?
+      ) -> void
+
+      def to_hash: -> {
+        target: Anthropic::Models::browser_click_target,
+        modifiers: String?,
+        tab_id: String?
+      }
+    end
+  end
+end

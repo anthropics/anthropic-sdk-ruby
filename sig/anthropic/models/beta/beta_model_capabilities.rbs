@@ -13,6 +13,7 @@ module Anthropic
           effort: Anthropic::Beta::BetaEffortCapability,
           image_input: Anthropic::Beta::BetaCapabilitySupport,
           pdf_input: Anthropic::Beta::BetaCapabilitySupport,
+          server_tools: Anthropic::Beta::BetaServerToolsCapability,
           structured_outputs: Anthropic::Beta::BetaCapabilitySupport,
           thinking: Anthropic::Beta::BetaThinkingCapability
         }
@@ -34,6 +35,8 @@ module Anthropic
 
         attr_accessor pdf_input: Anthropic::Beta::BetaCapabilitySupport
 
+        attr_accessor server_tools: Anthropic::Beta::BetaServerToolsCapability
+
         attr_accessor structured_outputs: Anthropic::Beta::BetaCapabilitySupport
 
         attr_accessor thinking: Anthropic::Beta::BetaThinkingCapability
@@ -47,6 +50,7 @@ module Anthropic
           effort: Anthropic::Beta::BetaEffortCapability,
           image_input: Anthropic::Beta::BetaCapabilitySupport,
           pdf_input: Anthropic::Beta::BetaCapabilitySupport,
+          server_tools: Anthropic::Beta::BetaServerToolsCapability,
           structured_outputs: Anthropic::Beta::BetaCapabilitySupport,
           thinking: Anthropic::Beta::BetaThinkingCapability
         ) -> void
@@ -60,6 +64,7 @@ module Anthropic
           effort: Anthropic::Beta::BetaEffortCapability,
           image_input: Anthropic::Beta::BetaCapabilitySupport,
           pdf_input: Anthropic::Beta::BetaCapabilitySupport,
+          server_tools: Anthropic::Beta::BetaServerToolsCapability,
           structured_outputs: Anthropic::Beta::BetaCapabilitySupport,
           thinking: Anthropic::Beta::BetaThinkingCapability
         }

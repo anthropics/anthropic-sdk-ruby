@@ -25,8 +25,6 @@ class Anthropic::Test::Resources::Beta::Tunnels::CertificatesTest < Anthropic::T
   end
 
   def test_retrieve_required_params
-    skip("buildURL drops path-level query params")
-
     response = @anthropic.beta.tunnels.certificates.retrieve("certificate_id", tunnel_id: "tunnel_id")
 
     assert_pattern do
@@ -47,8 +45,6 @@ class Anthropic::Test::Resources::Beta::Tunnels::CertificatesTest < Anthropic::T
   end
 
   def test_list
-    skip("buildURL drops path-level query params")
-
     response = @anthropic.beta.tunnels.certificates.list("tunnel_id")
 
     assert_pattern do

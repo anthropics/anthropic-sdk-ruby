@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    class BetaComputerMiddleClickInput = Beta::BetaComputerMiddleClickInput
+
+    module Beta
+      type beta_computer_middle_click_input =
+        { coordinate: ::Array[Integer]?, text: String? }
+
+      class BetaComputerMiddleClickInput < Anthropic::Internal::Type::BaseModel
+        attr_accessor coordinate: ::Array[Integer]?
+
+        attr_accessor text: String?
+
+        def initialize: (?coordinate: ::Array[Integer]?, ?text: String?) -> void
+
+        def to_hash: -> { coordinate: ::Array[Integer]?, text: String? }
+      end
+    end
+  end
+end

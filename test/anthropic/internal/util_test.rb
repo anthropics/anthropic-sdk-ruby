@@ -201,6 +201,27 @@ class Anthropic::Test::UtilUriHandlingTest < Minitest::Test
     end
   end
 
+  def test_interpolate_path
+    cases = {
+      ["cards/%1$s", "../secrets"] => "cards/..%2Fsecrets",
+      ["cards/%1$s", "..."] => "cards/...",
+      ["cards/%1$s?beta=..", "x"] => "cards/x?beta=.."
+    }
+    cases.each do |path, expected|
+      assert_equal(expected, Anthropic::Internal::Util.interpolate_path(path))
+    end
+
+    [
+      ["cards/%1$s", "."],
+      ["cards/%1$s", ".."],
+      ["cards/%1$s%2$s", ".", "."],
+      # `%%` is how `format` writes a literal `%`, so this path text holds "%2E%2e".
+      ["cards/%1$s/%%2E%%2e", "x"]
+    ].each do |path|
+      assert_raises(ArgumentError) { Anthropic::Internal::Util.interpolate_path(path) }
+    end
+  end
+
   def test_parsing
     %w[
       http://example.com
@@ -499,8 +520,15 @@ class Anthropic::Test::UtilFusedEnumTest < Minitest::Test
     fused_3 = Anthropic::Internal::Util.chain_fused(fused_2) { fused_2.each(&_1) }
 
     th = ::Thread.new do
-      que << "🐶"
-      fused_3.each { sleep(10) }
+      fused_3.each do
+        # signal once enumeration is under way: killed before that, `enum` never starts
+        # and its `ensure` never runs
+        que << "🐶"
+        sleep(10)
+      end
+    ensure
+      # unblocks the pop below if nothing was enumerated
+      que.close
     end
 
     assert_equal("🐶", que.pop)

@@ -1,0 +1,53 @@
+module Anthropic
+  module Models
+    class BetaComputerTypeToolUseBlock = Beta::BetaComputerTypeToolUseBlock
+
+    module Beta
+      type beta_computer_type_tool_use_block =
+        {
+          id: String,
+          input: Anthropic::Beta::BetaComputerTypeInput,
+          name: :type,
+          toolset_name: :computer,
+          type: :tool_use,
+          caller_: Anthropic::Models::Beta::beta_tool_use_caller
+        }
+
+      class BetaComputerTypeToolUseBlock < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor input: Anthropic::Beta::BetaComputerTypeInput
+
+        attr_accessor name: :type
+
+        attr_accessor toolset_name: :computer
+
+        attr_accessor type: :tool_use
+
+        attr_reader caller_: Anthropic::Models::Beta::beta_tool_use_caller?
+
+        def caller_=: (
+          Anthropic::Models::Beta::beta_tool_use_caller
+        ) -> Anthropic::Models::Beta::beta_tool_use_caller
+
+        def initialize: (
+          id: String,
+          input: Anthropic::Beta::BetaComputerTypeInput,
+          ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+          ?name: :type,
+          ?toolset_name: :computer,
+          ?type: :tool_use
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          input: Anthropic::Beta::BetaComputerTypeInput,
+          name: :type,
+          toolset_name: :computer,
+          type: :tool_use,
+          caller_: Anthropic::Models::Beta::beta_tool_use_caller
+        }
+      end
+    end
+  end
+end

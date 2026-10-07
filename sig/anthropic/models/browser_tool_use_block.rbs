@@ -1,0 +1,401 @@
+module Anthropic
+  module Models
+    type browser_tool_use_block =
+      Anthropic::BrowserNavigateToolUseBlock
+      | Anthropic::BrowserListTabsToolUseBlock
+      | Anthropic::BrowserNewTabToolUseBlock
+      | Anthropic::BrowserSwitchTabToolUseBlock
+      | Anthropic::BrowserCloseTabToolUseBlock
+      | Anthropic::BrowserReadPageToolUseBlock
+      | Anthropic::BrowserGetPageTextToolUseBlock
+      | Anthropic::BrowserReadConsoleToolUseBlock
+      | Anthropic::BrowserReadNetworkToolUseBlock
+      | Anthropic::BrowserFindToolUseBlock
+      | Anthropic::BrowserFormInputToolUseBlock
+      | Anthropic::BrowserFileUploadToolUseBlock
+      | Anthropic::BrowserScrollToToolUseBlock
+      | Anthropic::BrowserScreenshotToolUseBlock
+      | Anthropic::BrowserZoomToolUseBlock
+      | Anthropic::BrowserLeftClickToolUseBlock
+      | Anthropic::BrowserRightClickToolUseBlock
+      | Anthropic::BrowserMiddleClickToolUseBlock
+      | Anthropic::BrowserDoubleClickToolUseBlock
+      | Anthropic::BrowserTripleClickToolUseBlock
+      | Anthropic::BrowserHoverToolUseBlock
+      | Anthropic::BrowserLeftClickDragToolUseBlock
+      | Anthropic::BrowserLeftMouseDownToolUseBlock
+      | Anthropic::BrowserLeftMouseUpToolUseBlock
+      | Anthropic::BrowserMouseMoveToolUseBlock
+      | Anthropic::BrowserScrollToolUseBlock
+      | Anthropic::BrowserTypeToolUseBlock
+      | Anthropic::BrowserKeyToolUseBlock
+      | Anthropic::BrowserHoldKeyToolUseBlock
+      | Anthropic::BrowserWaitToolUseBlock
+      | Anthropic::BrowserJavascriptExecToolUseBlock
+
+    module BrowserToolUseBlock
+      extend Anthropic::Internal::Type::Union
+
+      type name_ =
+        :navigate
+        | :list_tabs
+        | :new_tab
+        | :switch_tab
+        | :close_tab
+        | :read_page
+        | :get_page_text
+        | :read_console
+        | :read_network
+        | :find
+        | :form_input
+        | :file_upload
+        | :scroll_to
+        | :screenshot
+        | :zoom
+        | :left_click
+        | :right_click
+        | :middle_click
+        | :double_click
+        | :triple_click
+        | :hover
+        | :left_click_drag
+        | :left_mouse_down
+        | :left_mouse_up
+        | :mouse_move
+        | :scroll
+        | :type
+        | :key
+        | :hold_key
+        | :wait
+        | :javascript_exec
+
+      module Name
+        extend Anthropic::Internal::Type::Enum
+
+        NAVIGATE: :navigate
+        LIST_TABS: :list_tabs
+        NEW_TAB: :new_tab
+        SWITCH_TAB: :switch_tab
+        CLOSE_TAB: :close_tab
+        READ_PAGE: :read_page
+        GET_PAGE_TEXT: :get_page_text
+        READ_CONSOLE: :read_console
+        READ_NETWORK: :read_network
+        FIND: :find
+        FORM_INPUT: :form_input
+        FILE_UPLOAD: :file_upload
+        SCROLL_TO: :scroll_to
+        SCREENSHOT: :screenshot
+        ZOOM: :zoom
+        LEFT_CLICK: :left_click
+        RIGHT_CLICK: :right_click
+        MIDDLE_CLICK: :middle_click
+        DOUBLE_CLICK: :double_click
+        TRIPLE_CLICK: :triple_click
+        HOVER: :hover
+        LEFT_CLICK_DRAG: :left_click_drag
+        LEFT_MOUSE_DOWN: :left_mouse_down
+        LEFT_MOUSE_UP: :left_mouse_up
+        MOUSE_MOVE: :mouse_move
+        SCROLL: :scroll
+        TYPE: :type
+        KEY: :key
+        HOLD_KEY: :hold_key
+        WAIT: :wait
+        JAVASCRIPT_EXEC: :javascript_exec
+
+        def self?.values: -> ::Array[Anthropic::Models::BrowserToolUseBlock::name_]
+      end
+
+      def self?.variants: -> ::Array[Anthropic::Models::browser_tool_use_block]
+
+      def self.new:
+        (
+          name: :navigate | "navigate",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserNavigateInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::BrowserNavigateToolUseBlock
+        | (
+          name: :list_tabs | "list_tabs",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserListTabsInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::BrowserListTabsToolUseBlock
+        | (
+          name: :new_tab | "new_tab",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserNewTabInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::BrowserNewTabToolUseBlock
+        | (
+          name: :switch_tab | "switch_tab",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserSwitchTabInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::BrowserSwitchTabToolUseBlock
+        | (
+          name: :close_tab | "close_tab",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserCloseTabInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::BrowserCloseTabToolUseBlock
+        | (
+          name: :read_page | "read_page",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserReadPageInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::BrowserReadPageToolUseBlock
+        | (
+          name: :get_page_text | "get_page_text",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserGetPageTextInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::BrowserGetPageTextToolUseBlock
+        | (
+          name: :read_console | "read_console",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserReadConsoleInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::BrowserReadConsoleToolUseBlock
+        | (
+          name: :read_network | "read_network",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserReadNetworkInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::BrowserReadNetworkToolUseBlock
+        | (
+          name: :find | "find",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserFindInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::BrowserFindToolUseBlock
+        | (
+          name: :form_input | "form_input",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserFormInputInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::BrowserFormInputToolUseBlock
+        | (
+          name: :file_upload | "file_upload",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserFileUploadInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::BrowserFileUploadToolUseBlock
+        | (
+          name: :scroll_to | "scroll_to",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserScrollToInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::BrowserScrollToToolUseBlock
+        | (
+          name: :screenshot | "screenshot",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserScreenshotInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::BrowserScreenshotToolUseBlock
+        | (
+          name: :zoom | "zoom",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserZoomInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::BrowserZoomToolUseBlock
+        | (
+          name: :left_click | "left_click",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserLeftClickInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::BrowserLeftClickToolUseBlock
+        | (
+          name: :right_click | "right_click",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserRightClickInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::BrowserRightClickToolUseBlock
+        | (
+          name: :middle_click | "middle_click",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserMiddleClickInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::BrowserMiddleClickToolUseBlock
+        | (
+          name: :double_click | "double_click",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserDoubleClickInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::BrowserDoubleClickToolUseBlock
+        | (
+          name: :triple_click | "triple_click",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserTripleClickInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::BrowserTripleClickToolUseBlock
+        | (
+          name: :hover | "hover",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserHoverInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::BrowserHoverToolUseBlock
+        | (
+          name: :left_click_drag | "left_click_drag",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserLeftClickDragInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::BrowserLeftClickDragToolUseBlock
+        | (
+          name: :left_mouse_down | "left_mouse_down",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserLeftMouseDownInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::BrowserLeftMouseDownToolUseBlock
+        | (
+          name: :left_mouse_up | "left_mouse_up",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserLeftMouseUpInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::BrowserLeftMouseUpToolUseBlock
+        | (
+          name: :mouse_move | "mouse_move",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserMouseMoveInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::BrowserMouseMoveToolUseBlock
+        | (
+          name: :scroll | "scroll",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserScrollInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::BrowserScrollToolUseBlock
+        | (
+          name: :type | "type",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserTypeInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::BrowserTypeToolUseBlock
+        | (
+          name: :key | "key",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserKeyInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::BrowserKeyToolUseBlock
+        | (
+          name: :hold_key | "hold_key",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserHoldKeyInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::BrowserHoldKeyToolUseBlock
+        | (
+          name: :wait | "wait",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserWaitInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::BrowserWaitToolUseBlock
+        | (
+          name: :javascript_exec | "javascript_exec",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserJavascriptExecInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::BrowserJavascriptExecToolUseBlock
+        | (
+          name: Anthropic::Models::BrowserToolUseBlock::name_ | String,
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::BrowserNavigateInput
+          | Anthropic::BrowserListTabsInput
+          | Anthropic::BrowserNewTabInput
+          | Anthropic::BrowserSwitchTabInput
+          | Anthropic::BrowserCloseTabInput
+          | Anthropic::BrowserReadPageInput
+          | Anthropic::BrowserGetPageTextInput
+          | Anthropic::BrowserReadConsoleInput
+          | Anthropic::BrowserReadNetworkInput
+          | Anthropic::BrowserFindInput
+          | Anthropic::BrowserFormInputInput
+          | Anthropic::BrowserFileUploadInput
+          | Anthropic::BrowserScrollToInput
+          | Anthropic::BrowserScreenshotInput
+          | Anthropic::BrowserZoomInput
+          | Anthropic::BrowserLeftClickInput
+          | Anthropic::BrowserRightClickInput
+          | Anthropic::BrowserMiddleClickInput
+          | Anthropic::BrowserDoubleClickInput
+          | Anthropic::BrowserTripleClickInput
+          | Anthropic::BrowserHoverInput
+          | Anthropic::BrowserLeftClickDragInput
+          | Anthropic::BrowserLeftMouseDownInput
+          | Anthropic::BrowserLeftMouseUpInput
+          | Anthropic::BrowserMouseMoveInput
+          | Anthropic::BrowserScrollInput
+          | Anthropic::BrowserTypeInput
+          | Anthropic::BrowserKeyInput
+          | Anthropic::BrowserHoldKeyInput
+          | Anthropic::BrowserWaitInput
+          | Anthropic::BrowserJavascriptExecInput,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> Anthropic::Models::browser_tool_use_block
+    end
+  end
+end

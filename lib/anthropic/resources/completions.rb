@@ -3,6 +3,9 @@
 module Anthropic
   module Resources
     class Completions
+      # @deprecated Use the [Messages API](https://platform.claude.com/docs/en/api/messages/create)
+      # instead.
+      #
       # See {Anthropic::Resources::Completions#create_streaming} for streaming
       # counterpart.
       #
@@ -62,6 +65,9 @@ module Anthropic
         )
       end
 
+      # @deprecated Use the [Messages API](https://platform.claude.com/docs/en/api/messages/create)
+      # instead.
+      #
       # See {Anthropic::Resources::Completions#create} for non-streaming counterpart.
       #
       # [Legacy] Create a Text Completion.

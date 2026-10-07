@@ -1,0 +1,53 @@
+module Anthropic
+  module Models
+    class BetaBrowserJavascriptExecToolUseBlock = Beta::BetaBrowserJavascriptExecToolUseBlock
+
+    module Beta
+      type beta_browser_javascript_exec_tool_use_block =
+        {
+          id: String,
+          input: Anthropic::Beta::BetaBrowserJavascriptExecInput,
+          name: :javascript_exec,
+          toolset_name: :browser,
+          type: :tool_use,
+          caller_: Anthropic::Models::Beta::beta_tool_use_caller
+        }
+
+      class BetaBrowserJavascriptExecToolUseBlock < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor input: Anthropic::Beta::BetaBrowserJavascriptExecInput
+
+        attr_accessor name: :javascript_exec
+
+        attr_accessor toolset_name: :browser
+
+        attr_accessor type: :tool_use
+
+        attr_reader caller_: Anthropic::Models::Beta::beta_tool_use_caller?
+
+        def caller_=: (
+          Anthropic::Models::Beta::beta_tool_use_caller
+        ) -> Anthropic::Models::Beta::beta_tool_use_caller
+
+        def initialize: (
+          id: String,
+          input: Anthropic::Beta::BetaBrowserJavascriptExecInput,
+          ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+          ?name: :javascript_exec,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          input: Anthropic::Beta::BetaBrowserJavascriptExecInput,
+          name: :javascript_exec,
+          toolset_name: :browser,
+          type: :tool_use,
+          caller_: Anthropic::Models::Beta::beta_tool_use_caller
+        }
+      end
+    end
+  end
+end

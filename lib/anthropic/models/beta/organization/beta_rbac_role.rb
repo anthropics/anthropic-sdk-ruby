@@ -18,8 +18,19 @@ module Anthropic
           #   @return [Time]
           required :created_at, Time
 
+          # @!attribute display_name
+          #   Name of the RBAC Role. For a role created by Anthropic, this name can differ
+          #   from the label claude.ai shows, and Anthropic may change the name. To keep a
+          #   lasting reference to a role, store its `id`.
+          #
+          #   @return [String]
+          required :display_name, String
+
           # @!attribute name
-          #   Name of the RBAC Role.
+          #   @deprecated Use `display_name` instead; `name` always has the same value.
+          #
+          #   Deprecated: use `display_name` instead. Name of the RBAC Role; always the same
+          #   value as `display_name`.
           #
           #   @return [String]
           required :name, String
@@ -38,7 +49,7 @@ module Anthropic
           #   @return [Time]
           required :updated_at, Time
 
-          # @!method initialize(id:, created_at:, name:, updated_at:, type: :rbac_role)
+          # @!method initialize(id:, created_at:, display_name:, name:, updated_at:, type: :rbac_role)
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Organization::BetaRBACRole} for more details.
           #
@@ -46,7 +57,9 @@ module Anthropic
           #
           #   @param created_at [Time] RFC 3339 datetime string indicating when the RBAC Role was created.
           #
-          #   @param name [String] Name of the RBAC Role.
+          #   @param display_name [String] Name of the RBAC Role. For a role created by Anthropic, this name can differ fro
+          #
+          #   @param name [String] Deprecated: use `display_name` instead. Name of the RBAC Role; always the same v
           #
           #   @param updated_at [Time] RFC 3339 datetime string indicating when the RBAC Role was last updated.
           #

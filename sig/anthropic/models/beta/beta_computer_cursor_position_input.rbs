@@ -1,0 +1,15 @@
+module Anthropic
+  module Models
+    class BetaComputerCursorPositionInput = Beta::BetaComputerCursorPositionInput
+
+    module Beta
+      type beta_computer_cursor_position_input = {  }
+
+      class BetaComputerCursorPositionInput < Anthropic::Internal::Type::BaseModel
+        def initialize: -> void
+
+        def to_hash: -> {  }
+      end
+    end
+  end
+end

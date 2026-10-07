@@ -77,7 +77,7 @@ module Anthropic
           variant :"session.status_terminated",
                   -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusTerminatedEvent }
 
-          # Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+          # Emitted when a child thread is created. Written to the parent thread's output stream so clients observing the session see child creation.
           variant :"session.thread_created",
                   -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent }
 

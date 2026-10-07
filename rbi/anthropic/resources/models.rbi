@@ -39,6 +39,7 @@ module Anthropic
         params(
           after_id: String,
           before_id: String,
+          lifecycle: T::Array[Anthropic::ModelListParams::Lifecycle::OrSymbol],
           limit: Integer,
           betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
           workspace_id: String,
@@ -52,6 +53,11 @@ module Anthropic
         # Query param: ID of the object to use as a cursor for pagination. When provided,
         # returns the page of results immediately before this object.
         before_id: nil,
+        # Query param: Filter the list to models in any of the given lifecycle stages
+        # (`active`, `deprecated`, or `retired`). Up to 3 values. When omitted, the list
+        # contains the `active` and `deprecated` models; `retired` models appear only when
+        # `retired` is requested explicitly.
+        lifecycle: nil,
         # Query param: Number of items to return per page.
         #
         # Defaults to `20`. Ranges from `1` to `1000`.

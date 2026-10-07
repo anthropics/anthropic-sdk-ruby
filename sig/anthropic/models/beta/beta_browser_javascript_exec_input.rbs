@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    class BetaBrowserJavascriptExecInput = Beta::BetaBrowserJavascriptExecInput
+
+    module Beta
+      type beta_browser_javascript_exec_input =
+        { text: String, tab_id: String? }
+
+      class BetaBrowserJavascriptExecInput < Anthropic::Internal::Type::BaseModel
+        attr_accessor text: String
+
+        attr_accessor tab_id: String?
+
+        def initialize: (text: String, ?tab_id: String?) -> void
+
+        def to_hash: -> { text: String, tab_id: String? }
+      end
+    end
+  end
+end

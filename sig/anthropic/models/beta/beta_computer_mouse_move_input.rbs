@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    class BetaComputerMouseMoveInput = Beta::BetaComputerMouseMoveInput
+
+    module Beta
+      type beta_computer_mouse_move_input = { coordinate: ::Array[Integer] }
+
+      class BetaComputerMouseMoveInput < Anthropic::Internal::Type::BaseModel
+        attr_accessor coordinate: ::Array[Integer]
+
+        def initialize: (coordinate: ::Array[Integer]) -> void
+
+        def to_hash: -> { coordinate: ::Array[Integer] }
+      end
+    end
+  end
+end

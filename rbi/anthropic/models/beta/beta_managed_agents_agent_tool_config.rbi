@@ -111,6 +111,10 @@ module Anthropic
                 Anthropic::Beta::BetaManagedAgentsAutoPolicy::OrHash
               ),
             name: Symbol,
+            url_sources:
+              T.nilable(
+                Anthropic::Beta::BetaManagedAgentsWebFetchURLSources::OrHash
+              ),
             allowed_domains: T::Array[String],
             blocked_domains: T::Array[String],
             max_content_tokens: T.nilable(Integer),
@@ -124,6 +128,9 @@ module Anthropic
           # Permission policy for tool execution.
           permission_policy:,
           name:,
+          # Which sources contribute URLs the tool may fetch, always in the object form.
+          # Null when not set, which allows every source.
+          url_sources: nil,
           allowed_domains: nil,
           blocked_domains: nil,
           max_content_tokens: nil,

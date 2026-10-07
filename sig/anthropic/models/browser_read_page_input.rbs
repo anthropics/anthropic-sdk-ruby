@@ -1,0 +1,35 @@
+module Anthropic
+  module Models
+    type browser_read_page_input =
+      {
+        depth: Integer?,
+        filter: Anthropic::Models::browser_read_page_filter?,
+        ref: String?,
+        tab_id: String?
+      }
+
+    class BrowserReadPageInput < Anthropic::Internal::Type::BaseModel
+      attr_accessor depth: Integer?
+
+      attr_accessor filter: Anthropic::Models::browser_read_page_filter?
+
+      attr_accessor ref: String?
+
+      attr_accessor tab_id: String?
+
+      def initialize: (
+        ?depth: Integer?,
+        ?filter: Anthropic::Models::browser_read_page_filter?,
+        ?ref: String?,
+        ?tab_id: String?
+      ) -> void
+
+      def to_hash: -> {
+        depth: Integer?,
+        filter: Anthropic::Models::browser_read_page_filter?,
+        ref: String?,
+        tab_id: String?
+      }
+    end
+  end
+end

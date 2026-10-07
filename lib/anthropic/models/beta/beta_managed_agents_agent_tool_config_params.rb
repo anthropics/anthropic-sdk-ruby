@@ -75,6 +75,8 @@ module Anthropic
         #
         #   @option args [Integer, nil] :max_content_tokens Maximum number of tokens of fetched text content to include in context per call.
         #
+        #   @option args [Anthropic::Models::Beta::BetaManagedAgentsWebFetchURLSourcesParams, nil] :url_sources Which sources contribute URLs the tool may fetch. Omit to allow every source.
+        #
         #   @option args [Anthropic::Models::Beta::BetaManagedAgentsUserLocation, nil] :user_location Approximate user location for search result localization.
         #
         # @raise [ArgumentError]

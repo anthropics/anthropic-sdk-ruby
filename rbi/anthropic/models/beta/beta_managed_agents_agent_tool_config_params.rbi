@@ -117,6 +117,10 @@ module Anthropic
             allowed_domains: T::Array[String],
             blocked_domains: T::Array[String],
             max_content_tokens: T.nilable(Integer),
+            url_sources:
+              T.nilable(
+                Anthropic::Beta::BetaManagedAgentsWebFetchURLSourcesParams::OrHash
+              ),
             user_location:
               T.nilable(Anthropic::Beta::BetaManagedAgentsUserLocation::OrHash)
           ).returns(
@@ -146,6 +150,8 @@ module Anthropic
           # Maximum number of tokens of fetched text content to include in context per call.
           # Does not apply to binary content such as PDFs.
           max_content_tokens: nil,
+          # Which sources contribute URLs the tool may fetch. Omit to allow every source.
+          url_sources: nil,
           # Approximate user location for search result localization.
           user_location: nil
         )

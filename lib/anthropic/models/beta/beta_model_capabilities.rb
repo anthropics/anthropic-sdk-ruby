@@ -17,7 +17,10 @@ module Anthropic
         required :citations, -> { Anthropic::Beta::BetaCapabilitySupport }
 
         # @!attribute code_execution
-        #   Whether the model supports code execution tools.
+        #   Whether code that the model runs in the code execution tool can call the
+        #   request's other tools, as in programmatic tool calling and dynamic filtering for
+        #   web search and web fetch. Support for the code execution tool itself is in
+        #   `server_tools.code_execution`.
         #
         #   @return [Anthropic::Models::Beta::BetaCapabilitySupport]
         required :code_execution, -> { Anthropic::Beta::BetaCapabilitySupport }
@@ -53,6 +56,15 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaCapabilitySupport]
         required :pdf_input, -> { Anthropic::Beta::BetaCapabilitySupport }
 
+        # @!attribute server_tools
+        #   Whether this model supports the web search and code execution server tools.
+        #   `supported` is true when the model supports at least one of the tools. A
+        #   supported tool can still be rejected for your organization, for example when an
+        #   admin has turned web search off.
+        #
+        #   @return [Anthropic::Models::Beta::BetaServerToolsCapability]
+        required :server_tools, -> { Anthropic::Beta::BetaServerToolsCapability }
+
         # @!attribute structured_outputs
         #   Whether the model supports structured output / JSON mode / strict tool schemas.
         #
@@ -65,7 +77,7 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaThinkingCapability]
         required :thinking, -> { Anthropic::Beta::BetaThinkingCapability }
 
-        # @!method initialize(batch:, citations:, code_execution:, compaction:, context_management:, effort:, image_input:, pdf_input:, structured_outputs:, thinking:)
+        # @!method initialize(batch:, citations:, code_execution:, compaction:, context_management:, effort:, image_input:, pdf_input:, server_tools:, structured_outputs:, thinking:)
         #   Model capability information.
         #
         #   Some parameter documentations has been truncated, see
@@ -75,7 +87,7 @@ module Anthropic
         #
         #   @param citations [Anthropic::Models::Beta::BetaCapabilitySupport] Whether the model supports citation generation.
         #
-        #   @param code_execution [Anthropic::Models::Beta::BetaCapabilitySupport] Whether the model supports code execution tools.
+        #   @param code_execution [Anthropic::Models::Beta::BetaCapabilitySupport] Whether code that the model runs in the code execution tool can call the request
         #
         #   @param compaction [Anthropic::Models::Beta::BetaCompactionCapability, nil] Server-side compaction support (the top-level `compaction` parameter) and the ac
         #
@@ -86,6 +98,8 @@ module Anthropic
         #   @param image_input [Anthropic::Models::Beta::BetaCapabilitySupport] Whether the model accepts image content blocks.
         #
         #   @param pdf_input [Anthropic::Models::Beta::BetaCapabilitySupport] Whether the model accepts PDF content blocks.
+        #
+        #   @param server_tools [Anthropic::Models::Beta::BetaServerToolsCapability] Whether this model supports the web search and code execution server tools. `sup
         #
         #   @param structured_outputs [Anthropic::Models::Beta::BetaCapabilitySupport] Whether the model supports structured output / JSON mode / strict tool schemas.
         #

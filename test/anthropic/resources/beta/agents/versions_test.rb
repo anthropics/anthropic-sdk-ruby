@@ -4,8 +4,6 @@ require_relative "../../../test_helper"
 
 class Anthropic::Test::Resources::Beta::Agents::VersionsTest < Anthropic::Test::ResourceTest
   def test_list
-    skip("buildURL drops path-level query params")
-
     response = @anthropic.beta.agents.versions.list("agent_011CZkYpogX7uDKUyvBTophP")
 
     assert_pattern do

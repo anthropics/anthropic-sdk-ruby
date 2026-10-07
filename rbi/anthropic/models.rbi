@@ -66,57 +66,185 @@ module Anthropic
 
   BillingError = Anthropic::Models::BillingError
 
+  BrowserClickTarget = Anthropic::Models::BrowserClickTarget
+
   BrowserCloseTabConfig = Anthropic::Models::BrowserCloseTabConfig
+
+  BrowserCloseTabInput = Anthropic::Models::BrowserCloseTabInput
+
+  BrowserCloseTabToolUseBlock = Anthropic::Models::BrowserCloseTabToolUseBlock
+
+  BrowserCoordinateTarget = Anthropic::Models::BrowserCoordinateTarget
 
   BrowserDoubleClickConfig = Anthropic::Models::BrowserDoubleClickConfig
 
+  BrowserDoubleClickInput = Anthropic::Models::BrowserDoubleClickInput
+
+  BrowserDoubleClickToolUseBlock =
+    Anthropic::Models::BrowserDoubleClickToolUseBlock
+
   BrowserFileUploadConfig = Anthropic::Models::BrowserFileUploadConfig
+
+  BrowserFileUploadInput = Anthropic::Models::BrowserFileUploadInput
+
+  BrowserFileUploadToolUseBlock =
+    Anthropic::Models::BrowserFileUploadToolUseBlock
 
   BrowserFindConfig = Anthropic::Models::BrowserFindConfig
 
+  BrowserFindInput = Anthropic::Models::BrowserFindInput
+
+  BrowserFindToolUseBlock = Anthropic::Models::BrowserFindToolUseBlock
+
   BrowserFormInputConfig = Anthropic::Models::BrowserFormInputConfig
+
+  BrowserFormInputInput = Anthropic::Models::BrowserFormInputInput
+
+  BrowserFormInputToolUseBlock = Anthropic::Models::BrowserFormInputToolUseBlock
+
+  BrowserFormInputValue = Anthropic::Models::BrowserFormInputValue
 
   BrowserGetPageTextConfig = Anthropic::Models::BrowserGetPageTextConfig
 
+  BrowserGetPageTextInput = Anthropic::Models::BrowserGetPageTextInput
+
+  BrowserGetPageTextToolUseBlock =
+    Anthropic::Models::BrowserGetPageTextToolUseBlock
+
   BrowserHoldKeyConfig = Anthropic::Models::BrowserHoldKeyConfig
+
+  BrowserHoldKeyInput = Anthropic::Models::BrowserHoldKeyInput
+
+  BrowserHoldKeyToolUseBlock = Anthropic::Models::BrowserHoldKeyToolUseBlock
 
   BrowserHoverConfig = Anthropic::Models::BrowserHoverConfig
 
+  BrowserHoverInput = Anthropic::Models::BrowserHoverInput
+
+  BrowserHoverToolUseBlock = Anthropic::Models::BrowserHoverToolUseBlock
+
   BrowserJavascriptExecConfig = Anthropic::Models::BrowserJavascriptExecConfig
 
+  BrowserJavascriptExecInput = Anthropic::Models::BrowserJavascriptExecInput
+
+  BrowserJavascriptExecToolUseBlock =
+    Anthropic::Models::BrowserJavascriptExecToolUseBlock
+
   BrowserKeyConfig = Anthropic::Models::BrowserKeyConfig
+
+  BrowserKeyInput = Anthropic::Models::BrowserKeyInput
+
+  BrowserKeyToolUseBlock = Anthropic::Models::BrowserKeyToolUseBlock
 
   BrowserLeftClickConfig = Anthropic::Models::BrowserLeftClickConfig
 
   BrowserLeftClickDragConfig = Anthropic::Models::BrowserLeftClickDragConfig
 
+  BrowserLeftClickDragInput = Anthropic::Models::BrowserLeftClickDragInput
+
+  BrowserLeftClickDragToolUseBlock =
+    Anthropic::Models::BrowserLeftClickDragToolUseBlock
+
+  BrowserLeftClickInput = Anthropic::Models::BrowserLeftClickInput
+
+  BrowserLeftClickToolUseBlock = Anthropic::Models::BrowserLeftClickToolUseBlock
+
   BrowserLeftMouseDownConfig = Anthropic::Models::BrowserLeftMouseDownConfig
+
+  BrowserLeftMouseDownInput = Anthropic::Models::BrowserLeftMouseDownInput
+
+  BrowserLeftMouseDownToolUseBlock =
+    Anthropic::Models::BrowserLeftMouseDownToolUseBlock
 
   BrowserLeftMouseUpConfig = Anthropic::Models::BrowserLeftMouseUpConfig
 
+  BrowserLeftMouseUpInput = Anthropic::Models::BrowserLeftMouseUpInput
+
+  BrowserLeftMouseUpToolUseBlock =
+    Anthropic::Models::BrowserLeftMouseUpToolUseBlock
+
   BrowserListTabsConfig = Anthropic::Models::BrowserListTabsConfig
+
+  BrowserListTabsInput = Anthropic::Models::BrowserListTabsInput
+
+  BrowserListTabsToolUseBlock = Anthropic::Models::BrowserListTabsToolUseBlock
 
   BrowserMiddleClickConfig = Anthropic::Models::BrowserMiddleClickConfig
 
+  BrowserMiddleClickInput = Anthropic::Models::BrowserMiddleClickInput
+
+  BrowserMiddleClickToolUseBlock =
+    Anthropic::Models::BrowserMiddleClickToolUseBlock
+
   BrowserMouseMoveConfig = Anthropic::Models::BrowserMouseMoveConfig
+
+  BrowserMouseMoveInput = Anthropic::Models::BrowserMouseMoveInput
+
+  BrowserMouseMoveToolUseBlock = Anthropic::Models::BrowserMouseMoveToolUseBlock
 
   BrowserNavigateConfig = Anthropic::Models::BrowserNavigateConfig
 
+  BrowserNavigateInput = Anthropic::Models::BrowserNavigateInput
+
+  BrowserNavigateToolUseBlock = Anthropic::Models::BrowserNavigateToolUseBlock
+
   BrowserNewTabConfig = Anthropic::Models::BrowserNewTabConfig
+
+  BrowserNewTabInput = Anthropic::Models::BrowserNewTabInput
+
+  BrowserNewTabToolUseBlock = Anthropic::Models::BrowserNewTabToolUseBlock
 
   BrowserReadConsoleConfig = Anthropic::Models::BrowserReadConsoleConfig
 
+  BrowserReadConsoleInput = Anthropic::Models::BrowserReadConsoleInput
+
+  BrowserReadConsoleToolUseBlock =
+    Anthropic::Models::BrowserReadConsoleToolUseBlock
+
   BrowserReadNetworkConfig = Anthropic::Models::BrowserReadNetworkConfig
+
+  BrowserReadNetworkInput = Anthropic::Models::BrowserReadNetworkInput
+
+  BrowserReadNetworkToolUseBlock =
+    Anthropic::Models::BrowserReadNetworkToolUseBlock
 
   BrowserReadPageConfig = Anthropic::Models::BrowserReadPageConfig
 
+  BrowserReadPageFilter = Anthropic::Models::BrowserReadPageFilter
+
+  BrowserReadPageInput = Anthropic::Models::BrowserReadPageInput
+
+  BrowserReadPageToolUseBlock = Anthropic::Models::BrowserReadPageToolUseBlock
+
+  BrowserRefTarget = Anthropic::Models::BrowserRefTarget
+
   BrowserRightClickConfig = Anthropic::Models::BrowserRightClickConfig
+
+  BrowserRightClickInput = Anthropic::Models::BrowserRightClickInput
+
+  BrowserRightClickToolUseBlock =
+    Anthropic::Models::BrowserRightClickToolUseBlock
 
   BrowserScreenshotConfig = Anthropic::Models::BrowserScreenshotConfig
 
+  BrowserScreenshotInput = Anthropic::Models::BrowserScreenshotInput
+
+  BrowserScreenshotToolUseBlock =
+    Anthropic::Models::BrowserScreenshotToolUseBlock
+
   BrowserScrollConfig = Anthropic::Models::BrowserScrollConfig
 
+  BrowserScrollDirection = Anthropic::Models::BrowserScrollDirection
+
+  BrowserScrollInput = Anthropic::Models::BrowserScrollInput
+
   BrowserScrollToConfig = Anthropic::Models::BrowserScrollToConfig
+
+  BrowserScrollToInput = Anthropic::Models::BrowserScrollToInput
+
+  BrowserScrollToolUseBlock = Anthropic::Models::BrowserScrollToolUseBlock
+
+  BrowserScrollToToolUseBlock = Anthropic::Models::BrowserScrollToToolUseBlock
 
   BrowserStateBlockParam = Anthropic::Models::BrowserStateBlockParam
 
@@ -137,17 +265,40 @@ module Anthropic
 
   BrowserSwitchTabConfig = Anthropic::Models::BrowserSwitchTabConfig
 
+  BrowserSwitchTabInput = Anthropic::Models::BrowserSwitchTabInput
+
+  BrowserSwitchTabToolUseBlock = Anthropic::Models::BrowserSwitchTabToolUseBlock
+
   BrowserToolset20260801 = Anthropic::Models::BrowserToolset20260801
 
   BrowserToolsetConfigs = Anthropic::Models::BrowserToolsetConfigs
 
+  BrowserToolUseBlock = Anthropic::Models::BrowserToolUseBlock
+
   BrowserTripleClickConfig = Anthropic::Models::BrowserTripleClickConfig
+
+  BrowserTripleClickInput = Anthropic::Models::BrowserTripleClickInput
+
+  BrowserTripleClickToolUseBlock =
+    Anthropic::Models::BrowserTripleClickToolUseBlock
 
   BrowserTypeConfig = Anthropic::Models::BrowserTypeConfig
 
+  BrowserTypeInput = Anthropic::Models::BrowserTypeInput
+
+  BrowserTypeToolUseBlock = Anthropic::Models::BrowserTypeToolUseBlock
+
   BrowserWaitConfig = Anthropic::Models::BrowserWaitConfig
 
+  BrowserWaitInput = Anthropic::Models::BrowserWaitInput
+
+  BrowserWaitToolUseBlock = Anthropic::Models::BrowserWaitToolUseBlock
+
   BrowserZoomConfig = Anthropic::Models::BrowserZoomConfig
+
+  BrowserZoomInput = Anthropic::Models::BrowserZoomInput
+
+  BrowserZoomToolUseBlock = Anthropic::Models::BrowserZoomToolUseBlock
 
   CacheControlEphemeral = Anthropic::Models::CacheControlEphemeral
 
@@ -244,41 +395,124 @@ module Anthropic
 
   ComputerCursorPositionConfig = Anthropic::Models::ComputerCursorPositionConfig
 
+  ComputerCursorPositionInput = Anthropic::Models::ComputerCursorPositionInput
+
+  ComputerCursorPositionToolUseBlock =
+    Anthropic::Models::ComputerCursorPositionToolUseBlock
+
   ComputerDoubleClickConfig = Anthropic::Models::ComputerDoubleClickConfig
+
+  ComputerDoubleClickInput = Anthropic::Models::ComputerDoubleClickInput
+
+  ComputerDoubleClickToolUseBlock =
+    Anthropic::Models::ComputerDoubleClickToolUseBlock
 
   ComputerHoldKeyConfig = Anthropic::Models::ComputerHoldKeyConfig
 
+  ComputerHoldKeyInput = Anthropic::Models::ComputerHoldKeyInput
+
+  ComputerHoldKeyToolUseBlock = Anthropic::Models::ComputerHoldKeyToolUseBlock
+
   ComputerKeyConfig = Anthropic::Models::ComputerKeyConfig
+
+  ComputerKeyInput = Anthropic::Models::ComputerKeyInput
+
+  ComputerKeyToolUseBlock = Anthropic::Models::ComputerKeyToolUseBlock
 
   ComputerLeftClickConfig = Anthropic::Models::ComputerLeftClickConfig
 
   ComputerLeftClickDragConfig = Anthropic::Models::ComputerLeftClickDragConfig
 
+  ComputerLeftClickDragInput = Anthropic::Models::ComputerLeftClickDragInput
+
+  ComputerLeftClickDragToolUseBlock =
+    Anthropic::Models::ComputerLeftClickDragToolUseBlock
+
+  ComputerLeftClickInput = Anthropic::Models::ComputerLeftClickInput
+
+  ComputerLeftClickToolUseBlock =
+    Anthropic::Models::ComputerLeftClickToolUseBlock
+
   ComputerLeftMouseDownConfig = Anthropic::Models::ComputerLeftMouseDownConfig
+
+  ComputerLeftMouseDownInput = Anthropic::Models::ComputerLeftMouseDownInput
+
+  ComputerLeftMouseDownToolUseBlock =
+    Anthropic::Models::ComputerLeftMouseDownToolUseBlock
 
   ComputerLeftMouseUpConfig = Anthropic::Models::ComputerLeftMouseUpConfig
 
+  ComputerLeftMouseUpInput = Anthropic::Models::ComputerLeftMouseUpInput
+
+  ComputerLeftMouseUpToolUseBlock =
+    Anthropic::Models::ComputerLeftMouseUpToolUseBlock
+
   ComputerMiddleClickConfig = Anthropic::Models::ComputerMiddleClickConfig
+
+  ComputerMiddleClickInput = Anthropic::Models::ComputerMiddleClickInput
+
+  ComputerMiddleClickToolUseBlock =
+    Anthropic::Models::ComputerMiddleClickToolUseBlock
 
   ComputerMouseMoveConfig = Anthropic::Models::ComputerMouseMoveConfig
 
+  ComputerMouseMoveInput = Anthropic::Models::ComputerMouseMoveInput
+
+  ComputerMouseMoveToolUseBlock =
+    Anthropic::Models::ComputerMouseMoveToolUseBlock
+
   ComputerRightClickConfig = Anthropic::Models::ComputerRightClickConfig
+
+  ComputerRightClickInput = Anthropic::Models::ComputerRightClickInput
+
+  ComputerRightClickToolUseBlock =
+    Anthropic::Models::ComputerRightClickToolUseBlock
 
   ComputerScreenshotConfig = Anthropic::Models::ComputerScreenshotConfig
 
+  ComputerScreenshotInput = Anthropic::Models::ComputerScreenshotInput
+
+  ComputerScreenshotToolUseBlock =
+    Anthropic::Models::ComputerScreenshotToolUseBlock
+
   ComputerScrollConfig = Anthropic::Models::ComputerScrollConfig
+
+  ComputerScrollDirection = Anthropic::Models::ComputerScrollDirection
+
+  ComputerScrollInput = Anthropic::Models::ComputerScrollInput
+
+  ComputerScrollToolUseBlock = Anthropic::Models::ComputerScrollToolUseBlock
 
   ComputerToolset20260801 = Anthropic::Models::ComputerToolset20260801
 
   ComputerToolsetConfigs = Anthropic::Models::ComputerToolsetConfigs
 
+  ComputerToolUseBlock = Anthropic::Models::ComputerToolUseBlock
+
   ComputerTripleClickConfig = Anthropic::Models::ComputerTripleClickConfig
+
+  ComputerTripleClickInput = Anthropic::Models::ComputerTripleClickInput
+
+  ComputerTripleClickToolUseBlock =
+    Anthropic::Models::ComputerTripleClickToolUseBlock
 
   ComputerTypeConfig = Anthropic::Models::ComputerTypeConfig
 
+  ComputerTypeInput = Anthropic::Models::ComputerTypeInput
+
+  ComputerTypeToolUseBlock = Anthropic::Models::ComputerTypeToolUseBlock
+
   ComputerWaitConfig = Anthropic::Models::ComputerWaitConfig
 
+  ComputerWaitInput = Anthropic::Models::ComputerWaitInput
+
+  ComputerWaitToolUseBlock = Anthropic::Models::ComputerWaitToolUseBlock
+
   ComputerZoomConfig = Anthropic::Models::ComputerZoomConfig
+
+  ComputerZoomInput = Anthropic::Models::ComputerZoomInput
+
+  ComputerZoomToolUseBlock = Anthropic::Models::ComputerZoomToolUseBlock
 
   Container = Anthropic::Models::Container
 
@@ -384,6 +618,8 @@ module Anthropic
 
   ModelInfo = Anthropic::Models::ModelInfo
 
+  ModelLine = Anthropic::Models::ModelLine
+
   ModelListParams = Anthropic::Models::ModelListParams
 
   ModelRetrieveParams = Anthropic::Models::ModelRetrieveParams
@@ -437,6 +673,8 @@ module Anthropic
   ServerToolCaller = Anthropic::Models::ServerToolCaller
 
   ServerToolCaller20260120 = Anthropic::Models::ServerToolCaller20260120
+
+  ServerToolsCapability = Anthropic::Models::ServerToolsCapability
 
   ServerToolUsage = Anthropic::Models::ServerToolUsage
 
@@ -570,6 +808,8 @@ module Anthropic
   ToolSearchToolSearchResultBlockParam =
     Anthropic::Models::ToolSearchToolSearchResultBlockParam
 
+  ToolsetToolUseBlock = Anthropic::Models::ToolsetToolUseBlock
+
   ToolTextEditor20250124 = Anthropic::Models::ToolTextEditor20250124
 
   ToolTextEditor20250429 = Anthropic::Models::ToolTextEditor20250429
@@ -581,6 +821,8 @@ module Anthropic
   ToolUseBlock = Anthropic::Models::ToolUseBlock
 
   ToolUseBlockParam = Anthropic::Models::ToolUseBlockParam
+
+  ToolUseCaller = Anthropic::Models::ToolUseCaller
 
   URLImageSource = Anthropic::Models::URLImageSource
 

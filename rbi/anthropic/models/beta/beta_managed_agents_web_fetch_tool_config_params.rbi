@@ -81,6 +81,26 @@ module Anthropic
         end
         attr_writer :type
 
+        # Which sources contribute URLs the tool may fetch. Omit to allow every source.
+        sig do
+          returns(
+            T.nilable(
+              Anthropic::Beta::BetaManagedAgentsWebFetchURLSourcesParams
+            )
+          )
+        end
+        attr_reader :url_sources
+
+        sig do
+          params(
+            url_sources:
+              T.nilable(
+                Anthropic::Beta::BetaManagedAgentsWebFetchURLSourcesParams::OrHash
+              )
+          ).void
+        end
+        attr_writer :url_sources
+
         # Configuration override for the web_fetch tool.
         sig do
           params(
@@ -98,6 +118,10 @@ module Anthropic
               ),
             type:
               Anthropic::Beta::BetaManagedAgentsWebFetchToolConfigParams::Type::OrSymbol,
+            url_sources:
+              T.nilable(
+                Anthropic::Beta::BetaManagedAgentsWebFetchURLSourcesParams::OrHash
+              ),
             name: Symbol
           ).returns(T.attached_class)
         end
@@ -122,6 +146,8 @@ module Anthropic
           # or require confirmation.
           permission_policy: nil,
           type: nil,
+          # Which sources contribute URLs the tool may fetch. Omit to allow every source.
+          url_sources: nil,
           # Must be "web_fetch".
           name: :web_fetch
         )
@@ -144,7 +170,11 @@ module Anthropic
                   )
                 ),
               type:
-                Anthropic::Beta::BetaManagedAgentsWebFetchToolConfigParams::Type::OrSymbol
+                Anthropic::Beta::BetaManagedAgentsWebFetchToolConfigParams::Type::OrSymbol,
+              url_sources:
+                T.nilable(
+                  Anthropic::Beta::BetaManagedAgentsWebFetchURLSourcesParams
+                )
             }
           )
         end

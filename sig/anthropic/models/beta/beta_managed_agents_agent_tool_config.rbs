@@ -84,6 +84,7 @@ module Anthropic
             type: :web_fetch | "web_fetch",
             enabled: bool,
             permission_policy: Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfig::permission_policy,
+            url_sources: Anthropic::Beta::BetaManagedAgentsWebFetchURLSources?,
             ?allowed_domains: ::Array[String],
             ?blocked_domains: ::Array[String],
             ?max_content_tokens: Integer?,
@@ -118,6 +119,7 @@ module Anthropic
             | :grep
             | :web_fetch
             | :web_search,
+            ?url_sources: Anthropic::Beta::BetaManagedAgentsWebFetchURLSources?,
             ?allowed_domains: ::Array[String],
             ?blocked_domains: ::Array[String],
             ?max_content_tokens: Integer?,

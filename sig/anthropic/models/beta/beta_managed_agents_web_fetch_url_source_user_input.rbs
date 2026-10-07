@@ -1,0 +1,40 @@
+module Anthropic
+  module Models
+    module BetaManagedAgentsWebFetchURLSourceUserInput = Beta::BetaManagedAgentsWebFetchURLSourceUserInput
+
+    module Beta
+      type beta_managed_agents_web_fetch_url_source_user_input =
+        Anthropic::Beta::BetaManagedAgentsWebFetchURLSourceAll
+        | Anthropic::Beta::BetaManagedAgentsWebFetchURLSourceNone
+
+      module BetaManagedAgentsWebFetchURLSourceUserInput
+        extend Anthropic::Internal::Type::Union
+
+        type type_ = :all | :none
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          ALL: :all
+          NONE: :none
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsWebFetchURLSourceUserInput::type_]
+        end
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_web_fetch_url_source_user_input]
+
+        def self.new:
+          (
+            type: :all | "all"
+          ) -> Anthropic::Beta::BetaManagedAgentsWebFetchURLSourceAll
+          | (
+            type: :none | "none"
+          ) -> Anthropic::Beta::BetaManagedAgentsWebFetchURLSourceNone
+          | (
+            type: Anthropic::Models::Beta::BetaManagedAgentsWebFetchURLSourceUserInput::type_
+            | String
+          ) -> Anthropic::Models::Beta::beta_managed_agents_web_fetch_url_source_user_input
+      end
+    end
+  end
+end

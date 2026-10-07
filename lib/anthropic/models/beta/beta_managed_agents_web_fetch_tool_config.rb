@@ -26,6 +26,13 @@ module Anthropic
         #   @return [Symbol, :web_fetch]
         required :type, const: :web_fetch
 
+        # @!attribute url_sources
+        #   Which sources contribute URLs the tool may fetch, always in the object form.
+        #   Null when not set, which allows every source.
+        #
+        #   @return [Anthropic::Models::Beta::BetaManagedAgentsWebFetchURLSources, nil]
+        required :url_sources, -> { Anthropic::Beta::BetaManagedAgentsWebFetchURLSources }, nil?: true
+
         # @!attribute allowed_domains
         #
         #   @return [Array<String>, nil]
@@ -41,12 +48,17 @@ module Anthropic
         #   @return [Integer, nil]
         optional :max_content_tokens, Integer, nil?: true
 
-        # @!method initialize(enabled:, permission_policy:, allowed_domains: nil, blocked_domains: nil, max_content_tokens: nil, name: :web_fetch, type: :web_fetch)
+        # @!method initialize(enabled:, permission_policy:, url_sources:, allowed_domains: nil, blocked_domains: nil, max_content_tokens: nil, name: :web_fetch, type: :web_fetch)
         #   Configuration for the web_fetch tool.
+        #
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfig} for more details.
         #
         #   @param enabled [Boolean]
         #
         #   @param permission_policy [Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy, Anthropic::Models::Beta::BetaManagedAgentsAutoPolicy] Permission policy for tool execution.
+        #
+        #   @param url_sources [Anthropic::Models::Beta::BetaManagedAgentsWebFetchURLSources, nil] Which sources contribute URLs the tool may fetch, always in the object form. Nul
         #
         #   @param allowed_domains [Array<String>]
         #

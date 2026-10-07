@@ -1,0 +1,53 @@
+module Anthropic
+  module Models
+    class BetaBrowserReadPageToolUseBlock = Beta::BetaBrowserReadPageToolUseBlock
+
+    module Beta
+      type beta_browser_read_page_tool_use_block =
+        {
+          id: String,
+          input: Anthropic::Beta::BetaBrowserReadPageInput,
+          name: :read_page,
+          toolset_name: :browser,
+          type: :tool_use,
+          caller_: Anthropic::Models::Beta::beta_tool_use_caller
+        }
+
+      class BetaBrowserReadPageToolUseBlock < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor input: Anthropic::Beta::BetaBrowserReadPageInput
+
+        attr_accessor name: :read_page
+
+        attr_accessor toolset_name: :browser
+
+        attr_accessor type: :tool_use
+
+        attr_reader caller_: Anthropic::Models::Beta::beta_tool_use_caller?
+
+        def caller_=: (
+          Anthropic::Models::Beta::beta_tool_use_caller
+        ) -> Anthropic::Models::Beta::beta_tool_use_caller
+
+        def initialize: (
+          id: String,
+          input: Anthropic::Beta::BetaBrowserReadPageInput,
+          ?caller_: Anthropic::Models::Beta::beta_tool_use_caller,
+          ?name: :read_page,
+          ?toolset_name: :browser,
+          ?type: :tool_use
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          input: Anthropic::Beta::BetaBrowserReadPageInput,
+          name: :read_page,
+          toolset_name: :browser,
+          type: :tool_use,
+          caller_: Anthropic::Models::Beta::beta_tool_use_caller
+        }
+      end
+    end
+  end
+end

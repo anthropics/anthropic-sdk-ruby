@@ -81,8 +81,9 @@ module Anthropic
             sig { returns(String) }
             attr_accessor :oauth_scope
 
-            # Identity that tokens minted via this rule act as. Currently always a
-            # `service_account` target.
+            # What this rule targets. Check `type` before reading the other fields. Tokens
+            # minted via a rule whose target `type` is `service_account` act as that service
+            # account.
             sig do
               returns(
                 Anthropic::Beta::Organization::Federation::BetaServiceAccountTarget
@@ -191,8 +192,9 @@ module Anthropic
               name:,
               # Space-separated OAuth scopes granted on the minted token.
               oauth_scope:,
-              # Identity that tokens minted via this rule act as. Currently always a
-              # `service_account` target.
+              # What this rule targets. Check `type` before reading the other fields. Tokens
+              # minted via a rule whose target `type` is `service_account` act as that service
+              # account.
               target:,
               # Lifetime in seconds of access tokens minted via this rule. Minted tokens are
               # capped at `max(60, min(this value, 2 × remaining assertion validity))` seconds.

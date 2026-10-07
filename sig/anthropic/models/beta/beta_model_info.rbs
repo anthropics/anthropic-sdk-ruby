@@ -9,9 +9,13 @@ module Anthropic
           allowed_fallback_models: ::Array[String]?,
           capabilities: Anthropic::Beta::BetaModelCapabilities?,
           created_at: Time,
+          deprecated_at: Time?,
           display_name: String,
+          lifecycle: Anthropic::Models::Beta::BetaModelInfo::lifecycle,
+          line: Anthropic::Models::Beta::beta_model_line?,
           max_input_tokens: Integer?,
           max_tokens: Integer?,
+          retires_at: Time?,
           type: :model
         }
 
@@ -24,11 +28,19 @@ module Anthropic
 
         attr_accessor created_at: Time
 
+        attr_accessor deprecated_at: Time?
+
         attr_accessor display_name: String
+
+        attr_accessor lifecycle: Anthropic::Models::Beta::BetaModelInfo::lifecycle
+
+        attr_accessor line: Anthropic::Models::Beta::beta_model_line?
 
         attr_accessor max_input_tokens: Integer?
 
         attr_accessor max_tokens: Integer?
+
+        attr_accessor retires_at: Time?
 
         attr_accessor type: :model
 
@@ -37,9 +49,13 @@ module Anthropic
           allowed_fallback_models: ::Array[String]?,
           capabilities: Anthropic::Beta::BetaModelCapabilities?,
           created_at: Time,
+          deprecated_at: Time?,
           display_name: String,
+          lifecycle: Anthropic::Models::Beta::BetaModelInfo::lifecycle,
+          line: Anthropic::Models::Beta::beta_model_line?,
           max_input_tokens: Integer?,
           max_tokens: Integer?,
+          retires_at: Time?,
           ?type: :model
         ) -> void
 
@@ -48,11 +64,27 @@ module Anthropic
           allowed_fallback_models: ::Array[String]?,
           capabilities: Anthropic::Beta::BetaModelCapabilities?,
           created_at: Time,
+          deprecated_at: Time?,
           display_name: String,
+          lifecycle: Anthropic::Models::Beta::BetaModelInfo::lifecycle,
+          line: Anthropic::Models::Beta::beta_model_line?,
           max_input_tokens: Integer?,
           max_tokens: Integer?,
+          retires_at: Time?,
           type: :model
         }
+
+        type lifecycle = :active | :deprecated | :retired
+
+        module Lifecycle
+          extend Anthropic::Internal::Type::Enum
+
+          ACTIVE: :active
+          DEPRECATED: :deprecated
+          RETIRED: :retired
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaModelInfo::lifecycle]
+        end
       end
     end
   end

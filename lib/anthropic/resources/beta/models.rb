@@ -44,11 +44,13 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::ModelListParams} for more details.
         #
-        # @overload list(after_id: nil, before_id: nil, limit: nil, betas: nil, workspace_id: nil, request_options: {})
+        # @overload list(after_id: nil, before_id: nil, lifecycle: nil, limit: nil, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param after_id [String] Query param: ID of the object to use as a cursor for pagination. When provided,
         #
         # @param before_id [String] Query param: ID of the object to use as a cursor for pagination. When provided,
+        #
+        # @param lifecycle [Array<Symbol, Anthropic::Models::Beta::ModelListParams::Lifecycle>] Query param: Filter the list to models in any of the given lifecycle stages (`ac
         #
         # @param limit [Integer] Query param: Number of items to return per page.
         #
@@ -62,7 +64,7 @@ module Anthropic
         #
         # @see Anthropic::Models::Beta::ModelListParams
         def list(params = {})
-          query_params = [:after_id, :before_id, :limit]
+          query_params = [:after_id, :before_id, :lifecycle, :limit]
           parsed, options = Anthropic::Beta::ModelListParams.dump_request(params)
           query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
           @client.request(

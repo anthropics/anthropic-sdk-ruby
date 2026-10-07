@@ -1,0 +1,233 @@
+module Anthropic
+  module Models
+    type computer_tool_use_block =
+      Anthropic::ComputerKeyToolUseBlock
+      | Anthropic::ComputerHoldKeyToolUseBlock
+      | Anthropic::ComputerTypeToolUseBlock
+      | Anthropic::ComputerCursorPositionToolUseBlock
+      | Anthropic::ComputerMouseMoveToolUseBlock
+      | Anthropic::ComputerLeftMouseDownToolUseBlock
+      | Anthropic::ComputerLeftMouseUpToolUseBlock
+      | Anthropic::ComputerLeftClickToolUseBlock
+      | Anthropic::ComputerLeftClickDragToolUseBlock
+      | Anthropic::ComputerRightClickToolUseBlock
+      | Anthropic::ComputerMiddleClickToolUseBlock
+      | Anthropic::ComputerDoubleClickToolUseBlock
+      | Anthropic::ComputerTripleClickToolUseBlock
+      | Anthropic::ComputerScrollToolUseBlock
+      | Anthropic::ComputerWaitToolUseBlock
+      | Anthropic::ComputerScreenshotToolUseBlock
+      | Anthropic::ComputerZoomToolUseBlock
+
+    module ComputerToolUseBlock
+      extend Anthropic::Internal::Type::Union
+
+      type name_ =
+        :key
+        | :hold_key
+        | :type
+        | :cursor_position
+        | :mouse_move
+        | :left_mouse_down
+        | :left_mouse_up
+        | :left_click
+        | :left_click_drag
+        | :right_click
+        | :middle_click
+        | :double_click
+        | :triple_click
+        | :scroll
+        | :wait
+        | :screenshot
+        | :zoom
+
+      module Name
+        extend Anthropic::Internal::Type::Enum
+
+        KEY: :key
+        HOLD_KEY: :hold_key
+        TYPE: :type
+        CURSOR_POSITION: :cursor_position
+        MOUSE_MOVE: :mouse_move
+        LEFT_MOUSE_DOWN: :left_mouse_down
+        LEFT_MOUSE_UP: :left_mouse_up
+        LEFT_CLICK: :left_click
+        LEFT_CLICK_DRAG: :left_click_drag
+        RIGHT_CLICK: :right_click
+        MIDDLE_CLICK: :middle_click
+        DOUBLE_CLICK: :double_click
+        TRIPLE_CLICK: :triple_click
+        SCROLL: :scroll
+        WAIT: :wait
+        SCREENSHOT: :screenshot
+        ZOOM: :zoom
+
+        def self?.values: -> ::Array[Anthropic::Models::ComputerToolUseBlock::name_]
+      end
+
+      def self?.variants: -> ::Array[Anthropic::Models::computer_tool_use_block]
+
+      def self.new:
+        (
+          name: :key | "key",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::ComputerKeyInput,
+          ?toolset_name: :computer,
+          ?type: :tool_use
+        ) -> Anthropic::ComputerKeyToolUseBlock
+        | (
+          name: :hold_key | "hold_key",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::ComputerHoldKeyInput,
+          ?toolset_name: :computer,
+          ?type: :tool_use
+        ) -> Anthropic::ComputerHoldKeyToolUseBlock
+        | (
+          name: :type | "type",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::ComputerTypeInput,
+          ?toolset_name: :computer,
+          ?type: :tool_use
+        ) -> Anthropic::ComputerTypeToolUseBlock
+        | (
+          name: :cursor_position | "cursor_position",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::ComputerCursorPositionInput,
+          ?toolset_name: :computer,
+          ?type: :tool_use
+        ) -> Anthropic::ComputerCursorPositionToolUseBlock
+        | (
+          name: :mouse_move | "mouse_move",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::ComputerMouseMoveInput,
+          ?toolset_name: :computer,
+          ?type: :tool_use
+        ) -> Anthropic::ComputerMouseMoveToolUseBlock
+        | (
+          name: :left_mouse_down | "left_mouse_down",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::ComputerLeftMouseDownInput,
+          ?toolset_name: :computer,
+          ?type: :tool_use
+        ) -> Anthropic::ComputerLeftMouseDownToolUseBlock
+        | (
+          name: :left_mouse_up | "left_mouse_up",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::ComputerLeftMouseUpInput,
+          ?toolset_name: :computer,
+          ?type: :tool_use
+        ) -> Anthropic::ComputerLeftMouseUpToolUseBlock
+        | (
+          name: :left_click | "left_click",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::ComputerLeftClickInput,
+          ?toolset_name: :computer,
+          ?type: :tool_use
+        ) -> Anthropic::ComputerLeftClickToolUseBlock
+        | (
+          name: :left_click_drag | "left_click_drag",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::ComputerLeftClickDragInput,
+          ?toolset_name: :computer,
+          ?type: :tool_use
+        ) -> Anthropic::ComputerLeftClickDragToolUseBlock
+        | (
+          name: :right_click | "right_click",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::ComputerRightClickInput,
+          ?toolset_name: :computer,
+          ?type: :tool_use
+        ) -> Anthropic::ComputerRightClickToolUseBlock
+        | (
+          name: :middle_click | "middle_click",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::ComputerMiddleClickInput,
+          ?toolset_name: :computer,
+          ?type: :tool_use
+        ) -> Anthropic::ComputerMiddleClickToolUseBlock
+        | (
+          name: :double_click | "double_click",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::ComputerDoubleClickInput,
+          ?toolset_name: :computer,
+          ?type: :tool_use
+        ) -> Anthropic::ComputerDoubleClickToolUseBlock
+        | (
+          name: :triple_click | "triple_click",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::ComputerTripleClickInput,
+          ?toolset_name: :computer,
+          ?type: :tool_use
+        ) -> Anthropic::ComputerTripleClickToolUseBlock
+        | (
+          name: :scroll | "scroll",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::ComputerScrollInput,
+          ?toolset_name: :computer,
+          ?type: :tool_use
+        ) -> Anthropic::ComputerScrollToolUseBlock
+        | (
+          name: :wait | "wait",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::ComputerWaitInput,
+          ?toolset_name: :computer,
+          ?type: :tool_use
+        ) -> Anthropic::ComputerWaitToolUseBlock
+        | (
+          name: :screenshot | "screenshot",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::ComputerScreenshotInput,
+          ?toolset_name: :computer,
+          ?type: :tool_use
+        ) -> Anthropic::ComputerScreenshotToolUseBlock
+        | (
+          name: :zoom | "zoom",
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::ComputerZoomInput,
+          ?toolset_name: :computer,
+          ?type: :tool_use
+        ) -> Anthropic::ComputerZoomToolUseBlock
+        | (
+          name: Anthropic::Models::ComputerToolUseBlock::name_ | String,
+          id: String,
+          caller_: Anthropic::Models::tool_use_caller,
+          input: Anthropic::ComputerKeyInput
+          | Anthropic::ComputerHoldKeyInput
+          | Anthropic::ComputerTypeInput
+          | Anthropic::ComputerCursorPositionInput
+          | Anthropic::ComputerMouseMoveInput
+          | Anthropic::ComputerLeftMouseDownInput
+          | Anthropic::ComputerLeftMouseUpInput
+          | Anthropic::ComputerLeftClickInput
+          | Anthropic::ComputerLeftClickDragInput
+          | Anthropic::ComputerRightClickInput
+          | Anthropic::ComputerMiddleClickInput
+          | Anthropic::ComputerDoubleClickInput
+          | Anthropic::ComputerTripleClickInput
+          | Anthropic::ComputerScrollInput
+          | Anthropic::ComputerWaitInput
+          | Anthropic::ComputerScreenshotInput
+          | Anthropic::ComputerZoomInput,
+          ?toolset_name: :computer,
+          ?type: :tool_use
+        ) -> Anthropic::Models::computer_tool_use_block
+    end
+  end
+end

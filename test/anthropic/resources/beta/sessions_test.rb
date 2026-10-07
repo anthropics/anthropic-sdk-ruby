@@ -98,8 +98,6 @@ class Anthropic::Test::Resources::Beta::SessionsTest < Anthropic::Test::Resource
   end
 
   def test_list
-    skip("buildURL drops path-level query params")
-
     response = @anthropic.beta.sessions.list
 
     assert_pattern do

@@ -47,8 +47,7 @@ module Anthropic
         optional :metadata, Anthropic::Internal::Type::HashOf[String]
 
         # @!attribute multiagent
-        #   Multiagent orchestration configuration. Currently supports the `coordinator`
-        #   topology with a roster of 1-20 agents.
+        #   Multiagent orchestration configuration.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams, nil]
         optional :multiagent, -> { Anthropic::Beta::BetaManagedAgentsMultiagentParams }, nil?: true
@@ -67,7 +66,7 @@ module Anthropic
         optional :system_, String, api_name: :system, nil?: true
 
         # @!attribute tools
-        #   Tool configurations available to the agent. Maximum of 128 tools across all
+        #   Tool configurations available to the agent. Maximum of 256 tools across all
         #   toolsets allowed.
         #
         #   @return [Array<Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401Params, Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetParams, Anthropic::Models::Beta::BetaManagedAgentsCustomToolParams>, nil]
@@ -105,13 +104,13 @@ module Anthropic
         #
         #   @param metadata [Hash{Symbol=>String}] Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up t
         #
-        #   @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams, nil] Multiagent orchestration configuration. Currently supports the `coordinator` top
+        #   @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams, nil] Multiagent orchestration configuration.
         #
         #   @param skills [Array<Anthropic::Models::Beta::BetaManagedAgentsAnthropicSkillParams, Anthropic::Models::Beta::BetaManagedAgentsCustomSkillParams>] Skills available to the agent.
         #
         #   @param system_ [String, nil] System prompt for the agent.
         #
-        #   @param tools [Array<Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401Params, Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetParams, Anthropic::Models::Beta::BetaManagedAgentsCustomToolParams>] Tool configurations available to the agent. Maximum of 128 tools across all tool
+        #   @param tools [Array<Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401Params, Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetParams, Anthropic::Models::Beta::BetaManagedAgentsCustomToolParams>] Tool configurations available to the agent. Maximum of 256 tools across all tool
         #
         #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #

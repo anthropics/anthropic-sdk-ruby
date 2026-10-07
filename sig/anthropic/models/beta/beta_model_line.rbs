@@ -1,0 +1,21 @@
+module Anthropic
+  module Models
+    module BetaModelLine = Beta::BetaModelLine
+
+    module Beta
+      type beta_model_line = :haiku | :sonnet | :opus | :fable | :mythos
+
+      module BetaModelLine
+        extend Anthropic::Internal::Type::Enum
+
+        HAIKU: :haiku
+        SONNET: :sonnet
+        OPUS: :opus
+        FABLE: :fable
+        MYTHOS: :mythos
+
+        def self?.values: -> ::Array[Anthropic::Models::Beta::beta_model_line]
+      end
+    end
+  end
+end

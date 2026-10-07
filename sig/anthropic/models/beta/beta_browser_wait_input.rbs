@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    class BetaBrowserWaitInput = Beta::BetaBrowserWaitInput
+
+    module Beta
+      type beta_browser_wait_input = { duration: Float, tab_id: String? }
+
+      class BetaBrowserWaitInput < Anthropic::Internal::Type::BaseModel
+        attr_accessor duration: Float
+
+        attr_accessor tab_id: String?
+
+        def initialize: (duration: Float, ?tab_id: String?) -> void
+
+        def to_hash: -> { duration: Float, tab_id: String? }
+      end
+    end
+  end
+end

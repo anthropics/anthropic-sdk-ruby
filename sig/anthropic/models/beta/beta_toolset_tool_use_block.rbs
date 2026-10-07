@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module BetaToolsetToolUseBlock = Beta::BetaToolsetToolUseBlock
+
+    module Beta
+      type beta_toolset_tool_use_block =
+        Anthropic::Models::Beta::beta_browser_tool_use_block
+        | Anthropic::Models::Beta::beta_computer_tool_use_block
+        | Anthropic::Beta::BetaToolUseBlock
+
+      module BetaToolsetToolUseBlock
+        extend Anthropic::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_toolset_tool_use_block]
+      end
+    end
+  end
+end
