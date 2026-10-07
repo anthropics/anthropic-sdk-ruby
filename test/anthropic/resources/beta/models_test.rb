@@ -16,10 +16,13 @@ class Anthropic::Test::Resources::Beta::ModelsTest < Anthropic::Test::ResourceTe
         allowed_fallback_models: ^(Anthropic::Internal::Type::ArrayOf[String]) | nil,
         capabilities: Anthropic::Beta::BetaModelCapabilities | nil,
         created_at: Time,
+        deprecated_at: Time | nil,
         display_name: String,
+        lifecycle: Anthropic::Beta::BetaModelInfo::Lifecycle,
         line: Anthropic::Beta::BetaModelLine | nil,
         max_input_tokens: Integer | nil,
         max_tokens: Integer | nil,
+        retires_at: Time | nil,
         type: Symbol
       }
     end
@@ -45,10 +48,13 @@ class Anthropic::Test::Resources::Beta::ModelsTest < Anthropic::Test::ResourceTe
         allowed_fallback_models: ^(Anthropic::Internal::Type::ArrayOf[String]) | nil,
         capabilities: Anthropic::Beta::BetaModelCapabilities | nil,
         created_at: Time,
+        deprecated_at: Time | nil,
         display_name: String,
+        lifecycle: Anthropic::Beta::BetaModelInfo::Lifecycle,
         line: Anthropic::Beta::BetaModelLine | nil,
         max_input_tokens: Integer | nil,
         max_tokens: Integer | nil,
+        retires_at: Time | nil,
         type: Symbol
       }
     end

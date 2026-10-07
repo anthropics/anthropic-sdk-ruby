@@ -15,10 +15,13 @@ class Anthropic::Test::Resources::ModelsTest < Anthropic::Test::ResourceTest
         id: String,
         capabilities: Anthropic::ModelCapabilities | nil,
         created_at: Time,
+        deprecated_at: Time | nil,
         display_name: String,
+        lifecycle: Anthropic::ModelInfo::Lifecycle,
         line: Anthropic::ModelLine | nil,
         max_input_tokens: Integer | nil,
         max_tokens: Integer | nil,
+        retires_at: Time | nil,
         type: Symbol
       }
     end
@@ -43,10 +46,13 @@ class Anthropic::Test::Resources::ModelsTest < Anthropic::Test::ResourceTest
         id: String,
         capabilities: Anthropic::ModelCapabilities | nil,
         created_at: Time,
+        deprecated_at: Time | nil,
         display_name: String,
+        lifecycle: Anthropic::ModelInfo::Lifecycle,
         line: Anthropic::ModelLine | nil,
         max_input_tokens: Integer | nil,
         max_tokens: Integer | nil,
+        retires_at: Time | nil,
         type: Symbol
       }
     end

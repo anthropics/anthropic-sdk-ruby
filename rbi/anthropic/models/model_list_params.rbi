@@ -27,6 +27,24 @@ module Anthropic
       sig { params(before_id: String).void }
       attr_writer :before_id
 
+      # Filter the list to models in any of the given lifecycle stages (`active`,
+      # `deprecated`, or `retired`). Up to 3 values. When omitted, the list contains the
+      # `active` and `deprecated` models; `retired` models appear only when `retired` is
+      # requested explicitly.
+      sig do
+        returns(
+          T.nilable(T::Array[Anthropic::ModelListParams::Lifecycle::OrSymbol])
+        )
+      end
+      attr_reader :lifecycle
+
+      sig do
+        params(
+          lifecycle: T::Array[Anthropic::ModelListParams::Lifecycle::OrSymbol]
+        ).void
+      end
+      attr_writer :lifecycle
+
       # Number of items to return per page.
       #
       # Defaults to `20`. Ranges from `1` to `1000`.
@@ -67,6 +85,7 @@ module Anthropic
         params(
           after_id: String,
           before_id: String,
+          lifecycle: T::Array[Anthropic::ModelListParams::Lifecycle::OrSymbol],
           limit: Integer,
           betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
           workspace_id: String,
@@ -80,6 +99,11 @@ module Anthropic
         # ID of the object to use as a cursor for pagination. When provided, returns the
         # page of results immediately before this object.
         before_id: nil,
+        # Filter the list to models in any of the given lifecycle stages (`active`,
+        # `deprecated`, or `retired`). Up to 3 values. When omitted, the list contains the
+        # `active` and `deprecated` models; `retired` models appear only when `retired` is
+        # requested explicitly.
+        lifecycle: nil,
         # Number of items to return per page.
         #
         # Defaults to `20`. Ranges from `1` to `1000`.
@@ -102,6 +126,8 @@ module Anthropic
           {
             after_id: String,
             before_id: String,
+            lifecycle:
+              T::Array[Anthropic::ModelListParams::Lifecycle::OrSymbol],
             limit: Integer,
             betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
@@ -110,6 +136,32 @@ module Anthropic
         )
       end
       def to_hash
+      end
+
+      module Lifecycle
+        extend Anthropic::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias { T.all(Symbol, Anthropic::ModelListParams::Lifecycle) }
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        ACTIVE =
+          T.let(:active, Anthropic::ModelListParams::Lifecycle::TaggedSymbol)
+        DEPRECATED =
+          T.let(
+            :deprecated,
+            Anthropic::ModelListParams::Lifecycle::TaggedSymbol
+          )
+        RETIRED =
+          T.let(:retired, Anthropic::ModelListParams::Lifecycle::TaggedSymbol)
+
+        sig do
+          override.returns(
+            T::Array[Anthropic::ModelListParams::Lifecycle::TaggedSymbol]
+          )
+        end
+        def self.values
+        end
       end
     end
   end

@@ -22,6 +22,16 @@ module Anthropic
         #   @return [String, nil]
         optional :before_id, String
 
+        # @!attribute lifecycle
+        #   Filter the list to models in any of the given lifecycle stages (`active`,
+        #   `deprecated`, or `retired`). Up to 3 values. When omitted, the list contains the
+        #   `active` and `deprecated` models; `retired` models appear only when `retired` is
+        #   requested explicitly.
+        #
+        #   @return [Array<Symbol, Anthropic::Models::Beta::ModelListParams::Lifecycle>, nil]
+        optional :lifecycle,
+                 -> { Anthropic::Internal::Type::ArrayOf[enum: Anthropic::Beta::ModelListParams::Lifecycle] }
+
         # @!attribute limit
         #   Number of items to return per page.
         #
@@ -47,13 +57,15 @@ module Anthropic
         #   @return [String, nil]
         optional :workspace_id, String
 
-        # @!method initialize(after_id: nil, before_id: nil, limit: nil, betas: nil, workspace_id: nil, request_options: {})
+        # @!method initialize(after_id: nil, before_id: nil, lifecycle: nil, limit: nil, betas: nil, workspace_id: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::ModelListParams} for more details.
         #
         #   @param after_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
         #
         #   @param before_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
+        #
+        #   @param lifecycle [Array<Symbol, Anthropic::Models::Beta::ModelListParams::Lifecycle>] Filter the list to models in any of the given lifecycle stages (`active`, `depre
         #
         #   @param limit [Integer] Number of items to return per page.
         #
@@ -62,6 +74,17 @@ module Anthropic
         #   @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
+
+        module Lifecycle
+          extend Anthropic::Internal::Type::Enum
+
+          ACTIVE = :active
+          DEPRECATED = :deprecated
+          RETIRED = :retired
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
       end
     end
   end

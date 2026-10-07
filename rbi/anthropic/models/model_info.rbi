@@ -29,9 +29,27 @@ module Anthropic
       sig { returns(Time) }
       attr_accessor :created_at
 
+      # RFC 3339 datetime string representing the time of the model's most recent
+      # deprecation. Populated for `deprecated` and `retired` models; `null` while the
+      # model is `active`.
+      sig { returns(T.nilable(Time)) }
+      attr_accessor :deprecated_at
+
       # A human-readable name for the model.
       sig { returns(String) }
       attr_accessor :display_name
+
+      # The model's current lifecycle stage.
+      #
+      # - `active`: The model is available for use, open to new adopters, and not
+      #   scheduled for retirement.
+      # - `deprecated`: The model remains callable for organizations with existing
+      #   access, but is headed for retirement and closed to new adopters.
+      # - `retired`: The model is no longer available for use; inference requests naming
+      #   it fail. It remains in the catalogue as the historical record of its
+      #   retirement.
+      sig { returns(Anthropic::ModelInfo::Lifecycle::TaggedSymbol) }
+      attr_accessor :lifecycle
 
       # The model line this model belongs to, such as `opus` for both Claude Opus 4.5
       # and Claude Opus 4.6. More lines may be added. `null` when the model belongs to
@@ -47,6 +65,14 @@ module Anthropic
       sig { returns(T.nilable(Integer)) }
       attr_accessor :max_tokens
 
+      # RFC 3339 datetime string representing the model's currently scheduled retirement
+      # date. The schedule can be revised until retirement occurs; `null` while the
+      # model is `active` or while no retirement is scheduled. A past date on a
+      # `deprecated` model means retirement is overdue, not that it has occurred:
+      # `lifecycle` is the retirement signal.
+      sig { returns(T.nilable(Time)) }
+      attr_accessor :retires_at
+
       # Object type.
       #
       # For Models, this is always `"model"`.
@@ -58,10 +84,13 @@ module Anthropic
           id: String,
           capabilities: T.nilable(Anthropic::ModelCapabilities::OrHash),
           created_at: Time,
+          deprecated_at: T.nilable(Time),
           display_name: String,
+          lifecycle: Anthropic::ModelInfo::Lifecycle::OrSymbol,
           line: T.nilable(Anthropic::ModelLine::OrSymbol),
           max_input_tokens: T.nilable(Integer),
           max_tokens: T.nilable(Integer),
+          retires_at: T.nilable(Time),
           type: Symbol
         ).returns(T.attached_class)
       end
@@ -74,8 +103,22 @@ module Anthropic
         # RFC 3339 datetime string representing the time at which the model was released.
         # May be set to an epoch value if the release date is unknown.
         created_at:,
+        # RFC 3339 datetime string representing the time of the model's most recent
+        # deprecation. Populated for `deprecated` and `retired` models; `null` while the
+        # model is `active`.
+        deprecated_at:,
         # A human-readable name for the model.
         display_name:,
+        # The model's current lifecycle stage.
+        #
+        # - `active`: The model is available for use, open to new adopters, and not
+        #   scheduled for retirement.
+        # - `deprecated`: The model remains callable for organizations with existing
+        #   access, but is headed for retirement and closed to new adopters.
+        # - `retired`: The model is no longer available for use; inference requests naming
+        #   it fail. It remains in the catalogue as the historical record of its
+        #   retirement.
+        lifecycle:,
         # The model line this model belongs to, such as `opus` for both Claude Opus 4.5
         # and Claude Opus 4.6. More lines may be added. `null` when the model belongs to
         # no line; do not infer a line from the `id`.
@@ -84,6 +127,12 @@ module Anthropic
         max_input_tokens:,
         # Maximum value for the `max_tokens` parameter when using this model.
         max_tokens:,
+        # RFC 3339 datetime string representing the model's currently scheduled retirement
+        # date. The schedule can be revised until retirement occurs; `null` while the
+        # model is `active` or while no retirement is scheduled. A past date on a
+        # `deprecated` model means retirement is overdue, not that it has occurred:
+        # `lifecycle` is the retirement signal.
+        retires_at:,
         # Object type.
         #
         # For Models, this is always `"model"`.
@@ -97,15 +146,48 @@ module Anthropic
             id: String,
             capabilities: T.nilable(Anthropic::ModelCapabilities),
             created_at: Time,
+            deprecated_at: T.nilable(Time),
             display_name: String,
+            lifecycle: Anthropic::ModelInfo::Lifecycle::TaggedSymbol,
             line: T.nilable(Anthropic::ModelLine::TaggedSymbol),
             max_input_tokens: T.nilable(Integer),
             max_tokens: T.nilable(Integer),
+            retires_at: T.nilable(Time),
             type: Symbol
           }
         )
       end
       def to_hash
+      end
+
+      # The model's current lifecycle stage.
+      #
+      # - `active`: The model is available for use, open to new adopters, and not
+      #   scheduled for retirement.
+      # - `deprecated`: The model remains callable for organizations with existing
+      #   access, but is headed for retirement and closed to new adopters.
+      # - `retired`: The model is no longer available for use; inference requests naming
+      #   it fail. It remains in the catalogue as the historical record of its
+      #   retirement.
+      module Lifecycle
+        extend Anthropic::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias { T.all(Symbol, Anthropic::ModelInfo::Lifecycle) }
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        ACTIVE = T.let(:active, Anthropic::ModelInfo::Lifecycle::TaggedSymbol)
+        DEPRECATED =
+          T.let(:deprecated, Anthropic::ModelInfo::Lifecycle::TaggedSymbol)
+        RETIRED = T.let(:retired, Anthropic::ModelInfo::Lifecycle::TaggedSymbol)
+
+        sig do
+          override.returns(
+            T::Array[Anthropic::ModelInfo::Lifecycle::TaggedSymbol]
+          )
+        end
+        def self.values
+        end
       end
     end
   end

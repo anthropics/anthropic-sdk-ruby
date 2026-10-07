@@ -12,6 +12,7 @@ module Anthropic
         def list: (
           ?after_id: String,
           ?before_id: String,
+          ?lifecycle: ::Array[Anthropic::Models::Beta::ModelListParams::lifecycle],
           ?limit: Integer,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?workspace_id: String,
