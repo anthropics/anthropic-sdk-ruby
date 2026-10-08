@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.77.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.77.0...v1.77.1) (2026-10-08)
+
+### Chores
+
+* **ci:** check that pull requests update the changelog
+
 ## 1.77.0 (2026-10-07)
 
 Full Changelog: [v1.76.0...v1.77.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.76.0...v1.77.0)
