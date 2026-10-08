@@ -46,6 +46,19 @@ module Anthropic
           #   @return [String]
           required :plugin_name, String
 
+          # @!attribute chat_cowork_unified_metrics
+          #   Plugin use recorded while members had Chat and Cowork unified (Cowork's features
+          #   inside claude.ai chat) turned on. A count is null in date-range mode where it
+          #   cannot be computed. Omitted from the response on deployments that do not offer
+          #   Chat and Cowork unified.
+          #
+          #   @return [Anthropic::Models::Beta::Organization::BetaAnalyticsPluginActivity::ChatCoworkUnifiedMetrics, nil]
+          optional :chat_cowork_unified_metrics,
+                   -> {
+                     Anthropic::Beta::Organization::BetaAnalyticsPluginActivity::ChatCoworkUnifiedMetrics
+                   },
+                   nil?: true
+
           # @!attribute plugin_id
           #   Stable plugin identifier when available (e.g. `serena@claude-plugins-official`).
           #   Null for third-party Claude Code plugins (redacted at the source) and Cowork
@@ -56,13 +69,15 @@ module Anthropic
 
           # @!attribute product
           #   Product that produced this row's activity: one of `chat`, `claude_code`,
-          #   `cowork`, or `office_agent` (the canonical Cost & Usage product naming; an
-          #   `office_agent` row's per-surface breakdown is in its `office_metrics`). On
-          #   `/plugins` only `cowork` and `claude_code` occur (the only surfaces with plugin
-          #   attribution); on `/artifacts` only `chat`, `claude_code`, and `cowork` occur
-          #   (the surfaces that create artifacts); `/apps/chat/projects` does not support the
-          #   product dimension (a `product` entry in `group_by[]` or `filter[]` there is
-          #   rejected). Present only when the request grouped by `product`.
+          #   `cowork`, `office_agent`, or `chat_cowork_unified` (Chat and Cowork unified).
+          #   These are the canonical Cost & Usage product names; an `office_agent` row's
+          #   per-surface breakdown is in its `office_metrics`. On `/plugins` only `cowork`,
+          #   `claude_code` and `chat_cowork_unified` occur (the only surfaces with plugin
+          #   attribution); on `/artifacts` only `chat`, `claude_code`, `cowork` and
+          #   `chat_cowork_unified` occur (the surfaces that create artifacts);
+          #   `/apps/chat/projects` does not support the product dimension (a `product` entry
+          #   in `group_by[]` or `filter[]` there is rejected). Present only when the request
+          #   grouped by `product`.
           #
           #   @return [String, nil]
           optional :product, String, nil?: true
@@ -89,13 +104,13 @@ module Anthropic
           #   @return [String, nil]
           optional :user_id, String, nil?: true
 
-          # @!method initialize(claude_code_metrics:, cowork_metrics:, distinct_user_count:, install_count:, invocation_count:, plugin_name:, plugin_id: nil, product: nil, rbac_group_id: nil, rbac_group_name: nil, user_id: nil)
+          # @!method initialize(claude_code_metrics:, cowork_metrics:, distinct_user_count:, install_count:, invocation_count:, plugin_name:, chat_cowork_unified_metrics: nil, plugin_id: nil, product: nil, rbac_group_id: nil, rbac_group_name: nil, user_id: nil)
           #   Per-plugin install + invocation activity for a given day.
           #
-          #   With `group_by[]=user_id` / `rbac_group_id` / `product` (`cowork` /
-          #   `claude_code` only on this endpoint) each row is one (plugin, user), (plugin,
-          #   group), or (plugin, product) cut: the flat `user_id` / `rbac_group_id` /
-          #   `product` keys carry the cut and the counts are scoped to it.
+          #   With `group_by[]=user_id` / `rbac_group_id` / `product` (`cowork`, `claude_code`
+          #   and `chat_cowork_unified` only on this endpoint) each row is one (plugin, user),
+          #   (plugin, group), or (plugin, product) cut: the flat `user_id` / `rbac_group_id`
+          #   / `product` keys carry the cut and the counts are scoped to it.
           #
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Organization::BetaAnalyticsPluginActivity} for more
@@ -113,6 +128,8 @@ module Anthropic
           #
           #   @param plugin_name [String] Name of the plugin
           #
+          #   @param chat_cowork_unified_metrics [Anthropic::Models::Beta::Organization::BetaAnalyticsPluginActivity::ChatCoworkUnifiedMetrics, nil] Plugin use recorded while members had Chat and Cowork unified (Cowork's features
+          #
           #   @param plugin_id [String, nil] Stable plugin identifier when available (e.g. `serena@claude-plugins-official`).
           #
           #   @param product [String, nil] Product that produced this row's activity: one of `chat`, `claude_code`, `cowork
@@ -122,6 +139,29 @@ module Anthropic
           #   @param rbac_group_name [String, nil] Resolved RBAC group display name, alongside `rbac_group_id` when name resolution
           #
           #   @param user_id [String, nil] Tagged user identifier (e.g. `user_...`). Present only when the request grouped
+
+          # @see Anthropic::Models::Beta::Organization::BetaAnalyticsPluginActivity#chat_cowork_unified_metrics
+          class ChatCoworkUnifiedMetrics < Anthropic::Internal::Type::BaseModel
+            # @!attribute distinct_session_plugin_used_count
+            #   Same measure as `cowork_metrics.distinct_session_plugin_used_count`, for
+            #   activity recorded while members had Chat and Cowork unified turned on. Null on
+            #   aggregated rows where a distinct count cannot be computed.
+            #
+            #   @return [Integer, nil]
+            required :distinct_session_plugin_used_count, Integer, nil?: true
+
+            # @!method initialize(distinct_session_plugin_used_count:)
+            #   Plugin use recorded while members had Chat and Cowork unified (Cowork's features
+            #   inside claude.ai chat) turned on. A count is null in date-range mode where it
+            #   cannot be computed. Omitted from the response on deployments that do not offer
+            #   Chat and Cowork unified.
+            #
+            #   Some parameter documentations has been truncated, see
+            #   {Anthropic::Models::Beta::Organization::BetaAnalyticsPluginActivity::ChatCoworkUnifiedMetrics}
+            #   for more details.
+            #
+            #   @param distinct_session_plugin_used_count [Integer, nil] Same measure as `cowork_metrics.distinct_session_plugin_used_count`, for activit
+          end
         end
       end
     end

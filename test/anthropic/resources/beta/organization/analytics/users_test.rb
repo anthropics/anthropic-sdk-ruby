@@ -26,6 +26,7 @@ class Anthropic::Test::Resources::Beta::Organization::Analytics::UsersTest < Ant
         office_metrics: Anthropic::Beta::Organization::BetaAnalyticsOfficeMetrics,
         science_metrics: Anthropic::Beta::Organization::BetaAnalyticsScienceMetrics,
         web_search_count: Integer,
+        chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics | nil,
         distinct_user_count: Integer | nil,
         last_activity_date: Date | nil,
         rbac_group_id: String | nil,

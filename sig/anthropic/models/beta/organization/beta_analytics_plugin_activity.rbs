@@ -10,6 +10,7 @@ module Anthropic
             install_count: Integer?,
             invocation_count: Integer,
             plugin_name: String,
+            chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsPluginActivity::ChatCoworkUnifiedMetrics?,
             plugin_id: String?,
             product: String?,
             rbac_group_id: String?,
@@ -30,6 +31,8 @@ module Anthropic
 
           attr_accessor plugin_name: String
 
+          attr_accessor chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsPluginActivity::ChatCoworkUnifiedMetrics?
+
           attr_accessor plugin_id: String?
 
           attr_accessor product: String?
@@ -47,6 +50,7 @@ module Anthropic
             install_count: Integer?,
             invocation_count: Integer,
             plugin_name: String,
+            ?chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsPluginActivity::ChatCoworkUnifiedMetrics?,
             ?plugin_id: String?,
             ?product: String?,
             ?rbac_group_id: String?,
@@ -61,12 +65,26 @@ module Anthropic
             install_count: Integer?,
             invocation_count: Integer,
             plugin_name: String,
+            chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsPluginActivity::ChatCoworkUnifiedMetrics?,
             plugin_id: String?,
             product: String?,
             rbac_group_id: String?,
             rbac_group_name: String?,
             user_id: String?
           }
+
+          type chat_cowork_unified_metrics =
+            { distinct_session_plugin_used_count: Integer? }
+
+          class ChatCoworkUnifiedMetrics < Anthropic::Internal::Type::BaseModel
+            attr_accessor distinct_session_plugin_used_count: Integer?
+
+            def initialize: (
+              distinct_session_plugin_used_count: Integer?
+            ) -> void
+
+            def to_hash: -> { distinct_session_plugin_used_count: Integer? }
+          end
         end
       end
     end

@@ -10,6 +10,7 @@ module Anthropic
             cowork_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorCoworkMetrics,
             distinct_user_count: Integer,
             office_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeMetrics,
+            chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics?,
             connector_display_name: String?,
             individual_auth_distinct_user_count: Integer?,
             managed_auth_distinct_user_count: Integer?,
@@ -34,6 +35,8 @@ module Anthropic
           attr_accessor distinct_user_count: Integer
 
           attr_accessor office_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeMetrics
+
+          attr_accessor chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics?
 
           attr_accessor connector_display_name: String?
 
@@ -62,6 +65,7 @@ module Anthropic
             cowork_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorCoworkMetrics,
             distinct_user_count: Integer,
             office_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeMetrics,
+            ?chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics?,
             ?connector_display_name: String?,
             ?individual_auth_distinct_user_count: Integer?,
             ?managed_auth_distinct_user_count: Integer?,
@@ -81,6 +85,7 @@ module Anthropic
             cowork_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorCoworkMetrics,
             distinct_user_count: Integer,
             office_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeMetrics,
+            chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics?,
             connector_display_name: String?,
             individual_auth_distinct_user_count: Integer?,
             managed_auth_distinct_user_count: Integer?,
@@ -92,6 +97,56 @@ module Anthropic
             user_id: String?,
             write_call_count: Integer?
           }
+
+          type chat_cowork_unified_metrics =
+            {
+              chat: Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Chat,
+              sessions: Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Sessions
+            }
+
+          class ChatCoworkUnifiedMetrics < Anthropic::Internal::Type::BaseModel
+            attr_accessor chat: Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Chat
+
+            attr_accessor sessions: Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Sessions
+
+            def initialize: (
+              chat: Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Chat,
+              sessions: Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Sessions
+            ) -> void
+
+            def to_hash: -> {
+              chat: Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Chat,
+              sessions: Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Sessions
+            }
+
+            type chat = { distinct_conversation_connector_used_count: Integer? }
+
+            class Chat < Anthropic::Internal::Type::BaseModel
+              attr_accessor distinct_conversation_connector_used_count: Integer?
+
+              def initialize: (
+                distinct_conversation_connector_used_count: Integer?
+              ) -> void
+
+              def to_hash: -> {
+                distinct_conversation_connector_used_count: Integer?
+              }
+            end
+
+            type sessions = { distinct_session_connector_used_count: Integer? }
+
+            class Sessions < Anthropic::Internal::Type::BaseModel
+              attr_accessor distinct_session_connector_used_count: Integer?
+
+              def initialize: (
+                distinct_session_connector_used_count: Integer?
+              ) -> void
+
+              def to_hash: -> {
+                distinct_session_connector_used_count: Integer?
+              }
+            end
+          end
         end
       end
     end

@@ -115,6 +115,30 @@ module Anthropic
           sig { returns(T.nilable(String)) }
           attr_accessor :attributed_list_price
 
+          # Skill use recorded while members had Chat and Cowork unified (Cowork's features
+          # inside claude.ai chat) turned on, split into chat conversations and Cowork
+          # sessions. A count is null in date-range mode where it cannot be computed.
+          # Omitted from the response on deployments that do not offer Chat and Cowork
+          # unified.
+          sig do
+            returns(
+              T.nilable(
+                Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics
+              )
+            )
+          end
+          attr_reader :chat_cowork_unified_metrics
+
+          sig do
+            params(
+              chat_cowork_unified_metrics:
+                T.nilable(
+                  Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics::OrHash
+                )
+            ).void
+          end
+          attr_writer :chat_cowork_unified_metrics
+
           # Currency for this row's monetary fields (`estimated_overage_spend` and
           # `attributed_list_price`), as an uppercase ISO-4217 code. Always "USD" when
           # either amount is populated; null whenever both amounts are null.
@@ -173,13 +197,15 @@ module Anthropic
           attr_accessor :invocation_count
 
           # Product that produced this row's activity: one of `chat`, `claude_code`,
-          # `cowork`, or `office_agent` (the canonical Cost & Usage product naming; an
-          # `office_agent` row's per-surface breakdown is in its `office_metrics`). On
-          # `/plugins` only `cowork` and `claude_code` occur (the only surfaces with plugin
-          # attribution); on `/artifacts` only `chat`, `claude_code`, and `cowork` occur
-          # (the surfaces that create artifacts); `/apps/chat/projects` does not support the
-          # product dimension (a `product` entry in `group_by[]` or `filter[]` there is
-          # rejected). Present only when the request grouped by `product`.
+          # `cowork`, `office_agent`, or `chat_cowork_unified` (Chat and Cowork unified).
+          # These are the canonical Cost & Usage product names; an `office_agent` row's
+          # per-surface breakdown is in its `office_metrics`. On `/plugins` only `cowork`,
+          # `claude_code` and `chat_cowork_unified` occur (the only surfaces with plugin
+          # attribution); on `/artifacts` only `chat`, `claude_code`, `cowork` and
+          # `chat_cowork_unified` occur (the surfaces that create artifacts);
+          # `/apps/chat/projects` does not support the product dimension (a `product` entry
+          # in `group_by[]` or `filter[]` there is rejected). Present only when the request
+          # grouped by `product`.
           sig { returns(T.nilable(String)) }
           attr_accessor :product
 
@@ -243,6 +269,10 @@ module Anthropic
                 Anthropic::Beta::Organization::BetaAnalyticsSkillOfficeMetrics::OrHash,
               skill_name: String,
               attributed_list_price: T.nilable(String),
+              chat_cowork_unified_metrics:
+                T.nilable(
+                  Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics::OrHash
+                ),
               currency: T.nilable(String),
               enable_count: T.nilable(Integer),
               estimated_overage_spend: T.nilable(String),
@@ -299,6 +329,12 @@ module Anthropic
             # attributed to a member–skill pair with no counted usage on that day is excluded
             # from those cuts.
             attributed_list_price: nil,
+            # Skill use recorded while members had Chat and Cowork unified (Cowork's features
+            # inside claude.ai chat) turned on, split into chat conversations and Cowork
+            # sessions. A count is null in date-range mode where it cannot be computed.
+            # Omitted from the response on deployments that do not offer Chat and Cowork
+            # unified.
+            chat_cowork_unified_metrics: nil,
             # Currency for this row's monetary fields (`estimated_overage_spend` and
             # `attributed_list_price`), as an uppercase ISO-4217 code. Always "USD" when
             # either amount is populated; null whenever both amounts are null.
@@ -349,13 +385,15 @@ module Anthropic
             # directly.
             invocation_count: nil,
             # Product that produced this row's activity: one of `chat`, `claude_code`,
-            # `cowork`, or `office_agent` (the canonical Cost & Usage product naming; an
-            # `office_agent` row's per-surface breakdown is in its `office_metrics`). On
-            # `/plugins` only `cowork` and `claude_code` occur (the only surfaces with plugin
-            # attribution); on `/artifacts` only `chat`, `claude_code`, and `cowork` occur
-            # (the surfaces that create artifacts); `/apps/chat/projects` does not support the
-            # product dimension (a `product` entry in `group_by[]` or `filter[]` there is
-            # rejected). Present only when the request grouped by `product`.
+            # `cowork`, `office_agent`, or `chat_cowork_unified` (Chat and Cowork unified).
+            # These are the canonical Cost & Usage product names; an `office_agent` row's
+            # per-surface breakdown is in its `office_metrics`. On `/plugins` only `cowork`,
+            # `claude_code` and `chat_cowork_unified` occur (the only surfaces with plugin
+            # attribution); on `/artifacts` only `chat`, `claude_code`, `cowork` and
+            # `chat_cowork_unified` occur (the surfaces that create artifacts);
+            # `/apps/chat/projects` does not support the product dimension (a `product` entry
+            # in `group_by[]` or `filter[]` there is rejected). Present only when the request
+            # grouped by `product`.
             product: nil,
             # Tagged RBAC group identifier (`rbac_group_...`), matching the spend-limits API
             # spelling. Present only when the request grouped by `rbac_group_id`.
@@ -404,6 +442,10 @@ module Anthropic
                   Anthropic::Beta::Organization::BetaAnalyticsSkillOfficeMetrics,
                 skill_name: String,
                 attributed_list_price: T.nilable(String),
+                chat_cowork_unified_metrics:
+                  T.nilable(
+                    Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics
+                  ),
                 currency: T.nilable(String),
                 enable_count: T.nilable(Integer),
                 estimated_overage_spend: T.nilable(String),
@@ -421,6 +463,168 @@ module Anthropic
             )
           end
           def to_hash
+          end
+
+          class ChatCoworkUnifiedMetrics < Anthropic::Internal::Type::BaseModel
+            OrHash =
+              T.type_alias do
+                T.any(
+                  Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics,
+                  Anthropic::Internal::AnyHash
+                )
+              end
+
+            # A skill's use in chat conversations recorded while members had Chat and Cowork
+            # unified turned on.
+            sig do
+              returns(
+                Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics::Chat
+              )
+            end
+            attr_reader :chat
+
+            sig do
+              params(
+                chat:
+                  Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics::Chat::OrHash
+              ).void
+            end
+            attr_writer :chat
+
+            # A skill's use in Cowork sessions recorded while members had Chat and Cowork
+            # unified turned on.
+            sig do
+              returns(
+                Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics::Sessions
+              )
+            end
+            attr_reader :sessions
+
+            sig do
+              params(
+                sessions:
+                  Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics::Sessions::OrHash
+              ).void
+            end
+            attr_writer :sessions
+
+            # Skill use recorded while members had Chat and Cowork unified (Cowork's features
+            # inside claude.ai chat) turned on, split into chat conversations and Cowork
+            # sessions. A count is null in date-range mode where it cannot be computed.
+            # Omitted from the response on deployments that do not offer Chat and Cowork
+            # unified.
+            sig do
+              params(
+                chat:
+                  Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics::Chat::OrHash,
+                sessions:
+                  Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics::Sessions::OrHash
+              ).returns(T.attached_class)
+            end
+            def self.new(
+              # A skill's use in chat conversations recorded while members had Chat and Cowork
+              # unified turned on.
+              chat:,
+              # A skill's use in Cowork sessions recorded while members had Chat and Cowork
+              # unified turned on.
+              sessions:
+            )
+            end
+
+            sig do
+              override.returns(
+                {
+                  chat:
+                    Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics::Chat,
+                  sessions:
+                    Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics::Sessions
+                }
+              )
+            end
+            def to_hash
+            end
+
+            class Chat < Anthropic::Internal::Type::BaseModel
+              OrHash =
+                T.type_alias do
+                  T.any(
+                    Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics::Chat,
+                    Anthropic::Internal::AnyHash
+                  )
+                end
+
+              # Same measure as `chat_metrics.distinct_conversation_skill_used_count`, for
+              # activity recorded while members had Chat and Cowork unified turned on.
+              # Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows
+              # where a distinct count cannot be computed.
+              sig { returns(T.nilable(Integer)) }
+              attr_accessor :distinct_conversation_skill_used_count
+
+              # A skill's use in chat conversations recorded while members had Chat and Cowork
+              # unified turned on.
+              sig do
+                params(
+                  distinct_conversation_skill_used_count: T.nilable(Integer)
+                ).returns(T.attached_class)
+              end
+              def self.new(
+                # Same measure as `chat_metrics.distinct_conversation_skill_used_count`, for
+                # activity recorded while members had Chat and Cowork unified turned on.
+                # Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows
+                # where a distinct count cannot be computed.
+                distinct_conversation_skill_used_count:
+              )
+              end
+
+              sig do
+                override.returns(
+                  { distinct_conversation_skill_used_count: T.nilable(Integer) }
+                )
+              end
+              def to_hash
+              end
+            end
+
+            class Sessions < Anthropic::Internal::Type::BaseModel
+              OrHash =
+                T.type_alias do
+                  T.any(
+                    Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics::Sessions,
+                    Anthropic::Internal::AnyHash
+                  )
+                end
+
+              # Same measure as `cowork_metrics.distinct_session_skill_used_count`, for activity
+              # recorded while members had Chat and Cowork unified turned on. Approximate (HLL,
+              # typical error <2%) in date-range mode. Null on aggregated rows where a distinct
+              # count cannot be computed.
+              sig { returns(T.nilable(Integer)) }
+              attr_accessor :distinct_session_skill_used_count
+
+              # A skill's use in Cowork sessions recorded while members had Chat and Cowork
+              # unified turned on.
+              sig do
+                params(
+                  distinct_session_skill_used_count: T.nilable(Integer)
+                ).returns(T.attached_class)
+              end
+              def self.new(
+                # Same measure as `cowork_metrics.distinct_session_skill_used_count`, for activity
+                # recorded while members had Chat and Cowork unified turned on. Approximate (HLL,
+                # typical error <2%) in date-range mode. Null on aggregated rows where a distinct
+                # count cannot be computed.
+                distinct_session_skill_used_count:
+              )
+              end
+
+              sig do
+                override.returns(
+                  { distinct_session_skill_used_count: T.nilable(Integer) }
+                )
+              end
+              def to_hash
+              end
+            end
           end
 
           # Skill share status (claude.ai only): one of `private`, `organization`, or

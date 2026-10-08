@@ -5,7 +5,10 @@ module Anthropic
     module Beta
       module Organization
         # Publicly documented product surfaces. `claude-tag` is Claude Tag, the Claude
-        # product in Slack.
+        # product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's
+        # features inside claude.ai chat: chat and Cowork usage by a member who has it
+        # turned on is reported under this value instead of `chat` or `cowork`. It is
+        # accepted as a filter only on deployments that offer Chat and Cowork unified.
         module BetaAnalyticsProductFilter
           extend Anthropic::Internal::Type::Enum
 
@@ -21,6 +24,11 @@ module Anthropic
           CHAT =
             T.let(
               :chat,
+              Anthropic::Beta::Organization::BetaAnalyticsProductFilter::TaggedSymbol
+            )
+          CHAT_COWORK_UNIFIED =
+            T.let(
+              :chat_cowork_unified,
               Anthropic::Beta::Organization::BetaAnalyticsProductFilter::TaggedSymbol
             )
           CLAUDE_TAG =

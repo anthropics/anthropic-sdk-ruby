@@ -75,6 +75,24 @@ module Anthropic
           sig { returns(T.nilable(Float)) }
           attr_accessor :weekly_adoption_rate
 
+          # Number of users with activity in Chat and Cowork unified on the requested day.
+          # Omitted from the response on deployments that do not offer Chat and Cowork
+          # unified.
+          sig { returns(T.nilable(Integer)) }
+          attr_accessor :chat_cowork_unified_daily_active_user_count
+
+          # Number of users with activity in Chat and Cowork unified in the 30-day rolling
+          # window. Omitted from the response on deployments that do not offer Chat and
+          # Cowork unified.
+          sig { returns(T.nilable(Integer)) }
+          attr_accessor :chat_cowork_unified_monthly_active_user_count
+
+          # Number of users with activity in Chat and Cowork unified in the 7-day rolling
+          # window. Omitted from the response on deployments that do not offer Chat and
+          # Cowork unified.
+          sig { returns(T.nilable(Integer)) }
+          attr_accessor :chat_cowork_unified_weekly_active_user_count
+
           # Number of users with claude.ai (chat) activity on the requested day. Omitted
           # from the response while the per-product breakdown is not enabled for this
           # organization.
@@ -188,6 +206,9 @@ module Anthropic
               starting_at: Time,
               weekly_active_user_count: Integer,
               weekly_adoption_rate: T.nilable(Float),
+              chat_cowork_unified_daily_active_user_count: T.nilable(Integer),
+              chat_cowork_unified_monthly_active_user_count: T.nilable(Integer),
+              chat_cowork_unified_weekly_active_user_count: T.nilable(Integer),
               chat_daily_active_user_count: T.nilable(Integer),
               chat_monthly_active_user_count: T.nilable(Integer),
               chat_weekly_active_user_count: T.nilable(Integer),
@@ -243,6 +264,18 @@ module Anthropic
             # (`WAU / assigned_seat_count * 100`). Null when the response is scoped to an RBAC
             # group.
             weekly_adoption_rate:,
+            # Number of users with activity in Chat and Cowork unified on the requested day.
+            # Omitted from the response on deployments that do not offer Chat and Cowork
+            # unified.
+            chat_cowork_unified_daily_active_user_count: nil,
+            # Number of users with activity in Chat and Cowork unified in the 30-day rolling
+            # window. Omitted from the response on deployments that do not offer Chat and
+            # Cowork unified.
+            chat_cowork_unified_monthly_active_user_count: nil,
+            # Number of users with activity in Chat and Cowork unified in the 7-day rolling
+            # window. Omitted from the response on deployments that do not offer Chat and
+            # Cowork unified.
+            chat_cowork_unified_weekly_active_user_count: nil,
             # Number of users with claude.ai (chat) activity on the requested day. Omitted
             # from the response while the per-product breakdown is not enabled for this
             # organization.
@@ -327,6 +360,11 @@ module Anthropic
                 starting_at: Time,
                 weekly_active_user_count: Integer,
                 weekly_adoption_rate: T.nilable(Float),
+                chat_cowork_unified_daily_active_user_count: T.nilable(Integer),
+                chat_cowork_unified_monthly_active_user_count:
+                  T.nilable(Integer),
+                chat_cowork_unified_weekly_active_user_count:
+                  T.nilable(Integer),
                 chat_daily_active_user_count: T.nilable(Integer),
                 chat_monthly_active_user_count: T.nilable(Integer),
                 chat_weekly_active_user_count: T.nilable(Integer),

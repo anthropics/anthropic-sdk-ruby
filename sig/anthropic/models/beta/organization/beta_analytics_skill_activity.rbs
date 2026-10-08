@@ -11,6 +11,7 @@ module Anthropic
             office_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillOfficeMetrics,
             skill_name: String,
             attributed_list_price: String?,
+            chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics?,
             currency: String?,
             enable_count: Integer?,
             estimated_overage_spend: String?,
@@ -37,6 +38,8 @@ module Anthropic
           attr_accessor skill_name: String
 
           attr_accessor attributed_list_price: String?
+
+          attr_accessor chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics?
 
           attr_accessor currency: String?
 
@@ -66,6 +69,7 @@ module Anthropic
             office_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillOfficeMetrics,
             skill_name: String,
             ?attributed_list_price: String?,
+            ?chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics?,
             ?currency: String?,
             ?enable_count: Integer?,
             ?estimated_overage_spend: String?,
@@ -86,6 +90,7 @@ module Anthropic
             office_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillOfficeMetrics,
             skill_name: String,
             attributed_list_price: String?,
+            chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics?,
             currency: String?,
             enable_count: Integer?,
             estimated_overage_spend: String?,
@@ -97,6 +102,54 @@ module Anthropic
             skill_display_name: String?,
             user_id: String?
           }
+
+          type chat_cowork_unified_metrics =
+            {
+              chat: Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics::Chat,
+              sessions: Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics::Sessions
+            }
+
+          class ChatCoworkUnifiedMetrics < Anthropic::Internal::Type::BaseModel
+            attr_accessor chat: Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics::Chat
+
+            attr_accessor sessions: Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics::Sessions
+
+            def initialize: (
+              chat: Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics::Chat,
+              sessions: Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics::Sessions
+            ) -> void
+
+            def to_hash: -> {
+              chat: Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics::Chat,
+              sessions: Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics::Sessions
+            }
+
+            type chat = { distinct_conversation_skill_used_count: Integer? }
+
+            class Chat < Anthropic::Internal::Type::BaseModel
+              attr_accessor distinct_conversation_skill_used_count: Integer?
+
+              def initialize: (
+                distinct_conversation_skill_used_count: Integer?
+              ) -> void
+
+              def to_hash: -> {
+                distinct_conversation_skill_used_count: Integer?
+              }
+            end
+
+            type sessions = { distinct_session_skill_used_count: Integer? }
+
+            class Sessions < Anthropic::Internal::Type::BaseModel
+              attr_accessor distinct_session_skill_used_count: Integer?
+
+              def initialize: (
+                distinct_session_skill_used_count: Integer?
+              ) -> void
+
+              def to_hash: -> { distinct_session_skill_used_count: Integer? }
+            end
+          end
 
           type share_status = :organization | :private | :public
 
