@@ -312,6 +312,9 @@ module Anthropic
             if dot_segment
               raise ArgumentError.new("The request was not sent: path #{interpolated.inspect} has the dot segment #{dot_segment.inspect}, which would send it to a different URL")
             end
+            if encoded.include?("")
+              raise ArgumentError.new("The request was not sent: path #{interpolated.inspect} has an empty path parameter, which would send it to a different URL")
+            end
             interpolated
           end
         end

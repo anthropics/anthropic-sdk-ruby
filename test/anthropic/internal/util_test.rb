@@ -206,6 +206,7 @@ class Anthropic::Test::UtilUriHandlingTest < Minitest::Test
       ["cards/%1$s", "../secrets"] => "cards/..%2Fsecrets",
       ["cards/%1$s", "..."] => "cards/...",
       ["cards/%1$s", "%2e%2e"] => "cards/%252e%252e",
+      ["cards/%1$s", 0] => "cards/0",
       ["cards/%1$s?beta=..", "x"] => "cards/x?beta=.."
     }
     cases.each do |path, expected|
@@ -216,7 +217,11 @@ class Anthropic::Test::UtilUriHandlingTest < Minitest::Test
       ["cards/%1$s", "."],
       ["cards/%1$s", ".."],
       ["cards/%1$s%2$s", ".", "."],
-      ["cards/%1$s?beta=true", ".."]
+      ["cards/%1$s?beta=true", ".."],
+      ["cards/%1$s", ""],
+      ["cards/%1$s", nil],
+      ["cards/%1$s/items", ""],
+      ["cards/%1$s%2$s", "", "x"]
     ].each do |path|
       assert_raises(ArgumentError) { Anthropic::Internal::Util.interpolate_path(path) }
     end
