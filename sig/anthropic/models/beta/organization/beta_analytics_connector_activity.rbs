@@ -100,52 +100,24 @@ module Anthropic
 
           type chat_cowork_unified_metrics =
             {
-              chat: Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Chat,
-              sessions: Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Sessions
+              chat: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics,
+              sessions: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics
             }
 
           class ChatCoworkUnifiedMetrics < Anthropic::Internal::Type::BaseModel
-            attr_accessor chat: Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Chat
+            attr_accessor chat: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics
 
-            attr_accessor sessions: Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Sessions
+            attr_accessor sessions: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics
 
             def initialize: (
-              chat: Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Chat,
-              sessions: Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Sessions
+              chat: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics,
+              sessions: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics
             ) -> void
 
             def to_hash: -> {
-              chat: Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Chat,
-              sessions: Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Sessions
+              chat: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics,
+              sessions: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics
             }
-
-            type chat = { distinct_conversation_connector_used_count: Integer? }
-
-            class Chat < Anthropic::Internal::Type::BaseModel
-              attr_accessor distinct_conversation_connector_used_count: Integer?
-
-              def initialize: (
-                distinct_conversation_connector_used_count: Integer?
-              ) -> void
-
-              def to_hash: -> {
-                distinct_conversation_connector_used_count: Integer?
-              }
-            end
-
-            type sessions = { distinct_session_connector_used_count: Integer? }
-
-            class Sessions < Anthropic::Internal::Type::BaseModel
-              attr_accessor distinct_session_connector_used_count: Integer?
-
-              def initialize: (
-                distinct_session_connector_used_count: Integer?
-              ) -> void
-
-              def to_hash: -> {
-                distinct_session_connector_used_count: Integer?
-              }
-            end
           end
         end
       end

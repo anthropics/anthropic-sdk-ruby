@@ -408,7 +408,7 @@ module Anthropic
             # Cowork unified turned on.
             sig do
               returns(
-                Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Chat
+                Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics
               )
             end
             attr_reader :chat
@@ -416,7 +416,7 @@ module Anthropic
             sig do
               params(
                 chat:
-                  Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Chat::OrHash
+                  Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics::OrHash
               ).void
             end
             attr_writer :chat
@@ -425,7 +425,7 @@ module Anthropic
             # unified turned on.
             sig do
               returns(
-                Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Sessions
+                Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics
               )
             end
             attr_reader :sessions
@@ -433,7 +433,7 @@ module Anthropic
             sig do
               params(
                 sessions:
-                  Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Sessions::OrHash
+                  Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics::OrHash
               ).void
             end
             attr_writer :sessions
@@ -446,9 +446,9 @@ module Anthropic
             sig do
               params(
                 chat:
-                  Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Chat::OrHash,
+                  Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics::OrHash,
                 sessions:
-                  Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Sessions::OrHash
+                  Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics::OrHash
               ).returns(T.attached_class)
             end
             def self.new(
@@ -465,98 +465,13 @@ module Anthropic
               override.returns(
                 {
                   chat:
-                    Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Chat,
+                    Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics,
                   sessions:
-                    Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Sessions
+                    Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics
                 }
               )
             end
             def to_hash
-            end
-
-            class Chat < Anthropic::Internal::Type::BaseModel
-              OrHash =
-                T.type_alias do
-                  T.any(
-                    Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Chat,
-                    Anthropic::Internal::AnyHash
-                  )
-                end
-
-              # Same measure as `chat_metrics.distinct_conversation_connector_used_count`, for
-              # activity recorded while members had Chat and Cowork unified turned on.
-              # Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows
-              # where a distinct count cannot be computed.
-              sig { returns(T.nilable(Integer)) }
-              attr_accessor :distinct_conversation_connector_used_count
-
-              # A connector's use in chat conversations recorded while members had Chat and
-              # Cowork unified turned on.
-              sig do
-                params(
-                  distinct_conversation_connector_used_count: T.nilable(Integer)
-                ).returns(T.attached_class)
-              end
-              def self.new(
-                # Same measure as `chat_metrics.distinct_conversation_connector_used_count`, for
-                # activity recorded while members had Chat and Cowork unified turned on.
-                # Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows
-                # where a distinct count cannot be computed.
-                distinct_conversation_connector_used_count:
-              )
-              end
-
-              sig do
-                override.returns(
-                  {
-                    distinct_conversation_connector_used_count:
-                      T.nilable(Integer)
-                  }
-                )
-              end
-              def to_hash
-              end
-            end
-
-            class Sessions < Anthropic::Internal::Type::BaseModel
-              OrHash =
-                T.type_alias do
-                  T.any(
-                    Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Sessions,
-                    Anthropic::Internal::AnyHash
-                  )
-                end
-
-              # Same measure as `cowork_metrics.distinct_session_connector_used_count`, for
-              # activity recorded while members had Chat and Cowork unified turned on.
-              # Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows
-              # where a distinct count cannot be computed.
-              sig { returns(T.nilable(Integer)) }
-              attr_accessor :distinct_session_connector_used_count
-
-              # A connector's use in Cowork sessions recorded while members had Chat and Cowork
-              # unified turned on.
-              sig do
-                params(
-                  distinct_session_connector_used_count: T.nilable(Integer)
-                ).returns(T.attached_class)
-              end
-              def self.new(
-                # Same measure as `cowork_metrics.distinct_session_connector_used_count`, for
-                # activity recorded while members had Chat and Cowork unified turned on.
-                # Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows
-                # where a distinct count cannot be computed.
-                distinct_session_connector_used_count:
-              )
-              end
-
-              sig do
-                override.returns(
-                  { distinct_session_connector_used_count: T.nilable(Integer) }
-                )
-              end
-              def to_hash
-              end
             end
           end
         end

@@ -80,193 +80,24 @@ module Anthropic
 
           type chat_cowork_unified_metrics =
             {
-              chat: Anthropic::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics::Chat,
-              sessions: Anthropic::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics::Sessions
+              chat: Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedChatMetrics,
+              sessions: Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedSessionsMetrics
             }
 
           class ChatCoworkUnifiedMetrics < Anthropic::Internal::Type::BaseModel
-            attr_accessor chat: Anthropic::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics::Chat
+            attr_accessor chat: Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedChatMetrics
 
-            attr_accessor sessions: Anthropic::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics::Sessions
+            attr_accessor sessions: Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedSessionsMetrics
 
             def initialize: (
-              chat: Anthropic::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics::Chat,
-              sessions: Anthropic::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics::Sessions
+              chat: Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedChatMetrics,
+              sessions: Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedSessionsMetrics
             ) -> void
 
             def to_hash: -> {
-              chat: Anthropic::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics::Chat,
-              sessions: Anthropic::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics::Sessions
+              chat: Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedChatMetrics,
+              sessions: Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedSessionsMetrics
             }
-
-            type chat =
-              {
-                connectors_used_count: Integer,
-                distinct_artifacts_created_count: Integer,
-                distinct_connectors_used_count: Integer?,
-                distinct_conversation_count: Integer?,
-                distinct_files_uploaded_count: Integer?,
-                distinct_projects_created_count: Integer,
-                distinct_projects_used_count: Integer?,
-                distinct_shared_artifacts_viewed_count: Integer?,
-                distinct_skills_used_count: Integer?,
-                message_count: Integer,
-                shared_conversations_viewed_count: Integer,
-                thinking_message_count: Integer
-              }
-
-            class Chat < Anthropic::Internal::Type::BaseModel
-              attr_accessor connectors_used_count: Integer
-
-              attr_accessor distinct_artifacts_created_count: Integer
-
-              attr_accessor distinct_connectors_used_count: Integer?
-
-              attr_accessor distinct_conversation_count: Integer?
-
-              attr_accessor distinct_files_uploaded_count: Integer?
-
-              attr_accessor distinct_projects_created_count: Integer
-
-              attr_accessor distinct_projects_used_count: Integer?
-
-              attr_accessor distinct_shared_artifacts_viewed_count: Integer?
-
-              attr_accessor distinct_skills_used_count: Integer?
-
-              attr_accessor message_count: Integer
-
-              attr_accessor shared_conversations_viewed_count: Integer
-
-              attr_accessor thinking_message_count: Integer
-
-              def initialize: (
-                connectors_used_count: Integer,
-                distinct_artifacts_created_count: Integer,
-                distinct_connectors_used_count: Integer?,
-                distinct_conversation_count: Integer?,
-                distinct_files_uploaded_count: Integer?,
-                distinct_projects_created_count: Integer,
-                distinct_projects_used_count: Integer?,
-                distinct_shared_artifacts_viewed_count: Integer?,
-                distinct_skills_used_count: Integer?,
-                message_count: Integer,
-                shared_conversations_viewed_count: Integer,
-                thinking_message_count: Integer
-              ) -> void
-
-              def to_hash: -> {
-                connectors_used_count: Integer,
-                distinct_artifacts_created_count: Integer,
-                distinct_connectors_used_count: Integer?,
-                distinct_conversation_count: Integer?,
-                distinct_files_uploaded_count: Integer?,
-                distinct_projects_created_count: Integer,
-                distinct_projects_used_count: Integer?,
-                distinct_shared_artifacts_viewed_count: Integer?,
-                distinct_skills_used_count: Integer?,
-                message_count: Integer,
-                shared_conversations_viewed_count: Integer,
-                thinking_message_count: Integer
-              }
-            end
-
-            type sessions =
-              {
-                action_count: Integer,
-                artifacts_created_count: Integer,
-                connectors_used_count: Integer,
-                dispatch_turn_count: Integer,
-                distinct_connectors_used_count: Integer?,
-                distinct_session_count: Integer?,
-                distinct_skills_used_count: Integer?,
-                message_count: Integer,
-                skills_used_count: Integer,
-                distinct_plugins_used_count: Integer?,
-                edit_tool_count: Integer?,
-                file_edit_count: Integer?,
-                multi_edit_tool_count: Integer?,
-                notebook_edit_tool_count: Integer?,
-                plugins_used_count: Integer?,
-                sessions_with_file_edits_count: Integer?,
-                write_tool_count: Integer?
-              }
-
-            class Sessions < Anthropic::Internal::Type::BaseModel
-              attr_accessor action_count: Integer
-
-              attr_accessor artifacts_created_count: Integer
-
-              attr_accessor connectors_used_count: Integer
-
-              attr_accessor dispatch_turn_count: Integer
-
-              attr_accessor distinct_connectors_used_count: Integer?
-
-              attr_accessor distinct_session_count: Integer?
-
-              attr_accessor distinct_skills_used_count: Integer?
-
-              attr_accessor message_count: Integer
-
-              attr_accessor skills_used_count: Integer
-
-              attr_accessor distinct_plugins_used_count: Integer?
-
-              attr_accessor edit_tool_count: Integer?
-
-              attr_accessor file_edit_count: Integer?
-
-              attr_accessor multi_edit_tool_count: Integer?
-
-              attr_accessor notebook_edit_tool_count: Integer?
-
-              attr_accessor plugins_used_count: Integer?
-
-              attr_accessor sessions_with_file_edits_count: Integer?
-
-              attr_accessor write_tool_count: Integer?
-
-              def initialize: (
-                action_count: Integer,
-                artifacts_created_count: Integer,
-                connectors_used_count: Integer,
-                dispatch_turn_count: Integer,
-                distinct_connectors_used_count: Integer?,
-                distinct_session_count: Integer?,
-                distinct_skills_used_count: Integer?,
-                message_count: Integer,
-                skills_used_count: Integer,
-                ?distinct_plugins_used_count: Integer?,
-                ?edit_tool_count: Integer?,
-                ?file_edit_count: Integer?,
-                ?multi_edit_tool_count: Integer?,
-                ?notebook_edit_tool_count: Integer?,
-                ?plugins_used_count: Integer?,
-                ?sessions_with_file_edits_count: Integer?,
-                ?write_tool_count: Integer?
-              ) -> void
-
-              def to_hash: -> {
-                action_count: Integer,
-                artifacts_created_count: Integer,
-                connectors_used_count: Integer,
-                dispatch_turn_count: Integer,
-                distinct_connectors_used_count: Integer?,
-                distinct_session_count: Integer?,
-                distinct_skills_used_count: Integer?,
-                message_count: Integer,
-                skills_used_count: Integer,
-                distinct_plugins_used_count: Integer?,
-                edit_tool_count: Integer?,
-                file_edit_count: Integer?,
-                multi_edit_tool_count: Integer?,
-                notebook_edit_tool_count: Integer?,
-                plugins_used_count: Integer?,
-                sessions_with_file_edits_count: Integer?,
-                write_tool_count: Integer?
-              }
-            end
           end
         end
       end

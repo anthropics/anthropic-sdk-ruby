@@ -81,9 +81,9 @@ module Anthropic
           sig { returns(T.nilable(Integer)) }
           attr_accessor :chat_cowork_unified_daily_active_user_count
 
-          # Number of users with activity in Chat and Cowork unified in the 30-day rolling
-          # window. Omitted from the response on deployments that do not offer Chat and
-          # Cowork unified.
+          # Number of users with activity in Chat and Cowork unified in the 28-day rolling
+          # window (30 days when the request filters by `rbac_group_id`). Omitted from the
+          # response on deployments that do not offer Chat and Cowork unified.
           sig { returns(T.nilable(Integer)) }
           attr_accessor :chat_cowork_unified_monthly_active_user_count
 
@@ -268,9 +268,9 @@ module Anthropic
             # Omitted from the response on deployments that do not offer Chat and Cowork
             # unified.
             chat_cowork_unified_daily_active_user_count: nil,
-            # Number of users with activity in Chat and Cowork unified in the 30-day rolling
-            # window. Omitted from the response on deployments that do not offer Chat and
-            # Cowork unified.
+            # Number of users with activity in Chat and Cowork unified in the 28-day rolling
+            # window (30 days when the request filters by `rbac_group_id`). Omitted from the
+            # response on deployments that do not offer Chat and Cowork unified.
             chat_cowork_unified_monthly_active_user_count: nil,
             # Number of users with activity in Chat and Cowork unified in the 7-day rolling
             # window. Omitted from the response on deployments that do not offer Chat and

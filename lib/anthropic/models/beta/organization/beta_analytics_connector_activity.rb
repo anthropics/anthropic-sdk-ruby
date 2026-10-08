@@ -234,17 +234,16 @@ module Anthropic
             #   A connector's use in chat conversations recorded while members had Chat and
             #   Cowork unified turned on.
             #
-            #   @return [Anthropic::Models::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Chat]
-            required :chat,
-                     -> { Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Chat }
+            #   @return [Anthropic::Models::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics]
+            required :chat, -> { Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics }
 
             # @!attribute sessions
             #   A connector's use in Cowork sessions recorded while members had Chat and Cowork
             #   unified turned on.
             #
-            #   @return [Anthropic::Models::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Sessions]
+            #   @return [Anthropic::Models::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics]
             required :sessions,
-                     -> { Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Sessions }
+                     -> { Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics }
 
             # @!method initialize(chat:, sessions:)
             #   Connector use recorded while members had Chat and Cowork unified (Cowork's
@@ -257,53 +256,9 @@ module Anthropic
             #   {Anthropic::Models::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics}
             #   for more details.
             #
-            #   @param chat [Anthropic::Models::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Chat] A connector's use in chat conversations recorded while members had
+            #   @param chat [Anthropic::Models::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics] A connector's use in chat conversations recorded while members had
             #
-            #   @param sessions [Anthropic::Models::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Sessions] A connector's use in Cowork sessions recorded while members had
-
-            # @see Anthropic::Models::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics#chat
-            class Chat < Anthropic::Internal::Type::BaseModel
-              # @!attribute distinct_conversation_connector_used_count
-              #   Same measure as `chat_metrics.distinct_conversation_connector_used_count`, for
-              #   activity recorded while members had Chat and Cowork unified turned on.
-              #   Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows
-              #   where a distinct count cannot be computed.
-              #
-              #   @return [Integer, nil]
-              required :distinct_conversation_connector_used_count, Integer, nil?: true
-
-              # @!method initialize(distinct_conversation_connector_used_count:)
-              #   A connector's use in chat conversations recorded while members had Chat and
-              #   Cowork unified turned on.
-              #
-              #   Some parameter documentations has been truncated, see
-              #   {Anthropic::Models::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Chat}
-              #   for more details.
-              #
-              #   @param distinct_conversation_connector_used_count [Integer, nil] Same measure as `chat_metrics.distinct_conversation_connector_used_count`, for a
-            end
-
-            # @see Anthropic::Models::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics#sessions
-            class Sessions < Anthropic::Internal::Type::BaseModel
-              # @!attribute distinct_session_connector_used_count
-              #   Same measure as `cowork_metrics.distinct_session_connector_used_count`, for
-              #   activity recorded while members had Chat and Cowork unified turned on.
-              #   Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows
-              #   where a distinct count cannot be computed.
-              #
-              #   @return [Integer, nil]
-              required :distinct_session_connector_used_count, Integer, nil?: true
-
-              # @!method initialize(distinct_session_connector_used_count:)
-              #   A connector's use in Cowork sessions recorded while members had Chat and Cowork
-              #   unified turned on.
-              #
-              #   Some parameter documentations has been truncated, see
-              #   {Anthropic::Models::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::Sessions}
-              #   for more details.
-              #
-              #   @param distinct_session_connector_used_count [Integer, nil] Same measure as `cowork_metrics.distinct_session_connector_used_count`, for acti
-            end
+            #   @param sessions [Anthropic::Models::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics] A connector's use in Cowork sessions recorded while members had
           end
         end
       end

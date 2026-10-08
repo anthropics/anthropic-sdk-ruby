@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_connector_chat_cowork_unified_sessions_metrics =
+          { distinct_session_connector_used_count: Integer? }
+
+        class BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics < Anthropic::Internal::Type::BaseModel
+          attr_accessor distinct_session_connector_used_count: Integer?
+
+          def initialize: (
+            distinct_session_connector_used_count: Integer?
+          ) -> void
+
+          def to_hash: -> { distinct_session_connector_used_count: Integer? }
+        end
+      end
+    end
+  end
+end
