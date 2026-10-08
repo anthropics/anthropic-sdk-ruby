@@ -205,6 +205,7 @@ class Anthropic::Test::UtilUriHandlingTest < Minitest::Test
     cases = {
       ["cards/%1$s", "../secrets"] => "cards/..%2Fsecrets",
       ["cards/%1$s", "..."] => "cards/...",
+      ["cards/%1$s", "%2e%2e"] => "cards/%252e%252e",
       ["cards/%1$s?beta=..", "x"] => "cards/x?beta=.."
     }
     cases.each do |path, expected|
@@ -215,8 +216,7 @@ class Anthropic::Test::UtilUriHandlingTest < Minitest::Test
       ["cards/%1$s", "."],
       ["cards/%1$s", ".."],
       ["cards/%1$s%2$s", ".", "."],
-      # `%%` is how `format` writes a literal `%`, so this path text holds "%2E%2e".
-      ["cards/%1$s/%%2E%%2e", "x"]
+      ["cards/%1$s?beta=true", ".."]
     ].each do |path|
       assert_raises(ArgumentError) { Anthropic::Internal::Util.interpolate_path(path) }
     end
