@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.77.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.77.0...v1.77.1) (2026-10-08)
+
+### Bug Fixes
+
+* **client:** raise before sending a request with an empty path parameter
+
+
+### Chores
+
+* **ci:** check that pull requests update the changelog
+* **docs:** note that listing Claude Console spend limits is in early access
+* **internal:** simplify the check that refuses "." and ".." path parameters
+
 ## 1.77.0 (2026-10-07)
 
 Full Changelog: [v1.76.0...v1.77.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.76.0...v1.77.0)

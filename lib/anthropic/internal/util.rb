@@ -308,10 +308,12 @@ module Anthropic
           in [String => p, *interpolations]
             encoded = interpolations.map { encode_path(_1) }
             interpolated = format(p, *encoded)
-            path_part = interpolated.partition(/[?#]/).first
-            dot_segment = path_part.split("/").find { _1.match?(/\A(?:\.|%2e){1,2}\z/i) }
+            dot_segment = encoded.find { _1 == "." || _1 == ".." }
             if dot_segment
-              raise ArgumentError.new("The request was not sent: path #{path_part.inspect} has the dot segment #{dot_segment.inspect}, which would send it to a different URL")
+              raise ArgumentError.new("The request was not sent: path #{interpolated.inspect} has the dot segment #{dot_segment.inspect}, which would send it to a different URL")
+            end
+            if encoded.include?("")
+              raise ArgumentError.new("The request was not sent: path #{interpolated.inspect} has an empty path parameter, which would send it to a different URL")
             end
             interpolated
           end
