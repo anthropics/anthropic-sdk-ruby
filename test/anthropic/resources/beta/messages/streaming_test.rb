@@ -523,4 +523,102 @@ class Anthropic::Test::Resources::Beta::Messages::StreamingTest < Minitest::Test
 
     SSE
   end
+
+  def compaction_values_response(start, delta)
+    frames = [
+      {
+        type: "message_start",
+        message: {
+          id: "msg_compaction",
+          type: "message",
+          role: "assistant",
+          content: [],
+          model: "claude-sonnet-4-20250514",
+          stop_reason: nil,
+          stop_sequence: nil,
+          usage: {input_tokens: 10, output_tokens: 0}
+        }
+      },
+      {type: "content_block_start", index: 0, content_block: {type: "compaction", **start}},
+      {type: "content_block_delta", index: 0, delta: {type: "compaction_delta", **delta}},
+      {type: "content_block_stop", index: 0},
+      {
+        type: "message_delta",
+        delta: {stop_reason: "compaction", stop_sequence: nil},
+        usage: {output_tokens: 5}
+      },
+      {type: "message_stop"}
+    ]
+    frames.map { "event: #{_1.fetch(:type)}\ndata: #{JSON.generate(_1)}\n\n" }.join
+  end
+
+  def assert_compaction_values(
+    delta,
+    start = {
+      content: "old summary",
+      encrypted_content: "old checkpoint",
+      signature: "sig",
+      tool_changes: []
+    }
+  )
+    WebMock.reset!
+    stub_streaming_response(compaction_values_response(start, delta))
+    stream = @client.beta.messages.stream(**compaction_params)
+    events = stream.to_a
+    block = stream.accumulated_message.content.fetch(0)
+    expected = {type: "compaction", **start, **delta}
+    assert_equal(JSON.parse(JSON.generate(expected)), JSON.parse(block.to_json))
+    assert_equal({content: expected[:content]}, {content: block.content})
+    assert_equal(
+      {encrypted_content: expected[:encrypted_content]},
+      {encrypted_content: block.encrypted_content}
+    )
+    event = events.find { _1.type == :compaction }
+    assert_equal({content: expected[:content]}, {content: event.content})
+    assert_equal(1, events.count { _1.type == :message_stop })
+    assert_equal(:compaction, stream.accumulated_message.stop_reason)
+    before = block.to_json
+    captured = nil
+    stub_request(:post, "http://localhost/v1/messages?beta=true")
+      .with do |req|
+      captured = JSON.parse(req.body)
+      true
+    end
+      .to_return(status: 200,
+                 headers: {"content-type" => "application/json"},
+                 body: JSON.generate(
+                   {
+                     id: "msg_reply",
+                     type: "message",
+                     role: "assistant",
+                     model: "claude-sonnet-4-20250514",
+                     content: [],
+                     stop_reason: "end_turn",
+                     usage: {
+                       input_tokens: 1, output_tokens: 0
+                     }
+                   }
+                 ))
+    @client.beta.messages.create(**compaction_params, messages: [{role: :assistant, content: [block]}])
+    assert_equal(JSON.parse(JSON.generate(expected)), captured.fetch("messages").last.fetch("content").first)
+    assert_equal(before, block.to_json)
+  ensure
+    stream&.close
+  end
+
+  def test_null_and_empty_compaction_values_are_readable_and_replayable
+    ["new summary", "", nil].product(["new checkpoint", "", nil]).each do |summary, checkpoint|
+      assert_compaction_values({content: summary, encrypted_content: checkpoint})
+    end
+  end
+
+  def test_omitted_compaction_fields_retain_prior_values
+    assert_compaction_values({content: "new summary"})
+    assert_compaction_values({encrypted_content: nil})
+    assert_compaction_values({})
+  end
+
+  def test_absent_optional_compaction_fields_are_not_invented
+    assert_compaction_values({content: "Summary"}, {content: nil, encrypted_content: nil})
+  end
 end

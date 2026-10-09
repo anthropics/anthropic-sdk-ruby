@@ -139,8 +139,11 @@ module Anthropic
             in Anthropic::Models::SignatureDelta | Anthropic::Models::BetaSignatureDelta if content.type == :thinking
               content.signature = delta.signature
             in Anthropic::Models::BetaCompactionContentBlockDelta if content.type == :compaction
-              content.content = delta.content
-              content.encrypted_content = delta.encrypted_content
+              # Rebuild from raw fields: nullable generated setters reject nil,
+              # and an omitted delta field must not clear the prior value.
+              current_snapshot.content[event.index] = Anthropic::Internal::Type::Converter.coerce(
+                content.class, content.to_h.merge(delta.to_h.slice(:content, :encrypted_content))
+              )
             else
             end
           in Anthropic::Models::RawContentBlockStopEvent | Anthropic::Models::BetaRawContentBlockStopEvent
@@ -266,9 +269,9 @@ module Anthropic
                 signature: content_block.signature
               )
             in Anthropic::Models::BetaCompactionContentBlockDelta if content_block.type == :compaction
-              events_to_yield << Anthropic::Streaming::CompactionEvent.new(
-                type: :compaction,
-                content: content_block.content
+              events_to_yield << Anthropic::Internal::Type::Converter.coerce(
+                Anthropic::Streaming::CompactionEvent,
+                {type: :compaction, content: content_block.content}
               )
             else
             end
