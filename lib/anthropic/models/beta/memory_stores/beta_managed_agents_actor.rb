@@ -63,11 +63,11 @@ module Anthropic
           def self.new(type:, **args)
             case type.to_sym
             when :session_actor
-              Anthropic::Beta::MemoryStores::BetaManagedAgentsSessionActor.new(**args)
+              Anthropic::Beta::MemoryStores::BetaManagedAgentsSessionActor.new(type: type, **args)
             when :api_actor
-              Anthropic::Beta::MemoryStores::BetaManagedAgentsAPIActor.new(**args)
+              Anthropic::Beta::MemoryStores::BetaManagedAgentsAPIActor.new(type: type, **args)
             when :user_actor
-              Anthropic::Beta::MemoryStores::BetaManagedAgentsUserActor.new(**args)
+              Anthropic::Beta::MemoryStores::BetaManagedAgentsUserActor.new(type: type, **args)
             when :service_account_actor
               Anthropic::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor.new(**args)
             else

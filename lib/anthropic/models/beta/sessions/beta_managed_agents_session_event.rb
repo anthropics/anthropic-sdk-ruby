@@ -315,75 +315,102 @@ module Anthropic
           def self.new(type:, **args)
             case type.to_sym
             when :"user.message"
-              Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEvent.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEvent.new(type: type, **args)
             when :"user.interrupt"
-              Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEvent.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEvent.new(type: type, **args)
             when :"user.tool_confirmation"
-              Anthropic::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent.new(type: type, **args)
             when :"user.custom_tool_result"
-              Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent.new(type: type, **args)
             when :"agent.custom_tool_use"
-              Anthropic::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent.new(type: type, **args)
             when :"agent.message"
-              Anthropic::Beta::Sessions::BetaManagedAgentsAgentMessageEvent.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsAgentMessageEvent.new(type: type, **args)
             when :"agent.thinking"
-              Anthropic::Beta::Sessions::BetaManagedAgentsAgentThinkingEvent.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsAgentThinkingEvent.new(type: type, **args)
             when :"agent.mcp_tool_use"
-              Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent.new(type: type, **args)
             when :"agent.mcp_tool_result"
-              Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent.new(type: type, **args)
             when :"agent.tool_use"
-              Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent.new(type: type, **args)
             when :"agent.tool_result"
-              Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent.new(type: type, **args)
             when :"agent.thread_message_received"
-              Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadMessageReceivedEvent.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadMessageReceivedEvent.new(
+                type: type,
+                **args
+              )
             when :"agent.thread_message_sent"
-              Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent.new(type: type, **args)
             when :"agent.thread_context_compacted"
-              Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadContextCompactedEvent.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadContextCompactedEvent.new(
+                type: type,
+                **args
+              )
             when :"session.error"
-              Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent.new(type: type, **args)
             when :"session.status_rescheduled"
-              Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusRescheduledEvent.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusRescheduledEvent.new(
+                type: type,
+                **args
+              )
             when :"session.status_running"
-              Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusRunningEvent.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusRunningEvent.new(type: type, **args)
             when :"session.status_idle"
-              Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent.new(type: type, **args)
             when :"session.status_terminated"
-              Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusTerminatedEvent.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusTerminatedEvent.new(type: type, **args)
             when :"session.thread_created"
-              Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent.new(type: type, **args)
             when :"span.outcome_evaluation_start"
-              Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationStartEvent.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationStartEvent.new(
+                type: type,
+                **args
+              )
             when :"span.outcome_evaluation_end"
-              Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationEndEvent.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationEndEvent.new(
+                type: type,
+                **args
+              )
             when :"span.model_request_start"
-              Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelRequestStartEvent.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelRequestStartEvent.new(type: type, **args)
             when :"span.model_request_end"
-              Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelRequestEndEvent.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelRequestEndEvent.new(type: type, **args)
             when :"span.outcome_evaluation_ongoing"
-              Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent.new(
+                type: type,
+                **args
+              )
             when :"user.define_outcome"
-              Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent.new(type: type, **args)
             when :"session.deleted"
-              Anthropic::Beta::Sessions::BetaManagedAgentsSessionDeletedEvent.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsSessionDeletedEvent.new(type: type, **args)
             when :"session.thread_status_running"
-              Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRunningEvent.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRunningEvent.new(
+                type: type,
+                **args
+              )
             when :"session.thread_status_idle"
-              Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent.new(type: type, **args)
             when :"session.thread_status_terminated"
-              Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusTerminatedEvent.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusTerminatedEvent.new(
+                type: type,
+                **args
+              )
             when :"user.tool_result"
-              Anthropic::Beta::BetaManagedAgentsUserToolResultEvent.new(**args)
+              Anthropic::Beta::BetaManagedAgentsUserToolResultEvent.new(type: type, **args)
             when :"session.thread_status_rescheduled"
-              Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRescheduledEvent.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRescheduledEvent.new(
+                type: type,
+                **args
+              )
             when :"session.updated"
-              Anthropic::Beta::BetaManagedAgentsSessionUpdatedEvent.new(**args)
+              Anthropic::Beta::BetaManagedAgentsSessionUpdatedEvent.new(type: type, **args)
             when :"system.message"
-              Anthropic::Beta::BetaManagedAgentsSystemMessageEvent.new(**args)
+              Anthropic::Beta::BetaManagedAgentsSystemMessageEvent.new(type: type, **args)
             when :"session.usage"
-              Anthropic::Beta::BetaManagedAgentsSessionUsageEvent.new(**args)
+              Anthropic::Beta::BetaManagedAgentsSessionUsageEvent.new(type: type, **args)
             when :"workflow_run.created"
               Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunCreatedEvent.new(**args)
             when :"workflow_run.status_ended"

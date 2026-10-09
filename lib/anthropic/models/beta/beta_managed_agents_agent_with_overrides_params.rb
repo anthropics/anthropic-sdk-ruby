@@ -170,11 +170,11 @@ module Anthropic
           def self.new(type:, **args)
             case type.to_sym
             when :agent_toolset_20260401
-              Anthropic::Beta::BetaManagedAgentsAgentToolset20260401Params.new(**args)
+              Anthropic::Beta::BetaManagedAgentsAgentToolset20260401Params.new(type: type, **args)
             when :mcp_toolset
-              Anthropic::Beta::BetaManagedAgentsMCPToolsetParams.new(**args)
+              Anthropic::Beta::BetaManagedAgentsMCPToolsetParams.new(type: type, **args)
             when :custom
-              Anthropic::Beta::BetaManagedAgentsCustomToolParams.new(**args)
+              Anthropic::Beta::BetaManagedAgentsCustomToolParams.new(type: type, **args)
             else
               raise ArgumentError, "unknown type: #{type}"
             end

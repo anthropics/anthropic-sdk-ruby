@@ -79,9 +79,9 @@ module Anthropic
           def self.new(type:, **args)
             case type.to_sym
             when :agent
-              Anthropic::Beta::BetaManagedAgentsSessionThreadAgent.new(**args)
+              Anthropic::Beta::BetaManagedAgentsSessionThreadAgent.new(type: type, **args)
             when :advisor
-              Anthropic::Beta::BetaManagedAgentsAdvisor.new(**args)
+              Anthropic::Beta::BetaManagedAgentsAdvisor.new(type: type, **args)
             else
               raise ArgumentError, "unknown type: #{type}"
             end

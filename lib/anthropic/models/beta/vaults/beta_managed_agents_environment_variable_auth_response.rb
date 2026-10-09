@@ -87,9 +87,14 @@ module Anthropic
             def self.new(type:, **args)
               case type.to_sym
               when :unrestricted
-                Anthropic::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingResponse.new(**args)
+                Anthropic::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingResponse.new(
+                  type: type, **args
+                )
               when :limited
-                Anthropic::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingResponse.new(**args)
+                Anthropic::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingResponse.new(
+                  type: type,
+                  **args
+                )
               else
                 raise ArgumentError, "unknown type: #{type}"
               end

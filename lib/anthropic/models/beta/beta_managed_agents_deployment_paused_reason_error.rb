@@ -101,33 +101,57 @@ module Anthropic
         def self.new(type:, **args)
           case type.to_sym
           when :environment_archived_error
-            Anthropic::Beta::BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError.new(**args)
+            Anthropic::Beta::BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError.new(
+              type: type,
+              **args
+            )
           when :agent_archived_error
-            Anthropic::Beta::BetaManagedAgentsAgentArchivedDeploymentPausedReasonError.new(**args)
+            Anthropic::Beta::BetaManagedAgentsAgentArchivedDeploymentPausedReasonError.new(type: type, **args)
           when :environment_not_found_error
-            Anthropic::Beta::BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError.new(**args)
+            Anthropic::Beta::BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError.new(
+              type: type,
+              **args
+            )
           when :vault_not_found_error
-            Anthropic::Beta::BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError.new(**args)
+            Anthropic::Beta::BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError.new(type: type, **args)
           when :file_not_found_error
-            Anthropic::Beta::BetaManagedAgentsFileNotFoundDeploymentPausedReasonError.new(**args)
+            Anthropic::Beta::BetaManagedAgentsFileNotFoundDeploymentPausedReasonError.new(type: type, **args)
           when :session_resource_not_found_error
-            Anthropic::Beta::BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError.new(**args)
+            Anthropic::Beta::BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError.new(
+              type: type,
+              **args
+            )
           when :workspace_archived_error
-            Anthropic::Beta::BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError.new(**args)
+            Anthropic::Beta::BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError.new(
+              type: type,
+              **args
+            )
           when :organization_disabled_error
-            Anthropic::Beta::BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError.new(**args)
+            Anthropic::Beta::BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError.new(
+              type: type,
+              **args
+            )
           when :memory_store_archived_error
-            Anthropic::Beta::BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError.new(**args)
+            Anthropic::Beta::BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError.new(
+              type: type,
+              **args
+            )
           when :skill_not_found_error
-            Anthropic::Beta::BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError.new(**args)
+            Anthropic::Beta::BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError.new(type: type, **args)
           when :vault_archived_error
-            Anthropic::Beta::BetaManagedAgentsVaultArchivedDeploymentPausedReasonError.new(**args)
+            Anthropic::Beta::BetaManagedAgentsVaultArchivedDeploymentPausedReasonError.new(type: type, **args)
           when :unknown_error
-            Anthropic::Beta::BetaManagedAgentsUnknownDeploymentPausedReasonError.new(**args)
+            Anthropic::Beta::BetaManagedAgentsUnknownDeploymentPausedReasonError.new(type: type, **args)
           when :self_hosted_resources_unsupported_error
-            Anthropic::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError.new(**args)
+            Anthropic::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError.new(
+              type: type,
+              **args
+            )
           when :mcp_egress_blocked_error
-            Anthropic::Beta::BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError.new(**args)
+            Anthropic::Beta::BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError.new(
+              type: type,
+              **args
+            )
           else
             raise ArgumentError, "unknown type: #{type}"
           end

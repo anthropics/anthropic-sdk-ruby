@@ -140,13 +140,13 @@ module Anthropic
             def self.new(type:, **args)
               case type.to_sym
               when :text
-                Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock.new(**args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock.new(type: type, **args)
               when :image
-                Anthropic::Beta::Sessions::BetaManagedAgentsImageBlock.new(**args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsImageBlock.new(type: type, **args)
               when :document
-                Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock.new(**args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock.new(type: type, **args)
               when :search_result
-                Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultBlock.new(**args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultBlock.new(type: type, **args)
               else
                 raise ArgumentError, "unknown type: #{type}"
               end

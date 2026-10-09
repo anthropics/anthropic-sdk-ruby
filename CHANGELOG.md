@@ -2,6 +2,11 @@
 
 ## [1.78.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.78.0...v1.78.1) (2026-10-09)
 
+### Bug Fixes
+
+* **client:** keep the discriminator when a union's .new builds a variant
+
+
 ### Chores
 
 * **docs:** correct prefill, thinking, fallback and model descriptions
