@@ -6,7 +6,7 @@ class Anthropic::Test::Resources::Beta::AgentsTest < Anthropic::Test::ResourceTe
   def test_create_required_params
     response =
       @anthropic.beta.agents.create(
-        model: Anthropic::Beta::BetaManagedAgentsModel::CLAUDE_OPUS_5,
+        model: Anthropic::Beta::BetaManagedAgentsModel::CLAUDE_OPUS_5_5,
         name: "My First Agent"
       )
 

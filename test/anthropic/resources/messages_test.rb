@@ -8,7 +8,7 @@ class Anthropic::Test::Resources::MessagesTest < Anthropic::Test::ResourceTest
       @anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: Anthropic::Model::CLAUDE_OPUS_5
+        model: Anthropic::Model::CLAUDE_OPUS_5_5
       )
 
     assert_pattern do
@@ -36,7 +36,7 @@ class Anthropic::Test::Resources::MessagesTest < Anthropic::Test::ResourceTest
     response =
       @anthropic.messages.count_tokens(
         messages: [{content: "Hello, world", role: :user}],
-        model: Anthropic::Model::CLAUDE_OPUS_5
+        model: Anthropic::Model::CLAUDE_OPUS_5_5
       )
 
     assert_pattern do

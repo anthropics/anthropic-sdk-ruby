@@ -95,7 +95,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: Anthropic::Model::CLAUDE_OPUS_5
+        model: Anthropic::Model::CLAUDE_OPUS_5_5
       )
     end
 
@@ -112,7 +112,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: Anthropic::Model::CLAUDE_OPUS_5
+        model: Anthropic::Model::CLAUDE_OPUS_5_5
       )
     end
 
@@ -128,7 +128,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: Anthropic::Model::CLAUDE_OPUS_5,
+        model: Anthropic::Model::CLAUDE_OPUS_5_5,
         request_options: {max_retries: 3}
       )
     end
@@ -146,7 +146,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: Anthropic::Model::CLAUDE_OPUS_5,
+        model: Anthropic::Model::CLAUDE_OPUS_5_5,
         request_options: {max_retries: 4}
       )
     end
@@ -168,7 +168,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: Anthropic::Model::CLAUDE_OPUS_5
+        model: Anthropic::Model::CLAUDE_OPUS_5_5
       )
     end
 
@@ -193,7 +193,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: Anthropic::Model::CLAUDE_OPUS_5
+        model: Anthropic::Model::CLAUDE_OPUS_5_5
       )
     end
     Thread.current.thread_variable_set(:time_now, nil)
@@ -216,7 +216,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: Anthropic::Model::CLAUDE_OPUS_5
+        model: Anthropic::Model::CLAUDE_OPUS_5_5
       )
     end
 
@@ -241,7 +241,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: Anthropic::Model::CLAUDE_OPUS_5
+        model: Anthropic::Model::CLAUDE_OPUS_5_5
       )
     end
     Thread.current.thread_variable_set(:time_now, nil)
@@ -265,7 +265,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: Anthropic::Model::CLAUDE_OPUS_5
+        model: Anthropic::Model::CLAUDE_OPUS_5_5
       )
     end
 
@@ -283,7 +283,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: Anthropic::Model::CLAUDE_OPUS_5
+        model: Anthropic::Model::CLAUDE_OPUS_5_5
       )
     end
 
@@ -301,7 +301,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: Anthropic::Model::CLAUDE_OPUS_5
+        model: Anthropic::Model::CLAUDE_OPUS_5_5
       )
     end
 
@@ -319,7 +319,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: Anthropic::Model::CLAUDE_OPUS_5,
+        model: Anthropic::Model::CLAUDE_OPUS_5_5,
         request_options: {extra_headers: {"x-stainless-retry-count" => nil}}
       )
     end
@@ -338,7 +338,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: Anthropic::Model::CLAUDE_OPUS_5,
+        model: Anthropic::Model::CLAUDE_OPUS_5_5,
         request_options: {extra_headers: {"x-stainless-retry-count" => "42"}}
       )
     end
@@ -360,7 +360,7 @@ class AnthropicTest < Minitest::Test
         anthropic.messages.create(
           max_tokens: 1024,
           messages: [{content: "Hello, world", role: :user}],
-          model: Anthropic::Model::CLAUDE_OPUS_5
+          model: Anthropic::Model::CLAUDE_OPUS_5_5
         )
       end
       assert_equal(413, e.status)
@@ -435,7 +435,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: Anthropic::Model::CLAUDE_OPUS_5,
+        model: Anthropic::Model::CLAUDE_OPUS_5_5,
         request_options: {extra_headers: {}}
       )
     end
@@ -469,7 +469,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: Anthropic::Model::CLAUDE_OPUS_5,
+        model: Anthropic::Model::CLAUDE_OPUS_5_5,
         request_options: {extra_headers: {}}
       )
     end
@@ -498,7 +498,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: Anthropic::Model::CLAUDE_OPUS_5,
+        model: Anthropic::Model::CLAUDE_OPUS_5_5,
         request_options: {extra_headers: {"authorization" => "Bearer xyz"}}
       )
     end
@@ -530,7 +530,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: Anthropic::Model::CLAUDE_OPUS_5,
+        model: Anthropic::Model::CLAUDE_OPUS_5_5,
         request_options: {extra_headers: {"authorization" => "Bearer xyz"}}
       )
     end
@@ -567,7 +567,7 @@ class AnthropicTest < Minitest::Test
     anthropic.messages.create(
       max_tokens: 1024,
       messages: [{content: "Hello, world", role: :user}],
-      model: Anthropic::Model::CLAUDE_OPUS_5
+      model: Anthropic::Model::CLAUDE_OPUS_5_5
     )
 
     assert_requested(:any, /./) do |req|
