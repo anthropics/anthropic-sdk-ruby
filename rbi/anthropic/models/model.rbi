@@ -72,11 +72,9 @@ module Anthropic
       CLAUDE_SONNET_4_6 =
         T.let(:"claude-sonnet-4-6", Anthropic::Model::TaggedSymbol)
 
-      # Fastest model with near-frontier intelligence
       CLAUDE_HAIKU_4_5 =
         T.let(:"claude-haiku-4-5", Anthropic::Model::TaggedSymbol)
 
-      # Fastest model with near-frontier intelligence
       CLAUDE_HAIKU_4_5_20251001 =
         T.let(:"claude-haiku-4-5-20251001", Anthropic::Model::TaggedSymbol)
 

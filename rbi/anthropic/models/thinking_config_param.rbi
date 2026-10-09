@@ -2,15 +2,16 @@
 
 module Anthropic
   module Models
-    # Configuration for enabling Claude's extended thinking.
+    # Configuration for Claude's thinking.
     #
-    # When enabled, responses include `thinking` content blocks showing Claude's
-    # thinking process before the final answer. Requires a minimum budget of 1,024
-    # tokens and counts towards your `max_tokens` limit.
+    # With `{"type": "adaptive"}`, Claude decides when and how much to think. With
+    # `{"type": "enabled"}` (manual extended thinking), you set a `budget_tokens` of
+    # at least 1,024. Thinking tokens count toward your `max_tokens` limit.
     #
-    # See
-    # [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking)
-    # for details.
+    # Which `type` values are accepted, and what happens when you omit `thinking`,
+    # depend on the model. See
+    # [thinking](https://platform.claude.com/docs/en/build-with-claude/thinking#configuring-thinking)
+    # for each model's behavior.
     module ThinkingConfigParam
       extend Anthropic::Internal::Type::Union
 
@@ -85,8 +86,9 @@ module Anthropic
         budget_tokens: nil,
         # Controls how thinking content appears in the response. When set to `summarized`,
         # thinking is returned normally. When set to `omitted`, thinking content is
-        # redacted but a signature is returned for multi-turn continuity. Defaults to
-        # `summarized`.
+        # redacted but a signature is returned for multi-turn continuity. The default
+        # depends on the model; see
+        # [Controlling thinking display](https://platform.claude.com/docs/en/build-with-claude/thinking#controlling-thinking-display).
         display_: nil
       )
       end
