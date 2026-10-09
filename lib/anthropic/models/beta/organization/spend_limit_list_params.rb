@@ -22,10 +22,7 @@ module Anthropic
           optional :page, String, nil?: true
 
           # @!attribute scope_type
-          #   Return only limits with these scope types. A Claude Console organization has
-          #   `organization` and `workspace` limits; a Claude Enterprise organization has
-          #   `organization`, `seat_tier`, `rbac_group`, `organization_service` and `user`
-          #   limits. Omit for all.
+          #   Return only limits with these scope types. Omit for all.
           #
           #   @return [Array<Symbol, Anthropic::Models::Beta::Organization::SpendLimitListParams::ScopeType>, nil]
           optional :scope_type,
@@ -49,7 +46,7 @@ module Anthropic
           #
           #   @param page [String, nil] Opaque cursor from a previous response's `next_page` field.
           #
-          #   @param scope_type [Array<Symbol, Anthropic::Models::Beta::Organization::SpendLimitListParams::ScopeType>, nil] Return only limits with these scope types. A Claude Console organization has `or
+          #   @param scope_type [Array<Symbol, Anthropic::Models::Beta::Organization::SpendLimitListParams::ScopeType>, nil] Return only limits with these scope types. Omit for all.
           #
           #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `spend-limit-reads-2026-09-26` in t
           #

@@ -35,12 +35,10 @@ module Anthropic
 
           # List the organization's spend limits.
           #
-          # A Claude Console organization's limits come in an order that is stable across
-          # pages. A Claude Enterprise organization's are grouped by scope type, in the
-          # order `organization`, `seat_tier`, `rbac_group`, `organization_service`, `user`;
-          # within a type they come in a fixed order that is not creation order. Listing
-          # Claude Console limits is in an early access preview. To request access, contact
-          # your Anthropic account team.
+          # Limits are grouped by scope type, in the order `organization`, `seat_tier`,
+          # `rbac_group`, `organization_service`, `user`; within a type they come in a fixed
+          # order that is not creation order. Supported for Claude Enterprise organizations
+          # only, not for Claude Console organizations.
           sig do
             params(
               limit: Integer,
@@ -65,10 +63,7 @@ module Anthropic
             limit: nil,
             # Query param: Opaque cursor from a previous response's `next_page` field.
             page: nil,
-            # Query param: Return only limits with these scope types. A Claude Console
-            # organization has `organization` and `workspace` limits; a Claude Enterprise
-            # organization has `organization`, `seat_tier`, `rbac_group`,
-            # `organization_service` and `user` limits. Omit for all.
+            # Query param: Return only limits with these scope types. Omit for all.
             scope_type: nil,
             # Header param: This endpoint is in beta: requests must send
             # `spend-limit-reads-2026-09-26` in this header.

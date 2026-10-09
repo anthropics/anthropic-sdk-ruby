@@ -1,6 +1,11 @@
 # Changelog
 
-## [1.78.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.78.0...v1.78.1) (2026-10-09)
+## [1.79.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.78.0...v1.79.0) (2026-10-09)
+
+### Features
+
+* **api:** add organization_type_not_supported error to spend limit lists
+
 
 ### Bug Fixes
 
