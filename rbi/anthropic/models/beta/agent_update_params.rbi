@@ -75,19 +75,16 @@ module Anthropic
         # Multiagent orchestration configuration. Full replacement. Omit to preserve; send
         # null to clear.
         sig do
-          returns(T.nilable(Anthropic::Beta::BetaManagedAgentsMultiagentParams))
-        end
-        attr_reader :multiagent
-
-        sig do
-          params(
-            multiagent:
-              T.nilable(
-                Anthropic::Beta::BetaManagedAgentsMultiagentParams::OrHash
+          returns(
+            T.nilable(
+              T.any(
+                Anthropic::Beta::BetaManagedAgentsMultiagentCoordinatorParams,
+                Anthropic::Beta::BetaManagedAgentsMultiagent20261001Params
               )
-          ).void
+            )
+          )
         end
-        attr_writer :multiagent
+        attr_accessor :multiagent
 
         # Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
         sig { returns(T.nilable(String)) }
@@ -191,7 +188,10 @@ module Anthropic
               ),
             multiagent:
               T.nilable(
-                Anthropic::Beta::BetaManagedAgentsMultiagentParams::OrHash
+                T.any(
+                  Anthropic::Beta::BetaManagedAgentsMultiagentCoordinatorParams::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsMultiagent20261001Params::OrHash
+                )
               ),
             name: String,
             skills:
@@ -288,7 +288,12 @@ module Anthropic
                   String
                 ),
               multiagent:
-                T.nilable(Anthropic::Beta::BetaManagedAgentsMultiagentParams),
+                T.nilable(
+                  T.any(
+                    Anthropic::Beta::BetaManagedAgentsMultiagentCoordinatorParams,
+                    Anthropic::Beta::BetaManagedAgentsMultiagent20261001Params
+                  )
+                ),
               name: String,
               skills:
                 T.nilable(

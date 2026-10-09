@@ -25,7 +25,10 @@ module Anthropic
             metadata: T::Hash[Symbol, String],
             multiagent:
               T.nilable(
-                Anthropic::Beta::BetaManagedAgentsMultiagentParams::OrHash
+                T.any(
+                  Anthropic::Beta::BetaManagedAgentsMultiagentCoordinatorParams::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsMultiagent20261001Params::OrHash
+                )
               ),
             skills:
               T::Array[
@@ -137,7 +140,10 @@ module Anthropic
               ),
             multiagent:
               T.nilable(
-                Anthropic::Beta::BetaManagedAgentsMultiagentParams::OrHash
+                T.any(
+                  Anthropic::Beta::BetaManagedAgentsMultiagentCoordinatorParams::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsMultiagent20261001Params::OrHash
+                )
               ),
             name: String,
             skills:

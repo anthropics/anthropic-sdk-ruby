@@ -1,0 +1,66 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_workflow_run_error =
+          Anthropic::Beta::Sessions::BetaManagedAgentsTimeoutWorkflowRunError
+          | Anthropic::Beta::Sessions::BetaManagedAgentsProgramWorkflowRunError
+          | Anthropic::Beta::Sessions::BetaManagedAgentsUnknownWorkflowRunError
+          | Anthropic::Beta::Sessions::BetaManagedAgentsThreadLimitWorkflowRunError
+          | Anthropic::Beta::Sessions::BetaManagedAgentsMaxWorkflowRunsWorkflowRunError
+
+        module BetaManagedAgentsWorkflowRunError
+          extend Anthropic::Internal::Type::Union
+
+          type type_ =
+            :timeout_error
+            | :program_error
+            | :unknown_error
+            | :thread_limit_error
+            | :max_workflow_runs_error
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            TIMEOUT_ERROR: :timeout_error
+            PROGRAM_ERROR: :program_error
+            UNKNOWN_ERROR: :unknown_error
+            THREAD_LIMIT_ERROR: :thread_limit_error
+            MAX_WORKFLOW_RUNS_ERROR: :max_workflow_runs_error
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsWorkflowRunError::type_]
+          end
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_error]
+
+          def self.new:
+            (
+              type: :timeout_error | "timeout_error",
+              message: String
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsTimeoutWorkflowRunError
+            | (
+              type: :program_error | "program_error",
+              message: String
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsProgramWorkflowRunError
+            | (
+              type: :unknown_error | "unknown_error",
+              message: String
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsUnknownWorkflowRunError
+            | (
+              type: :thread_limit_error | "thread_limit_error",
+              message: String
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsThreadLimitWorkflowRunError
+            | (
+              type: :max_workflow_runs_error | "max_workflow_runs_error",
+              message: String
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsMaxWorkflowRunsWorkflowRunError
+            | (
+              type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsWorkflowRunError::type_
+              | String,
+              message: String
+            ) -> Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_error
+        end
+      end
+    end
+  end
+end

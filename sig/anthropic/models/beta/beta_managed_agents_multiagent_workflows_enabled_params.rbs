@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsMultiagentWorkflowsEnabledParams = Beta::BetaManagedAgentsMultiagentWorkflowsEnabledParams
+
+    module Beta
+      type beta_managed_agents_multiagent_workflows_enabled_params =
+        {
+          type: :enabled,
+          inline_agents: Anthropic::Models::Beta::beta_managed_agents_multiagent_inline_agents_params?,
+          predefined_agents: ::Array[Anthropic::Models::Beta::beta_managed_agents_multiagent_predefined_agent_params]?
+        }
+
+      class BetaManagedAgentsMultiagentWorkflowsEnabledParams < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :enabled
+
+        attr_accessor inline_agents: Anthropic::Models::Beta::beta_managed_agents_multiagent_inline_agents_params?
+
+        attr_accessor predefined_agents: ::Array[Anthropic::Models::Beta::beta_managed_agents_multiagent_predefined_agent_params]?
+
+        def initialize: (
+          ?inline_agents: Anthropic::Models::Beta::beta_managed_agents_multiagent_inline_agents_params?,
+          ?predefined_agents: ::Array[Anthropic::Models::Beta::beta_managed_agents_multiagent_predefined_agent_params]?,
+          ?type: :enabled
+        ) -> void
+
+        def to_hash: -> {
+          type: :enabled,
+          inline_agents: Anthropic::Models::Beta::beta_managed_agents_multiagent_inline_agents_params?,
+          predefined_agents: ::Array[Anthropic::Models::Beta::beta_managed_agents_multiagent_predefined_agent_params]?
+        }
+      end
+    end
+  end
+end

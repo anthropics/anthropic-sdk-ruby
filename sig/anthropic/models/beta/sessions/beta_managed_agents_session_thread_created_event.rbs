@@ -8,7 +8,8 @@ module Anthropic
             agent_name: String,
             processed_at: Time,
             session_thread_id: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent::type_
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent::type_,
+            workflow_run_id: String?
           }
 
         class BetaManagedAgentsSessionThreadCreatedEvent < Anthropic::Internal::Type::BaseModel
@@ -22,12 +23,15 @@ module Anthropic
 
           attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent::type_
 
+          attr_accessor workflow_run_id: String?
+
           def initialize: (
             id: String,
             agent_name: String,
             processed_at: Time,
             session_thread_id: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent::type_
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent::type_,
+            workflow_run_id: String?
           ) -> void
 
           def to_hash: -> {
@@ -35,7 +39,8 @@ module Anthropic
             agent_name: String,
             processed_at: Time,
             session_thread_id: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent::type_
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent::type_,
+            workflow_run_id: String?
           }
 
           type type_ = :"session.thread_created"

@@ -14,7 +14,8 @@ module Anthropic
             status: Anthropic::Models::Beta::Sessions::beta_managed_agents_session_thread_status,
             type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread::type_,
             updated_at: Time,
-            usage: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadUsage?
+            usage: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadUsage?,
+            workflow_run_id: String?
           }
 
         class BetaManagedAgentsSessionThread < Anthropic::Internal::Type::BaseModel
@@ -40,6 +41,8 @@ module Anthropic
 
           attr_accessor usage: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadUsage?
 
+          attr_accessor workflow_run_id: String?
+
           def initialize: (
             id: String,
             agent: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread::agent,
@@ -51,7 +54,8 @@ module Anthropic
             status: Anthropic::Models::Beta::Sessions::beta_managed_agents_session_thread_status,
             type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread::type_,
             updated_at: Time,
-            usage: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadUsage?
+            usage: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadUsage?,
+            workflow_run_id: String?
           ) -> void
 
           def to_hash: -> {
@@ -65,23 +69,26 @@ module Anthropic
             status: Anthropic::Models::Beta::Sessions::beta_managed_agents_session_thread_status,
             type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread::type_,
             updated_at: Time,
-            usage: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadUsage?
+            usage: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadUsage?,
+            workflow_run_id: String?
           }
 
           type agent =
             Anthropic::Beta::BetaManagedAgentsSessionThreadAgent
             | Anthropic::Beta::BetaManagedAgentsAdvisor
+            | Anthropic::Beta::Sessions::BetaManagedAgentsInlineAgent
 
           module Agent
             extend Anthropic::Internal::Type::Union
 
-            type type_ = :agent | :advisor
+            type type_ = :agent | :advisor | :inline
 
             module Type
               extend Anthropic::Internal::Type::Enum
 
               AGENT: :agent
               ADVISOR: :advisor
+              INLINE: :inline
 
               def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread::Agent::type_]
             end
@@ -106,6 +113,16 @@ module Anthropic
                 model: String
               ) -> Anthropic::Beta::BetaManagedAgentsAdvisor
               | (
+                type: :inline | "inline",
+                description: String?,
+                mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition],
+                model: Anthropic::Beta::BetaManagedAgentsModelConfig,
+                name: String,
+                skills: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsInlineAgent::skill],
+                system_: String?,
+                tools: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsInlineAgent::tool]
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsInlineAgent
+              | (
                 type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread::Agent::type_
                 | String,
                 model: Anthropic::Beta::BetaManagedAgentsModelConfig | String,
@@ -113,9 +130,11 @@ module Anthropic
                 ?description: String?,
                 ?mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition],
                 ?name: String,
-                ?skills: ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent::skill],
+                ?skills: ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent::skill]
+                | ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsInlineAgent::skill],
                 ?system_: String?,
-                ?tools: ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent::tool],
+                ?tools: ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent::tool]
+                | ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsInlineAgent::tool],
                 ?version: Integer
               ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread::agent
           end

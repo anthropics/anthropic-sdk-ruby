@@ -187,6 +187,41 @@ module Anthropic
               :"session.usage",
               Anthropic::Beta::Sessions::BetaManagedAgentsSessionEventType::TaggedSymbol
             )
+          WORKFLOW_RUN_CREATED =
+            T.let(
+              :"workflow_run.created",
+              Anthropic::Beta::Sessions::BetaManagedAgentsSessionEventType::TaggedSymbol
+            )
+          WORKFLOW_RUN_STATUS_RUNNING =
+            T.let(
+              :"workflow_run.status_running",
+              Anthropic::Beta::Sessions::BetaManagedAgentsSessionEventType::TaggedSymbol
+            )
+          WORKFLOW_RUN_STATUS_IDLE =
+            T.let(
+              :"workflow_run.status_idle",
+              Anthropic::Beta::Sessions::BetaManagedAgentsSessionEventType::TaggedSymbol
+            )
+          WORKFLOW_RUN_STATUS_ENDED =
+            T.let(
+              :"workflow_run.status_ended",
+              Anthropic::Beta::Sessions::BetaManagedAgentsSessionEventType::TaggedSymbol
+            )
+          WORKFLOW_RUN_ERROR =
+            T.let(
+              :"workflow_run.error",
+              Anthropic::Beta::Sessions::BetaManagedAgentsSessionEventType::TaggedSymbol
+            )
+          WORKFLOW_RUN_PHASE_STARTED =
+            T.let(
+              :"workflow_run.phase_started",
+              Anthropic::Beta::Sessions::BetaManagedAgentsSessionEventType::TaggedSymbol
+            )
+          WORKFLOW_RUN_PHASE_ENDED =
+            T.let(
+              :"workflow_run.phase_ended",
+              Anthropic::Beta::Sessions::BetaManagedAgentsSessionEventType::TaggedSymbol
+            )
 
           sig do
             override.returns(

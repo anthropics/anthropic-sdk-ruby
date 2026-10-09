@@ -30,12 +30,8 @@ module Anthropic
         #   Resolved multiagent orchestration configuration. Null when the agent is
         #   single-threaded.
         #
-        #   @return [Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator, nil]
-        required :multiagent,
-                 -> {
-                   Anthropic::Beta::BetaManagedAgentsSessionMultiagentCoordinator
-                 },
-                 nil?: true
+        #   @return [Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator, Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagent20261001, nil]
+        required :multiagent, union: -> { Anthropic::Beta::BetaManagedAgentsSessionMultiagent }, nil?: true
 
         # @!attribute name
         #
@@ -84,7 +80,7 @@ module Anthropic
         #
         #   @param model [Anthropic::Models::Beta::BetaManagedAgentsModelConfig] Model identifier and configuration.
         #
-        #   @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator, nil] Resolved multiagent orchestration configuration. Null when the agent is single-t
+        #   @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator, Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagent20261001, nil] Resolved multiagent orchestration configuration. Null when the agent is single-t
         #
         #   @param name [String]
         #

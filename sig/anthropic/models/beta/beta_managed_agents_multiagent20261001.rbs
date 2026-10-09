@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsMultiagent20261001 = Beta::BetaManagedAgentsMultiagent20261001
+
+    module Beta
+      type beta_managed_agents_multiagent20261001 =
+        {
+          advisor: Anthropic::Models::Beta::beta_managed_agents_multiagent_advisor,
+          subagents: Anthropic::Models::Beta::beta_managed_agents_multiagent_subagents,
+          type: :multiagent_20261001,
+          workflows: Anthropic::Models::Beta::beta_managed_agents_multiagent_workflows
+        }
+
+      class BetaManagedAgentsMultiagent20261001 < Anthropic::Internal::Type::BaseModel
+        attr_accessor advisor: Anthropic::Models::Beta::beta_managed_agents_multiagent_advisor
+
+        attr_accessor subagents: Anthropic::Models::Beta::beta_managed_agents_multiagent_subagents
+
+        attr_accessor type: :multiagent_20261001
+
+        attr_accessor workflows: Anthropic::Models::Beta::beta_managed_agents_multiagent_workflows
+
+        def initialize: (
+          advisor: Anthropic::Models::Beta::beta_managed_agents_multiagent_advisor,
+          subagents: Anthropic::Models::Beta::beta_managed_agents_multiagent_subagents,
+          workflows: Anthropic::Models::Beta::beta_managed_agents_multiagent_workflows,
+          ?type: :multiagent_20261001
+        ) -> void
+
+        def to_hash: -> {
+          advisor: Anthropic::Models::Beta::beta_managed_agents_multiagent_advisor,
+          subagents: Anthropic::Models::Beta::beta_managed_agents_multiagent_subagents,
+          type: :multiagent_20261001,
+          workflows: Anthropic::Models::Beta::beta_managed_agents_multiagent_workflows
+        }
+      end
+    end
+  end
+end

@@ -73,6 +73,18 @@ module Anthropic
           #   @return [String, nil]
           optional :attributed_list_price, String, nil?: true
 
+          # @!attribute chat_cowork_unified_metrics
+          #   Skill use recorded while members had Chat and Cowork unified (Cowork's features
+          #   inside claude.ai chat) turned on, split into chat conversations and Cowork
+          #   sessions. A count is null in date-range mode where it cannot be computed.
+          #   Omitted from the response on deployments that do not offer Chat and Cowork
+          #   unified.
+          #
+          #   @return [Anthropic::Models::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics, nil]
+          optional :chat_cowork_unified_metrics,
+                   -> { Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics },
+                   nil?: true
+
           # @!attribute currency
           #   Currency for this row's monetary fields (`estimated_overage_spend` and
           #   `attributed_list_price`), as an uppercase ISO-4217 code. Always "USD" when
@@ -140,13 +152,15 @@ module Anthropic
 
           # @!attribute product
           #   Product that produced this row's activity: one of `chat`, `claude_code`,
-          #   `cowork`, or `office_agent` (the canonical Cost & Usage product naming; an
-          #   `office_agent` row's per-surface breakdown is in its `office_metrics`). On
-          #   `/plugins` only `cowork` and `claude_code` occur (the only surfaces with plugin
-          #   attribution); on `/artifacts` only `chat`, `claude_code`, and `cowork` occur
-          #   (the surfaces that create artifacts); `/apps/chat/projects` does not support the
-          #   product dimension (a `product` entry in `group_by[]` or `filter[]` there is
-          #   rejected). Present only when the request grouped by `product`.
+          #   `cowork`, `office_agent`, or `chat_cowork_unified` (Chat and Cowork unified).
+          #   These are the canonical Cost & Usage product names; an `office_agent` row's
+          #   per-surface breakdown is in its `office_metrics`. On `/plugins` only `cowork`,
+          #   `claude_code` and `chat_cowork_unified` occur (the only surfaces with plugin
+          #   attribution); on `/artifacts` only `chat`, `claude_code`, `cowork` and
+          #   `chat_cowork_unified` occur (the surfaces that create artifacts);
+          #   `/apps/chat/projects` does not support the product dimension (a `product` entry
+          #   in `group_by[]` or `filter[]` there is rejected). Present only when the request
+          #   grouped by `product`.
           #
           #   @return [String, nil]
           optional :product, String, nil?: true
@@ -203,7 +217,7 @@ module Anthropic
           #   @return [String, nil]
           optional :user_id, String, nil?: true
 
-          # @!method initialize(chat_metrics:, claude_code_metrics:, cowork_metrics:, distinct_user_count:, office_metrics:, skill_name:, attributed_list_price: nil, currency: nil, enable_count: nil, estimated_overage_spend: nil, invocation_count: nil, product: nil, rbac_group_id: nil, rbac_group_name: nil, share_status: nil, skill_display_name: nil, user_id: nil)
+          # @!method initialize(chat_metrics:, claude_code_metrics:, cowork_metrics:, distinct_user_count:, office_metrics:, skill_name:, attributed_list_price: nil, chat_cowork_unified_metrics: nil, currency: nil, enable_count: nil, estimated_overage_spend: nil, invocation_count: nil, product: nil, rbac_group_id: nil, rbac_group_name: nil, share_status: nil, skill_display_name: nil, user_id: nil)
           #   Per-skill activity data for a given day.
           #
           #   Some parameter documentations has been truncated, see
@@ -224,6 +238,8 @@ module Anthropic
           #
           #   @param attributed_list_price [String, nil] List-price (rate-card) value of the member requests attributed to this skill, as
           #
+          #   @param chat_cowork_unified_metrics [Anthropic::Models::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics, nil] Skill use recorded while members had Chat and Cowork unified (Cowork's features
+          #
           #   @param currency [String, nil] Currency for this row's monetary fields (`estimated_overage_spend` and `attribut
           #
           #   @param enable_count [Integer, nil] Distinct accounts that enabled this skill on the requested day (claude.ai only —
@@ -243,6 +259,39 @@ module Anthropic
           #   @param skill_display_name [String, nil] Human-readable display name for rows whose `skill_name` is an opaque skill id (u
           #
           #   @param user_id [String, nil] Tagged user identifier (e.g. `user_...`). Present only when the request grouped
+
+          # @see Anthropic::Models::Beta::Organization::BetaAnalyticsSkillActivity#chat_cowork_unified_metrics
+          class ChatCoworkUnifiedMetrics < Anthropic::Internal::Type::BaseModel
+            # @!attribute chat
+            #   A skill's use in chat conversations recorded while members had Chat and Cowork
+            #   unified turned on.
+            #
+            #   @return [Anthropic::Models::Beta::Organization::BetaAnalyticsSkillChatCoworkUnifiedChatMetrics]
+            required :chat, -> { Anthropic::Beta::Organization::BetaAnalyticsSkillChatCoworkUnifiedChatMetrics }
+
+            # @!attribute sessions
+            #   A skill's use in Cowork sessions recorded while members had Chat and Cowork
+            #   unified turned on.
+            #
+            #   @return [Anthropic::Models::Beta::Organization::BetaAnalyticsSkillChatCoworkUnifiedSessionsMetrics]
+            required :sessions,
+                     -> { Anthropic::Beta::Organization::BetaAnalyticsSkillChatCoworkUnifiedSessionsMetrics }
+
+            # @!method initialize(chat:, sessions:)
+            #   Skill use recorded while members had Chat and Cowork unified (Cowork's features
+            #   inside claude.ai chat) turned on, split into chat conversations and Cowork
+            #   sessions. A count is null in date-range mode where it cannot be computed.
+            #   Omitted from the response on deployments that do not offer Chat and Cowork
+            #   unified.
+            #
+            #   Some parameter documentations has been truncated, see
+            #   {Anthropic::Models::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics}
+            #   for more details.
+            #
+            #   @param chat [Anthropic::Models::Beta::Organization::BetaAnalyticsSkillChatCoworkUnifiedChatMetrics] A skill's use in chat conversations recorded while members had
+            #
+            #   @param sessions [Anthropic::Models::Beta::Organization::BetaAnalyticsSkillChatCoworkUnifiedSessionsMetrics] A skill's use in Cowork sessions recorded while members had Chat
+          end
 
           # Skill share status (claude.ai only): one of `private`, `organization`, or
           # `public`. Null for skills used only in Claude Code or Office (no per-skill

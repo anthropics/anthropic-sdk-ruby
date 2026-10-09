@@ -1,0 +1,23 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_max_workflow_runs_workflow_run_error =
+          { message: String, type: :max_workflow_runs_error }
+
+        class BetaManagedAgentsMaxWorkflowRunsWorkflowRunError < Anthropic::Internal::Type::BaseModel
+          attr_accessor message: String
+
+          attr_accessor type: :max_workflow_runs_error
+
+          def initialize: (
+            message: String,
+            ?type: :max_workflow_runs_error
+          ) -> void
+
+          def to_hash: -> { message: String, type: :max_workflow_runs_error }
+        end
+      end
+    end
+  end
+end

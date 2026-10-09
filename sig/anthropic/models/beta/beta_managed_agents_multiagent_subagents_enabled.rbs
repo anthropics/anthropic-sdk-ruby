@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsMultiagentSubagentsEnabled = Beta::BetaManagedAgentsMultiagentSubagentsEnabled
+
+    module Beta
+      type beta_managed_agents_multiagent_subagents_enabled =
+        {
+          inline_agents: Anthropic::Models::Beta::beta_managed_agents_multiagent_inline_agents,
+          predefined_agents: ::Array[Anthropic::Beta::BetaManagedAgentsAgentReference],
+          type: :enabled
+        }
+
+      class BetaManagedAgentsMultiagentSubagentsEnabled < Anthropic::Internal::Type::BaseModel
+        attr_accessor inline_agents: Anthropic::Models::Beta::beta_managed_agents_multiagent_inline_agents
+
+        attr_accessor predefined_agents: ::Array[Anthropic::Beta::BetaManagedAgentsAgentReference]
+
+        attr_accessor type: :enabled
+
+        def initialize: (
+          inline_agents: Anthropic::Models::Beta::beta_managed_agents_multiagent_inline_agents,
+          predefined_agents: ::Array[Anthropic::Beta::BetaManagedAgentsAgentReference],
+          ?type: :enabled
+        ) -> void
+
+        def to_hash: -> {
+          inline_agents: Anthropic::Models::Beta::beta_managed_agents_multiagent_inline_agents,
+          predefined_agents: ::Array[Anthropic::Beta::BetaManagedAgentsAgentReference],
+          type: :enabled
+        }
+      end
+    end
+  end
+end

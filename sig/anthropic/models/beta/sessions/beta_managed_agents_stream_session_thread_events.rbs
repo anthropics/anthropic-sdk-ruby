@@ -40,6 +40,13 @@ module Anthropic
           | Anthropic::Beta::BetaManagedAgentsDeltaEvent
           | Anthropic::Beta::BetaManagedAgentsSystemMessageEvent
           | Anthropic::Beta::BetaManagedAgentsSessionUsageEvent
+          | Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunCreatedEvent
+          | Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunStatusEndedEvent
+          | Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunPhaseStartedEvent
+          | Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunPhaseEndedEvent
+          | Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunStatusRunningEvent
+          | Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunStatusIdleEvent
+          | Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunErrorEvent
 
         module BetaManagedAgentsStreamSessionThreadEvents
           extend Anthropic::Internal::Type::Union
@@ -82,6 +89,13 @@ module Anthropic
             | :event_delta
             | :"system.message"
             | :"session.usage"
+            | :"workflow_run.created"
+            | :"workflow_run.status_ended"
+            | :"workflow_run.phase_started"
+            | :"workflow_run.phase_ended"
+            | :"workflow_run.status_running"
+            | :"workflow_run.status_idle"
+            | :"workflow_run.error"
 
           module Type
             extend Anthropic::Internal::Type::Enum
@@ -123,6 +137,13 @@ module Anthropic
             EVENT_DELTA: :event_delta
             SYSTEM_MESSAGE: :"system.message"
             SESSION_USAGE: :"session.usage"
+            WORKFLOW_RUN_CREATED: :"workflow_run.created"
+            WORKFLOW_RUN_STATUS_ENDED: :"workflow_run.status_ended"
+            WORKFLOW_RUN_PHASE_STARTED: :"workflow_run.phase_started"
+            WORKFLOW_RUN_PHASE_ENDED: :"workflow_run.phase_ended"
+            WORKFLOW_RUN_STATUS_RUNNING: :"workflow_run.status_running"
+            WORKFLOW_RUN_STATUS_IDLE: :"workflow_run.status_idle"
+            WORKFLOW_RUN_ERROR: :"workflow_run.error"
 
             def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsStreamSessionThreadEvents::type_]
           end
@@ -273,7 +294,8 @@ module Anthropic
               id: String,
               agent_name: String,
               processed_at: Time,
-              session_thread_id: String
+              session_thread_id: String,
+              workflow_run_id: String?
             ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent
             | (
               type: :"span.outcome_evaluation_start"
@@ -405,6 +427,58 @@ module Anthropic
               ?budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?
             ) -> Anthropic::Beta::BetaManagedAgentsSessionUsageEvent
             | (
+              type: :"workflow_run.created" | "workflow_run.created",
+              id: String,
+              description: String?,
+              name: String,
+              phases: ::Array[Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunPhase],
+              processed_at: Time,
+              workflow_run_id: String
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunCreatedEvent
+            | (
+              type: :"workflow_run.status_ended" | "workflow_run.status_ended",
+              id: String,
+              processed_at: Time,
+              result: Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_result,
+              workflow_run_id: String
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunStatusEndedEvent
+            | (
+              type: :"workflow_run.phase_started"
+              | "workflow_run.phase_started",
+              id: String,
+              processed_at: Time,
+              workflow_run_id: String,
+              workflow_run_phase_id: String
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunPhaseStartedEvent
+            | (
+              type: :"workflow_run.phase_ended" | "workflow_run.phase_ended",
+              id: String,
+              phase_started_id: String,
+              processed_at: Time,
+              workflow_run_id: String,
+              workflow_run_phase_id: String
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunPhaseEndedEvent
+            | (
+              type: :"workflow_run.status_running"
+              | "workflow_run.status_running",
+              id: String,
+              processed_at: Time,
+              workflow_run_id: String
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunStatusRunningEvent
+            | (
+              type: :"workflow_run.status_idle" | "workflow_run.status_idle",
+              id: String,
+              processed_at: Time,
+              workflow_run_id: String
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunStatusIdleEvent
+            | (
+              type: :"workflow_run.error" | "workflow_run.error",
+              id: String,
+              error: Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_error,
+              processed_at: Time,
+              workflow_run_id: String?
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunErrorEvent
+            | (
               type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsStreamSessionThreadEvents::type_
               | String,
               ?id: String,
@@ -420,7 +494,8 @@ module Anthropic
               ?processed_at: Time? | Time,
               ?session_thread_id: String? | String,
               ?result: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::result
-              | String,
+              | String
+              | Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_result,
               ?tool_use_id: String,
               ?deny_message: String?,
               ?custom_tool_use_id: String,
@@ -435,11 +510,13 @@ module Anthropic
               ?from_agent_name: String?,
               ?to_session_thread_id: String,
               ?to_agent_name: String?,
-              ?error: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::error,
+              ?error: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::error
+              | Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_error,
               ?stop_details: Anthropic::Beta::Sessions::BetaManagedAgentsSessionRefusalStopDetails?,
               ?stop_reason: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent::stop_reason
               | Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::stop_reason,
               ?agent_name: String,
+              ?workflow_run_id: String? | String,
               ?iteration: Integer,
               ?outcome_id: String,
               ?explanation: String,
@@ -448,7 +525,7 @@ module Anthropic
               | Anthropic::Beta::Sessions::BetaManagedAgentsSessionUsageSnapshot,
               ?model_request_start_id: String,
               ?model_usage: Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelUsage,
-              ?description: String,
+              ?description: String | String?,
               ?max_iterations: Integer?,
               ?rubric: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::rubric,
               ?agent: Anthropic::Beta::BetaManagedAgentsSessionAgent?,
@@ -457,7 +534,10 @@ module Anthropic
               ?title: String?,
               ?event: Anthropic::Models::Beta::beta_managed_agents_start_event_preview,
               ?delta: Anthropic::Beta::BetaManagedAgentsDeltaContent,
-              ?event_id: String
+              ?event_id: String,
+              ?phases: ::Array[Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunPhase],
+              ?workflow_run_phase_id: String,
+              ?phase_started_id: String
             ) -> Anthropic::Models::Beta::Sessions::beta_managed_agents_stream_session_thread_events
         end
       end

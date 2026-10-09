@@ -45,7 +45,14 @@ module Anthropic
                 Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRescheduledEvent,
                 Anthropic::Beta::BetaManagedAgentsSessionUpdatedEvent,
                 Anthropic::Beta::BetaManagedAgentsSystemMessageEvent,
-                Anthropic::Beta::BetaManagedAgentsSessionUsageEvent
+                Anthropic::Beta::BetaManagedAgentsSessionUsageEvent,
+                Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunCreatedEvent,
+                Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunStatusEndedEvent,
+                Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunPhaseStartedEvent,
+                Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunPhaseEndedEvent,
+                Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunStatusRunningEvent,
+                Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunStatusIdleEvent,
+                Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunErrorEvent
               )
             end
 
@@ -236,6 +243,41 @@ module Anthropic
                 :"session.usage",
                 Anthropic::Beta::Sessions::BetaManagedAgentsSessionEvent::Type::TaggedSymbol
               )
+            WORKFLOW_RUN_CREATED =
+              T.let(
+                :"workflow_run.created",
+                Anthropic::Beta::Sessions::BetaManagedAgentsSessionEvent::Type::TaggedSymbol
+              )
+            WORKFLOW_RUN_STATUS_ENDED =
+              T.let(
+                :"workflow_run.status_ended",
+                Anthropic::Beta::Sessions::BetaManagedAgentsSessionEvent::Type::TaggedSymbol
+              )
+            WORKFLOW_RUN_PHASE_STARTED =
+              T.let(
+                :"workflow_run.phase_started",
+                Anthropic::Beta::Sessions::BetaManagedAgentsSessionEvent::Type::TaggedSymbol
+              )
+            WORKFLOW_RUN_PHASE_ENDED =
+              T.let(
+                :"workflow_run.phase_ended",
+                Anthropic::Beta::Sessions::BetaManagedAgentsSessionEvent::Type::TaggedSymbol
+              )
+            WORKFLOW_RUN_STATUS_RUNNING =
+              T.let(
+                :"workflow_run.status_running",
+                Anthropic::Beta::Sessions::BetaManagedAgentsSessionEvent::Type::TaggedSymbol
+              )
+            WORKFLOW_RUN_STATUS_IDLE =
+              T.let(
+                :"workflow_run.status_idle",
+                Anthropic::Beta::Sessions::BetaManagedAgentsSessionEvent::Type::TaggedSymbol
+              )
+            WORKFLOW_RUN_ERROR =
+              T.let(
+                :"workflow_run.error",
+                Anthropic::Beta::Sessions::BetaManagedAgentsSessionEvent::Type::TaggedSymbol
+              )
 
             sig do
               override.returns(
@@ -298,7 +340,12 @@ module Anthropic
               result:
                 T.any(
                   Anthropic::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::Result::OrSymbol,
-                  String
+                  String,
+                  T.any(
+                    Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResultCompleted::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResultError::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResultStopped::OrHash
+                  )
                 ),
               tool_use_id: String,
               deny_message: T.nilable(String),
@@ -322,19 +369,28 @@ module Anthropic
               to_agent_name: T.nilable(String),
               error:
                 T.any(
-                  Anthropic::Beta::Sessions::BetaManagedAgentsUnknownError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsModelOverloadedError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsModelRateLimitedError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsBillingError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCloneError::OrHash
+                  T.any(
+                    Anthropic::Beta::Sessions::BetaManagedAgentsUnknownError::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsModelOverloadedError::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsModelRateLimitedError::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsBillingError::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutError::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCloneError::OrHash
+                  ),
+                  T.any(
+                    Anthropic::Beta::Sessions::BetaManagedAgentsTimeoutWorkflowRunError::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsProgramWorkflowRunError::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsUnknownWorkflowRunError::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsThreadLimitWorkflowRunError::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsMaxWorkflowRunsWorkflowRunError::OrHash
+                  )
                 ),
               stop_details:
                 T.nilable(
@@ -349,6 +405,7 @@ module Anthropic
                   Anthropic::Beta::Sessions::BetaManagedAgentsSessionRefusal::OrHash
                 ),
               agent_name: String,
+              workflow_run_id: T.any(T.nilable(String), String),
               iteration: Integer,
               outcome_id: String,
               explanation: String,
@@ -361,7 +418,7 @@ module Anthropic
               model_request_start_id: String,
               model_usage:
                 Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelUsage::OrHash,
-              description: String,
+              description: T.any(String, T.nilable(String)),
               max_iterations: T.nilable(Integer),
               rubric:
                 T.any(
@@ -377,7 +434,13 @@ module Anthropic
                   Anthropic::Beta::BetaManagedAgentsBudgetLimit::OrHash
                 ),
               metadata: T::Hash[Symbol, String],
-              title: T.nilable(String)
+              title: T.nilable(String),
+              phases:
+                T::Array[
+                  Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunPhase::OrHash
+                ],
+              workflow_run_phase_id: String,
+              phase_started_id: String
             ).returns(
               Anthropic::Beta::Sessions::BetaManagedAgentsSessionEvent::Variants
             )
@@ -439,6 +502,7 @@ module Anthropic
             # Name of the callable agent this message was sent to. Absent when sent to the
             # primary agent.
             to_agent_name: nil,
+            # Why the run did not finish, or was not created.
             error: nil,
             # Structured information about why the session stopped. `null` when there is
             # nothing more to report.
@@ -446,6 +510,9 @@ module Anthropic
             stop_reason: nil,
             # Name of the callable agent the thread runs.
             agent_name: nil,
+            # Identifier of the workflow run that created the thread, or `null` for any other
+            # thread.
+            workflow_run_id: nil,
             # 0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation
             # after the first revision; etc.
             iteration: nil,
@@ -482,7 +549,14 @@ module Anthropic
             # non-empty metadata; absent when metadata was unchanged or cleared to empty.
             metadata: nil,
             # The session's new title. Present only when the update changed it.
-            title: nil
+            title: nil,
+            # The phases that the run's plan declares, in the plan's order. Can be empty.
+            phases: nil,
+            # Identifier of the phase, as in `phases` on the run's `workflow_run.created`
+            # event.
+            workflow_run_phase_id: nil,
+            # Identifier of the `workflow_run.phase_started` event that opened the phase.
+            phase_started_id: nil
           )
           end
         end

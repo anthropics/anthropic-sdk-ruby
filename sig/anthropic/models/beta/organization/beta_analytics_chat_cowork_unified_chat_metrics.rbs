@@ -1,0 +1,79 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_chat_cowork_unified_chat_metrics =
+          {
+            connectors_used_count: Integer,
+            distinct_artifacts_created_count: Integer,
+            distinct_connectors_used_count: Integer?,
+            distinct_conversation_count: Integer?,
+            distinct_files_uploaded_count: Integer?,
+            distinct_projects_created_count: Integer,
+            distinct_projects_used_count: Integer?,
+            distinct_shared_artifacts_viewed_count: Integer?,
+            distinct_skills_used_count: Integer?,
+            message_count: Integer,
+            shared_conversations_viewed_count: Integer,
+            thinking_message_count: Integer
+          }
+
+        class BetaAnalyticsChatCoworkUnifiedChatMetrics < Anthropic::Internal::Type::BaseModel
+          attr_accessor connectors_used_count: Integer
+
+          attr_accessor distinct_artifacts_created_count: Integer
+
+          attr_accessor distinct_connectors_used_count: Integer?
+
+          attr_accessor distinct_conversation_count: Integer?
+
+          attr_accessor distinct_files_uploaded_count: Integer?
+
+          attr_accessor distinct_projects_created_count: Integer
+
+          attr_accessor distinct_projects_used_count: Integer?
+
+          attr_accessor distinct_shared_artifacts_viewed_count: Integer?
+
+          attr_accessor distinct_skills_used_count: Integer?
+
+          attr_accessor message_count: Integer
+
+          attr_accessor shared_conversations_viewed_count: Integer
+
+          attr_accessor thinking_message_count: Integer
+
+          def initialize: (
+            connectors_used_count: Integer,
+            distinct_artifacts_created_count: Integer,
+            distinct_connectors_used_count: Integer?,
+            distinct_conversation_count: Integer?,
+            distinct_files_uploaded_count: Integer?,
+            distinct_projects_created_count: Integer,
+            distinct_projects_used_count: Integer?,
+            distinct_shared_artifacts_viewed_count: Integer?,
+            distinct_skills_used_count: Integer?,
+            message_count: Integer,
+            shared_conversations_viewed_count: Integer,
+            thinking_message_count: Integer
+          ) -> void
+
+          def to_hash: -> {
+            connectors_used_count: Integer,
+            distinct_artifacts_created_count: Integer,
+            distinct_connectors_used_count: Integer?,
+            distinct_conversation_count: Integer?,
+            distinct_files_uploaded_count: Integer?,
+            distinct_projects_created_count: Integer,
+            distinct_projects_used_count: Integer?,
+            distinct_shared_artifacts_viewed_count: Integer?,
+            distinct_skills_used_count: Integer?,
+            message_count: Integer,
+            shared_conversations_viewed_count: Integer,
+            thinking_message_count: Integer
+          }
+        end
+      end
+    end
+  end
+end

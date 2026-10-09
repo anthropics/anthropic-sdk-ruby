@@ -26,7 +26,8 @@ class Anthropic::Test::Resources::Beta::Sessions::ThreadsTest < Anthropic::Test:
         status: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatus,
         type: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread::Type,
         updated_at: Time,
-        usage: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadUsage | nil
+        usage: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadUsage | nil,
+        workflow_run_id: String | nil
       }
     end
   end
@@ -57,7 +58,8 @@ class Anthropic::Test::Resources::Beta::Sessions::ThreadsTest < Anthropic::Test:
         status: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatus,
         type: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread::Type,
         updated_at: Time,
-        usage: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadUsage | nil
+        usage: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadUsage | nil,
+        workflow_run_id: String | nil
       }
     end
   end
@@ -85,7 +87,8 @@ class Anthropic::Test::Resources::Beta::Sessions::ThreadsTest < Anthropic::Test:
         status: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatus,
         type: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread::Type,
         updated_at: Time,
-        usage: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadUsage | nil
+        usage: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadUsage | nil,
+        workflow_run_id: String | nil
       }
     end
   end

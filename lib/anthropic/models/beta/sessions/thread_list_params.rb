@@ -26,6 +26,16 @@ module Anthropic
           #   @return [String, nil]
           optional :page, String
 
+          # @!attribute statuses
+          #   Return only threads that have one of these statuses.
+          #
+          #   Repeat the parameter to give more than one status. Leave it out to return
+          #   threads of every status.
+          #
+          #   @return [Array<Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatus>, nil]
+          optional :statuses,
+                   -> { Anthropic::Internal::Type::ArrayOf[enum: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatus] }
+
           # @!attribute betas
           #   Optional header to specify the beta version(s) you want to use.
           #
@@ -43,7 +53,7 @@ module Anthropic
           #   @return [String, nil]
           optional :workspace_id, String
 
-          # @!method initialize(session_id:, limit: nil, page: nil, betas: nil, workspace_id: nil, request_options: {})
+          # @!method initialize(session_id:, limit: nil, page: nil, statuses: nil, betas: nil, workspace_id: nil, request_options: {})
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Sessions::ThreadListParams} for more details.
           #
@@ -52,6 +62,8 @@ module Anthropic
           #   @param limit [Integer] Maximum results per page. Defaults to 1000.
           #
           #   @param page [String] Opaque pagination cursor from a previous response's `next_page`. Forward-only.
+          #
+          #   @param statuses [Array<Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatus>] Return only threads that have one of these statuses.
           #
           #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
           #

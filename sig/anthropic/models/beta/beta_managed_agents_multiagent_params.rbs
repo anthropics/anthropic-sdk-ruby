@@ -1,38 +1,47 @@
 module Anthropic
   module Models
-    class BetaManagedAgentsMultiagentParams = Beta::BetaManagedAgentsMultiagentParams
+    module BetaManagedAgentsMultiagentParams = Beta::BetaManagedAgentsMultiagentParams
 
     module Beta
       type beta_managed_agents_multiagent_params =
-        {
-          agents: ::Array[Anthropic::Models::Beta::beta_managed_agents_multiagent_roster_entry_params],
-          type: Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams::type_
-        }
+        Anthropic::Beta::BetaManagedAgentsMultiagentCoordinatorParams
+        | Anthropic::Beta::BetaManagedAgentsMultiagent20261001Params
 
-      class BetaManagedAgentsMultiagentParams < Anthropic::Internal::Type::BaseModel
-        attr_accessor agents: ::Array[Anthropic::Models::Beta::beta_managed_agents_multiagent_roster_entry_params]
+      module BetaManagedAgentsMultiagentParams
+        extend Anthropic::Internal::Type::Union
 
-        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams::type_
-
-        def initialize: (
-          agents: ::Array[Anthropic::Models::Beta::beta_managed_agents_multiagent_roster_entry_params],
-          type: Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams::type_
-        ) -> void
-
-        def to_hash: -> {
-          agents: ::Array[Anthropic::Models::Beta::beta_managed_agents_multiagent_roster_entry_params],
-          type: Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams::type_
-        }
-
-        type type_ = :coordinator
+        type type_ = :coordinator | :multiagent_20261001
 
         module Type
           extend Anthropic::Internal::Type::Enum
 
           COORDINATOR: :coordinator
+          MULTIAGENT_20261001: :multiagent_20261001
 
           def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams::type_]
         end
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_multiagent_params]
+
+        def self.new:
+          (
+            type: :coordinator | "coordinator",
+            agents: ::Array[Anthropic::Models::Beta::beta_managed_agents_multiagent_roster_entry_params]
+          ) -> Anthropic::Beta::BetaManagedAgentsMultiagentCoordinatorParams
+          | (
+            type: :multiagent_20261001 | "multiagent_20261001",
+            ?advisor: Anthropic::Models::Beta::beta_managed_agents_multiagent_advisor_params?,
+            ?subagents: Anthropic::Models::Beta::beta_managed_agents_multiagent_subagents_params?,
+            ?workflows: Anthropic::Models::Beta::beta_managed_agents_multiagent_workflows_params?
+          ) -> Anthropic::Beta::BetaManagedAgentsMultiagent20261001Params
+          | (
+            type: Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams::type_
+            | String,
+            ?agents: ::Array[Anthropic::Models::Beta::beta_managed_agents_multiagent_roster_entry_params],
+            ?advisor: Anthropic::Models::Beta::beta_managed_agents_multiagent_advisor_params?,
+            ?subagents: Anthropic::Models::Beta::beta_managed_agents_multiagent_subagents_params?,
+            ?workflows: Anthropic::Models::Beta::beta_managed_agents_multiagent_workflows_params?
+          ) -> Anthropic::Models::Beta::beta_managed_agents_multiagent_params
       end
     end
   end

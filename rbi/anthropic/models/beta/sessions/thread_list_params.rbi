@@ -33,6 +33,31 @@ module Anthropic
           sig { params(page: String).void }
           attr_writer :page
 
+          # Return only threads that have one of these statuses.
+          #
+          # Repeat the parameter to give more than one status. Leave it out to return
+          # threads of every status.
+          sig do
+            returns(
+              T.nilable(
+                T::Array[
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatus::OrSymbol
+                ]
+              )
+            )
+          end
+          attr_reader :statuses
+
+          sig do
+            params(
+              statuses:
+                T::Array[
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatus::OrSymbol
+                ]
+            ).void
+          end
+          attr_writer :statuses
+
           # Optional header to specify the beta version(s) you want to use.
           sig do
             returns(
@@ -67,6 +92,10 @@ module Anthropic
               session_id: String,
               limit: Integer,
               page: String,
+              statuses:
+                T::Array[
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatus::OrSymbol
+                ],
               betas:
                 T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               workspace_id: String,
@@ -79,6 +108,11 @@ module Anthropic
             limit: nil,
             # Opaque pagination cursor from a previous response's `next_page`. Forward-only.
             page: nil,
+            # Return only threads that have one of these statuses.
+            #
+            # Repeat the parameter to give more than one status. Leave it out to return
+            # threads of every status.
+            statuses: nil,
             # Optional header to specify the beta version(s) you want to use.
             betas: nil,
             # Optional header to select the Workspace for this request. The value is a
@@ -98,6 +132,10 @@ module Anthropic
                 session_id: String,
                 limit: Integer,
                 page: String,
+                statuses:
+                  T::Array[
+                    Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatus::OrSymbol
+                  ],
                 betas:
                   T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
                 workspace_id: String,

@@ -4,6 +4,7 @@ module Anthropic
       module Organization
         type beta_analytics_product_filter =
           :chat
+          | :chat_cowork_unified
           | :"claude-tag"
           | :claude_code
           | :claude_design
@@ -15,6 +16,7 @@ module Anthropic
           extend Anthropic::Internal::Type::Enum
 
           CHAT: :chat
+          CHAT_COWORK_UNIFIED: :chat_cowork_unified
           CLAUDE_TAG: :"claude-tag"
           CLAUDE_CODE: :claude_code
           CLAUDE_DESIGN: :claude_design

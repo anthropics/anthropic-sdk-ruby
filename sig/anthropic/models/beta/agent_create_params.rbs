@@ -8,7 +8,7 @@ module Anthropic
           description: String?,
           mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams],
           metadata: ::Hash[Symbol, String],
-          multiagent: Anthropic::Beta::BetaManagedAgentsMultiagentParams?,
+          multiagent: Anthropic::Models::Beta::beta_managed_agents_multiagent_params?,
           skills: ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params],
           system_: String?,
           tools: ::Array[Anthropic::Models::Beta::AgentCreateParams::tool],
@@ -37,7 +37,7 @@ module Anthropic
 
         def metadata=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
 
-        attr_accessor multiagent: Anthropic::Beta::BetaManagedAgentsMultiagentParams?
+        attr_accessor multiagent: Anthropic::Models::Beta::beta_managed_agents_multiagent_params?
 
         attr_reader skills: ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params]?
 
@@ -69,7 +69,7 @@ module Anthropic
           ?description: String?,
           ?mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams],
           ?metadata: ::Hash[Symbol, String],
-          ?multiagent: Anthropic::Beta::BetaManagedAgentsMultiagentParams?,
+          ?multiagent: Anthropic::Models::Beta::beta_managed_agents_multiagent_params?,
           ?skills: ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params],
           ?system_: String?,
           ?tools: ::Array[Anthropic::Models::Beta::AgentCreateParams::tool],
@@ -84,7 +84,7 @@ module Anthropic
           description: String?,
           mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams],
           metadata: ::Hash[Symbol, String],
-          multiagent: Anthropic::Beta::BetaManagedAgentsMultiagentParams?,
+          multiagent: Anthropic::Models::Beta::beta_managed_agents_multiagent_params?,
           skills: ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params],
           system_: String?,
           tools: ::Array[Anthropic::Models::Beta::AgentCreateParams::tool],

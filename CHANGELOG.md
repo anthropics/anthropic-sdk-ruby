@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.78.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.77.1...v1.78.0) (2026-10-09)
+
+### Features
+
+* **api:** add types for the Chat and Cowork unified analytics metrics
+* **api:** add workflows, multiagent configuration and thread status filtering to Managed Agents
+
 ## [1.77.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.77.0...v1.77.1) (2026-10-08)
 
 ### Bug Fixes

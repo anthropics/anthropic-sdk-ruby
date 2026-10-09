@@ -26,6 +26,7 @@ class Anthropic::Test::Resources::Beta::Organization::Analytics::SkillsTest < An
         office_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillOfficeMetrics,
         skill_name: String,
         attributed_list_price: String | nil,
+        chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics | nil,
         currency: String | nil,
         enable_count: Integer | nil,
         estimated_overage_spend: String | nil,

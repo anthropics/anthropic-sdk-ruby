@@ -48,6 +48,17 @@ module Anthropic
           #   @return [Integer]
           required :web_search_count, Integer
 
+          # @!attribute chat_cowork_unified_metrics
+          #   Activity recorded while the member had Chat and Cowork unified (Cowork's
+          #   features inside claude.ai chat) turned on, split into `chat` (chat activity) and
+          #   `sessions` (Cowork activity). Omitted from the response on deployments that do
+          #   not offer Chat and Cowork unified.
+          #
+          #   @return [Anthropic::Models::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics, nil]
+          optional :chat_cowork_unified_metrics,
+                   -> { Anthropic::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics },
+                   nil?: true
+
           # @!attribute distinct_user_count
           #   Number of distinct active users represented by this row. Only set for grouped
           #   rollups (`group_by[]`); null for per-user rows. In date-range mode, recomputed
@@ -93,7 +104,7 @@ module Anthropic
           #   @return [Anthropic::Models::Beta::Organization::BetaAnalyticsUser, nil]
           optional :user, -> { Anthropic::Beta::Organization::BetaAnalyticsUser }, nil?: true
 
-          # @!method initialize(chat_metrics:, claude_code_metrics:, cowork_metrics:, design_metrics:, office_metrics:, science_metrics:, web_search_count:, distinct_user_count: nil, last_activity_date: nil, rbac_group_id: nil, rbac_group_name: nil, user: nil)
+          # @!method initialize(chat_metrics:, claude_code_metrics:, cowork_metrics:, design_metrics:, office_metrics:, science_metrics:, web_search_count:, chat_cowork_unified_metrics: nil, distinct_user_count: nil, last_activity_date: nil, rbac_group_id: nil, rbac_group_name: nil, user: nil)
           #   Per-user activity data for a given day.
           #
           #   Some parameter documentations has been truncated, see
@@ -114,6 +125,8 @@ module Anthropic
           #
           #   @param web_search_count [Integer] Number of web searches performed
           #
+          #   @param chat_cowork_unified_metrics [Anthropic::Models::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics, nil] Activity recorded while the member had Chat and Cowork unified (Cowork's feature
+          #
           #   @param distinct_user_count [Integer, nil] Number of distinct active users represented by this row. Only set for grouped ro
           #
           #   @param last_activity_date [Date, nil] Most recent UTC day (YYYY-MM-DD) on which the user had any counted activity, wit
@@ -123,6 +136,36 @@ module Anthropic
           #   @param rbac_group_name [String, nil] Resolved RBAC group display name, alongside `rbac_group_id` when name resolution
           #
           #   @param user [Anthropic::Models::Beta::Organization::BetaAnalyticsUser, nil] The user this row describes. Null on rows aggregated across users.
+
+          # @see Anthropic::Models::Beta::Organization::BetaAnalyticsUserActivity#chat_cowork_unified_metrics
+          class ChatCoworkUnifiedMetrics < Anthropic::Internal::Type::BaseModel
+            # @!attribute chat
+            #   Chat activity recorded while members had Chat and Cowork unified turned on.
+            #
+            #   @return [Anthropic::Models::Beta::Organization::BetaAnalyticsChatCoworkUnifiedChatMetrics]
+            required :chat, -> { Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedChatMetrics }
+
+            # @!attribute sessions
+            #   Cowork session activity recorded while members had Chat and Cowork unified
+            #   turned on.
+            #
+            #   @return [Anthropic::Models::Beta::Organization::BetaAnalyticsChatCoworkUnifiedSessionsMetrics]
+            required :sessions, -> { Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedSessionsMetrics }
+
+            # @!method initialize(chat:, sessions:)
+            #   Activity recorded while the member had Chat and Cowork unified (Cowork's
+            #   features inside claude.ai chat) turned on, split into `chat` (chat activity) and
+            #   `sessions` (Cowork activity). Omitted from the response on deployments that do
+            #   not offer Chat and Cowork unified.
+            #
+            #   Some parameter documentations has been truncated, see
+            #   {Anthropic::Models::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics}
+            #   for more details.
+            #
+            #   @param chat [Anthropic::Models::Beta::Organization::BetaAnalyticsChatCoworkUnifiedChatMetrics] Chat activity recorded while members had Chat and Cowork unified turned
+            #
+            #   @param sessions [Anthropic::Models::Beta::Organization::BetaAnalyticsChatCoworkUnifiedSessionsMetrics] Cowork session activity recorded while members had Chat and Cowork
+          end
         end
       end
     end

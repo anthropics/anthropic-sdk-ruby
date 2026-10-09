@@ -36,6 +36,11 @@ module Anthropic
           end
           attr_accessor :type
 
+          # Identifier of the workflow run that created the thread, or `null` for any other
+          # thread.
+          sig { returns(T.nilable(String)) }
+          attr_accessor :workflow_run_id
+
           # Emitted when a child thread is created. Written to the parent thread's output
           # stream so clients observing the session see child creation.
           sig do
@@ -45,7 +50,8 @@ module Anthropic
               processed_at: Time,
               session_thread_id: String,
               type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent::Type::OrSymbol
+                Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent::Type::OrSymbol,
+              workflow_run_id: T.nilable(String)
             ).returns(T.attached_class)
           end
           def self.new(
@@ -57,7 +63,10 @@ module Anthropic
             processed_at:,
             # Public `sthr_` ID of the newly created thread.
             session_thread_id:,
-            type:
+            type:,
+            # Identifier of the workflow run that created the thread, or `null` for any other
+            # thread.
+            workflow_run_id:
           )
           end
 
@@ -69,7 +78,8 @@ module Anthropic
                 processed_at: Time,
                 session_thread_id: String,
                 type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent::Type::TaggedSymbol
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent::Type::TaggedSymbol,
+                workflow_run_id: T.nilable(String)
               }
             )
           end

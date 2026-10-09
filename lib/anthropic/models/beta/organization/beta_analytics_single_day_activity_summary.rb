@@ -93,6 +93,30 @@ module Anthropic
           #   @return [Float, nil]
           required :weekly_adoption_rate, Float, nil?: true
 
+          # @!attribute chat_cowork_unified_daily_active_user_count
+          #   Number of users with activity in Chat and Cowork unified on the requested day.
+          #   Omitted from the response on deployments that do not offer Chat and Cowork
+          #   unified.
+          #
+          #   @return [Integer, nil]
+          optional :chat_cowork_unified_daily_active_user_count, Integer, nil?: true
+
+          # @!attribute chat_cowork_unified_monthly_active_user_count
+          #   Number of users with activity in Chat and Cowork unified in the 28-day rolling
+          #   window (30 days when the request filters by `rbac_group_id`). Omitted from the
+          #   response on deployments that do not offer Chat and Cowork unified.
+          #
+          #   @return [Integer, nil]
+          optional :chat_cowork_unified_monthly_active_user_count, Integer, nil?: true
+
+          # @!attribute chat_cowork_unified_weekly_active_user_count
+          #   Number of users with activity in Chat and Cowork unified in the 7-day rolling
+          #   window. Omitted from the response on deployments that do not offer Chat and
+          #   Cowork unified.
+          #
+          #   @return [Integer, nil]
+          optional :chat_cowork_unified_weekly_active_user_count, Integer, nil?: true
+
           # @!attribute chat_daily_active_user_count
           #   Number of users with claude.ai (chat) activity on the requested day. Omitted
           #   from the response while the per-product breakdown is not enabled for this
@@ -222,7 +246,7 @@ module Anthropic
           #   @return [Integer, nil]
           optional :science_weekly_active_user_count, Integer, nil?: true
 
-          # @!method initialize(assigned_seat_count:, cowork_daily_active_user_count:, cowork_monthly_active_user_count:, cowork_weekly_active_user_count:, daily_active_user_count:, daily_adoption_rate:, ending_at:, monthly_active_user_count:, monthly_adoption_rate:, pending_invite_count:, starting_at:, weekly_active_user_count:, weekly_adoption_rate:, chat_daily_active_user_count: nil, chat_monthly_active_user_count: nil, chat_weekly_active_user_count: nil, claude_code_daily_active_user_count: nil, claude_code_monthly_active_user_count: nil, claude_code_weekly_active_user_count: nil, claude_design_daily_active_user_count: nil, claude_design_monthly_active_user_count: nil, claude_design_weekly_active_user_count: nil, office_agent_daily_active_user_count: nil, office_agent_monthly_active_user_count: nil, office_agent_weekly_active_user_count: nil, science_daily_active_user_count: nil, science_entitled_user_count: nil, science_monthly_active_user_count: nil, science_weekly_active_user_count: nil)
+          # @!method initialize(assigned_seat_count:, cowork_daily_active_user_count:, cowork_monthly_active_user_count:, cowork_weekly_active_user_count:, daily_active_user_count:, daily_adoption_rate:, ending_at:, monthly_active_user_count:, monthly_adoption_rate:, pending_invite_count:, starting_at:, weekly_active_user_count:, weekly_adoption_rate:, chat_cowork_unified_daily_active_user_count: nil, chat_cowork_unified_monthly_active_user_count: nil, chat_cowork_unified_weekly_active_user_count: nil, chat_daily_active_user_count: nil, chat_monthly_active_user_count: nil, chat_weekly_active_user_count: nil, claude_code_daily_active_user_count: nil, claude_code_monthly_active_user_count: nil, claude_code_weekly_active_user_count: nil, claude_design_daily_active_user_count: nil, claude_design_monthly_active_user_count: nil, claude_design_weekly_active_user_count: nil, office_agent_daily_active_user_count: nil, office_agent_monthly_active_user_count: nil, office_agent_weekly_active_user_count: nil, science_daily_active_user_count: nil, science_entitled_user_count: nil, science_monthly_active_user_count: nil, science_weekly_active_user_count: nil)
           #   Per-day entry in the /summaries response.
           #
           #   Some parameter documentations has been truncated, see
@@ -254,6 +278,12 @@ module Anthropic
           #   @param weekly_active_user_count [Integer] Number of users with token consumption in the 7-day rolling window
           #
           #   @param weekly_adoption_rate [Float, nil] Percentage of assigned seats with activity in the 7-day rolling window (`WAU / a
+          #
+          #   @param chat_cowork_unified_daily_active_user_count [Integer, nil] Number of users with activity in Chat and Cowork unified on the requested day. O
+          #
+          #   @param chat_cowork_unified_monthly_active_user_count [Integer, nil] Number of users with activity in Chat and Cowork unified in the 28-day rolling w
+          #
+          #   @param chat_cowork_unified_weekly_active_user_count [Integer, nil] Number of users with activity in Chat and Cowork unified in the 7-day rolling wi
           #
           #   @param chat_daily_active_user_count [Integer, nil] Number of users with claude.ai (chat) activity on the requested day. Omitted fro
           #

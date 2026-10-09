@@ -89,6 +89,30 @@ module Anthropic
           end
           attr_writer :office_metrics
 
+          # Connector use recorded while members had Chat and Cowork unified (Cowork's
+          # features inside claude.ai chat) turned on, split into chat conversations and
+          # Cowork sessions. A count is null in date-range mode where it cannot be computed.
+          # Omitted from the response on deployments that do not offer Chat and Cowork
+          # unified.
+          sig do
+            returns(
+              T.nilable(
+                Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics
+              )
+            )
+          end
+          attr_reader :chat_cowork_unified_metrics
+
+          sig do
+            params(
+              chat_cowork_unified_metrics:
+                T.nilable(
+                  Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::OrHash
+                )
+            ).void
+          end
+          attr_writer :chat_cowork_unified_metrics
+
           # Human-readable display name for rows whose `connector_name` is an opaque
           # connector id rather than a readable name, resolved at request time from the
           # organization's connectors (including connectors that have since been removed).
@@ -135,13 +159,15 @@ module Anthropic
           attr_accessor :managed_auth_distinct_user_count
 
           # Product that produced this row's activity: one of `chat`, `claude_code`,
-          # `cowork`, or `office_agent` (the canonical Cost & Usage product naming; an
-          # `office_agent` row's per-surface breakdown is in its `office_metrics`). On
-          # `/plugins` only `cowork` and `claude_code` occur (the only surfaces with plugin
-          # attribution); on `/artifacts` only `chat`, `claude_code`, and `cowork` occur
-          # (the surfaces that create artifacts); `/apps/chat/projects` does not support the
-          # product dimension (a `product` entry in `group_by[]` or `filter[]` there is
-          # rejected). Present only when the request grouped by `product`.
+          # `cowork`, `office_agent`, or `chat_cowork_unified` (Chat and Cowork unified).
+          # These are the canonical Cost & Usage product names; an `office_agent` row's
+          # per-surface breakdown is in its `office_metrics`. On `/plugins` only `cowork`,
+          # `claude_code` and `chat_cowork_unified` occur (the only surfaces with plugin
+          # attribution); on `/artifacts` only `chat`, `claude_code`, `cowork` and
+          # `chat_cowork_unified` occur (the surfaces that create artifacts);
+          # `/apps/chat/projects` does not support the product dimension (a `product` entry
+          # in `group_by[]` or `filter[]` there is rejected). Present only when the request
+          # grouped by `product`.
           sig { returns(T.nilable(String)) }
           attr_accessor :product
 
@@ -207,6 +233,10 @@ module Anthropic
               distinct_user_count: Integer,
               office_metrics:
                 Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeMetrics::OrHash,
+              chat_cowork_unified_metrics:
+                T.nilable(
+                  Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::OrHash
+                ),
               connector_display_name: T.nilable(String),
               individual_auth_distinct_user_count: T.nilable(Integer),
               managed_auth_distinct_user_count: T.nilable(Integer),
@@ -236,6 +266,12 @@ module Anthropic
             # Office Agent activity metrics for a single connector on a given day, broken out
             # by Office product.
             office_metrics:,
+            # Connector use recorded while members had Chat and Cowork unified (Cowork's
+            # features inside claude.ai chat) turned on, split into chat conversations and
+            # Cowork sessions. A count is null in date-range mode where it cannot be computed.
+            # Omitted from the response on deployments that do not offer Chat and Cowork
+            # unified.
+            chat_cowork_unified_metrics: nil,
             # Human-readable display name for rows whose `connector_name` is an opaque
             # connector id rather than a readable name, resolved at request time from the
             # organization's connectors (including connectors that have since been removed).
@@ -276,13 +312,15 @@ module Anthropic
             # partial-window value.
             managed_auth_distinct_user_count: nil,
             # Product that produced this row's activity: one of `chat`, `claude_code`,
-            # `cowork`, or `office_agent` (the canonical Cost & Usage product naming; an
-            # `office_agent` row's per-surface breakdown is in its `office_metrics`). On
-            # `/plugins` only `cowork` and `claude_code` occur (the only surfaces with plugin
-            # attribution); on `/artifacts` only `chat`, `claude_code`, and `cowork` occur
-            # (the surfaces that create artifacts); `/apps/chat/projects` does not support the
-            # product dimension (a `product` entry in `group_by[]` or `filter[]` there is
-            # rejected). Present only when the request grouped by `product`.
+            # `cowork`, `office_agent`, or `chat_cowork_unified` (Chat and Cowork unified).
+            # These are the canonical Cost & Usage product names; an `office_agent` row's
+            # per-surface breakdown is in its `office_metrics`. On `/plugins` only `cowork`,
+            # `claude_code` and `chat_cowork_unified` occur (the only surfaces with plugin
+            # attribution); on `/artifacts` only `chat`, `claude_code`, `cowork` and
+            # `chat_cowork_unified` occur (the surfaces that create artifacts);
+            # `/apps/chat/projects` does not support the product dimension (a `product` entry
+            # in `group_by[]` or `filter[]` there is rejected). Present only when the request
+            # grouped by `product`.
             product: nil,
             # Tagged RBAC group identifier (`rbac_group_...`), matching the spend-limits API
             # spelling. Present only when the request grouped by `rbac_group_id`.
@@ -337,6 +375,10 @@ module Anthropic
                 distinct_user_count: Integer,
                 office_metrics:
                   Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeMetrics,
+                chat_cowork_unified_metrics:
+                  T.nilable(
+                    Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics
+                  ),
                 connector_display_name: T.nilable(String),
                 individual_auth_distinct_user_count: T.nilable(Integer),
                 managed_auth_distinct_user_count: T.nilable(Integer),
@@ -351,6 +393,86 @@ module Anthropic
             )
           end
           def to_hash
+          end
+
+          class ChatCoworkUnifiedMetrics < Anthropic::Internal::Type::BaseModel
+            OrHash =
+              T.type_alias do
+                T.any(
+                  Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics,
+                  Anthropic::Internal::AnyHash
+                )
+              end
+
+            # A connector's use in chat conversations recorded while members had Chat and
+            # Cowork unified turned on.
+            sig do
+              returns(
+                Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics
+              )
+            end
+            attr_reader :chat
+
+            sig do
+              params(
+                chat:
+                  Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics::OrHash
+              ).void
+            end
+            attr_writer :chat
+
+            # A connector's use in Cowork sessions recorded while members had Chat and Cowork
+            # unified turned on.
+            sig do
+              returns(
+                Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics
+              )
+            end
+            attr_reader :sessions
+
+            sig do
+              params(
+                sessions:
+                  Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics::OrHash
+              ).void
+            end
+            attr_writer :sessions
+
+            # Connector use recorded while members had Chat and Cowork unified (Cowork's
+            # features inside claude.ai chat) turned on, split into chat conversations and
+            # Cowork sessions. A count is null in date-range mode where it cannot be computed.
+            # Omitted from the response on deployments that do not offer Chat and Cowork
+            # unified.
+            sig do
+              params(
+                chat:
+                  Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics::OrHash,
+                sessions:
+                  Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics::OrHash
+              ).returns(T.attached_class)
+            end
+            def self.new(
+              # A connector's use in chat conversations recorded while members had Chat and
+              # Cowork unified turned on.
+              chat:,
+              # A connector's use in Cowork sessions recorded while members had Chat and Cowork
+              # unified turned on.
+              sessions:
+            )
+            end
+
+            sig do
+              override.returns(
+                {
+                  chat:
+                    Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics,
+                  sessions:
+                    Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics
+                }
+              )
+            end
+            def to_hash
+            end
           end
         end
       end

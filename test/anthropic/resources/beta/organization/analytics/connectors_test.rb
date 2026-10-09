@@ -25,6 +25,7 @@ class Anthropic::Test::Resources::Beta::Organization::Analytics::ConnectorsTest 
         cowork_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorCoworkMetrics,
         distinct_user_count: Integer,
         office_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeMetrics,
+        chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics | nil,
         connector_display_name: String | nil,
         individual_auth_distinct_user_count: Integer | nil,
         managed_auth_distinct_user_count: Integer | nil,

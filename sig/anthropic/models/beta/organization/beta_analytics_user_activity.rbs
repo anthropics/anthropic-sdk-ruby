@@ -11,6 +11,7 @@ module Anthropic
             office_metrics: Anthropic::Beta::Organization::BetaAnalyticsOfficeMetrics,
             science_metrics: Anthropic::Beta::Organization::BetaAnalyticsScienceMetrics,
             web_search_count: Integer,
+            chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics?,
             distinct_user_count: Integer?,
             last_activity_date: Date?,
             rbac_group_id: String?,
@@ -33,6 +34,8 @@ module Anthropic
 
           attr_accessor web_search_count: Integer
 
+          attr_accessor chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics?
+
           attr_accessor distinct_user_count: Integer?
 
           attr_accessor last_activity_date: Date?
@@ -51,6 +54,7 @@ module Anthropic
             office_metrics: Anthropic::Beta::Organization::BetaAnalyticsOfficeMetrics,
             science_metrics: Anthropic::Beta::Organization::BetaAnalyticsScienceMetrics,
             web_search_count: Integer,
+            ?chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics?,
             ?distinct_user_count: Integer?,
             ?last_activity_date: Date?,
             ?rbac_group_id: String?,
@@ -66,12 +70,35 @@ module Anthropic
             office_metrics: Anthropic::Beta::Organization::BetaAnalyticsOfficeMetrics,
             science_metrics: Anthropic::Beta::Organization::BetaAnalyticsScienceMetrics,
             web_search_count: Integer,
+            chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics?,
             distinct_user_count: Integer?,
             last_activity_date: Date?,
             rbac_group_id: String?,
             rbac_group_name: String?,
             user: Anthropic::Beta::Organization::BetaAnalyticsUser?
           }
+
+          type chat_cowork_unified_metrics =
+            {
+              chat: Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedChatMetrics,
+              sessions: Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedSessionsMetrics
+            }
+
+          class ChatCoworkUnifiedMetrics < Anthropic::Internal::Type::BaseModel
+            attr_accessor chat: Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedChatMetrics
+
+            attr_accessor sessions: Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedSessionsMetrics
+
+            def initialize: (
+              chat: Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedChatMetrics,
+              sessions: Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedSessionsMetrics
+            ) -> void
+
+            def to_hash: -> {
+              chat: Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedChatMetrics,
+              sessions: Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedSessionsMetrics
+            }
+          end
         end
       end
     end

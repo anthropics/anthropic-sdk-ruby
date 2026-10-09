@@ -104,6 +104,29 @@ module Anthropic
           sig { returns(Integer) }
           attr_accessor :web_search_count
 
+          # Activity recorded while the member had Chat and Cowork unified (Cowork's
+          # features inside claude.ai chat) turned on, split into `chat` (chat activity) and
+          # `sessions` (Cowork activity). Omitted from the response on deployments that do
+          # not offer Chat and Cowork unified.
+          sig do
+            returns(
+              T.nilable(
+                Anthropic::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics
+              )
+            )
+          end
+          attr_reader :chat_cowork_unified_metrics
+
+          sig do
+            params(
+              chat_cowork_unified_metrics:
+                T.nilable(
+                  Anthropic::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics::OrHash
+                )
+            ).void
+          end
+          attr_writer :chat_cowork_unified_metrics
+
           # Number of distinct active users represented by this row. Only set for grouped
           # rollups (`group_by[]`); null for per-user rows. In date-range mode, recomputed
           # as an exact distinct count of the group's active members over the requested
@@ -167,6 +190,10 @@ module Anthropic
               science_metrics:
                 Anthropic::Beta::Organization::BetaAnalyticsScienceMetrics::OrHash,
               web_search_count: Integer,
+              chat_cowork_unified_metrics:
+                T.nilable(
+                  Anthropic::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics::OrHash
+                ),
               distinct_user_count: T.nilable(Integer),
               last_activity_date: T.nilable(Date),
               rbac_group_id: T.nilable(String),
@@ -193,6 +220,11 @@ module Anthropic
             science_metrics:,
             # Number of web searches performed
             web_search_count:,
+            # Activity recorded while the member had Chat and Cowork unified (Cowork's
+            # features inside claude.ai chat) turned on, split into `chat` (chat activity) and
+            # `sessions` (Cowork activity). Omitted from the response on deployments that do
+            # not offer Chat and Cowork unified.
+            chat_cowork_unified_metrics: nil,
             # Number of distinct active users represented by this row. Only set for grouped
             # rollups (`group_by[]`); null for per-user rows. In date-range mode, recomputed
             # as an exact distinct count of the group's active members over the requested
@@ -237,6 +269,10 @@ module Anthropic
                 science_metrics:
                   Anthropic::Beta::Organization::BetaAnalyticsScienceMetrics,
                 web_search_count: Integer,
+                chat_cowork_unified_metrics:
+                  T.nilable(
+                    Anthropic::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics
+                  ),
                 distinct_user_count: T.nilable(Integer),
                 last_activity_date: T.nilable(Date),
                 rbac_group_id: T.nilable(String),
@@ -247,6 +283,83 @@ module Anthropic
             )
           end
           def to_hash
+          end
+
+          class ChatCoworkUnifiedMetrics < Anthropic::Internal::Type::BaseModel
+            OrHash =
+              T.type_alias do
+                T.any(
+                  Anthropic::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics,
+                  Anthropic::Internal::AnyHash
+                )
+              end
+
+            # Chat activity recorded while members had Chat and Cowork unified turned on.
+            sig do
+              returns(
+                Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedChatMetrics
+              )
+            end
+            attr_reader :chat
+
+            sig do
+              params(
+                chat:
+                  Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedChatMetrics::OrHash
+              ).void
+            end
+            attr_writer :chat
+
+            # Cowork session activity recorded while members had Chat and Cowork unified
+            # turned on.
+            sig do
+              returns(
+                Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedSessionsMetrics
+              )
+            end
+            attr_reader :sessions
+
+            sig do
+              params(
+                sessions:
+                  Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedSessionsMetrics::OrHash
+              ).void
+            end
+            attr_writer :sessions
+
+            # Activity recorded while the member had Chat and Cowork unified (Cowork's
+            # features inside claude.ai chat) turned on, split into `chat` (chat activity) and
+            # `sessions` (Cowork activity). Omitted from the response on deployments that do
+            # not offer Chat and Cowork unified.
+            sig do
+              params(
+                chat:
+                  Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedChatMetrics::OrHash,
+                sessions:
+                  Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedSessionsMetrics::OrHash
+              ).returns(T.attached_class)
+            end
+            def self.new(
+              # Chat activity recorded while members had Chat and Cowork unified turned on.
+              chat:,
+              # Cowork session activity recorded while members had Chat and Cowork unified
+              # turned on.
+              sessions:
+            )
+            end
+
+            sig do
+              override.returns(
+                {
+                  chat:
+                    Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedChatMetrics,
+                  sessions:
+                    Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedSessionsMetrics
+                }
+              )
+            end
+            def to_hash
+            end
           end
         end
       end
