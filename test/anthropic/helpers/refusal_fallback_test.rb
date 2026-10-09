@@ -1107,4 +1107,99 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
     assert(@bodies[1]["messages"].any? { _1["role"] == "assistant" })
     refute(@bodies[2]["messages"].any? { _1["role"] == "assistant" })
   end
+
+  def compaction_refusal_stream(model, token:, content:, checkpoint: :omitted, has_prefill_claim: true)
+    block = {type: "compaction", content: nil, checkpoint_metadata: {source: "test"}}
+    delta = {type: "compaction_delta", content: content}
+    delta[:encrypted_content] = checkpoint unless checkpoint == :omitted
+    frames = sse_event("content_block_start", {type: "content_block_start", index: 0, content_block: block})
+    frames << sse_event("content_block_delta", {type: "content_block_delta", index: 0, delta: delta})
+    frames << sse_event("content_block_stop", {type: "content_block_stop", index: 0})
+    refusal_stream(model, token: token, has_prefill_claim: has_prefill_claim)
+      .sub("event: message_delta\n", "#{frames}event: message_delta\n")
+  end
+
+  def test_streaming_fallback_replays_complete_compaction_values
+    ["Summary", "", nil].product(["ciphertext", "", nil, :omitted]).each do |content, checkpoint|
+      assert_compaction_replay(content, checkpoint)
+    end
+  end
+
+  def assert_compaction_replay(content, checkpoint)
+    WebMock.reset!
+    primary = compaction_refusal_stream(
+      "primary-model",
+      token: "tok-compact",
+      content: content,
+      checkpoint: checkpoint
+    )
+    stub_streams(primary, accept_stream("fallback-model", text: "done"))
+    client = make_client([{model: "fallback-model"}])
+    events = client.beta.messages.stream_raw(**PARAMS, request_options: {fallback_state: Anthropic::BetaFallbackState.new}).to_a
+    expected = {
+      "type" => "compaction",
+      "content" => content,
+      "checkpoint_metadata" => {"source" => "test"}
+    }
+    expected["encrypted_content"] = checkpoint unless checkpoint == :omitted
+    assert_equal([expected], @bodies[1]["messages"].last["content"])
+    assert_equal("assistant", @bodies[1]["messages"].last["role"])
+    delta = events.find do
+      _1.type == :content_block_delta && _1.delta.type == :compaction_delta
+    end.delta.to_h
+    assert_equal({content: content}, delta.slice(:content))
+    unless checkpoint == :omitted
+      assert_equal(
+        {encrypted_content: checkpoint},
+        delta.slice(:encrypted_content)
+      )
+    end
+    assert_equal(1, events.count { _1.type == :message_stop })
+    assert_equal(:end_turn, events.find { _1.type == :message_delta }.delta.stop_reason)
+    assert_equal({"token" => "tok-compact", "mode" => "best_effort"}, @bodies[1]["fallback_credit_token"])
+  end
+
+  def test_streaming_fallback_keeps_compaction_blocks_across_two_refusals
+    stub_streams(
+      compaction_refusal_stream(
+        "primary-model",
+        token: "tok-a",
+        content: "first summary",
+        checkpoint: "first checkpoint"
+      ),
+      compaction_refusal_stream(
+        "mid-model",
+        token: "tok-b",
+        content: "second summary",
+        checkpoint: "second checkpoint"
+      ),
+      accept_stream("final-model", text: "done")
+    )
+    client = make_client([{model: "mid-model"}, {model: "final-model"}])
+    state = Anthropic::BetaFallbackState.new
+    events = client.beta.messages.stream_raw(**PARAMS, request_options: {fallback_state: state}).to_a
+    blocks = @bodies[2]["messages"].last["content"]
+    assert_equal(["first summary", "second summary"], blocks.map { _1["content"] })
+    assert_equal(["first checkpoint", "second checkpoint"], blocks.map { _1["encrypted_content"] })
+    assert_equal(1, state.index)
+    assert_equal(1, events.count { _1.type == :message_start })
+    assert_equal(1, events.count { _1.type == :message_stop })
+    assert_equal("first summary", @bodies[1]["messages"].last["content"].first["content"])
+  end
+
+  def test_streaming_fallback_does_not_replay_compaction_without_prefill_claim
+    stub_streams(
+      compaction_refusal_stream(
+        "primary-model",
+        token: "tok-a",
+        content: "private summary",
+        checkpoint: "opaque",
+        has_prefill_claim: false
+      ),
+      accept_stream("final-model", text: "done")
+    )
+    client = make_client([{model: "final-model"}])
+    client.beta.messages.stream_raw(**PARAMS, request_options: {fallback_state: Anthropic::BetaFallbackState.new}).to_a
+    assert_equal([{"role" => "user", "content" => "hi"}], @bodies[1]["messages"])
+  end
 end
