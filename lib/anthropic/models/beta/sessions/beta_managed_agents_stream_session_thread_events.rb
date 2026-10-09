@@ -24,7 +24,7 @@ module Anthropic
           variant :"user.custom_tool_result",
                   -> { Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent }
 
-          # Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
+          # Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result. The client can send it as soon as this event arrives, without waiting for `session.status_idle`.
           variant :"agent.custom_tool_use",
                   -> { Anthropic::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent }
 
@@ -248,7 +248,7 @@ module Anthropic
           #
           #   @option args [String, nil] :deny_message Optional message providing context for a 'deny' decision. Only allowed when resu
           #
-          #   @option args [String] :custom_tool_use_id The id of the `agent.custom_tool_use` event this result corresponds to, which ca
+          #   @option args [String] :custom_tool_use_id The id of the `agent.custom_tool_use` event this result corresponds to. It is al
           #
           #   @option args [Boolean, nil] :is_error Whether the tool execution resulted in an error.
           #

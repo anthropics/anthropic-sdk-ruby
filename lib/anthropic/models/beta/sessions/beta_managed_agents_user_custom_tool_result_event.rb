@@ -12,8 +12,8 @@ module Anthropic
           required :id, String
 
           # @!attribute custom_tool_use_id
-          #   The id of the `agent.custom_tool_use` event this result corresponds to, which
-          #   can be found in the last `session.status_idle`
+          #   The id of the `agent.custom_tool_use` event this result corresponds to. It is
+          #   also listed in the last `session.status_idle`
           #   [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids)
           #   `stop_reason.event_ids` field.
           #
@@ -60,7 +60,7 @@ module Anthropic
           #
           #   @param id [String] Unique identifier for this event.
           #
-          #   @param custom_tool_use_id [String] The id of the `agent.custom_tool_use` event this result corresponds to, which ca
+          #   @param custom_tool_use_id [String] The id of the `agent.custom_tool_use` event this result corresponds to. It is al
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent::Type]
           #

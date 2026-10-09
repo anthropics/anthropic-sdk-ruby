@@ -90,7 +90,7 @@ module Anthropic
             #
             #   @option args [String, nil] :deny_message Optional message providing context for a 'deny' decision. Only allowed when resu
             #
-            #   @option args [String] :custom_tool_use_id The id of the `agent.custom_tool_use` event this result corresponds to, which ca
+            #   @option args [String] :custom_tool_use_id The id of the `agent.custom_tool_use` event this result corresponds to. It is al
             #
             #   @option args [Boolean, nil] :is_error Whether the tool execution resulted in an error.
             #

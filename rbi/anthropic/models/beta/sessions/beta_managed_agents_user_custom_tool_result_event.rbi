@@ -17,8 +17,8 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :id
 
-          # The id of the `agent.custom_tool_use` event this result corresponds to, which
-          # can be found in the last `session.status_idle`
+          # The id of the `agent.custom_tool_use` event this result corresponds to. It is
+          # also listed in the last `session.status_idle`
           # [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids)
           # `stop_reason.event_ids` field.
           sig { returns(String) }
@@ -95,8 +95,8 @@ module Anthropic
           def self.new(
             # Unique identifier for this event.
             id:,
-            # The id of the `agent.custom_tool_use` event this result corresponds to, which
-            # can be found in the last `session.status_idle`
+            # The id of the `agent.custom_tool_use` event this result corresponds to. It is
+            # also listed in the last `session.status_idle`
             # [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids)
             # `stop_reason.event_ids` field.
             custom_tool_use_id:,
