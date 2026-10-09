@@ -103,6 +103,11 @@ module Anthropic
           end
           attr_writer :usage
 
+          # Identifier of the workflow run that created the thread, or `null` for any other
+          # thread.
+          sig { returns(T.nilable(String)) }
+          attr_accessor :workflow_run_id
+
           # An execution thread within a `session`. Each session has one primary thread plus
           # zero or more child threads.
           sig do
@@ -111,7 +116,8 @@ module Anthropic
               agent:
                 T.any(
                   Anthropic::Beta::BetaManagedAgentsSessionThreadAgent::OrHash,
-                  Anthropic::Beta::BetaManagedAgentsAdvisor::OrHash
+                  Anthropic::Beta::BetaManagedAgentsAdvisor::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsInlineAgent::OrHash
                 ),
               archived_at: T.nilable(Time),
               created_at: Time,
@@ -129,7 +135,8 @@ module Anthropic
               usage:
                 T.nilable(
                   Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadUsage::OrHash
-                )
+                ),
+              workflow_run_id: T.nilable(String)
             ).returns(T.attached_class)
           end
           def self.new(
@@ -156,7 +163,10 @@ module Anthropic
             updated_at:,
             # Cumulative token usage for this thread. Null until the thread's first idle
             # transition.
-            usage:
+            usage:,
+            # Identifier of the workflow run that created the thread, or `null` for any other
+            # thread.
+            workflow_run_id:
           )
           end
 
@@ -182,7 +192,8 @@ module Anthropic
                 usage:
                   T.nilable(
                     Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadUsage
-                  )
+                  ),
+                workflow_run_id: T.nilable(String)
               }
             )
           end
@@ -198,7 +209,8 @@ module Anthropic
               T.type_alias do
                 T.any(
                   Anthropic::Beta::BetaManagedAgentsSessionThreadAgent,
-                  Anthropic::Beta::BetaManagedAgentsAdvisor
+                  Anthropic::Beta::BetaManagedAgentsAdvisor,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsInlineAgent
                 )
               end
 
@@ -222,6 +234,11 @@ module Anthropic
               ADVISOR =
                 T.let(
                   :advisor,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread::Agent::Type::TaggedSymbol
+                )
+              INLINE =
+                T.let(
+                  :inline,
                   Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread::Agent::Type::TaggedSymbol
                 )
 
@@ -292,6 +309,7 @@ module Anthropic
               id: nil,
               description: nil,
               mcp_servers: nil,
+              # The name that the agent's definition gave, or one that the server assigned.
               name: nil,
               skills: nil,
               system_: nil,

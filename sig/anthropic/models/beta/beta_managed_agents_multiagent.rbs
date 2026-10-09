@@ -1,77 +1,47 @@
 module Anthropic
   module Models
-    class BetaManagedAgentsMultiagent = Beta::BetaManagedAgentsMultiagent
+    module BetaManagedAgentsMultiagent = Beta::BetaManagedAgentsMultiagent
 
     module Beta
       type beta_managed_agents_multiagent =
-        {
-          agents: ::Array[Anthropic::Models::Beta::BetaManagedAgentsMultiagent::agent],
-          type: Anthropic::Models::Beta::BetaManagedAgentsMultiagent::type_
-        }
+        Anthropic::Beta::BetaManagedAgentsMultiagentCoordinator
+        | Anthropic::Beta::BetaManagedAgentsMultiagent20261001
 
-      class BetaManagedAgentsMultiagent < Anthropic::Internal::Type::BaseModel
-        attr_accessor agents: ::Array[Anthropic::Models::Beta::BetaManagedAgentsMultiagent::agent]
+      module BetaManagedAgentsMultiagent
+        extend Anthropic::Internal::Type::Union
 
-        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsMultiagent::type_
-
-        def initialize: (
-          agents: ::Array[Anthropic::Models::Beta::BetaManagedAgentsMultiagent::agent],
-          type: Anthropic::Models::Beta::BetaManagedAgentsMultiagent::type_
-        ) -> void
-
-        def to_hash: -> {
-          agents: ::Array[Anthropic::Models::Beta::BetaManagedAgentsMultiagent::agent],
-          type: Anthropic::Models::Beta::BetaManagedAgentsMultiagent::type_
-        }
-
-        type agent =
-          Anthropic::Beta::BetaManagedAgentsAgentReference
-          | Anthropic::Beta::BetaManagedAgentsAdvisor
-
-        module Agent
-          extend Anthropic::Internal::Type::Union
-
-          type type_ = :agent | :advisor
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            AGENT: :agent
-            ADVISOR: :advisor
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsMultiagent::Agent::type_]
-          end
-
-          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsMultiagent::agent]
-
-          def self.new:
-            (
-              type: :agent | "agent",
-              id: String,
-              version: Integer
-            ) -> Anthropic::Beta::BetaManagedAgentsAgentReference
-            | (
-              type: :advisor | "advisor",
-              model: String
-            ) -> Anthropic::Beta::BetaManagedAgentsAdvisor
-            | (
-              type: Anthropic::Models::Beta::BetaManagedAgentsMultiagent::Agent::type_
-              | String,
-              ?id: String,
-              ?version: Integer,
-              ?model: String
-            ) -> Anthropic::Models::Beta::BetaManagedAgentsMultiagent::agent
-        end
-
-        type type_ = :coordinator
+        type type_ = :coordinator | :multiagent_20261001
 
         module Type
           extend Anthropic::Internal::Type::Enum
 
           COORDINATOR: :coordinator
+          MULTIAGENT_20261001: :multiagent_20261001
 
           def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsMultiagent::type_]
         end
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_multiagent]
+
+        def self.new:
+          (
+            type: :coordinator | "coordinator",
+            agents: ::Array[Anthropic::Models::Beta::BetaManagedAgentsMultiagentCoordinator::agent]
+          ) -> Anthropic::Beta::BetaManagedAgentsMultiagentCoordinator
+          | (
+            type: :multiagent_20261001 | "multiagent_20261001",
+            advisor: Anthropic::Models::Beta::beta_managed_agents_multiagent_advisor,
+            subagents: Anthropic::Models::Beta::beta_managed_agents_multiagent_subagents,
+            workflows: Anthropic::Models::Beta::beta_managed_agents_multiagent_workflows
+          ) -> Anthropic::Beta::BetaManagedAgentsMultiagent20261001
+          | (
+            type: Anthropic::Models::Beta::BetaManagedAgentsMultiagent::type_
+            | String,
+            ?agents: ::Array[Anthropic::Models::Beta::BetaManagedAgentsMultiagentCoordinator::agent],
+            ?advisor: Anthropic::Models::Beta::beta_managed_agents_multiagent_advisor,
+            ?subagents: Anthropic::Models::Beta::beta_managed_agents_multiagent_subagents,
+            ?workflows: Anthropic::Models::Beta::beta_managed_agents_multiagent_workflows
+          ) -> Anthropic::Models::Beta::beta_managed_agents_multiagent
       end
     end
   end

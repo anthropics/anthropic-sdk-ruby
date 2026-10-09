@@ -1,0 +1,54 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_workflow_run_created_event =
+          {
+            id: String,
+            description: String?,
+            name: String,
+            phases: ::Array[Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunPhase],
+            processed_at: Time,
+            type: :"workflow_run.created",
+            workflow_run_id: String
+          }
+
+        class BetaManagedAgentsWorkflowRunCreatedEvent < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor description: String?
+
+          attr_accessor name: String
+
+          attr_accessor phases: ::Array[Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunPhase]
+
+          attr_accessor processed_at: Time
+
+          attr_accessor type: :"workflow_run.created"
+
+          attr_accessor workflow_run_id: String
+
+          def initialize: (
+            id: String,
+            description: String?,
+            name: String,
+            phases: ::Array[Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunPhase],
+            processed_at: Time,
+            workflow_run_id: String,
+            ?type: :"workflow_run.created"
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            description: String?,
+            name: String,
+            phases: ::Array[Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunPhase],
+            processed_at: Time,
+            type: :"workflow_run.created",
+            workflow_run_id: String
+          }
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,40 @@
+module Anthropic
+  module Models
+    module BetaManagedAgentsMultiagentInlineAgentsParams = Beta::BetaManagedAgentsMultiagentInlineAgentsParams
+
+    module Beta
+      type beta_managed_agents_multiagent_inline_agents_params =
+        Anthropic::Beta::BetaManagedAgentsMultiagentInlineAgentsEnabledParams
+        | Anthropic::Beta::BetaManagedAgentsMultiagentInlineAgentsDisabledParams
+
+      module BetaManagedAgentsMultiagentInlineAgentsParams
+        extend Anthropic::Internal::Type::Union
+
+        type type_ = :enabled | :disabled
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          ENABLED: :enabled
+          DISABLED: :disabled
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsMultiagentInlineAgentsParams::type_]
+        end
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_multiagent_inline_agents_params]
+
+        def self.new:
+          (
+            type: :enabled | "enabled"
+          ) -> Anthropic::Beta::BetaManagedAgentsMultiagentInlineAgentsEnabledParams
+          | (
+            type: :disabled | "disabled"
+          ) -> Anthropic::Beta::BetaManagedAgentsMultiagentInlineAgentsDisabledParams
+          | (
+            type: Anthropic::Models::Beta::BetaManagedAgentsMultiagentInlineAgentsParams::type_
+            | String
+          ) -> Anthropic::Models::Beta::beta_managed_agents_multiagent_inline_agents_params
+      end
+    end
+  end
+end

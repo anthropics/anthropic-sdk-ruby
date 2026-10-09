@@ -50,16 +50,12 @@ module Anthropic
         attr_writer :model
 
         # Multiagent orchestration configuration. Null when the agent is single-threaded.
-        sig { returns(T.nilable(Anthropic::Beta::BetaManagedAgentsMultiagent)) }
-        attr_reader :multiagent
-
         sig do
-          params(
-            multiagent:
-              T.nilable(Anthropic::Beta::BetaManagedAgentsMultiagent::OrHash)
-          ).void
+          returns(
+            T.nilable(Anthropic::Beta::BetaManagedAgentsMultiagent::Variants)
+          )
         end
-        attr_writer :multiagent
+        attr_accessor :multiagent
 
         sig { returns(String) }
         attr_accessor :name
@@ -109,7 +105,12 @@ module Anthropic
             metadata: T::Hash[Symbol, String],
             model: Anthropic::Beta::BetaManagedAgentsModelConfig::OrHash,
             multiagent:
-              T.nilable(Anthropic::Beta::BetaManagedAgentsMultiagent::OrHash),
+              T.nilable(
+                T.any(
+                  Anthropic::Beta::BetaManagedAgentsMultiagentCoordinator::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsMultiagent20261001::OrHash
+                )
+              ),
             name: String,
             skills:
               T::Array[
@@ -172,7 +173,9 @@ module Anthropic
               metadata: T::Hash[Symbol, String],
               model: Anthropic::Beta::BetaManagedAgentsModelConfig,
               multiagent:
-                T.nilable(Anthropic::Beta::BetaManagedAgentsMultiagent),
+                T.nilable(
+                  Anthropic::Beta::BetaManagedAgentsMultiagent::Variants
+                ),
               name: String,
               skills:
                 T::Array[

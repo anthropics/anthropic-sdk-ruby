@@ -55,8 +55,8 @@ module Anthropic
         #   Multiagent orchestration configuration. Full replacement. Omit to preserve; send
         #   null to clear.
         #
-        #   @return [Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams, nil]
-        optional :multiagent, -> { Anthropic::Beta::BetaManagedAgentsMultiagentParams }, nil?: true
+        #   @return [Anthropic::Models::Beta::BetaManagedAgentsMultiagentCoordinatorParams, Anthropic::Models::Beta::BetaManagedAgentsMultiagent20261001Params, nil]
+        optional :multiagent, union: -> { Anthropic::Beta::BetaManagedAgentsMultiagentParams }, nil?: true
 
         # @!attribute name
         #   Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
@@ -130,7 +130,7 @@ module Anthropic
         #
         #   @param model [Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams, Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel] Model identifier. Accepts the [model string](https://platform.claude.com/docs/en
         #
-        #   @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams, nil] Multiagent orchestration configuration. Full replacement. Omit to preserve; send
+        #   @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsMultiagentCoordinatorParams, Anthropic::Models::Beta::BetaManagedAgentsMultiagent20261001Params, nil] Multiagent orchestration configuration. Full replacement. Omit to preserve; send
         #
         #   @param name [String] Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
         #

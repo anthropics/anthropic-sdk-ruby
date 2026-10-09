@@ -1,0 +1,44 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_workflow_run_status_ended_event =
+          {
+            id: String,
+            processed_at: Time,
+            result: Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_result,
+            type: :"workflow_run.status_ended",
+            workflow_run_id: String
+          }
+
+        class BetaManagedAgentsWorkflowRunStatusEndedEvent < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor processed_at: Time
+
+          attr_accessor result: Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_result
+
+          attr_accessor type: :"workflow_run.status_ended"
+
+          attr_accessor workflow_run_id: String
+
+          def initialize: (
+            id: String,
+            processed_at: Time,
+            result: Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_result,
+            workflow_run_id: String,
+            ?type: :"workflow_run.status_ended"
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            processed_at: Time,
+            result: Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_result,
+            type: :"workflow_run.status_ended",
+            workflow_run_id: String
+          }
+        end
+      end
+    end
+  end
+end

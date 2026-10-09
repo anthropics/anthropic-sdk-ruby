@@ -71,19 +71,16 @@ module Anthropic
 
         # Multiagent orchestration configuration.
         sig do
-          returns(T.nilable(Anthropic::Beta::BetaManagedAgentsMultiagentParams))
-        end
-        attr_reader :multiagent
-
-        sig do
-          params(
-            multiagent:
-              T.nilable(
-                Anthropic::Beta::BetaManagedAgentsMultiagentParams::OrHash
+          returns(
+            T.nilable(
+              T.any(
+                Anthropic::Beta::BetaManagedAgentsMultiagentCoordinatorParams,
+                Anthropic::Beta::BetaManagedAgentsMultiagent20261001Params
               )
-          ).void
+            )
+          )
         end
-        attr_writer :multiagent
+        attr_accessor :multiagent
 
         # Skills available to the agent.
         sig do
@@ -194,7 +191,10 @@ module Anthropic
             metadata: T::Hash[Symbol, String],
             multiagent:
               T.nilable(
-                Anthropic::Beta::BetaManagedAgentsMultiagentParams::OrHash
+                T.any(
+                  Anthropic::Beta::BetaManagedAgentsMultiagentCoordinatorParams::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsMultiagent20261001Params::OrHash
+                )
               ),
             skills:
               T::Array[
@@ -272,7 +272,12 @@ module Anthropic
                 T::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams],
               metadata: T::Hash[Symbol, String],
               multiagent:
-                T.nilable(Anthropic::Beta::BetaManagedAgentsMultiagentParams),
+                T.nilable(
+                  T.any(
+                    Anthropic::Beta::BetaManagedAgentsMultiagentCoordinatorParams,
+                    Anthropic::Beta::BetaManagedAgentsMultiagent20261001Params
+                  )
+                ),
               skills:
                 T::Array[
                   T.any(

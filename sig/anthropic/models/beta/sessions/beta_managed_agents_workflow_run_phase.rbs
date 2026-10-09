@@ -1,0 +1,26 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_workflow_run_phase =
+          { id: String, description: String?, name: String }
+
+        class BetaManagedAgentsWorkflowRunPhase < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor description: String?
+
+          attr_accessor name: String
+
+          def initialize: (
+            id: String,
+            description: String?,
+            name: String
+          ) -> void
+
+          def to_hash: -> { id: String, description: String?, name: String }
+        end
+      end
+    end
+  end
+end

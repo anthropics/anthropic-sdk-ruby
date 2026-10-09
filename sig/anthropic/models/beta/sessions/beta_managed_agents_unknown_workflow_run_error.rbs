@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_unknown_workflow_run_error =
+          { message: String, type: :unknown_error }
+
+        class BetaManagedAgentsUnknownWorkflowRunError < Anthropic::Internal::Type::BaseModel
+          attr_accessor message: String
+
+          attr_accessor type: :unknown_error
+
+          def initialize: (message: String, ?type: :unknown_error) -> void
+
+          def to_hash: -> { message: String, type: :unknown_error }
+        end
+      end
+    end
+  end
+end

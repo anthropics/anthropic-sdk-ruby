@@ -42,6 +42,13 @@ module Anthropic
           SESSION_UPDATED = :"session.updated"
           SYSTEM_MESSAGE = :"system.message"
           SESSION_USAGE = :"session.usage"
+          WORKFLOW_RUN_CREATED = :"workflow_run.created"
+          WORKFLOW_RUN_STATUS_RUNNING = :"workflow_run.status_running"
+          WORKFLOW_RUN_STATUS_IDLE = :"workflow_run.status_idle"
+          WORKFLOW_RUN_STATUS_ENDED = :"workflow_run.status_ended"
+          WORKFLOW_RUN_ERROR = :"workflow_run.error"
+          WORKFLOW_RUN_PHASE_STARTED = :"workflow_run.phase_started"
+          WORKFLOW_RUN_PHASE_ENDED = :"workflow_run.phase_ended"
 
           # @!method self.values
           #   @return [Array<Symbol>]

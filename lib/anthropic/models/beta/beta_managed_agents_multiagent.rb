@@ -3,90 +3,60 @@
 module Anthropic
   module Models
     module Beta
-      class BetaManagedAgentsMultiagent < Anthropic::Internal::Type::BaseModel
-        # @!attribute agents
-        #   Agents the coordinator may spawn as session threads, each resolved to a specific
-        #   version.
-        #
-        #   @return [Array<Anthropic::Models::Beta::BetaManagedAgentsAgentReference, Anthropic::Models::Beta::BetaManagedAgentsAdvisor>]
-        required :agents,
-                 -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaManagedAgentsMultiagent::Agent] }
+      # Resolved multiagent orchestration configuration as returned in API responses.
+      module BetaManagedAgentsMultiagent
+        extend Anthropic::Internal::Type::Union
 
-        # @!attribute type
-        #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMultiagent::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsMultiagent::Type }
+        discriminator :type
 
-        # @!method initialize(agents:, type:)
-        #   Resolved multiagent orchestration configuration as returned in API responses.
-        #
-        #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Models::Beta::BetaManagedAgentsMultiagent} for more details.
-        #
-        #   @param agents [Array<Anthropic::Models::Beta::BetaManagedAgentsAgentReference, Anthropic::Models::Beta::BetaManagedAgentsAdvisor>] Agents the coordinator may spawn as session threads, each resolved to a specific
-        #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMultiagent::Type]
+        # Resolved coordinator topology with a concrete agent roster.
+        variant :coordinator, -> { Anthropic::Beta::BetaManagedAgentsMultiagentCoordinator }
 
-        # A resolved multiagent roster entry.
-        module Agent
-          extend Anthropic::Internal::Type::Union
+        # Resolved multiagent configuration with three members, each enabled or disabled on its own.
+        variant :multiagent_20261001, -> { Anthropic::Beta::BetaManagedAgentsMultiagent20261001 }
 
-          discriminator :type
-
-          # A resolved agent reference with a concrete version.
-          variant :agent, -> { Anthropic::Beta::BetaManagedAgentsAgentReference }
-
-          # Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
-          variant :advisor, -> { Anthropic::Beta::BetaManagedAgentsAdvisor }
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            AGENT = :agent
-            ADVISOR = :advisor
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
-
-          # @!method self.variants
-          #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsAgentReference, Anthropic::Models::Beta::BetaManagedAgentsAdvisor)]
-
-          # Creates a new instance of the variant class whose `type` matches the given
-          # value, passing the remaining arguments to its constructor.
-          #
-          # @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMultiagent::Agent::Type, String]
-          #
-          # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
-          #
-          #   @option args [String] :id
-          #
-          #   @option args [Integer] :version
-          #
-          #   @option args [String] :model The advisor model id.
-          #
-          # @raise [ArgumentError]
-          # @return [Anthropic::Models::Beta::BetaManagedAgentsAgentReference, Anthropic::Models::Beta::BetaManagedAgentsAdvisor]
-          def self.new(type:, **args)
-            case type.to_sym
-            when :agent
-              Anthropic::Beta::BetaManagedAgentsAgentReference.new(**args)
-            when :advisor
-              Anthropic::Beta::BetaManagedAgentsAdvisor.new(**args)
-            else
-              raise ArgumentError, "unknown type: #{type}"
-            end
-          end
-        end
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsMultiagent#type
         module Type
           extend Anthropic::Internal::Type::Enum
 
           COORDINATOR = :coordinator
+          MULTIAGENT_20261001 = :multiagent_20261001
 
           # @!method self.values
           #   @return [Array<Symbol>]
+        end
+
+        # @!method self.variants
+        #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsMultiagentCoordinator, Anthropic::Models::Beta::BetaManagedAgentsMultiagent20261001)]
+
+        # Creates a new instance of the variant class whose `type` matches the given
+        # value, passing the remaining arguments to its constructor.
+        #
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::BetaManagedAgentsMultiagent} for more details.
+        #
+        # @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMultiagent::Type, String]
+        #
+        # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+        #
+        #   @option args [Array<Anthropic::Models::Beta::BetaManagedAgentsAgentReference, Anthropic::Models::Beta::BetaManagedAgentsAdvisor>] :agents Agents the coordinator may spawn as session threads, each resolved to a specific
+        #
+        #   @option args [Anthropic::Models::Beta::BetaManagedAgentsMultiagentAdvisorEnabled, Anthropic::Models::Beta::BetaManagedAgentsMultiagentAdvisorDisabled] :advisor Whether the session's primary thread can consult an advisor model.
+        #
+        #   @option args [Anthropic::Models::Beta::BetaManagedAgentsMultiagentSubagentsEnabled, Anthropic::Models::Beta::BetaManagedAgentsMultiagentSubagentsDisabled] :subagents Whether the agent can spawn session threads.
+        #
+        #   @option args [Anthropic::Models::Beta::BetaManagedAgentsMultiagentWorkflowsEnabled, Anthropic::Models::Beta::BetaManagedAgentsMultiagentWorkflowsDisabled] :workflows Whether the agent can start workflow runs.
+        #
+        # @raise [ArgumentError]
+        # @return [Anthropic::Models::Beta::BetaManagedAgentsMultiagentCoordinator, Anthropic::Models::Beta::BetaManagedAgentsMultiagent20261001]
+        def self.new(type:, **args)
+          case type.to_sym
+          when :coordinator
+            Anthropic::Beta::BetaManagedAgentsMultiagentCoordinator.new(**args)
+          when :multiagent_20261001
+            Anthropic::Beta::BetaManagedAgentsMultiagent20261001.new(**args)
+          else
+            raise ArgumentError, "unknown type: #{type}"
+          end
         end
       end
     end

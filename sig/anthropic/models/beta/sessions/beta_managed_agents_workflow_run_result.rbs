@@ -1,0 +1,47 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_workflow_run_result =
+          Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResultCompleted
+          | Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResultError
+          | Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResultStopped
+
+        module BetaManagedAgentsWorkflowRunResult
+          extend Anthropic::Internal::Type::Union
+
+          type type_ = :completed | :error | :stopped
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            COMPLETED: :completed
+            ERROR: :error
+            STOPPED: :stopped
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsWorkflowRunResult::type_]
+          end
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_result]
+
+          def self.new:
+            (
+              type: :completed | "completed"
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResultCompleted
+            | (
+              type: :error | "error",
+              error: Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_error
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResultError
+            | (
+              type: :stopped | "stopped"
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResultStopped
+            | (
+              type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsWorkflowRunResult::type_
+              | String,
+              ?error: Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_error
+            ) -> Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_result
+        end
+      end
+    end
+  end
+end

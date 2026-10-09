@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module BetaManagedAgentsMultiagentPredefinedAgentParams = Beta::BetaManagedAgentsMultiagentPredefinedAgentParams
+
+    module Beta
+      type beta_managed_agents_multiagent_predefined_agent_params =
+        Anthropic::Beta::BetaManagedAgentsAgentParams
+        | Anthropic::Beta::BetaManagedAgentsMultiagentSelfParams
+        | String
+
+      module BetaManagedAgentsMultiagentPredefinedAgentParams
+        extend Anthropic::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_multiagent_predefined_agent_params]
+      end
+    end
+  end
+end

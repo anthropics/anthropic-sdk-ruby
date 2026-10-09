@@ -1,0 +1,40 @@
+module Anthropic
+  module Models
+    module BetaManagedAgentsMultiagentInlineAgents = Beta::BetaManagedAgentsMultiagentInlineAgents
+
+    module Beta
+      type beta_managed_agents_multiagent_inline_agents =
+        Anthropic::Beta::BetaManagedAgentsMultiagentInlineAgentsEnabled
+        | Anthropic::Beta::BetaManagedAgentsMultiagentInlineAgentsDisabled
+
+      module BetaManagedAgentsMultiagentInlineAgents
+        extend Anthropic::Internal::Type::Union
+
+        type type_ = :enabled | :disabled
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          ENABLED: :enabled
+          DISABLED: :disabled
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsMultiagentInlineAgents::type_]
+        end
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_multiagent_inline_agents]
+
+        def self.new:
+          (
+            type: :enabled | "enabled"
+          ) -> Anthropic::Beta::BetaManagedAgentsMultiagentInlineAgentsEnabled
+          | (
+            type: :disabled | "disabled"
+          ) -> Anthropic::Beta::BetaManagedAgentsMultiagentInlineAgentsDisabled
+          | (
+            type: Anthropic::Models::Beta::BetaManagedAgentsMultiagentInlineAgents::type_
+            | String
+          ) -> Anthropic::Models::Beta::beta_managed_agents_multiagent_inline_agents
+      end
+    end
+  end
+end

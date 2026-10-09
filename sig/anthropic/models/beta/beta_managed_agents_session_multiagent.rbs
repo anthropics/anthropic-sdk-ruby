@@ -1,0 +1,48 @@
+module Anthropic
+  module Models
+    module BetaManagedAgentsSessionMultiagent = Beta::BetaManagedAgentsSessionMultiagent
+
+    module Beta
+      type beta_managed_agents_session_multiagent =
+        Anthropic::Beta::BetaManagedAgentsSessionMultiagentCoordinator
+        | Anthropic::Beta::BetaManagedAgentsSessionMultiagent20261001
+
+      module BetaManagedAgentsSessionMultiagent
+        extend Anthropic::Internal::Type::Union
+
+        type type_ = :coordinator | :multiagent_20261001
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          COORDINATOR: :coordinator
+          MULTIAGENT_20261001: :multiagent_20261001
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagent::type_]
+        end
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_session_multiagent]
+
+        def self.new:
+          (
+            type: :coordinator | "coordinator",
+            agents: ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator::agent]
+          ) -> Anthropic::Beta::BetaManagedAgentsSessionMultiagentCoordinator
+          | (
+            type: :multiagent_20261001 | "multiagent_20261001",
+            advisor: Anthropic::Models::Beta::beta_managed_agents_multiagent_advisor,
+            subagents: Anthropic::Models::Beta::beta_managed_agents_session_multiagent_subagents,
+            workflows: Anthropic::Models::Beta::beta_managed_agents_session_multiagent_workflows
+          ) -> Anthropic::Beta::BetaManagedAgentsSessionMultiagent20261001
+          | (
+            type: Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagent::type_
+            | String,
+            ?agents: ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator::agent],
+            ?advisor: Anthropic::Models::Beta::beta_managed_agents_multiagent_advisor,
+            ?subagents: Anthropic::Models::Beta::beta_managed_agents_session_multiagent_subagents,
+            ?workflows: Anthropic::Models::Beta::beta_managed_agents_session_multiagent_workflows
+          ) -> Anthropic::Models::Beta::beta_managed_agents_session_multiagent
+      end
+    end
+  end
+end

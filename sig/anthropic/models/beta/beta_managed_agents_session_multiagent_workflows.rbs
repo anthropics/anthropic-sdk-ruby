@@ -1,0 +1,44 @@
+module Anthropic
+  module Models
+    module BetaManagedAgentsSessionMultiagentWorkflows = Beta::BetaManagedAgentsSessionMultiagentWorkflows
+
+    module Beta
+      type beta_managed_agents_session_multiagent_workflows =
+        Anthropic::Beta::BetaManagedAgentsSessionMultiagentWorkflowsEnabled
+        | Anthropic::Beta::BetaManagedAgentsMultiagentWorkflowsDisabled
+
+      module BetaManagedAgentsSessionMultiagentWorkflows
+        extend Anthropic::Internal::Type::Union
+
+        type type_ = :enabled | :disabled
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          ENABLED: :enabled
+          DISABLED: :disabled
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentWorkflows::type_]
+        end
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_session_multiagent_workflows]
+
+        def self.new:
+          (
+            type: :enabled | "enabled",
+            inline_agents: Anthropic::Models::Beta::beta_managed_agents_multiagent_inline_agents,
+            predefined_agents: ::Array[Anthropic::Beta::BetaManagedAgentsSessionThreadAgent]
+          ) -> Anthropic::Beta::BetaManagedAgentsSessionMultiagentWorkflowsEnabled
+          | (
+            type: :disabled | "disabled"
+          ) -> Anthropic::Beta::BetaManagedAgentsMultiagentWorkflowsDisabled
+          | (
+            type: Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentWorkflows::type_
+            | String,
+            ?inline_agents: Anthropic::Models::Beta::beta_managed_agents_multiagent_inline_agents,
+            ?predefined_agents: ::Array[Anthropic::Beta::BetaManagedAgentsSessionThreadAgent]
+          ) -> Anthropic::Models::Beta::beta_managed_agents_session_multiagent_workflows
+      end
+    end
+  end
+end

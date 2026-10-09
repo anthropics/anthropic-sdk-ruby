@@ -48,13 +48,15 @@ module Anthropic
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Sessions::ThreadListParams} for more details.
           #
-          # @overload list(session_id, limit: nil, page: nil, betas: nil, workspace_id: nil, request_options: {})
+          # @overload list(session_id, limit: nil, page: nil, statuses: nil, betas: nil, workspace_id: nil, request_options: {})
           #
           # @param session_id [String] Path param
           #
           # @param limit [Integer] Query param: Maximum results per page. Defaults to 1000.
           #
           # @param page [String] Query param: Opaque pagination cursor from a previous response's `next_page`. Fo
+          #
+          # @param statuses [Array<Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatus>] Query param: Return only threads that have one of these statuses.
           #
           # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #
@@ -66,7 +68,7 @@ module Anthropic
           #
           # @see Anthropic::Models::Beta::Sessions::ThreadListParams
           def list(session_id, params = {})
-            query_params = [:limit, :page]
+            query_params = [:limit, :page, :statuses]
             parsed, options = Anthropic::Beta::Sessions::ThreadListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(

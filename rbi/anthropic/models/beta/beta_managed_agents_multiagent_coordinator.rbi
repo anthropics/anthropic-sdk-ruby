@@ -20,10 +20,7 @@ module Anthropic
         sig do
           returns(
             T::Array[
-              T.any(
-                Anthropic::Beta::BetaManagedAgentsAgentReference,
-                Anthropic::Beta::BetaManagedAgentsAdvisor
-              )
+              Anthropic::Beta::BetaManagedAgentsMultiagentCoordinator::Agent::Variants
             ]
           )
         end
@@ -31,7 +28,7 @@ module Anthropic
 
         sig do
           returns(
-            Anthropic::Beta::BetaManagedAgentsMultiagentCoordinator::Type::OrSymbol
+            Anthropic::Beta::BetaManagedAgentsMultiagentCoordinator::Type::TaggedSymbol
           )
         end
         attr_accessor :type
@@ -63,13 +60,10 @@ module Anthropic
             {
               agents:
                 T::Array[
-                  T.any(
-                    Anthropic::Beta::BetaManagedAgentsAgentReference,
-                    Anthropic::Beta::BetaManagedAgentsAdvisor
-                  )
+                  Anthropic::Beta::BetaManagedAgentsMultiagentCoordinator::Agent::Variants
                 ],
               type:
-                Anthropic::Beta::BetaManagedAgentsMultiagentCoordinator::Type::OrSymbol
+                Anthropic::Beta::BetaManagedAgentsMultiagentCoordinator::Type::TaggedSymbol
             }
           )
         end

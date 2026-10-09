@@ -1,0 +1,152 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_inline_agent =
+          {
+            description: String?,
+            mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition],
+            model: Anthropic::Beta::BetaManagedAgentsModelConfig,
+            name: String,
+            skills: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsInlineAgent::skill],
+            system_: String?,
+            tools: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsInlineAgent::tool],
+            type: :inline
+          }
+
+        class BetaManagedAgentsInlineAgent < Anthropic::Internal::Type::BaseModel
+          attr_accessor description: String?
+
+          attr_accessor mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition]
+
+          attr_accessor model: Anthropic::Beta::BetaManagedAgentsModelConfig
+
+          attr_accessor name: String
+
+          attr_accessor skills: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsInlineAgent::skill]
+
+          attr_accessor system_: String?
+
+          attr_accessor tools: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsInlineAgent::tool]
+
+          attr_accessor type: :inline
+
+          def initialize: (
+            description: String?,
+            mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition],
+            model: Anthropic::Beta::BetaManagedAgentsModelConfig,
+            name: String,
+            skills: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsInlineAgent::skill],
+            system_: String?,
+            tools: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsInlineAgent::tool],
+            ?type: :inline
+          ) -> void
+
+          def to_hash: -> {
+            description: String?,
+            mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition],
+            model: Anthropic::Beta::BetaManagedAgentsModelConfig,
+            name: String,
+            skills: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsInlineAgent::skill],
+            system_: String?,
+            tools: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsInlineAgent::tool],
+            type: :inline
+          }
+
+          type skill =
+            Anthropic::Beta::BetaManagedAgentsAnthropicSkill
+            | Anthropic::Beta::BetaManagedAgentsCustomSkill
+
+          module Skill
+            extend Anthropic::Internal::Type::Union
+
+            type type_ = :anthropic | :custom
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              ANTHROPIC: :anthropic
+              CUSTOM: :custom
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsInlineAgent::Skill::type_]
+            end
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsInlineAgent::skill]
+
+            def self.new:
+              (
+                type: :anthropic | "anthropic",
+                skill_id: String,
+                version: String
+              ) -> Anthropic::Beta::BetaManagedAgentsAnthropicSkill
+              | (
+                type: :custom | "custom",
+                skill_id: String,
+                version: String
+              ) -> Anthropic::Beta::BetaManagedAgentsCustomSkill
+              | (
+                type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsInlineAgent::Skill::type_
+                | String,
+                skill_id: String,
+                version: String
+              ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsInlineAgent::skill
+          end
+
+          type tool =
+            Anthropic::Beta::BetaManagedAgentsAgentToolset20260401
+            | Anthropic::Beta::BetaManagedAgentsMCPToolset
+            | Anthropic::Beta::BetaManagedAgentsCustomTool
+
+          module Tool
+            extend Anthropic::Internal::Type::Union
+
+            type type_ = :agent_toolset_20260401 | :mcp_toolset | :custom
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              AGENT_TOOLSET_20260401: :agent_toolset_20260401
+              MCP_TOOLSET: :mcp_toolset
+              CUSTOM: :custom
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsInlineAgent::Tool::type_]
+            end
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsInlineAgent::tool]
+
+            def self.new:
+              (
+                type: :agent_toolset_20260401 | "agent_toolset_20260401",
+                configs: ::Array[Anthropic::Models::Beta::beta_managed_agents_agent_tool_config],
+                default_config: Anthropic::Beta::BetaManagedAgentsAgentToolsetDefaultConfig
+              ) -> Anthropic::Beta::BetaManagedAgentsAgentToolset20260401
+              | (
+                type: :mcp_toolset | "mcp_toolset",
+                configs: ::Array[Anthropic::Beta::BetaManagedAgentsMCPToolConfig],
+                default_config: Anthropic::Beta::BetaManagedAgentsMCPToolsetDefaultConfig,
+                mcp_server_name: String
+              ) -> Anthropic::Beta::BetaManagedAgentsMCPToolset
+              | (
+                type: :custom | "custom",
+                description: String,
+                input_schema: Anthropic::Beta::BetaManagedAgentsCustomToolInputSchema,
+                name: String
+              ) -> Anthropic::Beta::BetaManagedAgentsCustomTool
+              | (
+                type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsInlineAgent::Tool::type_
+                | String,
+                ?configs: ::Array[Anthropic::Models::Beta::beta_managed_agents_agent_tool_config]
+                | ::Array[Anthropic::Beta::BetaManagedAgentsMCPToolConfig],
+                ?default_config: Anthropic::Beta::BetaManagedAgentsAgentToolsetDefaultConfig
+                | Anthropic::Beta::BetaManagedAgentsMCPToolsetDefaultConfig,
+                ?mcp_server_name: String,
+                ?description: String,
+                ?input_schema: Anthropic::Beta::BetaManagedAgentsCustomToolInputSchema,
+                ?name: String
+              ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsInlineAgent::tool
+          end
+        end
+      end
+    end
+  end
+end

@@ -58,6 +58,13 @@ class Anthropic::Test::Resources::Beta::Sessions::Threads::EventsTest < Anthropi
       in Anthropic::Beta::BetaManagedAgentsSessionUpdatedEvent
       in Anthropic::Beta::BetaManagedAgentsSystemMessageEvent
       in Anthropic::Beta::BetaManagedAgentsSessionUsageEvent
+      in Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunCreatedEvent
+      in Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunStatusEndedEvent
+      in Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunPhaseStartedEvent
+      in Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunPhaseEndedEvent
+      in Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunStatusRunningEvent
+      in Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunStatusIdleEvent
+      in Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunErrorEvent
       end
     end
 
@@ -173,7 +180,14 @@ class Anthropic::Test::Resources::Beta::Sessions::Threads::EventsTest < Anthropi
         stop_reason: Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent::StopReason
       }
       in {type: :"session.status_terminated", id: String, processed_at: Time}
-      in {type: :"session.thread_created", id: String, agent_name: String, processed_at: Time, session_thread_id: String}
+      in {
+        type: :"session.thread_created",
+        id: String,
+        agent_name: String,
+        processed_at: Time,
+        session_thread_id: String,
+        workflow_run_id: String | nil
+      }
       in {type: :"span.outcome_evaluation_start", id: String, iteration: Integer, outcome_id: String, processed_at: Time}
       in {
         type: :"span.outcome_evaluation_end",
@@ -266,6 +280,46 @@ class Anthropic::Test::Resources::Beta::Sessions::Threads::EventsTest < Anthropi
         processed_at: Time,
         usage: Anthropic::Beta::Sessions::BetaManagedAgentsSessionUsageSnapshot,
         budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit | nil
+      }
+      in {
+        type: :"workflow_run.created",
+        id: String,
+        description: String | nil,
+        name: String,
+        phases: ^(Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunPhase]),
+        processed_at: Time,
+        workflow_run_id: String
+      }
+      in {
+        type: :"workflow_run.status_ended",
+        id: String,
+        processed_at: Time,
+        result: Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResult,
+        workflow_run_id: String
+      }
+      in {
+        type: :"workflow_run.phase_started",
+        id: String,
+        processed_at: Time,
+        workflow_run_id: String,
+        workflow_run_phase_id: String
+      }
+      in {
+        type: :"workflow_run.phase_ended",
+        id: String,
+        phase_started_id: String,
+        processed_at: Time,
+        workflow_run_id: String,
+        workflow_run_phase_id: String
+      }
+      in {type: :"workflow_run.status_running", id: String, processed_at: Time, workflow_run_id: String}
+      in {type: :"workflow_run.status_idle", id: String, processed_at: Time, workflow_run_id: String}
+      in {
+        type: :"workflow_run.error",
+        id: String,
+        error: Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunError,
+        processed_at: Time,
+        workflow_run_id: String | nil
       }
       end
     end

@@ -49,8 +49,8 @@ module Anthropic
         # @!attribute multiagent
         #   Multiagent orchestration configuration.
         #
-        #   @return [Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams, nil]
-        optional :multiagent, -> { Anthropic::Beta::BetaManagedAgentsMultiagentParams }, nil?: true
+        #   @return [Anthropic::Models::Beta::BetaManagedAgentsMultiagentCoordinatorParams, Anthropic::Models::Beta::BetaManagedAgentsMultiagent20261001Params, nil]
+        optional :multiagent, union: -> { Anthropic::Beta::BetaManagedAgentsMultiagentParams }, nil?: true
 
         # @!attribute skills
         #   Skills available to the agent.
@@ -104,7 +104,7 @@ module Anthropic
         #
         #   @param metadata [Hash{Symbol=>String}] Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up t
         #
-        #   @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams, nil] Multiagent orchestration configuration.
+        #   @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsMultiagentCoordinatorParams, Anthropic::Models::Beta::BetaManagedAgentsMultiagent20261001Params, nil] Multiagent orchestration configuration.
         #
         #   @param skills [Array<Anthropic::Models::Beta::BetaManagedAgentsAnthropicSkillParams, Anthropic::Models::Beta::BetaManagedAgentsCustomSkillParams>] Skills available to the agent.
         #

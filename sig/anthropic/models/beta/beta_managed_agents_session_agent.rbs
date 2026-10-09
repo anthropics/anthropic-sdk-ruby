@@ -9,7 +9,7 @@ module Anthropic
           description: String?,
           mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition],
           model: Anthropic::Beta::BetaManagedAgentsModelConfig,
-          multiagent: Anthropic::Beta::BetaManagedAgentsSessionMultiagentCoordinator?,
+          multiagent: Anthropic::Models::Beta::beta_managed_agents_session_multiagent?,
           name: String,
           skills: ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionAgent::skill],
           system_: String?,
@@ -27,7 +27,7 @@ module Anthropic
 
         attr_accessor model: Anthropic::Beta::BetaManagedAgentsModelConfig
 
-        attr_accessor multiagent: Anthropic::Beta::BetaManagedAgentsSessionMultiagentCoordinator?
+        attr_accessor multiagent: Anthropic::Models::Beta::beta_managed_agents_session_multiagent?
 
         attr_accessor name: String
 
@@ -46,7 +46,7 @@ module Anthropic
           description: String?,
           mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition],
           model: Anthropic::Beta::BetaManagedAgentsModelConfig,
-          multiagent: Anthropic::Beta::BetaManagedAgentsSessionMultiagentCoordinator?,
+          multiagent: Anthropic::Models::Beta::beta_managed_agents_session_multiagent?,
           name: String,
           skills: ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionAgent::skill],
           system_: String?,
@@ -60,7 +60,7 @@ module Anthropic
           description: String?,
           mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition],
           model: Anthropic::Beta::BetaManagedAgentsModelConfig,
-          multiagent: Anthropic::Beta::BetaManagedAgentsSessionMultiagentCoordinator?,
+          multiagent: Anthropic::Models::Beta::beta_managed_agents_session_multiagent?,
           name: String,
           skills: ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionAgent::skill],
           system_: String?,

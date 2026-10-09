@@ -43,6 +43,10 @@ module Anthropic
               session_id: String,
               limit: Integer,
               page: String,
+              statuses:
+                T::Array[
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatus::OrSymbol
+                ],
               betas:
                 T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               workspace_id: String,
@@ -61,6 +65,11 @@ module Anthropic
             # Query param: Opaque pagination cursor from a previous response's `next_page`.
             # Forward-only.
             page: nil,
+            # Query param: Return only threads that have one of these statuses.
+            #
+            # Repeat the parameter to give more than one status. Leave it out to return
+            # threads of every status.
+            statuses: nil,
             # Header param: Optional header to specify the beta version(s) you want to use.
             betas: nil,
             # Header param: Optional header to select the Workspace for this request. The

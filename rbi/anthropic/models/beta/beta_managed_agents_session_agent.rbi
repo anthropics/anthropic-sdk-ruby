@@ -43,21 +43,11 @@ module Anthropic
         sig do
           returns(
             T.nilable(
-              Anthropic::Beta::BetaManagedAgentsSessionMultiagentCoordinator
+              Anthropic::Beta::BetaManagedAgentsSessionMultiagent::Variants
             )
           )
         end
-        attr_reader :multiagent
-
-        sig do
-          params(
-            multiagent:
-              T.nilable(
-                Anthropic::Beta::BetaManagedAgentsSessionMultiagentCoordinator::OrHash
-              )
-          ).void
-        end
-        attr_writer :multiagent
+        attr_accessor :multiagent
 
         sig { returns(String) }
         attr_accessor :name
@@ -106,7 +96,10 @@ module Anthropic
             model: Anthropic::Beta::BetaManagedAgentsModelConfig::OrHash,
             multiagent:
               T.nilable(
-                Anthropic::Beta::BetaManagedAgentsSessionMultiagentCoordinator::OrHash
+                T.any(
+                  Anthropic::Beta::BetaManagedAgentsSessionMultiagentCoordinator::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsSessionMultiagent20261001::OrHash
+                )
               ),
             name: String,
             skills:
@@ -160,7 +153,7 @@ module Anthropic
               model: Anthropic::Beta::BetaManagedAgentsModelConfig,
               multiagent:
                 T.nilable(
-                  Anthropic::Beta::BetaManagedAgentsSessionMultiagentCoordinator
+                  Anthropic::Beta::BetaManagedAgentsSessionMultiagent::Variants
                 ),
               name: String,
               skills:

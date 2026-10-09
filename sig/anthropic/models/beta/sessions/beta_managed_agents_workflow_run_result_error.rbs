@@ -1,0 +1,29 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_workflow_run_result_error =
+          {
+            error: Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_error,
+            type: :error
+          }
+
+        class BetaManagedAgentsWorkflowRunResultError < Anthropic::Internal::Type::BaseModel
+          attr_accessor error: Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_error
+
+          attr_accessor type: :error
+
+          def initialize: (
+            error: Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_error,
+            ?type: :error
+          ) -> void
+
+          def to_hash: -> {
+            error: Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_error,
+            type: :error
+          }
+        end
+      end
+    end
+  end
+end

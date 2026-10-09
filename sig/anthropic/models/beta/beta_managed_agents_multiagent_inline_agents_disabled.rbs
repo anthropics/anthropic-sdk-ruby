@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsMultiagentInlineAgentsDisabled = Beta::BetaManagedAgentsMultiagentInlineAgentsDisabled
+
+    module Beta
+      type beta_managed_agents_multiagent_inline_agents_disabled =
+        { type: :disabled }
+
+      class BetaManagedAgentsMultiagentInlineAgentsDisabled < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :disabled
+
+        def initialize: (?type: :disabled) -> void
+
+        def to_hash: -> { type: :disabled }
+      end
+    end
+  end
+end
