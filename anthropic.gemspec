@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
     "manifest.yaml",
     "SECURITY.md",
     "CHANGELOG.md",
+    "LICENSE*",
     ".ignore"
   ]
   s.extra_rdoc_files = ["README.md"]
