@@ -674,6 +674,34 @@ class Anthropic::Test::Resources::Messages::StreamingTest < Minitest::Test
     assert_nil(message.stop_sequence)
   end
 
+  def message_stream(events)
+    raw_events = events.map do
+      Anthropic::Internal::Type::Converter.coerce(Anthropic::Models::RawMessageStreamEvent, _1)
+    end
+    raw_stream = Struct.new(:events, :status, :headers) { def each(&blk) = events.each(&blk) }
+    Anthropic::Streaming::MessageStream.new(raw_stream: raw_stream.new(raw_events, 200, {}))
+  end
+
+  def test_events_of_an_unknown_type_pass_through_unaccumulated
+    known = basic_sse_response.scan(/^data: (.+)$/).flatten.map { JSON.parse(_1, symbolize_names: true) }
+    expected_types = message_stream(known).map(&:type)
+    expected_message = message_stream(known).accumulated_message.to_h
+
+    [
+      {note: "x"},
+      {usage: {input_tokens: 1, output_tokens: 2}},
+      {index: 0, delta: {type: "text_delta", text: "unknown"}},
+      {message: {id: "msg_unknown"}}
+    ].product((0..known.length).to_a) do |fields, position|
+      stream = message_stream(known.dup.insert(position, {type: "unknown_event", **fields}))
+      types = stream.map(&:type)
+
+      assert_equal(1, types.count("unknown_event"))
+      assert_equal(expected_types, types - ["unknown_event"])
+      assert_equal(expected_message, stream.accumulated_message.to_h)
+    end
+  end
+
   def test_message_delta_fields_are_all_handled_by_accumulate_event
     # tripwire: handle a new field in MessageStream#accumulate_event, then list it here.
     # Beta-only fields are gated on BetaRawMessageDeltaEvent there, so a field graduating

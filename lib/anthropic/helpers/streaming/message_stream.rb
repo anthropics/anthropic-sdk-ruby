@@ -24,6 +24,13 @@ module Anthropic
         private def iterator
           @iterator ||= Anthropic::Internal::Util.chain_fused(@stream) do |y|
             @raw_stream.each do |raw_event|
+              # An event of a type this version doesn't know arrives as the closest known class, with
+              # `type` left as a String.
+              unless raw_event.type.is_a?(Symbol)
+                y << raw_event
+                next
+              end
+
               @accumated_message_snapshot = accumulate_event(
                 event: raw_event,
                 current_snapshot: @accumated_message_snapshot
@@ -96,18 +103,11 @@ module Anthropic
             raise ArgumentError.new(message)
           end
 
-          if current_snapshot.nil?
-            return event.message if event.type == :message_start
-
-            message = "Unexpected event order, got \"#{event.type}\" before \":message_start\""
-            raise RuntimeError.new(message)
-          end
-
           case event
           in Anthropic::Models::RawMessageStartEvent
-            # `coerce` returns `event.message` itself when it is already a Message (as does the
-            # first-event return above), so the snapshot *is* the message_start event's message
-            # and the branches below mutate it in place rather than an isolated copy.
+            # `coerce` returns `event.message` itself when it is already a Message, so the snapshot *is*
+            # the message_start event's message and the branches below mutate it in place rather than
+            # an isolated copy.
             return Anthropic::Internal::Type::Converter.coerce(Anthropic::Models::Message, event.message)
           in Anthropic::Models::BetaRawMessageStartEvent
             return Anthropic::Internal::Type::Converter.coerce(Anthropic::Models::BetaMessage, event.message)

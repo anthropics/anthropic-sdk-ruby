@@ -10,6 +10,7 @@
 ### Bug Fixes
 
 * **client:** keep the discriminator when a union's .new builds a variant
+* **streaming:** pass events of an unknown type through the message stream helper untouched
 
 
 ### Chores
