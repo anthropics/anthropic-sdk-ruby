@@ -24,7 +24,8 @@ module Anthropic
         # The accepted values depend on the organization type. Console and API
         # organizations accept `user`, `developer`, `billing`, and `claude_code_user`;
         # `admin` cannot be assigned through the API. Claude Enterprise organizations
-        # accept `user` and `managed`.
+        # accept `user` and `managed`; changing a User's role to `managed` requires the
+        # `write:rbac_groups` scope in addition to `write:members`.
         sig do
           returns(Anthropic::Organization::UserUpdateParams::Role::OrSymbol)
         end
@@ -45,7 +46,8 @@ module Anthropic
           # The accepted values depend on the organization type. Console and API
           # organizations accept `user`, `developer`, `billing`, and `claude_code_user`;
           # `admin` cannot be assigned through the API. Claude Enterprise organizations
-          # accept `user` and `managed`.
+          # accept `user` and `managed`; changing a User's role to `managed` requires the
+          # `write:rbac_groups` scope in addition to `write:members`.
           role:,
           request_options: {}
         )
@@ -68,7 +70,8 @@ module Anthropic
         # The accepted values depend on the organization type. Console and API
         # organizations accept `user`, `developer`, `billing`, and `claude_code_user`;
         # `admin` cannot be assigned through the API. Claude Enterprise organizations
-        # accept `user` and `managed`.
+        # accept `user` and `managed`; changing a User's role to `managed` requires the
+        # `write:rbac_groups` scope in addition to `write:members`.
         module Role
           extend Anthropic::Internal::Type::Enum
 
