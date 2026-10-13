@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.79.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.78.0...v1.79.0) (2026-10-10)
+## [1.79.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.78.0...v1.79.0) (2026-10-13)
 
 ### Features
 
@@ -18,6 +18,7 @@
 * **docs:** correct prefill, thinking, fallback and model descriptions
 * **docs:** update model examples
 * include the license files in the published packages
+* **internal:** narrow the tripwire test rule in the contributor guides
 
 
 ### Documentation
