@@ -25,6 +25,9 @@ module Anthropic
         def retrieve(deployment_run_id, params = {})
           parsed, options = Anthropic::Beta::DeploymentRunRetrieveParams.dump_request(params)
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::DEPLOYMENT_RUNS_RETRIEVE,
+            span_attributes: {"anthropic.deployment_run.id" => deployment_run_id},
+            span_route: "/v1/deployment_runs/{deployment_run_id}",
             method: :get,
             path: ["v1/deployment_runs/%1$s?beta=true", deployment_run_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
@@ -83,6 +86,19 @@ module Anthropic
           parsed, options = Anthropic::Beta::DeploymentRunListParams.dump_request(params)
           query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::DEPLOYMENT_RUNS_LIST,
+            span_route: "/v1/deployment_runs",
+            span_query: %w[
+              created_at[gt]
+              created_at[gte]
+              created_at[lt]
+              created_at[lte]
+              deployment_id
+              has_error
+              limit
+              page
+              trigger_type
+            ],
             method: :get,
             path: "v1/deployment_runs?beta=true",
             query: query.transform_keys(

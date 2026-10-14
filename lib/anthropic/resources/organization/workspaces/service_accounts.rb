@@ -36,6 +36,12 @@ module Anthropic
                 raise ArgumentError.new("missing required path argument #{_1}")
               end
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_WORKSPACES_SERVICE_ACCOUNTS_RETRIEVE,
+              span_attributes: {
+                "anthropic.organization.workspace.id" => workspace_id,
+                "anthropic.organization.workspace.service_account.id" => service_account_id
+              },
+              span_route: "/v1/organizations/workspaces/{workspace_id}/service_accounts/{service_account_id}",
               method: :get,
               path: [
                 "v1/organizations/workspaces/%1$s/service_accounts/%2$s",
@@ -80,6 +86,12 @@ module Anthropic
                 raise ArgumentError.new("missing required path argument #{_1}")
               end
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_WORKSPACES_SERVICE_ACCOUNTS_UPDATE,
+              span_attributes: {
+                "anthropic.organization.workspace.id" => workspace_id,
+                "anthropic.organization.workspace.service_account.id" => service_account_id
+              },
+              span_route: "/v1/organizations/workspaces/{workspace_id}/service_accounts/{service_account_id}",
               method: :post,
               path: [
                 "v1/organizations/workspaces/%1$s/service_accounts/%2$s",
@@ -122,6 +134,10 @@ module Anthropic
             parsed, options = Anthropic::Organization::Workspaces::ServiceAccountListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed)
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_WORKSPACES_SERVICE_ACCOUNTS_LIST,
+              span_attributes: {"anthropic.organization.workspace.id" => workspace_id},
+              span_route: "/v1/organizations/workspaces/{workspace_id}/service_accounts",
+              span_query: %w[limit page],
               method: :get,
               path: ["v1/organizations/workspaces/%1$s/service_accounts", workspace_id],
               query: query,
@@ -162,6 +178,10 @@ module Anthropic
           def add(workspace_id, params)
             parsed, options = Anthropic::Organization::Workspaces::ServiceAccountAddParams.dump_request(params)
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_WORKSPACES_SERVICE_ACCOUNTS_ADD,
+              span_attributes: {"anthropic.organization.workspace.id" => workspace_id},
+              span_created_id: {"anthropic.organization.workspace.service_account.id" => :service_account_id},
+              span_route: "/v1/organizations/workspaces/{workspace_id}/service_accounts",
               method: :post,
               path: ["v1/organizations/workspaces/%1$s/service_accounts", workspace_id],
               body: parsed,
@@ -201,6 +221,12 @@ module Anthropic
                 raise ArgumentError.new("missing required path argument #{_1}")
               end
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_WORKSPACES_SERVICE_ACCOUNTS_REMOVE,
+              span_attributes: {
+                "anthropic.organization.workspace.id" => workspace_id,
+                "anthropic.organization.workspace.service_account.id" => service_account_id
+              },
+              span_route: "/v1/organizations/workspaces/{workspace_id}/service_accounts/{service_account_id}",
               method: :delete,
               path: [
                 "v1/organizations/workspaces/%1$s/service_accounts/%2$s",

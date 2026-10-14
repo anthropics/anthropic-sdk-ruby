@@ -56,6 +56,8 @@ module Anthropic
         end
         header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
         @client.request(
+          span_name: Anthropic::Internal::Tracing::SpanName::COMPLETIONS_CREATE,
+          span_route: "/v1/complete",
           method: :post,
           path: "v1/complete",
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
@@ -106,7 +108,7 @@ module Anthropic
       #
       # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Anthropic::Internal::Stream<Anthropic::Models::Completion>]
+      # @return [Anthropic::Internal::Type::BaseStream<Anthropic::Models::Completion>]
       #
       # @see Anthropic::Models::CompletionCreateParams
       def create_streaming(params)
@@ -118,6 +120,8 @@ module Anthropic
         parsed.store(:stream, true)
         header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
         @client.request(
+          span_name: Anthropic::Internal::Tracing::SpanName::COMPLETIONS_CREATE,
+          span_route: "/v1/complete",
           method: :post,
           path: "v1/complete",
           headers: {

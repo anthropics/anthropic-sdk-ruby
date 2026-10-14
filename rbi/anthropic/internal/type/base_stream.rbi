@@ -7,6 +7,8 @@ module Anthropic
       #
       # This module provides a base implementation for streaming responses in the SDK.
       module BaseStream
+        # Before `Enumerable`, so that `Enumerable#select` stays ahead of `Kernel#select`, as it is at run time.
+        include Kernel
         include Enumerable
 
         Message = type_member(:in)

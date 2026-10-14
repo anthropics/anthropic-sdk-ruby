@@ -20,7 +20,8 @@ module Anthropic
         #   The accepted values depend on the organization type. Console and API
         #   organizations accept `user`, `developer`, `billing`, and `claude_code_user`;
         #   `admin` cannot be assigned through the API. Claude Enterprise organizations
-        #   accept `user` and `managed`.
+        #   accept `user` and `managed`; inviting with the `managed` role requires the
+        #   `write:rbac_groups` scope in addition to `write:members`.
         #
         #   @return [Symbol, Anthropic::Models::Organization::InviteCreateParams::Role]
         required :role, enum: -> { Anthropic::Organization::InviteCreateParams::Role }
@@ -50,7 +51,8 @@ module Anthropic
         # The accepted values depend on the organization type. Console and API
         # organizations accept `user`, `developer`, `billing`, and `claude_code_user`;
         # `admin` cannot be assigned through the API. Claude Enterprise organizations
-        # accept `user` and `managed`.
+        # accept `user` and `managed`; inviting with the `managed` role requires the
+        # `write:rbac_groups` scope in addition to `write:members`.
         module Role
           extend Anthropic::Internal::Type::Enum
 

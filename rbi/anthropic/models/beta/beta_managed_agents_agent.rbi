@@ -28,6 +28,13 @@ module Anthropic
         sig { returns(T.nilable(String)) }
         attr_accessor :description
 
+        # Execution principal for runs of this agent. Always present;
+        # `{"type": "service_account"}` when runs carry no customer-named principal.
+        sig do
+          returns(Anthropic::Beta::BetaManagedAgentsExecutionIdentity::Variants)
+        end
+        attr_accessor :execution_identity
+
         sig do
           returns(
             T::Array[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition]
@@ -98,6 +105,11 @@ module Anthropic
             archived_at: T.nilable(Time),
             created_at: Time,
             description: T.nilable(String),
+            execution_identity:
+              T.any(
+                Anthropic::Beta::BetaManagedAgentsAWSRoleExecutionIdentity::OrHash,
+                Anthropic::Beta::BetaManagedAgentsServiceAccountExecutionIdentity::OrHash
+              ),
             mcp_servers:
               T::Array[
                 Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition::OrHash
@@ -140,6 +152,9 @@ module Anthropic
           # A timestamp in RFC 3339 format
           created_at:,
           description:,
+          # Execution principal for runs of this agent. Always present;
+          # `{"type": "service_account"}` when runs carry no customer-named principal.
+          execution_identity:,
           mcp_servers:,
           metadata:,
           # Model identifier and configuration.
@@ -166,6 +181,8 @@ module Anthropic
               archived_at: T.nilable(Time),
               created_at: Time,
               description: T.nilable(String),
+              execution_identity:
+                Anthropic::Beta::BetaManagedAgentsExecutionIdentity::Variants,
               mcp_servers:
                 T::Array[
                   Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition

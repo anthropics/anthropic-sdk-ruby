@@ -21,6 +21,8 @@ module Anthropic
           # @see Anthropic::Models::Beta::Organization::ComplianceSettingRetrieveParams
           def retrieve(params = {})
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_COMPLIANCE_SETTINGS_RETRIEVE,
+              span_route: "/v1/organizations/compliance_settings",
               method: :get,
               path: "v1/organizations/compliance_settings?beta=true",
               model: Anthropic::Beta::Organization::BetaComplianceSettings,
@@ -58,6 +60,8 @@ module Anthropic
           def update(params)
             parsed, options = Anthropic::Beta::Organization::ComplianceSettingUpdateParams.dump_request(params)
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_COMPLIANCE_SETTINGS_UPDATE,
+              span_route: "/v1/organizations/compliance_settings",
               method: :post,
               path: "v1/organizations/compliance_settings?beta=true",
               body: parsed,

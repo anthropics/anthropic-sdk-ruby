@@ -27,10 +27,7 @@ module Anthropic
           sig { returns(T.nilable(String)) }
           attr_accessor :page
 
-          # Return only limits with these scope types. A Claude Console organization has
-          # `organization` and `workspace` limits; a Claude Enterprise organization has
-          # `organization`, `seat_tier`, `rbac_group`, `organization_service` and `user`
-          # limits. Omit for all.
+          # Return only limits with these scope types. Omit for all.
           sig do
             returns(
               T.nilable(
@@ -80,10 +77,7 @@ module Anthropic
             limit: nil,
             # Opaque cursor from a previous response's `next_page` field.
             page: nil,
-            # Return only limits with these scope types. A Claude Console organization has
-            # `organization` and `workspace` limits; a Claude Enterprise organization has
-            # `organization`, `seat_tier`, `rbac_group`, `organization_service` and `user`
-            # limits. Omit for all.
+            # Return only limits with these scope types. Omit for all.
             scope_type: nil,
             # This endpoint is in beta: requests must send `spend-limit-reads-2026-09-26` in
             # this header.

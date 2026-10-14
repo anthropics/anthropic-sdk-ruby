@@ -23,6 +23,7 @@ class Anthropic::Test::Resources::Beta::Agents::VersionsTest < Anthropic::Test::
         archived_at: Time | nil,
         created_at: Time,
         description: String | nil,
+        execution_identity: Anthropic::Beta::BetaManagedAgentsExecutionIdentity,
         mcp_servers: ^(Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition]),
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
         model: Anthropic::Beta::BetaManagedAgentsModelConfig,

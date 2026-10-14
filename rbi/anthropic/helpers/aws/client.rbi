@@ -24,7 +24,9 @@ module Anthropic
             max_retries: Integer,
             timeout: T.nilable(Float),
             initial_retry_delay: Float,
-            max_retry_delay: Float
+            max_retry_delay: Float,
+            open_telemetry:
+              T.nilable(T.any(T::Boolean, Anthropic::Internal::AnyHash))
           ).returns(T.attached_class)
         end
         def self.new(
@@ -42,7 +44,9 @@ module Anthropic
           # `Anthropic::Client::DEFAULT_TIMEOUT_IN_SECONDS` when `nil`.
           timeout: nil,
           initial_retry_delay: Anthropic::Client::DEFAULT_INITIAL_RETRY_DELAY,
-          max_retry_delay: Anthropic::Client::DEFAULT_MAX_RETRY_DELAY
+          max_retry_delay: Anthropic::Client::DEFAULT_MAX_RETRY_DELAY,
+          # OpenTelemetry tracing of this client's API calls. See {Anthropic::Client}.
+          open_telemetry: nil
         )
         end
 

@@ -47,6 +47,10 @@ module Anthropic
               parsed, options = Anthropic::Beta::Organization::Analytics::SkillListParams.dump_request(params)
               query = Anthropic::Internal::Util.encode_query_params(parsed)
               @client.request(
+                span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_ANALYTICS_SKILLS_LIST,
+                span_route: "/v1/organizations/analytics/skills",
+                span_query: %w[date ending_date filter group_by limit order order_by page starting_date],
+                span_content_query: %w[filter],
                 method: :get,
                 path: "v1/organizations/analytics/skills?beta=true",
                 query: query,

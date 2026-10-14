@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_telemetry_destination_disabled_reason_redirect =
+          { type: :redirect }
+
+        class BetaTelemetryDestinationDisabledReasonRedirect < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :redirect
+
+          def initialize: (?type: :redirect) -> void
+
+          def to_hash: -> { type: :redirect }
+        end
+      end
+    end
+  end
+end

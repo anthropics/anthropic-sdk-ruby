@@ -57,7 +57,9 @@ module Anthropic
             timeout: T.nilable(Float),
             initial_retry_delay: Float,
             max_retry_delay: Float,
-            middleware: T.nilable(Anthropic::Middleware::EntryOrArray)
+            middleware: T.nilable(Anthropic::Middleware::EntryOrArray),
+            open_telemetry:
+              T.nilable(T.any(T::Boolean, Anthropic::Internal::AnyHash))
           ).returns(T.attached_class)
         end
         def self.new(
@@ -76,7 +78,9 @@ module Anthropic
           max_retry_delay: Anthropic::Client::DEFAULT_MAX_RETRY_DELAY,
           # Per-attempt HTTP around-middleware. The Google bearer is applied
           # per attempt, after user middleware.
-          middleware: nil
+          middleware: nil,
+          # OpenTelemetry tracing of this client's API calls. See {Anthropic::Client}.
+          open_telemetry: nil
         )
         end
       end

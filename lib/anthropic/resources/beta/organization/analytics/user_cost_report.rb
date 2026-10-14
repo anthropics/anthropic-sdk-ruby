@@ -68,6 +68,29 @@ module Anthropic
               parsed, options = Anthropic::Beta::Organization::Analytics::UserCostReportListParams.dump_request(params)
               query = Anthropic::Internal::Util.encode_query_params(parsed)
               @client.request(
+                span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_ANALYTICS_USER_COST_REPORT_LIST,
+                span_route: "/v1/organizations/analytics/user_cost_report",
+                span_query: %w[
+                  bucket_width
+                  claude_tag_categories
+                  claude_tag_user_ids
+                  context_windows
+                  ending_at
+                  exclude_deleted_users
+                  group_by
+                  inference_geos
+                  limit
+                  models
+                  order
+                  order_by
+                  page
+                  products
+                  rbac_group_ids
+                  slack_channel_ids
+                  speeds
+                  starting_at
+                  user_ids
+                ],
                 method: :get,
                 path: "v1/organizations/analytics/user_cost_report?beta=true",
                 query: query,

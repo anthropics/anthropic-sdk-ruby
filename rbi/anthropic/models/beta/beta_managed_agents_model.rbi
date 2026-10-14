@@ -108,14 +108,12 @@ module Anthropic
             Anthropic::Beta::BetaManagedAgentsModel::TaggedSymbol
           )
 
-        # Fastest model with near-frontier intelligence
         CLAUDE_HAIKU_4_5 =
           T.let(
             :"claude-haiku-4-5",
             Anthropic::Beta::BetaManagedAgentsModel::TaggedSymbol
           )
 
-        # Fastest model with near-frontier intelligence
         CLAUDE_HAIKU_4_5_20251001 =
           T.let(
             :"claude-haiku-4-5-20251001",

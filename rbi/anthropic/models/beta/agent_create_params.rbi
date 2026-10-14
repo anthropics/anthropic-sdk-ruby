@@ -17,7 +17,7 @@ module Anthropic
 
         # Model identifier. Accepts the
         # [model string](https://platform.claude.com/docs/en/about-claude/models/overview#latest-models-comparison),
-        # e.g. `claude-opus-5`, or a `model_config` object for additional configuration
+        # e.g. `claude-opus-5-5`, or a `model_config` object for additional configuration
         # control
         sig do
           returns(
@@ -37,6 +37,20 @@ module Anthropic
         # Description of what the agent does.
         sig { returns(T.nilable(String)) }
         attr_accessor :description
+
+        # Execution principal for runs of this agent. Omitting it, sending null, or
+        # sending `{"type": "service_account"}` stores the default.
+        sig do
+          returns(
+            T.nilable(
+              T.any(
+                Anthropic::Beta::BetaManagedAgentsAWSRoleExecutionIdentityParams,
+                Anthropic::Beta::BetaManagedAgentsServiceAccountExecutionIdentityParams
+              )
+            )
+          )
+        end
+        attr_accessor :execution_identity
 
         # MCP servers this agent connects to. Maximum 20. Names must be unique within the
         # array. Every server must be referenced by an `mcp_toolset` in `tools`;
@@ -184,6 +198,13 @@ module Anthropic
               ),
             name: String,
             description: T.nilable(String),
+            execution_identity:
+              T.nilable(
+                T.any(
+                  Anthropic::Beta::BetaManagedAgentsAWSRoleExecutionIdentityParams::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsServiceAccountExecutionIdentityParams::OrHash
+                )
+              ),
             mcp_servers:
               T::Array[
                 Anthropic::Beta::BetaManagedAgentsURLMCPServerParams::OrHash
@@ -220,13 +241,16 @@ module Anthropic
         def self.new(
           # Model identifier. Accepts the
           # [model string](https://platform.claude.com/docs/en/about-claude/models/overview#latest-models-comparison),
-          # e.g. `claude-opus-5`, or a `model_config` object for additional configuration
+          # e.g. `claude-opus-5-5`, or a `model_config` object for additional configuration
           # control
           model:,
           # Human-readable name for the agent.
           name:,
           # Description of what the agent does.
           description: nil,
+          # Execution principal for runs of this agent. Omitting it, sending null, or
+          # sending `{"type": "service_account"}` stores the default.
+          execution_identity: nil,
           # MCP servers this agent connects to. Maximum 20. Names must be unique within the
           # array. Every server must be referenced by an `mcp_toolset` in `tools`;
           # unreferenced servers are rejected. See the
@@ -268,6 +292,13 @@ module Anthropic
                 ),
               name: String,
               description: T.nilable(String),
+              execution_identity:
+                T.nilable(
+                  T.any(
+                    Anthropic::Beta::BetaManagedAgentsAWSRoleExecutionIdentityParams,
+                    Anthropic::Beta::BetaManagedAgentsServiceAccountExecutionIdentityParams
+                  )
+                ),
               mcp_servers:
                 T::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams],
               metadata: T::Hash[Symbol, String],
@@ -306,7 +337,7 @@ module Anthropic
 
         # Model identifier. Accepts the
         # [model string](https://platform.claude.com/docs/en/about-claude/models/overview#latest-models-comparison),
-        # e.g. `claude-opus-5`, or a `model_config` object for additional configuration
+        # e.g. `claude-opus-5-5`, or a `model_config` object for additional configuration
         # control
         module Model
           extend Anthropic::Internal::Type::Union

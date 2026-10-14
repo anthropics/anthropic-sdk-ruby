@@ -41,6 +41,10 @@ module Anthropic
             parsed, options = Anthropic::Organization::ServiceAccounts::WorkspaceListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed)
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SERVICE_ACCOUNTS_WORKSPACES_LIST,
+              span_attributes: {"anthropic.organization.service_account.id" => service_account_id},
+              span_route: "/v1/organizations/service_accounts/{service_account_id}/workspaces",
+              span_query: %w[limit page],
               method: :get,
               path: ["v1/organizations/service_accounts/%1$s/workspaces", service_account_id],
               query: query,
@@ -79,6 +83,10 @@ module Anthropic
           def add(service_account_id, params)
             parsed, options = Anthropic::Organization::ServiceAccounts::WorkspaceAddParams.dump_request(params)
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SERVICE_ACCOUNTS_WORKSPACES_ADD,
+              span_attributes: {"anthropic.organization.service_account.id" => service_account_id},
+              span_created_id: {"anthropic.organization.service_account.workspace.id" => :workspace_id},
+              span_route: "/v1/organizations/service_accounts/{service_account_id}/workspaces",
               method: :post,
               path: ["v1/organizations/service_accounts/%1$s/workspaces", service_account_id],
               body: parsed,
@@ -120,6 +128,12 @@ module Anthropic
                 raise ArgumentError.new("missing required path argument #{_1}")
               end
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SERVICE_ACCOUNTS_WORKSPACES_REMOVE,
+              span_attributes: {
+                "anthropic.organization.service_account.id" => service_account_id,
+                "anthropic.organization.service_account.workspace.id" => workspace_id
+              },
+              span_route: "/v1/organizations/service_accounts/{service_account_id}/workspaces/{workspace_id}",
               method: :delete,
               path: [
                 "v1/organizations/service_accounts/%1$s/workspaces/%2$s",

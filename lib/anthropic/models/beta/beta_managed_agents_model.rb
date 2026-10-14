@@ -88,10 +88,8 @@ module Anthropic
         # Best combination of speed and intelligence
         CLAUDE_SONNET_4_6 = :"claude-sonnet-4-6"
 
-        # Fastest model with near-frontier intelligence
         CLAUDE_HAIKU_4_5 = :"claude-haiku-4-5"
 
-        # Fastest model with near-frontier intelligence
         CLAUDE_HAIKU_4_5_20251001 = :"claude-haiku-4-5-20251001"
 
         # Powerful intelligence for long-running agents and coding

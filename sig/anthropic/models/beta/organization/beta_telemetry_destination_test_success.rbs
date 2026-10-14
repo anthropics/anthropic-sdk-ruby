@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_telemetry_destination_test_success = { type: :success }
+
+        class BetaTelemetryDestinationTestSuccess < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :success
+
+          def initialize: (?type: :success) -> void
+
+          def to_hash: -> { type: :success }
+        end
+      end
+    end
+  end
+end

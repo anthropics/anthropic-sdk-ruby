@@ -99,6 +99,17 @@ class Anthropic::Test::Resources::Messages::StreamingTest < Minitest::Test
     assert_equal(["Hello", " there", "!"], stream.text.to_a)
   end
 
+  def test_closing_an_unread_stream_closes_the_raw_stream
+    stub_streaming_response(basic_sse_response)
+    client = Anthropic::Client.new(base_url: "http://localhost", api_key: "test-key", open_telemetry: false)
+
+    stream = client.messages.stream(**basic_params)
+    stream.close
+
+    assert_empty(stream.instance_variable_get(:@raw_stream).to_a)
+    assert_empty(stream.to_a)
+  end
+
   def test_accumulated_message
     stub_streaming_response(basic_sse_response)
 
@@ -267,6 +278,67 @@ class Anthropic::Test::Resources::Messages::StreamingTest < Minitest::Test
     message = stream.accumulated_message
 
     assert_equal("{\"location\":\"San Francisco\"\"}", message.content.first.input)
+  end
+
+  class GetWeatherInput < Anthropic::BaseModel
+    required :location, String
+  end
+
+  # tool_input_sse_response, whose tool_use block also carries the fields a toolset
+  # member's does, and one this SDK version does not model.
+  def toolset_member_tool_use_sse_response
+    tool_input_sse_response.sub(
+      '"input":{}}',
+      '"input":{},"toolset_name":"fake_toolset","caller":{"type":"direct"},"field_from_a_later_version":"kept"}'
+    )
+  end
+
+  def test_accumulated_message_keeps_every_field_of_a_parsed_tool_use_block
+    stub_streaming_response(toolset_member_tool_use_sse_response)
+
+    stream = @client.messages.stream(**tools_params, tools: [{name: "get_weather", input_schema: GetWeatherInput}])
+
+    block = stream.accumulated_message.content.first
+
+    assert_equal("San Francisco", block.parsed.location)
+    assert_equal("fake_toolset", block.toolset_name)
+    assert_equal(:direct, block.caller_.type)
+    assert_equal("kept", block[:field_from_a_later_version])
+  end
+
+  def json_text_sse_response
+    <<~SSE
+      event: message_start
+      data: {"type":"message_start","message":{"id":"msg_json","type":"message","role":"assistant","content":[],"model":"claude-opus-4-6","stop_reason":null,"stop_sequence":null,"usage":{"input_tokens":10,"output_tokens":1}}}
+
+      event: content_block_start
+      data: {"type":"content_block_start","index":0,"content_block":{"type":"text","text":""}}
+
+      event: content_block_delta
+      data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"{\\"location\\":\\"San Francisco\\"}"}}
+
+      event: content_block_stop
+      data: {"type":"content_block_stop","index":0}
+
+      event: message_delta
+      data: {"type":"message_delta","delta":{"stop_reason":"end_turn","stop_sequence":null},"usage":{"output_tokens":10}}
+
+      event: message_stop
+      data: {"type":"message_stop"}
+
+    SSE
+  end
+
+  def test_accumulated_message_keeps_a_parsed_text_block_readable
+    stub_streaming_response(json_text_sse_response)
+
+    stream = @client.messages.stream(**basic_params, output_config: {format: GetWeatherInput})
+
+    block = stream.accumulated_message.content.first
+
+    assert_equal("San Francisco", block.parsed.location)
+    assert_nil(block.citations)
+    refute_operator(block.to_h, :key?, :citations)
   end
 
   # A server-tool turn: the server_tool_use input streams in as input_json_delta
@@ -672,6 +744,34 @@ class Anthropic::Test::Resources::Messages::StreamingTest < Minitest::Test
     assert_nil(message.usage.output_tokens_details)
     # The delta's null stop_sequence must leave the field readable, not poisoned.
     assert_nil(message.stop_sequence)
+  end
+
+  def message_stream(events)
+    raw_events = events.map do
+      Anthropic::Internal::Type::Converter.coerce(Anthropic::Models::RawMessageStreamEvent, _1)
+    end
+    raw_stream = Struct.new(:events, :status, :headers) { def each(&blk) = events.each(&blk) }
+    Anthropic::Streaming::MessageStream.new(raw_stream: raw_stream.new(raw_events, 200, {}))
+  end
+
+  def test_events_of_an_unknown_type_pass_through_unaccumulated
+    known = basic_sse_response.scan(/^data: (.+)$/).flatten.map { JSON.parse(_1, symbolize_names: true) }
+    expected_types = message_stream(known).map(&:type)
+    expected_message = message_stream(known).accumulated_message.to_h
+
+    [
+      {note: "x"},
+      {usage: {input_tokens: 1, output_tokens: 2}},
+      {index: 0, delta: {type: "text_delta", text: "unknown"}},
+      {message: {id: "msg_unknown"}}
+    ].product((0..known.length).to_a) do |fields, position|
+      stream = message_stream(known.dup.insert(position, {type: "unknown_event", **fields}))
+      types = stream.map(&:type)
+
+      assert_equal(1, types.count("unknown_event"))
+      assert_equal(expected_types, types - ["unknown_event"])
+      assert_equal(expected_message, stream.accumulated_message.to_h)
+    end
   end
 
   def test_message_delta_fields_are_all_handled_by_accumulate_event

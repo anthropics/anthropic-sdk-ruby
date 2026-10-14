@@ -30,6 +30,9 @@ module Anthropic
         def create(params)
           parsed, options = Anthropic::Organization::InviteCreateParams.dump_request(params)
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_INVITES_CREATE,
+            span_created_id: "anthropic.organization.invite.id",
+            span_route: "/v1/organizations/invites",
             method: :post,
             path: "v1/organizations/invites",
             body: parsed,
@@ -51,6 +54,9 @@ module Anthropic
         # @see Anthropic::Models::Organization::InviteRetrieveParams
         def retrieve(invite_id, params = {})
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_INVITES_RETRIEVE,
+            span_attributes: {"anthropic.organization.invite.id" => invite_id},
+            span_route: "/v1/organizations/invites/{invite_id}",
             method: :get,
             path: ["v1/organizations/invites/%1$s", invite_id],
             model: Anthropic::Organization::OrganizationInvite,
@@ -86,6 +92,9 @@ module Anthropic
           parsed, options = Anthropic::Organization::InviteListParams.dump_request(params)
           query = Anthropic::Internal::Util.encode_query_params(parsed)
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_INVITES_LIST,
+            span_route: "/v1/organizations/invites",
+            span_query: %w[after_id before_id email limit roles statuses],
             method: :get,
             path: "v1/organizations/invites",
             query: query,
@@ -108,6 +117,9 @@ module Anthropic
         # @see Anthropic::Models::Organization::InviteDeleteParams
         def delete(invite_id, params = {})
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_INVITES_DELETE,
+            span_attributes: {"anthropic.organization.invite.id" => invite_id},
+            span_route: "/v1/organizations/invites/{invite_id}",
             method: :delete,
             path: ["v1/organizations/invites/%1$s", invite_id],
             model: Anthropic::Models::Organization::InviteDeleteResponse,

@@ -1,0 +1,41 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module TelemetryDestinations
+          type beta_telemetry_destination_workspace =
+            {
+              created_at: Time,
+              telemetry_destination_id: String,
+              type: :telemetry_destination_workspace,
+              workspace_id: String
+            }
+
+          class BetaTelemetryDestinationWorkspace < Anthropic::Internal::Type::BaseModel
+            attr_accessor created_at: Time
+
+            attr_accessor telemetry_destination_id: String
+
+            attr_accessor type: :telemetry_destination_workspace
+
+            attr_accessor workspace_id: String
+
+            def initialize: (
+              created_at: Time,
+              telemetry_destination_id: String,
+              workspace_id: String,
+              ?type: :telemetry_destination_workspace
+            ) -> void
+
+            def to_hash: -> {
+              created_at: Time,
+              telemetry_destination_id: String,
+              type: :telemetry_destination_workspace,
+              workspace_id: String
+            }
+          end
+        end
+      end
+    end
+  end
+end

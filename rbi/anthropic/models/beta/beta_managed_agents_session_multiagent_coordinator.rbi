@@ -138,6 +138,11 @@ module Anthropic
                 ),
               id: String,
               description: T.nilable(String),
+              execution_identity:
+                T.any(
+                  Anthropic::Beta::BetaManagedAgentsAWSRoleExecutionIdentity::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsServiceAccountExecutionIdentity::OrHash
+                ),
               mcp_servers:
                 T::Array[
                   Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition::OrHash
@@ -170,6 +175,10 @@ module Anthropic
             model:,
             id: nil,
             description: nil,
+            # Execution principal snapshotted from the agent at session creation. Always
+            # present; `{"type": "service_account"}` when runs carry no customer-named
+            # principal.
+            execution_identity: nil,
             mcp_servers: nil,
             name: nil,
             skills: nil,

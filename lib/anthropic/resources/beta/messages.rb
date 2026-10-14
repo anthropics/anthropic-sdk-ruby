@@ -79,7 +79,7 @@ module Anthropic
         #
         # @param temperature [Float] Body param: Amount of randomness injected into the response.
         #
-        # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigBetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive] Body param: Configuration for enabling Claude's extended thinking.
+        # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigBetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive] Body param: Configuration for Claude's thinking.
         #
         # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
         #
@@ -134,6 +134,8 @@ module Anthropic
               workspace_id: "anthropic-workspace-id"
             }
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::MESSAGES_CREATE,
+            span_route: "/v1/messages",
             method: :post,
             path: "v1/messages?beta=true",
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),
@@ -247,6 +249,8 @@ module Anthropic
               workspace_id: "anthropic-workspace-id"
             }
           raw_stream = @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::MESSAGES_CREATE,
+            span_route: "/v1/messages",
             method: :post,
             path: "v1/messages?beta=true",
             headers: stream_headers(
@@ -319,7 +323,7 @@ module Anthropic
         #
         # @param temperature [Float] Body param: Amount of randomness injected into the response.
         #
-        # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigBetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive] Body param: Configuration for enabling Claude's extended thinking.
+        # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigBetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive] Body param: Configuration for Claude's thinking.
         #
         # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
         #
@@ -337,7 +341,7 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Anthropic::Internal::Stream<Anthropic::Models::Beta::BetaRawMessageStartEvent, Anthropic::Models::Beta::BetaRawMessageDeltaEvent, Anthropic::Models::Beta::BetaRawMessageStopEvent, Anthropic::Models::Beta::BetaRawContentBlockStartEvent, Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent, Anthropic::Models::Beta::BetaRawContentBlockStopEvent>]
+        # @return [Anthropic::Internal::Type::BaseStream<Anthropic::Models::Beta::BetaRawMessageStartEvent, Anthropic::Models::Beta::BetaRawMessageDeltaEvent, Anthropic::Models::Beta::BetaRawMessageStopEvent, Anthropic::Models::Beta::BetaRawContentBlockStartEvent, Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent, Anthropic::Models::Beta::BetaRawContentBlockStopEvent>]
         #
         # @see Anthropic::Models::Beta::MessageCreateParams
         def stream_raw(params)
@@ -359,6 +363,8 @@ module Anthropic
               workspace_id: "anthropic-workspace-id"
             }
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::MESSAGES_CREATE,
+            span_route: "/v1/messages",
             method: :post,
             path: "v1/messages?beta=true",
             headers: stream_headers(
@@ -406,7 +412,7 @@ module Anthropic
         #
         # @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>] Body param: System prompt.
         #
-        # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigBetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive] Body param: Configuration for enabling Claude's extended thinking.
+        # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigBetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive] Body param: Configuration for Claude's thinking.
         #
         # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
         #
@@ -434,6 +440,8 @@ module Anthropic
               workspace_id: "anthropic-workspace-id"
             }
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::MESSAGES_COUNT_TOKENS,
+            span_route: "/v1/messages/count_tokens",
             method: :post,
             path: "v1/messages/count_tokens?beta=true",
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),

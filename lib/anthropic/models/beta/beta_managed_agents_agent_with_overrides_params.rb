@@ -24,7 +24,7 @@ module Anthropic
                  -> { Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams] }
 
         # @!attribute model
-        #   Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a
+        #   Replacement model. Accepts the model string, e.g. `claude-opus-5-5`, or a
         #   `model_config` object. Omit to use the agent's model.
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams, Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel, nil]
@@ -74,7 +74,7 @@ module Anthropic
         #
         #   @param mcp_servers [Array<Anthropic::Models::Beta::BetaManagedAgentsURLMCPServerParams>] Replacement MCP server list. Full replacement: the provided array becomes the MC
         #
-        #   @param model [Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams, Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel] Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a `model_c
+        #   @param model [Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams, Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel] Replacement model. Accepts the model string, e.g. `claude-opus-5-5`, or a `model
         #
         #   @param skills [Array<Anthropic::Models::Beta::BetaManagedAgentsAnthropicSkillParams, Anthropic::Models::Beta::BetaManagedAgentsCustomSkillParams>] Replacement skill list. Full replacement: the provided array becomes the skills.
         #
@@ -94,7 +94,7 @@ module Anthropic
           #   @return [Array<Symbol>]
         end
 
-        # Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a
+        # Replacement model. Accepts the model string, e.g. `claude-opus-5-5`, or a
         # `model_config` object. Omit to use the agent's model.
         #
         # @see Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams#model
@@ -170,11 +170,11 @@ module Anthropic
           def self.new(type:, **args)
             case type.to_sym
             when :agent_toolset_20260401
-              Anthropic::Beta::BetaManagedAgentsAgentToolset20260401Params.new(**args)
+              Anthropic::Beta::BetaManagedAgentsAgentToolset20260401Params.new(type: type, **args)
             when :mcp_toolset
-              Anthropic::Beta::BetaManagedAgentsMCPToolsetParams.new(**args)
+              Anthropic::Beta::BetaManagedAgentsMCPToolsetParams.new(type: type, **args)
             when :custom
-              Anthropic::Beta::BetaManagedAgentsCustomToolParams.new(**args)
+              Anthropic::Beta::BetaManagedAgentsCustomToolParams.new(type: type, **args)
             else
               raise ArgumentError, "unknown type: #{type}"
             end

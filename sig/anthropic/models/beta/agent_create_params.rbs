@@ -6,6 +6,7 @@ module Anthropic
           model: Anthropic::Models::Beta::AgentCreateParams::model,
           name: String,
           description: String?,
+          execution_identity: Anthropic::Models::Beta::beta_managed_agents_execution_identity_params?,
           mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams],
           metadata: ::Hash[Symbol, String],
           multiagent: Anthropic::Models::Beta::beta_managed_agents_multiagent_params?,
@@ -26,6 +27,8 @@ module Anthropic
         attr_accessor name: String
 
         attr_accessor description: String?
+
+        attr_accessor execution_identity: Anthropic::Models::Beta::beta_managed_agents_execution_identity_params?
 
         attr_reader mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams]?
 
@@ -67,6 +70,7 @@ module Anthropic
           model: Anthropic::Models::Beta::AgentCreateParams::model,
           name: String,
           ?description: String?,
+          ?execution_identity: Anthropic::Models::Beta::beta_managed_agents_execution_identity_params?,
           ?mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams],
           ?metadata: ::Hash[Symbol, String],
           ?multiagent: Anthropic::Models::Beta::beta_managed_agents_multiagent_params?,
@@ -82,6 +86,7 @@ module Anthropic
           model: Anthropic::Models::Beta::AgentCreateParams::model,
           name: String,
           description: String?,
+          execution_identity: Anthropic::Models::Beta::beta_managed_agents_execution_identity_params?,
           mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams],
           metadata: ::Hash[Symbol, String],
           multiagent: Anthropic::Models::Beta::beta_managed_agents_multiagent_params?,

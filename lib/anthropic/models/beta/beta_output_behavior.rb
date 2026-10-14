@@ -50,9 +50,9 @@ module Anthropic
         def self.new(type:, **args)
           case type.to_sym
           when :create_new
-            Anthropic::Beta::BetaOutputBehaviorCreateNew.new(**args)
+            Anthropic::Beta::BetaOutputBehaviorCreateNew.new(type: type, **args)
           when :update_existing
-            Anthropic::Beta::BetaOutputBehaviorUpdateExisting.new(**args)
+            Anthropic::Beta::BetaOutputBehaviorUpdateExisting.new(type: type, **args)
           else
             raise ArgumentError, "unknown type: #{type}"
           end

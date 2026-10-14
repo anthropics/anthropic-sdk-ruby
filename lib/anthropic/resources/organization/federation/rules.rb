@@ -60,6 +60,9 @@ module Anthropic
           def create(params)
             parsed, options = Anthropic::Organization::Federation::RuleCreateParams.dump_request(params)
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_FEDERATION_RULES_CREATE,
+              span_created_id: "anthropic.organization.federation_rule.id",
+              span_route: "/v1/organizations/federation_rules",
               method: :post,
               path: "v1/organizations/federation_rules",
               body: parsed,
@@ -86,6 +89,9 @@ module Anthropic
           # @see Anthropic::Models::Organization::Federation::RuleRetrieveParams
           def retrieve(federation_rule_id, params = {})
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_FEDERATION_RULES_RETRIEVE,
+              span_attributes: {"anthropic.organization.federation_rule.id" => federation_rule_id},
+              span_route: "/v1/organizations/federation_rules/{federation_rule_id}",
               method: :get,
               path: ["v1/organizations/federation_rules/%1$s", federation_rule_id],
               model: Anthropic::Organization::Federation::FederationRule,
@@ -147,6 +153,9 @@ module Anthropic
           def update(federation_rule_id, params = {})
             parsed, options = Anthropic::Organization::Federation::RuleUpdateParams.dump_request(params)
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_FEDERATION_RULES_UPDATE,
+              span_attributes: {"anthropic.organization.federation_rule.id" => federation_rule_id},
+              span_route: "/v1/organizations/federation_rules/{federation_rule_id}",
               method: :post,
               path: ["v1/organizations/federation_rules/%1$s", federation_rule_id],
               body: parsed,
@@ -184,6 +193,9 @@ module Anthropic
             parsed, options = Anthropic::Organization::Federation::RuleListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed)
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_FEDERATION_RULES_LIST,
+              span_route: "/v1/organizations/federation_rules",
+              span_query: %w[include_archived issuer_id limit page],
               method: :get,
               path: "v1/organizations/federation_rules",
               query: query,
@@ -218,6 +230,9 @@ module Anthropic
           # @see Anthropic::Models::Organization::Federation::RuleArchiveParams
           def archive(federation_rule_id, params = {})
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_FEDERATION_RULES_ARCHIVE,
+              span_attributes: {"anthropic.organization.federation_rule.id" => federation_rule_id},
+              span_route: "/v1/organizations/federation_rules/{federation_rule_id}/archive",
               method: :post,
               path: ["v1/organizations/federation_rules/%1$s/archive", federation_rule_id],
               model: Anthropic::Organization::Federation::FederationRule,

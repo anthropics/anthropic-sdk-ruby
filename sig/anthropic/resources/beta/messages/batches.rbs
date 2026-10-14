@@ -46,7 +46,7 @@ module Anthropic
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?workspace_id: String,
             ?request_options: Anthropic::request_opts
-          ) -> Anthropic::Internal::JsonLStream[Anthropic::Beta::Messages::BetaMessageBatchIndividualResponse]
+          ) -> Anthropic::Internal::Type::BaseStream[bot, Anthropic::Beta::Messages::BetaMessageBatchIndividualResponse]
 
           def initialize: (client: Anthropic::Client) -> void
         end

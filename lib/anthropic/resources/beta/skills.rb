@@ -31,6 +31,9 @@ module Anthropic
           parsed, options = Anthropic::Beta::SkillCreateParams.dump_request(params)
           header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::SKILLS_CREATE,
+            span_created_id: "anthropic.skill.id",
+            span_route: "/v1/skills",
             method: :post,
             path: "v1/skills?beta=true",
             headers: {
@@ -66,6 +69,9 @@ module Anthropic
         def retrieve(skill_id, params = {})
           parsed, options = Anthropic::Beta::SkillRetrieveParams.dump_request(params)
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::SKILLS_RETRIEVE,
+            span_attributes: {"anthropic.skill.id" => skill_id},
+            span_route: "/v1/skills/{skill_id}",
             method: :get,
             path: ["v1/skills/%1$s?beta=true", skill_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
@@ -101,6 +107,9 @@ module Anthropic
           parsed, options = Anthropic::Beta::SkillListParams.dump_request(params)
           query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::SKILLS_LIST,
+            span_route: "/v1/skills",
+            span_query: %w[limit page source],
             method: :get,
             path: "v1/skills?beta=true",
             query: query,
@@ -135,6 +144,9 @@ module Anthropic
         def delete(skill_id, params = {})
           parsed, options = Anthropic::Beta::SkillDeleteParams.dump_request(params)
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::SKILLS_DELETE,
+            span_attributes: {"anthropic.skill.id" => skill_id},
+            span_route: "/v1/skills/{skill_id}",
             method: :delete,
             path: ["v1/skills/%1$s?beta=true", skill_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),

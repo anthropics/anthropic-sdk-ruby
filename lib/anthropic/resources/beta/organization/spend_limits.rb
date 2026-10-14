@@ -24,6 +24,9 @@ module Anthropic
           # @see Anthropic::Models::Beta::Organization::SpendLimitRetrieveParams
           def retrieve(spend_limit_id, params = {})
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SPEND_LIMITS_RETRIEVE,
+              span_attributes: {"anthropic.organization.spend_limit.id" => spend_limit_id},
+              span_route: "/v1/organizations/spend_limits/{spend_limit_id}",
               method: :get,
               path: ["v1/organizations/spend_limits/%1$s?beta=true", spend_limit_id],
               model: Anthropic::Beta::Organization::BetaSpendLimit,
@@ -33,12 +36,10 @@ module Anthropic
 
           # List the organization's spend limits.
           #
-          # A Claude Console organization's limits come in an order that is stable across
-          # pages. A Claude Enterprise organization's are grouped by scope type, in the
-          # order `organization`, `seat_tier`, `rbac_group`, `organization_service`, `user`;
-          # within a type they come in a fixed order that is not creation order. Listing
-          # Claude Console limits is in an early access preview. To request access, contact
-          # your Anthropic account team.
+          # Limits are grouped by scope type, in the order `organization`, `seat_tier`,
+          # `rbac_group`, `organization_service`, `user`; within a type they come in a fixed
+          # order that is not creation order. Supported for Claude Enterprise organizations
+          # only, not for Claude Console organizations.
           #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Organization::SpendLimitListParams} for more details.
@@ -49,7 +50,7 @@ module Anthropic
           #
           # @param page [String, nil] Query param: Opaque cursor from a previous response's `next_page` field.
           #
-          # @param scope_type [Array<Symbol, Anthropic::Models::Beta::Organization::SpendLimitListParams::ScopeType>, nil] Query param: Return only limits with these scope types. A Claude Console organiz
+          # @param scope_type [Array<Symbol, Anthropic::Models::Beta::Organization::SpendLimitListParams::ScopeType>, nil] Query param: Return only limits with these scope types. Omit for all.
           #
           # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `spend-limit-reads-20
           #
@@ -63,6 +64,9 @@ module Anthropic
             parsed, options = Anthropic::Beta::Organization::SpendLimitListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SPEND_LIMITS_LIST,
+              span_route: "/v1/organizations/spend_limits",
+              span_query: %w[limit page scope_type],
               method: :get,
               path: "v1/organizations/spend_limits?beta=true",
               query: query,
@@ -92,6 +96,9 @@ module Anthropic
           # @see Anthropic::Models::Beta::Organization::SpendLimitDeleteParams
           def delete(spend_limit_id, params = {})
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SPEND_LIMITS_DELETE,
+              span_attributes: {"anthropic.organization.spend_limit.id" => spend_limit_id},
+              span_route: "/v1/organizations/spend_limits/{spend_limit_id}",
               method: :delete,
               path: ["v1/organizations/spend_limits/%1$s?beta=true", spend_limit_id],
               model: Anthropic::Models::Beta::Organization::SpendLimitDeleteResponse,
@@ -130,6 +137,9 @@ module Anthropic
             parsed, options = Anthropic::Beta::Organization::SpendLimitSetParams.dump_request(params)
             header_params = {betas: "anthropic-beta"}
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SPEND_LIMITS_SET,
+              span_created_id: "anthropic.organization.spend_limit.id",
+              span_route: "/v1/organizations/spend_limits",
               method: :post,
               path: "v1/organizations/spend_limits?beta=true",
               headers: parsed.slice(*header_params.keys).transform_keys(header_params),

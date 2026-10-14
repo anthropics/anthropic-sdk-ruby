@@ -16,6 +16,14 @@ module Anthropic
           sig { returns(T.nilable(String)) }
           attr_accessor :description
 
+          # The session's execution principal.
+          sig do
+            returns(
+              Anthropic::Beta::BetaManagedAgentsExecutionIdentity::Variants
+            )
+          end
+          attr_accessor :execution_identity
+
           sig do
             returns(
               T::Array[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition]
@@ -68,6 +76,11 @@ module Anthropic
           sig do
             params(
               description: T.nilable(String),
+              execution_identity:
+                T.any(
+                  Anthropic::Beta::BetaManagedAgentsAWSRoleExecutionIdentity::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsServiceAccountExecutionIdentity::OrHash
+                ),
               mcp_servers:
                 T::Array[
                   Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition::OrHash
@@ -95,6 +108,8 @@ module Anthropic
           end
           def self.new(
             description:,
+            # The session's execution principal.
+            execution_identity:,
             mcp_servers:,
             # Model identifier and configuration.
             model:,
@@ -111,6 +126,8 @@ module Anthropic
             override.returns(
               {
                 description: T.nilable(String),
+                execution_identity:
+                  Anthropic::Beta::BetaManagedAgentsExecutionIdentity::Variants,
                 mcp_servers:
                   T::Array[
                     Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition

@@ -47,7 +47,8 @@ module Anthropic
           timeout: Float?,
           initial_retry_delay: Float,
           max_retry_delay: Float,
-          middleware: Anthropic::Middleware::entry_or_array?
+          middleware: Anthropic::Middleware::entry_or_array?,
+          ?open_telemetry: Anthropic::Internal::Tracing::client_option?
         ) -> void
       end
     end

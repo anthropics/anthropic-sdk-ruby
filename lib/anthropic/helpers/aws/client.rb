@@ -54,6 +54,9 @@ module Anthropic
         #
         # @param max_retry_delay [Float]
         #
+        # @param open_telemetry [Hash{Symbol=>Object}, Boolean, nil] OpenTelemetry tracing of this
+        #   client's API calls. See {Anthropic::Client#initialize}.
+        #
         def initialize(
           api_key: nil,
           aws_access_key: nil,
@@ -67,7 +70,8 @@ module Anthropic
           max_retries: self.class::DEFAULT_MAX_RETRIES,
           timeout: nil,
           initial_retry_delay: self.class::DEFAULT_INITIAL_RETRY_DELAY,
-          max_retry_delay: self.class::DEFAULT_MAX_RETRY_DELAY
+          max_retry_delay: self.class::DEFAULT_MAX_RETRY_DELAY,
+          open_telemetry: nil
         )
           effective_api_key, resolved_base_url = setup_aws_auth(
             api_key: api_key,
@@ -96,9 +100,15 @@ module Anthropic
             timeout: timeout,
             max_retries: max_retries,
             initial_retry_delay: initial_retry_delay,
-            max_retry_delay: max_retry_delay
+            max_retry_delay: max_retry_delay,
+            open_telemetry: open_telemetry
           )
         end
+
+        # @api private
+        #
+        # @return [String]
+        private def open_telemetry_scope = "#{super}.aws"
 
         # @api private
         #

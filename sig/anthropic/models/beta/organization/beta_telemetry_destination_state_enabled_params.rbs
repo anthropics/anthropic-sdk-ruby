@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_telemetry_destination_state_enabled_params =
+          { type: :enabled }
+
+        class BetaTelemetryDestinationStateEnabledParams < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :enabled
+
+          def initialize: (?type: :enabled) -> void
+
+          def to_hash: -> { type: :enabled }
+        end
+      end
+    end
+  end
+end

@@ -78,11 +78,11 @@ module Anthropic
             def self.new(type:, **args)
               case type.to_sym
               when :base64
-                Anthropic::Beta::Sessions::BetaManagedAgentsBase64ImageSource.new(**args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsBase64ImageSource.new(type: type, **args)
               when :url
-                Anthropic::Beta::Sessions::BetaManagedAgentsURLImageSource.new(**args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsURLImageSource.new(type: type, **args)
               when :file
-                Anthropic::Beta::Sessions::BetaManagedAgentsFileImageSource.new(**args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsFileImageSource.new(type: type, **args)
               else
                 raise ArgumentError, "unknown type: #{type}"
               end

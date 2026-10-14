@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_telemetry_destination_disabled_reason_caller =
+          { type: :caller }
+
+        class BetaTelemetryDestinationDisabledReasonCaller < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :caller
+
+          def initialize: (?type: :caller) -> void
+
+          def to_hash: -> { type: :caller }
+        end
+      end
+    end
+  end
+end

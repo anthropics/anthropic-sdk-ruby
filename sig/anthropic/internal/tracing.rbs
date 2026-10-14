@@ -1,0 +1,477 @@
+module Anthropic
+  module Internal
+    class TracedStream[Elem]
+      include Anthropic::Internal::Type::BaseStream[top, Elem]
+
+      attr_reader streamed_message: top?
+
+      def initialize: (
+        Anthropic::Internal::Type::BaseStream[bot, Elem] stream,
+        Enumerable[Elem] iterator,
+        top? streamed_message
+      ) -> void
+    end
+
+    module Tracing
+      INSTRUMENTATION_SCOPE: "com.anthropic.sdk.ruby"
+
+      ERROR_TYPE: "error.type"
+      HTTP_REQUEST_METHOD: "http.request.method"
+      HTTP_REQUEST_RESEND_COUNT: "http.request.resend_count"
+      HTTP_RESPONSE_STATUS_CODE: "http.response.status_code"
+      HTTP_ROUTE: "http.route"
+      SERVER_ADDRESS: "server.address"
+      SERVER_PORT: "server.port"
+      URL_FULL: "url.full"
+      URL_PATH: "url.path"
+      URL_QUERY: "url.query"
+      URL_SCHEME: "url.scheme"
+
+      GEN_AI_PROVIDER_NAME: "gen_ai.provider.name"
+      ANTHROPIC_REQUEST_ID: "anthropic.request.id"
+      ANTHROPIC_ORGANIZATION_ID: "anthropic.organization.id"
+      ANTHROPIC_WORKSPACE_ID: "anthropic.workspace.id"
+      GEN_AI_OPERATION_NAME: "gen_ai.operation.name"
+      GEN_AI_REQUEST_MODEL: "gen_ai.request.model"
+      GEN_AI_REQUEST_MAX_TOKENS: "gen_ai.request.max_tokens"
+      GEN_AI_REQUEST_TEMPERATURE: "gen_ai.request.temperature"
+      GEN_AI_REQUEST_TOP_P: "gen_ai.request.top_p"
+      GEN_AI_REQUEST_TOP_K: "gen_ai.request.top_k"
+      GEN_AI_REQUEST_REASONING_LEVEL: "gen_ai.request.reasoning.level"
+      ANTHROPIC_REQUEST_SERVICE_TIER: "anthropic.request.service_tier"
+      ANTHROPIC_THINKING_TYPE: "anthropic.thinking.type"
+      ANTHROPIC_THINKING_BUDGET_TOKENS: "anthropic.thinking.budget_tokens"
+      ANTHROPIC_BETA: "anthropic.beta"
+      GEN_AI_REQUEST_STREAM: "gen_ai.request.stream"
+      GEN_AI_RESPONSE_ID: "gen_ai.response.id"
+      GEN_AI_RESPONSE_MODEL: "gen_ai.response.model"
+      GEN_AI_USAGE_CACHE_WRITE_INPUT_TOKENS: "gen_ai.usage.cache_write.input_tokens"
+      GEN_AI_USAGE_CACHE_READ_INPUT_TOKENS: "gen_ai.usage.cache_read.input_tokens"
+      ANTHROPIC_USAGE_CACHE_CREATION_EPHEMERAL_5M_INPUT_TOKENS: "anthropic.usage.cache_creation.ephemeral_5m_input_tokens"
+      ANTHROPIC_USAGE_CACHE_CREATION_EPHEMERAL_1H_INPUT_TOKENS: "anthropic.usage.cache_creation.ephemeral_1h_input_tokens"
+      ANTHROPIC_RESPONSE_SERVICE_TIER: "anthropic.response.service_tier"
+      GEN_AI_USAGE_OUTPUT_TOKENS: "gen_ai.usage.output_tokens"
+      GEN_AI_USAGE_REASONING_OUTPUT_TOKENS: "gen_ai.usage.reasoning.output_tokens"
+      ANTHROPIC_MESSAGE_STOP_REASON: "anthropic.message.stop_reason"
+      ANTHROPIC_MESSAGE_COUNT_TOKENS_INPUT_TOKENS: "anthropic.message.count_tokens.input_tokens"
+      ANTHROPIC_SESSION_ENVIRONMENT_ID: "anthropic.session.environment.id"
+      GEN_AI_AGENT_NAME: "gen_ai.agent.name"
+
+      module SpanName
+        COMPLETIONS_CREATE: "anthropic.completions.create"
+        MESSAGES_CREATE: "anthropic.messages.create"
+        MESSAGES_COUNT_TOKENS: "anthropic.messages.count_tokens"
+        MESSAGES_BATCHES_CREATE: "anthropic.messages.batches.create"
+        MESSAGES_BATCHES_RETRIEVE: "anthropic.messages.batches.retrieve"
+        MESSAGES_BATCHES_LIST: "anthropic.messages.batches.list"
+        MESSAGES_BATCHES_DELETE: "anthropic.messages.batches.delete"
+        MESSAGES_BATCHES_CANCEL: "anthropic.messages.batches.cancel"
+        MESSAGES_BATCHES_RESULTS: "anthropic.messages.batches.results"
+        MODELS_RETRIEVE: "anthropic.models.retrieve"
+        MODELS_LIST: "anthropic.models.list"
+        FILES_LIST: "anthropic.files.list"
+        FILES_DELETE: "anthropic.files.delete"
+        FILES_DOWNLOAD: "anthropic.files.download"
+        FILES_RETRIEVE_METADATA: "anthropic.files.retrieve_metadata"
+        FILES_UPLOAD: "anthropic.files.upload"
+        SKILLS_CREATE: "anthropic.skills.create"
+        SKILLS_RETRIEVE: "anthropic.skills.retrieve"
+        SKILLS_LIST: "anthropic.skills.list"
+        SKILLS_DELETE: "anthropic.skills.delete"
+        SKILLS_VERSIONS_CREATE: "anthropic.skills.versions.create"
+        SKILLS_VERSIONS_RETRIEVE: "anthropic.skills.versions.retrieve"
+        SKILLS_VERSIONS_LIST: "anthropic.skills.versions.list"
+        SKILLS_VERSIONS_DELETE: "anthropic.skills.versions.delete"
+        ORGANIZATION_RETRIEVE: "anthropic.organization.retrieve"
+        ORGANIZATION_API_KEYS_RETRIEVE: "anthropic.organization.api_keys.retrieve"
+        ORGANIZATION_API_KEYS_UPDATE: "anthropic.organization.api_keys.update"
+        ORGANIZATION_API_KEYS_LIST: "anthropic.organization.api_keys.list"
+        ORGANIZATION_EXTERNAL_KEYS_CREATE: "anthropic.organization.external_keys.create"
+        ORGANIZATION_EXTERNAL_KEYS_RETRIEVE: "anthropic.organization.external_keys.retrieve"
+        ORGANIZATION_EXTERNAL_KEYS_UPDATE: "anthropic.organization.external_keys.update"
+        ORGANIZATION_EXTERNAL_KEYS_LIST: "anthropic.organization.external_keys.list"
+        ORGANIZATION_EXTERNAL_KEYS_DELETE: "anthropic.organization.external_keys.delete"
+        ORGANIZATION_EXTERNAL_KEYS_VALIDATE: "anthropic.organization.external_keys.validate"
+        ORGANIZATION_FEDERATION_ISSUERS_CREATE: "anthropic.organization.federation.issuers.create"
+        ORGANIZATION_FEDERATION_ISSUERS_RETRIEVE: "anthropic.organization.federation.issuers.retrieve"
+        ORGANIZATION_FEDERATION_ISSUERS_UPDATE: "anthropic.organization.federation.issuers.update"
+        ORGANIZATION_FEDERATION_ISSUERS_LIST: "anthropic.organization.federation.issuers.list"
+        ORGANIZATION_FEDERATION_ISSUERS_ARCHIVE: "anthropic.organization.federation.issuers.archive"
+        ORGANIZATION_FEDERATION_RULES_CREATE: "anthropic.organization.federation.rules.create"
+        ORGANIZATION_FEDERATION_RULES_RETRIEVE: "anthropic.organization.federation.rules.retrieve"
+        ORGANIZATION_FEDERATION_RULES_UPDATE: "anthropic.organization.federation.rules.update"
+        ORGANIZATION_FEDERATION_RULES_LIST: "anthropic.organization.federation.rules.list"
+        ORGANIZATION_FEDERATION_RULES_ARCHIVE: "anthropic.organization.federation.rules.archive"
+        ORGANIZATION_FEDERATION_RULES_WORKSPACES_LIST: "anthropic.organization.federation.rules.workspaces.list"
+        ORGANIZATION_FEDERATION_RULES_WORKSPACES_ADD: "anthropic.organization.federation.rules.workspaces.add"
+        ORGANIZATION_FEDERATION_RULES_WORKSPACES_REMOVE: "anthropic.organization.federation.rules.workspaces.remove"
+        ORGANIZATION_INVITES_CREATE: "anthropic.organization.invites.create"
+        ORGANIZATION_INVITES_RETRIEVE: "anthropic.organization.invites.retrieve"
+        ORGANIZATION_INVITES_LIST: "anthropic.organization.invites.list"
+        ORGANIZATION_INVITES_DELETE: "anthropic.organization.invites.delete"
+        ORGANIZATION_SERVICE_ACCOUNTS_CREATE: "anthropic.organization.service_accounts.create"
+        ORGANIZATION_SERVICE_ACCOUNTS_RETRIEVE: "anthropic.organization.service_accounts.retrieve"
+        ORGANIZATION_SERVICE_ACCOUNTS_UPDATE: "anthropic.organization.service_accounts.update"
+        ORGANIZATION_SERVICE_ACCOUNTS_LIST: "anthropic.organization.service_accounts.list"
+        ORGANIZATION_SERVICE_ACCOUNTS_ARCHIVE: "anthropic.organization.service_accounts.archive"
+        ORGANIZATION_SERVICE_ACCOUNTS_WORKSPACES_LIST: "anthropic.organization.service_accounts.workspaces.list"
+        ORGANIZATION_SERVICE_ACCOUNTS_WORKSPACES_ADD: "anthropic.organization.service_accounts.workspaces.add"
+        ORGANIZATION_SERVICE_ACCOUNTS_WORKSPACES_REMOVE: "anthropic.organization.service_accounts.workspaces.remove"
+        ORGANIZATION_USERS_RETRIEVE: "anthropic.organization.users.retrieve"
+        ORGANIZATION_USERS_UPDATE: "anthropic.organization.users.update"
+        ORGANIZATION_USERS_LIST: "anthropic.organization.users.list"
+        ORGANIZATION_USERS_REMOVE: "anthropic.organization.users.remove"
+        ORGANIZATION_WORKSPACES_CREATE: "anthropic.organization.workspaces.create"
+        ORGANIZATION_WORKSPACES_RETRIEVE: "anthropic.organization.workspaces.retrieve"
+        ORGANIZATION_WORKSPACES_UPDATE: "anthropic.organization.workspaces.update"
+        ORGANIZATION_WORKSPACES_LIST: "anthropic.organization.workspaces.list"
+        ORGANIZATION_WORKSPACES_ARCHIVE: "anthropic.organization.workspaces.archive"
+        ORGANIZATION_WORKSPACES_RATE_LIMITS_LIST: "anthropic.organization.workspaces.rate_limits.list"
+        ORGANIZATION_WORKSPACES_MEMBERS_RETRIEVE: "anthropic.organization.workspaces.members.retrieve"
+        ORGANIZATION_WORKSPACES_MEMBERS_UPDATE: "anthropic.organization.workspaces.members.update"
+        ORGANIZATION_WORKSPACES_MEMBERS_LIST: "anthropic.organization.workspaces.members.list"
+        ORGANIZATION_WORKSPACES_MEMBERS_ADD: "anthropic.organization.workspaces.members.add"
+        ORGANIZATION_WORKSPACES_MEMBERS_REMOVE: "anthropic.organization.workspaces.members.remove"
+        ORGANIZATION_WORKSPACES_SERVICE_ACCOUNTS_RETRIEVE: "anthropic.organization.workspaces.service_accounts.retrieve"
+        ORGANIZATION_WORKSPACES_SERVICE_ACCOUNTS_UPDATE: "anthropic.organization.workspaces.service_accounts.update"
+        ORGANIZATION_WORKSPACES_SERVICE_ACCOUNTS_LIST: "anthropic.organization.workspaces.service_accounts.list"
+        ORGANIZATION_WORKSPACES_SERVICE_ACCOUNTS_ADD: "anthropic.organization.workspaces.service_accounts.add"
+        ORGANIZATION_WORKSPACES_SERVICE_ACCOUNTS_REMOVE: "anthropic.organization.workspaces.service_accounts.remove"
+        ORGANIZATION_RATE_LIMITS_LIST: "anthropic.organization.rate_limits.list"
+        ORGANIZATION_COMPLIANCE_SETTINGS_RETRIEVE: "anthropic.organization.compliance_settings.retrieve"
+        ORGANIZATION_COMPLIANCE_SETTINGS_UPDATE: "anthropic.organization.compliance_settings.update"
+        AGENTS_CREATE: "anthropic.agents.create"
+        AGENTS_RETRIEVE: "anthropic.agents.retrieve"
+        AGENTS_UPDATE: "anthropic.agents.update"
+        AGENTS_LIST: "anthropic.agents.list"
+        AGENTS_ARCHIVE: "anthropic.agents.archive"
+        AGENTS_VERSIONS_LIST: "anthropic.agents.versions.list"
+        ENVIRONMENTS_CREATE: "anthropic.environments.create"
+        ENVIRONMENTS_RETRIEVE: "anthropic.environments.retrieve"
+        ENVIRONMENTS_UPDATE: "anthropic.environments.update"
+        ENVIRONMENTS_LIST: "anthropic.environments.list"
+        ENVIRONMENTS_DELETE: "anthropic.environments.delete"
+        ENVIRONMENTS_ARCHIVE: "anthropic.environments.archive"
+        ENVIRONMENTS_WORK_RETRIEVE: "anthropic.environments.work.retrieve"
+        ENVIRONMENTS_WORK_UPDATE: "anthropic.environments.work.update"
+        ENVIRONMENTS_WORK_LIST: "anthropic.environments.work.list"
+        ENVIRONMENTS_WORK_ACK: "anthropic.environments.work.ack"
+        ENVIRONMENTS_WORK_HEARTBEAT: "anthropic.environments.work.heartbeat"
+        ENVIRONMENTS_WORK_POLL: "anthropic.environments.work.poll"
+        ENVIRONMENTS_WORK_STATS: "anthropic.environments.work.stats"
+        ENVIRONMENTS_WORK_STOP: "anthropic.environments.work.stop"
+        SESSIONS_CREATE: "anthropic.sessions.create"
+        SESSIONS_RETRIEVE: "anthropic.sessions.retrieve"
+        SESSIONS_UPDATE: "anthropic.sessions.update"
+        SESSIONS_LIST: "anthropic.sessions.list"
+        SESSIONS_DELETE: "anthropic.sessions.delete"
+        SESSIONS_ARCHIVE: "anthropic.sessions.archive"
+        SESSIONS_EVENTS_LIST: "anthropic.sessions.events.list"
+        SESSIONS_EVENTS_SEND: "anthropic.sessions.events.send"
+        SESSIONS_EVENTS_STREAM: "anthropic.sessions.events.stream"
+        SESSIONS_RESOURCES_RETRIEVE: "anthropic.sessions.resources.retrieve"
+        SESSIONS_RESOURCES_UPDATE: "anthropic.sessions.resources.update"
+        SESSIONS_RESOURCES_LIST: "anthropic.sessions.resources.list"
+        SESSIONS_RESOURCES_DELETE: "anthropic.sessions.resources.delete"
+        SESSIONS_RESOURCES_ADD: "anthropic.sessions.resources.add"
+        SESSIONS_THREADS_RETRIEVE: "anthropic.sessions.threads.retrieve"
+        SESSIONS_THREADS_LIST: "anthropic.sessions.threads.list"
+        SESSIONS_THREADS_ARCHIVE: "anthropic.sessions.threads.archive"
+        SESSIONS_THREADS_EVENTS_LIST: "anthropic.sessions.threads.events.list"
+        SESSIONS_THREADS_EVENTS_STREAM: "anthropic.sessions.threads.events.stream"
+        DEPLOYMENTS_CREATE: "anthropic.deployments.create"
+        DEPLOYMENTS_RETRIEVE: "anthropic.deployments.retrieve"
+        DEPLOYMENTS_UPDATE: "anthropic.deployments.update"
+        DEPLOYMENTS_LIST: "anthropic.deployments.list"
+        DEPLOYMENTS_ARCHIVE: "anthropic.deployments.archive"
+        DEPLOYMENTS_PAUSE: "anthropic.deployments.pause"
+        DEPLOYMENTS_RUN: "anthropic.deployments.run"
+        DEPLOYMENTS_UNPAUSE: "anthropic.deployments.unpause"
+        DEPLOYMENT_RUNS_RETRIEVE: "anthropic.deployment_runs.retrieve"
+        DEPLOYMENT_RUNS_LIST: "anthropic.deployment_runs.list"
+        VAULTS_CREATE: "anthropic.vaults.create"
+        VAULTS_RETRIEVE: "anthropic.vaults.retrieve"
+        VAULTS_UPDATE: "anthropic.vaults.update"
+        VAULTS_LIST: "anthropic.vaults.list"
+        VAULTS_DELETE: "anthropic.vaults.delete"
+        VAULTS_ARCHIVE: "anthropic.vaults.archive"
+        VAULTS_CREDENTIALS_CREATE: "anthropic.vaults.credentials.create"
+        VAULTS_CREDENTIALS_RETRIEVE: "anthropic.vaults.credentials.retrieve"
+        VAULTS_CREDENTIALS_UPDATE: "anthropic.vaults.credentials.update"
+        VAULTS_CREDENTIALS_LIST: "anthropic.vaults.credentials.list"
+        VAULTS_CREDENTIALS_DELETE: "anthropic.vaults.credentials.delete"
+        VAULTS_CREDENTIALS_ARCHIVE: "anthropic.vaults.credentials.archive"
+        VAULTS_CREDENTIALS_MCP_OAUTH_VALIDATE: "anthropic.vaults.credentials.mcp_oauth_validate"
+        MEMORY_STORES_CREATE: "anthropic.memory_stores.create"
+        MEMORY_STORES_RETRIEVE: "anthropic.memory_stores.retrieve"
+        MEMORY_STORES_UPDATE: "anthropic.memory_stores.update"
+        MEMORY_STORES_LIST: "anthropic.memory_stores.list"
+        MEMORY_STORES_DELETE: "anthropic.memory_stores.delete"
+        MEMORY_STORES_ARCHIVE: "anthropic.memory_stores.archive"
+        MEMORY_STORES_MEMORIES_CREATE: "anthropic.memory_stores.memories.create"
+        MEMORY_STORES_MEMORIES_RETRIEVE: "anthropic.memory_stores.memories.retrieve"
+        MEMORY_STORES_MEMORIES_UPDATE: "anthropic.memory_stores.memories.update"
+        MEMORY_STORES_MEMORIES_LIST: "anthropic.memory_stores.memories.list"
+        MEMORY_STORES_MEMORIES_DELETE: "anthropic.memory_stores.memories.delete"
+        MEMORY_STORES_MEMORY_VERSIONS_RETRIEVE: "anthropic.memory_stores.memory_versions.retrieve"
+        MEMORY_STORES_MEMORY_VERSIONS_LIST: "anthropic.memory_stores.memory_versions.list"
+        MEMORY_STORES_MEMORY_VERSIONS_REDACT: "anthropic.memory_stores.memory_versions.redact"
+        SKILLS_VERSIONS_DOWNLOAD: "anthropic.skills.versions.download"
+        USER_PROFILES_CREATE: "anthropic.user_profiles.create"
+        USER_PROFILES_RETRIEVE: "anthropic.user_profiles.retrieve"
+        USER_PROFILES_UPDATE: "anthropic.user_profiles.update"
+        USER_PROFILES_LIST: "anthropic.user_profiles.list"
+        USER_PROFILES_CREATE_ENROLLMENT_URL: "anthropic.user_profiles.create_enrollment_url"
+        DREAMS_CREATE: "anthropic.dreams.create"
+        DREAMS_RETRIEVE: "anthropic.dreams.retrieve"
+        DREAMS_LIST: "anthropic.dreams.list"
+        DREAMS_ARCHIVE: "anthropic.dreams.archive"
+        DREAMS_CANCEL: "anthropic.dreams.cancel"
+        TUNNELS_CREATE: "anthropic.tunnels.create"
+        TUNNELS_RETRIEVE: "anthropic.tunnels.retrieve"
+        TUNNELS_LIST: "anthropic.tunnels.list"
+        TUNNELS_ARCHIVE: "anthropic.tunnels.archive"
+        TUNNELS_REVEAL_TOKEN: "anthropic.tunnels.reveal_token"
+        TUNNELS_ROTATE_TOKEN: "anthropic.tunnels.rotate_token"
+        TUNNELS_CERTIFICATES_CREATE: "anthropic.tunnels.certificates.create"
+        TUNNELS_CERTIFICATES_RETRIEVE: "anthropic.tunnels.certificates.retrieve"
+        TUNNELS_CERTIFICATES_LIST: "anthropic.tunnels.certificates.list"
+        TUNNELS_CERTIFICATES_ARCHIVE: "anthropic.tunnels.certificates.archive"
+        ORGANIZATION_ANALYTICS_SUMMARIES_LIST: "anthropic.organization.analytics.summaries.list"
+        ORGANIZATION_ANALYTICS_USERS_LIST: "anthropic.organization.analytics.users.list"
+        ORGANIZATION_ANALYTICS_APPS_CHAT_PROJECTS_LIST: "anthropic.organization.analytics.apps.chat.projects.list"
+        ORGANIZATION_ANALYTICS_CONNECTORS_LIST: "anthropic.organization.analytics.connectors.list"
+        ORGANIZATION_ANALYTICS_PLUGINS_LIST: "anthropic.organization.analytics.plugins.list"
+        ORGANIZATION_ANALYTICS_SKILLS_LIST: "anthropic.organization.analytics.skills.list"
+        ORGANIZATION_ANALYTICS_ARTIFACTS_LIST: "anthropic.organization.analytics.artifacts.list"
+        ORGANIZATION_ANALYTICS_USAGE_REPORT_LIST: "anthropic.organization.analytics.usage_report.list"
+        ORGANIZATION_ANALYTICS_USER_USAGE_REPORT_LIST: "anthropic.organization.analytics.user_usage_report.list"
+        ORGANIZATION_ANALYTICS_COST_REPORT_LIST: "anthropic.organization.analytics.cost_report.list"
+        ORGANIZATION_ANALYTICS_USER_COST_REPORT_LIST: "anthropic.organization.analytics.user_cost_report.list"
+        ORGANIZATION_SPEND_LIMITS_RETRIEVE: "anthropic.organization.spend_limits.retrieve"
+        ORGANIZATION_SPEND_LIMITS_LIST: "anthropic.organization.spend_limits.list"
+        ORGANIZATION_SPEND_LIMITS_DELETE: "anthropic.organization.spend_limits.delete"
+        ORGANIZATION_SPEND_LIMITS_SET: "anthropic.organization.spend_limits.set"
+        ORGANIZATION_SPEND_LIMITS_EFFECTIVE_LIST: "anthropic.organization.spend_limits.effective.list"
+        ORGANIZATION_SPEND_LIMITS_INCREASE_REQUESTS_RETRIEVE: "anthropic.organization.spend_limits.increase_requests.retrieve"
+        ORGANIZATION_SPEND_LIMITS_INCREASE_REQUESTS_LIST: "anthropic.organization.spend_limits.increase_requests.list"
+        ORGANIZATION_SPEND_LIMITS_INCREASE_REQUESTS_APPROVE: "anthropic.organization.spend_limits.increase_requests.approve"
+        ORGANIZATION_SPEND_LIMITS_INCREASE_REQUESTS_DENY: "anthropic.organization.spend_limits.increase_requests.deny"
+        ORGANIZATION_RBAC_GROUPS_CREATE: "anthropic.organization.rbac_groups.create"
+        ORGANIZATION_RBAC_GROUPS_RETRIEVE: "anthropic.organization.rbac_groups.retrieve"
+        ORGANIZATION_RBAC_GROUPS_UPDATE: "anthropic.organization.rbac_groups.update"
+        ORGANIZATION_RBAC_GROUPS_LIST: "anthropic.organization.rbac_groups.list"
+        ORGANIZATION_RBAC_GROUPS_DELETE: "anthropic.organization.rbac_groups.delete"
+        ORGANIZATION_RBAC_GROUPS_MEMBERS_LIST: "anthropic.organization.rbac_groups.members.list"
+        ORGANIZATION_RBAC_GROUPS_MEMBERS_ADD: "anthropic.organization.rbac_groups.members.add"
+        ORGANIZATION_RBAC_GROUPS_MEMBERS_REMOVE: "anthropic.organization.rbac_groups.members.remove"
+        ORGANIZATION_RBAC_ROLES_RETRIEVE: "anthropic.organization.rbac_roles.retrieve"
+        ORGANIZATION_RBAC_ROLES_LIST: "anthropic.organization.rbac_roles.list"
+        ORGANIZATION_RBAC_ROLES_PERMISSIONS_LIST: "anthropic.organization.rbac_roles.permissions.list"
+        ORGANIZATION_PLUGINS_CREATE: "anthropic.organization.plugins.create"
+        ORGANIZATION_PLUGINS_RETRIEVE: "anthropic.organization.plugins.retrieve"
+        ORGANIZATION_PLUGINS_UPDATE: "anthropic.organization.plugins.update"
+        ORGANIZATION_PLUGINS_LIST: "anthropic.organization.plugins.list"
+        ORGANIZATION_PLUGINS_DELETE: "anthropic.organization.plugins.delete"
+        ORGANIZATION_PLUGINS_VERSIONS_CREATE: "anthropic.organization.plugins.versions.create"
+        ORGANIZATION_PLUGINS_VERSIONS_RETRIEVE: "anthropic.organization.plugins.versions.retrieve"
+        ORGANIZATION_PLUGINS_VERSIONS_LIST: "anthropic.organization.plugins.versions.list"
+        ORGANIZATION_PLUGINS_VERSIONS_DOWNLOAD: "anthropic.organization.plugins.versions.download"
+        ORGANIZATION_PLUGINS_INSTALLATION_SETTINGS_LIST: "anthropic.organization.plugins.installation_settings.list"
+        ORGANIZATION_PLUGINS_INSTALLATION_SETTINGS_REMOVE: "anthropic.organization.plugins.installation_settings.remove"
+        ORGANIZATION_PLUGINS_INSTALLATION_SETTINGS_SET: "anthropic.organization.plugins.installation_settings.set"
+        ORGANIZATION_PLUGINS_SHARES_LIST: "anthropic.organization.plugins.shares.list"
+        ORGANIZATION_PLUGIN_MARKETPLACES_RETRIEVE: "anthropic.organization.plugin_marketplaces.retrieve"
+        ORGANIZATION_PLUGIN_MARKETPLACES_UPDATE: "anthropic.organization.plugin_marketplaces.update"
+        ORGANIZATION_PLUGIN_MARKETPLACES_LIST: "anthropic.organization.plugin_marketplaces.list"
+        ORGANIZATION_PLUGIN_MARKETPLACES_VALIDATE_ARCHIVE: "anthropic.organization.plugin_marketplaces.validate_archive"
+        ORGANIZATION_PLUGIN_MARKETPLACES_VALIDATE_REPOSITORY: "anthropic.organization.plugin_marketplaces.validate_repository"
+        ORGANIZATION_TELEMETRY_DESTINATIONS_CREATE: "anthropic.organization.telemetry_destinations.create"
+        ORGANIZATION_TELEMETRY_DESTINATIONS_RETRIEVE: "anthropic.organization.telemetry_destinations.retrieve"
+        ORGANIZATION_TELEMETRY_DESTINATIONS_UPDATE: "anthropic.organization.telemetry_destinations.update"
+        ORGANIZATION_TELEMETRY_DESTINATIONS_LIST: "anthropic.organization.telemetry_destinations.list"
+        ORGANIZATION_TELEMETRY_DESTINATIONS_DELETE: "anthropic.organization.telemetry_destinations.delete"
+        ORGANIZATION_TELEMETRY_DESTINATIONS_TEST: "anthropic.organization.telemetry_destinations.test"
+        ORGANIZATION_TELEMETRY_DESTINATIONS_WORKSPACES_LIST: "anthropic.organization.telemetry_destinations.workspaces.list"
+        ORGANIZATION_TELEMETRY_DESTINATIONS_WORKSPACES_ADD: "anthropic.organization.telemetry_destinations.workspaces.add"
+        ORGANIZATION_TELEMETRY_DESTINATIONS_WORKSPACES_REMOVE: "anthropic.organization.telemetry_destinations.workspaces.remove"
+      end
+
+      CLIENT_ATTRIBUTES: ::Hash[String, String]
+
+      RESPONSE_HEADER_ATTRIBUTES: ::Hash[String, String]
+
+      type client_option =
+        bool
+        | {
+          tracer_provider: top,
+          propagation: bool?,
+          traces: (bool | traces_option)?
+        }
+
+      type traces_option =
+        {
+          enabled: bool?,
+          content_mode: (:metadata_only | :content | String)?,
+          max_content_bytes: Integer?
+        }
+
+      type request_option = { conversation_id: String? }
+
+      CLIENT_OPTION_KEYS: ::Array[Symbol]
+
+      TRACES_KEYS: ::Array[Symbol]
+
+      CONTENT_MODES: ::Array[Symbol]
+
+      DEFAULT_MAX_CONTENT_BYTES: Integer
+
+      REQUEST_OPTION_KEYS: ::Array[Symbol]
+
+      CONTENT_QUERY_PARAMETERS: ::Array[String]
+
+      SPAN_ATTRIBUTES: ::Hash[String, ::Hash[Symbol, top]]
+
+      interface _Recorder
+        def start_attributes: (
+          Anthropic::Internal::Transport::BaseClient client,
+          ::Hash[Symbol, top] req
+        ) -> ::Hash[String, top]?
+
+        def record: (top span, ::Hash[Symbol, top] result) -> void
+      end
+
+      self.@recorders: ::Hash[String?, ::Array[_Recorder]]
+
+      def self.client_option: (
+        (::Hash[(Symbol | String), top] | bool)? option
+      ) -> ::Hash[Symbol, top]
+
+      def self.request_option: (
+        ::Hash[(Symbol | String), top]? option
+      ) -> ::Hash[Symbol, top]
+
+      def self.tracer: (::Hash[Symbol, top] option, ?String scope) -> top?
+
+      def self.content?: (::Hash[Symbol, top] option) -> bool
+
+      def self.max_content_bytes: (::Hash[Symbol, top] option) -> Integer
+
+      def self.propagation?: (::Hash[Symbol, top] option) -> bool
+
+      def self.start_api_call_span: (
+        top tracer,
+        ::Hash[Symbol, top] req,
+        propagation: bool
+      ) -> top?
+
+      def self.register_recorder: (
+        String? span_name,
+        _Recorder recorder
+      ) -> void
+
+      def self.api_call_span_attributes: (
+        Anthropic::Internal::Transport::BaseClient client,
+        ::Hash[Symbol, top] req
+      ) -> ::Hash[String, top]
+
+      def self.record_send: (
+        top span,
+        Anthropic::Internal::Transport::BaseClient client,
+        ::Hash[Symbol, top] request,
+        URI::Generic url
+      ) -> void
+
+      def self.set_response_attributes: (
+        top span,
+        String? span_name,
+        Anthropic::Internal::Type::BaseModel | ::Hash[Symbol, top] response
+      ) -> void
+
+      def self.inject: (top span) -> ::Hash[String, String]
+
+      def self.trace_header_names: (top? span) -> ::Array[String]
+
+      def self.end_api_call_span: (top span, ::Hash[Symbol, top] result) -> void
+
+      def self.end_api_call_span_when_stream_ends: (
+        top span,
+        Anthropic::Internal::Type::BaseStream[bot, top] stream,
+        ::Hash[Symbol, top] result
+      ) -> Anthropic::Internal::Type::BaseStream[bot, top]
+
+      def self.set_error_status: (top span, Exception error) -> void
+
+      private def self.option_hash: (
+        top option,
+        ::Array[Symbol] keys,
+        String name,
+        String expected
+      ) -> ::Hash[Symbol, top]
+
+      private def self.plain: (top value) -> String
+
+      private def self.environment_option: -> ::Hash[Symbol, top]
+
+      private def self.environment_content_mode: -> Symbol
+
+      private def self.environment_max_content_bytes: -> Integer?
+
+      private def self.set_response_status_code: (
+        top span,
+        ::Hash[Symbol, top] result
+      ) -> void
+
+      private def self.set_created_id: (
+        top span,
+        ::Hash[Symbol, top] result
+      ) -> void
+
+      private def self.set_response_header_attributes: (
+        top span,
+        ::Hash[Symbol, top] result
+      ) -> void
+
+      private def self.record_result: (
+        top span,
+        ::Hash[Symbol, top] result
+      ) -> void
+
+      private def self.recorders: (String? span_name) -> ::Array[_Recorder]
+
+      private def self.recording: (String? span_name) { -> top } -> top
+
+      private def self.url_attributes: (
+        Anthropic::Internal::Transport::BaseClient client,
+        URI::Generic url,
+        ::Array[String] query_names,
+        ::Array[String] content_names
+      ) -> ::Hash[String, String]
+
+      private def self.request_attributes: (
+        Anthropic::Internal::Transport::BaseClient client,
+        ::Hash[Symbol, top] req
+      ) -> ::Hash[String, top]
+
+      private def self.dig: (top data, ::Array[Symbol] path) -> top
+
+      private def self.attribute_value: (
+        top value,
+        Symbol | ::Array[Symbol] `type`
+      ) -> top
+
+      private def self.header_value: (
+        String? value,
+        Symbol | ::Array[Symbol] `type`
+      ) -> top
+
+      private def self.iterate_and_end_span: (
+        Enumerator[top] source,
+        top span,
+        bool events
+      ) -> Enumerator[top]
+
+      private def self.error_type: (StandardError error) -> String
+    end
+  end
+end

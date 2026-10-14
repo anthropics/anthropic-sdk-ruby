@@ -1,0 +1,23 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_deleted_telemetry_destination =
+          { id: String, type: :telemetry_destination_deleted }
+
+        class BetaDeletedTelemetryDestination < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor type: :telemetry_destination_deleted
+
+          def initialize: (
+            id: String,
+            ?type: :telemetry_destination_deleted
+          ) -> void
+
+          def to_hash: -> { id: String, type: :telemetry_destination_deleted }
+        end
+      end
+    end
+  end
+end

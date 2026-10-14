@@ -1,5 +1,40 @@
 # Changelog
 
+## [1.79.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.78.0...v1.79.0) (2026-10-14)
+
+### Features
+
+* **api:** add execution_identity to Managed Agents agents
+* **api:** add organization_type_not_supported error to spend limit lists
+* **api:** add telemetry destination test endpoint
+* **api:** add telemetry destinations to the Admin API
+* **client:** add OpenTelemetry tracing for API calls, streaming and tool runs, on by default: once the application registers a tracer provider each call emits a span, and each request carries the trace context in the headers of the registered propagator, such as `traceparent`. `open_telemetry: false` or `ANTHROPIC_OPEN_TELEMETRY=false` turns both off, and `open_telemetry: {propagation: false}` or `ANTHROPIC_OPEN_TELEMETRY_PROPAGATION=false` only the headers, where a variable applies only to a client that is given no `open_telemetry` option. Adds the dependency `opentelemetry-api` (`>= 1.2.4`, `< 2`)
+
+
+### Bug Fixes
+
+* **api:** rename telemetry destination test response model
+* **client:** ignore OpenTelemetry env vars when the option is set
+* **client:** keep the discriminator when a union's .new builds a variant
+* **streaming:** keep every field of a tool use block when attaching its parsed input
+* **streaming:** pass events of an unknown type through the message stream helper untouched
+* **tools:** name the toolset on the tool runner's result for a toolset member's call
+
+
+### Chores
+
+* **docs:** correct prefill, thinking, fallback and model descriptions
+* **docs:** document the scope required to assign the managed role
+* **docs:** update model examples
+* include the license files in the published packages
+* **internal:** narrow the tripwire test rule in the contributor guides
+
+
+### Documentation
+
+* **api:** clarify when custom tool results can be sent
+* **api:** say is_enabled is always true for user spend limits
+
 ## [1.78.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.77.1...v1.78.0) (2026-10-09)
 
 ### Features

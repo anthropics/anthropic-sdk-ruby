@@ -6,7 +6,7 @@ class Anthropic::Test::Resources::Beta::AgentsTest < Anthropic::Test::ResourceTe
   def test_create_required_params
     response =
       @anthropic.beta.agents.create(
-        model: Anthropic::Beta::BetaManagedAgentsModel::CLAUDE_OPUS_5,
+        model: Anthropic::Beta::BetaManagedAgentsModel::CLAUDE_OPUS_5_5,
         name: "My First Agent"
       )
 
@@ -20,6 +20,7 @@ class Anthropic::Test::Resources::Beta::AgentsTest < Anthropic::Test::ResourceTe
         archived_at: Time | nil,
         created_at: Time,
         description: String | nil,
+        execution_identity: Anthropic::Beta::BetaManagedAgentsExecutionIdentity,
         mcp_servers: ^(Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition]),
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
         model: Anthropic::Beta::BetaManagedAgentsModelConfig,
@@ -48,6 +49,7 @@ class Anthropic::Test::Resources::Beta::AgentsTest < Anthropic::Test::ResourceTe
         archived_at: Time | nil,
         created_at: Time,
         description: String | nil,
+        execution_identity: Anthropic::Beta::BetaManagedAgentsExecutionIdentity,
         mcp_servers: ^(Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition]),
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
         model: Anthropic::Beta::BetaManagedAgentsModelConfig,
@@ -76,6 +78,7 @@ class Anthropic::Test::Resources::Beta::AgentsTest < Anthropic::Test::ResourceTe
         archived_at: Time | nil,
         created_at: Time,
         description: String | nil,
+        execution_identity: Anthropic::Beta::BetaManagedAgentsExecutionIdentity,
         mcp_servers: ^(Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition]),
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
         model: Anthropic::Beta::BetaManagedAgentsModelConfig,
@@ -111,6 +114,7 @@ class Anthropic::Test::Resources::Beta::AgentsTest < Anthropic::Test::ResourceTe
         archived_at: Time | nil,
         created_at: Time,
         description: String | nil,
+        execution_identity: Anthropic::Beta::BetaManagedAgentsExecutionIdentity,
         mcp_servers: ^(Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition]),
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
         model: Anthropic::Beta::BetaManagedAgentsModelConfig,
@@ -139,6 +143,7 @@ class Anthropic::Test::Resources::Beta::AgentsTest < Anthropic::Test::ResourceTe
         archived_at: Time | nil,
         created_at: Time,
         description: String | nil,
+        execution_identity: Anthropic::Beta::BetaManagedAgentsExecutionIdentity,
         mcp_servers: ^(Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition]),
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
         model: Anthropic::Beta::BetaManagedAgentsModelConfig,

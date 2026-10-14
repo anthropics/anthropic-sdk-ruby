@@ -97,7 +97,7 @@ class Anthropic::Test::Helpers::ToolRunner::StreamingTest < Minitest::Test
         events << {
           type: "content_block_start",
           index: i,
-          content_block: {type: "tool_use", id: block[:id], name: block[:name], input: ""}
+          content_block: {**block, input: ""}
         }
         events << {
           type: "content_block_delta",
@@ -351,6 +351,54 @@ class Anthropic::Test::Helpers::ToolRunner::StreamingTest < Minitest::Test
         {role: "user", content: [{type: "tool_result", tool_use_id: "t1", is_error: true, content: String}]}
       ]
     end
+  end
+
+  def test_toolset_member_call_is_replayed_and_answered_with_its_toolset_name
+    input = {lhs: 10.0, rhs: 5.0, operator: "+"}
+    responses = [
+      stream_events(
+        id: "msg_1",
+        content: [
+          {type: "tool_use", id: "t1", name: "calculator", toolset_name: "fake_toolset", input:},
+          {type: "tool_use", id: "t2", name: "calculator", input:}
+        ]
+      ),
+      stream_events(id: "msg_2", content: [{type: "text", text: "Result: 15"}], stop_reason: "end_turn")
+    ]
+    bodies = []
+    stub_request(:post, "http://localhost/v1/messages?beta=true")
+      .to_return do |request|
+      bodies << JSON.parse(request.body, symbolize_names: true)
+      {status: 200, body: responses[bodies.length - 1], headers: {"content-type" => "text/event-stream"}}
+    end
+
+    @client.beta.messages.tool_runner(
+      max_tokens: 1024,
+      messages: [{content: "What is 10 + 5?", role: :user}],
+      model: :"claude-3-7-sonnet-latest",
+      tools: [@calculator],
+      stream: true
+    ).run_until_finished
+
+    assert_equal(2, bodies.length)
+    replayed, results = bodies.last[:messages].last(2)
+    assert_pattern do
+      replayed => {
+        role: "assistant",
+        content: [{type: "tool_use", id: "t1", toolset_name: "fake_toolset"}, {type: "tool_use", id: "t2"}]
+      }
+    end
+    assert_pattern do
+      results => {
+        role: "user",
+        content: [
+          {type: "tool_result", tool_use_id: "t1", toolset_name: "fake_toolset"},
+          {type: "tool_result", tool_use_id: "t2"}
+        ]
+      }
+    end
+    refute_operator(replayed[:content].last, :key?, :toolset_name)
+    refute_operator(results[:content].last, :key?, :toolset_name)
   end
 
   def test_server_assigned_container_is_forwarded

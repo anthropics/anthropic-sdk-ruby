@@ -38,6 +38,9 @@ module Anthropic
         def create(params)
           parsed, options = Anthropic::Organization::WorkspaceCreateParams.dump_request(params)
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_WORKSPACES_CREATE,
+            span_created_id: "anthropic.organization.workspace.id",
+            span_route: "/v1/organizations/workspaces",
             method: :post,
             path: "v1/organizations/workspaces",
             body: parsed,
@@ -59,6 +62,9 @@ module Anthropic
         # @see Anthropic::Models::Organization::WorkspaceRetrieveParams
         def retrieve(workspace_id, params = {})
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_WORKSPACES_RETRIEVE,
+            span_attributes: {"anthropic.organization.workspace.id" => workspace_id},
+            span_route: "/v1/organizations/workspaces/{workspace_id}",
             method: :get,
             path: ["v1/organizations/workspaces/%1$s", workspace_id],
             model: Anthropic::Organization::Workspace,
@@ -93,6 +99,9 @@ module Anthropic
         def update(workspace_id, params = {})
           parsed, options = Anthropic::Organization::WorkspaceUpdateParams.dump_request(params)
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_WORKSPACES_UPDATE,
+            span_attributes: {"anthropic.organization.workspace.id" => workspace_id},
+            span_route: "/v1/organizations/workspaces/{workspace_id}",
             method: :post,
             path: ["v1/organizations/workspaces/%1$s", workspace_id],
             body: parsed,
@@ -127,6 +136,9 @@ module Anthropic
           parsed, options = Anthropic::Organization::WorkspaceListParams.dump_request(params)
           query = Anthropic::Internal::Util.encode_query_params(parsed)
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_WORKSPACES_LIST,
+            span_route: "/v1/organizations/workspaces",
+            span_query: %w[after_id before_id include_archived include_default limit],
             method: :get,
             path: "v1/organizations/workspaces",
             query: query,
@@ -148,6 +160,9 @@ module Anthropic
         # @see Anthropic::Models::Organization::WorkspaceArchiveParams
         def archive(workspace_id, params = {})
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_WORKSPACES_ARCHIVE,
+            span_attributes: {"anthropic.organization.workspace.id" => workspace_id},
+            span_route: "/v1/organizations/workspaces/{workspace_id}/archive",
             method: :post,
             path: ["v1/organizations/workspaces/%1$s/archive", workspace_id],
             model: Anthropic::Organization::Workspace,

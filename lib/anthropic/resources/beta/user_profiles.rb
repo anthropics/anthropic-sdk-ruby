@@ -36,6 +36,9 @@ module Anthropic
           parsed, options = Anthropic::Beta::UserProfileCreateParams.dump_request(params)
           header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::USER_PROFILES_CREATE,
+            span_created_id: "anthropic.user_profile.id",
+            span_route: "/v1/user_profiles",
             method: :post,
             path: "v1/user_profiles?beta=true",
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),
@@ -66,6 +69,9 @@ module Anthropic
         def retrieve(user_profile_id, params = {})
           parsed, options = Anthropic::Beta::UserProfileRetrieveParams.dump_request(params)
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::USER_PROFILES_RETRIEVE,
+            span_attributes: {"anthropic.user_profile.id" => user_profile_id},
+            span_route: "/v1/user_profiles/{user_profile_id}",
             method: :get,
             path: ["v1/user_profiles/%1$s?beta=true", user_profile_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
@@ -108,6 +114,9 @@ module Anthropic
           parsed, options = Anthropic::Beta::UserProfileUpdateParams.dump_request(params)
           header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::USER_PROFILES_UPDATE,
+            span_attributes: {"anthropic.user_profile.id" => user_profile_id},
+            span_route: "/v1/user_profiles/{user_profile_id}",
             method: :post,
             path: ["v1/user_profiles/%1$s?beta=true", user_profile_id],
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),
@@ -146,6 +155,9 @@ module Anthropic
           parsed, options = Anthropic::Beta::UserProfileListParams.dump_request(params)
           query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::USER_PROFILES_LIST,
+            span_route: "/v1/user_profiles",
+            span_query: %w[limit order order_by page],
             method: :get,
             path: "v1/user_profiles?beta=true",
             query: query,
@@ -181,6 +193,9 @@ module Anthropic
         def create_enrollment_url(user_profile_id, params = {})
           parsed, options = Anthropic::Beta::UserProfileCreateEnrollmentURLParams.dump_request(params)
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::USER_PROFILES_CREATE_ENROLLMENT_URL,
+            span_attributes: {"anthropic.user_profile.id" => user_profile_id},
+            span_route: "/v1/user_profiles/{user_profile_id}/enrollment_url",
             method: :post,
             path: ["v1/user_profiles/%1$s/enrollment_url?beta=true", user_profile_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),

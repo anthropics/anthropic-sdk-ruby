@@ -109,13 +109,13 @@ module Anthropic
             def self.new(type:, **args)
               case type.to_sym
               when :end_turn
-                Anthropic::Beta::Sessions::BetaManagedAgentsSessionEndTurn.new(**args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsSessionEndTurn.new(type: type, **args)
               when :requires_action
-                Anthropic::Beta::Sessions::BetaManagedAgentsSessionRequiresAction.new(**args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsSessionRequiresAction.new(type: type, **args)
               when :retries_exhausted
-                Anthropic::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted.new(**args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted.new(type: type, **args)
               when :budget_reached
-                Anthropic::Beta::Sessions::BetaManagedAgentsSessionBudgetReached.new(**args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsSessionBudgetReached.new(type: type, **args)
               when :refusal
                 Anthropic::Beta::Sessions::BetaManagedAgentsSessionRefusal.new(**args)
               else

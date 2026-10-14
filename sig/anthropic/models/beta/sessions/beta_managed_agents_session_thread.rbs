@@ -100,6 +100,7 @@ module Anthropic
                 type: :agent | "agent",
                 id: String,
                 description: String?,
+                execution_identity: Anthropic::Models::Beta::beta_managed_agents_execution_identity,
                 mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition],
                 model: Anthropic::Beta::BetaManagedAgentsModelConfig,
                 name: String,
@@ -115,6 +116,7 @@ module Anthropic
               | (
                 type: :inline | "inline",
                 description: String?,
+                execution_identity: Anthropic::Models::Beta::beta_managed_agents_execution_identity,
                 mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition],
                 model: Anthropic::Beta::BetaManagedAgentsModelConfig,
                 name: String,
@@ -128,6 +130,7 @@ module Anthropic
                 model: Anthropic::Beta::BetaManagedAgentsModelConfig | String,
                 ?id: String,
                 ?description: String?,
+                ?execution_identity: Anthropic::Models::Beta::beta_managed_agents_execution_identity,
                 ?mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition],
                 ?name: String,
                 ?skills: ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent::skill]

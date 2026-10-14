@@ -12,13 +12,15 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::AgentCreateParams} for more details.
         #
-        # @overload create(model:, name:, description: nil, mcp_servers: nil, metadata: nil, multiagent: nil, skills: nil, system_: nil, tools: nil, betas: nil, workspace_id: nil, request_options: {})
+        # @overload create(model:, name:, description: nil, execution_identity: nil, mcp_servers: nil, metadata: nil, multiagent: nil, skills: nil, system_: nil, tools: nil, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param model [Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams, Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel] Body param: Model identifier. Accepts the [model string](https://platform.claude
         #
         # @param name [String] Body param: Human-readable name for the agent.
         #
         # @param description [String, nil] Body param: Description of what the agent does.
+        #
+        # @param execution_identity [Anthropic::Models::Beta::BetaManagedAgentsAWSRoleExecutionIdentityParams, Anthropic::Models::Beta::BetaManagedAgentsServiceAccountExecutionIdentityParams, nil] Body param: Execution principal for runs of this agent. Omitting it, sending nul
         #
         # @param mcp_servers [Array<Anthropic::Models::Beta::BetaManagedAgentsURLMCPServerParams>] Body param: MCP servers this agent connects to. Maximum 20. Names must be unique
         #
@@ -45,6 +47,9 @@ module Anthropic
           parsed, options = Anthropic::Beta::AgentCreateParams.dump_request(params)
           header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::AGENTS_CREATE,
+            span_created_id: "gen_ai.agent.id",
+            span_route: "/v1/agents",
             method: :post,
             path: "v1/agents?beta=true",
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),
@@ -79,6 +84,10 @@ module Anthropic
           parsed, options = Anthropic::Beta::AgentRetrieveParams.dump_request(params)
           query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::AGENTS_RETRIEVE,
+            span_attributes: {"gen_ai.agent.id" => agent_id},
+            span_route: "/v1/agents/{agent_id}",
+            span_query: %w[version],
             method: :get,
             path: ["v1/agents/%1$s?beta=true", agent_id],
             query: query,
@@ -96,11 +105,13 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::AgentUpdateParams} for more details.
         #
-        # @overload update(agent_id, description: nil, mcp_servers: nil, metadata: nil, model: nil, multiagent: nil, name: nil, skills: nil, system_: nil, tools: nil, version: nil, betas: nil, workspace_id: nil, request_options: {})
+        # @overload update(agent_id, description: nil, execution_identity: nil, mcp_servers: nil, metadata: nil, model: nil, multiagent: nil, name: nil, skills: nil, system_: nil, tools: nil, version: nil, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param agent_id [String] Path param: Unique identifier of the agent to update.
         #
         # @param description [String, nil] Body param: Description. Omit to preserve; send empty string or null to clear.
+        #
+        # @param execution_identity [Anthropic::Models::Beta::BetaManagedAgentsAWSRoleExecutionIdentityParams, Anthropic::Models::Beta::BetaManagedAgentsServiceAccountExecutionIdentityParams, nil] Body param: Execution principal for runs of this agent. Full replacement. Omit t
         #
         # @param mcp_servers [Array<Anthropic::Models::Beta::BetaManagedAgentsURLMCPServerParams>, nil] Body param: MCP servers. Full replacement. Omit to preserve; send empty array or
         #
@@ -133,6 +144,9 @@ module Anthropic
           parsed, options = Anthropic::Beta::AgentUpdateParams.dump_request(params)
           header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::AGENTS_UPDATE,
+            span_attributes: {"gen_ai.agent.id" => agent_id},
+            span_route: "/v1/agents/{agent_id}",
             method: :post,
             path: ["v1/agents/%1$s?beta=true", agent_id],
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),
@@ -173,6 +187,9 @@ module Anthropic
           parsed, options = Anthropic::Beta::AgentListParams.dump_request(params)
           query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::AGENTS_LIST,
+            span_route: "/v1/agents",
+            span_query: %w[created_at[gte] created_at[lte] include_archived limit page],
             method: :get,
             path: "v1/agents?beta=true",
             query: query.transform_keys(created_at_gte: "created_at[gte]", created_at_lte: "created_at[lte]"),
@@ -207,6 +224,9 @@ module Anthropic
         def archive(agent_id, params = {})
           parsed, options = Anthropic::Beta::AgentArchiveParams.dump_request(params)
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::AGENTS_ARCHIVE,
+            span_attributes: {"gen_ai.agent.id" => agent_id},
+            span_route: "/v1/agents/{agent_id}/archive",
             method: :post,
             path: ["v1/agents/%1$s/archive?beta=true", agent_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),

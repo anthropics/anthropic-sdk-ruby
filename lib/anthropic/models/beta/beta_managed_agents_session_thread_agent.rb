@@ -14,6 +14,14 @@ module Anthropic
         #   @return [String, nil]
         required :description, String, nil?: true
 
+        # @!attribute execution_identity
+        #   Execution principal snapshotted from the agent at session creation. Always
+        #   present; `{"type": "service_account"}` when runs carry no customer-named
+        #   principal.
+        #
+        #   @return [Anthropic::Models::Beta::BetaManagedAgentsAWSRoleExecutionIdentity, Anthropic::Models::Beta::BetaManagedAgentsServiceAccountExecutionIdentity]
+        required :execution_identity, union: -> { Anthropic::Beta::BetaManagedAgentsExecutionIdentity }
+
         # @!attribute mcp_servers
         #
         #   @return [Array<Anthropic::Models::Beta::BetaManagedAgentsMCPServerURLDefinition>]
@@ -58,14 +66,19 @@ module Anthropic
         #   @return [Integer]
         required :version, Integer
 
-        # @!method initialize(id:, description:, mcp_servers:, model:, name:, skills:, system_:, tools:, type:, version:)
+        # @!method initialize(id:, description:, execution_identity:, mcp_servers:, model:, name:, skills:, system_:, tools:, type:, version:)
         #   Resolved `agent` definition for a single `session_thread`. Snapshot of the agent
         #   at thread creation time. The multiagent roster is not repeated here; read it
         #   from `Session.agent`.
         #
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent} for more details.
+        #
         #   @param id [String]
         #
         #   @param description [String, nil]
+        #
+        #   @param execution_identity [Anthropic::Models::Beta::BetaManagedAgentsAWSRoleExecutionIdentity, Anthropic::Models::Beta::BetaManagedAgentsServiceAccountExecutionIdentity] Execution principal snapshotted from the agent at session creation. Always prese
         #
         #   @param mcp_servers [Array<Anthropic::Models::Beta::BetaManagedAgentsMCPServerURLDefinition>]
         #
@@ -124,9 +137,9 @@ module Anthropic
           def self.new(type:, **args)
             case type.to_sym
             when :anthropic
-              Anthropic::Beta::BetaManagedAgentsAnthropicSkill.new(**args)
+              Anthropic::Beta::BetaManagedAgentsAnthropicSkill.new(type: type, **args)
             when :custom
-              Anthropic::Beta::BetaManagedAgentsCustomSkill.new(**args)
+              Anthropic::Beta::BetaManagedAgentsCustomSkill.new(type: type, **args)
             else
               raise ArgumentError, "unknown type: #{type}"
             end
@@ -184,11 +197,11 @@ module Anthropic
           def self.new(type:, **args)
             case type.to_sym
             when :agent_toolset_20260401
-              Anthropic::Beta::BetaManagedAgentsAgentToolset20260401.new(**args)
+              Anthropic::Beta::BetaManagedAgentsAgentToolset20260401.new(type: type, **args)
             when :mcp_toolset
-              Anthropic::Beta::BetaManagedAgentsMCPToolset.new(**args)
+              Anthropic::Beta::BetaManagedAgentsMCPToolset.new(type: type, **args)
             when :custom
-              Anthropic::Beta::BetaManagedAgentsCustomTool.new(**args)
+              Anthropic::Beta::BetaManagedAgentsCustomTool.new(type: type, **args)
             else
               raise ArgumentError, "unknown type: #{type}"
             end

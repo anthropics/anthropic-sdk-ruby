@@ -41,6 +41,10 @@ module Anthropic
             parsed, options = Anthropic::Organization::Workspaces::RateLimitListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed)
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_WORKSPACES_RATE_LIMITS_LIST,
+              span_attributes: {"anthropic.organization.workspace.id" => workspace_id},
+              span_route: "/v1/organizations/workspaces/{workspace_id}/rate_limits",
+              span_query: %w[group_type include_inherited limit page],
               method: :get,
               path: ["v1/organizations/workspaces/%1$s/rate_limits", workspace_id],
               query: query,

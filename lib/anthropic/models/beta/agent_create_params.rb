@@ -11,7 +11,7 @@ module Anthropic
         # @!attribute model
         #   Model identifier. Accepts the
         #   [model string](https://platform.claude.com/docs/en/about-claude/models/overview#latest-models-comparison),
-        #   e.g. `claude-opus-5`, or a `model_config` object for additional configuration
+        #   e.g. `claude-opus-5-5`, or a `model_config` object for additional configuration
         #   control
         #
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams, Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel]
@@ -28,6 +28,15 @@ module Anthropic
         #
         #   @return [String, nil]
         optional :description, String, nil?: true
+
+        # @!attribute execution_identity
+        #   Execution principal for runs of this agent. Omitting it, sending null, or
+        #   sending `{"type": "service_account"}` stores the default.
+        #
+        #   @return [Anthropic::Models::Beta::BetaManagedAgentsAWSRoleExecutionIdentityParams, Anthropic::Models::Beta::BetaManagedAgentsServiceAccountExecutionIdentityParams, nil]
+        optional :execution_identity,
+                 union: -> { Anthropic::Beta::BetaManagedAgentsExecutionIdentityParams },
+                 nil?: true
 
         # @!attribute mcp_servers
         #   MCP servers this agent connects to. Maximum 20. Names must be unique within the
@@ -90,7 +99,7 @@ module Anthropic
         #   @return [String, nil]
         optional :workspace_id, String
 
-        # @!method initialize(model:, name:, description: nil, mcp_servers: nil, metadata: nil, multiagent: nil, skills: nil, system_: nil, tools: nil, betas: nil, workspace_id: nil, request_options: {})
+        # @!method initialize(model:, name:, description: nil, execution_identity: nil, mcp_servers: nil, metadata: nil, multiagent: nil, skills: nil, system_: nil, tools: nil, betas: nil, workspace_id: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::AgentCreateParams} for more details.
         #
@@ -99,6 +108,8 @@ module Anthropic
         #   @param name [String] Human-readable name for the agent.
         #
         #   @param description [String, nil] Description of what the agent does.
+        #
+        #   @param execution_identity [Anthropic::Models::Beta::BetaManagedAgentsAWSRoleExecutionIdentityParams, Anthropic::Models::Beta::BetaManagedAgentsServiceAccountExecutionIdentityParams, nil] Execution principal for runs of this agent. Omitting it, sending null, or sendin
         #
         #   @param mcp_servers [Array<Anthropic::Models::Beta::BetaManagedAgentsURLMCPServerParams>] MCP servers this agent connects to. Maximum 20. Names must be unique within the
         #
@@ -120,7 +131,7 @@ module Anthropic
 
         # Model identifier. Accepts the
         # [model string](https://platform.claude.com/docs/en/about-claude/models/overview#latest-models-comparison),
-        # e.g. `claude-opus-5`, or a `model_config` object for additional configuration
+        # e.g. `claude-opus-5-5`, or a `model_config` object for additional configuration
         # control
         module Model
           extend Anthropic::Internal::Type::Union
@@ -193,11 +204,11 @@ module Anthropic
           def self.new(type:, **args)
             case type.to_sym
             when :agent_toolset_20260401
-              Anthropic::Beta::BetaManagedAgentsAgentToolset20260401Params.new(**args)
+              Anthropic::Beta::BetaManagedAgentsAgentToolset20260401Params.new(type: type, **args)
             when :mcp_toolset
-              Anthropic::Beta::BetaManagedAgentsMCPToolsetParams.new(**args)
+              Anthropic::Beta::BetaManagedAgentsMCPToolsetParams.new(type: type, **args)
             when :custom
-              Anthropic::Beta::BetaManagedAgentsCustomToolParams.new(**args)
+              Anthropic::Beta::BetaManagedAgentsCustomToolParams.new(type: type, **args)
             else
               raise ArgumentError, "unknown type: #{type}"
             end

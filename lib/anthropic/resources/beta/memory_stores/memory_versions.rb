@@ -37,6 +37,13 @@ module Anthropic
                 raise ArgumentError.new("missing required path argument #{_1}")
               end
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::MEMORY_STORES_MEMORY_VERSIONS_RETRIEVE,
+              span_attributes: {
+                "gen_ai.memory.store.id" => memory_store_id,
+                "anthropic.memory_store.memory_version.id" => memory_version_id
+              },
+              span_route: "/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}",
+              span_query: %w[view],
               method: :get,
               path: [
                 "v1/memory_stores/%1$s/memory_versions/%2$s?beta=true",
@@ -110,6 +117,21 @@ module Anthropic
             parsed, options = Anthropic::Beta::MemoryStores::MemoryVersionListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::MEMORY_STORES_MEMORY_VERSIONS_LIST,
+              span_attributes: {"gen_ai.memory.store.id" => memory_store_id},
+              span_route: "/v1/memory_stores/{memory_store_id}/memory_versions",
+              span_query: %w[
+                api_key_id
+                created_at[gte]
+                created_at[lte]
+                limit
+                memory_id
+                operation
+                page
+                service_account_id
+                session_id
+                view
+              ],
               method: :get,
               path: ["v1/memory_stores/%1$s/memory_versions?beta=true", memory_store_id],
               query: query.transform_keys(
@@ -154,6 +176,12 @@ module Anthropic
                 raise ArgumentError.new("missing required path argument #{_1}")
               end
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::MEMORY_STORES_MEMORY_VERSIONS_REDACT,
+              span_attributes: {
+                "gen_ai.memory.store.id" => memory_store_id,
+                "anthropic.memory_store.memory_version.id" => memory_version_id
+              },
+              span_route: "/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}/redact",
               method: :post,
               path: [
                 "v1/memory_stores/%1$s/memory_versions/%2$s/redact?beta=true",

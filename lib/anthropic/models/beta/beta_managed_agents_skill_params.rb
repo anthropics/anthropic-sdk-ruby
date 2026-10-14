@@ -44,9 +44,9 @@ module Anthropic
         def self.new(type:, **args)
           case type.to_sym
           when :anthropic
-            Anthropic::Beta::BetaManagedAgentsAnthropicSkillParams.new(**args)
+            Anthropic::Beta::BetaManagedAgentsAnthropicSkillParams.new(type: type, **args)
           when :custom
-            Anthropic::Beta::BetaManagedAgentsCustomSkillParams.new(**args)
+            Anthropic::Beta::BetaManagedAgentsCustomSkillParams.new(type: type, **args)
           else
             raise ArgumentError, "unknown type: #{type}"
           end

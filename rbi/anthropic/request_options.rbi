@@ -40,6 +40,11 @@ module Anthropic
     sig { returns(T.nilable(T.anything)) }
     attr_accessor :extra_body
 
+    # OpenTelemetry settings for this request's span. Its one key is
+    # `:conversation_id`, the ID of the conversation that the request is part of.
+    sig { returns(T.nilable({ conversation_id: T.nilable(String) })) }
+    attr_accessor :open_telemetry
+
     # Maximum number of retries to attempt after a failed initial request.
     sig { returns(T.nilable(Integer)) }
     attr_accessor :max_retries

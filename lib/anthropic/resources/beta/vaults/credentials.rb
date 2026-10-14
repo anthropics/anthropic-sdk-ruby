@@ -33,6 +33,10 @@ module Anthropic
             parsed, options = Anthropic::Beta::Vaults::CredentialCreateParams.dump_request(params)
             header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::VAULTS_CREDENTIALS_CREATE,
+              span_attributes: {"anthropic.vault.id" => vault_id},
+              span_created_id: "anthropic.vault.credential.id",
+              span_route: "/v1/vaults/{vault_id}/credentials",
               method: :post,
               path: ["v1/vaults/%1$s/credentials?beta=true", vault_id],
               headers: parsed.slice(*header_params.keys).transform_keys(header_params),
@@ -69,6 +73,12 @@ module Anthropic
                 raise ArgumentError.new("missing required path argument #{_1}")
               end
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::VAULTS_CREDENTIALS_RETRIEVE,
+              span_attributes: {
+                "anthropic.vault.id" => vault_id,
+                "anthropic.vault.credential.id" => credential_id
+              },
+              span_route: "/v1/vaults/{vault_id}/credentials/{credential_id}",
               method: :get,
               path: ["v1/vaults/%1$s/credentials/%2$s?beta=true", vault_id, credential_id],
               headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
@@ -111,6 +121,12 @@ module Anthropic
               end
             header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::VAULTS_CREDENTIALS_UPDATE,
+              span_attributes: {
+                "anthropic.vault.id" => vault_id,
+                "anthropic.vault.credential.id" => credential_id
+              },
+              span_route: "/v1/vaults/{vault_id}/credentials/{credential_id}",
               method: :post,
               path: ["v1/vaults/%1$s/credentials/%2$s?beta=true", vault_id, credential_id],
               headers: parsed.slice(*header_params.keys).transform_keys(header_params),
@@ -149,6 +165,10 @@ module Anthropic
             parsed, options = Anthropic::Beta::Vaults::CredentialListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::VAULTS_CREDENTIALS_LIST,
+              span_attributes: {"anthropic.vault.id" => vault_id},
+              span_route: "/v1/vaults/{vault_id}/credentials",
+              span_query: %w[include_archived limit page],
               method: :get,
               path: ["v1/vaults/%1$s/credentials?beta=true", vault_id],
               query: query,
@@ -189,6 +209,12 @@ module Anthropic
                 raise ArgumentError.new("missing required path argument #{_1}")
               end
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::VAULTS_CREDENTIALS_DELETE,
+              span_attributes: {
+                "anthropic.vault.id" => vault_id,
+                "anthropic.vault.credential.id" => credential_id
+              },
+              span_route: "/v1/vaults/{vault_id}/credentials/{credential_id}",
               method: :delete,
               path: ["v1/vaults/%1$s/credentials/%2$s?beta=true", vault_id, credential_id],
               headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
@@ -224,6 +250,12 @@ module Anthropic
                 raise ArgumentError.new("missing required path argument #{_1}")
               end
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::VAULTS_CREDENTIALS_ARCHIVE,
+              span_attributes: {
+                "anthropic.vault.id" => vault_id,
+                "anthropic.vault.credential.id" => credential_id
+              },
+              span_route: "/v1/vaults/{vault_id}/credentials/{credential_id}/archive",
               method: :post,
               path: ["v1/vaults/%1$s/credentials/%2$s/archive?beta=true", vault_id, credential_id],
               headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
@@ -260,6 +292,12 @@ module Anthropic
                 raise ArgumentError.new("missing required path argument #{_1}")
               end
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::VAULTS_CREDENTIALS_MCP_OAUTH_VALIDATE,
+              span_attributes: {
+                "anthropic.vault.id" => vault_id,
+                "anthropic.vault.credential.id" => credential_id
+              },
+              span_route: "/v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate",
               method: :post,
               path: ["v1/vaults/%1$s/credentials/%2$s/mcp_oauth_validate?beta=true", vault_id, credential_id],
               headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),

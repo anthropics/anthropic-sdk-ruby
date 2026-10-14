@@ -180,37 +180,37 @@ module Anthropic
           def self.new(type:, **args)
             case type.to_sym
             when :environment_archived_error
-              Anthropic::Beta::BetaManagedAgentsEnvironmentArchivedRunError.new(**args)
+              Anthropic::Beta::BetaManagedAgentsEnvironmentArchivedRunError.new(type: type, **args)
             when :agent_archived_error
-              Anthropic::Beta::BetaManagedAgentsAgentArchivedRunError.new(**args)
+              Anthropic::Beta::BetaManagedAgentsAgentArchivedRunError.new(type: type, **args)
             when :environment_not_found_error
-              Anthropic::Beta::BetaManagedAgentsEnvironmentNotFoundRunError.new(**args)
+              Anthropic::Beta::BetaManagedAgentsEnvironmentNotFoundRunError.new(type: type, **args)
             when :vault_not_found_error
-              Anthropic::Beta::BetaManagedAgentsVaultNotFoundRunError.new(**args)
+              Anthropic::Beta::BetaManagedAgentsVaultNotFoundRunError.new(type: type, **args)
             when :vault_archived_error
-              Anthropic::Beta::BetaManagedAgentsVaultArchivedRunError.new(**args)
+              Anthropic::Beta::BetaManagedAgentsVaultArchivedRunError.new(type: type, **args)
             when :file_not_found_error
-              Anthropic::Beta::BetaManagedAgentsFileNotFoundRunError.new(**args)
+              Anthropic::Beta::BetaManagedAgentsFileNotFoundRunError.new(type: type, **args)
             when :memory_store_archived_error
-              Anthropic::Beta::BetaManagedAgentsMemoryStoreArchivedRunError.new(**args)
+              Anthropic::Beta::BetaManagedAgentsMemoryStoreArchivedRunError.new(type: type, **args)
             when :skill_not_found_error
-              Anthropic::Beta::BetaManagedAgentsSkillNotFoundRunError.new(**args)
+              Anthropic::Beta::BetaManagedAgentsSkillNotFoundRunError.new(type: type, **args)
             when :session_resource_not_found_error
-              Anthropic::Beta::BetaManagedAgentsSessionResourceNotFoundRunError.new(**args)
+              Anthropic::Beta::BetaManagedAgentsSessionResourceNotFoundRunError.new(type: type, **args)
             when :workspace_archived_error
-              Anthropic::Beta::BetaManagedAgentsWorkspaceArchivedRunError.new(**args)
+              Anthropic::Beta::BetaManagedAgentsWorkspaceArchivedRunError.new(type: type, **args)
             when :organization_disabled_error
-              Anthropic::Beta::BetaManagedAgentsOrganizationDisabledRunError.new(**args)
+              Anthropic::Beta::BetaManagedAgentsOrganizationDisabledRunError.new(type: type, **args)
             when :session_rate_limited_error
-              Anthropic::Beta::BetaManagedAgentsSessionRateLimitedRunError.new(**args)
+              Anthropic::Beta::BetaManagedAgentsSessionRateLimitedRunError.new(type: type, **args)
             when :session_creation_rejected_error
-              Anthropic::Beta::BetaManagedAgentsSessionCreationRejectedRunError.new(**args)
+              Anthropic::Beta::BetaManagedAgentsSessionCreationRejectedRunError.new(type: type, **args)
             when :unknown_error
-              Anthropic::Beta::BetaManagedAgentsUnknownRunError.new(**args)
+              Anthropic::Beta::BetaManagedAgentsUnknownRunError.new(type: type, **args)
             when :self_hosted_resources_unsupported_error
-              Anthropic::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedRunError.new(**args)
+              Anthropic::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedRunError.new(type: type, **args)
             when :mcp_egress_blocked_error
-              Anthropic::Beta::BetaManagedAgentsMCPEgressBlockedRunError.new(**args)
+              Anthropic::Beta::BetaManagedAgentsMCPEgressBlockedRunError.new(type: type, **args)
             else
               raise ArgumentError, "unknown type: #{type}"
             end

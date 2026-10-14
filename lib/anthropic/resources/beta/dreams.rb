@@ -42,6 +42,9 @@ module Anthropic
           parsed, options = Anthropic::Beta::DreamCreateParams.dump_request(params)
           header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::DREAMS_CREATE,
+            span_created_id: "anthropic.dream.id",
+            span_route: "/v1/dreams",
             method: :post,
             path: "v1/dreams?beta=true",
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),
@@ -78,6 +81,9 @@ module Anthropic
         def retrieve(dream_id, params = {})
           parsed, options = Anthropic::Beta::DreamRetrieveParams.dump_request(params)
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::DREAMS_RETRIEVE,
+            span_attributes: {"anthropic.dream.id" => dream_id},
+            span_route: "/v1/dreams/{dream_id}",
             method: :get,
             path: ["v1/dreams/%1$s?beta=true", dream_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
@@ -125,6 +131,9 @@ module Anthropic
           parsed, options = Anthropic::Beta::DreamListParams.dump_request(params)
           query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::DREAMS_LIST,
+            span_route: "/v1/dreams",
+            span_query: %w[created_at[gt] created_at[lt] include_archived limit page statuses],
             method: :get,
             path: "v1/dreams?beta=true",
             query: query.transform_keys(created_at_gt: "created_at[gt]", created_at_lt: "created_at[lt]"),
@@ -168,6 +177,9 @@ module Anthropic
         def archive(dream_id, params = {})
           parsed, options = Anthropic::Beta::DreamArchiveParams.dump_request(params)
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::DREAMS_ARCHIVE,
+            span_attributes: {"anthropic.dream.id" => dream_id},
+            span_route: "/v1/dreams/{dream_id}/archive",
             method: :post,
             path: ["v1/dreams/%1$s/archive?beta=true", dream_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
@@ -206,6 +218,9 @@ module Anthropic
         def cancel(dream_id, params = {})
           parsed, options = Anthropic::Beta::DreamCancelParams.dump_request(params)
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::DREAMS_CANCEL,
+            span_attributes: {"anthropic.dream.id" => dream_id},
+            span_route: "/v1/dreams/{dream_id}/cancel",
             method: :post,
             path: ["v1/dreams/%1$s/cancel?beta=true", dream_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),

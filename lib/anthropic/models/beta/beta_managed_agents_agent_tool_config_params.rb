@@ -84,21 +84,21 @@ module Anthropic
         def self.new(type:, **args)
           case type.to_sym
           when :bash
-            Anthropic::Beta::BetaManagedAgentsBashToolConfigParams.new(**args)
+            Anthropic::Beta::BetaManagedAgentsBashToolConfigParams.new(type: type, **args)
           when :edit
-            Anthropic::Beta::BetaManagedAgentsEditToolConfigParams.new(**args)
+            Anthropic::Beta::BetaManagedAgentsEditToolConfigParams.new(type: type, **args)
           when :read
-            Anthropic::Beta::BetaManagedAgentsReadToolConfigParams.new(**args)
+            Anthropic::Beta::BetaManagedAgentsReadToolConfigParams.new(type: type, **args)
           when :write
-            Anthropic::Beta::BetaManagedAgentsWriteToolConfigParams.new(**args)
+            Anthropic::Beta::BetaManagedAgentsWriteToolConfigParams.new(type: type, **args)
           when :glob
-            Anthropic::Beta::BetaManagedAgentsGlobToolConfigParams.new(**args)
+            Anthropic::Beta::BetaManagedAgentsGlobToolConfigParams.new(type: type, **args)
           when :grep
-            Anthropic::Beta::BetaManagedAgentsGrepToolConfigParams.new(**args)
+            Anthropic::Beta::BetaManagedAgentsGrepToolConfigParams.new(type: type, **args)
           when :web_fetch
-            Anthropic::Beta::BetaManagedAgentsWebFetchToolConfigParams.new(**args)
+            Anthropic::Beta::BetaManagedAgentsWebFetchToolConfigParams.new(type: type, **args)
           when :web_search
-            Anthropic::Beta::BetaManagedAgentsWebSearchToolConfigParams.new(**args)
+            Anthropic::Beta::BetaManagedAgentsWebSearchToolConfigParams.new(type: type, **args)
           else
             raise ArgumentError, "unknown type: #{type}"
           end

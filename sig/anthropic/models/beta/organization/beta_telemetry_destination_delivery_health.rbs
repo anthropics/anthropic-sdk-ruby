@@ -1,0 +1,30 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_telemetry_destination_delivery_health =
+          { last_error: String?, last_error_at: Time?, last_success_at: Time? }
+
+        class BetaTelemetryDestinationDeliveryHealth < Anthropic::Internal::Type::BaseModel
+          attr_accessor last_error: String?
+
+          attr_accessor last_error_at: Time?
+
+          attr_accessor last_success_at: Time?
+
+          def initialize: (
+            last_error: String?,
+            last_error_at: Time?,
+            last_success_at: Time?
+          ) -> void
+
+          def to_hash: -> {
+            last_error: String?,
+            last_error_at: Time?,
+            last_success_at: Time?
+          }
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,41 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_telemetry_destination_traces_params =
+          {
+            content_mode: Anthropic::Models::Beta::Organization::beta_telemetry_destination_content_mode?,
+            enabled: bool,
+            endpoint_url: String?,
+            max_content_bytes: Integer?
+          }
+
+        class BetaTelemetryDestinationTracesParams < Anthropic::Internal::Type::BaseModel
+          attr_accessor content_mode: Anthropic::Models::Beta::Organization::beta_telemetry_destination_content_mode?
+
+          attr_reader enabled: bool?
+
+          def enabled=: (bool) -> bool
+
+          attr_accessor endpoint_url: String?
+
+          attr_accessor max_content_bytes: Integer?
+
+          def initialize: (
+            ?content_mode: Anthropic::Models::Beta::Organization::beta_telemetry_destination_content_mode?,
+            ?enabled: bool,
+            ?endpoint_url: String?,
+            ?max_content_bytes: Integer?
+          ) -> void
+
+          def to_hash: -> {
+            content_mode: Anthropic::Models::Beta::Organization::beta_telemetry_destination_content_mode?,
+            enabled: bool,
+            endpoint_url: String?,
+            max_content_bytes: Integer?
+          }
+        end
+      end
+    end
+  end
+end

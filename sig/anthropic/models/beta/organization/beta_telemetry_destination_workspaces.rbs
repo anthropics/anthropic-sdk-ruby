@@ -1,0 +1,45 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_telemetry_destination_workspaces =
+          Anthropic::Beta::Organization::BetaTelemetryDestinationWorkspacesAll
+          | Anthropic::Beta::Organization::BetaTelemetryDestinationWorkspacesInclude
+          | Anthropic::Beta::Organization::BetaTelemetryDestinationWorkspacesExclude
+
+        module BetaTelemetryDestinationWorkspaces
+          extend Anthropic::Internal::Type::Union
+
+          type type_ = :all | :include | :exclude
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            ALL: :all
+            INCLUDE: :include
+            EXCLUDE: :exclude
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaTelemetryDestinationWorkspaces::type_]
+          end
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::beta_telemetry_destination_workspaces]
+
+          def self.new:
+            (
+              type: :all | "all"
+            ) -> Anthropic::Beta::Organization::BetaTelemetryDestinationWorkspacesAll
+            | (
+              type: :include | "include"
+            ) -> Anthropic::Beta::Organization::BetaTelemetryDestinationWorkspacesInclude
+            | (
+              type: :exclude | "exclude"
+            ) -> Anthropic::Beta::Organization::BetaTelemetryDestinationWorkspacesExclude
+            | (
+              type: Anthropic::Models::Beta::Organization::BetaTelemetryDestinationWorkspaces::type_
+              | String
+            ) -> Anthropic::Models::Beta::Organization::beta_telemetry_destination_workspaces
+        end
+      end
+    end
+  end
+end

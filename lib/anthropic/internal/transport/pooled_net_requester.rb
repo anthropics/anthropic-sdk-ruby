@@ -180,11 +180,15 @@ module Anthropic
 
           req = nil
           finished = false
+          context = OpenTelemetry::Context.current
 
           # rubocop:disable Metrics/BlockLength
           enum = Enumerator.new do |y|
             next if finished
 
+            # This enumerator's fiber has a context of its own, so it takes the caller's: HTTP
+            # instrumentation then starts its spans as children of the span of the API call.
+            token = OpenTelemetry::Context.attach(context)
             with_pool(url, deadline: deadline) do |conn|
               eof = false
               closing = nil
@@ -228,6 +232,8 @@ module Anthropic
             raise Anthropic::Errors::APITimeoutError.new(url: url, request: req)
           rescue StandardError
             raise Anthropic::Errors::APIConnectionError.new(url: url, request: req)
+          ensure
+            OpenTelemetry::Context.detach(token) unless token.nil?
           end
           # rubocop:enable Metrics/BlockLength
 

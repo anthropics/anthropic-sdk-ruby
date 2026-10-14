@@ -1,0 +1,61 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class TelemetryDestinations
+          attr_reader workspaces: Anthropic::Resources::Beta::Organization::TelemetryDestinations::Workspaces
+
+          def create: (
+            endpoint_url: String,
+            workspaces: Anthropic::Models::Beta::Organization::beta_telemetry_destination_workspaces_params,
+            ?display_name: String?,
+            ?headers: ::Hash[Symbol, String],
+            ?traces: Anthropic::Beta::Organization::BetaTelemetryDestinationTracesParams,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaTelemetryDestination
+
+          def retrieve: (
+            String destination_id,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaTelemetryDestination
+
+          def update: (
+            String destination_id,
+            ?display_name: String?,
+            ?endpoint_url: String,
+            ?headers: ::Hash[Symbol, String?]?,
+            ?state: Anthropic::Models::Beta::Organization::beta_telemetry_destination_state_params,
+            ?traces: Anthropic::Beta::Organization::BetaTelemetryDestinationTracesParams?,
+            ?workspaces: Anthropic::Models::Beta::Organization::beta_telemetry_destination_workspaces_params,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaTelemetryDestination
+
+          def list: (
+            ?limit: Integer,
+            ?page: String,
+            ?workspace_ids: ::Array[String],
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Organization::BetaTelemetryDestination]
+
+          def delete: (
+            String destination_id,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaDeletedTelemetryDestination
+
+          def test_: (
+            String destination_id,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaTelemetryDestinationTestResponse
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

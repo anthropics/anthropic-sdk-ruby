@@ -135,11 +135,14 @@ module Anthropic
             def self.new(type:, **args)
               case type.to_sym
               when :mcp_oauth
-                Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams.new(**args)
+                Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams.new(type: type, **args)
               when :static_bearer
-                Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams.new(**args)
+                Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams.new(type: type, **args)
               when :environment_variable
-                Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams.new(**args)
+                Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams.new(
+                  type: type,
+                  **args
+                )
               else
                 raise ArgumentError, "unknown type: #{type}"
               end

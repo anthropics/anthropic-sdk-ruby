@@ -22,6 +22,9 @@ module Anthropic
         def create(params)
           parsed, options = Anthropic::Organization::ExternalKeyCreateParams.dump_request(params)
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_EXTERNAL_KEYS_CREATE,
+            span_created_id: "anthropic.organization.external_key.id",
+            span_route: "/v1/organizations/external_keys",
             method: :post,
             path: "v1/organizations/external_keys",
             body: parsed,
@@ -43,6 +46,9 @@ module Anthropic
         # @see Anthropic::Models::Organization::ExternalKeyRetrieveParams
         def retrieve(external_key_id, params = {})
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_EXTERNAL_KEYS_RETRIEVE,
+            span_attributes: {"anthropic.organization.external_key.id" => external_key_id},
+            span_route: "/v1/organizations/external_keys/{external_key_id}",
             method: :get,
             path: ["v1/organizations/external_keys/%1$s", external_key_id],
             model: Anthropic::Organization::ExternalKey,
@@ -74,6 +80,9 @@ module Anthropic
         def update(external_key_id, params = {})
           parsed, options = Anthropic::Organization::ExternalKeyUpdateParams.dump_request(params)
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_EXTERNAL_KEYS_UPDATE,
+            span_attributes: {"anthropic.organization.external_key.id" => external_key_id},
+            span_route: "/v1/organizations/external_keys/{external_key_id}",
             method: :post,
             path: ["v1/organizations/external_keys/%1$s", external_key_id],
             body: parsed,
@@ -102,6 +111,9 @@ module Anthropic
           parsed, options = Anthropic::Organization::ExternalKeyListParams.dump_request(params)
           query = Anthropic::Internal::Util.encode_query_params(parsed)
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_EXTERNAL_KEYS_LIST,
+            span_route: "/v1/organizations/external_keys",
+            span_query: %w[limit page],
             method: :get,
             path: "v1/organizations/external_keys",
             query: query,
@@ -126,6 +138,9 @@ module Anthropic
         # @see Anthropic::Models::Organization::ExternalKeyDeleteParams
         def delete(external_key_id, params = {})
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_EXTERNAL_KEYS_DELETE,
+            span_attributes: {"anthropic.organization.external_key.id" => external_key_id},
+            span_route: "/v1/organizations/external_keys/{external_key_id}",
             method: :delete,
             path: ["v1/organizations/external_keys/%1$s", external_key_id],
             model: Anthropic::Models::Organization::ExternalKeyDeleteResponse,
@@ -151,6 +166,9 @@ module Anthropic
         # @see Anthropic::Models::Organization::ExternalKeyValidateParams
         def validate(external_key_id, params = {})
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_EXTERNAL_KEYS_VALIDATE,
+            span_attributes: {"anthropic.organization.external_key.id" => external_key_id},
+            span_route: "/v1/organizations/external_keys/{external_key_id}/validate",
             method: :post,
             path: ["v1/organizations/external_keys/%1$s/validate", external_key_id],
             model: Anthropic::Models::Organization::ExternalKeyValidateResponse,

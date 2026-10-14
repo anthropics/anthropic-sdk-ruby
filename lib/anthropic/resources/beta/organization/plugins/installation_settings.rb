@@ -53,6 +53,10 @@ module Anthropic
                 Anthropic::Beta::Organization::Plugins::InstallationSettingListParams.dump_request(params)
               query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
               @client.request(
+                span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_PLUGINS_INSTALLATION_SETTINGS_LIST,
+                span_attributes: {"anthropic.organization.plugin.id" => plugin_id},
+                span_route: "/v1/organizations/plugins/{plugin_id}/installation_settings",
+                span_query: %w[limit organization_id page target_type],
                 method: :get,
                 path: ["v1/organizations/plugins/%1$s/installation_settings?beta=true", plugin_id],
                 query: query,
@@ -116,6 +120,12 @@ module Anthropic
                   raise ArgumentError.new("missing required path argument #{_1}")
                 end
               @client.request(
+                span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_PLUGINS_INSTALLATION_SETTINGS_REMOVE,
+                span_attributes: {
+                  "anthropic.organization.plugin.id" => plugin_id,
+                  "anthropic.organization.plugin.installation_setting.id" => target
+                },
+                span_route: "/v1/organizations/plugins/{plugin_id}/installation_settings/{target}",
                 method: :delete,
                 path: [
                   "v1/organizations/plugins/%1$s/installation_settings/%2$s?beta=true",
@@ -179,6 +189,12 @@ module Anthropic
                 end
               header_params = {betas: "anthropic-beta"}
               @client.request(
+                span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_PLUGINS_INSTALLATION_SETTINGS_SET,
+                span_attributes: {
+                  "anthropic.organization.plugin.id" => plugin_id,
+                  "anthropic.organization.plugin.installation_setting.id" => target
+                },
+                span_route: "/v1/organizations/plugins/{plugin_id}/installation_settings/{target}",
                 method: :post,
                 path: [
                   "v1/organizations/plugins/%1$s/installation_settings/%2$s?beta=true",

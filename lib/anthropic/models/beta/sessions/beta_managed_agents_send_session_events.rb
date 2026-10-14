@@ -90,7 +90,7 @@ module Anthropic
             #
             #   @option args [String, nil] :deny_message Optional message providing context for a 'deny' decision. Only allowed when resu
             #
-            #   @option args [String] :custom_tool_use_id The id of the `agent.custom_tool_use` event this result corresponds to, which ca
+            #   @option args [String] :custom_tool_use_id The id of the `agent.custom_tool_use` event this result corresponds to. It is al
             #
             #   @option args [Boolean, nil] :is_error Whether the tool execution resulted in an error.
             #
@@ -107,19 +107,19 @@ module Anthropic
             def self.new(type:, **args)
               case type.to_sym
               when :"user.message"
-                Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEvent.new(**args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEvent.new(type: type, **args)
               when :"user.interrupt"
-                Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEvent.new(**args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEvent.new(type: type, **args)
               when :"user.tool_confirmation"
-                Anthropic::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent.new(**args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent.new(type: type, **args)
               when :"user.custom_tool_result"
-                Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent.new(**args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent.new(type: type, **args)
               when :"user.define_outcome"
-                Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent.new(**args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent.new(type: type, **args)
               when :"user.tool_result"
-                Anthropic::Beta::BetaManagedAgentsUserToolResultEvent.new(**args)
+                Anthropic::Beta::BetaManagedAgentsUserToolResultEvent.new(type: type, **args)
               when :"system.message"
-                Anthropic::Beta::BetaManagedAgentsSystemMessageEvent.new(**args)
+                Anthropic::Beta::BetaManagedAgentsSystemMessageEvent.new(type: type, **args)
               else
                 raise ArgumentError, "unknown type: #{type}"
               end

@@ -81,9 +81,9 @@ module Anthropic
           def self.new(type:, **args)
             case type.to_sym
             when :file
-              Anthropic::Beta::Sessions::BetaManagedAgentsFileRubric.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsFileRubric.new(type: type, **args)
             when :text
-              Anthropic::Beta::Sessions::BetaManagedAgentsTextRubric.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsTextRubric.new(type: type, **args)
             else
               raise ArgumentError, "unknown type: #{type}"
             end

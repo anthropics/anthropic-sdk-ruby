@@ -698,6 +698,35 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
     assert_match(/'get_tides' not found/, follow_up.dig(:messages, -1, :content, 0, :content))
   end
 
+  def test_toolset_member_call_is_answered_with_its_toolset_name
+    input = {lhs: 10.0, rhs: 5.0, operator: "+"}
+    bodies = stub_responses_capturing_bodies(
+      tool_use_response(
+        id: "msg_1",
+        tool_use: [
+          {id: "tool_1", name: "calculator", toolset_name: "fake_toolset", input:},
+          # An explicit null is not a toolset name: its result must leave the key out.
+          {id: "tool_2", name: "calculator", toolset_name: nil, input:},
+          {id: "tool_3", name: "get_tides", toolset_name: "fake_toolset", input: {}}
+        ]
+      ),
+      text_response(id: "msg_2", text: "The result is 15")
+    )
+
+    @client.beta.messages.tool_runner(basic_params).each_message { _1 }
+
+    assert_equal(2, bodies.length)
+    results = bodies.last.dig(:messages, -1, :content)
+    assert_pattern do
+      results => [
+        {type: "tool_result", tool_use_id: "tool_1", toolset_name: "fake_toolset"},
+        {type: "tool_result", tool_use_id: "tool_2", is_error: false},
+        {type: "tool_result", tool_use_id: "tool_3", toolset_name: "fake_toolset", is_error: true}
+      ]
+    end
+    refute_operator(results[1], :key?, :toolset_name)
+  end
+
   # A block type this SDK version does not model can be coerced to `BetaToolUseBlock`.
   def test_unknown_block_type_is_not_run_as_a_tool_call
     widget_use = {

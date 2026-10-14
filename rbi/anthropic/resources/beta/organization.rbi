@@ -55,6 +55,13 @@ module Anthropic
         end
         attr_reader :plugin_marketplaces
 
+        sig do
+          returns(
+            Anthropic::Resources::Beta::Organization::TelemetryDestinations
+          )
+        end
+        attr_reader :telemetry_destinations
+
         # Retrieve information about the organization associated with the authenticated
         # API key.
         sig do

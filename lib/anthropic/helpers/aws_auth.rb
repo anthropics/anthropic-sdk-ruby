@@ -185,6 +185,10 @@ module Anthropic
       # a `StringIO`, which the terminal's encoding passes through untouched,
       # so the signed payload is exactly the bytes that go over the wire.
       #
+      # The headers that carry a trace context are sent but not signed: an HTTP
+      # instrumentation may replace them with the context of its own span after
+      # this, which would invalidate a signature that covered them.
+      #
       # @param req [Anthropic::APIRequest]
       # @return [Anthropic::APIRequest]
       private def sign_aws_request(req)
@@ -201,7 +205,10 @@ module Anthropic
             StringIO.new(encoded.to_s)
           end
 
-        signed = @signer.sign_request(http_method: req.method, url: req.url, body: body, headers: headers)
+        # The propagator is read per request: the application may register it after it makes the client.
+        unsigned = %w[traceparent tracestate baggage] | Anthropic::Internal::Tracing.trace_header_names(nil)
+        signable = headers.reject { |name, _| unsigned.include?(name.to_s.downcase) }
+        signed = @signer.sign_request(http_method: req.method, url: req.url, body: body, headers: signable)
         headers = Anthropic::Internal::Util.normalized_headers(headers, signed.headers)
         headers.delete("connection")
         req.with(headers: headers, body: body)

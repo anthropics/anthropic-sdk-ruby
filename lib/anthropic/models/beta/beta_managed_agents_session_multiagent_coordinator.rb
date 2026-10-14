@@ -52,6 +52,10 @@ module Anthropic
           # Creates a new instance of the variant class whose `type` matches the given
           # value, passing the remaining arguments to its constructor.
           #
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator::Agent}
+          # for more details.
+          #
           # @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator::Agent::Type, String]
           #
           # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
@@ -59,6 +63,8 @@ module Anthropic
           #   @option args [String] :id
           #
           #   @option args [String, nil] :description
+          #
+          #   @option args [Anthropic::Models::Beta::BetaManagedAgentsAWSRoleExecutionIdentity, Anthropic::Models::Beta::BetaManagedAgentsServiceAccountExecutionIdentity] :execution_identity Execution principal snapshotted from the agent at session creation. Always prese
           #
           #   @option args [Array<Anthropic::Models::Beta::BetaManagedAgentsMCPServerURLDefinition>] :mcp_servers
           #
@@ -79,9 +85,9 @@ module Anthropic
           def self.new(type:, **args)
             case type.to_sym
             when :agent
-              Anthropic::Beta::BetaManagedAgentsSessionThreadAgent.new(**args)
+              Anthropic::Beta::BetaManagedAgentsSessionThreadAgent.new(type: type, **args)
             when :advisor
-              Anthropic::Beta::BetaManagedAgentsAdvisor.new(**args)
+              Anthropic::Beta::BetaManagedAgentsAdvisor.new(type: type, **args)
             else
               raise ArgumentError, "unknown type: #{type}"
             end

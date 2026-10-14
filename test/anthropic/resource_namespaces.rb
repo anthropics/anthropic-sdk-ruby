@@ -59,6 +59,9 @@ module Anthropic
           module SpendLimits
           end
 
+          module TelemetryDestinations
+          end
+
           module Workspaces
           end
         end
@@ -123,6 +126,9 @@ module Anthropic
         module SpendLimits
         end
 
+        module TelemetryDestinations
+        end
+
         module Workspaces
         end
       end
@@ -151,6 +157,9 @@ module Anthropic
       end
 
       module SpendLimits
+      end
+
+      module TelemetryDestinations
       end
 
       module Threads

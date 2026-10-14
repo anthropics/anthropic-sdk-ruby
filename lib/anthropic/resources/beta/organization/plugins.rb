@@ -73,6 +73,9 @@ module Anthropic
             parsed, options = Anthropic::Beta::Organization::PluginCreateParams.dump_request(params)
             header_params = {betas: "anthropic-beta"}
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_PLUGINS_CREATE,
+              span_created_id: "anthropic.organization.plugin.id",
+              span_route: "/v1/organizations/plugins",
               method: :post,
               path: "v1/organizations/plugins?beta=true",
               headers: {
@@ -121,6 +124,10 @@ module Anthropic
             parsed, options = Anthropic::Beta::Organization::PluginRetrieveParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_PLUGINS_RETRIEVE,
+              span_attributes: {"anthropic.organization.plugin.id" => plugin_id},
+              span_route: "/v1/organizations/plugins/{plugin_id}",
+              span_query: %w[organization_id],
               method: :get,
               path: ["v1/organizations/plugins/%1$s?beta=true", plugin_id],
               query: query,
@@ -182,6 +189,9 @@ module Anthropic
             parsed, options = Anthropic::Beta::Organization::PluginUpdateParams.dump_request(params)
             header_params = {betas: "anthropic-beta"}
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_PLUGINS_UPDATE,
+              span_attributes: {"anthropic.organization.plugin.id" => plugin_id},
+              span_route: "/v1/organizations/plugins/{plugin_id}",
               method: :post,
               path: ["v1/organizations/plugins/%1$s?beta=true", plugin_id],
               headers: parsed.slice(*header_params.keys).transform_keys(header_params),
@@ -260,6 +270,20 @@ module Anthropic
             parsed, options = Anthropic::Beta::Organization::PluginListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_PLUGINS_LIST,
+              span_route: "/v1/organizations/plugins",
+              span_query: %w[
+                created_at[gt]
+                created_at[gte]
+                created_at[lt]
+                created_at[lte]
+                limit
+                marketplace_id
+                organization_id
+                owner_type
+                owner_user_id
+                page
+              ],
               method: :get,
               path: "v1/organizations/plugins?beta=true",
               query: query.transform_keys(
@@ -314,6 +338,9 @@ module Anthropic
           def delete(plugin_id, params = {})
             parsed, options = Anthropic::Beta::Organization::PluginDeleteParams.dump_request(params)
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_PLUGINS_DELETE,
+              span_attributes: {"anthropic.organization.plugin.id" => plugin_id},
+              span_route: "/v1/organizations/plugins/{plugin_id}",
               method: :delete,
               path: ["v1/organizations/plugins/%1$s?beta=true", plugin_id],
               headers: parsed.transform_keys(betas: "anthropic-beta"),

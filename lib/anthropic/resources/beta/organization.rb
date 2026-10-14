@@ -49,6 +49,9 @@ module Anthropic
         # @return [Anthropic::Resources::Beta::Organization::PluginMarketplaces]
         attr_reader :plugin_marketplaces
 
+        # @return [Anthropic::Resources::Beta::Organization::TelemetryDestinations]
+        attr_reader :telemetry_destinations
+
         # Retrieve information about the organization associated with the authenticated
         # API key.
         #
@@ -61,6 +64,8 @@ module Anthropic
         # @see Anthropic::Models::Beta::OrganizationRetrieveParams
         def retrieve(params = {})
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_RETRIEVE,
+            span_route: "/v1/organizations/me",
             method: :get,
             path: "v1/organizations/me?beta=true",
             model: Anthropic::Beta::BetaOrganization,
@@ -88,6 +93,8 @@ module Anthropic
           @rbac_roles = Anthropic::Resources::Beta::Organization::RBACRoles.new(client: client)
           @plugins = Anthropic::Resources::Beta::Organization::Plugins.new(client: client)
           @plugin_marketplaces = Anthropic::Resources::Beta::Organization::PluginMarketplaces.new(client: client)
+          @telemetry_destinations =
+            Anthropic::Resources::Beta::Organization::TelemetryDestinations.new(client: client)
         end
       end
     end

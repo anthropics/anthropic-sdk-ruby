@@ -1,7 +1,7 @@
 module Anthropic
   module Internal
     module Type
-      module BaseStream[Message, Elem]
+      module BaseStream[in Message, out Elem]
         include Enumerable[Elem]
 
         attr_reader status: Integer

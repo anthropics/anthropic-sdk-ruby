@@ -67,9 +67,9 @@ module Anthropic
           def self.new(type:, **args)
             case type.to_sym
             when :memory
-              Anthropic::Beta::MemoryStores::BetaManagedAgentsMemory.new(**args)
+              Anthropic::Beta::MemoryStores::BetaManagedAgentsMemory.new(type: type, **args)
             when :memory_prefix
-              Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryPrefix.new(**args)
+              Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryPrefix.new(type: type, **args)
             else
               raise ArgumentError, "unknown type: #{type}"
             end

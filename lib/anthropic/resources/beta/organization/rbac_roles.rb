@@ -23,6 +23,9 @@ module Anthropic
           # @see Anthropic::Models::Beta::Organization::RBACRoleRetrieveParams
           def retrieve(rbac_role_id, params = {})
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_RBAC_ROLES_RETRIEVE,
+              span_attributes: {"anthropic.organization.rbac_role.id" => rbac_role_id},
+              span_route: "/v1/organizations/rbac_roles/{rbac_role_id}",
               method: :get,
               path: ["v1/organizations/rbac_roles/%1$s?beta=true", rbac_role_id],
               model: Anthropic::Beta::Organization::BetaRBACRole,
@@ -52,6 +55,9 @@ module Anthropic
             parsed, options = Anthropic::Beta::Organization::RBACRoleListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed)
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_RBAC_ROLES_LIST,
+              span_route: "/v1/organizations/rbac_roles",
+              span_query: %w[limit page],
               method: :get,
               path: "v1/organizations/rbac_roles?beta=true",
               query: query,

@@ -5,6 +5,7 @@ module Anthropic
         type beta_managed_agents_inline_agent =
           {
             description: String?,
+            execution_identity: Anthropic::Models::Beta::beta_managed_agents_execution_identity,
             mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition],
             model: Anthropic::Beta::BetaManagedAgentsModelConfig,
             name: String,
@@ -16,6 +17,8 @@ module Anthropic
 
         class BetaManagedAgentsInlineAgent < Anthropic::Internal::Type::BaseModel
           attr_accessor description: String?
+
+          attr_accessor execution_identity: Anthropic::Models::Beta::beta_managed_agents_execution_identity
 
           attr_accessor mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition]
 
@@ -33,6 +36,7 @@ module Anthropic
 
           def initialize: (
             description: String?,
+            execution_identity: Anthropic::Models::Beta::beta_managed_agents_execution_identity,
             mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition],
             model: Anthropic::Beta::BetaManagedAgentsModelConfig,
             name: String,
@@ -44,6 +48,7 @@ module Anthropic
 
           def to_hash: -> {
             description: String?,
+            execution_identity: Anthropic::Models::Beta::beta_managed_agents_execution_identity,
             mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition],
             model: Anthropic::Beta::BetaManagedAgentsModelConfig,
             name: String,

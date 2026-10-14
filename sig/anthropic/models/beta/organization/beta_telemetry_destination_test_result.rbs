@@ -1,0 +1,42 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_telemetry_destination_test_result =
+          Anthropic::Beta::Organization::BetaTelemetryDestinationTestSuccess
+          | Anthropic::Beta::Organization::BetaTelemetryDestinationTestFailure
+
+        module BetaTelemetryDestinationTestResult
+          extend Anthropic::Internal::Type::Union
+
+          type type_ = :success | :failure
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            SUCCESS: :success
+            FAILURE: :failure
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaTelemetryDestinationTestResult::type_]
+          end
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::beta_telemetry_destination_test_result]
+
+          def self.new:
+            (
+              type: :success | "success"
+            ) -> Anthropic::Beta::Organization::BetaTelemetryDestinationTestSuccess
+            | (
+              type: :failure | "failure",
+              error: String
+            ) -> Anthropic::Beta::Organization::BetaTelemetryDestinationTestFailure
+            | (
+              type: Anthropic::Models::Beta::Organization::BetaTelemetryDestinationTestResult::type_
+              | String,
+              ?error: String
+            ) -> Anthropic::Models::Beta::Organization::beta_telemetry_destination_test_result
+        end
+      end
+    end
+  end
+end

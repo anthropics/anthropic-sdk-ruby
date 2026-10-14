@@ -22,12 +22,12 @@ module Anthropic
       class MessageStream
         include Anthropic::Internal::Type::BaseStream[raw_message_event, stream_event]
 
-        @raw_stream: Anthropic::Internal::Stream[raw_message_event]
+        @raw_stream: Anthropic::Internal::Type::BaseStream[bot, raw_message_event]
         @accumated_message_snapshot: Anthropic::Models::message?
         @iterator: Enumerable[stream_event]?
 
         def initialize: (
-          raw_stream: Anthropic::Internal::Stream[raw_message_event]
+          raw_stream: Anthropic::Internal::Type::BaseStream[bot, raw_message_event]
         ) -> void
 
         def until_done: -> void

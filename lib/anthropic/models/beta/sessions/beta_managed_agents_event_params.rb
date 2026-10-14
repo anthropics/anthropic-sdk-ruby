@@ -73,7 +73,7 @@ module Anthropic
           #
           #   @option args [String, nil] :deny_message Optional message providing context for a 'deny' decision. Only allowed when resu
           #
-          #   @option args [String] :custom_tool_use_id The id of the `agent.custom_tool_use` event this result corresponds to, which ca
+          #   @option args [String] :custom_tool_use_id The id of the `agent.custom_tool_use` event this result corresponds to. It is al
           #
           #   @option args [Boolean, nil] :is_error Whether the tool execution resulted in an error.
           #
@@ -88,19 +88,25 @@ module Anthropic
           def self.new(type:, **args)
             case type.to_sym
             when :"user.message"
-              Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEventParams.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEventParams.new(type: type, **args)
             when :"user.interrupt"
-              Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams.new(type: type, **args)
             when :"user.tool_confirmation"
-              Anthropic::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams.new(
+                type: type,
+                **args
+              )
             when :"user.custom_tool_result"
-              Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams.new(
+                type: type,
+                **args
+              )
             when :"user.define_outcome"
-              Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams.new(type: type, **args)
             when :"user.tool_result"
-              Anthropic::Beta::Sessions::BetaManagedAgentsUserToolResultEventParams.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsUserToolResultEventParams.new(type: type, **args)
             when :"system.message"
-              Anthropic::Beta::Sessions::BetaManagedAgentsSystemMessageEventParams.new(**args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsSystemMessageEventParams.new(type: type, **args)
             else
               raise ArgumentError, "unknown type: #{type}"
             end

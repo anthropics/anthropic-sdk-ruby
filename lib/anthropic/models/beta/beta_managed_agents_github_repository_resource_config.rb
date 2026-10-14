@@ -92,9 +92,9 @@ module Anthropic
           def self.new(type:, **args)
             case type.to_sym
             when :branch
-              Anthropic::Beta::BetaManagedAgentsBranchCheckout.new(**args)
+              Anthropic::Beta::BetaManagedAgentsBranchCheckout.new(type: type, **args)
             when :commit
-              Anthropic::Beta::BetaManagedAgentsCommitCheckout.new(**args)
+              Anthropic::Beta::BetaManagedAgentsCommitCheckout.new(type: type, **args)
             else
               raise ArgumentError, "unknown type: #{type}"
             end

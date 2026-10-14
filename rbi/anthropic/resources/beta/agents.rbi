@@ -18,6 +18,13 @@ module Anthropic
               ),
             name: String,
             description: T.nilable(String),
+            execution_identity:
+              T.nilable(
+                T.any(
+                  Anthropic::Beta::BetaManagedAgentsAWSRoleExecutionIdentityParams::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsServiceAccountExecutionIdentityParams::OrHash
+                )
+              ),
             mcp_servers:
               T::Array[
                 Anthropic::Beta::BetaManagedAgentsURLMCPServerParams::OrHash
@@ -54,13 +61,16 @@ module Anthropic
         def create(
           # Body param: Model identifier. Accepts the
           # [model string](https://platform.claude.com/docs/en/about-claude/models/overview#latest-models-comparison),
-          # e.g. `claude-opus-5`, or a `model_config` object for additional configuration
+          # e.g. `claude-opus-5-5`, or a `model_config` object for additional configuration
           # control
           model:,
           # Body param: Human-readable name for the agent.
           name:,
           # Body param: Description of what the agent does.
           description: nil,
+          # Body param: Execution principal for runs of this agent. Omitting it, sending
+          # null, or sending `{"type": "service_account"}` stores the default.
+          execution_identity: nil,
           # Body param: MCP servers this agent connects to. Maximum 20. Names must be unique
           # within the array. Every server must be referenced by an `mcp_toolset` in
           # `tools`; unreferenced servers are rejected. See the
@@ -125,6 +135,13 @@ module Anthropic
           params(
             agent_id: String,
             description: T.nilable(String),
+            execution_identity:
+              T.nilable(
+                T.any(
+                  Anthropic::Beta::BetaManagedAgentsAWSRoleExecutionIdentityParams::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsServiceAccountExecutionIdentityParams::OrHash
+                )
+              ),
             mcp_servers:
               T.nilable(
                 T::Array[
@@ -177,6 +194,9 @@ module Anthropic
           agent_id,
           # Body param: Description. Omit to preserve; send empty string or null to clear.
           description: nil,
+          # Body param: Execution principal for runs of this agent. Full replacement. Omit
+          # to preserve; send null or `{"type": "service_account"}` to restore the default.
+          execution_identity: nil,
           # Body param: MCP servers. Full replacement. Omit to preserve; send empty array or
           # `null` to clear. Names must be unique. Maximum 20. Every server must be
           # referenced by an `mcp_toolset` in the agent's resulting `tools`; unreferenced
@@ -189,7 +209,7 @@ module Anthropic
           metadata: nil,
           # Body param: Model identifier. Accepts the
           # [model string](https://platform.claude.com/docs/en/about-claude/models/overview#latest-models-comparison),
-          # e.g. `claude-opus-5`, or a `model_config` object for additional configuration
+          # e.g. `claude-opus-5-5`, or a `model_config` object for additional configuration
           # control. Omit to preserve. Cannot be cleared.
           model: nil,
           # Body param: Multiagent orchestration configuration. Full replacement. Omit to

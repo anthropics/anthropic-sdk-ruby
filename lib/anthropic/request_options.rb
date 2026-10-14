@@ -52,6 +52,13 @@ module Anthropic
     #   @return [Object, nil]
     optional :extra_body, Anthropic::Internal::Type::HashOf[Anthropic::Internal::Type::Unknown]
 
+    # @!attribute open_telemetry
+    #   OpenTelemetry settings for this request's span. Its one key is
+    #   `:conversation_id`, the ID of the conversation that the request is part of.
+    #
+    #   @return [Hash{Symbol=>String}, nil]
+    optional :open_telemetry, Anthropic::Internal::Type::HashOf[String]
+
     # @!attribute max_retries
     #   Maximum number of retries to attempt after a failed initial request.
     #

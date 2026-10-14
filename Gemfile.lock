@@ -4,6 +4,7 @@ PATH
     anthropic (1.78.0)
       base64 (~> 0.1)
       connection_pool (>= 2, < 4)
+      opentelemetry-api (>= 1.2.4, < 2)
       standardwebhooks (~> 1.0)
 
 GEM
@@ -126,6 +127,19 @@ GEM
     net-http (0.7.0)
       uri
     netrc (0.11.0)
+    opentelemetry-api (1.8.0)
+      logger
+    opentelemetry-common (0.23.0)
+      opentelemetry-api (~> 1.0)
+    opentelemetry-registry (0.4.0)
+      opentelemetry-api (~> 1.1)
+    opentelemetry-sdk (1.10.0)
+      opentelemetry-api (~> 1.1)
+      opentelemetry-common (~> 0.20)
+      opentelemetry-registry (~> 0.2)
+      opentelemetry-semantic_conventions
+    opentelemetry-semantic_conventions (1.36.0)
+      opentelemetry-api (~> 1.0)
     os (1.1.4)
     parallel (1.27.0)
     parser (3.3.10.0)
@@ -265,6 +279,7 @@ DEPENDENCIES
   minitest-hooks
   minitest-proveit
   minitest-rg
+  opentelemetry-sdk
   rake
   rbs
   redcarpet

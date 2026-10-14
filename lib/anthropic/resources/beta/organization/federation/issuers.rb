@@ -50,6 +50,9 @@ module Anthropic
               parsed, options = Anthropic::Beta::Organization::Federation::IssuerCreateParams.dump_request(params)
               header_params = {betas: "anthropic-beta"}
               @client.request(
+                span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_FEDERATION_ISSUERS_CREATE,
+                span_created_id: "anthropic.organization.federation_issuer.id",
+                span_route: "/v1/organizations/federation_issuers",
                 method: :post,
                 path: "v1/organizations/federation_issuers?beta=true",
                 headers: parsed.slice(*header_params.keys).transform_keys(header_params),
@@ -80,6 +83,9 @@ module Anthropic
             def retrieve(federation_issuer_id, params = {})
               parsed, options = Anthropic::Beta::Organization::Federation::IssuerRetrieveParams.dump_request(params)
               @client.request(
+                span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_FEDERATION_ISSUERS_RETRIEVE,
+                span_attributes: {"anthropic.organization.federation_issuer.id" => federation_issuer_id},
+                span_route: "/v1/organizations/federation_issuers/{federation_issuer_id}",
                 method: :get,
                 path: ["v1/organizations/federation_issuers/%1$s?beta=true", federation_issuer_id],
                 headers: parsed.transform_keys(betas: "anthropic-beta"),
@@ -132,6 +138,9 @@ module Anthropic
               parsed, options = Anthropic::Beta::Organization::Federation::IssuerUpdateParams.dump_request(params)
               header_params = {betas: "anthropic-beta"}
               @client.request(
+                span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_FEDERATION_ISSUERS_UPDATE,
+                span_attributes: {"anthropic.organization.federation_issuer.id" => federation_issuer_id},
+                span_route: "/v1/organizations/federation_issuers/{federation_issuer_id}",
                 method: :post,
                 path: ["v1/organizations/federation_issuers/%1$s?beta=true", federation_issuer_id],
                 headers: parsed.slice(*header_params.keys).transform_keys(header_params),
@@ -170,6 +179,9 @@ module Anthropic
               parsed, options = Anthropic::Beta::Organization::Federation::IssuerListParams.dump_request(params)
               query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
               @client.request(
+                span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_FEDERATION_ISSUERS_LIST,
+                span_route: "/v1/organizations/federation_issuers",
+                span_query: %w[include_archived limit page],
                 method: :get,
                 path: "v1/organizations/federation_issuers?beta=true",
                 query: query,
@@ -206,6 +218,9 @@ module Anthropic
             def archive(federation_issuer_id, params = {})
               parsed, options = Anthropic::Beta::Organization::Federation::IssuerArchiveParams.dump_request(params)
               @client.request(
+                span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_FEDERATION_ISSUERS_ARCHIVE,
+                span_attributes: {"anthropic.organization.federation_issuer.id" => federation_issuer_id},
+                span_route: "/v1/organizations/federation_issuers/{federation_issuer_id}/archive",
                 method: :post,
                 path: ["v1/organizations/federation_issuers/%1$s/archive?beta=true", federation_issuer_id],
                 headers: parsed.transform_keys(betas: "anthropic-beta"),

@@ -10,8 +10,8 @@ module Anthropic
             #
             # Returns one row per (member, period) the member resolves a spend limit for, with
             # the `source` scope the spend limit was inherited from. Paginates by member, so a
-            # member's periods never split across pages. Listing Claude Console limits is in
-            # an early access preview. To request access, contact your Anthropic account team.
+            # member's periods never split across pages. Supported for Claude Enterprise
+            # organizations only, not for Claude Console organizations.
             #
             # Some parameter documentations has been truncated, see
             # {Anthropic::Models::Beta::Organization::SpendLimits::EffectiveListParams} for
@@ -36,6 +36,9 @@ module Anthropic
               parsed, options = Anthropic::Beta::Organization::SpendLimits::EffectiveListParams.dump_request(params)
               query = Anthropic::Internal::Util.encode_query_params(parsed)
               @client.request(
+                span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SPEND_LIMITS_EFFECTIVE_LIST,
+                span_route: "/v1/organizations/spend_limits/effective",
+                span_query: %w[limit page period user_ids],
                 method: :get,
                 path: "v1/organizations/spend_limits/effective?beta=true",
                 query: query,
