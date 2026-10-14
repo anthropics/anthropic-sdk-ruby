@@ -10,6 +10,12 @@ module Anthropic
           #   @return [String, nil]
           required :description, String, nil?: true
 
+          # @!attribute execution_identity
+          #   The session's execution principal.
+          #
+          #   @return [Anthropic::Models::Beta::BetaManagedAgentsAWSRoleExecutionIdentity, Anthropic::Models::Beta::BetaManagedAgentsServiceAccountExecutionIdentity]
+          required :execution_identity, union: -> { Anthropic::Beta::BetaManagedAgentsExecutionIdentity }
+
           # @!attribute mcp_servers
           #
           #   @return [Array<Anthropic::Models::Beta::BetaManagedAgentsMCPServerURLDefinition>]
@@ -50,12 +56,14 @@ module Anthropic
           #   @return [Symbol, :inline]
           required :type, const: :inline
 
-          # @!method initialize(description:, mcp_servers:, model:, name:, skills:, system_:, tools:, type: :inline)
+          # @!method initialize(description:, execution_identity:, mcp_servers:, model:, name:, skills:, system_:, tools:, type: :inline)
           #   An agent that has no Agent resource, and so no `id` or `version`. It is defined
           #   inline, in a workflow run's plan or when a session thread is spawned, and is not
           #   saved.
           #
           #   @param description [String, nil]
+          #
+          #   @param execution_identity [Anthropic::Models::Beta::BetaManagedAgentsAWSRoleExecutionIdentity, Anthropic::Models::Beta::BetaManagedAgentsServiceAccountExecutionIdentity] The session's execution principal.
           #
           #   @param mcp_servers [Array<Anthropic::Models::Beta::BetaManagedAgentsMCPServerURLDefinition>]
           #

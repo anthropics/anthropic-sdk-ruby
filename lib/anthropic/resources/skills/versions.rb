@@ -26,6 +26,10 @@ module Anthropic
           parsed, options = Anthropic::Skills::VersionCreateParams.dump_request(params)
           header_params = {workspace_id: "anthropic-workspace-id"}
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::SKILLS_VERSIONS_CREATE,
+            span_attributes: {"anthropic.skill.id" => skill_id},
+            span_created_id: "anthropic.skill.version.id",
+            span_route: "/v1/skills/{skill_id}/versions",
             method: :post,
             path: ["v1/skills/%1$s/versions", skill_id],
             headers: {
@@ -65,6 +69,9 @@ module Anthropic
               raise ArgumentError.new("missing required path argument #{_1}")
             end
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::SKILLS_VERSIONS_RETRIEVE,
+            span_attributes: {"anthropic.skill.id" => skill_id, "anthropic.skill.version.id" => version},
+            span_route: "/v1/skills/{skill_id}/versions/{version}",
             method: :get,
             path: ["v1/skills/%1$s/versions/%2$s", skill_id, version],
             headers: parsed.transform_keys(workspace_id: "anthropic-workspace-id"),
@@ -98,6 +105,10 @@ module Anthropic
           parsed, options = Anthropic::Skills::VersionListParams.dump_request(params)
           query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::SKILLS_VERSIONS_LIST,
+            span_attributes: {"anthropic.skill.id" => skill_id},
+            span_route: "/v1/skills/{skill_id}/versions",
+            span_query: %w[limit page],
             method: :get,
             path: ["v1/skills/%1$s/versions", skill_id],
             query: query,
@@ -133,6 +144,9 @@ module Anthropic
               raise ArgumentError.new("missing required path argument #{_1}")
             end
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::SKILLS_VERSIONS_DELETE,
+            span_attributes: {"anthropic.skill.id" => skill_id, "anthropic.skill.version.id" => version},
+            span_route: "/v1/skills/{skill_id}/versions/{version}",
             method: :delete,
             path: ["v1/skills/%1$s/versions/%2$s", skill_id, version],
             headers: parsed.transform_keys(workspace_id: "anthropic-workspace-id"),

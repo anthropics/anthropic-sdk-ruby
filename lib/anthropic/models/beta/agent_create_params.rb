@@ -29,6 +29,15 @@ module Anthropic
         #   @return [String, nil]
         optional :description, String, nil?: true
 
+        # @!attribute execution_identity
+        #   Execution principal for runs of this agent. Omitting it, sending null, or
+        #   sending `{"type": "service_account"}` stores the default.
+        #
+        #   @return [Anthropic::Models::Beta::BetaManagedAgentsAWSRoleExecutionIdentityParams, Anthropic::Models::Beta::BetaManagedAgentsServiceAccountExecutionIdentityParams, nil]
+        optional :execution_identity,
+                 union: -> { Anthropic::Beta::BetaManagedAgentsExecutionIdentityParams },
+                 nil?: true
+
         # @!attribute mcp_servers
         #   MCP servers this agent connects to. Maximum 20. Names must be unique within the
         #   array. Every server must be referenced by an `mcp_toolset` in `tools`;
@@ -90,7 +99,7 @@ module Anthropic
         #   @return [String, nil]
         optional :workspace_id, String
 
-        # @!method initialize(model:, name:, description: nil, mcp_servers: nil, metadata: nil, multiagent: nil, skills: nil, system_: nil, tools: nil, betas: nil, workspace_id: nil, request_options: {})
+        # @!method initialize(model:, name:, description: nil, execution_identity: nil, mcp_servers: nil, metadata: nil, multiagent: nil, skills: nil, system_: nil, tools: nil, betas: nil, workspace_id: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::AgentCreateParams} for more details.
         #
@@ -99,6 +108,8 @@ module Anthropic
         #   @param name [String] Human-readable name for the agent.
         #
         #   @param description [String, nil] Description of what the agent does.
+        #
+        #   @param execution_identity [Anthropic::Models::Beta::BetaManagedAgentsAWSRoleExecutionIdentityParams, Anthropic::Models::Beta::BetaManagedAgentsServiceAccountExecutionIdentityParams, nil] Execution principal for runs of this agent. Omitting it, sending null, or sendin
         #
         #   @param mcp_servers [Array<Anthropic::Models::Beta::BetaManagedAgentsURLMCPServerParams>] MCP servers this agent connects to. Maximum 20. Names must be unique within the
         #

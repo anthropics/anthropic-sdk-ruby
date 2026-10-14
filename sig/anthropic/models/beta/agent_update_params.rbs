@@ -5,6 +5,7 @@ module Anthropic
         {
           agent_id: String,
           description: String?,
+          execution_identity: Anthropic::Models::Beta::beta_managed_agents_execution_identity_params?,
           mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams]?,
           metadata: ::Hash[Symbol, String?]?,
           model: Anthropic::Models::Beta::AgentUpdateParams::model,
@@ -26,6 +27,8 @@ module Anthropic
         attr_accessor agent_id: String
 
         attr_accessor description: String?
+
+        attr_accessor execution_identity: Anthropic::Models::Beta::beta_managed_agents_execution_identity_params?
 
         attr_accessor mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams]?
 
@@ -66,6 +69,7 @@ module Anthropic
         def initialize: (
           agent_id: String,
           ?description: String?,
+          ?execution_identity: Anthropic::Models::Beta::beta_managed_agents_execution_identity_params?,
           ?mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams]?,
           ?metadata: ::Hash[Symbol, String?]?,
           ?model: Anthropic::Models::Beta::AgentUpdateParams::model,
@@ -83,6 +87,7 @@ module Anthropic
         def to_hash: -> {
           agent_id: String,
           description: String?,
+          execution_identity: Anthropic::Models::Beta::beta_managed_agents_execution_identity_params?,
           mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams]?,
           metadata: ::Hash[Symbol, String?]?,
           model: Anthropic::Models::Beta::AgentUpdateParams::model,

@@ -38,6 +38,20 @@ module Anthropic
         sig { returns(T.nilable(String)) }
         attr_accessor :description
 
+        # Execution principal for runs of this agent. Omitting it, sending null, or
+        # sending `{"type": "service_account"}` stores the default.
+        sig do
+          returns(
+            T.nilable(
+              T.any(
+                Anthropic::Beta::BetaManagedAgentsAWSRoleExecutionIdentityParams,
+                Anthropic::Beta::BetaManagedAgentsServiceAccountExecutionIdentityParams
+              )
+            )
+          )
+        end
+        attr_accessor :execution_identity
+
         # MCP servers this agent connects to. Maximum 20. Names must be unique within the
         # array. Every server must be referenced by an `mcp_toolset` in `tools`;
         # unreferenced servers are rejected. See the
@@ -184,6 +198,13 @@ module Anthropic
               ),
             name: String,
             description: T.nilable(String),
+            execution_identity:
+              T.nilable(
+                T.any(
+                  Anthropic::Beta::BetaManagedAgentsAWSRoleExecutionIdentityParams::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsServiceAccountExecutionIdentityParams::OrHash
+                )
+              ),
             mcp_servers:
               T::Array[
                 Anthropic::Beta::BetaManagedAgentsURLMCPServerParams::OrHash
@@ -227,6 +248,9 @@ module Anthropic
           name:,
           # Description of what the agent does.
           description: nil,
+          # Execution principal for runs of this agent. Omitting it, sending null, or
+          # sending `{"type": "service_account"}` stores the default.
+          execution_identity: nil,
           # MCP servers this agent connects to. Maximum 20. Names must be unique within the
           # array. Every server must be referenced by an `mcp_toolset` in `tools`;
           # unreferenced servers are rejected. See the
@@ -268,6 +292,13 @@ module Anthropic
                 ),
               name: String,
               description: T.nilable(String),
+              execution_identity:
+                T.nilable(
+                  T.any(
+                    Anthropic::Beta::BetaManagedAgentsAWSRoleExecutionIdentityParams,
+                    Anthropic::Beta::BetaManagedAgentsServiceAccountExecutionIdentityParams
+                  )
+                ),
               mcp_servers:
                 T::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams],
               metadata: T::Hash[Symbol, String],

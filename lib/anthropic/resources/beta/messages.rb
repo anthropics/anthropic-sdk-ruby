@@ -134,6 +134,8 @@ module Anthropic
               workspace_id: "anthropic-workspace-id"
             }
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::MESSAGES_CREATE,
+            span_route: "/v1/messages",
             method: :post,
             path: "v1/messages?beta=true",
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),
@@ -337,7 +339,7 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Anthropic::Internal::Stream<Anthropic::Models::Beta::BetaRawMessageStartEvent, Anthropic::Models::Beta::BetaRawMessageDeltaEvent, Anthropic::Models::Beta::BetaRawMessageStopEvent, Anthropic::Models::Beta::BetaRawContentBlockStartEvent, Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent, Anthropic::Models::Beta::BetaRawContentBlockStopEvent>]
+        # @return [Anthropic::Internal::Type::BaseStream<Anthropic::Models::Beta::BetaRawMessageStartEvent, Anthropic::Models::Beta::BetaRawMessageDeltaEvent, Anthropic::Models::Beta::BetaRawMessageStopEvent, Anthropic::Models::Beta::BetaRawContentBlockStartEvent, Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent, Anthropic::Models::Beta::BetaRawContentBlockStopEvent>]
         #
         # @see Anthropic::Models::Beta::MessageCreateParams
         def stream_raw(params)
@@ -359,6 +361,8 @@ module Anthropic
               workspace_id: "anthropic-workspace-id"
             }
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::MESSAGES_CREATE,
+            span_route: "/v1/messages",
             method: :post,
             path: "v1/messages?beta=true",
             headers: stream_headers(
@@ -434,6 +438,8 @@ module Anthropic
               workspace_id: "anthropic-workspace-id"
             }
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::MESSAGES_COUNT_TOKENS,
+            span_route: "/v1/messages/count_tokens",
             method: :post,
             path: "v1/messages/count_tokens?beta=true",
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),

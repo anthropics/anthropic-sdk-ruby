@@ -23,6 +23,20 @@ module Anthropic
         sig { returns(T.nilable(String)) }
         attr_accessor :description
 
+        # Execution principal for runs of this agent. Full replacement. Omit to preserve;
+        # send null or `{"type": "service_account"}` to restore the default.
+        sig do
+          returns(
+            T.nilable(
+              T.any(
+                Anthropic::Beta::BetaManagedAgentsAWSRoleExecutionIdentityParams,
+                Anthropic::Beta::BetaManagedAgentsServiceAccountExecutionIdentityParams
+              )
+            )
+          )
+        end
+        attr_accessor :execution_identity
+
         # MCP servers. Full replacement. Omit to preserve; send empty array or `null` to
         # clear. Names must be unique. Maximum 20. Every server must be referenced by an
         # `mcp_toolset` in the agent's resulting `tools`; unreferenced servers are
@@ -173,6 +187,13 @@ module Anthropic
           params(
             agent_id: String,
             description: T.nilable(String),
+            execution_identity:
+              T.nilable(
+                T.any(
+                  Anthropic::Beta::BetaManagedAgentsAWSRoleExecutionIdentityParams::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsServiceAccountExecutionIdentityParams::OrHash
+                )
+              ),
             mcp_servers:
               T.nilable(
                 T::Array[
@@ -225,6 +246,9 @@ module Anthropic
           agent_id:,
           # Description. Omit to preserve; send empty string or null to clear.
           description: nil,
+          # Execution principal for runs of this agent. Full replacement. Omit to preserve;
+          # send null or `{"type": "service_account"}` to restore the default.
+          execution_identity: nil,
           # MCP servers. Full replacement. Omit to preserve; send empty array or `null` to
           # clear. Names must be unique. Maximum 20. Every server must be referenced by an
           # `mcp_toolset` in the agent's resulting `tools`; unreferenced servers are
@@ -276,6 +300,13 @@ module Anthropic
             {
               agent_id: String,
               description: T.nilable(String),
+              execution_identity:
+                T.nilable(
+                  T.any(
+                    Anthropic::Beta::BetaManagedAgentsAWSRoleExecutionIdentityParams,
+                    Anthropic::Beta::BetaManagedAgentsServiceAccountExecutionIdentityParams
+                  )
+                ),
               mcp_servers:
                 T.nilable(
                   T::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams]

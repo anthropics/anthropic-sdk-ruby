@@ -1,10 +1,12 @@
 # Changelog
 
-## [1.79.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.78.0...v1.79.0) (2026-10-13)
+## [1.79.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.78.0...v1.79.0) (2026-10-14)
 
 ### Features
 
+* **api:** add execution_identity to Managed Agents agents
 * **api:** add organization_type_not_supported error to spend limit lists
+* **client:** add OpenTelemetry spans for API calls
 
 
 ### Bug Fixes

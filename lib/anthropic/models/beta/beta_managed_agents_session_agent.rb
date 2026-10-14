@@ -14,6 +14,14 @@ module Anthropic
         #   @return [String, nil]
         required :description, String, nil?: true
 
+        # @!attribute execution_identity
+        #   Execution principal snapshotted from the agent at session creation. Always
+        #   present; `{"type": "service_account"}` when runs carry no customer-named
+        #   principal.
+        #
+        #   @return [Anthropic::Models::Beta::BetaManagedAgentsAWSRoleExecutionIdentity, Anthropic::Models::Beta::BetaManagedAgentsServiceAccountExecutionIdentity]
+        required :execution_identity, union: -> { Anthropic::Beta::BetaManagedAgentsExecutionIdentity }
+
         # @!attribute mcp_servers
         #
         #   @return [Array<Anthropic::Models::Beta::BetaManagedAgentsMCPServerURLDefinition>]
@@ -65,7 +73,7 @@ module Anthropic
         #   @return [Integer]
         required :version, Integer
 
-        # @!method initialize(id:, description:, mcp_servers:, model:, multiagent:, name:, skills:, system_:, tools:, type:, version:)
+        # @!method initialize(id:, description:, execution_identity:, mcp_servers:, model:, multiagent:, name:, skills:, system_:, tools:, type:, version:)
         #   Resolved `agent` definition for a `session`. Snapshot of the `agent` at
         #   `session` creation time.
         #
@@ -75,6 +83,8 @@ module Anthropic
         #   @param id [String]
         #
         #   @param description [String, nil]
+        #
+        #   @param execution_identity [Anthropic::Models::Beta::BetaManagedAgentsAWSRoleExecutionIdentity, Anthropic::Models::Beta::BetaManagedAgentsServiceAccountExecutionIdentity] Execution principal snapshotted from the agent at session creation. Always prese
         #
         #   @param mcp_servers [Array<Anthropic::Models::Beta::BetaManagedAgentsMCPServerURLDefinition>]
         #

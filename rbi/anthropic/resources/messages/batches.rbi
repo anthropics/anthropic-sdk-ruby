@@ -182,7 +182,8 @@ module Anthropic
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(
-            Anthropic::Internal::JsonLStream[
+            Anthropic::Internal::Type::BaseStream[
+              T.noreturn,
               Anthropic::Messages::MessageBatchIndividualResponse
             ]
           )

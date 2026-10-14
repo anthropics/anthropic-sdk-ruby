@@ -59,7 +59,8 @@ module Anthropic
                 workspace_id: String,
                 request_options: Anthropic::RequestOptions::OrHash
               ).returns(
-                Anthropic::Internal::Stream[
+                Anthropic::Internal::Type::BaseStream[
+                  T.noreturn,
                   Anthropic::Beta::Sessions::BetaManagedAgentsStreamSessionThreadEvents::Variants
                 ]
               )

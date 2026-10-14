@@ -35,6 +35,11 @@ module Anthropic
             parsed, options = Anthropic::Beta::MemoryStores::MemoryCreateParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::MEMORY_STORES_MEMORIES_CREATE,
+              span_attributes: {"gen_ai.memory.store.id" => memory_store_id},
+              span_created_id: "gen_ai.memory.record.id",
+              span_route: "/v1/memory_stores/{memory_store_id}/memories",
+              span_query: %w[view],
               method: :post,
               path: ["v1/memory_stores/%1$s/memories?beta=true", memory_store_id],
               query: query,
@@ -76,6 +81,13 @@ module Anthropic
                 raise ArgumentError.new("missing required path argument #{_1}")
               end
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::MEMORY_STORES_MEMORIES_RETRIEVE,
+              span_attributes: {
+                "gen_ai.memory.store.id" => memory_store_id,
+                "gen_ai.memory.record.id" => memory_id
+              },
+              span_route: "/v1/memory_stores/{memory_store_id}/memories/{memory_id}",
+              span_query: %w[view],
               method: :get,
               path: ["v1/memory_stores/%1$s/memories/%2$s?beta=true", memory_store_id, memory_id],
               query: query,
@@ -126,6 +138,13 @@ module Anthropic
                 raise ArgumentError.new("missing required path argument #{_1}")
               end
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::MEMORY_STORES_MEMORIES_UPDATE,
+              span_attributes: {
+                "gen_ai.memory.store.id" => memory_store_id,
+                "gen_ai.memory.record.id" => memory_id
+              },
+              span_route: "/v1/memory_stores/{memory_store_id}/memories/{memory_id}",
+              span_query: %w[view],
               method: :post,
               path: ["v1/memory_stores/%1$s/memories/%2$s?beta=true", memory_store_id, memory_id],
               query: query,
@@ -169,6 +188,11 @@ module Anthropic
             parsed, options = Anthropic::Beta::MemoryStores::MemoryListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::MEMORY_STORES_MEMORIES_LIST,
+              span_attributes: {"gen_ai.memory.store.id" => memory_store_id},
+              span_route: "/v1/memory_stores/{memory_store_id}/memories",
+              span_query: %w[depth limit page path_prefix view],
+              span_content_query: %w[page],
               method: :get,
               path: ["v1/memory_stores/%1$s/memories?beta=true", memory_store_id],
               query: query,
@@ -213,6 +237,13 @@ module Anthropic
                 raise ArgumentError.new("missing required path argument #{_1}")
               end
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::MEMORY_STORES_MEMORIES_DELETE,
+              span_attributes: {
+                "gen_ai.memory.store.id" => memory_store_id,
+                "gen_ai.memory.record.id" => memory_id
+              },
+              span_route: "/v1/memory_stores/{memory_store_id}/memories/{memory_id}",
+              span_query: %w[expected_content_sha256],
               method: :delete,
               path: ["v1/memory_stores/%1$s/memories/%2$s?beta=true", memory_store_id, memory_id],
               query: query,

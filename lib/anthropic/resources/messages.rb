@@ -94,6 +94,8 @@ module Anthropic
 
         header_params = {user_profile_id: "anthropic-user-profile-id", workspace_id: "anthropic-workspace-id"}
         @client.request(
+          span_name: Anthropic::Internal::Tracing::SpanName::MESSAGES_CREATE,
+          span_route: "/v1/messages",
           method: :post,
           path: "v1/messages",
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
@@ -254,7 +256,7 @@ module Anthropic
       #
       # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Anthropic::Internal::Stream<Anthropic::Models::RawMessageStartEvent, Anthropic::Models::RawMessageDeltaEvent, Anthropic::Models::RawMessageStopEvent, Anthropic::Models::RawContentBlockStartEvent, Anthropic::Models::RawContentBlockDeltaEvent, Anthropic::Models::RawContentBlockStopEvent>]
+      # @return [Anthropic::Internal::Type::BaseStream<Anthropic::Models::RawMessageStartEvent, Anthropic::Models::RawMessageDeltaEvent, Anthropic::Models::RawMessageStopEvent, Anthropic::Models::RawContentBlockStartEvent, Anthropic::Models::RawContentBlockDeltaEvent, Anthropic::Models::RawContentBlockStopEvent>]
       #
       # @see Anthropic::Models::MessageCreateParams
       def stream_raw(params)
@@ -268,6 +270,8 @@ module Anthropic
 
         header_params = {user_profile_id: "anthropic-user-profile-id", workspace_id: "anthropic-workspace-id"}
         @client.request(
+          span_name: Anthropic::Internal::Tracing::SpanName::MESSAGES_CREATE,
+          span_route: "/v1/messages",
           method: :post,
           path: "v1/messages",
           headers: stream_headers(
@@ -325,6 +329,8 @@ module Anthropic
         Anthropic::Helpers::Messages.distill_input_schema_models!(parsed, strict: nil)
         header_params = {user_profile_id: "anthropic-user-profile-id", workspace_id: "anthropic-workspace-id"}
         @client.request(
+          span_name: Anthropic::Internal::Tracing::SpanName::MESSAGES_COUNT_TOKENS,
+          span_route: "/v1/messages/count_tokens",
           method: :post,
           path: "v1/messages/count_tokens",
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),

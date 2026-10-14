@@ -36,6 +36,10 @@ module Anthropic
               parsed, options = Anthropic::Organization::Federation::Rules::WorkspaceListParams.dump_request(params)
               query = Anthropic::Internal::Util.encode_query_params(parsed)
               @client.request(
+                span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_FEDERATION_RULES_WORKSPACES_LIST,
+                span_attributes: {"anthropic.organization.federation_rule.id" => federation_rule_id},
+                span_route: "/v1/organizations/federation_rules/{federation_rule_id}/workspaces",
+                span_query: %w[limit page],
                 method: :get,
                 path: ["v1/organizations/federation_rules/%1$s/workspaces", federation_rule_id],
                 query: query,
@@ -74,6 +78,10 @@ module Anthropic
             def add(federation_rule_id, params)
               parsed, options = Anthropic::Organization::Federation::Rules::WorkspaceAddParams.dump_request(params)
               @client.request(
+                span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_FEDERATION_RULES_WORKSPACES_ADD,
+                span_attributes: {"anthropic.organization.federation_rule.id" => federation_rule_id},
+                span_created_id: {"anthropic.organization.federation_rule.workspace.id" => :workspace_id},
+                span_route: "/v1/organizations/federation_rules/{federation_rule_id}/workspaces",
                 method: :post,
                 path: ["v1/organizations/federation_rules/%1$s/workspaces", federation_rule_id],
                 body: parsed,
@@ -111,6 +119,12 @@ module Anthropic
                   raise ArgumentError.new("missing required path argument #{_1}")
                 end
               @client.request(
+                span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_FEDERATION_RULES_WORKSPACES_REMOVE,
+                span_attributes: {
+                  "anthropic.organization.federation_rule.id" => federation_rule_id,
+                  "anthropic.organization.federation_rule.workspace.id" => workspace_id
+                },
+                span_route: "/v1/organizations/federation_rules/{federation_rule_id}/workspaces/{workspace_id}",
                 method: :delete,
                 path: [
                   "v1/organizations/federation_rules/%1$s/workspaces/%2$s",

@@ -40,6 +40,9 @@ module Anthropic
         def create(params)
           parsed, options = Anthropic::Organization::ServiceAccountCreateParams.dump_request(params)
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SERVICE_ACCOUNTS_CREATE,
+            span_created_id: "anthropic.organization.service_account.id",
+            span_route: "/v1/organizations/service_accounts",
             method: :post,
             path: "v1/organizations/service_accounts",
             body: parsed,
@@ -66,6 +69,9 @@ module Anthropic
         # @see Anthropic::Models::Organization::ServiceAccountRetrieveParams
         def retrieve(service_account_id, params = {})
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SERVICE_ACCOUNTS_RETRIEVE,
+            span_attributes: {"anthropic.organization.service_account.id" => service_account_id},
+            span_route: "/v1/organizations/service_accounts/{service_account_id}",
             method: :get,
             path: ["v1/organizations/service_accounts/%1$s", service_account_id],
             model: Anthropic::Organization::ServiceAccount,
@@ -104,6 +110,9 @@ module Anthropic
         def update(service_account_id, params = {})
           parsed, options = Anthropic::Organization::ServiceAccountUpdateParams.dump_request(params)
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SERVICE_ACCOUNTS_UPDATE,
+            span_attributes: {"anthropic.organization.service_account.id" => service_account_id},
+            span_route: "/v1/organizations/service_accounts/{service_account_id}",
             method: :post,
             path: ["v1/organizations/service_accounts/%1$s", service_account_id],
             body: parsed,
@@ -140,6 +149,9 @@ module Anthropic
           parsed, options = Anthropic::Organization::ServiceAccountListParams.dump_request(params)
           query = Anthropic::Internal::Util.encode_query_params(parsed)
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SERVICE_ACCOUNTS_LIST,
+            span_route: "/v1/organizations/service_accounts",
+            span_query: %w[include_archived limit page],
             method: :get,
             path: "v1/organizations/service_accounts",
             query: query,
@@ -172,6 +184,9 @@ module Anthropic
         # @see Anthropic::Models::Organization::ServiceAccountArchiveParams
         def archive(service_account_id, params = {})
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SERVICE_ACCOUNTS_ARCHIVE,
+            span_attributes: {"anthropic.organization.service_account.id" => service_account_id},
+            span_route: "/v1/organizations/service_accounts/{service_account_id}/archive",
             method: :post,
             path: ["v1/organizations/service_accounts/%1$s/archive", service_account_id],
             model: Anthropic::Organization::ServiceAccount,

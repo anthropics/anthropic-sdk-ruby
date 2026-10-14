@@ -61,6 +61,8 @@ module Anthropic
         # @see Anthropic::Models::Beta::OrganizationRetrieveParams
         def retrieve(params = {})
           @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_RETRIEVE,
+            span_route: "/v1/organizations/me",
             method: :get,
             path: "v1/organizations/me?beta=true",
             model: Anthropic::Beta::BetaOrganization,

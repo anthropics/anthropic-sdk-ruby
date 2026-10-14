@@ -28,5 +28,6 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = ["README.md"]
   s.add_dependency "base64", "~> 0.1"
   s.add_dependency "connection_pool", ">= 2", "< 4"
+  s.add_dependency "opentelemetry-api", ">= 1.2.4", "< 2"
   s.add_dependency "standardwebhooks", "~> 1.0"
 end

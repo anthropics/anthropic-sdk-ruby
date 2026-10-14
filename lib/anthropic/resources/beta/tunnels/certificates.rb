@@ -36,6 +36,10 @@ module Anthropic
             parsed, options = Anthropic::Beta::Tunnels::CertificateCreateParams.dump_request(params)
             header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::TUNNELS_CERTIFICATES_CREATE,
+              span_attributes: {"anthropic.tunnel.id" => tunnel_id},
+              span_created_id: "anthropic.tunnel.certificate.id",
+              span_route: "/v1/tunnels/{tunnel_id}/certificates",
               method: :post,
               path: ["v1/tunnels/%1$s/certificates?beta=true", tunnel_id],
               headers: parsed.slice(*header_params.keys).transform_keys(header_params),
@@ -77,6 +81,12 @@ module Anthropic
                 raise ArgumentError.new("missing required path argument #{_1}")
               end
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::TUNNELS_CERTIFICATES_RETRIEVE,
+              span_attributes: {
+                "anthropic.tunnel.id" => tunnel_id,
+                "anthropic.tunnel.certificate.id" => certificate_id
+              },
+              span_route: "/v1/tunnels/{tunnel_id}/certificates/{certificate_id}",
               method: :get,
               path: ["v1/tunnels/%1$s/certificates/%2$s?beta=true", tunnel_id, certificate_id],
               headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
@@ -120,6 +130,10 @@ module Anthropic
             parsed, options = Anthropic::Beta::Tunnels::CertificateListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::TUNNELS_CERTIFICATES_LIST,
+              span_attributes: {"anthropic.tunnel.id" => tunnel_id},
+              span_route: "/v1/tunnels/{tunnel_id}/certificates",
+              span_query: %w[include_archived limit page],
               method: :get,
               path: ["v1/tunnels/%1$s/certificates?beta=true", tunnel_id],
               query: query,
@@ -168,6 +182,12 @@ module Anthropic
                 raise ArgumentError.new("missing required path argument #{_1}")
               end
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::TUNNELS_CERTIFICATES_ARCHIVE,
+              span_attributes: {
+                "anthropic.tunnel.id" => tunnel_id,
+                "anthropic.tunnel.certificate.id" => certificate_id
+              },
+              span_route: "/v1/tunnels/{tunnel_id}/certificates/{certificate_id}/archive",
               method: :post,
               path: ["v1/tunnels/%1$s/certificates/%2$s/archive?beta=true", tunnel_id, certificate_id],
               headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),

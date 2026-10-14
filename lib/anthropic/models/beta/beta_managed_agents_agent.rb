@@ -27,6 +27,13 @@ module Anthropic
         #   @return [String, nil]
         required :description, String, nil?: true
 
+        # @!attribute execution_identity
+        #   Execution principal for runs of this agent. Always present;
+        #   `{"type": "service_account"}` when runs carry no customer-named principal.
+        #
+        #   @return [Anthropic::Models::Beta::BetaManagedAgentsAWSRoleExecutionIdentity, Anthropic::Models::Beta::BetaManagedAgentsServiceAccountExecutionIdentity]
+        required :execution_identity, union: -> { Anthropic::Beta::BetaManagedAgentsExecutionIdentity }
+
         # @!attribute mcp_servers
         #
         #   @return [Array<Anthropic::Models::Beta::BetaManagedAgentsMCPServerURLDefinition>]
@@ -90,7 +97,7 @@ module Anthropic
         #   @return [Integer]
         required :version, Integer
 
-        # @!method initialize(id:, archived_at:, created_at:, description:, mcp_servers:, metadata:, model:, multiagent:, name:, skills:, system_:, tools:, type:, updated_at:, version:)
+        # @!method initialize(id:, archived_at:, created_at:, description:, execution_identity:, mcp_servers:, metadata:, model:, multiagent:, name:, skills:, system_:, tools:, type:, updated_at:, version:)
         #   A Managed Agents `agent`.
         #
         #   Some parameter documentations has been truncated, see
@@ -103,6 +110,8 @@ module Anthropic
         #   @param created_at [Time] A timestamp in RFC 3339 format
         #
         #   @param description [String, nil]
+        #
+        #   @param execution_identity [Anthropic::Models::Beta::BetaManagedAgentsAWSRoleExecutionIdentity, Anthropic::Models::Beta::BetaManagedAgentsServiceAccountExecutionIdentity] Execution principal for runs of this agent. Always present; `{"type": "service_a
         #
         #   @param mcp_servers [Array<Anthropic::Models::Beta::BetaManagedAgentsMCPServerURLDefinition>]
         #

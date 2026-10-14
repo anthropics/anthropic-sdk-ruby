@@ -27,6 +27,9 @@ module Anthropic
       def retrieve(model_id, params = {})
         parsed, options = Anthropic::ModelRetrieveParams.dump_request(params)
         @client.request(
+          span_name: Anthropic::Internal::Tracing::SpanName::MODELS_RETRIEVE,
+          span_attributes: {"anthropic.model.id" => model_id},
+          span_route: "/v1/models/{model_id}",
           method: :get,
           path: ["v1/models/%1$s", model_id],
           headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
@@ -67,6 +70,9 @@ module Anthropic
         parsed, options = Anthropic::ModelListParams.dump_request(params)
         query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
         @client.request(
+          span_name: Anthropic::Internal::Tracing::SpanName::MODELS_LIST,
+          span_route: "/v1/models",
+          span_query: %w[after_id before_id lifecycle limit],
           method: :get,
           path: "v1/models",
           query: query,

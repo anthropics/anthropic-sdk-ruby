@@ -20,6 +20,12 @@ module Anthropic
             page: Class?,
             stream: Class?,
             model: Anthropic::Internal::Type::Converter::input?,
+            span_name: String?,
+            span_attributes: ::Hash[String, top]?,
+            span_created_id: (String | ::Hash[String, Symbol])?,
+            span_route: String?,
+            span_query: ::Array[String]?,
+            span_content_query: ::Array[String]?,
             options: Anthropic::request_opts?
           }
         type request_input =
@@ -37,6 +43,8 @@ module Anthropic
             | Integer
             | ::Array[(Symbol | Integer)]
             | (^(top arg0) -> top))?,
+            span_query: ::Array[String]?,
+            span_content_query: ::Array[String]?,
             options: ::Hash[Symbol, top],
             middleware: ::Array[Anthropic::Middleware::entry],
             metadata: ::Hash[Symbol, top]
@@ -58,7 +66,8 @@ module Anthropic
         def self.follow_redirect: (
           Anthropic::Internal::Transport::BaseClient::request_input request,
           status: Integer,
-          response_headers: ::Hash[String, String]
+          response_headers: ::Hash[String, String],
+          ?span: top?
         ) -> Anthropic::Internal::Transport::BaseClient::request_input
 
         def self.reap_connection!: (
@@ -92,6 +101,7 @@ module Anthropic
           ?max_retries: Integer,
           ?initial_retry_delay: Float,
           ?max_retry_delay: Float,
+          ?open_telemetry: Anthropic::Internal::Tracing::client_option?,
           ?headers: ::Hash[String, (String
           | Integer
           | ::Array[(String | Integer)?])?],
@@ -101,6 +111,17 @@ module Anthropic
         ) -> void
 
         private def auth_headers: -> ::Hash[String, String]
+
+        def open_telemetry_attributes: -> ::Hash[String, String]
+
+        def open_telemetry_content?: -> bool
+
+        # @api private
+        attr_reader open_telemetry_max_content_bytes: Integer
+
+        def open_telemetry_tracer: -> top?
+
+        private def open_telemetry_scope: -> String
 
         private def user_agent: -> String
 
@@ -127,7 +148,8 @@ module Anthropic
           Anthropic::Internal::Transport::BaseClient::request_input request,
           redirect_count: Integer,
           retry_count: Integer,
-          send_retry_header: bool
+          send_retry_header: bool,
+          ?span: top?
         ) -> [Integer, top, ::Hash[String, String], Enumerable[String]]
 
         def request: (
@@ -145,8 +167,21 @@ module Anthropic
           ?page: Class?,
           ?stream: Class?,
           ?model: Anthropic::Internal::Type::Converter::input?,
+          ?span_name: String?,
+          ?span_attributes: ::Hash[String, top]?,
+          ?span_created_id: (String | ::Hash[String, Symbol])?,
+          ?span_route: String?,
+          ?span_query: ::Array[String]?,
+          ?span_content_query: ::Array[String]?,
           ?options: Anthropic::request_opts?
         ) -> top
+
+        private def execute_request: (
+          Anthropic::Internal::Transport::BaseClient::request_components req,
+          ?span: top?
+        ) ?{
+          (Integer status, ::Hash[String, String] headers) -> void
+        } -> top
 
         def inspect: -> String
       end

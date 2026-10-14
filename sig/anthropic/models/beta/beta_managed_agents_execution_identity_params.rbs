@@ -1,0 +1,42 @@
+module Anthropic
+  module Models
+    module BetaManagedAgentsExecutionIdentityParams = Beta::BetaManagedAgentsExecutionIdentityParams
+
+    module Beta
+      type beta_managed_agents_execution_identity_params =
+        Anthropic::Beta::BetaManagedAgentsAWSRoleExecutionIdentityParams
+        | Anthropic::Beta::BetaManagedAgentsServiceAccountExecutionIdentityParams
+
+      module BetaManagedAgentsExecutionIdentityParams
+        extend Anthropic::Internal::Type::Union
+
+        type type_ = :aws_role | :service_account
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          AWS_ROLE: :aws_role
+          SERVICE_ACCOUNT: :service_account
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsExecutionIdentityParams::type_]
+        end
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_execution_identity_params]
+
+        def self.new:
+          (
+            type: :aws_role | "aws_role",
+            role_arn: String
+          ) -> Anthropic::Beta::BetaManagedAgentsAWSRoleExecutionIdentityParams
+          | (
+            type: :service_account | "service_account"
+          ) -> Anthropic::Beta::BetaManagedAgentsServiceAccountExecutionIdentityParams
+          | (
+            type: Anthropic::Models::Beta::BetaManagedAgentsExecutionIdentityParams::type_
+            | String,
+            ?role_arn: String
+          ) -> Anthropic::Models::Beta::beta_managed_agents_execution_identity_params
+      end
+    end
+  end
+end

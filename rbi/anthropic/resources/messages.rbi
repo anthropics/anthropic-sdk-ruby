@@ -754,7 +754,8 @@ module Anthropic
           stream: T.noreturn,
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(
-          Anthropic::Internal::Stream[
+          Anthropic::Internal::Type::BaseStream[
+            T.noreturn,
             Anthropic::RawMessageStreamEvent::Variants
           ]
         )

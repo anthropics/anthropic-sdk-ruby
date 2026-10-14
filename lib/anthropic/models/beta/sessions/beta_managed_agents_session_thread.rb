@@ -148,6 +148,10 @@ module Anthropic
             # Creates a new instance of the variant class whose `type` matches the given
             # value, passing the remaining arguments to its constructor.
             #
+            # Some parameter documentations has been truncated, see
+            # {Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread::Agent} for
+            # more details.
+            #
             # @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread::Agent::Type, String]
             #
             # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
@@ -155,6 +159,8 @@ module Anthropic
             #   @option args [String] :id
             #
             #   @option args [String, nil] :description
+            #
+            #   @option args [Anthropic::Models::Beta::BetaManagedAgentsAWSRoleExecutionIdentity, Anthropic::Models::Beta::BetaManagedAgentsServiceAccountExecutionIdentity] :execution_identity Execution principal snapshotted from the agent at session creation. Always prese
             #
             #   @option args [Array<Anthropic::Models::Beta::BetaManagedAgentsMCPServerURLDefinition>] :mcp_servers
             #

@@ -59,6 +59,13 @@ module Anthropic
                   ]
                 ),
               model: T.nilable(Anthropic::Internal::Type::Converter::Input),
+              span_name: T.nilable(String),
+              span_attributes: T.nilable(T::Hash[String, T.anything]),
+              span_created_id:
+                T.nilable(T.any(String, T::Hash[String, Symbol])),
+              span_route: T.nilable(String),
+              span_query: T.nilable(T::Array[String]),
+              span_content_query: T.nilable(T::Array[String]),
               options: T.nilable(Anthropic::RequestOptions::OrHash)
             }
           end
@@ -84,6 +91,8 @@ module Anthropic
                     T.proc.params(arg0: T.anything).returns(T.anything)
                   )
                 ),
+              span_query: T.nilable(T::Array[String]),
+              span_content_query: T.nilable(T::Array[String]),
               options: T::Hash[Symbol, T.anything],
               middleware: T::Array[Anthropic::Middleware::Entry],
               metadata: T::Hash[Symbol, T.anything]
@@ -119,10 +128,17 @@ module Anthropic
             params(
               request: Anthropic::Internal::Transport::BaseClient::RequestInput,
               status: Integer,
-              response_headers: T::Hash[String, String]
+              response_headers: T::Hash[String, String],
+              span: T.nilable(T.anything)
             ).returns(Anthropic::Internal::Transport::BaseClient::RequestInput)
           end
-          def follow_redirect(request, status:, response_headers:)
+          def follow_redirect(
+            request,
+            status:,
+            response_headers:,
+            # the span of the API call
+            span: nil
+          )
           end
 
           # @api private
@@ -173,6 +189,8 @@ module Anthropic
             max_retries: Integer,
             initial_retry_delay: Float,
             max_retry_delay: Float,
+            open_telemetry:
+              T.nilable(T.any(T::Boolean, Anthropic::Internal::AnyHash)),
             headers:
               T::Hash[
                 String,
@@ -197,6 +215,7 @@ module Anthropic
           max_retries: 0,
           initial_retry_delay: 0.0,
           max_retry_delay: 0.0,
+          open_telemetry: nil,
           headers: {},
           idempotency_header: nil,
           middleware: nil,
@@ -207,6 +226,41 @@ module Anthropic
         # @api private
         sig { overridable.returns(T::Hash[String, String]) }
         private def auth_headers
+        end
+
+        # @api private
+        #
+        # What every span of this client starts with. A client for another platform
+        # overrides it.
+        sig { overridable.returns(T::Hash[String, String]) }
+        def open_telemetry_attributes
+        end
+
+        # @api private
+        #
+        # Whether this client's spans have the `content` attributes.
+        sig { overridable.returns(T::Boolean) }
+        def open_telemetry_content?
+        end
+
+        # @api private
+        # The most bytes the `content` attributes of one of this client's spans hold.
+        sig { returns(Integer) }
+        attr_reader :open_telemetry_max_content_bytes
+
+        # @api private
+        #
+        # The tracer of this client's spans, or `nil` when they are disabled.
+        sig { returns(T.nilable(T.anything)) }
+        def open_telemetry_tracer
+        end
+
+        # @api private
+        #
+        # The instrumentation scope of this client's spans. A client for another platform
+        # overrides it.
+        sig { overridable.returns(String) }
+        private def open_telemetry_scope
         end
 
         # @api private
@@ -262,7 +316,8 @@ module Anthropic
             request: Anthropic::Internal::Transport::BaseClient::RequestInput,
             redirect_count: Integer,
             retry_count: Integer,
-            send_retry_header: T::Boolean
+            send_retry_header: T::Boolean,
+            span: T.nilable(T.anything)
           ).returns(
             [
               Integer,
@@ -276,14 +331,16 @@ module Anthropic
           request,
           redirect_count:,
           retry_count:,
-          send_retry_header:
+          send_retry_header:,
+          # the span of the API call
+          span: nil
         )
         end
 
         # Execute the request specified by `req`. This is the method that all resource
         # methods call into.
         #
-        # @overload request(method, path, query: {}, headers: {}, body: nil, unwrap: nil, page: nil, stream: nil, model: Anthropic::Internal::Type::Unknown, options: {})
+        # @overload request(method, path, query: {}, headers: {}, body: nil, unwrap: nil, page: nil, stream: nil, model: Anthropic::Internal::Type::Unknown, span_name: nil, span_attributes: nil, span_created_id: nil, span_route: nil, span_query: nil, span_content_query: nil, options: {})
         sig do
           params(
             method: Symbol,
@@ -333,6 +390,12 @@ module Anthropic
                 ]
               ),
             model: T.nilable(Anthropic::Internal::Type::Converter::Input),
+            span_name: T.nilable(String),
+            span_attributes: T.nilable(T::Hash[String, T.anything]),
+            span_created_id: T.nilable(T.any(String, T::Hash[String, Symbol])),
+            span_route: T.nilable(String),
+            span_query: T.nilable(T::Array[String]),
+            span_content_query: T.nilable(T::Array[String]),
             options: T.nilable(Anthropic::RequestOptions::OrHash)
           ).returns(T.anything)
         end
@@ -346,8 +409,33 @@ module Anthropic
           page: nil,
           stream: nil,
           model: Anthropic::Internal::Type::Unknown,
+          span_name: nil,
+          span_attributes: nil,
+          span_created_id: nil,
+          span_route: nil,
+          span_query: nil,
+          span_content_query: nil,
           options: {}
         )
+        end
+
+        # @api private
+        #
+        # Yields the final response's status and headers before the body is decoded.
+        sig do
+          params(
+            req: Anthropic::Internal::Transport::BaseClient::RequestComponents,
+            span: T.nilable(T.anything),
+            blk:
+              T.nilable(
+                T
+                  .proc
+                  .params(status: Integer, headers: T::Hash[String, String])
+                  .void
+              )
+          ).returns(T.anything)
+        end
+        private def execute_request(req, span: nil, &blk)
         end
 
         # @api private

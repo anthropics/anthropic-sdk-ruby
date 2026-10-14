@@ -190,6 +190,34 @@ module Anthropic
     # @param timeout [Float, nil] Request timeout in seconds. Defaults to
     # `Anthropic::Client::DEFAULT_TIMEOUT_IN_SECONDS` when `nil`.
     #
+    # @param open_telemetry [Hash{Symbol=>Object}, Boolean, nil] OpenTelemetry tracing of this client's API calls. Each call emits a span when
+    # the application has registered a tracer provider with the OpenTelemetry API.
+    # `false` disables the spans, and `true` is the default. Keys can be Strings, and
+    # an unknown key raises `ArgumentError`.
+    #
+    #   @option open_telemetry [#tracer] :tracer_provider Used in place of the registered tracer provider.
+    #
+    #   @option open_telemetry [Boolean] :propagation `false` sends no trace context headers, such as `traceparent`, with this
+    #   client's requests, for an application whose HTTP client instrumentation already
+    #   sends them, so that a request does not carry them twice. The spans are
+    #   unaffected. Defaults to `false` when
+    #   `ENV["ANTHROPIC_OPEN_TELEMETRY_PROPAGATION"]` is `false`, otherwise `true`.
+    #
+    #   @option open_telemetry [Hash{Symbol=>Object}, Boolean] :traces The settings of the spans. `true` and `false` are short for `{enabled: true}`
+    #   and `{enabled: false}`. Its keys:
+    #
+    #   - `:enabled` (Boolean): `false` disables the spans, and the other keys are then
+    #     unused. Defaults to `false` when `ENV["ANTHROPIC_OPEN_TELEMETRY"]` is `false`,
+    #     otherwise `true`.
+    #   - `:content_mode` (Symbol, String): `:content` adds the content of requests and
+    #     responses to the spans, and `:metadata_only` does not. Defaults to
+    #     `ENV["ANTHROPIC_OPEN_TELEMETRY_TRACES_CONTENT_MODE"]`, otherwise
+    #     `:metadata_only`.
+    #   - `:max_content_bytes` (Integer): the most bytes of content that one span holds,
+    #     1 or more. Content over the bound is cut, and the span then has
+    #     `anthropic.content.truncated`. Defaults to
+    #     `ENV["ANTHROPIC_OPEN_TELEMETRY_TRACES_MAX_CONTENT_BYTES"]`, otherwise 0.75 MB.
+    #
     # @param initial_retry_delay [Float]
     #
     # @param max_retry_delay [Float]
@@ -207,6 +235,7 @@ module Anthropic
       proxy: nil,
       max_retries: self.class::DEFAULT_MAX_RETRIES,
       timeout: nil,
+      open_telemetry: nil,
       initial_retry_delay: self.class::DEFAULT_INITIAL_RETRY_DELAY,
       max_retry_delay: self.class::DEFAULT_MAX_RETRY_DELAY,
       middleware: nil
@@ -298,6 +327,7 @@ module Anthropic
         base_url: base_url,
         proxy: proxy,
         timeout: timeout,
+        open_telemetry: open_telemetry,
         max_retries: max_retries,
         initial_retry_delay: initial_retry_delay,
         max_retry_delay: max_retry_delay,

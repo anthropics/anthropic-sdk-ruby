@@ -28,6 +28,9 @@ module Anthropic
         parsed, options = Anthropic::FileListParams.dump_request(params)
         query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
         @client.request(
+          span_name: Anthropic::Internal::Tracing::SpanName::FILES_LIST,
+          span_route: "/v1/files",
+          span_query: %w[ids limit page],
           method: :get,
           path: "v1/files",
           query: query,
@@ -57,6 +60,9 @@ module Anthropic
       def delete(file_id, params = {})
         parsed, options = Anthropic::FileDeleteParams.dump_request(params)
         @client.request(
+          span_name: Anthropic::Internal::Tracing::SpanName::FILES_DELETE,
+          span_attributes: {"anthropic.file.id" => file_id},
+          span_route: "/v1/files/{file_id}",
           method: :delete,
           path: ["v1/files/%1$s", file_id],
           headers: parsed.transform_keys(workspace_id: "anthropic-workspace-id"),
@@ -84,6 +90,9 @@ module Anthropic
       def download(file_id, params = {})
         parsed, options = Anthropic::FileDownloadParams.dump_request(params)
         @client.request(
+          span_name: Anthropic::Internal::Tracing::SpanName::FILES_DOWNLOAD,
+          span_attributes: {"anthropic.file.id" => file_id},
+          span_route: "/v1/files/{file_id}/content",
           method: :get,
           path: ["v1/files/%1$s/content", file_id],
           headers: {
@@ -114,6 +123,9 @@ module Anthropic
       def retrieve_metadata(file_id, params = {})
         parsed, options = Anthropic::FileRetrieveMetadataParams.dump_request(params)
         @client.request(
+          span_name: Anthropic::Internal::Tracing::SpanName::FILES_RETRIEVE_METADATA,
+          span_attributes: {"anthropic.file.id" => file_id},
+          span_route: "/v1/files/{file_id}",
           method: :get,
           path: ["v1/files/%1$s", file_id],
           headers: parsed.transform_keys(workspace_id: "anthropic-workspace-id"),
@@ -144,6 +156,9 @@ module Anthropic
         parsed, options = Anthropic::FileUploadParams.dump_request(params)
         header_params = {workspace_id: "anthropic-workspace-id"}
         @client.request(
+          span_name: Anthropic::Internal::Tracing::SpanName::FILES_UPLOAD,
+          span_created_id: "anthropic.file.id",
+          span_route: "/v1/files",
           method: :post,
           path: "v1/files",
           headers: {

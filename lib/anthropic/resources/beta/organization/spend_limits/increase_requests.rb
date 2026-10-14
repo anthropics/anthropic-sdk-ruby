@@ -22,6 +22,9 @@ module Anthropic
             # @see Anthropic::Models::Beta::Organization::SpendLimits::IncreaseRequestRetrieveParams
             def retrieve(spend_limit_increase_request_id, params = {})
               @client.request(
+                span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SPEND_LIMITS_INCREASE_REQUESTS_RETRIEVE,
+                span_attributes: {"anthropic.organization.spend_limit_increase_request.id" => spend_limit_increase_request_id},
+                span_route: "/v1/organizations/spend_limit_increase_requests/{spend_limit_increase_request_id}",
                 method: :get,
                 path: [
                   "v1/organizations/spend_limit_increase_requests/%1$s?beta=true",
@@ -57,6 +60,9 @@ module Anthropic
                 Anthropic::Beta::Organization::SpendLimits::IncreaseRequestListParams.dump_request(params)
               query = Anthropic::Internal::Util.encode_query_params(parsed)
               @client.request(
+                span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SPEND_LIMITS_INCREASE_REQUESTS_LIST,
+                span_route: "/v1/organizations/spend_limit_increase_requests",
+                span_query: %w[actor_ids limit page status],
                 method: :get,
                 path: "v1/organizations/spend_limit_increase_requests?beta=true",
                 query: query,
@@ -95,6 +101,9 @@ module Anthropic
               parsed, options =
                 Anthropic::Beta::Organization::SpendLimits::IncreaseRequestApproveParams.dump_request(params)
               @client.request(
+                span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SPEND_LIMITS_INCREASE_REQUESTS_APPROVE,
+                span_attributes: {"anthropic.organization.spend_limit_increase_request.id" => spend_limit_increase_request_id},
+                span_route: "/v1/organizations/spend_limit_increase_requests/{spend_limit_increase_request_id}/approve",
                 method: :post,
                 path: [
                   "v1/organizations/spend_limit_increase_requests/%1$s/approve?beta=true",
@@ -126,6 +135,9 @@ module Anthropic
               parsed, options =
                 Anthropic::Beta::Organization::SpendLimits::IncreaseRequestDenyParams.dump_request(params)
               @client.request(
+                span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SPEND_LIMITS_INCREASE_REQUESTS_DENY,
+                span_attributes: {"anthropic.organization.spend_limit_increase_request.id" => spend_limit_increase_request_id},
+                span_route: "/v1/organizations/spend_limit_increase_requests/{spend_limit_increase_request_id}/deny",
                 method: :post,
                 path: [
                   "v1/organizations/spend_limit_increase_requests/%1$s/deny?beta=true",

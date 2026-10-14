@@ -128,7 +128,12 @@ module Anthropic
           workspace_id: String,
           stream: T.noreturn,
           request_options: Anthropic::RequestOptions::OrHash
-        ).returns(Anthropic::Internal::Stream[Anthropic::Completion])
+        ).returns(
+          Anthropic::Internal::Type::BaseStream[
+            T.noreturn,
+            Anthropic::Completion
+          ]
+        )
       end
       def create_streaming(
         # Body param: The maximum number of tokens to generate before stopping.

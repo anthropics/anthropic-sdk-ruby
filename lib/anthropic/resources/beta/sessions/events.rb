@@ -54,6 +54,19 @@ module Anthropic
             parsed, options = Anthropic::Beta::Sessions::EventListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_EVENTS_LIST,
+              span_attributes: {"anthropic.session.id" => session_id},
+              span_route: "/v1/sessions/{session_id}/events",
+              span_query: %w[
+                created_at[gt]
+                created_at[gte]
+                created_at[lt]
+                created_at[lte]
+                limit
+                order
+                page
+                types
+              ],
               method: :get,
               path: ["v1/sessions/%1$s/events?beta=true", session_id],
               query: query.transform_keys(
@@ -96,6 +109,9 @@ module Anthropic
             parsed, options = Anthropic::Beta::Sessions::EventSendParams.dump_request(params)
             header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_EVENTS_SEND,
+              span_attributes: {"anthropic.session.id" => session_id},
+              span_route: "/v1/sessions/{session_id}/events",
               method: :post,
               path: ["v1/sessions/%1$s/events?beta=true", session_id],
               headers: parsed.slice(*header_params.keys).transform_keys(header_params),
@@ -122,7 +138,7 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @return [Anthropic::Internal::Stream<Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThinkingEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageReceivedEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadContextCompactedEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusRescheduledEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusRunningEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusTerminatedEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationStartEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationEndEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelRequestStartEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelRequestEndEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionDeletedEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRunningEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusTerminatedEvent, Anthropic::Models::Beta::BetaManagedAgentsUserToolResultEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRescheduledEvent, Anthropic::Models::Beta::BetaManagedAgentsSessionUpdatedEvent, Anthropic::Models::Beta::BetaManagedAgentsStartEvent, Anthropic::Models::Beta::BetaManagedAgentsDeltaEvent, Anthropic::Models::Beta::BetaManagedAgentsSystemMessageEvent, Anthropic::Models::Beta::BetaManagedAgentsSessionUsageEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsWorkflowRunCreatedEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsWorkflowRunStatusEndedEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsWorkflowRunPhaseStartedEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsWorkflowRunPhaseEndedEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsWorkflowRunStatusRunningEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsWorkflowRunStatusIdleEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsWorkflowRunErrorEvent>]
+          # @return [Anthropic::Internal::Type::BaseStream<Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThinkingEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageReceivedEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadContextCompactedEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusRescheduledEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusRunningEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusTerminatedEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationStartEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationEndEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelRequestStartEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelRequestEndEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionDeletedEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRunningEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusTerminatedEvent, Anthropic::Models::Beta::BetaManagedAgentsUserToolResultEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRescheduledEvent, Anthropic::Models::Beta::BetaManagedAgentsSessionUpdatedEvent, Anthropic::Models::Beta::BetaManagedAgentsStartEvent, Anthropic::Models::Beta::BetaManagedAgentsDeltaEvent, Anthropic::Models::Beta::BetaManagedAgentsSystemMessageEvent, Anthropic::Models::Beta::BetaManagedAgentsSessionUsageEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsWorkflowRunCreatedEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsWorkflowRunStatusEndedEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsWorkflowRunPhaseStartedEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsWorkflowRunPhaseEndedEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsWorkflowRunStatusRunningEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsWorkflowRunStatusIdleEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsWorkflowRunErrorEvent>]
           #
           # @see Anthropic::Models::Beta::Sessions::EventStreamParams
           def stream_events(session_id, params = {})
@@ -130,6 +146,10 @@ module Anthropic
             parsed, options = Anthropic::Beta::Sessions::EventStreamParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_EVENTS_STREAM,
+              span_attributes: {"anthropic.session.id" => session_id},
+              span_route: "/v1/sessions/{session_id}/events/stream",
+              span_query: %w[event_deltas],
               method: :get,
               path: ["v1/sessions/%1$s/events/stream?beta=true", session_id],
               query: query,

@@ -31,7 +31,24 @@ module Anthropic
           #
           # @raise [ArgumentError]
           def validate!(req)
-            keys = [:method, :path, :query, :headers, :body, :unwrap, :page, :stream, :model, :options]
+            keys = [
+              :method,
+              :path,
+              :query,
+              :headers,
+              :body,
+              :unwrap,
+              :page,
+              :stream,
+              :model,
+              :span_name,
+              :span_attributes,
+              :span_created_id,
+              :span_route,
+              :span_query,
+              :span_content_query,
+              :options
+            ]
             case req
             in Hash
               req.each_key do |k|
@@ -83,12 +100,18 @@ module Anthropic
           #
           #   @option request [Float] :timeout
           #
+          #   @option request [Array<String>, nil] :span_query
+          #
+          #   @option request [Array<String>, nil] :span_content_query
+          #
           # @param status [Integer]
           #
           # @param response_headers [Hash{String=>String}]
           #
+          # @param span [OpenTelemetry::Trace::Span, nil] the span of the API call
+          #
           # @return [Hash{Symbol=>Object}]
-          def follow_redirect(request, status:, response_headers:)
+          def follow_redirect(request, status:, response_headers:, span: nil)
             method, url, headers = request.fetch_values(:method, :url, :headers)
             location =
               Kernel.then do
@@ -131,7 +154,8 @@ module Anthropic
 
             # from undici
             if Anthropic::Internal::Util.uri_origin(url) != Anthropic::Internal::Util.uri_origin(location)
-              drop = %w[authorization cookie host proxy-authorization]
+              # The trace context is for the API's origin only, like the credentials dropped here.
+              drop = %w[authorization cookie host proxy-authorization] + Anthropic::Internal::Tracing.trace_header_names(span)
               # The sentinel keeps the strip durable: provider middleware
               # (Vertex OAuth, Bedrock SigV4) runs per attempt and would
               # otherwise re-add `authorization` on the redirected leg.
@@ -196,6 +220,7 @@ module Anthropic
         # @param max_retries [Integer]
         # @param initial_retry_delay [Float]
         # @param max_retry_delay [Float]
+        # @param open_telemetry [Hash{Symbol=>Object}, Boolean, nil]
         # @param headers [Hash{String=>String, Integer, Array<String, Integer, nil>, nil}]
         # @param idempotency_header [String, nil]
         # @param middleware [Array<#call>, #call, nil]
@@ -207,6 +232,7 @@ module Anthropic
           max_retries: 0,
           initial_retry_delay: 0.0,
           max_retry_delay: 0.0,
+          open_telemetry: nil,
           headers: {},
           idempotency_header: nil,
           middleware: nil,
@@ -230,12 +256,52 @@ module Anthropic
           @max_retries = max_retries
           @initial_retry_delay = initial_retry_delay
           @max_retry_delay = max_retry_delay
+          open_telemetry = Anthropic::Internal::Tracing.client_option(open_telemetry)
+          @tracer = Anthropic::Internal::Tracing.tracer(open_telemetry, open_telemetry_scope)
+          @open_telemetry_content = Anthropic::Internal::Tracing.content?(open_telemetry)
+          @open_telemetry_max_content_bytes = Anthropic::Internal::Tracing.max_content_bytes(open_telemetry)
+          @open_telemetry_propagation = Anthropic::Internal::Tracing.propagation?(open_telemetry)
         end
 
         # @api private
         #
         # @return [Hash{String=>String}]
         private def auth_headers = {}
+
+        # @api private
+        #
+        # What every span of this client starts with. A client for another platform
+        # overrides it.
+        #
+        # @return [Hash{String=>String}]
+        def open_telemetry_attributes = Anthropic::Internal::Tracing::CLIENT_ATTRIBUTES
+
+        # @api private
+        #
+        # Whether this client's spans have the `content` attributes.
+        #
+        # @return [Boolean]
+        def open_telemetry_content? = @open_telemetry_content
+
+        # @api private
+        # The most bytes the `content` attributes of one of this client's spans hold.
+        # @return [Integer]
+        attr_reader :open_telemetry_max_content_bytes
+
+        # @api private
+        #
+        # The tracer of this client's spans, or `nil` when they are disabled.
+        #
+        # @return [OpenTelemetry::Trace::Tracer, nil]
+        def open_telemetry_tracer = @tracer
+
+        # @api private
+        #
+        # The instrumentation scope of this client's spans. A client for another platform
+        # overrides it.
+        #
+        # @return [String]
+        private def open_telemetry_scope = Anthropic::Internal::Tracing::INSTRUMENTATION_SCOPE
 
         # @api private
         #
@@ -269,6 +335,18 @@ module Anthropic
         #
         #   @option req [Anthropic::Internal::Type::Converter, Class, nil] :model
         #
+        #   @option req [String, nil] :span_name
+        #
+        #   @option req [Hash{String=>Object}, nil] :span_attributes
+        #
+        #   @option req [String, Hash{String=>Symbol}, nil] :span_created_id
+        #
+        #   @option req [String, nil] :span_route
+        #
+        #   @option req [Array<String>, nil] :span_query
+        #
+        #   @option req [Array<String>, nil] :span_content_query query parameters that are content on this endpoint only
+        #
         # @param opts [Hash{Symbol=>Object}] .
         #
         #   @option opts [Hash{String=>Array<String>, String, nil}, nil] :extra_query
@@ -276,6 +354,8 @@ module Anthropic
         #   @option opts [Hash{String=>String, nil}, nil] :extra_headers
         #
         #   @option opts [Object, nil] :extra_body
+        #
+        #   @option opts [Hash{Symbol=>String}, nil] :open_telemetry
         #
         #   @option opts [Integer, nil] :max_retries
         #
@@ -355,6 +435,8 @@ module Anthropic
             cast_to: req[:page] ? nil : req.fetch(:model, Anthropic::Internal::Type::Unknown),
             stream: req[:stream],
             unwrap: req[:unwrap],
+            span_query: req[:span_query],
+            span_content_query: req[:span_content_query],
             options: opts.except(:middleware),
             middleware: request_middleware,
             metadata: {}
@@ -458,15 +540,21 @@ module Anthropic
         #
         #   @option request [Float] :timeout
         #
+        #   @option request [Array<String>, nil] :span_query
+        #
+        #   @option request [Array<String>, nil] :span_content_query
+        #
         # @param redirect_count [Integer]
         #
         # @param retry_count [Integer]
         #
         # @param send_retry_header [Boolean]
         #
+        # @param span [OpenTelemetry::Trace::Span, nil] the span of the API call
+        #
         # @raise [Anthropic::Errors::APIError]
         # @return [Array(Integer, Net::HTTPResponse|nil, Hash{String=>String}, Enumerable<String>)]
-        def send_request(request, redirect_count:, retry_count:, send_retry_header:)
+        def send_request(request, redirect_count:, retry_count:, send_retry_header:, span: nil)
           if send_retry_header
             request.fetch(:headers)["x-stainless-retry-count"] = retry_count.to_s
           end
@@ -518,6 +606,7 @@ module Anthropic
           terminal = lambda do |r|
             adapted_url = r.url
             adapted_body = r.body
+            Anthropic::Internal::Tracing.record_send(span, self, request, r.url) if span
             enc_headers, encoded = Anthropic::Internal::Util.encode_content(r.headers, r.body)
             input = {
               method: r.method,
@@ -582,7 +671,8 @@ module Anthropic
             request = self.class.follow_redirect(
               request.merge(url: adapted_url, body: adapted_body),
               status: status,
-              response_headers: headers
+              response_headers: headers,
+              span: (span if @open_telemetry_propagation)
             )
             # The redirect retargets the URL, and `follow_redirect` may drop the
             # body (303 → GET); the cached frozen copies would then be stale, so
@@ -593,7 +683,8 @@ module Anthropic
               request,
               redirect_count: redirect_count + 1,
               retry_count: retry_count,
-              send_retry_header: send_retry_header
+              send_retry_header: send_retry_header,
+              span: span
             )
           in Exception if retry_count >= max_retries
             raise status
@@ -635,7 +726,8 @@ module Anthropic
               request,
               redirect_count: redirect_count,
               retry_count: retry_count + 1,
-              send_retry_header: send_retry_header
+              send_retry_header: send_retry_header,
+              span: span
             )
           end
         end
@@ -643,7 +735,7 @@ module Anthropic
         # Execute the request specified by `req`. This is the method that all resource
         # methods call into.
         #
-        # @overload request(method, path, query: {}, headers: {}, body: nil, unwrap: nil, page: nil, stream: nil, model: Anthropic::Internal::Type::Unknown, options: {})
+        # @overload request(method, path, query: {}, headers: {}, body: nil, unwrap: nil, page: nil, stream: nil, model: Anthropic::Internal::Type::Unknown, span_name: nil, span_attributes: nil, span_created_id: nil, span_route: nil, span_query: nil, span_content_query: nil, options: {})
         #
         # @param method [Symbol]
         #
@@ -663,6 +755,18 @@ module Anthropic
         #
         # @param model [Anthropic::Internal::Type::Converter, Class, nil]
         #
+        # @param span_name [String, nil]
+        #
+        # @param span_attributes [Hash{String=>Object}, nil]
+        #
+        # @param span_created_id [String, Hash{String=>Symbol}, nil]
+        #
+        # @param span_route [String, nil]
+        #
+        # @param span_query [Array<String>, nil]
+        #
+        # @param span_content_query [Array<String>, nil] query parameters that are content on this endpoint only
+        #
         # @param options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] .
         #
         #   @option options [Hash{String=>Array<String>, String, nil}, nil] :extra_query
@@ -670,6 +774,8 @@ module Anthropic
         #   @option options [Hash{String=>String, nil}, nil] :extra_headers
         #
         #   @option options [Object, nil] :extra_body
+        #
+        #   @option options [Hash{Symbol=>String}, nil] :open_telemetry
         #
         #   @option options [Integer, nil] :max_retries
         #
@@ -679,12 +785,60 @@ module Anthropic
         # @return [Object]
         def request(req)
           self.class.validate!(req)
+          Anthropic::RequestOptions.validate!(req[:options].to_h)
+          Anthropic::Internal::Tracing.request_option(req[:options].to_h[:open_telemetry])
+          return execute_request(req) if @tracer.nil?
+
+          start_time = Anthropic::Internal::Util.monotonic_secs
+          attributes = Anthropic::Internal::Tracing.api_call_span_attributes(self, req)
+          span = Anthropic::Internal::Tracing.start_api_call_span(
+            @tracer,
+            {**req, span_attributes: attributes},
+            propagation: @open_telemetry_propagation
+          )
+          return execute_request(req) if span.nil?
+
+          result = {req: req, client: self, start_time: start_time}
+          data = begin
+            # The response is kept before its body is decoded: a body that cannot be decoded still has a status.
+            result[:data] = OpenTelemetry::Trace.with_span(span) do
+              execute_request(req, span: span) { result.update(status: _1, headers: _2) }
+            end
+          rescue StandardError => e
+            result[:error] = e
+            raise
+          ensure
+            unless result[:data].is_a?(Anthropic::Internal::Type::BaseStream)
+              Anthropic::Internal::Tracing.end_api_call_span(span, result)
+            end
+          end
+          return data unless data.is_a?(Anthropic::Internal::Type::BaseStream)
+
+          # The stream that the application gets reads `data`, and ends the span once read or closed.
+          Anthropic::Internal::Tracing.end_api_call_span_when_stream_ends(span, data, result)
+        end
+
+        # @api private
+        #
+        # Yields the final response's status and headers before the body is decoded.
+        #
+        # @param req [Hash{Symbol=>Object}]
+        # @param span [OpenTelemetry::Trace::Span, nil]
+        #
+        # @yieldparam status [Integer]
+        # @yieldparam headers [Hash{String=>String}]
+        #
+        # @raise [Anthropic::Errors::APIError]
+        # @return [Object]
+        private def execute_request(req, span: nil)
           model = req.fetch(:model) { Anthropic::Internal::Type::Unknown }
           opts = req[:options].to_h
           unwrap = req[:unwrap]
-          Anthropic::RequestOptions.validate!(opts)
           request = build_request(req.except(:options), opts)
           url = request.fetch(:url)
+          if span && @open_telemetry_propagation
+            request.fetch(:headers).update(Anthropic::Internal::Tracing.inject(span))
+          end
 
           # Don't send the current retry count in the headers if the caller modified the header defaults.
           send_retry_header = request.fetch(:headers)["x-stainless-retry-count"] == "0"
@@ -692,8 +846,10 @@ module Anthropic
             request,
             redirect_count: 0,
             retry_count: 0,
-            send_retry_header: send_retry_header
+            send_retry_header: send_retry_header,
+            span: span
           )
+          yield(status, headers) if block_given?
 
           decoded = Anthropic::Internal::Util.decode_content(headers, stream: stream)
           case req
@@ -754,6 +910,12 @@ module Anthropic
                 T::Class[Anthropic::Internal::Type::BaseStream[T.anything, Anthropic::Internal::Type::BaseModel]]
               ),
               model: T.nilable(Anthropic::Internal::Type::Converter::Input),
+              span_name: T.nilable(String),
+              span_attributes: T.nilable(T::Hash[String, T.anything]),
+              span_created_id: T.nilable(T.any(String, T::Hash[String, Symbol])),
+              span_route: T.nilable(String),
+              span_query: T.nilable(T::Array[String]),
+              span_content_query: T.nilable(T::Array[String]),
               options: T.nilable(Anthropic::RequestOptions::OrHash)
             }
           end
@@ -778,6 +940,8 @@ module Anthropic
                   T.proc.params(arg0: T.anything).returns(T.anything)
                 )
               ),
+              span_query: T.nilable(T::Array[String]),
+              span_content_query: T.nilable(T::Array[String]),
               options: T::Hash[Symbol, T.anything],
               middleware: T::Array[T.anything],
               metadata: T::Hash[Symbol, T.anything]

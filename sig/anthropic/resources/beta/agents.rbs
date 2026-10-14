@@ -8,6 +8,7 @@ module Anthropic
           model: Anthropic::Models::Beta::AgentCreateParams::model,
           name: String,
           ?description: String?,
+          ?execution_identity: Anthropic::Models::Beta::beta_managed_agents_execution_identity_params?,
           ?mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams],
           ?metadata: ::Hash[Symbol, String],
           ?multiagent: Anthropic::Models::Beta::beta_managed_agents_multiagent_params?,
@@ -30,6 +31,7 @@ module Anthropic
         def update: (
           String agent_id,
           ?description: String?,
+          ?execution_identity: Anthropic::Models::Beta::beta_managed_agents_execution_identity_params?,
           ?mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams]?,
           ?metadata: ::Hash[Symbol, String?]?,
           ?model: Anthropic::Models::Beta::AgentUpdateParams::model,

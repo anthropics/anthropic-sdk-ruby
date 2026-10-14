@@ -20,6 +20,15 @@ module Anthropic
         #   @return [String, nil]
         optional :description, String, nil?: true
 
+        # @!attribute execution_identity
+        #   Execution principal for runs of this agent. Full replacement. Omit to preserve;
+        #   send null or `{"type": "service_account"}` to restore the default.
+        #
+        #   @return [Anthropic::Models::Beta::BetaManagedAgentsAWSRoleExecutionIdentityParams, Anthropic::Models::Beta::BetaManagedAgentsServiceAccountExecutionIdentityParams, nil]
+        optional :execution_identity,
+                 union: -> { Anthropic::Beta::BetaManagedAgentsExecutionIdentityParams },
+                 nil?: true
+
         # @!attribute mcp_servers
         #   MCP servers. Full replacement. Omit to preserve; send empty array or `null` to
         #   clear. Names must be unique. Maximum 20. Every server must be referenced by an
@@ -116,13 +125,15 @@ module Anthropic
         #   @return [String, nil]
         optional :workspace_id, String
 
-        # @!method initialize(agent_id:, description: nil, mcp_servers: nil, metadata: nil, model: nil, multiagent: nil, name: nil, skills: nil, system_: nil, tools: nil, version: nil, betas: nil, workspace_id: nil, request_options: {})
+        # @!method initialize(agent_id:, description: nil, execution_identity: nil, mcp_servers: nil, metadata: nil, model: nil, multiagent: nil, name: nil, skills: nil, system_: nil, tools: nil, version: nil, betas: nil, workspace_id: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::AgentUpdateParams} for more details.
         #
         #   @param agent_id [String] Unique identifier of the agent to update.
         #
         #   @param description [String, nil] Description. Omit to preserve; send empty string or null to clear.
+        #
+        #   @param execution_identity [Anthropic::Models::Beta::BetaManagedAgentsAWSRoleExecutionIdentityParams, Anthropic::Models::Beta::BetaManagedAgentsServiceAccountExecutionIdentityParams, nil] Execution principal for runs of this agent. Full replacement. Omit to preserve;
         #
         #   @param mcp_servers [Array<Anthropic::Models::Beta::BetaManagedAgentsURLMCPServerParams>, nil] MCP servers. Full replacement. Omit to preserve; send empty array or `null` to c
         #

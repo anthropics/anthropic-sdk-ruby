@@ -38,6 +38,9 @@ module Anthropic
               parsed, options = Anthropic::Beta::Organization::Analytics::ArtifactListParams.dump_request(params)
               query = Anthropic::Internal::Util.encode_query_params(parsed)
               @client.request(
+                span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_ANALYTICS_ARTIFACTS_LIST,
+                span_route: "/v1/organizations/analytics/artifacts",
+                span_query: %w[date filter group_by limit page],
                 method: :get,
                 path: "v1/organizations/analytics/artifacts?beta=true",
                 query: query,

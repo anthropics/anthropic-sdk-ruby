@@ -9,6 +9,7 @@ module Anthropic
           archived_at: Time?,
           created_at: Time,
           description: String?,
+          execution_identity: Anthropic::Models::Beta::beta_managed_agents_execution_identity,
           mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition],
           metadata: ::Hash[Symbol, String],
           model: Anthropic::Beta::BetaManagedAgentsModelConfig,
@@ -30,6 +31,8 @@ module Anthropic
         attr_accessor created_at: Time
 
         attr_accessor description: String?
+
+        attr_accessor execution_identity: Anthropic::Models::Beta::beta_managed_agents_execution_identity
 
         attr_accessor mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition]
 
@@ -58,6 +61,7 @@ module Anthropic
           archived_at: Time?,
           created_at: Time,
           description: String?,
+          execution_identity: Anthropic::Models::Beta::beta_managed_agents_execution_identity,
           mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition],
           metadata: ::Hash[Symbol, String],
           model: Anthropic::Beta::BetaManagedAgentsModelConfig,
@@ -76,6 +80,7 @@ module Anthropic
           archived_at: Time?,
           created_at: Time,
           description: String?,
+          execution_identity: Anthropic::Models::Beta::beta_managed_agents_execution_identity,
           mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition],
           metadata: ::Hash[Symbol, String],
           model: Anthropic::Beta::BetaManagedAgentsModelConfig,

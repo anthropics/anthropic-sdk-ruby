@@ -46,6 +46,9 @@ module Anthropic
           def create(params)
             parsed, options = Anthropic::Organization::Federation::IssuerCreateParams.dump_request(params)
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_FEDERATION_ISSUERS_CREATE,
+              span_created_id: "anthropic.organization.federation_issuer.id",
+              span_route: "/v1/organizations/federation_issuers",
               method: :post,
               path: "v1/organizations/federation_issuers",
               body: parsed,
@@ -72,6 +75,9 @@ module Anthropic
           # @see Anthropic::Models::Organization::Federation::IssuerRetrieveParams
           def retrieve(federation_issuer_id, params = {})
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_FEDERATION_ISSUERS_RETRIEVE,
+              span_attributes: {"anthropic.organization.federation_issuer.id" => federation_issuer_id},
+              span_route: "/v1/organizations/federation_issuers/{federation_issuer_id}",
               method: :get,
               path: ["v1/organizations/federation_issuers/%1$s", federation_issuer_id],
               model: Anthropic::Organization::Federation::FederationIssuer,
@@ -120,6 +126,9 @@ module Anthropic
           def update(federation_issuer_id, params = {})
             parsed, options = Anthropic::Organization::Federation::IssuerUpdateParams.dump_request(params)
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_FEDERATION_ISSUERS_UPDATE,
+              span_attributes: {"anthropic.organization.federation_issuer.id" => federation_issuer_id},
+              span_route: "/v1/organizations/federation_issuers/{federation_issuer_id}",
               method: :post,
               path: ["v1/organizations/federation_issuers/%1$s", federation_issuer_id],
               body: parsed,
@@ -154,6 +163,9 @@ module Anthropic
             parsed, options = Anthropic::Organization::Federation::IssuerListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed)
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_FEDERATION_ISSUERS_LIST,
+              span_route: "/v1/organizations/federation_issuers",
+              span_query: %w[include_archived limit page],
               method: :get,
               path: "v1/organizations/federation_issuers",
               query: query,
@@ -186,6 +198,9 @@ module Anthropic
           # @see Anthropic::Models::Organization::Federation::IssuerArchiveParams
           def archive(federation_issuer_id, params = {})
             @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_FEDERATION_ISSUERS_ARCHIVE,
+              span_attributes: {"anthropic.organization.federation_issuer.id" => federation_issuer_id},
+              span_route: "/v1/organizations/federation_issuers/{federation_issuer_id}/archive",
               method: :post,
               path: ["v1/organizations/federation_issuers/%1$s/archive", federation_issuer_id],
               model: Anthropic::Organization::Federation::FederationIssuer,
