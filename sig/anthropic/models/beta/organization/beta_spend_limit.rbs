@@ -65,6 +65,7 @@ module Anthropic
             | Anthropic::Beta::Organization::BetaSpendLimitOrganizationServiceScope
             | Anthropic::Beta::Organization::BetaSpendLimitOrganizationScope
             | Anthropic::Beta::Organization::BetaSpendLimitWorkspaceScope
+            | Anthropic::Beta::Organization::BetaSpendLimitUsageTierScope
 
           module Scope
             extend Anthropic::Internal::Type::Union
@@ -76,6 +77,7 @@ module Anthropic
               | :organization_service
               | :organization
               | :workspace
+              | :usage_tier
 
             module Type
               extend Anthropic::Internal::Type::Enum
@@ -86,6 +88,7 @@ module Anthropic
               ORGANIZATION_SERVICE: :organization_service
               ORGANIZATION: :organization
               WORKSPACE: :workspace
+              USAGE_TIER: :usage_tier
 
               def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaSpendLimit::Scope::type_]
             end
@@ -116,6 +119,9 @@ module Anthropic
                 type: :workspace | "workspace",
                 workspace_id: String
               ) -> Anthropic::Beta::Organization::BetaSpendLimitWorkspaceScope
+              | (
+                type: :usage_tier | "usage_tier"
+              ) -> Anthropic::Beta::Organization::BetaSpendLimitUsageTierScope
               | (
                 type: Anthropic::Models::Beta::Organization::BetaSpendLimit::Scope::type_
                 | String,

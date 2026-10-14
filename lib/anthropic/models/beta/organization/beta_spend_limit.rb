@@ -51,7 +51,7 @@ module Anthropic
           #   What the limit applies to. A tagged union on `type`; each variant carries the
           #   identifier for its scope.
           #
-          #   @return [Anthropic::Models::Beta::Organization::BetaSpendLimitUserScope, Anthropic::Models::Beta::Organization::BetaSpendLimitSeatTierScope, Anthropic::Models::Beta::Organization::BetaSpendLimitRBACGroupScope, Anthropic::Models::Beta::Organization::BetaSpendLimitOrganizationServiceScope, Anthropic::Models::Beta::Organization::BetaSpendLimitOrganizationScope, Anthropic::Models::Beta::Organization::BetaSpendLimitWorkspaceScope]
+          #   @return [Anthropic::Models::Beta::Organization::BetaSpendLimitUserScope, Anthropic::Models::Beta::Organization::BetaSpendLimitSeatTierScope, Anthropic::Models::Beta::Organization::BetaSpendLimitRBACGroupScope, Anthropic::Models::Beta::Organization::BetaSpendLimitOrganizationServiceScope, Anthropic::Models::Beta::Organization::BetaSpendLimitOrganizationScope, Anthropic::Models::Beta::Organization::BetaSpendLimitWorkspaceScope, Anthropic::Models::Beta::Organization::BetaSpendLimitUsageTierScope]
           required :scope, union: -> { Anthropic::Beta::Organization::BetaSpendLimit::Scope }
 
           # @!attribute type
@@ -84,7 +84,7 @@ module Anthropic
           #
           #   @param period [Symbol, Anthropic::Models::Beta::Organization::BetaSpendLimitPeriod] Length of the window the limit resets over. `amount` caps spend within each peri
           #
-          #   @param scope [Anthropic::Models::Beta::Organization::BetaSpendLimitUserScope, Anthropic::Models::Beta::Organization::BetaSpendLimitSeatTierScope, Anthropic::Models::Beta::Organization::BetaSpendLimitRBACGroupScope, Anthropic::Models::Beta::Organization::BetaSpendLimitOrganizationServiceScope, Anthropic::Models::Beta::Organization::BetaSpendLimitOrganizationScope, Anthropic::Models::Beta::Organization::BetaSpendLimitWorkspaceScope] What the limit applies to. A tagged union on `type`; each variant carries the id
+          #   @param scope [Anthropic::Models::Beta::Organization::BetaSpendLimitUserScope, Anthropic::Models::Beta::Organization::BetaSpendLimitSeatTierScope, Anthropic::Models::Beta::Organization::BetaSpendLimitRBACGroupScope, Anthropic::Models::Beta::Organization::BetaSpendLimitOrganizationServiceScope, Anthropic::Models::Beta::Organization::BetaSpendLimitOrganizationScope, Anthropic::Models::Beta::Organization::BetaSpendLimitWorkspaceScope, Anthropic::Models::Beta::Organization::BetaSpendLimitUsageTierScope] What the limit applies to. A tagged union on `type`; each variant carries the id
           #
           #   @param updated_at [Time] RFC 3339 datetime at which the spend limit was last modified.
           #
@@ -114,6 +114,13 @@ module Anthropic
             # Scope selecting one workspace of a Claude Console organization.
             variant :workspace, -> { Anthropic::Beta::Organization::BetaSpendLimitWorkspaceScope }
 
+            # Scope of the monthly spend cap Anthropic sets for a Claude Console
+            # organization from its usage tier, or a higher cap Anthropic granted the
+            # organization. Read-only; its `created_at` and `updated_at` are the
+            # organization's creation time, so `amount` can change while `updated_at` stays
+            # the same.
+            variant :usage_tier, -> { Anthropic::Beta::Organization::BetaSpendLimitUsageTierScope }
+
             module Type
               extend Anthropic::Internal::Type::Enum
 
@@ -123,13 +130,14 @@ module Anthropic
               ORGANIZATION_SERVICE = :organization_service
               ORGANIZATION = :organization
               WORKSPACE = :workspace
+              USAGE_TIER = :usage_tier
 
               # @!method self.values
               #   @return [Array<Symbol>]
             end
 
             # @!method self.variants
-            #   @return [Array(Anthropic::Models::Beta::Organization::BetaSpendLimitUserScope, Anthropic::Models::Beta::Organization::BetaSpendLimitSeatTierScope, Anthropic::Models::Beta::Organization::BetaSpendLimitRBACGroupScope, Anthropic::Models::Beta::Organization::BetaSpendLimitOrganizationServiceScope, Anthropic::Models::Beta::Organization::BetaSpendLimitOrganizationScope, Anthropic::Models::Beta::Organization::BetaSpendLimitWorkspaceScope)]
+            #   @return [Array(Anthropic::Models::Beta::Organization::BetaSpendLimitUserScope, Anthropic::Models::Beta::Organization::BetaSpendLimitSeatTierScope, Anthropic::Models::Beta::Organization::BetaSpendLimitRBACGroupScope, Anthropic::Models::Beta::Organization::BetaSpendLimitOrganizationServiceScope, Anthropic::Models::Beta::Organization::BetaSpendLimitOrganizationScope, Anthropic::Models::Beta::Organization::BetaSpendLimitWorkspaceScope, Anthropic::Models::Beta::Organization::BetaSpendLimitUsageTierScope)]
 
             # Creates a new instance of the variant class whose `type` matches the given
             # value, passing the remaining arguments to its constructor.
@@ -149,7 +157,7 @@ module Anthropic
             #   @option args [String] :workspace_id Tagged ID of the workspace the spend limit applies to.
             #
             # @raise [ArgumentError]
-            # @return [Anthropic::Models::Beta::Organization::BetaSpendLimitUserScope, Anthropic::Models::Beta::Organization::BetaSpendLimitSeatTierScope, Anthropic::Models::Beta::Organization::BetaSpendLimitRBACGroupScope, Anthropic::Models::Beta::Organization::BetaSpendLimitOrganizationServiceScope, Anthropic::Models::Beta::Organization::BetaSpendLimitOrganizationScope, Anthropic::Models::Beta::Organization::BetaSpendLimitWorkspaceScope]
+            # @return [Anthropic::Models::Beta::Organization::BetaSpendLimitUserScope, Anthropic::Models::Beta::Organization::BetaSpendLimitSeatTierScope, Anthropic::Models::Beta::Organization::BetaSpendLimitRBACGroupScope, Anthropic::Models::Beta::Organization::BetaSpendLimitOrganizationServiceScope, Anthropic::Models::Beta::Organization::BetaSpendLimitOrganizationScope, Anthropic::Models::Beta::Organization::BetaSpendLimitWorkspaceScope, Anthropic::Models::Beta::Organization::BetaSpendLimitUsageTierScope]
             def self.new(type:, **args)
               case type.to_sym
               when :user
@@ -164,6 +172,8 @@ module Anthropic
                 Anthropic::Beta::Organization::BetaSpendLimitOrganizationScope.new(**args)
               when :workspace
                 Anthropic::Beta::Organization::BetaSpendLimitWorkspaceScope.new(**args)
+              when :usage_tier
+                Anthropic::Beta::Organization::BetaSpendLimitUsageTierScope.new(**args)
               else
                 raise ArgumentError, "unknown type: #{type}"
               end
