@@ -434,6 +434,8 @@ module Anthropic
           "anthropic.organization.telemetry_destinations.list"
         ORGANIZATION_TELEMETRY_DESTINATIONS_DELETE =
           "anthropic.organization.telemetry_destinations.delete"
+        ORGANIZATION_TELEMETRY_DESTINATIONS_TEST =
+          "anthropic.organization.telemetry_destinations.test"
         ORGANIZATION_TELEMETRY_DESTINATIONS_WORKSPACES_LIST =
           "anthropic.organization.telemetry_destinations.workspaces.list"
         ORGANIZATION_TELEMETRY_DESTINATIONS_WORKSPACES_ADD =

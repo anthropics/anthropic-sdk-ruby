@@ -47,6 +47,12 @@ module Anthropic
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Beta::Organization::BetaDeletedTelemetryDestination
 
+          def test_: (
+            String destination_id,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaTelemetryDestinationTest
+
           def initialize: (client: Anthropic::Client) -> void
         end
       end

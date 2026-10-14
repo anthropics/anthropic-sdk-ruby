@@ -121,4 +121,19 @@ class Anthropic::Test::Resources::Beta::Organization::TelemetryDestinationsTest 
       }
     end
   end
+
+  def test_test_
+    response = @anthropic.beta.organization.telemetry_destinations.test_("destination_id")
+
+    assert_pattern do
+      response => Anthropic::Beta::Organization::BetaTelemetryDestinationTest
+    end
+
+    assert_pattern do
+      response => {
+        result: Anthropic::Beta::Organization::BetaTelemetryDestinationTestResult,
+        type: Symbol
+      }
+    end
+  end
 end

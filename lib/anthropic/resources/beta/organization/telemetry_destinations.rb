@@ -225,6 +225,40 @@ module Anthropic
             )
           end
 
+          # Send one test span, named `anthropic.test`, to the destination with its
+          # registered headers, once and without retries, and report the destination's
+          # answer. The response is 200 whether or not the destination answered with a 2xx
+          # status: its `result` has the type `success`, or the type `failure` and the
+          # reason in `error`. The destination's configuration, `state` and
+          # `delivery_health` do not change. A disabled destination can be tested too. Wait
+          # 10 seconds between tests of one destination; a request that comes sooner may be
+          # answered with status 429.
+          #
+          # @overload test_(destination_id, betas: nil, request_options: {})
+          #
+          # @param destination_id [String] ID of the destination to test (starts with `tdst_`).
+          #
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          #
+          # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+          #
+          # @return [Anthropic::Models::Beta::Organization::BetaTelemetryDestinationTest]
+          #
+          # @see Anthropic::Models::Beta::Organization::TelemetryDestinationTestParams
+          def test_(destination_id, params = {})
+            parsed, options = Anthropic::Beta::Organization::TelemetryDestinationTestParams.dump_request(params)
+            @client.request(
+              span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_TELEMETRY_DESTINATIONS_TEST,
+              span_attributes: {"anthropic.organization.telemetry_destination.id" => destination_id},
+              span_route: "/v1/organizations/telemetry_destinations/{destination_id}/test",
+              method: :post,
+              path: ["v1/organizations/telemetry_destinations/%1$s/test?beta=true", destination_id],
+              headers: parsed.transform_keys(betas: "anthropic-beta"),
+              model: Anthropic::Beta::Organization::BetaTelemetryDestinationTest,
+              options: {extra_headers: {"anthropic-beta" => "telemetry-destinations-2026-08-11"}, **options}
+            )
+          end
+
           # @api private
           #
           # @param client [Anthropic::Client]

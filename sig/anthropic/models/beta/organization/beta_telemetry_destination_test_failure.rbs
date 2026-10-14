@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_telemetry_destination_test_failure =
+          { error: String, type: :failure }
+
+        class BetaTelemetryDestinationTestFailure < Anthropic::Internal::Type::BaseModel
+          attr_accessor error: String
+
+          attr_accessor type: :failure
+
+          def initialize: (error: String, ?type: :failure) -> void
+
+          def to_hash: -> { error: String, type: :failure }
+        end
+      end
+    end
+  end
+end

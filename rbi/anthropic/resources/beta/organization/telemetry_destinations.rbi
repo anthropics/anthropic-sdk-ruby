@@ -262,6 +262,33 @@ module Anthropic
           )
           end
 
+          # Send one test span, named `anthropic.test`, to the destination with its
+          # registered headers, once and without retries, and report the destination's
+          # answer. The response is 200 whether or not the destination answered with a 2xx
+          # status: its `result` has the type `success`, or the type `failure` and the
+          # reason in `error`. The destination's configuration, `state` and
+          # `delivery_health` do not change. A disabled destination can be tested too. Wait
+          # 10 seconds between tests of one destination; a request that comes sooner may be
+          # answered with status 429.
+          sig do
+            params(
+              destination_id: String,
+              betas:
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
+              request_options: Anthropic::RequestOptions::OrHash
+            ).returns(
+              Anthropic::Beta::Organization::BetaTelemetryDestinationTest
+            )
+          end
+          def test_(
+            # ID of the destination to test (starts with `tdst_`).
+            destination_id,
+            # Optional header to specify the beta version(s) you want to use.
+            betas: nil,
+            request_options: {}
+          )
+          end
+
           # @api private
           sig { params(client: Anthropic::Client).returns(T.attached_class) }
           def self.new(client:)
