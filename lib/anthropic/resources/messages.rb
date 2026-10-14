@@ -22,7 +22,7 @@ module Anthropic
       # Some parameter documentations has been truncated, see
       # {Anthropic::Models::MessageCreateParams} for more details.
       #
-      # @overload create(max_tokens:, messages:, model:, cache_control: nil, container: nil, diagnostics: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+      # @overload create(max_tokens:, messages:, model:, cache_control: nil, container: nil, diagnostics: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
       #
       # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
       #
@@ -43,6 +43,8 @@ module Anthropic
       # @param output_config [Anthropic::Models::OutputConfig] Body param: Configuration options for the model's output, such as the output for
       #
       # @param service_tier [Symbol, Anthropic::Models::MessageCreateParams::ServiceTier] Body param: Determines whether to use priority capacity (if available) or standa
+      #
+      # @param speed [Symbol, Anthropic::Models::MessageCreateParams::Speed, nil] Body param: The inference speed mode for this request. `"fast"` enables high out
       #
       # @param stop_sequences [Array<String>] Body param: Custom text sequences that will cause the model to stop generating.
       #
@@ -122,7 +124,7 @@ module Anthropic
       # Some parameter documentations has been truncated, see
       # {Anthropic::Models::MessageCreateParams} for more details.
       #
-      # @overload stream(max_tokens:, messages:, model:, cache_control: nil, container: nil, diagnostics: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+      # @overload stream(max_tokens:, messages:, model:, cache_control: nil, container: nil, diagnostics: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
       #
       # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
       #
@@ -143,6 +145,8 @@ module Anthropic
       # @param output_config [Anthropic::Models::OutputConfig] Body param: Configuration options for the model's output, such as the output for
       #
       # @param service_tier [Symbol, Anthropic::Models::MessageCreateParams::ServiceTier] Body param: Determines whether to use priority capacity (if available) or standa
+      #
+      # @param speed [Symbol, Anthropic::Models::MessageCreateParams::Speed, nil] Body param: The inference speed mode for this request. `"fast"` enables high out
       #
       # @param stop_sequences [Array<String>] Body param: Custom text sequences that will cause the model to stop generating.
       #
@@ -214,7 +218,7 @@ module Anthropic
       # Some parameter documentations has been truncated, see
       # {Anthropic::Models::MessageCreateParams} for more details.
       #
-      # @overload stream_raw(max_tokens:, messages:, model:, cache_control: nil, container: nil, diagnostics: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+      # @overload stream_raw(max_tokens:, messages:, model:, cache_control: nil, container: nil, diagnostics: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
       #
       # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
       #
@@ -235,6 +239,8 @@ module Anthropic
       # @param output_config [Anthropic::Models::OutputConfig] Body param: Configuration options for the model's output, such as the output for
       #
       # @param service_tier [Symbol, Anthropic::Models::MessageCreateParams::ServiceTier] Body param: Determines whether to use priority capacity (if available) or standa
+      #
+      # @param speed [Symbol, Anthropic::Models::MessageCreateParams::Speed, nil] Body param: The inference speed mode for this request. `"fast"` enables high out
       #
       # @param stop_sequences [Array<String>] Body param: Custom text sequences that will cause the model to stop generating.
       #
@@ -299,7 +305,7 @@ module Anthropic
       # Some parameter documentations has been truncated, see
       # {Anthropic::Models::MessageCountTokensParams} for more details.
       #
-      # @overload count_tokens(messages:, model:, cache_control: nil, output_config: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+      # @overload count_tokens(messages:, model:, cache_control: nil, output_config: nil, speed: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
       #
       # @param messages [Array<Anthropic::Models::MessageParam>] Body param: Input messages.
       #
@@ -308,6 +314,8 @@ module Anthropic
       # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Body param: Top-level cache control automatically applies a cache_control marker
       #
       # @param output_config [Anthropic::Models::OutputConfig] Body param: Configuration options for the model's output, such as the output for
+      #
+      # @param speed [Symbol, Anthropic::Models::MessageCountTokensParams::Speed, nil] Body param: The inference speed mode for this request. `"fast"` enables high out
       #
       # @param system_ [String, Array<Anthropic::Models::TextBlockParam>] Body param: System prompt.
       #

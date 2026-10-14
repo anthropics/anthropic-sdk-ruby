@@ -104,6 +104,13 @@ module Anthropic
       #   @return [Anthropic::Models::OutputConfig, nil]
       optional :output_config, -> { Anthropic::OutputConfig }
 
+      # @!attribute speed
+      #   The inference speed mode for this request. `"fast"` enables high
+      #   output-tokens-per-second inference.
+      #
+      #   @return [Symbol, Anthropic::Models::MessageCountTokensParams::Speed, nil]
+      optional :speed, enum: -> { Anthropic::MessageCountTokensParams::Speed }, nil?: true
+
       # @!attribute system_
       #   System prompt.
       #
@@ -236,7 +243,7 @@ module Anthropic
       #   @return [String, nil]
       optional :workspace_id, String
 
-      # @!method initialize(messages:, model:, cache_control: nil, output_config: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+      # @!method initialize(messages:, model:, cache_control: nil, output_config: nil, speed: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Anthropic::Models::MessageCountTokensParams} for more details.
       #
@@ -247,6 +254,8 @@ module Anthropic
       #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Top-level cache control automatically applies a cache_control marker to the last
       #
       #   @param output_config [Anthropic::Models::OutputConfig] Configuration options for the model's output, such as the output format.
+      #
+      #   @param speed [Symbol, Anthropic::Models::MessageCountTokensParams::Speed, nil] The inference speed mode for this request. `"fast"` enables high output-tokens-p
       #
       #   @param system_ [String, Array<Anthropic::Models::TextBlockParam>] System prompt.
       #
@@ -261,6 +270,18 @@ module Anthropic
       #   @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
       #
       #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
+
+      # The inference speed mode for this request. `"fast"` enables high
+      # output-tokens-per-second inference.
+      module Speed
+        extend Anthropic::Internal::Type::Enum
+
+        STANDARD = :standard
+        FAST = :fast
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
 
       # System prompt.
       #

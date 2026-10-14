@@ -6,6 +6,7 @@ module Anthropic
         model: Anthropic::Models::model,
         cache_control: Anthropic::CacheControlEphemeral?,
         output_config: Anthropic::OutputConfig,
+        speed: Anthropic::Models::MessageCountTokensParams::speed?,
         system_: Anthropic::Models::MessageCountTokensParams::system_,
         thinking: Anthropic::Models::thinking_config_param,
         tool_choice: Anthropic::Models::tool_choice,
@@ -28,6 +29,8 @@ module Anthropic
       attr_reader output_config: Anthropic::OutputConfig?
 
       def output_config=: (Anthropic::OutputConfig) -> Anthropic::OutputConfig
+
+      attr_accessor speed: Anthropic::Models::MessageCountTokensParams::speed?
 
       attr_reader system_: Anthropic::Models::MessageCountTokensParams::system_?
 
@@ -66,6 +69,7 @@ module Anthropic
         model: Anthropic::Models::model,
         ?cache_control: Anthropic::CacheControlEphemeral?,
         ?output_config: Anthropic::OutputConfig,
+        ?speed: Anthropic::Models::MessageCountTokensParams::speed?,
         ?system_: Anthropic::Models::MessageCountTokensParams::system_,
         ?thinking: Anthropic::Models::thinking_config_param,
         ?tool_choice: Anthropic::Models::tool_choice,
@@ -80,6 +84,7 @@ module Anthropic
         model: Anthropic::Models::model,
         cache_control: Anthropic::CacheControlEphemeral?,
         output_config: Anthropic::OutputConfig,
+        speed: Anthropic::Models::MessageCountTokensParams::speed?,
         system_: Anthropic::Models::MessageCountTokensParams::system_,
         thinking: Anthropic::Models::thinking_config_param,
         tool_choice: Anthropic::Models::tool_choice,
@@ -88,6 +93,17 @@ module Anthropic
         workspace_id: String,
         request_options: Anthropic::RequestOptions
       }
+
+      type speed = :standard | :fast
+
+      module Speed
+        extend Anthropic::Internal::Type::Enum
+
+        STANDARD: :standard
+        FAST: :fast
+
+        def self?.values: -> ::Array[Anthropic::Models::MessageCountTokensParams::speed]
+      end
 
       type system_ = String | ::Array[Anthropic::TextBlockParam]
 

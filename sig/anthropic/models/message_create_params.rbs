@@ -12,6 +12,7 @@ module Anthropic
         metadata: Anthropic::Metadata,
         output_config: Anthropic::OutputConfig,
         service_tier: Anthropic::Models::MessageCreateParams::service_tier,
+        speed: Anthropic::Models::MessageCreateParams::speed?,
         stop_sequences: ::Array[String],
         system_: Anthropic::Models::MessageCreateParams::system_,
         temperature: Float,
@@ -56,6 +57,8 @@ module Anthropic
       def service_tier=: (
         Anthropic::Models::MessageCreateParams::service_tier
       ) -> Anthropic::Models::MessageCreateParams::service_tier
+
+      attr_accessor speed: Anthropic::Models::MessageCreateParams::speed?
 
       attr_reader stop_sequences: ::Array[String]?
 
@@ -116,6 +119,7 @@ module Anthropic
         ?metadata: Anthropic::Metadata,
         ?output_config: Anthropic::OutputConfig,
         ?service_tier: Anthropic::Models::MessageCreateParams::service_tier,
+        ?speed: Anthropic::Models::MessageCreateParams::speed?,
         ?stop_sequences: ::Array[String],
         ?system_: Anthropic::Models::MessageCreateParams::system_,
         ?temperature: Float,
@@ -140,6 +144,7 @@ module Anthropic
         metadata: Anthropic::Metadata,
         output_config: Anthropic::OutputConfig,
         service_tier: Anthropic::Models::MessageCreateParams::service_tier,
+        speed: Anthropic::Models::MessageCreateParams::speed?,
         stop_sequences: ::Array[String],
         system_: Anthropic::Models::MessageCreateParams::system_,
         temperature: Float,
@@ -162,6 +167,17 @@ module Anthropic
         STANDARD_ONLY: :standard_only
 
         def self?.values: -> ::Array[Anthropic::Models::MessageCreateParams::service_tier]
+      end
+
+      type speed = :standard | :fast
+
+      module Speed
+        extend Anthropic::Internal::Type::Enum
+
+        STANDARD: :standard
+        FAST: :fast
+
+        def self?.values: -> ::Array[Anthropic::Models::MessageCreateParams::speed]
       end
 
       type system_ = String | ::Array[Anthropic::TextBlockParam]

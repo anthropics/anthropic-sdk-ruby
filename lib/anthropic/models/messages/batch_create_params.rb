@@ -230,6 +230,17 @@ module Anthropic
             #   @return [Symbol, Anthropic::Models::Messages::BatchCreateParams::Request::Params::ServiceTier, nil]
             optional :service_tier, enum: -> { Anthropic::Messages::BatchCreateParams::Request::Params::ServiceTier }
 
+            # @!attribute speed
+            #   The inference speed mode for this request. `"fast"` enables high
+            #   output-tokens-per-second inference.
+            #
+            #   @return [Symbol, Anthropic::Models::Messages::BatchCreateParams::Request::Params::Speed, nil]
+            optional :speed,
+                     enum: -> {
+                       Anthropic::Messages::BatchCreateParams::Request::Params::Speed
+                     },
+                     nil?: true
+
             # @!attribute stop_sequences
             #   Custom text sequences that will cause the model to stop generating.
             #
@@ -420,7 +431,7 @@ module Anthropic
             #   @return [Float, nil]
             optional :top_p, Float
 
-            # @!method initialize(max_tokens:, messages:, model:, cache_control: nil, container: nil, diagnostics: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, stream: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil)
+            # @!method initialize(max_tokens:, messages:, model:, cache_control: nil, container: nil, diagnostics: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, speed: nil, stop_sequences: nil, stream: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil)
             #   Messages API creation parameters for the individual request.
             #
             #   See the
@@ -450,6 +461,8 @@ module Anthropic
             #   @param output_config [Anthropic::Models::OutputConfig] Configuration options for the model's output, such as the output format.
             #
             #   @param service_tier [Symbol, Anthropic::Models::Messages::BatchCreateParams::Request::Params::ServiceTier] Determines whether to use priority capacity (if available) or standard capacity
+            #
+            #   @param speed [Symbol, Anthropic::Models::Messages::BatchCreateParams::Request::Params::Speed, nil] The inference speed mode for this request. `"fast"` enables high output-tokens-p
             #
             #   @param stop_sequences [Array<String>] Custom text sequences that will cause the model to stop generating.
             #
@@ -482,6 +495,20 @@ module Anthropic
 
               AUTO = :auto
               STANDARD_ONLY = :standard_only
+
+              # @!method self.values
+              #   @return [Array<Symbol>]
+            end
+
+            # The inference speed mode for this request. `"fast"` enables high
+            # output-tokens-per-second inference.
+            #
+            # @see Anthropic::Models::Messages::BatchCreateParams::Request::Params#speed
+            module Speed
+              extend Anthropic::Internal::Type::Enum
+
+              STANDARD = :standard
+              FAST = :fast
 
               # @!method self.values
               #   @return [Array<Symbol>]

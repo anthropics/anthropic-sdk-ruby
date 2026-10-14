@@ -332,6 +332,17 @@ module Anthropic
             end
             attr_writer :service_tier
 
+            # The inference speed mode for this request. `"fast"` enables high
+            # output-tokens-per-second inference.
+            sig do
+              returns(
+                T.nilable(
+                  Anthropic::Messages::BatchCreateParams::Request::Params::Speed::OrSymbol
+                )
+              )
+            end
+            attr_accessor :speed
+
             # Custom text sequences that will cause the model to stop generating.
             #
             # Our models will normally stop when they have naturally completed their turn,
@@ -650,6 +661,10 @@ module Anthropic
                 output_config: Anthropic::OutputConfig::OrHash,
                 service_tier:
                   Anthropic::Messages::BatchCreateParams::Request::Params::ServiceTier::OrSymbol,
+                speed:
+                  T.nilable(
+                    Anthropic::Messages::BatchCreateParams::Request::Params::Speed::OrSymbol
+                  ),
                 stop_sequences: T::Array[String],
                 stream: T::Boolean,
                 system_:
@@ -812,6 +827,9 @@ module Anthropic
               # [service-tiers](https://platform.claude.com/docs/en/api/service-tiers) for
               # details.
               service_tier: nil,
+              # The inference speed mode for this request. `"fast"` enables high
+              # output-tokens-per-second inference.
+              speed: nil,
               # Custom text sequences that will cause the model to stop generating.
               #
               # Our models will normally stop when they have naturally completed their turn,
@@ -971,6 +989,10 @@ module Anthropic
                   output_config: Anthropic::OutputConfig,
                   service_tier:
                     Anthropic::Messages::BatchCreateParams::Request::Params::ServiceTier::OrSymbol,
+                  speed:
+                    T.nilable(
+                      Anthropic::Messages::BatchCreateParams::Request::Params::Speed::OrSymbol
+                    ),
                   stop_sequences: T::Array[String],
                   stream: T::Boolean,
                   system_:
@@ -1057,6 +1079,42 @@ module Anthropic
                 override.returns(
                   T::Array[
                     Anthropic::Messages::BatchCreateParams::Request::Params::ServiceTier::TaggedSymbol
+                  ]
+                )
+              end
+              def self.values
+              end
+            end
+
+            # The inference speed mode for this request. `"fast"` enables high
+            # output-tokens-per-second inference.
+            module Speed
+              extend Anthropic::Internal::Type::Enum
+
+              TaggedSymbol =
+                T.type_alias do
+                  T.all(
+                    Symbol,
+                    Anthropic::Messages::BatchCreateParams::Request::Params::Speed
+                  )
+                end
+              OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+              STANDARD =
+                T.let(
+                  :standard,
+                  Anthropic::Messages::BatchCreateParams::Request::Params::Speed::TaggedSymbol
+                )
+              FAST =
+                T.let(
+                  :fast,
+                  Anthropic::Messages::BatchCreateParams::Request::Params::Speed::TaggedSymbol
+                )
+
+              sig do
+                override.returns(
+                  T::Array[
+                    Anthropic::Messages::BatchCreateParams::Request::Params::Speed::TaggedSymbol
                   ]
                 )
               end
