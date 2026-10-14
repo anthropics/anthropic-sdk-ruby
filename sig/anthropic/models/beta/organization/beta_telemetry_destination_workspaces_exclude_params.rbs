@@ -1,0 +1,25 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_telemetry_destination_workspaces_exclude_params =
+          { type: :exclude, workspace_ids: ::Array[String] }
+
+        class BetaTelemetryDestinationWorkspacesExcludeParams < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :exclude
+
+          attr_reader workspace_ids: ::Array[String]?
+
+          def workspace_ids=: (::Array[String]) -> ::Array[String]
+
+          def initialize: (
+            ?workspace_ids: ::Array[String],
+            ?type: :exclude
+          ) -> void
+
+          def to_hash: -> { type: :exclude, workspace_ids: ::Array[String] }
+        end
+      end
+    end
+  end
+end

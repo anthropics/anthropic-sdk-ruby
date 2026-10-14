@@ -1,0 +1,35 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class TelemetryDestinations
+          class Workspaces
+            def list: (
+              String destination_id,
+              ?limit: Integer,
+              ?page: String,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Organization::TelemetryDestinations::BetaTelemetryDestinationWorkspace]
+
+            def add: (
+              String workspace_id,
+              destination_id: String,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Beta::Organization::TelemetryDestinations::BetaTelemetryDestinationWorkspace
+
+            def remove: (
+              String workspace_id,
+              destination_id: String,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Beta::Organization::TelemetryDestinations::BetaDeletedTelemetryDestinationWorkspace
+
+            def initialize: (client: Anthropic::Client) -> void
+          end
+        end
+      end
+    end
+  end
+end

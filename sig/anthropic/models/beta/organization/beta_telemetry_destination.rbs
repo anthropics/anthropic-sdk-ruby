@@ -1,0 +1,74 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_telemetry_destination =
+          {
+            id: String,
+            created_at: Time,
+            delivery_health: Anthropic::Beta::Organization::BetaTelemetryDestinationDeliveryHealth,
+            display_name: String?,
+            endpoint_url: String,
+            header_names: ::Array[String],
+            state: Anthropic::Models::Beta::Organization::beta_telemetry_destination_state,
+            traces: Anthropic::Beta::Organization::BetaTelemetryDestinationTraces,
+            type: :telemetry_destination,
+            updated_at: Time,
+            workspaces: Anthropic::Models::Beta::Organization::beta_telemetry_destination_workspaces
+          }
+
+        class BetaTelemetryDestination < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor created_at: Time
+
+          attr_accessor delivery_health: Anthropic::Beta::Organization::BetaTelemetryDestinationDeliveryHealth
+
+          attr_accessor display_name: String?
+
+          attr_accessor endpoint_url: String
+
+          attr_accessor header_names: ::Array[String]
+
+          attr_accessor state: Anthropic::Models::Beta::Organization::beta_telemetry_destination_state
+
+          attr_accessor traces: Anthropic::Beta::Organization::BetaTelemetryDestinationTraces
+
+          attr_accessor type: :telemetry_destination
+
+          attr_accessor updated_at: Time
+
+          attr_accessor workspaces: Anthropic::Models::Beta::Organization::beta_telemetry_destination_workspaces
+
+          def initialize: (
+            id: String,
+            created_at: Time,
+            delivery_health: Anthropic::Beta::Organization::BetaTelemetryDestinationDeliveryHealth,
+            display_name: String?,
+            endpoint_url: String,
+            header_names: ::Array[String],
+            state: Anthropic::Models::Beta::Organization::beta_telemetry_destination_state,
+            traces: Anthropic::Beta::Organization::BetaTelemetryDestinationTraces,
+            updated_at: Time,
+            workspaces: Anthropic::Models::Beta::Organization::beta_telemetry_destination_workspaces,
+            ?type: :telemetry_destination
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            created_at: Time,
+            delivery_health: Anthropic::Beta::Organization::BetaTelemetryDestinationDeliveryHealth,
+            display_name: String?,
+            endpoint_url: String,
+            header_names: ::Array[String],
+            state: Anthropic::Models::Beta::Organization::beta_telemetry_destination_state,
+            traces: Anthropic::Beta::Organization::BetaTelemetryDestinationTraces,
+            type: :telemetry_destination,
+            updated_at: Time,
+            workspaces: Anthropic::Models::Beta::Organization::beta_telemetry_destination_workspaces
+          }
+        end
+      end
+    end
+  end
+end

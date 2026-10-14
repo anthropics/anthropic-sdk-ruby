@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_telemetry_destination_workspaces_exclude = { type: :exclude }
+
+        class BetaTelemetryDestinationWorkspacesExclude < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :exclude
+
+          def initialize: (?type: :exclude) -> void
+
+          def to_hash: -> { type: :exclude }
+        end
+      end
+    end
+  end
+end

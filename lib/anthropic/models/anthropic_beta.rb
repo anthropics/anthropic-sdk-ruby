@@ -105,6 +105,8 @@ module Anthropic
 
       variant const: -> { Anthropic::Models::AnthropicBeta::SPEND_LIMIT_READS_2026_09_26 }
 
+      variant const: -> { Anthropic::Models::AnthropicBeta::TELEMETRY_DESTINATIONS_2026_08_11 }
+
       variant String
 
       # @!method self.variants
@@ -166,6 +168,7 @@ module Anthropic
       MCP_CLIENT_2026_09_15 = :"mcp-client-2026-09-15"
       CE_PLUGINS_2026_09_01 = :"ce-plugins-2026-09-01"
       SPEND_LIMIT_READS_2026_09_26 = :"spend-limit-reads-2026-09-26"
+      TELEMETRY_DESTINATIONS_2026_08_11 = :"telemetry-destinations-2026-08-11"
 
       # @!endgroup
     end

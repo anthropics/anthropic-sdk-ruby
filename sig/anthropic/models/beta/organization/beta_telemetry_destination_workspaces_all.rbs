@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_telemetry_destination_workspaces_all = { type: :all }
+
+        class BetaTelemetryDestinationWorkspacesAll < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :all
+
+          def initialize: (?type: :all) -> void
+
+          def to_hash: -> { type: :all }
+        end
+      end
+    end
+  end
+end

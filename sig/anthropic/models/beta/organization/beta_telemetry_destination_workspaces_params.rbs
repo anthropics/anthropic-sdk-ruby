@@ -1,0 +1,48 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_telemetry_destination_workspaces_params =
+          Anthropic::Beta::Organization::BetaTelemetryDestinationWorkspacesAllParams
+          | Anthropic::Beta::Organization::BetaTelemetryDestinationWorkspacesIncludeParams
+          | Anthropic::Beta::Organization::BetaTelemetryDestinationWorkspacesExcludeParams
+
+        module BetaTelemetryDestinationWorkspacesParams
+          extend Anthropic::Internal::Type::Union
+
+          type type_ = :all | :include | :exclude
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            ALL: :all
+            INCLUDE: :include
+            EXCLUDE: :exclude
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaTelemetryDestinationWorkspacesParams::type_]
+          end
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::beta_telemetry_destination_workspaces_params]
+
+          def self.new:
+            (
+              type: :all | "all"
+            ) -> Anthropic::Beta::Organization::BetaTelemetryDestinationWorkspacesAllParams
+            | (
+              type: :include | "include",
+              ?workspace_ids: ::Array[String]
+            ) -> Anthropic::Beta::Organization::BetaTelemetryDestinationWorkspacesIncludeParams
+            | (
+              type: :exclude | "exclude",
+              ?workspace_ids: ::Array[String]
+            ) -> Anthropic::Beta::Organization::BetaTelemetryDestinationWorkspacesExcludeParams
+            | (
+              type: Anthropic::Models::Beta::Organization::BetaTelemetryDestinationWorkspacesParams::type_
+              | String,
+              ?workspace_ids: ::Array[String]
+            ) -> Anthropic::Models::Beta::Organization::beta_telemetry_destination_workspaces_params
+        end
+      end
+    end
+  end
+end

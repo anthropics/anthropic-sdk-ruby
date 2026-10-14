@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_telemetry_destination_disabled_reason_sustained_failure =
+          { type: :sustained_failure }
+
+        class BetaTelemetryDestinationDisabledReasonSustainedFailure < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :sustained_failure
+
+          def initialize: (?type: :sustained_failure) -> void
+
+          def to_hash: -> { type: :sustained_failure }
+        end
+      end
+    end
+  end
+end

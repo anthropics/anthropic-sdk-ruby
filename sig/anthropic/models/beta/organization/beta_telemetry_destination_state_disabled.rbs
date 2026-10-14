@@ -1,0 +1,29 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_telemetry_destination_state_disabled =
+          {
+            reason: Anthropic::Models::Beta::Organization::beta_telemetry_destination_disabled_reason,
+            type: :disabled
+          }
+
+        class BetaTelemetryDestinationStateDisabled < Anthropic::Internal::Type::BaseModel
+          attr_accessor reason: Anthropic::Models::Beta::Organization::beta_telemetry_destination_disabled_reason
+
+          attr_accessor type: :disabled
+
+          def initialize: (
+            reason: Anthropic::Models::Beta::Organization::beta_telemetry_destination_disabled_reason,
+            ?type: :disabled
+          ) -> void
+
+          def to_hash: -> {
+            reason: Anthropic::Models::Beta::Organization::beta_telemetry_destination_disabled_reason,
+            type: :disabled
+          }
+        end
+      end
+    end
+  end
+end

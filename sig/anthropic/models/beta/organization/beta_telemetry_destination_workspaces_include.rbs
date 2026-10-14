@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_telemetry_destination_workspaces_include = { type: :include }
+
+        class BetaTelemetryDestinationWorkspacesInclude < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :include
+
+          def initialize: (?type: :include) -> void
+
+          def to_hash: -> { type: :include }
+        end
+      end
+    end
+  end
+end

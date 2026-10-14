@@ -1,0 +1,65 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type telemetry_destination_create_params =
+          {
+            endpoint_url: String,
+            workspaces: Anthropic::Models::Beta::Organization::beta_telemetry_destination_workspaces_params,
+            display_name: String?,
+            headers: ::Hash[Symbol, String],
+            traces: Anthropic::Beta::Organization::BetaTelemetryDestinationTracesParams,
+            betas: ::Array[Anthropic::Models::anthropic_beta]
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class TelemetryDestinationCreateParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor endpoint_url: String
+
+          attr_accessor workspaces: Anthropic::Models::Beta::Organization::beta_telemetry_destination_workspaces_params
+
+          attr_accessor display_name: String?
+
+          attr_reader headers: ::Hash[Symbol, String]?
+
+          def headers=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+          attr_reader traces: Anthropic::Beta::Organization::BetaTelemetryDestinationTracesParams?
+
+          def traces=: (
+            Anthropic::Beta::Organization::BetaTelemetryDestinationTracesParams
+          ) -> Anthropic::Beta::Organization::BetaTelemetryDestinationTracesParams
+
+          attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+          def betas=: (
+            ::Array[Anthropic::Models::anthropic_beta]
+          ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+          def initialize: (
+            endpoint_url: String,
+            workspaces: Anthropic::Models::Beta::Organization::beta_telemetry_destination_workspaces_params,
+            ?display_name: String?,
+            ?headers: ::Hash[Symbol, String],
+            ?traces: Anthropic::Beta::Organization::BetaTelemetryDestinationTracesParams,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            endpoint_url: String,
+            workspaces: Anthropic::Models::Beta::Organization::beta_telemetry_destination_workspaces_params,
+            display_name: String?,
+            headers: ::Hash[Symbol, String],
+            traces: Anthropic::Beta::Organization::BetaTelemetryDestinationTracesParams,
+            betas: ::Array[Anthropic::Models::anthropic_beta],
+            request_options: Anthropic::RequestOptions
+          }
+        end
+      end
+    end
+  end
+end

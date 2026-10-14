@@ -1,0 +1,25 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_telemetry_destination_workspaces_include_params =
+          { type: :include, workspace_ids: ::Array[String] }
+
+        class BetaTelemetryDestinationWorkspacesIncludeParams < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :include
+
+          attr_reader workspace_ids: ::Array[String]?
+
+          def workspace_ids=: (::Array[String]) -> ::Array[String]
+
+          def initialize: (
+            ?workspace_ids: ::Array[String],
+            ?type: :include
+          ) -> void
+
+          def to_hash: -> { type: :include, workspace_ids: ::Array[String] }
+        end
+      end
+    end
+  end
+end

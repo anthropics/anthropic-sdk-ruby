@@ -220,6 +220,11 @@ module Anthropic
           :"spend-limit-reads-2026-09-26",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
+      TELEMETRY_DESTINATIONS_2026_08_11 =
+        T.let(
+          :"telemetry-destinations-2026-08-11",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
     end
   end
 end

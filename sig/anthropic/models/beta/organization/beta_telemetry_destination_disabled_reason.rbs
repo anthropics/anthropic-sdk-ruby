@@ -1,0 +1,51 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_telemetry_destination_disabled_reason =
+          Anthropic::Beta::Organization::BetaTelemetryDestinationDisabledReasonCaller
+          | Anthropic::Beta::Organization::BetaTelemetryDestinationDisabledReasonSustainedFailure
+          | Anthropic::Beta::Organization::BetaTelemetryDestinationDisabledReasonInvalidAddress
+          | Anthropic::Beta::Organization::BetaTelemetryDestinationDisabledReasonRedirect
+
+        module BetaTelemetryDestinationDisabledReason
+          extend Anthropic::Internal::Type::Union
+
+          type type_ =
+            :caller | :sustained_failure | :invalid_address | :redirect
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            CALLER: :caller
+            SUSTAINED_FAILURE: :sustained_failure
+            INVALID_ADDRESS: :invalid_address
+            REDIRECT: :redirect
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaTelemetryDestinationDisabledReason::type_]
+          end
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::beta_telemetry_destination_disabled_reason]
+
+          def self.new:
+            (
+              type: :caller | "caller"
+            ) -> Anthropic::Beta::Organization::BetaTelemetryDestinationDisabledReasonCaller
+            | (
+              type: :sustained_failure | "sustained_failure"
+            ) -> Anthropic::Beta::Organization::BetaTelemetryDestinationDisabledReasonSustainedFailure
+            | (
+              type: :invalid_address | "invalid_address"
+            ) -> Anthropic::Beta::Organization::BetaTelemetryDestinationDisabledReasonInvalidAddress
+            | (
+              type: :redirect | "redirect"
+            ) -> Anthropic::Beta::Organization::BetaTelemetryDestinationDisabledReasonRedirect
+            | (
+              type: Anthropic::Models::Beta::Organization::BetaTelemetryDestinationDisabledReason::type_
+              | String
+            ) -> Anthropic::Models::Beta::Organization::beta_telemetry_destination_disabled_reason
+        end
+      end
+    end
+  end
+end

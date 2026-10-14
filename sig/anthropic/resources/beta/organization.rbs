@@ -32,6 +32,8 @@ module Anthropic
 
         attr_reader plugin_marketplaces: Anthropic::Resources::Beta::Organization::PluginMarketplaces
 
+        attr_reader telemetry_destinations: Anthropic::Resources::Beta::Organization::TelemetryDestinations
+
         def retrieve: (
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaOrganization

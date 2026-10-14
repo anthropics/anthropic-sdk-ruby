@@ -1,0 +1,40 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_telemetry_destination_state_params =
+          Anthropic::Beta::Organization::BetaTelemetryDestinationStateEnabledParams
+          | Anthropic::Beta::Organization::BetaTelemetryDestinationStateDisabledParams
+
+        module BetaTelemetryDestinationStateParams
+          extend Anthropic::Internal::Type::Union
+
+          type type_ = :enabled | :disabled
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            ENABLED: :enabled
+            DISABLED: :disabled
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaTelemetryDestinationStateParams::type_]
+          end
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::beta_telemetry_destination_state_params]
+
+          def self.new:
+            (
+              type: :enabled | "enabled"
+            ) -> Anthropic::Beta::Organization::BetaTelemetryDestinationStateEnabledParams
+            | (
+              type: :disabled | "disabled"
+            ) -> Anthropic::Beta::Organization::BetaTelemetryDestinationStateDisabledParams
+            | (
+              type: Anthropic::Models::Beta::Organization::BetaTelemetryDestinationStateParams::type_
+              | String
+            ) -> Anthropic::Models::Beta::Organization::beta_telemetry_destination_state_params
+        end
+      end
+    end
+  end
+end

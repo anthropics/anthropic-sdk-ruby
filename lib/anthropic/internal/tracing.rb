@@ -330,6 +330,17 @@ module Anthropic
           "anthropic.organization.plugin_marketplaces.validate_archive"
         ORGANIZATION_PLUGIN_MARKETPLACES_VALIDATE_REPOSITORY =
           "anthropic.organization.plugin_marketplaces.validate_repository"
+        ORGANIZATION_TELEMETRY_DESTINATIONS_CREATE = "anthropic.organization.telemetry_destinations.create"
+        ORGANIZATION_TELEMETRY_DESTINATIONS_RETRIEVE = "anthropic.organization.telemetry_destinations.retrieve"
+        ORGANIZATION_TELEMETRY_DESTINATIONS_UPDATE = "anthropic.organization.telemetry_destinations.update"
+        ORGANIZATION_TELEMETRY_DESTINATIONS_LIST = "anthropic.organization.telemetry_destinations.list"
+        ORGANIZATION_TELEMETRY_DESTINATIONS_DELETE = "anthropic.organization.telemetry_destinations.delete"
+        ORGANIZATION_TELEMETRY_DESTINATIONS_WORKSPACES_LIST =
+          "anthropic.organization.telemetry_destinations.workspaces.list"
+        ORGANIZATION_TELEMETRY_DESTINATIONS_WORKSPACES_ADD =
+          "anthropic.organization.telemetry_destinations.workspaces.add"
+        ORGANIZATION_TELEMETRY_DESTINATIONS_WORKSPACES_REMOVE =
+          "anthropic.organization.telemetry_destinations.workspaces.remove"
       end
 
       # @type [Hash{String=>String}]

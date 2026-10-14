@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_telemetry_destination_disabled_reason_invalid_address =
+          { type: :invalid_address }
+
+        class BetaTelemetryDestinationDisabledReasonInvalidAddress < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :invalid_address
+
+          def initialize: (?type: :invalid_address) -> void
+
+          def to_hash: -> { type: :invalid_address }
+        end
+      end
+    end
+  end
+end
