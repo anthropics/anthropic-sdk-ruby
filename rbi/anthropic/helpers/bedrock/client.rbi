@@ -89,7 +89,9 @@ module Anthropic
             aws_session_token: T.nilable(String),
             aws_profile: T.nilable(String),
             api_key: T.nilable(String),
-            middleware: T.nilable(Anthropic::Middleware::EntryOrArray)
+            middleware: T.nilable(Anthropic::Middleware::EntryOrArray),
+            open_telemetry:
+              T.nilable(T.any(T::Boolean, Anthropic::Internal::AnyHash))
           ).returns(T.attached_class)
         end
         def self.new(
@@ -109,7 +111,9 @@ module Anthropic
           # Per-attempt HTTP around-middleware. Middleware sees the canonical
           # Anthropic request shape; the Bedrock URL rewrite and SigV4 signing
           # happen inside the continuation, per attempt.
-          middleware: nil
+          middleware: nil,
+          # OpenTelemetry tracing of this client's API calls. See {Anthropic::Client}.
+          open_telemetry: nil
         )
         end
       end

@@ -22,7 +22,8 @@ module Anthropic
         #
         # @return [Enumerable<generic<Elem>>]
         private def iterator
-          @iterator ||= Anthropic::Internal::Util.chain_fused(@stream) do |y|
+          # Closing this stream closes the raw stream, which ends the request.
+          @iterator ||= Anthropic::Internal::Util.chain_fused(@raw_stream.to_enum) do |y|
             @raw_stream.each do |raw_event|
               # An event of a type this version doesn't know arrives as the closest known class, with
               # `type` left as a String.
@@ -31,10 +32,10 @@ module Anthropic
                 next
               end
 
-              @accumated_message_snapshot = accumulate_event(
-                event: raw_event,
-                current_snapshot: @accumated_message_snapshot
-              )
+              @accumated_message_snapshot =
+                Anthropic::Helpers::Tracing.accumulate_streamed_message(@raw_stream) do
+                  accumulate_event(event: raw_event, current_snapshot: @accumated_message_snapshot)
+                end
               events_to_yield = build_events(event: raw_event, message_snapshot: @accumated_message_snapshot)
               events_to_yield.each(&y)
             end

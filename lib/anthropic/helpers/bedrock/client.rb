@@ -61,6 +61,9 @@ module Anthropic
         #   the Bedrock URL rewrite and SigV4 signing happen inside the continuation, per
         #   attempt.
         #
+        # @param open_telemetry [Hash{Symbol=>Object}, Boolean, nil] OpenTelemetry tracing of this
+        #   client's API calls. See {Anthropic::Client#initialize}.
+        #
         def initialize(
           aws_region: nil,
           base_url: nil,
@@ -73,7 +76,8 @@ module Anthropic
           aws_session_token: nil,
           aws_profile: nil,
           api_key: nil,
-          middleware: nil
+          middleware: nil,
+          open_telemetry: nil
         )
           api_key ||= ENV["AWS_BEARER_TOKEN_BEDROCK"]
 
@@ -140,7 +144,8 @@ module Anthropic
             max_retries: max_retries,
             initial_retry_delay: initial_retry_delay,
             max_retry_delay: max_retry_delay,
-            middleware: middleware
+            middleware: middleware,
+            open_telemetry: open_telemetry
           )
         end
 
@@ -205,6 +210,18 @@ module Anthropic
           validate_bedrock_request!(req)
           super
         end
+
+        # @api private
+        #
+        # @return [Hash{String=>String}]
+        def open_telemetry_attributes
+          {**super, Anthropic::Internal::Tracing::GEN_AI_PROVIDER_NAME => "aws.bedrock"}
+        end
+
+        # @api private
+        #
+        # @return [String]
+        private def open_telemetry_scope = "#{super}.bedrock"
 
         # @api private
         #

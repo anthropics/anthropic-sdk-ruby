@@ -249,6 +249,8 @@ module Anthropic
               workspace_id: "anthropic-workspace-id"
             }
           raw_stream = @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::MESSAGES_CREATE,
+            span_route: "/v1/messages",
             method: :post,
             path: "v1/messages?beta=true",
             headers: stream_headers(

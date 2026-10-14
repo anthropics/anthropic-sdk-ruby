@@ -106,29 +106,29 @@ module Anthropic
       timeout: nil,
       # OpenTelemetry tracing of this client's API calls. Each call emits a span when
       # the application has registered a tracer provider with the OpenTelemetry API.
-      # `false` disables the spans, and `true` is the default. Keys can be Strings, and
-      # an unknown key raises `ArgumentError`.
+      # `true` and `false` are short for `{traces: true}` and `{traces: false}`. Keys
+      # can be Strings, and an unknown key raises `ArgumentError`. A client that is
+      # given no option reads `ENV["ANTHROPIC_OPEN_TELEMETRY"]`, where `false` is
+      # `open_telemetry: false`, `ENV["ANTHROPIC_OPEN_TELEMETRY_PROPAGATION"]`, where
+      # `false` is `propagation: false`,
+      # `ENV["ANTHROPIC_OPEN_TELEMETRY_TRACES_CONTENT_MODE"]` and
+      # `ENV["ANTHROPIC_OPEN_TELEMETRY_TRACES_MAX_CONTENT_BYTES"]`. A client that is
+      # given the option, even `true` or `{}`, reads none of them.
       #
       # - `:tracer_provider` is used in place of the registered tracer provider.
       # - `propagation: false` sends no trace context headers, such as `traceparent`,
       #   with this client's requests, for an application whose HTTP client
       #   instrumentation already sends them, so that a request does not carry them
-      #   twice. The spans are unaffected. Defaults to `false` when
-      #   `ENV["ANTHROPIC_OPEN_TELEMETRY_PROPAGATION"]` is `false`, otherwise `true`.
+      #   twice. The spans are unaffected. Defaults to `true`.
       # - `:traces` holds the settings of the spans. `true` and `false` are short for
       #   `{enabled: true}` and `{enabled: false}`. Its keys:
       #   - `enabled: false` disables the spans, and the other keys are then unused.
-      #     Defaults to `false` when `ENV["ANTHROPIC_OPEN_TELEMETRY"]` is `false`,
-      #     otherwise `true`.
+      #     Defaults to `true`.
       #   - `content_mode: :content` adds the content of requests and responses to the
-      #     spans, and `:metadata_only` does not. Defaults to
-      #     `ENV["ANTHROPIC_OPEN_TELEMETRY_TRACES_CONTENT_MODE"]`, otherwise
-      #     `:metadata_only`.
+      #     spans, and `:metadata_only` does not. Defaults to `:metadata_only`.
       #   - `:max_content_bytes` is the most bytes of content that one span holds, an
       #     Integer of 1 or more. Content over the bound is cut, and the span then has
-      #     `anthropic.content.truncated`. Defaults to
-      #     `ENV["ANTHROPIC_OPEN_TELEMETRY_TRACES_MAX_CONTENT_BYTES"]`, otherwise 0.75
-      #     MB.
+      #     `anthropic.content.truncated`. Defaults to 0.75 MB.
       open_telemetry: nil,
       initial_retry_delay: Anthropic::Client::DEFAULT_INITIAL_RETRY_DELAY,
       max_retry_delay: Anthropic::Client::DEFAULT_MAX_RETRY_DELAY,

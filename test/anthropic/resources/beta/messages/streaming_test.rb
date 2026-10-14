@@ -171,6 +171,17 @@ class Anthropic::Test::Resources::Beta::Messages::StreamingTest < Minitest::Test
     refute_operator(block.to_h, :key?, :citations)
   end
 
+  def test_closing_an_unread_stream_closes_the_raw_stream
+    stub_streaming_response(tool_input_sse_response)
+    client = Anthropic::Client.new(base_url: "http://localhost", api_key: "test-key", open_telemetry: false)
+
+    stream = client.beta.messages.stream(**tool_params)
+    stream.close
+
+    assert_empty(stream.instance_variable_get(:@raw_stream).to_a)
+    assert_empty(stream.to_a)
+  end
+
   # A server-tool turn: the server_tool_use input streams in as input_json_delta
   # chunks like a client tool's, and its result block arrives whole (no deltas).
   def server_tool_use_sse_response

@@ -35,6 +35,8 @@ group :development, :test do
   gem "minitest-hooks"
   gem "minitest-proveit"
   gem "minitest-rg"
+  # exports the SDK's spans in tests; applications install their own
+  gem "opentelemetry-sdk"
   gem "webmock"
 end
 

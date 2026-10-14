@@ -38,7 +38,10 @@ module Anthropic
           type_member(:out) { { fixed: Anthropic::Streaming::StreamEvent } }
 
         sig do
-          params(raw_stream: Anthropic::Internal::Stream[RawMessageEvent]).void
+          params(
+            raw_stream:
+              Anthropic::Internal::Type::BaseStream[T.noreturn, RawMessageEvent]
+          ).void
         end
         def initialize(raw_stream:)
         end

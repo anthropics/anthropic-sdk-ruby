@@ -122,8 +122,9 @@ module Anthropic
         # @return [Anthropic::Models::BetaMessage, nil]
         def next_message
           message = nil
-          fold do
-            message = @client.beta.messages.create(with_helper_header(_1, StainlessHelperHeader::BETA_TOOL_RUNNER))
+          fold do |params|
+            message =
+              @client.beta.messages.create(with_helper_header(params, StainlessHelperHeader::BETA_TOOL_RUNNER))
             [true, message]
           end
           message
@@ -132,7 +133,16 @@ module Anthropic
         # @return [Array<Anthropic::Models::BetaMessage>]
         def run_until_finished
           messages = []
-          each_streaming { messages << _1.accumulated_message }
+          # Not `each_streaming`: an error from this block is the runner's, not the application's.
+          fold do |params|
+            stream =
+              @client.beta.messages.stream(with_helper_header(params, StainlessHelperHeader::BETA_TOOL_RUNNER))
+            message = stream.accumulated_message
+            messages << message
+            [false, message]
+          ensure
+            stream&.close
+          end
           messages
         end
 
@@ -142,9 +152,10 @@ module Anthropic
             raise ArgumentError.new("A block must be given to ##{__method__}")
           end
 
-          fold do
-            message = @client.beta.messages.create(with_helper_header(_1, StainlessHelperHeader::BETA_TOOL_RUNNER))
-            blk.call(message)
+          fold do |params|
+            message =
+              @client.beta.messages.create(with_helper_header(params, StainlessHelperHeader::BETA_TOOL_RUNNER))
+            in_app { blk.call(message) }
             [false, message]
           end
         end
@@ -155,9 +166,10 @@ module Anthropic
             raise ArgumentError.new("A block must be given to ##{__method__}")
           end
 
-          fold do
-            stream = @client.beta.messages.stream(with_helper_header(_1, StainlessHelperHeader::BETA_TOOL_RUNNER))
-            blk.call(stream)
+          fold do |params|
+            stream =
+              @client.beta.messages.stream(with_helper_header(params, StainlessHelperHeader::BETA_TOOL_RUNNER))
+            in_app { blk.call(stream) }
             [false, stream.accumulated_message]
           ensure
             stream&.close
@@ -166,11 +178,74 @@ module Anthropic
 
         # @api private
         #
+        # Runs the runner's own code with the tool runner span current.
+        private def in_tool_runner(&blk)
+          otel_context = @tool_runner_otel_context
+          otel_context ? OpenTelemetry::Context.with_current(otel_context, &blk) : yield
+        end
+
+        # @api private
+        #
+        # @param raw [Object]
+        #
+        # @return [Array<Object>, String]
+        private def tool_result_content(raw) = raw.is_a?(Array) ? raw : raw.to_s
+
+        # @api private
+        #
+        # Runs the application's block in the context it started the loop from, where the tool runner
+        # span is not current. An error it raises is the application stopping the runner, except an API
+        # error: that is the stream the runner yielded failing as the application reads it.
+        private def in_app(&blk)
+          otel_context = @app_otel_context
+          otel_context ? OpenTelemetry::Context.with_current(otel_context, &blk) : yield
+        rescue Anthropic::Errors::APIError
+          raise
+        rescue StandardError
+          @stopped_by_app = true
+          raise
+        end
+
+        # @api private
+        #
+        # Runs one loop in its `anthropic.messages.tool_runner` span, which has no status when the
+        # application stops the loop.
+        #
         # @yieldparam [Array(Boolean, Anthropic::Models::Beta::MessageCreateParams)]
         private def fold(&blk)
           @compaction_phase = nil if @compaction_phase == :handling
           return nil if finished? && @pending_compaction.nil?
 
+          # A loop the application starts from inside another one has its own span.
+          outer = [@tool_runner_otel_context, @app_otel_context, @stopped_by_app]
+          @stopped_by_app = false
+          tool_runner_span = Anthropic::Helpers::Tracing.start_tool_runner_span(@client, params)
+          if tool_runner_span
+            @tool_runner_otel_context = OpenTelemetry::Trace.context_with_span(tool_runner_span)
+            # The application can start each loop from another context, so it is read on every entry.
+            @app_otel_context = OpenTelemetry::Context.current
+          else
+            @tool_runner_otel_context = @app_otel_context = nil
+          end
+          begin
+            value = in_tool_runner { run_loop(&blk) }
+            returned = true
+            value
+          rescue StandardError => e
+            error = e unless @stopped_by_app
+            raise
+          ensure
+            if tool_runner_span
+              Anthropic::Helpers::Tracing.end_tool_runner_span(tool_runner_span, returned: returned, error: error)
+            end
+            @tool_runner_otel_context, @app_otel_context, @stopped_by_app = outer
+          end
+        end
+
+        # @api private
+        #
+        # @yieldparam [Array(Boolean, Anthropic::Models::Beta::MessageCreateParams)]
+        private def run_loop(&blk)
           brk = false
           # rubocop:disable Metrics/BlockLength
           # rubocop:disable Style/CaseEquality
@@ -221,21 +296,34 @@ module Anthropic
                        _1.class.model === tool_use.parsed && Anthropic::Helpers::Messages.tool_api_name(_1) == tool_use.name
                      end
                    end)
+                  tool_use_span = Anthropic::Helpers::Tracing.start_tool_use_span(
+                    @client,
+                    tool,
+                    tool_use,
+                    params[:request_options]
+                  )
                   begin
                     # `parsed` was read against `params[:tools]`, which an added tool is not in.
                     input = tool_use.parsed
                     input = Anthropic::Internal::Type::Converter.coerce(tool, tool_use.input) if @tool_overrides.key?(tool_use.name)
-                    raw = tool.call(input)
+                    run = proc { tool.call(input) }
+                    raw = tool_use_span ? OpenTelemetry::Trace.with_span(tool_use_span, &run) : run.call
                     is_error = false
                   rescue StandardError => e
                     is_error = true
                     raw = e.message
+                  ensure
+                    if tool_use_span
+                      # `is_error` is unset when the run was interrupted, and then so is the span's status.
+                      result = {content: tool_result_content(raw), is_error:} unless is_error.nil?
+                      Anthropic::Helpers::Tracing.end_tool_use_span(@client, tool_use_span, tool_use.input, result)
+                    end
                   end
                 else
                   is_error = true
                   raw = "Error: parsed '#{tool_use.name}' not found"
                 end
-                content = raw.is_a?(Array) ? raw : raw.to_s
+                content = tool_result_content(raw)
                 {**resp, content:, is_error:}
               end
 
@@ -587,6 +675,9 @@ module Anthropic
           @tool_overrides = {}
           @pending_compaction = nil
           @compaction_phase = nil
+          @tool_runner_otel_context = nil
+          @app_otel_context = nil
+          @stopped_by_app = false
         end
 
         private def with_helper_header(params, helper)

@@ -436,17 +436,18 @@ module Anthropic
       class << self
         # The settings of a client's spans, frozen: its `open_telemetry` option with
         # Symbol keys, where `:traces` is a Hash that has every one of {TRACES_KEYS}.
-        # `true` and `nil` are `{}`, `false` is `{traces: false}`, and a `:traces` of
-        # `true` or `false` is `{enabled: <it>}`. What the option leaves unset comes from
-        # the environment, which is read here and nowhere else, and then from the default.
+        # `true` and `false` are `{traces: <it>}`, and a `:traces` of `true` or `false` is
+        # `{enabled: <it>}`. `nil`, for a client that is given no option, is what the
+        # environment says, and the environment is read here and nowhere else. Any other
+        # option is complete: what it leaves unset has the default, and no variable is read.
         #
         # @param option [Hash{Symbol=>Object}, Boolean, nil]
         #
         # @raise [ArgumentError]
         # @return [Hash{Symbol=>Object}]
         def client_option(option)
-          option = {} if option.nil? || option == true
-          option = {traces: false} if option == false
+          option = environment_option if option.nil?
+          option = {traces: option} if [true, false].include?(option)
           option = option_hash(option, CLIENT_OPTION_KEYS, "`open_telemetry`", "true, false or a Hash")
           propagation = option[:propagation]
           unless [true, false, nil].include?(propagation)
@@ -468,15 +469,13 @@ module Anthropic
               "`open_telemetry` [:traces][:max_content_bytes] must be an Integer of 1 or more, got #{plain(bytes)}"
             )
           end
-          enabled = !ENV["ANTHROPIC_OPEN_TELEMETRY"]&.casecmp?("false") if enabled.nil?
-          propagation = !ENV["ANTHROPIC_OPEN_TELEMETRY_PROPAGATION"]&.casecmp?("false") if propagation.nil?
           {
             tracer_provider: option[:tracer_provider],
-            propagation: propagation,
+            propagation: propagation.nil? || propagation,
             traces: {
-              enabled: enabled,
-              content_mode: mode&.to_sym || environment_content_mode,
-              max_content_bytes: bytes || environment_max_content_bytes || DEFAULT_MAX_CONTENT_BYTES
+              enabled: enabled.nil? || enabled,
+              content_mode: mode&.to_sym || :metadata_only,
+              max_content_bytes: bytes || DEFAULT_MAX_CONTENT_BYTES
             }.freeze
           }.freeze
         end
@@ -782,6 +781,23 @@ module Anthropic
           when String, Symbol, Numeric, true, false, nil then value.inspect
           else "a #{value.class}"
           end
+        end
+
+        # @api private
+        #
+        # The `open_telemetry` option that the environment variables stand for. Only
+        # `false`, in any case, turns the spans or the propagation off.
+        #
+        # @return [Hash{Symbol=>Object}]
+        private def environment_option
+          {
+            propagation: !ENV["ANTHROPIC_OPEN_TELEMETRY_PROPAGATION"]&.casecmp?("false"),
+            traces: {
+              enabled: !ENV["ANTHROPIC_OPEN_TELEMETRY"]&.casecmp?("false"),
+              content_mode: environment_content_mode,
+              max_content_bytes: environment_max_content_bytes
+            }
+          }
         end
 
         # @api private

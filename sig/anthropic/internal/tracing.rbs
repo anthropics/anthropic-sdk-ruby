@@ -402,6 +402,8 @@ module Anthropic
 
       private def self.plain: (top value) -> String
 
+      private def self.environment_option: -> ::Hash[Symbol, top]
+
       private def self.environment_content_mode: -> Symbol
 
       private def self.environment_max_content_bytes: -> Integer?

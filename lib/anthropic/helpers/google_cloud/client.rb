@@ -87,6 +87,9 @@ module Anthropic
         #   is applied per attempt, after user middleware.
         #
         # @raise [ArgumentError]
+        #
+        # @param open_telemetry [Hash{Symbol=>Object}, Boolean, nil] OpenTelemetry tracing of this
+        #   client's API calls. See {Anthropic::Client#initialize}.
         def initialize(
           project: ENV["ANTHROPIC_GOOGLE_CLOUD_PROJECT"] || ENV["GOOGLE_CLOUD_PROJECT"],
           location: ENV["ANTHROPIC_GOOGLE_CLOUD_LOCATION"] || "global",
@@ -99,7 +102,8 @@ module Anthropic
           timeout: nil,
           initial_retry_delay: self.class::DEFAULT_INITIAL_RETRY_DELAY,
           max_retry_delay: self.class::DEFAULT_MAX_RETRY_DELAY,
-          middleware: nil
+          middleware: nil,
+          open_telemetry: nil
         )
           if skip_auth && (token_provider || google_credentials)
             raise ArgumentError.new(
@@ -151,7 +155,8 @@ module Anthropic
             max_retries: max_retries,
             initial_retry_delay: initial_retry_delay,
             max_retry_delay: max_retry_delay,
-            middleware: middleware
+            middleware: middleware,
+            open_telemetry: open_telemetry
           )
         end
 
@@ -179,6 +184,11 @@ module Anthropic
         #
         # @return [Hash{String=>String}]
         private def auth_headers = {}
+
+        # @api private
+        #
+        # @return [String]
+        private def open_telemetry_scope = "#{super}.google_cloud"
 
         # @api private
         #

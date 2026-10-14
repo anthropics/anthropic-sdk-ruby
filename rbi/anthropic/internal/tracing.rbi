@@ -454,9 +454,10 @@ module Anthropic
       class << self
         # The settings of a client's spans, frozen: its `open_telemetry` option with
         # Symbol keys, where `:traces` is a Hash that has every one of {TRACES_KEYS}.
-        # `true` and `nil` are `{}`, `false` is `{traces: false}`, and a `:traces` of
-        # `true` or `false` is `{enabled: <it>}`. What the option leaves unset comes from
-        # the environment, which is read here and nowhere else, and then from the default.
+        # `true` and `false` are `{traces: <it>}`, and a `:traces` of `true` or `false` is
+        # `{enabled: <it>}`. `nil`, for a client that is given no option, is what the
+        # environment says, and the environment is read here and nowhere else. Any other
+        # option is complete: what it leaves unset has the default, and no variable is read.
         sig do
           params(
             option:
@@ -667,6 +668,14 @@ module Anthropic
         # value only when it is a plain one, and its class otherwise.
         sig { params(value: T.anything).returns(String) }
         private def plain(value)
+        end
+
+        # @api private
+        #
+        # The `open_telemetry` option that the environment variables stand for. Only
+        # `false`, in any case, turns the spans or the propagation off.
+        sig { returns(T::Hash[Symbol, T.anything]) }
+        private def environment_option
         end
 
         # @api private

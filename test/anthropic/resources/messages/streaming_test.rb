@@ -99,6 +99,17 @@ class Anthropic::Test::Resources::Messages::StreamingTest < Minitest::Test
     assert_equal(["Hello", " there", "!"], stream.text.to_a)
   end
 
+  def test_closing_an_unread_stream_closes_the_raw_stream
+    stub_streaming_response(basic_sse_response)
+    client = Anthropic::Client.new(base_url: "http://localhost", api_key: "test-key", open_telemetry: false)
+
+    stream = client.messages.stream(**basic_params)
+    stream.close
+
+    assert_empty(stream.instance_variable_get(:@raw_stream).to_a)
+    assert_empty(stream.to_a)
+  end
+
   def test_accumulated_message
     stub_streaming_response(basic_sse_response)
 

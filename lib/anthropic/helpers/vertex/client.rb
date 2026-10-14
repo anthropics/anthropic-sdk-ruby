@@ -43,6 +43,9 @@ module Anthropic
         #   the Vertex URL rewrite and OAuth header happen inside the continuation, per
         #   attempt.
         #
+        # @param open_telemetry [Hash{Symbol=>Object}, Boolean, nil] OpenTelemetry tracing of this
+        #   client's API calls. See {Anthropic::Client#initialize}.
+        #
         def initialize(
           region: ENV["CLOUD_ML_REGION"],
           project_id: ENV["ANTHROPIC_VERTEX_PROJECT_ID"],
@@ -51,7 +54,8 @@ module Anthropic
           timeout: nil,
           initial_retry_delay: DEFAULT_INITIAL_RETRY_DELAY,
           max_retry_delay: DEFAULT_MAX_RETRY_DELAY,
-          middleware: nil
+          middleware: nil,
+          open_telemetry: nil
         )
           begin
             require("googleauth")
@@ -111,7 +115,8 @@ module Anthropic
             max_retries: max_retries,
             initial_retry_delay: initial_retry_delay,
             max_retry_delay: max_retry_delay,
-            middleware: middleware
+            middleware: middleware,
+            open_telemetry: open_telemetry
           )
 
           @messages = Anthropic::Resources::Messages.new(client: self)
@@ -183,6 +188,18 @@ module Anthropic
 
           super
         end
+
+        # @api private
+        #
+        # @return [Hash{String=>String}]
+        def open_telemetry_attributes
+          {**super, Anthropic::Internal::Tracing::GEN_AI_PROVIDER_NAME => "gcp.vertex_ai"}
+        end
+
+        # @api private
+        #
+        # @return [String]
+        private def open_telemetry_scope = "#{super}.vertex"
 
         # @api private
         #
