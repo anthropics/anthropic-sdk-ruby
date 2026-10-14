@@ -213,6 +213,8 @@ module Anthropic
             mapped =
               tool_uses.map do |tool_use|
                 resp = {type: :tool_result, tool_use_id: tool_use.id}
+                # The result of a toolset member's call has to name the toolset as the call does.
+                resp[:toolset_name] = tool_use[:toolset_name] if tool_use[:toolset_name].is_a?(String)
                 if available.include?(tool_use.name) &&
                    (tool = @tool_overrides.fetch(tool_use.name) do
                      tools.find do

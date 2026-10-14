@@ -10,7 +10,9 @@
 ### Bug Fixes
 
 * **client:** keep the discriminator when a union's .new builds a variant
+* **streaming:** keep every field of a tool use block when attaching its parsed input
 * **streaming:** pass events of an unknown type through the message stream helper untouched
+* **tools:** name the toolset on the tool runner's result for a toolset member's call
 
 
 ### Chores

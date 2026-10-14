@@ -269,6 +269,67 @@ class Anthropic::Test::Resources::Messages::StreamingTest < Minitest::Test
     assert_equal("{\"location\":\"San Francisco\"\"}", message.content.first.input)
   end
 
+  class GetWeatherInput < Anthropic::BaseModel
+    required :location, String
+  end
+
+  # tool_input_sse_response, whose tool_use block also carries the fields a toolset
+  # member's does, and one this SDK version does not model.
+  def toolset_member_tool_use_sse_response
+    tool_input_sse_response.sub(
+      '"input":{}}',
+      '"input":{},"toolset_name":"fake_toolset","caller":{"type":"direct"},"field_from_a_later_version":"kept"}'
+    )
+  end
+
+  def test_accumulated_message_keeps_every_field_of_a_parsed_tool_use_block
+    stub_streaming_response(toolset_member_tool_use_sse_response)
+
+    stream = @client.messages.stream(**tools_params, tools: [{name: "get_weather", input_schema: GetWeatherInput}])
+
+    block = stream.accumulated_message.content.first
+
+    assert_equal("San Francisco", block.parsed.location)
+    assert_equal("fake_toolset", block.toolset_name)
+    assert_equal(:direct, block.caller_.type)
+    assert_equal("kept", block[:field_from_a_later_version])
+  end
+
+  def json_text_sse_response
+    <<~SSE
+      event: message_start
+      data: {"type":"message_start","message":{"id":"msg_json","type":"message","role":"assistant","content":[],"model":"claude-opus-4-6","stop_reason":null,"stop_sequence":null,"usage":{"input_tokens":10,"output_tokens":1}}}
+
+      event: content_block_start
+      data: {"type":"content_block_start","index":0,"content_block":{"type":"text","text":""}}
+
+      event: content_block_delta
+      data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"{\\"location\\":\\"San Francisco\\"}"}}
+
+      event: content_block_stop
+      data: {"type":"content_block_stop","index":0}
+
+      event: message_delta
+      data: {"type":"message_delta","delta":{"stop_reason":"end_turn","stop_sequence":null},"usage":{"output_tokens":10}}
+
+      event: message_stop
+      data: {"type":"message_stop"}
+
+    SSE
+  end
+
+  def test_accumulated_message_keeps_a_parsed_text_block_readable
+    stub_streaming_response(json_text_sse_response)
+
+    stream = @client.messages.stream(**basic_params, output_config: {format: GetWeatherInput})
+
+    block = stream.accumulated_message.content.first
+
+    assert_equal("San Francisco", block.parsed.location)
+    assert_nil(block.citations)
+    refute_operator(block.to_h, :key?, :citations)
+  end
+
   # A server-tool turn: the server_tool_use input streams in as input_json_delta
   # chunks like a client tool's, and its result block arrives whole (no deltas).
   def server_tool_use_sse_response

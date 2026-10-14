@@ -316,6 +316,7 @@ module Anthropic
         # @api private
         #
         # Parse tool use blocks and text blocks with structured output in the message.
+        # A block is kept as it arrived, with only `parsed` added to it.
         #
         # @param message [Anthropic::Models::Message] The message to parse
         #
@@ -324,7 +325,7 @@ module Anthropic
           return message unless message&.content
 
           # rubocop:disable Metrics/BlockLength
-          message.content.each_with_index do |content, index|
+          message.content.each do |content|
             case content.type
             when :tool_use
               next unless (tool = @tools[content.name])
@@ -342,20 +343,7 @@ module Anthropic
                   e
                 end
 
-              cls =
-                case content
-                in Anthropic::ContentBlock
-                  Anthropic::Models::ToolUseBlock
-                else
-                  Anthropic::Models::BetaToolUseBlock
-                end
-              message.content[index] = cls.new(
-                id: content.id,
-                input: content.input,
-                name: content.name,
-                type: content.type,
-                parsed: parsed
-              )
+              content.parsed = parsed
             when :text
               next unless (model = @models.first&.last)
 
@@ -367,19 +355,7 @@ module Anthropic
                   {error: e.message}
                 end
 
-              cls =
-                case content
-                in Anthropic::ContentBlock
-                  Anthropic::Models::TextBlock
-                else
-                  Anthropic::Models::BetaTextBlock
-                end
-              message.content[index] = cls.new(
-                citations: content.citations,
-                text: content.text,
-                type: content.type,
-                parsed: parsed
-              )
+              content.parsed = parsed
             end
           end
           # rubocop:enable Metrics/BlockLength
