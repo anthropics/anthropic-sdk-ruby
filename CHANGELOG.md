@@ -13,6 +13,7 @@
 
 ### Bug Fixes
 
+* **client:** ignore OpenTelemetry env vars when the option is set
 * **client:** keep the discriminator when a union's .new builds a variant
 * **streaming:** keep every field of a tool use block when attaching its parsed input
 * **streaming:** pass events of an unknown type through the message stream helper untouched

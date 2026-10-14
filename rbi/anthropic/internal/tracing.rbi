@@ -475,7 +475,8 @@ module Anthropic
         # `true` and `false` are `{traces: <it>}`, and a `:traces` of `true` or `false` is
         # `{enabled: <it>}`. `nil`, for a client that is given no option, is what the
         # environment says, and the environment is read here and nowhere else. Any other
-        # option is complete: what it leaves unset has the default, and no variable is read.
+        # option is complete: what it leaves unset has the default, and no variable is
+        # read.
         sig do
           params(
             option:
