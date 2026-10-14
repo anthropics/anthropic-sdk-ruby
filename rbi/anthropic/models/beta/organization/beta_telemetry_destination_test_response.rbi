@@ -4,11 +4,11 @@ module Anthropic
   module Models
     module Beta
       module Organization
-        class BetaTelemetryDestinationTest < Anthropic::Internal::Type::BaseModel
+        class BetaTelemetryDestinationTestResponse < Anthropic::Internal::Type::BaseModel
           OrHash =
             T.type_alias do
               T.any(
-                Anthropic::Beta::Organization::BetaTelemetryDestinationTest,
+                Anthropic::Beta::Organization::BetaTelemetryDestinationTestResponse,
                 Anthropic::Internal::AnyHash
               )
             end

@@ -5,7 +5,7 @@ module Anthropic
     module Beta
       module Organization
         # @see Anthropic::Resources::Beta::Organization::TelemetryDestinations#test_
-        class BetaTelemetryDestinationTest < Anthropic::Internal::Type::BaseModel
+        class BetaTelemetryDestinationTestResponse < Anthropic::Internal::Type::BaseModel
           # @!attribute result
           #   How the test went: `success` when the destination answered with a 2xx status,
           #   else `failure` with the reason.
@@ -22,8 +22,8 @@ module Anthropic
           #   The result of one test span sent to a destination.
           #
           #   Some parameter documentations has been truncated, see
-          #   {Anthropic::Models::Beta::Organization::BetaTelemetryDestinationTest} for more
-          #   details.
+          #   {Anthropic::Models::Beta::Organization::BetaTelemetryDestinationTestResponse}
+          #   for more details.
           #
           #   @param result [Anthropic::Models::Beta::Organization::BetaTelemetryDestinationTestSuccess, Anthropic::Models::Beta::Organization::BetaTelemetryDestinationTestFailure] How the test went: `success` when the destination answered with a 2xx status, el
           #

@@ -13,6 +13,7 @@
 
 ### Bug Fixes
 
+* **api:** rename telemetry destination test response model
 * **client:** ignore OpenTelemetry env vars when the option is set
 * **client:** keep the discriminator when a union's .new builds a variant
 * **streaming:** keep every field of a tool use block when attaching its parsed input

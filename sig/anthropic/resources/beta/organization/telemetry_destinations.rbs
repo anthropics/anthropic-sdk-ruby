@@ -51,7 +51,7 @@ module Anthropic
             String destination_id,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?request_options: Anthropic::request_opts
-          ) -> Anthropic::Beta::Organization::BetaTelemetryDestinationTest
+          ) -> Anthropic::Beta::Organization::BetaTelemetryDestinationTestResponse
 
           def initialize: (client: Anthropic::Client) -> void
         end

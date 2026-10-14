@@ -2,13 +2,13 @@ module Anthropic
   module Models
     module Beta
       module Organization
-        type beta_telemetry_destination_test =
+        type beta_telemetry_destination_test_response =
           {
             result: Anthropic::Models::Beta::Organization::beta_telemetry_destination_test_result,
             type: :telemetry_destination_test
           }
 
-        class BetaTelemetryDestinationTest < Anthropic::Internal::Type::BaseModel
+        class BetaTelemetryDestinationTestResponse < Anthropic::Internal::Type::BaseModel
           attr_accessor result: Anthropic::Models::Beta::Organization::beta_telemetry_destination_test_result
 
           attr_accessor type: :telemetry_destination_test

@@ -277,7 +277,7 @@ module Anthropic
                 T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(
-              Anthropic::Beta::Organization::BetaTelemetryDestinationTest
+              Anthropic::Beta::Organization::BetaTelemetryDestinationTestResponse
             )
           end
           def test_(

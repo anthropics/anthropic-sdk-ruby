@@ -242,7 +242,7 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @return [Anthropic::Models::Beta::Organization::BetaTelemetryDestinationTest]
+          # @return [Anthropic::Models::Beta::Organization::BetaTelemetryDestinationTestResponse]
           #
           # @see Anthropic::Models::Beta::Organization::TelemetryDestinationTestParams
           def test_(destination_id, params = {})
@@ -254,7 +254,7 @@ module Anthropic
               method: :post,
               path: ["v1/organizations/telemetry_destinations/%1$s/test?beta=true", destination_id],
               headers: parsed.transform_keys(betas: "anthropic-beta"),
-              model: Anthropic::Beta::Organization::BetaTelemetryDestinationTest,
+              model: Anthropic::Beta::Organization::BetaTelemetryDestinationTestResponse,
               options: {extra_headers: {"anthropic-beta" => "telemetry-destinations-2026-08-11"}, **options}
             )
           end

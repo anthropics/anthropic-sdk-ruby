@@ -126,7 +126,7 @@ class Anthropic::Test::Resources::Beta::Organization::TelemetryDestinationsTest 
     response = @anthropic.beta.organization.telemetry_destinations.test_("destination_id")
 
     assert_pattern do
-      response => Anthropic::Beta::Organization::BetaTelemetryDestinationTest
+      response => Anthropic::Beta::Organization::BetaTelemetryDestinationTestResponse
     end
 
     assert_pattern do
