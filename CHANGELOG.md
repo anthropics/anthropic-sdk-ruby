@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.80.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.79.0...v1.80.0) (2026-10-14)
+## [1.80.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.79.0...v1.80.0) (2026-10-15)
 
 ### Features
 
@@ -11,6 +11,11 @@
 ### Chores
 
 * **ci:** speed up breaking change detection
+
+
+### Documentation
+
+* **api:** note that some models need a beta header to use speed
 
 ## [1.79.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.78.0...v1.79.0) (2026-10-14)
 

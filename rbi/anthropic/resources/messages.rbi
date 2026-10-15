@@ -197,6 +197,11 @@ module Anthropic
         service_tier: nil,
         # Body param: The inference speed mode for this request. `"fast"` enables high
         # output-tokens-per-second inference.
+        #
+        # Some models require the `fast-mode-2026-02-01` beta header for any `speed`
+        # value. See
+        # [fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode) for
+        # which models.
         speed: nil,
         # Body param: Custom text sequences that will cause the model to stop generating.
         #
@@ -885,6 +890,11 @@ module Anthropic
         service_tier: nil,
         # Body param: The inference speed mode for this request. `"fast"` enables high
         # output-tokens-per-second inference.
+        #
+        # Some models require the `fast-mode-2026-02-01` beta header for any `speed`
+        # value. See
+        # [fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode) for
+        # which models.
         speed: nil,
         # Body param: Custom text sequences that will cause the model to stop generating.
         #
@@ -1182,6 +1192,11 @@ module Anthropic
         output_config: nil,
         # Body param: The inference speed mode for this request. `"fast"` enables high
         # output-tokens-per-second inference.
+        #
+        # Some models require the `fast-mode-2026-02-01` beta header for any `speed`
+        # value. See
+        # [fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode) for
+        # which models.
         speed: nil,
         # Body param: System prompt.
         #
