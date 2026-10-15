@@ -13,6 +13,7 @@
 
 * **ci:** speed up breaking change detection
 * **docs:** describe headers on Managed Agents and telemetry endpoints
+* **tests:** cover trace context propagation and failing telemetry
 
 
 ### Documentation
