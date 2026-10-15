@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.81.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.80.0...v1.81.0) (2026-10-15)
+
+### Features
+
+* **client:** yield server-sent events with unrecognized event names
+
+
+### Chores
+
+* **tests:** cover per-request timeouts and later union variants
+
 ## [1.80.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.79.0...v1.80.0) (2026-10-15)
 
 ### Features
@@ -13,7 +24,6 @@
 
 * **ci:** speed up breaking change detection
 * **docs:** describe headers on Managed Agents and telemetry endpoints
-* **tests:** cover per-request timeouts and later union variants
 * **tests:** cover trace context propagation and failing telemetry
 
 
