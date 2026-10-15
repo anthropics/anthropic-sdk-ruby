@@ -19,7 +19,8 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :dream_id
 
-        # Optional header to specify the beta version(s) you want to use.
+        # This endpoint is in beta: requests must send `dreaming-2026-04-21` in this
+        # header.
         sig do
           returns(
             T.nilable(
@@ -59,7 +60,8 @@ module Anthropic
         def self.new(
           # The ID of the dream to cancel (`drm_...`).
           dream_id:,
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `dreaming-2026-04-21` in this
+          # header.
           betas: nil,
           # Optional header to select the Workspace for this request. The value is a
           # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

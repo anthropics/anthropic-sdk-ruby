@@ -32,7 +32,8 @@ module Anthropic
           optional :expected_content_sha256, String
 
           # @!attribute betas
-          #   Optional header to specify the beta version(s) you want to use.
+          #   This endpoint is in beta: requests must send `agent-memory-2026-07-22` or
+          #   `managed-agents-2026-04-01` in this header.
           #
           #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
           optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
@@ -58,7 +59,7 @@ module Anthropic
           #
           #   @param expected_content_sha256 [String] Delete the memory only if its current `content_sha256` equals this value, given
           #
-          #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `manag
           #
           #   @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
           #

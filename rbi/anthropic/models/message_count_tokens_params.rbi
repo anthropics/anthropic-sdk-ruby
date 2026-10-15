@@ -113,6 +113,18 @@ module Anthropic
       sig { params(output_config: Anthropic::OutputConfig::OrHash).void }
       attr_writer :output_config
 
+      # The inference speed mode for this request. `"fast"` enables high
+      # output-tokens-per-second inference.
+      #
+      # Some models require the `fast-mode-2026-02-01` beta header for any `speed`
+      # value. See
+      # [fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode) for
+      # which models.
+      sig do
+        returns(T.nilable(Anthropic::MessageCountTokensParams::Speed::OrSymbol))
+      end
+      attr_accessor :speed
+
       # System prompt.
       #
       # A system prompt is a way of providing context and instructions to Claude, such
@@ -366,6 +378,8 @@ module Anthropic
           model: T.any(Anthropic::Model::OrSymbol, String),
           cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash),
           output_config: Anthropic::OutputConfig::OrHash,
+          speed:
+            T.nilable(Anthropic::MessageCountTokensParams::Speed::OrSymbol),
           system_: Anthropic::MessageCountTokensParams::System::Variants,
           thinking:
             T.any(
@@ -494,6 +508,14 @@ module Anthropic
         cache_control: nil,
         # Configuration options for the model's output, such as the output format.
         output_config: nil,
+        # The inference speed mode for this request. `"fast"` enables high
+        # output-tokens-per-second inference.
+        #
+        # Some models require the `fast-mode-2026-02-01` beta header for any `speed`
+        # value. See
+        # [fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode) for
+        # which models.
+        speed: nil,
         # System prompt.
         #
         # A system prompt is a way of providing context and instructions to Claude, such
@@ -613,6 +635,8 @@ module Anthropic
             model: T.any(Anthropic::Model::OrSymbol, String),
             cache_control: T.nilable(Anthropic::CacheControlEphemeral),
             output_config: Anthropic::OutputConfig,
+            speed:
+              T.nilable(Anthropic::MessageCountTokensParams::Speed::OrSymbol),
             system_: Anthropic::MessageCountTokensParams::System::Variants,
             thinking:
               T.any(
@@ -661,6 +685,39 @@ module Anthropic
         )
       end
       def to_hash
+      end
+
+      # The inference speed mode for this request. `"fast"` enables high
+      # output-tokens-per-second inference.
+      #
+      # Some models require the `fast-mode-2026-02-01` beta header for any `speed`
+      # value. See
+      # [fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode) for
+      # which models.
+      module Speed
+        extend Anthropic::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(Symbol, Anthropic::MessageCountTokensParams::Speed)
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        STANDARD =
+          T.let(
+            :standard,
+            Anthropic::MessageCountTokensParams::Speed::TaggedSymbol
+          )
+        FAST =
+          T.let(:fast, Anthropic::MessageCountTokensParams::Speed::TaggedSymbol)
+
+        sig do
+          override.returns(
+            T::Array[Anthropic::MessageCountTokensParams::Speed::TaggedSymbol]
+          )
+        end
+        def self.values
+        end
       end
 
       # System prompt.

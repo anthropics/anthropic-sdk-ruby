@@ -33,7 +33,8 @@ module Anthropic
             # Body param: Arbitrary key-value metadata to attach to the credential. Maximum 16
             # pairs, keys up to 64 chars, values up to 512 chars.
             metadata: nil,
-            # Header param: Optional header to specify the beta version(s) you want to use.
+            # Header param: This endpoint is in beta: requests must send
+            # `managed-agents-2026-04-01` in this header.
             betas: nil,
             # Header param: Optional header to select the Workspace for this request. The
             # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -62,7 +63,8 @@ module Anthropic
             credential_id,
             # Path param: Identifier of the vault containing the credential.
             vault_id:,
-            # Header param: Optional header to specify the beta version(s) you want to use.
+            # Header param: This endpoint is in beta: requests must send
+            # `managed-agents-2026-04-01` in this header.
             betas: nil,
             # Header param: Optional header to select the Workspace for this request. The
             # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -107,7 +109,8 @@ module Anthropic
             # Body param: Metadata patch. Set a key to a string to upsert it, or to null to
             # delete it. Omitted keys are preserved.
             metadata: nil,
-            # Header param: Optional header to specify the beta version(s) you want to use.
+            # Header param: This endpoint is in beta: requests must send
+            # `managed-agents-2026-04-01` in this header.
             betas: nil,
             # Header param: Optional header to select the Workspace for this request. The
             # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -148,7 +151,8 @@ module Anthropic
             # Query param: Opaque pagination token from a previous `list_credentials`
             # response.
             page: nil,
-            # Header param: Optional header to specify the beta version(s) you want to use.
+            # Header param: This endpoint is in beta: requests must send
+            # `managed-agents-2026-04-01` in this header.
             betas: nil,
             # Header param: Optional header to select the Workspace for this request. The
             # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -179,7 +183,8 @@ module Anthropic
             credential_id,
             # Path param: Identifier of the vault containing the credential.
             vault_id:,
-            # Header param: Optional header to specify the beta version(s) you want to use.
+            # Header param: This endpoint is in beta: requests must send
+            # `managed-agents-2026-04-01` in this header.
             betas: nil,
             # Header param: Optional header to select the Workspace for this request. The
             # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -208,7 +213,8 @@ module Anthropic
             credential_id,
             # Path param: Identifier of the vault containing the credential.
             vault_id:,
-            # Header param: Optional header to specify the beta version(s) you want to use.
+            # Header param: This endpoint is in beta: requests must send
+            # `managed-agents-2026-04-01` in this header.
             betas: nil,
             # Header param: Optional header to select the Workspace for this request. The
             # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -239,7 +245,8 @@ module Anthropic
             credential_id,
             # Path param: Identifier of the vault containing the credential.
             vault_id:,
-            # Header param: Optional header to specify the beta version(s) you want to use.
+            # Header param: This endpoint is in beta: requests must send
+            # `managed-agents-2026-04-01` in this header.
             betas: nil,
             # Header param: Optional header to select the Workspace for this request. The
             # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

@@ -33,7 +33,7 @@ module Anthropic
           #
           # @param traces [Anthropic::Models::Beta::Organization::BetaTelemetryDestinationTracesParams] Body param: The settings for the traces that the destination receives. If you le
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `telemetry-destinatio
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -62,11 +62,15 @@ module Anthropic
           # [OpenTelemetry export guide](https://platform.claude.com/docs/en/manage-claude/opentelemetry#delivery-and-health)
           # to learn how the API delivers spans and when it disables a destination.
           #
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::Organization::TelemetryDestinationRetrieveParams} for
+          # more details.
+          #
           # @overload retrieve(destination_id, betas: nil, request_options: {})
           #
           # @param destination_id [String] ID of the destination (`tdst_...`).
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11`
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -123,7 +127,7 @@ module Anthropic
           #
           # @param workspaces [Anthropic::Models::Beta::Organization::BetaTelemetryDestinationWorkspacesAllParams, Anthropic::Models::Beta::Organization::BetaTelemetryDestinationWorkspacesIncludeParams, Anthropic::Models::Beta::Organization::BetaTelemetryDestinationWorkspacesExcludeParams] Body param: The new workspace scope, in the same form as on create. The field ca
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `telemetry-destinatio
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -165,7 +169,7 @@ module Anthropic
           #
           # @param workspace_ids [Array<String>] Query param: Return only the destinations that cover at least one of these works
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `telemetry-destinatio
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -200,11 +204,15 @@ module Anthropic
           # [OpenTelemetry export guide](https://platform.claude.com/docs/en/manage-claude/opentelemetry#delivery-and-health)
           # to learn more about managing a destination.
           #
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::Organization::TelemetryDestinationDeleteParams} for
+          # more details.
+          #
           # @overload delete(destination_id, betas: nil, request_options: {})
           #
           # @param destination_id [String] ID of the destination (`tdst_...`).
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11`
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -234,11 +242,15 @@ module Anthropic
           # 10 seconds between tests of one destination; a request that comes sooner may be
           # answered with status 429.
           #
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::Organization::TelemetryDestinationTestParams} for more
+          # details.
+          #
           # @overload test_(destination_id, betas: nil, request_options: {})
           #
           # @param destination_id [String] ID of the destination to test (starts with `tdst_`).
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11`
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #

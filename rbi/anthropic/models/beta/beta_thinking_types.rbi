@@ -24,9 +24,27 @@ module Anthropic
         end
         attr_writer :adaptive
 
+        # Whether the model accepts thinking with type 'between_tools' (thinking turned
+        # off, and any short progress updates the model writes between tool calls come
+        # back as thinking blocks). False exactly when a request that sends it gets a 400
+        # from this model. A request that sends 'between_tools' can still be rejected for
+        # another reason, such as an effort level the model does not allow with thinking
+        # off.
+        sig { returns(Anthropic::Beta::BetaCapabilitySupport) }
+        attr_reader :between_tools
+
+        sig do
+          params(
+            between_tools: Anthropic::Beta::BetaCapabilitySupport::OrHash
+          ).void
+        end
+        attr_writer :between_tools
+
         # Whether the model accepts thinking with type 'disabled' (thinking turned off).
         # False exactly when a request that sends it gets a 400 from this model. True on a
-        # model that does not support thinking.
+        # model that does not support thinking. A request that sends 'disabled' can still
+        # be rejected for another reason, such as an effort level the model does not allow
+        # with thinking off.
         sig { returns(Anthropic::Beta::BetaCapabilitySupport) }
         attr_reader :disabled
 
@@ -50,6 +68,7 @@ module Anthropic
         sig do
           params(
             adaptive: Anthropic::Beta::BetaCapabilitySupport::OrHash,
+            between_tools: Anthropic::Beta::BetaCapabilitySupport::OrHash,
             disabled: Anthropic::Beta::BetaCapabilitySupport::OrHash,
             enabled: Anthropic::Beta::BetaCapabilitySupport::OrHash
           ).returns(T.attached_class)
@@ -58,9 +77,18 @@ module Anthropic
           # Whether the model accepts thinking with type 'adaptive' (the model decides
           # whether and how much to think).
           adaptive:,
+          # Whether the model accepts thinking with type 'between_tools' (thinking turned
+          # off, and any short progress updates the model writes between tool calls come
+          # back as thinking blocks). False exactly when a request that sends it gets a 400
+          # from this model. A request that sends 'between_tools' can still be rejected for
+          # another reason, such as an effort level the model does not allow with thinking
+          # off.
+          between_tools:,
           # Whether the model accepts thinking with type 'disabled' (thinking turned off).
           # False exactly when a request that sends it gets a 400 from this model. True on a
-          # model that does not support thinking.
+          # model that does not support thinking. A request that sends 'disabled' can still
+          # be rejected for another reason, such as an effort level the model does not allow
+          # with thinking off.
           disabled:,
           # Whether the model accepts thinking with type 'enabled' (extended thinking with a
           # caller-set `budget_tokens`).
@@ -72,6 +100,7 @@ module Anthropic
           override.returns(
             {
               adaptive: Anthropic::Beta::BetaCapabilitySupport,
+              between_tools: Anthropic::Beta::BetaCapabilitySupport,
               disabled: Anthropic::Beta::BetaCapabilitySupport,
               enabled: Anthropic::Beta::BetaCapabilitySupport
             }

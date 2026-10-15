@@ -40,7 +40,8 @@ module Anthropic
         sig { params(metadata: T::Hash[Symbol, String]).void }
         attr_writer :metadata
 
-        # Optional header to specify the beta version(s) you want to use.
+        # This endpoint is in beta: requests must send `agent-memory-2026-07-22` or
+        # `managed-agents-2026-04-01` in this header.
         sig do
           returns(
             T.nilable(
@@ -93,7 +94,8 @@ module Anthropic
           # belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters.
           # Not visible to the agent.
           metadata: nil,
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `agent-memory-2026-07-22` or
+          # `managed-agents-2026-04-01` in this header.
           betas: nil,
           # Optional header to select the Workspace for this request. The value is a
           # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

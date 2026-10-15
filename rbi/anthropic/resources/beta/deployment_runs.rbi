@@ -16,7 +16,8 @@ module Anthropic
         def retrieve(
           # Unique identifier of the deployment run.
           deployment_run_id,
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+          # header.
           betas: nil,
           # Optional header to select the Workspace for this request. The value is a
           # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -74,7 +75,8 @@ module Anthropic
           page: nil,
           # Query param: Filter runs by what triggered them. Omit to return all runs.
           trigger_type: nil,
-          # Header param: Optional header to specify the beta version(s) you want to use.
+          # Header param: This endpoint is in beta: requests must send
+          # `managed-agents-2026-04-01` in this header.
           betas: nil,
           # Header param: Optional header to select the Workspace for this request. The
           # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

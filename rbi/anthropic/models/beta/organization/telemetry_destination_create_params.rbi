@@ -83,7 +83,8 @@ module Anthropic
           end
           attr_writer :traces
 
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11`
+          # in this header.
           sig do
             returns(
               T.nilable(
@@ -151,7 +152,8 @@ module Anthropic
             # The settings for the traces that the destination receives. If you leave it out,
             # every setting takes its default.
             traces: nil,
-            # Optional header to specify the beta version(s) you want to use.
+            # This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11`
+            # in this header.
             betas: nil,
             request_options: {}
           )

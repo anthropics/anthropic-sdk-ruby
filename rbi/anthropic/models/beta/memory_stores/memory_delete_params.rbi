@@ -35,7 +35,8 @@ module Anthropic
           sig { params(expected_content_sha256: String).void }
           attr_writer :expected_content_sha256
 
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `agent-memory-2026-07-22` or
+          # `managed-agents-2026-04-01` in this header.
           sig do
             returns(
               T.nilable(
@@ -86,7 +87,8 @@ module Anthropic
             # If the hashes differ, the request fails with HTTP status 409 and nothing is
             # deleted.
             expected_content_sha256: nil,
-            # Optional header to specify the beta version(s) you want to use.
+            # This endpoint is in beta: requests must send `agent-memory-2026-07-22` or
+            # `managed-agents-2026-04-01` in this header.
             betas: nil,
             # Optional header to select the Workspace for this request. The value is a
             # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

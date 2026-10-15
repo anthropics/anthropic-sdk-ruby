@@ -75,7 +75,8 @@ module Anthropic
         end
         attr_writer :status
 
-        # Optional header to specify the beta version(s) you want to use.
+        # This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+        # header.
         sig do
           returns(
             T.nilable(
@@ -135,7 +136,8 @@ module Anthropic
           # Filter by status: `active` or `paused`. Omit for both. To include archived
           # deployments, use `include_archived` instead; the two cannot be combined.
           status: nil,
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+          # header.
           betas: nil,
           # Optional header to select the Workspace for this request. The value is a
           # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

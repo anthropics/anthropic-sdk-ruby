@@ -76,7 +76,8 @@ module Anthropic
         end
         attr_writer :output_behavior
 
-        # Optional header to specify the beta version(s) you want to use.
+        # This endpoint is in beta: requests must send `dreaming-2026-04-21` in this
+        # header.
         sig do
           returns(
             T.nilable(
@@ -150,7 +151,8 @@ module Anthropic
           # Which memory store a dream writes its result to. Defaults to `create_new` when
           # left out of a create request.
           output_behavior: nil,
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `dreaming-2026-04-21` in this
+          # header.
           betas: nil,
           # Optional header to select the Workspace for this request. The value is a
           # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

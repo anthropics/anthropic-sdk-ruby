@@ -69,7 +69,8 @@ module Anthropic
                    -> { Anthropic::Internal::Type::ArrayOf[enum: Anthropic::Beta::Sessions::BetaManagedAgentsSessionEventType] }
 
           # @!attribute betas
-          #   Optional header to specify the beta version(s) you want to use.
+          #   This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+          #   header.
           #
           #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
           optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
@@ -107,7 +108,7 @@ module Anthropic
           #
           #   @param types [Array<Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEventType>] Filter by event type. Values match the `type` field on returned events (for exam
           #
-          #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
           #
           #   @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
           #

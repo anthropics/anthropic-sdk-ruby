@@ -29,6 +29,7 @@ module Anthropic
           metadata: Anthropic::Metadata::OrHash,
           output_config: Anthropic::OutputConfig::OrHash,
           service_tier: Anthropic::MessageCreateParams::ServiceTier::OrSymbol,
+          speed: T.nilable(Anthropic::MessageCreateParams::Speed::OrSymbol),
           stop_sequences: T::Array[String],
           system_: Anthropic::MessageCreateParams::System::Variants,
           temperature: Float,
@@ -194,6 +195,14 @@ module Anthropic
         # [service-tiers](https://platform.claude.com/docs/en/api/service-tiers) for
         # details.
         service_tier: nil,
+        # Body param: The inference speed mode for this request. `"fast"` enables high
+        # output-tokens-per-second inference.
+        #
+        # Some models require the `fast-mode-2026-02-01` beta header for any `speed`
+        # value. See
+        # [fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode) for
+        # which models.
+        speed: nil,
         # Body param: Custom text sequences that will cause the model to stop generating.
         #
         # Our models will normally stop when they have naturally completed their turn,
@@ -370,6 +379,7 @@ module Anthropic
           metadata: Anthropic::Metadata::OrHash,
           output_config: Anthropic::OutputConfig::OrHash,
           service_tier: Anthropic::MessageCreateParams::ServiceTier::OrSymbol,
+          speed: T.nilable(Anthropic::MessageCreateParams::Speed::OrSymbol),
           stop_sequences: T::Array[String],
           system_: Anthropic::MessageCreateParams::System::Variants,
           temperature: Float,
@@ -531,6 +541,9 @@ module Anthropic
         # [service-tiers](https://platform.claude.com/docs/en/api/service-tiers) for
         # details.
         service_tier: nil,
+        # Body param: The inference speed mode for this request. `"fast"` enables high
+        # output-tokens-per-second inference.
+        speed: nil,
         # Body param: Custom text sequences that will cause the model to stop generating.
         #
         # Our models will normally stop when they have naturally completed their turn,
@@ -704,6 +717,7 @@ module Anthropic
           metadata: Anthropic::Metadata::OrHash,
           output_config: Anthropic::OutputConfig::OrHash,
           service_tier: Anthropic::MessageCreateParams::ServiceTier::OrSymbol,
+          speed: T.nilable(Anthropic::MessageCreateParams::Speed::OrSymbol),
           stop_sequences: T::Array[String],
           system_: Anthropic::MessageCreateParams::System::Variants,
           temperature: Float,
@@ -874,6 +888,14 @@ module Anthropic
         # [service-tiers](https://platform.claude.com/docs/en/api/service-tiers) for
         # details.
         service_tier: nil,
+        # Body param: The inference speed mode for this request. `"fast"` enables high
+        # output-tokens-per-second inference.
+        #
+        # Some models require the `fast-mode-2026-02-01` beta header for any `speed`
+        # value. See
+        # [fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode) for
+        # which models.
+        speed: nil,
         # Body param: Custom text sequences that will cause the model to stop generating.
         #
         # Our models will normally stop when they have naturally completed their turn,
@@ -1037,6 +1059,8 @@ module Anthropic
           model: T.any(Anthropic::Model::OrSymbol, String),
           cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash),
           output_config: Anthropic::OutputConfig::OrHash,
+          speed:
+            T.nilable(Anthropic::MessageCountTokensParams::Speed::OrSymbol),
           system_: Anthropic::MessageCountTokensParams::System::Variants,
           thinking:
             T.any(
@@ -1166,6 +1190,14 @@ module Anthropic
         # Body param: Configuration options for the model's output, such as the output
         # format.
         output_config: nil,
+        # Body param: The inference speed mode for this request. `"fast"` enables high
+        # output-tokens-per-second inference.
+        #
+        # Some models require the `fast-mode-2026-02-01` beta header for any `speed`
+        # value. See
+        # [fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode) for
+        # which models.
+        speed: nil,
         # Body param: System prompt.
         #
         # A system prompt is a way of providing context and instructions to Claude, such

@@ -80,7 +80,8 @@ module Anthropic
                   Anthropic::Beta::Organization::BetaSpendLimitRBACGroupScope::OrHash,
                   Anthropic::Beta::Organization::BetaSpendLimitOrganizationServiceScope::OrHash,
                   Anthropic::Beta::Organization::BetaSpendLimitOrganizationScope::OrHash,
-                  Anthropic::Beta::Organization::BetaSpendLimitWorkspaceScope::OrHash
+                  Anthropic::Beta::Organization::BetaSpendLimitWorkspaceScope::OrHash,
+                  Anthropic::Beta::Organization::BetaSpendLimitUsageTierScope::OrHash
                 ),
               updated_at: Time,
               type: Symbol
@@ -147,7 +148,8 @@ module Anthropic
                   Anthropic::Beta::Organization::BetaSpendLimitRBACGroupScope,
                   Anthropic::Beta::Organization::BetaSpendLimitOrganizationServiceScope,
                   Anthropic::Beta::Organization::BetaSpendLimitOrganizationScope,
-                  Anthropic::Beta::Organization::BetaSpendLimitWorkspaceScope
+                  Anthropic::Beta::Organization::BetaSpendLimitWorkspaceScope,
+                  Anthropic::Beta::Organization::BetaSpendLimitUsageTierScope
                 )
               end
 
@@ -191,6 +193,11 @@ module Anthropic
               WORKSPACE =
                 T.let(
                   :workspace,
+                  Anthropic::Beta::Organization::BetaSpendLimit::Scope::Type::TaggedSymbol
+                )
+              USAGE_TIER =
+                T.let(
+                  :usage_tier,
                   Anthropic::Beta::Organization::BetaSpendLimit::Scope::Type::TaggedSymbol
                 )
 

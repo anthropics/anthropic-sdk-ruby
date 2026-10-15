@@ -10,10 +10,23 @@ module Anthropic
       #   @return [Anthropic::Models::CapabilitySupport]
       required :adaptive, -> { Anthropic::CapabilitySupport }
 
+      # @!attribute between_tools
+      #   Whether the model accepts thinking with type 'between_tools' (thinking turned
+      #   off, and any short progress updates the model writes between tool calls come
+      #   back as thinking blocks). False exactly when a request that sends it gets a 400
+      #   from this model. A request that sends 'between_tools' can still be rejected for
+      #   another reason, such as an effort level the model does not allow with thinking
+      #   off.
+      #
+      #   @return [Anthropic::Models::CapabilitySupport]
+      required :between_tools, -> { Anthropic::CapabilitySupport }
+
       # @!attribute disabled
       #   Whether the model accepts thinking with type 'disabled' (thinking turned off).
       #   False exactly when a request that sends it gets a 400 from this model. True on a
-      #   model that does not support thinking.
+      #   model that does not support thinking. A request that sends 'disabled' can still
+      #   be rejected for another reason, such as an effort level the model does not allow
+      #   with thinking off.
       #
       #   @return [Anthropic::Models::CapabilitySupport]
       required :disabled, -> { Anthropic::CapabilitySupport }
@@ -25,7 +38,7 @@ module Anthropic
       #   @return [Anthropic::Models::CapabilitySupport]
       required :enabled, -> { Anthropic::CapabilitySupport }
 
-      # @!method initialize(adaptive:, disabled:, enabled:)
+      # @!method initialize(adaptive:, between_tools:, disabled:, enabled:)
       #   Which `thinking.type` values the model accepts on requests. Read each key on its
       #   own: for example, `enabled` can be false while `disabled` is true.
       #
@@ -33,6 +46,8 @@ module Anthropic
       #   {Anthropic::Models::ThinkingTypes} for more details.
       #
       #   @param adaptive [Anthropic::Models::CapabilitySupport] Whether the model accepts thinking with type 'adaptive' (the model decides wheth
+      #
+      #   @param between_tools [Anthropic::Models::CapabilitySupport] Whether the model accepts thinking with type 'between_tools' (thinking turned of
       #
       #   @param disabled [Anthropic::Models::CapabilitySupport] Whether the model accepts thinking with type 'disabled' (thinking turned off). F
       #

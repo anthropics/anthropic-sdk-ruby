@@ -3,6 +3,7 @@ module Anthropic
     type thinking_types =
       {
         adaptive: Anthropic::CapabilitySupport,
+        between_tools: Anthropic::CapabilitySupport,
         disabled: Anthropic::CapabilitySupport,
         enabled: Anthropic::CapabilitySupport
       }
@@ -10,18 +11,22 @@ module Anthropic
     class ThinkingTypes < Anthropic::Internal::Type::BaseModel
       attr_accessor adaptive: Anthropic::CapabilitySupport
 
+      attr_accessor between_tools: Anthropic::CapabilitySupport
+
       attr_accessor disabled: Anthropic::CapabilitySupport
 
       attr_accessor enabled: Anthropic::CapabilitySupport
 
       def initialize: (
         adaptive: Anthropic::CapabilitySupport,
+        between_tools: Anthropic::CapabilitySupport,
         disabled: Anthropic::CapabilitySupport,
         enabled: Anthropic::CapabilitySupport
       ) -> void
 
       def to_hash: -> {
         adaptive: Anthropic::CapabilitySupport,
+        between_tools: Anthropic::CapabilitySupport,
         disabled: Anthropic::CapabilitySupport,
         enabled: Anthropic::CapabilitySupport
       }

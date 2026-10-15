@@ -62,7 +62,13 @@ module Anthropic
       #   @return [Symbol, Anthropic::Models::Usage::ServiceTier, nil]
       required :service_tier, enum: -> { Anthropic::Usage::ServiceTier }, nil?: true
 
-      # @!method initialize(cache_creation:, cache_creation_input_tokens:, cache_read_input_tokens:, inference_geo:, input_tokens:, output_tokens:, output_tokens_details:, server_tool_use:, service_tier:)
+      # @!attribute speed
+      #   The inference speed mode used for this request.
+      #
+      #   @return [Symbol, Anthropic::Models::Usage::Speed, nil]
+      required :speed, enum: -> { Anthropic::Usage::Speed }, nil?: true
+
+      # @!method initialize(cache_creation:, cache_creation_input_tokens:, cache_read_input_tokens:, inference_geo:, input_tokens:, output_tokens:, output_tokens_details:, server_tool_use:, service_tier:, speed:)
       #   Some parameter documentations has been truncated, see {Anthropic::Models::Usage}
       #   for more details.
       #
@@ -83,6 +89,8 @@ module Anthropic
       #   @param server_tool_use [Anthropic::Models::ServerToolUsage, nil] The number of server tool requests.
       #
       #   @param service_tier [Symbol, Anthropic::Models::Usage::ServiceTier, nil] If the request used the priority, standard, or batch tier.
+      #
+      #   @param speed [Symbol, Anthropic::Models::Usage::Speed, nil] The inference speed mode used for this request.
 
       # If the request used the priority, standard, or batch tier.
       #
@@ -93,6 +101,19 @@ module Anthropic
         STANDARD = :standard
         PRIORITY = :priority
         BATCH = :batch
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
+
+      # The inference speed mode used for this request.
+      #
+      # @see Anthropic::Models::Usage#speed
+      module Speed
+        extend Anthropic::Internal::Type::Enum
+
+        STANDARD = :standard
+        FAST = :fast
 
         # @!method self.values
         #   @return [Array<Symbol>]

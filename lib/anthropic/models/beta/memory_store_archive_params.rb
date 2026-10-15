@@ -17,7 +17,8 @@ module Anthropic
         required :memory_store_id, String
 
         # @!attribute betas
-        #   Optional header to specify the beta version(s) you want to use.
+        #   This endpoint is in beta: requests must send `agent-memory-2026-07-22` or
+        #   `managed-agents-2026-04-01` in this header.
         #
         #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
@@ -39,7 +40,7 @@ module Anthropic
         #
         #   @param memory_store_id [String] ID of the memory store to archive (a `memstore_...` identifier). Required. Archi
         #
-        #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `manag
         #
         #   @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #

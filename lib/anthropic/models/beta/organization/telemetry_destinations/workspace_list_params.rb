@@ -30,7 +30,8 @@ module Anthropic
             optional :page, String
 
             # @!attribute betas
-            #   Optional header to specify the beta version(s) you want to use.
+            #   This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11`
+            #   in this header.
             #
             #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
             optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
@@ -46,7 +47,7 @@ module Anthropic
             #
             #   @param page [String] Opaque cursor from a previous response's `next_page`. Leave it out to get the fi
             #
-            #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+            #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11`
             #
             #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
           end

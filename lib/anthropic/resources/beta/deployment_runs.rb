@@ -13,7 +13,7 @@ module Anthropic
         #
         # @param deployment_run_id [String] Unique identifier of the deployment run.
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
         #
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
@@ -61,7 +61,7 @@ module Anthropic
         #
         # @param trigger_type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsTriggerType] Query param: Filter runs by what triggered them. Omit to return all runs.
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #

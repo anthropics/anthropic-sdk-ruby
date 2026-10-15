@@ -154,7 +154,8 @@ module Anthropic
         sig { returns(T.nilable(T::Array[String])) }
         attr_accessor :vault_ids
 
-        # Optional header to specify the beta version(s) you want to use.
+        # This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+        # header.
         sig do
           returns(
             T.nilable(
@@ -260,7 +261,8 @@ module Anthropic
           # Vault IDs. Full replacement. Omit to preserve; send empty array or null to
           # clear. Maximum 50.
           vault_ids: nil,
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+          # header.
           betas: nil,
           # Optional header to select the Workspace for this request. The value is a
           # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

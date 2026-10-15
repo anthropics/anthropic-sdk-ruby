@@ -31,7 +31,8 @@ module Anthropic
             # operations default to `full`; list, create, and update operations default to
             # `basic`. Listing with `view=full` caps `limit` at 20.
             view: nil,
-            # Header param: Optional header to specify the beta version(s) you want to use.
+            # Header param: This endpoint is in beta: requests must send
+            # `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
             betas: nil,
             # Header param: Optional header to select the Workspace for this request. The
             # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -103,7 +104,8 @@ module Anthropic
             # operations default to `full`; list, create, and update operations default to
             # `basic`. Listing with `view=full` caps `limit` at 20.
             view: nil,
-            # Header param: Optional header to specify the beta version(s) you want to use.
+            # Header param: This endpoint is in beta: requests must send
+            # `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
             betas: nil,
             # Header param: Optional header to select the Workspace for this request. The
             # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -134,7 +136,8 @@ module Anthropic
             memory_version_id,
             # Path param: The ID of the memory store that holds the version (`memstore_...`).
             memory_store_id:,
-            # Header param: Optional header to specify the beta version(s) you want to use.
+            # Header param: This endpoint is in beta: requests must send
+            # `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
             betas: nil,
             # Header param: Optional header to select the Workspace for this request. The
             # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

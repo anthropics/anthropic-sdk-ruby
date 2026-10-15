@@ -25,7 +25,8 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :ca_certificate_pem
 
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this
+          # header.
           sig do
             returns(
               T.nilable(
@@ -70,7 +71,8 @@ module Anthropic
             # PEM-encoded X.509 CA certificate. Must contain exactly one certificate and no
             # private-key material. Maximum 8KB.
             ca_certificate_pem:,
-            # Optional header to specify the beta version(s) you want to use.
+            # This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this
+            # header.
             betas: nil,
             # Optional header to select the Workspace for this request. The value is a
             # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

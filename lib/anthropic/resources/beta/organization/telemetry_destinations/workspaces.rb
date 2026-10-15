@@ -27,7 +27,7 @@ module Anthropic
             #
             # @param page [String] Query param: Opaque cursor from a previous response's `next_page`. Leave it out
             #
-            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `telemetry-destinatio
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #
@@ -69,13 +69,17 @@ module Anthropic
             # [OpenTelemetry export guide](https://platform.claude.com/docs/en/manage-claude/opentelemetry#choose-workspaces-for-a-destination)
             # to learn more about choosing the workspaces of a destination.
             #
+            # Some parameter documentations has been truncated, see
+            # {Anthropic::Models::Beta::Organization::TelemetryDestinations::WorkspaceAddParams}
+            # for more details.
+            #
             # @overload add(workspace_id, destination_id:, betas: nil, request_options: {})
             #
             # @param workspace_id [String] Path param: ID of the workspace to add (`wrkspc_...`).
             #
             # @param destination_id [String] Path param: ID of the destination (`tdst_...`).
             #
-            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `telemetry-destinatio
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #
@@ -120,13 +124,17 @@ module Anthropic
             # [OpenTelemetry export guide](https://platform.claude.com/docs/en/manage-claude/opentelemetry#choose-workspaces-for-a-destination)
             # to learn more about choosing the workspaces of a destination.
             #
+            # Some parameter documentations has been truncated, see
+            # {Anthropic::Models::Beta::Organization::TelemetryDestinations::WorkspaceRemoveParams}
+            # for more details.
+            #
             # @overload remove(workspace_id, destination_id:, betas: nil, request_options: {})
             #
             # @param workspace_id [String] Path param: ID of the workspace to remove (`wrkspc_...`).
             #
             # @param destination_id [String] Path param: ID of the destination (`tdst_...`).
             #
-            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `telemetry-destinatio
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #

@@ -134,7 +134,8 @@ module Anthropic
           end
           attr_writer :workspaces
 
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11`
+          # in this header.
           sig do
             returns(
               T.nilable(
@@ -221,7 +222,8 @@ module Anthropic
             # the destination's list has more than 750 workspaces. Remove workspaces one at a
             # time until 750 or fewer remain, then send the update again.
             workspaces: nil,
-            # Optional header to specify the beta version(s) you want to use.
+            # This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11`
+            # in this header.
             betas: nil,
             request_options: {}
           )

@@ -16,15 +16,20 @@ module Anthropic
           required :destination_id, String
 
           # @!attribute betas
-          #   Optional header to specify the beta version(s) you want to use.
+          #   This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11`
+          #   in this header.
           #
           #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
           optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
           # @!method initialize(destination_id:, betas: nil, request_options: {})
+          #   Some parameter documentations has been truncated, see
+          #   {Anthropic::Models::Beta::Organization::TelemetryDestinationTestParams} for more
+          #   details.
+          #
           #   @param destination_id [String] ID of the destination to test (starts with `tdst_`).
           #
-          #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11`
           #
           #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
         end
