@@ -20,7 +20,8 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :destination_id
 
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11`
+          # in this header.
           sig do
             returns(
               T.nilable(
@@ -48,7 +49,8 @@ module Anthropic
           def self.new(
             # ID of the destination to test (starts with `tdst_`).
             destination_id:,
-            # Optional header to specify the beta version(s) you want to use.
+            # This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11`
+            # in this header.
             betas: nil,
             request_options: {}
           )

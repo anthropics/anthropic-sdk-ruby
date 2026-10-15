@@ -19,7 +19,8 @@ module Anthropic
         sig { returns(T.nilable(String)) }
         attr_accessor :display_name
 
-        # Optional header to specify the beta version(s) you want to use.
+        # This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this
+        # header.
         sig do
           returns(
             T.nilable(
@@ -59,7 +60,8 @@ module Anthropic
         def self.new(
           # Optional human-readable name for the tunnel (1-255 characters).
           display_name: nil,
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this
+          # header.
           betas: nil,
           # Optional header to select the Workspace for this request. The value is a
           # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

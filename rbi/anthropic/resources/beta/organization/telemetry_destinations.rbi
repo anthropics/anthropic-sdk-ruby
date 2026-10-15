@@ -72,7 +72,8 @@ module Anthropic
             # Body param: The settings for the traces that the destination receives. If you
             # leave it out, every setting takes its default.
             traces: nil,
-            # Header param: Optional header to specify the beta version(s) you want to use.
+            # Header param: This endpoint is in beta: requests must send
+            # `telemetry-destinations-2026-08-11` in this header.
             betas: nil,
             request_options: {}
           )
@@ -94,7 +95,8 @@ module Anthropic
           def retrieve(
             # ID of the destination (`tdst_...`).
             destination_id,
-            # Optional header to specify the beta version(s) you want to use.
+            # This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11`
+            # in this header.
             betas: nil,
             request_options: {}
           )
@@ -186,7 +188,8 @@ module Anthropic
             # the destination's list has more than 750 workspaces. Remove workspaces one at a
             # time until 750 or fewer remain, then send the update again.
             workspaces: nil,
-            # Header param: Optional header to specify the beta version(s) you want to use.
+            # Header param: This endpoint is in beta: requests must send
+            # `telemetry-destinations-2026-08-11` in this header.
             betas: nil,
             request_options: {}
           )
@@ -228,7 +231,8 @@ module Anthropic
             # match. An ID that isn't the ID of one of the organization's workspaces doesn't
             # match any destination, not even one whose type is `all`.
             workspace_ids: nil,
-            # Header param: Optional header to specify the beta version(s) you want to use.
+            # Header param: This endpoint is in beta: requests must send
+            # `telemetry-destinations-2026-08-11` in this header.
             betas: nil,
             request_options: {}
           )
@@ -256,7 +260,8 @@ module Anthropic
           def delete(
             # ID of the destination (`tdst_...`).
             destination_id,
-            # Optional header to specify the beta version(s) you want to use.
+            # This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11`
+            # in this header.
             betas: nil,
             request_options: {}
           )
@@ -283,7 +288,8 @@ module Anthropic
           def test_(
             # ID of the destination to test (starts with `tdst_`).
             destination_id,
-            # Optional header to specify the beta version(s) you want to use.
+            # This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11`
+            # in this header.
             betas: nil,
             request_options: {}
           )

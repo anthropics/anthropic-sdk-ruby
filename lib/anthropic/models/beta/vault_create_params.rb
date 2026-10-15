@@ -22,7 +22,8 @@ module Anthropic
         optional :metadata, Anthropic::Internal::Type::HashOf[String]
 
         # @!attribute betas
-        #   Optional header to specify the beta version(s) you want to use.
+        #   This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+        #   header.
         #
         #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
@@ -46,7 +47,7 @@ module Anthropic
         #
         #   @param metadata [Hash{Symbol=>String}] Arbitrary key-value metadata to attach to the vault. Maximum 16 pairs, keys up t
         #
-        #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
         #
         #   @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #

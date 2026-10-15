@@ -37,7 +37,8 @@ module Anthropic
             # operations default to `full`; list, create, and update operations default to
             # `basic`. Listing with `view=full` caps `limit` at 20.
             view: nil,
-            # Header param: Optional header to specify the beta version(s) you want to use.
+            # Header param: This endpoint is in beta: requests must send
+            # `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
             betas: nil,
             # Header param: Optional header to select the Workspace for this request. The
             # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -74,7 +75,8 @@ module Anthropic
             # operations default to `full`; list, create, and update operations default to
             # `basic`. Listing with `view=full` caps `limit` at 20.
             view: nil,
-            # Header param: Optional header to specify the beta version(s) you want to use.
+            # Header param: This endpoint is in beta: requests must send
+            # `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
             betas: nil,
             # Header param: Optional header to select the Workspace for this request. The
             # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -130,7 +132,8 @@ module Anthropic
             # request returns `memory_precondition_failed_error` (HTTP 409). When omitted, the
             # update is unconditional.
             precondition: nil,
-            # Header param: Optional header to specify the beta version(s) you want to use.
+            # Header param: This endpoint is in beta: requests must send
+            # `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
             betas: nil,
             # Header param: Optional header to select the Workspace for this request. The
             # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -186,7 +189,8 @@ module Anthropic
             # (content omitted). `full` populates `content` on each item and caps `limit` at
             # 20; use this as the bulk-read path for export and sync.
             view: nil,
-            # Header param: Optional header to specify the beta version(s) you want to use.
+            # Header param: This endpoint is in beta: requests must send
+            # `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
             betas: nil,
             # Header param: Optional header to select the Workspace for this request. The
             # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -225,7 +229,8 @@ module Anthropic
             # If the hashes differ, the request fails with HTTP status 409 and nothing is
             # deleted.
             expected_content_sha256: nil,
-            # Header param: Optional header to specify the beta version(s) you want to use.
+            # Header param: This endpoint is in beta: requests must send
+            # `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
             betas: nil,
             # Header param: Optional header to select the Workspace for this request. The
             # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

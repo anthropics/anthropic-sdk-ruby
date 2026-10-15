@@ -30,7 +30,7 @@ module Anthropic
           #
           # @param types [Array<Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEventType>] Query param: Filter by event type. Values match the `type` field on returned eve
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
@@ -96,7 +96,7 @@ module Anthropic
           #
           # @param events [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolResultEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSystemMessageEventParams>] Body param: Events to send to the `session`.
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
@@ -132,7 +132,7 @@ module Anthropic
           #
           # @param event_deltas [Array<Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeltaType>] Query param: When set, this connection also receives streaming deltas (`event_st
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #

@@ -20,7 +20,7 @@ module Anthropic
           #
           # @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Query param: Selects which projection of a `memory` or `memory_version` the serv
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `agent-memory-2026-07
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
@@ -63,7 +63,7 @@ module Anthropic
           #
           # @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Query param: Selects which projection of a `memory` or `memory_version` the serv
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `agent-memory-2026-07
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
@@ -119,7 +119,7 @@ module Anthropic
           #
           # @param precondition [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsPrecondition] Body param: Optional optimistic-concurrency precondition. When supplied, the upd
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `agent-memory-2026-07
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
@@ -174,7 +174,7 @@ module Anthropic
           #
           # @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Query param: Which projection of each `memory` to return. Defaults to `basic` (c
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `agent-memory-2026-07
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
@@ -219,7 +219,7 @@ module Anthropic
           #
           # @param expected_content_sha256 [String] Query param: Delete the memory only if its current `content_sha256` equals this
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `agent-memory-2026-07
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #

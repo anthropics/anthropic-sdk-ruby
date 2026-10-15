@@ -29,7 +29,8 @@ module Anthropic
             # Body param: PEM-encoded X.509 CA certificate. Must contain exactly one
             # certificate and no private-key material. Maximum 8KB.
             ca_certificate_pem:,
-            # Header param: Optional header to specify the beta version(s) you want to use.
+            # Header param: This endpoint is in beta: requests must send
+            # `mcp-tunnels-2026-06-22` in this header.
             betas: nil,
             # Header param: Optional header to select the Workspace for this request. The
             # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -63,7 +64,8 @@ module Anthropic
             certificate_id,
             # Path param: ID of the tunnel (`tnl_...`).
             tunnel_id:,
-            # Header param: Optional header to specify the beta version(s) you want to use.
+            # Header param: This endpoint is in beta: requests must send
+            # `mcp-tunnels-2026-06-22` in this header.
             betas: nil,
             # Header param: Optional header to select the Workspace for this request. The
             # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -111,7 +113,8 @@ module Anthropic
             # Query param: Opaque pagination cursor from a previous `list_tunnel_certificates`
             # response.
             page: nil,
-            # Header param: Optional header to specify the beta version(s) you want to use.
+            # Header param: This endpoint is in beta: requests must send
+            # `mcp-tunnels-2026-06-22` in this header.
             betas: nil,
             # Header param: Optional header to select the Workspace for this request. The
             # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -148,7 +151,8 @@ module Anthropic
             certificate_id,
             # Path param: ID of the tunnel (`tnl_...`).
             tunnel_id:,
-            # Header param: Optional header to specify the beta version(s) you want to use.
+            # Header param: This endpoint is in beta: requests must send
+            # `mcp-tunnels-2026-06-22` in this header.
             betas: nil,
             # Header param: Optional header to select the Workspace for this request. The
             # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

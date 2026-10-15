@@ -105,7 +105,8 @@ module Anthropic
           end
           attr_writer :types
 
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+          # header.
           sig do
             returns(
               T.nilable(
@@ -178,7 +179,8 @@ module Anthropic
             # Filter by event type. Values match the `type` field on returned events (for
             # example, `user.message` or `agent.tool_use`). Omit to return all event types.
             types: nil,
-            # Optional header to specify the beta version(s) you want to use.
+            # This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+            # header.
             betas: nil,
             # Optional header to select the Workspace for this request. The value is a
             # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

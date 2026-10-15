@@ -46,7 +46,8 @@ module Anthropic
           end
           attr_writer :view
 
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `agent-memory-2026-07-22` or
+          # `managed-agents-2026-04-01` in this header.
           sig do
             returns(
               T.nilable(
@@ -98,7 +99,8 @@ module Anthropic
             # default to `full`; list, create, and update operations default to `basic`.
             # Listing with `view=full` caps `limit` at 20.
             view: nil,
-            # Optional header to specify the beta version(s) you want to use.
+            # This endpoint is in beta: requests must send `agent-memory-2026-07-22` or
+            # `managed-agents-2026-04-01` in this header.
             betas: nil,
             # Optional header to select the Workspace for this request. The value is a
             # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

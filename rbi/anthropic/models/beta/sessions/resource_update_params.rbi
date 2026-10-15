@@ -27,7 +27,8 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :authorization_token
 
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+          # header.
           sig do
             returns(
               T.nilable(
@@ -73,7 +74,8 @@ module Anthropic
             # New authorization token for the resource. Currently only `github_repository`
             # resources support token rotation.
             authorization_token:,
-            # Optional header to specify the beta version(s) you want to use.
+            # This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+            # header.
             betas: nil,
             # Optional header to select the Workspace for this request. The value is a
             # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

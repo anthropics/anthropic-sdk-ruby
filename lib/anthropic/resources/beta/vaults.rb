@@ -18,7 +18,7 @@ module Anthropic
         #
         # @param metadata [Hash{Symbol=>String}] Body param: Arbitrary key-value metadata to attach to the vault. Maximum 16 pair
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -52,7 +52,7 @@ module Anthropic
         #
         # @param vault_id [String] Unique identifier of the vault to retrieve.
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
         #
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
@@ -88,7 +88,7 @@ module Anthropic
         #
         # @param metadata [Hash{Symbol=>String, nil}, nil] Body param: Metadata patch. Set a key to a string to upsert it, or to null to de
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -126,7 +126,7 @@ module Anthropic
         #
         # @param page [String] Query param: Opaque pagination token from a previous `list_vaults` response.
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -165,7 +165,7 @@ module Anthropic
         #
         # @param vault_id [String] Unique identifier of the vault to delete.
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
         #
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
@@ -197,7 +197,7 @@ module Anthropic
         #
         # @param vault_id [String] Unique identifier of the vault to archive.
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
         #
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #

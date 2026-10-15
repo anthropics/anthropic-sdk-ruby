@@ -15,7 +15,8 @@ module Anthropic
         optional :display_name, String, nil?: true
 
         # @!attribute betas
-        #   Optional header to specify the beta version(s) you want to use.
+        #   This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this
+        #   header.
         #
         #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
@@ -37,7 +38,7 @@ module Anthropic
         #
         #   @param display_name [String, nil] Optional human-readable name for the tunnel (1-255 characters).
         #
-        #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this he
         #
         #   @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #

@@ -25,7 +25,8 @@ module Anthropic
             sig { returns(String) }
             attr_accessor :workspace_id
 
-            # Optional header to specify the beta version(s) you want to use.
+            # This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11`
+            # in this header.
             sig do
               returns(
                 T.nilable(
@@ -57,7 +58,8 @@ module Anthropic
               destination_id:,
               # ID of the workspace to add (`wrkspc_...`).
               workspace_id:,
-              # Optional header to specify the beta version(s) you want to use.
+              # This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11`
+              # in this header.
               betas: nil,
               request_options: {}
             )

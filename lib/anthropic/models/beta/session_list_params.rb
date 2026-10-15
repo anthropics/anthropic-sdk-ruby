@@ -91,7 +91,8 @@ module Anthropic
                  -> { Anthropic::Internal::Type::ArrayOf[enum: Anthropic::Beta::SessionListParams::Status] }
 
         # @!attribute betas
-        #   Optional header to specify the beta version(s) you want to use.
+        #   This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+        #   header.
         #
         #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
@@ -137,7 +138,7 @@ module Anthropic
         #
         #   @param statuses [Array<Symbol, Anthropic::Models::Beta::SessionListParams::Status>] Filter by session status. Repeat the parameter to match any of multiple statuses
         #
-        #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
         #
         #   @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #

@@ -63,7 +63,8 @@ module Anthropic
           optional :traces, -> { Anthropic::Beta::Organization::BetaTelemetryDestinationTracesParams }
 
           # @!attribute betas
-          #   Optional header to specify the beta version(s) you want to use.
+          #   This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11`
+          #   in this header.
           #
           #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
           optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
@@ -83,7 +84,7 @@ module Anthropic
           #
           #   @param traces [Anthropic::Models::Beta::Organization::BetaTelemetryDestinationTracesParams] The settings for the traces that the destination receives. If you leave it out,
           #
-          #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11`
           #
           #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
         end

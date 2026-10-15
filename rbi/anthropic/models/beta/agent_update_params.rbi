@@ -154,7 +154,8 @@ module Anthropic
         sig { params(version: Integer).void }
         attr_writer :version
 
-        # Optional header to specify the beta version(s) you want to use.
+        # This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+        # header.
         sig do
           returns(
             T.nilable(
@@ -282,7 +283,8 @@ module Anthropic
           # supplied, the request fails if it does not match the server's current version;
           # omit to apply the update unconditionally.
           version: nil,
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+          # header.
           betas: nil,
           # Optional header to select the Workspace for this request. The value is a
           # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

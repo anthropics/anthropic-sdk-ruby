@@ -23,7 +23,7 @@ module Anthropic
         #
         # @param metadata [Hash{Symbol=>String}] Body param: Arbitrary key-value tags for your own bookkeeping (such as the end u
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `agent-memory-2026-07
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -57,7 +57,7 @@ module Anthropic
         #
         # @param memory_store_id [String] ID of the memory store to retrieve (a `memstore_...` identifier). Required. Enum
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `manag
         #
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
@@ -95,7 +95,7 @@ module Anthropic
         #
         # @param name [String, nil] Body param: New human-readable name for the store. 1–255 characters; no control
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `agent-memory-2026-07
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -137,7 +137,7 @@ module Anthropic
         #
         # @param page [String] Query param: Opaque pagination cursor (a `page_...` value). Pass the `next_page`
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `agent-memory-2026-07
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -176,7 +176,7 @@ module Anthropic
         #
         # @param memory_store_id [String] ID of the memory store to permanently delete (a `memstore_...` identifier). Requ
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `manag
         #
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
@@ -208,7 +208,7 @@ module Anthropic
         #
         # @param memory_store_id [String] ID of the memory store to archive (a `memstore_...` identifier). Required. Archi
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `manag
         #
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #

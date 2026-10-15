@@ -23,7 +23,8 @@ module Anthropic
         sig { returns(T.nilable(String)) }
         attr_accessor :reason
 
-        # Optional header to specify the beta version(s) you want to use.
+        # This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this
+        # header.
         sig do
           returns(
             T.nilable(
@@ -66,7 +67,8 @@ module Anthropic
           tunnel_id:,
           # Optional free-text reason for the rotation, recorded for audit.
           reason: nil,
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this
+          # header.
           betas: nil,
           # Optional header to select the Workspace for this request. The value is a
           # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

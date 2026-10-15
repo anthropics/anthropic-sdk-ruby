@@ -45,7 +45,8 @@ module Anthropic
           sig { params(workspace_ids: T::Array[String]).void }
           attr_writer :workspace_ids
 
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11`
+          # in this header.
           sig do
             returns(
               T.nilable(
@@ -87,7 +88,8 @@ module Anthropic
             # match. An ID that isn't the ID of one of the organization's workspaces doesn't
             # match any destination, not even one whose type is `all`.
             workspace_ids: nil,
-            # Optional header to specify the beta version(s) you want to use.
+            # This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11`
+            # in this header.
             betas: nil,
             request_options: {}
           )

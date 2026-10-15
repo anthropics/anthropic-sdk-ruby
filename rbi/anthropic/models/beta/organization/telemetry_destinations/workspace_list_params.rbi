@@ -36,7 +36,8 @@ module Anthropic
             sig { params(page: String).void }
             attr_writer :page
 
-            # Optional header to specify the beta version(s) you want to use.
+            # This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11`
+            # in this header.
             sig do
               returns(
                 T.nilable(
@@ -72,7 +73,8 @@ module Anthropic
               # Opaque cursor from a previous response's `next_page`. Leave it out to get the
               # first page.
               page: nil,
-              # Optional header to specify the beta version(s) you want to use.
+              # This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11`
+              # in this header.
               betas: nil,
               request_options: {}
             )

@@ -36,7 +36,7 @@ module Anthropic
         #
         # @param vault_ids [Array<String>] Body param: Vault IDs for stored credentials the agent can use during the sessio
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -70,7 +70,7 @@ module Anthropic
         #
         # @param session_id [String]
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
         #
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
@@ -112,7 +112,7 @@ module Anthropic
         #
         # @param vault_ids [Array<String>] Body param: Vault IDs (`vlt_*`) to attach to the session. Not yet supported; req
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -170,7 +170,7 @@ module Anthropic
         #
         # @param statuses [Array<Symbol, Anthropic::Models::Beta::SessionListParams::Status>] Query param: Filter by session status. Repeat the parameter to match any of mult
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -243,7 +243,7 @@ module Anthropic
         #
         # @param session_id [String]
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
         #
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
@@ -275,7 +275,7 @@ module Anthropic
         #
         # @param session_id [String]
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
         #
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #

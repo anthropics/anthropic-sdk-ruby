@@ -60,7 +60,8 @@ module Anthropic
           # Body param: Which memory store a dream writes its result to. Defaults to
           # `create_new` when left out of a create request.
           output_behavior: nil,
-          # Header param: Optional header to specify the beta version(s) you want to use.
+          # Header param: This endpoint is in beta: requests must send `dreaming-2026-04-21`
+          # in this header.
           betas: nil,
           # Header param: Optional header to select the Workspace for this request. The
           # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -91,7 +92,8 @@ module Anthropic
         def retrieve(
           # The ID of the dream to get (`drm_...`).
           dream_id,
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `dreaming-2026-04-21` in this
+          # header.
           betas: nil,
           # Optional header to select the Workspace for this request. The value is a
           # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -146,7 +148,8 @@ module Anthropic
           # Repeat the parameter to give more than one status. Leave it out to return dreams
           # of every status.
           statuses: nil,
-          # Header param: Optional header to specify the beta version(s) you want to use.
+          # Header param: This endpoint is in beta: requests must send `dreaming-2026-04-21`
+          # in this header.
           betas: nil,
           # Header param: Optional header to select the Workspace for this request. The
           # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -180,7 +183,8 @@ module Anthropic
         def archive(
           # The ID of the dream to archive (`drm_...`).
           dream_id,
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `dreaming-2026-04-21` in this
+          # header.
           betas: nil,
           # Optional header to select the Workspace for this request. The value is a
           # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -214,7 +218,8 @@ module Anthropic
         def cancel(
           # The ID of the dream to cancel (`drm_...`).
           dream_id,
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `dreaming-2026-04-21` in this
+          # header.
           betas: nil,
           # Optional header to select the Workspace for this request. The value is a
           # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

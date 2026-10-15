@@ -57,7 +57,8 @@ module Anthropic
             # events (for example, `user.message` or `agent.tool_use`). Omit to return all
             # event types.
             types: nil,
-            # Header param: Optional header to specify the beta version(s) you want to use.
+            # Header param: This endpoint is in beta: requests must send
+            # `managed-agents-2026-04-01` in this header.
             betas: nil,
             # Header param: Optional header to select the Workspace for this request. The
             # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -99,7 +100,8 @@ module Anthropic
             session_id,
             # Body param: Events to send to the `session`.
             events:,
-            # Header param: Optional header to specify the beta version(s) you want to use.
+            # Header param: This endpoint is in beta: requests must send
+            # `managed-agents-2026-04-01` in this header.
             betas: nil,
             # Header param: Optional header to select the Workspace for this request. The
             # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -143,7 +145,8 @@ module Anthropic
             # the `agent.thinking` event itself. Only previews of the requested event types
             # are sent.
             event_deltas: nil,
-            # Header param: Optional header to specify the beta version(s) you want to use.
+            # Header param: This endpoint is in beta: requests must send
+            # `managed-agents-2026-04-01` in this header.
             betas: nil,
             # Header param: Optional header to select the Workspace for this request. The
             # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

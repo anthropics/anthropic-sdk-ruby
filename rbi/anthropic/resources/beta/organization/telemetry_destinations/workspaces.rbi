@@ -37,7 +37,8 @@ module Anthropic
               # Query param: Opaque cursor from a previous response's `next_page`. Leave it out
               # to get the first page.
               page: nil,
-              # Header param: Optional header to specify the beta version(s) you want to use.
+              # Header param: This endpoint is in beta: requests must send
+              # `telemetry-destinations-2026-08-11` in this header.
               betas: nil,
               request_options: {}
             )
@@ -73,7 +74,8 @@ module Anthropic
               workspace_id,
               # Path param: ID of the destination (`tdst_...`).
               destination_id:,
-              # Header param: Optional header to specify the beta version(s) you want to use.
+              # Header param: This endpoint is in beta: requests must send
+              # `telemetry-destinations-2026-08-11` in this header.
               betas: nil,
               request_options: {}
             )
@@ -106,7 +108,8 @@ module Anthropic
               workspace_id,
               # Path param: ID of the destination (`tdst_...`).
               destination_id:,
-              # Header param: Optional header to specify the beta version(s) you want to use.
+              # Header param: This endpoint is in beta: requests must send
+              # `telemetry-destinations-2026-08-11` in this header.
               betas: nil,
               request_options: {}
             )

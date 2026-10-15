@@ -51,7 +51,9 @@ module Anthropic
           # Claude access to (`access_type` `passthrough`), that company's name where known.
           # Maximum 255 characters.
           name: nil,
-          # Header param: Optional header to specify the beta version(s) you want to use.
+          # Header param: This endpoint is in beta: requests must send
+          # `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or
+          # `user-profiles-2026-09-04` in this header.
           betas: nil,
           # Header param: Optional header to select the Workspace for this request. The
           # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -76,7 +78,8 @@ module Anthropic
         def retrieve(
           # The ID of the user profile to get (`uprof_...`).
           user_profile_id,
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `user-profiles-2026-03-24`,
+          # `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
           betas: nil,
           # Optional header to select the Workspace for this request. The value is a
           # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -138,7 +141,9 @@ module Anthropic
           # Body param: If present, replaces the stored name. Omit to leave unchanged.
           # Maximum 255 characters.
           name: nil,
-          # Header param: Optional header to specify the beta version(s) you want to use.
+          # Header param: This endpoint is in beta: requests must send
+          # `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or
+          # `user-profiles-2026-09-04` in this header.
           betas: nil,
           # Header param: Optional header to select the Workspace for this request. The
           # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -180,7 +185,9 @@ module Anthropic
           #
           # Leave it out to get the first page.
           page: nil,
-          # Header param: Optional header to specify the beta version(s) you want to use.
+          # Header param: This endpoint is in beta: requests must send
+          # `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or
+          # `user-profiles-2026-09-04` in this header.
           betas: nil,
           # Header param: Optional header to select the Workspace for this request. The
           # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -205,7 +212,8 @@ module Anthropic
         def create_enrollment_url(
           # The ID of the user profile to create an enrollment URL for (`uprof_...`).
           user_profile_id,
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `user-profiles-2026-03-24`,
+          # `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
           betas: nil,
           # Optional header to select the Workspace for this request. The value is a
           # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

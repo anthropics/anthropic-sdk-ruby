@@ -29,7 +29,7 @@ module Anthropic
         #
         # @param output_behavior [Anthropic::Models::Beta::BetaOutputBehaviorCreateNew, Anthropic::Models::Beta::BetaOutputBehaviorUpdateExisting] Body param: Which memory store a dream writes its result to. Defaults to `create
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `dreaming-2026-04-21`
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -69,7 +69,7 @@ module Anthropic
         #
         # @param dream_id [String] The ID of the dream to get (`drm_...`).
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `dreaming-2026-04-21` in this heade
         #
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
@@ -117,7 +117,7 @@ module Anthropic
         #
         # @param statuses [Array<Symbol, Anthropic::Models::Beta::BetaDreamStatus>] Query param: Return only dreams that have one of these statuses.
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `dreaming-2026-04-21`
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -165,7 +165,7 @@ module Anthropic
         #
         # @param dream_id [String] The ID of the dream to archive (`drm_...`).
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `dreaming-2026-04-21` in this heade
         #
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
@@ -206,7 +206,7 @@ module Anthropic
         #
         # @param dream_id [String] The ID of the dream to cancel (`drm_...`).
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `dreaming-2026-04-21` in this heade
         #
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #

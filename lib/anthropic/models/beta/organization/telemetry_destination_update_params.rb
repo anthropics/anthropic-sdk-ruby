@@ -86,7 +86,8 @@ module Anthropic
                    union: -> { Anthropic::Beta::Organization::BetaTelemetryDestinationWorkspacesParams }
 
           # @!attribute betas
-          #   Optional header to specify the beta version(s) you want to use.
+          #   This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11`
+          #   in this header.
           #
           #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
           optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
@@ -110,7 +111,7 @@ module Anthropic
           #
           #   @param workspaces [Anthropic::Models::Beta::Organization::BetaTelemetryDestinationWorkspacesAllParams, Anthropic::Models::Beta::Organization::BetaTelemetryDestinationWorkspacesIncludeParams, Anthropic::Models::Beta::Organization::BetaTelemetryDestinationWorkspacesExcludeParams] The new workspace scope, in the same form as on create. The field can't be `null
           #
-          #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11`
           #
           #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
         end

@@ -23,7 +23,7 @@ module Anthropic
         #
         # @param name [String, nil] Body param: Optional for all profiles. Real-world name of the entity this profil
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `user-profiles-2026-0
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -57,7 +57,7 @@ module Anthropic
         #
         # @param user_profile_id [String] The ID of the user profile to get (`uprof_...`).
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `user-profiles-2026-03-24`, `user-p
         #
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
@@ -101,7 +101,7 @@ module Anthropic
         #
         # @param name [String, nil] Body param: If present, replaces the stored name. Omit to leave unchanged. Maxim
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `user-profiles-2026-0
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -141,7 +141,7 @@ module Anthropic
         #
         # @param page [String] Query param: The cursor for the page to return, taken from `next_page` in a prev
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `user-profiles-2026-0
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -181,7 +181,7 @@ module Anthropic
         #
         # @param user_profile_id [String] The ID of the user profile to create an enrollment URL for (`uprof_...`).
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `user-profiles-2026-03-24`, `user-p
         #
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #

@@ -22,7 +22,8 @@ module Anthropic
           required :certificate_id, String
 
           # @!attribute betas
-          #   Optional header to specify the beta version(s) you want to use.
+          #   This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this
+          #   header.
           #
           #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
           optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
@@ -46,7 +47,7 @@ module Anthropic
           #
           #   @param certificate_id [String] ID of the certificate to archive (`tcrt_...`).
           #
-          #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this he
           #
           #   @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
           #

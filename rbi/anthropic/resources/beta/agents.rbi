@@ -88,7 +88,8 @@ module Anthropic
           # Body param: Tool configurations available to the agent. Maximum of 256 tools
           # across all toolsets allowed.
           tools: nil,
-          # Header param: Optional header to specify the beta version(s) you want to use.
+          # Header param: This endpoint is in beta: requests must send
+          # `managed-agents-2026-04-01` in this header.
           betas: nil,
           # Header param: Optional header to select the Workspace for this request. The
           # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -117,7 +118,8 @@ module Anthropic
           # Query param: Agent version. Omit for the most recent version. Must be at least 1
           # if specified.
           version: nil,
-          # Header param: Optional header to specify the beta version(s) you want to use.
+          # Header param: This endpoint is in beta: requests must send
+          # `managed-agents-2026-04-01` in this header.
           betas: nil,
           # Header param: Optional header to select the Workspace for this request. The
           # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -232,7 +234,8 @@ module Anthropic
           # specified. When supplied, the request fails if it does not match the server's
           # current version; omit to apply the update unconditionally.
           version: nil,
-          # Header param: Optional header to specify the beta version(s) you want to use.
+          # Header param: This endpoint is in beta: requests must send
+          # `managed-agents-2026-04-01` in this header.
           betas: nil,
           # Header param: Optional header to select the Workspace for this request. The
           # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -273,7 +276,8 @@ module Anthropic
           limit: nil,
           # Query param: Opaque pagination cursor from a previous response.
           page: nil,
-          # Header param: Optional header to specify the beta version(s) you want to use.
+          # Header param: This endpoint is in beta: requests must send
+          # `managed-agents-2026-04-01` in this header.
           betas: nil,
           # Header param: Optional header to select the Workspace for this request. The
           # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -298,7 +302,8 @@ module Anthropic
         def archive(
           # Unique identifier of the agent to archive.
           agent_id,
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+          # header.
           betas: nil,
           # Optional header to select the Workspace for this request. The value is a
           # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

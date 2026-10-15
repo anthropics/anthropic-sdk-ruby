@@ -26,7 +26,8 @@ module Anthropic
         def create(
           # Body param: Optional human-readable name for the tunnel (1-255 characters).
           display_name: nil,
-          # Header param: Optional header to specify the beta version(s) you want to use.
+          # Header param: This endpoint is in beta: requests must send
+          # `mcp-tunnels-2026-06-22` in this header.
           betas: nil,
           # Header param: Optional header to select the Workspace for this request. The
           # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -56,7 +57,8 @@ module Anthropic
         def retrieve(
           # ID of the tunnel (`tnl_...`).
           tunnel_id,
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this
+          # header.
           betas: nil,
           # Optional header to select the Workspace for this request. The value is a
           # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -97,7 +99,8 @@ module Anthropic
           limit: nil,
           # Query param: Opaque pagination cursor from a previous `list_tunnels` response.
           page: nil,
-          # Header param: Optional header to specify the beta version(s) you want to use.
+          # Header param: This endpoint is in beta: requests must send
+          # `mcp-tunnels-2026-06-22` in this header.
           betas: nil,
           # Header param: Optional header to select the Workspace for this request. The
           # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -130,7 +133,8 @@ module Anthropic
         def archive(
           # ID of the tunnel (`tnl_...`).
           tunnel_id,
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this
+          # header.
           betas: nil,
           # Optional header to select the Workspace for this request. The value is a
           # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -163,7 +167,8 @@ module Anthropic
         def reveal_token(
           # ID of the tunnel (`tnl_...`).
           tunnel_id,
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this
+          # header.
           betas: nil,
           # Optional header to select the Workspace for this request. The value is a
           # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -198,7 +203,8 @@ module Anthropic
           tunnel_id,
           # Body param: Optional free-text reason for the rotation, recorded for audit.
           reason: nil,
-          # Header param: Optional header to specify the beta version(s) you want to use.
+          # Header param: This endpoint is in beta: requests must send
+          # `mcp-tunnels-2026-06-22` in this header.
           betas: nil,
           # Header param: Optional header to select the Workspace for this request. The
           # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

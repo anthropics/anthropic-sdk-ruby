@@ -47,7 +47,8 @@ module Anthropic
         optional :output_behavior, union: -> { Anthropic::Beta::BetaOutputBehavior }
 
         # @!attribute betas
-        #   Optional header to specify the beta version(s) you want to use.
+        #   This endpoint is in beta: requests must send `dreaming-2026-04-21` in this
+        #   header.
         #
         #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
@@ -75,7 +76,7 @@ module Anthropic
         #
         #   @param output_behavior [Anthropic::Models::Beta::BetaOutputBehaviorCreateNew, Anthropic::Models::Beta::BetaOutputBehaviorUpdateExisting] Which memory store a dream writes its result to. Defaults to `create_new` when l
         #
-        #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `dreaming-2026-04-21` in this heade
         #
         #   @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #

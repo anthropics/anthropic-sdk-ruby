@@ -23,7 +23,8 @@ module Anthropic
             resource_id,
             # Path param
             session_id:,
-            # Header param: Optional header to specify the beta version(s) you want to use.
+            # Header param: This endpoint is in beta: requests must send
+            # `managed-agents-2026-04-01` in this header.
             betas: nil,
             # Header param: Optional header to select the Workspace for this request. The
             # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -58,7 +59,8 @@ module Anthropic
             # Body param: New authorization token for the resource. Currently only
             # `github_repository` resources support token rotation.
             authorization_token:,
-            # Header param: Optional header to specify the beta version(s) you want to use.
+            # Header param: This endpoint is in beta: requests must send
+            # `managed-agents-2026-04-01` in this header.
             betas: nil,
             # Header param: Optional header to select the Workspace for this request. The
             # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -95,7 +97,8 @@ module Anthropic
             limit: nil,
             # Query param: Opaque cursor from a previous response's `next_page` field.
             page: nil,
-            # Header param: Optional header to specify the beta version(s) you want to use.
+            # Header param: This endpoint is in beta: requests must send
+            # `managed-agents-2026-04-01` in this header.
             betas: nil,
             # Header param: Optional header to select the Workspace for this request. The
             # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -126,7 +129,8 @@ module Anthropic
             resource_id,
             # Path param
             session_id:,
-            # Header param: Optional header to specify the beta version(s) you want to use.
+            # Header param: This endpoint is in beta: requests must send
+            # `managed-agents-2026-04-01` in this header.
             betas: nil,
             # Header param: Optional header to select the Workspace for this request. The
             # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -163,7 +167,8 @@ module Anthropic
             # Body param: Mount path in the container. Defaults to
             # `/mnt/session/uploads/<file_id>`.
             mount_path: nil,
-            # Header param: Optional header to specify the beta version(s) you want to use.
+            # Header param: This endpoint is in beta: requests must send
+            # `managed-agents-2026-04-01` in this header.
             betas: nil,
             # Header param: Optional header to select the Workspace for this request. The
             # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

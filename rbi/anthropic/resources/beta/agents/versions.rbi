@@ -28,7 +28,8 @@ module Anthropic
             limit: nil,
             # Query param: Opaque pagination cursor.
             page: nil,
-            # Header param: Optional header to specify the beta version(s) you want to use.
+            # Header param: This endpoint is in beta: requests must send
+            # `managed-agents-2026-04-01` in this header.
             betas: nil,
             # Header param: Optional header to select the Workspace for this request. The
             # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

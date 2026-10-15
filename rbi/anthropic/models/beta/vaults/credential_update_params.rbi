@@ -60,7 +60,8 @@ module Anthropic
           sig { returns(T.nilable(T::Hash[Symbol, T.nilable(String)])) }
           attr_accessor :metadata
 
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+          # header.
           sig do
             returns(
               T.nilable(
@@ -120,7 +121,8 @@ module Anthropic
             # Metadata patch. Set a key to a string to upsert it, or to null to delete it.
             # Omitted keys are preserved.
             metadata: nil,
-            # Optional header to specify the beta version(s) you want to use.
+            # This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+            # header.
             betas: nil,
             # Optional header to select the Workspace for this request. The value is a
             # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

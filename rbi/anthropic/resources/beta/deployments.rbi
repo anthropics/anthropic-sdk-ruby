@@ -77,7 +77,8 @@ module Anthropic
           # Body param: Vault IDs for stored credentials the agent can use during sessions
           # created from this deployment. Maximum 50.
           vault_ids: nil,
-          # Header param: Optional header to specify the beta version(s) you want to use.
+          # Header param: This endpoint is in beta: requests must send
+          # `managed-agents-2026-04-01` in this header.
           betas: nil,
           # Header param: Optional header to select the Workspace for this request. The
           # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -102,7 +103,8 @@ module Anthropic
         def retrieve(
           # Unique identifier of the deployment.
           deployment_id,
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+          # header.
           betas: nil,
           # Optional header to select the Workspace for this request. The value is a
           # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -195,7 +197,8 @@ module Anthropic
           # Body param: Vault IDs. Full replacement. Omit to preserve; send empty array or
           # null to clear. Maximum 50.
           vault_ids: nil,
-          # Header param: Optional header to specify the beta version(s) you want to use.
+          # Header param: This endpoint is in beta: requests must send
+          # `managed-agents-2026-04-01` in this header.
           betas: nil,
           # Header param: Optional header to select the Workspace for this request. The
           # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -246,7 +249,8 @@ module Anthropic
           # archived deployments, use `include_archived` instead; the two cannot be
           # combined.
           status: nil,
-          # Header param: Optional header to specify the beta version(s) you want to use.
+          # Header param: This endpoint is in beta: requests must send
+          # `managed-agents-2026-04-01` in this header.
           betas: nil,
           # Header param: Optional header to select the Workspace for this request. The
           # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -271,7 +275,8 @@ module Anthropic
         def archive(
           # Unique identifier of the deployment to archive.
           deployment_id,
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+          # header.
           betas: nil,
           # Optional header to select the Workspace for this request. The value is a
           # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -296,7 +301,8 @@ module Anthropic
         def pause(
           # Unique identifier of the deployment to pause.
           deployment_id,
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+          # header.
           betas: nil,
           # Optional header to select the Workspace for this request. The value is a
           # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -321,7 +327,8 @@ module Anthropic
         def run(
           # Unique identifier of the deployment to run.
           deployment_id,
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+          # header.
           betas: nil,
           # Optional header to select the Workspace for this request. The value is a
           # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -346,7 +353,8 @@ module Anthropic
         def unpause(
           # Unique identifier of the deployment to unpause.
           deployment_id,
-          # Optional header to specify the beta version(s) you want to use.
+          # This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+          # header.
           betas: nil,
           # Optional header to select the Workspace for this request. The value is a
           # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
