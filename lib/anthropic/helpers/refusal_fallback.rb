@@ -50,6 +50,10 @@ module Anthropic
   # beta this requires is sent by default on every request the middleware
   # handles; the `betas:` option controls this.
   #
+  # A `speed: "fast"` request that falls back to an entry with no `speed`, and
+  # is rejected with a 429 or 529, is retried once on that entry without
+  # `speed`. Set `speed: "fast"` on the entry to keep it fast-only.
+  #
   # To keep later requests on the model that accepted, pass a
   # {BetaFallbackState} via the `fallback_state` request option; requests
   # sharing that state start directly at the pinned fallback.
@@ -130,18 +134,18 @@ module Anthropic
       end
 
       streaming = req.streaming?
+      entry = @fallbacks.fetch(start_index) unless start_index == -1
       initial_body =
-        if start_index == -1
+        if entry.nil?
           body
         elsif streaming
           # Only `model` and `speed` are honored on the streaming path: the credit
           # token is tied to the refused request's body.
-          entry = @fallbacks.fetch(start_index)
           degrade_between_tools(patch(body, entry.slice(:speed)).merge(model: entry.fetch(:model)))
         else
-          apply_fallback(body, @fallbacks.fetch(start_index))
+          apply_fallback(body, entry)
         end
-      res = nxt.call(req.with(body: initial_body))
+      res = entry ? send_hop(req, nxt, entry, initial_body).first : nxt.call(req.with(body: initial_body))
       return res unless res.status < 300
 
       if streaming
@@ -277,6 +281,25 @@ module Anthropic
       {token: token, mode: Anthropic::Models::Beta::BetaFallbackCreditTokenParam::Mode::BEST_EFFORT}
     end
 
+    # Send a request built from `entry`. One that is fast only because the
+    # original request was, and is rejected with a 429 or 529, is resent once
+    # without `speed`, and that response stands in for the first.
+    #
+    # @param req [Anthropic::APIRequest]
+    # @param nxt [#call]
+    # @param entry [Hash{Symbol=>Object}]
+    # @param hop_body [Hash{Symbol=>Object}]
+    # @return [Array(Anthropic::APIResponse, Boolean)] the response, and whether
+    #   it answers the resend.
+    def send_hop(req, nxt, entry, hop_body)
+      res = nxt.call(req.with(body: hop_body))
+      return [res, false] unless [429, 529].include?(res.status)
+      return [res, false] if entry.key?(:speed) || hop_body[:speed].to_s != "fast"
+
+      Anthropic::Internal::Util.close_fused!(res.body)
+      [nxt.call(req.with(body: hop_body.except(:speed))), true]
+    end
+
     # --- non-streaming ------------------------------------------------------
 
     # @param req [Anthropic::APIRequest]
@@ -304,7 +327,7 @@ module Anthropic
         hop_body = hop_body.merge(fallback_credit_token: credit_token_param(token)) if token
 
         begin
-          hop_res = nxt.call(req.with(body: hop_body))
+          hop_res = send_hop(req, nxt, entry, hop_body).first
         rescue StandardError
           hop_res = nil
         end
@@ -360,7 +383,7 @@ module Anthropic
     # @param req [Anthropic::APIRequest]
     # @param res [Anthropic::APIResponse]
     # @param nxt [#call]
-    # @param body [Hash{Symbol=>Object}] the body sent for stream A
+    # @param body [Hash{Symbol=>Object}] the body built for stream A
     # @param first_hop [Integer]
     # @param pin [Proc]
     # @return [Anthropic::APIResponse]
@@ -405,7 +428,7 @@ module Anthropic
         has_next = hop + 1 < @fallbacks.length
 
         hop_body = degrade_between_tools(patch(body, entry.slice(:speed)))
-        res_b, sent, failed = issue_hop(req, nxt, hop_body, model, token, base, partial)
+        res_b, sent, failed = issue_hop(req, nxt, hop_body, entry, token, base, partial)
 
         if failed
           next if has_next
@@ -468,15 +491,19 @@ module Anthropic
       end
     end
 
-    # Issue one fallback hop with a single 400-on-prefill retry.
+    # Issue one fallback hop with a single 400-on-prefill retry, which stays
+    # without `speed` once the hop has been resent without it.
     #
     # @return [Array(Anthropic::APIResponse, Array<Hash>, false), Array(nil, Array<Hash>, true)]
     #   the response, the continuation actually sent (`base + partial`, or
     #   `base` if the prefill was dropped on retry), and whether the hop failed.
-    def issue_hop(req, nxt, body, model, token, base, partial)
+    def issue_hop(req, nxt, body, entry, token, base, partial)
       continuation = base + partial
       2.times do |attempt|
-        hop_body = body.merge(model: model, fallback_credit_token: credit_token_param(token))
+        hop_body = body.merge(
+          model: entry.fetch(:model).to_s,
+          fallback_credit_token: credit_token_param(token)
+        )
         unless continuation.empty?
           hop_body = hop_body.merge(
             messages: body.fetch(:messages) + [{role: :assistant, content: continuation}]
@@ -484,10 +511,11 @@ module Anthropic
         end
 
         begin
-          res = nxt.call(req.with(body: hop_body))
+          res, resent = send_hop(req, nxt, entry, hop_body)
         rescue StandardError
           return [nil, continuation, true]
         end
+        body = body.except(:speed) if resent
         return [res, continuation, false] if res.status < 300
 
         if attempt.zero? && res.status == 400 && !partial.empty?

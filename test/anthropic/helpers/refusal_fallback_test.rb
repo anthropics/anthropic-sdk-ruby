@@ -17,7 +17,13 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
     WebMock.enable!
   end
 
+  def setup
+    super
+    Thread.current.thread_variable_set(:mock_sleep, [])
+  end
+
   def teardown
+    Thread.current.thread_variable_set(:mock_sleep, nil)
     WebMock.reset!
     super
   end
@@ -1184,5 +1190,264 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
     assert_equal(3, @bodies.length)
     assert(@bodies[1]["messages"].any? { _1["role"] == "assistant" })
     refute(@bodies[2]["messages"].any? { _1["role"] == "assistant" })
+  end
+
+  # — a rejected fast fallback is resent without `speed` —
+
+  ERROR_TYPES = {
+    400 => "invalid_request_error",
+    429 => "rate_limit_error",
+    500 => "api_error",
+    529 => "overloaded_error"
+  }.freeze
+
+  def stub_sequence(*responses)
+    stub_request(:post, "http://localhost/v1/messages?beta=true")
+      .with do |req|
+      @bodies << JSON.parse(req.body)
+      true
+    end
+      .to_return(*responses)
+  end
+
+  def json_response(body, status: 200)
+    {status: status, headers: {"content-type" => "application/json"}, body: JSON.generate(body)}
+  end
+
+  def sse_response(body)
+    {status: 200, headers: {"content-type" => "text/event-stream"}, body: body}
+  end
+
+  def error_response(status)
+    json_response(
+      {type: "error", error: {type: ERROR_TYPES.fetch(status), message: "rejected"}},
+      status: status
+    )
+  end
+
+  def refusal_response(method, model, token:)
+    return sse_response(refusal_stream(model, token: token)) if method == :stream_raw
+    json_response(refusal_body(model, fallback_credit_token: token))
+  end
+
+  def accept_response(method, model)
+    return sse_response(accept_stream(model, text: "ok")) if method == :stream_raw
+    json_response(message_body(model, content: [{type: "text", text: "ok"}]))
+  end
+
+  # @return [Hash{Symbol=>Object}] the `stop_reason` and text the caller received
+  def send_message(method, client, **params)
+    if method == :stream_raw
+      events = client.beta.messages.stream_raw(**PARAMS, **params).to_a
+      return {
+        stop_reason: events.find { _1.type == :message_delta }.delta.stop_reason,
+        text: events.select { _1.type == :content_block_delta }.map { _1.delta.text }.join
+      }
+    end
+    message = client.beta.messages.create(**PARAMS, **params)
+    {stop_reason: message.stop_reason, text: message.content.select { _1.type == :text }.map(&:text).join}
+  end
+
+  def resends_a_rejected_fast_hop_without_speed(method, status, speed)
+    stub_sequence(
+      refusal_response(method, "primary-model", token: "tok"),
+      error_response(status),
+      accept_response(method, "fallback-model")
+    )
+    client = make_client([{model: "fallback-model"}])
+    state = Anthropic::BetaFallbackState.new
+
+    result = send_message(method, client, speed: speed, request_options: {fallback_state: state})
+
+    assert_equal(%w[primary-model fallback-model fallback-model], @bodies.map { _1["model"] })
+    assert_equal("fast", @bodies[1]["speed"])
+    refute(@bodies[2].key?("speed"))
+    assert_equal({"token" => "tok", "mode" => "best_effort"}, @bodies[2]["fallback_credit_token"])
+    assert_equal(@bodies[1].except("speed"), @bodies[2])
+    assert_equal({stop_reason: :end_turn, text: "ok"}, result)
+    assert_equal(0, state.index)
+  end
+
+  def never_resends(method, entry:, params:, status:)
+    stub_sequence(refusal_response(method, "primary-model", token: "tok"), error_response(status))
+    client = make_client([{model: "fallback-model", **entry}])
+    state = Anthropic::BetaFallbackState.new
+
+    result = send_message(method, client, **params, request_options: {fallback_state: state})
+
+    assert_equal(%w[primary-model fallback-model], @bodies.map { _1["model"] })
+    assert_equal([params[:speed]&.to_s] * 2, @bodies.map { _1["speed"] })
+    assert_equal(:refusal, result.fetch(:stop_reason))
+    assert_nil(state.index)
+  end
+
+  def resends_a_fast_hop_only_once_then_skips_it(method)
+    stub_sequence(
+      refusal_response(method, "primary-model", token: "tok"),
+      error_response(429),
+      error_response(429),
+      accept_response(method, "last-model")
+    )
+    client = make_client([{model: "mid-model"}, {model: "last-model"}])
+    state = Anthropic::BetaFallbackState.new
+
+    result = send_message(method, client, speed: :fast, request_options: {fallback_state: state})
+
+    assert_equal(%w[primary-model mid-model mid-model last-model], @bodies.map { _1["model"] })
+    assert_equal(["fast", "fast", nil, "fast"], @bodies.map { _1["speed"] })
+    assert_equal({"token" => "tok", "mode" => "best_effort"}, @bodies[3]["fallback_credit_token"])
+    assert_equal({stop_reason: :end_turn, text: "ok"}, result)
+    assert_equal(1, state.index)
+  end
+
+  def resends_a_rejected_fast_pinned_start_without_speed(method)
+    stub_sequence(error_response(429), accept_response(method, "fallback-model"))
+    client = make_client([{model: "fallback-model"}])
+    state = Anthropic::BetaFallbackState.new
+    state.index = 0
+
+    result = send_message(method, client, speed: :fast, request_options: {fallback_state: state})
+
+    assert_equal(%w[fallback-model fallback-model], @bodies.map { _1["model"] })
+    assert_equal("fast", @bodies[0]["speed"])
+    refute(@bodies[1].key?("speed"))
+    assert_equal(@bodies[0].except("speed"), @bodies[1])
+    assert_equal({stop_reason: :end_turn, text: "ok"}, result)
+    assert_empty(Thread.current.thread_variable_get(:mock_sleep))
+  end
+
+  def surfaces_the_error_when_a_pinned_start_is_rejected_twice(method)
+    stub_sequence(error_response(429), error_response(429))
+    client = make_client([{model: "fallback-model"}])
+    state = Anthropic::BetaFallbackState.new
+    state.index = 0
+
+    assert_raises(Anthropic::Errors::RateLimitError) do
+      send_message(method, client, speed: :fast, request_options: {fallback_state: state, max_retries: 0})
+    end
+
+    assert_equal(["fast", nil], @bodies.map { _1["speed"] })
+  end
+
+  def never_resends_a_rejected_fast_primary_request(method)
+    stub_sequence(error_response(429))
+    client = make_client([{model: "fallback-model"}])
+
+    assert_raises(Anthropic::Errors::RateLimitError) do
+      send_message(method, client, speed: :fast, request_options: {max_retries: 0})
+    end
+
+    assert_equal(["fast"], @bodies.map { _1["speed"] })
+  end
+
+  NOT_RESENT = {
+    an_entry_that_sets_speed_to_fast: {entry: {speed: "fast"}, params: {speed: :fast}, status: 429},
+    a_request_without_speed: {entry: {}, params: {}, status: 429},
+    a_standard_request: {entry: {}, params: {speed: :standard}, status: 429},
+    a_fast_hop_rejected_with_400: {entry: {}, params: {speed: :fast}, status: 400},
+    a_fast_hop_rejected_with_500: {entry: {}, params: {speed: :fast}, status: 500}
+  }.freeze
+
+  RESEND_SCENARIOS = [
+    :resends_a_fast_hop_only_once_then_skips_it,
+    :resends_a_rejected_fast_pinned_start_without_speed,
+    :surfaces_the_error_when_a_pinned_start_is_rejected_twice,
+    :never_resends_a_rejected_fast_primary_request
+  ].freeze
+
+  [:create, :stream_raw].each do |method|
+    [429, 529].product([:fast, "fast"]).each do |status, speed|
+      define_method(:"test_#{method}_resends_a_#{speed.class}_fast_hop_rejected_with_#{status}") do
+        resends_a_rejected_fast_hop_without_speed(method, status, speed)
+      end
+    end
+    NOT_RESENT.each do |name, scenario|
+      define_method(:"test_#{method}_never_resends_#{name}") { never_resends(method, **scenario) }
+    end
+    RESEND_SCENARIOS.each do |scenario|
+      define_method(:"test_#{method}_#{scenario}") { send(scenario, method) }
+    end
+  end
+
+  def test_releases_the_rejected_fast_response_before_resending
+    stub_sequence(accept_response(:create, "fallback-model"))
+    released = false
+    reject_fast = lambda do |req, nxt|
+      next nxt.call(req) unless req.body.key?(:speed)
+      body = Anthropic::Internal::Util.fused_enum([error_response(429).fetch(:body)]) { released = true }
+      Anthropic::APIResponse.new(**error_response(429), body: body, request: req)
+    end
+    client = make_client([{model: "fallback-model"}])
+    state = Anthropic::BetaFallbackState.new
+    state.index = 0
+
+    client.beta.messages.create(
+      **PARAMS,
+      speed: :fast,
+      request_options: {fallback_state: state, middleware: [reject_fast]}
+    )
+
+    assert_equal(1, @bodies.length)
+    assert(released)
+  end
+
+  def test_streaming_resend_without_speed_keeps_the_prefill
+    stub_sequence(
+      sse_response(
+        refusal_stream("primary-model", token: "tok", partial_text: "partial ", has_prefill_claim: true)
+      ),
+      error_response(429),
+      accept_response(:stream_raw, "fallback-model")
+    )
+    client = make_client([{model: "fallback-model"}])
+
+    client.beta.messages.stream_raw(
+      **PARAMS,
+      speed: :fast,
+      request_options: {fallback_state: Anthropic::BetaFallbackState.new}
+    ).to_a
+
+    assert_equal(3, @bodies.length)
+    assert_equal(
+      {"role" => "assistant", "content" => [{"type" => "text", "text" => "partial "}]},
+      @bodies[2]["messages"].last
+    )
+    assert_equal(@bodies[1].except("speed"), @bodies[2])
+  end
+
+  {
+    stays_without_speed_when_the_prefill_is_then_dropped: [
+      [429, 400],
+      [{speed: true, prefill: true}, {speed: false, prefill: true}, {speed: false, prefill: false}]
+    ],
+    resends_without_speed_after_the_prefill_was_dropped: [
+      [400, 429],
+      [{speed: true, prefill: true}, {speed: true, prefill: false}, {speed: false, prefill: false}]
+    ]
+  }.each do |name, (statuses, hops)|
+    define_method(:"test_streaming_hop_#{name}") do
+      stub_sequence(
+        sse_response(
+          refusal_stream("primary-model", token: "tok", partial_text: "partial ", has_prefill_claim: true)
+        ),
+        *statuses.map { error_response(_1) },
+        accept_response(:stream_raw, "fallback-model")
+      )
+      client = make_client([{model: "fallback-model"}])
+      state = Anthropic::BetaFallbackState.new
+
+      result = nil
+      capture_io do
+        result = send_message(:stream_raw, client, speed: :fast, request_options: {fallback_state: state})
+      end
+
+      assert_equal(%w[primary-model] + (%w[fallback-model] * 3), @bodies.map { _1["model"] })
+      sent = @bodies.drop(1).map do
+        {speed: _1.key?("speed"), prefill: _1["messages"].last["role"] == "assistant"}
+      end
+      assert_equal(hops, sent)
+      assert_equal({stop_reason: :end_turn, text: "partial ok"}, result)
+      assert_equal(0, state.index)
+    end
   end
 end
