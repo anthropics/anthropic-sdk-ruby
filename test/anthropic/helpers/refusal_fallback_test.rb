@@ -1063,7 +1063,49 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
     assert_equal({"type" => "disabled"}, @bodies[1]["thinking"])
   end
 
-  def test_streaming_pinned_start_only_applies_model_from_the_entry
+  def test_streaming_entry_with_nil_speed_removes_speed_from_the_hop
+    stub_streams(refusal_stream("primary-model", token: "tok-1"), accept_stream("fallback-model", text: "ok"))
+    client = make_client([{model: "fallback-model", speed: nil}])
+
+    client.beta.messages.stream_raw(
+      **PARAMS,
+      speed: :fast,
+      request_options: {fallback_state: Anthropic::BetaFallbackState.new}
+    ).to_a
+
+    assert_equal("fast", @bodies[0]["speed"])
+    refute(@bodies[1].key?("speed"))
+    assert_equal("fallback-model", @bodies[1]["model"])
+    assert_equal({"token" => "tok-1", "mode" => "best_effort"}, @bodies[1]["fallback_credit_token"])
+  end
+
+  def test_streaming_entry_that_sets_speed_overrides_it_on_the_hop
+    stub_streams(refusal_stream("primary-model", token: "tok-1"), accept_stream("fallback-model", text: "ok"))
+    client = make_client([{model: "fallback-model", speed: :standard}])
+
+    client.beta.messages.stream_raw(
+      **PARAMS,
+      speed: :fast,
+      request_options: {fallback_state: Anthropic::BetaFallbackState.new}
+    ).to_a
+
+    assert_equal("standard", @bodies[1]["speed"])
+  end
+
+  def test_streaming_entry_without_speed_keeps_the_original_on_the_hop
+    stub_streams(refusal_stream("primary-model", token: "tok-1"), accept_stream("fallback-model", text: "ok"))
+    client = make_client([{model: "fallback-model"}])
+
+    client.beta.messages.stream_raw(
+      **PARAMS,
+      speed: :fast,
+      request_options: {fallback_state: Anthropic::BetaFallbackState.new}
+    ).to_a
+
+    assert_equal("fast", @bodies[1]["speed"])
+  end
+
+  def test_streaming_pinned_start_ignores_max_tokens_from_the_entry
     stub_streams(accept_stream("mid-model", text: "ok"))
     client = make_client([{model: "mid-model", max_tokens: 512}, {model: "last-model"}])
 
@@ -1073,6 +1115,42 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
 
     assert_equal("mid-model", @bodies[0]["model"])
     assert_equal(1024, @bodies[0]["max_tokens"])
+  end
+
+  def test_streaming_pinned_start_removes_speed_when_the_entry_sets_it_to_nil
+    stub_streams(accept_stream("mid-model", text: "ok"))
+    client = make_client([{model: "mid-model", speed: nil}, {model: "last-model"}])
+
+    state = Anthropic::BetaFallbackState.new
+    state.index = 0
+    client.beta.messages.stream_raw(**PARAMS, speed: :fast, request_options: {fallback_state: state}).to_a
+
+    assert_equal("mid-model", @bodies[0]["model"])
+    refute(@bodies[0].key?("speed"))
+  end
+
+  def test_streaming_pinned_start_applies_speed_from_the_entry
+    stub_streams(accept_stream("mid-model", text: "ok"))
+    client = make_client([{model: "mid-model", speed: :standard}, {model: "last-model"}])
+
+    state = Anthropic::BetaFallbackState.new
+    state.index = 0
+    client.beta.messages.stream_raw(**PARAMS, speed: :fast, request_options: {fallback_state: state}).to_a
+
+    assert_equal("standard", @bodies[0]["speed"])
+  end
+
+  def test_streaming_hop_after_a_pinned_start_builds_on_the_pinned_request
+    stub_streams(refusal_stream("mid-model", token: "tok-1"), accept_stream("last-model", text: "ok"))
+    client = make_client([{model: "mid-model", speed: nil}, {model: "last-model"}])
+
+    state = Anthropic::BetaFallbackState.new
+    state.index = 0
+    client.beta.messages.stream_raw(**PARAMS, speed: :fast, request_options: {fallback_state: state}).to_a
+
+    assert_equal(%w[mid-model last-model], @bodies.map { _1["model"] })
+    refute(@bodies[0].key?("speed"))
+    refute(@bodies[1].key?("speed"))
   end
 
   def test_streaming_retries_once_without_prefill_on_400
