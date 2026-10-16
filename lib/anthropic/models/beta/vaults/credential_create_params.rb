@@ -103,6 +103,10 @@ module Anthropic
             # Creates a new instance of the variant class whose `type` matches the given
             # value, passing the remaining arguments to its constructor.
             #
+            # Some parameter documentations has been truncated, see
+            # {Anthropic::Models::Beta::Vaults::CredentialCreateParams::Auth} for more
+            # details.
+            #
             # @param type [Symbol, Anthropic::Models::Beta::Vaults::CredentialCreateParams::Auth::Type, String]
             #
             # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
@@ -111,7 +115,7 @@ module Anthropic
             #
             #   @option args [String] :mcp_server_url URL of the MCP server this credential authenticates against.
             #
-            #   @option args [Time, nil] :expires_at A timestamp in RFC 3339 format
+            #   @option args [Time, nil] :expires_at When `access_token` expires, in RFC 3339.
             #
             #   @option args [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshParams, nil] :refresh Refresh token configuration, if the credential supports token refresh.
             #

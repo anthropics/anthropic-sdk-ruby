@@ -17,7 +17,13 @@ module Anthropic
           optional :access_token, String, nil?: true
 
           # @!attribute expires_at
-          #   A timestamp in RFC 3339 format
+          #   When the credential's access token expires, in RFC 3339. Leave it out to keep
+          #   the stored expiry.
+          #
+          #   If you send a new `access_token`, send its `expires_at` too, or the new token
+          #   keeps the old expiry.
+          #
+          #   Must be in the future.
           #
           #   @return [Time, nil]
           optional :expires_at, Time, nil?: true
@@ -34,11 +40,15 @@ module Anthropic
           #   Parameters for updating an MCP OAuth credential. The `mcp_server_url` is
           #   immutable.
           #
+          #   Some parameter documentations has been truncated, see
+          #   {Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams} for
+          #   more details.
+          #
           #   @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams::Type]
           #
           #   @param access_token [String, nil] Updated OAuth access token.
           #
-          #   @param expires_at [Time, nil] A timestamp in RFC 3339 format
+          #   @param expires_at [Time, nil] When the credential's access token expires, in RFC 3339. Leave it out to keep th
           #
           #   @param refresh [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshUpdateParams, nil] Updated refresh token configuration.
 

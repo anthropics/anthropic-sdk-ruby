@@ -16,6 +16,7 @@
 
 * **ci:** publish gems from a fixed Ubuntu 24.04 runner
 * **ci:** set up Ruby 3.2 with a newer setup-ruby in the build and dependency version jobs
+* **docs:** add credential expiry descriptions to the Managed Agents API reference
 * **docs:** correct plugin manifest_version and reach descriptions
 * **tests:** cover per-request timeouts and later union variants
 * **tests:** make the tracing tests independent of test order

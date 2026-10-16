@@ -23,7 +23,9 @@ module Anthropic
           required :type, enum: -> { Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthCreateParams::Type }
 
           # @!attribute expires_at
-          #   A timestamp in RFC 3339 format
+          #   When `access_token` expires, in RFC 3339.
+          #
+          #   Must be in the future.
           #
           #   @return [Time, nil]
           optional :expires_at, Time, nil?: true
@@ -41,13 +43,17 @@ module Anthropic
           # @!method initialize(access_token:, mcp_server_url:, type:, expires_at: nil, refresh: nil)
           #   Parameters for creating an MCP OAuth credential.
           #
+          #   Some parameter documentations has been truncated, see
+          #   {Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthCreateParams} for
+          #   more details.
+          #
           #   @param access_token [String] OAuth access token.
           #
           #   @param mcp_server_url [String] URL of the MCP server this credential authenticates against.
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthCreateParams::Type]
           #
-          #   @param expires_at [Time, nil] A timestamp in RFC 3339 format
+          #   @param expires_at [Time, nil] When `access_token` expires, in RFC 3339.
           #
           #   @param refresh [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshParams, nil] Refresh token configuration, if the credential supports token refresh.
 

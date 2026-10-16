@@ -232,7 +232,9 @@ module Anthropic
               access_token: nil,
               # URL of the MCP server this credential authenticates against.
               mcp_server_url: nil,
-              # A timestamp in RFC 3339 format
+              # When `access_token` expires, in RFC 3339.
+              #
+              # Must be in the future.
               expires_at: nil,
               # Refresh token configuration, if the credential supports token refresh.
               refresh: nil,
