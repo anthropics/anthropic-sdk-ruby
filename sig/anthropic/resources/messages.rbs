@@ -28,10 +28,6 @@ module Anthropic
         ?request_options: Anthropic::request_opts
       ) -> Anthropic::Message
 
-      def stream: (
-        Anthropic::MessageCreateParams | ::Hash[Symbol, top] params
-      ) -> Anthropic::Helpers::Streaming::MessageStream
-
       def stream_raw: (
         max_tokens: Integer,
         messages: ::Array[Anthropic::MessageParam],
@@ -71,6 +67,10 @@ module Anthropic
         ?workspace_id: String,
         ?request_options: Anthropic::request_opts
       ) -> Anthropic::MessageTokensCount
+
+      def stream: (
+        Anthropic::MessageCreateParams | ::Hash[Symbol, top] params
+      ) -> Anthropic::Helpers::Streaming::MessageStream
 
       def initialize: (client: Anthropic::Client) -> void
     end

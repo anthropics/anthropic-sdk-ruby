@@ -146,22 +146,6 @@ module Anthropic
           )
         end
 
-        # Streams a message like {Anthropic::Resources::Beta::Messages#stream_raw} and returns a
-        # {Anthropic::Helpers::Streaming::MessageStream}, which accumulates the streamed
-        # events and parses tool inputs and structured output. Takes the same parameters
-        # as {Anthropic::Resources::Beta::Messages#stream_raw}. Hand-written (custom code, not generated).
-        #
-        # @param params [Anthropic::Models::Beta::MessageCreateParams, Hash{Symbol=>Object}]
-        #
-        # @return [Anthropic::Helpers::Streaming::MessageStream]
-        #
-        # @see Anthropic::Resources::Beta::Messages#stream_raw
-        def stream(params)
-          parsed = Anthropic::Models::Beta::MessageCreateParams.dump_request(params).first
-          tools, models = Anthropic::Helpers::Messages.distill_input_schema_models!(parsed, strict: nil, is_beta: true)
-          Anthropic::Streaming::MessageStream.new(raw_stream: stream_raw(params), tools:, models:)
-        end
-
         # See {Anthropic::Resources::Beta::Messages#create} for non-streaming counterpart.
         #
         # Send a structured list of input messages with text and/or image content, and the
@@ -344,6 +328,22 @@ module Anthropic
             model: Anthropic::Beta::BetaMessageTokensCount,
             options: options
           )
+        end
+
+        # Streams a message like {Anthropic::Resources::Beta::Messages#stream_raw} and returns a
+        # {Anthropic::Helpers::Streaming::MessageStream}, which accumulates the streamed
+        # events and parses tool inputs and structured output. Takes the same parameters
+        # as {Anthropic::Resources::Beta::Messages#stream_raw}. Hand-written (custom code, not generated).
+        #
+        # @param params [Anthropic::Models::Beta::MessageCreateParams, Hash{Symbol=>Object}]
+        #
+        # @return [Anthropic::Helpers::Streaming::MessageStream]
+        #
+        # @see Anthropic::Resources::Beta::Messages#stream_raw
+        def stream(params)
+          parsed = Anthropic::Models::Beta::MessageCreateParams.dump_request(params).first
+          tools, models = Anthropic::Helpers::Messages.distill_input_schema_models!(parsed, strict: nil, is_beta: true)
+          Anthropic::Streaming::MessageStream.new(raw_stream: stream_raw(params), tools:, models:)
         end
 
         private

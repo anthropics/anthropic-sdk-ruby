@@ -353,18 +353,6 @@ module Anthropic
       )
       end
 
-      # Streams a message like #stream_raw and returns a MessageStream, which
-      # accumulates the streamed events. Takes the same parameters as #stream_raw.
-      # Hand-written (custom code, not generated).
-      sig do
-        params(
-          params:
-            T.any(Anthropic::MessageCreateParams, Anthropic::Internal::AnyHash)
-        ).returns(Anthropic::Helpers::Streaming::MessageStream)
-      end
-      def stream(params)
-      end
-
       # See {Anthropic::Resources::Messages#create} for non-streaming counterpart.
       #
       # Send a structured list of input messages with text and/or image content, and the
@@ -980,6 +968,18 @@ module Anthropic
         workspace_id: nil,
         request_options: {}
       )
+      end
+
+      # Streams a message like #stream_raw and returns a MessageStream, which
+      # accumulates the streamed events. Takes the same parameters as #stream_raw.
+      # Hand-written (custom code, not generated).
+      sig do
+        params(
+          params:
+            T.any(Anthropic::MessageCreateParams, Anthropic::Internal::AnyHash)
+        ).returns(Anthropic::Helpers::Streaming::MessageStream)
+      end
+      def stream(params)
       end
 
       # @api private

@@ -7,6 +7,11 @@
 * **client:** yield server-sent events with unrecognized event names
 
 
+### Bug Fixes
+
+* **client:** `messages.stream` and `beta.messages.stream` now take the same parameters as `stream_raw`; their Sorbet and RBS signatures take one params hash
+
+
 ### Chores
 
 * **ci:** publish gems from a fixed Ubuntu 24.04 runner
@@ -23,11 +28,6 @@
 * **api:** add between_tools to thinking types in model capabilities
 * **api:** add the speed parameter and usage.speed to Messages
 * **api:** return a Console organization's usage-tier spend cap as a read-only spend limit
-
-
-### Bug Fixes
-
-* **client:** `messages.stream` and `beta.messages.stream` now take the same parameters as `stream_raw`; their Sorbet and RBS signatures take one params hash
 
 
 ### Chores
