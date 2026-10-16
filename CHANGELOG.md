@@ -9,6 +9,7 @@
 
 ### Chores
 
+* **ci:** set up Ruby 3.2 with a newer setup-ruby in the build and dependency version jobs
 * **tests:** cover per-request timeouts and later union variants
 * **tests:** make the tracing tests independent of test order
 
