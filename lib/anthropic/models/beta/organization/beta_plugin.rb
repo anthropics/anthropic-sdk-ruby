@@ -59,7 +59,8 @@ module Anthropic
           required :latest_version_id, String
 
           # @!attribute manifest_version
-          #   The version string the served version's manifest declares.
+          #   The served version's manifest `version`, normalized for display, or `null` (the
+          #   Plugin Version's `manifest_version` says how and when).
           #
           #   @return [String, nil]
           required :manifest_version, String, nil?: true
@@ -108,9 +109,21 @@ module Anthropic
           required :owner, union: -> { Anthropic::Beta::Organization::BetaPlugin::Owner }
 
           # @!attribute reach
-          #   How far the served version reaches: `remote` when it declares an MCP server or a
-          #   CLI, `privileged` when it declares a hook, monitor, language server or settings
-          #   but nothing remote, `contained` otherwise; null when not classifiable.
+          #   How far the served version reaches, or `null` if it is not classified.
+          #
+          #   `remote` means it declares an MCP server or a CLI. `privileged` means it
+          #   declares no MCP server or CLI, but declares a hook, monitor, language server, or
+          #   settings, or has a skill, command, or other Markdown file whose frontmatter
+          #   pre-approves tools (`allowed-tools` with any value other than an empty one or
+          #   one that names only `AskUserQuestion`, `TodoWrite`, and `ToolSearch`). Otherwise
+          #   it is `contained`.
+          #
+          #   If the frontmatter of a skill, command, or other Markdown file that could change
+          #   the value could not be read, or was past a size limit, the version is `null` or
+          #   `privileged` (or `remote`, if it declares an MCP server or a CLI), not
+          #   `contained`. The value is normally worked out when a version is stored, under
+          #   the rules of that time, so an older version can be `null`, or `contained` where
+          #   the same files stored today would be `privileged` or `null`.
           #
           #   @return [Symbol, Anthropic::Models::Beta::Organization::BetaPlugin::Reach, nil]
           required :reach, enum: -> { Anthropic::Beta::Organization::BetaPlugin::Reach }, nil?: true
@@ -161,7 +174,7 @@ module Anthropic
           #
           #   @param latest_version_id [String] The newest version.
           #
-          #   @param manifest_version [String, nil] The version string the served version's manifest declares.
+          #   @param manifest_version [String, nil] The served version's manifest `version`, normalized for display, or `null` (the
           #
           #   @param marketplace_id [String] The ID of the plugin marketplace the Plugin lives in.
           #
@@ -173,7 +186,7 @@ module Anthropic
           #
           #   @param owner [Anthropic::Models::Beta::Organization::BetaPluginOwnerOrganization, Anthropic::Models::Beta::Organization::BetaPluginOwnerUser] Who owns the Plugin: the organization, or the member whose personal plugin marke
           #
-          #   @param reach [Symbol, Anthropic::Models::Beta::Organization::BetaPlugin::Reach, nil] How far the served version reaches: `remote` when it declares an MCP server or a
+          #   @param reach [Symbol, Anthropic::Models::Beta::Organization::BetaPlugin::Reach, nil] How far the served version reaches, or `null` if it is not classified.
           #
           #   @param served_version_id [String] The version claude.ai serves to members.
           #
@@ -306,9 +319,21 @@ module Anthropic
             end
           end
 
-          # How far the served version reaches: `remote` when it declares an MCP server or a
-          # CLI, `privileged` when it declares a hook, monitor, language server or settings
-          # but nothing remote, `contained` otherwise; null when not classifiable.
+          # How far the served version reaches, or `null` if it is not classified.
+          #
+          # `remote` means it declares an MCP server or a CLI. `privileged` means it
+          # declares no MCP server or CLI, but declares a hook, monitor, language server, or
+          # settings, or has a skill, command, or other Markdown file whose frontmatter
+          # pre-approves tools (`allowed-tools` with any value other than an empty one or
+          # one that names only `AskUserQuestion`, `TodoWrite`, and `ToolSearch`). Otherwise
+          # it is `contained`.
+          #
+          # If the frontmatter of a skill, command, or other Markdown file that could change
+          # the value could not be read, or was past a size limit, the version is `null` or
+          # `privileged` (or `remote`, if it declares an MCP server or a CLI), not
+          # `contained`. The value is normally worked out when a version is stored, under
+          # the rules of that time, so an older version can be `null`, or `contained` where
+          # the same files stored today would be `privileged` or `null`.
           #
           # @see Anthropic::Models::Beta::Organization::BetaPlugin#reach
           module Reach

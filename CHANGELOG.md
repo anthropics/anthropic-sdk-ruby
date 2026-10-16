@@ -10,8 +10,10 @@
 ### Chores
 
 * **ci:** set up Ruby 3.2 with a newer setup-ruby in the build and dependency version jobs
+* **docs:** correct plugin manifest_version and reach descriptions
 * **tests:** cover per-request timeouts and later union variants
 * **tests:** make the tracing tests independent of test order
+* **tests:** send events that the stream yields in the tracing test
 
 ## [1.80.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.79.0...v1.80.0) (2026-10-15)
 

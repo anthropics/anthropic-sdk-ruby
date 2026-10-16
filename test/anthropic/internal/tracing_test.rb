@@ -20,7 +20,7 @@ class Anthropic::Test::TracingTest < Minitest::Test
     headers: JSON_HEADERS
   }.freeze
   EVENTS = {
-    body: %w[a b].map { "data: #{{message: _1}.to_json}\n\n" }.join,
+    body: %w[a b].map { "event: unhandled\ndata: #{{message: _1}.to_json}\n\n" }.join,
     headers: {"content-type" => "text/event-stream"}
   }.freeze
 
