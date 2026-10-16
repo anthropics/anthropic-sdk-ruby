@@ -22,6 +22,11 @@
 * **api:** return a Console organization's usage-tier spend cap as a read-only spend limit
 
 
+### Bug Fixes
+
+* **client:** `messages.stream` and `beta.messages.stream` now take the same parameters as `stream_raw`; their Sorbet and RBS signatures take one params hash
+
+
 ### Chores
 
 * **ci:** speed up breaking change detection
