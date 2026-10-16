@@ -143,6 +143,8 @@ class Anthropic::Test::TracingTest < Minitest::Test
     @environment = VARIABLES.keys.to_h { [_1, ENV.delete(_1)] }
     @propagation = OpenTelemetry.propagation
     @logger = OpenTelemetry.logger
+    # A test of another class can leave a tracer provider registered.
+    reset_tracer_provider
     @sent = []
     @contexts = []
   end

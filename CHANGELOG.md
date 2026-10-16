@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.81.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.80.0...v1.81.0) (2026-10-15)
+## [1.81.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.80.0...v1.81.0) (2026-10-16)
 
 ### Features
 
@@ -10,6 +10,7 @@
 ### Chores
 
 * **tests:** cover per-request timeouts and later union variants
+* **tests:** make the tracing tests independent of test order
 
 ## [1.80.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.79.0...v1.80.0) (2026-10-15)
 
