@@ -6,7 +6,7 @@ module Anthropic
       # @see Anthropic::Resources::Beta::Vaults#create
       class BetaManagedAgentsVault < Anthropic::Internal::Type::BaseModel
         # @!attribute id
-        #   Unique identifier for the vault.
+        #   The unique ID of the vault (`vlt_...`).
         #
         #   @return [String]
         required :id, String
@@ -49,7 +49,7 @@ module Anthropic
         # @!method initialize(id:, archived_at:, created_at:, display_name:, metadata:, type:, updated_at:)
         #   A vault that stores credentials for use by agents during sessions.
         #
-        #   @param id [String] Unique identifier for the vault.
+        #   @param id [String] The unique ID of the vault (`vlt_...`).
         #
         #   @param archived_at [Time, nil] When the vault was archived. Null if not archived.
         #

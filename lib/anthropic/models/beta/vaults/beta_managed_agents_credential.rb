@@ -7,7 +7,7 @@ module Anthropic
         # @see Anthropic::Resources::Beta::Vaults::Credentials#create
         class BetaManagedAgentsCredential < Anthropic::Internal::Type::BaseModel
           # @!attribute id
-          #   Unique identifier for the credential.
+          #   The unique ID of the credential (`vcrd_...`).
           #
           #   @return [String]
           required :id, String
@@ -63,7 +63,7 @@ module Anthropic
           #   A credential stored in a vault. Sensitive fields are never returned in
           #   responses.
           #
-          #   @param id [String] Unique identifier for the credential.
+          #   @param id [String] The unique ID of the credential (`vcrd_...`).
           #
           #   @param archived_at [Time, nil] When the credential was archived. Null if not archived.
           #

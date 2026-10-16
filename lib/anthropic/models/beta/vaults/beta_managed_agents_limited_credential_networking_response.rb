@@ -6,9 +6,11 @@ module Anthropic
       module Vaults
         class BetaManagedAgentsLimitedCredentialNetworkingResponse < Anthropic::Internal::Type::BaseModel
           # @!attribute allowed_hosts
-          #   Hostnames on which the secret will be substituted. An entry matches the request
-          #   host exactly; a `*.`-prefixed entry matches any subdomain of the named domain
-          #   but not the domain itself.
+          #   The destination hosts of the outbound requests that the credential's secret is
+          #   substituted into.
+          #
+          #   An entry matches the request host exactly. An entry such as `*.example.com`
+          #   matches any subdomain of `example.com` but not `example.com` itself.
           #
           #   @return [Array<String>]
           required :allowed_hosts, Anthropic::Internal::Type::ArrayOf[String]
@@ -26,7 +28,7 @@ module Anthropic
           #   {Anthropic::Models::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingResponse}
           #   for more details.
           #
-          #   @param allowed_hosts [Array<String>] Hostnames on which the secret will be substituted. An entry matches the request
+          #   @param allowed_hosts [Array<String>] The destination hosts of the outbound requests that the credential's secret is s
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingResponse::Type]
 

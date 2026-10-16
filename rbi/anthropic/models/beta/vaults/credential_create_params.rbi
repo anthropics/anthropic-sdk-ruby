@@ -228,7 +228,7 @@ module Anthropic
             end
             def self.new(
               type:,
-              # OAuth access token.
+              # The OAuth access token to send to the MCP server.
               access_token: nil,
               # URL of the MCP server this credential authenticates against.
               mcp_server_url: nil,
@@ -238,13 +238,15 @@ module Anthropic
               expires_at: nil,
               # Refresh token configuration, if the credential supports token refresh.
               refresh: nil,
-              # Static bearer token value.
+              # The static bearer token to send to the MCP server, such as an API key or
+              # personal access token.
               token: nil,
               # Outbound hosts the secret value is substituted on.
               networking: nil,
               # Name of the environment variable. Immutable after create.
               secret_name: nil,
-              # Secret value. Write-only; never returned in responses.
+              # The secret to substitute into the agent's outbound requests. It's write-only and
+              # never returned in responses.
               secret_value: nil,
               # Where in the outbound request the secret value may be substituted.
               injection_location: nil

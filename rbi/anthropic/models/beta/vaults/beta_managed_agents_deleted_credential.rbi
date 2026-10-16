@@ -13,7 +13,7 @@ module Anthropic
               )
             end
 
-          # Unique identifier of the deleted credential.
+          # The unique ID of the deleted credential (`vcrd_...`).
           sig { returns(String) }
           attr_accessor :id
 
@@ -33,7 +33,7 @@ module Anthropic
             ).returns(T.attached_class)
           end
           def self.new(
-            # Unique identifier of the deleted credential.
+            # The unique ID of the deleted credential (`vcrd_...`).
             id:,
             type:
           )

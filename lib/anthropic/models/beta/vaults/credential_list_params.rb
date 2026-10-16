@@ -16,7 +16,7 @@ module Anthropic
           required :vault_id, String
 
           # @!attribute include_archived
-          #   Whether to include archived credentials in the results.
+          #   Whether to include archived credentials in the results. Defaults to `false`.
           #
           #   @return [Boolean, nil]
           optional :include_archived, Anthropic::Internal::Type::Boolean
@@ -28,7 +28,9 @@ module Anthropic
           optional :limit, Integer
 
           # @!attribute page
-          #   Opaque pagination token from a previous `list_credentials` response.
+          #   The `next_page` value from a previous
+          #   [List Credentials](https://platform.claude.com/docs/en/api/beta/vaults/credentials/list)
+          #   response, to get the next page. Leave it out to get the first page.
           #
           #   @return [String, nil]
           optional :page, String
@@ -57,11 +59,11 @@ module Anthropic
           #
           #   @param vault_id [String] Identifier of the vault to list credentials for.
           #
-          #   @param include_archived [Boolean] Whether to include archived credentials in the results.
+          #   @param include_archived [Boolean] Whether to include archived credentials in the results. Defaults to `false`.
           #
           #   @param limit [Integer] Maximum number of credentials to return per page. Defaults to 20, maximum 100.
           #
-          #   @param page [String] Opaque pagination token from a previous `list_credentials` response.
+          #   @param page [String] The `next_page` value from a previous [List Credentials](https://platform.claude
           #
           #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
           #

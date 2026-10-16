@@ -18,7 +18,8 @@ module Anthropic
           required :secret_name, String
 
           # @!attribute secret_value
-          #   Secret value. Write-only; never returned in responses.
+          #   The secret to substitute into the agent's outbound requests. It's write-only and
+          #   never returned in responses.
           #
           #   @return [String]
           required :secret_value, String
@@ -38,11 +39,15 @@ module Anthropic
           # @!method initialize(networking:, secret_name:, secret_value:, type:, injection_location: nil)
           #   Parameters for creating an environment variable credential.
           #
+          #   Some parameter documentations has been truncated, see
+          #   {Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams}
+          #   for more details.
+          #
           #   @param networking [Anthropic::Models::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingParams] Outbound hosts the secret value is substituted on.
           #
           #   @param secret_name [String] Name of the environment variable. Immutable after create.
           #
-          #   @param secret_value [String] Secret value. Write-only; never returned in responses.
+          #   @param secret_value [String] The secret to substitute into the agent's outbound requests. It's write-only and
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams::Type]
           #

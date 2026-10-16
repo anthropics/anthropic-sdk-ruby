@@ -6,7 +6,7 @@ module Anthropic
       module Vaults
         class BetaManagedAgentsMCPOAuthRefreshResponse < Anthropic::Internal::Type::BaseModel
           # @!attribute client_id
-          #   OAuth client ID.
+          #   The OAuth client ID used when refreshing the access token.
           #
           #   @return [String]
           required :client_id, String
@@ -38,7 +38,7 @@ module Anthropic
           # @!method initialize(client_id:, token_endpoint:, token_endpoint_auth:, resource: nil, scope: nil)
           #   OAuth refresh token configuration returned in credential responses.
           #
-          #   @param client_id [String] OAuth client ID.
+          #   @param client_id [String] The OAuth client ID used when refreshing the access token.
           #
           #   @param token_endpoint [String] Token endpoint URL used to refresh the access token.
           #

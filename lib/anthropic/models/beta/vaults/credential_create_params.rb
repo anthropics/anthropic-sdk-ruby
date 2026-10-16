@@ -111,7 +111,7 @@ module Anthropic
             #
             # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
             #
-            #   @option args [String] :access_token OAuth access token.
+            #   @option args [String] :access_token The OAuth access token to send to the MCP server.
             #
             #   @option args [String] :mcp_server_url URL of the MCP server this credential authenticates against.
             #
@@ -119,13 +119,13 @@ module Anthropic
             #
             #   @option args [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshParams, nil] :refresh Refresh token configuration, if the credential supports token refresh.
             #
-            #   @option args [String] :token Static bearer token value.
+            #   @option args [String] :token The static bearer token to send to the MCP server, such as an API key or persona
             #
             #   @option args [Anthropic::Models::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingParams] :networking Outbound hosts the secret value is substituted on.
             #
             #   @option args [String] :secret_name Name of the environment variable. Immutable after create.
             #
-            #   @option args [String] :secret_value Secret value. Write-only; never returned in responses.
+            #   @option args [String] :secret_value The secret to substitute into the agent's outbound requests. It's write-only and
             #
             #   @option args [Anthropic::Models::Beta::Vaults::BetaManagedAgentsInjectionLocationParams] :injection_location Where in the outbound request the secret value may be substituted.
             #

@@ -22,8 +22,8 @@ module Anthropic
           required :credential_id, String
 
           # @!attribute auth
-          #   Updated authentication configuration. The `type` is immutable; the variant sent
-          #   must match the stored credential's type.
+          #   New authentication settings for the credential. The `type` must match the
+          #   credential's current type, which can't be changed.
           #
           #   @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams, nil]
           optional :auth, union: -> { Anthropic::Beta::Vaults::CredentialUpdateParams::Auth }
@@ -67,7 +67,7 @@ module Anthropic
           #
           #   @param credential_id [String] Unique identifier of the credential to update.
           #
-          #   @param auth [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams] Updated authentication configuration. The `type` is immutable; the variant sent
+          #   @param auth [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams] New authentication settings for the credential. The `type` must match the creden
           #
           #   @param display_name [String, nil] Updated human-readable name for the credential. 1-255 characters.
           #
@@ -79,8 +79,8 @@ module Anthropic
           #
           #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 
-          # Updated authentication configuration. The `type` is immutable; the variant sent
-          # must match the stored credential's type.
+          # New authentication settings for the credential. The `type` must match the
+          # credential's current type, which can't be changed.
           module Auth
             extend Anthropic::Internal::Type::Union
 
@@ -121,19 +121,19 @@ module Anthropic
             #
             # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
             #
-            #   @option args [String, nil] :access_token Updated OAuth access token.
+            #   @option args [String, nil] :access_token The new OAuth access token to replace the stored one.
             #
             #   @option args [Time, nil] :expires_at When the credential's access token expires, in RFC 3339. Leave it out to keep th
             #
             #   @option args [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshUpdateParams, nil] :refresh Updated refresh token configuration.
             #
-            #   @option args [String, nil] :token Updated static bearer token value.
+            #   @option args [String, nil] :token The new static bearer token to replace the stored one.
             #
             #   @option args [Anthropic::Models::Beta::Vaults::BetaManagedAgentsInjectionLocationUpdateParams] :injection_location Updated injection location.
             #
-            #   @option args [Anthropic::Models::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingParams, nil] :networking Updated networking scope. Full replacement.
+            #   @option args [Anthropic::Models::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingParams, nil] :networking The new networking scope, which replaces the stored one as a whole.
             #
-            #   @option args [String, nil] :secret_value Updated secret value.
+            #   @option args [String, nil] :secret_value The new secret value to replace the stored one.
             #
             # @raise [ArgumentError]
             # @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams]

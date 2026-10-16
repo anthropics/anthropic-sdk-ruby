@@ -28,7 +28,8 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :secret_name
 
-          # Secret value. Write-only; never returned in responses.
+          # The secret to substitute into the agent's outbound requests. It's write-only and
+          # never returned in responses.
           sig { returns(String) }
           attr_accessor :secret_value
 
@@ -78,7 +79,8 @@ module Anthropic
             networking:,
             # Name of the environment variable. Immutable after create.
             secret_name:,
-            # Secret value. Write-only; never returned in responses.
+            # The secret to substitute into the agent's outbound requests. It's write-only and
+            # never returned in responses.
             secret_value:,
             type:,
             # Where in the outbound request the secret value may be substituted.

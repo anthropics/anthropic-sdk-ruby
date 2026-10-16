@@ -13,7 +13,7 @@ module Anthropic
               )
             end
 
-          # OAuth access token.
+          # The OAuth access token to send to the MCP server.
           sig { returns(String) }
           attr_accessor :access_token
 
@@ -69,7 +69,7 @@ module Anthropic
             ).returns(T.attached_class)
           end
           def self.new(
-            # OAuth access token.
+            # The OAuth access token to send to the MCP server.
             access_token:,
             # URL of the MCP server this credential authenticates against.
             mcp_server_url:,

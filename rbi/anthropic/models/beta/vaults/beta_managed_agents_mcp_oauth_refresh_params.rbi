@@ -13,11 +13,13 @@ module Anthropic
               )
             end
 
-          # OAuth client ID.
+          # The OAuth client ID to use when refreshing the access token. It can't be changed
+          # after the credential is created.
           sig { returns(String) }
           attr_accessor :client_id
 
-          # OAuth refresh token.
+          # The OAuth refresh token that the API uses to get a new access token when the
+          # current one expires.
           sig { returns(String) }
           attr_accessor :refresh_token
 
@@ -61,9 +63,11 @@ module Anthropic
             ).returns(T.attached_class)
           end
           def self.new(
-            # OAuth client ID.
+            # The OAuth client ID to use when refreshing the access token. It can't be changed
+            # after the credential is created.
             client_id:,
-            # OAuth refresh token.
+            # The OAuth refresh token that the API uses to get a new access token when the
+            # current one expires.
             refresh_token:,
             # Token endpoint URL used to refresh the access token.
             token_endpoint:,
@@ -169,7 +173,8 @@ module Anthropic
             end
             def self.new(
               type:,
-              # OAuth client secret.
+              # The OAuth client secret, sent to `token_endpoint` with HTTP Basic
+              # authentication.
               client_secret: nil
             )
             end

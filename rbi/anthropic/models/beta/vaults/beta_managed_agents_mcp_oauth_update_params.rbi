@@ -20,7 +20,7 @@ module Anthropic
           end
           attr_accessor :type
 
-          # Updated OAuth access token.
+          # The new OAuth access token to replace the stored one.
           sig { returns(T.nilable(String)) }
           attr_accessor :access_token
 
@@ -70,7 +70,7 @@ module Anthropic
           end
           def self.new(
             type:,
-            # Updated OAuth access token.
+            # The new OAuth access token to replace the stored one.
             access_token: nil,
             # When the credential's access token expires, in RFC 3339. Leave it out to keep
             # the stored expiry.

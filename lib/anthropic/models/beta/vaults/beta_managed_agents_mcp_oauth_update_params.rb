@@ -11,7 +11,7 @@ module Anthropic
           required :type, enum: -> { Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams::Type }
 
           # @!attribute access_token
-          #   Updated OAuth access token.
+          #   The new OAuth access token to replace the stored one.
           #
           #   @return [String, nil]
           optional :access_token, String, nil?: true
@@ -46,7 +46,7 @@ module Anthropic
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams::Type]
           #
-          #   @param access_token [String, nil] Updated OAuth access token.
+          #   @param access_token [String, nil] The new OAuth access token to replace the stored one.
           #
           #   @param expires_at [Time, nil] When the credential's access token expires, in RFC 3339. Leave it out to keep th
           #

@@ -6,7 +6,7 @@ module Anthropic
       module Vaults
         class BetaManagedAgentsTokenEndpointAuthPostParam < Anthropic::Internal::Type::BaseModel
           # @!attribute client_secret
-          #   OAuth client secret.
+          #   The OAuth client secret, sent to `token_endpoint` in the POST body.
           #
           #   @return [String]
           required :client_secret, String
@@ -19,7 +19,7 @@ module Anthropic
           # @!method initialize(client_secret:, type:)
           #   Token endpoint uses POST body authentication with client credentials.
           #
-          #   @param client_secret [String] OAuth client secret.
+          #   @param client_secret [String] The OAuth client secret, sent to `token_endpoint` in the POST body.
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostParam::Type]
 

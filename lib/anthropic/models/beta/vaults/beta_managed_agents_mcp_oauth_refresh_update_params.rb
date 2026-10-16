@@ -6,13 +6,14 @@ module Anthropic
       module Vaults
         class BetaManagedAgentsMCPOAuthRefreshUpdateParams < Anthropic::Internal::Type::BaseModel
           # @!attribute refresh_token
-          #   Updated OAuth refresh token.
+          #   The new OAuth refresh token to replace the stored one.
           #
           #   @return [String, nil]
           optional :refresh_token, String, nil?: true
 
           # @!attribute scope
-          #   Updated OAuth scope for the refresh request.
+          #   The new OAuth scope for refresh requests. Send an empty string to clear the
+          #   stored scope.
           #
           #   @return [String, nil]
           optional :scope, String, nil?: true
@@ -26,9 +27,13 @@ module Anthropic
           # @!method initialize(refresh_token: nil, scope: nil, token_endpoint_auth: nil)
           #   Parameters for updating OAuth refresh token configuration.
           #
-          #   @param refresh_token [String, nil] Updated OAuth refresh token.
+          #   Some parameter documentations has been truncated, see
+          #   {Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshUpdateParams}
+          #   for more details.
           #
-          #   @param scope [String, nil] Updated OAuth scope for the refresh request.
+          #   @param refresh_token [String, nil] The new OAuth refresh token to replace the stored one.
+          #
+          #   @param scope [String, nil] The new OAuth scope for refresh requests. Send an empty string to clear the stor
           #
           #   @param token_endpoint_auth [Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicUpdateParam, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostUpdateParam]
 
@@ -62,11 +67,15 @@ module Anthropic
             # Creates a new instance of the variant class whose `type` matches the given
             # value, passing the remaining arguments to its constructor.
             #
+            # Some parameter documentations has been truncated, see
+            # {Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshUpdateParams::TokenEndpointAuth}
+            # for more details.
+            #
             # @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshUpdateParams::TokenEndpointAuth::Type, String]
             #
             # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
             #
-            #   @option args [String, nil] :client_secret Updated OAuth client secret.
+            #   @option args [String, nil] :client_secret A new OAuth client secret to replace the stored one.
             #
             # @raise [ArgumentError]
             # @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicUpdateParam, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostUpdateParam]

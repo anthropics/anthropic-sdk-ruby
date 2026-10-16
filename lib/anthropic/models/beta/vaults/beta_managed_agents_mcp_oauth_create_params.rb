@@ -6,7 +6,7 @@ module Anthropic
       module Vaults
         class BetaManagedAgentsMCPOAuthCreateParams < Anthropic::Internal::Type::BaseModel
           # @!attribute access_token
-          #   OAuth access token.
+          #   The OAuth access token to send to the MCP server.
           #
           #   @return [String]
           required :access_token, String
@@ -47,7 +47,7 @@ module Anthropic
           #   {Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthCreateParams} for
           #   more details.
           #
-          #   @param access_token [String] OAuth access token.
+          #   @param access_token [String] The OAuth access token to send to the MCP server.
           #
           #   @param mcp_server_url [String] URL of the MCP server this credential authenticates against.
           #

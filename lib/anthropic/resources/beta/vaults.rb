@@ -7,7 +7,7 @@ module Anthropic
         # @return [Anthropic::Resources::Beta::Vaults::Credentials]
         attr_reader :credentials
 
-        # Create Vault
+        # Create a Vault
         #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::VaultCreateParams} for more details.
@@ -43,7 +43,7 @@ module Anthropic
           )
         end
 
-        # Get Vault
+        # Retrieve a Vault
         #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::VaultRetrieveParams} for more details.
@@ -75,7 +75,7 @@ module Anthropic
           )
         end
 
-        # Update Vault
+        # Update a Vault
         #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::VaultUpdateParams} for more details.
@@ -120,11 +120,11 @@ module Anthropic
         #
         # @overload list(include_archived: nil, limit: nil, page: nil, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param include_archived [Boolean] Query param: Whether to include archived vaults in the results.
+        # @param include_archived [Boolean] Query param: Whether to include archived vaults in the results. Defaults to `fal
         #
         # @param limit [Integer] Query param: Maximum number of vaults to return per page. Defaults to 20, maximu
         #
-        # @param page [String] Query param: Opaque pagination token from a previous `list_vaults` response.
+        # @param page [String] Query param: The `next_page` value from a previous [List Vaults](https://platfor
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
         #
@@ -156,7 +156,7 @@ module Anthropic
           )
         end
 
-        # Delete Vault
+        # Delete a Vault
         #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::VaultDeleteParams} for more details.
@@ -188,7 +188,7 @@ module Anthropic
           )
         end
 
-        # Archive Vault
+        # Archive a Vault
         #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::VaultArchiveParams} for more details.

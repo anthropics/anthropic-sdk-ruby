@@ -19,7 +19,7 @@ module Anthropic
                    -> { Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationUpdateParams }
 
           # @!attribute networking
-          #   Updated networking scope. Full replacement.
+          #   The new networking scope, which replaces the stored one as a whole.
           #
           #   @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingParams, nil]
           optional :networking,
@@ -27,7 +27,7 @@ module Anthropic
                    nil?: true
 
           # @!attribute secret_value
-          #   Updated secret value.
+          #   The new secret value to replace the stored one.
           #
           #   @return [String, nil]
           optional :secret_value, String, nil?: true
@@ -40,9 +40,9 @@ module Anthropic
           #
           #   @param injection_location [Anthropic::Models::Beta::Vaults::BetaManagedAgentsInjectionLocationUpdateParams] Updated injection location.
           #
-          #   @param networking [Anthropic::Models::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingParams, nil] Updated networking scope. Full replacement.
+          #   @param networking [Anthropic::Models::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingParams, nil] The new networking scope, which replaces the stored one as a whole.
           #
-          #   @param secret_value [String, nil] Updated secret value.
+          #   @param secret_value [String, nil] The new secret value to replace the stored one.
 
           # @see Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams#type
           module Type

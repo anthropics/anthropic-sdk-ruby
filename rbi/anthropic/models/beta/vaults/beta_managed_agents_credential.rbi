@@ -13,7 +13,7 @@ module Anthropic
               )
             end
 
-          # Unique identifier for the credential.
+          # The unique ID of the credential (`vcrd_...`).
           sig { returns(String) }
           attr_accessor :id
 
@@ -78,7 +78,7 @@ module Anthropic
             ).returns(T.attached_class)
           end
           def self.new(
-            # Unique identifier for the credential.
+            # The unique ID of the credential (`vcrd_...`).
             id:,
             # When the credential was archived. Null if not archived.
             archived_at:,

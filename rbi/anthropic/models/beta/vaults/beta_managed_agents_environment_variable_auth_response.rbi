@@ -159,9 +159,11 @@ module Anthropic
             end
             def self.new(
               type:,
-              # Hostnames on which the secret will be substituted. An entry matches the request
-              # host exactly; a `*.`-prefixed entry matches any subdomain of the named domain
-              # but not the domain itself.
+              # The destination hosts of the outbound requests that the credential's secret is
+              # substituted into.
+              #
+              # An entry matches the request host exactly. An entry such as `*.example.com`
+              # matches any subdomain of `example.com` but not `example.com` itself.
               allowed_hosts: nil
             )
             end

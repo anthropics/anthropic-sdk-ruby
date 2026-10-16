@@ -13,11 +13,12 @@ module Anthropic
               )
             end
 
-          # Updated OAuth refresh token.
+          # The new OAuth refresh token to replace the stored one.
           sig { returns(T.nilable(String)) }
           attr_accessor :refresh_token
 
-          # Updated OAuth scope for the refresh request.
+          # The new OAuth scope for refresh requests. Send an empty string to clear the
+          # stored scope.
           sig { returns(T.nilable(String)) }
           attr_accessor :scope
 
@@ -57,9 +58,10 @@ module Anthropic
             ).returns(T.attached_class)
           end
           def self.new(
-            # Updated OAuth refresh token.
+            # The new OAuth refresh token to replace the stored one.
             refresh_token: nil,
-            # Updated OAuth scope for the refresh request.
+            # The new OAuth scope for refresh requests. Send an empty string to clear the
+            # stored scope.
             scope: nil,
             token_endpoint_auth: nil
           )
@@ -149,7 +151,11 @@ module Anthropic
             end
             def self.new(
               type:,
-              # Updated OAuth client secret.
+              # A new OAuth client secret to replace the stored one.
+              #
+              # The credential must already use `client_secret_basic` or `client_secret_post`.
+              # It keeps its current `token_endpoint_auth` type, even if the `type` sent with
+              # this secret is the other one.
               client_secret: nil
             )
             end

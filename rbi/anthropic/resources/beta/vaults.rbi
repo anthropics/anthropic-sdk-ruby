@@ -7,7 +7,7 @@ module Anthropic
         sig { returns(Anthropic::Resources::Beta::Vaults::Credentials) }
         attr_reader :credentials
 
-        # Create Vault
+        # Create a Vault
         sig do
           params(
             display_name: String,
@@ -37,7 +37,7 @@ module Anthropic
         )
         end
 
-        # Get Vault
+        # Retrieve a Vault
         sig do
           params(
             vault_id: String,
@@ -63,7 +63,7 @@ module Anthropic
         )
         end
 
-        # Update Vault
+        # Update a Vault
         sig do
           params(
             vault_id: String,
@@ -112,12 +112,15 @@ module Anthropic
           )
         end
         def list(
-          # Query param: Whether to include archived vaults in the results.
+          # Query param: Whether to include archived vaults in the results. Defaults to
+          # `false`.
           include_archived: nil,
           # Query param: Maximum number of vaults to return per page. Defaults to 20,
           # maximum 100.
           limit: nil,
-          # Query param: Opaque pagination token from a previous `list_vaults` response.
+          # Query param: The `next_page` value from a previous
+          # [List Vaults](https://platform.claude.com/docs/en/api/beta/vaults/list)
+          # response, to get the next page. Leave it out to get the first page.
           page: nil,
           # Header param: This endpoint is in beta: requests must send
           # `managed-agents-2026-04-01` in this header.
@@ -133,7 +136,7 @@ module Anthropic
         )
         end
 
-        # Delete Vault
+        # Delete a Vault
         sig do
           params(
             vault_id: String,
@@ -159,7 +162,7 @@ module Anthropic
         )
         end
 
-        # Archive Vault
+        # Archive a Vault
         sig do
           params(
             vault_id: String,

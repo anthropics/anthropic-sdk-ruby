@@ -6,7 +6,8 @@ module Anthropic
       module Vaults
         class BetaManagedAgentsStaticBearerCreateParams < Anthropic::Internal::Type::BaseModel
           # @!attribute token
-          #   Static bearer token value.
+          #   The static bearer token to send to the MCP server, such as an API key or
+          #   personal access token.
           #
           #   @return [String]
           required :token, String
@@ -25,7 +26,11 @@ module Anthropic
           # @!method initialize(token:, mcp_server_url:, type:)
           #   Parameters for creating a static bearer token credential.
           #
-          #   @param token [String] Static bearer token value.
+          #   Some parameter documentations has been truncated, see
+          #   {Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerCreateParams} for
+          #   more details.
+          #
+          #   @param token [String] The static bearer token to send to the MCP server, such as an API key or persona
           #
           #   @param mcp_server_url [String] URL of the MCP server this credential authenticates against.
           #

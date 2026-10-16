@@ -9,7 +9,7 @@ module Anthropic
         include Anthropic::Internal::Type::RequestParameters
 
         # @!attribute include_archived
-        #   Whether to include archived vaults in the results.
+        #   Whether to include archived vaults in the results. Defaults to `false`.
         #
         #   @return [Boolean, nil]
         optional :include_archived, Anthropic::Internal::Type::Boolean
@@ -21,7 +21,9 @@ module Anthropic
         optional :limit, Integer
 
         # @!attribute page
-        #   Opaque pagination token from a previous `list_vaults` response.
+        #   The `next_page` value from a previous
+        #   [List Vaults](https://platform.claude.com/docs/en/api/beta/vaults/list)
+        #   response, to get the next page. Leave it out to get the first page.
         #
         #   @return [String, nil]
         optional :page, String
@@ -48,11 +50,11 @@ module Anthropic
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::VaultListParams} for more details.
         #
-        #   @param include_archived [Boolean] Whether to include archived vaults in the results.
+        #   @param include_archived [Boolean] Whether to include archived vaults in the results. Defaults to `false`.
         #
         #   @param limit [Integer] Maximum number of vaults to return per page. Defaults to 20, maximum 100.
         #
-        #   @param page [String] Opaque pagination token from a previous `list_vaults` response.
+        #   @param page [String] The `next_page` value from a previous [List Vaults](https://platform.claude.com/
         #
         #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
         #

@@ -40,7 +40,7 @@ module Anthropic
           #
           # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
           #
-          #   @option args [Array<String>] :allowed_hosts Hostnames on which the secret will be substituted. Each entry is a bare hostname
+          #   @option args [Array<String>] :allowed_hosts The destination hosts of the outbound requests that the credential's secret is s
           #
           # @raise [ArgumentError]
           # @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingParams]

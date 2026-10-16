@@ -7,7 +7,7 @@ module Anthropic
         # @see Anthropic::Resources::Beta::Vaults::Credentials#delete
         class BetaManagedAgentsDeletedCredential < Anthropic::Internal::Type::BaseModel
           # @!attribute id
-          #   Unique identifier of the deleted credential.
+          #   The unique ID of the deleted credential (`vcrd_...`).
           #
           #   @return [String]
           required :id, String
@@ -20,7 +20,7 @@ module Anthropic
           # @!method initialize(id:, type:)
           #   Confirmation of a deleted credential.
           #
-          #   @param id [String] Unique identifier of the deleted credential.
+          #   @param id [String] The unique ID of the deleted credential (`vcrd_...`).
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsDeletedCredential::Type]
 

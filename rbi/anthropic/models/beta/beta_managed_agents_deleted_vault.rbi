@@ -14,7 +14,7 @@ module Anthropic
             )
           end
 
-        # Unique identifier of the deleted vault.
+        # The unique ID of the deleted vault (`vlt_...`).
         sig { returns(String) }
         attr_accessor :id
 
@@ -33,7 +33,7 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
-          # Unique identifier of the deleted vault.
+          # The unique ID of the deleted vault (`vlt_...`).
           id:,
           type:
         )
