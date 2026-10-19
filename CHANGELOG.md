@@ -19,6 +19,7 @@
 * **ci:** publish gems from a fixed Ubuntu 24.04 runner
 * **ci:** set up Ruby 3.2 with a newer setup-ruby in the build and dependency version jobs
 * **docs:** add credential expiry descriptions to the Managed Agents API reference
+* **docs:** add Messages API request descriptions
 * **docs:** correct plugin manifest_version and reach descriptions
 * **docs:** improve Managed Agents memory store descriptions
 * **docs:** improve Managed Agents vault and credential descriptions
