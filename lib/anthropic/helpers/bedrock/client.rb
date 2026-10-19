@@ -169,6 +169,10 @@ module Anthropic
           raise NotImplementedError, "Skills are not supported on Bedrock."
         end
 
+        def user_profiles
+          raise NotImplementedError, "User profiles are not supported on Bedrock."
+        end
+
         # @api private
         #
         # @param req [Hash{Symbol=>Object}] .
@@ -318,6 +322,8 @@ module Anthropic
             message = "Please instead use https://docs.anthropic.com/en/api/claude-on-amazon-bedrock#list-available-models to list available models on Bedrock."
             # rubocop:enable Layout/LineLength
             raise NotImplementedError.new(message)
+          in %r{^v1/user_profiles}
+            raise NotImplementedError.new("User profiles are not supported on Bedrock.")
           else
           end
         end

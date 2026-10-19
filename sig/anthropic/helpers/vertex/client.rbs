@@ -18,6 +18,8 @@ module Anthropic
 
         def skills: -> bot
 
+        def user_profiles: -> bot
+
         private def build_request: (
           Anthropic::Internal::Transport::BaseClient::request_components req,
           Anthropic::request_options opts

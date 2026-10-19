@@ -535,8 +535,88 @@ class Anthropic::Test::AWSClientTest < Minitest::Test
     assert_kind_of(Anthropic::Resources::Skills, client.skills)
   end
 
-  # The gateway serves the full first-party API, so — unlike the Bedrock and
-  # Google Cloud clients — nothing the parent wires up is withheld here.
+  def test_user_profiles_resource_available
+    client = Anthropic::AWSClient.new(api_key: "sk-ant-xxx", workspace_id: "ws-xxx", base_url: "http://localhost")
+    assert_kind_of(Anthropic::Resources::UserProfiles, client.user_profiles)
+  end
+
+  def test_sigv4_signs_user_profile_delete
+    url = "https://aws-external-anthropic.us-east-1.api.aws/v1/user_profiles/uprof_test"
+    stub_request(:delete, url).to_return_json(
+      status: 200,
+      body: {id: "uprof_test", type: "user_profile_deleted"}
+    )
+
+    client = Anthropic::AWSClient.new(
+      aws_access_key: "my-aws-access",
+      aws_secret_access_key: "my-aws-secret",
+      aws_region: "us-east-1",
+      workspace_id: "ws-test-123"
+    )
+    deleted = client.user_profiles.delete("uprof_test")
+
+    assert_equal("uprof_test", deleted.id)
+    assert_requested(:delete, url, times: 1) do |req|
+      assert_match(/^AWS4-HMAC-SHA256 Credential=my-aws-access/, req.headers.fetch("Authorization"))
+      assert_equal("ws-test-123", req.headers["Anthropic-Workspace-Id"])
+      assert_equal(Digest::SHA256.hexdigest(""), req.headers["X-Amz-Content-Sha256"])
+    end
+  end
+
+  def test_user_profile_requests_reach_the_gateway
+    url = "https://aws-external-anthropic.us-east-1.api.aws/v1/user_profiles"
+    profile = {id: "uprof_test", type: "user_profile"}
+    stub_request(:post, url).to_return_json(status: 200, body: profile)
+    stub_request(:get, "#{url}/uprof_test").to_return_json(status: 200, body: profile)
+    stub_request(:post, "#{url}/uprof_test").to_return_json(status: 200, body: profile)
+    stub_request(:get, url).to_return_json(status: 200, body: {data: [profile], next_page: nil})
+
+    client = Anthropic::AWSClient.new(api_key: "sk-ant-xxx", workspace_id: "ws-test", aws_region: "us-east-1")
+    profiles = client.user_profiles
+
+    assert_equal("uprof_test", profiles.create.id)
+    assert_equal("uprof_test", profiles.retrieve("uprof_test").id)
+    assert_equal("uprof_test", profiles.update("uprof_test", name: "Name").id)
+    assert_equal(["uprof_test"], profiles.list.data.map(&:id))
+
+    [[:post, url], [:get, "#{url}/uprof_test"], [:post, "#{url}/uprof_test"], [:get, url]].each do |method, uri|
+      assert_requested(method, uri, times: 1) do |req|
+        assert_equal("sk-ant-xxx", req.headers["X-Api-Key"])
+        assert_equal("ws-test", req.headers["Anthropic-Workspace-Id"])
+      end
+    end
+  end
+
+  def test_messages_send_the_user_profile_id_header
+    url = "https://aws-external-anthropic.us-east-1.api.aws/v1/messages"
+    stub_request(:post, url).to_return_json(status: 200, body: {})
+
+    client = Anthropic::AWSClient.new(api_key: "sk-ant-xxx", workspace_id: "ws-test", aws_region: "us-east-1")
+    client.messages.create(
+      max_tokens: 16,
+      messages: [{role: "user", content: "hi"}],
+      model: "claude-opus-4-6",
+      user_profile_id: "uprof_test"
+    )
+
+    assert_requested(:post, url, times: 1) do |req|
+      assert_equal("uprof_test", req.headers["Anthropic-User-Profile-Id"])
+      refute_includes(JSON.parse(req.body).keys, "user_profile_id")
+    end
+  end
+
+  def test_user_profile_action_urls_raise_before_sending
+    client = Anthropic::AWSClient.new(api_key: "sk-ant-xxx", workspace_id: "ws-test", aws_region: "us-east-1")
+    [client.user_profiles, client.beta.user_profiles].each do |profiles|
+      err = assert_raises(NotImplementedError) do
+        profiles.action_urls.create("uprof_test", action: {type: :enroll_end_user})
+      end
+      assert_equal("User profile action URLs are not supported on the AWS gateway.", err.message)
+    end
+  end
+
+  # Unlike the Bedrock and Google Cloud clients, nothing the parent wires up is
+  # withheld here.
   def test_completions_resource_available
     client = Anthropic::AWSClient.new(api_key: "sk-ant-xxx", workspace_id: "ws-xxx", base_url: "http://localhost")
     assert_kind_of(Anthropic::Resources::Completions, client.completions)

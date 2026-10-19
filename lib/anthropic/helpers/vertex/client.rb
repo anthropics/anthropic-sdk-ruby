@@ -141,6 +141,10 @@ module Anthropic
           raise NotImplementedError, "Skills are not supported on Vertex."
         end
 
+        def user_profiles
+          raise NotImplementedError, "Managing user profiles is not supported on Vertex."
+        end
+
         # @api private
         #
         # @param req [Hash{Symbol=>Object}] .
@@ -184,6 +188,9 @@ module Anthropic
           path = Array(req[:path]).first.to_s
           if path.start_with?("v1/messages/batches")
             raise NotImplementedError.new("The Batch API is not supported in the Vertex client yet")
+          end
+          if path.start_with?("v1/user_profiles")
+            raise NotImplementedError.new("Managing user profiles is not supported on Vertex.")
           end
 
           super

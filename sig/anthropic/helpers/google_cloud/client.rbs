@@ -14,6 +14,13 @@ module Anthropic
 
         def completions: -> bot
 
+        def user_profiles: -> bot
+
+        private def build_request: (
+          Anthropic::Internal::Transport::BaseClient::request_components req,
+          Anthropic::request_options opts
+        ) -> Anthropic::Internal::Transport::BaseClient::request_input
+
         private def resolve_default_credentials?: -> bool
 
         private def auth_headers: -> ::Hash[String, String]

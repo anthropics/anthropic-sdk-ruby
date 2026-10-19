@@ -30,6 +30,10 @@ module Anthropic
         def skills
         end
 
+        sig { returns(T.noreturn) }
+        def user_profiles
+        end
+
         # @api private
         sig do
           override

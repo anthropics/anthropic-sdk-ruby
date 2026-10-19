@@ -131,6 +131,13 @@ module Anthropic
                 "Skills are not supported on Bedrock Mantle. Only Messages (/v1/messages) is supported."
         end
 
+        # User profiles are not supported on Bedrock Mantle. Only Messages (/v1/messages) is supported.
+        def user_profiles
+          raise NotImplementedError,
+                "User profiles are not supported on Bedrock Mantle. " \
+                "Only Messages (/v1/messages) is supported."
+        end
+
         # @api private
         #
         # @return [Hash{String=>String}]
@@ -146,10 +153,36 @@ module Anthropic
         # @api private
         #
         # @return [#call]
-        private def provider_middleware = method(:aws_auth_provider)
+        private def provider_middleware
+          ->(req, nxt) { aws_auth_provider(adapt_request(req), nxt) }
+        end
+
+        # @api private
+        #
+        # Mantle drops custom request headers, so Messages and token counting send the user profile ID
+        # in the body.
+        #
+        # @param req [Anthropic::APIRequest]
+        # @return [Anthropic::APIRequest]
+        private def adapt_request(req)
+          path = req.url.path.to_s
+          return req unless req.method == :post && path.end_with?("/v1/messages", "/v1/messages/count_tokens")
+
+          body = req.body
+          profile_headers, headers = req.headers.partition do |name, _|
+            name.to_s.casecmp?("anthropic-user-profile-id")
+          end
+          user_profile_id = profile_headers.last&.last
+          return req if user_profile_id.to_s.empty? || !body.is_a?(Hash)
+
+          unless body.keys.any? { _1.to_s == "user_profile_id" }
+            body = {**body, user_profile_id: user_profile_id}
+          end
+          req.with(headers: headers.to_h, body: body)
+        end
 
         # Restricted Beta service that only exposes messages. Other beta resources
-        # (models, files, skills) are not supported on Bedrock Mantle.
+        # (models, files, skills, user profiles) are not supported on Bedrock Mantle.
         class MantleBeta
           # @return [Anthropic::Resources::Beta::Messages]
           attr_reader :messages
@@ -172,6 +205,12 @@ module Anthropic
           def skills
             raise NotImplementedError,
                   "Beta skills are not supported on Bedrock Mantle. Only Messages (/v1/messages) is supported."
+          end
+
+          def user_profiles
+            raise NotImplementedError,
+                  "Beta user profiles are not supported on Bedrock Mantle. " \
+                  "Only Messages (/v1/messages) is supported."
           end
         end
       end

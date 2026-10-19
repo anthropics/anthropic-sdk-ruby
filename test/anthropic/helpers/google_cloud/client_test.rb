@@ -527,6 +527,25 @@ class Anthropic::Test::GoogleCloudClientTest < Minitest::Test
     assert_match(/Completions/, err.message)
   end
 
+  def test_user_profiles_raises
+    err = assert_raises(NotImplementedError) { make_client.user_profiles }
+    assert_equal("User profiles are not supported on the Google Cloud gateway.", err.message)
+  end
+
+  def test_beta_user_profiles_raise_before_sending
+    profiles = make_client.beta.user_profiles
+    [
+      -> { profiles.create },
+      -> { profiles.retrieve("uprof_test") },
+      -> { profiles.list },
+      -> { profiles.create_enrollment_url("uprof_test") },
+      -> { profiles.action_urls.create("uprof_test", action: {type: :enroll_end_user}) }
+    ].each do |call|
+      err = assert_raises(NotImplementedError, &call)
+      assert_equal("User profiles are not supported on the Google Cloud gateway.", err.message)
+    end
+  end
+
   # ---------------------------------------------------------------------------
   # Auth per attempt / cross-origin redirect
   # ---------------------------------------------------------------------------

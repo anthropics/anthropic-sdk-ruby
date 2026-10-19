@@ -10,8 +10,8 @@ module Anthropic
       # `:rawPredict` publisher-model API (publisher model IDs, messages
       # only). This client speaks the full first-party Anthropic API: requests
       # pass through the gateway unchanged — standard `/v1/*` paths, standard
-      # model names, the complete API surface. The deprecated text Completions
-      # endpoint is intentionally not exposed.
+      # model names. The deprecated text Completions endpoint is intentionally
+      # not exposed, and the gateway does not serve the User Profiles API.
       class Client < Anthropic::Client
         # OAuth2 scope required to call the gateway.
         SCOPE = "https://www.googleapis.com/auth/cloud-platform"
@@ -147,8 +147,8 @@ module Anthropic
           # {#resolve_default_credentials?} keeps the parent from discovering
           # one; `base_url` is always resolved by this point, so the parent's
           # `ANTHROPIC_BASE_URL` fallback never applies. The parent wires up
-          # every resource; {#completions} withholds the one the gateway does
-          # not serve.
+          # every resource; {#completions} and {#user_profiles} withhold the
+          # ones the gateway does not serve.
           super(
             base_url: base_url,
             timeout: timeout,
@@ -174,6 +174,31 @@ module Anthropic
           raise NotImplementedError.new(
             "The deprecated text Completions API is not supported on the Google Cloud gateway."
           )
+        end
+
+        # User profiles are not supported on the Google Cloud gateway.
+        #
+        # @raise [NotImplementedError]
+        def user_profiles
+          raise NotImplementedError.new("User profiles are not supported on the Google Cloud gateway.")
+        end
+
+        # @api private
+        #
+        # Fails fast on the beta user profile routes, which the gateway does not
+        # serve either.
+        #
+        # @param req [Hash{Symbol=>Object}]
+        # @param opts [Hash{Symbol=>Object}]
+        # @return [Hash{Symbol=>Object}]
+        private def build_request(req, opts)
+          # Id-parameterized routes pass `path` as an Array whose first element
+          # is the format string (e.g. `["v1/user_profiles/%1$s", id]`).
+          if Array(req[:path]).first.to_s.start_with?("v1/user_profiles")
+            raise NotImplementedError.new("User profiles are not supported on the Google Cloud gateway.")
+          end
+
+          super
         end
 
         # @api private

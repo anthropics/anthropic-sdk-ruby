@@ -51,6 +51,19 @@ module Anthropic
         end
 
         # @api private
+        sig do
+          override
+            .params(
+              req:
+                Anthropic::Internal::Transport::BaseClient::RequestComponents,
+              opts: Anthropic::Internal::AnyHash
+            )
+            .returns(Anthropic::Internal::Transport::BaseClient::RequestInput)
+        end
+        private def build_request(req, opts)
+        end
+
+        # @api private
         sig { override.returns(Anthropic::Middleware::Entry) }
         private def provider_middleware
         end
