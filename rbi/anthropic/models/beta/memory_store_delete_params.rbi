@@ -15,9 +15,10 @@ module Anthropic
             )
           end
 
-        # ID of the memory store to permanently delete (a `memstore_...` identifier).
-        # Required. Deletion cascades to all memories and memory versions in the store and
-        # cannot be undone.
+        # The ID of the memory store to delete (`memstore_...`).
+        #
+        # Deleting a store also deletes all its memories and memory versions. It can't be
+        # undone.
         sig { returns(String) }
         attr_accessor :memory_store_id
 
@@ -60,9 +61,10 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
-          # ID of the memory store to permanently delete (a `memstore_...` identifier).
-          # Required. Deletion cascades to all memories and memory versions in the store and
-          # cannot be undone.
+          # The ID of the memory store to delete (`memstore_...`).
+          #
+          # Deleting a store also deletes all its memories and memory versions. It can't be
+          # undone.
           memory_store_id:,
           # This endpoint is in beta: requests must send `agent-memory-2026-07-22` or
           # `managed-agents-2026-04-01` in this header.

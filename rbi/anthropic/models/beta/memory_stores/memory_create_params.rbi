@@ -20,24 +20,27 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :memory_store_id
 
-          # UTF-8 text content for the new memory. Maximum 100 kB (102,400 bytes). Required;
-          # pass `""` explicitly to create an empty memory.
+          # The UTF-8 text content of the new memory. Pass `""` to create an empty memory.
+          #
+          # The maximum size is 100 kB (102,400 bytes).
           sig { returns(T.nilable(String)) }
           attr_accessor :content
 
-          # Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`. Must start
-          # with `/`, contain at least one non-empty segment, and be at most 1,024 bytes.
-          # Must not contain empty segments, `.` or `..` segments, control or format
-          # characters, or the Unicode line and paragraph separators (U+2028, U+2029), and
-          # must be NFC-normalized. Paths are case-sensitive.
+          # The path of the new memory, such as `/projects/foo/notes.md`. Paths are
+          # case-sensitive.
+          #
+          # A path starts with `/` and has 1 to 20 segments. A segment can't be empty and
+          # can't be `.` or `..`. A path can't contain control characters, format
+          # characters, or the line and paragraph separators U+2028 and U+2029. It must be
+          # in Unicode Normalization Form C and at most 1,024 bytes long.
           sig { returns(String) }
           attr_accessor :path
 
-          # Selects which projection of a `memory` or `memory_version` the server returns.
-          # `basic` returns the object with `content` set to `null`; `full` populates
-          # `content`. When omitted, the default is endpoint-specific: retrieve operations
-          # default to `full`; list, create, and update operations default to `basic`.
-          # Listing with `view=full` caps `limit` at 20.
+          # Whether a `memory` or `memory_version` in the response includes its `content`.
+          # Defaults to `full` on retrieve operations and to `basic` on list, create, and
+          # update operations.
+          #
+          # With `full`, list operations return at most 20 items per page.
           sig do
             returns(
               T.nilable(
@@ -101,20 +104,23 @@ module Anthropic
           def self.new(
             # The ID of the memory store to create the memory in (`memstore_...`).
             memory_store_id:,
-            # UTF-8 text content for the new memory. Maximum 100 kB (102,400 bytes). Required;
-            # pass `""` explicitly to create an empty memory.
+            # The UTF-8 text content of the new memory. Pass `""` to create an empty memory.
+            #
+            # The maximum size is 100 kB (102,400 bytes).
             content:,
-            # Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`. Must start
-            # with `/`, contain at least one non-empty segment, and be at most 1,024 bytes.
-            # Must not contain empty segments, `.` or `..` segments, control or format
-            # characters, or the Unicode line and paragraph separators (U+2028, U+2029), and
-            # must be NFC-normalized. Paths are case-sensitive.
+            # The path of the new memory, such as `/projects/foo/notes.md`. Paths are
+            # case-sensitive.
+            #
+            # A path starts with `/` and has 1 to 20 segments. A segment can't be empty and
+            # can't be `.` or `..`. A path can't contain control characters, format
+            # characters, or the line and paragraph separators U+2028 and U+2029. It must be
+            # in Unicode Normalization Form C and at most 1,024 bytes long.
             path:,
-            # Selects which projection of a `memory` or `memory_version` the server returns.
-            # `basic` returns the object with `content` set to `null`; `full` populates
-            # `content`. When omitted, the default is endpoint-specific: retrieve operations
-            # default to `full`; list, create, and update operations default to `basic`.
-            # Listing with `view=full` caps `limit` at 20.
+            # Whether a `memory` or `memory_version` in the response includes its `content`.
+            # Defaults to `full` on retrieve operations and to `basic` on list, create, and
+            # update operations.
+            #
+            # With `full`, list operations return at most 20 items per page.
             view: nil,
             # This endpoint is in beta: requests must send `agent-memory-2026-07-22` or
             # `managed-agents-2026-04-01` in this header.

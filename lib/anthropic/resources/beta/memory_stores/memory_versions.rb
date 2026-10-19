@@ -5,7 +5,7 @@ module Anthropic
     class Beta
       class MemoryStores
         class MemoryVersions
-          # Retrieve a memory version
+          # Retrieve a Memory Version
           #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::MemoryStores::MemoryVersionRetrieveParams} for more
@@ -17,7 +17,7 @@ module Anthropic
           #
           # @param memory_store_id [String] Path param: The ID of the memory store that holds the version (`memstore_...`).
           #
-          # @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Query param: Selects which projection of a `memory` or `memory_version` the serv
+          # @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Query param: Whether a `memory` or `memory_version` in the response includes its
           #
           # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `agent-memory-2026-07
           #
@@ -60,7 +60,7 @@ module Anthropic
             )
           end
 
-          # List memory versions
+          # List Memory Versions
           #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::MemoryStores::MemoryVersionListParams} for more
@@ -77,7 +77,7 @@ module Anthropic
           #
           # @param created_at_lte [Time] Query param: Return versions created at or before this time (inclusive).
           #
-          # @param limit [Integer] Query param: The maximum number of versions to return per page. Defaults to 20.
+          # @param limit [Integer] Query param: The maximum number of versions to return per page, from 1 to 100. D
           #
           # @param memory_id [String] Query param: Return only versions of the memory with this ID (`mem_...`).
           #
@@ -89,7 +89,7 @@ module Anthropic
           #
           # @param session_id [String] Query param: Return only versions written by the session with this ID.
           #
-          # @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Query param: Selects which projection of a `memory` or `memory_version` the serv
+          # @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Query param: Whether a `memory` or `memory_version` in the response includes its
           #
           # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `agent-memory-2026-07
           #
@@ -148,7 +148,7 @@ module Anthropic
             )
           end
 
-          # Redact a memory version
+          # Redact a Memory Version
           #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::MemoryStores::MemoryVersionRedactParams} for more

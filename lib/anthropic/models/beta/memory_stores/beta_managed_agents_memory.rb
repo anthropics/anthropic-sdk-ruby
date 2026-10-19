@@ -7,8 +7,10 @@ module Anthropic
         # @see Anthropic::Resources::Beta::MemoryStores::Memories#create
         class BetaManagedAgentsMemory < Anthropic::Internal::Type::BaseModel
           # @!attribute id
-          #   Unique identifier for this memory (a `mem_...` value). Stable across renames;
-          #   use this ID, not the path, to read, update, or delete the memory.
+          #   The unique ID of the memory (`mem_...`). It stays the same when the memory's
+          #   path changes.
+          #
+          #   To retrieve, update, or delete the memory, pass this ID.
           #
           #   @return [String]
           required :id, String
@@ -23,8 +25,8 @@ module Anthropic
           required :content_sha256, String
 
           # @!attribute content_size_bytes
-          #   Size of `content` in bytes (the UTF-8 plaintext length). Always populated,
-          #   regardless of `view`.
+          #   The size of the memory's `content` in UTF-8 bytes. It is set regardless of
+          #   `view`.
           #
           #   @return [Integer]
           required :content_size_bytes, Integer
@@ -42,11 +44,15 @@ module Anthropic
           required :memory_store_id, String
 
           # @!attribute memory_version_id
-          #   ID of the `memory_version` representing this memory's current content (a
-          #   `memver_...` value). This is the authoritative head pointer; `memory_version`
-          #   objects do not carry an `is_latest` flag, so compare against this field instead.
-          #   Enumerate the history via
-          #   [List memory versions](/en/api/beta/memory_stores/memory_versions/list).
+          #   The ID of the memory version that holds the memory's current content
+          #   (`memver_...`).
+          #
+          #   Memory versions don't have a flag that marks the latest one. Compare their IDs
+          #   with this field instead.
+          #
+          #   See the
+          #   [memory guide](https://platform.claude.com/docs/en/managed-agents/memory#audit-memory-changes)
+          #   to learn more about memory versions.
           #
           #   @return [String]
           required :memory_version_id, String
@@ -65,52 +71,58 @@ module Anthropic
           required :type, enum: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsMemory::Type }
 
           # @!attribute updated_at
-          #   When this memory was last modified, in RFC 3339 format. Use this as a cheap
-          #   freshness signal; for who made the change, look up the head version's
-          #   `created_by` via
-          #   [List memory versions](/en/api/beta/memory_stores/memory_versions/list).
+          #   When the memory was last changed, in RFC 3339.
+          #
+          #   To find out who made the change, look at `created_by` on the memory version that
+          #   `memory_version_id` references.
           #
           #   @return [Time]
           required :updated_at, Time
 
           # @!attribute content
-          #   The memory's UTF-8 text content. Populated when `view=full`; `null` when
-          #   `view=basic`. Maximum 100 kB (102,400 bytes).
+          #   The memory's UTF-8 text content, or `null` when the response uses `view=basic`.
+          #
+          #   The maximum size is 100 kB (102,400 bytes).
           #
           #   @return [String, nil]
           optional :content, String, nil?: true
 
           # @!method initialize(id:, content_sha256:, content_size_bytes:, created_at:, memory_store_id:, memory_version_id:, path:, type:, updated_at:, content: nil)
-          #   A `memory` object: a single text document at a hierarchical path inside a memory
-          #   store. The `content` field is populated when `view=full` and `null` when
-          #   `view=basic`; the `content_size_bytes` and `content_sha256` fields are always
-          #   populated so sync clients can diff without fetching content. Memories are
-          #   addressed by their `mem_...` ID; the path is the create key and can be changed
-          #   via update.
+          #   A text document at a path inside a memory store.
+          #
+          #   `content` is `null` when the response uses `view=basic`. `content_size_bytes`
+          #   and `content_sha256` are always set, so you can detect changes without fetching
+          #   the content. To retrieve, update, or delete a memory, pass its ID, which stays
+          #   the same when its path changes.
+          #
+          #   See the
+          #   [memory guide](https://platform.claude.com/docs/en/managed-agents/memory#view-and-edit-memories)
+          #   to learn more about working with memories.
           #
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemory} for more
           #   details.
           #
-          #   @param id [String] Unique identifier for this memory (a `mem_...` value). Stable across renames; us
+          #   @param id [String] The unique ID of the memory (`mem_...`). It stays the same when the memory's pat
           #
           #   @param content_sha256 [String] Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The s
           #
-          #   @param content_size_bytes [Integer] Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regar
+          #   @param content_size_bytes [Integer] The size of the memory's `content` in UTF-8 bytes. It is set regardless of `view
           #
           #   @param created_at [Time] When this memory was created, in RFC 3339 format.
           #
           #   @param memory_store_id [String] ID of the memory store this memory belongs to (a `memstore_...` value).
           #
-          #   @param memory_version_id [String] ID of the `memory_version` representing this memory's current content (a `memver
+          #   @param memory_version_id [String] The ID of the memory version that holds the memory's current content
+          #   (`memver\_..
           #
           #   @param path [String] Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`.
           #
           #   @param type [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemory::Type]
           #
-          #   @param updated_at [Time] When this memory was last modified, in RFC 3339 format. Use this as a cheap fres
+          #   @param updated_at [Time] When the memory was last changed, in RFC 3339.
           #
-          #   @param content [String, nil] The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=b
+          #   @param content [String, nil] The memory's UTF-8 text content, or `null` when the response uses `view=basic`.
 
           # @see Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemory#type
           module Type

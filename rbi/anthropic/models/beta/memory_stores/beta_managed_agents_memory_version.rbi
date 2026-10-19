@@ -21,10 +21,11 @@ module Anthropic
           sig { returns(Time) }
           attr_accessor :created_at
 
-          # ID of the memory this version snapshots (a `mem_...` value). Remains valid after
-          # the memory is deleted; pass it as `memory_id` to
-          # [List memory versions](/en/api/beta/memory_stores/memory_versions/list) to
-          # retrieve the memory's retained versions, including the `deleted` row while the
+          # The ID of the memory that this version belongs to (`mem_...`).
+          #
+          # The ID stays valid after the memory is deleted. Pass it as `memory_id` to
+          # [List Memory Versions](https://platform.claude.com/docs/en/api/beta/memory_stores/memory_versions/list)
+          # to get the memory's retained versions, including its `deleted` version while the
           # lineage is retained.
           sig { returns(String) }
           attr_accessor :memory_id
@@ -64,13 +65,16 @@ module Anthropic
           sig { returns(T.nilable(Integer)) }
           attr_accessor :content_size_bytes
 
-          # Who performed this write: one of `session_actor`, `api_actor`, `user_actor`, or
-          # `service_account_actor`; `null` when no writer is recorded. Captured at write
-          # time and preserved through redaction. A `session_actor` is an agent writing
-          # through the store's mounted filesystem at `/mnt/memory/`. The API key that
-          # created that session is not recorded on agent writes, so attribution names who
-          # made the write, not who is ultimately responsible; look up session provenance
-          # via the [Sessions API](/en/api/beta/sessions/retrieve).
+          # Who made this change to the memory, or `null` if the author wasn't recorded.
+          #
+          # Redacting the version doesn't change this field. A `session_actor` here is an
+          # agent that wrote through the store's mounted filesystem at `/mnt/memory/`. The
+          # version doesn't record the API key that created that session. So the author in
+          # `created_by` is who made the change, not who is ultimately responsible for it.
+          #
+          # You can
+          # [retrieve the session](https://platform.claude.com/docs/en/api/beta/sessions/retrieve)
+          # to learn more about where the change came from.
           sig do
             returns(
               T.nilable(
@@ -98,10 +102,14 @@ module Anthropic
           sig { returns(T.nilable(String)) }
           attr_accessor :path
 
-          # When this version was redacted, in RFC 3339 format, or `null` if it has not been
-          # redacted. When set, `content`, `path`, `content_size_bytes`, and
-          # `content_sha256` are all `null`. See
-          # [Redact a memory version](/en/api/beta/memory_stores/memory_versions/redact).
+          # When the version was redacted, in RFC 3339, or `null` if it hasn't been.
+          #
+          # When set, `content`, `path`, `content_size_bytes`, and `content_sha256` are
+          # `null`.
+          #
+          # See the
+          # [memory guide](https://platform.claude.com/docs/en/managed-agents/memory#redact-a-version)
+          # to learn more about redaction.
           sig { returns(T.nilable(Time)) }
           attr_accessor :redacted_at
 
@@ -130,14 +138,20 @@ module Anthropic
           end
           attr_writer :redacted_by
 
-          # A `memory_version` object: one immutable, attributed row in a memory's
-          # append-only history. Every non-no-op mutation to a memory produces a new
-          # version. Versions belong to the store (not the individual memory) and are not
-          # deleted with the memory; each version is retained for at least the version
-          # retention period after it was written, unless the store itself is deleted.
-          # Retrieving a redacted version returns 200 with `content`, `path`,
-          # `content_size_bytes`, and `content_sha256` set to `null`; branch on
-          # `redacted_at`, not HTTP status.
+          # One entry in a memory's history, recording a single change and who made it.
+          #
+          # Every change to a memory adds one version. Only redaction can change a version
+          # after that. Versions belong to the memory store and stay after the memory is
+          # deleted. Each version is retained for at least the version retention period
+          # after it was written, unless the store itself is deleted.
+          #
+          # Retrieving a redacted version succeeds, with `content`, `path`,
+          # `content_size_bytes`, and `content_sha256` set to `null`. Check `redacted_at` to
+          # find out whether a version was redacted.
+          #
+          # See the
+          # [memory guide](https://platform.claude.com/docs/en/managed-agents/memory#audit-memory-changes)
+          # to learn more about memory versions.
           sig do
             params(
               id: String,
@@ -174,10 +188,11 @@ module Anthropic
             id:,
             # When this version was written, in RFC 3339 format.
             created_at:,
-            # ID of the memory this version snapshots (a `mem_...` value). Remains valid after
-            # the memory is deleted; pass it as `memory_id` to
-            # [List memory versions](/en/api/beta/memory_stores/memory_versions/list) to
-            # retrieve the memory's retained versions, including the `deleted` row while the
+            # The ID of the memory that this version belongs to (`mem_...`).
+            #
+            # The ID stays valid after the memory is deleted. Pass it as `memory_id` to
+            # [List Memory Versions](https://platform.claude.com/docs/en/api/beta/memory_stores/memory_versions/list)
+            # to get the memory's retained versions, including its `deleted` version while the
             # lineage is retained.
             memory_id:,
             # ID of the memory store this version belongs to (a `memstore_...` value).
@@ -195,21 +210,28 @@ module Anthropic
             # Size of `content` in bytes as of this version. `null` when `redacted_at` is set
             # or `operation` is `deleted`. Populated regardless of `view` otherwise.
             content_size_bytes: nil,
-            # Who performed this write: one of `session_actor`, `api_actor`, `user_actor`, or
-            # `service_account_actor`; `null` when no writer is recorded. Captured at write
-            # time and preserved through redaction. A `session_actor` is an agent writing
-            # through the store's mounted filesystem at `/mnt/memory/`. The API key that
-            # created that session is not recorded on agent writes, so attribution names who
-            # made the write, not who is ultimately responsible; look up session provenance
-            # via the [Sessions API](/en/api/beta/sessions/retrieve).
+            # Who made this change to the memory, or `null` if the author wasn't recorded.
+            #
+            # Redacting the version doesn't change this field. A `session_actor` here is an
+            # agent that wrote through the store's mounted filesystem at `/mnt/memory/`. The
+            # version doesn't record the API key that created that session. So the author in
+            # `created_by` is who made the change, not who is ultimately responsible for it.
+            #
+            # You can
+            # [retrieve the session](https://platform.claude.com/docs/en/api/beta/sessions/retrieve)
+            # to learn more about where the change came from.
             created_by: nil,
             # The memory's path at the time of this write. `null` if and only if `redacted_at`
             # is set.
             path: nil,
-            # When this version was redacted, in RFC 3339 format, or `null` if it has not been
-            # redacted. When set, `content`, `path`, `content_size_bytes`, and
-            # `content_sha256` are all `null`. See
-            # [Redact a memory version](/en/api/beta/memory_stores/memory_versions/redact).
+            # When the version was redacted, in RFC 3339, or `null` if it hasn't been.
+            #
+            # When set, `content`, `path`, `content_size_bytes`, and `content_sha256` are
+            # `null`.
+            #
+            # See the
+            # [memory guide](https://platform.claude.com/docs/en/managed-agents/memory#redact-a-version)
+            # to learn more about redaction.
             redacted_at: nil,
             # Who redacted this version, or `null` if it has not been redacted. In practice
             # always an `api_actor`, `user_actor`, or `service_account_actor` (agents do not

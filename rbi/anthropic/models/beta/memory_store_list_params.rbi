@@ -15,16 +15,14 @@ module Anthropic
             )
           end
 
-        # Return only stores whose `created_at` is at or after this time (inclusive). Sent
-        # on the wire as `created_at[gte]`.
+        # Return only memory stores created at or after this time (inclusive).
         sig { returns(T.nilable(Time)) }
         attr_reader :created_at_gte
 
         sig { params(created_at_gte: Time).void }
         attr_writer :created_at_gte
 
-        # Return only stores whose `created_at` is at or before this time (inclusive).
-        # Sent on the wire as `created_at[lte]`.
+        # Return only memory stores created at or before this time (inclusive).
         sig { returns(T.nilable(Time)) }
         attr_reader :created_at_lte
 
@@ -47,8 +45,8 @@ module Anthropic
         sig { params(limit: Integer).void }
         attr_writer :limit
 
-        # Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a
-        # previous response to fetch the next page; omit for the first page.
+        # The `next_page` value from a previous response, to get the next page. Omit it to
+        # get the first page.
         sig { returns(T.nilable(String)) }
         attr_reader :page
 
@@ -98,11 +96,9 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
-          # Return only stores whose `created_at` is at or after this time (inclusive). Sent
-          # on the wire as `created_at[gte]`.
+          # Return only memory stores created at or after this time (inclusive).
           created_at_gte: nil,
-          # Return only stores whose `created_at` is at or before this time (inclusive).
-          # Sent on the wire as `created_at[lte]`.
+          # Return only memory stores created at or before this time (inclusive).
           created_at_lte: nil,
           # When `true`, archived stores are included in the results. Defaults to `false`
           # (archived stores are excluded).
@@ -110,8 +106,8 @@ module Anthropic
           # Maximum number of stores to return per page. Must be between 1 and 100. Defaults
           # to 20 when omitted.
           limit: nil,
-          # Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a
-          # previous response to fetch the next page; omit for the first page.
+          # The `next_page` value from a previous response, to get the next page. Omit it to
+          # get the first page.
           page: nil,
           # This endpoint is in beta: requests must send `agent-memory-2026-07-22` or
           # `managed-agents-2026-04-01` in this header.

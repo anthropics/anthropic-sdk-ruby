@@ -9,9 +9,10 @@ module Anthropic
         include Anthropic::Internal::Type::RequestParameters
 
         # @!attribute memory_store_id
-        #   ID of the memory store to permanently delete (a `memstore_...` identifier).
-        #   Required. Deletion cascades to all memories and memory versions in the store and
-        #   cannot be undone.
+        #   The ID of the memory store to delete (`memstore_...`).
+        #
+        #   Deleting a store also deletes all its memories and memory versions. It can't be
+        #   undone.
         #
         #   @return [String]
         required :memory_store_id, String
@@ -38,7 +39,7 @@ module Anthropic
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::MemoryStoreDeleteParams} for more details.
         #
-        #   @param memory_store_id [String] ID of the memory store to permanently delete (a `memstore_...` identifier). Requ
+        #   @param memory_store_id [String] The ID of the memory store to delete (`memstore_...`).
         #
         #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `manag
         #

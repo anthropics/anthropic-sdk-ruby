@@ -22,11 +22,11 @@ module Anthropic
           required :memory_id, String
 
           # @!attribute view
-          #   Selects which projection of a `memory` or `memory_version` the server returns.
-          #   `basic` returns the object with `content` set to `null`; `full` populates
-          #   `content`. When omitted, the default is endpoint-specific: retrieve operations
-          #   default to `full`; list, create, and update operations default to `basic`.
-          #   Listing with `view=full` caps `limit` at 20.
+          #   Whether a `memory` or `memory_version` in the response includes its `content`.
+          #   Defaults to `full` on retrieve operations and to `basic` on list, create, and
+          #   update operations.
+          #
+          #   With `full`, list operations return at most 20 items per page.
           #
           #   @return [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView, nil]
           optional :view, enum: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryView }
@@ -39,21 +39,22 @@ module Anthropic
           optional :content, String, nil?: true
 
           # @!attribute path
-          #   New path for the memory (a rename). Must start with `/`, contain at least one
-          #   non-empty segment, and be at most 1,024 bytes. Must not contain empty segments,
-          #   `.` or `..` segments, control or format characters, or the Unicode line and
-          #   paragraph separators (U+2028, U+2029), and must be NFC-normalized. Paths are
-          #   case-sensitive. The memory's `id` is preserved across renames. Omit to leave the
-          #   path unchanged.
+          #   The new path of the memory, which renames it. Omit it to keep the current path.
+          #
+          #   The memory keeps its `id`. A path starts with `/` and has 1 to 20 segments. A
+          #   segment can't be empty and can't be `.` or `..`. A path can't contain control
+          #   characters, format characters, or the line and paragraph separators U+2028 and
+          #   U+2029. It must be in Unicode Normalization Form C and at most 1,024 bytes long.
+          #   Paths are case-sensitive.
           #
           #   @return [String, nil]
           optional :path, String, nil?: true
 
           # @!attribute precondition
-          #   Optional optimistic-concurrency precondition. When supplied, the update applies
-          #   only if the memory's current state matches; on mismatch the request returns
-          #   `memory_precondition_failed_error` (HTTP 409). When omitted, the update is
-          #   unconditional.
+          #   The condition that the memory must meet for the update to apply. Omit it to
+          #   update unconditionally.
+          #
+          #   If the condition fails, the request fails with HTTP status 409.
           #
           #   @return [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsPrecondition, nil]
           optional :precondition, -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsPrecondition }
@@ -84,13 +85,13 @@ module Anthropic
           #
           #   @param memory_id [String] The ID of the memory to update (`mem_...`).
           #
-          #   @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Selects which projection of a `memory` or `memory_version` the server returns. `
+          #   @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Whether a `memory` or `memory_version` in the response includes its `content`. D
           #
           #   @param content [String, nil] New UTF-8 text content for the memory. Maximum 100 kB (102,400 bytes). Omit to l
           #
-          #   @param path [String, nil] New path for the memory (a rename). Must start with `/`, contain at least one no
+          #   @param path [String, nil] The new path of the memory, which renames it. Omit it to keep the current path.
           #
-          #   @param precondition [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsPrecondition] Optional optimistic-concurrency precondition. When supplied, the update applies
+          #   @param precondition [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsPrecondition] The condition that the memory must meet for the update to apply. Omit it to upda
           #
           #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `manag
           #

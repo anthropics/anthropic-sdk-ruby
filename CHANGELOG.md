@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.81.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.80.0...v1.81.0) (2026-10-16)
+## [1.81.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.80.0...v1.81.0) (2026-10-19)
 
 ### Features
 
@@ -18,6 +18,7 @@
 * **ci:** set up Ruby 3.2 with a newer setup-ruby in the build and dependency version jobs
 * **docs:** add credential expiry descriptions to the Managed Agents API reference
 * **docs:** correct plugin manifest_version and reach descriptions
+* **docs:** improve Managed Agents memory store descriptions
 * **docs:** improve Managed Agents vault and credential descriptions
 * **tests:** cover per-request timeouts and later union variants
 * **tests:** make the tracing tests independent of test order

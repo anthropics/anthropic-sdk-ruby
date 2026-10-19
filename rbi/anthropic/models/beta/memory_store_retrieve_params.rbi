@@ -15,8 +15,7 @@ module Anthropic
             )
           end
 
-        # ID of the memory store to retrieve (a `memstore_...` identifier). Required.
-        # Enumerate IDs via `GET /v1/memory_stores`.
+        # The ID of the memory store to retrieve (`memstore_...`).
         sig { returns(String) }
         attr_accessor :memory_store_id
 
@@ -59,8 +58,7 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
-          # ID of the memory store to retrieve (a `memstore_...` identifier). Required.
-          # Enumerate IDs via `GET /v1/memory_stores`.
+          # The ID of the memory store to retrieve (`memstore_...`).
           memory_store_id:,
           # This endpoint is in beta: requests must send `agent-memory-2026-07-22` or
           # `managed-agents-2026-04-01` in this header.
