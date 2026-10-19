@@ -202,6 +202,8 @@ module Anthropic
         ORGANIZATION_WORKSPACES_LIST = "anthropic.organization.workspaces.list"
         ORGANIZATION_WORKSPACES_ARCHIVE =
           "anthropic.organization.workspaces.archive"
+        ORGANIZATION_WORKSPACES_RATE_LIMITS_UPDATE =
+          "anthropic.organization.workspaces.rate_limits.update"
         ORGANIZATION_WORKSPACES_RATE_LIMITS_LIST =
           "anthropic.organization.workspaces.rate_limits.list"
         ORGANIZATION_WORKSPACES_MEMBERS_RETRIEVE =

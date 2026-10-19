@@ -5,7 +5,7 @@ module Anthropic
     module Beta
       module Organization
         module Workspaces
-          # @see Anthropic::Resources::Beta::Organization::Workspaces::RateLimits#list
+          # @see Anthropic::Resources::Beta::Organization::Workspaces::RateLimits#update
           class BetaWorkspaceRateLimit < Anthropic::Internal::Type::BaseModel
             # @!attribute group
             #   The rate-limit group this entry's limits apply to. Its `type` equals

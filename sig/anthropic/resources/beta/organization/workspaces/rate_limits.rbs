@@ -4,6 +4,13 @@ module Anthropic
       class Organization
         class Workspaces
           class RateLimits
+            def update: (
+              String rate_limit_id,
+              workspace_id: String,
+              limits: ::Array[Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimitUpdateValue],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimit
+
             def list: (
               String workspace_id,
               ?group_type: Anthropic::Models::Beta::Organization::Workspaces::RateLimitListParams::group_type?,
