@@ -15,6 +15,8 @@ TEST_PATHS=(
 	test/anthropic/resources/files_test.rb
 	test/anthropic/resources/skills_test.rb
 	test/anthropic/resources/skills/versions_test.rb
+	test/anthropic/resources/user_profiles_test.rb
+	test/anthropic/resources/user_profiles/action_urls_test.rb
 	test/anthropic/resources/organization_test.rb
 	test/anthropic/resources/organization/api_keys_test.rb
 	test/anthropic/resources/organization/external_keys_test.rb
@@ -57,6 +59,7 @@ TEST_PATHS=(
 	test/anthropic/resources/beta/skills/versions_test.rb
 	test/anthropic/resources/beta/webhooks_test.rb
 	test/anthropic/resources/beta/user_profiles_test.rb
+	test/anthropic/resources/beta/user_profiles/action_urls_test.rb
 	test/anthropic/resources/beta/dreams_test.rb
 	test/anthropic/resources/beta/tunnels_test.rb
 	test/anthropic/resources/beta/tunnels/certificates_test.rb

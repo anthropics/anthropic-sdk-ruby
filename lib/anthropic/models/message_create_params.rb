@@ -350,7 +350,7 @@ module Anthropic
 
       # @!attribute user_profile_id
       #   The user profile ID to attribute this request to. Use when acting on behalf of a
-      #   party other than your organization. Requires the `user-profiles` beta header.
+      #   party other than your organization.
       #
       #   @return [String, nil]
       optional :user_profile_id, String

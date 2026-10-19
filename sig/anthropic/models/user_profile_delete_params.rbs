@@ -1,0 +1,30 @@
+module Anthropic
+  module Models
+    type user_profile_delete_params =
+      { user_profile_id: String, workspace_id: String }
+      & Anthropic::Internal::Type::request_parameters
+
+    class UserProfileDeleteParams < Anthropic::Internal::Type::BaseModel
+      extend Anthropic::Internal::Type::RequestParameters::Converter
+      include Anthropic::Internal::Type::RequestParameters
+
+      attr_accessor user_profile_id: String
+
+      attr_reader workspace_id: String?
+
+      def workspace_id=: (String) -> String
+
+      def initialize: (
+        user_profile_id: String,
+        ?workspace_id: String,
+        ?request_options: Anthropic::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        user_profile_id: String,
+        workspace_id: String,
+        request_options: Anthropic::RequestOptions
+      }
+    end
+  end
+end

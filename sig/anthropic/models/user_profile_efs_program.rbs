@@ -1,0 +1,25 @@
+module Anthropic
+  module Models
+    type user_profile_efs_program =
+      {
+        features: ::Hash[Symbol, Anthropic::UserProfileEfsFeature],
+        status: Anthropic::Models::user_profile_program_status
+      }
+
+    class UserProfileEfsProgram < Anthropic::Internal::Type::BaseModel
+      attr_accessor features: ::Hash[Symbol, Anthropic::UserProfileEfsFeature]
+
+      attr_accessor status: Anthropic::Models::user_profile_program_status
+
+      def initialize: (
+        features: ::Hash[Symbol, Anthropic::UserProfileEfsFeature],
+        status: Anthropic::Models::user_profile_program_status
+      ) -> void
+
+      def to_hash: -> {
+        features: ::Hash[Symbol, Anthropic::UserProfileEfsFeature],
+        status: Anthropic::Models::user_profile_program_status
+      }
+    end
+  end
+end

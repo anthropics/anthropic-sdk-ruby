@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    type user_profile_list_order_by = :created_at | :name
+
+    module UserProfileListOrderBy
+      extend Anthropic::Internal::Type::Enum
+
+      # Sort by when each user profile was created. This is the default.
+      CREATED_AT: :created_at
+
+      # Sort by `name`, ignoring the case of ASCII letters. Profiles without a name come last in either direction.
+      NAME: :name
+
+      def self?.values: -> ::Array[Anthropic::Models::user_profile_list_order_by]
+    end
+  end
+end

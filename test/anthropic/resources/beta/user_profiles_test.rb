@@ -15,14 +15,14 @@ class Anthropic::Test::Resources::Beta::UserProfilesTest < Anthropic::Test::Reso
         id: String,
         created_at: Time,
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
+        name: String | nil,
         trust_grants: ^(Anthropic::Internal::Type::HashOf[Anthropic::Beta::BetaUserProfileTrustGrant]),
         type: Anthropic::Beta::BetaUserProfile::Type,
         updated_at: Time,
         access_type: Anthropic::Beta::BetaUserProfile::AccessType | nil,
         external_id: String | nil,
         external_user_details: Anthropic::Beta::BetaUserProfileExternalUserDetails | nil,
-        external_user_onboarded_at: Time | nil,
-        name: String | nil
+        external_user_onboarded_at: Time | nil
       }
     end
   end
@@ -39,14 +39,14 @@ class Anthropic::Test::Resources::Beta::UserProfilesTest < Anthropic::Test::Reso
         id: String,
         created_at: Time,
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
+        name: String | nil,
         trust_grants: ^(Anthropic::Internal::Type::HashOf[Anthropic::Beta::BetaUserProfileTrustGrant]),
         type: Anthropic::Beta::BetaUserProfile::Type,
         updated_at: Time,
         access_type: Anthropic::Beta::BetaUserProfile::AccessType | nil,
         external_id: String | nil,
         external_user_details: Anthropic::Beta::BetaUserProfileExternalUserDetails | nil,
-        external_user_onboarded_at: Time | nil,
-        name: String | nil
+        external_user_onboarded_at: Time | nil
       }
     end
   end
@@ -63,14 +63,14 @@ class Anthropic::Test::Resources::Beta::UserProfilesTest < Anthropic::Test::Reso
         id: String,
         created_at: Time,
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
+        name: String | nil,
         trust_grants: ^(Anthropic::Internal::Type::HashOf[Anthropic::Beta::BetaUserProfileTrustGrant]),
         type: Anthropic::Beta::BetaUserProfile::Type,
         updated_at: Time,
         access_type: Anthropic::Beta::BetaUserProfile::AccessType | nil,
         external_id: String | nil,
         external_user_details: Anthropic::Beta::BetaUserProfileExternalUserDetails | nil,
-        external_user_onboarded_at: Time | nil,
-        name: String | nil
+        external_user_onboarded_at: Time | nil
       }
     end
   end
@@ -94,14 +94,29 @@ class Anthropic::Test::Resources::Beta::UserProfilesTest < Anthropic::Test::Reso
         id: String,
         created_at: Time,
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
+        name: String | nil,
         trust_grants: ^(Anthropic::Internal::Type::HashOf[Anthropic::Beta::BetaUserProfileTrustGrant]),
         type: Anthropic::Beta::BetaUserProfile::Type,
         updated_at: Time,
         access_type: Anthropic::Beta::BetaUserProfile::AccessType | nil,
         external_id: String | nil,
         external_user_details: Anthropic::Beta::BetaUserProfileExternalUserDetails | nil,
-        external_user_onboarded_at: Time | nil,
-        name: String | nil
+        external_user_onboarded_at: Time | nil
+      }
+    end
+  end
+
+  def test_delete
+    response = @anthropic.beta.user_profiles.delete("uprof_011CZkZCu8hGbp5mYRQgUmz9")
+
+    assert_pattern do
+      response => Anthropic::Beta::BetaDeletedUserProfile
+    end
+
+    assert_pattern do
+      response => {
+        id: String,
+        type: Symbol
       }
     end
   end

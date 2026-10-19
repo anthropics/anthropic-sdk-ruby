@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    class UserProfileEnrollEndUserAction = UserProfiles::UserProfileEnrollEndUserAction
+
+    module UserProfiles
+      type user_profile_enroll_end_user_action = { type: :enroll_end_user }
+
+      class UserProfileEnrollEndUserAction < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :enroll_end_user
+
+        def initialize: (?type: :enroll_end_user) -> void
+
+        def to_hash: -> { type: :enroll_end_user }
+      end
+    end
+  end
+end

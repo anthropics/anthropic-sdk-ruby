@@ -77,6 +77,9 @@ module Anthropic
         module Tunnels
         end
 
+        module UserProfiles
+        end
+
         module Vaults
         end
       end
@@ -166,6 +169,9 @@ module Anthropic
       end
 
       module Tunnels
+      end
+
+      module UserProfiles
       end
 
       module Vaults

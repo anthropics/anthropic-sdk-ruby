@@ -1,0 +1,51 @@
+module Anthropic
+  module Models
+    module Beta
+      module UserProfiles
+        type action_url_create_params =
+          {
+            user_profile_id: String,
+            action: Anthropic::Beta::UserProfiles::BetaUserProfileEnrollEndUserAction,
+            betas: ::Array[Anthropic::Models::anthropic_beta],
+            workspace_id: String
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class ActionURLCreateParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor user_profile_id: String
+
+          attr_accessor action: Anthropic::Beta::UserProfiles::BetaUserProfileEnrollEndUserAction
+
+          attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+          def betas=: (
+            ::Array[Anthropic::Models::anthropic_beta]
+          ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+          attr_reader workspace_id: String?
+
+          def workspace_id=: (String) -> String
+
+          def initialize: (
+            user_profile_id: String,
+            action: Anthropic::Beta::UserProfiles::BetaUserProfileEnrollEndUserAction,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?workspace_id: String,
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            user_profile_id: String,
+            action: Anthropic::Beta::UserProfiles::BetaUserProfileEnrollEndUserAction,
+            betas: ::Array[Anthropic::Models::anthropic_beta],
+            workspace_id: String,
+            request_options: Anthropic::RequestOptions
+          }
+        end
+      end
+    end
+  end
+end

@@ -64,8 +64,7 @@ module Anthropic
         sig { params(page: String).void }
         attr_writer :page
 
-        # This endpoint is in beta: requests must send `user-profiles-2026-03-24`,
-        # `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
+        # Optional header to specify the beta version(s) you want to use.
         sig do
           returns(
             T.nilable(
@@ -119,8 +118,7 @@ module Anthropic
           #
           # Leave it out to get the first page.
           page: nil,
-          # This endpoint is in beta: requests must send `user-profiles-2026-03-24`,
-          # `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
+          # Optional header to specify the beta version(s) you want to use.
           betas: nil,
           # Optional header to select the Workspace for this request. The value is a
           # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

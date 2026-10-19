@@ -489,6 +489,8 @@ module Anthropic
 
   class DeletedSkill = Anthropic::Models::DeletedSkill
 
+  class DeletedUserProfile = Anthropic::Models::DeletedUserProfile
+
   class Diagnostics = Anthropic::Models::Diagnostics
 
   class DiagnosticsParam = Anthropic::Models::DiagnosticsParam
@@ -764,6 +766,48 @@ module Anthropic
   class Usage = Anthropic::Models::Usage
 
   class UserLocation = Anthropic::Models::UserLocation
+
+  class UserProfile = Anthropic::Models::UserProfile
+
+  module UserProfileAccessType = Anthropic::Models::UserProfileAccessType
+
+  class UserProfileCreateParams = Anthropic::Models::UserProfileCreateParams
+
+  class UserProfileCyberProgram = Anthropic::Models::UserProfileCyberProgram
+
+  class UserProfileCyberRequirements = Anthropic::Models::UserProfileCyberRequirements
+
+  class UserProfileCyberTier = Anthropic::Models::UserProfileCyberTier
+
+  class UserProfileDeleteParams = Anthropic::Models::UserProfileDeleteParams
+
+  class UserProfileEfsFeature = Anthropic::Models::UserProfileEfsFeature
+
+  class UserProfileEfsProgram = Anthropic::Models::UserProfileEfsProgram
+
+  module UserProfileExternalUserAccountStatus = Anthropic::Models::UserProfileExternalUserAccountStatus
+
+  class UserProfileExternalUserDetails = Anthropic::Models::UserProfileExternalUserDetails
+
+  class UserProfileExternalUserDetailsParams = Anthropic::Models::UserProfileExternalUserDetailsParams
+
+  module UserProfileExternalUserEntityType = Anthropic::Models::UserProfileExternalUserEntityType
+
+  module UserProfileListOrder = Anthropic::Models::UserProfileListOrder
+
+  module UserProfileListOrderBy = Anthropic::Models::UserProfileListOrderBy
+
+  class UserProfileListParams = Anthropic::Models::UserProfileListParams
+
+  class UserProfilePrograms = Anthropic::Models::UserProfilePrograms
+
+  module UserProfileProgramStatus = Anthropic::Models::UserProfileProgramStatus
+
+  class UserProfileRetrieveParams = Anthropic::Models::UserProfileRetrieveParams
+
+  module UserProfiles = Anthropic::Models::UserProfiles
+
+  class UserProfileUpdateParams = Anthropic::Models::UserProfileUpdateParams
 
   class WebFetchBlock = Anthropic::Models::WebFetchBlock
 

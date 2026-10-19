@@ -43,9 +43,9 @@ module Anthropic
           attr_writer :betas
 
           # The user profile ID to attribute the requests in this batch to. Use when acting
-          # on behalf of a party other than your organization. Requires the `user-profiles`
-          # beta header. Applies to every request in the batch; an individual request whose
-          # `user_profile_id` body field conflicts with this header is errored.
+          # on behalf of a party other than your organization. Applies to every request in
+          # the batch; an individual request whose `user_profile_id` body field conflicts
+          # with this header is errored.
           sig { returns(T.nilable(String)) }
           attr_reader :user_profile_id
 
@@ -84,9 +84,9 @@ module Anthropic
             # Optional header to specify the beta version(s) you want to use.
             betas: nil,
             # The user profile ID to attribute the requests in this batch to. Use when acting
-            # on behalf of a party other than your organization. Requires the `user-profiles`
-            # beta header. Applies to every request in the batch; an individual request whose
-            # `user_profile_id` body field conflicts with this header is errored.
+            # on behalf of a party other than your organization. Applies to every request in
+            # the batch; an individual request whose `user_profile_id` body field conflicts
+            # with this header is errored.
             user_profile_id: nil,
             # Optional header to select the Workspace for this request. The value is a
             # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

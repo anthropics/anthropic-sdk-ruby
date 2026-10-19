@@ -1,0 +1,49 @@
+module Anthropic
+  module Resources
+    class UserProfiles
+      attr_reader action_urls: Anthropic::Resources::UserProfiles::ActionURLs
+
+      def create: (
+        ?access_type: Anthropic::Models::user_profile_access_type,
+        ?external_user_details: Anthropic::UserProfileExternalUserDetailsParams,
+        ?metadata: ::Hash[Symbol, String],
+        ?name: String?,
+        ?workspace_id: String,
+        ?request_options: Anthropic::request_opts
+      ) -> Anthropic::UserProfile
+
+      def retrieve: (
+        String user_profile_id,
+        ?workspace_id: String,
+        ?request_options: Anthropic::request_opts
+      ) -> Anthropic::UserProfile
+
+      def update: (
+        String user_profile_id,
+        ?access_type: Anthropic::Models::user_profile_access_type?,
+        ?external_user_details: Anthropic::UserProfileExternalUserDetailsParams,
+        ?metadata: ::Hash[Symbol, String],
+        ?name: String?,
+        ?workspace_id: String,
+        ?request_options: Anthropic::request_opts
+      ) -> Anthropic::UserProfile
+
+      def list: (
+        ?limit: Integer,
+        ?order: Anthropic::Models::user_profile_list_order,
+        ?order_by: Anthropic::Models::user_profile_list_order_by,
+        ?page: String,
+        ?workspace_id: String,
+        ?request_options: Anthropic::request_opts
+      ) -> Anthropic::Internal::PageCursor[Anthropic::UserProfile]
+
+      def delete: (
+        String user_profile_id,
+        ?workspace_id: String,
+        ?request_options: Anthropic::request_opts
+      ) -> Anthropic::DeletedUserProfile
+
+      def initialize: (client: Anthropic::Client) -> void
+    end
+  end
+end

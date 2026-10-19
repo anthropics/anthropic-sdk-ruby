@@ -1,0 +1,30 @@
+module Anthropic
+  module Models
+    class UserProfileActionURL = UserProfiles::UserProfileActionURL
+
+    module UserProfiles
+      type user_profile_action_url =
+        { expires_at: Time, type: :user_profile_action_url, url: String }
+
+      class UserProfileActionURL < Anthropic::Internal::Type::BaseModel
+        attr_accessor expires_at: Time
+
+        attr_accessor type: :user_profile_action_url
+
+        attr_accessor url: String
+
+        def initialize: (
+          expires_at: Time,
+          url: String,
+          ?type: :user_profile_action_url
+        ) -> void
+
+        def to_hash: -> {
+          expires_at: Time,
+          type: :user_profile_action_url,
+          url: String
+        }
+      end
+    end
+  end
+end

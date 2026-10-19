@@ -4,6 +4,9 @@ module Anthropic
   module Resources
     class Beta
       class UserProfiles
+        # @return [Anthropic::Resources::Beta::UserProfiles::ActionURLs]
+        attr_reader :action_urls
+
         # Create User Profile
         #
         # Some parameter documentations has been truncated, see
@@ -23,7 +26,7 @@ module Anthropic
         #
         # @param name [String, nil] Body param: Optional for all profiles. Real-world name of the entity this profil
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `user-profiles-2026-0
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -57,7 +60,7 @@ module Anthropic
         #
         # @param user_profile_id [String] The ID of the user profile to get (`uprof_...`).
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `user-profiles-2026-03-24`, `user-p
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
@@ -101,7 +104,7 @@ module Anthropic
         #
         # @param name [String, nil] Body param: If present, replaces the stored name. Omit to leave unchanged. Maxim
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `user-profiles-2026-0
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -141,7 +144,7 @@ module Anthropic
         #
         # @param page [String] Query param: The cursor for the page to return, taken from `next_page` in a prev
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `user-profiles-2026-0
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -171,6 +174,38 @@ module Anthropic
           )
         end
 
+        # Delete User Profile
+        #
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::UserProfileDeleteParams} for more details.
+        #
+        # @overload delete(user_profile_id, betas: nil, workspace_id: nil, request_options: {})
+        #
+        # @param user_profile_id [String] The ID of the user profile to delete (`uprof_...`).
+        #
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
+        #
+        # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [Anthropic::Models::Beta::BetaDeletedUserProfile]
+        #
+        # @see Anthropic::Models::Beta::UserProfileDeleteParams
+        def delete(user_profile_id, params = {})
+          parsed, options = Anthropic::Beta::UserProfileDeleteParams.dump_request(params)
+          @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::USER_PROFILES_DELETE,
+            span_attributes: {"anthropic.user_profile.id" => user_profile_id},
+            span_route: "/v1/user_profiles/{user_profile_id}",
+            method: :delete,
+            path: ["v1/user_profiles/%1$s?beta=true", user_profile_id],
+            headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
+            model: Anthropic::Beta::BetaDeletedUserProfile,
+            options: {extra_headers: {"anthropic-beta" => "user-profiles-2026-08-18"}, **options}
+          )
+        end
+
         # Create Enrollment URL
         #
         # Some parameter documentations has been truncated, see
@@ -181,7 +216,7 @@ module Anthropic
         #
         # @param user_profile_id [String] The ID of the user profile to create an enrollment URL for (`uprof_...`).
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `user-profiles-2026-03-24`, `user-p
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
@@ -209,6 +244,7 @@ module Anthropic
         # @param client [Anthropic::Client]
         def initialize(client:)
           @client = client
+          @action_urls = Anthropic::Resources::Beta::UserProfiles::ActionURLs.new(client: client)
         end
       end
     end

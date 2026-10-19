@@ -1,0 +1,16 @@
+module Anthropic
+  module Resources
+    class UserProfiles
+      class ActionURLs
+        def create: (
+          String user_profile_id,
+          action: Anthropic::UserProfiles::UserProfileEnrollEndUserAction,
+          ?workspace_id: String,
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::UserProfiles::UserProfileActionURL
+
+        def initialize: (client: Anthropic::Client) -> void
+      end
+    end
+  end
+end

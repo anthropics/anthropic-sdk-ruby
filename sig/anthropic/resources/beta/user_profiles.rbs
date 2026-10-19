@@ -2,6 +2,8 @@ module Anthropic
   module Resources
     class Beta
       class UserProfiles
+        attr_reader action_urls: Anthropic::Resources::Beta::UserProfiles::ActionURLs
+
         def create: (
           ?access_type: Anthropic::Models::Beta::UserProfileCreateParams::access_type,
           ?external_id: String?,
@@ -43,6 +45,13 @@ module Anthropic
           ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::BetaUserProfile]
+
+        def delete: (
+          String user_profile_id,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaDeletedUserProfile
 
         def create_enrollment_url: (
           String user_profile_id,

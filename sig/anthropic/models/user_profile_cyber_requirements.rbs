@@ -1,0 +1,16 @@
+module Anthropic
+  module Models
+    type user_profile_cyber_requirements =
+      { data_retention: bool, human_review: bool }
+
+    class UserProfileCyberRequirements < Anthropic::Internal::Type::BaseModel
+      attr_accessor data_retention: bool
+
+      attr_accessor human_review: bool
+
+      def initialize: (data_retention: bool, human_review: bool) -> void
+
+      def to_hash: -> { data_retention: bool, human_review: bool }
+    end
+  end
+end

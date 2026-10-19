@@ -1,0 +1,25 @@
+module Anthropic
+  module Models
+    type user_profile_programs =
+      {
+        cyber: Anthropic::UserProfileCyberProgram?,
+        efs: Anthropic::UserProfileEfsProgram?
+      }
+
+    class UserProfilePrograms < Anthropic::Internal::Type::BaseModel
+      attr_accessor cyber: Anthropic::UserProfileCyberProgram?
+
+      attr_accessor efs: Anthropic::UserProfileEfsProgram?
+
+      def initialize: (
+        cyber: Anthropic::UserProfileCyberProgram?,
+        efs: Anthropic::UserProfileEfsProgram?
+      ) -> void
+
+      def to_hash: -> {
+        cyber: Anthropic::UserProfileCyberProgram?,
+        efs: Anthropic::UserProfileEfsProgram?
+      }
+    end
+  end
+end

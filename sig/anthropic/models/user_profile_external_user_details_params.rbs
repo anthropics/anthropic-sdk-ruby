@@ -1,0 +1,52 @@
+module Anthropic
+  module Models
+    type user_profile_external_user_details_params =
+      {
+        account_status: Anthropic::Models::user_profile_external_user_account_status?,
+        country: String?,
+        email_hash: String?,
+        entity_type: Anthropic::Models::user_profile_external_user_entity_type?,
+        name_hash: String?,
+        onboarded_at: Time,
+        reference_id: String?
+      }
+
+    class UserProfileExternalUserDetailsParams < Anthropic::Internal::Type::BaseModel
+      attr_accessor account_status: Anthropic::Models::user_profile_external_user_account_status?
+
+      attr_accessor country: String?
+
+      attr_accessor email_hash: String?
+
+      attr_accessor entity_type: Anthropic::Models::user_profile_external_user_entity_type?
+
+      attr_accessor name_hash: String?
+
+      attr_reader onboarded_at: Time?
+
+      def onboarded_at=: (Time) -> Time
+
+      attr_accessor reference_id: String?
+
+      def initialize: (
+        ?account_status: Anthropic::Models::user_profile_external_user_account_status?,
+        ?country: String?,
+        ?email_hash: String?,
+        ?entity_type: Anthropic::Models::user_profile_external_user_entity_type?,
+        ?name_hash: String?,
+        ?onboarded_at: Time,
+        ?reference_id: String?
+      ) -> void
+
+      def to_hash: -> {
+        account_status: Anthropic::Models::user_profile_external_user_account_status?,
+        country: String?,
+        email_hash: String?,
+        entity_type: Anthropic::Models::user_profile_external_user_entity_type?,
+        name_hash: String?,
+        onboarded_at: Time,
+        reference_id: String?
+      }
+    end
+  end
+end

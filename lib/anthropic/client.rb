@@ -82,6 +82,9 @@ module Anthropic
     # @return [Anthropic::Resources::Skills]
     attr_reader :skills
 
+    # @return [Anthropic::Resources::UserProfiles]
+    attr_reader :user_profiles
+
     # @return [Anthropic::Resources::Organization]
     attr_reader :organization
 
@@ -342,6 +345,7 @@ module Anthropic
       @models = Anthropic::Resources::Models.new(client: self)
       @files = Anthropic::Resources::Files.new(client: self)
       @skills = Anthropic::Resources::Skills.new(client: self)
+      @user_profiles = Anthropic::Resources::UserProfiles.new(client: self)
       @organization = Anthropic::Resources::Organization.new(client: self)
       @beta = Anthropic::Resources::Beta.new(client: self)
     end

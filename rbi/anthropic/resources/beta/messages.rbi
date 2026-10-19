@@ -725,8 +725,7 @@ module Anthropic
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,
           # Header param: The user profile ID to attribute this request to. Use when acting
-          # on behalf of a party other than your organization. Requires the `user-profiles`
-          # beta header.
+          # on behalf of a party other than your organization.
           user_profile_id: nil,
           # Header param: Optional header to select the Workspace for this request. The
           # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1169,8 +1168,7 @@ module Anthropic
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,
           # Header param: The user profile ID to attribute this request to. Use when acting
-          # on behalf of a party other than your organization. Requires the `user-profiles`
-          # beta header.
+          # on behalf of a party other than your organization.
           user_profile_id: nil,
           # Header param: Optional header to select the Workspace for this request. The
           # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1484,8 +1482,7 @@ module Anthropic
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,
           # Header param: The user profile ID to attribute this request to. Use when acting
-          # on behalf of a party other than your organization. Requires the `user-profiles`
-          # beta header.
+          # on behalf of a party other than your organization.
           user_profile_id: nil,
           # Header param: Optional header to select the Workspace for this request. The
           # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
