@@ -13,6 +13,7 @@
 ### Bug Fixes
 
 * **client:** `messages.stream` and `beta.messages.stream` now take the same parameters as `stream_raw`; their Sorbet and RBS signatures take one params hash
+* **types:** type the keyword parameters of messages.stream and beta.messages.stream
 
 
 ### Chores

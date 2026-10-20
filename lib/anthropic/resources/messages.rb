@@ -256,16 +256,59 @@ module Anthropic
         )
       end
 
-      # Streams a message like {Anthropic::Resources::Messages#stream_raw} and returns a
-      # {Anthropic::Helpers::Streaming::MessageStream}, which accumulates the streamed
-      # events and parses tool inputs and structured output. Takes the same parameters
-      # as {Anthropic::Resources::Messages#stream_raw}. Hand-written (custom code, not generated).
+      # Streams a message like `stream_raw` and returns a MessageStream, which
+      # accumulates the streamed events and parses tool inputs and structured output.
       #
-      # @param params [Anthropic::Models::MessageCreateParams, Hash{Symbol=>Object}]
+      # Some parameter documentations has been truncated, see
+      # {Anthropic::Models::MessageCreateParams} for more details.
+      #
+      # @overload stream(max_tokens:, messages:, model:, cache_control: nil, container: nil, diagnostics: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+      #
+      # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
+      #
+      # @param messages [Array<Anthropic::Models::MessageParam>] Body param: Input messages.
+      #
+      # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.
+      #
+      # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Body param: Top-level cache control automatically applies a cache_control marker
+      #
+      # @param container [Anthropic::Models::ContainerParams, String, nil] Body param: Container identifier for reuse across requests.
+      #
+      # @param diagnostics [Anthropic::Models::DiagnosticsParam, nil] Body param: Request-level diagnostics. Supply `previous_message_id` to have the
+      #
+      # @param inference_geo [String, nil] Body param: Specifies the geographic region for inference processing. If not spe
+      #
+      # @param metadata [Anthropic::Models::Metadata] Body param: An object describing metadata about the request.
+      #
+      # @param output_config [Anthropic::Models::OutputConfig] Body param: Configuration options for the model's output, such as the output for
+      #
+      # @param service_tier [Symbol, Anthropic::Models::MessageCreateParams::ServiceTier] Body param: Determines whether to use priority capacity (if available) or standa
+      #
+      # @param speed [Symbol, Anthropic::Models::MessageCreateParams::Speed, nil] Body param: The inference speed mode for this request. `"fast"` enables high out
+      #
+      # @param stop_sequences [Array<String>] Body param: Custom text sequences that will cause the model to stop generating.
+      #
+      # @param system_ [String, Array<Anthropic::Models::TextBlockParam>] Body param: System prompt.
+      #
+      # @param temperature [Float] Body param: Amount of randomness injected into the response.
+      #
+      # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, Anthropic::Models::ThinkingConfigBetweenTools, Anthropic::Models::ThinkingConfigAdaptive] Body param: Configuration for Claude's thinking.
+      #
+      # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
+      #
+      # @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::CodeExecutionTool20250522, Anthropic::Models::CodeExecutionTool20250825, Anthropic::Models::CodeExecutionTool20260120, Anthropic::Models::CodeExecutionTool20260521, Anthropic::Models::BrowserToolset20260801, Anthropic::Models::MemoryTool20250818, Anthropic::Models::ComputerToolset20260801, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::ToolTextEditor20250429, Anthropic::Models::ToolTextEditor20250728, Anthropic::Models::WebSearchTool20250305, Anthropic::Models::WebFetchTool20250910, Anthropic::Models::WebSearchTool20260209, Anthropic::Models::WebFetchTool20260209, Anthropic::Models::WebFetchTool20260309, Anthropic::Models::WebSearchTool20260318, Anthropic::Models::WebFetchTool20260318, Anthropic::Models::ToolSearchToolBm25_20251119, Anthropic::Models::ToolSearchToolRegex20251119>] Body param: Definitions of tools that the model may use.
+      #
+      # @param top_k [Integer] Body param: Only sample from the top K options for each subsequent token.
+      #
+      # @param top_p [Float] Body param: Use nucleus sampling.
+      #
+      # @param user_profile_id [String] Header param: The user profile ID to attribute this request to. Use when acting
+      #
+      # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
+      #
+      # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Anthropic::Helpers::Streaming::MessageStream]
-      #
-      # @see Anthropic::Resources::Messages#stream_raw
       def stream(params)
         parsed = Anthropic::Models::MessageCreateParams.dump_request(params).first
         warn_thinking_enabled(parsed)
