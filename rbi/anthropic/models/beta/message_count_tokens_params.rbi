@@ -81,8 +81,7 @@ module Anthropic
         #
         # Note that if you want to include a
         # [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role),
-        # you can use the top-level `system` parameter — there is no `"system"` role for
-        # input messages in the Messages API.
+        # you can use the top-level `system` parameter.
         #
         # There is a limit of 100,000 messages in a single request.
         sig { returns(T::Array[Anthropic::Beta::BetaMessageParam]) }
@@ -626,8 +625,7 @@ module Anthropic
           #
           # Note that if you want to include a
           # [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role),
-          # you can use the top-level `system` parameter — there is no `"system"` role for
-          # input messages in the Messages API.
+          # you can use the top-level `system` parameter.
           #
           # There is a limit of 100,000 messages in a single request.
           messages:,

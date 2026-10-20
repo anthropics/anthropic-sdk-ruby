@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.82.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.82.0...v1.82.1) (2026-10-20)
+
+### Documentation
+
+* **api:** remove outdated system role note from messages description
+
 ## [1.82.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.81.0...v1.82.0) (2026-10-20)
 
 ### Features
