@@ -2,6 +2,11 @@
 
 ## [1.81.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.81.0...v1.81.1) (2026-10-20)
 
+### Bug Fixes
+
+* **client:** parse date and time fields on list pages
+
+
 ### Chores
 
 * **ci:** run the changelog check on a standard runner
