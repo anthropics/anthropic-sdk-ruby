@@ -52,6 +52,9 @@ module Anthropic
         # @return [Anthropic::Resources::Beta::Organization::TelemetryDestinations]
         attr_reader :telemetry_destinations
 
+        # @return [Anthropic::Resources::Beta::Organization::Webhooks]
+        attr_reader :webhooks
+
         # Retrieve information about the organization associated with the authenticated
         # API key.
         #
@@ -95,6 +98,7 @@ module Anthropic
           @plugin_marketplaces = Anthropic::Resources::Beta::Organization::PluginMarketplaces.new(client: client)
           @telemetry_destinations =
             Anthropic::Resources::Beta::Organization::TelemetryDestinations.new(client: client)
+          @webhooks = Anthropic::Resources::Beta::Organization::Webhooks.new(client: client)
         end
       end
     end

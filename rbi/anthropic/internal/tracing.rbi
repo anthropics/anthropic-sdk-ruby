@@ -447,6 +447,14 @@ module Anthropic
           "anthropic.organization.telemetry_destinations.workspaces.add"
         ORGANIZATION_TELEMETRY_DESTINATIONS_WORKSPACES_REMOVE =
           "anthropic.organization.telemetry_destinations.workspaces.remove"
+        ORGANIZATION_WEBHOOKS_CREATE = "anthropic.organization.webhooks.create"
+        ORGANIZATION_WEBHOOKS_RETRIEVE =
+          "anthropic.organization.webhooks.retrieve"
+        ORGANIZATION_WEBHOOKS_UPDATE = "anthropic.organization.webhooks.update"
+        ORGANIZATION_WEBHOOKS_LIST = "anthropic.organization.webhooks.list"
+        ORGANIZATION_WEBHOOKS_DELETE = "anthropic.organization.webhooks.delete"
+        ORGANIZATION_WEBHOOKS_REGENERATE_SIGNING_SECRET =
+          "anthropic.organization.webhooks.regenerate_signing_secret"
       end
 
       CLIENT_ATTRIBUTES = T.let(T.unsafe(nil), T::Hash[String, String])

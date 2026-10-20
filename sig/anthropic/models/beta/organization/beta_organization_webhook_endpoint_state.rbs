@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_organization_webhook_endpoint_state = :disabled | :enabled
+
+        module BetaOrganizationWebhookEndpointState
+          extend Anthropic::Internal::Type::Enum
+
+          DISABLED: :disabled
+          ENABLED: :enabled
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::beta_organization_webhook_endpoint_state]
+        end
+      end
+    end
+  end
+end

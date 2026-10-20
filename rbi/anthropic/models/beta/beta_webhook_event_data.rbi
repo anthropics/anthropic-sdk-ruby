@@ -54,7 +54,9 @@ module Anthropic
               Anthropic::Beta::BetaWebhookMemoryStoreCreatedEventData,
               Anthropic::Beta::BetaWebhookMemoryStoreArchivedEventData,
               Anthropic::Beta::BetaWebhookMemoryStoreDeletedEventData,
-              Anthropic::Beta::BetaWebhookSessionBudgetReachedEventData
+              Anthropic::Beta::BetaWebhookSessionBudgetReachedEventData,
+              Anthropic::Beta::BetaWebhookUserProfileEnforcementActionOpenedEventData,
+              Anthropic::Beta::BetaWebhookUserProfileEnforcementActionResolvedEventData
             )
           end
 
@@ -287,6 +289,16 @@ module Anthropic
               :"session.budget_reached",
               Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
             )
+          USER_PROFILE_ENFORCEMENT_ACTION_OPENED =
+            T.let(
+              :"user_profile.enforcement_action_opened",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          USER_PROFILE_ENFORCEMENT_ACTION_RESOLVED =
+            T.let(
+              :"user_profile.enforcement_action_resolved",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
 
           sig do
             override.returns(
@@ -316,7 +328,8 @@ module Anthropic
             organization_id: String,
             workspace_id: String,
             session_thread_id: String,
-            vault_id: String
+            vault_id: String,
+            enforcement_action_id: String
           ).returns(Anthropic::Beta::BetaWebhookEventData::Variants)
         end
         def self.new(
@@ -324,11 +337,13 @@ module Anthropic
           # ID of the session that triggered the event.
           id:,
           organization_id:,
-          workspace_id:,
+          workspace_id: nil,
           # ID of the session thread this event refers to.
           session_thread_id: nil,
           # ID of the vault that owns this credential.
-          vault_id: nil
+          vault_id: nil,
+          # ID (`enac_...`) of the enforcement action that was opened or resolved.
+          enforcement_action_id: nil
         )
         end
       end

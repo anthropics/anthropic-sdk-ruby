@@ -34,6 +34,8 @@ module Anthropic
 
         attr_reader telemetry_destinations: Anthropic::Resources::Beta::Organization::TelemetryDestinations
 
+        attr_reader webhooks: Anthropic::Resources::Beta::Organization::Webhooks
+
         def retrieve: (
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaOrganization

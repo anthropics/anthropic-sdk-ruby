@@ -80,7 +80,7 @@ module Anthropic
         end
         @next_page_ = page_data[:next_page]
         @has_more = page_data[:has_more]
-        @data_refreshed_at = page_data[:data_refreshed_at]
+        @data_refreshed_at = Anthropic::Internal::Type::Converter.coerce(Time, page_data[:data_refreshed_at])
       end
 
       # @api private

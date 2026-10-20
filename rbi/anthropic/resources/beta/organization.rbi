@@ -62,6 +62,9 @@ module Anthropic
         end
         attr_reader :telemetry_destinations
 
+        sig { returns(Anthropic::Resources::Beta::Organization::Webhooks) }
+        attr_reader :webhooks
+
         # Retrieve information about the organization associated with the authenticated
         # API key.
         sig do

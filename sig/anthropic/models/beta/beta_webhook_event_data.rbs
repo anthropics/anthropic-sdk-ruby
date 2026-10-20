@@ -48,6 +48,8 @@ module Anthropic
         | Anthropic::Beta::BetaWebhookMemoryStoreArchivedEventData
         | Anthropic::Beta::BetaWebhookMemoryStoreDeletedEventData
         | Anthropic::Beta::BetaWebhookSessionBudgetReachedEventData
+        | Anthropic::Beta::BetaWebhookUserProfileEnforcementActionOpenedEventData
+        | Anthropic::Beta::BetaWebhookUserProfileEnforcementActionResolvedEventData
 
       module BetaWebhookEventData
         extend Anthropic::Internal::Type::Union
@@ -97,6 +99,8 @@ module Anthropic
           | :"memory_store.archived"
           | :"memory_store.deleted"
           | :"session.budget_reached"
+          | :"user_profile.enforcement_action_opened"
+          | :"user_profile.enforcement_action_resolved"
 
         module Type
           extend Anthropic::Internal::Type::Enum
@@ -145,6 +149,8 @@ module Anthropic
           MEMORY_STORE_ARCHIVED: :"memory_store.archived"
           MEMORY_STORE_DELETED: :"memory_store.deleted"
           SESSION_BUDGET_REACHED: :"session.budget_reached"
+          USER_PROFILE_ENFORCEMENT_ACTION_OPENED: :"user_profile.enforcement_action_opened"
+          USER_PROFILE_ENFORCEMENT_ACTION_RESOLVED: :"user_profile.enforcement_action_resolved"
 
           def self?.values: -> ::Array[Anthropic::Models::Beta::BetaWebhookEventData::type_]
         end
@@ -426,12 +432,27 @@ module Anthropic
             workspace_id: String
           ) -> Anthropic::Beta::BetaWebhookSessionBudgetReachedEventData
           | (
+            type: :"user_profile.enforcement_action_opened"
+            | "user_profile.enforcement_action_opened",
+            id: String,
+            enforcement_action_id: String,
+            organization_id: String
+          ) -> Anthropic::Beta::BetaWebhookUserProfileEnforcementActionOpenedEventData
+          | (
+            type: :"user_profile.enforcement_action_resolved"
+            | "user_profile.enforcement_action_resolved",
+            id: String,
+            enforcement_action_id: String,
+            organization_id: String
+          ) -> Anthropic::Beta::BetaWebhookUserProfileEnforcementActionResolvedEventData
+          | (
             type: Anthropic::Models::Beta::BetaWebhookEventData::type_ | String,
             id: String,
             organization_id: String,
-            workspace_id: String,
+            ?workspace_id: String,
             ?session_thread_id: String,
-            ?vault_id: String
+            ?vault_id: String,
+            ?enforcement_action_id: String
           ) -> Anthropic::Models::Beta::beta_webhook_event_data
       end
     end

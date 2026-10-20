@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaWebhookUserProfileEnforcementActionResolvedEventData = Beta::BetaWebhookUserProfileEnforcementActionResolvedEventData
+
+    module Beta
+      type beta_webhook_user_profile_enforcement_action_resolved_event_data =
+        {
+          id: String,
+          enforcement_action_id: String,
+          organization_id: String,
+          type: :"user_profile.enforcement_action_resolved"
+        }
+
+      class BetaWebhookUserProfileEnforcementActionResolvedEventData < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor enforcement_action_id: String
+
+        attr_accessor organization_id: String
+
+        attr_accessor type: :"user_profile.enforcement_action_resolved"
+
+        def initialize: (
+          id: String,
+          enforcement_action_id: String,
+          organization_id: String,
+          ?type: :"user_profile.enforcement_action_resolved"
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          enforcement_action_id: String,
+          organization_id: String,
+          type: :"user_profile.enforcement_action_resolved"
+        }
+      end
+    end
+  end
+end
