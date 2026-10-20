@@ -1,0 +1,82 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_new_organization_webhook_endpoint =
+          {
+            id: String,
+            created_at: Time,
+            description: String,
+            disabled_reason: String,
+            enabled_events: ::Array[Anthropic::Models::Beta::Organization::BetaNewOrganizationWebhookEndpoint::enabled_event],
+            name: String,
+            signing_secret: String,
+            state: Anthropic::Models::Beta::Organization::beta_organization_webhook_endpoint_state,
+            updated_at: Time,
+            url: String
+          }
+
+        class BetaNewOrganizationWebhookEndpoint < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor created_at: Time
+
+          attr_accessor description: String
+
+          attr_accessor disabled_reason: String
+
+          attr_accessor enabled_events: ::Array[Anthropic::Models::Beta::Organization::BetaNewOrganizationWebhookEndpoint::enabled_event]
+
+          attr_accessor name: String
+
+          attr_accessor signing_secret: String
+
+          attr_accessor state: Anthropic::Models::Beta::Organization::beta_organization_webhook_endpoint_state
+
+          attr_accessor updated_at: Time
+
+          attr_accessor url: String
+
+          def initialize: (
+            id: String,
+            created_at: Time,
+            description: String,
+            disabled_reason: String,
+            enabled_events: ::Array[Anthropic::Models::Beta::Organization::BetaNewOrganizationWebhookEndpoint::enabled_event],
+            name: String,
+            signing_secret: String,
+            state: Anthropic::Models::Beta::Organization::beta_organization_webhook_endpoint_state,
+            updated_at: Time,
+            url: String
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            created_at: Time,
+            description: String,
+            disabled_reason: String,
+            enabled_events: ::Array[Anthropic::Models::Beta::Organization::BetaNewOrganizationWebhookEndpoint::enabled_event],
+            name: String,
+            signing_secret: String,
+            state: Anthropic::Models::Beta::Organization::beta_organization_webhook_endpoint_state,
+            updated_at: Time,
+            url: String
+          }
+
+          type enabled_event =
+            :"user_profile.enforcement_action_opened"
+            | :"user_profile.enforcement_action_resolved"
+
+          module EnabledEvent
+            extend Anthropic::Internal::Type::Enum
+
+            USER_PROFILE_ENFORCEMENT_ACTION_OPENED: :"user_profile.enforcement_action_opened"
+            USER_PROFILE_ENFORCEMENT_ACTION_RESOLVED: :"user_profile.enforcement_action_resolved"
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaNewOrganizationWebhookEndpoint::enabled_event]
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,58 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class Webhooks
+          def create: (
+            enabled_events: ::Array[Anthropic::Models::Beta::Organization::WebhookCreateParams::enabled_event],
+            url: String,
+            ?description: String,
+            ?name: String,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaNewOrganizationWebhookEndpoint
+
+          def retrieve: (
+            String webhook_endpoint_id,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaOrganizationWebhookEndpoint
+
+          def update: (
+            String webhook_endpoint_id,
+            ?description: String,
+            ?enabled_events: ::Array[Anthropic::Models::Beta::Organization::WebhookUpdateParams::enabled_event],
+            ?name: String,
+            ?state: Anthropic::Models::Beta::Organization::WebhookUpdateParams::state,
+            ?url: String,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaOrganizationWebhookEndpoint
+
+          def list: (
+            ?after_id: String?,
+            ?before_id: String?,
+            ?limit: Integer,
+            ?order: Anthropic::Models::Beta::Organization::WebhookListParams::order?,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Internal::Page[Anthropic::Beta::Organization::BetaOrganizationWebhookEndpoint]
+
+          def delete: (
+            String webhook_endpoint_id,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaDeletedOrganizationWebhookEndpoint
+
+          def regenerate_signing_secret: (
+            String webhook_endpoint_id,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaOrganizationWebhookEndpointSigningSecret
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

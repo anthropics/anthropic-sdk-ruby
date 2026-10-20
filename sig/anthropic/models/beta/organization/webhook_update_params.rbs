@@ -1,0 +1,102 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type webhook_update_params =
+          {
+            webhook_endpoint_id: String,
+            description: String,
+            enabled_events: ::Array[Anthropic::Models::Beta::Organization::WebhookUpdateParams::enabled_event],
+            name: String,
+            state: Anthropic::Models::Beta::Organization::WebhookUpdateParams::state,
+            url: String,
+            betas: ::Array[Anthropic::Models::anthropic_beta]
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class WebhookUpdateParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor webhook_endpoint_id: String
+
+          attr_reader description: String?
+
+          def description=: (String) -> String
+
+          attr_reader enabled_events: ::Array[Anthropic::Models::Beta::Organization::WebhookUpdateParams::enabled_event]?
+
+          def enabled_events=: (
+            ::Array[Anthropic::Models::Beta::Organization::WebhookUpdateParams::enabled_event]
+          ) -> ::Array[Anthropic::Models::Beta::Organization::WebhookUpdateParams::enabled_event]
+
+          attr_reader name: String?
+
+          def name=: (String) -> String
+
+          attr_reader state: Anthropic::Models::Beta::Organization::WebhookUpdateParams::state?
+
+          def state=: (
+            Anthropic::Models::Beta::Organization::WebhookUpdateParams::state
+          ) -> Anthropic::Models::Beta::Organization::WebhookUpdateParams::state
+
+          attr_reader url: String?
+
+          def url=: (String) -> String
+
+          attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+          def betas=: (
+            ::Array[Anthropic::Models::anthropic_beta]
+          ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+          def initialize: (
+            webhook_endpoint_id: String,
+            ?description: String,
+            ?enabled_events: ::Array[Anthropic::Models::Beta::Organization::WebhookUpdateParams::enabled_event],
+            ?name: String,
+            ?state: Anthropic::Models::Beta::Organization::WebhookUpdateParams::state,
+            ?url: String,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            webhook_endpoint_id: String,
+            description: String,
+            enabled_events: ::Array[Anthropic::Models::Beta::Organization::WebhookUpdateParams::enabled_event],
+            name: String,
+            state: Anthropic::Models::Beta::Organization::WebhookUpdateParams::state,
+            url: String,
+            betas: ::Array[Anthropic::Models::anthropic_beta],
+            request_options: Anthropic::RequestOptions
+          }
+
+          type enabled_event =
+            :"user_profile.enforcement_action_opened"
+            | :"user_profile.enforcement_action_resolved"
+
+          module EnabledEvent
+            extend Anthropic::Internal::Type::Enum
+
+            USER_PROFILE_ENFORCEMENT_ACTION_OPENED: :"user_profile.enforcement_action_opened"
+            USER_PROFILE_ENFORCEMENT_ACTION_RESOLVED: :"user_profile.enforcement_action_resolved"
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::WebhookUpdateParams::enabled_event]
+          end
+
+          type state = :disabled | :enabled
+
+          module State
+            extend Anthropic::Internal::Type::Enum
+
+            DISABLED: :disabled
+            ENABLED: :enabled
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::WebhookUpdateParams::state]
+          end
+        end
+      end
+    end
+  end
+end

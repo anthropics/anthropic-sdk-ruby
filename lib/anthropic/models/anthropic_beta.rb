@@ -107,6 +107,8 @@ module Anthropic
 
       variant const: -> { Anthropic::Models::AnthropicBeta::TELEMETRY_DESTINATIONS_2026_08_11 }
 
+      variant const: -> { Anthropic::Models::AnthropicBeta::WEBHOOKS_2026_10_07 }
+
       variant String
 
       # @!method self.variants
@@ -169,6 +171,7 @@ module Anthropic
       CE_PLUGINS_2026_09_01 = :"ce-plugins-2026-09-01"
       SPEND_LIMIT_READS_2026_09_26 = :"spend-limit-reads-2026-09-26"
       TELEMETRY_DESTINATIONS_2026_08_11 = :"telemetry-destinations-2026-08-11"
+      WEBHOOKS_2026_10_07 = :"webhooks-2026-10-07"
 
       # @!endgroup
     end

@@ -225,6 +225,8 @@ module Anthropic
           :"telemetry-destinations-2026-08-11",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
+      WEBHOOKS_2026_10_07 =
+        T.let(:"webhooks-2026-10-07", Anthropic::AnthropicBeta::TaggedSymbol)
     end
   end
 end

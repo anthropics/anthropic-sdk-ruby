@@ -1,6 +1,11 @@
 # Changelog
 
-## [1.81.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.81.0...v1.81.1) (2026-10-20)
+## [1.82.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.81.0...v1.82.0) (2026-10-20)
+
+### Features
+
+* **api:** add org webhook endpoints and user profile enforcement events
+
 
 ### Bug Fixes
 
