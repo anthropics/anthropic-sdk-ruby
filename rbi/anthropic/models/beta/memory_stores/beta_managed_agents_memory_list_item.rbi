@@ -4,9 +4,9 @@ module Anthropic
   module Models
     module Beta
       module MemoryStores
-        # One item in a [List memories](/en/api/beta/memory_stores/memories/list)
-        # response: either a `memory` object or, when `depth` is set, a `memory_prefix`
-        # rollup marker.
+        # One item in a
+        # [List Memories](https://platform.claude.com/docs/en/api/beta/memory_stores/memories/list)
+        # response: a `memory`, or a `memory_prefix` marker when `depth` is `1`.
         module BetaManagedAgentsMemoryListItem
           extend Anthropic::Internal::Type::Union
 
@@ -87,34 +87,41 @@ module Anthropic
             # Always starts with `/`. Paths are case-sensitive and unique within a store.
             # Maximum 1,024 bytes.
             path:,
-            # Unique identifier for this memory (a `mem_...` value). Stable across renames;
-            # use this ID, not the path, to read, update, or delete the memory.
+            # The unique ID of the memory (`mem_...`). It stays the same when the memory's
+            # path changes.
+            #
+            # To retrieve, update, or delete the memory, pass this ID.
             id: nil,
             # Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The
             # server applies no normalization, so clients can compute the same hash locally
             # for staleness checks and as the value for a `content_sha256` precondition on
             # update. Always populated, regardless of `view`.
             content_sha256: nil,
-            # Size of `content` in bytes (the UTF-8 plaintext length). Always populated,
-            # regardless of `view`.
+            # The size of the memory's `content` in UTF-8 bytes. It is set regardless of
+            # `view`.
             content_size_bytes: nil,
             # When this memory was created, in RFC 3339 format.
             created_at: nil,
             # ID of the memory store this memory belongs to (a `memstore_...` value).
             memory_store_id: nil,
-            # ID of the `memory_version` representing this memory's current content (a
-            # `memver_...` value). This is the authoritative head pointer; `memory_version`
-            # objects do not carry an `is_latest` flag, so compare against this field instead.
-            # Enumerate the history via
-            # [List memory versions](/en/api/beta/memory_stores/memory_versions/list).
+            # The ID of the memory version that holds the memory's current content
+            # (`memver_...`).
+            #
+            # Memory versions don't have a flag that marks the latest one. Compare their IDs
+            # with this field instead.
+            #
+            # See the
+            # [memory guide](https://platform.claude.com/docs/en/managed-agents/memory#audit-memory-changes)
+            # to learn more about memory versions.
             memory_version_id: nil,
-            # When this memory was last modified, in RFC 3339 format. Use this as a cheap
-            # freshness signal; for who made the change, look up the head version's
-            # `created_by` via
-            # [List memory versions](/en/api/beta/memory_stores/memory_versions/list).
+            # When the memory was last changed, in RFC 3339.
+            #
+            # To find out who made the change, look at `created_by` on the memory version that
+            # `memory_version_id` references.
             updated_at: nil,
-            # The memory's UTF-8 text content. Populated when `view=full`; `null` when
-            # `view=basic`. Maximum 100 kB (102,400 bytes).
+            # The memory's UTF-8 text content, or `null` when the response uses `view=basic`.
+            #
+            # The maximum size is 100 kB (102,400 bytes).
             content: nil
           )
           end

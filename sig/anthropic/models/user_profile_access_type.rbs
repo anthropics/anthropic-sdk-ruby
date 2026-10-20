@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    type user_profile_access_type = :application | :passthrough
+
+    module UserProfileAccessType
+      extend Anthropic::Internal::Type::Enum
+
+      # The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+      APPLICATION: :application
+
+      # The user profile represents a company that the platform resells Claude access to.
+      PASSTHROUGH: :passthrough
+
+      def self?.values: -> ::Array[Anthropic::Models::user_profile_access_type]
+    end
+  end
+end

@@ -5,7 +5,7 @@ module Anthropic
     class Beta
       class MemoryStores
         class Memories
-          # Create a memory
+          # Create a Memory
           #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::MemoryStores::MemoryCreateParams} for more details.
@@ -14,11 +14,11 @@ module Anthropic
           #
           # @param memory_store_id [String] Path param: The ID of the memory store to create the memory in (`memstore_...`).
           #
-          # @param content [String, nil] Body param: UTF-8 text content for the new memory. Maximum 100 kB (102,400 bytes
+          # @param content [String, nil] Body param: The UTF-8 text content of the new memory. Pass `""` to create an emp
           #
-          # @param path [String] Body param: Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`.
+          # @param path [String] Body param: The path of the new memory, such as `/projects/foo/notes.md`. Paths
           #
-          # @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Query param: Selects which projection of a `memory` or `memory_version` the serv
+          # @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Query param: Whether a `memory` or `memory_version` in the response includes its
           #
           # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `agent-memory-2026-07
           #
@@ -50,7 +50,7 @@ module Anthropic
             )
           end
 
-          # Retrieve a memory
+          # Retrieve a Memory
           #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::MemoryStores::MemoryRetrieveParams} for more details.
@@ -61,7 +61,7 @@ module Anthropic
           #
           # @param memory_store_id [String] Path param: The ID of the memory store that holds the memory (`memstore_...`).
           #
-          # @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Query param: Selects which projection of a `memory` or `memory_version` the serv
+          # @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Query param: Whether a `memory` or `memory_version` in the response includes its
           #
           # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `agent-memory-2026-07
           #
@@ -100,7 +100,7 @@ module Anthropic
             )
           end
 
-          # Update a memory
+          # Update a Memory
           #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::MemoryStores::MemoryUpdateParams} for more details.
@@ -111,13 +111,13 @@ module Anthropic
           #
           # @param memory_store_id [String] Path param: The ID of the memory store that holds the memory (`memstore_...`).
           #
-          # @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Query param: Selects which projection of a `memory` or `memory_version` the serv
+          # @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Query param: Whether a `memory` or `memory_version` in the response includes its
           #
           # @param content [String, nil] Body param: New UTF-8 text content for the memory. Maximum 100 kB (102,400 bytes
           #
-          # @param path [String, nil] Body param: New path for the memory (a rename). Must start with `/`, contain at
+          # @param path [String, nil] Body param: The new path of the memory, which renames it. Omit it to keep the cu
           #
-          # @param precondition [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsPrecondition] Body param: Optional optimistic-concurrency precondition. When supplied, the upd
+          # @param precondition [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsPrecondition] Body param: The condition that the memory must meet for the update to apply. Omi
           #
           # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `agent-memory-2026-07
           #
@@ -155,7 +155,7 @@ module Anthropic
             )
           end
 
-          # List memories
+          # List Memories
           #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::MemoryStores::MemoryListParams} for more details.
@@ -164,15 +164,15 @@ module Anthropic
           #
           # @param memory_store_id [String] Path param: The ID of the memory store to list memories from (`memstore_...`).
           #
-          # @param depth [Integer] Query param: `0` (or omitted) returns all descendants below `path_prefix` (recur
+          # @param depth [Integer] Query param: How far below `path_prefix` to list. Defaults to `0`, which lists e
           #
-          # @param limit [Integer] Query param: Maximum number of items to return per page. Must be between 1 and 1
+          # @param limit [Integer] Query param: The maximum number of items to return per page, from 1 to 100. Defa
           #
-          # @param page [String] Query param: Opaque pagination cursor (a `page_...` value). Pass the `next_page`
+          # @param page [String] Query param: The `next_page` value from a previous response, to get the next pag
           #
-          # @param path_prefix [String] Query param: Optional path prefix filter. Must end with `/` (segment-aligned), e
+          # @param path_prefix [String] Query param: Return only memories whose path starts with this prefix, such as `/
           #
-          # @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Query param: Which projection of each `memory` to return. Defaults to `basic` (c
+          # @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Query param: Whether each memory in the response includes `content`. Defaults to
           #
           # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `agent-memory-2026-07
           #
@@ -206,7 +206,7 @@ module Anthropic
             )
           end
 
-          # Delete a memory
+          # Delete a Memory
           #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::MemoryStores::MemoryDeleteParams} for more details.

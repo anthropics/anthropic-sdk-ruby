@@ -464,7 +464,7 @@ module Anthropic
         attr_writer :betas
 
         # The user profile ID to attribute this request to. Use when acting on behalf of a
-        # party other than your organization. Requires the `user-profiles` beta header.
+        # party other than your organization.
         sig { returns(T.nilable(String)) }
         attr_reader :user_profile_id
 
@@ -773,7 +773,7 @@ module Anthropic
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,
           # The user profile ID to attribute this request to. Use when acting on behalf of a
-          # party other than your organization. Requires the `user-profiles` beta header.
+          # party other than your organization.
           user_profile_id: nil,
           # Optional header to select the Workspace for this request. The value is a
           # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

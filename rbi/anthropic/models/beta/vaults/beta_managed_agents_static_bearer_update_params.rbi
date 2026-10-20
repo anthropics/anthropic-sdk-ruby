@@ -20,7 +20,7 @@ module Anthropic
           end
           attr_accessor :type
 
-          # Updated static bearer token value.
+          # The new static bearer token to replace the stored one.
           sig { returns(T.nilable(String)) }
           attr_accessor :token
 
@@ -35,7 +35,7 @@ module Anthropic
           end
           def self.new(
             type:,
-            # Updated static bearer token value.
+            # The new static bearer token to replace the stored one.
             token: nil
           )
           end

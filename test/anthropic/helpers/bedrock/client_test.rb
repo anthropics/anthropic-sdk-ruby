@@ -584,6 +584,25 @@ class Anthropic::Test::BedrockClientTest < Minitest::Test
     assert_raises(NotImplementedError) { make_client.skills }
   end
 
+  def test_user_profiles_raises_not_implemented
+    err = assert_raises(NotImplementedError) { make_client.user_profiles }
+    assert_equal("User profiles are not supported on Bedrock.", err.message)
+  end
+
+  def test_beta_user_profiles_raise_before_sending
+    profiles = make_client.beta.user_profiles
+    [
+      -> { profiles.create },
+      -> { profiles.retrieve("uprof_test") },
+      -> { profiles.list },
+      -> { profiles.create_enrollment_url("uprof_test") },
+      -> { profiles.action_urls.create("uprof_test", action: {type: :enroll_end_user}) }
+    ].each do |call|
+      err = assert_raises(NotImplementedError, &call)
+      assert_equal("User profiles are not supported on Bedrock.", err.message)
+    end
+  end
+
   # First-party static env keys must never fold into a Bedrock client.
   def test_does_not_fold_env_static_keys
     original = %w[ANTHROPIC_API_KEY ANTHROPIC_AUTH_TOKEN].to_h { [_1, ENV.fetch(_1, nil)] }

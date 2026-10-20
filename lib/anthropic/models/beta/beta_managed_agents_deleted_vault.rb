@@ -6,7 +6,7 @@ module Anthropic
       # @see Anthropic::Resources::Beta::Vaults#delete
       class BetaManagedAgentsDeletedVault < Anthropic::Internal::Type::BaseModel
         # @!attribute id
-        #   Unique identifier of the deleted vault.
+        #   The unique ID of the deleted vault (`vlt_...`).
         #
         #   @return [String]
         required :id, String
@@ -19,7 +19,7 @@ module Anthropic
         # @!method initialize(id:, type:)
         #   Confirmation of a deleted vault.
         #
-        #   @param id [String] Unique identifier of the deleted vault.
+        #   @param id [String] The unique ID of the deleted vault (`vlt_...`).
         #
         #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeletedVault::Type]
 

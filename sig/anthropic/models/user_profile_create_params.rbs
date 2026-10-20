@@ -1,0 +1,58 @@
+module Anthropic
+  module Models
+    type user_profile_create_params =
+      {
+        access_type: Anthropic::Models::user_profile_access_type,
+        external_user_details: Anthropic::UserProfileExternalUserDetailsParams,
+        metadata: ::Hash[Symbol, String],
+        name: String?,
+        workspace_id: String
+      }
+      & Anthropic::Internal::Type::request_parameters
+
+    class UserProfileCreateParams < Anthropic::Internal::Type::BaseModel
+      extend Anthropic::Internal::Type::RequestParameters::Converter
+      include Anthropic::Internal::Type::RequestParameters
+
+      attr_reader access_type: Anthropic::Models::user_profile_access_type?
+
+      def access_type=: (
+        Anthropic::Models::user_profile_access_type
+      ) -> Anthropic::Models::user_profile_access_type
+
+      attr_reader external_user_details: Anthropic::UserProfileExternalUserDetailsParams?
+
+      def external_user_details=: (
+        Anthropic::UserProfileExternalUserDetailsParams
+      ) -> Anthropic::UserProfileExternalUserDetailsParams
+
+      attr_reader metadata: ::Hash[Symbol, String]?
+
+      def metadata=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+      attr_accessor name: String?
+
+      attr_reader workspace_id: String?
+
+      def workspace_id=: (String) -> String
+
+      def initialize: (
+        ?access_type: Anthropic::Models::user_profile_access_type,
+        ?external_user_details: Anthropic::UserProfileExternalUserDetailsParams,
+        ?metadata: ::Hash[Symbol, String],
+        ?name: String?,
+        ?workspace_id: String,
+        ?request_options: Anthropic::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        access_type: Anthropic::Models::user_profile_access_type,
+        external_user_details: Anthropic::UserProfileExternalUserDetailsParams,
+        metadata: ::Hash[Symbol, String],
+        name: String?,
+        workspace_id: String,
+        request_options: Anthropic::RequestOptions
+      }
+    end
+  end
+end

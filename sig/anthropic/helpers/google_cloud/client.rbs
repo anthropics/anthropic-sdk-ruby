@@ -6,6 +6,8 @@ module Anthropic
 
         URL_TEMPLATE: String
 
+        ORGANIZATION_URL_TEMPLATE: String
+
         attr_reader project: String?
 
         attr_reader location: String?
@@ -13,6 +15,13 @@ module Anthropic
         attr_reader workspace_id: String?
 
         def completions: -> bot
+
+        def user_profiles: -> bot
+
+        private def build_request: (
+          Anthropic::Internal::Transport::BaseClient::request_components req,
+          Anthropic::request_options opts
+        ) -> Anthropic::Internal::Transport::BaseClient::request_input
 
         private def resolve_default_credentials?: -> bool
 
@@ -24,7 +33,7 @@ module Anthropic
           Anthropic::APIRequest req
         ) -> Anthropic::APIRequest
 
-        private def derive_base_url: -> String
+        private def derive_base_url: (String template) -> String
 
         private def require_googleauth: -> void
 

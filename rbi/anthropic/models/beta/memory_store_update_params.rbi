@@ -15,26 +15,31 @@ module Anthropic
             )
           end
 
-        # ID of the memory store to update (a `memstore_...` identifier). Required.
-        # Enumerate IDs via `GET /v1/memory_stores`. Updating an archived store
-        # returns 400.
+        # The ID of the memory store to update (`memstore_...`).
+        #
+        # The request fails with HTTP status 400 if the store is archived.
         sig { returns(String) }
         attr_accessor :memory_store_id
 
-        # New description for the store, up to 1024 characters. Pass an empty string to
+        # New description for the store, up to 1,024 characters. Pass an empty string to
         # clear it.
         sig { returns(T.nilable(String)) }
         attr_accessor :description
 
-        # Metadata patch. Set a key to a string to upsert it, or to null to delete it.
-        # Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars
-        # each) with values up to 512 chars.
+        # Changes to apply to the memory store's metadata. Keys you leave out keep their
+        # values.
+        #
+        # Set a key to a string to add or replace it, or to `null` to remove it. After the
+        # change, the metadata can hold at most 16 key-value pairs. Keys are 1 to 64
+        # characters long and values at most 512 characters.
         sig { returns(T.nilable(T::Hash[Symbol, T.nilable(String)])) }
         attr_accessor :metadata
 
-        # New human-readable name for the store. 1–255 characters; no control characters.
-        # Renaming changes the slug used for the store's `mount_path` in sessions created
-        # after the update.
+        # The new name of the memory store, 1 to 255 characters long, without control
+        # characters.
+        #
+        # Sessions created after the change use the new name for the store's directory
+        # under `/mnt/memory/`.
         sig { returns(T.nilable(String)) }
         attr_accessor :name
 
@@ -80,20 +85,25 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
-          # ID of the memory store to update (a `memstore_...` identifier). Required.
-          # Enumerate IDs via `GET /v1/memory_stores`. Updating an archived store
-          # returns 400.
+          # The ID of the memory store to update (`memstore_...`).
+          #
+          # The request fails with HTTP status 400 if the store is archived.
           memory_store_id:,
-          # New description for the store, up to 1024 characters. Pass an empty string to
+          # New description for the store, up to 1,024 characters. Pass an empty string to
           # clear it.
           description: nil,
-          # Metadata patch. Set a key to a string to upsert it, or to null to delete it.
-          # Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars
-          # each) with values up to 512 chars.
+          # Changes to apply to the memory store's metadata. Keys you leave out keep their
+          # values.
+          #
+          # Set a key to a string to add or replace it, or to `null` to remove it. After the
+          # change, the metadata can hold at most 16 key-value pairs. Keys are 1 to 64
+          # characters long and values at most 512 characters.
           metadata: nil,
-          # New human-readable name for the store. 1–255 characters; no control characters.
-          # Renaming changes the slug used for the store's `mount_path` in sessions created
-          # after the update.
+          # The new name of the memory store, 1 to 255 characters long, without control
+          # characters.
+          #
+          # Sessions created after the change use the new name for the store's directory
+          # under `/mnt/memory/`.
           name: nil,
           # This endpoint is in beta: requests must send `agent-memory-2026-07-22` or
           # `managed-agents-2026-04-01` in this header.

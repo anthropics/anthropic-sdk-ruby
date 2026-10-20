@@ -20,7 +20,11 @@ module Anthropic
           end
           attr_accessor :type
 
-          # Updated OAuth client secret.
+          # A new OAuth client secret to replace the stored one.
+          #
+          # The credential must already use `client_secret_basic` or `client_secret_post`.
+          # It keeps its current `token_endpoint_auth` type, even if the `type` sent with
+          # this secret is the other one.
           sig { returns(T.nilable(String)) }
           attr_accessor :client_secret
 
@@ -34,7 +38,11 @@ module Anthropic
           end
           def self.new(
             type:,
-            # Updated OAuth client secret.
+            # A new OAuth client secret to replace the stored one.
+            #
+            # The credential must already use `client_secret_basic` or `client_secret_post`.
+            # It keeps its current `token_endpoint_auth` type, even if the `type` sent with
+            # this secret is the other one.
             client_secret: nil
           )
           end

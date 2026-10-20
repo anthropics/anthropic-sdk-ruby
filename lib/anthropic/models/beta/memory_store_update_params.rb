@@ -9,32 +9,37 @@ module Anthropic
         include Anthropic::Internal::Type::RequestParameters
 
         # @!attribute memory_store_id
-        #   ID of the memory store to update (a `memstore_...` identifier). Required.
-        #   Enumerate IDs via `GET /v1/memory_stores`. Updating an archived store
-        #   returns 400.
+        #   The ID of the memory store to update (`memstore_...`).
+        #
+        #   The request fails with HTTP status 400 if the store is archived.
         #
         #   @return [String]
         required :memory_store_id, String
 
         # @!attribute description
-        #   New description for the store, up to 1024 characters. Pass an empty string to
+        #   New description for the store, up to 1,024 characters. Pass an empty string to
         #   clear it.
         #
         #   @return [String, nil]
         optional :description, String, nil?: true
 
         # @!attribute metadata
-        #   Metadata patch. Set a key to a string to upsert it, or to null to delete it.
-        #   Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars
-        #   each) with values up to 512 chars.
+        #   Changes to apply to the memory store's metadata. Keys you leave out keep their
+        #   values.
+        #
+        #   Set a key to a string to add or replace it, or to `null` to remove it. After the
+        #   change, the metadata can hold at most 16 key-value pairs. Keys are 1 to 64
+        #   characters long and values at most 512 characters.
         #
         #   @return [Hash{Symbol=>String, nil}, nil]
         optional :metadata, Anthropic::Internal::Type::HashOf[String, nil?: true], nil?: true
 
         # @!attribute name
-        #   New human-readable name for the store. 1–255 characters; no control characters.
-        #   Renaming changes the slug used for the store's `mount_path` in sessions created
-        #   after the update.
+        #   The new name of the memory store, 1 to 255 characters long, without control
+        #   characters.
+        #
+        #   Sessions created after the change use the new name for the store's directory
+        #   under `/mnt/memory/`.
         #
         #   @return [String, nil]
         optional :name, String, nil?: true
@@ -61,13 +66,13 @@ module Anthropic
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::MemoryStoreUpdateParams} for more details.
         #
-        #   @param memory_store_id [String] ID of the memory store to update (a `memstore_...` identifier). Required. Enumer
+        #   @param memory_store_id [String] The ID of the memory store to update (`memstore_...`).
         #
-        #   @param description [String, nil] New description for the store, up to 1024 characters. Pass an empty string to cl
+        #   @param description [String, nil] New description for the store, up to 1,024 characters. Pass an empty string to c
         #
-        #   @param metadata [Hash{Symbol=>String, nil}, nil] Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omi
+        #   @param metadata [Hash{Symbol=>String, nil}, nil] Changes to apply to the memory store's metadata. Keys you leave out keep their v
         #
-        #   @param name [String, nil] New human-readable name for the store. 1–255 characters; no control characters.
+        #   @param name [String, nil] The new name of the memory store, 1 to 255 characters long, without control char
         #
         #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `manag
         #

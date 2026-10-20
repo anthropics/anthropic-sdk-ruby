@@ -53,7 +53,7 @@ module Anthropic
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #
-            # @return [Anthropic::Internal::PageCursor<Anthropic::Models::Beta::Organization::BetaAnalyticsCostReportTimeBucket>]
+            # @return [Anthropic::Internal::ReportPageCursor<Anthropic::Models::Beta::Organization::BetaAnalyticsCostReportTimeBucket>]
             #
             # @see Anthropic::Models::Beta::Organization::Analytics::CostReportListParams
             def list(params)
@@ -83,7 +83,7 @@ module Anthropic
                 method: :get,
                 path: "v1/organizations/analytics/cost_report?beta=true",
                 query: query,
-                page: Anthropic::Internal::PageCursor,
+                page: Anthropic::Internal::ReportPageCursor,
                 model: Anthropic::Beta::Organization::BetaAnalyticsCostReportTimeBucket,
                 options: options
               )

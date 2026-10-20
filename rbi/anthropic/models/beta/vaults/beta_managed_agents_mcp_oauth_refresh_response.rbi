@@ -13,7 +13,7 @@ module Anthropic
               )
             end
 
-          # OAuth client ID.
+          # The OAuth client ID used when refreshing the access token.
           sig { returns(String) }
           attr_accessor :client_id
 
@@ -52,7 +52,7 @@ module Anthropic
             ).returns(T.attached_class)
           end
           def self.new(
-            # OAuth client ID.
+            # The OAuth client ID used when refreshing the access token.
             client_id:,
             # Token endpoint URL used to refresh the access token.
             token_endpoint:,

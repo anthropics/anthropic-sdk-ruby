@@ -17,6 +17,13 @@ module Anthropic
         required :type, const: :tools_changed
 
         # @!method initialize(cache_missed_input_tokens:, type: :tools_changed)
+        #   A `cache_miss_reason` for a request whose `tools` differ from the previous
+        #   request's, for example because tools were added, removed, or reordered.
+        #
+        #   See the
+        #   [cache diagnostics guide](https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics#cache-miss-reason-types)
+        #   to learn what to change for each reason.
+        #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaCacheMissToolsChanged} for more details.
         #

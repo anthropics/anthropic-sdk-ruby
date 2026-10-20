@@ -28,31 +28,6 @@ module Anthropic
         ?request_options: Anthropic::request_opts
       ) -> Anthropic::Message
 
-      def stream: (
-        max_tokens: Integer,
-        messages: ::Array[Anthropic::MessageParam],
-        model: Anthropic::Models::model,
-        ?cache_control: Anthropic::CacheControlEphemeral?,
-        ?container: Anthropic::Models::message_create_params_container?,
-        ?diagnostics: Anthropic::DiagnosticsParam?,
-        ?inference_geo: String?,
-        ?metadata: Anthropic::Metadata,
-        ?output_config: Anthropic::OutputConfig,
-        ?service_tier: Anthropic::Models::MessageCreateParams::service_tier,
-        ?speed: Anthropic::Models::MessageCreateParams::speed?,
-        ?stop_sequences: ::Array[String],
-        ?system_: Anthropic::Models::MessageCreateParams::system_,
-        ?temperature: Float,
-        ?thinking: Anthropic::Models::thinking_config_param,
-        ?tool_choice: Anthropic::Models::tool_choice,
-        ?tools: ::Array[Anthropic::Models::tool_union],
-        ?top_k: Integer,
-        ?top_p: Float,
-        ?user_profile_id: String,
-        ?workspace_id: String,
-        ?request_options: Anthropic::request_opts
-      ) -> Anthropic::Helpers::Streaming::MessageStream
-
       def stream_raw: (
         max_tokens: Integer,
         messages: ::Array[Anthropic::MessageParam],
@@ -92,6 +67,31 @@ module Anthropic
         ?workspace_id: String,
         ?request_options: Anthropic::request_opts
       ) -> Anthropic::MessageTokensCount
+
+      def stream: (
+        max_tokens: Integer,
+        messages: ::Array[Anthropic::MessageParam],
+        model: Anthropic::Models::model,
+        ?cache_control: Anthropic::CacheControlEphemeral?,
+        ?container: Anthropic::Models::message_create_params_container?,
+        ?diagnostics: Anthropic::DiagnosticsParam?,
+        ?inference_geo: String?,
+        ?metadata: Anthropic::Metadata,
+        ?output_config: Anthropic::OutputConfig,
+        ?service_tier: Anthropic::Models::MessageCreateParams::service_tier,
+        ?speed: Anthropic::Models::MessageCreateParams::speed?,
+        ?stop_sequences: ::Array[String],
+        ?system_: Anthropic::Models::MessageCreateParams::system_,
+        ?temperature: Float,
+        ?thinking: Anthropic::Models::thinking_config_param,
+        ?tool_choice: Anthropic::Models::tool_choice,
+        ?tools: ::Array[Anthropic::Models::tool_union],
+        ?top_k: Integer,
+        ?top_p: Float,
+        ?user_profile_id: String,
+        ?workspace_id: String,
+        ?request_options: Anthropic::request_opts
+      ) -> Anthropic::Helpers::Streaming::MessageStream
 
       def initialize: (client: Anthropic::Client) -> void
     end

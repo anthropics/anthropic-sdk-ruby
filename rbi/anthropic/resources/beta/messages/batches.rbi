@@ -33,10 +33,9 @@ module Anthropic
             # Header param: Optional header to specify the beta version(s) you want to use.
             betas: nil,
             # Header param: The user profile ID to attribute the requests in this batch to.
-            # Use when acting on behalf of a party other than your organization. Requires the
-            # `user-profiles` beta header. Applies to every request in the batch; an
-            # individual request whose `user_profile_id` body field conflicts with this header
-            # is errored.
+            # Use when acting on behalf of a party other than your organization. Applies to
+            # every request in the batch; an individual request whose `user_profile_id` body
+            # field conflicts with this header is errored.
             user_profile_id: nil,
             # Header param: Optional header to select the Workspace for this request. The
             # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

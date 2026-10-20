@@ -67,9 +67,18 @@ module Anthropic
         def skills
         end
 
+        sig { returns(T.noreturn) }
+        def user_profiles
+        end
+
         # @api private
         sig { override.returns(Anthropic::Middleware::Entry) }
         private def provider_middleware
+        end
+
+        # @api private
+        sig { params(req: Anthropic::APIRequest).returns(Anthropic::APIRequest) }
+        private def adapt_request(req)
         end
       end
     end

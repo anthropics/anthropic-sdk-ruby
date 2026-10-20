@@ -6,7 +6,8 @@ module Anthropic
       module Vaults
         class BetaManagedAgentsTokenEndpointAuthBasicParam < Anthropic::Internal::Type::BaseModel
           # @!attribute client_secret
-          #   OAuth client secret.
+          #   The OAuth client secret, sent to `token_endpoint` with HTTP Basic
+          #   authentication.
           #
           #   @return [String]
           required :client_secret, String
@@ -19,7 +20,11 @@ module Anthropic
           # @!method initialize(client_secret:, type:)
           #   Token endpoint uses HTTP Basic authentication with client credentials.
           #
-          #   @param client_secret [String] OAuth client secret.
+          #   Some parameter documentations has been truncated, see
+          #   {Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicParam}
+          #   for more details.
+          #
+          #   @param client_secret [String] The OAuth client secret, sent to `token_endpoint` with HTTP Basic authentication
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicParam::Type]
 

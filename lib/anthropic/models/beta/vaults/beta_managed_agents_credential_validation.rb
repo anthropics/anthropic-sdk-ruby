@@ -19,7 +19,8 @@ module Anthropic
           required :has_refresh_token, Anthropic::Internal::Type::Boolean
 
           # @!attribute mcp_probe
-          #   Details of the failing MCP probe step. Null when the probe succeeded.
+          #   Details of the MCP probe step that failed, or `null` if the probe succeeded or
+          #   there was no access token to test.
           #
           #   @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPProbe, nil]
           required :mcp_probe, -> { Anthropic::Beta::Vaults::BetaManagedAgentsMCPProbe }, nil?: true
@@ -65,7 +66,7 @@ module Anthropic
           #
           #   @param has_refresh_token [Boolean] Whether the credential has a refresh token configured.
           #
-          #   @param mcp_probe [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPProbe, nil] Details of the failing MCP probe step. Null when the probe succeeded.
+          #   @param mcp_probe [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPProbe, nil] Details of the MCP probe step that failed, or `null` if the probe succeeded or t
           #
           #   @param refresh [Anthropic::Models::Beta::Vaults::BetaManagedAgentsRefreshObject, nil] Details of the refresh-token exchange attempted on a 401. Null when no refresh w
           #

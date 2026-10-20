@@ -24,8 +24,8 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :credential_id
 
-          # Updated authentication configuration. The `type` is immutable; the variant sent
-          # must match the stored credential's type.
+          # New authentication settings for the credential. The `type` must match the
+          # credential's current type, which can't be changed.
           sig do
             returns(
               T.nilable(
@@ -113,8 +113,8 @@ module Anthropic
             vault_id:,
             # Unique identifier of the credential to update.
             credential_id:,
-            # Updated authentication configuration. The `type` is immutable; the variant sent
-            # must match the stored credential's type.
+            # New authentication settings for the credential. The `type` must match the
+            # credential's current type, which can't be changed.
             auth: nil,
             # Updated human-readable name for the credential. 1-255 characters.
             display_name: nil,
@@ -158,8 +158,8 @@ module Anthropic
           def to_hash
           end
 
-          # Updated authentication configuration. The `type` is immutable; the variant sent
-          # must match the stored credential's type.
+          # New authentication settings for the credential. The `type` must match the
+          # credential's current type, which can't be changed.
           module Auth
             extend Anthropic::Internal::Type::Union
 
@@ -250,19 +250,25 @@ module Anthropic
             end
             def self.new(
               type:,
-              # Updated OAuth access token.
+              # The new OAuth access token to replace the stored one.
               access_token: nil,
-              # A timestamp in RFC 3339 format
+              # When the credential's access token expires, in RFC 3339. Leave it out to keep
+              # the stored expiry.
+              #
+              # If you send a new `access_token`, send its `expires_at` too, or the new token
+              # keeps the old expiry.
+              #
+              # Must be in the future.
               expires_at: nil,
               # Updated refresh token configuration.
               refresh: nil,
-              # Updated static bearer token value.
+              # The new static bearer token to replace the stored one.
               token: nil,
               # Updated injection location.
               injection_location: nil,
-              # Updated networking scope. Full replacement.
+              # The new networking scope, which replaces the stored one as a whole.
               networking: nil,
-              # Updated secret value.
+              # The new secret value to replace the stored one.
               secret_value: nil
             )
             end

@@ -25,7 +25,7 @@ module Anthropic
 
         # @!method initialize(expires_at:, type:, url:)
         #   A URL to give to the entity that a user profile represents, so that the entity
-        #   can enroll for a trust grant.
+        #   can enroll in a program.
         #
         #   @param expires_at [Time] When this enrollment URL expires, in RFC 3339 format.
         #

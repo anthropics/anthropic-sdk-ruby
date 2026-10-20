@@ -19,6 +19,23 @@ module Anthropic
         def completions
         end
 
+        sig { returns(T.noreturn) }
+        def user_profiles
+        end
+
+        # @api private
+        sig do
+          override
+            .params(
+              req:
+                Anthropic::Internal::Transport::BaseClient::RequestComponents,
+              opts: Anthropic::Internal::AnyHash
+            )
+            .returns(Anthropic::Internal::Transport::BaseClient::RequestInput)
+        end
+        private def build_request(req, opts)
+        end
+
         # @api private
         sig { override.returns(T::Boolean) }
         private def resolve_default_credentials?
@@ -40,8 +57,8 @@ module Anthropic
         end
 
         # @api private
-        sig { returns(String) }
-        private def derive_base_url
+        sig { params(template: String).returns(String) }
+        private def derive_base_url(template)
         end
 
         sig do

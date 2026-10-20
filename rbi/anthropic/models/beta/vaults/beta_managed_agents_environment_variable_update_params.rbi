@@ -38,7 +38,7 @@ module Anthropic
           end
           attr_writer :injection_location
 
-          # Updated networking scope. Full replacement.
+          # The new networking scope, which replaces the stored one as a whole.
           sig do
             returns(
               T.nilable(
@@ -51,7 +51,7 @@ module Anthropic
           end
           attr_accessor :networking
 
-          # Updated secret value.
+          # The new secret value to replace the stored one.
           sig { returns(T.nilable(String)) }
           attr_accessor :secret_value
 
@@ -77,9 +77,9 @@ module Anthropic
             type:,
             # Updated injection location.
             injection_location: nil,
-            # Updated networking scope. Full replacement.
+            # The new networking scope, which replaces the stored one as a whole.
             networking: nil,
-            # Updated secret value.
+            # The new secret value to replace the stored one.
             secret_value: nil
           )
           end

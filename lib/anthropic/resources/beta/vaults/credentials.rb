@@ -5,7 +5,7 @@ module Anthropic
     class Beta
       class Vaults
         class Credentials
-          # Create Credential
+          # Create a Credential
           #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Vaults::CredentialCreateParams} for more details.
@@ -46,7 +46,7 @@ module Anthropic
             )
           end
 
-          # Get Credential
+          # Retrieve a Credential
           #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Vaults::CredentialRetrieveParams} for more details.
@@ -87,7 +87,7 @@ module Anthropic
             )
           end
 
-          # Update Credential
+          # Update a Credential
           #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Vaults::CredentialUpdateParams} for more details.
@@ -98,7 +98,7 @@ module Anthropic
           #
           # @param vault_id [String] Path param: Identifier of the vault containing the credential.
           #
-          # @param auth [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams] Body param: Updated authentication configuration. The `type` is immutable; the v
+          # @param auth [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams] Body param: New authentication settings for the credential. The `type` must matc
           #
           # @param display_name [String, nil] Body param: Updated human-readable name for the credential. 1-255 characters.
           #
@@ -145,11 +145,11 @@ module Anthropic
           #
           # @param vault_id [String] Path param: Identifier of the vault to list credentials for.
           #
-          # @param include_archived [Boolean] Query param: Whether to include archived credentials in the results.
+          # @param include_archived [Boolean] Query param: Whether to include archived credentials in the results. Defaults to
           #
           # @param limit [Integer] Query param: Maximum number of credentials to return per page. Defaults to 20, m
           #
-          # @param page [String] Query param: Opaque pagination token from a previous `list_credentials` response
+          # @param page [String] Query param: The `next_page` value from a previous [List Credentials](https://pl
           #
           # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
           #
@@ -182,7 +182,7 @@ module Anthropic
             )
           end
 
-          # Delete Credential
+          # Delete a Credential
           #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Vaults::CredentialDeleteParams} for more details.
@@ -223,7 +223,7 @@ module Anthropic
             )
           end
 
-          # Archive Credential
+          # Archive a Credential
           #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Vaults::CredentialArchiveParams} for more details.
@@ -264,7 +264,7 @@ module Anthropic
             )
           end
 
-          # Validate Credential
+          # Validate an MCP OAuth Credential
           #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Vaults::CredentialMCPOAuthValidateParams} for more

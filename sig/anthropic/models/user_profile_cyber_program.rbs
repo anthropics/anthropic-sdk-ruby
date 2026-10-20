@@ -1,0 +1,30 @@
+module Anthropic
+  module Models
+    type user_profile_cyber_program =
+      {
+        requirements: Anthropic::UserProfileCyberRequirements?,
+        status: Anthropic::Models::user_profile_program_status,
+        tiers: ::Hash[Symbol, Anthropic::UserProfileCyberTier]
+      }
+
+    class UserProfileCyberProgram < Anthropic::Internal::Type::BaseModel
+      attr_accessor requirements: Anthropic::UserProfileCyberRequirements?
+
+      attr_accessor status: Anthropic::Models::user_profile_program_status
+
+      attr_accessor tiers: ::Hash[Symbol, Anthropic::UserProfileCyberTier]
+
+      def initialize: (
+        requirements: Anthropic::UserProfileCyberRequirements?,
+        status: Anthropic::Models::user_profile_program_status,
+        tiers: ::Hash[Symbol, Anthropic::UserProfileCyberTier]
+      ) -> void
+
+      def to_hash: -> {
+        requirements: Anthropic::UserProfileCyberRequirements?,
+        status: Anthropic::Models::user_profile_program_status,
+        tiers: ::Hash[Symbol, Anthropic::UserProfileCyberTier]
+      }
+    end
+  end
+end

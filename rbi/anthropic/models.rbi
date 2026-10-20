@@ -538,6 +538,8 @@ module Anthropic
 
   DeletedSkill = Anthropic::Models::DeletedSkill
 
+  DeletedUserProfile = Anthropic::Models::DeletedUserProfile
+
   Diagnostics = Anthropic::Models::Diagnostics
 
   DiagnosticsParam = Anthropic::Models::DiagnosticsParam
@@ -831,6 +833,52 @@ module Anthropic
   Usage = Anthropic::Models::Usage
 
   UserLocation = Anthropic::Models::UserLocation
+
+  UserProfile = Anthropic::Models::UserProfile
+
+  UserProfileAccessType = Anthropic::Models::UserProfileAccessType
+
+  UserProfileCreateParams = Anthropic::Models::UserProfileCreateParams
+
+  UserProfileCyberProgram = Anthropic::Models::UserProfileCyberProgram
+
+  UserProfileCyberRequirements = Anthropic::Models::UserProfileCyberRequirements
+
+  UserProfileCyberTier = Anthropic::Models::UserProfileCyberTier
+
+  UserProfileDeleteParams = Anthropic::Models::UserProfileDeleteParams
+
+  UserProfileEfsFeature = Anthropic::Models::UserProfileEfsFeature
+
+  UserProfileEfsProgram = Anthropic::Models::UserProfileEfsProgram
+
+  UserProfileExternalUserAccountStatus =
+    Anthropic::Models::UserProfileExternalUserAccountStatus
+
+  UserProfileExternalUserDetails =
+    Anthropic::Models::UserProfileExternalUserDetails
+
+  UserProfileExternalUserDetailsParams =
+    Anthropic::Models::UserProfileExternalUserDetailsParams
+
+  UserProfileExternalUserEntityType =
+    Anthropic::Models::UserProfileExternalUserEntityType
+
+  UserProfileListOrder = Anthropic::Models::UserProfileListOrder
+
+  UserProfileListOrderBy = Anthropic::Models::UserProfileListOrderBy
+
+  UserProfileListParams = Anthropic::Models::UserProfileListParams
+
+  UserProfilePrograms = Anthropic::Models::UserProfilePrograms
+
+  UserProfileProgramStatus = Anthropic::Models::UserProfileProgramStatus
+
+  UserProfileRetrieveParams = Anthropic::Models::UserProfileRetrieveParams
+
+  UserProfiles = Anthropic::Models::UserProfiles
+
+  UserProfileUpdateParams = Anthropic::Models::UserProfileUpdateParams
 
   WebFetchBlock = Anthropic::Models::WebFetchBlock
 

@@ -14,7 +14,7 @@ module Anthropic
             )
           end
 
-        # Unique identifier for the vault.
+        # The unique ID of the vault (`vlt_...`).
         sig { returns(String) }
         attr_accessor :id
 
@@ -56,7 +56,7 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
-          # Unique identifier for the vault.
+          # The unique ID of the vault (`vlt_...`).
           id:,
           # When the vault was archived. Null if not archived.
           archived_at:,

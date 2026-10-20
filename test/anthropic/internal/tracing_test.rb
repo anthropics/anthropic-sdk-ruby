@@ -20,7 +20,7 @@ class Anthropic::Test::TracingTest < Minitest::Test
     headers: JSON_HEADERS
   }.freeze
   EVENTS = {
-    body: %w[a b].map { "event: completion\ndata: #{{message: _1}.to_json}\n\n" }.join,
+    body: %w[a b].map { "event: unhandled\ndata: #{{message: _1}.to_json}\n\n" }.join,
     headers: {"content-type" => "text/event-stream"}
   }.freeze
 
@@ -143,6 +143,8 @@ class Anthropic::Test::TracingTest < Minitest::Test
     @environment = VARIABLES.keys.to_h { [_1, ENV.delete(_1)] }
     @propagation = OpenTelemetry.propagation
     @logger = OpenTelemetry.logger
+    # A test of another class can leave a tracer provider registered.
+    reset_tracer_provider
     @sent = []
     @contexts = []
   end

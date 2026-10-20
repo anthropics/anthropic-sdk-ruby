@@ -68,7 +68,13 @@ module Anthropic
             sig { returns(T.nilable(String)) }
             attr_accessor :display_name
 
-            # The version string the manifest declares; null when it declares none.
+            # The manifest's `version`, normalized for display: one leading `v` or `V` is
+            # dropped, and the result is returned only if it is 1 to 64 characters, starts
+            # with a digit, and uses only ASCII letters, digits, `.`, `+`, and `-`; otherwise
+            # `null`. For example, `"v1.4.0"` is returned as `"1.4.0"`, and `"latest"` as
+            # `null`. For a synchronized plugin, the `version` of its `marketplace.json` entry
+            # can take the place of the manifest's `version`. It is also `null` for a version
+            # stored before claude.ai began recording this field (August 2026).
             sig { returns(T.nilable(String)) }
             attr_accessor :manifest_version
 
@@ -76,8 +82,8 @@ module Anthropic
             sig { returns(String) }
             attr_accessor :plugin_id
 
-            # How far the version reaches: `remote`, `privileged` or `contained`, as on the
-            # Plugin; null when not classifiable.
+            # How far the version reaches: `remote`, `privileged`, `contained`, or `null`, as
+            # defined on the Plugin's `reach`.
             sig do
               returns(
                 T.nilable(
@@ -143,12 +149,18 @@ module Anthropic
               description:,
               # The manifest's display name; null when it declares none.
               display_name:,
-              # The version string the manifest declares; null when it declares none.
+              # The manifest's `version`, normalized for display: one leading `v` or `V` is
+              # dropped, and the result is returned only if it is 1 to 64 characters, starts
+              # with a digit, and uses only ASCII letters, digits, `.`, `+`, and `-`; otherwise
+              # `null`. For example, `"v1.4.0"` is returned as `"1.4.0"`, and `"latest"` as
+              # `null`. For a synchronized plugin, the `version` of its `marketplace.json` entry
+              # can take the place of the manifest's `version`. It is also `null` for a version
+              # stored before claude.ai began recording this field (August 2026).
               manifest_version:,
               # The Plugin's ID.
               plugin_id:,
-              # How far the version reaches: `remote`, `privileged` or `contained`, as on the
-              # Plugin; null when not classifiable.
+              # How far the version reaches: `remote`, `privileged`, `contained`, or `null`, as
+              # defined on the Plugin's `reach`.
               reach:,
               # As supplied with the upload; null when none were supplied.
               release_notes:,
@@ -274,8 +286,8 @@ module Anthropic
               end
             end
 
-            # How far the version reaches: `remote`, `privileged` or `contained`, as on the
-            # Plugin; null when not classifiable.
+            # How far the version reaches: `remote`, `privileged`, `contained`, or `null`, as
+            # defined on the Plugin's `reach`.
             module Reach
               extend Anthropic::Internal::Type::Enum
 

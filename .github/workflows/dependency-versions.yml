@@ -35,8 +35,9 @@ jobs:
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Set up Ruby
-        uses: ruby/setup-ruby@c4e5b1316158f92e3d49443a9d58b31d25ac0f8f # v1.306.0
+        uses: ruby/setup-ruby@651ff0d62c5c79bed6d53ec518387aae20e72c1a # v1
         with:
+          ruby-version: '3.2'
           # setup-ruby would install from the lockfile before the override below applies.
           bundler-cache: false
 
@@ -44,7 +45,7 @@ jobs:
         id: gem-cache
         run: |-
           bundle config set --local path vendor/bundle
-          echo "prefix=gems-${ImageOS}-ruby-$(cat .ruby-version)-" >> "$GITHUB_OUTPUT"
+          echo "prefix=gems-${ImageOS}-ruby-$(ruby -e 'print RUBY_VERSION')-" >> "$GITHUB_OUTPUT"
 
       - name: Restore gem cache
         id: restore-gems

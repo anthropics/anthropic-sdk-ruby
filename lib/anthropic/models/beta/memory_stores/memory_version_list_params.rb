@@ -34,7 +34,10 @@ module Anthropic
           optional :created_at_lte, Time
 
           # @!attribute limit
-          #   The maximum number of versions to return per page. Defaults to 20.
+          #   The maximum number of versions to return per page, from 1 to 100. Defaults
+          #   to 20.
+          #
+          #   With `view=full`, a page holds at most 20 versions.
           #
           #   @return [Integer, nil]
           optional :limit, Integer
@@ -42,8 +45,8 @@ module Anthropic
           # @!attribute memory_id
           #   Return only versions of the memory with this ID (`mem_...`).
           #
-          #   The filter still works after the memory is deleted. The results then include the
-          #   version whose `operation` is `deleted`.
+          #   The filter still works after the memory is deleted. While that memory's versions
+          #   are retained, the results include the version whose `operation` is `deleted`.
           #
           #   @return [String, nil]
           optional :memory_id, String
@@ -74,11 +77,11 @@ module Anthropic
           optional :session_id, String
 
           # @!attribute view
-          #   Selects which projection of a `memory` or `memory_version` the server returns.
-          #   `basic` returns the object with `content` set to `null`; `full` populates
-          #   `content`. When omitted, the default is endpoint-specific: retrieve operations
-          #   default to `full`; list, create, and update operations default to `basic`.
-          #   Listing with `view=full` caps `limit` at 20.
+          #   Whether a `memory` or `memory_version` in the response includes its `content`.
+          #   Defaults to `full` on retrieve operations and to `basic` on list, create, and
+          #   update operations.
+          #
+          #   With `full`, list operations return at most 20 items per page.
           #
           #   @return [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView, nil]
           optional :view, enum: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryView }
@@ -114,7 +117,7 @@ module Anthropic
           #
           #   @param created_at_lte [Time] Return versions created at or before this time (inclusive).
           #
-          #   @param limit [Integer] The maximum number of versions to return per page. Defaults to 20.
+          #   @param limit [Integer] The maximum number of versions to return per page, from 1 to 100. Defaults to 20
           #
           #   @param memory_id [String] Return only versions of the memory with this ID (`mem_...`).
           #
@@ -126,7 +129,7 @@ module Anthropic
           #
           #   @param session_id [String] Return only versions written by the session with this ID.
           #
-          #   @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Selects which projection of a `memory` or `memory_version` the server returns. `
+          #   @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Whether a `memory` or `memory_version` in the response includes its `content`. D
           #
           #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `manag
           #

@@ -10,17 +10,26 @@ module Anthropic
       # `:rawPredict` publisher-model API (publisher model IDs, messages
       # only). This client speaks the full first-party Anthropic API: requests
       # pass through the gateway unchanged — standard `/v1/*` paths, standard
-      # model names, the complete API surface. The deprecated text Completions
-      # endpoint is intentionally not exposed.
+      # model names. The deprecated text Completions endpoint is intentionally
+      # not exposed, and the gateway does not serve the User Profiles API.
       class Client < Anthropic::Client
         # OAuth2 scope required to call the gateway.
         SCOPE = "https://www.googleapis.com/auth/cloud-platform"
 
+        LOCATION_URL_TEMPLATE =
+          "https://claude.googleapis.com/v1/projects/%<project>s/locations/%<location>s"
+
         # Gateway base URL template; override via `base_url` or
         # `ANTHROPIC_GOOGLE_CLOUD_BASE_URL`.
-        URL_TEMPLATE =
-          "https://claude.googleapis.com/v1alpha" \
-          "/projects/%<project>s/locations/%<location>s/workspaces/%<workspace_id>s/invoke"
+        URL_TEMPLATE = "#{LOCATION_URL_TEMPLATE}/workspaces/%<workspace_id>s/invoke".freeze
+
+        # Gateway base URL template for organization-level routes, which are
+        # served from a base with no workspace in it.
+        ORGANIZATION_URL_TEMPLATE = "#{LOCATION_URL_TEMPLATE}/claudeOrganization/invoke".freeze
+
+        ORGANIZATION_PATH_PREFIX = "/v1/organizations/"
+
+        private_constant :LOCATION_URL_TEMPLATE, :ORGANIZATION_PATH_PREFIX
 
         # @return [String, nil]
         attr_reader :project
@@ -53,12 +62,14 @@ module Anthropic
         #   explicit `nil` falls back to the same defaults.
         #
         # @param workspace_id [String, nil] Defaults to
-        #   `ENV["ANTHROPIC_GOOGLE_CLOUD_WORKSPACE_ID"]`. Required unless
-        #   `skip_auth` is true and an explicit `base_url` is given.
+        #   `ENV["ANTHROPIC_GOOGLE_CLOUD_WORKSPACE_ID"]`. Required when the base
+        #   URL is derived, except for organization-level routes
+        #   (`/v1/organizations/`), which need no workspace ID.
         #
-        # @param base_url [String, nil] Override the gateway base URL. Defaults to
-        #   `ENV["ANTHROPIC_GOOGLE_CLOUD_BASE_URL"]`, otherwise derived from
-        #   `project`, `location`, and `workspace_id` via {URL_TEMPLATE}.
+        # @param base_url [String, nil] Override the gateway base URL for every
+        #   route. Defaults to `ENV["ANTHROPIC_GOOGLE_CLOUD_BASE_URL"]`, otherwise
+        #   derived from `project`, `location`, and `workspace_id` via
+        #   {URL_TEMPLATE}.
         #
         # @param google_credentials [#apply, nil] A `googleauth`-compatible
         #   credentials object. Mutually exclusive with `skip_auth`.
@@ -67,10 +78,9 @@ module Anthropic
         #   token string. Takes precedence over `google_credentials`. Mutually
         #   exclusive with `skip_auth`.
         #
-        # @param skip_auth [Boolean] When true, no token is attached and
-        #   `workspace_id` is only required when the base URL must be derived.
-        #   For callers fronting with their own authenticated proxy. Mutually
-        #   exclusive with `token_provider` and `google_credentials`.
+        # @param skip_auth [Boolean] When true, no token is attached. For callers
+        #   fronting with their own authenticated proxy. Mutually exclusive with
+        #   `token_provider` and `google_credentials`.
         #
         # @param max_retries [Integer] Max number of retries to attempt after a
         #   failed retryable request.
@@ -132,23 +142,23 @@ module Anthropic
           # so nil can't reach the derived URL (matches the other SDKs).
           @location = location || ENV["ANTHROPIC_GOOGLE_CLOUD_LOCATION"] || "global"
 
-          if workspace_id.nil? && !skip_auth
-            raise ArgumentError.new(
-              "No workspace ID was given. Set the `workspace_id` argument or the " \
-              "`ANTHROPIC_GOOGLE_CLOUD_WORKSPACE_ID` environment variable."
-            )
-          end
           @workspace_id = workspace_id
 
           base_url = nil if base_url.to_s.empty?
-          base_url ||= derive_base_url
+          unless base_url
+            @organization_base_url = URI.parse(derive_base_url(ORGANIZATION_URL_TEMPLATE))
+            # Without a workspace ID there is no workspace base to derive, so
+            # `base_url` is the organization base.
+            base_url = @workspace_id.nil? ? @organization_base_url.to_s : derive_base_url(URL_TEMPLATE)
+          end
 
           # No first-party credential is ever passed up, and
           # {#resolve_default_credentials?} keeps the parent from discovering
           # one; `base_url` is always resolved by this point, so the parent's
           # `ANTHROPIC_BASE_URL` fallback never applies. The parent wires up
-          # every resource; {#completions} withholds the one the gateway does
-          # not serve.
+          # every resource; {#completions} and {#user_profiles} withhold the
+          # ones the gateway does not serve, and {#build_request} refuses the
+          # user profile routes however the resource is reached.
           super(
             base_url: base_url,
             timeout: timeout,
@@ -174,6 +184,83 @@ module Anthropic
           raise NotImplementedError.new(
             "The deprecated text Completions API is not supported on the Google Cloud gateway."
           )
+        end
+
+        # User profiles are not supported on the Google Cloud gateway.
+        #
+        # @raise [NotImplementedError]
+        def user_profiles
+          raise NotImplementedError.new("User profiles are not supported on the Google Cloud gateway.")
+        end
+
+        # @api private
+        #
+        # @param req [Hash{Symbol=>Object}] .
+        #
+        #   @option req [Symbol] :method
+        #
+        #   @option req [String, Array<String>] :path
+        #
+        #   @option req [Hash{String=>Array<String>, String, nil}, nil] :query
+        #
+        #   @option req [Hash{String=>String, Integer, Array<String, Integer, nil>, nil}, nil] :headers
+        #
+        #   @option req [Object, nil] :body
+        #
+        #   @option req [Symbol, Integer, Array<Symbol, Integer>, Proc, nil] :unwrap
+        #
+        #   @option req [Class<Anthropic::Internal::Type::BasePage>, nil] :page
+        #
+        #   @option req [Class<Anthropic::Internal::Type::BaseStream>, nil] :stream
+        #
+        #   @option req [Anthropic::Internal::Type::Converter, Class, nil] :model
+        #
+        # @param opts [Hash{Symbol=>Object}] .
+        #
+        #   @option opts [String, nil] :idempotency_key
+        #
+        #   @option opts [Hash{String=>Array<String>, String, nil}, nil] :extra_query
+        #
+        #   @option opts [Hash{String=>String, nil}, nil] :extra_headers
+        #
+        #   @option opts [Object, nil] :extra_body
+        #
+        #   @option opts [Integer, nil] :max_retries
+        #
+        #   @option opts [Float, nil] :timeout
+        #
+        # @raise [ArgumentError]
+        # @raise [NotImplementedError]
+        # @return [Hash{Symbol=>Object}]
+        private def build_request(req, opts)
+          # Id-parameterized routes pass `path` as an Array whose first element
+          # is the format string (e.g. `["v1/user_profiles/%1$s", id]`).
+          if Array(req[:path]).first.to_s.start_with?("v1/user_profiles")
+            raise NotImplementedError.new("User profiles are not supported on the Google Cloud gateway.")
+          end
+
+          request = super
+          return request if @organization_base_url.nil?
+
+          url = request.fetch(:url)
+          under_base_url =
+            url.path.start_with?("#{base_url.path}/") &&
+            Anthropic::Internal::Util.uri_origin(url) == Anthropic::Internal::Util.uri_origin(base_url)
+          return request unless under_base_url
+
+          path = url.path.delete_prefix(base_url.path)
+          if path.start_with?(ORGANIZATION_PATH_PREFIX)
+            url = url.dup
+            url.path = "#{@organization_base_url.path}#{path}"
+            {**request, url: url}
+          elsif @workspace_id.nil?
+            raise ArgumentError.new(
+              "No workspace ID was given. Set the `workspace_id` argument or the " \
+              "`ANTHROPIC_GOOGLE_CLOUD_WORKSPACE_ID` environment variable."
+            )
+          else
+            request
+          end
         end
 
         # @api private
@@ -230,9 +317,10 @@ module Anthropic
 
         # @api private
         #
+        # @param template [String]
         # @return [String]
         # @raise [ArgumentError]
-        private def derive_base_url
+        private def derive_base_url(template)
           if @project.nil?
             raise ArgumentError.new(
               "No project found. Set the `project` argument, set the " \
@@ -240,13 +328,7 @@ module Anthropic
               "application default credentials with a project."
             )
           end
-          if @workspace_id.nil?
-            raise ArgumentError.new(
-              "No workspace ID was given. Set the `workspace_id` argument or the " \
-              "`ANTHROPIC_GOOGLE_CLOUD_WORKSPACE_ID` environment variable."
-            )
-          end
-          format(URL_TEMPLATE, project: @project, location: @location, workspace_id: @workspace_id)
+          format(template, project: @project, location: @location, workspace_id: @workspace_id)
         end
 
         # @api private

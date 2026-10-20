@@ -24,11 +24,11 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :memory_version_id
 
-          # Selects which projection of a `memory` or `memory_version` the server returns.
-          # `basic` returns the object with `content` set to `null`; `full` populates
-          # `content`. When omitted, the default is endpoint-specific: retrieve operations
-          # default to `full`; list, create, and update operations default to `basic`.
-          # Listing with `view=full` caps `limit` at 20.
+          # Whether a `memory` or `memory_version` in the response includes its `content`.
+          # Defaults to `full` on retrieve operations and to `basic` on list, create, and
+          # update operations.
+          #
+          # With `full`, list operations return at most 20 items per page.
           sig do
             returns(
               T.nilable(
@@ -93,11 +93,11 @@ module Anthropic
             memory_store_id:,
             # The ID of the memory version to retrieve (`memver_...`).
             memory_version_id:,
-            # Selects which projection of a `memory` or `memory_version` the server returns.
-            # `basic` returns the object with `content` set to `null`; `full` populates
-            # `content`. When omitted, the default is endpoint-specific: retrieve operations
-            # default to `full`; list, create, and update operations default to `basic`.
-            # Listing with `view=full` caps `limit` at 20.
+            # Whether a `memory` or `memory_version` in the response includes its `content`.
+            # Defaults to `full` on retrieve operations and to `basic` on list, create, and
+            # update operations.
+            #
+            # With `full`, list operations return at most 20 items per page.
             view: nil,
             # This endpoint is in beta: requests must send `agent-memory-2026-07-22` or
             # `managed-agents-2026-04-01` in this header.

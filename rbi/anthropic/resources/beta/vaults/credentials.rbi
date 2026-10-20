@@ -5,7 +5,7 @@ module Anthropic
     class Beta
       class Vaults
         class Credentials
-          # Create Credential
+          # Create a Credential
           sig do
             params(
               vault_id: String,
@@ -47,7 +47,7 @@ module Anthropic
           )
           end
 
-          # Get Credential
+          # Retrieve a Credential
           sig do
             params(
               credential_id: String,
@@ -77,7 +77,7 @@ module Anthropic
           )
           end
 
-          # Update Credential
+          # Update a Credential
           sig do
             params(
               credential_id: String,
@@ -101,8 +101,8 @@ module Anthropic
             credential_id,
             # Path param: Identifier of the vault containing the credential.
             vault_id:,
-            # Body param: Updated authentication configuration. The `type` is immutable; the
-            # variant sent must match the stored credential's type.
+            # Body param: New authentication settings for the credential. The `type` must
+            # match the credential's current type, which can't be changed.
             auth: nil,
             # Body param: Updated human-readable name for the credential. 1-255 characters.
             display_name: nil,
@@ -143,13 +143,15 @@ module Anthropic
           def list(
             # Path param: Identifier of the vault to list credentials for.
             vault_id,
-            # Query param: Whether to include archived credentials in the results.
+            # Query param: Whether to include archived credentials in the results. Defaults to
+            # `false`.
             include_archived: nil,
             # Query param: Maximum number of credentials to return per page. Defaults to 20,
             # maximum 100.
             limit: nil,
-            # Query param: Opaque pagination token from a previous `list_credentials`
-            # response.
+            # Query param: The `next_page` value from a previous
+            # [List Credentials](https://platform.claude.com/docs/en/api/beta/vaults/credentials/list)
+            # response, to get the next page. Leave it out to get the first page.
             page: nil,
             # Header param: This endpoint is in beta: requests must send
             # `managed-agents-2026-04-01` in this header.
@@ -165,7 +167,7 @@ module Anthropic
           )
           end
 
-          # Delete Credential
+          # Delete a Credential
           sig do
             params(
               credential_id: String,
@@ -197,7 +199,7 @@ module Anthropic
           )
           end
 
-          # Archive Credential
+          # Archive a Credential
           sig do
             params(
               credential_id: String,
@@ -227,7 +229,7 @@ module Anthropic
           )
           end
 
-          # Validate Credential
+          # Validate an MCP OAuth Credential
           sig do
             params(
               credential_id: String,

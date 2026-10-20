@@ -16,28 +16,31 @@ module Anthropic
           required :memory_store_id, String
 
           # @!attribute content
-          #   UTF-8 text content for the new memory. Maximum 100 kB (102,400 bytes). Required;
-          #   pass `""` explicitly to create an empty memory.
+          #   The UTF-8 text content of the new memory. Pass `""` to create an empty memory.
+          #
+          #   The maximum size is 100 kB (102,400 bytes).
           #
           #   @return [String, nil]
           required :content, String, nil?: true
 
           # @!attribute path
-          #   Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`. Must start
-          #   with `/`, contain at least one non-empty segment, and be at most 1,024 bytes.
-          #   Must not contain empty segments, `.` or `..` segments, control or format
-          #   characters, or the Unicode line and paragraph separators (U+2028, U+2029), and
-          #   must be NFC-normalized. Paths are case-sensitive.
+          #   The path of the new memory, such as `/projects/foo/notes.md`. Paths are
+          #   case-sensitive.
+          #
+          #   A path starts with `/` and has 1 to 20 segments. A segment can't be empty and
+          #   can't be `.` or `..`. A path can't contain control characters, format
+          #   characters, or the line and paragraph separators U+2028 and U+2029. It must be
+          #   in Unicode Normalization Form C and at most 1,024 bytes long.
           #
           #   @return [String]
           required :path, String
 
           # @!attribute view
-          #   Selects which projection of a `memory` or `memory_version` the server returns.
-          #   `basic` returns the object with `content` set to `null`; `full` populates
-          #   `content`. When omitted, the default is endpoint-specific: retrieve operations
-          #   default to `full`; list, create, and update operations default to `basic`.
-          #   Listing with `view=full` caps `limit` at 20.
+          #   Whether a `memory` or `memory_version` in the response includes its `content`.
+          #   Defaults to `full` on retrieve operations and to `basic` on list, create, and
+          #   update operations.
+          #
+          #   With `full`, list operations return at most 20 items per page.
           #
           #   @return [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView, nil]
           optional :view, enum: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryView }
@@ -66,11 +69,11 @@ module Anthropic
           #
           #   @param memory_store_id [String] The ID of the memory store to create the memory in (`memstore_...`).
           #
-          #   @param content [String, nil] UTF-8 text content for the new memory. Maximum 100 kB (102,400 bytes). Required;
+          #   @param content [String, nil] The UTF-8 text content of the new memory. Pass `""` to create an empty memory.
           #
-          #   @param path [String] Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`. Must start
+          #   @param path [String] The path of the new memory, such as `/projects/foo/notes.md`. Paths are case-sen
           #
-          #   @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Selects which projection of a `memory` or `memory_version` the server returns. `
+          #   @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Whether a `memory` or `memory_version` in the response includes its `content`. D
           #
           #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `manag
           #

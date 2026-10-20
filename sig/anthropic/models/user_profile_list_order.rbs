@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    type user_profile_list_order = :asc | :desc
+
+    module UserProfileListOrder
+      extend Anthropic::Internal::Type::Enum
+
+      # Oldest first when `order_by` is `created_at`, or names in ascending order when `order_by` is `name`.
+      ASC: :asc
+
+      # Newest first when `order_by` is `created_at`, or names in descending order when `order_by` is `name`. This is the default.
+      DESC: :desc
+
+      def self?.values: -> ::Array[Anthropic::Models::user_profile_list_order]
+    end
+  end
+end

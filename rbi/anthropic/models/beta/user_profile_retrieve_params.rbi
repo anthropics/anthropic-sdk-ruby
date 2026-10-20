@@ -19,8 +19,7 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :user_profile_id
 
-        # This endpoint is in beta: requests must send `user-profiles-2026-03-24`,
-        # `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
+        # Optional header to specify the beta version(s) you want to use.
         sig do
           returns(
             T.nilable(
@@ -60,8 +59,7 @@ module Anthropic
         def self.new(
           # The ID of the user profile to get (`uprof_...`).
           user_profile_id:,
-          # This endpoint is in beta: requests must send `user-profiles-2026-03-24`,
-          # `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
+          # Optional header to specify the beta version(s) you want to use.
           betas: nil,
           # Optional header to select the Workspace for this request. The value is a
           # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

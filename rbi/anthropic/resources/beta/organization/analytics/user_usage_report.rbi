@@ -72,7 +72,7 @@ module Anthropic
                 user_ids: T.nilable(T::Array[String]),
                 request_options: Anthropic::RequestOptions::OrHash
               ).returns(
-                Anthropic::Internal::PageCursor[
+                Anthropic::Internal::ReportPageCursor[
                   Anthropic::Beta::Organization::BetaAnalyticsUsageUsersItem
                 ]
               )

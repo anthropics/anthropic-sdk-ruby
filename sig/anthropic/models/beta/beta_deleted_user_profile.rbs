@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    class BetaDeletedUserProfile = Beta::BetaDeletedUserProfile
+
+    module Beta
+      type beta_deleted_user_profile =
+        { id: String, type: :user_profile_deleted }
+
+      class BetaDeletedUserProfile < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor type: :user_profile_deleted
+
+        def initialize: (id: String, ?type: :user_profile_deleted) -> void
+
+        def to_hash: -> { id: String, type: :user_profile_deleted }
+      end
+    end
+  end
+end

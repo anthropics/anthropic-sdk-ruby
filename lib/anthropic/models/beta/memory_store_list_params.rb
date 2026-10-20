@@ -9,15 +9,13 @@ module Anthropic
         include Anthropic::Internal::Type::RequestParameters
 
         # @!attribute created_at_gte
-        #   Return only stores whose `created_at` is at or after this time (inclusive). Sent
-        #   on the wire as `created_at[gte]`.
+        #   Return only memory stores created at or after this time (inclusive).
         #
         #   @return [Time, nil]
         optional :created_at_gte, Time
 
         # @!attribute created_at_lte
-        #   Return only stores whose `created_at` is at or before this time (inclusive).
-        #   Sent on the wire as `created_at[lte]`.
+        #   Return only memory stores created at or before this time (inclusive).
         #
         #   @return [Time, nil]
         optional :created_at_lte, Time
@@ -37,8 +35,8 @@ module Anthropic
         optional :limit, Integer
 
         # @!attribute page
-        #   Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a
-        #   previous response to fetch the next page; omit for the first page.
+        #   The `next_page` value from a previous response, to get the next page. Omit it to
+        #   get the first page.
         #
         #   @return [String, nil]
         optional :page, String
@@ -65,15 +63,15 @@ module Anthropic
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::MemoryStoreListParams} for more details.
         #
-        #   @param created_at_gte [Time] Return only stores whose `created_at` is at or after this time (inclusive). Sent
+        #   @param created_at_gte [Time] Return only memory stores created at or after this time (inclusive).
         #
-        #   @param created_at_lte [Time] Return only stores whose `created_at` is at or before this time (inclusive). Sen
+        #   @param created_at_lte [Time] Return only memory stores created at or before this time (inclusive).
         #
         #   @param include_archived [Boolean] When `true`, archived stores are included in the results. Defaults to `false` (a
         #
         #   @param limit [Integer] Maximum number of stores to return per page. Must be between 1 and 100. Defaults
         #
-        #   @param page [String] Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a
+        #   @param page [String] The `next_page` value from a previous response, to get the next page. Omit it to
         #
         #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `manag
         #

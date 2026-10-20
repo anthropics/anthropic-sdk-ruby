@@ -11,7 +11,7 @@ module Anthropic
           required :type, enum: -> { Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams::Type }
 
           # @!attribute token
-          #   Updated static bearer token value.
+          #   The new static bearer token to replace the stored one.
           #
           #   @return [String, nil]
           optional :token, String, nil?: true
@@ -22,7 +22,7 @@ module Anthropic
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams::Type]
           #
-          #   @param token [String, nil] Updated static bearer token value.
+          #   @param token [String, nil] The new static bearer token to replace the stored one.
 
           # @see Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams#type
           module Type

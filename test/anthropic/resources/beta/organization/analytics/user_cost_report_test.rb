@@ -8,7 +8,7 @@ class Anthropic::Test::Resources::Beta::Organization::Analytics::UserCostReportT
       @anthropic.beta.organization.analytics.user_cost_report.list(starting_at: "2019-12-27T18:11:19.117Z")
 
     assert_pattern do
-      response => Anthropic::Internal::PageCursor
+      response => Anthropic::Internal::ReportPageCursor
     end
 
     row = response.to_enum.first

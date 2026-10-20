@@ -5,7 +5,7 @@ module Anthropic
     class Beta
       class MemoryStores
         class MemoryVersions
-          # Retrieve a memory version
+          # Retrieve a Memory Version
           sig do
             params(
               memory_version_id: String,
@@ -25,11 +25,11 @@ module Anthropic
             memory_version_id,
             # Path param: The ID of the memory store that holds the version (`memstore_...`).
             memory_store_id:,
-            # Query param: Selects which projection of a `memory` or `memory_version` the
-            # server returns. `basic` returns the object with `content` set to `null`; `full`
-            # populates `content`. When omitted, the default is endpoint-specific: retrieve
-            # operations default to `full`; list, create, and update operations default to
-            # `basic`. Listing with `view=full` caps `limit` at 20.
+            # Query param: Whether a `memory` or `memory_version` in the response includes its
+            # `content`. Defaults to `full` on retrieve operations and to `basic` on list,
+            # create, and update operations.
+            #
+            # With `full`, list operations return at most 20 items per page.
             view: nil,
             # Header param: This endpoint is in beta: requests must send
             # `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
@@ -45,7 +45,7 @@ module Anthropic
           )
           end
 
-          # List memory versions
+          # List Memory Versions
           sig do
             params(
               memory_store_id: String,
@@ -81,12 +81,15 @@ module Anthropic
             created_at_gte: nil,
             # Query param: Return versions created at or before this time (inclusive).
             created_at_lte: nil,
-            # Query param: The maximum number of versions to return per page. Defaults to 20.
+            # Query param: The maximum number of versions to return per page, from 1 to 100.
+            # Defaults to 20.
+            #
+            # With `view=full`, a page holds at most 20 versions.
             limit: nil,
             # Query param: Return only versions of the memory with this ID (`mem_...`).
             #
-            # The filter still works after the memory is deleted. The results then include the
-            # version whose `operation` is `deleted`.
+            # The filter still works after the memory is deleted. While that memory's versions
+            # are retained, the results include the version whose `operation` is `deleted`.
             memory_id: nil,
             # Query param: Return only versions that record this kind of change.
             operation: nil,
@@ -98,11 +101,11 @@ module Anthropic
             service_account_id: nil,
             # Query param: Return only versions written by the session with this ID.
             session_id: nil,
-            # Query param: Selects which projection of a `memory` or `memory_version` the
-            # server returns. `basic` returns the object with `content` set to `null`; `full`
-            # populates `content`. When omitted, the default is endpoint-specific: retrieve
-            # operations default to `full`; list, create, and update operations default to
-            # `basic`. Listing with `view=full` caps `limit` at 20.
+            # Query param: Whether a `memory` or `memory_version` in the response includes its
+            # `content`. Defaults to `full` on retrieve operations and to `basic` on list,
+            # create, and update operations.
+            #
+            # With `full`, list operations return at most 20 items per page.
             view: nil,
             # Header param: This endpoint is in beta: requests must send
             # `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
@@ -118,7 +121,7 @@ module Anthropic
           )
           end
 
-          # Redact a memory version
+          # Redact a Memory Version
           sig do
             params(
               memory_version_id: String,

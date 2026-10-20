@@ -1,0 +1,42 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Workspaces
+          type rate_limit_update_params =
+            {
+              workspace_id: String,
+              rate_limit_id: String,
+              limits: ::Array[Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimitUpdateValue]
+            }
+            & Anthropic::Internal::Type::request_parameters
+
+          class RateLimitUpdateParams < Anthropic::Internal::Type::BaseModel
+            extend Anthropic::Internal::Type::RequestParameters::Converter
+            include Anthropic::Internal::Type::RequestParameters
+
+            attr_accessor workspace_id: String
+
+            attr_accessor rate_limit_id: String
+
+            attr_accessor limits: ::Array[Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimitUpdateValue]
+
+            def initialize: (
+              workspace_id: String,
+              rate_limit_id: String,
+              limits: ::Array[Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimitUpdateValue],
+              ?request_options: Anthropic::request_opts
+            ) -> void
+
+            def to_hash: -> {
+              workspace_id: String,
+              rate_limit_id: String,
+              limits: ::Array[Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimitUpdateValue],
+              request_options: Anthropic::RequestOptions
+            }
+          end
+        end
+      end
+    end
+  end
+end

@@ -15,9 +15,10 @@ module Anthropic
             )
           end
 
-        # ID of the memory store to archive (a `memstore_...` identifier). Required.
-        # Archiving is one-way and idempotent; archived stores cannot be unarchived.
-        # Enumerate IDs via `GET /v1/memory_stores`.
+        # The ID of the memory store to archive (`memstore_...`).
+        #
+        # Archiving can't be undone. Archiving a store that is already archived returns it
+        # unchanged.
         sig { returns(String) }
         attr_accessor :memory_store_id
 
@@ -60,9 +61,10 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
-          # ID of the memory store to archive (a `memstore_...` identifier). Required.
-          # Archiving is one-way and idempotent; archived stores cannot be unarchived.
-          # Enumerate IDs via `GET /v1/memory_stores`.
+          # The ID of the memory store to archive (`memstore_...`).
+          #
+          # Archiving can't be undone. Archiving a store that is already archived returns it
+          # unchanged.
           memory_store_id:,
           # This endpoint is in beta: requests must send `agent-memory-2026-07-22` or
           # `managed-agents-2026-04-01` in this header.

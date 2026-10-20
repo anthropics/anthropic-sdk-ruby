@@ -61,7 +61,7 @@ module Anthropic
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #
-            # @return [Anthropic::Internal::PageCursor<Anthropic::Models::Beta::Organization::BetaAnalyticsCostUsersItem>]
+            # @return [Anthropic::Internal::ReportPageCursor<Anthropic::Models::Beta::Organization::BetaAnalyticsCostUsersItem>]
             #
             # @see Anthropic::Models::Beta::Organization::Analytics::UserCostReportListParams
             def list(params)
@@ -94,7 +94,7 @@ module Anthropic
                 method: :get,
                 path: "v1/organizations/analytics/user_cost_report?beta=true",
                 query: query,
-                page: Anthropic::Internal::PageCursor,
+                page: Anthropic::Internal::ReportPageCursor,
                 model: Anthropic::Beta::Organization::BetaAnalyticsCostUsersItem,
                 options: options
               )

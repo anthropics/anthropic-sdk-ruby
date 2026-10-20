@@ -552,6 +552,17 @@ class Anthropic::Test::UnionTest < Minitest::Test
     variant -> { M5 }
   end
 
+  module U7
+    extend Anthropic::Internal::Type::Union
+
+    variant Time
+    variant String
+  end
+
+  class M6 < Anthropic::Internal::Type::BaseModel
+    required :a, -> { U7 }
+  end
+
   def test_accessors
     model = M3.new(recur: [])
     tap do
@@ -559,6 +570,18 @@ class Anthropic::Test::UnionTest < Minitest::Test
       flunk
     rescue Anthropic::Errors::ConversionError => e
       assert_kind_of(ArgumentError, e.cause)
+    end
+  end
+
+  def test_accessors_after_later_variant_matched
+    cases = {
+      "hi" => "hi",
+      "2026-01-02T03:04:05Z" => Time.utc(2026, 1, 2, 3, 4, 5)
+    }
+
+    cases.each do |input, expect|
+      model = Anthropic::Internal::Type::Converter.coerce(M6, {a: input})
+      assert_pattern { model.a => ^expect }
     end
   end
 

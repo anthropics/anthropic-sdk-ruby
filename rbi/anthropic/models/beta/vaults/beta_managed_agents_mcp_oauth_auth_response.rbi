@@ -24,7 +24,8 @@ module Anthropic
           end
           attr_accessor :type
 
-          # A timestamp in RFC 3339 format
+          # When the credential's access token expires, in RFC 3339. Absent if the expiry
+          # isn't known.
           sig { returns(T.nilable(Time)) }
           attr_accessor :expires_at
 
@@ -65,7 +66,8 @@ module Anthropic
             # URL of the MCP server this credential authenticates against.
             mcp_server_url:,
             type:,
-            # A timestamp in RFC 3339 format
+            # When the credential's access token expires, in RFC 3339. Absent if the expiry
+            # isn't known.
             expires_at: nil,
             # Refresh token configuration, if the credential supports token refresh.
             refresh: nil

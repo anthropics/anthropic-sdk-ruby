@@ -457,6 +457,56 @@ class Anthropic::Test::VertexClientTest < Minitest::Test
     assert_raises(NotImplementedError) { client.skills }
   end
 
+  def test_user_profiles_raises_not_implemented
+    client = Anthropic::VertexClient.new(region: "us-east5", project_id: "proj")
+    err = assert_raises(NotImplementedError) { client.user_profiles }
+    assert_equal("Managing user profiles is not supported on Vertex.", err.message)
+  end
+
+  def test_beta_user_profiles_raise_before_sending
+    profiles = Anthropic::VertexClient.new(region: "us-east5", project_id: "proj").beta.user_profiles
+    [
+      -> { profiles.create },
+      -> { profiles.retrieve("uprof_test") },
+      -> { profiles.list },
+      -> { profiles.create_enrollment_url("uprof_test") },
+      -> { profiles.action_urls.create("uprof_test", action: {type: :enroll_end_user}) }
+    ].each do |call|
+      err = assert_raises(NotImplementedError, &call)
+      assert_equal("Managing user profiles is not supported on Vertex.", err.message)
+    end
+  end
+
+  def test_messages_send_the_user_profile_id_header
+    base = "https://us-east5-aiplatform.googleapis.com/v1/projects/proj/locations/us-east5/" \
+           "publishers/anthropic/models"
+    create_url = "#{base}/m:rawPredict"
+    count_tokens_url = "#{base}/count-tokens:rawPredict"
+    stub_request(:post, create_url).to_return_json(status: 200, body: {})
+    stub_request(:post, count_tokens_url).to_return_json(status: 200, body: {})
+
+    credentials = Object.new.tap do |c|
+      c.define_singleton_method(:apply) { |headers| headers.merge("authorization" => "Bearer token") }
+    end
+    params = {messages: [{role: "user", content: "hi"}], model: "m", user_profile_id: "uprof_test"}
+
+    Google::Auth.stub(:get_application_default, credentials) do
+      client = Anthropic::VertexClient.new(region: "us-east5", project_id: "proj")
+      client.messages.create(max_tokens: 16, **params)
+      client.beta.messages.create(max_tokens: 16, **params)
+      client.messages.count_tokens(**params)
+    end
+
+    assert_requested(:post, create_url, times: 2) do |req|
+      assert_equal("uprof_test", req.headers["Anthropic-User-Profile-Id"])
+      refute_includes(JSON.parse(req.body).keys, "user_profile_id")
+    end
+    assert_requested(:post, count_tokens_url, times: 1) do |req|
+      assert_equal("uprof_test", req.headers["Anthropic-User-Profile-Id"])
+      refute_includes(JSON.parse(req.body).keys, "user_profile_id")
+    end
+  end
+
   def test_long_request_check_applies_unless_timeout_is_passed
     uri = "https://us-east5-aiplatform.googleapis.com/v1/projects/proj/locations/us-east5/" \
           "publishers/anthropic/models/m:rawPredict"

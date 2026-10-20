@@ -8,14 +8,14 @@ module Anthropic
           id: String,
           created_at: Time,
           metadata: ::Hash[Symbol, String],
+          name: String?,
           trust_grants: ::Hash[Symbol, Anthropic::Beta::BetaUserProfileTrustGrant],
           type: Anthropic::Models::Beta::BetaUserProfile::type_,
           updated_at: Time,
           access_type: Anthropic::Models::Beta::BetaUserProfile::access_type,
           external_id: String?,
           external_user_details: Anthropic::Beta::BetaUserProfileExternalUserDetails,
-          external_user_onboarded_at: Time?,
-          name: String?
+          external_user_onboarded_at: Time?
         }
 
       class BetaUserProfile < Anthropic::Internal::Type::BaseModel
@@ -24,6 +24,8 @@ module Anthropic
         attr_accessor created_at: Time
 
         attr_accessor metadata: ::Hash[Symbol, String]
+
+        attr_accessor name: String?
 
         attr_accessor trust_grants: ::Hash[Symbol, Anthropic::Beta::BetaUserProfileTrustGrant]
 
@@ -47,34 +49,32 @@ module Anthropic
 
         attr_accessor external_user_onboarded_at: Time?
 
-        attr_accessor name: String?
-
         def initialize: (
           id: String,
           created_at: Time,
           metadata: ::Hash[Symbol, String],
+          name: String?,
           trust_grants: ::Hash[Symbol, Anthropic::Beta::BetaUserProfileTrustGrant],
           type: Anthropic::Models::Beta::BetaUserProfile::type_,
           updated_at: Time,
           ?access_type: Anthropic::Models::Beta::BetaUserProfile::access_type,
           ?external_id: String?,
           ?external_user_details: Anthropic::Beta::BetaUserProfileExternalUserDetails,
-          ?external_user_onboarded_at: Time?,
-          ?name: String?
+          ?external_user_onboarded_at: Time?
         ) -> void
 
         def to_hash: -> {
           id: String,
           created_at: Time,
           metadata: ::Hash[Symbol, String],
+          name: String?,
           trust_grants: ::Hash[Symbol, Anthropic::Beta::BetaUserProfileTrustGrant],
           type: Anthropic::Models::Beta::BetaUserProfile::type_,
           updated_at: Time,
           access_type: Anthropic::Models::Beta::BetaUserProfile::access_type,
           external_id: String?,
           external_user_details: Anthropic::Beta::BetaUserProfileExternalUserDetails,
-          external_user_onboarded_at: Time?,
-          name: String?
+          external_user_onboarded_at: Time?
         }
 
         type type_ = :user_profile

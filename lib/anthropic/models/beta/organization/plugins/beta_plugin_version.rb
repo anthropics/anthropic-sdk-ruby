@@ -56,7 +56,13 @@ module Anthropic
             required :display_name, String, nil?: true
 
             # @!attribute manifest_version
-            #   The version string the manifest declares; null when it declares none.
+            #   The manifest's `version`, normalized for display: one leading `v` or `V` is
+            #   dropped, and the result is returned only if it is 1 to 64 characters, starts
+            #   with a digit, and uses only ASCII letters, digits, `.`, `+`, and `-`; otherwise
+            #   `null`. For example, `"v1.4.0"` is returned as `"1.4.0"`, and `"latest"` as
+            #   `null`. For a synchronized plugin, the `version` of its `marketplace.json` entry
+            #   can take the place of the manifest's `version`. It is also `null` for a version
+            #   stored before claude.ai began recording this field (August 2026).
             #
             #   @return [String, nil]
             required :manifest_version, String, nil?: true
@@ -68,8 +74,8 @@ module Anthropic
             required :plugin_id, String
 
             # @!attribute reach
-            #   How far the version reaches: `remote`, `privileged` or `contained`, as on the
-            #   Plugin; null when not classifiable.
+            #   How far the version reaches: `remote`, `privileged`, `contained`, or `null`, as
+            #   defined on the Plugin's `reach`.
             #
             #   @return [Symbol, Anthropic::Models::Beta::Organization::Plugins::BetaPluginVersion::Reach, nil]
             required :reach,
@@ -109,11 +115,11 @@ module Anthropic
             #
             #   @param display_name [String, nil] The manifest's display name; null when it declares none.
             #
-            #   @param manifest_version [String, nil] The version string the manifest declares; null when it declares none.
+            #   @param manifest_version [String, nil] The manifest's `version`, normalized for display: one leading `v` or `V` is drop
             #
             #   @param plugin_id [String] The Plugin's ID.
             #
-            #   @param reach [Symbol, Anthropic::Models::Beta::Organization::Plugins::BetaPluginVersion::Reach, nil] How far the version reaches: `remote`, `privileged` or `contained`, as on the Pl
+            #   @param reach [Symbol, Anthropic::Models::Beta::Organization::Plugins::BetaPluginVersion::Reach, nil] How far the version reaches: `remote`, `privileged`, `contained`, or `null`, as
             #
             #   @param release_notes [String, nil] As supplied with the upload; null when none were supplied.
             #
@@ -175,8 +181,8 @@ module Anthropic
               end
             end
 
-            # How far the version reaches: `remote`, `privileged` or `contained`, as on the
-            # Plugin; null when not classifiable.
+            # How far the version reaches: `remote`, `privileged`, `contained`, or `null`, as
+            # defined on the Plugin's `reach`.
             #
             # @see Anthropic::Models::Beta::Organization::Plugins::BetaPluginVersion#reach
             module Reach

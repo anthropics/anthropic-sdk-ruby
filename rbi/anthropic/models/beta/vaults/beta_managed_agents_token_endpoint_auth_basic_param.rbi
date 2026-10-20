@@ -13,7 +13,8 @@ module Anthropic
               )
             end
 
-          # OAuth client secret.
+          # The OAuth client secret, sent to `token_endpoint` with HTTP Basic
+          # authentication.
           sig { returns(String) }
           attr_accessor :client_secret
 
@@ -33,7 +34,8 @@ module Anthropic
             ).returns(T.attached_class)
           end
           def self.new(
-            # OAuth client secret.
+            # The OAuth client secret, sent to `token_endpoint` with HTTP Basic
+            # authentication.
             client_secret:,
             type:
           )

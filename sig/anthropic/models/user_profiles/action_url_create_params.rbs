@@ -1,0 +1,40 @@
+module Anthropic
+  module Models
+    module UserProfiles
+      type action_url_create_params =
+        {
+          user_profile_id: String,
+          action: Anthropic::UserProfiles::UserProfileEnrollEndUserAction,
+          workspace_id: String
+        }
+        & Anthropic::Internal::Type::request_parameters
+
+      class ActionURLCreateParams < Anthropic::Internal::Type::BaseModel
+        extend Anthropic::Internal::Type::RequestParameters::Converter
+        include Anthropic::Internal::Type::RequestParameters
+
+        attr_accessor user_profile_id: String
+
+        attr_accessor action: Anthropic::UserProfiles::UserProfileEnrollEndUserAction
+
+        attr_reader workspace_id: String?
+
+        def workspace_id=: (String) -> String
+
+        def initialize: (
+          user_profile_id: String,
+          action: Anthropic::UserProfiles::UserProfileEnrollEndUserAction,
+          ?workspace_id: String,
+          ?request_options: Anthropic::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          user_profile_id: String,
+          action: Anthropic::UserProfiles::UserProfileEnrollEndUserAction,
+          workspace_id: String,
+          request_options: Anthropic::RequestOptions
+        }
+      end
+    end
+  end
+end

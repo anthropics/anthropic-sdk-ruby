@@ -16,40 +16,48 @@ module Anthropic
           required :memory_store_id, String
 
           # @!attribute depth
-          #   `0` (or omitted) returns all descendants below `path_prefix` (recursive). `1`
-          #   returns immediate children only; deeper entries roll up as `memory_prefix`
-          #   items. `depth=1` behaves like `ls`; omitting `depth` behaves like `find`.
+          #   How far below `path_prefix` to list. Defaults to `0`, which lists every memory
+          #   below the prefix.
+          #
+          #   Pass `1` to list only the direct children. Deeper memories are then grouped into
+          #   `memory_prefix` items.
           #
           #   @return [Integer, nil]
           optional :depth, Integer
 
           # @!attribute limit
-          #   Maximum number of items to return per page. Must be between 1 and 100. Defaults
-          #   to 20 when omitted. Capped at 20 when `view=full`. Both `memory` and
-          #   `memory_prefix` items count toward the limit.
+          #   The maximum number of items to return per page, from 1 to 100. Defaults to 20.
+          #
+          #   With `view=full`, a page holds at most 20 items. `memory` and `memory_prefix`
+          #   items both count toward the limit.
           #
           #   @return [Integer, nil]
           optional :limit, Integer
 
           # @!attribute page
-          #   Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a
-          #   previous response to fetch the next page; omit for the first page.
+          #   The `next_page` value from a previous response, to get the next page. Omit it to
+          #   get the first page.
           #
           #   @return [String, nil]
           optional :page, String
 
           # @!attribute path_prefix
-          #   Optional path prefix filter. Must end with `/` (segment-aligned), e.g.,
-          #   `/notes/`. This value appears in request URLs. Do not include secrets or
-          #   personally identifiable information.
+          #   Return only memories whose path starts with this prefix, such as `/notes/`. This
+          #   value appears in request URLs. Do not include secrets or personally identifiable
+          #   information.
+          #
+          #   Omit it to list the whole store. The prefix must end with `/` and matches whole
+          #   segments, so `/notes/` matches `/notes/todo.md` but not
+          #   `/notes-archive/todo.md`.
           #
           #   @return [String, nil]
           optional :path_prefix, String
 
           # @!attribute view
-          #   Which projection of each `memory` to return. Defaults to `basic` (content
-          #   omitted). `full` populates `content` on each item and caps `limit` at 20; use
-          #   this as the bulk-read path for export and sync.
+          #   Whether each memory in the response includes `content`. Defaults to `basic`,
+          #   which sets it to `null`.
+          #
+          #   With `full`, a page holds at most 20 items.
           #
           #   @return [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView, nil]
           optional :view, enum: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryView }
@@ -78,15 +86,15 @@ module Anthropic
           #
           #   @param memory_store_id [String] The ID of the memory store to list memories from (`memstore_...`).
           #
-          #   @param depth [Integer] `0` (or omitted) returns all descendants below `path_prefix` (recursive). `1` re
+          #   @param depth [Integer] How far below `path_prefix` to list. Defaults to `0`, which lists every memory b
           #
-          #   @param limit [Integer] Maximum number of items to return per page. Must be between 1 and 100. Defaults
+          #   @param limit [Integer] The maximum number of items to return per page, from 1 to 100. Defaults to 20.
           #
-          #   @param page [String] Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a
+          #   @param page [String] The `next_page` value from a previous response, to get the next page. Omit it to
           #
-          #   @param path_prefix [String] Optional path prefix filter. Must end with `/` (segment-aligned), e.g., `/notes/
+          #   @param path_prefix [String] Return only memories whose path starts with this prefix, such as `/notes/`. This
           #
-          #   @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Which projection of each `memory` to return. Defaults to `basic` (content omitte
+          #   @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Whether each memory in the response includes `content`. Defaults to `basic`, whi
           #
           #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `manag
           #

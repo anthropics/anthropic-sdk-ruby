@@ -1,0 +1,60 @@
+module Anthropic
+  module Models
+    type user_profile_list_params =
+      {
+        limit: Integer,
+        order: Anthropic::Models::user_profile_list_order,
+        order_by: Anthropic::Models::user_profile_list_order_by,
+        page: String,
+        workspace_id: String
+      }
+      & Anthropic::Internal::Type::request_parameters
+
+    class UserProfileListParams < Anthropic::Internal::Type::BaseModel
+      extend Anthropic::Internal::Type::RequestParameters::Converter
+      include Anthropic::Internal::Type::RequestParameters
+
+      attr_reader limit: Integer?
+
+      def limit=: (Integer) -> Integer
+
+      attr_reader order: Anthropic::Models::user_profile_list_order?
+
+      def order=: (
+        Anthropic::Models::user_profile_list_order
+      ) -> Anthropic::Models::user_profile_list_order
+
+      attr_reader order_by: Anthropic::Models::user_profile_list_order_by?
+
+      def order_by=: (
+        Anthropic::Models::user_profile_list_order_by
+      ) -> Anthropic::Models::user_profile_list_order_by
+
+      attr_reader page: String?
+
+      def page=: (String) -> String
+
+      attr_reader workspace_id: String?
+
+      def workspace_id=: (String) -> String
+
+      def initialize: (
+        ?limit: Integer,
+        ?order: Anthropic::Models::user_profile_list_order,
+        ?order_by: Anthropic::Models::user_profile_list_order_by,
+        ?page: String,
+        ?workspace_id: String,
+        ?request_options: Anthropic::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        limit: Integer,
+        order: Anthropic::Models::user_profile_list_order,
+        order_by: Anthropic::Models::user_profile_list_order_by,
+        page: String,
+        workspace_id: String,
+        request_options: Anthropic::RequestOptions
+      }
+    end
+  end
+end

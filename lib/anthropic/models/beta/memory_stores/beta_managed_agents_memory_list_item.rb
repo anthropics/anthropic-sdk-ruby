@@ -4,9 +4,9 @@ module Anthropic
   module Models
     module Beta
       module MemoryStores
-        # One item in a [List memories](/en/api/beta/memory_stores/memories/list)
-        # response: either a `memory` object or, when `depth` is set, a `memory_prefix`
-        # rollup marker.
+        # One item in a
+        # [List Memories](https://platform.claude.com/docs/en/api/beta/memory_stores/memories/list)
+        # response: a `memory`, or a `memory_prefix` marker when `depth` is `1`.
         #
         # @see Anthropic::Resources::Beta::MemoryStores::Memories#list
         module BetaManagedAgentsMemoryListItem
@@ -14,10 +14,16 @@ module Anthropic
 
           discriminator :type
 
-          # A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+          # A text document at a path inside a memory store.
+          #
+          # `content` is `null` when the response uses `view=basic`. `content_size_bytes` and `content_sha256` are always set, so you can detect changes without fetching the content. To retrieve, update, or delete a memory, pass its ID, which stays the same when its path changes.
+          #
+          # See the [memory guide](https://platform.claude.com/docs/en/managed-agents/memory#view-and-edit-memories) to learn more about working with memories.
           variant :memory, -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsMemory }
 
-          # A rolled-up directory marker returned by [List memories](/en/api/beta/memory_stores/memories/list) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
+          # A directory marker that [List Memories](https://platform.claude.com/docs/en/api/beta/memory_stores/memories/list) returns instead of the memories below the requested `depth`.
+          #
+          # It stands for one or more memories whose paths start with `path`. It isn't a stored object and doesn't have an ID. Each marker counts toward the page `limit`.
           variant :memory_prefix, -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryPrefix }
 
           module Type
@@ -44,23 +50,24 @@ module Anthropic
           #
           # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
           #
-          #   @option args [String] :id Unique identifier for this memory (a `mem_...` value). Stable across renames; us
+          #   @option args [String] :id The unique ID of the memory (`mem_...`). It stays the same when the memory's pat
           #
           #   @option args [String] :content_sha256 Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The s
           #
-          #   @option args [Integer] :content_size_bytes Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regar
+          #   @option args [Integer] :content_size_bytes The size of the memory's `content` in UTF-8 bytes. It is set regardless of `view
           #
           #   @option args [Time] :created_at When this memory was created, in RFC 3339 format.
           #
           #   @option args [String] :memory_store_id ID of the memory store this memory belongs to (a `memstore_...` value).
           #
-          #   @option args [String] :memory_version_id ID of the `memory_version` representing this memory's current content (a `memver
+          #   @option args [String] :memory_version_id The ID of the memory version that holds the memory's current content
+          #   (`memver\_..
           #
           #   @option args [String] :path Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`.
           #
-          #   @option args [Time] :updated_at When this memory was last modified, in RFC 3339 format. Use this as a cheap fres
+          #   @option args [Time] :updated_at When the memory was last changed, in RFC 3339.
           #
-          #   @option args [String, nil] :content The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=b
+          #   @option args [String, nil] :content The memory's UTF-8 text content, or `null` when the response uses `view=basic`.
           #
           # @raise [ArgumentError]
           # @return [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemory, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryPrefix]

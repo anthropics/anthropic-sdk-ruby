@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    type user_profile_external_user_entity_type =
+      :individual | :business | :non_profit | :government
+
+    module UserProfileExternalUserEntityType
+      extend Anthropic::Internal::Type::Enum
+
+      INDIVIDUAL: :individual
+      BUSINESS: :business
+      NON_PROFIT: :non_profit
+      GOVERNMENT: :government
+
+      def self?.values: -> ::Array[Anthropic::Models::user_profile_external_user_entity_type]
+    end
+  end
+end

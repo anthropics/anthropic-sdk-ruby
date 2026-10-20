@@ -10,18 +10,18 @@ module Anthropic
         # @return [Anthropic::Resources::Beta::MemoryStores::MemoryVersions]
         attr_reader :memory_versions
 
-        # Create a memory store
+        # Create a Memory Store
         #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MemoryStoreCreateParams} for more details.
         #
         # @overload create(name:, description: nil, metadata: nil, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param name [String] Body param: Human-readable name for the store. Required; 1–255 characters; no co
+        # @param name [String] Body param: The name of the memory store, 1 to 255 characters long, without cont
         #
-        # @param description [String] Body param: Free-text description of what the store contains, up to 1024 charact
+        # @param description [String] Body param: Free-text description of what the store contains, up to 1,024 charac
         #
-        # @param metadata [Hash{Symbol=>String}] Body param: Arbitrary key-value tags for your own bookkeeping (such as the end u
+        # @param metadata [Hash{Symbol=>String}] Body param: Key-value pairs for your own use, such as the end user that the stor
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `agent-memory-2026-07
         #
@@ -48,14 +48,14 @@ module Anthropic
           )
         end
 
-        # Retrieve a memory store
+        # Retrieve a Memory Store
         #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MemoryStoreRetrieveParams} for more details.
         #
         # @overload retrieve(memory_store_id, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param memory_store_id [String] ID of the memory store to retrieve (a `memstore_...` identifier). Required. Enum
+        # @param memory_store_id [String] The ID of the memory store to retrieve (`memstore_...`).
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `manag
         #
@@ -80,20 +80,20 @@ module Anthropic
           )
         end
 
-        # Update a memory store
+        # Update a Memory Store
         #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MemoryStoreUpdateParams} for more details.
         #
         # @overload update(memory_store_id, description: nil, metadata: nil, name: nil, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param memory_store_id [String] Path param: ID of the memory store to update (a `memstore_...` identifier). Requ
+        # @param memory_store_id [String] Path param: The ID of the memory store to update (`memstore_...`).
         #
-        # @param description [String, nil] Body param: New description for the store, up to 1024 characters. Pass an empty
+        # @param description [String, nil] Body param: New description for the store, up to 1,024 characters. Pass an empty
         #
-        # @param metadata [Hash{Symbol=>String, nil}, nil] Body param: Metadata patch. Set a key to a string to upsert it, or to null to de
+        # @param metadata [Hash{Symbol=>String, nil}, nil] Body param: Changes to apply to the memory store's metadata. Keys you leave out
         #
-        # @param name [String, nil] Body param: New human-readable name for the store. 1–255 characters; no control
+        # @param name [String, nil] Body param: The new name of the memory store, 1 to 255 characters long, without
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `agent-memory-2026-07
         #
@@ -120,22 +120,22 @@ module Anthropic
           )
         end
 
-        # List memory stores
+        # List Memory Stores
         #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MemoryStoreListParams} for more details.
         #
         # @overload list(created_at_gte: nil, created_at_lte: nil, include_archived: nil, limit: nil, page: nil, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param created_at_gte [Time] Query param: Return only stores whose `created_at` is at or after this time (inc
+        # @param created_at_gte [Time] Query param: Return only memory stores created at or after this time (inclusive)
         #
-        # @param created_at_lte [Time] Query param: Return only stores whose `created_at` is at or before this time (in
+        # @param created_at_lte [Time] Query param: Return only memory stores created at or before this time (inclusive
         #
         # @param include_archived [Boolean] Query param: When `true`, archived stores are included in the results. Defaults
         #
         # @param limit [Integer] Query param: Maximum number of stores to return per page. Must be between 1 and
         #
-        # @param page [String] Query param: Opaque pagination cursor (a `page_...` value). Pass the `next_page`
+        # @param page [String] Query param: The `next_page` value from a previous response, to get the next pag
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `agent-memory-2026-07
         #
@@ -167,14 +167,14 @@ module Anthropic
           )
         end
 
-        # Delete a memory store
+        # Delete a Memory Store
         #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MemoryStoreDeleteParams} for more details.
         #
         # @overload delete(memory_store_id, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param memory_store_id [String] ID of the memory store to permanently delete (a `memstore_...` identifier). Requ
+        # @param memory_store_id [String] The ID of the memory store to delete (`memstore_...`).
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `manag
         #
@@ -199,14 +199,14 @@ module Anthropic
           )
         end
 
-        # Archive a memory store
+        # Archive a Memory Store
         #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MemoryStoreArchiveParams} for more details.
         #
         # @overload archive(memory_store_id, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param memory_store_id [String] ID of the memory store to archive (a `memstore_...` identifier). Required. Archi
+        # @param memory_store_id [String] The ID of the memory store to archive (`memstore_...`).
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `manag
         #

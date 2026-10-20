@@ -6,8 +6,9 @@ module Anthropic
       module Vaults
         class BetaManagedAgentsMCPProbe < Anthropic::Internal::Type::BaseModel
           # @!attribute http_response
-          #   The captured HTTP error response. Null when no HTTP response was received
-          #   (timeout, DNS, TLS).
+          #   The HTTP error response from the MCP server, or `null` if the MCP server didn't
+          #   return one for the failing step, for example after a timeout or a DNS or TLS
+          #   failure.
           #
           #   @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsRefreshHTTPResponse, nil]
           required :http_response,
@@ -28,7 +29,7 @@ module Anthropic
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPProbe} for more details.
           #
-          #   @param http_response [Anthropic::Models::Beta::Vaults::BetaManagedAgentsRefreshHTTPResponse, nil] The captured HTTP error response. Null when no HTTP response was received (timeo
+          #   @param http_response [Anthropic::Models::Beta::Vaults::BetaManagedAgentsRefreshHTTPResponse, nil] The HTTP error response from the MCP server, or `null` if the MCP server didn't
           #
           #   @param method_ [String] The MCP method that failed (for example `initialize` or `tools/list`).
         end

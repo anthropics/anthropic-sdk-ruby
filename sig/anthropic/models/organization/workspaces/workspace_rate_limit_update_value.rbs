@@ -1,0 +1,31 @@
+module Anthropic
+  module Models
+    module Organization
+      class WorkspaceRateLimitUpdateValue = Workspaces::WorkspaceRateLimitUpdateValue
+
+      module Workspaces
+        type workspace_rate_limit_update_value =
+          {
+            type: Anthropic::Models::Organization::Workspaces::workspace_rate_limit_type,
+            value: Integer?
+          }
+
+        class WorkspaceRateLimitUpdateValue < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: Anthropic::Models::Organization::Workspaces::workspace_rate_limit_type
+
+          attr_accessor value: Integer?
+
+          def initialize: (
+            type: Anthropic::Models::Organization::Workspaces::workspace_rate_limit_type,
+            value: Integer?
+          ) -> void
+
+          def to_hash: -> {
+            type: Anthropic::Models::Organization::Workspaces::workspace_rate_limit_type,
+            value: Integer?
+          }
+        end
+      end
+    end
+  end
+end

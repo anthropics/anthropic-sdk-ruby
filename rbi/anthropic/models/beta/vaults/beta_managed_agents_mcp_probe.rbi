@@ -13,8 +13,9 @@ module Anthropic
               )
             end
 
-          # The captured HTTP error response. Null when no HTTP response was received
-          # (timeout, DNS, TLS).
+          # The HTTP error response from the MCP server, or `null` if the MCP server didn't
+          # return one for the failing step, for example after a timeout or a DNS or TLS
+          # failure.
           sig do
             returns(
               T.nilable(
@@ -49,8 +50,9 @@ module Anthropic
             ).returns(T.attached_class)
           end
           def self.new(
-            # The captured HTTP error response. Null when no HTTP response was received
-            # (timeout, DNS, TLS).
+            # The HTTP error response from the MCP server, or `null` if the MCP server didn't
+            # return one for the failing step, for example after a timeout or a DNS or TLS
+            # failure.
             http_response:,
             # The MCP method that failed (for example `initialize` or `tools/list`).
             method_:

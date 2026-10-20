@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    type user_profile_program_status = :active | :pending | :rejected
+
+    module UserProfileProgramStatus
+      extend Anthropic::Internal::Type::Enum
+
+      # The profile is in the program.
+      ACTIVE: :active
+
+      # The profile is not in the program yet, and something is still awaited.
+      PENDING: :pending
+
+      # The profile is not in the program and nothing is awaited: Anthropic has declined, or has withdrawn an earlier approval.
+      REJECTED: :rejected
+
+      def self?.values: -> ::Array[Anthropic::Models::user_profile_program_status]
+    end
+  end
+end

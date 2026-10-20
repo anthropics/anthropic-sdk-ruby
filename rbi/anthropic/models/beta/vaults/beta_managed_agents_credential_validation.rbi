@@ -21,7 +21,8 @@ module Anthropic
           sig { returns(T::Boolean) }
           attr_accessor :has_refresh_token
 
-          # Details of the failing MCP probe step. Null when the probe succeeded.
+          # Details of the MCP probe step that failed, or `null` if the probe succeeded or
+          # there was no access token to test.
           sig do
             returns(
               T.nilable(Anthropic::Beta::Vaults::BetaManagedAgentsMCPProbe)
@@ -107,7 +108,8 @@ module Anthropic
             credential_id:,
             # Whether the credential has a refresh token configured.
             has_refresh_token:,
-            # Details of the failing MCP probe step. Null when the probe succeeded.
+            # Details of the MCP probe step that failed, or `null` if the probe succeeded or
+            # there was no access token to test.
             mcp_probe:,
             # Details of the refresh-token exchange attempted on a 401. Null when no refresh
             # was attempted.

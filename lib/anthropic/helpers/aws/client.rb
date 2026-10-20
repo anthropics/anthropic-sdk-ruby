@@ -91,9 +91,9 @@ module Anthropic
 
           # In API-key mode the gateway key rides the base client's `api_key`
           # slot; {#resolve_default_credentials?} keeps first-party credential
-          # auto-discovery out of the picture when it is absent. The gateway
-          # serves the full first-party API, so every resource the parent wires
-          # up stays available.
+          # auto-discovery out of the picture when it is absent. Every resource
+          # the parent wires up stays available; {#build_request} rejects the
+          # one route the gateway does not serve.
           super(
             api_key: effective_api_key,
             base_url: resolved_base_url,
@@ -103,6 +103,23 @@ module Anthropic
             max_retry_delay: max_retry_delay,
             open_telemetry: open_telemetry
           )
+        end
+
+        # @api private
+        #
+        # Fails fast on user profile action URLs, which the gateway does not serve.
+        #
+        # @param req [Hash{Symbol=>Object}]
+        # @param opts [Hash{Symbol=>Object}]
+        # @return [Hash{Symbol=>Object}]
+        private def build_request(req, opts)
+          # Id-parameterized routes pass `path` as an Array whose first element
+          # is the format string (e.g. `["v1/user_profiles/%1$s/action_urls", id]`).
+          if Array(req[:path]).first.to_s.match?(%r{\Av1/user_profiles/[^/]+/action_urls})
+            raise NotImplementedError.new("User profile action URLs are not supported on the AWS gateway.")
+          end
+
+          super
         end
 
         # @api private

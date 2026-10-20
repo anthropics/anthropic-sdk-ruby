@@ -1,0 +1,19 @@
+module Anthropic
+  module Resources
+    class Beta
+      class UserProfiles
+        class ActionURLs
+          def create: (
+            String user_profile_id,
+            action: Anthropic::Beta::UserProfiles::BetaUserProfileEnrollEndUserAction,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?workspace_id: String,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::UserProfiles::BetaUserProfileActionURL
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

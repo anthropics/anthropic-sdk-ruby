@@ -1,0 +1,29 @@
+module Anthropic
+  module Models
+    type user_profile_cyber_tier =
+      { status: Anthropic::Models::UserProfileCyberTier::status }
+
+    class UserProfileCyberTier < Anthropic::Internal::Type::BaseModel
+      attr_accessor status: Anthropic::Models::UserProfileCyberTier::status
+
+      def initialize: (
+        status: Anthropic::Models::UserProfileCyberTier::status
+      ) -> void
+
+      def to_hash: -> {
+        status: Anthropic::Models::UserProfileCyberTier::status
+      }
+
+      type status = :active | :inactive
+
+      module Status
+        extend Anthropic::Internal::Type::Enum
+
+        ACTIVE: :active
+        INACTIVE: :inactive
+
+        def self?.values: -> ::Array[Anthropic::Models::UserProfileCyberTier::status]
+      end
+    end
+  end
+end

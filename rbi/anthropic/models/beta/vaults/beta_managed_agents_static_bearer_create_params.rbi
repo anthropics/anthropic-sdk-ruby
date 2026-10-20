@@ -13,7 +13,8 @@ module Anthropic
               )
             end
 
-          # Static bearer token value.
+          # The static bearer token to send to the MCP server, such as an API key or
+          # personal access token.
           sig { returns(String) }
           attr_accessor :token
 
@@ -38,7 +39,8 @@ module Anthropic
             ).returns(T.attached_class)
           end
           def self.new(
-            # Static bearer token value.
+            # The static bearer token to send to the MCP server, such as an API key or
+            # personal access token.
             token:,
             # URL of the MCP server this credential authenticates against.
             mcp_server_url:,

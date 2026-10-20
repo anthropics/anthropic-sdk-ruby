@@ -22,7 +22,7 @@ module Anthropic
               ?speeds: ::Array[Anthropic::Models::Beta::Organization::Analytics::UsageReportListParams::speed]?,
               ?user_ids: ::Array[String]?,
               ?request_options: Anthropic::request_opts
-            ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Organization::BetaAnalyticsUsageReportTimeBucket]
+            ) -> Anthropic::Internal::ReportPageCursor[Anthropic::Beta::Organization::BetaAnalyticsUsageReportTimeBucket]
 
             def initialize: (client: Anthropic::Client) -> void
           end

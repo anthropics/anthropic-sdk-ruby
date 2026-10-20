@@ -13,7 +13,7 @@ module Anthropic
               )
             end
 
-          # Unique identifier for the credential.
+          # The unique ID of the credential (`vcrd_...`).
           sig { returns(String) }
           attr_accessor :id
 
@@ -78,7 +78,7 @@ module Anthropic
             ).returns(T.attached_class)
           end
           def self.new(
-            # Unique identifier for the credential.
+            # The unique ID of the credential (`vcrd_...`).
             id:,
             # When the credential was archived. Null if not archived.
             archived_at:,
@@ -208,7 +208,8 @@ module Anthropic
               type:,
               # URL of the MCP server this credential authenticates against.
               mcp_server_url: nil,
-              # A timestamp in RFC 3339 format
+              # When the credential's access token expires, in RFC 3339. Absent if the expiry
+              # isn't known.
               expires_at: nil,
               # Refresh token configuration, if the credential supports token refresh.
               refresh: nil,

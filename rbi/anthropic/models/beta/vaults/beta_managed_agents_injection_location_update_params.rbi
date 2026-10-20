@@ -27,7 +27,14 @@ module Anthropic
           sig { params(header: T::Boolean).void }
           attr_writer :header
 
-          # Updated injection location.
+          # Changes which parts of an outbound request the secret is substituted into. A
+          # location you leave out keeps its current setting.
+          #
+          # After the change, at least one location must be enabled.
+          #
+          # See
+          # [Authenticate with vaults](https://platform.claude.com/docs/en/managed-agents/vaults#add-a-credential)
+          # to learn more about injection locations.
           sig do
             params(body: T::Boolean, header: T::Boolean).returns(
               T.attached_class

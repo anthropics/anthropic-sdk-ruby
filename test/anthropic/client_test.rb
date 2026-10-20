@@ -346,6 +346,29 @@ class AnthropicTest < Minitest::Test
     assert_requested(:any, /./, headers: {"x-stainless-retry-count" => "42"}, times: 3)
   end
 
+  def test_request_option_timeout_overrides_client_timeout
+    stub_request(:post, "http://localhost/v1/messages").to_return_json(status: 500, body: {})
+
+    anthropic =
+      Anthropic::Client.new(
+        base_url: "http://localhost",
+        api_key: "my-anthropic-api-key",
+        timeout: 30,
+        max_retries: 0
+      )
+
+    assert_raises(Anthropic::Errors::InternalServerError) do
+      anthropic.messages.create(
+        max_tokens: 1024,
+        messages: [{content: "Hello, world", role: :user}],
+        model: Anthropic::Model::CLAUDE_OPUS_5_5,
+        request_options: {timeout: 7}
+      )
+    end
+
+    assert_requested(:any, /./, headers: {"x-stainless-timeout" => "7.0"})
+  end
+
   def test_non_json_error_body
     ["length limit exceeded", ""].each do |body|
       stub_request(:post, "http://localhost/v1/messages").to_return(

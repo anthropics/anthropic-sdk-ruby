@@ -9,8 +9,7 @@ module Anthropic
         include Anthropic::Internal::Type::RequestParameters
 
         # @!attribute memory_store_id
-        #   ID of the memory store to retrieve (a `memstore_...` identifier). Required.
-        #   Enumerate IDs via `GET /v1/memory_stores`.
+        #   The ID of the memory store to retrieve (`memstore_...`).
         #
         #   @return [String]
         required :memory_store_id, String
@@ -37,7 +36,7 @@ module Anthropic
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::MemoryStoreRetrieveParams} for more details.
         #
-        #   @param memory_store_id [String] ID of the memory store to retrieve (a `memstore_...` identifier). Required. Enum
+        #   @param memory_store_id [String] The ID of the memory store to retrieve (`memstore_...`).
         #
         #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `manag
         #

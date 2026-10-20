@@ -22,11 +22,11 @@ module Anthropic
           required :memory_id, String
 
           # @!attribute view
-          #   Selects which projection of a `memory` or `memory_version` the server returns.
-          #   `basic` returns the object with `content` set to `null`; `full` populates
-          #   `content`. When omitted, the default is endpoint-specific: retrieve operations
-          #   default to `full`; list, create, and update operations default to `basic`.
-          #   Listing with `view=full` caps `limit` at 20.
+          #   Whether a `memory` or `memory_version` in the response includes its `content`.
+          #   Defaults to `full` on retrieve operations and to `basic` on list, create, and
+          #   update operations.
+          #
+          #   With `full`, list operations return at most 20 items per page.
           #
           #   @return [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView, nil]
           optional :view, enum: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryView }
@@ -57,7 +57,7 @@ module Anthropic
           #
           #   @param memory_id [String] The ID of the memory to retrieve (`mem_...`).
           #
-          #   @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Selects which projection of a `memory` or `memory_version` the server returns. `
+          #   @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Whether a `memory` or `memory_version` in the response includes its `content`. D
           #
           #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `manag
           #

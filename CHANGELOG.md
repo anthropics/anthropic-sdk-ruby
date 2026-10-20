@@ -1,5 +1,36 @@
 # Changelog
 
+## [1.81.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.80.0...v1.81.0) (2026-10-20)
+
+### Features
+
+* **api:** add data_refreshed_at and has_more to analytics report pages
+* **api:** add workspace rate-limit updates to the Admin API
+* **api:** make User Profiles generally available
+* **client:** yield server-sent events with unrecognized event names
+* **google-cloud:** use the v1 endpoints and add the organization endpoint
+
+
+### Bug Fixes
+
+* **client:** `messages.stream` and `beta.messages.stream` now take the same parameters as `stream_raw`; their Sorbet and RBS signatures take one params hash
+* **types:** type the keyword parameters of messages.stream and beta.messages.stream
+
+
+### Chores
+
+* **ci:** publish gems from a fixed Ubuntu 24.04 runner
+* **ci:** set up Ruby 3.2 with a newer setup-ruby in the build and dependency version jobs
+* **ci:** skip the changelog check on draft pull requests
+* **docs:** add credential expiry descriptions to the Managed Agents API reference
+* **docs:** add Messages API request descriptions
+* **docs:** correct plugin manifest_version and reach descriptions
+* **docs:** improve Managed Agents memory store descriptions
+* **docs:** improve Managed Agents vault and credential descriptions
+* **tests:** cover per-request timeouts and later union variants
+* **tests:** make the tracing tests independent of test order
+* **tests:** send events that the stream yields in the tracing test
+
 ## [1.80.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.79.0...v1.80.0) (2026-10-15)
 
 ### Features

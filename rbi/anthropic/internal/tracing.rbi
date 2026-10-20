@@ -118,6 +118,13 @@ module Anthropic
         SKILLS_VERSIONS_RETRIEVE = "anthropic.skills.versions.retrieve"
         SKILLS_VERSIONS_LIST = "anthropic.skills.versions.list"
         SKILLS_VERSIONS_DELETE = "anthropic.skills.versions.delete"
+        USER_PROFILES_CREATE = "anthropic.user_profiles.create"
+        USER_PROFILES_RETRIEVE = "anthropic.user_profiles.retrieve"
+        USER_PROFILES_UPDATE = "anthropic.user_profiles.update"
+        USER_PROFILES_LIST = "anthropic.user_profiles.list"
+        USER_PROFILES_DELETE = "anthropic.user_profiles.delete"
+        USER_PROFILES_ACTION_URLS_CREATE =
+          "anthropic.user_profiles.action_urls.create"
         ORGANIZATION_RETRIEVE = "anthropic.organization.retrieve"
         ORGANIZATION_API_KEYS_RETRIEVE =
           "anthropic.organization.api_keys.retrieve"
@@ -195,6 +202,8 @@ module Anthropic
         ORGANIZATION_WORKSPACES_LIST = "anthropic.organization.workspaces.list"
         ORGANIZATION_WORKSPACES_ARCHIVE =
           "anthropic.organization.workspaces.archive"
+        ORGANIZATION_WORKSPACES_RATE_LIMITS_UPDATE =
+          "anthropic.organization.workspaces.rate_limits.update"
         ORGANIZATION_WORKSPACES_RATE_LIMITS_LIST =
           "anthropic.organization.workspaces.rate_limits.list"
         ORGANIZATION_WORKSPACES_MEMBERS_RETRIEVE =
@@ -309,10 +318,6 @@ module Anthropic
         MEMORY_STORES_MEMORY_VERSIONS_REDACT =
           "anthropic.memory_stores.memory_versions.redact"
         SKILLS_VERSIONS_DOWNLOAD = "anthropic.skills.versions.download"
-        USER_PROFILES_CREATE = "anthropic.user_profiles.create"
-        USER_PROFILES_RETRIEVE = "anthropic.user_profiles.retrieve"
-        USER_PROFILES_UPDATE = "anthropic.user_profiles.update"
-        USER_PROFILES_LIST = "anthropic.user_profiles.list"
         USER_PROFILES_CREATE_ENROLLMENT_URL =
           "anthropic.user_profiles.create_enrollment_url"
         DREAMS_CREATE = "anthropic.dreams.create"

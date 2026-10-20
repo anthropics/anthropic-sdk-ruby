@@ -1,0 +1,29 @@
+module Anthropic
+  module Models
+    type user_profile_efs_feature =
+      { status: Anthropic::Models::UserProfileEfsFeature::status }
+
+    class UserProfileEfsFeature < Anthropic::Internal::Type::BaseModel
+      attr_accessor status: Anthropic::Models::UserProfileEfsFeature::status
+
+      def initialize: (
+        status: Anthropic::Models::UserProfileEfsFeature::status
+      ) -> void
+
+      def to_hash: -> {
+        status: Anthropic::Models::UserProfileEfsFeature::status
+      }
+
+      type status = :active | :inactive
+
+      module Status
+        extend Anthropic::Internal::Type::Enum
+
+        ACTIVE: :active
+        INACTIVE: :inactive
+
+        def self?.values: -> ::Array[Anthropic::Models::UserProfileEfsFeature::status]
+      end
+    end
+  end
+end

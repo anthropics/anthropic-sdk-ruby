@@ -15,7 +15,7 @@ module Anthropic
             )
           end
 
-        # Whether to include archived vaults in the results.
+        # Whether to include archived vaults in the results. Defaults to `false`.
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :include_archived
 
@@ -29,7 +29,9 @@ module Anthropic
         sig { params(limit: Integer).void }
         attr_writer :limit
 
-        # Opaque pagination token from a previous `list_vaults` response.
+        # The `next_page` value from a previous
+        # [List Vaults](https://platform.claude.com/docs/en/api/beta/vaults/list)
+        # response, to get the next page. Leave it out to get the first page.
         sig { returns(T.nilable(String)) }
         attr_reader :page
 
@@ -77,11 +79,13 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
-          # Whether to include archived vaults in the results.
+          # Whether to include archived vaults in the results. Defaults to `false`.
           include_archived: nil,
           # Maximum number of vaults to return per page. Defaults to 20, maximum 100.
           limit: nil,
-          # Opaque pagination token from a previous `list_vaults` response.
+          # The `next_page` value from a previous
+          # [List Vaults](https://platform.claude.com/docs/en/api/beta/vaults/list)
+          # response, to get the next page. Leave it out to get the first page.
           page: nil,
           # This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
           # header.
