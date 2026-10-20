@@ -64,4 +64,26 @@ class Anthropic::Test::GoogleCloudClientLiveTest < Minitest::Test
       )
     end
   end
+
+  def test_live_organization_route
+    skip_unless_live
+    client = make_client
+    skip("set ANTHROPIC_GOOGLE_CLOUD_WORKSPACE_ID to run this test") if client.workspace_id.nil?
+
+    workspace = client.organization.workspaces.retrieve(client.workspace_id)
+    assert_equal(client.workspace_id, workspace.id)
+  end
+
+  def test_live_managed_agents_routes
+    skip_unless_live
+    client = make_client
+    agent = client.beta.agents.create(model: MODEL, name: "sdk-live-test")
+    begin
+      assert_equal(agent.id, client.beta.agents.retrieve(agent.id).id)
+      refute_empty(client.beta.agents.list(limit: 1).data)
+    ensure
+      archived = client.beta.agents.archive(agent.id)
+    end
+    refute_nil(archived.archived_at)
+  end
 end

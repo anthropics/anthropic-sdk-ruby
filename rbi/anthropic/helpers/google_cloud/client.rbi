@@ -57,8 +57,8 @@ module Anthropic
         end
 
         # @api private
-        sig { returns(String) }
-        private def derive_base_url
+        sig { params(template: String).returns(String) }
+        private def derive_base_url(template)
         end
 
         sig do

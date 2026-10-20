@@ -6,6 +6,8 @@ module Anthropic
 
         URL_TEMPLATE: String
 
+        ORGANIZATION_URL_TEMPLATE: String
+
         attr_reader project: String?
 
         attr_reader location: String?
@@ -31,7 +33,7 @@ module Anthropic
           Anthropic::APIRequest req
         ) -> Anthropic::APIRequest
 
-        private def derive_base_url: -> String
+        private def derive_base_url: (String template) -> String
 
         private def require_googleauth: -> void
 

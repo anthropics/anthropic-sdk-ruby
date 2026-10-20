@@ -61,9 +61,16 @@ class Anthropic::Test::GoogleCloudClientTest < Minitest::Test
     )
   end
 
+  def location_url(location:, project:)
+    "https://claude.googleapis.com/v1/projects/#{project}/locations/#{location}"
+  end
+
   def derived_base_url(location: "us-central1", project: "test-proj", workspace_id: "ws-test")
-    "https://claude.googleapis.com/v1alpha" \
-      "/projects/#{project}/locations/#{location}/workspaces/#{workspace_id}/invoke"
+    "#{location_url(location: location, project: project)}/workspaces/#{workspace_id}/invoke"
+  end
+
+  def organization_base_url(location: "us-central1", project: "test-proj")
+    "#{location_url(location: location, project: project)}/claudeOrganization/invoke"
   end
 
   # ---------------------------------------------------------------------------
@@ -173,14 +180,12 @@ class Anthropic::Test::GoogleCloudClientTest < Minitest::Test
     assert_equal("ws-from-env", client.workspace_id)
   end
 
-  def test_missing_workspace_id_raises
-    err = assert_raises(ArgumentError) do
-      Anthropic::GoogleCloudClient.new(
-        project: "test-proj", location: "us-central1", google_credentials: fake_credentials
-      )
-    end
-    assert_includes(err.message, "workspace_id")
-    assert_includes(err.message, "ANTHROPIC_GOOGLE_CLOUD_WORKSPACE_ID")
+  def test_missing_workspace_id_constructs
+    client = Anthropic::GoogleCloudClient.new(
+      project: "test-proj", location: "us-central1", google_credentials: fake_credentials
+    )
+    assert_nil(client.workspace_id)
+    assert_equal(organization_base_url, client.base_url.to_s)
   end
 
   # ---------------------------------------------------------------------------
@@ -397,12 +402,10 @@ class Anthropic::Test::GoogleCloudClientTest < Minitest::Test
     assert_nil(client.workspace_id)
   end
 
-  def test_skip_auth_without_base_url_requires_workspace_id
-    err = assert_raises(ArgumentError) do
-      Anthropic::GoogleCloudClient.new(skip_auth: true, project: "test-proj")
-    end
-    assert_includes(err.message, "workspace_id")
-    assert_includes(err.message, "ANTHROPIC_GOOGLE_CLOUD_WORKSPACE_ID")
+  def test_skip_auth_without_base_url_no_workspace_id_required
+    client = Anthropic::GoogleCloudClient.new(skip_auth: true, project: "test-proj")
+    assert_nil(client.workspace_id)
+    assert_equal(organization_base_url(location: "global"), client.base_url.to_s)
   end
 
   def test_skip_auth_derives_base_url_with_workspace_id
@@ -444,6 +447,224 @@ class Anthropic::Test::GoogleCloudClientTest < Minitest::Test
       assert_nil(req.headers["X-Api-Key"])
       assert_nil(req.headers["Anthropic-Workspace-Id"])
     end
+  end
+
+  # ---------------------------------------------------------------------------
+  # Organization-level routes
+  # ---------------------------------------------------------------------------
+
+  def test_organization_route_uses_organization_base
+    url =
+      "https://claude.googleapis.com/v1/projects/test-proj/locations/us-central1" \
+      "/claudeOrganization/invoke/v1/organizations/workspaces?beta=true"
+    stub_request(:get, url).to_return_json(status: 200, body: {data: [], has_more: false})
+
+    make_client.beta.organization.workspaces.list
+
+    assert_requested(:any, /./, times: 1)
+    assert_requested(:get, url) do |req|
+      assert_equal("Bearer gcp-token", req.headers["Authorization"])
+    end
+  end
+
+  def test_organization_route_with_path_parameter
+    url = "#{organization_base_url}/v1/organizations/workspaces/wrkspc_123"
+    stub_request(:get, url).to_return_json(status: 200, body: {})
+
+    make_client.organization.workspaces.retrieve("wrkspc_123")
+
+    assert_requested(:any, /./, times: 1)
+    assert_requested(:get, url) do |req|
+      assert_equal("Bearer gcp-token", req.headers["Authorization"])
+    end
+  end
+
+  def test_workspace_route_keeps_workspace_base
+    stub_request(:post, "#{derived_base_url}/v1/messages").to_return_json(status: 200, body: {})
+
+    make_client.messages.create(max_tokens: 1, messages: [{content: "hi", role: :user}], model: :m)
+
+    assert_requested(:any, /./, times: 1)
+    assert_requested(:post, "#{derived_base_url}/v1/messages") do |req|
+      assert_equal("Bearer gcp-token", req.headers["Authorization"])
+    end
+  end
+
+  def test_organization_route_needs_no_workspace_id
+    url = "#{organization_base_url}/v1/organizations/workspaces?beta=true"
+    stub_request(:get, url).to_return_json(status: 200, body: {data: [], has_more: false})
+
+    client = Anthropic::GoogleCloudClient.new(
+      project: "test-proj", location: "us-central1", google_credentials: fake_credentials
+    )
+    client.beta.organization.workspaces.list
+
+    assert_requested(:any, /./, times: 1)
+    assert_requested(:get, url) do |req|
+      assert_equal("Bearer gcp-token", req.headers["Authorization"])
+    end
+  end
+
+  def test_workspace_route_without_workspace_id_raises_before_sending
+    client = Anthropic::GoogleCloudClient.new(
+      project: "test-proj", location: "us-central1", google_credentials: fake_credentials
+    )
+
+    err = assert_raises(ArgumentError) do
+      client.messages.create(max_tokens: 1, messages: [{content: "hi", role: :user}], model: :m)
+    end
+
+    assert_includes(err.message, "workspace_id")
+    assert_includes(err.message, "ANTHROPIC_GOOGLE_CLOUD_WORKSPACE_ID")
+    assert_not_requested(:any, /./)
+  end
+
+  def test_user_profile_routes_raise_before_sending
+    no_workspace = Anthropic::GoogleCloudClient.new(
+      project: "test-proj", location: "us-central1", google_credentials: fake_credentials
+    )
+
+    [make_client, make_client(base_url: "http://localhost"), no_workspace].each do |client|
+      # Built directly: the routes are refused however the resource is reached.
+      profiles = Anthropic::Resources::UserProfiles.new(client: client)
+      beta_profiles = client.beta.user_profiles
+      [
+        -> { profiles.create },
+        -> { profiles.retrieve("uprof_test") },
+        -> { profiles.update("uprof_test") },
+        -> { profiles.list },
+        -> { profiles.delete("uprof_test") },
+        -> { profiles.action_urls.create("uprof_test", action: {type: :enroll_end_user}) },
+        -> { beta_profiles.create },
+        -> { beta_profiles.retrieve("uprof_test") },
+        -> { beta_profiles.update("uprof_test") },
+        -> { beta_profiles.list },
+        -> { beta_profiles.delete("uprof_test") },
+        -> { beta_profiles.create_enrollment_url("uprof_test") },
+        -> { beta_profiles.action_urls.create("uprof_test", action: {type: :enroll_end_user}) }
+      ].each do |call|
+        err = assert_raises(NotImplementedError, &call)
+        assert_equal("User profiles are not supported on the Google Cloud gateway.", err.message)
+      end
+    end
+
+    assert_not_requested(:any, /./)
+  end
+
+  def test_explicit_base_url_takes_every_route
+    stub_request(:get, "http://localhost/v1/organizations/workspaces?beta=true")
+      .to_return_json(status: 200, body: {data: [], has_more: false})
+    stub_request(:post, "http://localhost/v1/messages").to_return_json(status: 200, body: {})
+
+    client = make_client(base_url: "http://localhost")
+    client.beta.organization.workspaces.list
+    client.messages.create(max_tokens: 1, messages: [{content: "hi", role: :user}], model: :m)
+
+    assert_requested(:any, /./, times: 2)
+    assert_requested(:get, "http://localhost/v1/organizations/workspaces?beta=true") do |req|
+      assert_equal("Bearer gcp-token", req.headers["Authorization"])
+    end
+    assert_requested(:post, "http://localhost/v1/messages")
+  end
+
+  def test_base_url_env_takes_every_route
+    ENV["ANTHROPIC_GOOGLE_CLOUD_BASE_URL"] = "http://from-env.example.com"
+    stub_request(:get, "http://from-env.example.com/v1/organizations/workspaces?beta=true")
+      .to_return_json(status: 200, body: {data: [], has_more: false})
+
+    make_client.beta.organization.workspaces.list
+
+    assert_requested(:any, /./, times: 1)
+    assert_requested(:get, "http://from-env.example.com/v1/organizations/workspaces?beta=true") do |req|
+      assert_equal("Bearer gcp-token", req.headers["Authorization"])
+    end
+  end
+
+  def test_explicit_base_url_without_workspace_id_takes_every_route
+    stub_request(:get, "http://localhost/v1/organizations/workspaces?beta=true")
+      .to_return_json(status: 200, body: {data: [], has_more: false})
+    stub_request(:post, "http://localhost/v1/messages").to_return_json(status: 200, body: {})
+
+    client = Anthropic::GoogleCloudClient.new(
+      base_url: "http://localhost", google_credentials: fake_credentials
+    )
+    assert_nil(client.workspace_id)
+    client.beta.organization.workspaces.list
+    client.messages.create(max_tokens: 1, messages: [{content: "hi", role: :user}], model: :m)
+
+    assert_requested(:any, /./, times: 2)
+    assert_requested(:get, "http://localhost/v1/organizations/workspaces?beta=true") do |req|
+      assert_equal("Bearer gcp-token", req.headers["Authorization"])
+    end
+    assert_requested(:post, "http://localhost/v1/messages")
+  end
+
+  def test_adc_backfilled_project_routes_organization_route
+    url = "#{organization_base_url(project: 'adc-proj')}/v1/organizations/workspaces?beta=true"
+    stub_request(:get, url).to_return_json(status: 200, body: {data: [], has_more: false})
+
+    adc = fake_credentials(token: "tok-adc", project_id: "adc-proj")
+    Google::Auth.stub(:get_application_default, adc) do
+      client = Anthropic::GoogleCloudClient.new(location: "us-central1")
+      client.beta.organization.workspaces.list
+    end
+
+    assert_requested(:any, /./, times: 1)
+    assert_requested(:get, url) do |req|
+      assert_equal("Bearer tok-adc", req.headers["Authorization"])
+    end
+  end
+
+  def test_skip_auth_organization_route_has_no_auth_headers
+    url = "#{organization_base_url(location: 'global')}/v1/organizations/workspaces?beta=true"
+    stub_request(:get, url).to_return_json(status: 200, body: {data: [], has_more: false})
+
+    client = Anthropic::GoogleCloudClient.new(skip_auth: true, project: "test-proj")
+    client.beta.organization.workspaces.list
+
+    assert_requested(:get, url) do |req|
+      assert_nil(req.headers["Authorization"])
+      assert_nil(req.headers["X-Api-Key"])
+    end
+  end
+
+  def test_organization_route_pagination_keeps_organization_base
+    url = "#{organization_base_url}/v1/organizations/workspaces?beta=true"
+    stub_request(:get, url)
+      .to_return_json(status: 200, body: {data: [{id: "wrkspc_1"}], has_more: true, last_id: "wrkspc_1"})
+    stub_request(:get, "#{url}&after_id=wrkspc_1")
+      .to_return_json(status: 200, body: {data: [{id: "wrkspc_2"}], has_more: false, last_id: "wrkspc_2"})
+
+    ids = []
+    make_client.beta.organization.workspaces.list.auto_paging_each { ids << _1.id }
+
+    assert_equal(%w[wrkspc_1 wrkspc_2], ids)
+    assert_requested(:any, /./, times: 2)
+    assert_requested(:get, "#{url}&after_id=wrkspc_1")
+  end
+
+  def test_organization_route_auth_applies_per_attempt
+    url = "#{organization_base_url}/v1/organizations/workspaces?beta=true"
+    stub_request(:get, url).to_return_json(
+      {status: 500, body: {}},
+      {status: 200, body: {data: [], has_more: false}}
+    )
+
+    Thread.current.thread_variable_set(:mock_sleep, [])
+    seen = []
+    probe = lambda do |req, nxt|
+      seen << req.url.to_s
+      nxt.call(req)
+    end
+    make_client(max_retries: 1, middleware: [probe]).beta.organization.workspaces.list
+
+    assert_equal([url, url], seen)
+    assert_requested(:any, /./, times: 2)
+    assert_requested(:get, url, times: 2) do |req|
+      assert_equal("Bearer gcp-token", req.headers["Authorization"])
+    end
+  ensure
+    Thread.current.thread_variable_set(:mock_sleep, nil)
   end
 
   # ---------------------------------------------------------------------------
