@@ -12,6 +12,11 @@
 * **api:** add support for new API version 2026-10-21
 
 
+### Bug Fixes
+
+* **client:** accept webhook header names in any case
+
+
 ### Documentation
 
 * **api:** remove outdated system role note from messages description
