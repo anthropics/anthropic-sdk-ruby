@@ -26,10 +26,10 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::Type }
+          #   @return [Symbol, :mcp_connection_failed_error]
+          required :type, const: :mcp_connection_failed_error
 
-          # @!method initialize(mcp_server_name:, message:, retry_status:, type:)
+          # @!method initialize(mcp_server_name:, message:, retry_status:, type: :mcp_connection_failed_error)
           #   Failed to connect to an MCP server.
           #
           #   @param mcp_server_name [String] Name of the MCP server that failed to connect.
@@ -38,7 +38,7 @@ module Anthropic
           #
           #   @param retry_status [Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal] What the client should do next.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::Type]
+          #   @param type [Symbol, :mcp_connection_failed_error]
 
           # What the client should do next.
           #
@@ -83,25 +83,15 @@ module Anthropic
             def self.new(type:, **args)
               case type.to_sym
               when :retrying
-                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying.new(**args)
               when :exhausted
-                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted.new(**args)
               when :terminal
-                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal.new(**args)
               else
                 raise ArgumentError, "unknown type: #{type}"
               end
             end
-          end
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            MCP_CONNECTION_FAILED_ERROR = :mcp_connection_failed_error
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
           end
         end
       end

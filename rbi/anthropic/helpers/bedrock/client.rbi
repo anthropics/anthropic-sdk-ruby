@@ -4,13 +4,8 @@ module Anthropic
   module Helpers
     module Bedrock
       class Client < Anthropic::Client
-        DEFAULT_VERSION = "bedrock-2023-05-31"
-
         sig { returns(String) }
         attr_reader :aws_region
-
-        sig { returns(Anthropic::Resources::Completions) }
-        attr_reader :completions
 
         sig { returns(Anthropic::Resources::Messages) }
         attr_reader :messages

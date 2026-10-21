@@ -2,31 +2,14 @@ module Anthropic
   module Models
     module Beta
       module Sessions
-        type beta_managed_agents_redacted_block =
-          {
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsRedactedBlock::type_
-          }
+        type beta_managed_agents_redacted_block = { type: :redacted }
 
         class BetaManagedAgentsRedactedBlock < Anthropic::Internal::Type::BaseModel
-          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsRedactedBlock::type_
+          attr_accessor type: :redacted
 
-          def initialize: (
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsRedactedBlock::type_
-          ) -> void
+          def initialize: (?type: :redacted) -> void
 
-          def to_hash: -> {
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsRedactedBlock::type_
-          }
-
-          type type_ = :redacted
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            REDACTED: :redacted
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsRedactedBlock::type_]
-          end
+          def to_hash: -> { type: :redacted }
         end
       end
     end

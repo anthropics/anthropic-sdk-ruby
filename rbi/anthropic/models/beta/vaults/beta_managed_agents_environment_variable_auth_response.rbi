@@ -41,11 +41,7 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :secret_name
 
-          sig do
-            returns(
-              Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # Environment variable credential details. The secret value is never returned.
@@ -59,8 +55,7 @@ module Anthropic
                   Anthropic::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingResponse::OrHash
                 ),
               secret_name: String,
-              type:
-                Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::Type::OrSymbol
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
@@ -70,7 +65,7 @@ module Anthropic
             networking:,
             # Name of the environment variable.
             secret_name:,
-            type:
+            type: :environment_variable
           )
           end
 
@@ -82,8 +77,7 @@ module Anthropic
                 networking:
                   Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::Networking::Variants,
                 secret_name: String,
-                type:
-                  Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::Type::TaggedSymbol
+                type: Symbol
               }
             )
           end
@@ -166,35 +160,6 @@ module Anthropic
               # matches any subdomain of `example.com` but not `example.com` itself.
               allowed_hosts: nil
             )
-            end
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            ENVIRONMENT_VARIABLE =
-              T.let(
-                :environment_variable,
-                Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
             end
           end
         end

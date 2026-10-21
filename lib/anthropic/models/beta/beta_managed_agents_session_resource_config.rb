@@ -63,11 +63,11 @@ module Anthropic
         def self.new(type:, **args)
           case type.to_sym
           when :github_repository
-            Anthropic::Beta::BetaManagedAgentsGitHubRepositoryResourceConfig.new(type: type, **args)
+            Anthropic::Beta::BetaManagedAgentsGitHubRepositoryResourceConfig.new(**args)
           when :file
-            Anthropic::Beta::BetaManagedAgentsFileResourceConfig.new(type: type, **args)
+            Anthropic::Beta::BetaManagedAgentsFileResourceConfig.new(**args)
           when :memory_store
-            Anthropic::Beta::BetaManagedAgentsMemoryStoreResourceConfig.new(type: type, **args)
+            Anthropic::Beta::BetaManagedAgentsMemoryStoreResourceConfig.new(**args)
           else
             raise ArgumentError, "unknown type: #{type}"
           end

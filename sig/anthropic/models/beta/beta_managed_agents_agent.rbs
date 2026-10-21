@@ -18,7 +18,7 @@ module Anthropic
           skills: ::Array[Anthropic::Models::Beta::BetaManagedAgentsAgent::skill],
           system_: String?,
           tools: ::Array[Anthropic::Models::Beta::BetaManagedAgentsAgent::tool],
-          type: Anthropic::Models::Beta::BetaManagedAgentsAgent::type_,
+          type: :agent,
           updated_at: Time,
           version: Integer
         }
@@ -50,7 +50,7 @@ module Anthropic
 
         attr_accessor tools: ::Array[Anthropic::Models::Beta::BetaManagedAgentsAgent::tool]
 
-        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsAgent::type_
+        attr_accessor type: :agent
 
         attr_accessor updated_at: Time
 
@@ -70,9 +70,9 @@ module Anthropic
           skills: ::Array[Anthropic::Models::Beta::BetaManagedAgentsAgent::skill],
           system_: String?,
           tools: ::Array[Anthropic::Models::Beta::BetaManagedAgentsAgent::tool],
-          type: Anthropic::Models::Beta::BetaManagedAgentsAgent::type_,
           updated_at: Time,
-          version: Integer
+          version: Integer,
+          ?type: :agent
         ) -> void
 
         def to_hash: -> {
@@ -89,7 +89,7 @@ module Anthropic
           skills: ::Array[Anthropic::Models::Beta::BetaManagedAgentsAgent::skill],
           system_: String?,
           tools: ::Array[Anthropic::Models::Beta::BetaManagedAgentsAgent::tool],
-          type: Anthropic::Models::Beta::BetaManagedAgentsAgent::type_,
+          type: :agent,
           updated_at: Time,
           version: Integer
         }
@@ -185,16 +185,6 @@ module Anthropic
               ?input_schema: Anthropic::Beta::BetaManagedAgentsCustomToolInputSchema,
               ?name: String
             ) -> Anthropic::Models::Beta::BetaManagedAgentsAgent::tool
-        end
-
-        type type_ = :agent
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          AGENT: :agent
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsAgent::type_]
         end
       end
     end

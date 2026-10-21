@@ -12,23 +12,13 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsBranchCheckout::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsBranchCheckout::Type }
+        #   @return [Symbol, :branch]
+        required :type, const: :branch
 
-        # @!method initialize(name:, type:)
+        # @!method initialize(name:, type: :branch)
         #   @param name [String] Branch name to check out.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsBranchCheckout::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsBranchCheckout#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          BRANCH = :branch
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :branch]
       end
     end
 

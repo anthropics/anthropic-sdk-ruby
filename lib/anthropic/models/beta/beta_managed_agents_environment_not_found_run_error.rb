@@ -12,25 +12,15 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsEnvironmentNotFoundRunError::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsEnvironmentNotFoundRunError::Type }
+        #   @return [Symbol, :environment_not_found_error]
+        required :type, const: :environment_not_found_error
 
-        # @!method initialize(message:, type:)
+        # @!method initialize(message:, type: :environment_not_found_error)
         #   The deployment's environment no longer exists.
         #
         #   @param message [String] Human-readable error description.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsEnvironmentNotFoundRunError::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsEnvironmentNotFoundRunError#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          ENVIRONMENT_NOT_FOUND_ERROR = :environment_not_found_error
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :environment_not_found_error]
       end
     end
 

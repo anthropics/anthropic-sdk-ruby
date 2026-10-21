@@ -27,11 +27,7 @@ module Anthropic
           end
           attr_accessor :content
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEvent::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # Timestamp when the agent finished processing this message.
@@ -51,9 +47,8 @@ module Anthropic
                     Anthropic::Beta::Sessions::BetaManagedAgentsRedactedBlock::OrHash
                   )
                 ],
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEvent::Type::OrSymbol,
-              processed_at: T.nilable(Time)
+              processed_at: T.nilable(Time),
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
@@ -61,9 +56,9 @@ module Anthropic
             id:,
             # Array of content blocks comprising the user message.
             content:,
-            type:,
             # Timestamp when the agent finished processing this message.
-            processed_at: nil
+            processed_at: nil,
+            type: :"user.message"
           )
           end
 
@@ -75,8 +70,7 @@ module Anthropic
                   T::Array[
                     Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEvent::Content::Variants
                   ],
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEvent::Type::TaggedSymbol,
+                type: Symbol,
                 processed_at: T.nilable(Time)
               }
             )
@@ -190,35 +184,6 @@ module Anthropic
               # The title of the document.
               title: nil
             )
-            end
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEvent::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            USER_MESSAGE =
-              T.let(
-                :"user.message",
-                Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEvent::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEvent::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
             end
           end
         end

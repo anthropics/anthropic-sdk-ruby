@@ -19,7 +19,7 @@ class Anthropic::Test::Resources::Beta::DeploymentRunsTest < Anthropic::Test::Re
         error: Anthropic::Beta::BetaManagedAgentsDeploymentRun::Error | nil,
         session_id: String | nil,
         trigger_context: Anthropic::Beta::BetaManagedAgentsTriggerContext,
-        type: Anthropic::Beta::BetaManagedAgentsDeploymentRun::Type
+        type: Symbol
       }
     end
   end
@@ -47,7 +47,7 @@ class Anthropic::Test::Resources::Beta::DeploymentRunsTest < Anthropic::Test::Re
         error: Anthropic::Beta::BetaManagedAgentsDeploymentRun::Error | nil,
         session_id: String | nil,
         trigger_context: Anthropic::Beta::BetaManagedAgentsTriggerContext,
-        type: Anthropic::Beta::BetaManagedAgentsDeploymentRun::Type
+        type: Symbol
       }
     end
   end

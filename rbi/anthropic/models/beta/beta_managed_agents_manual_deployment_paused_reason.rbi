@@ -15,61 +15,16 @@ module Anthropic
             )
           end
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsManualDeploymentPausedReason::Type::TaggedSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # The caller invoked the pause endpoint on the deployment.
-        sig do
-          params(
-            type:
-              Anthropic::Beta::BetaManagedAgentsManualDeploymentPausedReason::Type::OrSymbol
-          ).returns(T.attached_class)
-        end
-        def self.new(type:)
+        sig { params(type: Symbol).returns(T.attached_class) }
+        def self.new(type: :manual)
         end
 
-        sig do
-          override.returns(
-            {
-              type:
-                Anthropic::Beta::BetaManagedAgentsManualDeploymentPausedReason::Type::TaggedSymbol
-            }
-          )
-        end
+        sig { override.returns({ type: Symbol }) }
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsManualDeploymentPausedReason::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          MANUAL =
-            T.let(
-              :manual,
-              Anthropic::Beta::BetaManagedAgentsManualDeploymentPausedReason::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsManualDeploymentPausedReason::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

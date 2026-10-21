@@ -5,14 +5,14 @@ module Anthropic
     module Beta
       type beta_managed_agents_github_repository_resource_config =
         {
-          type: Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceConfig::type_,
+          type: :github_repository,
           url: String,
           checkout: Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceConfig::checkout?,
           mount_path: String?
         }
 
       class BetaManagedAgentsGitHubRepositoryResourceConfig < Anthropic::Internal::Type::BaseModel
-        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceConfig::type_
+        attr_accessor type: :github_repository
 
         attr_accessor url: String
 
@@ -21,28 +21,18 @@ module Anthropic
         attr_accessor mount_path: String?
 
         def initialize: (
-          type: Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceConfig::type_,
           url: String,
           ?checkout: Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceConfig::checkout?,
-          ?mount_path: String?
+          ?mount_path: String?,
+          ?type: :github_repository
         ) -> void
 
         def to_hash: -> {
-          type: Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceConfig::type_,
+          type: :github_repository,
           url: String,
           checkout: Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceConfig::checkout?,
           mount_path: String?
         }
-
-        type type_ = :github_repository
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          GITHUB_REPOSITORY: :github_repository
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceConfig::type_]
-        end
 
         type checkout =
           Anthropic::Beta::BetaManagedAgentsBranchCheckout

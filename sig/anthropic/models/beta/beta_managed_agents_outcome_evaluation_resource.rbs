@@ -11,7 +11,7 @@ module Anthropic
           iteration: Integer,
           outcome_id: String,
           result: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsOutcomeEvaluationResource::type_
+          type: :outcome_evaluation
         }
 
       class BetaManagedAgentsOutcomeEvaluationResource < Anthropic::Internal::Type::BaseModel
@@ -27,7 +27,7 @@ module Anthropic
 
         attr_accessor result: String
 
-        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsOutcomeEvaluationResource::type_
+        attr_accessor type: :outcome_evaluation
 
         def initialize: (
           completed_at: Time?,
@@ -36,7 +36,7 @@ module Anthropic
           iteration: Integer,
           outcome_id: String,
           result: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsOutcomeEvaluationResource::type_
+          ?type: :outcome_evaluation
         ) -> void
 
         def to_hash: -> {
@@ -46,18 +46,8 @@ module Anthropic
           iteration: Integer,
           outcome_id: String,
           result: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsOutcomeEvaluationResource::type_
+          type: :outcome_evaluation
         }
-
-        type type_ = :outcome_evaluation
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          OUTCOME_EVALUATION: :outcome_evaluation
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsOutcomeEvaluationResource::type_]
-        end
       end
     end
   end

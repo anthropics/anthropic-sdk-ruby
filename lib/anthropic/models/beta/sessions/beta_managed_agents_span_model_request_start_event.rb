@@ -19,27 +19,17 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelRequestStartEvent::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelRequestStartEvent::Type }
+          #   @return [Symbol, :"span.model_request_start"]
+          required :type, const: :"span.model_request_start"
 
-          # @!method initialize(id:, processed_at:, type:)
+          # @!method initialize(id:, processed_at:, type: :"span.model_request_start")
           #   Emitted when a model request is initiated by the agent.
           #
           #   @param id [String] Unique identifier for this event.
           #
           #   @param processed_at [Time] Timestamp when the model request started.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelRequestStartEvent::Type]
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelRequestStartEvent#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            SPAN_MODEL_REQUEST_START = :"span.model_request_start"
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :"span.model_request_start"]
         end
       end
     end

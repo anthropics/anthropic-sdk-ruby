@@ -13,16 +13,16 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsSessionMultiagentCoordinator::Type }
+        #   @return [Symbol, :coordinator]
+        required :type, const: :coordinator
 
-        # @!method initialize(agents:, type:)
+        # @!method initialize(agents:, type: :coordinator)
         #   Resolved coordinator topology with full agent definitions for each roster
         #   member.
         #
         #   @param agents [Array<Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent, Anthropic::Models::Beta::BetaManagedAgentsAdvisor>] Full `agent` definitions the coordinator may spawn as session threads.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator::Type]
+        #   @param type [Symbol, :coordinator]
 
         # A session-resolved multiagent roster entry.
         module Agent
@@ -85,23 +85,13 @@ module Anthropic
           def self.new(type:, **args)
             case type.to_sym
             when :agent
-              Anthropic::Beta::BetaManagedAgentsSessionThreadAgent.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsSessionThreadAgent.new(**args)
             when :advisor
-              Anthropic::Beta::BetaManagedAgentsAdvisor.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsAdvisor.new(**args)
             else
               raise ArgumentError, "unknown type: #{type}"
             end
           end
-        end
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          COORDINATOR = :coordinator
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
         end
       end
     end

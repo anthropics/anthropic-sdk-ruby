@@ -11,11 +11,9 @@ module Anthropic
       # Some parameter documentations has been truncated, see
       # {Anthropic::Models::ModelRetrieveParams} for more details.
       #
-      # @overload retrieve(model_id, betas: nil, workspace_id: nil, request_options: {})
+      # @overload retrieve(model_id, workspace_id: nil, request_options: {})
       #
       # @param model_id [String] Model identifier or alias.
-      #
-      # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
       #
       # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
       #
@@ -32,7 +30,7 @@ module Anthropic
           span_route: "/v1/models/{model_id}",
           method: :get,
           path: ["v1/models/%1$s", model_id],
-          headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
+          headers: parsed.transform_keys(workspace_id: "anthropic-workspace-id"),
           model: Anthropic::ModelInfo,
           options: options
         )
@@ -46,7 +44,7 @@ module Anthropic
       # Some parameter documentations has been truncated, see
       # {Anthropic::Models::ModelListParams} for more details.
       #
-      # @overload list(after_id: nil, before_id: nil, lifecycle: nil, limit: nil, betas: nil, workspace_id: nil, request_options: {})
+      # @overload list(after_id: nil, before_id: nil, lifecycle: nil, limit: nil, workspace_id: nil, request_options: {})
       #
       # @param after_id [String] Query param: ID of the object to use as a cursor for pagination. When provided,
       #
@@ -55,8 +53,6 @@ module Anthropic
       # @param lifecycle [Array<Symbol, Anthropic::Models::ModelListParams::Lifecycle>] Query param: Filter the list to models in any of the given lifecycle stages (`ac
       #
       # @param limit [Integer] Query param: Number of items to return per page.
-      #
-      # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
       #
       # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
       #
@@ -76,10 +72,7 @@ module Anthropic
           method: :get,
           path: "v1/models",
           query: query,
-          headers: parsed.except(*query_params).transform_keys(
-            betas: "anthropic-beta",
-            workspace_id: "anthropic-workspace-id"
-          ),
+          headers: parsed.except(*query_params).transform_keys(workspace_id: "anthropic-workspace-id"),
           page: Anthropic::Internal::Page,
           model: Anthropic::ModelInfo,
           options: options

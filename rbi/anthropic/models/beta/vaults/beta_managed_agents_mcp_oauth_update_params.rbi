@@ -13,11 +13,7 @@ module Anthropic
               )
             end
 
-          sig do
-            returns(
-              Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams::Type::OrSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # The new OAuth access token to replace the stored one.
@@ -58,18 +54,16 @@ module Anthropic
           # immutable.
           sig do
             params(
-              type:
-                Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams::Type::OrSymbol,
               access_token: T.nilable(String),
               expires_at: T.nilable(Time),
               refresh:
                 T.nilable(
                   Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshUpdateParams::OrHash
-                )
+                ),
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
-            type:,
             # The new OAuth access token to replace the stored one.
             access_token: nil,
             # When the credential's access token expires, in RFC 3339. Leave it out to keep
@@ -81,15 +75,15 @@ module Anthropic
             # Must be in the future.
             expires_at: nil,
             # Updated refresh token configuration.
-            refresh: nil
+            refresh: nil,
+            type: :mcp_oauth
           )
           end
 
           sig do
             override.returns(
               {
-                type:
-                  Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams::Type::OrSymbol,
+                type: Symbol,
                 access_token: T.nilable(String),
                 expires_at: T.nilable(Time),
                 refresh:
@@ -100,35 +94,6 @@ module Anthropic
             )
           end
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            MCP_OAUTH =
-              T.let(
-                :mcp_oauth,
-                Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

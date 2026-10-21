@@ -49,9 +49,9 @@ module Anthropic
         def self.new(type:, **args)
           case type.to_sym
           when :memory_store
-            Anthropic::Beta::BetaDreamMemoryStoreInput.new(type: type, **args)
+            Anthropic::Beta::BetaDreamMemoryStoreInput.new(**args)
           when :sessions
-            Anthropic::Beta::BetaDreamSessionsInput.new(type: type, **args)
+            Anthropic::Beta::BetaDreamSessionsInput.new(**args)
           else
             raise ArgumentError, "unknown type: #{type}"
           end

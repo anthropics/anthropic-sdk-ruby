@@ -10,7 +10,6 @@ module Anthropic
       sig do
         params(
           model_id: String,
-          betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
           workspace_id: String,
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(Anthropic::ModelInfo)
@@ -18,8 +17,6 @@ module Anthropic
       def retrieve(
         # Model identifier or alias.
         model_id,
-        # Optional header to specify the beta version(s) you want to use.
-        betas: nil,
         # Optional header to select the Workspace for this request. The value is a
         # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
         #
@@ -41,7 +38,6 @@ module Anthropic
           before_id: String,
           lifecycle: T::Array[Anthropic::ModelListParams::Lifecycle::OrSymbol],
           limit: Integer,
-          betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
           workspace_id: String,
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(Anthropic::Internal::Page[Anthropic::ModelInfo])
@@ -62,8 +58,6 @@ module Anthropic
         #
         # Defaults to `20`. Ranges from `1` to `1000`.
         limit: nil,
-        # Header param: Optional header to specify the beta version(s) you want to use.
-        betas: nil,
         # Header param: Optional header to select the Workspace for this request. The
         # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
         #

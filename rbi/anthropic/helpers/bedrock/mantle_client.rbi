@@ -52,10 +52,6 @@ module Anthropic
         end
 
         sig { returns(T.noreturn) }
-        def completions
-        end
-
-        sig { returns(T.noreturn) }
         def models
         end
 

@@ -47,11 +47,7 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :title
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultBlock::Type::OrSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # A block containing a web search result.
@@ -65,8 +61,7 @@ module Anthropic
                 ],
               source: String,
               title: String,
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultBlock::Type::OrSymbol
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
@@ -78,7 +73,7 @@ module Anthropic
             source:,
             # The title of the search result.
             title:,
-            type:
+            type: :search_result
           )
           end
 
@@ -93,41 +88,11 @@ module Anthropic
                   ],
                 source: String,
                 title: String,
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultBlock::Type::OrSymbol
+                type: Symbol
               }
             )
           end
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultBlock::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            SEARCH_RESULT =
-              T.let(
-                :search_result,
-                Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultBlock::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultBlock::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

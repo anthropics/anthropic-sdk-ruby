@@ -16,6 +16,7 @@ module Anthropic
             ?limit: Integer,
             ?page: String?,
             ?scope_type: ::Array[Anthropic::Models::Beta::Organization::SpendLimitListParams::scope_type]?,
+            ?workspace_id: String?,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Organization::BetaSpendLimit]

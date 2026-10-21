@@ -13,8 +13,8 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEvent::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEvent::Type }
+          #   @return [Symbol, :"user.interrupt"]
+          required :type, const: :"user.interrupt"
 
           # @!attribute processed_at
           #   Timestamp when the interrupt was processed.
@@ -30,7 +30,7 @@ module Anthropic
           #   @return [String, nil]
           optional :session_thread_id, String, nil?: true
 
-          # @!method initialize(id:, type:, processed_at: nil, session_thread_id: nil)
+          # @!method initialize(id:, processed_at: nil, session_thread_id: nil, type: :"user.interrupt")
           #   An interrupt event that pauses agent execution and returns control to the user.
           #
           #   Some parameter documentations has been truncated, see
@@ -39,21 +39,11 @@ module Anthropic
           #
           #   @param id [String] Unique identifier for this event.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEvent::Type]
-          #
           #   @param processed_at [Time, nil] Timestamp when the interrupt was processed.
           #
           #   @param session_thread_id [String, nil] If absent, interrupts every non-archived thread in a multiagent session (or the
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEvent#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            USER_INTERRUPT = :"user.interrupt"
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #
+          #   @param type [Symbol, :"user.interrupt"]
         end
       end
     end

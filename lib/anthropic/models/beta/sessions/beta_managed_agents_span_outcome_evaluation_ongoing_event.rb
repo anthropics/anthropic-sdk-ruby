@@ -32,11 +32,10 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent::Type]
-          required :type,
-                   enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent::Type }
+          #   @return [Symbol, :"span.outcome_evaluation_ongoing"]
+          required :type, const: :"span.outcome_evaluation_ongoing"
 
-          # @!method initialize(id:, iteration:, outcome_id:, processed_at:, type:)
+          # @!method initialize(id:, iteration:, outcome_id:, processed_at:, type: :"span.outcome_evaluation_ongoing")
           #   Periodic heartbeat emitted while an outcome evaluation cycle is in progress.
           #   Distinguishes 'evaluation is actively running' from 'evaluation is stuck'
           #   between the corresponding `span.outcome_evaluation_start` and
@@ -54,17 +53,7 @@ module Anthropic
           #
           #   @param processed_at [Time] Timestamp when this heartbeat was emitted.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent::Type]
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            SPAN_OUTCOME_EVALUATION_ONGOING = :"span.outcome_evaluation_ongoing"
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :"span.outcome_evaluation_ongoing"]
         end
       end
     end

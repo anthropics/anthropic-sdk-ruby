@@ -19,25 +19,13 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :id
 
-          # The rate-limit group this entry's limits apply to. Its `type` equals
-          # `group_type`.
+          # The rate-limit group this entry's limits apply to.
           sig do
             returns(
               Anthropic::Beta::Organization::BetaOrganizationRateLimit::Group::Variants
             )
           end
           attr_accessor :group
-
-          # Deprecated: use `group.type` instead. The kind of rate-limit group this entry
-          # represents. `model_group` entries apply to a family of models (listed in
-          # `models`); other values apply to an API-surface category and have `models` set
-          # to `null`. Always equal to `group.type`.
-          sig do
-            returns(
-              Anthropic::Beta::Organization::BetaOrganizationRateLimit::GroupType::TaggedSymbol
-            )
-          end
-          attr_accessor :group_type
 
           # The limiter values that apply to this group.
           sig do
@@ -50,7 +38,7 @@ module Anthropic
           attr_accessor :limits
 
           # Model names this entry's limits apply to, including aliases. `null` when
-          # `group_type` is not `"model_group"`.
+          # `group.type` is not `"model_group"`.
           sig { returns(T.nilable(T::Array[String])) }
           attr_accessor :models
 
@@ -70,8 +58,6 @@ module Anthropic
                   Anthropic::Beta::Organization::BetaOrganizationRateLimitSkillsGroup::OrHash,
                   Anthropic::Beta::Organization::BetaOrganizationRateLimitWebSearchGroup::OrHash
                 ),
-              group_type:
-                Anthropic::Beta::Organization::BetaOrganizationRateLimit::GroupType::OrSymbol,
               limits:
                 T::Array[
                   Anthropic::Beta::Organization::BetaOrganizationRateLimitValue::OrHash
@@ -85,18 +71,12 @@ module Anthropic
             # differs between organizations; the group's own identifier is `group.id`. Pass it
             # as `rate_limit_id` to set a workspace's overrides for this group.
             id:,
-            # The rate-limit group this entry's limits apply to. Its `type` equals
-            # `group_type`.
+            # The rate-limit group this entry's limits apply to.
             group:,
-            # Deprecated: use `group.type` instead. The kind of rate-limit group this entry
-            # represents. `model_group` entries apply to a family of models (listed in
-            # `models`); other values apply to an API-surface category and have `models` set
-            # to `null`. Always equal to `group.type`.
-            group_type:,
             # The limiter values that apply to this group.
             limits:,
             # Model names this entry's limits apply to, including aliases. `null` when
-            # `group_type` is not `"model_group"`.
+            # `group.type` is not `"model_group"`.
             models:,
             # Object type. Always `rate_limit` for organization rate-limit entries.
             type: :rate_limit
@@ -109,8 +89,6 @@ module Anthropic
                 id: String,
                 group:
                   Anthropic::Beta::Organization::BetaOrganizationRateLimit::Group::Variants,
-                group_type:
-                  Anthropic::Beta::Organization::BetaOrganizationRateLimit::GroupType::TaggedSymbol,
                 limits:
                   T::Array[
                     Anthropic::Beta::Organization::BetaOrganizationRateLimitValue
@@ -123,8 +101,7 @@ module Anthropic
           def to_hash
           end
 
-          # The rate-limit group this entry's limits apply to. Its `type` equals
-          # `group_type`.
+          # The rate-limit group this entry's limits apply to.
           module Group
             extend Anthropic::Internal::Type::Union
 
@@ -226,64 +203,6 @@ module Anthropic
               # display only; it may change.
               display_name: nil
             )
-            end
-          end
-
-          # Deprecated: use `group.type` instead. The kind of rate-limit group this entry
-          # represents. `model_group` entries apply to a family of models (listed in
-          # `models`); other values apply to an API-surface category and have `models` set
-          # to `null`. Always equal to `group.type`.
-          module GroupType
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Organization::BetaOrganizationRateLimit::GroupType
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            BATCH =
-              T.let(
-                :batch,
-                Anthropic::Beta::Organization::BetaOrganizationRateLimit::GroupType::TaggedSymbol
-              )
-            FILES =
-              T.let(
-                :files,
-                Anthropic::Beta::Organization::BetaOrganizationRateLimit::GroupType::TaggedSymbol
-              )
-            MODEL_GROUP =
-              T.let(
-                :model_group,
-                Anthropic::Beta::Organization::BetaOrganizationRateLimit::GroupType::TaggedSymbol
-              )
-            SKILLS =
-              T.let(
-                :skills,
-                Anthropic::Beta::Organization::BetaOrganizationRateLimit::GroupType::TaggedSymbol
-              )
-            TOKEN_COUNT =
-              T.let(
-                :token_count,
-                Anthropic::Beta::Organization::BetaOrganizationRateLimit::GroupType::TaggedSymbol
-              )
-            WEB_SEARCH =
-              T.let(
-                :web_search,
-                Anthropic::Beta::Organization::BetaOrganizationRateLimit::GroupType::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Organization::BetaOrganizationRateLimit::GroupType::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
             end
           end
         end

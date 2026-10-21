@@ -6,24 +6,13 @@ module Anthropic
       class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError < Anthropic::Internal::Type::BaseModel
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError::Type]
-        required :type,
-                 enum: -> { Anthropic::Beta::BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError::Type }
+        #   @return [Symbol, :vault_not_found_error]
+        required :type, const: :vault_not_found_error
 
-        # @!method initialize(type:)
+        # @!method initialize(type: :vault_not_found_error)
         #   A vault referenced by the deployment no longer exists.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          VAULT_NOT_FOUND_ERROR = :vault_not_found_error
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :vault_not_found_error]
       end
     end
 

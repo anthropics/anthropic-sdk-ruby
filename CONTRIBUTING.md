@@ -129,3 +129,7 @@ To preview the documentation, run:
 ```bash
 $ bundle exec rake docs:preview [PORT=8808]
 ```
+
+## License
+
+By contributing to this repository, you agree that your contributions are licensed under the Apache License, Version 2.0 (see [LICENSE](LICENSE)).

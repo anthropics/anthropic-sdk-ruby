@@ -6,7 +6,7 @@ module Anthropic
           {
             id: String,
             processed_at: Time,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadContextCompactedEvent::type_
+            type: :"agent.thread_context_compacted"
           }
 
         class BetaManagedAgentsAgentThreadContextCompactedEvent < Anthropic::Internal::Type::BaseModel
@@ -14,29 +14,19 @@ module Anthropic
 
           attr_accessor processed_at: Time
 
-          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadContextCompactedEvent::type_
+          attr_accessor type: :"agent.thread_context_compacted"
 
           def initialize: (
             id: String,
             processed_at: Time,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadContextCompactedEvent::type_
+            ?type: :"agent.thread_context_compacted"
           ) -> void
 
           def to_hash: -> {
             id: String,
             processed_at: Time,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadContextCompactedEvent::type_
+            type: :"agent.thread_context_compacted"
           }
-
-          type type_ = :"agent.thread_context_compacted"
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            AGENT_THREAD_CONTEXT_COMPACTED: :"agent.thread_context_compacted"
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadContextCompactedEvent::type_]
-          end
         end
       end
     end

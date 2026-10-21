@@ -29,8 +29,8 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::Type }
+          #   @return [Symbol, :"user.tool_confirmation"]
+          required :type, const: :"user.tool_confirmation"
 
           # @!attribute deny_message
           #   Optional message providing context for a 'deny' decision. Only allowed when
@@ -52,7 +52,7 @@ module Anthropic
           #   @return [String, nil]
           optional :session_thread_id, String, nil?: true
 
-          # @!method initialize(id:, result:, tool_use_id:, type:, deny_message: nil, processed_at: nil, session_thread_id: nil)
+          # @!method initialize(id:, result:, tool_use_id:, deny_message: nil, processed_at: nil, session_thread_id: nil, type: :"user.tool_confirmation")
           #   A tool confirmation event that approves or denies a pending tool execution.
           #
           #   Some parameter documentations has been truncated, see
@@ -65,13 +65,13 @@ module Anthropic
           #
           #   @param tool_use_id [String] The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresp
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::Type]
-          #
           #   @param deny_message [String, nil] Optional message providing context for a 'deny' decision. Only allowed when resu
           #
           #   @param processed_at [Time, nil] Timestamp when the confirmation was processed.
           #
           #   @param session_thread_id [String, nil] Set by the server to the subagent thread this confirmation was routed to. Omitte
+          #
+          #   @param type [Symbol, :"user.tool_confirmation"]
 
           # The confirmation result: 'allow' or 'deny'.
           #
@@ -81,16 +81,6 @@ module Anthropic
 
             ALLOW = :allow
             DENY = :deny
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            USER_TOOL_CONFIRMATION = :"user.tool_confirmation"
 
             # @!method self.values
             #   @return [Array<Symbol>]

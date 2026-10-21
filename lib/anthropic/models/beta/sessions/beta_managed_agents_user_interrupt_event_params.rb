@@ -7,8 +7,8 @@ module Anthropic
         class BetaManagedAgentsUserInterruptEventParams < Anthropic::Internal::Type::BaseModel
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams::Type }
+          #   @return [Symbol, :"user.interrupt"]
+          required :type, const: :"user.interrupt"
 
           # @!attribute session_thread_id
           #   If absent, interrupts every non-archived thread in a multiagent session (or the
@@ -18,26 +18,16 @@ module Anthropic
           #   @return [String, nil]
           optional :session_thread_id, String, nil?: true
 
-          # @!method initialize(type:, session_thread_id: nil)
+          # @!method initialize(session_thread_id: nil, type: :"user.interrupt")
           #   Parameters for sending an interrupt to pause the agent.
           #
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams}
           #   for more details.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams::Type]
-          #
           #   @param session_thread_id [String, nil] If absent, interrupts every non-archived thread in a multiagent session (or the
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            USER_INTERRUPT = :"user.interrupt"
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #
+          #   @param type [Symbol, :"user.interrupt"]
         end
       end
     end

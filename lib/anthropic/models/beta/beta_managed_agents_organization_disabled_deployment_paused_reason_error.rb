@@ -6,24 +6,13 @@ module Anthropic
       class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError < Anthropic::Internal::Type::BaseModel
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError::Type]
-        required :type,
-                 enum: -> { Anthropic::Beta::BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError::Type }
+        #   @return [Symbol, :organization_disabled_error]
+        required :type, const: :organization_disabled_error
 
-        # @!method initialize(type:)
+        # @!method initialize(type: :organization_disabled_error)
         #   The deployment's organization is disabled.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          ORGANIZATION_DISABLED_ERROR = :organization_disabled_error
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :organization_disabled_error]
       end
     end
 

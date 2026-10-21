@@ -12,26 +12,16 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSessionRateLimitedRunError::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsSessionRateLimitedRunError::Type }
+        #   @return [Symbol, :session_rate_limited_error]
+        required :type, const: :session_rate_limited_error
 
-        # @!method initialize(message:, type:)
+        # @!method initialize(message:, type: :session_rate_limited_error)
         #   Session creation was rejected due to rate limiting. The schedule keeps firing;
         #   subsequent runs may succeed.
         #
         #   @param message [String] Human-readable error description.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSessionRateLimitedRunError::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsSessionRateLimitedRunError#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          SESSION_RATE_LIMITED_ERROR = :session_rate_limited_error
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :session_rate_limited_error]
       end
     end
 

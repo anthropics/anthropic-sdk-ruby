@@ -18,62 +18,21 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :model
 
-        sig do
-          returns(Anthropic::Beta::BetaManagedAgentsAdvisor::Type::TaggedSymbol)
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # Platform advisor roster entry: a model the session's primary thread may consult
         # mid-turn.
-        sig do
-          params(
-            model: String,
-            type: Anthropic::Beta::BetaManagedAgentsAdvisor::Type::OrSymbol
-          ).returns(T.attached_class)
-        end
+        sig { params(model: String, type: Symbol).returns(T.attached_class) }
         def self.new(
           # The advisor model id.
           model:,
-          type:
+          type: :advisor
         )
         end
 
-        sig do
-          override.returns(
-            {
-              model: String,
-              type:
-                Anthropic::Beta::BetaManagedAgentsAdvisor::Type::TaggedSymbol
-            }
-          )
-        end
+        sig { override.returns({ model: String, type: Symbol }) }
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(Symbol, Anthropic::Beta::BetaManagedAgentsAdvisor::Type)
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          ADVISOR =
-            T.let(
-              :advisor,
-              Anthropic::Beta::BetaManagedAgentsAdvisor::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsAdvisor::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

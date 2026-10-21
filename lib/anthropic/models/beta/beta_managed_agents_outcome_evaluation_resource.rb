@@ -47,10 +47,10 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsOutcomeEvaluationResource::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsOutcomeEvaluationResource::Type }
+        #   @return [Symbol, :outcome_evaluation]
+        required :type, const: :outcome_evaluation
 
-        # @!method initialize(completed_at:, description:, explanation:, iteration:, outcome_id:, result:, type:)
+        # @!method initialize(completed_at:, description:, explanation:, iteration:, outcome_id:, result:, type: :outcome_evaluation)
         #   Evaluation state for a single outcome defined via a `define_outcome` event.
         #
         #   Some parameter documentations has been truncated, see
@@ -69,17 +69,7 @@ module Anthropic
         #
         #   @param result [String] Current evaluation state. `pending` before the agent begins work; `running` whil
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsOutcomeEvaluationResource::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsOutcomeEvaluationResource#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          OUTCOME_EVALUATION = :outcome_evaluation
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :outcome_evaluation]
       end
     end
 

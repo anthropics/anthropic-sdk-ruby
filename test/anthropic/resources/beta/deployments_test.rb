@@ -31,7 +31,7 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
         resources: ^(Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaManagedAgentsSessionResourceConfig]),
         schedule: Anthropic::Beta::BetaManagedAgentsSchedule | nil,
         status: Anthropic::Beta::BetaManagedAgentsDeploymentStatus,
-        type: Anthropic::Beta::BetaManagedAgentsDeployment::Type,
+        type: Symbol,
         updated_at: Time,
         vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String]),
         budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit | nil
@@ -61,7 +61,7 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
         resources: ^(Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaManagedAgentsSessionResourceConfig]),
         schedule: Anthropic::Beta::BetaManagedAgentsSchedule | nil,
         status: Anthropic::Beta::BetaManagedAgentsDeploymentStatus,
-        type: Anthropic::Beta::BetaManagedAgentsDeployment::Type,
+        type: Symbol,
         updated_at: Time,
         vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String]),
         budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit | nil
@@ -91,7 +91,7 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
         resources: ^(Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaManagedAgentsSessionResourceConfig]),
         schedule: Anthropic::Beta::BetaManagedAgentsSchedule | nil,
         status: Anthropic::Beta::BetaManagedAgentsDeploymentStatus,
-        type: Anthropic::Beta::BetaManagedAgentsDeployment::Type,
+        type: Symbol,
         updated_at: Time,
         vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String]),
         budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit | nil
@@ -128,7 +128,7 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
         resources: ^(Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaManagedAgentsSessionResourceConfig]),
         schedule: Anthropic::Beta::BetaManagedAgentsSchedule | nil,
         status: Anthropic::Beta::BetaManagedAgentsDeploymentStatus,
-        type: Anthropic::Beta::BetaManagedAgentsDeployment::Type,
+        type: Symbol,
         updated_at: Time,
         vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String]),
         budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit | nil
@@ -158,7 +158,7 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
         resources: ^(Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaManagedAgentsSessionResourceConfig]),
         schedule: Anthropic::Beta::BetaManagedAgentsSchedule | nil,
         status: Anthropic::Beta::BetaManagedAgentsDeploymentStatus,
-        type: Anthropic::Beta::BetaManagedAgentsDeployment::Type,
+        type: Symbol,
         updated_at: Time,
         vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String]),
         budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit | nil
@@ -188,7 +188,7 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
         resources: ^(Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaManagedAgentsSessionResourceConfig]),
         schedule: Anthropic::Beta::BetaManagedAgentsSchedule | nil,
         status: Anthropic::Beta::BetaManagedAgentsDeploymentStatus,
-        type: Anthropic::Beta::BetaManagedAgentsDeployment::Type,
+        type: Symbol,
         updated_at: Time,
         vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String]),
         budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit | nil
@@ -212,7 +212,7 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
         error: Anthropic::Beta::BetaManagedAgentsDeploymentRun::Error | nil,
         session_id: String | nil,
         trigger_context: Anthropic::Beta::BetaManagedAgentsTriggerContext,
-        type: Anthropic::Beta::BetaManagedAgentsDeploymentRun::Type
+        type: Symbol
       }
     end
   end
@@ -239,7 +239,7 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
         resources: ^(Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaManagedAgentsSessionResourceConfig]),
         schedule: Anthropic::Beta::BetaManagedAgentsSchedule | nil,
         status: Anthropic::Beta::BetaManagedAgentsDeploymentStatus,
-        type: Anthropic::Beta::BetaManagedAgentsDeployment::Type,
+        type: Symbol,
         updated_at: Time,
         vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String]),
         budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit | nil

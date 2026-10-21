@@ -29,11 +29,7 @@ module Anthropic
           end
           attr_accessor :retry_status
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # ID of the vault containing the affected credential.
@@ -52,9 +48,8 @@ module Anthropic
                   Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted::OrHash,
                   Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal::OrHash
                 ),
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError::Type::OrSymbol,
-              vault_id: String
+              vault_id: String,
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
@@ -64,9 +59,9 @@ module Anthropic
             message:,
             # What the client should do next.
             retry_status:,
-            type:,
             # ID of the vault containing the affected credential.
-            vault_id:
+            vault_id:,
+            type: :credential_host_unreachable_error
           )
           end
 
@@ -77,8 +72,7 @@ module Anthropic
                 message: String,
                 retry_status:
                   Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError::RetryStatus::Variants,
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError::Type::TaggedSymbol,
+                type: Symbol,
                 vault_id: String
               }
             )
@@ -159,35 +153,6 @@ module Anthropic
               )
             end
             def self.new(type:)
-            end
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            CREDENTIAL_HOST_UNREACHABLE_ERROR =
-              T.let(
-                :credential_host_unreachable_error,
-                Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
             end
           end
         end

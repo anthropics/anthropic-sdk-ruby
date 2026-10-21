@@ -20,8 +20,7 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :id
 
-        # The rate-limit group this entry's limits apply to. Its `type` equals
-        # `group_type`.
+        # The rate-limit group this entry's limits apply to.
         sig do
           returns(
             Anthropic::Organization::OrganizationRateLimit::Group::Variants
@@ -36,7 +35,7 @@ module Anthropic
         attr_accessor :limits
 
         # Model names this entry's limits apply to, including aliases. `null` when
-        # `group_type` is not `"model_group"`.
+        # `group.type` is not `"model_group"`.
         sig { returns(T.nilable(T::Array[String])) }
         attr_accessor :models
 
@@ -69,13 +68,12 @@ module Anthropic
           # differs between organizations; the group's own identifier is `group.id`. Pass it
           # as `rate_limit_id` to set a workspace's overrides for this group.
           id:,
-          # The rate-limit group this entry's limits apply to. Its `type` equals
-          # `group_type`.
+          # The rate-limit group this entry's limits apply to.
           group:,
           # The limiter values that apply to this group.
           limits:,
           # Model names this entry's limits apply to, including aliases. `null` when
-          # `group_type` is not `"model_group"`.
+          # `group.type` is not `"model_group"`.
           models:,
           # Object type. Always `rate_limit` for organization rate-limit entries.
           type: :rate_limit
@@ -98,8 +96,7 @@ module Anthropic
         def to_hash
         end
 
-        # The rate-limit group this entry's limits apply to. Its `type` equals
-        # `group_type`.
+        # The rate-limit group this entry's limits apply to.
         module Group
           extend Anthropic::Internal::Type::Union
 

@@ -19,28 +19,17 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadContextCompactedEvent::Type]
-          required :type,
-                   enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadContextCompactedEvent::Type }
+          #   @return [Symbol, :"agent.thread_context_compacted"]
+          required :type, const: :"agent.thread_context_compacted"
 
-          # @!method initialize(id:, processed_at:, type:)
+          # @!method initialize(id:, processed_at:, type: :"agent.thread_context_compacted")
           #   Indicates that context compaction (summarization) occurred during the session.
           #
           #   @param id [String] Unique identifier for this event.
           #
           #   @param processed_at [Time] Timestamp when compaction was processed.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadContextCompactedEvent::Type]
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadContextCompactedEvent#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            AGENT_THREAD_CONTEXT_COMPACTED = :"agent.thread_context_compacted"
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :"agent.thread_context_compacted"]
         end
       end
     end

@@ -28,7 +28,7 @@ class Anthropic::Test::Resources::Beta::SessionsTest < Anthropic::Test::Resource
         stats: Anthropic::Beta::BetaManagedAgentsSessionStats,
         status: Anthropic::Beta::BetaManagedAgentsSession::Status,
         title: String | nil,
-        type: Anthropic::Beta::BetaManagedAgentsSession::Type,
+        type: Symbol,
         updated_at: Time,
         usage: Anthropic::Beta::BetaManagedAgentsSessionUsage,
         vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String]),
@@ -58,7 +58,7 @@ class Anthropic::Test::Resources::Beta::SessionsTest < Anthropic::Test::Resource
         stats: Anthropic::Beta::BetaManagedAgentsSessionStats,
         status: Anthropic::Beta::BetaManagedAgentsSession::Status,
         title: String | nil,
-        type: Anthropic::Beta::BetaManagedAgentsSession::Type,
+        type: Symbol,
         updated_at: Time,
         usage: Anthropic::Beta::BetaManagedAgentsSessionUsage,
         vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String]),
@@ -88,7 +88,7 @@ class Anthropic::Test::Resources::Beta::SessionsTest < Anthropic::Test::Resource
         stats: Anthropic::Beta::BetaManagedAgentsSessionStats,
         status: Anthropic::Beta::BetaManagedAgentsSession::Status,
         title: String | nil,
-        type: Anthropic::Beta::BetaManagedAgentsSession::Type,
+        type: Symbol,
         updated_at: Time,
         usage: Anthropic::Beta::BetaManagedAgentsSessionUsage,
         vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String]),
@@ -125,7 +125,7 @@ class Anthropic::Test::Resources::Beta::SessionsTest < Anthropic::Test::Resource
         stats: Anthropic::Beta::BetaManagedAgentsSessionStats,
         status: Anthropic::Beta::BetaManagedAgentsSession::Status,
         title: String | nil,
-        type: Anthropic::Beta::BetaManagedAgentsSession::Type,
+        type: Symbol,
         updated_at: Time,
         usage: Anthropic::Beta::BetaManagedAgentsSessionUsage,
         vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String]),
@@ -144,7 +144,7 @@ class Anthropic::Test::Resources::Beta::SessionsTest < Anthropic::Test::Resource
     assert_pattern do
       response => {
         id: String,
-        type: Anthropic::Beta::BetaManagedAgentsDeletedSession::Type
+        type: Symbol
       }
     end
   end
@@ -170,7 +170,7 @@ class Anthropic::Test::Resources::Beta::SessionsTest < Anthropic::Test::Resource
         stats: Anthropic::Beta::BetaManagedAgentsSessionStats,
         status: Anthropic::Beta::BetaManagedAgentsSession::Status,
         title: String | nil,
-        type: Anthropic::Beta::BetaManagedAgentsSession::Type,
+        type: Symbol,
         updated_at: Time,
         usage: Anthropic::Beta::BetaManagedAgentsSessionUsage,
         vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String]),

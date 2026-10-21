@@ -23,10 +23,10 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsCronScheduleParams::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsCronScheduleParams::Type }
+        #   @return [Symbol, :cron]
+        required :type, const: :cron
 
-        # @!method initialize(expression:, timezone:, type:)
+        # @!method initialize(expression:, timezone:, type: :cron)
         #   5-field POSIX cron schedule. Literal wall-clock matching in the configured
         #   timezone.
         #
@@ -37,17 +37,7 @@ module Anthropic
         #
         #   @param timezone [String] Required. IANA timezone identifier (e.g., "America/Los_Angeles", "UTC"). Validat
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsCronScheduleParams::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsCronScheduleParams#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          CRON = :cron
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :cron]
       end
     end
 

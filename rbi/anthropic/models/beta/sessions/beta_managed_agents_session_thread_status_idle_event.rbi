@@ -57,11 +57,7 @@ module Anthropic
           end
           attr_accessor :stop_reason
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # A session thread has yielded and is awaiting input. Emitted on the thread's own
@@ -84,8 +80,7 @@ module Anthropic
                   Anthropic::Beta::Sessions::BetaManagedAgentsSessionBudgetReached::OrHash,
                   Anthropic::Beta::Sessions::BetaManagedAgentsSessionRefusal::OrHash
                 ),
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::Type::OrSymbol
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
@@ -101,7 +96,7 @@ module Anthropic
             # nothing more to report.
             stop_details:,
             stop_reason:,
-            type:
+            type: :"session.thread_status_idle"
           )
           end
 
@@ -118,8 +113,7 @@ module Anthropic
                   ),
                 stop_reason:
                   Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::StopReason::Variants,
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::Type::TaggedSymbol
+                type: Symbol
               }
             )
           end
@@ -216,35 +210,6 @@ module Anthropic
               # `session.status_idle` with the remainder.
               event_ids: nil
             )
-            end
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            SESSION_THREAD_STATUS_IDLE =
-              T.let(
-                :"session.thread_status_idle",
-                Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
             end
           end
         end

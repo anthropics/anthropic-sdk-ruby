@@ -21,10 +21,10 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeltaEvent::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsDeltaEvent::Type }
+        #   @return [Symbol, :event_delta]
+        required :type, const: :event_delta
 
-        # @!method initialize(delta:, event_id:, type:)
+        # @!method initialize(delta:, event_id:, type: :event_delta)
         #   An incremental update to an event that is still being streamed. Deltas are
         #   best-effort and may stop early; when the buffered event with id == event_id is
         #   produced it carries the complete content. A model request that ends early (an
@@ -39,17 +39,7 @@ module Anthropic
         #
         #   @param event_id [String] The id of the event being previewed. Matches event.id on the corresponding event
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeltaEvent::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsDeltaEvent#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          EVENT_DELTA = :event_delta
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :event_delta]
       end
     end
 

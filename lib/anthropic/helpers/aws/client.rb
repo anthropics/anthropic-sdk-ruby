@@ -15,7 +15,7 @@ module Anthropic
         # Creates and returns a new client for interacting with Anthropic models via the AWS gateway.
         #
         # AWS credentials are resolved in priority order:
-        #   1. `api_key` constructor arg → API key mode (x-api-key header, no SigV4)
+        #   1. `api_key` constructor arg → API key mode (Authorization: Bearer header, no SigV4)
         #   2. `aws_access_key` + `aws_secret_access_key` args → SigV4 with explicit credentials
         #   3. `aws_profile` arg → SigV4 with named AWS profile
         #   4. `ANTHROPIC_AWS_API_KEY` env var → API key mode (only when no platform auth args given)
@@ -23,7 +23,7 @@ module Anthropic
         #
         # When `skip_auth` is true, all auth is skipped and workspace_id is not required.
         #
-        # @param api_key [String, nil] Anthropic API key (bypasses SigV4, uses x-api-key header)
+        # @param api_key [String, nil] Anthropic API key (bypasses SigV4, uses Authorization: Bearer header)
         #
         # @param aws_access_key [String, nil] AWS access key ID for SigV4 signing
         #

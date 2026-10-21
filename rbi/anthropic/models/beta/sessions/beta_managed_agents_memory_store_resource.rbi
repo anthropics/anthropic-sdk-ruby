@@ -18,11 +18,7 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :memory_store_id
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsMemoryStoreResource::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts
@@ -63,8 +59,6 @@ module Anthropic
           sig do
             params(
               memory_store_id: String,
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsMemoryStoreResource::Type::OrSymbol,
               access:
                 T.nilable(
                   Anthropic::Beta::Sessions::BetaManagedAgentsMemoryStoreResource::Access::OrSymbol
@@ -72,14 +66,14 @@ module Anthropic
               description: String,
               instructions: T.nilable(String),
               mount_path: T.nilable(String),
-              name: T.nilable(String)
+              name: T.nilable(String),
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
             # The memory store ID (memstore\_...). Must belong to the caller's organization
             # and workspace.
             memory_store_id:,
-            type:,
             # Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts
             # the store as a read-only filesystem.
             access: nil,
@@ -94,7 +88,8 @@ module Anthropic
             mount_path: nil,
             # Display name of the memory store, snapshotted at attach time. Later edits to the
             # store's name do not propagate to this resource.
-            name: nil
+            name: nil,
+            type: :memory_store
           )
           end
 
@@ -102,8 +97,7 @@ module Anthropic
             override.returns(
               {
                 memory_store_id: String,
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsMemoryStoreResource::Type::TaggedSymbol,
+                type: Symbol,
                 access:
                   T.nilable(
                     Anthropic::Beta::Sessions::BetaManagedAgentsMemoryStoreResource::Access::TaggedSymbol
@@ -116,35 +110,6 @@ module Anthropic
             )
           end
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsMemoryStoreResource::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            MEMORY_STORE =
-              T.let(
-                :memory_store,
-                Anthropic::Beta::Sessions::BetaManagedAgentsMemoryStoreResource::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsMemoryStoreResource::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
 
           # Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts

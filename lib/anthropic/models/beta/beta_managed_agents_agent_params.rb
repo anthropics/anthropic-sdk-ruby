@@ -12,8 +12,8 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsAgentParams::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsAgentParams::Type }
+        #   @return [Symbol, :agent]
+        required :type, const: :agent
 
         # @!attribute version
         #   The specific `agent` version to use. Omit to use the latest version. Must be at
@@ -22,7 +22,7 @@ module Anthropic
         #   @return [Integer, nil]
         optional :version, Integer
 
-        # @!method initialize(id:, type:, version: nil)
+        # @!method initialize(id:, version: nil, type: :agent)
         #   Specification for an Agent. Provide a specific `version` or use the short-form
         #   `agent="agent_id"` for the most recent version
         #
@@ -31,19 +31,9 @@ module Anthropic
         #
         #   @param id [String] The `agent` ID.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsAgentParams::Type]
-        #
         #   @param version [Integer] The specific `agent` version to use. Omit to use the latest version. Must be at
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsAgentParams#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          AGENT = :agent
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #
+        #   @param type [Symbol, :agent]
       end
     end
 

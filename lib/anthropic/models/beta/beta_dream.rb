@@ -111,8 +111,8 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaDream::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaDream::Type }
+        #   @return [Symbol, :dream]
+        required :type, const: :dream
 
         # @!attribute usage
         #   The dream's token counts, which stop changing once its `status` is `completed`
@@ -121,7 +121,7 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaDreamUsage]
         required :usage, -> { Anthropic::Beta::BetaDreamUsage }
 
-        # @!method initialize(id:, archived_at:, created_at:, ended_at:, error:, inputs:, instructions:, model:, output_behavior:, outputs:, session_id:, status:, type:, usage:)
+        # @!method initialize(id:, archived_at:, created_at:, ended_at:, error:, inputs:, instructions:, model:, output_behavior:, outputs:, session_id:, status:, usage:, type: :dream)
         #   An asynchronous job that reads a memory store and past sessions, then writes a
         #   reorganized version of that memory store.
         #
@@ -164,19 +164,9 @@ module Anthropic
         #
         #   @param status [Symbol, Anthropic::Models::Beta::BetaDreamStatus] Where a dream is in its lifecycle.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaDream::Type]
-        #
         #   @param usage [Anthropic::Models::Beta::BetaDreamUsage] The dream's token counts, which stop changing once its `status` is `completed` o
-
-        # @see Anthropic::Models::Beta::BetaDream#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          DREAM = :dream
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #
+        #   @param type [Symbol, :dream]
       end
     end
 

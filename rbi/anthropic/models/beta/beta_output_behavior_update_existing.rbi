@@ -20,11 +20,7 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :memory_store_id
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaOutputBehaviorUpdateExisting::Type::OrSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # Write the result into the input memory store instead of a new memory store.
@@ -33,60 +29,21 @@ module Anthropic
         # 403 error. While another `update_existing` dream on the same memory store hasn't
         # fully stopped, the request returns a 409 error.
         sig do
-          params(
-            memory_store_id: String,
-            type:
-              Anthropic::Beta::BetaOutputBehaviorUpdateExisting::Type::OrSymbol
-          ).returns(T.attached_class)
+          params(memory_store_id: String, type: Symbol).returns(
+            T.attached_class
+          )
         end
         def self.new(
           # The ID of the memory store for the dream to write its result to
           # (`memstore_...`). It must be the memory store in the `memory_store` entry of
           # `inputs`.
           memory_store_id:,
-          type:
+          type: :update_existing
         )
         end
 
-        sig do
-          override.returns(
-            {
-              memory_store_id: String,
-              type:
-                Anthropic::Beta::BetaOutputBehaviorUpdateExisting::Type::OrSymbol
-            }
-          )
-        end
+        sig { override.returns({ memory_store_id: String, type: Symbol }) }
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaOutputBehaviorUpdateExisting::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          UPDATE_EXISTING =
-            T.let(
-              :update_existing,
-              Anthropic::Beta::BetaOutputBehaviorUpdateExisting::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaOutputBehaviorUpdateExisting::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

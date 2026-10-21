@@ -17,67 +17,24 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :client_secret
 
-          sig do
-            returns(
-              Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostParam::Type::OrSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # Token endpoint uses POST body authentication with client credentials.
           sig do
-            params(
-              client_secret: String,
-              type:
-                Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostParam::Type::OrSymbol
-            ).returns(T.attached_class)
+            params(client_secret: String, type: Symbol).returns(
+              T.attached_class
+            )
           end
           def self.new(
             # The OAuth client secret, sent to `token_endpoint` in the POST body.
             client_secret:,
-            type:
+            type: :client_secret_post
           )
           end
 
-          sig do
-            override.returns(
-              {
-                client_secret: String,
-                type:
-                  Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostParam::Type::OrSymbol
-              }
-            )
-          end
+          sig { override.returns({ client_secret: String, type: Symbol }) }
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostParam::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            CLIENT_SECRET_POST =
-              T.let(
-                :client_secret_post,
-                Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostParam::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostParam::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

@@ -18,10 +18,10 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMultiagentCoordinatorParams::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsMultiagentCoordinatorParams::Type }
+        #   @return [Symbol, :coordinator]
+        required :type, const: :coordinator
 
-        # @!method initialize(agents:, type:)
+        # @!method initialize(agents:, type: :coordinator)
         #   A coordinator topology: the session's primary thread orchestrates work by
         #   spawning session threads, each running an agent drawn from the `agents` roster.
         #
@@ -31,17 +31,7 @@ module Anthropic
         #
         #   @param agents [Array<Anthropic::Models::Beta::BetaManagedAgentsAgentParams, Anthropic::Models::Beta::BetaManagedAgentsMultiagentSelfParams, Anthropic::Models::Beta::BetaManagedAgentsAdvisorParams, String>] Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMultiagentCoordinatorParams::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsMultiagentCoordinatorParams#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          COORDINATOR = :coordinator
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :coordinator]
       end
     end
 

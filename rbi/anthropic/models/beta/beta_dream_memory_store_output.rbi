@@ -21,17 +21,14 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :memory_store_id
 
-        sig do
-          returns(Anthropic::Beta::BetaDreamMemoryStoreOutput::Type::OrSymbol)
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # The memory store that holds a dream's result, as an entry in `outputs`.
         sig do
-          params(
-            memory_store_id: String,
-            type: Anthropic::Beta::BetaDreamMemoryStoreOutput::Type::OrSymbol
-          ).returns(T.attached_class)
+          params(memory_store_id: String, type: Symbol).returns(
+            T.attached_class
+          )
         end
         def self.new(
           # The ID of the memory store that the dream writes its result to (`memstore_...`).
@@ -39,45 +36,12 @@ module Anthropic
           # With `output_behavior` set to `create_new`, this is a new memory store. With
           # `update_existing`, it is the input memory store.
           memory_store_id:,
-          type:
+          type: :memory_store
         )
         end
 
-        sig do
-          override.returns(
-            {
-              memory_store_id: String,
-              type: Anthropic::Beta::BetaDreamMemoryStoreOutput::Type::OrSymbol
-            }
-          )
-        end
+        sig { override.returns({ memory_store_id: String, type: Symbol }) }
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(Symbol, Anthropic::Beta::BetaDreamMemoryStoreOutput::Type)
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          MEMORY_STORE =
-            T.let(
-              :memory_store,
-              Anthropic::Beta::BetaDreamMemoryStoreOutput::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaDreamMemoryStoreOutput::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

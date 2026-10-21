@@ -6,7 +6,7 @@ module Anthropic
       type beta_managed_agents_agent_with_overrides_params =
         {
           id: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams::type_,
+          type: :agent_with_overrides,
           mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams],
           model: Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams::model,
           skills: ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params],
@@ -18,7 +18,7 @@ module Anthropic
       class BetaManagedAgentsAgentWithOverridesParams < Anthropic::Internal::Type::BaseModel
         attr_accessor id: String
 
-        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams::type_
+        attr_accessor type: :agent_with_overrides
 
         attr_reader mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams]?
 
@@ -52,18 +52,18 @@ module Anthropic
 
         def initialize: (
           id: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams::type_,
           ?mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams],
           ?model: Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams::model,
           ?skills: ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params],
           ?system_: String?,
           ?tools: ::Array[Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams::tool],
-          ?version: Integer
+          ?version: Integer,
+          ?type: :agent_with_overrides
         ) -> void
 
         def to_hash: -> {
           id: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams::type_,
+          type: :agent_with_overrides,
           mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams],
           model: Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams::model,
           skills: ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params],
@@ -71,16 +71,6 @@ module Anthropic
           tools: ::Array[Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams::tool],
           version: Integer
         }
-
-        type type_ = :agent_with_overrides
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          AGENT_WITH_OVERRIDES: :agent_with_overrides
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams::type_]
-        end
 
         type model =
           Anthropic::Beta::BetaManagedAgentsModelConfigParams

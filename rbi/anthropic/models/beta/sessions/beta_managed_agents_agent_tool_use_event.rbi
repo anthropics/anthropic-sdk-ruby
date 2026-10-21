@@ -29,11 +29,7 @@ module Anthropic
           sig { returns(Time) }
           attr_accessor :processed_at
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # The evaluated permission policy for this tool invocation.
@@ -97,8 +93,6 @@ module Anthropic
               input: T::Hash[Symbol, T.anything],
               name: String,
               processed_at: Time,
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::Type::OrSymbol,
               evaluated_permission:
                 Anthropic::Beta::Sessions::BetaManagedAgentsAgentEvaluatedPermission::OrSymbol,
               evaluation:
@@ -107,7 +101,8 @@ module Anthropic
                   Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAsk::OrHash,
                   Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAuto::OrHash
                 ),
-              session_thread_id: T.nilable(String)
+              session_thread_id: T.nilable(String),
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
@@ -119,7 +114,6 @@ module Anthropic
             name:,
             # Timestamp when this event was processed.
             processed_at:,
-            type:,
             # The evaluated permission policy for this tool invocation.
             evaluated_permission: nil,
             # Which resolved permission_policy produced evaluated_permission: always_allow,
@@ -135,7 +129,8 @@ module Anthropic
             # events. Informational only: the server routes the matching
             # `user.tool_confirmation` or `user.tool_result` by `tool_use_id`, so clients do
             # not send it back.
-            session_thread_id: nil
+            session_thread_id: nil,
+            type: :"agent.tool_use"
           )
           end
 
@@ -146,8 +141,7 @@ module Anthropic
                 input: T::Hash[Symbol, T.anything],
                 name: String,
                 processed_at: Time,
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::Type::TaggedSymbol,
+                type: Symbol,
                 evaluated_permission:
                   Anthropic::Beta::Sessions::BetaManagedAgentsAgentEvaluatedPermission::TaggedSymbol,
                 evaluation:
@@ -157,35 +151,6 @@ module Anthropic
             )
           end
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            AGENT_TOOL_USE =
-              T.let(
-                :"agent.tool_use",
-                Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

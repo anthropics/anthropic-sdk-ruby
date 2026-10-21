@@ -81,11 +81,20 @@ module Anthropic
         #
         # Note that if you want to include a
         # [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role),
-        # you can use the top-level `system` parameter — there is no `"system"` role for
-        # input messages in the Messages API.
+        # you can use the top-level `system` parameter.
         #
         # There is a limit of 100,000 messages in a single request.
-        sig { returns(T::Array[Anthropic::Beta::BetaMessageParam]) }
+        sig do
+          returns(
+            T::Array[
+              T.any(
+                Anthropic::Beta::BetaUserMessageParam,
+                Anthropic::Beta::BetaAssistantMessageParam,
+                Anthropic::Beta::BetaSystemMessageParam
+              )
+            ]
+          )
+        end
         attr_accessor :messages
 
         # The model that will complete your prompt.
@@ -485,7 +494,14 @@ module Anthropic
 
         sig do
           params(
-            messages: T::Array[Anthropic::Beta::BetaMessageParam::OrHash],
+            messages:
+              T::Array[
+                T.any(
+                  Anthropic::Beta::BetaUserMessageParam::OrHash,
+                  Anthropic::Beta::BetaAssistantMessageParam::OrHash,
+                  Anthropic::Beta::BetaSystemMessageParam::OrHash
+                )
+              ],
             model: T.any(Anthropic::Model::OrSymbol, String),
             cache_control:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
@@ -626,8 +642,7 @@ module Anthropic
           #
           # Note that if you want to include a
           # [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role),
-          # you can use the top-level `system` parameter — there is no `"system"` role for
-          # input messages in the Messages API.
+          # you can use the top-level `system` parameter.
           #
           # There is a limit of 100,000 messages in a single request.
           messages:,
@@ -789,7 +804,14 @@ module Anthropic
         sig do
           override.returns(
             {
-              messages: T::Array[Anthropic::Beta::BetaMessageParam],
+              messages:
+                T::Array[
+                  T.any(
+                    Anthropic::Beta::BetaUserMessageParam,
+                    Anthropic::Beta::BetaAssistantMessageParam,
+                    Anthropic::Beta::BetaSystemMessageParam
+                  )
+                ],
               model: T.any(Anthropic::Model::OrSymbol, String),
               cache_control:
                 T.nilable(Anthropic::Beta::BetaCacheControlEphemeral),

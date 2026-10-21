@@ -13,25 +13,15 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostParam::Type]
-          required :type, enum: -> { Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostParam::Type }
+          #   @return [Symbol, :client_secret_post]
+          required :type, const: :client_secret_post
 
-          # @!method initialize(client_secret:, type:)
+          # @!method initialize(client_secret:, type: :client_secret_post)
           #   Token endpoint uses POST body authentication with client credentials.
           #
           #   @param client_secret [String] The OAuth client secret, sent to `token_endpoint` in the POST body.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostParam::Type]
-
-          # @see Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostParam#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            CLIENT_SECRET_POST = :client_secret_post
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :client_secret_post]
         end
       end
     end

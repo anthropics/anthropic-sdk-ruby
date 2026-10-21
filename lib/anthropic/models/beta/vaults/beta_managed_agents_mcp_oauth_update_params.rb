@@ -7,8 +7,8 @@ module Anthropic
         class BetaManagedAgentsMCPOAuthUpdateParams < Anthropic::Internal::Type::BaseModel
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams::Type]
-          required :type, enum: -> { Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams::Type }
+          #   @return [Symbol, :mcp_oauth]
+          required :type, const: :mcp_oauth
 
           # @!attribute access_token
           #   The new OAuth access token to replace the stored one.
@@ -36,7 +36,7 @@ module Anthropic
                    -> { Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshUpdateParams },
                    nil?: true
 
-          # @!method initialize(type:, access_token: nil, expires_at: nil, refresh: nil)
+          # @!method initialize(access_token: nil, expires_at: nil, refresh: nil, type: :mcp_oauth)
           #   Parameters for updating an MCP OAuth credential. The `mcp_server_url` is
           #   immutable.
           #
@@ -44,23 +44,13 @@ module Anthropic
           #   {Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams} for
           #   more details.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams::Type]
-          #
           #   @param access_token [String, nil] The new OAuth access token to replace the stored one.
           #
           #   @param expires_at [Time, nil] When the credential's access token expires, in RFC 3339. Leave it out to keep th
           #
           #   @param refresh [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshUpdateParams, nil] Updated refresh token configuration.
-
-          # @see Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            MCP_OAUTH = :mcp_oauth
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #
+          #   @param type [Symbol, :mcp_oauth]
         end
       end
     end

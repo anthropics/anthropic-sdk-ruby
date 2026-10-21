@@ -82,15 +82,9 @@ module Anthropic
             def self.new(type:, **args)
               case type.to_sym
               when :client_secret_basic
-                Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicUpdateParam.new(
-                  type: type,
-                  **args
-                )
+                Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicUpdateParam.new(**args)
               when :client_secret_post
-                Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostUpdateParam.new(
-                  type: type,
-                  **args
-                )
+                Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostUpdateParam.new(**args)
               else
                 raise ArgumentError, "unknown type: #{type}"
               end

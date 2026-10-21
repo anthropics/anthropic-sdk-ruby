@@ -13,11 +13,7 @@ module Anthropic
               )
             end
 
-          sig do
-            returns(
-              Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams::Type::OrSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # Updated injection location.
@@ -59,8 +55,6 @@ module Anthropic
           # immutable.
           sig do
             params(
-              type:
-                Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams::Type::OrSymbol,
               injection_location:
                 Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationUpdateParams::OrHash,
               networking:
@@ -70,25 +64,25 @@ module Anthropic
                     Anthropic::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingParams::OrHash
                   )
                 ),
-              secret_value: T.nilable(String)
+              secret_value: T.nilable(String),
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
-            type:,
             # Updated injection location.
             injection_location: nil,
             # The new networking scope, which replaces the stored one as a whole.
             networking: nil,
             # The new secret value to replace the stored one.
-            secret_value: nil
+            secret_value: nil,
+            type: :environment_variable
           )
           end
 
           sig do
             override.returns(
               {
-                type:
-                  Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams::Type::OrSymbol,
+                type: Symbol,
                 injection_location:
                   Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationUpdateParams,
                 networking:
@@ -103,35 +97,6 @@ module Anthropic
             )
           end
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            ENVIRONMENT_VARIABLE =
-              T.let(
-                :environment_variable,
-                Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

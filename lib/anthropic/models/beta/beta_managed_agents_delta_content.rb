@@ -13,8 +13,8 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeltaContent::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsDeltaContent::Type }
+        #   @return [Symbol, :content_delta]
+        required :type, const: :content_delta
 
         # @!attribute index
         #   Which entry in the previewed event's content array this fragment lands in.
@@ -24,25 +24,15 @@ module Anthropic
         #   @return [Integer, nil]
         optional :index, Integer
 
-        # @!method initialize(content:, type:, index: nil)
+        # @!method initialize(content:, index: nil, type: :content_delta)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsDeltaContent} for more details.
         #
         #   @param content [Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock] A partial element of the content array at index, typed like the element itself —
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeltaContent::Type]
-        #
         #   @param index [Integer] Which entry in the previewed event's content array this fragment lands in. Inser
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsDeltaContent#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          CONTENT_DELTA = :content_delta
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #
+        #   @param type [Symbol, :content_delta]
       end
     end
 

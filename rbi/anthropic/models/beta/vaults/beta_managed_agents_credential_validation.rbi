@@ -67,11 +67,7 @@ module Anthropic
           end
           attr_accessor :status
 
-          sig do
-            returns(
-              Anthropic::Beta::Vaults::BetaManagedAgentsCredentialValidation::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # When the validation probe was performed.
@@ -97,10 +93,9 @@ module Anthropic
                 ),
               status:
                 Anthropic::Beta::Vaults::BetaManagedAgentsCredentialValidationStatus::OrSymbol,
-              type:
-                Anthropic::Beta::Vaults::BetaManagedAgentsCredentialValidation::Type::OrSymbol,
               validated_at: Time,
-              vault_id: String
+              vault_id: String,
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
@@ -116,11 +111,11 @@ module Anthropic
             refresh:,
             # Overall verdict of the validation probe.
             status:,
-            type:,
             # When the validation probe was performed.
             validated_at:,
             # Identifier of the vault containing the credential.
-            vault_id:
+            vault_id:,
+            type: :vault_credential_validation
           )
           end
 
@@ -137,43 +132,13 @@ module Anthropic
                   ),
                 status:
                   Anthropic::Beta::Vaults::BetaManagedAgentsCredentialValidationStatus::TaggedSymbol,
-                type:
-                  Anthropic::Beta::Vaults::BetaManagedAgentsCredentialValidation::Type::TaggedSymbol,
+                type: Symbol,
                 validated_at: Time,
                 vault_id: String
               }
             )
           end
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Vaults::BetaManagedAgentsCredentialValidation::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            VAULT_CREDENTIAL_VALIDATION =
-              T.let(
-                :vault_credential_validation,
-                Anthropic::Beta::Vaults::BetaManagedAgentsCredentialValidation::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Vaults::BetaManagedAgentsCredentialValidation::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

@@ -23,11 +23,7 @@ module Anthropic
         sig { returns(Time) }
         attr_accessor :processed_at
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsSessionUpdatedEvent::Type::TaggedSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # The session's effective agent configuration after the update. Present only when
@@ -81,14 +77,13 @@ module Anthropic
           params(
             id: String,
             processed_at: Time,
-            type:
-              Anthropic::Beta::BetaManagedAgentsSessionUpdatedEvent::Type::OrSymbol,
             agent:
               T.nilable(Anthropic::Beta::BetaManagedAgentsSessionAgent::OrHash),
             budget:
               T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit::OrHash),
             metadata: T::Hash[Symbol, String],
-            title: T.nilable(String)
+            title: T.nilable(String),
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
@@ -96,7 +91,6 @@ module Anthropic
           id:,
           # Timestamp when the update was applied.
           processed_at:,
-          type:,
           # The session's effective agent configuration after the update. Present only when
           # the update changed `agent` (tools or mcp_servers); when present it is the full
           # materialised snapshot, not a diff.
@@ -109,7 +103,8 @@ module Anthropic
           # non-empty metadata; absent when metadata was unchanged or cleared to empty.
           metadata: nil,
           # The session's new title. Present only when the update changed it.
-          title: nil
+          title: nil,
+          type: :"session.updated"
         )
         end
 
@@ -118,8 +113,7 @@ module Anthropic
             {
               id: String,
               processed_at: Time,
-              type:
-                Anthropic::Beta::BetaManagedAgentsSessionUpdatedEvent::Type::TaggedSymbol,
+              type: Symbol,
               agent: T.nilable(Anthropic::Beta::BetaManagedAgentsSessionAgent),
               budget: T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit),
               metadata: T::Hash[Symbol, String],
@@ -128,35 +122,6 @@ module Anthropic
           )
         end
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsSessionUpdatedEvent::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          SESSION_UPDATED =
-            T.let(
-              :"session.updated",
-              Anthropic::Beta::BetaManagedAgentsSessionUpdatedEvent::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsSessionUpdatedEvent::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

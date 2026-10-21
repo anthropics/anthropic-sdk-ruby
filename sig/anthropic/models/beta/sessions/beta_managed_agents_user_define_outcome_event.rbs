@@ -10,7 +10,7 @@ module Anthropic
             outcome_id: String,
             processed_at: Time,
             rubric: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::rubric,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::type_
+            type: :"user.define_outcome"
           }
 
         class BetaManagedAgentsUserDefineOutcomeEvent < Anthropic::Internal::Type::BaseModel
@@ -26,7 +26,7 @@ module Anthropic
 
           attr_accessor rubric: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::rubric
 
-          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::type_
+          attr_accessor type: :"user.define_outcome"
 
           def initialize: (
             id: String,
@@ -35,7 +35,7 @@ module Anthropic
             outcome_id: String,
             processed_at: Time,
             rubric: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::rubric,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::type_
+            ?type: :"user.define_outcome"
           ) -> void
 
           def to_hash: -> {
@@ -45,7 +45,7 @@ module Anthropic
             outcome_id: String,
             processed_at: Time,
             rubric: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::rubric,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::type_
+            type: :"user.define_outcome"
           }
 
           type rubric =
@@ -83,16 +83,6 @@ module Anthropic
                 ?file_id: String,
                 ?content: String
               ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::rubric
-          end
-
-          type type_ = :"user.define_outcome"
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            USER_DEFINE_OUTCOME: :"user.define_outcome"
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::type_]
           end
         end
       end

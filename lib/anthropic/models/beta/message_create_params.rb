@@ -94,13 +94,12 @@ module Anthropic
         #
         #   Note that if you want to include a
         #   [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role),
-        #   you can use the top-level `system` parameter — there is no `"system"` role for
-        #   input messages in the Messages API.
+        #   you can use the top-level `system` parameter.
         #
         #   There is a limit of 100,000 messages in a single request.
         #
-        #   @return [Array<Anthropic::Models::Beta::BetaMessageParam>]
-        required :messages, -> { Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaMessageParam] }
+        #   @return [Array<Anthropic::Models::Beta::BetaUserMessageParam, Anthropic::Models::Beta::BetaAssistantMessageParam, Anthropic::Models::Beta::BetaSystemMessageParam>]
+        required :messages, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaMessageParam] }
 
         # @!attribute model
         #   The model that will complete your prompt.
@@ -279,23 +278,6 @@ module Anthropic
         #   @return [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>, nil]
         optional :system_, union: -> { Anthropic::Beta::MessageCreateParams::System }, api_name: :system
 
-        # @!attribute temperature
-        #   @deprecated Deprecated. Models released after Claude Opus 4.6 do not support setting
-        #   temperature. A value of 1.0 will be accepted for backwards compatibility, all
-        #   other values will be rejected with a 400 error.
-        #
-        #   Amount of randomness injected into the response.
-        #
-        #   Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0`
-        #   for analytical / multiple choice, and closer to `1.0` for creative and
-        #   generative tasks.
-        #
-        #   Note that even with `temperature` of `0.0`, the results will not be fully
-        #   deterministic.
-        #
-        #   @return [Float, nil]
-        optional :temperature, Float
-
         # @!attribute thinking
         #   Configuration for Claude's thinking.
         #
@@ -400,36 +382,6 @@ module Anthropic
         #   @return [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaCodeExecutionTool20250522, Anthropic::Models::Beta::BetaCodeExecutionTool20250825, Anthropic::Models::Beta::BetaCodeExecutionTool20260120, Anthropic::Models::Beta::BetaCodeExecutionTool20260521, Anthropic::Models::Beta::BetaBrowserToolset20260801, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaMemoryTool20250818, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20251124, Anthropic::Models::Beta::BetaComputerToolset20260801, Anthropic::Models::Beta::BetaToolTextEditor20250124, Anthropic::Models::Beta::BetaToolTextEditor20250429, Anthropic::Models::Beta::BetaToolTextEditor20250728, Anthropic::Models::Beta::BetaWebSearchTool20250305, Anthropic::Models::Beta::BetaWebFetchTool20250910, Anthropic::Models::Beta::BetaWebSearchTool20260209, Anthropic::Models::Beta::BetaWebFetchTool20260209, Anthropic::Models::Beta::BetaWebFetchTool20260309, Anthropic::Models::Beta::BetaWebSearchTool20260318, Anthropic::Models::Beta::BetaWebFetchTool20260318, Anthropic::Models::Beta::BetaAdvisorTool20260301, Anthropic::Models::Beta::BetaToolSearchToolBm25_20251119, Anthropic::Models::Beta::BetaToolSearchToolRegex20251119, Anthropic::Models::Beta::BetaMCPToolset>, nil]
         optional :tools, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaToolUnion] }
 
-        # @!attribute top_k
-        #   @deprecated Deprecated. Models released after Claude Opus 4.6 do not accept top_k; any value
-        #   will be rejected with a 400 error.
-        #
-        #   Only sample from the top K options for each subsequent token.
-        #
-        #   Used to remove "long tail" low probability responses.
-        #   [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
-        #
-        #   Recommended for advanced use cases only.
-        #
-        #   @return [Integer, nil]
-        optional :top_k, Integer
-
-        # @!attribute top_p
-        #   @deprecated Deprecated. Models released after Claude Opus 4.6 do not support setting top_p.
-        #   A value >= 0.99 will be accepted for backwards compatibility, all other values
-        #   will be rejected with a 400 error.
-        #
-        #   Use nucleus sampling.
-        #
-        #   In nucleus sampling, we compute the cumulative distribution over all the options
-        #   for each subsequent token in decreasing probability order and cut it off once it
-        #   reaches a particular probability specified by `top_p`.
-        #
-        #   Recommended for advanced use cases only.
-        #
-        #   @return [Float, nil]
-        optional :top_p, Float
-
         # @!attribute betas
         #   Optional header to specify the beta version(s) you want to use.
         #
@@ -454,13 +406,13 @@ module Anthropic
         #   @return [String, nil]
         optional :workspace_id, String
 
-        # @!method initialize(max_tokens:, messages:, model:, cache_control: nil, compaction: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+        # @!method initialize(max_tokens:, messages:, model:, cache_control: nil, compaction: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::MessageCreateParams} for more details.
         #
         #   @param max_tokens [Integer] The maximum number of tokens to generate before stopping.
         #
-        #   @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>] Input messages.
+        #   @param messages [Array<Anthropic::Models::Beta::BetaUserMessageParam, Anthropic::Models::Beta::BetaAssistantMessageParam, Anthropic::Models::Beta::BetaSystemMessageParam>] Input messages.
         #
         #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.
         #
@@ -496,17 +448,11 @@ module Anthropic
         #
         #   @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>] System prompt.
         #
-        #   @param temperature [Float] Amount of randomness injected into the response.
-        #
         #   @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigBetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive] Configuration for Claude's thinking.
         #
         #   @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
         #
         #   @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaCodeExecutionTool20250522, Anthropic::Models::Beta::BetaCodeExecutionTool20250825, Anthropic::Models::Beta::BetaCodeExecutionTool20260120, Anthropic::Models::Beta::BetaCodeExecutionTool20260521, Anthropic::Models::Beta::BetaBrowserToolset20260801, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaMemoryTool20250818, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20251124, Anthropic::Models::Beta::BetaComputerToolset20260801, Anthropic::Models::Beta::BetaToolTextEditor20250124, Anthropic::Models::Beta::BetaToolTextEditor20250429, Anthropic::Models::Beta::BetaToolTextEditor20250728, Anthropic::Models::Beta::BetaWebSearchTool20250305, Anthropic::Models::Beta::BetaWebFetchTool20250910, Anthropic::Models::Beta::BetaWebSearchTool20260209, Anthropic::Models::Beta::BetaWebFetchTool20260209, Anthropic::Models::Beta::BetaWebFetchTool20260309, Anthropic::Models::Beta::BetaWebSearchTool20260318, Anthropic::Models::Beta::BetaWebFetchTool20260318, Anthropic::Models::Beta::BetaAdvisorTool20260301, Anthropic::Models::Beta::BetaToolSearchToolBm25_20251119, Anthropic::Models::Beta::BetaToolSearchToolRegex20251119, Anthropic::Models::Beta::BetaMCPToolset>] Definitions of tools that the model may use.
-        #
-        #   @param top_k [Integer] Only sample from the top K options for each subsequent token.
-        #
-        #   @param top_p [Float] Use nucleus sampling.
         #
         #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #

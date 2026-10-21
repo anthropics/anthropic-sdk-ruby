@@ -161,7 +161,7 @@ module Anthropic
               # otherwise re-add `authorization` on the redirected leg.
               request = {
                 **request,
-                headers: request.fetch(:headers).except(*drop),
+                headers: request.fetch(:headers).except(*drop, "x-api-key"),
                 metadata: {**request.fetch(:metadata, {}), cross_origin_redirect: true}
               }
             end
@@ -716,10 +716,13 @@ module Anthropic
             # per-request overrides aren't clobbered.
             user_keys = request.fetch(:user_header_keys, [])
 
-            auth_headers.each do |k, v|
-              k_norm = k.to_s.downcase
-              next if user_keys.include?(k_norm)
-              request.fetch(:headers)[k_norm] = v.to_s.strip
+            # A cross-origin redirect dropped the credential; it stays dropped.
+            unless request.fetch(:metadata, {})[:cross_origin_redirect]
+              auth_headers.each do |k, v|
+                k_norm = k.to_s.downcase
+                next if user_keys.include?(k_norm)
+                request.fetch(:headers)[k_norm] = v.to_s.strip
+              end
             end
 
             send_request(

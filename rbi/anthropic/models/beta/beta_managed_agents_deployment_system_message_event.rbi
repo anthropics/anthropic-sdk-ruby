@@ -23,11 +23,7 @@ module Anthropic
         end
         attr_accessor :content
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsDeploymentSystemMessageEvent::Type::TaggedSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # Privileged context for the accompanying turn and all subsequent turns, appended
@@ -39,14 +35,13 @@ module Anthropic
               T::Array[
                 Anthropic::Beta::BetaManagedAgentsSystemContentBlock::OrHash
               ],
-            type:
-              Anthropic::Beta::BetaManagedAgentsDeploymentSystemMessageEvent::Type::OrSymbol
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
           # System content blocks to append. Text-only.
           content:,
-          type:
+          type: :"system.message"
         )
         end
 
@@ -55,41 +50,11 @@ module Anthropic
             {
               content:
                 T::Array[Anthropic::Beta::BetaManagedAgentsSystemContentBlock],
-              type:
-                Anthropic::Beta::BetaManagedAgentsDeploymentSystemMessageEvent::Type::TaggedSymbol
+              type: Symbol
             }
           )
         end
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsDeploymentSystemMessageEvent::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          SYSTEM_MESSAGE =
-            T.let(
-              :"system.message",
-              Anthropic::Beta::BetaManagedAgentsDeploymentSystemMessageEvent::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsDeploymentSystemMessageEvent::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

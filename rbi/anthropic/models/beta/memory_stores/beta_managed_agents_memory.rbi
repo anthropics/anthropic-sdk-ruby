@@ -58,11 +58,7 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :path
 
-          sig do
-            returns(
-              Anthropic::Beta::MemoryStores::BetaManagedAgentsMemory::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # When the memory was last changed, in RFC 3339.
@@ -97,10 +93,9 @@ module Anthropic
               memory_store_id: String,
               memory_version_id: String,
               path: String,
-              type:
-                Anthropic::Beta::MemoryStores::BetaManagedAgentsMemory::Type::OrSymbol,
               updated_at: Time,
-              content: T.nilable(String)
+              content: T.nilable(String),
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
@@ -135,7 +130,6 @@ module Anthropic
             # Always starts with `/`. Paths are case-sensitive and unique within a store.
             # Maximum 1,024 bytes.
             path:,
-            type:,
             # When the memory was last changed, in RFC 3339.
             #
             # To find out who made the change, look at `created_by` on the memory version that
@@ -144,7 +138,8 @@ module Anthropic
             # The memory's UTF-8 text content, or `null` when the response uses `view=basic`.
             #
             # The maximum size is 100 kB (102,400 bytes).
-            content: nil
+            content: nil,
+            type: :memory
           )
           end
 
@@ -158,43 +153,13 @@ module Anthropic
                 memory_store_id: String,
                 memory_version_id: String,
                 path: String,
-                type:
-                  Anthropic::Beta::MemoryStores::BetaManagedAgentsMemory::Type::TaggedSymbol,
+                type: Symbol,
                 updated_at: Time,
                 content: T.nilable(String)
               }
             )
           end
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::MemoryStores::BetaManagedAgentsMemory::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            MEMORY =
-              T.let(
-                :memory,
-                Anthropic::Beta::MemoryStores::BetaManagedAgentsMemory::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::MemoryStores::BetaManagedAgentsMemory::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

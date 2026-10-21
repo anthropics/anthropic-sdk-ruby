@@ -19,9 +19,9 @@ module Anthropic
       # Implements steps 2-5 of the spec precedence chain (step 1 is handled at
       # the client constructor level):
       #
-      # Step 2a: +ANTHROPIC_API_KEY+ -> return +nil+ so the client uses its
-      #          existing +X-Api-Key+ header path. (API keys are not Bearer
-      #          tokens, so they can't flow through this chain.)
+      # Step 2a: +ANTHROPIC_API_KEY+ -> return +nil+ so the client sends the
+      #          key itself. (A key needs no token cache or OAuth beta
+      #          header, so it doesn't flow through this chain.)
       # Step 2b: +ANTHROPIC_AUTH_TOKEN+ -> StaticToken (Bearer).
       # Step 3:  +ANTHROPIC_PROFILE+ set -> load that profile. This is
       #          *explicit profile selection* via env var; failures propagate.
@@ -45,7 +45,7 @@ module Anthropic
       # Returns +nil+ when nothing matches -- the client will fall back to
       # its normal "no auth configured" error.
       def default_credentials(base_url: DEFAULT_BASE_URL)
-        # Step 2a -- env api_key: return nil so the base client handles X-Api-Key.
+        # Step 2a -- env api_key: return nil so the base client sends the key.
         # Treat an empty string the same as unset, matching the Python client.
         unless ENV[ENV_API_KEY].to_s.empty?
           return nil

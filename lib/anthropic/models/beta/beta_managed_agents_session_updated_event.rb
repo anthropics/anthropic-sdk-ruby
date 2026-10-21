@@ -18,8 +18,8 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSessionUpdatedEvent::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsSessionUpdatedEvent::Type }
+        #   @return [Symbol, :"session.updated"]
+        required :type, const: :"session.updated"
 
         # @!attribute agent
         #   The session's effective agent configuration after the update. Present only when
@@ -50,7 +50,7 @@ module Anthropic
         #   @return [String, nil]
         optional :title, String, nil?: true
 
-        # @!method initialize(id:, processed_at:, type:, agent: nil, budget: nil, metadata: nil, title: nil)
+        # @!method initialize(id:, processed_at:, agent: nil, budget: nil, metadata: nil, title: nil, type: :"session.updated")
         #   Emitted when an UpdateSession request changed at least one field. Carries only
         #   the fields that changed; absent fields were not part of the update. The new
         #   configuration applies from the next turn.
@@ -63,8 +63,6 @@ module Anthropic
         #
         #   @param processed_at [Time] Timestamp when the update was applied.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSessionUpdatedEvent::Type]
-        #
         #   @param agent [Anthropic::Models::Beta::BetaManagedAgentsSessionAgent, nil] The session's effective agent configuration after the update. Present only when
         #
         #   @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] The session's budget after the update: the new budget when set or replaced, or n
@@ -72,16 +70,8 @@ module Anthropic
         #   @param metadata [Hash{Symbol=>String}] The session's full metadata bag after the update. Present when the update set no
         #
         #   @param title [String, nil] The session's new title. Present only when the update changed it.
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsSessionUpdatedEvent#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          SESSION_UPDATED = :"session.updated"
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #
+        #   @param type [Symbol, :"session.updated"]
       end
     end
 

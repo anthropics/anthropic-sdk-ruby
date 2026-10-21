@@ -21,71 +21,28 @@ module Anthropic
           sig { returns(Time) }
           attr_accessor :processed_at
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelRequestStartEvent::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # Emitted when a model request is initiated by the agent.
           sig do
-            params(
-              id: String,
-              processed_at: Time,
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelRequestStartEvent::Type::OrSymbol
-            ).returns(T.attached_class)
+            params(id: String, processed_at: Time, type: Symbol).returns(
+              T.attached_class
+            )
           end
           def self.new(
             # Unique identifier for this event.
             id:,
             # Timestamp when the model request started.
             processed_at:,
-            type:
+            type: :"span.model_request_start"
           )
           end
 
           sig do
-            override.returns(
-              {
-                id: String,
-                processed_at: Time,
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelRequestStartEvent::Type::TaggedSymbol
-              }
-            )
+            override.returns({ id: String, processed_at: Time, type: Symbol })
           end
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelRequestStartEvent::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            SPAN_MODEL_REQUEST_START =
-              T.let(
-                :"span.model_request_start",
-                Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelRequestStartEvent::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelRequestStartEvent::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

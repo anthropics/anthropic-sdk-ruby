@@ -28,11 +28,7 @@ module Anthropic
           end
           attr_accessor :rubric
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::Type::OrSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # Eval→revision cycles before giving up. Default 3, max 20.
@@ -49,9 +45,8 @@ module Anthropic
                   Anthropic::Beta::Sessions::BetaManagedAgentsFileRubricParams::OrHash,
                   Anthropic::Beta::Sessions::BetaManagedAgentsTextRubricParams::OrHash
                 ),
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::Type::OrSymbol,
-              max_iterations: T.nilable(Integer)
+              max_iterations: T.nilable(Integer),
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
@@ -59,9 +54,9 @@ module Anthropic
             description:,
             # How to grade the outcome. Text or file reference.
             rubric:,
-            type:,
             # Eval→revision cycles before giving up. Default 3, max 20.
-            max_iterations: nil
+            max_iterations: nil,
+            type: :"user.define_outcome"
           )
           end
 
@@ -74,8 +69,7 @@ module Anthropic
                     Anthropic::Beta::Sessions::BetaManagedAgentsFileRubricParams,
                     Anthropic::Beta::Sessions::BetaManagedAgentsTextRubricParams
                   ),
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::Type::OrSymbol,
+                type: Symbol,
                 max_iterations: T.nilable(Integer)
               }
             )
@@ -159,35 +153,6 @@ module Anthropic
               # Maximum 262144 characters.
               content: nil
             )
-            end
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            USER_DEFINE_OUTCOME =
-              T.let(
-                :"user.define_outcome",
-                Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
             end
           end
         end

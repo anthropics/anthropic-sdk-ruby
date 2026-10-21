@@ -45,9 +45,9 @@ module Anthropic
         def self.new(type:, **args)
           case type.to_sym
           when :schedule
-            Anthropic::Beta::BetaManagedAgentsScheduleTriggerContext.new(type: type, **args)
+            Anthropic::Beta::BetaManagedAgentsScheduleTriggerContext.new(**args)
           when :manual
-            Anthropic::Beta::BetaManagedAgentsManualTriggerContext.new(type: type, **args)
+            Anthropic::Beta::BetaManagedAgentsManualTriggerContext.new(**args)
           else
             raise ArgumentError, "unknown type: #{type}"
           end

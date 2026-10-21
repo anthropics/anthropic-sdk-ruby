@@ -13,8 +13,8 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetParams::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsMCPToolsetParams::Type }
+        #   @return [Symbol, :mcp_toolset]
+        required :type, const: :mcp_toolset
 
         # @!attribute configs
         #   Per-tool configuration overrides.
@@ -31,7 +31,7 @@ module Anthropic
                  -> { Anthropic::Beta::BetaManagedAgentsMCPToolsetDefaultConfigParams },
                  nil?: true
 
-        # @!method initialize(mcp_server_name:, type:, configs: nil, default_config: nil)
+        # @!method initialize(mcp_server_name:, configs: nil, default_config: nil, type: :mcp_toolset)
         #   Configuration for tools from an MCP server defined in `mcp_servers`.
         #
         #   Some parameter documentations has been truncated, see
@@ -39,21 +39,11 @@ module Anthropic
         #
         #   @param mcp_server_name [String] Name of the MCP server. Must match a server name from the mcp_servers array. 1-2
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetParams::Type]
-        #
         #   @param configs [Array<Anthropic::Models::Beta::BetaManagedAgentsMCPToolConfigParams>] Per-tool configuration overrides.
         #
         #   @param default_config [Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetDefaultConfigParams, nil] Default configuration for all tools from this server.
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetParams#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          MCP_TOOLSET = :mcp_toolset
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #
+        #   @param type [Symbol, :mcp_toolset]
       end
     end
 

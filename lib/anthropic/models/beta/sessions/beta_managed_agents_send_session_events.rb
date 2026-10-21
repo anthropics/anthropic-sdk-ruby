@@ -107,19 +107,19 @@ module Anthropic
             def self.new(type:, **args)
               case type.to_sym
               when :"user.message"
-                Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEvent.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEvent.new(**args)
               when :"user.interrupt"
-                Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEvent.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEvent.new(**args)
               when :"user.tool_confirmation"
-                Anthropic::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent.new(**args)
               when :"user.custom_tool_result"
-                Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent.new(**args)
               when :"user.define_outcome"
-                Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent.new(**args)
               when :"user.tool_result"
-                Anthropic::Beta::BetaManagedAgentsUserToolResultEvent.new(type: type, **args)
+                Anthropic::Beta::BetaManagedAgentsUserToolResultEvent.new(**args)
               when :"system.message"
-                Anthropic::Beta::BetaManagedAgentsSystemMessageEvent.new(type: type, **args)
+                Anthropic::Beta::BetaManagedAgentsSystemMessageEvent.new(**args)
               else
                 raise ArgumentError, "unknown type: #{type}"
               end

@@ -26,9 +26,8 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams::Type]
-          required :type,
-                   enum: -> { Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams::Type }
+          #   @return [Symbol, :environment_variable]
+          required :type, const: :environment_variable
 
           # @!attribute injection_location
           #   Where in the outbound request the secret value may be substituted.
@@ -36,7 +35,7 @@ module Anthropic
           #   @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsInjectionLocationParams, nil]
           optional :injection_location, -> { Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationParams }
 
-          # @!method initialize(networking:, secret_name:, secret_value:, type:, injection_location: nil)
+          # @!method initialize(networking:, secret_name:, secret_value:, injection_location: nil, type: :environment_variable)
           #   Parameters for creating an environment variable credential.
           #
           #   Some parameter documentations has been truncated, see
@@ -49,19 +48,9 @@ module Anthropic
           #
           #   @param secret_value [String] The secret to substitute into the agent's outbound requests. It's write-only and
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams::Type]
-          #
           #   @param injection_location [Anthropic::Models::Beta::Vaults::BetaManagedAgentsInjectionLocationParams] Where in the outbound request the secret value may be substituted.
-
-          # @see Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            ENVIRONMENT_VARIABLE = :environment_variable
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #
+          #   @param type [Symbol, :environment_variable]
         end
       end
     end

@@ -31,11 +31,10 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusTerminatedEvent::Type]
-          required :type,
-                   enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusTerminatedEvent::Type }
+          #   @return [Symbol, :"session.thread_status_terminated"]
+          required :type, const: :"session.thread_status_terminated"
 
-          # @!method initialize(id:, agent_name:, processed_at:, session_thread_id:, type:)
+          # @!method initialize(id:, agent_name:, processed_at:, session_thread_id:, type: :"session.thread_status_terminated")
           #   A session thread has terminated and will accept no further input. Emitted on the
           #   thread's own stream and cross-posted to the primary stream for child threads.
           #
@@ -47,17 +46,7 @@ module Anthropic
           #
           #   @param session_thread_id [String] Public sthr\_ ID of the thread that terminated.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusTerminatedEvent::Type]
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusTerminatedEvent#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            SESSION_THREAD_STATUS_TERMINATED = :"session.thread_status_terminated"
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :"session.thread_status_terminated"]
         end
       end
     end

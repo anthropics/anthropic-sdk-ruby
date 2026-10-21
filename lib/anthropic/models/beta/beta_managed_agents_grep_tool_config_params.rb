@@ -90,9 +90,9 @@ module Anthropic
           def self.new(type:, **args)
             case type.to_sym
             when :always_allow
-              Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy.new(**args)
             when :always_ask
-              Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy.new(**args)
             when :auto
               Anthropic::Beta::BetaManagedAgentsAutoPolicy.new(**args)
             else

@@ -12,25 +12,15 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSystemContentBlock::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsSystemContentBlock::Type }
+        #   @return [Symbol, :text]
+        required :type, const: :text
 
-        # @!method initialize(text:, type:)
+        # @!method initialize(text:, type: :text)
         #   Content block in a mid-conversation system message. Text-only.
         #
         #   @param text [String] The text content.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSystemContentBlock::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsSystemContentBlock#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TEXT = :text
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :text]
       end
     end
 

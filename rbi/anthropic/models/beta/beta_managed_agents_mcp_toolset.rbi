@@ -36,11 +36,7 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :mcp_server_name
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsMCPToolset::Type::TaggedSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         sig do
@@ -50,7 +46,7 @@ module Anthropic
             default_config:
               Anthropic::Beta::BetaManagedAgentsMCPToolsetDefaultConfig::OrHash,
             mcp_server_name: String,
-            type: Anthropic::Beta::BetaManagedAgentsMCPToolset::Type::OrSymbol
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
@@ -58,7 +54,7 @@ module Anthropic
           # Resolved default configuration for all tools from an MCP server.
           default_config:,
           mcp_server_name:,
-          type:
+          type: :mcp_toolset
         )
         end
 
@@ -70,38 +66,11 @@ module Anthropic
               default_config:
                 Anthropic::Beta::BetaManagedAgentsMCPToolsetDefaultConfig,
               mcp_server_name: String,
-              type:
-                Anthropic::Beta::BetaManagedAgentsMCPToolset::Type::TaggedSymbol
+              type: Symbol
             }
           )
         end
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(Symbol, Anthropic::Beta::BetaManagedAgentsMCPToolset::Type)
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          MCP_TOOLSET =
-            T.let(
-              :mcp_toolset,
-              Anthropic::Beta::BetaManagedAgentsMCPToolset::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsMCPToolset::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

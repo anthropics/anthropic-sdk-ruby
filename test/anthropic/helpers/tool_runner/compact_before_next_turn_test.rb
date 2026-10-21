@@ -380,7 +380,7 @@ class Anthropic::Test::Helpers::ToolRunner::CompactBeforeNextTurnTest < Minitest
         assert_match(/while the conversation is being compacted/, error.message)
         # Other params can still change, and the change is kept after the history is replaced.
         runner.params = {**runner.params, max_tokens: 2048}
-        runner.params.update(temperature: 0.5)
+        runner.params.update(inference_geo: "us")
       else
         nil
       end
@@ -389,7 +389,7 @@ class Anthropic::Test::Helpers::ToolRunner::CompactBeforeNextTurnTest < Minitest
     after = bodies(requests)[2]
     assert_equal(compaction_block_alone, after[:messages])
     assert_equal(2048, after[:max_tokens])
-    assert_equal(0.5, after[:temperature])
+    assert_equal("us", after[:inference_geo])
   end
 
   def test_a_failed_compaction_can_be_asked_for_again
@@ -412,14 +412,6 @@ class Anthropic::Test::Helpers::ToolRunner::CompactBeforeNextTurnTest < Minitest
       [nil, {type: "summarize"}, {type: "summarize"}, nil],
       bodies(requests).map { _1[:compaction] }
     )
-  end
-
-  def test_removed_compaction_control_option_is_refused
-    error = assert_raises(ArgumentError) do
-      @client.beta.messages.tool_runner({**basic_params, compaction_control: {enabled: true}})
-    end
-
-    assert_match(/`compaction_control` has been removed.*`#compact_before_next_turn`/, error.message)
   end
 
   def test_compaction_param_is_refused_on_a_tool_runner

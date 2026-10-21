@@ -54,21 +54,6 @@ module Anthropic
       sig { params(limit: Integer).void }
       attr_writer :limit
 
-      # Optional header to specify the beta version(s) you want to use.
-      sig do
-        returns(
-          T.nilable(T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)])
-        )
-      end
-      attr_reader :betas
-
-      sig do
-        params(
-          betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)]
-        ).void
-      end
-      attr_writer :betas
-
       # Optional header to select the Workspace for this request. The value is a
       # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
       #
@@ -87,7 +72,6 @@ module Anthropic
           before_id: String,
           lifecycle: T::Array[Anthropic::ModelListParams::Lifecycle::OrSymbol],
           limit: Integer,
-          betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
           workspace_id: String,
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(T.attached_class)
@@ -108,8 +92,6 @@ module Anthropic
         #
         # Defaults to `20`. Ranges from `1` to `1000`.
         limit: nil,
-        # Optional header to specify the beta version(s) you want to use.
-        betas: nil,
         # Optional header to select the Workspace for this request. The value is a
         # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
         #
@@ -129,7 +111,6 @@ module Anthropic
             lifecycle:
               T::Array[Anthropic::ModelListParams::Lifecycle::OrSymbol],
             limit: Integer,
-            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions
           }

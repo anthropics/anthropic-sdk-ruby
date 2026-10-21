@@ -4,7 +4,7 @@ module Anthropic
       type message_create_params =
         {
           max_tokens: Integer,
-          messages: ::Array[Anthropic::Beta::BetaMessageParam],
+          messages: ::Array[Anthropic::Models::Beta::beta_message_param],
           model: Anthropic::Models::model,
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           compaction: Anthropic::Beta::BetaCompactionConfig?,
@@ -22,12 +22,9 @@ module Anthropic
           speed: Anthropic::Models::Beta::MessageCreateParams::speed?,
           stop_sequences: ::Array[String],
           system_: Anthropic::Models::Beta::MessageCreateParams::system_,
-          temperature: Float,
           thinking: Anthropic::Models::Beta::beta_thinking_config_param,
           tool_choice: Anthropic::Models::Beta::beta_tool_choice,
           tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
-          top_k: Integer,
-          top_p: Float,
           betas: ::Array[Anthropic::Models::anthropic_beta],
           user_profile_id: String,
           workspace_id: String
@@ -40,7 +37,7 @@ module Anthropic
 
         attr_accessor max_tokens: Integer
 
-        attr_accessor messages: ::Array[Anthropic::Beta::BetaMessageParam]
+        attr_accessor messages: ::Array[Anthropic::Models::Beta::beta_message_param]
 
         attr_accessor model: Anthropic::Models::model
 
@@ -98,10 +95,6 @@ module Anthropic
           Anthropic::Models::Beta::MessageCreateParams::system_
         ) -> Anthropic::Models::Beta::MessageCreateParams::system_
 
-        attr_reader temperature: Float?
-
-        def temperature=: (Float) -> Float
-
         attr_reader thinking: Anthropic::Models::Beta::beta_thinking_config_param?
 
         def thinking=: (
@@ -120,14 +113,6 @@ module Anthropic
           ::Array[Anthropic::Models::Beta::beta_tool_union]
         ) -> ::Array[Anthropic::Models::Beta::beta_tool_union]
 
-        attr_reader top_k: Integer?
-
-        def top_k=: (Integer) -> Integer
-
-        attr_reader top_p: Float?
-
-        def top_p=: (Float) -> Float
-
         attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
 
         def betas=: (
@@ -144,7 +129,7 @@ module Anthropic
 
         def initialize: (
           max_tokens: Integer,
-          messages: ::Array[Anthropic::Beta::BetaMessageParam],
+          messages: ::Array[Anthropic::Models::Beta::beta_message_param],
           model: Anthropic::Models::model,
           ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           ?compaction: Anthropic::Beta::BetaCompactionConfig?,
@@ -162,12 +147,9 @@ module Anthropic
           ?speed: Anthropic::Models::Beta::MessageCreateParams::speed?,
           ?stop_sequences: ::Array[String],
           ?system_: Anthropic::Models::Beta::MessageCreateParams::system_,
-          ?temperature: Float,
           ?thinking: Anthropic::Models::Beta::beta_thinking_config_param,
           ?tool_choice: Anthropic::Models::Beta::beta_tool_choice,
           ?tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
-          ?top_k: Integer,
-          ?top_p: Float,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?user_profile_id: String,
           ?workspace_id: String,
@@ -176,7 +158,7 @@ module Anthropic
 
         def to_hash: -> {
           max_tokens: Integer,
-          messages: ::Array[Anthropic::Beta::BetaMessageParam],
+          messages: ::Array[Anthropic::Models::Beta::beta_message_param],
           model: Anthropic::Models::model,
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           compaction: Anthropic::Beta::BetaCompactionConfig?,
@@ -194,12 +176,9 @@ module Anthropic
           speed: Anthropic::Models::Beta::MessageCreateParams::speed?,
           stop_sequences: ::Array[String],
           system_: Anthropic::Models::Beta::MessageCreateParams::system_,
-          temperature: Float,
           thinking: Anthropic::Models::Beta::beta_thinking_config_param,
           tool_choice: Anthropic::Models::Beta::beta_tool_choice,
           tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
-          top_k: Integer,
-          top_p: Float,
           betas: ::Array[Anthropic::Models::anthropic_beta],
           user_profile_id: String,
           workspace_id: String,

@@ -143,7 +143,7 @@ class AnthropicMiddlewareTest < Minitest::Test
       assert(req.body[:messages][0].frozen?)
       assert(req.body[:messages][0][:content].frozen?, "String leaves must be frozen, not aliased")
       assert_raises(FrozenError) { req.headers["x-thing"] = "v" }
-      assert_raises(FrozenError) { req.headers["x-api-key"] << "x" }
+      assert_raises(FrozenError) { req.headers["authorization"] << "x" }
       assert_raises(FrozenError) { req.url.path << "x" }
       assert_raises(FrozenError) { req.body[:messages] << {role: :user, content: "leak"} }
       nxt.call(req)
@@ -613,14 +613,14 @@ class AnthropicMiddlewareTest < Minitest::Test
       },
       headers: {
         "Accept" => "application/json",
-        "Anthropic-Version" => "2023-06-01",
+        "Authorization" => "Bearer my-anthropic-api-key",
         "Content-Type" => "application/json",
-        "X-Api-Key" => "my-anthropic-api-key",
         "X-Stainless-Lang" => "ruby",
         "X-Stainless-Retry-Count" => "0"
       }
     }
     volatile = %w[
+      Anthropic-Version
       User-Agent
       X-Stainless-Arch
       X-Stainless-Os

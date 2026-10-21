@@ -103,15 +103,15 @@ module Anthropic
           def self.new(type:, **args)
             case type.to_sym
             when :low
-              Anthropic::Beta::BetaManagedAgentsEffortLow.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsEffortLow.new(**args)
             when :medium
-              Anthropic::Beta::BetaManagedAgentsEffortMedium.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsEffortMedium.new(**args)
             when :high
-              Anthropic::Beta::BetaManagedAgentsEffortHigh.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsEffortHigh.new(**args)
             when :xhigh
-              Anthropic::Beta::BetaManagedAgentsEffortXhigh.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsEffortXhigh.new(**args)
             when :max
-              Anthropic::Beta::BetaManagedAgentsEffortMax.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsEffortMax.new(**args)
             else
               raise ArgumentError, "unknown type: #{type}"
             end

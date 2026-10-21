@@ -6,7 +6,7 @@ module Anthropic
 
         def create: (
           max_tokens: Integer,
-          messages: ::Array[Anthropic::Beta::BetaMessageParam],
+          messages: ::Array[Anthropic::Models::Beta::beta_message_param],
           model: Anthropic::Models::model,
           ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           ?compaction: Anthropic::Beta::BetaCompactionConfig?,
@@ -24,12 +24,9 @@ module Anthropic
           ?speed: Anthropic::Models::Beta::MessageCreateParams::speed?,
           ?stop_sequences: ::Array[String],
           ?system_: Anthropic::Models::Beta::MessageCreateParams::system_,
-          ?temperature: Float,
           ?thinking: Anthropic::Models::Beta::beta_thinking_config_param,
           ?tool_choice: Anthropic::Models::Beta::beta_tool_choice,
           ?tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
-          ?top_k: Integer,
-          ?top_p: Float,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?user_profile_id: String,
           ?workspace_id: String,
@@ -38,7 +35,7 @@ module Anthropic
 
         def stream_raw: (
           max_tokens: Integer,
-          messages: ::Array[Anthropic::Beta::BetaMessageParam],
+          messages: ::Array[Anthropic::Models::Beta::beta_message_param],
           model: Anthropic::Models::model,
           ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           ?compaction: Anthropic::Beta::BetaCompactionConfig?,
@@ -56,12 +53,9 @@ module Anthropic
           ?speed: Anthropic::Models::Beta::MessageCreateParams::speed?,
           ?stop_sequences: ::Array[String],
           ?system_: Anthropic::Models::Beta::MessageCreateParams::system_,
-          ?temperature: Float,
           ?thinking: Anthropic::Models::Beta::beta_thinking_config_param,
           ?tool_choice: Anthropic::Models::Beta::beta_tool_choice,
           ?tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
-          ?top_k: Integer,
-          ?top_p: Float,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?user_profile_id: String,
           ?workspace_id: String,
@@ -69,7 +63,7 @@ module Anthropic
         ) -> Anthropic::Internal::Type::BaseStream[bot, Anthropic::Models::Beta::beta_raw_message_stream_event]
 
         def count_tokens: (
-          messages: ::Array[Anthropic::Beta::BetaMessageParam],
+          messages: ::Array[Anthropic::Models::Beta::beta_message_param],
           model: Anthropic::Models::model,
           ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           ?compaction: Anthropic::Beta::BetaCompactionConfig?,
@@ -90,7 +84,7 @@ module Anthropic
 
         def stream: (
           max_tokens: Integer,
-          messages: ::Array[Anthropic::Beta::BetaMessageParam],
+          messages: ::Array[Anthropic::Models::Beta::beta_message_param],
           model: Anthropic::Models::model,
           ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           ?compaction: Anthropic::Beta::BetaCompactionConfig?,
@@ -108,12 +102,9 @@ module Anthropic
           ?speed: Anthropic::Models::Beta::MessageCreateParams::speed?,
           ?stop_sequences: ::Array[String],
           ?system_: Anthropic::Models::Beta::MessageCreateParams::system_,
-          ?temperature: Float,
           ?thinking: Anthropic::Models::Beta::beta_thinking_config_param,
           ?tool_choice: Anthropic::Models::Beta::beta_tool_choice,
           ?tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
-          ?top_k: Integer,
-          ?top_p: Float,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?user_profile_id: String,
           ?workspace_id: String,

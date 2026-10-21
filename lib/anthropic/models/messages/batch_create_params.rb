@@ -162,13 +162,12 @@ module Anthropic
             #
             #   Note that if you want to include a
             #   [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role),
-            #   you can use the top-level `system` parameter — there is no `"system"` role for
-            #   input messages in the Messages API.
+            #   you can use the top-level `system` parameter.
             #
             #   There is a limit of 100,000 messages in a single request.
             #
-            #   @return [Array<Anthropic::Models::MessageParam>]
-            required :messages, -> { Anthropic::Internal::Type::ArrayOf[Anthropic::MessageParam] }
+            #   @return [Array<Anthropic::Models::UserMessageParam, Anthropic::Models::AssistantMessageParam, Anthropic::Models::SystemMessageParam>]
+            required :messages, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::MessageParam] }
 
             # @!attribute model
             #   The model that will complete your prompt.
@@ -285,23 +284,6 @@ module Anthropic
                      union: -> { Anthropic::Messages::BatchCreateParams::Request::Params::System },
                      api_name: :system
 
-            # @!attribute temperature
-            #   @deprecated Deprecated. Models released after Claude Opus 4.6 do not support setting
-            #   temperature. A value of 1.0 will be accepted for backwards compatibility, all
-            #   other values will be rejected with a 400 error.
-            #
-            #   Amount of randomness injected into the response.
-            #
-            #   Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0`
-            #   for analytical / multiple choice, and closer to `1.0` for creative and
-            #   generative tasks.
-            #
-            #   Note that even with `temperature` of `0.0`, the results will not be fully
-            #   deterministic.
-            #
-            #   @return [Float, nil]
-            optional :temperature, Float
-
             # @!attribute thinking
             #   Configuration for Claude's thinking.
             #
@@ -406,37 +388,7 @@ module Anthropic
             #   @return [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::CodeExecutionTool20250522, Anthropic::Models::CodeExecutionTool20250825, Anthropic::Models::CodeExecutionTool20260120, Anthropic::Models::CodeExecutionTool20260521, Anthropic::Models::BrowserToolset20260801, Anthropic::Models::MemoryTool20250818, Anthropic::Models::ComputerToolset20260801, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::ToolTextEditor20250429, Anthropic::Models::ToolTextEditor20250728, Anthropic::Models::WebSearchTool20250305, Anthropic::Models::WebFetchTool20250910, Anthropic::Models::WebSearchTool20260209, Anthropic::Models::WebFetchTool20260209, Anthropic::Models::WebFetchTool20260309, Anthropic::Models::WebSearchTool20260318, Anthropic::Models::WebFetchTool20260318, Anthropic::Models::ToolSearchToolBm25_20251119, Anthropic::Models::ToolSearchToolRegex20251119>, nil]
             optional :tools, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::ToolUnion] }
 
-            # @!attribute top_k
-            #   @deprecated Deprecated. Models released after Claude Opus 4.6 do not accept top_k; any value
-            #   will be rejected with a 400 error.
-            #
-            #   Only sample from the top K options for each subsequent token.
-            #
-            #   Used to remove "long tail" low probability responses.
-            #   [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
-            #
-            #   Recommended for advanced use cases only.
-            #
-            #   @return [Integer, nil]
-            optional :top_k, Integer
-
-            # @!attribute top_p
-            #   @deprecated Deprecated. Models released after Claude Opus 4.6 do not support setting top_p.
-            #   A value >= 0.99 will be accepted for backwards compatibility, all other values
-            #   will be rejected with a 400 error.
-            #
-            #   Use nucleus sampling.
-            #
-            #   In nucleus sampling, we compute the cumulative distribution over all the options
-            #   for each subsequent token in decreasing probability order and cut it off once it
-            #   reaches a particular probability specified by `top_p`.
-            #
-            #   Recommended for advanced use cases only.
-            #
-            #   @return [Float, nil]
-            optional :top_p, Float
-
-            # @!method initialize(max_tokens:, messages:, model:, cache_control: nil, container: nil, diagnostics: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, speed: nil, stop_sequences: nil, stream: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil)
+            # @!method initialize(max_tokens:, messages:, model:, cache_control: nil, container: nil, diagnostics: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, speed: nil, stop_sequences: nil, stream: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil)
             #   Messages API creation parameters for the individual request.
             #
             #   See the
@@ -449,7 +401,7 @@ module Anthropic
             #
             #   @param max_tokens [Integer] The maximum number of tokens to generate before stopping.
             #
-            #   @param messages [Array<Anthropic::Models::MessageParam>] Input messages.
+            #   @param messages [Array<Anthropic::Models::UserMessageParam, Anthropic::Models::AssistantMessageParam, Anthropic::Models::SystemMessageParam>] Input messages.
             #
             #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.
             #
@@ -475,17 +427,11 @@ module Anthropic
             #
             #   @param system_ [String, Array<Anthropic::Models::TextBlockParam>] System prompt.
             #
-            #   @param temperature [Float] Amount of randomness injected into the response.
-            #
             #   @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, Anthropic::Models::ThinkingConfigBetweenTools, Anthropic::Models::ThinkingConfigAdaptive] Configuration for Claude's thinking.
             #
             #   @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
             #
             #   @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::CodeExecutionTool20250522, Anthropic::Models::CodeExecutionTool20250825, Anthropic::Models::CodeExecutionTool20260120, Anthropic::Models::CodeExecutionTool20260521, Anthropic::Models::BrowserToolset20260801, Anthropic::Models::MemoryTool20250818, Anthropic::Models::ComputerToolset20260801, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::ToolTextEditor20250429, Anthropic::Models::ToolTextEditor20250728, Anthropic::Models::WebSearchTool20250305, Anthropic::Models::WebFetchTool20250910, Anthropic::Models::WebSearchTool20260209, Anthropic::Models::WebFetchTool20260209, Anthropic::Models::WebFetchTool20260309, Anthropic::Models::WebSearchTool20260318, Anthropic::Models::WebFetchTool20260318, Anthropic::Models::ToolSearchToolBm25_20251119, Anthropic::Models::ToolSearchToolRegex20251119>] Definitions of tools that the model may use.
-            #
-            #   @param top_k [Integer] Only sample from the top K options for each subsequent token.
-            #
-            #   @param top_p [Float] Use nucleus sampling.
 
             # Determines whether to use priority capacity (if available) or standard capacity
             # for this request.

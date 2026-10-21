@@ -31,6 +31,7 @@ module Anthropic
             raise ArgumentError.new("Cannot verify a webhook without a key on either the client's webhook_key or passed in as an argument")
           end
 
+          headers = headers.transform_keys(&:downcase) if headers.is_a?(Hash)
           ::StandardWebhooks::Webhook.new(key).verify(payload, headers)
 
           parsed = JSON.parse(payload, symbolize_names: true)

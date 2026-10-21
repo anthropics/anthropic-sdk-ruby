@@ -54,11 +54,7 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :name
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsMemoryStore::Type::TaggedSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # When the memory store was last changed, in RFC 3339.
@@ -79,8 +75,8 @@ module Anthropic
             description: String,
             metadata: T::Hash[Symbol, String],
             name: String,
-            type: Anthropic::Beta::BetaManagedAgentsMemoryStore::Type::OrSymbol,
-            updated_at: Time
+            updated_at: Time,
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
@@ -112,12 +108,12 @@ module Anthropic
           # Human-readable name for the store. 1–255 characters. The store's mount-path slug
           # under `/mnt/memory/` is derived from this name.
           name:,
-          type:,
           # When the memory store was last changed, in RFC 3339.
           #
           # Changing its `name`, `description`, or `metadata` updates it. Archiving the
           # store does too. Changes to the store's memories don't.
-          updated_at:
+          updated_at:,
+          type: :memory_store
         )
         end
 
@@ -130,39 +126,12 @@ module Anthropic
               description: String,
               metadata: T::Hash[Symbol, String],
               name: String,
-              type:
-                Anthropic::Beta::BetaManagedAgentsMemoryStore::Type::TaggedSymbol,
+              type: Symbol,
               updated_at: Time
             }
           )
         end
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(Symbol, Anthropic::Beta::BetaManagedAgentsMemoryStore::Type)
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          MEMORY_STORE =
-            T.let(
-              :memory_store,
-              Anthropic::Beta::BetaManagedAgentsMemoryStore::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsMemoryStore::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

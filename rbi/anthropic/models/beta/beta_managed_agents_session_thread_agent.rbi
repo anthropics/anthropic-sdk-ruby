@@ -71,11 +71,7 @@ module Anthropic
         end
         attr_accessor :tools
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsSessionThreadAgent::Type::TaggedSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         sig { returns(Integer) }
@@ -115,9 +111,8 @@ module Anthropic
                   Anthropic::Beta::BetaManagedAgentsCustomTool::OrHash
                 )
               ],
-            type:
-              Anthropic::Beta::BetaManagedAgentsSessionThreadAgent::Type::OrSymbol,
-            version: Integer
+            version: Integer,
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
@@ -134,8 +129,8 @@ module Anthropic
           skills:,
           system_:,
           tools:,
-          type:,
-          version:
+          version:,
+          type: :agent
         )
         end
 
@@ -161,8 +156,7 @@ module Anthropic
                 T::Array[
                   Anthropic::Beta::BetaManagedAgentsSessionThreadAgent::Tool::Variants
                 ],
-              type:
-                Anthropic::Beta::BetaManagedAgentsSessionThreadAgent::Type::TaggedSymbol,
+              type: Symbol,
               version: Integer
             }
           )
@@ -353,35 +347,6 @@ module Anthropic
             input_schema: nil,
             name: nil
           )
-          end
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsSessionThreadAgent::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          AGENT =
-            T.let(
-              :agent,
-              Anthropic::Beta::BetaManagedAgentsSessionThreadAgent::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsSessionThreadAgent::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
           end
         end
       end

@@ -13,25 +13,15 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubricParams::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsFileRubricParams::Type }
+          #   @return [Symbol, :file]
+          required :type, const: :file
 
-          # @!method initialize(file_id:, type:)
+          # @!method initialize(file_id:, type: :file)
           #   Rubric referenced by a file uploaded via the Files API.
           #
           #   @param file_id [String] ID of the rubric file.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubricParams::Type]
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubricParams#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            FILE = :file
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :file]
         end
       end
     end

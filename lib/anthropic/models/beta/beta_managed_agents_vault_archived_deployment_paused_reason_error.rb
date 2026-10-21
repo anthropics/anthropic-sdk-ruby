@@ -6,24 +6,13 @@ module Anthropic
       class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError < Anthropic::Internal::Type::BaseModel
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsVaultArchivedDeploymentPausedReasonError::Type]
-        required :type,
-                 enum: -> { Anthropic::Beta::BetaManagedAgentsVaultArchivedDeploymentPausedReasonError::Type }
+        #   @return [Symbol, :vault_archived_error]
+        required :type, const: :vault_archived_error
 
-        # @!method initialize(type:)
+        # @!method initialize(type: :vault_archived_error)
         #   A vault referenced by the deployment is archived.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsVaultArchivedDeploymentPausedReasonError::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsVaultArchivedDeploymentPausedReasonError#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          VAULT_ARCHIVED_ERROR = :vault_archived_error
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :vault_archived_error]
       end
     end
 

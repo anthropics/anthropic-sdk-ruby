@@ -29,11 +29,7 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :session_thread_id
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRescheduledEvent::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # A session thread hit a transient error and is retrying automatically. Emitted on
@@ -45,8 +41,7 @@ module Anthropic
               agent_name: String,
               processed_at: Time,
               session_thread_id: String,
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRescheduledEvent::Type::OrSymbol
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
@@ -58,7 +53,7 @@ module Anthropic
             processed_at:,
             # Public sthr\_ ID of the thread that is retrying.
             session_thread_id:,
-            type:
+            type: :"session.thread_status_rescheduled"
           )
           end
 
@@ -69,41 +64,11 @@ module Anthropic
                 agent_name: String,
                 processed_at: Time,
                 session_thread_id: String,
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRescheduledEvent::Type::TaggedSymbol
+                type: Symbol
               }
             )
           end
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRescheduledEvent::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            SESSION_THREAD_STATUS_RESCHEDULED =
-              T.let(
-                :"session.thread_status_rescheduled",
-                Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRescheduledEvent::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRescheduledEvent::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

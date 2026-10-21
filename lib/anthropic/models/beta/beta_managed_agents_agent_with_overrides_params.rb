@@ -12,8 +12,8 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams::Type }
+        #   @return [Symbol, :agent_with_overrides]
+        required :type, const: :agent_with_overrides
 
         # @!attribute mcp_servers
         #   Replacement MCP server list. Full replacement: the provided array becomes the
@@ -59,7 +59,7 @@ module Anthropic
         #   @return [Integer, nil]
         optional :version, Integer
 
-        # @!method initialize(id:, type:, mcp_servers: nil, model: nil, skills: nil, system_: nil, tools: nil, version: nil)
+        # @!method initialize(id:, mcp_servers: nil, model: nil, skills: nil, system_: nil, tools: nil, version: nil, type: :agent_with_overrides)
         #   Reference to an `agent` plus optional configuration overrides. Each provided
         #   field replaces the agent's value for the caller's use; the agent resource is
         #   unchanged.
@@ -69,8 +69,6 @@ module Anthropic
         #   details.
         #
         #   @param id [String] The `agent` ID.
-        #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams::Type]
         #
         #   @param mcp_servers [Array<Anthropic::Models::Beta::BetaManagedAgentsURLMCPServerParams>] Replacement MCP server list. Full replacement: the provided array becomes the MC
         #
@@ -83,16 +81,8 @@ module Anthropic
         #   @param tools [Array<Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401Params, Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetParams, Anthropic::Models::Beta::BetaManagedAgentsCustomToolParams>] Replacement tool list. Full replacement: the provided array becomes the tool con
         #
         #   @param version [Integer] The specific `agent` version to use. Omit to use the latest version.
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          AGENT_WITH_OVERRIDES = :agent_with_overrides
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #
+        #   @param type [Symbol, :agent_with_overrides]
 
         # Replacement model. Accepts the model string, e.g. `claude-opus-5-5`, or a
         # `model_config` object. Omit to use the agent's model.
@@ -170,11 +160,11 @@ module Anthropic
           def self.new(type:, **args)
             case type.to_sym
             when :agent_toolset_20260401
-              Anthropic::Beta::BetaManagedAgentsAgentToolset20260401Params.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsAgentToolset20260401Params.new(**args)
             when :mcp_toolset
-              Anthropic::Beta::BetaManagedAgentsMCPToolsetParams.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsMCPToolsetParams.new(**args)
             when :custom
-              Anthropic::Beta::BetaManagedAgentsCustomToolParams.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsCustomToolParams.new(**args)
             else
               raise ArgumentError, "unknown type: #{type}"
             end

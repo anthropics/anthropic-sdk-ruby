@@ -18,11 +18,7 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :name
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition::Type::TaggedSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         sig { returns(String) }
@@ -30,56 +26,15 @@ module Anthropic
 
         # URL-based MCP server connection as returned in API responses.
         sig do
-          params(
-            name: String,
-            type:
-              Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition::Type::OrSymbol,
-            url: String
-          ).returns(T.attached_class)
-        end
-        def self.new(name:, type:, url:)
-        end
-
-        sig do
-          override.returns(
-            {
-              name: String,
-              type:
-                Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition::Type::TaggedSymbol,
-              url: String
-            }
+          params(name: String, url: String, type: Symbol).returns(
+            T.attached_class
           )
         end
-        def to_hash
+        def self.new(name:, url:, type: :url)
         end
 
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          URL =
-            T.let(
-              :url,
-              Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
+        sig { override.returns({ name: String, type: Symbol, url: String }) }
+        def to_hash
         end
       end
     end

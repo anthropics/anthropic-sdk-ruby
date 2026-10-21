@@ -4,42 +4,20 @@ module Anthropic
 
     module Beta
       type beta_managed_agents_agent_params =
-        {
-          id: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsAgentParams::type_,
-          version: Integer
-        }
+        { id: String, type: :agent, version: Integer }
 
       class BetaManagedAgentsAgentParams < Anthropic::Internal::Type::BaseModel
         attr_accessor id: String
 
-        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsAgentParams::type_
+        attr_accessor type: :agent
 
         attr_reader version: Integer?
 
         def version=: (Integer) -> Integer
 
-        def initialize: (
-          id: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsAgentParams::type_,
-          ?version: Integer
-        ) -> void
+        def initialize: (id: String, ?version: Integer, ?type: :agent) -> void
 
-        def to_hash: -> {
-          id: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsAgentParams::type_,
-          version: Integer
-        }
-
-        type type_ = :agent
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          AGENT: :agent
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsAgentParams::type_]
-        end
+        def to_hash: -> { id: String, type: :agent, version: Integer }
       end
     end
   end

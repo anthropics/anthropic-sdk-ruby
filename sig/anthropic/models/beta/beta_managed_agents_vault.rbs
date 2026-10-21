@@ -10,7 +10,7 @@ module Anthropic
           created_at: Time,
           display_name: String,
           metadata: ::Hash[Symbol, String],
-          type: Anthropic::Models::Beta::BetaManagedAgentsVault::type_,
+          type: :vault,
           updated_at: Time
         }
 
@@ -25,7 +25,7 @@ module Anthropic
 
         attr_accessor metadata: ::Hash[Symbol, String]
 
-        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsVault::type_
+        attr_accessor type: :vault
 
         attr_accessor updated_at: Time
 
@@ -35,8 +35,8 @@ module Anthropic
           created_at: Time,
           display_name: String,
           metadata: ::Hash[Symbol, String],
-          type: Anthropic::Models::Beta::BetaManagedAgentsVault::type_,
-          updated_at: Time
+          updated_at: Time,
+          ?type: :vault
         ) -> void
 
         def to_hash: -> {
@@ -45,19 +45,9 @@ module Anthropic
           created_at: Time,
           display_name: String,
           metadata: ::Hash[Symbol, String],
-          type: Anthropic::Models::Beta::BetaManagedAgentsVault::type_,
+          type: :vault,
           updated_at: Time
         }
-
-        type type_ = :vault
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          VAULT: :vault
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsVault::type_]
-        end
       end
     end
   end

@@ -4,35 +4,16 @@ module Anthropic
 
     module Beta
       type beta_managed_agents_advisor_params =
-        {
-          model: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsAdvisorParams::type_
-        }
+        { model: String, type: :advisor }
 
       class BetaManagedAgentsAdvisorParams < Anthropic::Internal::Type::BaseModel
         attr_accessor model: String
 
-        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsAdvisorParams::type_
+        attr_accessor type: :advisor
 
-        def initialize: (
-          model: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsAdvisorParams::type_
-        ) -> void
+        def initialize: (model: String, ?type: :advisor) -> void
 
-        def to_hash: -> {
-          model: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsAdvisorParams::type_
-        }
-
-        type type_ = :advisor
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          ADVISOR: :advisor
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsAdvisorParams::type_]
-        end
+        def to_hash: -> { model: String, type: :advisor }
       end
     end
   end

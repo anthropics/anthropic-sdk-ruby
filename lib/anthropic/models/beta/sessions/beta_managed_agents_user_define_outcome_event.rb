@@ -45,10 +45,10 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::Type }
+          #   @return [Symbol, :"user.define_outcome"]
+          required :type, const: :"user.define_outcome"
 
-          # @!method initialize(id:, description:, max_iterations:, outcome_id:, processed_at:, rubric:, type:)
+          # @!method initialize(id:, description:, max_iterations:, outcome_id:, processed_at:, rubric:, type: :"user.define_outcome")
           #   Echo of a `user.define_outcome` input event. Carries the server-generated
           #   `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
           #
@@ -68,7 +68,7 @@ module Anthropic
           #
           #   @param rubric [Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubric, Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubric] How to grade the outcome. File rubrics are currently resolved to their text cont
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::Type]
+          #   @param type [Symbol, :"user.define_outcome"]
 
           # How to grade the outcome. File rubrics are currently resolved to their text
           # content; clients should handle both variants.
@@ -114,23 +114,13 @@ module Anthropic
             def self.new(type:, **args)
               case type.to_sym
               when :file
-                Anthropic::Beta::Sessions::BetaManagedAgentsFileRubric.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsFileRubric.new(**args)
               when :text
-                Anthropic::Beta::Sessions::BetaManagedAgentsTextRubric.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsTextRubric.new(**args)
               else
                 raise ArgumentError, "unknown type: #{type}"
               end
             end
-          end
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            USER_DEFINE_OUTCOME = :"user.define_outcome"
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
           end
         end
       end

@@ -57,9 +57,8 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationEndEvent::Type]
-          required :type,
-                   enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationEndEvent::Type }
+          #   @return [Symbol, :"span.outcome_evaluation_end"]
+          required :type, const: :"span.outcome_evaluation_end"
 
           # @!attribute usage
           #   Aggregate token usage for this evaluation cycle. Sums across all grader model
@@ -68,7 +67,7 @@ module Anthropic
           #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelUsage]
           required :usage, -> { Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelUsage }
 
-          # @!method initialize(id:, explanation:, iteration:, outcome_evaluation_start_id:, outcome_id:, processed_at:, result:, type:, usage:)
+          # @!method initialize(id:, explanation:, iteration:, outcome_evaluation_start_id:, outcome_id:, processed_at:, result:, usage:, type: :"span.outcome_evaluation_end")
           #   Emitted when an outcome evaluation cycle completes. Carries the verdict and
           #   aggregate token usage. A verdict of `needs_revision` means another evaluation
           #   cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted`
@@ -92,19 +91,9 @@ module Anthropic
           #
           #   @param result [String] Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revisio
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationEndEvent::Type]
-          #
           #   @param usage [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelUsage] Aggregate token usage for this evaluation cycle. Sums across all grader model re
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationEndEvent#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            SPAN_OUTCOME_EVALUATION_END = :"span.outcome_evaluation_end"
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #
+          #   @param type [Symbol, :"span.outcome_evaluation_end"]
         end
       end
     end

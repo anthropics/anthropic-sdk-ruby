@@ -25,8 +25,8 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent::Type }
+          #   @return [Symbol, :"agent.tool_result"]
+          required :type, const: :"agent.tool_result"
 
           # @!attribute content
           #   The result content returned by the tool.
@@ -41,7 +41,7 @@ module Anthropic
           #   @return [Boolean, nil]
           optional :is_error, Anthropic::Internal::Type::Boolean, nil?: true
 
-          # @!method initialize(id:, processed_at:, tool_use_id:, type:, content: nil, is_error: nil)
+          # @!method initialize(id:, processed_at:, tool_use_id:, content: nil, is_error: nil, type: :"agent.tool_result")
           #   Event representing the result of an agent tool execution.
           #
           #   @param id [String] Unique identifier for this event.
@@ -50,21 +50,11 @@ module Anthropic
           #
           #   @param tool_use_id [String] The id of the `agent.tool_use` event this result corresponds to.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent::Type]
-          #
           #   @param content [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultBlock>] The result content returned by the tool.
           #
           #   @param is_error [Boolean, nil] Whether the tool execution resulted in an error.
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            AGENT_TOOL_RESULT = :"agent.tool_result"
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #
+          #   @param type [Symbol, :"agent.tool_result"]
 
           # Content block in a tool result. Can be `text`, `image`, `document`, or
           # `search_result`.
@@ -124,13 +114,13 @@ module Anthropic
             def self.new(type:, **args)
               case type.to_sym
               when :text
-                Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock.new(**args)
               when :image
-                Anthropic::Beta::Sessions::BetaManagedAgentsImageBlock.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsImageBlock.new(**args)
               when :document
-                Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock.new(**args)
               when :search_result
-                Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultBlock.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultBlock.new(**args)
               else
                 raise ArgumentError, "unknown type: #{type}"
               end

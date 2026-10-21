@@ -14,7 +14,7 @@ module Anthropic
           skills: ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent::skill],
           system_: String?,
           tools: ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent::tool],
-          type: Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent::type_,
+          type: :agent,
           version: Integer
         }
 
@@ -37,7 +37,7 @@ module Anthropic
 
         attr_accessor tools: ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent::tool]
 
-        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent::type_
+        attr_accessor type: :agent
 
         attr_accessor version: Integer
 
@@ -51,8 +51,8 @@ module Anthropic
           skills: ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent::skill],
           system_: String?,
           tools: ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent::tool],
-          type: Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent::type_,
-          version: Integer
+          version: Integer,
+          ?type: :agent
         ) -> void
 
         def to_hash: -> {
@@ -65,7 +65,7 @@ module Anthropic
           skills: ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent::skill],
           system_: String?,
           tools: ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent::tool],
-          type: Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent::type_,
+          type: :agent,
           version: Integer
         }
 
@@ -160,16 +160,6 @@ module Anthropic
               ?input_schema: Anthropic::Beta::BetaManagedAgentsCustomToolInputSchema,
               ?name: String
             ) -> Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent::tool
-        end
-
-        type type_ = :agent
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          AGENT: :agent
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent::type_]
         end
       end
     end

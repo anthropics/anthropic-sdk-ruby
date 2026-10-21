@@ -12,25 +12,15 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsVaultNotFoundRunError::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsVaultNotFoundRunError::Type }
+        #   @return [Symbol, :vault_not_found_error]
+        required :type, const: :vault_not_found_error
 
-        # @!method initialize(message:, type:)
+        # @!method initialize(message:, type: :vault_not_found_error)
         #   A vault referenced by the deployment no longer exists.
         #
         #   @param message [String] Human-readable error description.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsVaultNotFoundRunError::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsVaultNotFoundRunError#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          VAULT_NOT_FOUND_ERROR = :vault_not_found_error
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :vault_not_found_error]
       end
     end
 

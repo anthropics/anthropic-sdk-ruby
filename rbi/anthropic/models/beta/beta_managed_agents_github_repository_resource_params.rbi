@@ -15,11 +15,7 @@ module Anthropic
             )
           end
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::Type::OrSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # Github URL of the repository
@@ -54,8 +50,6 @@ module Anthropic
         # Mount a GitHub repository into the session's container.
         sig do
           params(
-            type:
-              Anthropic::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::Type::OrSymbol,
             url: String,
             authorization_token: String,
             checkout:
@@ -65,11 +59,11 @@ module Anthropic
                   Anthropic::Beta::BetaManagedAgentsCommitCheckout::OrHash
                 )
               ),
-            mount_path: T.nilable(String)
+            mount_path: T.nilable(String),
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
-          type:,
           # Github URL of the repository
           url:,
           # GitHub authorization token used to clone the repository. Required for private
@@ -78,15 +72,15 @@ module Anthropic
           # Branch or commit to check out. Defaults to the repository's default branch.
           checkout: nil,
           # Mount path in the container. Defaults to `/workspace/<repo-name>`.
-          mount_path: nil
+          mount_path: nil,
+          type: :github_repository
         )
         end
 
         sig do
           override.returns(
             {
-              type:
-                Anthropic::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::Type::OrSymbol,
+              type: Symbol,
               url: String,
               authorization_token: String,
               checkout:
@@ -101,35 +95,6 @@ module Anthropic
           )
         end
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          GITHUB_REPOSITORY =
-            T.let(
-              :github_repository,
-              Anthropic::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
 
         # Branch or commit to check out. Defaults to the repository's default branch.

@@ -13,16 +13,6 @@ module Anthropic
       #   @return [String]
       required :model_id, String
 
-      # @!attribute betas
-      #   @deprecated Deprecated. This parameter will be removed from this method in a future release.
-      #   To use beta features, call the beta models methods (`client.beta.models`)
-      #   instead.
-      #
-      #   Optional header to specify the beta version(s) you want to use.
-      #
-      #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
-      optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
-
       # @!attribute workspace_id
       #   Optional header to select the Workspace for this request. The value is a
       #   Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -34,13 +24,11 @@ module Anthropic
       #   @return [String, nil]
       optional :workspace_id, String
 
-      # @!method initialize(model_id:, betas: nil, workspace_id: nil, request_options: {})
+      # @!method initialize(model_id:, workspace_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Anthropic::Models::ModelRetrieveParams} for more details.
       #
       #   @param model_id [String] Model identifier or alias.
-      #
-      #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
       #
       #   @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
       #

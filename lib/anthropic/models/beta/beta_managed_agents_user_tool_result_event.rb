@@ -21,8 +21,8 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsUserToolResultEvent::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsUserToolResultEvent::Type }
+        #   @return [Symbol, :"user.tool_result"]
+        required :type, const: :"user.tool_result"
 
         # @!attribute content
         #   The result content returned by the tool.
@@ -50,7 +50,7 @@ module Anthropic
         #   @return [String, nil]
         optional :session_thread_id, String, nil?: true
 
-        # @!method initialize(id:, tool_use_id:, type:, content: nil, is_error: nil, processed_at: nil, session_thread_id: nil)
+        # @!method initialize(id:, tool_use_id:, content: nil, is_error: nil, processed_at: nil, session_thread_id: nil, type: :"user.tool_result")
         #   Event sent by the client providing the result of an agent-toolset tool
         #   execution. Only valid on `self_hosted` environments, where sandbox-routed tools
         #   are executed by the client rather than the server.
@@ -63,8 +63,6 @@ module Anthropic
         #
         #   @param tool_use_id [String] The id of the `agent.tool_use` event this result corresponds to, which can be fo
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsUserToolResultEvent::Type]
-        #
         #   @param content [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultBlock>] The result content returned by the tool.
         #
         #   @param is_error [Boolean, nil] Whether the tool execution resulted in an error.
@@ -72,16 +70,8 @@ module Anthropic
         #   @param processed_at [Time, nil] Timestamp when this result was processed.
         #
         #   @param session_thread_id [String, nil] Set by the server to the subagent thread this result was routed to. Omitted when
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsUserToolResultEvent#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          USER_TOOL_RESULT = :"user.tool_result"
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #
+        #   @param type [Symbol, :"user.tool_result"]
 
         # Content block in a tool result. Can be `text`, `image`, `document`, or
         # `search_result`.
@@ -141,13 +131,13 @@ module Anthropic
           def self.new(type:, **args)
             case type.to_sym
             when :text
-              Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock.new(type: type, **args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock.new(**args)
             when :image
-              Anthropic::Beta::Sessions::BetaManagedAgentsImageBlock.new(type: type, **args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsImageBlock.new(**args)
             when :document
-              Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock.new(type: type, **args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock.new(**args)
             when :search_result
-              Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultBlock.new(type: type, **args)
+              Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultBlock.new(**args)
             else
               raise ArgumentError, "unknown type: #{type}"
             end

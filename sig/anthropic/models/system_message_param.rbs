@@ -1,0 +1,32 @@
+module Anthropic
+  module Models
+    type system_message_param =
+      { content: Anthropic::Models::SystemMessageParam::content, role: :system }
+
+    class SystemMessageParam < Anthropic::Internal::Type::BaseModel
+      attr_accessor content: Anthropic::Models::SystemMessageParam::content
+
+      attr_accessor role: :system
+
+      def initialize: (
+        content: Anthropic::Models::SystemMessageParam::content,
+        ?role: :system
+      ) -> void
+
+      def to_hash: -> {
+        content: Anthropic::Models::SystemMessageParam::content,
+        role: :system
+      }
+
+      type content = String | ::Array[Anthropic::TextBlockParam]
+
+      module Content
+        extend Anthropic::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Anthropic::Models::SystemMessageParam::content]
+
+        TextBlockParamArray: Anthropic::Internal::Type::Converter
+      end
+    end
+  end
+end

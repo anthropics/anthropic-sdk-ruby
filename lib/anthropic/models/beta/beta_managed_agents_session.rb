@@ -77,8 +77,8 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSession::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsSession::Type }
+        #   @return [Symbol, :session]
+        required :type, const: :session
 
         # @!attribute updated_at
         #   A timestamp in RFC 3339 format
@@ -106,7 +106,7 @@ module Anthropic
         #   @return [String, nil]
         optional :deployment_id, String, nil?: true
 
-        # @!method initialize(id:, agent:, archived_at:, budget:, created_at:, environment_id:, metadata:, outcome_evaluations:, resources:, stats:, status:, title:, type:, updated_at:, usage:, vault_ids:, deployment_id: nil)
+        # @!method initialize(id:, agent:, archived_at:, budget:, created_at:, environment_id:, metadata:, outcome_evaluations:, resources:, stats:, status:, title:, updated_at:, usage:, vault_ids:, deployment_id: nil, type: :session)
         #   A Managed Agents `session`.
         #
         #   Some parameter documentations has been truncated, see
@@ -136,8 +136,6 @@ module Anthropic
         #
         #   @param title [String, nil]
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSession::Type]
-        #
         #   @param updated_at [Time] A timestamp in RFC 3339 format
         #
         #   @param usage [Anthropic::Models::Beta::BetaManagedAgentsSessionUsage] Cumulative token usage for the session.
@@ -145,6 +143,8 @@ module Anthropic
         #   @param vault_ids [Array<String>] Vault IDs attached to the session at creation. Empty when no vaults were supplie
         #
         #   @param deployment_id [String, nil] Deployment ID when the session was created from a deployment reference. Null oth
+        #
+        #   @param type [Symbol, :session]
 
         # @see Anthropic::Models::Beta::BetaManagedAgentsSession#status
         module Status
@@ -161,16 +161,6 @@ module Anthropic
 
           # Session has ended, either due to an error or completion.
           TERMINATED = :terminated
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsSession#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          SESSION = :session
 
           # @!method self.values
           #   @return [Array<Symbol>]

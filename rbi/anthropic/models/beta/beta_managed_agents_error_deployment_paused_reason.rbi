@@ -23,11 +23,7 @@ module Anthropic
         end
         attr_accessor :error
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsErrorDeploymentPausedReason::Type::TaggedSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # A scheduled fire recorded a failed run whose error auto-pauses the deployment.
@@ -50,14 +46,13 @@ module Anthropic
                 Anthropic::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError::OrHash,
                 Anthropic::Beta::BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError::OrHash
               ),
-            type:
-              Anthropic::Beta::BetaManagedAgentsErrorDeploymentPausedReason::Type::OrSymbol
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
           # The failed run's error.
           error:,
-          type:
+          type: :error
         )
         end
 
@@ -66,41 +61,11 @@ module Anthropic
             {
               error:
                 Anthropic::Beta::BetaManagedAgentsDeploymentPausedReasonError::Variants,
-              type:
-                Anthropic::Beta::BetaManagedAgentsErrorDeploymentPausedReason::Type::TaggedSymbol
+              type: Symbol
             }
           )
         end
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsErrorDeploymentPausedReason::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          ERROR =
-            T.let(
-              :error,
-              Anthropic::Beta::BetaManagedAgentsErrorDeploymentPausedReason::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsErrorDeploymentPausedReason::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

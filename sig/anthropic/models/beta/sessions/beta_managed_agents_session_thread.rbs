@@ -12,7 +12,7 @@ module Anthropic
             session_id: String,
             stats: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStats?,
             status: Anthropic::Models::Beta::Sessions::beta_managed_agents_session_thread_status,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread::type_,
+            type: :session_thread,
             updated_at: Time,
             usage: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadUsage?,
             workflow_run_id: String?
@@ -35,7 +35,7 @@ module Anthropic
 
           attr_accessor status: Anthropic::Models::Beta::Sessions::beta_managed_agents_session_thread_status
 
-          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread::type_
+          attr_accessor type: :session_thread
 
           attr_accessor updated_at: Time
 
@@ -52,10 +52,10 @@ module Anthropic
             session_id: String,
             stats: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStats?,
             status: Anthropic::Models::Beta::Sessions::beta_managed_agents_session_thread_status,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread::type_,
             updated_at: Time,
             usage: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadUsage?,
-            workflow_run_id: String?
+            workflow_run_id: String?,
+            ?type: :session_thread
           ) -> void
 
           def to_hash: -> {
@@ -67,7 +67,7 @@ module Anthropic
             session_id: String,
             stats: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStats?,
             status: Anthropic::Models::Beta::Sessions::beta_managed_agents_session_thread_status,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread::type_,
+            type: :session_thread,
             updated_at: Time,
             usage: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadUsage?,
             workflow_run_id: String?
@@ -140,16 +140,6 @@ module Anthropic
                 | ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsInlineAgent::tool],
                 ?version: Integer
               ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread::agent
-          end
-
-          type type_ = :session_thread
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            SESSION_THREAD: :session_thread
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread::type_]
           end
         end
       end

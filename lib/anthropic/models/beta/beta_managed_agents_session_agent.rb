@@ -65,15 +65,15 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSessionAgent::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsSessionAgent::Type }
+        #   @return [Symbol, :agent]
+        required :type, const: :agent
 
         # @!attribute version
         #
         #   @return [Integer]
         required :version, Integer
 
-        # @!method initialize(id:, description:, execution_identity:, mcp_servers:, model:, multiagent:, name:, skills:, system_:, tools:, type:, version:)
+        # @!method initialize(id:, description:, execution_identity:, mcp_servers:, model:, multiagent:, name:, skills:, system_:, tools:, version:, type: :agent)
         #   Resolved `agent` definition for a `session`. Snapshot of the `agent` at
         #   `session` creation time.
         #
@@ -100,9 +100,9 @@ module Anthropic
         #
         #   @param tools [Array<Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401, Anthropic::Models::Beta::BetaManagedAgentsMCPToolset, Anthropic::Models::Beta::BetaManagedAgentsCustomTool>]
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSessionAgent::Type]
-        #
         #   @param version [Integer]
+        #
+        #   @param type [Symbol, :agent]
 
         # Resolved skill as returned in API responses.
         module Skill
@@ -145,9 +145,9 @@ module Anthropic
           def self.new(type:, **args)
             case type.to_sym
             when :anthropic
-              Anthropic::Beta::BetaManagedAgentsAnthropicSkill.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsAnthropicSkill.new(**args)
             when :custom
-              Anthropic::Beta::BetaManagedAgentsCustomSkill.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsCustomSkill.new(**args)
             else
               raise ArgumentError, "unknown type: #{type}"
             end
@@ -205,25 +205,15 @@ module Anthropic
           def self.new(type:, **args)
             case type.to_sym
             when :agent_toolset_20260401
-              Anthropic::Beta::BetaManagedAgentsAgentToolset20260401.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsAgentToolset20260401.new(**args)
             when :mcp_toolset
-              Anthropic::Beta::BetaManagedAgentsMCPToolset.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsMCPToolset.new(**args)
             when :custom
-              Anthropic::Beta::BetaManagedAgentsCustomTool.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsCustomTool.new(**args)
             else
               raise ArgumentError, "unknown type: #{type}"
             end
           end
-        end
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsSessionAgent#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          AGENT = :agent
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
         end
       end
     end

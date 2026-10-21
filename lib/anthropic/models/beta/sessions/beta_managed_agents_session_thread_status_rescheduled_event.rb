@@ -31,11 +31,10 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRescheduledEvent::Type]
-          required :type,
-                   enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRescheduledEvent::Type }
+          #   @return [Symbol, :"session.thread_status_rescheduled"]
+          required :type, const: :"session.thread_status_rescheduled"
 
-          # @!method initialize(id:, agent_name:, processed_at:, session_thread_id:, type:)
+          # @!method initialize(id:, agent_name:, processed_at:, session_thread_id:, type: :"session.thread_status_rescheduled")
           #   A session thread hit a transient error and is retrying automatically. Emitted on
           #   the thread's own stream and cross-posted to the primary stream for child
           #   threads.
@@ -48,17 +47,7 @@ module Anthropic
           #
           #   @param session_thread_id [String] Public sthr\_ ID of the thread that is retrying.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRescheduledEvent::Type]
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRescheduledEvent#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            SESSION_THREAD_STATUS_RESCHEDULED = :"session.thread_status_rescheduled"
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :"session.thread_status_rescheduled"]
         end
       end
     end

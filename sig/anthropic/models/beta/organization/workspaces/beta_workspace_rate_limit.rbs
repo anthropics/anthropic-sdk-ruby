@@ -6,7 +6,6 @@ module Anthropic
           type beta_workspace_rate_limit =
             {
               group: Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::group,
-              group_type: Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::group_type,
               limits: ::Array[Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimitValue],
               models: ::Array[String]?,
               rate_limit_id: String,
@@ -16,8 +15,6 @@ module Anthropic
 
           class BetaWorkspaceRateLimit < Anthropic::Internal::Type::BaseModel
             attr_accessor group: Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::group
-
-            attr_accessor group_type: Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::group_type
 
             attr_accessor limits: ::Array[Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimitValue]
 
@@ -31,7 +28,6 @@ module Anthropic
 
             def initialize: (
               group: Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::group,
-              group_type: Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::group_type,
               limits: ::Array[Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimitValue],
               models: ::Array[String]?,
               rate_limit_id: String,
@@ -41,7 +37,6 @@ module Anthropic
 
             def to_hash: -> {
               group: Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::group,
-              group_type: Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::group_type,
               limits: ::Array[Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimitValue],
               models: ::Array[String]?,
               rate_limit_id: String,
@@ -115,27 +110,6 @@ module Anthropic
                   id: String,
                   ?display_name: String
                 ) -> Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::group
-            end
-
-            type group_type =
-              :batch
-              | :files
-              | :model_group
-              | :skills
-              | :token_count
-              | :web_search
-
-            module GroupType
-              extend Anthropic::Internal::Type::Enum
-
-              BATCH: :batch
-              FILES: :files
-              MODEL_GROUP: :model_group
-              SKILLS: :skills
-              TOKEN_COUNT: :token_count
-              WEB_SEARCH: :web_search
-
-              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::group_type]
             end
           end
         end

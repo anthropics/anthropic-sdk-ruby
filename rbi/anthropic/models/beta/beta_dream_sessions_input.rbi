@@ -25,15 +25,14 @@ module Anthropic
         sig { returns(T::Array[String]) }
         attr_accessor :session_ids
 
-        sig { returns(Anthropic::Beta::BetaDreamSessionsInput::Type::OrSymbol) }
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # The sessions that a dream reads, given as an entry in `inputs`.
         sig do
-          params(
-            session_ids: T::Array[String],
-            type: Anthropic::Beta::BetaDreamSessionsInput::Type::OrSymbol
-          ).returns(T.attached_class)
+          params(session_ids: T::Array[String], type: Symbol).returns(
+            T.attached_class
+          )
         end
         def self.new(
           # The IDs of the sessions whose transcripts the dream reads (`sesn_...`).
@@ -45,45 +44,14 @@ module Anthropic
           # [limits table in the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams#limits)
           # lists all the limits on a dream.
           session_ids:,
-          type:
+          type: :sessions
         )
         end
 
         sig do
-          override.returns(
-            {
-              session_ids: T::Array[String],
-              type: Anthropic::Beta::BetaDreamSessionsInput::Type::OrSymbol
-            }
-          )
+          override.returns({ session_ids: T::Array[String], type: Symbol })
         end
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(Symbol, Anthropic::Beta::BetaDreamSessionsInput::Type)
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          SESSIONS =
-            T.let(
-              :sessions,
-              Anthropic::Beta::BetaDreamSessionsInput::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaDreamSessionsInput::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

@@ -14,10 +14,10 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSystemMessageEventParams::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSystemMessageEventParams::Type }
+          #   @return [Symbol, :"system.message"]
+          required :type, const: :"system.message"
 
-          # @!method initialize(content:, type:)
+          # @!method initialize(content:, type: :"system.message")
           #   Privileged context for the accompanying turn and all subsequent turns, appended
           #   to the session's system context as a `role: "system"` turn rather than replacing
           #   the top-level system prompt. At most one per request: it must be the final event
@@ -27,17 +27,7 @@ module Anthropic
           #
           #   @param content [Array<Anthropic::Models::Beta::BetaManagedAgentsSystemContentBlock>] System content blocks to append. Text-only.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSystemMessageEventParams::Type]
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSystemMessageEventParams#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            SYSTEM_MESSAGE = :"system.message"
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :"system.message"]
         end
       end
     end

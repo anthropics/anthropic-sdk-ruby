@@ -48,7 +48,7 @@ module Anthropic
         def self.new(type:, **args)
           case type.to_sym
           when :coordinator
-            Anthropic::Beta::BetaManagedAgentsSessionMultiagentCoordinator.new(type: type, **args)
+            Anthropic::Beta::BetaManagedAgentsSessionMultiagentCoordinator.new(**args)
           when :multiagent_20261001
             Anthropic::Beta::BetaManagedAgentsSessionMultiagent20261001.new(**args)
           else

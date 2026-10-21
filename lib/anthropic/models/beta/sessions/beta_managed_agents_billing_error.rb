@@ -20,10 +20,10 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsBillingError::Type }
+          #   @return [Symbol, :billing_error]
+          required :type, const: :billing_error
 
-          # @!method initialize(message:, retry_status:, type:)
+          # @!method initialize(message:, retry_status:, type: :billing_error)
           #   The caller's organization or workspace cannot make model requests — out of
           #   credits or spend limit reached. Retrying with the same credentials will not
           #   succeed; the caller must resolve the billing state.
@@ -32,7 +32,7 @@ module Anthropic
           #
           #   @param retry_status [Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal] What the client should do next.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError::Type]
+          #   @param type [Symbol, :billing_error]
 
           # What the client should do next.
           #
@@ -77,25 +77,15 @@ module Anthropic
             def self.new(type:, **args)
               case type.to_sym
               when :retrying
-                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying.new(**args)
               when :exhausted
-                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted.new(**args)
               when :terminal
-                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal.new(**args)
               else
                 raise ArgumentError, "unknown type: #{type}"
               end
             end
-          end
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            BILLING_ERROR = :billing_error
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
           end
         end
       end

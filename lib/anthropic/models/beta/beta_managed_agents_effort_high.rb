@@ -6,23 +6,13 @@ module Anthropic
       class BetaManagedAgentsEffortHigh < Anthropic::Internal::Type::BaseModel
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsEffortHigh::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsEffortHigh::Type }
+        #   @return [Symbol, :high]
+        required :type, const: :high
 
-        # @!method initialize(type:)
+        # @!method initialize(type: :high)
         #   High effort. Favors reasoning depth.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsEffortHigh::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsEffortHigh#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          HIGH = :high
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :high]
       end
     end
 

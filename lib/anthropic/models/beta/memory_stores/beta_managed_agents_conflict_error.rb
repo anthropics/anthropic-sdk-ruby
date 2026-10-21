@@ -7,27 +7,17 @@ module Anthropic
         class BetaManagedAgentsConflictError < Anthropic::Internal::Type::BaseModel
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsConflictError::Type]
-          required :type, enum: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsConflictError::Type }
+          #   @return [Symbol, :conflict_error]
+          required :type, const: :conflict_error
 
           # @!attribute message
           #
           #   @return [String, nil]
           optional :message, String
 
-          # @!method initialize(type:, message: nil)
-          #   @param type [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsConflictError::Type]
+          # @!method initialize(message: nil, type: :conflict_error)
           #   @param message [String]
-
-          # @see Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsConflictError#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            CONFLICT_ERROR = :conflict_error
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :conflict_error]
         end
       end
     end

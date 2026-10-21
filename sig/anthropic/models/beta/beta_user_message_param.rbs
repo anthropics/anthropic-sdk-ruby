@@ -1,0 +1,29 @@
+module Anthropic
+  module Models
+    class BetaUserMessageParam = Beta::BetaUserMessageParam
+
+    module Beta
+      type beta_user_message_param =
+        {
+          content: Anthropic::Models::Beta::beta_message_content_param,
+          role: :user
+        }
+
+      class BetaUserMessageParam < Anthropic::Internal::Type::BaseModel
+        attr_accessor content: Anthropic::Models::Beta::beta_message_content_param
+
+        attr_accessor role: :user
+
+        def initialize: (
+          content: Anthropic::Models::Beta::beta_message_content_param,
+          ?role: :user
+        ) -> void
+
+        def to_hash: -> {
+          content: Anthropic::Models::Beta::beta_message_content_param,
+          role: :user
+        }
+      end
+    end
+  end
+end

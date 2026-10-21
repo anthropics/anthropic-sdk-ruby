@@ -6,24 +6,14 @@ module Anthropic
       class BetaManagedAgentsMultiagentSelfParams < Anthropic::Internal::Type::BaseModel
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMultiagentSelfParams::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsMultiagentSelfParams::Type }
+        #   @return [Symbol, :self]
+        required :type, const: :self
 
-        # @!method initialize(type:)
+        # @!method initialize(type: :self)
         #   Sentinel roster entry meaning "the agent that owns this configuration". Resolved
         #   server-side to a concrete agent reference.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMultiagentSelfParams::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsMultiagentSelfParams#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          SELF = :self
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :self]
       end
     end
 

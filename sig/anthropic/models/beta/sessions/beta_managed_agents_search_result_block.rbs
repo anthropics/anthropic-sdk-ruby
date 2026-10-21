@@ -8,7 +8,7 @@ module Anthropic
             content: ::Array[Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultContent],
             source: String,
             title: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultBlock::type_
+            type: :search_result
           }
 
         class BetaManagedAgentsSearchResultBlock < Anthropic::Internal::Type::BaseModel
@@ -20,14 +20,14 @@ module Anthropic
 
           attr_accessor title: String
 
-          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultBlock::type_
+          attr_accessor type: :search_result
 
           def initialize: (
             citations: Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultCitations,
             content: ::Array[Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultContent],
             source: String,
             title: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultBlock::type_
+            ?type: :search_result
           ) -> void
 
           def to_hash: -> {
@@ -35,18 +35,8 @@ module Anthropic
             content: ::Array[Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultContent],
             source: String,
             title: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultBlock::type_
+            type: :search_result
           }
-
-          type type_ = :search_result
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            SEARCH_RESULT: :search_result
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultBlock::type_]
-          end
         end
       end
     end

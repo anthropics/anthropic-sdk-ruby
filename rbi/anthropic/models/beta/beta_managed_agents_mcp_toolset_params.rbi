@@ -19,11 +19,7 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :mcp_server_name
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsMCPToolsetParams::Type::OrSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # Per-tool configuration overrides.
@@ -70,8 +66,6 @@ module Anthropic
         sig do
           params(
             mcp_server_name: String,
-            type:
-              Anthropic::Beta::BetaManagedAgentsMCPToolsetParams::Type::OrSymbol,
             configs:
               T::Array[
                 Anthropic::Beta::BetaManagedAgentsMCPToolConfigParams::OrHash
@@ -79,18 +73,19 @@ module Anthropic
             default_config:
               T.nilable(
                 Anthropic::Beta::BetaManagedAgentsMCPToolsetDefaultConfigParams::OrHash
-              )
+              ),
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
           # Name of the MCP server. Must match a server name from the mcp_servers array.
           # 1-255 characters.
           mcp_server_name:,
-          type:,
           # Per-tool configuration overrides.
           configs: nil,
           # Default configuration for all tools from this server.
-          default_config: nil
+          default_config: nil,
+          type: :mcp_toolset
         )
         end
 
@@ -98,8 +93,7 @@ module Anthropic
           override.returns(
             {
               mcp_server_name: String,
-              type:
-                Anthropic::Beta::BetaManagedAgentsMCPToolsetParams::Type::OrSymbol,
+              type: Symbol,
               configs:
                 T::Array[Anthropic::Beta::BetaManagedAgentsMCPToolConfigParams],
               default_config:
@@ -110,35 +104,6 @@ module Anthropic
           )
         end
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsMCPToolsetParams::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          MCP_TOOLSET =
-            T.let(
-              :mcp_toolset,
-              Anthropic::Beta::BetaManagedAgentsMCPToolsetParams::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsMCPToolsetParams::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

@@ -19,67 +19,20 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :text
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsSystemContentBlock::Type::OrSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # Content block in a mid-conversation system message. Text-only.
-        sig do
-          params(
-            text: String,
-            type:
-              Anthropic::Beta::BetaManagedAgentsSystemContentBlock::Type::OrSymbol
-          ).returns(T.attached_class)
-        end
+        sig { params(text: String, type: Symbol).returns(T.attached_class) }
         def self.new(
           # The text content.
           text:,
-          type:
+          type: :text
         )
         end
 
-        sig do
-          override.returns(
-            {
-              text: String,
-              type:
-                Anthropic::Beta::BetaManagedAgentsSystemContentBlock::Type::OrSymbol
-            }
-          )
-        end
+        sig { override.returns({ text: String, type: Symbol }) }
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsSystemContentBlock::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          TEXT =
-            T.let(
-              :text,
-              Anthropic::Beta::BetaManagedAgentsSystemContentBlock::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsSystemContentBlock::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

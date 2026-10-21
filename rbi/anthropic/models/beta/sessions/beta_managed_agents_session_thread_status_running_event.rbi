@@ -29,11 +29,7 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :session_thread_id
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRunningEvent::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # A session thread has begun executing. Emitted on the thread's own stream and
@@ -44,8 +40,7 @@ module Anthropic
               agent_name: String,
               processed_at: Time,
               session_thread_id: String,
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRunningEvent::Type::OrSymbol
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
@@ -57,7 +52,7 @@ module Anthropic
             processed_at:,
             # Public sthr\_ ID of the thread that started running.
             session_thread_id:,
-            type:
+            type: :"session.thread_status_running"
           )
           end
 
@@ -68,41 +63,11 @@ module Anthropic
                 agent_name: String,
                 processed_at: Time,
                 session_thread_id: String,
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRunningEvent::Type::TaggedSymbol
+                type: Symbol
               }
             )
           end
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRunningEvent::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            SESSION_THREAD_STATUS_RUNNING =
-              T.let(
-                :"session.thread_status_running",
-                Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRunningEvent::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRunningEvent::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

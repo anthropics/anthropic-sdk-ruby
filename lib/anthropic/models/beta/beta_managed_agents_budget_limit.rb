@@ -13,10 +13,10 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsBudgetLimit::Type }
+        #   @return [Symbol, :limit]
+        required :type, const: :limit
 
-        # @!method initialize(max_list_cost:, type:)
+        # @!method initialize(max_list_cost:, type: :limit)
         #   A hard spend ceiling. The session stops issuing new model requests once the
         #   tracked list cost reaches `max_list_cost`.
         #
@@ -25,17 +25,7 @@ module Anthropic
         #
         #   @param max_list_cost [Anthropic::Models::BetaMonetaryAmount] Maximum list cost the session may accrue. List price is used regardless of any n
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          LIMIT = :limit
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :limit]
       end
     end
 

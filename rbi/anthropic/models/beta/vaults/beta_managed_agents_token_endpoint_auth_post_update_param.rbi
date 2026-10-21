@@ -13,11 +13,7 @@ module Anthropic
               )
             end
 
-          sig do
-            returns(
-              Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostUpdateParam::Type::OrSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # A new OAuth client secret to replace the stored one.
@@ -30,62 +26,25 @@ module Anthropic
 
           # Updated POST body authentication parameters for the token endpoint.
           sig do
-            params(
-              type:
-                Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostUpdateParam::Type::OrSymbol,
-              client_secret: T.nilable(String)
-            ).returns(T.attached_class)
+            params(client_secret: T.nilable(String), type: Symbol).returns(
+              T.attached_class
+            )
           end
           def self.new(
-            type:,
             # A new OAuth client secret to replace the stored one.
             #
             # The credential must already use `client_secret_basic` or `client_secret_post`.
             # It keeps its current `token_endpoint_auth` type, even if the `type` sent with
             # this secret is the other one.
-            client_secret: nil
+            client_secret: nil,
+            type: :client_secret_post
           )
           end
 
           sig do
-            override.returns(
-              {
-                type:
-                  Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostUpdateParam::Type::OrSymbol,
-                client_secret: T.nilable(String)
-              }
-            )
+            override.returns({ type: Symbol, client_secret: T.nilable(String) })
           end
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostUpdateParam::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            CLIENT_SECRET_POST =
-              T.let(
-                :client_secret_post,
-                Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostUpdateParam::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostUpdateParam::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

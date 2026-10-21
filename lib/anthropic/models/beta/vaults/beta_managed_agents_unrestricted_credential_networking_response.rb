@@ -7,25 +7,14 @@ module Anthropic
         class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse < Anthropic::Internal::Type::BaseModel
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingResponse::Type]
-          required :type,
-                   enum: -> { Anthropic::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingResponse::Type }
+          #   @return [Symbol, :unrestricted]
+          required :type, const: :unrestricted
 
-          # @!method initialize(type:)
+          # @!method initialize(type: :unrestricted)
           #   The secret is substituted on any host the session's Environment network policy
           #   permits egress to.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingResponse::Type]
-
-          # @see Anthropic::Models::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingResponse#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            UNRESTRICTED = :unrestricted
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :unrestricted]
         end
       end
     end

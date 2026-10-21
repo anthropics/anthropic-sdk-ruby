@@ -59,8 +59,8 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMemoryStore::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsMemoryStore::Type }
+        #   @return [Symbol, :memory_store]
+        required :type, const: :memory_store
 
         # @!attribute updated_at
         #   When the memory store was last changed, in RFC 3339.
@@ -71,7 +71,7 @@ module Anthropic
         #   @return [Time]
         required :updated_at, Time
 
-        # @!method initialize(id:, archived_at:, created_at:, description:, metadata:, name:, type:, updated_at:)
+        # @!method initialize(id:, archived_at:, created_at:, description:, metadata:, name:, updated_at:, type: :memory_store)
         #   A `memory_store`: a named container for agent memories, scoped to a workspace.
         #   Attach a store to a session via `resources[]` to mount it as a directory the
         #   agent can read and write.
@@ -91,19 +91,9 @@ module Anthropic
         #
         #   @param name [String] Human-readable name for the store. 1–255 characters. The store's mount-path slug
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMemoryStore::Type]
-        #
         #   @param updated_at [Time] When the memory store was last changed, in RFC 3339.
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsMemoryStore#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          MEMORY_STORE = :memory_store
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #
+        #   @param type [Symbol, :memory_store]
       end
     end
 

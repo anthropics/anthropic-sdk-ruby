@@ -5,7 +5,7 @@ module Anthropic
         type beta_managed_agents_user_custom_tool_result_event_params =
           {
             custom_tool_use_id: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams::type_,
+            type: :"user.custom_tool_result",
             content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams::content],
             is_error: bool?
           }
@@ -13,7 +13,7 @@ module Anthropic
         class BetaManagedAgentsUserCustomToolResultEventParams < Anthropic::Internal::Type::BaseModel
           attr_accessor custom_tool_use_id: String
 
-          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams::type_
+          attr_accessor type: :"user.custom_tool_result"
 
           attr_reader content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams::content]?
 
@@ -25,27 +25,17 @@ module Anthropic
 
           def initialize: (
             custom_tool_use_id: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams::type_,
             ?content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams::content],
-            ?is_error: bool?
+            ?is_error: bool?,
+            ?type: :"user.custom_tool_result"
           ) -> void
 
           def to_hash: -> {
             custom_tool_use_id: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams::type_,
+            type: :"user.custom_tool_result",
             content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams::content],
             is_error: bool?
           }
-
-          type type_ = :"user.custom_tool_result"
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            USER_CUSTOM_TOOL_RESULT: :"user.custom_tool_result"
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams::type_]
-          end
 
           type content =
             Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock

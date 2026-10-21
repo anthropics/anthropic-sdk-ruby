@@ -37,10 +37,10 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelRequestEndEvent::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelRequestEndEvent::Type }
+          #   @return [Symbol, :"span.model_request_end"]
+          required :type, const: :"span.model_request_end"
 
-          # @!method initialize(id:, is_error:, model_request_start_id:, model_usage:, processed_at:, type:)
+          # @!method initialize(id:, is_error:, model_request_start_id:, model_usage:, processed_at:, type: :"span.model_request_end")
           #   Emitted when a model request completes.
           #
           #   @param id [String] Unique identifier for this event.
@@ -53,17 +53,7 @@ module Anthropic
           #
           #   @param processed_at [Time] Timestamp when the model request completed.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelRequestEndEvent::Type]
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelRequestEndEvent#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            SPAN_MODEL_REQUEST_END = :"span.model_request_end"
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :"span.model_request_end"]
         end
       end
     end

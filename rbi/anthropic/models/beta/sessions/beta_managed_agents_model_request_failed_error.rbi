@@ -25,11 +25,7 @@ module Anthropic
           end
           attr_accessor :retry_status
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # A model request failed for a reason other than overload or rate-limiting.
@@ -42,8 +38,7 @@ module Anthropic
                   Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted::OrHash,
                   Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal::OrHash
                 ),
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::Type::OrSymbol
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
@@ -51,7 +46,7 @@ module Anthropic
             message:,
             # What the client should do next.
             retry_status:,
-            type:
+            type: :model_request_failed_error
           )
           end
 
@@ -61,8 +56,7 @@ module Anthropic
                 message: String,
                 retry_status:
                   Anthropic::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::RetryStatus::Variants,
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::Type::TaggedSymbol
+                type: Symbol
               }
             )
           end
@@ -142,35 +136,6 @@ module Anthropic
               )
             end
             def self.new(type:)
-            end
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            MODEL_REQUEST_FAILED_ERROR =
-              T.let(
-                :model_request_failed_error,
-                Anthropic::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
             end
           end
         end

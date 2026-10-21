@@ -7,7 +7,7 @@ module Anthropic
             mcp_server_name: String,
             message: String,
             retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::retry_status,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::type_
+            type: :mcp_connection_failed_error
           }
 
         class BetaManagedAgentsMCPConnectionFailedError < Anthropic::Internal::Type::BaseModel
@@ -17,20 +17,20 @@ module Anthropic
 
           attr_accessor retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::retry_status
 
-          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::type_
+          attr_accessor type: :mcp_connection_failed_error
 
           def initialize: (
             mcp_server_name: String,
             message: String,
             retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::retry_status,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::type_
+            ?type: :mcp_connection_failed_error
           ) -> void
 
           def to_hash: -> {
             mcp_server_name: String,
             message: String,
             retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::retry_status,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::type_
+            type: :mcp_connection_failed_error
           }
 
           type retry_status =
@@ -69,16 +69,6 @@ module Anthropic
                 type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::RetryStatus::type_
                 | String
               ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::retry_status
-          end
-
-          type type_ = :mcp_connection_failed_error
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            MCP_CONNECTION_FAILED_ERROR: :mcp_connection_failed_error
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::type_]
           end
         end
       end

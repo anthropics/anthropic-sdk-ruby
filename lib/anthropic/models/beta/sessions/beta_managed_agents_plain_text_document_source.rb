@@ -14,45 +14,22 @@ module Anthropic
           # @!attribute media_type
           #   MIME type of the text content. Must be "text/plain".
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource::MediaType]
-          required :media_type,
-                   enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource::MediaType }
+          #   @return [Symbol, :"text/plain"]
+          required :media_type, const: :"text/plain"
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource::Type }
+          #   @return [Symbol, :text]
+          required :type, const: :text
 
-          # @!method initialize(data:, media_type:, type:)
+          # @!method initialize(data:, media_type: :"text/plain", type: :text)
           #   Plain text document content.
           #
           #   @param data [String] The plain text content.
           #
-          #   @param media_type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource::MediaType] MIME type of the text content. Must be "text/plain".
+          #   @param media_type [Symbol, :"text/plain"] MIME type of the text content. Must be "text/plain".
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource::Type]
-
-          # MIME type of the text content. Must be "text/plain".
-          #
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource#media_type
-          module MediaType
-            extend Anthropic::Internal::Type::Enum
-
-            TEXT_PLAIN = :"text/plain"
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TEXT = :text
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :text]
         end
       end
     end

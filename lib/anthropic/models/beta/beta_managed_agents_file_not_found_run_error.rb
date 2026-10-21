@@ -12,25 +12,15 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsFileNotFoundRunError::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsFileNotFoundRunError::Type }
+        #   @return [Symbol, :file_not_found_error]
+        required :type, const: :file_not_found_error
 
-        # @!method initialize(message:, type:)
+        # @!method initialize(message:, type: :file_not_found_error)
         #   A file resource referenced by the deployment no longer exists.
         #
         #   @param message [String] Human-readable error description.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsFileNotFoundRunError::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsFileNotFoundRunError#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          FILE_NOT_FOUND_ERROR = :file_not_found_error
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :file_not_found_error]
       end
     end
 

@@ -13,25 +13,15 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubric::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsTextRubric::Type }
+          #   @return [Symbol, :text]
+          required :type, const: :text
 
-          # @!method initialize(content:, type:)
+          # @!method initialize(content:, type: :text)
           #   Rubric content provided inline as text.
           #
           #   @param content [String] Rubric content. Plain text or markdown — the grader treats it as freeform text.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubric::Type]
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubric#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TEXT = :text
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :text]
         end
       end
     end

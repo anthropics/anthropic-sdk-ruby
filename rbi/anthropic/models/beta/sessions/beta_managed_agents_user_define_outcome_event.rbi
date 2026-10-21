@@ -43,11 +43,7 @@ module Anthropic
           end
           attr_accessor :rubric
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # Echo of a `user.define_outcome` input event. Carries the server-generated
@@ -64,8 +60,7 @@ module Anthropic
                   Anthropic::Beta::Sessions::BetaManagedAgentsFileRubric::OrHash,
                   Anthropic::Beta::Sessions::BetaManagedAgentsTextRubric::OrHash
                 ),
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::Type::OrSymbol
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
@@ -83,7 +78,7 @@ module Anthropic
             # How to grade the outcome. File rubrics are currently resolved to their text
             # content; clients should handle both variants.
             rubric:,
-            type:
+            type: :"user.define_outcome"
           )
           end
 
@@ -97,8 +92,7 @@ module Anthropic
                 processed_at: Time,
                 rubric:
                   Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::Rubric::Variants,
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::Type::TaggedSymbol
+                type: Symbol
               }
             )
           end
@@ -181,35 +175,6 @@ module Anthropic
               # Rubric content. Plain text or markdown — the grader treats it as freeform text.
               content: nil
             )
-            end
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            USER_DEFINE_OUTCOME =
-              T.let(
-                :"user.define_outcome",
-                Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
             end
           end
         end

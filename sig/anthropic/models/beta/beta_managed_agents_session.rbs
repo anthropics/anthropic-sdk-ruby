@@ -17,7 +17,7 @@ module Anthropic
           stats: Anthropic::Beta::BetaManagedAgentsSessionStats,
           status: Anthropic::Models::Beta::BetaManagedAgentsSession::status,
           title: String?,
-          type: Anthropic::Models::Beta::BetaManagedAgentsSession::type_,
+          type: :session,
           updated_at: Time,
           usage: Anthropic::Beta::BetaManagedAgentsSessionUsage,
           vault_ids: ::Array[String],
@@ -49,7 +49,7 @@ module Anthropic
 
         attr_accessor title: String?
 
-        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsSession::type_
+        attr_accessor type: :session
 
         attr_accessor updated_at: Time
 
@@ -72,11 +72,11 @@ module Anthropic
           stats: Anthropic::Beta::BetaManagedAgentsSessionStats,
           status: Anthropic::Models::Beta::BetaManagedAgentsSession::status,
           title: String?,
-          type: Anthropic::Models::Beta::BetaManagedAgentsSession::type_,
           updated_at: Time,
           usage: Anthropic::Beta::BetaManagedAgentsSessionUsage,
           vault_ids: ::Array[String],
-          ?deployment_id: String?
+          ?deployment_id: String?,
+          ?type: :session
         ) -> void
 
         def to_hash: -> {
@@ -92,7 +92,7 @@ module Anthropic
           stats: Anthropic::Beta::BetaManagedAgentsSessionStats,
           status: Anthropic::Models::Beta::BetaManagedAgentsSession::status,
           title: String?,
-          type: Anthropic::Models::Beta::BetaManagedAgentsSession::type_,
+          type: :session,
           updated_at: Time,
           usage: Anthropic::Beta::BetaManagedAgentsSessionUsage,
           vault_ids: ::Array[String],
@@ -117,16 +117,6 @@ module Anthropic
           TERMINATED: :terminated
 
           def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsSession::status]
-        end
-
-        type type_ = :session
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          SESSION: :session
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsSession::type_]
         end
       end
     end

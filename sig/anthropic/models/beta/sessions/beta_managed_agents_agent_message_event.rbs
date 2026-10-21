@@ -7,7 +7,7 @@ module Anthropic
             id: String,
             content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::content],
             processed_at: Time,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::type_
+            type: :"agent.message"
           }
 
         class BetaManagedAgentsAgentMessageEvent < Anthropic::Internal::Type::BaseModel
@@ -17,20 +17,20 @@ module Anthropic
 
           attr_accessor processed_at: Time
 
-          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::type_
+          attr_accessor type: :"agent.message"
 
           def initialize: (
             id: String,
             content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::content],
             processed_at: Time,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::type_
+            ?type: :"agent.message"
           ) -> void
 
           def to_hash: -> {
             id: String,
             content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::content],
             processed_at: Time,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::type_
+            type: :"agent.message"
           }
 
           type content =
@@ -66,16 +66,6 @@ module Anthropic
                 | String,
                 ?text: String
               ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::content
-          end
-
-          type type_ = :"agent.message"
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            AGENT_MESSAGE: :"agent.message"
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::type_]
           end
         end
       end

@@ -26,11 +26,7 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :tool_use_id
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsUserToolResultEvent::Type::TaggedSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # The result content returned by the tool.
@@ -80,8 +76,6 @@ module Anthropic
           params(
             id: String,
             tool_use_id: String,
-            type:
-              Anthropic::Beta::BetaManagedAgentsUserToolResultEvent::Type::OrSymbol,
             content:
               T::Array[
                 T.any(
@@ -93,7 +87,8 @@ module Anthropic
               ],
             is_error: T.nilable(T::Boolean),
             processed_at: T.nilable(Time),
-            session_thread_id: T.nilable(String)
+            session_thread_id: T.nilable(String),
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
@@ -104,7 +99,6 @@ module Anthropic
           # [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids)
           # `stop_reason.event_ids` field.
           tool_use_id:,
-          type:,
           # The result content returned by the tool.
           content: nil,
           # Whether the tool execution resulted in an error.
@@ -113,7 +107,8 @@ module Anthropic
           processed_at: nil,
           # Set by the server to the subagent thread this result was routed to. Omitted when
           # it was routed to the primary thread.
-          session_thread_id: nil
+          session_thread_id: nil,
+          type: :"user.tool_result"
         )
         end
 
@@ -122,8 +117,7 @@ module Anthropic
             {
               id: String,
               tool_use_id: String,
-              type:
-                Anthropic::Beta::BetaManagedAgentsUserToolResultEvent::Type::TaggedSymbol,
+              type: Symbol,
               content:
                 T::Array[
                   Anthropic::Beta::BetaManagedAgentsUserToolResultEvent::Content::Variants
@@ -135,35 +129,6 @@ module Anthropic
           )
         end
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsUserToolResultEvent::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          USER_TOOL_RESULT =
-            T.let(
-              :"user.tool_result",
-              Anthropic::Beta::BetaManagedAgentsUserToolResultEvent::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsUserToolResultEvent::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
 
         # Content block in a tool result. Can be `text`, `image`, `document`, or

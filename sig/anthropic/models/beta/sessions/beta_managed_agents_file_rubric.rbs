@@ -2,36 +2,16 @@ module Anthropic
   module Models
     module Beta
       module Sessions
-        type beta_managed_agents_file_rubric =
-          {
-            file_id: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubric::type_
-          }
+        type beta_managed_agents_file_rubric = { file_id: String, type: :file }
 
         class BetaManagedAgentsFileRubric < Anthropic::Internal::Type::BaseModel
           attr_accessor file_id: String
 
-          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubric::type_
+          attr_accessor type: :file
 
-          def initialize: (
-            file_id: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubric::type_
-          ) -> void
+          def initialize: (file_id: String, ?type: :file) -> void
 
-          def to_hash: -> {
-            file_id: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubric::type_
-          }
-
-          type type_ = :file
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            FILE: :file
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubric::type_]
-          end
+          def to_hash: -> { file_id: String, type: :file }
         end
       end
     end

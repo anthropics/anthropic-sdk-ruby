@@ -94,8 +94,8 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeployment::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsDeployment::Type }
+        #   @return [Symbol, :deployment]
+        required :type, const: :deployment
 
         # @!attribute updated_at
         #   Time the deployment was last updated.
@@ -117,7 +117,7 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil]
         optional :budget, -> { Anthropic::Beta::BetaManagedAgentsBudgetLimit }, nil?: true
 
-        # @!method initialize(id:, agent:, archived_at:, created_at:, description:, environment_id:, initial_events:, metadata:, name:, paused_reason:, resources:, schedule:, status:, type:, updated_at:, vault_ids:, budget: nil)
+        # @!method initialize(id:, agent:, archived_at:, created_at:, description:, environment_id:, initial_events:, metadata:, name:, paused_reason:, resources:, schedule:, status:, updated_at:, vault_ids:, budget: nil, type: :deployment)
         #   A deployment is a configured instance of an agent — it binds the agent to
         #   everything needed to run it autonomously: an environment, credentials, initial
         #   events, and an optional schedule.
@@ -151,23 +151,13 @@ module Anthropic
         #
         #   @param status [Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeploymentStatus] Computed status of the deployment: `active` or `paused`. Archived deployments re
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeployment::Type]
-        #
         #   @param updated_at [Time] Time the deployment was last updated.
         #
         #   @param vault_ids [Array<String>] Vault IDs supplying stored credentials for sessions created from this deployment
         #
         #   @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] Spend ceiling stamped onto each session created from this deployment. Absent whe
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsDeployment#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          DEPLOYMENT = :deployment
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #
+        #   @param type [Symbol, :deployment]
       end
     end
 

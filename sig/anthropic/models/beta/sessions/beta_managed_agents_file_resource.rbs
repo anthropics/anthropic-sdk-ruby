@@ -8,7 +8,7 @@ module Anthropic
             created_at: Time,
             file_id: String,
             mount_path: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileResource::type_,
+            type: :file,
             updated_at: Time
           }
 
@@ -21,7 +21,7 @@ module Anthropic
 
           attr_accessor mount_path: String
 
-          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileResource::type_
+          attr_accessor type: :file
 
           attr_accessor updated_at: Time
 
@@ -30,8 +30,8 @@ module Anthropic
             created_at: Time,
             file_id: String,
             mount_path: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileResource::type_,
-            updated_at: Time
+            updated_at: Time,
+            ?type: :file
           ) -> void
 
           def to_hash: -> {
@@ -39,19 +39,9 @@ module Anthropic
             created_at: Time,
             file_id: String,
             mount_path: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileResource::type_,
+            type: :file,
             updated_at: Time
           }
-
-          type type_ = :file
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            FILE: :file
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileResource::type_]
-          end
         end
       end
     end

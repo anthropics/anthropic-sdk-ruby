@@ -365,7 +365,7 @@ class Anthropic::Test::AWSClientTest < Minitest::Test
     end
   end
 
-  def test_api_key_mode_request_includes_x_api_key_header
+  def test_api_key_mode_request_sends_api_key_as_bearer
     stub_request(:post, "http://localhost/v1/messages").to_return_json(
       status: 500,
       body: {}
@@ -386,7 +386,8 @@ class Anthropic::Test::AWSClientTest < Minitest::Test
     end
 
     assert_requested(:any, /./, times: 3) do |req|
-      assert_equal("sk-ant-test", req.headers.fetch("X-Api-Key"))
+      assert_equal("Bearer sk-ant-test", req.headers.fetch("Authorization"))
+      assert_nil(req.headers["X-Api-Key"])
     end
   end
 
@@ -581,7 +582,8 @@ class Anthropic::Test::AWSClientTest < Minitest::Test
 
     [[:post, url], [:get, "#{url}/uprof_test"], [:post, "#{url}/uprof_test"], [:get, url]].each do |method, uri|
       assert_requested(method, uri, times: 1) do |req|
-        assert_equal("sk-ant-xxx", req.headers["X-Api-Key"])
+        assert_equal("Bearer sk-ant-xxx", req.headers["Authorization"])
+        assert_nil(req.headers["X-Api-Key"])
         assert_equal("ws-test", req.headers["Anthropic-Workspace-Id"])
       end
     end
@@ -613,13 +615,6 @@ class Anthropic::Test::AWSClientTest < Minitest::Test
       end
       assert_equal("User profile action URLs are not supported on the AWS gateway.", err.message)
     end
-  end
-
-  # Unlike the Bedrock and Google Cloud clients, nothing the parent wires up is
-  # withheld here.
-  def test_completions_resource_available
-    client = Anthropic::AWSClient.new(api_key: "sk-ant-xxx", workspace_id: "ws-xxx", base_url: "http://localhost")
-    assert_kind_of(Anthropic::Resources::Completions, client.completions)
   end
 
   # ---------------------------------------------------------------------------

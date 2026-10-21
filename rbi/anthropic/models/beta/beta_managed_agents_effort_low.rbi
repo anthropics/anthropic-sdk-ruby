@@ -14,54 +14,16 @@ module Anthropic
             )
           end
 
-        sig do
-          returns(Anthropic::Beta::BetaManagedAgentsEffortLow::Type::OrSymbol)
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # Low effort. Favors latency over reasoning depth.
-        sig do
-          params(
-            type: Anthropic::Beta::BetaManagedAgentsEffortLow::Type::OrSymbol
-          ).returns(T.attached_class)
-        end
-        def self.new(type:)
+        sig { params(type: Symbol).returns(T.attached_class) }
+        def self.new(type: :low)
         end
 
-        sig do
-          override.returns(
-            {
-              type: Anthropic::Beta::BetaManagedAgentsEffortLow::Type::OrSymbol
-            }
-          )
-        end
+        sig { override.returns({ type: Symbol }) }
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(Symbol, Anthropic::Beta::BetaManagedAgentsEffortLow::Type)
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          LOW =
-            T.let(
-              :low,
-              Anthropic::Beta::BetaManagedAgentsEffortLow::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsEffortLow::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

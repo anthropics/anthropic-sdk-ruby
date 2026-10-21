@@ -25,11 +25,7 @@ module Anthropic
           end
           attr_accessor :retry_status
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsModelOverloadedError::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # The model is currently overloaded. Emitted after automatic retries are
@@ -43,8 +39,7 @@ module Anthropic
                   Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted::OrHash,
                   Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal::OrHash
                 ),
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsModelOverloadedError::Type::OrSymbol
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
@@ -52,7 +47,7 @@ module Anthropic
             message:,
             # What the client should do next.
             retry_status:,
-            type:
+            type: :model_overloaded_error
           )
           end
 
@@ -62,8 +57,7 @@ module Anthropic
                 message: String,
                 retry_status:
                   Anthropic::Beta::Sessions::BetaManagedAgentsModelOverloadedError::RetryStatus::Variants,
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsModelOverloadedError::Type::TaggedSymbol
+                type: Symbol
               }
             )
           end
@@ -143,35 +137,6 @@ module Anthropic
               )
             end
             def self.new(type:)
-            end
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsModelOverloadedError::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            MODEL_OVERLOADED_ERROR =
-              T.let(
-                :model_overloaded_error,
-                Anthropic::Beta::Sessions::BetaManagedAgentsModelOverloadedError::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsModelOverloadedError::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
             end
           end
         end

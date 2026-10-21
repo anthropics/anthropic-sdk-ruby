@@ -9,7 +9,7 @@ module Anthropic
             memory_id: String,
             memory_store_id: String,
             operation: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_version_operation,
-            type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryVersion::type_,
+            type: :memory_version,
             content: String?,
             :content_sha256 => String?,
             content_size_bytes: Integer?,
@@ -30,7 +30,7 @@ module Anthropic
 
           attr_accessor operation: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_version_operation
 
-          attr_accessor type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryVersion::type_
+          attr_accessor type: :memory_version
 
           attr_accessor content: String?
 
@@ -60,14 +60,14 @@ module Anthropic
             memory_id: String,
             memory_store_id: String,
             operation: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_version_operation,
-            type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryVersion::type_,
             ?content: String?,
             ?content_sha256: String?,
             ?content_size_bytes: Integer?,
             ?created_by: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_actor,
             ?path: String?,
             ?redacted_at: Time?,
-            ?redacted_by: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_actor
+            ?redacted_by: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_actor,
+            ?type: :memory_version
           ) -> void
 
           def to_hash: -> {
@@ -76,7 +76,7 @@ module Anthropic
             memory_id: String,
             memory_store_id: String,
             operation: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_version_operation,
-            type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryVersion::type_,
+            type: :memory_version,
             content: String?,
             :content_sha256 => String?,
             content_size_bytes: Integer?,
@@ -85,16 +85,6 @@ module Anthropic
             redacted_at: Time?,
             redacted_by: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_actor
           }
-
-          type type_ = :memory_version
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            MEMORY_VERSION: :memory_version
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryVersion::type_]
-          end
         end
       end
     end

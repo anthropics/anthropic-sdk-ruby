@@ -19,11 +19,10 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusRescheduledEvent::Type]
-          required :type,
-                   enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusRescheduledEvent::Type }
+          #   @return [Symbol, :"session.status_rescheduled"]
+          required :type, const: :"session.status_rescheduled"
 
-          # @!method initialize(id:, processed_at:, type:)
+          # @!method initialize(id:, processed_at:, type: :"session.status_rescheduled")
           #   Indicates the session is recovering from an error state and is rescheduled for
           #   execution.
           #
@@ -31,17 +30,7 @@ module Anthropic
           #
           #   @param processed_at [Time] Timestamp of status change.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusRescheduledEvent::Type]
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusRescheduledEvent#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            SESSION_STATUS_RESCHEDULED = :"session.status_rescheduled"
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :"session.status_rescheduled"]
         end
       end
     end

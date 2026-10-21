@@ -6,13 +6,8 @@ module Anthropic
       class Client < Anthropic::Client
         include Anthropic::Helpers::AWSAuth
 
-        DEFAULT_VERSION = "bedrock-2023-05-31"
-
         # @return [Anthropic::Resources::Messages]
         attr_reader :messages
-
-        # @return [Anthropic::Resources::Completions]
-        attr_reader :completions
 
         # @return [Anthropic::Resources::Beta]
         attr_reader :beta
@@ -132,7 +127,6 @@ module Anthropic
           # For AWSAuth#auth_headers: suppress key headers in SigV4 mode; in
           # API-key mode fall through to the base bearer-token handling.
           @use_sig_v4 = !@signer.nil?
-          @use_bearer_auth = false
 
           # The Bedrock bearer rides the base client's `auth_token` slot;
           # {#resolve_default_credentials?} keeps first-party credential
@@ -330,7 +324,8 @@ module Anthropic
 
         # @api private
         #
-        # Rewrites the canonical Anthropic request into Bedrock's shape — drops
+        # Rewrites the canonical Anthropic request into Bedrock's shape — moves
+        # the `anthropic-version` header into the body, drops
         # `:model`/`:stream` from the body and retargets the URL to
         # `/model/{model}/invoke[-with-response-stream]`. Called from
         # {#provider_middleware}, so user middleware sees the canonical
@@ -340,17 +335,17 @@ module Anthropic
         # @param req [Anthropic::APIRequest]
         # @return [Anthropic::APIRequest]
         private def adapt_request(req)
+          version = req.headers["anthropic-version"]
+          req = req.with(headers: req.headers.except("anthropic-version"))
           body = req.body
           return req unless body.is_a?(Hash)
 
           body = body.transform_keys("anthropic-beta": :anthropic_beta)
-          body[:anthropic_version] ||= DEFAULT_VERSION
+          body[:anthropic_version] ||= version if version
 
           path = req.url.path.to_s
           query = req.url.query
-          messages_route =
-            (path.end_with?("/v1/messages") && (query.nil? || query == "beta=true")) ||
-            (path.end_with?("/v1/complete") && query.nil?)
+          messages_route = path.end_with?("/v1/messages") && (query.nil? || query == "beta=true")
 
           return req.with(body: body) unless req.method == :post && messages_route
 
@@ -359,7 +354,7 @@ module Anthropic
 
           url = req.url.dup
           url.path = path.sub(
-            %r{v1/(?:messages|complete)\z},
+            %r{v1/messages\z},
             stream ? "model/#{model}/invoke-with-response-stream" : "model/#{model}/invoke"
           )
           url.query = nil

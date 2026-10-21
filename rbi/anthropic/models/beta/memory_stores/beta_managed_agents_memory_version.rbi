@@ -42,11 +42,7 @@ module Anthropic
           end
           attr_accessor :operation
 
-          sig do
-            returns(
-              Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryVersion::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # The memory's UTF-8 text content as of this version. `null` when `view=basic`,
@@ -160,8 +156,6 @@ module Anthropic
               memory_store_id: String,
               operation:
                 Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryVersionOperation::OrSymbol,
-              type:
-                Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryVersion::Type::OrSymbol,
               content: T.nilable(String),
               content_sha256: T.nilable(String),
               content_size_bytes: T.nilable(Integer),
@@ -180,7 +174,8 @@ module Anthropic
                   Anthropic::Beta::MemoryStores::BetaManagedAgentsAPIActor::OrHash,
                   Anthropic::Beta::MemoryStores::BetaManagedAgentsUserActor::OrHash,
                   Anthropic::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor::OrHash
-                )
+                ),
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
@@ -199,7 +194,6 @@ module Anthropic
             memory_store_id:,
             # The kind of mutation this version records: `created`, `modified`, or `deleted`.
             operation:,
-            type:,
             # The memory's UTF-8 text content as of this version. `null` when `view=basic`,
             # when `operation` is `deleted`, or when `redacted_at` is set.
             content: nil,
@@ -236,7 +230,8 @@ module Anthropic
             # Who redacted this version, or `null` if it has not been redacted. In practice
             # always an `api_actor`, `user_actor`, or `service_account_actor` (agents do not
             # have a redact capability).
-            redacted_by: nil
+            redacted_by: nil,
+            type: :memory_version
           )
           end
 
@@ -249,8 +244,7 @@ module Anthropic
                 memory_store_id: String,
                 operation:
                   Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryVersionOperation::TaggedSymbol,
-                type:
-                  Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryVersion::Type::TaggedSymbol,
+                type: Symbol,
                 content: T.nilable(String),
                 content_sha256: T.nilable(String),
                 content_size_bytes: T.nilable(Integer),
@@ -264,35 +258,6 @@ module Anthropic
             )
           end
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryVersion::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            MEMORY_VERSION =
-              T.let(
-                :memory_version,
-                Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryVersion::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryVersion::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

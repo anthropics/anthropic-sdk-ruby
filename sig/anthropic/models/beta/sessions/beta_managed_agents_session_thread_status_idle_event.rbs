@@ -10,7 +10,7 @@ module Anthropic
             session_thread_id: String,
             stop_details: Anthropic::Beta::Sessions::BetaManagedAgentsSessionRefusalStopDetails?,
             stop_reason: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::stop_reason,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::type_
+            type: :"session.thread_status_idle"
           }
 
         class BetaManagedAgentsSessionThreadStatusIdleEvent < Anthropic::Internal::Type::BaseModel
@@ -26,7 +26,7 @@ module Anthropic
 
           attr_accessor stop_reason: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::stop_reason
 
-          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::type_
+          attr_accessor type: :"session.thread_status_idle"
 
           def initialize: (
             id: String,
@@ -35,7 +35,7 @@ module Anthropic
             session_thread_id: String,
             stop_details: Anthropic::Beta::Sessions::BetaManagedAgentsSessionRefusalStopDetails?,
             stop_reason: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::stop_reason,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::type_
+            ?type: :"session.thread_status_idle"
           ) -> void
 
           def to_hash: -> {
@@ -45,7 +45,7 @@ module Anthropic
             session_thread_id: String,
             stop_details: Anthropic::Beta::Sessions::BetaManagedAgentsSessionRefusalStopDetails?,
             stop_reason: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::stop_reason,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::type_
+            type: :"session.thread_status_idle"
           }
 
           type stop_reason =
@@ -101,16 +101,6 @@ module Anthropic
                 | String,
                 ?event_ids: ::Array[String]
               ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::stop_reason
-          end
-
-          type type_ = :"session.thread_status_idle"
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            SESSION_THREAD_STATUS_IDLE: :"session.thread_status_idle"
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::type_]
           end
         end
       end

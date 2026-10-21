@@ -17,11 +17,7 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :id
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEvent::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # Timestamp when the interrupt was processed.
@@ -38,22 +34,21 @@ module Anthropic
           sig do
             params(
               id: String,
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEvent::Type::OrSymbol,
               processed_at: T.nilable(Time),
-              session_thread_id: T.nilable(String)
+              session_thread_id: T.nilable(String),
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
             # Unique identifier for this event.
             id:,
-            type:,
             # Timestamp when the interrupt was processed.
             processed_at: nil,
             # If absent, interrupts every non-archived thread in a multiagent session (or the
             # primary alone in a single-agent session). If present, interrupts only the named
             # thread.
-            session_thread_id: nil
+            session_thread_id: nil,
+            type: :"user.interrupt"
           )
           end
 
@@ -61,43 +56,13 @@ module Anthropic
             override.returns(
               {
                 id: String,
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEvent::Type::TaggedSymbol,
+                type: Symbol,
                 processed_at: T.nilable(Time),
                 session_thread_id: T.nilable(String)
               }
             )
           end
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEvent::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            USER_INTERRUPT =
-              T.let(
-                :"user.interrupt",
-                Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEvent::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEvent::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

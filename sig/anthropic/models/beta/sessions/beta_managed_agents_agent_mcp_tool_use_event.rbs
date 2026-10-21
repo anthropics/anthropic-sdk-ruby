@@ -9,7 +9,7 @@ module Anthropic
             mcp_server_name: String,
             name: String,
             processed_at: Time,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::type_,
+            type: :"agent.mcp_tool_use",
             evaluated_permission: Anthropic::Models::Beta::Sessions::beta_managed_agents_agent_evaluated_permission,
             evaluation: Anthropic::Models::Beta::Sessions::beta_managed_agents_agent_tool_evaluation,
             session_thread_id: String?
@@ -26,7 +26,7 @@ module Anthropic
 
           attr_accessor processed_at: Time
 
-          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::type_
+          attr_accessor type: :"agent.mcp_tool_use"
 
           attr_reader evaluated_permission: Anthropic::Models::Beta::Sessions::beta_managed_agents_agent_evaluated_permission?
 
@@ -48,10 +48,10 @@ module Anthropic
             mcp_server_name: String,
             name: String,
             processed_at: Time,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::type_,
             ?evaluated_permission: Anthropic::Models::Beta::Sessions::beta_managed_agents_agent_evaluated_permission,
             ?evaluation: Anthropic::Models::Beta::Sessions::beta_managed_agents_agent_tool_evaluation,
-            ?session_thread_id: String?
+            ?session_thread_id: String?,
+            ?type: :"agent.mcp_tool_use"
           ) -> void
 
           def to_hash: -> {
@@ -60,21 +60,11 @@ module Anthropic
             mcp_server_name: String,
             name: String,
             processed_at: Time,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::type_,
+            type: :"agent.mcp_tool_use",
             evaluated_permission: Anthropic::Models::Beta::Sessions::beta_managed_agents_agent_evaluated_permission,
             evaluation: Anthropic::Models::Beta::Sessions::beta_managed_agents_agent_tool_evaluation,
             session_thread_id: String?
           }
-
-          type type_ = :"agent.mcp_tool_use"
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            AGENT_MCP_TOOL_USE: :"agent.mcp_tool_use"
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::type_]
-          end
         end
       end
     end

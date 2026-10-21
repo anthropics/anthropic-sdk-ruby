@@ -17,11 +17,7 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :mcp_server_url
 
-          sig do
-            returns(
-              Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthAuthResponse::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # When the credential's access token expires, in RFC 3339. Absent if the expiry
@@ -53,24 +49,23 @@ module Anthropic
           sig do
             params(
               mcp_server_url: String,
-              type:
-                Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthAuthResponse::Type::OrSymbol,
               expires_at: T.nilable(Time),
               refresh:
                 T.nilable(
                   Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshResponse::OrHash
-                )
+                ),
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
             # URL of the MCP server this credential authenticates against.
             mcp_server_url:,
-            type:,
             # When the credential's access token expires, in RFC 3339. Absent if the expiry
             # isn't known.
             expires_at: nil,
             # Refresh token configuration, if the credential supports token refresh.
-            refresh: nil
+            refresh: nil,
+            type: :mcp_oauth
           )
           end
 
@@ -78,8 +73,7 @@ module Anthropic
             override.returns(
               {
                 mcp_server_url: String,
-                type:
-                  Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthAuthResponse::Type::TaggedSymbol,
+                type: Symbol,
                 expires_at: T.nilable(Time),
                 refresh:
                   T.nilable(
@@ -89,35 +83,6 @@ module Anthropic
             )
           end
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthAuthResponse::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            MCP_OAUTH =
-              T.let(
-                :mcp_oauth,
-                Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthAuthResponse::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthAuthResponse::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

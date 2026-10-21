@@ -17,7 +17,7 @@ class Anthropic::Test::Resources::Beta::UserProfilesTest < Anthropic::Test::Reso
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
         name: String | nil,
         trust_grants: ^(Anthropic::Internal::Type::HashOf[Anthropic::Beta::BetaUserProfileTrustGrant]),
-        type: Anthropic::Beta::BetaUserProfile::Type,
+        type: Symbol,
         updated_at: Time,
         access_type: Anthropic::Beta::BetaUserProfile::AccessType | nil,
         external_id: String | nil,
@@ -41,7 +41,7 @@ class Anthropic::Test::Resources::Beta::UserProfilesTest < Anthropic::Test::Reso
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
         name: String | nil,
         trust_grants: ^(Anthropic::Internal::Type::HashOf[Anthropic::Beta::BetaUserProfileTrustGrant]),
-        type: Anthropic::Beta::BetaUserProfile::Type,
+        type: Symbol,
         updated_at: Time,
         access_type: Anthropic::Beta::BetaUserProfile::AccessType | nil,
         external_id: String | nil,
@@ -65,7 +65,7 @@ class Anthropic::Test::Resources::Beta::UserProfilesTest < Anthropic::Test::Reso
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
         name: String | nil,
         trust_grants: ^(Anthropic::Internal::Type::HashOf[Anthropic::Beta::BetaUserProfileTrustGrant]),
-        type: Anthropic::Beta::BetaUserProfile::Type,
+        type: Symbol,
         updated_at: Time,
         access_type: Anthropic::Beta::BetaUserProfile::AccessType | nil,
         external_id: String | nil,
@@ -96,7 +96,7 @@ class Anthropic::Test::Resources::Beta::UserProfilesTest < Anthropic::Test::Reso
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
         name: String | nil,
         trust_grants: ^(Anthropic::Internal::Type::HashOf[Anthropic::Beta::BetaUserProfileTrustGrant]),
-        type: Anthropic::Beta::BetaUserProfile::Type,
+        type: Symbol,
         updated_at: Time,
         access_type: Anthropic::Beta::BetaUserProfile::AccessType | nil,
         external_id: String | nil,
@@ -131,7 +131,7 @@ class Anthropic::Test::Resources::Beta::UserProfilesTest < Anthropic::Test::Reso
     assert_pattern do
       response => {
         expires_at: Time,
-        type: Anthropic::Beta::BetaUserProfileEnrollmentURL::Type,
+        type: Symbol,
         url: String
       }
     end

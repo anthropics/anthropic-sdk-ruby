@@ -15,7 +15,6 @@ class Anthropic::Test::Resources::Beta::Organization::RBACRolesTest < Anthropic:
         id: String,
         created_at: Time,
         display_name: String,
-        name: String,
         type: Symbol,
         updated_at: Time
       }
@@ -41,7 +40,6 @@ class Anthropic::Test::Resources::Beta::Organization::RBACRolesTest < Anthropic:
         id: String,
         created_at: Time,
         display_name: String,
-        name: String,
         type: Symbol,
         updated_at: Time
       }

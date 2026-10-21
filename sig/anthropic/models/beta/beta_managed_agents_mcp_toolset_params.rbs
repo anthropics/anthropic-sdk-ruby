@@ -6,7 +6,7 @@ module Anthropic
       type beta_managed_agents_mcp_toolset_params =
         {
           mcp_server_name: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetParams::type_,
+          type: :mcp_toolset,
           configs: ::Array[Anthropic::Beta::BetaManagedAgentsMCPToolConfigParams],
           default_config: Anthropic::Beta::BetaManagedAgentsMCPToolsetDefaultConfigParams?
         }
@@ -14,7 +14,7 @@ module Anthropic
       class BetaManagedAgentsMCPToolsetParams < Anthropic::Internal::Type::BaseModel
         attr_accessor mcp_server_name: String
 
-        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetParams::type_
+        attr_accessor type: :mcp_toolset
 
         attr_reader configs: ::Array[Anthropic::Beta::BetaManagedAgentsMCPToolConfigParams]?
 
@@ -26,27 +26,17 @@ module Anthropic
 
         def initialize: (
           mcp_server_name: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetParams::type_,
           ?configs: ::Array[Anthropic::Beta::BetaManagedAgentsMCPToolConfigParams],
-          ?default_config: Anthropic::Beta::BetaManagedAgentsMCPToolsetDefaultConfigParams?
+          ?default_config: Anthropic::Beta::BetaManagedAgentsMCPToolsetDefaultConfigParams?,
+          ?type: :mcp_toolset
         ) -> void
 
         def to_hash: -> {
           mcp_server_name: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetParams::type_,
+          type: :mcp_toolset,
           configs: ::Array[Anthropic::Beta::BetaManagedAgentsMCPToolConfigParams],
           default_config: Anthropic::Beta::BetaManagedAgentsMCPToolsetDefaultConfigParams?
         }
-
-        type type_ = :mcp_toolset
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          MCP_TOOLSET: :mcp_toolset
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetParams::type_]
-        end
       end
     end
   end

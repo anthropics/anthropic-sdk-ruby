@@ -17,7 +17,7 @@ module Anthropic
           outputs: ::Array[Anthropic::Beta::BetaDreamOutput],
           session_id: String?,
           status: Anthropic::Models::Beta::beta_dream_status,
-          type: Anthropic::Models::Beta::BetaDream::type_,
+          type: :dream,
           usage: Anthropic::Beta::BetaDreamUsage
         }
 
@@ -46,7 +46,7 @@ module Anthropic
 
         attr_accessor status: Anthropic::Models::Beta::beta_dream_status
 
-        attr_accessor type: Anthropic::Models::Beta::BetaDream::type_
+        attr_accessor type: :dream
 
         attr_accessor usage: Anthropic::Beta::BetaDreamUsage
 
@@ -63,8 +63,8 @@ module Anthropic
           outputs: ::Array[Anthropic::Beta::BetaDreamOutput],
           session_id: String?,
           status: Anthropic::Models::Beta::beta_dream_status,
-          type: Anthropic::Models::Beta::BetaDream::type_,
-          usage: Anthropic::Beta::BetaDreamUsage
+          usage: Anthropic::Beta::BetaDreamUsage,
+          ?type: :dream
         ) -> void
 
         def to_hash: -> {
@@ -80,19 +80,9 @@ module Anthropic
           outputs: ::Array[Anthropic::Beta::BetaDreamOutput],
           session_id: String?,
           status: Anthropic::Models::Beta::beta_dream_status,
-          type: Anthropic::Models::Beta::BetaDream::type_,
+          type: :dream,
           usage: Anthropic::Beta::BetaDreamUsage
         }
-
-        type type_ = :dream
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          DREAM: :dream
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaDream::type_]
-        end
       end
     end
   end

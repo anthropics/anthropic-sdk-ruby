@@ -37,8 +37,8 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsVault::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsVault::Type }
+        #   @return [Symbol, :vault]
+        required :type, const: :vault
 
         # @!attribute updated_at
         #   A timestamp in RFC 3339 format
@@ -46,7 +46,7 @@ module Anthropic
         #   @return [Time]
         required :updated_at, Time
 
-        # @!method initialize(id:, archived_at:, created_at:, display_name:, metadata:, type:, updated_at:)
+        # @!method initialize(id:, archived_at:, created_at:, display_name:, metadata:, updated_at:, type: :vault)
         #   A vault that stores credentials for use by agents during sessions.
         #
         #   @param id [String] The unique ID of the vault (`vlt_...`).
@@ -59,19 +59,9 @@ module Anthropic
         #
         #   @param metadata [Hash{Symbol=>String}] Arbitrary key-value metadata attached to the vault.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsVault::Type]
-        #
         #   @param updated_at [Time] A timestamp in RFC 3339 format
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsVault#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          VAULT = :vault
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #
+        #   @param type [Symbol, :vault]
       end
     end
 

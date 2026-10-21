@@ -6,24 +6,14 @@ module Anthropic
       class BetaManagedAgentsUnknownDeploymentPausedReasonError < Anthropic::Internal::Type::BaseModel
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsUnknownDeploymentPausedReasonError::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsUnknownDeploymentPausedReasonError::Type }
+        #   @return [Symbol, :unknown_error]
+        required :type, const: :unknown_error
 
-        # @!method initialize(type:)
+        # @!method initialize(type: :unknown_error)
         #   An unrecognized error auto-paused the deployment. A fallback variant; matches a
         #   run whose `error.type` is `unknown_error`.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsUnknownDeploymentPausedReasonError::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsUnknownDeploymentPausedReasonError#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          UNKNOWN_ERROR = :unknown_error
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :unknown_error]
       end
     end
 

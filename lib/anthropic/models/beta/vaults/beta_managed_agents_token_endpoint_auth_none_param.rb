@@ -7,23 +7,13 @@ module Anthropic
         class BetaManagedAgentsTokenEndpointAuthNoneParam < Anthropic::Internal::Type::BaseModel
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthNoneParam::Type]
-          required :type, enum: -> { Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthNoneParam::Type }
+          #   @return [Symbol, :none]
+          required :type, const: :none
 
-          # @!method initialize(type:)
+          # @!method initialize(type: :none)
           #   Token endpoint requires no client authentication.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthNoneParam::Type]
-
-          # @see Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthNoneParam#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            NONE = :none
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :none]
         end
       end
     end

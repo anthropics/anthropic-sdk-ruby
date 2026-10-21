@@ -19,7 +19,14 @@ module Anthropic
       sig do
         params(
           max_tokens: Integer,
-          messages: T::Array[Anthropic::MessageParam::OrHash],
+          messages:
+            T::Array[
+              T.any(
+                Anthropic::UserMessageParam::OrHash,
+                Anthropic::AssistantMessageParam::OrHash,
+                Anthropic::SystemMessageParam::OrHash
+              )
+            ],
           model: T.any(Anthropic::Model::OrSymbol, String),
           cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash),
           container:
@@ -32,7 +39,6 @@ module Anthropic
           speed: T.nilable(Anthropic::MessageCreateParams::Speed::OrSymbol),
           stop_sequences: T::Array[String],
           system_: Anthropic::MessageCreateParams::System::Variants,
-          temperature: Float,
           thinking:
             T.any(
               Anthropic::ThinkingConfigEnabled::OrHash,
@@ -73,8 +79,6 @@ module Anthropic
                 Anthropic::ToolSearchToolRegex20251119::OrHash
               )
             ],
-          top_k: Integer,
-          top_p: Float,
           user_profile_id: String,
           workspace_id: String,
           stream: T.noreturn,
@@ -161,8 +165,7 @@ module Anthropic
         #
         # Note that if you want to include a
         # [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role),
-        # you can use the top-level `system` parameter — there is no `"system"` role for
-        # input messages in the Messages API.
+        # you can use the top-level `system` parameter.
         #
         # There is a limit of 100,000 messages in a single request.
         messages:,
@@ -219,15 +222,6 @@ module Anthropic
         # as specifying a particular goal or role. See our
         # [guide to system prompts](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role).
         system_: nil,
-        # Body param: Amount of randomness injected into the response.
-        #
-        # Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0`
-        # for analytical / multiple choice, and closer to `1.0` for creative and
-        # generative tasks.
-        #
-        # Note that even with `temperature` of `0.0`, the results will not be fully
-        # deterministic.
-        temperature: nil,
         # Body param: Configuration for Claude's thinking.
         #
         # With `{"type": "adaptive"}`, Claude decides when and how much to think. With
@@ -320,21 +314,6 @@ module Anthropic
         # [guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)
         # for more details.
         tools: nil,
-        # Body param: Only sample from the top K options for each subsequent token.
-        #
-        # Used to remove "long tail" low probability responses.
-        # [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
-        #
-        # Recommended for advanced use cases only.
-        top_k: nil,
-        # Body param: Use nucleus sampling.
-        #
-        # In nucleus sampling, we compute the cumulative distribution over all the options
-        # for each subsequent token in decreasing probability order and cut it off once it
-        # reaches a particular probability specified by `top_p`.
-        #
-        # Recommended for advanced use cases only.
-        top_p: nil,
         # Header param: The user profile ID to attribute this request to. Use when acting
         # on behalf of a party other than your organization.
         user_profile_id: nil,
@@ -365,7 +344,14 @@ module Anthropic
       sig do
         params(
           max_tokens: Integer,
-          messages: T::Array[Anthropic::MessageParam::OrHash],
+          messages:
+            T::Array[
+              T.any(
+                Anthropic::UserMessageParam::OrHash,
+                Anthropic::AssistantMessageParam::OrHash,
+                Anthropic::SystemMessageParam::OrHash
+              )
+            ],
           model: T.any(Anthropic::Model::OrSymbol, String),
           cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash),
           container:
@@ -378,7 +364,6 @@ module Anthropic
           speed: T.nilable(Anthropic::MessageCreateParams::Speed::OrSymbol),
           stop_sequences: T::Array[String],
           system_: Anthropic::MessageCreateParams::System::Variants,
-          temperature: Float,
           thinking:
             T.any(
               Anthropic::ThinkingConfigEnabled::OrHash,
@@ -419,8 +404,6 @@ module Anthropic
                 Anthropic::ToolSearchToolRegex20251119::OrHash
               )
             ],
-          top_k: Integer,
-          top_p: Float,
           user_profile_id: String,
           workspace_id: String,
           stream: T.noreturn,
@@ -512,8 +495,7 @@ module Anthropic
         #
         # Note that if you want to include a
         # [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role),
-        # you can use the top-level `system` parameter — there is no `"system"` role for
-        # input messages in the Messages API.
+        # you can use the top-level `system` parameter.
         #
         # There is a limit of 100,000 messages in a single request.
         messages:,
@@ -570,15 +552,6 @@ module Anthropic
         # as specifying a particular goal or role. See our
         # [guide to system prompts](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role).
         system_: nil,
-        # Body param: Amount of randomness injected into the response.
-        #
-        # Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0`
-        # for analytical / multiple choice, and closer to `1.0` for creative and
-        # generative tasks.
-        #
-        # Note that even with `temperature` of `0.0`, the results will not be fully
-        # deterministic.
-        temperature: nil,
         # Body param: Configuration for Claude's thinking.
         #
         # With `{"type": "adaptive"}`, Claude decides when and how much to think. With
@@ -671,21 +644,6 @@ module Anthropic
         # [guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)
         # for more details.
         tools: nil,
-        # Body param: Only sample from the top K options for each subsequent token.
-        #
-        # Used to remove "long tail" low probability responses.
-        # [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
-        #
-        # Recommended for advanced use cases only.
-        top_k: nil,
-        # Body param: Use nucleus sampling.
-        #
-        # In nucleus sampling, we compute the cumulative distribution over all the options
-        # for each subsequent token in decreasing probability order and cut it off once it
-        # reaches a particular probability specified by `top_p`.
-        #
-        # Recommended for advanced use cases only.
-        top_p: nil,
         # Header param: The user profile ID to attribute this request to. Use when acting
         # on behalf of a party other than your organization.
         user_profile_id: nil,
@@ -712,7 +670,14 @@ module Anthropic
       # [user guide](https://platform.claude.com/docs/en/build-with-claude/token-counting)
       sig do
         params(
-          messages: T::Array[Anthropic::MessageParam::OrHash],
+          messages:
+            T::Array[
+              T.any(
+                Anthropic::UserMessageParam::OrHash,
+                Anthropic::AssistantMessageParam::OrHash,
+                Anthropic::SystemMessageParam::OrHash
+              )
+            ],
           model: T.any(Anthropic::Model::OrSymbol, String),
           cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash),
           output_config: Anthropic::OutputConfig::OrHash,
@@ -831,8 +796,7 @@ module Anthropic
         #
         # Note that if you want to include a
         # [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role),
-        # you can use the top-level `system` parameter — there is no `"system"` role for
-        # input messages in the Messages API.
+        # you can use the top-level `system` parameter.
         #
         # There is a limit of 100,000 messages in a single request.
         messages:,
@@ -972,7 +936,14 @@ module Anthropic
       sig do
         params(
           max_tokens: Integer,
-          messages: T::Array[Anthropic::MessageParam::OrHash],
+          messages:
+            T::Array[
+              T.any(
+                Anthropic::UserMessageParam::OrHash,
+                Anthropic::AssistantMessageParam::OrHash,
+                Anthropic::SystemMessageParam::OrHash
+              )
+            ],
           model: T.any(Anthropic::Model::OrSymbol, String),
           cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash),
           container:
@@ -985,7 +956,6 @@ module Anthropic
           speed: T.nilable(Anthropic::MessageCreateParams::Speed::OrSymbol),
           stop_sequences: T::Array[String],
           system_: Anthropic::MessageCreateParams::System::Variants,
-          temperature: Float,
           thinking:
             T.any(
               Anthropic::ThinkingConfigEnabled::OrHash,
@@ -1026,8 +996,6 @@ module Anthropic
                 Anthropic::ToolSearchToolRegex20251119::OrHash
               )
             ],
-          top_k: Integer,
-          top_p: Float,
           user_profile_id: String,
           workspace_id: String,
           request_options: Anthropic::RequestOptions::OrHash
@@ -1113,8 +1081,7 @@ module Anthropic
         #
         # Note that if you want to include a
         # [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role),
-        # you can use the top-level `system` parameter — there is no `"system"` role for
-        # input messages in the Messages API.
+        # you can use the top-level `system` parameter.
         #
         # There is a limit of 100,000 messages in a single request.
         messages:,
@@ -1171,15 +1138,6 @@ module Anthropic
         # as specifying a particular goal or role. See our
         # [guide to system prompts](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role).
         system_: nil,
-        # Body param: Amount of randomness injected into the response.
-        #
-        # Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0`
-        # for analytical / multiple choice, and closer to `1.0` for creative and
-        # generative tasks.
-        #
-        # Note that even with `temperature` of `0.0`, the results will not be fully
-        # deterministic.
-        temperature: nil,
         # Body param: Configuration for Claude's thinking.
         #
         # With `{"type": "adaptive"}`, Claude decides when and how much to think. With
@@ -1272,21 +1230,6 @@ module Anthropic
         # [guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)
         # for more details.
         tools: nil,
-        # Body param: Only sample from the top K options for each subsequent token.
-        #
-        # Used to remove "long tail" low probability responses.
-        # [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
-        #
-        # Recommended for advanced use cases only.
-        top_k: nil,
-        # Body param: Use nucleus sampling.
-        #
-        # In nucleus sampling, we compute the cumulative distribution over all the options
-        # for each subsequent token in decreasing probability order and cut it off once it
-        # reaches a particular probability specified by `top_p`.
-        #
-        # Recommended for advanced use cases only.
-        top_p: nil,
         # Header param: The user profile ID to attribute this request to. Use when acting
         # on behalf of a party other than your organization.
         user_profile_id: nil,

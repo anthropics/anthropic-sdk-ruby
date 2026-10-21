@@ -7,7 +7,7 @@ module Anthropic
         {
           id: String,
           processed_at: Time,
-          type: Anthropic::Models::Beta::BetaManagedAgentsSessionUpdatedEvent::type_,
+          type: :"session.updated",
           agent: Anthropic::Beta::BetaManagedAgentsSessionAgent?,
           budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?,
           metadata: ::Hash[Symbol, String],
@@ -19,7 +19,7 @@ module Anthropic
 
         attr_accessor processed_at: Time
 
-        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsSessionUpdatedEvent::type_
+        attr_accessor type: :"session.updated"
 
         attr_accessor agent: Anthropic::Beta::BetaManagedAgentsSessionAgent?
 
@@ -34,32 +34,22 @@ module Anthropic
         def initialize: (
           id: String,
           processed_at: Time,
-          type: Anthropic::Models::Beta::BetaManagedAgentsSessionUpdatedEvent::type_,
           ?agent: Anthropic::Beta::BetaManagedAgentsSessionAgent?,
           ?budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?,
           ?metadata: ::Hash[Symbol, String],
-          ?title: String?
+          ?title: String?,
+          ?type: :"session.updated"
         ) -> void
 
         def to_hash: -> {
           id: String,
           processed_at: Time,
-          type: Anthropic::Models::Beta::BetaManagedAgentsSessionUpdatedEvent::type_,
+          type: :"session.updated",
           agent: Anthropic::Beta::BetaManagedAgentsSessionAgent?,
           budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?,
           metadata: ::Hash[Symbol, String],
           title: String?
         }
-
-        type type_ = :"session.updated"
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          SESSION_UPDATED: :"session.updated"
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionUpdatedEvent::type_]
-        end
       end
     end
   end

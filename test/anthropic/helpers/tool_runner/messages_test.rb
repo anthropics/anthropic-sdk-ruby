@@ -822,6 +822,19 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
     refute_operator(follow_up, :key?, :container)
   end
 
+  def test_typed_params_assigned_to_the_runner_adopt_the_container
+    bodies = stub_responses_capturing_bodies(
+      calculator_tool_use_response(id: "msg_1", tool_id: "tool_1", container: SERVER_CONTAINER),
+      text_response(id: "msg_2", text: "10 + 5 = 15")
+    )
+
+    runner = @client.beta.messages.tool_runner(basic_params)
+    runner.params = Anthropic::Beta::MessageCreateParams.new(**basic_params)
+    runner.each_message { _1 }
+
+    assert_equal("cntr_server", bodies.last[:container])
+  end
+
   def tool_result_for(runner, tool_use_id)
     blocks = runner.params[:messages].select { _1[:role] == :user }.flat_map { _1[:content] }
     blocks.find { _1.is_a?(Hash) && _1[:tool_use_id] == tool_use_id }
@@ -940,6 +953,61 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
     assert_pattern do
       result => {is_error: true, content: /'calculator' not found/}
     end
+  end
+
+  # Any request past the expected two gets a 400, so a runner that never finishes fails the test.
+  def test_string_keyed_params_run_like_symbol_keyed_ones
+    responses = [
+      calculator_tool_use_response(id: "msg_1", tool_id: "tool_1"),
+      text_response(id: "msg_2", text: "10 + 5 = 15")
+    ]
+    requests = 0
+    stub_request(:post, "http://localhost/v1/messages?beta=true")
+      .to_return do |_request|
+        requests += 1
+        responses.fetch(requests - 1, {status: 400})
+      end
+
+    runner = @client.beta.messages.tool_runner(basic_params.transform_keys(&:to_s))
+    runner.each_message { _1 }
+
+    assert_equal(2, requests)
+    assert_equal([{lhs: 10.0, rhs: 5.0, operator: :+}], @calculator.call_history)
+  end
+
+  def test_string_keyed_max_iterations_stops_the_runner
+    bodies = stub_responses_capturing_bodies(*Array.new(3) { pause_turn_response(id: "msg_#{_1 + 1}") })
+
+    collect_messages({**basic_params, max_iterations: 2}.transform_keys(&:to_s))
+
+    assert_equal(2, bodies.length)
+    bodies.each { refute_operator(_1, :key?, :max_iterations) }
+  end
+
+  def test_tool_runner_leaves_the_keys_of_the_callers_hash_alone
+    params = {**basic_params, max_iterations: 2}
+    container_hop_bodies(params)
+
+    assert_equal([*basic_params.keys, :max_iterations], params.keys)
+  end
+
+  # Typed params coerce a string-keyed message into a model that keeps the string keys.
+  def test_tool_removal_in_string_keyed_message_of_typed_params_is_honored
+    stub_responses(
+      calculator_tool_use_response(id: "msg_1", tool_id: "tool_1"),
+      text_response(id: "msg_2", text: "Cannot calculate right now")
+    )
+
+    removal = JSON.parse(calculator_removal_message.to_json)
+    params = Anthropic::Beta::MessageCreateParams.new(
+      **basic_params,
+      messages: [*basic_params[:messages], removal]
+    )
+    runner = @client.beta.messages.tool_runner(params)
+    runner.each_message { _1 }
+
+    assert_empty(@calculator.call_history)
+    assert_not_found_result(tool_result_for(runner, "tool_1"))
   end
 
   # `each_message` yields the response before that turn's tool dispatch, and an in-place

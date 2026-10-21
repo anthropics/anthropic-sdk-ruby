@@ -8,7 +8,7 @@ module Anthropic
             agent_name: String,
             processed_at: Time,
             session_thread_id: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent::type_,
+            type: :"session.thread_created",
             workflow_run_id: String?
           }
 
@@ -21,7 +21,7 @@ module Anthropic
 
           attr_accessor session_thread_id: String
 
-          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent::type_
+          attr_accessor type: :"session.thread_created"
 
           attr_accessor workflow_run_id: String?
 
@@ -30,8 +30,8 @@ module Anthropic
             agent_name: String,
             processed_at: Time,
             session_thread_id: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent::type_,
-            workflow_run_id: String?
+            workflow_run_id: String?,
+            ?type: :"session.thread_created"
           ) -> void
 
           def to_hash: -> {
@@ -39,19 +39,9 @@ module Anthropic
             agent_name: String,
             processed_at: Time,
             session_thread_id: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent::type_,
+            type: :"session.thread_created",
             workflow_run_id: String?
           }
-
-          type type_ = :"session.thread_created"
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            SESSION_THREAD_CREATED: :"session.thread_created"
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent::type_]
-          end
         end
       end
     end

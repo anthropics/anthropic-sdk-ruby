@@ -21,71 +21,28 @@ module Anthropic
           sig { returns(Time) }
           attr_accessor :processed_at
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusTerminatedEvent::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # Indicates the session has terminated, either due to an error or completion.
           sig do
-            params(
-              id: String,
-              processed_at: Time,
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusTerminatedEvent::Type::OrSymbol
-            ).returns(T.attached_class)
+            params(id: String, processed_at: Time, type: Symbol).returns(
+              T.attached_class
+            )
           end
           def self.new(
             # Unique identifier for this event.
             id:,
             # Timestamp of status change.
             processed_at:,
-            type:
+            type: :"session.status_terminated"
           )
           end
 
           sig do
-            override.returns(
-              {
-                id: String,
-                processed_at: Time,
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusTerminatedEvent::Type::TaggedSymbol
-              }
-            )
+            override.returns({ id: String, processed_at: Time, type: Symbol })
           end
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusTerminatedEvent::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            SESSION_STATUS_TERMINATED =
-              T.let(
-                :"session.status_terminated",
-                Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusTerminatedEvent::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusTerminatedEvent::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

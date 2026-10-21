@@ -6,24 +6,13 @@ module Anthropic
       class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError < Anthropic::Internal::Type::BaseModel
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError::Type]
-        required :type,
-                 enum: -> { Anthropic::Beta::BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError::Type }
+        #   @return [Symbol, :environment_not_found_error]
+        required :type, const: :environment_not_found_error
 
-        # @!method initialize(type:)
+        # @!method initialize(type: :environment_not_found_error)
         #   The deployment's environment no longer exists.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          ENVIRONMENT_NOT_FOUND_ERROR = :environment_not_found_error
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :environment_not_found_error]
       end
     end
 

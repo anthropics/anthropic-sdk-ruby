@@ -18,68 +18,25 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :client_secret
 
-          sig do
-            returns(
-              Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicParam::Type::OrSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # Token endpoint uses HTTP Basic authentication with client credentials.
           sig do
-            params(
-              client_secret: String,
-              type:
-                Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicParam::Type::OrSymbol
-            ).returns(T.attached_class)
+            params(client_secret: String, type: Symbol).returns(
+              T.attached_class
+            )
           end
           def self.new(
             # The OAuth client secret, sent to `token_endpoint` with HTTP Basic
             # authentication.
             client_secret:,
-            type:
+            type: :client_secret_basic
           )
           end
 
-          sig do
-            override.returns(
-              {
-                client_secret: String,
-                type:
-                  Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicParam::Type::OrSymbol
-              }
-            )
-          end
+          sig { override.returns({ client_secret: String, type: Symbol }) }
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicParam::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            CLIENT_SECRET_BASIC =
-              T.let(
-                :client_secret_basic,
-                Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicParam::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicParam::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

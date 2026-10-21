@@ -84,9 +84,7 @@ module Anthropic
         end
         attr_accessor :tools
 
-        sig do
-          returns(Anthropic::Beta::BetaManagedAgentsAgent::Type::TaggedSymbol)
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # A timestamp in RFC 3339 format
@@ -140,9 +138,9 @@ module Anthropic
                   Anthropic::Beta::BetaManagedAgentsCustomTool::OrHash
                 )
               ],
-            type: Anthropic::Beta::BetaManagedAgentsAgent::Type::OrSymbol,
             updated_at: Time,
-            version: Integer
+            version: Integer,
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
@@ -165,12 +163,12 @@ module Anthropic
           skills:,
           system_:,
           tools:,
-          type:,
           # A timestamp in RFC 3339 format
           updated_at:,
           # The agent's current version. Starts at 1 and increments when the agent is
           # modified.
-          version:
+          version:,
+          type: :agent
         )
         end
 
@@ -203,7 +201,7 @@ module Anthropic
                 T::Array[
                   Anthropic::Beta::BetaManagedAgentsAgent::Tool::Variants
                 ],
-              type: Anthropic::Beta::BetaManagedAgentsAgent::Type::TaggedSymbol,
+              type: Symbol,
               updated_at: Time,
               version: Integer
             }
@@ -387,32 +385,6 @@ module Anthropic
             input_schema: nil,
             name: nil
           )
-          end
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(Symbol, Anthropic::Beta::BetaManagedAgentsAgent::Type)
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          AGENT =
-            T.let(
-              :agent,
-              Anthropic::Beta::BetaManagedAgentsAgent::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsAgent::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
           end
         end
       end

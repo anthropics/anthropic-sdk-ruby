@@ -13,24 +13,14 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDeleteSessionResource::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsDeleteSessionResource::Type }
+          #   @return [Symbol, :session_resource_deleted]
+          required :type, const: :session_resource_deleted
 
-          # @!method initialize(id:, type:)
+          # @!method initialize(id:, type: :session_resource_deleted)
           #   Confirmation of resource deletion.
           #
           #   @param id [String]
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDeleteSessionResource::Type]
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsDeleteSessionResource#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            SESSION_RESOURCE_DELETED = :session_resource_deleted
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :session_resource_deleted]
         end
       end
     end

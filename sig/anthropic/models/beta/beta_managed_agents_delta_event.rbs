@@ -7,7 +7,7 @@ module Anthropic
         {
           delta: Anthropic::Beta::BetaManagedAgentsDeltaContent,
           event_id: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsDeltaEvent::type_
+          type: :event_delta
         }
 
       class BetaManagedAgentsDeltaEvent < Anthropic::Internal::Type::BaseModel
@@ -15,29 +15,19 @@ module Anthropic
 
         attr_accessor event_id: String
 
-        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsDeltaEvent::type_
+        attr_accessor type: :event_delta
 
         def initialize: (
           delta: Anthropic::Beta::BetaManagedAgentsDeltaContent,
           event_id: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsDeltaEvent::type_
+          ?type: :event_delta
         ) -> void
 
         def to_hash: -> {
           delta: Anthropic::Beta::BetaManagedAgentsDeltaContent,
           event_id: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsDeltaEvent::type_
+          type: :event_delta
         }
-
-        type type_ = :event_delta
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          EVENT_DELTA: :event_delta
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsDeltaEvent::type_]
-        end
       end
     end
   end

@@ -32,11 +32,7 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :name
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsCustomTool::Type::TaggedSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # A custom tool as returned in API responses.
@@ -46,7 +42,7 @@ module Anthropic
             input_schema:
               Anthropic::Beta::BetaManagedAgentsCustomToolInputSchema::OrHash,
             name: String,
-            type: Anthropic::Beta::BetaManagedAgentsCustomTool::Type::OrSymbol
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
@@ -54,7 +50,7 @@ module Anthropic
           # JSON Schema for custom tool input parameters.
           input_schema:,
           name:,
-          type:
+          type: :custom
         )
         end
 
@@ -65,38 +61,11 @@ module Anthropic
               input_schema:
                 Anthropic::Beta::BetaManagedAgentsCustomToolInputSchema,
               name: String,
-              type:
-                Anthropic::Beta::BetaManagedAgentsCustomTool::Type::TaggedSymbol
+              type: Symbol
             }
           )
         end
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(Symbol, Anthropic::Beta::BetaManagedAgentsCustomTool::Type)
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          CUSTOM =
-            T.let(
-              :custom,
-              Anthropic::Beta::BetaManagedAgentsCustomTool::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsCustomTool::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

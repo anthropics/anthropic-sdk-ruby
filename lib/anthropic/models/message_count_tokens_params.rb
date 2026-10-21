@@ -74,13 +74,12 @@ module Anthropic
       #
       #   Note that if you want to include a
       #   [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role),
-      #   you can use the top-level `system` parameter — there is no `"system"` role for
-      #   input messages in the Messages API.
+      #   you can use the top-level `system` parameter.
       #
       #   There is a limit of 100,000 messages in a single request.
       #
-      #   @return [Array<Anthropic::Models::MessageParam>]
-      required :messages, -> { Anthropic::Internal::Type::ArrayOf[Anthropic::MessageParam] }
+      #   @return [Array<Anthropic::Models::UserMessageParam, Anthropic::Models::AssistantMessageParam, Anthropic::Models::SystemMessageParam>]
+      required :messages, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::MessageParam] }
 
       # @!attribute model
       #   The model that will complete your prompt.
@@ -252,7 +251,7 @@ module Anthropic
       #   Some parameter documentations has been truncated, see
       #   {Anthropic::Models::MessageCountTokensParams} for more details.
       #
-      #   @param messages [Array<Anthropic::Models::MessageParam>] Input messages.
+      #   @param messages [Array<Anthropic::Models::UserMessageParam, Anthropic::Models::AssistantMessageParam, Anthropic::Models::SystemMessageParam>] Input messages.
       #
       #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.
       #

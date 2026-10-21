@@ -17,63 +17,16 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :id
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsDeletedSession::Type::TaggedSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # Confirmation that a `session` has been permanently deleted.
-        sig do
-          params(
-            id: String,
-            type:
-              Anthropic::Beta::BetaManagedAgentsDeletedSession::Type::OrSymbol
-          ).returns(T.attached_class)
-        end
-        def self.new(id:, type:)
+        sig { params(id: String, type: Symbol).returns(T.attached_class) }
+        def self.new(id:, type: :session_deleted)
         end
 
-        sig do
-          override.returns(
-            {
-              id: String,
-              type:
-                Anthropic::Beta::BetaManagedAgentsDeletedSession::Type::TaggedSymbol
-            }
-          )
-        end
+        sig { override.returns({ id: String, type: Symbol }) }
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsDeletedSession::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          SESSION_DELETED =
-            T.let(
-              :session_deleted,
-              Anthropic::Beta::BetaManagedAgentsDeletedSession::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsDeletedSession::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

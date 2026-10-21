@@ -19,8 +19,8 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSystemMessageEvent::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsSystemMessageEvent::Type }
+        #   @return [Symbol, :"system.message"]
+        required :type, const: :"system.message"
 
         # @!attribute processed_at
         #   Timestamp when this system message was processed.
@@ -28,7 +28,7 @@ module Anthropic
         #   @return [Time, nil]
         optional :processed_at, Time, nil?: true
 
-        # @!method initialize(id:, content:, type:, processed_at: nil)
+        # @!method initialize(id:, content:, processed_at: nil, type: :"system.message")
         #   A mid-conversation system message event. Carries system-role content that is
         #   appended to the session as a `role: "system"` turn.
         #
@@ -36,19 +36,9 @@ module Anthropic
         #
         #   @param content [Array<Anthropic::Models::Beta::BetaManagedAgentsSystemContentBlock>] System content blocks. Text-only.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSystemMessageEvent::Type]
-        #
         #   @param processed_at [Time, nil] Timestamp when this system message was processed.
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsSystemMessageEvent#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          SYSTEM_MESSAGE = :"system.message"
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #
+        #   @param type [Symbol, :"system.message"]
       end
     end
 

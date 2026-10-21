@@ -22,11 +22,11 @@ module Anthropic
       # Some parameter documentations has been truncated, see
       # {Anthropic::Models::MessageCreateParams} for more details.
       #
-      # @overload create(max_tokens:, messages:, model:, cache_control: nil, container: nil, diagnostics: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+      # @overload create(max_tokens:, messages:, model:, cache_control: nil, container: nil, diagnostics: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
       #
       # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
       #
-      # @param messages [Array<Anthropic::Models::MessageParam>] Body param: Input messages.
+      # @param messages [Array<Anthropic::Models::UserMessageParam, Anthropic::Models::AssistantMessageParam, Anthropic::Models::SystemMessageParam>] Body param: Input messages.
       #
       # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.
       #
@@ -50,17 +50,11 @@ module Anthropic
       #
       # @param system_ [String, Array<Anthropic::Models::TextBlockParam>] Body param: System prompt.
       #
-      # @param temperature [Float] Body param: Amount of randomness injected into the response.
-      #
       # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, Anthropic::Models::ThinkingConfigBetweenTools, Anthropic::Models::ThinkingConfigAdaptive] Body param: Configuration for Claude's thinking.
       #
       # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
       #
       # @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::CodeExecutionTool20250522, Anthropic::Models::CodeExecutionTool20250825, Anthropic::Models::CodeExecutionTool20260120, Anthropic::Models::CodeExecutionTool20260521, Anthropic::Models::BrowserToolset20260801, Anthropic::Models::MemoryTool20250818, Anthropic::Models::ComputerToolset20260801, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::ToolTextEditor20250429, Anthropic::Models::ToolTextEditor20250728, Anthropic::Models::WebSearchTool20250305, Anthropic::Models::WebFetchTool20250910, Anthropic::Models::WebSearchTool20260209, Anthropic::Models::WebFetchTool20260209, Anthropic::Models::WebFetchTool20260309, Anthropic::Models::WebSearchTool20260318, Anthropic::Models::WebFetchTool20260318, Anthropic::Models::ToolSearchToolBm25_20251119, Anthropic::Models::ToolSearchToolRegex20251119>] Body param: Definitions of tools that the model may use.
-      #
-      # @param top_k [Integer] Body param: Only sample from the top K options for each subsequent token.
-      #
-      # @param top_p [Float] Body param: Use nucleus sampling.
       #
       # @param user_profile_id [String] Header param: The user profile ID to attribute this request to. Use when acting
       #
@@ -124,11 +118,11 @@ module Anthropic
       # Some parameter documentations has been truncated, see
       # {Anthropic::Models::MessageCreateParams} for more details.
       #
-      # @overload stream_raw(max_tokens:, messages:, model:, cache_control: nil, container: nil, diagnostics: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+      # @overload stream_raw(max_tokens:, messages:, model:, cache_control: nil, container: nil, diagnostics: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
       #
       # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
       #
-      # @param messages [Array<Anthropic::Models::MessageParam>] Body param: Input messages.
+      # @param messages [Array<Anthropic::Models::UserMessageParam, Anthropic::Models::AssistantMessageParam, Anthropic::Models::SystemMessageParam>] Body param: Input messages.
       #
       # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.
       #
@@ -152,17 +146,11 @@ module Anthropic
       #
       # @param system_ [String, Array<Anthropic::Models::TextBlockParam>] Body param: System prompt.
       #
-      # @param temperature [Float] Body param: Amount of randomness injected into the response.
-      #
       # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, Anthropic::Models::ThinkingConfigBetweenTools, Anthropic::Models::ThinkingConfigAdaptive] Body param: Configuration for Claude's thinking.
       #
       # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
       #
       # @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::CodeExecutionTool20250522, Anthropic::Models::CodeExecutionTool20250825, Anthropic::Models::CodeExecutionTool20260120, Anthropic::Models::CodeExecutionTool20260521, Anthropic::Models::BrowserToolset20260801, Anthropic::Models::MemoryTool20250818, Anthropic::Models::ComputerToolset20260801, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::ToolTextEditor20250429, Anthropic::Models::ToolTextEditor20250728, Anthropic::Models::WebSearchTool20250305, Anthropic::Models::WebFetchTool20250910, Anthropic::Models::WebSearchTool20260209, Anthropic::Models::WebFetchTool20260209, Anthropic::Models::WebFetchTool20260309, Anthropic::Models::WebSearchTool20260318, Anthropic::Models::WebFetchTool20260318, Anthropic::Models::ToolSearchToolBm25_20251119, Anthropic::Models::ToolSearchToolRegex20251119>] Body param: Definitions of tools that the model may use.
-      #
-      # @param top_k [Integer] Body param: Only sample from the top K options for each subsequent token.
-      #
-      # @param top_p [Float] Body param: Use nucleus sampling.
       #
       # @param user_profile_id [String] Header param: The user profile ID to attribute this request to. Use when acting
       #
@@ -213,7 +201,7 @@ module Anthropic
       #
       # @overload count_tokens(messages:, model:, cache_control: nil, output_config: nil, speed: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
       #
-      # @param messages [Array<Anthropic::Models::MessageParam>] Body param: Input messages.
+      # @param messages [Array<Anthropic::Models::UserMessageParam, Anthropic::Models::AssistantMessageParam, Anthropic::Models::SystemMessageParam>] Body param: Input messages.
       #
       # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.
       #
@@ -262,11 +250,11 @@ module Anthropic
       # Some parameter documentations has been truncated, see
       # {Anthropic::Models::MessageCreateParams} for more details.
       #
-      # @overload stream(max_tokens:, messages:, model:, cache_control: nil, container: nil, diagnostics: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+      # @overload stream(max_tokens:, messages:, model:, cache_control: nil, container: nil, diagnostics: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
       #
       # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
       #
-      # @param messages [Array<Anthropic::Models::MessageParam>] Body param: Input messages.
+      # @param messages [Array<Anthropic::Models::UserMessageParam, Anthropic::Models::AssistantMessageParam, Anthropic::Models::SystemMessageParam>] Body param: Input messages.
       #
       # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.
       #
@@ -290,17 +278,11 @@ module Anthropic
       #
       # @param system_ [String, Array<Anthropic::Models::TextBlockParam>] Body param: System prompt.
       #
-      # @param temperature [Float] Body param: Amount of randomness injected into the response.
-      #
       # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, Anthropic::Models::ThinkingConfigBetweenTools, Anthropic::Models::ThinkingConfigAdaptive] Body param: Configuration for Claude's thinking.
       #
       # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
       #
       # @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::CodeExecutionTool20250522, Anthropic::Models::CodeExecutionTool20250825, Anthropic::Models::CodeExecutionTool20260120, Anthropic::Models::CodeExecutionTool20260521, Anthropic::Models::BrowserToolset20260801, Anthropic::Models::MemoryTool20250818, Anthropic::Models::ComputerToolset20260801, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::ToolTextEditor20250429, Anthropic::Models::ToolTextEditor20250728, Anthropic::Models::WebSearchTool20250305, Anthropic::Models::WebFetchTool20250910, Anthropic::Models::WebSearchTool20260209, Anthropic::Models::WebFetchTool20260209, Anthropic::Models::WebFetchTool20260309, Anthropic::Models::WebSearchTool20260318, Anthropic::Models::WebFetchTool20260318, Anthropic::Models::ToolSearchToolBm25_20251119, Anthropic::Models::ToolSearchToolRegex20251119>] Body param: Definitions of tools that the model may use.
-      #
-      # @param top_k [Integer] Body param: Only sample from the top K options for each subsequent token.
-      #
-      # @param top_p [Float] Body param: Use nucleus sampling.
       #
       # @param user_profile_id [String] Header param: The user profile ID to attribute this request to. Use when acting
       #

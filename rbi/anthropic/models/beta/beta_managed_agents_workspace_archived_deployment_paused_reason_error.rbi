@@ -15,61 +15,16 @@ module Anthropic
             )
           end
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError::Type::TaggedSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # The deployment's workspace was archived.
-        sig do
-          params(
-            type:
-              Anthropic::Beta::BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError::Type::OrSymbol
-          ).returns(T.attached_class)
-        end
-        def self.new(type:)
+        sig { params(type: Symbol).returns(T.attached_class) }
+        def self.new(type: :workspace_archived_error)
         end
 
-        sig do
-          override.returns(
-            {
-              type:
-                Anthropic::Beta::BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError::Type::TaggedSymbol
-            }
-          )
-        end
+        sig { override.returns({ type: Symbol }) }
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          WORKSPACE_ARCHIVED_ERROR =
-            T.let(
-              :workspace_archived_error,
-              Anthropic::Beta::BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

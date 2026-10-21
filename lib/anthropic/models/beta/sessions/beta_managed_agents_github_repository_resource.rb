@@ -23,8 +23,8 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::Type }
+          #   @return [Symbol, :github_repository]
+          required :type, const: :github_repository
 
           # @!attribute updated_at
           #   A timestamp in RFC 3339 format
@@ -46,30 +46,20 @@ module Anthropic
                    },
                    nil?: true
 
-          # @!method initialize(id:, created_at:, mount_path:, type:, updated_at:, url:, checkout: nil)
+          # @!method initialize(id:, created_at:, mount_path:, updated_at:, url:, checkout: nil, type: :github_repository)
           #   @param id [String]
           #
           #   @param created_at [Time] A timestamp in RFC 3339 format
           #
           #   @param mount_path [String]
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::Type]
-          #
           #   @param updated_at [Time] A timestamp in RFC 3339 format
           #
           #   @param url [String]
           #
           #   @param checkout [Anthropic::Models::Beta::BetaManagedAgentsBranchCheckout, Anthropic::Models::Beta::BetaManagedAgentsCommitCheckout, nil]
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            GITHUB_REPOSITORY = :github_repository
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #
+          #   @param type [Symbol, :github_repository]
 
           # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource#checkout
           module Checkout
@@ -110,9 +100,9 @@ module Anthropic
             def self.new(type:, **args)
               case type.to_sym
               when :branch
-                Anthropic::Beta::BetaManagedAgentsBranchCheckout.new(type: type, **args)
+                Anthropic::Beta::BetaManagedAgentsBranchCheckout.new(**args)
               when :commit
-                Anthropic::Beta::BetaManagedAgentsCommitCheckout.new(type: type, **args)
+                Anthropic::Beta::BetaManagedAgentsCommitCheckout.new(**args)
               else
                 raise ArgumentError, "unknown type: #{type}"
               end

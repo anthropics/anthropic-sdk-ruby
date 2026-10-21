@@ -35,11 +35,7 @@ module Anthropic
         end
         attr_accessor :agents
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsMultiagentCoordinatorParams::Type::OrSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # A coordinator topology: the session's primary thread orchestrates work by
@@ -55,8 +51,7 @@ module Anthropic
                   String
                 )
               ],
-            type:
-              Anthropic::Beta::BetaManagedAgentsMultiagentCoordinatorParams::Type::OrSymbol
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
@@ -67,7 +62,7 @@ module Anthropic
           # Referenced agents must exist, must not be archived, and must not themselves have
           # `multiagent` set (depth limit 1).
           agents:,
-          type:
+          type: :coordinator
         )
         end
 
@@ -83,41 +78,11 @@ module Anthropic
                     String
                   )
                 ],
-              type:
-                Anthropic::Beta::BetaManagedAgentsMultiagentCoordinatorParams::Type::OrSymbol
+              type: Symbol
             }
           )
         end
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsMultiagentCoordinatorParams::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          COORDINATOR =
-            T.let(
-              :coordinator,
-              Anthropic::Beta::BetaManagedAgentsMultiagentCoordinatorParams::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsMultiagentCoordinatorParams::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

@@ -7,7 +7,7 @@ module Anthropic
             id: String,
             processed_at: Time,
             tool_use_id: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent::type_,
+            type: :"agent.tool_result",
             content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent::content],
             is_error: bool?
           }
@@ -19,7 +19,7 @@ module Anthropic
 
           attr_accessor tool_use_id: String
 
-          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent::type_
+          attr_accessor type: :"agent.tool_result"
 
           attr_reader content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent::content]?
 
@@ -33,29 +33,19 @@ module Anthropic
             id: String,
             processed_at: Time,
             tool_use_id: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent::type_,
             ?content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent::content],
-            ?is_error: bool?
+            ?is_error: bool?,
+            ?type: :"agent.tool_result"
           ) -> void
 
           def to_hash: -> {
             id: String,
             processed_at: Time,
             tool_use_id: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent::type_,
+            type: :"agent.tool_result",
             content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent::content],
             is_error: bool?
           }
-
-          type type_ = :"agent.tool_result"
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            AGENT_TOOL_RESULT: :"agent.tool_result"
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent::type_]
-          end
 
           type content =
             Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock

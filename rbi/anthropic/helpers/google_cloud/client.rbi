@@ -16,10 +16,6 @@ module Anthropic
         attr_reader :workspace_id
 
         sig { returns(T.noreturn) }
-        def completions
-        end
-
-        sig { returns(T.noreturn) }
         def user_profiles
         end
 

@@ -7,8 +7,8 @@ module Anthropic
         class BetaManagedAgentsURLDocumentSource < Anthropic::Internal::Type::BaseModel
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsURLDocumentSource::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsURLDocumentSource::Type }
+          #   @return [Symbol, :url]
+          required :type, const: :url
 
           # @!attribute url
           #   URL of the document to fetch.
@@ -16,22 +16,12 @@ module Anthropic
           #   @return [String]
           required :url, String
 
-          # @!method initialize(type:, url:)
+          # @!method initialize(url:, type: :url)
           #   Document referenced by URL.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsURLDocumentSource::Type]
-          #
           #   @param url [String] URL of the document to fetch.
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsURLDocumentSource#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            URL = :url
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #
+          #   @param type [Symbol, :url]
         end
       end
     end

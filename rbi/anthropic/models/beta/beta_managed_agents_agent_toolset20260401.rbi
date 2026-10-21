@@ -38,11 +38,7 @@ module Anthropic
         end
         attr_writer :default_config
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsAgentToolset20260401::Type::TaggedSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         sig do
@@ -62,15 +58,14 @@ module Anthropic
               ],
             default_config:
               Anthropic::Beta::BetaManagedAgentsAgentToolsetDefaultConfig::OrHash,
-            type:
-              Anthropic::Beta::BetaManagedAgentsAgentToolset20260401::Type::OrSymbol
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
           configs:,
           # Resolved default configuration for agent tools.
           default_config:,
-          type:
+          type: :agent_toolset_20260401
         )
         end
 
@@ -83,41 +78,11 @@ module Anthropic
                 ],
               default_config:
                 Anthropic::Beta::BetaManagedAgentsAgentToolsetDefaultConfig,
-              type:
-                Anthropic::Beta::BetaManagedAgentsAgentToolset20260401::Type::TaggedSymbol
+              type: Symbol
             }
           )
         end
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsAgentToolset20260401::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          AGENT_TOOLSET_20260401 =
-            T.let(
-              :agent_toolset_20260401,
-              Anthropic::Beta::BetaManagedAgentsAgentToolset20260401::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsAgentToolset20260401::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

@@ -18,66 +18,20 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :id
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsDeletedVault::Type::TaggedSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # Confirmation of a deleted vault.
-        sig do
-          params(
-            id: String,
-            type: Anthropic::Beta::BetaManagedAgentsDeletedVault::Type::OrSymbol
-          ).returns(T.attached_class)
-        end
+        sig { params(id: String, type: Symbol).returns(T.attached_class) }
         def self.new(
           # The unique ID of the deleted vault (`vlt_...`).
           id:,
-          type:
+          type: :vault_deleted
         )
         end
 
-        sig do
-          override.returns(
-            {
-              id: String,
-              type:
-                Anthropic::Beta::BetaManagedAgentsDeletedVault::Type::TaggedSymbol
-            }
-          )
-        end
+        sig { override.returns({ id: String, type: Symbol }) }
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsDeletedVault::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          VAULT_DELETED =
-            T.let(
-              :vault_deleted,
-              Anthropic::Beta::BetaManagedAgentsDeletedVault::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsDeletedVault::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

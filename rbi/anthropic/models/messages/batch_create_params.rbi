@@ -244,11 +244,20 @@ module Anthropic
             #
             # Note that if you want to include a
             # [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role),
-            # you can use the top-level `system` parameter — there is no `"system"` role for
-            # input messages in the Messages API.
+            # you can use the top-level `system` parameter.
             #
             # There is a limit of 100,000 messages in a single request.
-            sig { returns(T::Array[Anthropic::MessageParam]) }
+            sig do
+              returns(
+                T::Array[
+                  T.any(
+                    Anthropic::UserMessageParam,
+                    Anthropic::AssistantMessageParam,
+                    Anthropic::SystemMessageParam
+                  )
+                ]
+              )
+            end
             attr_accessor :messages
 
             # The model that will complete your prompt.
@@ -398,20 +407,6 @@ module Anthropic
               ).void
             end
             attr_writer :system_
-
-            # Amount of randomness injected into the response.
-            #
-            # Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0`
-            # for analytical / multiple choice, and closer to `1.0` for creative and
-            # generative tasks.
-            #
-            # Note that even with `temperature` of `0.0`, the results will not be fully
-            # deterministic.
-            sig { returns(T.nilable(Float)) }
-            attr_reader :temperature
-
-            sig { params(temperature: Float).void }
-            attr_writer :temperature
 
             # Configuration for Claude's thinking.
             #
@@ -621,31 +616,6 @@ module Anthropic
             end
             attr_writer :tools
 
-            # Only sample from the top K options for each subsequent token.
-            #
-            # Used to remove "long tail" low probability responses.
-            # [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
-            #
-            # Recommended for advanced use cases only.
-            sig { returns(T.nilable(Integer)) }
-            attr_reader :top_k
-
-            sig { params(top_k: Integer).void }
-            attr_writer :top_k
-
-            # Use nucleus sampling.
-            #
-            # In nucleus sampling, we compute the cumulative distribution over all the options
-            # for each subsequent token in decreasing probability order and cut it off once it
-            # reaches a particular probability specified by `top_p`.
-            #
-            # Recommended for advanced use cases only.
-            sig { returns(T.nilable(Float)) }
-            attr_reader :top_p
-
-            sig { params(top_p: Float).void }
-            attr_writer :top_p
-
             # Messages API creation parameters for the individual request.
             #
             # See the
@@ -654,7 +624,14 @@ module Anthropic
             sig do
               params(
                 max_tokens: Integer,
-                messages: T::Array[Anthropic::MessageParam::OrHash],
+                messages:
+                  T::Array[
+                    T.any(
+                      Anthropic::UserMessageParam::OrHash,
+                      Anthropic::AssistantMessageParam::OrHash,
+                      Anthropic::SystemMessageParam::OrHash
+                    )
+                  ],
                 model: T.any(Anthropic::Model::OrSymbol, String),
                 cache_control:
                   T.nilable(Anthropic::CacheControlEphemeral::OrHash),
@@ -674,7 +651,6 @@ module Anthropic
                 stream: T::Boolean,
                 system_:
                   Anthropic::Messages::BatchCreateParams::Request::Params::System::Variants,
-                temperature: Float,
                 thinking:
                   T.any(
                     Anthropic::ThinkingConfigEnabled::OrHash,
@@ -714,9 +690,7 @@ module Anthropic
                       Anthropic::ToolSearchToolBm25_20251119::OrHash,
                       Anthropic::ToolSearchToolRegex20251119::OrHash
                     )
-                  ],
-                top_k: Integer,
-                top_p: Float
+                  ]
               ).returns(T.attached_class)
             end
             def self.new(
@@ -799,8 +773,7 @@ module Anthropic
               #
               # Note that if you want to include a
               # [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role),
-              # you can use the top-level `system` parameter — there is no `"system"` role for
-              # input messages in the Messages API.
+              # you can use the top-level `system` parameter.
               #
               # There is a limit of 100,000 messages in a single request.
               messages:,
@@ -865,15 +838,6 @@ module Anthropic
               # as specifying a particular goal or role. See our
               # [guide to system prompts](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role).
               system_: nil,
-              # Amount of randomness injected into the response.
-              #
-              # Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0`
-              # for analytical / multiple choice, and closer to `1.0` for creative and
-              # generative tasks.
-              #
-              # Note that even with `temperature` of `0.0`, the results will not be fully
-              # deterministic.
-              temperature: nil,
               # Configuration for Claude's thinking.
               #
               # With `{"type": "adaptive"}`, Claude decides when and how much to think. With
@@ -965,22 +929,7 @@ module Anthropic
               # See our
               # [guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)
               # for more details.
-              tools: nil,
-              # Only sample from the top K options for each subsequent token.
-              #
-              # Used to remove "long tail" low probability responses.
-              # [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
-              #
-              # Recommended for advanced use cases only.
-              top_k: nil,
-              # Use nucleus sampling.
-              #
-              # In nucleus sampling, we compute the cumulative distribution over all the options
-              # for each subsequent token in decreasing probability order and cut it off once it
-              # reaches a particular probability specified by `top_p`.
-              #
-              # Recommended for advanced use cases only.
-              top_p: nil
+              tools: nil
             )
             end
 
@@ -988,7 +937,14 @@ module Anthropic
               override.returns(
                 {
                   max_tokens: Integer,
-                  messages: T::Array[Anthropic::MessageParam],
+                  messages:
+                    T::Array[
+                      T.any(
+                        Anthropic::UserMessageParam,
+                        Anthropic::AssistantMessageParam,
+                        Anthropic::SystemMessageParam
+                      )
+                    ],
                   model: T.any(Anthropic::Model::OrSymbol, String),
                   cache_control: T.nilable(Anthropic::CacheControlEphemeral),
                   container:
@@ -1007,7 +963,6 @@ module Anthropic
                   stream: T::Boolean,
                   system_:
                     Anthropic::Messages::BatchCreateParams::Request::Params::System::Variants,
-                  temperature: Float,
                   thinking:
                     T.any(
                       Anthropic::ThinkingConfigEnabled,
@@ -1047,9 +1002,7 @@ module Anthropic
                         Anthropic::ToolSearchToolBm25_20251119,
                         Anthropic::ToolSearchToolRegex20251119
                       )
-                    ],
-                  top_k: Integer,
-                  top_p: Float
+                    ]
                 }
               )
             end

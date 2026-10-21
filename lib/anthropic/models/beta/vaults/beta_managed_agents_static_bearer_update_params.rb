@@ -7,8 +7,8 @@ module Anthropic
         class BetaManagedAgentsStaticBearerUpdateParams < Anthropic::Internal::Type::BaseModel
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams::Type]
-          required :type, enum: -> { Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams::Type }
+          #   @return [Symbol, :static_bearer]
+          required :type, const: :static_bearer
 
           # @!attribute token
           #   The new static bearer token to replace the stored one.
@@ -16,23 +16,13 @@ module Anthropic
           #   @return [String, nil]
           optional :token, String, nil?: true
 
-          # @!method initialize(type:, token: nil)
+          # @!method initialize(token: nil, type: :static_bearer)
           #   Parameters for updating a static bearer token credential. The `mcp_server_url`
           #   is immutable.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams::Type]
-          #
           #   @param token [String, nil] The new static bearer token to replace the stored one.
-
-          # @see Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            STATIC_BEARER = :static_bearer
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #
+          #   @param type [Symbol, :static_bearer]
         end
       end
     end

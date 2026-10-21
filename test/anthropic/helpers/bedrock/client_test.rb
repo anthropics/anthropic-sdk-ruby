@@ -66,12 +66,43 @@ class Anthropic::Test::BedrockClientTest < Minitest::Test
     assert_nil(adapted.url.query)
     assert_equal(
       {
-        anthropic_version: Anthropic::BedrockClient::DEFAULT_VERSION,
         max_tokens: 1024,
         messages: [{role: "user", content: "Hello, Claude"}]
       },
       adapted.body
     )
+  end
+
+  def test_adapt_request_drops_version_header
+    headers = {"anthropic-version" => "2030-01-01", "x-other" => "1"}.freeze
+    requests = [
+      make_api_request(url: "https://h/v1/messages", body: {model: "m"}, headers: headers),
+      make_api_request(url: "https://h/model/m/invoke", body: "raw", headers: headers)
+    ]
+
+    requests.each do |req|
+      assert_equal({"x-other" => "1"}, make_client.send(:adapt_request, req).headers)
+    end
+  end
+
+  def test_adapt_request_moves_version_header_into_body
+    req = make_api_request(
+      url: "https://h/v1/messages",
+      body: {model: "m"},
+      headers: {"anthropic-version" => "2030-01-01"}.freeze
+    )
+
+    assert_equal({anthropic_version: "2030-01-01"}, make_client.send(:adapt_request, req).body)
+  end
+
+  def test_adapt_request_keeps_body_version_over_header
+    req = make_api_request(
+      url: "https://h/v1/messages",
+      body: {model: "m", anthropic_version: "2030-01-02"},
+      headers: {"anthropic-version" => "2030-01-01"}.freeze
+    )
+
+    assert_equal({anthropic_version: "2030-01-02"}, make_client.send(:adapt_request, req).body)
   end
 
   def test_adapt_request_handles_beta_query_and_streaming
@@ -166,7 +197,7 @@ class Anthropic::Test::BedrockClientTest < Minitest::Test
     assert_requested(:post, redirected, times: 1) do |req|
       body = JSON.parse(req.body)
       refute(body.key?("model"))
-      assert_equal(Anthropic::BedrockClient::DEFAULT_VERSION, body["anthropic_version"])
+      assert_match(/\A\d{4}-\d{2}-\d{2}\z/, body["anthropic_version"])
     end
   end
 
@@ -358,7 +389,6 @@ class Anthropic::Test::BedrockClientTest < Minitest::Test
     )
 
     fixture_body = {
-      "anthropic_version" => Anthropic::BedrockClient::DEFAULT_VERSION,
       "max_tokens" => 1024,
       "messages" => [{"content" => "Hello, world", "role" => "user"}]
     }
@@ -378,11 +408,12 @@ class Anthropic::Test::BedrockClientTest < Minitest::Test
     ]
 
     assert_requested(:post, uri, times: 1) do |req|
-      assert_equal(fixture_body, JSON.parse(req.body))
+      body = JSON.parse(req.body)
+      assert_match(/\A\d{4}-\d{2}-\d{2}\z/, body.delete("anthropic_version"))
+      assert_equal(fixture_body, body)
       assert_equal(
         {
           "Accept" => "application/json",
-          "Anthropic-Version" => "2023-06-01",
           "Content-Type" => "application/json",
           "Host" => "localhost",
           "X-Stainless-Lang" => "ruby",
@@ -621,6 +652,7 @@ class Anthropic::Test::BedrockClientTest < Minitest::Test
       assert_requested(:post, uri, times: 1) do |req|
         headers = req.headers.transform_keys(&:downcase)
         refute(headers.key?("x-api-key"))
+        refute_equal("Bearer env-api-key", headers["authorization"])
         refute_equal("Bearer env-auth-token", headers["authorization"])
         true
       end

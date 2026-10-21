@@ -12,25 +12,15 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsOrganizationDisabledRunError::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsOrganizationDisabledRunError::Type }
+        #   @return [Symbol, :organization_disabled_error]
+        required :type, const: :organization_disabled_error
 
-        # @!method initialize(message:, type:)
+        # @!method initialize(message:, type: :organization_disabled_error)
         #   The deployment's organization is disabled.
         #
         #   @param message [String] Human-readable error description.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsOrganizationDisabledRunError::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsOrganizationDisabledRunError#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          ORGANIZATION_DISABLED_ERROR = :organization_disabled_error
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :organization_disabled_error]
       end
     end
 

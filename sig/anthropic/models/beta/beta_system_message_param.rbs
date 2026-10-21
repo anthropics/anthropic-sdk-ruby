@@ -1,0 +1,116 @@
+module Anthropic
+  module Models
+    class BetaSystemMessageParam = Beta::BetaSystemMessageParam
+
+    module Beta
+      type beta_system_message_param =
+        {
+          role: :system,
+          clear_at: Anthropic::Models::Beta::BetaSystemMessageParam::clear_at?,
+          content: Anthropic::Models::Beta::BetaSystemMessageParam::content,
+          output_config: Anthropic::Beta::BetaSystemMessageOutputConfig?
+        }
+
+      class BetaSystemMessageParam < Anthropic::Internal::Type::BaseModel
+        attr_accessor role: :system
+
+        attr_accessor clear_at: Anthropic::Models::Beta::BetaSystemMessageParam::clear_at?
+
+        attr_reader content: Anthropic::Models::Beta::BetaSystemMessageParam::content?
+
+        def content=: (
+          Anthropic::Models::Beta::BetaSystemMessageParam::content
+        ) -> Anthropic::Models::Beta::BetaSystemMessageParam::content
+
+        attr_accessor output_config: Anthropic::Beta::BetaSystemMessageOutputConfig?
+
+        def initialize: (
+          ?clear_at: Anthropic::Models::Beta::BetaSystemMessageParam::clear_at?,
+          ?content: Anthropic::Models::Beta::BetaSystemMessageParam::content,
+          ?output_config: Anthropic::Beta::BetaSystemMessageOutputConfig?,
+          ?role: :system
+        ) -> void
+
+        def to_hash: -> {
+          role: :system,
+          clear_at: Anthropic::Models::Beta::BetaSystemMessageParam::clear_at?,
+          content: Anthropic::Models::Beta::BetaSystemMessageParam::content,
+          output_config: Anthropic::Beta::BetaSystemMessageOutputConfig?
+        }
+
+        type clear_at = :next_user_message | :never
+
+        module ClearAt
+          extend Anthropic::Internal::Type::Enum
+
+          NEXT_USER_MESSAGE: :next_user_message
+          NEVER: :never
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaSystemMessageParam::clear_at]
+        end
+
+        type content =
+          String
+          | ::Array[Anthropic::Models::Beta::BetaSystemMessageParam::Content::block]
+
+        module Content
+          extend Anthropic::Internal::Type::Union
+
+          type block =
+            Anthropic::Beta::BetaTextBlockParam
+            | Anthropic::Beta::BetaRequestToolAdditionBlock
+            | Anthropic::Beta::BetaRequestToolRemovalBlock
+
+          module Block
+            extend Anthropic::Internal::Type::Union
+
+            type type_ = :text | :tool_addition | :tool_removal
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              TEXT: :text
+              TOOL_ADDITION: :tool_addition
+              TOOL_REMOVAL: :tool_removal
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::BetaSystemMessageParam::Content::Block::type_]
+            end
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaSystemMessageParam::Content::block]
+
+            def self.new:
+              (
+                type: :text | "text",
+                text: String,
+                ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+                ?citations: ::Array[Anthropic::Models::Beta::beta_text_citation_param]?
+              ) -> Anthropic::Beta::BetaTextBlockParam
+              | (
+                type: :tool_addition | "tool_addition",
+                tool: Anthropic::Models::Beta::BetaRequestToolAdditionBlock::tool,
+                ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+              ) -> Anthropic::Beta::BetaRequestToolAdditionBlock
+              | (
+                type: :tool_removal | "tool_removal",
+                tool: Anthropic::Models::Beta::BetaRequestToolRemovalBlock::tool,
+                ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+              ) -> Anthropic::Beta::BetaRequestToolRemovalBlock
+              | (
+                type: Anthropic::Models::Beta::BetaSystemMessageParam::Content::Block::type_
+                | String,
+                ?text: String,
+                ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+                ?citations: ::Array[Anthropic::Models::Beta::beta_text_citation_param]?,
+                ?tool: Anthropic::Models::Beta::BetaRequestToolAdditionBlock::tool
+                | Anthropic::Models::Beta::BetaRequestToolRemovalBlock::tool
+              ) -> Anthropic::Models::Beta::BetaSystemMessageParam::Content::block
+          end
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaSystemMessageParam::content]
+
+          BlockArray: Anthropic::Internal::Type::Converter
+        end
+      end
+    end
+  end
+end

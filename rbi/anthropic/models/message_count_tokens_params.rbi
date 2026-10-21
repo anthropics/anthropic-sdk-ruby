@@ -80,11 +80,20 @@ module Anthropic
       #
       # Note that if you want to include a
       # [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role),
-      # you can use the top-level `system` parameter — there is no `"system"` role for
-      # input messages in the Messages API.
+      # you can use the top-level `system` parameter.
       #
       # There is a limit of 100,000 messages in a single request.
-      sig { returns(T::Array[Anthropic::MessageParam]) }
+      sig do
+        returns(
+          T::Array[
+            T.any(
+              Anthropic::UserMessageParam,
+              Anthropic::AssistantMessageParam,
+              Anthropic::SystemMessageParam
+            )
+          ]
+        )
+      end
       attr_accessor :messages
 
       # The model that will complete your prompt.
@@ -374,7 +383,14 @@ module Anthropic
 
       sig do
         params(
-          messages: T::Array[Anthropic::MessageParam::OrHash],
+          messages:
+            T::Array[
+              T.any(
+                Anthropic::UserMessageParam::OrHash,
+                Anthropic::AssistantMessageParam::OrHash,
+                Anthropic::SystemMessageParam::OrHash
+              )
+            ],
           model: T.any(Anthropic::Model::OrSymbol, String),
           cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash),
           output_config: Anthropic::OutputConfig::OrHash,
@@ -493,8 +509,7 @@ module Anthropic
         #
         # Note that if you want to include a
         # [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role),
-        # you can use the top-level `system` parameter — there is no `"system"` role for
-        # input messages in the Messages API.
+        # you can use the top-level `system` parameter.
         #
         # There is a limit of 100,000 messages in a single request.
         messages:,
@@ -631,7 +646,14 @@ module Anthropic
       sig do
         override.returns(
           {
-            messages: T::Array[Anthropic::MessageParam],
+            messages:
+              T::Array[
+                T.any(
+                  Anthropic::UserMessageParam,
+                  Anthropic::AssistantMessageParam,
+                  Anthropic::SystemMessageParam
+                )
+              ],
             model: T.any(Anthropic::Model::OrSymbol, String),
             cache_control: T.nilable(Anthropic::CacheControlEphemeral),
             output_config: Anthropic::OutputConfig,

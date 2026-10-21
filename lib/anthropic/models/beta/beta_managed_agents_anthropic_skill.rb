@@ -11,30 +11,20 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsAnthropicSkill::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsAnthropicSkill::Type }
+        #   @return [Symbol, :anthropic]
+        required :type, const: :anthropic
 
         # @!attribute version
         #
         #   @return [String]
         required :version, String
 
-        # @!method initialize(skill_id:, type:, version:)
+        # @!method initialize(skill_id:, version:, type: :anthropic)
         #   A resolved Anthropic-managed skill.
         #
         #   @param skill_id [String]
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsAnthropicSkill::Type]
         #   @param version [String]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsAnthropicSkill#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          ANTHROPIC = :anthropic
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :anthropic]
       end
     end
 

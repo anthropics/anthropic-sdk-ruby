@@ -10,7 +10,7 @@ module Anthropic
           metadata: ::Hash[Symbol, String],
           name: String?,
           trust_grants: ::Hash[Symbol, Anthropic::Beta::BetaUserProfileTrustGrant],
-          type: Anthropic::Models::Beta::BetaUserProfile::type_,
+          type: :user_profile,
           updated_at: Time,
           access_type: Anthropic::Models::Beta::BetaUserProfile::access_type,
           external_id: String?,
@@ -29,7 +29,7 @@ module Anthropic
 
         attr_accessor trust_grants: ::Hash[Symbol, Anthropic::Beta::BetaUserProfileTrustGrant]
 
-        attr_accessor type: Anthropic::Models::Beta::BetaUserProfile::type_
+        attr_accessor type: :user_profile
 
         attr_accessor updated_at: Time
 
@@ -55,12 +55,12 @@ module Anthropic
           metadata: ::Hash[Symbol, String],
           name: String?,
           trust_grants: ::Hash[Symbol, Anthropic::Beta::BetaUserProfileTrustGrant],
-          type: Anthropic::Models::Beta::BetaUserProfile::type_,
           updated_at: Time,
           ?access_type: Anthropic::Models::Beta::BetaUserProfile::access_type,
           ?external_id: String?,
           ?external_user_details: Anthropic::Beta::BetaUserProfileExternalUserDetails,
-          ?external_user_onboarded_at: Time?
+          ?external_user_onboarded_at: Time?,
+          ?type: :user_profile
         ) -> void
 
         def to_hash: -> {
@@ -69,23 +69,13 @@ module Anthropic
           metadata: ::Hash[Symbol, String],
           name: String?,
           trust_grants: ::Hash[Symbol, Anthropic::Beta::BetaUserProfileTrustGrant],
-          type: Anthropic::Models::Beta::BetaUserProfile::type_,
+          type: :user_profile,
           updated_at: Time,
           access_type: Anthropic::Models::Beta::BetaUserProfile::access_type,
           external_id: String?,
           external_user_details: Anthropic::Beta::BetaUserProfileExternalUserDetails,
           external_user_onboarded_at: Time?
         }
-
-        type type_ = :user_profile
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          USER_PROFILE: :user_profile
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaUserProfile::type_]
-        end
 
         type access_type = :application | :passthrough
 

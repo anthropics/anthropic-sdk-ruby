@@ -17,11 +17,7 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :id
 
-          sig do
-            returns(
-              Anthropic::Beta::MemoryStores::BetaManagedAgentsDeletedMemory::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # The confirmation that
@@ -37,59 +33,16 @@ module Anthropic
           # See the
           # [memory guide](https://platform.claude.com/docs/en/managed-agents/memory#audit-memory-changes)
           # to learn more about how long versions are kept.
-          sig do
-            params(
-              id: String,
-              type:
-                Anthropic::Beta::MemoryStores::BetaManagedAgentsDeletedMemory::Type::OrSymbol
-            ).returns(T.attached_class)
-          end
+          sig { params(id: String, type: Symbol).returns(T.attached_class) }
           def self.new(
             # ID of the deleted memory (a `mem_...` value).
             id:,
-            type:
+            type: :memory_deleted
           )
           end
 
-          sig do
-            override.returns(
-              {
-                id: String,
-                type:
-                  Anthropic::Beta::MemoryStores::BetaManagedAgentsDeletedMemory::Type::TaggedSymbol
-              }
-            )
-          end
+          sig { override.returns({ id: String, type: Symbol }) }
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::MemoryStores::BetaManagedAgentsDeletedMemory::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            MEMORY_DELETED =
-              T.let(
-                :memory_deleted,
-                Anthropic::Beta::MemoryStores::BetaManagedAgentsDeletedMemory::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::MemoryStores::BetaManagedAgentsDeletedMemory::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

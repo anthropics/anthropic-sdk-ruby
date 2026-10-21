@@ -12,26 +12,16 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsAdvisor::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsAdvisor::Type }
+        #   @return [Symbol, :advisor]
+        required :type, const: :advisor
 
-        # @!method initialize(model:, type:)
+        # @!method initialize(model:, type: :advisor)
         #   Platform advisor roster entry: a model the session's primary thread may consult
         #   mid-turn.
         #
         #   @param model [String] The advisor model id.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsAdvisor::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsAdvisor#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          ADVISOR = :advisor
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :advisor]
       end
     end
 

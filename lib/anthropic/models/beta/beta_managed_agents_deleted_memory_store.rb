@@ -14,10 +14,10 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeletedMemoryStore::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsDeletedMemoryStore::Type }
+        #   @return [Symbol, :memory_store_deleted]
+        required :type, const: :memory_store_deleted
 
-        # @!method initialize(id:, type:)
+        # @!method initialize(id:, type: :memory_store_deleted)
         #   Confirmation that a `memory_store` was deleted.
         #
         #   Some parameter documentations has been truncated, see
@@ -25,17 +25,7 @@ module Anthropic
         #
         #   @param id [String] ID of the deleted memory store (a `memstore_...` identifier). The store and all
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeletedMemoryStore::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsDeletedMemoryStore#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          MEMORY_STORE_DELETED = :memory_store_deleted
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :memory_store_deleted]
       end
     end
 

@@ -2,60 +2,17 @@
 
 module Anthropic
   module Models
-    class MessageParam < Anthropic::Internal::Type::BaseModel
-      OrHash =
+    module MessageParam
+      extend Anthropic::Internal::Type::Union
+
+      Variants =
         T.type_alias do
-          T.any(Anthropic::MessageParam, Anthropic::Internal::AnyHash)
-        end
-
-      sig { returns(Anthropic::MessageParam::Content::Variants) }
-      attr_accessor :content
-
-      sig { returns(Anthropic::MessageParam::Role::OrSymbol) }
-      attr_accessor :role
-
-      sig do
-        params(
-          content: Anthropic::MessageParam::Content::Variants,
-          role: Anthropic::MessageParam::Role::OrSymbol
-        ).returns(T.attached_class)
-      end
-      def self.new(content:, role:)
-      end
-
-      sig do
-        override.returns(
-          {
-            content: Anthropic::MessageParam::Content::Variants,
-            role: Anthropic::MessageParam::Role::OrSymbol
-          }
-        )
-      end
-      def to_hash
-      end
-
-      module Content
-        extend Anthropic::Internal::Type::Union
-
-        Variants =
-          T.type_alias do
-            T.any(String, T::Array[Anthropic::ContentBlockParam::Variants])
-          end
-
-        sig do
-          override.returns(T::Array[Anthropic::MessageParam::Content::Variants])
-        end
-        def self.variants
-        end
-
-        ContentBlockParamArray =
-          T.let(
-            Anthropic::Internal::Type::ArrayOf[
-              union: Anthropic::ContentBlockParam
-            ],
-            Anthropic::Internal::Type::Converter
+          T.any(
+            Anthropic::UserMessageParam,
+            Anthropic::AssistantMessageParam,
+            Anthropic::SystemMessageParam
           )
-      end
+        end
 
       module Role
         extend Anthropic::Internal::Type::Enum
@@ -76,6 +33,25 @@ module Anthropic
         end
         def self.values
         end
+      end
+
+      sig { override.returns(T::Array[Anthropic::MessageParam::Variants]) }
+      def self.variants
+      end
+
+      # Creates a new instance of the variant class whose `role` matches the given
+      # value, passing the remaining arguments to its constructor.
+      sig do
+        params(
+          role: Anthropic::MessageParam::Role::OrSymbol,
+          content:
+            T.any(
+              Anthropic::MessageContentParam::Variants,
+              Anthropic::SystemMessageParam::Content::Variants
+            )
+        ).returns(Anthropic::MessageParam::Variants)
+      end
+      def self.new(role:, content:)
       end
     end
   end

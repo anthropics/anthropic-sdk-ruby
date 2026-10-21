@@ -15,10 +15,10 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsStartEvent::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsStartEvent::Type }
+        #   @return [Symbol, :event_start]
+        required :type, const: :event_start
 
-        # @!method initialize(event:, type:)
+        # @!method initialize(event:, type: :event_start)
         #   Opens a preview of a buffered event. Carries the previewed event's type and id
         #   only. Followed by zero or more event_delta events with the same event id,
         #   normally concluded by the buffered event carrying that id. If the producing
@@ -31,17 +31,7 @@ module Anthropic
         #
         #   @param event [Anthropic::Models::Beta::BetaManagedAgentsAgentMessagePreview, Anthropic::Models::Beta::BetaManagedAgentsAgentThinkingPreview] The previewed event's type and id. The event type determines which delta types t
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsStartEvent::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsStartEvent#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          EVENT_START = :event_start
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :event_start]
       end
     end
 

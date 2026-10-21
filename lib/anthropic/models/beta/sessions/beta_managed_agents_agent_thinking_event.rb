@@ -19,10 +19,10 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThinkingEvent::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsAgentThinkingEvent::Type }
+          #   @return [Symbol, :"agent.thinking"]
+          required :type, const: :"agent.thinking"
 
-          # @!method initialize(id:, processed_at:, type:)
+          # @!method initialize(id:, processed_at:, type: :"agent.thinking")
           #   Indicates the agent is making forward progress via extended thinking. A progress
           #   signal, not a content carrier.
           #
@@ -30,17 +30,7 @@ module Anthropic
           #
           #   @param processed_at [Time] Timestamp when this thinking was produced.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThinkingEvent::Type]
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThinkingEvent#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            AGENT_THINKING = :"agent.thinking"
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :"agent.thinking"]
         end
       end
     end

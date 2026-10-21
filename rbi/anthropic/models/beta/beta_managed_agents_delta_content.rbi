@@ -27,11 +27,7 @@ module Anthropic
         end
         attr_writer :content
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsDeltaContent::Type::TaggedSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # Which entry in the previewed event's content array this fragment lands in.
@@ -47,20 +43,19 @@ module Anthropic
           params(
             content:
               Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock::OrHash,
-            type:
-              Anthropic::Beta::BetaManagedAgentsDeltaContent::Type::OrSymbol,
-            index: Integer
+            index: Integer,
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
           # A partial element of the content array at index, typed like the element itself —
           # the same shape the buffered agent.message carries in content.
           content:,
-          type:,
           # Which entry in the previewed event's content array this fragment lands in.
           # Insert content as that entry when the index is new; append to the existing entry
           # otherwise.
-          index: nil
+          index: nil,
+          type: :content_delta
         )
         end
 
@@ -68,42 +63,12 @@ module Anthropic
           override.returns(
             {
               content: Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock,
-              type:
-                Anthropic::Beta::BetaManagedAgentsDeltaContent::Type::TaggedSymbol,
+              type: Symbol,
               index: Integer
             }
           )
         end
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsDeltaContent::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          CONTENT_DELTA =
-            T.let(
-              :content_delta,
-              Anthropic::Beta::BetaManagedAgentsDeltaContent::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsDeltaContent::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

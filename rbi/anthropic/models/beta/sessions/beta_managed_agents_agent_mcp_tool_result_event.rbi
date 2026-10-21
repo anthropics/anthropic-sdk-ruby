@@ -25,11 +25,7 @@ module Anthropic
           sig { returns(Time) }
           attr_accessor :processed_at
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # The result content returned by the tool.
@@ -69,8 +65,6 @@ module Anthropic
               id: String,
               mcp_tool_use_id: String,
               processed_at: Time,
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::Type::OrSymbol,
               content:
                 T::Array[
                   T.any(
@@ -80,7 +74,8 @@ module Anthropic
                     Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultBlock::OrHash
                   )
                 ],
-              is_error: T.nilable(T::Boolean)
+              is_error: T.nilable(T::Boolean),
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
@@ -90,11 +85,11 @@ module Anthropic
             mcp_tool_use_id:,
             # Timestamp when this event was processed.
             processed_at:,
-            type:,
             # The result content returned by the tool.
             content: nil,
             # Whether the tool execution resulted in an error.
-            is_error: nil
+            is_error: nil,
+            type: :"agent.mcp_tool_result"
           )
           end
 
@@ -104,8 +99,7 @@ module Anthropic
                 id: String,
                 mcp_tool_use_id: String,
                 processed_at: Time,
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::Type::TaggedSymbol,
+                type: Symbol,
                 content:
                   T::Array[
                     Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::Content::Variants
@@ -115,35 +109,6 @@ module Anthropic
             )
           end
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            AGENT_MCP_TOOL_RESULT =
-              T.let(
-                :"agent.mcp_tool_result",
-                Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
 
           # Content block in a tool result. Can be `text`, `image`, `document`, or

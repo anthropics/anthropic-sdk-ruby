@@ -26,10 +26,10 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::Type }
+          #   @return [Symbol, :"agent.message"]
+          required :type, const: :"agent.message"
 
-          # @!method initialize(id:, content:, processed_at:, type:)
+          # @!method initialize(id:, content:, processed_at:, type: :"agent.message")
           #   An agent response event in the session conversation.
           #
           #   @param id [String] Unique identifier for this event.
@@ -38,7 +38,7 @@ module Anthropic
           #
           #   @param processed_at [Time] Timestamp when this response was generated.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::Type]
+          #   @param type [Symbol, :"agent.message"]
 
           # Content block in an agent message.
           module Content
@@ -79,23 +79,13 @@ module Anthropic
             def self.new(type:, **args)
               case type.to_sym
               when :text
-                Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock.new(**args)
               when :redacted
-                Anthropic::Beta::Sessions::BetaManagedAgentsRedactedBlock.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsRedactedBlock.new(**args)
               else
                 raise ArgumentError, "unknown type: #{type}"
               end
             end
-          end
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            AGENT_MESSAGE = :"agent.message"
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
           end
         end
       end

@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module BetaMessageContentParam = Beta::BetaMessageContentParam
+
+    module Beta
+      type beta_message_content_param =
+        String | ::Array[Anthropic::Models::Beta::beta_content_block_param]
+
+      module BetaMessageContentParam
+        extend Anthropic::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_message_content_param]
+
+        BetaContentBlockParamArray: Anthropic::Internal::Type::Converter
+      end
+    end
+  end
+end

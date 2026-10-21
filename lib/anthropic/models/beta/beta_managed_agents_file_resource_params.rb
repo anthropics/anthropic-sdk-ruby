@@ -12,8 +12,8 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsFileResourceParams::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsFileResourceParams::Type }
+        #   @return [Symbol, :file]
+        required :type, const: :file
 
         # @!attribute mount_path
         #   Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
@@ -21,24 +21,14 @@ module Anthropic
         #   @return [String, nil]
         optional :mount_path, String, nil?: true
 
-        # @!method initialize(file_id:, type:, mount_path: nil)
+        # @!method initialize(file_id:, mount_path: nil, type: :file)
         #   Mount a file uploaded via the Files API into the session.
         #
         #   @param file_id [String] ID of a previously uploaded file.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsFileResourceParams::Type]
-        #
         #   @param mount_path [String, nil] Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsFileResourceParams#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          FILE = :file
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #
+        #   @param type [Symbol, :file]
       end
     end
 

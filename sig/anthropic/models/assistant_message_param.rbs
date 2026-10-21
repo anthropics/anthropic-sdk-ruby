@@ -1,0 +1,22 @@
+module Anthropic
+  module Models
+    type assistant_message_param =
+      { content: Anthropic::Models::message_content_param, role: :assistant }
+
+    class AssistantMessageParam < Anthropic::Internal::Type::BaseModel
+      attr_accessor content: Anthropic::Models::message_content_param
+
+      attr_accessor role: :assistant
+
+      def initialize: (
+        content: Anthropic::Models::message_content_param,
+        ?role: :assistant
+      ) -> void
+
+      def to_hash: -> {
+        content: Anthropic::Models::message_content_param,
+        role: :assistant
+      }
+    end
+  end
+end

@@ -7,7 +7,7 @@ module Anthropic
             id: String,
             mcp_tool_use_id: String,
             processed_at: Time,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::type_,
+            type: :"agent.mcp_tool_result",
             content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::content],
             is_error: bool?
           }
@@ -19,7 +19,7 @@ module Anthropic
 
           attr_accessor processed_at: Time
 
-          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::type_
+          attr_accessor type: :"agent.mcp_tool_result"
 
           attr_reader content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::content]?
 
@@ -33,29 +33,19 @@ module Anthropic
             id: String,
             mcp_tool_use_id: String,
             processed_at: Time,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::type_,
             ?content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::content],
-            ?is_error: bool?
+            ?is_error: bool?,
+            ?type: :"agent.mcp_tool_result"
           ) -> void
 
           def to_hash: -> {
             id: String,
             mcp_tool_use_id: String,
             processed_at: Time,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::type_,
+            type: :"agent.mcp_tool_result",
             content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::content],
             is_error: bool?
           }
-
-          type type_ = :"agent.mcp_tool_result"
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            AGENT_MCP_TOOL_RESULT: :"agent.mcp_tool_result"
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::type_]
-          end
 
           type content =
             Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock

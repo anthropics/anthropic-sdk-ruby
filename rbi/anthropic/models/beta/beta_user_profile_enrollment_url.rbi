@@ -19,11 +19,7 @@ module Anthropic
         attr_accessor :expires_at
 
         # Object type. Always `enrollment_url`.
-        sig do
-          returns(
-            Anthropic::Beta::BetaUserProfileEnrollmentURL::Type::TaggedSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # Enrollment URL to send to the end user. Valid until `expires_at`.
@@ -33,60 +29,24 @@ module Anthropic
         # A URL to give to the entity that a user profile represents, so that the entity
         # can enroll in a program.
         sig do
-          params(
-            expires_at: Time,
-            type: Anthropic::Beta::BetaUserProfileEnrollmentURL::Type::OrSymbol,
-            url: String
-          ).returns(T.attached_class)
+          params(expires_at: Time, url: String, type: Symbol).returns(
+            T.attached_class
+          )
         end
         def self.new(
           # When this enrollment URL expires, in RFC 3339 format.
           expires_at:,
-          # Object type. Always `enrollment_url`.
-          type:,
           # Enrollment URL to send to the end user. Valid until `expires_at`.
-          url:
+          url:,
+          # Object type. Always `enrollment_url`.
+          type: :enrollment_url
         )
         end
 
         sig do
-          override.returns(
-            {
-              expires_at: Time,
-              type:
-                Anthropic::Beta::BetaUserProfileEnrollmentURL::Type::TaggedSymbol,
-              url: String
-            }
-          )
+          override.returns({ expires_at: Time, type: Symbol, url: String })
         end
         def to_hash
-        end
-
-        # Object type. Always `enrollment_url`.
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(Symbol, Anthropic::Beta::BetaUserProfileEnrollmentURL::Type)
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          ENROLLMENT_URL =
-            T.let(
-              :enrollment_url,
-              Anthropic::Beta::BetaUserProfileEnrollmentURL::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaUserProfileEnrollmentURL::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

@@ -108,11 +108,7 @@ module Anthropic
         end
         attr_accessor :status
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsDeployment::Type::TaggedSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # Time the deployment was last updated.
@@ -179,11 +175,11 @@ module Anthropic
               T.nilable(Anthropic::Beta::BetaManagedAgentsSchedule::OrHash),
             status:
               Anthropic::Beta::BetaManagedAgentsDeploymentStatus::OrSymbol,
-            type: Anthropic::Beta::BetaManagedAgentsDeployment::Type::OrSymbol,
             updated_at: Time,
             vault_ids: T::Array[String],
             budget:
-              T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit::OrHash)
+              T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit::OrHash),
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
@@ -218,7 +214,6 @@ module Anthropic
           # Computed status of the deployment: `active` or `paused`. Archived deployments
           # report `active` with `archived_at` set.
           status:,
-          type:,
           # Time the deployment was last updated.
           updated_at:,
           # Vault IDs supplying stored credentials for sessions created from this
@@ -226,7 +221,8 @@ module Anthropic
           vault_ids:,
           # Spend ceiling stamped onto each session created from this deployment. Absent
           # when no budget is set.
-          budget: nil
+          budget: nil,
+          type: :deployment
         )
         end
 
@@ -256,8 +252,7 @@ module Anthropic
               schedule: T.nilable(Anthropic::Beta::BetaManagedAgentsSchedule),
               status:
                 Anthropic::Beta::BetaManagedAgentsDeploymentStatus::TaggedSymbol,
-              type:
-                Anthropic::Beta::BetaManagedAgentsDeployment::Type::TaggedSymbol,
+              type: Symbol,
               updated_at: Time,
               vault_ids: T::Array[String],
               budget: T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit)
@@ -265,32 +260,6 @@ module Anthropic
           )
         end
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(Symbol, Anthropic::Beta::BetaManagedAgentsDeployment::Type)
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          DEPLOYMENT =
-            T.let(
-              :deployment,
-              Anthropic::Beta::BetaManagedAgentsDeployment::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsDeployment::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

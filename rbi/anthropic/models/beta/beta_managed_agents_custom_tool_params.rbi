@@ -36,11 +36,7 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :name
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsCustomToolParams::Type::OrSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # A custom tool that is executed by the API client rather than the agent. When the
@@ -53,8 +49,7 @@ module Anthropic
             input_schema:
               Anthropic::Beta::BetaManagedAgentsCustomToolInputSchema::OrHash,
             name: String,
-            type:
-              Anthropic::Beta::BetaManagedAgentsCustomToolParams::Type::OrSymbol
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
@@ -66,7 +61,7 @@ module Anthropic
           # Unique name for the tool. 1-128 characters; letters, digits, underscores, and
           # hyphens.
           name:,
-          type:
+          type: :custom
         )
         end
 
@@ -77,41 +72,11 @@ module Anthropic
               input_schema:
                 Anthropic::Beta::BetaManagedAgentsCustomToolInputSchema,
               name: String,
-              type:
-                Anthropic::Beta::BetaManagedAgentsCustomToolParams::Type::OrSymbol
+              type: Symbol
             }
           )
         end
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsCustomToolParams::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          CUSTOM =
-            T.let(
-              :custom,
-              Anthropic::Beta::BetaManagedAgentsCustomToolParams::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsCustomToolParams::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

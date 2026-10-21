@@ -13,15 +13,15 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsImageBlock::Type }
+          #   @return [Symbol, :image]
+          required :type, const: :image
 
-          # @!method initialize(source:, type:)
+          # @!method initialize(source:, type: :image)
           #   Image content specified directly as base64 data or as a reference via a URL.
           #
           #   @param source [Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64ImageSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsURLImageSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileImageSource] The source of the image data.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock::Type]
+          #   @param type [Symbol, :image]
 
           # The source of the image data.
           #
@@ -78,25 +78,15 @@ module Anthropic
             def self.new(type:, **args)
               case type.to_sym
               when :base64
-                Anthropic::Beta::Sessions::BetaManagedAgentsBase64ImageSource.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsBase64ImageSource.new(**args)
               when :url
-                Anthropic::Beta::Sessions::BetaManagedAgentsURLImageSource.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsURLImageSource.new(**args)
               when :file
-                Anthropic::Beta::Sessions::BetaManagedAgentsFileImageSource.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsFileImageSource.new(**args)
               else
                 raise ArgumentError, "unknown type: #{type}"
               end
             end
-          end
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            IMAGE = :image
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
           end
         end
       end

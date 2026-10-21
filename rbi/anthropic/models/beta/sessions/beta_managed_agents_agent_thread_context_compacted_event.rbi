@@ -21,71 +21,28 @@ module Anthropic
           sig { returns(Time) }
           attr_accessor :processed_at
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadContextCompactedEvent::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # Indicates that context compaction (summarization) occurred during the session.
           sig do
-            params(
-              id: String,
-              processed_at: Time,
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadContextCompactedEvent::Type::OrSymbol
-            ).returns(T.attached_class)
+            params(id: String, processed_at: Time, type: Symbol).returns(
+              T.attached_class
+            )
           end
           def self.new(
             # Unique identifier for this event.
             id:,
             # Timestamp when compaction was processed.
             processed_at:,
-            type:
+            type: :"agent.thread_context_compacted"
           )
           end
 
           sig do
-            override.returns(
-              {
-                id: String,
-                processed_at: Time,
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadContextCompactedEvent::Type::TaggedSymbol
-              }
-            )
+            override.returns({ id: String, processed_at: Time, type: Symbol })
           end
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadContextCompactedEvent::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            AGENT_THREAD_CONTEXT_COMPACTED =
-              T.let(
-                :"agent.thread_context_compacted",
-                Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadContextCompactedEvent::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadContextCompactedEvent::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

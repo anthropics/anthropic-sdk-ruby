@@ -6,23 +6,13 @@ module Anthropic
       class BetaManagedAgentsAlwaysAllowPolicy < Anthropic::Internal::Type::BaseModel
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy::Type }
+        #   @return [Symbol, :always_allow]
+        required :type, const: :always_allow
 
-        # @!method initialize(type:)
+        # @!method initialize(type: :always_allow)
         #   Tool calls are automatically approved without user confirmation.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          ALWAYS_ALLOW = :always_allow
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :always_allow]
       end
     end
 

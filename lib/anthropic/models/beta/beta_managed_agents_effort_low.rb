@@ -6,23 +6,13 @@ module Anthropic
       class BetaManagedAgentsEffortLow < Anthropic::Internal::Type::BaseModel
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsEffortLow::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsEffortLow::Type }
+        #   @return [Symbol, :low]
+        required :type, const: :low
 
-        # @!method initialize(type:)
+        # @!method initialize(type: :low)
         #   Low effort. Favors latency over reasoning depth.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsEffortLow::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsEffortLow#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          LOW = :low
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :low]
       end
     end
 

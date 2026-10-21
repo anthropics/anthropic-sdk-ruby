@@ -31,8 +31,8 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent::Type }
+          #   @return [Symbol, :"session.thread_created"]
+          required :type, const: :"session.thread_created"
 
           # @!attribute workflow_run_id
           #   Identifier of the workflow run that created the thread, or `null` for any other
@@ -41,7 +41,7 @@ module Anthropic
           #   @return [String, nil]
           required :workflow_run_id, String, nil?: true
 
-          # @!method initialize(id:, agent_name:, processed_at:, session_thread_id:, type:, workflow_run_id:)
+          # @!method initialize(id:, agent_name:, processed_at:, session_thread_id:, workflow_run_id:, type: :"session.thread_created")
           #   Emitted when a child thread is created. Written to the parent thread's output
           #   stream so clients observing the session see child creation.
           #
@@ -57,19 +57,9 @@ module Anthropic
           #
           #   @param session_thread_id [String] Public `sthr_` ID of the newly created thread.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent::Type]
-          #
           #   @param workflow_run_id [String, nil] Identifier of the workflow run that created the thread, or `null` for any other
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            SESSION_THREAD_CREATED = :"session.thread_created"
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #
+          #   @param type [Symbol, :"session.thread_created"]
         end
       end
     end

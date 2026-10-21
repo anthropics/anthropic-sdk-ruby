@@ -21,72 +21,29 @@ module Anthropic
           sig { returns(Time) }
           attr_accessor :processed_at
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsAgentThinkingEvent::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # Indicates the agent is making forward progress via extended thinking. A progress
           # signal, not a content carrier.
           sig do
-            params(
-              id: String,
-              processed_at: Time,
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsAgentThinkingEvent::Type::OrSymbol
-            ).returns(T.attached_class)
+            params(id: String, processed_at: Time, type: Symbol).returns(
+              T.attached_class
+            )
           end
           def self.new(
             # Unique identifier for this event.
             id:,
             # Timestamp when this thinking was produced.
             processed_at:,
-            type:
+            type: :"agent.thinking"
           )
           end
 
           sig do
-            override.returns(
-              {
-                id: String,
-                processed_at: Time,
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentThinkingEvent::Type::TaggedSymbol
-              }
-            )
+            override.returns({ id: String, processed_at: Time, type: Symbol })
           end
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentThinkingEvent::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            AGENT_THINKING =
-              T.let(
-                :"agent.thinking",
-                Anthropic::Beta::Sessions::BetaManagedAgentsAgentThinkingEvent::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentThinkingEvent::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

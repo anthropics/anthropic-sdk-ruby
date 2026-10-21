@@ -434,11 +434,30 @@ class AnthropicTest < Minitest::Test
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
         model: :"claude-opus-4-6",
-        request_options: {extra_headers: {"x-api-key" => "caller-override"}}
+        request_options: {extra_headers: {"authorization" => "caller-override"}}
       )
     end
 
-    assert_requested(:any, /./, headers: {"x-api-key" => "caller-override"}, times: 3)
+    assert_requested(:any, /./, headers: {"authorization" => "caller-override"}, times: 3)
+  end
+
+  def test_extra_headers_nil_authorization_survives_retry
+    stub_request(:post, "http://localhost/v1/messages").to_return_json(status: 500, body: {})
+
+    anthropic = Anthropic::Client.new(base_url: "http://localhost", api_key: "my-anthropic-api-key")
+
+    assert_raises(Anthropic::Errors::InternalServerError) do
+      anthropic.messages.create(
+        max_tokens: 1024,
+        messages: [{content: "Hello, world", role: :user}],
+        model: :"claude-opus-4-6",
+        request_options: {extra_headers: {"authorization" => nil}}
+      )
+    end
+
+    assert_requested(:any, /./, times: 3) do
+      refute_includes(_1.headers.keys.map(&:downcase), "authorization")
+    end
   end
 
   def test_client_redirect_307
@@ -561,6 +580,32 @@ class AnthropicTest < Minitest::Test
     assert_requested(:any, "https://example.com/redirected", times: Anthropic::Client::MAX_REDIRECTS) do
       headers = _1.headers.keys.map(&:downcase)
       refute_includes(headers, "authorization")
+    end
+  end
+
+  def test_client_redirect_auth_strip_cross_origin_survives_retry
+    stub_request(:post, "http://localhost/v1/messages").to_return_json(
+      status: 307,
+      headers: {"location" => "https://example.com/redirected"},
+      body: {}
+    )
+    stub_request(:any, "https://example.com/redirected")
+      .to_return_json(status: 500, headers: {"retry-after-ms" => "1"}, body: {})
+      .then.to_return_json(status: 200, body: {})
+
+    anthropic = Anthropic::Client.new(base_url: "http://localhost", api_key: "my-anthropic-api-key")
+
+    anthropic.messages.create(
+      max_tokens: 1024,
+      messages: [{content: "Hello, world", role: :user}],
+      model: Anthropic::Model::CLAUDE_OPUS_5,
+      request_options: {extra_headers: {"x-api-key" => "set-by-hand"}}
+    )
+
+    assert_requested(:any, "https://example.com/redirected", times: 2) do
+      headers = _1.headers.keys.map(&:downcase)
+      refute_includes(headers, "authorization")
+      refute_includes(headers, "x-api-key")
     end
   end
 

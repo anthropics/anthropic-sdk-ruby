@@ -36,6 +36,8 @@ module Anthropic
         # @raise [ArgumentError] if `compaction` is set, if the messages are replaced while the
         #   conversation is being compacted, or if a compaction edit is added while a compaction is due
         def params=(params)
+          # The runner reads and writes its params as a symbol-keyed hash.
+          params = params.to_h.transform_keys(&:to_sym)
           reject_compaction_param!(params)
           if @compaction_phase == :in_flight && !params[:messages].equal?(current_messages)
             raise ArgumentError.new(
@@ -51,7 +53,7 @@ module Anthropic
         # @return [Boolean]
         def finished? = @finished
 
-        # @param params [Array<Anthropic::Beta::BetaMessageParam>]
+        # @param messages [Array<Anthropic::Models::Beta::BetaUserMessageParam, Anthropic::Models::Beta::BetaAssistantMessageParam, Anthropic::Models::Beta::BetaSystemMessageParam>]
         def feed_messages(*messages)
           self.params = {**params.to_h, messages: params[:messages].to_a + messages}
         end
@@ -116,7 +118,7 @@ module Anthropic
           @pending_compaction = compaction || {type: :summarize}
         end
 
-        # @return [Array<Anthropic::Beta::BetaMessageParam>]
+        # @return [Array<Anthropic::Models::Beta::BetaUserMessageParam, Anthropic::Models::Beta::BetaAssistantMessageParam, Anthropic::Models::Beta::BetaSystemMessageParam>]
         private def current_messages = params&.[](:messages).to_a
 
         # @return [Anthropic::Models::BetaMessage, nil]
@@ -632,9 +634,9 @@ module Anthropic
         #
         # Reads a field off either a plain hash (symbol or string keys) or a typed model.
         #
-        # A typed reader that cannot coerce its stored value (e.g. `BetaMessageParam#content`
-        # on a directive-only message with `content: []`) falls back to the raw value, so the
-        # typed form is walked exactly like the equivalent hash.
+        # A model coerced from a string-keyed hash keeps those keys, unseen by its typed readers, and
+        # a typed reader raises when it cannot coerce its stored value (e.g. string-keyed blocks in
+        # `BetaSystemMessageParam#content`). Both read the raw value, like the equivalent hash.
         #
         # @param obj [Object]
         #
@@ -646,7 +648,7 @@ module Anthropic
           in Hash
             obj.fetch(key) { obj[key.to_s] }
           in Anthropic::Internal::Type::BaseModel
-            begin
+            obj.to_h.fetch(key.to_s) do
               obj.public_send(key) if obj.respond_to?(key)
             rescue Anthropic::Errors::ConversionError
               obj[key]

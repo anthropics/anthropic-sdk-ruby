@@ -13,62 +13,17 @@ module Anthropic
               )
             end
 
-          sig do
-            returns(
-              Anthropic::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingResponse::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # The secret is substituted on any host the session's Environment network policy
           # permits egress to.
-          sig do
-            params(
-              type:
-                Anthropic::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingResponse::Type::OrSymbol
-            ).returns(T.attached_class)
-          end
-          def self.new(type:)
+          sig { params(type: Symbol).returns(T.attached_class) }
+          def self.new(type: :unrestricted)
           end
 
-          sig do
-            override.returns(
-              {
-                type:
-                  Anthropic::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingResponse::Type::TaggedSymbol
-              }
-            )
-          end
+          sig { override.returns({ type: Symbol }) }
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingResponse::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            UNRESTRICTED =
-              T.let(
-                :unrestricted,
-                Anthropic::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingResponse::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingResponse::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

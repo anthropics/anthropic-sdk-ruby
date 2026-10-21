@@ -49,11 +49,7 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :result
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationEndEvent::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # Aggregate token usage for this evaluation cycle. Sums across all grader model
@@ -84,10 +80,9 @@ module Anthropic
               outcome_id: String,
               processed_at: Time,
               result: String,
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationEndEvent::Type::OrSymbol,
               usage:
-                Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelUsage::OrHash
+                Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelUsage::OrHash,
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
@@ -113,10 +108,10 @@ module Anthropic
             # to the deliverables. 'interrupted': user sent an interrupt while evaluation was
             # in progress.
             result:,
-            type:,
             # Aggregate token usage for this evaluation cycle. Sums across all grader model
             # requests within the cycle.
-            usage:
+            usage:,
+            type: :"span.outcome_evaluation_end"
           )
           end
 
@@ -130,43 +125,13 @@ module Anthropic
                 outcome_id: String,
                 processed_at: Time,
                 result: String,
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationEndEvent::Type::TaggedSymbol,
+                type: Symbol,
                 usage:
                   Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelUsage
               }
             )
           end
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationEndEvent::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            SPAN_OUTCOME_EVALUATION_END =
-              T.let(
-                :"span.outcome_evaluation_end",
-                Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationEndEvent::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationEndEvent::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

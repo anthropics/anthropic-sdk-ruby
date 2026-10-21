@@ -20,17 +20,17 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsModelRateLimitedError::Type }
+          #   @return [Symbol, :model_rate_limited_error]
+          required :type, const: :model_rate_limited_error
 
-          # @!method initialize(message:, retry_status:, type:)
+          # @!method initialize(message:, retry_status:, type: :model_rate_limited_error)
           #   The model request was rate-limited.
           #
           #   @param message [String] Human-readable error description.
           #
           #   @param retry_status [Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal] What the client should do next.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError::Type]
+          #   @param type [Symbol, :model_rate_limited_error]
 
           # What the client should do next.
           #
@@ -75,25 +75,15 @@ module Anthropic
             def self.new(type:, **args)
               case type.to_sym
               when :retrying
-                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying.new(**args)
               when :exhausted
-                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted.new(**args)
               when :terminal
-                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal.new(**args)
               else
                 raise ArgumentError, "unknown type: #{type}"
               end
             end
-          end
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            MODEL_RATE_LIMITED_ERROR = :model_rate_limited_error
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
           end
         end
       end

@@ -14,10 +14,10 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsDeletedMemory::Type]
-          required :type, enum: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsDeletedMemory::Type }
+          #   @return [Symbol, :memory_deleted]
+          required :type, const: :memory_deleted
 
-          # @!method initialize(id:, type:)
+          # @!method initialize(id:, type: :memory_deleted)
           #   The confirmation that
           #   [Delete a Memory](https://platform.claude.com/docs/en/api/beta/memory_stores/memories/delete)
           #   returns.
@@ -34,17 +34,7 @@ module Anthropic
           #
           #   @param id [String] ID of the deleted memory (a `mem_...` value).
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsDeletedMemory::Type]
-
-          # @see Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsDeletedMemory#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            MEMORY_DELETED = :memory_deleted
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :memory_deleted]
         end
       end
     end

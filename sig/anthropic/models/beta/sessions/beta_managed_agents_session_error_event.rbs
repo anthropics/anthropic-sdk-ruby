@@ -7,7 +7,7 @@ module Anthropic
             id: String,
             error: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::error,
             processed_at: Time,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::type_
+            type: :"session.error"
           }
 
         class BetaManagedAgentsSessionErrorEvent < Anthropic::Internal::Type::BaseModel
@@ -17,20 +17,20 @@ module Anthropic
 
           attr_accessor processed_at: Time
 
-          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::type_
+          attr_accessor type: :"session.error"
 
           def initialize: (
             id: String,
             error: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::error,
             processed_at: Time,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::type_
+            ?type: :"session.error"
           ) -> void
 
           def to_hash: -> {
             id: String,
             error: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::error,
             processed_at: Time,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::type_
+            type: :"session.error"
           }
 
           type error =
@@ -192,16 +192,6 @@ module Anthropic
                 ?vault_id: String,
                 ?repository_url: String?
               ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::error
-          end
-
-          type type_ = :"session.error"
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            SESSION_ERROR: :"session.error"
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::type_]
           end
         end
       end

@@ -53,11 +53,11 @@ module Anthropic
         def self.new(type:, **args)
           case type.to_sym
           when :"user.message"
-            Anthropic::Beta::BetaManagedAgentsDeploymentUserMessageEvent.new(type: type, **args)
+            Anthropic::Beta::BetaManagedAgentsDeploymentUserMessageEvent.new(**args)
           when :"user.define_outcome"
-            Anthropic::Beta::BetaManagedAgentsDeploymentUserDefineOutcomeEvent.new(type: type, **args)
+            Anthropic::Beta::BetaManagedAgentsDeploymentUserDefineOutcomeEvent.new(**args)
           when :"system.message"
-            Anthropic::Beta::BetaManagedAgentsDeploymentSystemMessageEvent.new(type: type, **args)
+            Anthropic::Beta::BetaManagedAgentsDeploymentSystemMessageEvent.new(**args)
           else
             raise ArgumentError, "unknown type: #{type}"
           end

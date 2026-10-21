@@ -14,25 +14,13 @@ module Anthropic
                 )
               end
 
-            # The rate-limit group this entry's limits apply to. Its `type` equals
-            # `group_type`.
+            # The rate-limit group this entry's limits apply to.
             sig do
               returns(
                 Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::Group::Variants
               )
             end
             attr_accessor :group
-
-            # Deprecated: use `group.type` instead. The kind of rate-limit group this entry
-            # represents. `model_group` entries apply to a family of models (listed in
-            # `models`); other values apply to an API-surface category and have `models` set
-            # to `null`. Always equal to `group.type`.
-            sig do
-              returns(
-                Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::GroupType::TaggedSymbol
-              )
-            end
-            attr_accessor :group_type
 
             # The workspace's limiter values for this group. By default only the limiter types
             # with a workspace-level override are listed. With `include_inherited` set to
@@ -48,7 +36,7 @@ module Anthropic
             attr_accessor :limits
 
             # Model names this entry's limits apply to, including aliases. `null` when
-            # `group_type` is not `"model_group"`.
+            # `group.type` is not `"model_group"`.
             sig { returns(T.nilable(T::Array[String])) }
             attr_accessor :models
 
@@ -75,8 +63,6 @@ module Anthropic
                     Anthropic::Beta::Organization::BetaOrganizationRateLimitSkillsGroup::OrHash,
                     Anthropic::Beta::Organization::BetaOrganizationRateLimitWebSearchGroup::OrHash
                   ),
-                group_type:
-                  Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::GroupType::OrSymbol,
                 limits:
                   T::Array[
                     Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimitValue::OrHash
@@ -88,21 +74,15 @@ module Anthropic
               ).returns(T.attached_class)
             end
             def self.new(
-              # The rate-limit group this entry's limits apply to. Its `type` equals
-              # `group_type`.
+              # The rate-limit group this entry's limits apply to.
               group:,
-              # Deprecated: use `group.type` instead. The kind of rate-limit group this entry
-              # represents. `model_group` entries apply to a family of models (listed in
-              # `models`); other values apply to an API-surface category and have `models` set
-              # to `null`. Always equal to `group.type`.
-              group_type:,
               # The workspace's limiter values for this group. By default only the limiter types
               # with a workspace-level override are listed. With `include_inherited` set to
               # `true`, the limiter types the workspace inherits from the organization are
               # listed too, each marked by `source`.
               limits:,
               # Model names this entry's limits apply to, including aliases. `null` when
-              # `group_type` is not `"model_group"`.
+              # `group.type` is not `"model_group"`.
               models:,
               # The `id` of the organization's RateLimit entry this entry applies to.
               rate_limit_id:,
@@ -118,8 +98,6 @@ module Anthropic
                 {
                   group:
                     Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::Group::Variants,
-                  group_type:
-                    Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::GroupType::TaggedSymbol,
                   limits:
                     T::Array[
                       Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimitValue
@@ -134,8 +112,7 @@ module Anthropic
             def to_hash
             end
 
-            # The rate-limit group this entry's limits apply to. Its `type` equals
-            # `group_type`.
+            # The rate-limit group this entry's limits apply to.
             module Group
               extend Anthropic::Internal::Type::Union
 
@@ -237,64 +214,6 @@ module Anthropic
                 # display only; it may change.
                 display_name: nil
               )
-              end
-            end
-
-            # Deprecated: use `group.type` instead. The kind of rate-limit group this entry
-            # represents. `model_group` entries apply to a family of models (listed in
-            # `models`); other values apply to an API-surface category and have `models` set
-            # to `null`. Always equal to `group.type`.
-            module GroupType
-              extend Anthropic::Internal::Type::Enum
-
-              TaggedSymbol =
-                T.type_alias do
-                  T.all(
-                    Symbol,
-                    Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::GroupType
-                  )
-                end
-              OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-              BATCH =
-                T.let(
-                  :batch,
-                  Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::GroupType::TaggedSymbol
-                )
-              FILES =
-                T.let(
-                  :files,
-                  Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::GroupType::TaggedSymbol
-                )
-              MODEL_GROUP =
-                T.let(
-                  :model_group,
-                  Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::GroupType::TaggedSymbol
-                )
-              SKILLS =
-                T.let(
-                  :skills,
-                  Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::GroupType::TaggedSymbol
-                )
-              TOKEN_COUNT =
-                T.let(
-                  :token_count,
-                  Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::GroupType::TaggedSymbol
-                )
-              WEB_SEARCH =
-                T.let(
-                  :web_search,
-                  Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::GroupType::TaggedSymbol
-                )
-
-              sig do
-                override.returns(
-                  T::Array[
-                    Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::GroupType::TaggedSymbol
-                  ]
-                )
-              end
-              def self.values
               end
             end
           end

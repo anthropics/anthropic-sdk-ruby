@@ -42,7 +42,7 @@ module Anthropic
         attr_accessor :trust_grants
 
         # Object type. Always `user_profile`.
-        sig { returns(Anthropic::Beta::BetaUserProfile::Type::TaggedSymbol) }
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # When this user profile was last modified, in RFC 3339 format. It normally also
@@ -124,13 +124,13 @@ module Anthropic
                 Symbol,
                 Anthropic::Beta::BetaUserProfileTrustGrant::OrHash
               ],
-            type: Anthropic::Beta::BetaUserProfile::Type::OrSymbol,
             updated_at: Time,
             access_type: Anthropic::Beta::BetaUserProfile::AccessType::OrSymbol,
             external_id: T.nilable(String),
             external_user_details:
               Anthropic::Beta::BetaUserProfileExternalUserDetails::OrHash,
-            external_user_onboarded_at: T.nilable(Time)
+            external_user_onboarded_at: T.nilable(Time),
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
@@ -149,8 +149,6 @@ module Anthropic
           # Trust grants for this profile, keyed by grant name. Key omitted when no grant is
           # active or in flight.
           trust_grants:,
-          # Object type. Always `user_profile`.
-          type:,
           # When this user profile was last modified, in RFC 3339 format. It normally also
           # updates shortly after Anthropic gives the profile an approval or withdraws one.
           # Other changes to the statuses that Anthropic reports do not always update it, so
@@ -176,7 +174,9 @@ module Anthropic
           # supplies one. Legacy field, present only under the `user-profiles-2026-08-18`
           # beta header; without a legacy header, the value is
           # `external_user_details.onboarded_at`.
-          external_user_onboarded_at: nil
+          external_user_onboarded_at: nil,
+          # Object type. Always `user_profile`.
+          type: :user_profile
         )
         end
 
@@ -189,7 +189,7 @@ module Anthropic
               name: T.nilable(String),
               trust_grants:
                 T::Hash[Symbol, Anthropic::Beta::BetaUserProfileTrustGrant],
-              type: Anthropic::Beta::BetaUserProfile::Type::TaggedSymbol,
+              type: Symbol,
               updated_at: Time,
               access_type:
                 Anthropic::Beta::BetaUserProfile::AccessType::TaggedSymbol,
@@ -201,31 +201,6 @@ module Anthropic
           )
         end
         def to_hash
-        end
-
-        # Object type. Always `user_profile`.
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(Symbol, Anthropic::Beta::BetaUserProfile::Type)
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          USER_PROFILE =
-            T.let(
-              :user_profile,
-              Anthropic::Beta::BetaUserProfile::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[Anthropic::Beta::BetaUserProfile::Type::TaggedSymbol]
-            )
-          end
-          def self.values
-          end
         end
 
         # How the platform uses the API for this entity: `application` (default) or

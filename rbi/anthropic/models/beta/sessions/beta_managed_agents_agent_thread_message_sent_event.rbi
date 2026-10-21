@@ -35,11 +35,7 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :to_session_thread_id
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # Name of the callable agent this message was sent to. Absent when sent to the
@@ -63,9 +59,8 @@ module Anthropic
                 ],
               processed_at: Time,
               to_session_thread_id: String,
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent::Type::OrSymbol,
-              to_agent_name: T.nilable(String)
+              to_agent_name: T.nilable(String),
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
@@ -77,10 +72,10 @@ module Anthropic
             processed_at:,
             # Public `sthr_` ID of the thread the message was sent to.
             to_session_thread_id:,
-            type:,
             # Name of the callable agent this message was sent to. Absent when sent to the
             # primary agent.
-            to_agent_name: nil
+            to_agent_name: nil,
+            type: :"agent.thread_message_sent"
           )
           end
 
@@ -94,8 +89,7 @@ module Anthropic
                   ],
                 processed_at: Time,
                 to_session_thread_id: String,
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent::Type::TaggedSymbol,
+                type: Symbol,
                 to_agent_name: T.nilable(String)
               }
             )
@@ -209,35 +203,6 @@ module Anthropic
               # The title of the document.
               title: nil
             )
-            end
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            AGENT_THREAD_MESSAGE_SENT =
-              T.let(
-                :"agent.thread_message_sent",
-                Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
             end
           end
         end

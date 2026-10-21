@@ -14,25 +14,15 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsDeletedCredential::Type]
-          required :type, enum: -> { Anthropic::Beta::Vaults::BetaManagedAgentsDeletedCredential::Type }
+          #   @return [Symbol, :vault_credential_deleted]
+          required :type, const: :vault_credential_deleted
 
-          # @!method initialize(id:, type:)
+          # @!method initialize(id:, type: :vault_credential_deleted)
           #   Confirmation of a deleted credential.
           #
           #   @param id [String] The unique ID of the deleted credential (`vcrd_...`).
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsDeletedCredential::Type]
-
-          # @see Anthropic::Models::Beta::Vaults::BetaManagedAgentsDeletedCredential#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            VAULT_CREDENTIAL_DELETED = :vault_credential_deleted
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :vault_credential_deleted]
         end
       end
     end

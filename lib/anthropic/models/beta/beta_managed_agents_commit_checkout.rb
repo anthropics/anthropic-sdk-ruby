@@ -12,23 +12,13 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsCommitCheckout::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsCommitCheckout::Type }
+        #   @return [Symbol, :commit]
+        required :type, const: :commit
 
-        # @!method initialize(sha:, type:)
+        # @!method initialize(sha:, type: :commit)
         #   @param sha [String] Full commit SHA to check out.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsCommitCheckout::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsCommitCheckout#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          COMMIT = :commit
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :commit]
       end
     end
 

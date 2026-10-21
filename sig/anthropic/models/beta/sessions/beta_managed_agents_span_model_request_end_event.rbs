@@ -9,7 +9,7 @@ module Anthropic
             model_request_start_id: String,
             model_usage: Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelUsage,
             processed_at: Time,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelRequestEndEvent::type_
+            type: :"span.model_request_end"
           }
 
         class BetaManagedAgentsSpanModelRequestEndEvent < Anthropic::Internal::Type::BaseModel
@@ -23,7 +23,7 @@ module Anthropic
 
           attr_accessor processed_at: Time
 
-          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelRequestEndEvent::type_
+          attr_accessor type: :"span.model_request_end"
 
           def initialize: (
             id: String,
@@ -31,7 +31,7 @@ module Anthropic
             model_request_start_id: String,
             model_usage: Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelUsage,
             processed_at: Time,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelRequestEndEvent::type_
+            ?type: :"span.model_request_end"
           ) -> void
 
           def to_hash: -> {
@@ -40,18 +40,8 @@ module Anthropic
             model_request_start_id: String,
             model_usage: Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelUsage,
             processed_at: Time,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelRequestEndEvent::type_
+            type: :"span.model_request_end"
           }
-
-          type type_ = :"span.model_request_end"
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            SPAN_MODEL_REQUEST_END: :"span.model_request_end"
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelRequestEndEvent::type_]
-          end
         end
       end
     end

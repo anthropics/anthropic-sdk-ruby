@@ -13,11 +13,7 @@ module Anthropic
               )
             end
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsURLDocumentSource::Type::OrSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # URL of the document to fetch.
@@ -25,59 +21,16 @@ module Anthropic
           attr_accessor :url
 
           # Document referenced by URL.
-          sig do
-            params(
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsURLDocumentSource::Type::OrSymbol,
-              url: String
-            ).returns(T.attached_class)
-          end
+          sig { params(url: String, type: Symbol).returns(T.attached_class) }
           def self.new(
-            type:,
             # URL of the document to fetch.
-            url:
+            url:,
+            type: :url
           )
           end
 
-          sig do
-            override.returns(
-              {
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsURLDocumentSource::Type::OrSymbol,
-                url: String
-              }
-            )
-          end
+          sig { override.returns({ type: Symbol, url: String }) }
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsURLDocumentSource::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            URL =
-              T.let(
-                :url,
-                Anthropic::Beta::Sessions::BetaManagedAgentsURLDocumentSource::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsURLDocumentSource::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

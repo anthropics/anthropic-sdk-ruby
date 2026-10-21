@@ -20,9 +20,8 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::Type]
-          required :type,
-                   enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::Type }
+          #   @return [Symbol, :"user.define_outcome"]
+          required :type, const: :"user.define_outcome"
 
           # @!attribute max_iterations
           #   Eval→revision cycles before giving up. Default 3, max 20.
@@ -30,7 +29,7 @@ module Anthropic
           #   @return [Integer, nil]
           optional :max_iterations, Integer, nil?: true
 
-          # @!method initialize(description:, rubric:, type:, max_iterations: nil)
+          # @!method initialize(description:, rubric:, max_iterations: nil, type: :"user.define_outcome")
           #   Parameters for defining an outcome the agent should work toward. The agent
           #   begins work on receipt.
           #
@@ -38,9 +37,9 @@ module Anthropic
           #
           #   @param rubric [Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubricParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubricParams] How to grade the outcome. Text or file reference.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::Type]
-          #
           #   @param max_iterations [Integer, nil] Eval→revision cycles before giving up. Default 3, max 20.
+          #
+          #   @param type [Symbol, :"user.define_outcome"]
 
           # How to grade the outcome. Text or file reference.
           #
@@ -89,23 +88,13 @@ module Anthropic
             def self.new(type:, **args)
               case type.to_sym
               when :file
-                Anthropic::Beta::Sessions::BetaManagedAgentsFileRubricParams.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsFileRubricParams.new(**args)
               when :text
-                Anthropic::Beta::Sessions::BetaManagedAgentsTextRubricParams.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsTextRubricParams.new(**args)
               else
                 raise ArgumentError, "unknown type: #{type}"
               end
             end
-          end
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            USER_DEFINE_OUTCOME = :"user.define_outcome"
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
           end
         end
       end

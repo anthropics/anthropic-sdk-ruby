@@ -14,10 +14,10 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor::Type]
-          required :type, enum: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsSessionActor::Type }
+          #   @return [Symbol, :session_actor]
+          required :type, const: :session_actor
 
-          # @!method initialize(session_id:, type:)
+          # @!method initialize(session_id:, type: :session_actor)
           #   An agent acting during a session, for example through the session's mounted
           #   filesystem. It names the session itself, not the user or API key that started
           #   the session.
@@ -28,17 +28,7 @@ module Anthropic
           #
           #   @param session_id [String] ID of the session (a `sesn_...` value). Look up the session via [Retrieve a sess
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor::Type]
-
-          # @see Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            SESSION_ACTOR = :session_actor
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :session_actor]
         end
       end
     end

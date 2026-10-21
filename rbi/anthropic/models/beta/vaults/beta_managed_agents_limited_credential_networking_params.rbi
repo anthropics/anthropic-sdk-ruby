@@ -22,20 +22,14 @@ module Anthropic
           sig { returns(T::Array[String]) }
           attr_accessor :allowed_hosts
 
-          sig do
-            returns(
-              Anthropic::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingParams::Type::OrSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # Substitute the secret only on requests to the listed hosts.
           sig do
-            params(
-              allowed_hosts: T::Array[String],
-              type:
-                Anthropic::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingParams::Type::OrSymbol
-            ).returns(T.attached_class)
+            params(allowed_hosts: T::Array[String], type: Symbol).returns(
+              T.attached_class
+            )
           end
           def self.new(
             # The destination hosts of the outbound requests that the credential's secret is
@@ -45,49 +39,14 @@ module Anthropic
             # (`192.0.2.1`), or a `*.` wildcard (`*.example.com`). URLs, ports, paths, and
             # IPv6 addresses aren't accepted. The list can have up to 16 entries.
             allowed_hosts:,
-            type:
+            type: :limited
           )
           end
 
           sig do
-            override.returns(
-              {
-                allowed_hosts: T::Array[String],
-                type:
-                  Anthropic::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingParams::Type::OrSymbol
-              }
-            )
+            override.returns({ allowed_hosts: T::Array[String], type: Symbol })
           end
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingParams::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            LIMITED =
-              T.let(
-                :limited,
-                Anthropic::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingParams::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingParams::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

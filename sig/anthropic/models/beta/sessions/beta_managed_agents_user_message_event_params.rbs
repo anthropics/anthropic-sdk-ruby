@@ -5,22 +5,22 @@ module Anthropic
         type beta_managed_agents_user_message_event_params =
           {
             content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams::content],
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams::type_
+            type: :"user.message"
           }
 
         class BetaManagedAgentsUserMessageEventParams < Anthropic::Internal::Type::BaseModel
           attr_accessor content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams::content]
 
-          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams::type_
+          attr_accessor type: :"user.message"
 
           def initialize: (
             content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams::content],
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams::type_
+            ?type: :"user.message"
           ) -> void
 
           def to_hash: -> {
             content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams::content],
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams::type_
+            type: :"user.message"
           }
 
           type content =
@@ -74,16 +74,6 @@ module Anthropic
                 ?context: String?,
                 ?title: String?
               ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams::content
-          end
-
-          type type_ = :"user.message"
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            USER_MESSAGE: :"user.message"
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams::type_]
           end
         end
       end

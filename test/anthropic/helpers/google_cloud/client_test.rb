@@ -690,7 +690,7 @@ class Anthropic::Test::GoogleCloudClientTest < Minitest::Test
     client.messages.create(max_tokens: 1, messages: [{content: "hi", role: :user}], model: :m)
 
     assert_requested(:post, "#{derived_base_url}/v1/messages") do |req|
-      assert_equal("2023-06-01", req.headers["Anthropic-Version"])
+      assert_match(/\A\d{4}-\d{2}-\d{2}\z/, req.headers["Anthropic-Version"])
     end
   end
 
@@ -741,11 +741,6 @@ class Anthropic::Test::GoogleCloudClientTest < Minitest::Test
 
   def test_skills_resource_available
     assert_kind_of(Anthropic::Resources::Skills, make_client.skills)
-  end
-
-  def test_completions_raises
-    err = assert_raises(NotImplementedError) { make_client.completions }
-    assert_match(/Completions/, err.message)
   end
 
   def test_user_profiles_raises

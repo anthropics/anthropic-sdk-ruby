@@ -35,10 +35,12 @@ module Anthropic
 
           # List the organization's spend limits.
           #
-          # Limits are grouped by scope type, in the order `organization`, `seat_tier`,
+          # A Claude Console organization's limits, including any read-only `usage_tier`
+          # limit, come newest first. Listing them is in an early access preview. To request
+          # access, contact your Anthropic account team. A Claude Enterprise organization's
+          # limits are grouped by scope type, in the order `organization`, `seat_tier`,
           # `rbac_group`, `organization_service`, `user`; within a type they come in a fixed
-          # order that is not creation order. Supported for Claude Enterprise organizations
-          # only, not for Claude Console organizations.
+          # order that is not creation order.
           sig do
             params(
               limit: Integer,
@@ -49,6 +51,7 @@ module Anthropic
                     Anthropic::Beta::Organization::SpendLimitListParams::ScopeType::OrSymbol
                   ]
                 ),
+              workspace_id: T.nilable(String),
               betas:
                 T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               request_options: Anthropic::RequestOptions::OrHash
@@ -63,8 +66,13 @@ module Anthropic
             limit: nil,
             # Query param: Opaque cursor from a previous response's `next_page` field.
             page: nil,
-            # Query param: Return only limits with these scope types. Omit for all.
+            # Query param: Return only limits with these scope types. Omit for all. A scope
+            # type that doesn't apply to the organization gets a 400 error.
             scope_type: nil,
+            # Query param: Return only the limits whose `scope.workspace_id` is this workspace
+            # (`wrkspc_...`). Claude Console organizations only; other organizations get a 400
+            # error.
+            workspace_id: nil,
             # Header param: This endpoint is in beta: requests must send
             # `spend-limit-reads-2026-09-26` in this header.
             betas: nil,

@@ -15,10 +15,10 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryPrefix::Type]
-          required :type, enum: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryPrefix::Type }
+          #   @return [Symbol, :memory_prefix]
+          required :type, const: :memory_prefix
 
-          # @!method initialize(path:, type:)
+          # @!method initialize(path:, type: :memory_prefix)
           #   A directory marker that
           #   [List Memories](https://platform.claude.com/docs/en/api/beta/memory_stores/memories/list)
           #   returns instead of the memories below the requested `depth`.
@@ -33,17 +33,7 @@ module Anthropic
           #
           #   @param path [String] The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pas
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryPrefix::Type]
-
-          # @see Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryPrefix#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            MEMORY_PREFIX = :memory_prefix
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :memory_prefix]
         end
       end
     end

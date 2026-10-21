@@ -44,8 +44,8 @@ module Anthropic
         # @!attribute type
         #   Object type. Always `user_profile`.
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaUserProfile::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaUserProfile::Type }
+        #   @return [Symbol, :user_profile]
+        required :type, const: :user_profile
 
         # @!attribute updated_at
         #   When this user profile was last modified, in RFC 3339 format. It normally also
@@ -93,7 +93,7 @@ module Anthropic
         #   @return [Time, nil]
         optional :external_user_onboarded_at, Time, nil?: true
 
-        # @!method initialize(id:, created_at:, metadata:, name:, trust_grants:, type:, updated_at:, access_type: nil, external_id: nil, external_user_details: nil, external_user_onboarded_at: nil)
+        # @!method initialize(id:, created_at:, metadata:, name:, trust_grants:, updated_at:, access_type: nil, external_id: nil, external_user_details: nil, external_user_onboarded_at: nil, type: :user_profile)
         #   A record of an entity that the platform serves through the API, such as an
         #   end-user of the platform's product or a company that the platform resells Claude
         #   access to.
@@ -115,8 +115,6 @@ module Anthropic
         #
         #   @param trust_grants [Hash{Symbol=>Anthropic::Models::Beta::BetaUserProfileTrustGrant}] Trust grants for this profile, keyed by grant name. Key omitted when no grant is
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaUserProfile::Type] Object type. Always `user_profile`.
-        #
         #   @param updated_at [Time] When this user profile was last modified, in RFC 3339 format. It normally also u
         #
         #   @param access_type [Symbol, Anthropic::Models::Beta::BetaUserProfile::AccessType] How the platform uses the API for this entity: `application` (default) or `passt
@@ -126,18 +124,8 @@ module Anthropic
         #   @param external_user_details [Anthropic::Models::Beta::BetaUserProfileExternalUserDetails] Details about the entity this profile represents, as the platform states them; n
         #
         #   @param external_user_onboarded_at [Time, nil] When the entity this profile represents opened its account with the platform, as
-
-        # Object type. Always `user_profile`.
         #
-        # @see Anthropic::Models::Beta::BetaUserProfile#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          USER_PROFILE = :user_profile
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :user_profile] Object type. Always `user_profile`.
 
         # How the platform uses the API for this entity: `application` (default) or
         # `passthrough`. Absent under the legacy `user-profiles-2026-03-24` beta header.

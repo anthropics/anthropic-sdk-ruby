@@ -98,9 +98,7 @@ module Anthropic
         sig { returns(T.nilable(String)) }
         attr_accessor :title
 
-        sig do
-          returns(Anthropic::Beta::BetaManagedAgentsSession::Type::TaggedSymbol)
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # A timestamp in RFC 3339 format
@@ -154,11 +152,11 @@ module Anthropic
             stats: Anthropic::Beta::BetaManagedAgentsSessionStats::OrHash,
             status: Anthropic::Beta::BetaManagedAgentsSession::Status::OrSymbol,
             title: T.nilable(String),
-            type: Anthropic::Beta::BetaManagedAgentsSession::Type::OrSymbol,
             updated_at: Time,
             usage: Anthropic::Beta::BetaManagedAgentsSessionUsage::OrHash,
             vault_ids: T::Array[String],
-            deployment_id: T.nilable(String)
+            deployment_id: T.nilable(String),
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
@@ -182,7 +180,6 @@ module Anthropic
           stats:,
           status:,
           title:,
-          type:,
           # A timestamp in RFC 3339 format
           updated_at:,
           # Cumulative token usage for the session.
@@ -192,7 +189,8 @@ module Anthropic
           vault_ids:,
           # Deployment ID when the session was created from a deployment reference. Null
           # otherwise.
-          deployment_id: nil
+          deployment_id: nil,
+          type: :session
         )
         end
 
@@ -218,8 +216,7 @@ module Anthropic
               status:
                 Anthropic::Beta::BetaManagedAgentsSession::Status::TaggedSymbol,
               title: T.nilable(String),
-              type:
-                Anthropic::Beta::BetaManagedAgentsSession::Type::TaggedSymbol,
+              type: Symbol,
               updated_at: Time,
               usage: Anthropic::Beta::BetaManagedAgentsSessionUsage,
               vault_ids: T::Array[String],
@@ -271,32 +268,6 @@ module Anthropic
             override.returns(
               T::Array[
                 Anthropic::Beta::BetaManagedAgentsSession::Status::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(Symbol, Anthropic::Beta::BetaManagedAgentsSession::Type)
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          SESSION =
-            T.let(
-              :session,
-              Anthropic::Beta::BetaManagedAgentsSession::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsSession::Type::TaggedSymbol
               ]
             )
           end

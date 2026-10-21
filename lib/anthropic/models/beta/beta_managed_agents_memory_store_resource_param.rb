@@ -13,8 +13,8 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsMemoryStoreResourceParam::Type }
+        #   @return [Symbol, :memory_store]
+        required :type, const: :memory_store
 
         # @!attribute access
         #   Access mode for the mounted store. Defaults to read_write. read_only mounts the
@@ -32,7 +32,7 @@ module Anthropic
         #   @return [String, nil]
         optional :instructions, String, nil?: true
 
-        # @!method initialize(memory_store_id:, type:, access: nil, instructions: nil)
+        # @!method initialize(memory_store_id:, access: nil, instructions: nil, type: :memory_store)
         #   Parameters for attaching a memory store to an agent session.
         #
         #   Some parameter documentations has been truncated, see
@@ -42,21 +42,11 @@ module Anthropic
         #   @param memory_store_id [String] The memory store ID (memstore\_...). Must belong to the caller's organization
         #   and
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam::Type]
-        #
         #   @param access [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam::Access, nil] Access mode for the mounted store. Defaults to read_write. read_only mounts the
         #
         #   @param instructions [String, nil] Per-attachment guidance for the agent on how to use this store. Rendered into th
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          MEMORY_STORE = :memory_store
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #
+        #   @param type [Symbol, :memory_store]
 
         # Access mode for the mounted store. Defaults to read_write. read_only mounts the
         # store as a read-only filesystem.

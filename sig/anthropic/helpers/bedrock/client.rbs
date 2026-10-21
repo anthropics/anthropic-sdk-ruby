@@ -2,11 +2,7 @@ module Anthropic
   module Helpers
     module Bedrock
       class Client < Anthropic::Client
-        DEFAULT_VERSION: String
-
         attr_reader aws_region: String
-
-        attr_reader completions: Anthropic::Resources::Completions
 
         attr_reader messages: Anthropic::Resources::Messages
 

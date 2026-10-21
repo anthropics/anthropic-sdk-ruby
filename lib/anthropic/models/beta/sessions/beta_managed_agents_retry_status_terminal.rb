@@ -7,24 +7,14 @@ module Anthropic
         class BetaManagedAgentsRetryStatusTerminal < Anthropic::Internal::Type::BaseModel
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal::Type }
+          #   @return [Symbol, :terminal]
+          required :type, const: :terminal
 
-          # @!method initialize(type:)
+          # @!method initialize(type: :terminal)
           #   The session encountered a terminal error and will transition to `terminated`
           #   state.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal::Type]
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TERMINAL = :terminal
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :terminal]
         end
       end
     end

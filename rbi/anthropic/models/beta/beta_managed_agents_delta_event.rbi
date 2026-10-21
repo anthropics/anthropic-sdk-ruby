@@ -32,11 +32,7 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :event_id
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsDeltaEvent::Type::TaggedSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # An incremental update to an event that is still being streamed. Deltas are
@@ -49,7 +45,7 @@ module Anthropic
           params(
             delta: Anthropic::Beta::BetaManagedAgentsDeltaContent::OrHash,
             event_id: String,
-            type: Anthropic::Beta::BetaManagedAgentsDeltaEvent::Type::OrSymbol
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
@@ -60,7 +56,7 @@ module Anthropic
           # The id of the event being previewed. Matches event.id on the corresponding
           # event_start and the buffered event that reconciles the preview.
           event_id:,
-          type:
+          type: :event_delta
         )
         end
 
@@ -69,38 +65,11 @@ module Anthropic
             {
               delta: Anthropic::Beta::BetaManagedAgentsDeltaContent,
               event_id: String,
-              type:
-                Anthropic::Beta::BetaManagedAgentsDeltaEvent::Type::TaggedSymbol
+              type: Symbol
             }
           )
         end
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(Symbol, Anthropic::Beta::BetaManagedAgentsDeltaEvent::Type)
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          EVENT_DELTA =
-            T.let(
-              :event_delta,
-              Anthropic::Beta::BetaManagedAgentsDeltaEvent::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsDeltaEvent::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end
