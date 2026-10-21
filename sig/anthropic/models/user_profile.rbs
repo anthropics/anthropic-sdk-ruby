@@ -5,6 +5,8 @@ module Anthropic
         id: String,
         access_type: Anthropic::Models::user_profile_access_type,
         created_at: Time,
+        enforcement_actions: ::Array[Anthropic::Models::user_profile_enforcement_action],
+        enforcement_status: Anthropic::Models::user_profile_enforcement_status,
         external_user_details: Anthropic::UserProfileExternalUserDetails,
         metadata: ::Hash[Symbol, String],
         name: String?,
@@ -19,6 +21,10 @@ module Anthropic
       attr_accessor access_type: Anthropic::Models::user_profile_access_type
 
       attr_accessor created_at: Time
+
+      attr_accessor enforcement_actions: ::Array[Anthropic::Models::user_profile_enforcement_action]
+
+      attr_accessor enforcement_status: Anthropic::Models::user_profile_enforcement_status
 
       attr_accessor external_user_details: Anthropic::UserProfileExternalUserDetails
 
@@ -36,6 +42,8 @@ module Anthropic
         id: String,
         access_type: Anthropic::Models::user_profile_access_type,
         created_at: Time,
+        enforcement_actions: ::Array[Anthropic::Models::user_profile_enforcement_action],
+        enforcement_status: Anthropic::Models::user_profile_enforcement_status,
         external_user_details: Anthropic::UserProfileExternalUserDetails,
         metadata: ::Hash[Symbol, String],
         name: String?,
@@ -48,6 +56,8 @@ module Anthropic
         id: String,
         access_type: Anthropic::Models::user_profile_access_type,
         created_at: Time,
+        enforcement_actions: ::Array[Anthropic::Models::user_profile_enforcement_action],
+        enforcement_status: Anthropic::Models::user_profile_enforcement_status,
         external_user_details: Anthropic::UserProfileExternalUserDetails,
         metadata: ::Hash[Symbol, String],
         name: String?,

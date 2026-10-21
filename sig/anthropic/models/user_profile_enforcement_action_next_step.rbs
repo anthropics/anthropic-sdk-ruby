@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    type user_profile_enforcement_action_next_step = :verify
+
+    module UserProfileEnforcementActionNextStep
+      extend Anthropic::Internal::Type::Enum
+
+      VERIFY: :verify
+
+      def self?.values: -> ::Array[Anthropic::Models::user_profile_enforcement_action_next_step]
+    end
+  end
+end

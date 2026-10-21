@@ -789,6 +789,18 @@ module Anthropic
 
   class UserProfileEfsProgram = Anthropic::Models::UserProfileEfsProgram
 
+  module UserProfileEnforcementAction = Anthropic::Models::UserProfileEnforcementAction
+
+  class UserProfileEnforcementActionBan = Anthropic::Models::UserProfileEnforcementActionBan
+
+  module UserProfileEnforcementActionNextStep = Anthropic::Models::UserProfileEnforcementActionNextStep
+
+  module UserProfileEnforcementActionReason = Anthropic::Models::UserProfileEnforcementActionReason
+
+  class UserProfileEnforcementActionRestriction = Anthropic::Models::UserProfileEnforcementActionRestriction
+
+  module UserProfileEnforcementStatus = Anthropic::Models::UserProfileEnforcementStatus
+
   module UserProfileExternalUserAccountStatus = Anthropic::Models::UserProfileExternalUserAccountStatus
 
   class UserProfileExternalUserDetails = Anthropic::Models::UserProfileExternalUserDetails

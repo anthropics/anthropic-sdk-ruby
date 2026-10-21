@@ -21,6 +21,24 @@ module Anthropic
       sig { returns(Time) }
       attr_accessor :created_at
 
+      # The enforcement actions open on this profile; empty when none is open. Absent
+      # under the `user-profiles-2026-09-04` and earlier beta headers.
+      sig do
+        returns(T::Array[Anthropic::UserProfileEnforcementAction::Variants])
+      end
+      attr_accessor :enforcement_actions
+
+      # Anthropic's enforcement status of this profile, from its open enforcement
+      # actions and any identity check under review, by the first rule that applies:
+      # `banned` while any open action is a `ban`; `pending` while a restriction that an
+      # identity check can clear is open, the end user has submitted that check,
+      # Anthropic's review of it has not ended, and no open action's `reason` is
+      # `account_compromise`; `restricted` while any action is open; `unrestricted`
+      # while none is. Absent under the `user-profiles-2026-09-04` and earlier beta
+      # headers.
+      sig { returns(Anthropic::UserProfileEnforcementStatus::TaggedSymbol) }
+      attr_accessor :enforcement_status
+
       # Details about the entity this profile represents, as the platform states them;
       # not verified by Anthropic. Every field is present, `null` until the platform
       # supplies a value. Absent under the legacy `user-profiles-2026-03-24` and
@@ -83,6 +101,14 @@ module Anthropic
           id: String,
           access_type: Anthropic::UserProfileAccessType::OrSymbol,
           created_at: Time,
+          enforcement_actions:
+            T::Array[
+              T.any(
+                Anthropic::UserProfileEnforcementActionRestriction::OrHash,
+                Anthropic::UserProfileEnforcementActionBan::OrHash
+              )
+            ],
+          enforcement_status: Anthropic::UserProfileEnforcementStatus::OrSymbol,
           external_user_details:
             Anthropic::UserProfileExternalUserDetails::OrHash,
           metadata: T::Hash[Symbol, String],
@@ -100,6 +126,18 @@ module Anthropic
         access_type:,
         # When this user profile was created, in RFC 3339 format.
         created_at:,
+        # The enforcement actions open on this profile; empty when none is open. Absent
+        # under the `user-profiles-2026-09-04` and earlier beta headers.
+        enforcement_actions:,
+        # Anthropic's enforcement status of this profile, from its open enforcement
+        # actions and any identity check under review, by the first rule that applies:
+        # `banned` while any open action is a `ban`; `pending` while a restriction that an
+        # identity check can clear is open, the end user has submitted that check,
+        # Anthropic's review of it has not ended, and no open action's `reason` is
+        # `account_compromise`; `restricted` while any action is open; `unrestricted`
+        # while none is. Absent under the `user-profiles-2026-09-04` and earlier beta
+        # headers.
+        enforcement_status:,
         # Details about the entity this profile represents, as the platform states them;
         # not verified by Anthropic. Every field is present, `null` until the platform
         # supplies a value. Absent under the legacy `user-profiles-2026-03-24` and
@@ -136,6 +174,10 @@ module Anthropic
             id: String,
             access_type: Anthropic::UserProfileAccessType::TaggedSymbol,
             created_at: Time,
+            enforcement_actions:
+              T::Array[Anthropic::UserProfileEnforcementAction::Variants],
+            enforcement_status:
+              Anthropic::UserProfileEnforcementStatus::TaggedSymbol,
             external_user_details: Anthropic::UserProfileExternalUserDetails,
             metadata: T::Hash[Symbol, String],
             name: T.nilable(String),

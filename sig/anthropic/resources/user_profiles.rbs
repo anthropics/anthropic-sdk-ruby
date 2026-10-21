@@ -29,6 +29,7 @@ module Anthropic
       ) -> Anthropic::UserProfile
 
       def list: (
+        ?enforcement_status: ::Array[Anthropic::Models::user_profile_enforcement_status],
         ?limit: Integer,
         ?order: Anthropic::Models::user_profile_list_order,
         ?order_by: Anthropic::Models::user_profile_list_order_by,

@@ -119,7 +119,9 @@ module Anthropic
       # Some parameter documentations has been truncated, see
       # {Anthropic::Models::UserProfileListParams} for more details.
       #
-      # @overload list(limit: nil, order: nil, order_by: nil, page: nil, workspace_id: nil, request_options: {})
+      # @overload list(enforcement_status: nil, limit: nil, order: nil, order_by: nil, page: nil, workspace_id: nil, request_options: {})
+      #
+      # @param enforcement_status [Array<Symbol, Anthropic::Models::UserProfileEnforcementStatus>] Query param: Return only the user profiles whose `enforcement_status` is one of
       #
       # @param limit [Integer] Query param: The maximum number of user profiles to return, from 1 to 100. Defau
       #
@@ -137,13 +139,13 @@ module Anthropic
       #
       # @see Anthropic::Models::UserProfileListParams
       def list(params = {})
-        query_params = [:limit, :order, :order_by, :page]
+        query_params = [:enforcement_status, :limit, :order, :order_by, :page]
         parsed, options = Anthropic::UserProfileListParams.dump_request(params)
         query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
         @client.request(
           span_name: Anthropic::Internal::Tracing::SpanName::USER_PROFILES_LIST,
           span_route: "/v1/user_profiles",
-          span_query: %w[limit order order_by page],
+          span_query: %w[enforcement_status limit order order_by page],
           method: :get,
           path: "v1/user_profiles",
           query: query,

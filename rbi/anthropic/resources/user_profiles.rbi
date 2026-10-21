@@ -119,6 +119,8 @@ module Anthropic
       # List User Profiles
       sig do
         params(
+          enforcement_status:
+            T::Array[Anthropic::UserProfileEnforcementStatus::OrSymbol],
           limit: Integer,
           order: Anthropic::UserProfileListOrder::OrSymbol,
           order_by: Anthropic::UserProfileListOrderBy::OrSymbol,
@@ -128,6 +130,16 @@ module Anthropic
         ).returns(Anthropic::Internal::PageCursor[Anthropic::UserProfile])
       end
       def list(
+        # Query param: Return only the user profiles whose `enforcement_status` is one of
+        # these values: `unrestricted`, `pending`, `restricted` or `banned`. Repeat the
+        # parameter to match any of several. With it set, a page may hold fewer than
+        # `limit` profiles, or none, and still carry a `next_page`: the service examines a
+        # bounded number of profiles per request, and only a null `next_page` means the
+        # listing is complete. Rejected with `invalid_request_error` under the
+        # `user-profiles-2026-09-04` and earlier beta headers. Fails with
+        # `overloaded_error` when a profile's enforcement actions cannot be read for the
+        # moment.
+        enforcement_status: nil,
         # Query param: The maximum number of user profiles to return, from 1 to 100.
         # Defaults to 20.
         limit: nil,
