@@ -22,7 +22,8 @@ module Anthropic
           optional :page, String, nil?: true
 
           # @!attribute scope_type
-          #   Return only limits with these scope types. Omit for all.
+          #   Return only limits with these scope types. Omit for all. A scope type that
+          #   doesn't apply to the organization gets a 400 error.
           #
           #   @return [Array<Symbol, Anthropic::Models::Beta::Organization::SpendLimitListParams::ScopeType>, nil]
           optional :scope_type,
@@ -31,6 +32,14 @@ module Anthropic
                    },
                    nil?: true
 
+          # @!attribute workspace_id
+          #   Return only the limits whose `scope.workspace_id` is this workspace
+          #   (`wrkspc_...`). Claude Console organizations only; other organizations get a 400
+          #   error.
+          #
+          #   @return [String, nil]
+          optional :workspace_id, String, nil?: true
+
           # @!attribute betas
           #   This endpoint is in beta: requests must send `spend-limit-reads-2026-09-26` in
           #   this header.
@@ -38,7 +47,7 @@ module Anthropic
           #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
           optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-          # @!method initialize(limit: nil, page: nil, scope_type: nil, betas: nil, request_options: {})
+          # @!method initialize(limit: nil, page: nil, scope_type: nil, workspace_id: nil, betas: nil, request_options: {})
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Organization::SpendLimitListParams} for more details.
           #
@@ -46,7 +55,10 @@ module Anthropic
           #
           #   @param page [String, nil] Opaque cursor from a previous response's `next_page` field.
           #
-          #   @param scope_type [Array<Symbol, Anthropic::Models::Beta::Organization::SpendLimitListParams::ScopeType>, nil] Return only limits with these scope types. Omit for all.
+          #   @param scope_type [Array<Symbol, Anthropic::Models::Beta::Organization::SpendLimitListParams::ScopeType>, nil] Return only limits with these scope types. Omit for all. A scope type that doesn
+          #
+          #   @param workspace_id [String, nil] Return only the limits whose `scope.workspace_id` is this workspace
+          #   (`wrkspc\_...
           #
           #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `spend-limit-reads-2026-09-26` in t
           #
@@ -59,6 +71,7 @@ module Anthropic
             ORGANIZATION_SERVICE = :organization_service
             RBAC_GROUP = :rbac_group
             SEAT_TIER = :seat_tier
+            USAGE_TIER = :usage_tier
             USER = :user
             WORKSPACE = :workspace
 

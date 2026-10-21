@@ -7,6 +7,7 @@ module Anthropic
             limit: Integer,
             page: String?,
             scope_type: ::Array[Anthropic::Models::Beta::Organization::SpendLimitListParams::scope_type]?,
+            workspace_id: String?,
             betas: ::Array[Anthropic::Models::anthropic_beta]
           }
           & Anthropic::Internal::Type::request_parameters
@@ -23,6 +24,8 @@ module Anthropic
 
           attr_accessor scope_type: ::Array[Anthropic::Models::Beta::Organization::SpendLimitListParams::scope_type]?
 
+          attr_accessor workspace_id: String?
+
           attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
 
           def betas=: (
@@ -33,6 +36,7 @@ module Anthropic
             ?limit: Integer,
             ?page: String?,
             ?scope_type: ::Array[Anthropic::Models::Beta::Organization::SpendLimitListParams::scope_type]?,
+            ?workspace_id: String?,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?request_options: Anthropic::request_opts
           ) -> void
@@ -41,6 +45,7 @@ module Anthropic
             limit: Integer,
             page: String?,
             scope_type: ::Array[Anthropic::Models::Beta::Organization::SpendLimitListParams::scope_type]?,
+            workspace_id: String?,
             betas: ::Array[Anthropic::Models::anthropic_beta],
             request_options: Anthropic::RequestOptions
           }
@@ -50,6 +55,7 @@ module Anthropic
             | :organization_service
             | :rbac_group
             | :seat_tier
+            | :usage_tier
             | :user
             | :workspace
 
@@ -60,6 +66,7 @@ module Anthropic
             ORGANIZATION_SERVICE: :organization_service
             RBAC_GROUP: :rbac_group
             SEAT_TIER: :seat_tier
+            USAGE_TIER: :usage_tier
             USER: :user
             WORKSPACE: :workspace
 

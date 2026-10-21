@@ -27,7 +27,8 @@ module Anthropic
           sig { returns(T.nilable(String)) }
           attr_accessor :page
 
-          # Return only limits with these scope types. Omit for all.
+          # Return only limits with these scope types. Omit for all. A scope type that
+          # doesn't apply to the organization gets a 400 error.
           sig do
             returns(
               T.nilable(
@@ -38,6 +39,12 @@ module Anthropic
             )
           end
           attr_accessor :scope_type
+
+          # Return only the limits whose `scope.workspace_id` is this workspace
+          # (`wrkspc_...`). Claude Console organizations only; other organizations get a 400
+          # error.
+          sig { returns(T.nilable(String)) }
+          attr_accessor :workspace_id
 
           # This endpoint is in beta: requests must send `spend-limit-reads-2026-09-26` in
           # this header.
@@ -67,6 +74,7 @@ module Anthropic
                     Anthropic::Beta::Organization::SpendLimitListParams::ScopeType::OrSymbol
                   ]
                 ),
+              workspace_id: T.nilable(String),
               betas:
                 T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               request_options: Anthropic::RequestOptions::OrHash
@@ -77,8 +85,13 @@ module Anthropic
             limit: nil,
             # Opaque cursor from a previous response's `next_page` field.
             page: nil,
-            # Return only limits with these scope types. Omit for all.
+            # Return only limits with these scope types. Omit for all. A scope type that
+            # doesn't apply to the organization gets a 400 error.
             scope_type: nil,
+            # Return only the limits whose `scope.workspace_id` is this workspace
+            # (`wrkspc_...`). Claude Console organizations only; other organizations get a 400
+            # error.
+            workspace_id: nil,
             # This endpoint is in beta: requests must send `spend-limit-reads-2026-09-26` in
             # this header.
             betas: nil,
@@ -97,6 +110,7 @@ module Anthropic
                       Anthropic::Beta::Organization::SpendLimitListParams::ScopeType::OrSymbol
                     ]
                   ),
+                workspace_id: T.nilable(String),
                 betas:
                   T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
                 request_options: Anthropic::RequestOptions
@@ -136,6 +150,11 @@ module Anthropic
             SEAT_TIER =
               T.let(
                 :seat_tier,
+                Anthropic::Beta::Organization::SpendLimitListParams::ScopeType::TaggedSymbol
+              )
+            USAGE_TIER =
+              T.let(
+                :usage_tier,
                 Anthropic::Beta::Organization::SpendLimitListParams::ScopeType::TaggedSymbol
               )
             USER =
