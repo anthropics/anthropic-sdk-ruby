@@ -23,6 +23,27 @@ module Anthropic
       #   @return [Time]
       required :created_at, Time
 
+      # @!attribute enforcement_actions
+      #   The enforcement actions open on this profile; empty when none is open. Absent
+      #   under the `user-profiles-2026-09-04` and earlier beta headers.
+      #
+      #   @return [Array<Anthropic::Models::UserProfileEnforcementActionRestriction, Anthropic::Models::UserProfileEnforcementActionBan>]
+      required :enforcement_actions,
+               -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::UserProfileEnforcementAction] }
+
+      # @!attribute enforcement_status
+      #   Anthropic's enforcement status of this profile, from its open enforcement
+      #   actions and any identity check under review, by the first rule that applies:
+      #   `banned` while any open action is a `ban`; `pending` while a restriction that an
+      #   identity check can clear is open, the end user has submitted that check,
+      #   Anthropic's review of it has not ended, and no open action's `reason` is
+      #   `account_compromise`; `restricted` while any action is open; `unrestricted`
+      #   while none is. Absent under the `user-profiles-2026-09-04` and earlier beta
+      #   headers.
+      #
+      #   @return [Symbol, Anthropic::Models::UserProfileEnforcementStatus]
+      required :enforcement_status, enum: -> { Anthropic::UserProfileEnforcementStatus }
+
       # @!attribute external_user_details
       #   Details about the entity this profile represents, as the platform states them;
       #   not verified by Anthropic. Every field is present, `null` until the platform
@@ -74,7 +95,7 @@ module Anthropic
       #   @return [Time]
       required :updated_at, Time
 
-      # @!method initialize(id:, access_type:, created_at:, external_user_details:, metadata:, name:, programs:, updated_at:, type: :user_profile)
+      # @!method initialize(id:, access_type:, created_at:, enforcement_actions:, enforcement_status:, external_user_details:, metadata:, name:, programs:, updated_at:, type: :user_profile)
       #   A record of an entity that the platform serves through the API, such as an
       #   end-user of the platform's product or a company that the platform resells Claude
       #   access to.
@@ -91,6 +112,10 @@ module Anthropic
       #   @param access_type [Symbol, Anthropic::Models::UserProfileAccessType] How the platform uses the API for this entity: `application` (default) or `passt
       #
       #   @param created_at [Time] When this user profile was created, in RFC 3339 format.
+      #
+      #   @param enforcement_actions [Array<Anthropic::Models::UserProfileEnforcementActionRestriction, Anthropic::Models::UserProfileEnforcementActionBan>] The enforcement actions open on this profile; empty when none is open. Absent un
+      #
+      #   @param enforcement_status [Symbol, Anthropic::Models::UserProfileEnforcementStatus] Anthropic's enforcement status of this profile, from its open enforcement action
       #
       #   @param external_user_details [Anthropic::Models::UserProfileExternalUserDetails] Details about the entity this profile represents, as the platform states them; n
       #

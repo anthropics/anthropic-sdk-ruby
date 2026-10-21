@@ -92,7 +92,7 @@ To lint and typecheck:
 $ ./scripts/lint
 ```
 
-`./scripts/lint` runs the linters and type checkers from a separate bundle, `lint/Gemfile` and `lint/Gemfile.lock`, whose gems it installs if they are missing. It works on the version in the `.ruby-version` file, the oldest Ruby that this library supports and the one that CI tests on. GitHub CI lints on Ruby 3.4.
+`./scripts/lint` runs the linters and type checkers from a separate bundle, `lint/Gemfile` and `lint/Gemfile.lock`, whose gems it installs if they are missing. It works on the version in the `.ruby-version` file, the oldest Ruby that this library supports. GitHub CI tests on the newest Ruby 3.2 release and lints on Ruby 3.4.
 
 To format and fix all lint issues automatically:
 

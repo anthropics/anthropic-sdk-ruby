@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.1.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v2.0.0...v2.1.0) (2026-10-21)
+
+### Features
+
+* **api:** add enforcement status, actions and filter to user profiles
+
+
+### Chores
+
+* **ci:** update ruby/setup-ruby and run on the latest Ruby 3.2
+* **docs:** add enforcement fields to the user profile example
+
 ## [2.0.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.82.0...v2.0.0) (2026-10-21)
 
 ### ⚠ BREAKING CHANGES

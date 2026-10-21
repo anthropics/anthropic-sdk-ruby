@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    type user_profile_enforcement_status =
+      :unrestricted | :pending | :restricted | :banned
+
+    module UserProfileEnforcementStatus
+      extend Anthropic::Internal::Type::Enum
+
+      UNRESTRICTED: :unrestricted
+      PENDING: :pending
+      RESTRICTED: :restricted
+      BANNED: :banned
+
+      def self?.values: -> ::Array[Anthropic::Models::user_profile_enforcement_status]
+    end
+  end
+end

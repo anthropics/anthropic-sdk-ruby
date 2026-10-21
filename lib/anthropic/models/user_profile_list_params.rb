@@ -7,6 +7,20 @@ module Anthropic
       extend Anthropic::Internal::Type::RequestParameters::Converter
       include Anthropic::Internal::Type::RequestParameters
 
+      # @!attribute enforcement_status
+      #   Return only the user profiles whose `enforcement_status` is one of these values:
+      #   `unrestricted`, `pending`, `restricted` or `banned`. Repeat the parameter to
+      #   match any of several. With it set, a page may hold fewer than `limit` profiles,
+      #   or none, and still carry a `next_page`: the service examines a bounded number of
+      #   profiles per request, and only a null `next_page` means the listing is complete.
+      #   Rejected with `invalid_request_error` under the `user-profiles-2026-09-04` and
+      #   earlier beta headers. Fails with `overloaded_error` when a profile's enforcement
+      #   actions cannot be read for the moment.
+      #
+      #   @return [Array<Symbol, Anthropic::Models::UserProfileEnforcementStatus>, nil]
+      optional :enforcement_status,
+               -> { Anthropic::Internal::Type::ArrayOf[enum: Anthropic::UserProfileEnforcementStatus] }
+
       # @!attribute limit
       #   The maximum number of user profiles to return, from 1 to 100. Defaults to 20.
       #
@@ -47,9 +61,11 @@ module Anthropic
       #   @return [String, nil]
       optional :workspace_id, String
 
-      # @!method initialize(limit: nil, order: nil, order_by: nil, page: nil, workspace_id: nil, request_options: {})
+      # @!method initialize(enforcement_status: nil, limit: nil, order: nil, order_by: nil, page: nil, workspace_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Anthropic::Models::UserProfileListParams} for more details.
+      #
+      #   @param enforcement_status [Array<Symbol, Anthropic::Models::UserProfileEnforcementStatus>] Return only the user profiles whose `enforcement_status` is one of these values:
       #
       #   @param limit [Integer] The maximum number of user profiles to return, from 1 to 100. Defaults to 20.
       #

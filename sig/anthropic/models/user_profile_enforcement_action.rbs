@@ -1,0 +1,50 @@
+module Anthropic
+  module Models
+    type user_profile_enforcement_action =
+      Anthropic::UserProfileEnforcementActionRestriction
+      | Anthropic::UserProfileEnforcementActionBan
+
+    module UserProfileEnforcementAction
+      extend Anthropic::Internal::Type::Union
+
+      type type_ = :restriction | :ban
+
+      module Type
+        extend Anthropic::Internal::Type::Enum
+
+        RESTRICTION: :restriction
+        BAN: :ban
+
+        def self?.values: -> ::Array[Anthropic::Models::UserProfileEnforcementAction::type_]
+      end
+
+      def self?.variants: -> ::Array[Anthropic::Models::user_profile_enforcement_action]
+
+      def self.new:
+        (
+          type: :restriction | "restriction",
+          id: String,
+          action: Anthropic::Models::user_profile_enforcement_action_next_step?,
+          expires_at: Time?,
+          opened_at: Time,
+          reason: Anthropic::Models::user_profile_enforcement_action_reason
+        ) -> Anthropic::UserProfileEnforcementActionRestriction
+        | (
+          type: :ban | "ban",
+          id: String,
+          action: Anthropic::Models::user_profile_enforcement_action_next_step?,
+          expires_at: Time?,
+          opened_at: Time,
+          reason: Anthropic::Models::user_profile_enforcement_action_reason
+        ) -> Anthropic::UserProfileEnforcementActionBan
+        | (
+          type: Anthropic::Models::UserProfileEnforcementAction::type_ | String,
+          id: String,
+          action: Anthropic::Models::user_profile_enforcement_action_next_step?,
+          expires_at: Time?,
+          opened_at: Time,
+          reason: Anthropic::Models::user_profile_enforcement_action_reason
+        ) -> Anthropic::Models::user_profile_enforcement_action
+    end
+  end
+end

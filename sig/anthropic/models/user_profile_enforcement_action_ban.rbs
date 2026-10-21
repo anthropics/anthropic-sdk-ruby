@@ -1,0 +1,45 @@
+module Anthropic
+  module Models
+    type user_profile_enforcement_action_ban =
+      {
+        id: String,
+        action: Anthropic::Models::user_profile_enforcement_action_next_step?,
+        expires_at: Time?,
+        opened_at: Time,
+        reason: Anthropic::Models::user_profile_enforcement_action_reason,
+        type: :ban
+      }
+
+    class UserProfileEnforcementActionBan < Anthropic::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor action: Anthropic::Models::user_profile_enforcement_action_next_step?
+
+      attr_accessor expires_at: Time?
+
+      attr_accessor opened_at: Time
+
+      attr_accessor reason: Anthropic::Models::user_profile_enforcement_action_reason
+
+      attr_accessor type: :ban
+
+      def initialize: (
+        id: String,
+        action: Anthropic::Models::user_profile_enforcement_action_next_step?,
+        expires_at: Time?,
+        opened_at: Time,
+        reason: Anthropic::Models::user_profile_enforcement_action_reason,
+        ?type: :ban
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        action: Anthropic::Models::user_profile_enforcement_action_next_step?,
+        expires_at: Time?,
+        opened_at: Time,
+        reason: Anthropic::Models::user_profile_enforcement_action_reason,
+        type: :ban
+      }
+    end
+  end
+end
