@@ -12,25 +12,15 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSessionCreationRejectedRunError::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsSessionCreationRejectedRunError::Type }
+        #   @return [Symbol, :session_creation_rejected_error]
+        required :type, const: :session_creation_rejected_error
 
-        # @!method initialize(message:, type:)
+        # @!method initialize(message:, type: :session_creation_rejected_error)
         #   The session create request was rejected with a non-retryable validation error.
         #
         #   @param message [String] Human-readable error description.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSessionCreationRejectedRunError::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsSessionCreationRejectedRunError#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          SESSION_CREATION_REJECTED_ERROR = :session_creation_rejected_error
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :session_creation_rejected_error]
       end
     end
 

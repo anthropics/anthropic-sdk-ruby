@@ -6,25 +6,14 @@ module Anthropic
       class BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError < Anthropic::Internal::Type::BaseModel
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError::Type]
-        required :type,
-                 enum: -> { Anthropic::Beta::BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError::Type }
+        #   @return [Symbol, :mcp_egress_blocked_error]
+        required :type, const: :mcp_egress_blocked_error
 
-        # @!method initialize(type:)
+        # @!method initialize(type: :mcp_egress_blocked_error)
         #   An MCP server host used by the deployment's agent is blocked by the
         #   environment's network policy.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          MCP_EGRESS_BLOCKED_ERROR = :mcp_egress_blocked_error
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :mcp_egress_blocked_error]
       end
     end
 

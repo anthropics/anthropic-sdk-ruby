@@ -13,11 +13,7 @@ module Anthropic
               )
             end
 
-          sig do
-            returns(
-              Anthropic::Beta::MemoryStores::BetaManagedAgentsPrecondition::Type::OrSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # Expected `content_sha256` of the stored memory (64 lowercase hexadecimal
@@ -36,61 +32,22 @@ module Anthropic
           # current content, not the destination path. Currently the only supported variant
           # is `content_sha256`.
           sig do
-            params(
-              type:
-                Anthropic::Beta::MemoryStores::BetaManagedAgentsPrecondition::Type::OrSymbol,
-              content_sha256: String
-            ).returns(T.attached_class)
+            params(content_sha256: String, type: Symbol).returns(
+              T.attached_class
+            )
           end
           def self.new(
-            type:,
             # Expected `content_sha256` of the stored memory (64 lowercase hexadecimal
             # characters). Typically the `content_sha256` returned by a prior read or list
             # call. Because the server applies no content normalization, clients can also
             # compute this locally as the SHA-256 of the UTF-8 content bytes.
-            content_sha256: nil
+            content_sha256: nil,
+            type: :content_sha256
           )
           end
 
-          sig do
-            override.returns(
-              {
-                type:
-                  Anthropic::Beta::MemoryStores::BetaManagedAgentsPrecondition::Type::OrSymbol,
-                content_sha256: String
-              }
-            )
-          end
+          sig { override.returns({ type: Symbol, content_sha256: String }) }
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::MemoryStores::BetaManagedAgentsPrecondition::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            CONTENT_SHA256 =
-              T.let(
-                :content_sha256,
-                Anthropic::Beta::MemoryStores::BetaManagedAgentsPrecondition::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::MemoryStores::BetaManagedAgentsPrecondition::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

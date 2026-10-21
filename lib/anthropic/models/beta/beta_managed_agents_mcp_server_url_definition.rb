@@ -11,30 +11,20 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMCPServerURLDefinition::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition::Type }
+        #   @return [Symbol, :url]
+        required :type, const: :url
 
         # @!attribute url
         #
         #   @return [String]
         required :url, String
 
-        # @!method initialize(name:, type:, url:)
+        # @!method initialize(name:, url:, type: :url)
         #   URL-based MCP server connection as returned in API responses.
         #
         #   @param name [String]
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMCPServerURLDefinition::Type]
         #   @param url [String]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsMCPServerURLDefinition#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          URL = :url
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :url]
       end
     end
 

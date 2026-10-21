@@ -25,7 +25,7 @@ class Anthropic::Test::Resources::Beta::Vaults::CredentialsTest < Anthropic::Tes
         auth: Anthropic::Beta::Vaults::BetaManagedAgentsCredential::Auth,
         created_at: Time,
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
-        type: Anthropic::Beta::Vaults::BetaManagedAgentsCredential::Type,
+        type: Symbol,
         updated_at: Time,
         vault_id: String,
         display_name: String | nil
@@ -51,7 +51,7 @@ class Anthropic::Test::Resources::Beta::Vaults::CredentialsTest < Anthropic::Tes
         auth: Anthropic::Beta::Vaults::BetaManagedAgentsCredential::Auth,
         created_at: Time,
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
-        type: Anthropic::Beta::Vaults::BetaManagedAgentsCredential::Type,
+        type: Symbol,
         updated_at: Time,
         vault_id: String,
         display_name: String | nil
@@ -77,7 +77,7 @@ class Anthropic::Test::Resources::Beta::Vaults::CredentialsTest < Anthropic::Tes
         auth: Anthropic::Beta::Vaults::BetaManagedAgentsCredential::Auth,
         created_at: Time,
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
-        type: Anthropic::Beta::Vaults::BetaManagedAgentsCredential::Type,
+        type: Symbol,
         updated_at: Time,
         vault_id: String,
         display_name: String | nil
@@ -106,7 +106,7 @@ class Anthropic::Test::Resources::Beta::Vaults::CredentialsTest < Anthropic::Tes
         auth: Anthropic::Beta::Vaults::BetaManagedAgentsCredential::Auth,
         created_at: Time,
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
-        type: Anthropic::Beta::Vaults::BetaManagedAgentsCredential::Type,
+        type: Symbol,
         updated_at: Time,
         vault_id: String,
         display_name: String | nil
@@ -128,7 +128,7 @@ class Anthropic::Test::Resources::Beta::Vaults::CredentialsTest < Anthropic::Tes
     assert_pattern do
       response => {
         id: String,
-        type: Anthropic::Beta::Vaults::BetaManagedAgentsDeletedCredential::Type
+        type: Symbol
       }
     end
   end
@@ -151,7 +151,7 @@ class Anthropic::Test::Resources::Beta::Vaults::CredentialsTest < Anthropic::Tes
         auth: Anthropic::Beta::Vaults::BetaManagedAgentsCredential::Auth,
         created_at: Time,
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
-        type: Anthropic::Beta::Vaults::BetaManagedAgentsCredential::Type,
+        type: Symbol,
         updated_at: Time,
         vault_id: String,
         display_name: String | nil
@@ -177,7 +177,7 @@ class Anthropic::Test::Resources::Beta::Vaults::CredentialsTest < Anthropic::Tes
         mcp_probe: Anthropic::Beta::Vaults::BetaManagedAgentsMCPProbe | nil,
         refresh: Anthropic::Beta::Vaults::BetaManagedAgentsRefreshObject | nil,
         status: Anthropic::Beta::Vaults::BetaManagedAgentsCredentialValidationStatus,
-        type: Anthropic::Beta::Vaults::BetaManagedAgentsCredentialValidation::Type,
+        type: Symbol,
         validated_at: Time,
         vault_id: String
       }

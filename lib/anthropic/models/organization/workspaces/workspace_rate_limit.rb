@@ -7,8 +7,7 @@ module Anthropic
         # @see Anthropic::Resources::Organization::Workspaces::RateLimits#update
         class WorkspaceRateLimit < Anthropic::Internal::Type::BaseModel
           # @!attribute group
-          #   The rate-limit group this entry's limits apply to. Its `type` equals
-          #   `group_type`.
+          #   The rate-limit group this entry's limits apply to.
           #
           #   @return [Anthropic::Models::Organization::OrganizationRateLimitModelGroup, Anthropic::Models::Organization::OrganizationRateLimitBatchGroup, Anthropic::Models::Organization::OrganizationRateLimitTokenCountGroup, Anthropic::Models::Organization::OrganizationRateLimitFilesGroup, Anthropic::Models::Organization::OrganizationRateLimitSkillsGroup, Anthropic::Models::Organization::OrganizationRateLimitWebSearchGroup]
           required :group, union: -> { Anthropic::Organization::Workspaces::WorkspaceRateLimit::Group }
@@ -25,7 +24,7 @@ module Anthropic
 
           # @!attribute models
           #   Model names this entry's limits apply to, including aliases. `null` when
-          #   `group_type` is not `"model_group"`.
+          #   `group.type` is not `"model_group"`.
           #
           #   @return [Array<String>, nil]
           required :models, Anthropic::Internal::Type::ArrayOf[String], nil?: true
@@ -53,12 +52,11 @@ module Anthropic
           #   {Anthropic::Models::Organization::Workspaces::WorkspaceRateLimit} for more
           #   details.
           #
-          #   @param group [Anthropic::Models::Organization::OrganizationRateLimitModelGroup, Anthropic::Models::Organization::OrganizationRateLimitBatchGroup, Anthropic::Models::Organization::OrganizationRateLimitTokenCountGroup, Anthropic::Models::Organization::OrganizationRateLimitFilesGroup, Anthropic::Models::Organization::OrganizationRateLimitSkillsGroup, Anthropic::Models::Organization::OrganizationRateLimitWebSearchGroup] The rate-limit group this entry's limits apply to. Its `type` equals `group_type
+          #   @param group [Anthropic::Models::Organization::OrganizationRateLimitModelGroup, Anthropic::Models::Organization::OrganizationRateLimitBatchGroup, Anthropic::Models::Organization::OrganizationRateLimitTokenCountGroup, Anthropic::Models::Organization::OrganizationRateLimitFilesGroup, Anthropic::Models::Organization::OrganizationRateLimitSkillsGroup, Anthropic::Models::Organization::OrganizationRateLimitWebSearchGroup] The rate-limit group this entry's limits apply to.
           #
           #   @param limits [Array<Anthropic::Models::Organization::Workspaces::WorkspaceRateLimitValue>] The workspace's limiter values for this group. By default only the limiter types
           #
-          #   @param models [Array<String>, nil] Model names this entry's limits apply to, including aliases. `null` when
-          #   `group\_
+          #   @param models [Array<String>, nil] Model names this entry's limits apply to, including aliases. `null` when `group.
           #
           #   @param rate_limit_id [String] The `id` of the organization's RateLimit entry this entry applies to.
           #
@@ -66,8 +64,7 @@ module Anthropic
           #
           #   @param type [Symbol, :workspace_rate_limit] Object type. Always `workspace_rate_limit` for workspace rate-limit entries.
 
-          # The rate-limit group this entry's limits apply to. Its `type` equals
-          # `group_type`.
+          # The rate-limit group this entry's limits apply to.
           #
           # @see Anthropic::Models::Organization::Workspaces::WorkspaceRateLimit#group
           module Group

@@ -46,11 +46,10 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::Type]
-          required :type,
-                   enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::Type }
+          #   @return [Symbol, :"session.thread_status_idle"]
+          required :type, const: :"session.thread_status_idle"
 
-          # @!method initialize(id:, agent_name:, processed_at:, session_thread_id:, stop_details:, stop_reason:, type:)
+          # @!method initialize(id:, agent_name:, processed_at:, session_thread_id:, stop_details:, stop_reason:, type: :"session.thread_status_idle")
           #   A session thread has yielded and is awaiting input. Emitted on the thread's own
           #   stream and cross-posted to the primary stream for child threads.
           #
@@ -70,7 +69,7 @@ module Anthropic
           #
           #   @param stop_reason [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionBudgetReached, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRefusal]
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::Type]
+          #   @param type [Symbol, :"session.thread_status_idle"]
 
           # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent#stop_reason
           module StopReason
@@ -127,29 +126,19 @@ module Anthropic
             def self.new(type:, **args)
               case type.to_sym
               when :end_turn
-                Anthropic::Beta::Sessions::BetaManagedAgentsSessionEndTurn.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsSessionEndTurn.new(**args)
               when :requires_action
-                Anthropic::Beta::Sessions::BetaManagedAgentsSessionRequiresAction.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsSessionRequiresAction.new(**args)
               when :retries_exhausted
-                Anthropic::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted.new(**args)
               when :budget_reached
-                Anthropic::Beta::Sessions::BetaManagedAgentsSessionBudgetReached.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsSessionBudgetReached.new(**args)
               when :refusal
                 Anthropic::Beta::Sessions::BetaManagedAgentsSessionRefusal.new(**args)
               else
                 raise ArgumentError, "unknown type: #{type}"
               end
             end
-          end
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            SESSION_THREAD_STATUS_IDLE = :"session.thread_status_idle"
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
           end
         end
       end

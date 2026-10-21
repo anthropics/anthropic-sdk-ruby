@@ -383,7 +383,7 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
 
     client.beta.messages.create(
       **PARAMS,
-      top_p: 0.5,
+      inference_geo: "us",
       thinking: {type: :enabled, budget_tokens: 1024},
       request_options: {fallback_state: Anthropic::BetaFallbackState.new}
     )
@@ -394,7 +394,7 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
     # explicit nil → unsets (key absent, not sent as null)
     refute(retried.key?("thinking"))
     # absent → original value kept
-    assert_in_delta(0.5, retried["top_p"])
+    assert_equal("us", retried["inference_geo"])
   end
 
   def test_string_keyed_entry_patches_like_a_symbol_keyed_entry
@@ -403,7 +403,7 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
 
     client.beta.messages.create(
       **PARAMS,
-      top_p: 0.5,
+      inference_geo: "us",
       thinking: {type: :enabled, budget_tokens: 1024},
       request_options: {fallback_state: Anthropic::BetaFallbackState.new}
     )
@@ -412,7 +412,7 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
     assert_equal("fallback-model", retried["model"])
     assert_equal(512, retried["max_tokens"])
     refute(retried.key?("thinking"))
-    assert_in_delta(0.5, retried["top_p"])
+    assert_equal("us", retried["inference_geo"])
   end
 
   def test_typed_entry_with_explicit_nil_unsets_the_param

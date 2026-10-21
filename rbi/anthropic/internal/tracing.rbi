@@ -94,7 +94,6 @@ module Anthropic
       # The span name of each SDK method. Code that names a span through these fails to
       # load once no method has the name.
       module SpanName
-        COMPLETIONS_CREATE = "anthropic.completions.create"
         MESSAGES_CREATE = "anthropic.messages.create"
         MESSAGES_COUNT_TOKENS = "anthropic.messages.count_tokens"
         MESSAGES_BATCHES_CREATE = "anthropic.messages.batches.create"

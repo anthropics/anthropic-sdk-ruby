@@ -135,7 +135,6 @@ class Anthropic::Test::VertexClientTest < Minitest::Test
     assert_nil(adapted.url.query)
     assert_equal(
       {
-        anthropic_version: Anthropic::VertexClient::DEFAULT_VERSION,
         max_tokens: 1024,
         messages: [{role: "user", content: "Hello, Claude"}]
       },
@@ -144,6 +143,34 @@ class Anthropic::Test::VertexClientTest < Minitest::Test
 
     assert_equal(model, body[:model])
     assert_equal("/v1/v1/messages", req.url.path)
+  end
+
+  def test_adapt_request_moves_version_header_into_body
+    client = Anthropic::VertexClient.new(region: "us-east5", project_id: "proj")
+    req = make_api_request(
+      url: "https://us-east5-aiplatform.googleapis.com/v1/v1/messages",
+      body: {model: "m"},
+      headers: {"anthropic-version" => "2030-01-01", "x-other" => "1"}.freeze
+    )
+
+    adapted = client.send(:adapt_request, req)
+
+    assert_equal({anthropic_version: "2030-01-01"}, adapted.body)
+    assert_equal({"x-other" => "1"}, adapted.headers)
+  end
+
+  def test_adapt_request_keeps_body_version_over_header
+    client = Anthropic::VertexClient.new(region: "us-east5", project_id: "proj")
+    req = make_api_request(
+      url: "https://us-east5-aiplatform.googleapis.com/v1/v1/messages",
+      body: {model: "m", anthropic_version: "2030-01-02"},
+      headers: {"anthropic-version" => "2030-01-01"}.freeze
+    )
+
+    adapted = client.send(:adapt_request, req)
+
+    assert_equal({anthropic_version: "2030-01-02"}, adapted.body)
+    assert_empty(adapted.headers)
   end
 
   def test_adapt_request_for_beta
@@ -190,7 +217,6 @@ class Anthropic::Test::VertexClientTest < Minitest::Test
     assert_nil(adapted.url.query)
     assert_equal(
       {
-        anthropic_version: Anthropic::VertexClient::DEFAULT_VERSION,
         max_tokens: 1024,
         messages: [{role: "user", content: "Save a picture of a cat to my desktop."}],
         tools: tools
@@ -373,13 +399,9 @@ class Anthropic::Test::VertexClientTest < Minitest::Test
     end
 
     fixture_body = {
-      "anthropic_version" => Anthropic::VertexClient::DEFAULT_VERSION,
       "max_tokens" => 1024,
       "messages" => [{"content" => "Hello, world", "role" => "user"}]
     }
-    # `X-Api-Key` is env-dependent on Vertex (inherits Anthropic::Client's
-    # ENV["ANTHROPIC_API_KEY"] fallback) — pre-middleware behaviour, so
-    # volatile here.
     volatile = %w[
       User-Agent
       X-Stainless-Arch
@@ -391,15 +413,15 @@ class Anthropic::Test::VertexClientTest < Minitest::Test
       Accept-Encoding
       Host
       Content-Length
-      X-Api-Key
     ]
 
     assert_requested(:post, uri, times: 1) do |req|
-      assert_equal(fixture_body, JSON.parse(req.body))
+      body = JSON.parse(req.body)
+      assert_match(/\A\d{4}-\d{2}-\d{2}\z/, body.delete("anthropic_version"))
+      assert_equal(fixture_body, body)
       assert_equal(
         {
           "Accept" => "application/json",
-          "Anthropic-Version" => "2023-06-01",
           "Authorization" => "Bearer fake-token",
           "Content-Type" => "application/json",
           "X-Stainless-Lang" => "ruby",
@@ -563,6 +585,8 @@ class Anthropic::Test::VertexClientTest < Minitest::Test
       stub_request(:post, uri).to_return_json({status: 200, body: {}})
 
       client = Anthropic::VertexClient.new(region: region, project_id: project)
+      assert_nil(client.api_key)
+      assert_nil(client.auth_token)
       client.messages.create(
         max_tokens: 1024,
         messages: [{content: "hi", role: :user}],

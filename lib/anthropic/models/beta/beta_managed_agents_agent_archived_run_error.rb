@@ -12,25 +12,15 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsAgentArchivedRunError::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsAgentArchivedRunError::Type }
+        #   @return [Symbol, :agent_archived_error]
+        required :type, const: :agent_archived_error
 
-        # @!method initialize(message:, type:)
+        # @!method initialize(message:, type: :agent_archived_error)
         #   The deployment's agent was archived.
         #
         #   @param message [String] Human-readable error description.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsAgentArchivedRunError::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsAgentArchivedRunError#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          AGENT_ARCHIVED_ERROR = :agent_archived_error
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :agent_archived_error]
       end
     end
 

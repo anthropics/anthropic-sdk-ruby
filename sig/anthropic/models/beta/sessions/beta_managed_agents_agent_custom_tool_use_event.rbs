@@ -8,7 +8,7 @@ module Anthropic
             input: ::Hash[Symbol, top],
             name: String,
             processed_at: Time,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent::type_,
+            type: :"agent.custom_tool_use",
             session_thread_id: String?
           }
 
@@ -21,7 +21,7 @@ module Anthropic
 
           attr_accessor processed_at: Time
 
-          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent::type_
+          attr_accessor type: :"agent.custom_tool_use"
 
           attr_accessor session_thread_id: String?
 
@@ -30,8 +30,8 @@ module Anthropic
             input: ::Hash[Symbol, top],
             name: String,
             processed_at: Time,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent::type_,
-            ?session_thread_id: String?
+            ?session_thread_id: String?,
+            ?type: :"agent.custom_tool_use"
           ) -> void
 
           def to_hash: -> {
@@ -39,19 +39,9 @@ module Anthropic
             input: ::Hash[Symbol, top],
             name: String,
             processed_at: Time,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent::type_,
+            type: :"agent.custom_tool_use",
             session_thread_id: String?
           }
-
-          type type_ = :"agent.custom_tool_use"
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            AGENT_CUSTOM_TOOL_USE: :"agent.custom_tool_use"
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent::type_]
-          end
         end
       end
     end

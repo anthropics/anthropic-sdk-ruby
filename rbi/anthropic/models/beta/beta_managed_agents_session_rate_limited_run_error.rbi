@@ -19,68 +19,21 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :message
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsSessionRateLimitedRunError::Type::TaggedSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # Session creation was rejected due to rate limiting. The schedule keeps firing;
         # subsequent runs may succeed.
-        sig do
-          params(
-            message: String,
-            type:
-              Anthropic::Beta::BetaManagedAgentsSessionRateLimitedRunError::Type::OrSymbol
-          ).returns(T.attached_class)
-        end
+        sig { params(message: String, type: Symbol).returns(T.attached_class) }
         def self.new(
           # Human-readable error description.
           message:,
-          type:
+          type: :session_rate_limited_error
         )
         end
 
-        sig do
-          override.returns(
-            {
-              message: String,
-              type:
-                Anthropic::Beta::BetaManagedAgentsSessionRateLimitedRunError::Type::TaggedSymbol
-            }
-          )
-        end
+        sig { override.returns({ message: String, type: Symbol }) }
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsSessionRateLimitedRunError::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          SESSION_RATE_LIMITED_ERROR =
-            T.let(
-              :session_rate_limited_error,
-              Anthropic::Beta::BetaManagedAgentsSessionRateLimitedRunError::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsSessionRateLimitedRunError::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

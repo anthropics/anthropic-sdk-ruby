@@ -7,24 +7,14 @@ module Anthropic
         class BetaManagedAgentsSessionRetriesExhausted < Anthropic::Internal::Type::BaseModel
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted::Type }
+          #   @return [Symbol, :retries_exhausted]
+          required :type, const: :retries_exhausted
 
-          # @!method initialize(type:)
+          # @!method initialize(type: :retries_exhausted)
           #   The turn ended because repeated errors exhausted the retry budget or an error
           #   escalated to `retry_status: 'exhausted'`.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted::Type]
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            RETRIES_EXHAUSTED = :retries_exhausted
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :retries_exhausted]
         end
       end
     end

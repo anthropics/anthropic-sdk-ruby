@@ -2,31 +2,14 @@ module Anthropic
   module Models
     module Beta
       module Sessions
-        type beta_managed_agents_retry_status_retrying =
-          {
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying::type_
-          }
+        type beta_managed_agents_retry_status_retrying = { type: :retrying }
 
         class BetaManagedAgentsRetryStatusRetrying < Anthropic::Internal::Type::BaseModel
-          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying::type_
+          attr_accessor type: :retrying
 
-          def initialize: (
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying::type_
-          ) -> void
+          def initialize: (?type: :retrying) -> void
 
-          def to_hash: -> {
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying::type_
-          }
-
-          type type_ = :retrying
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            RETRYING: :retrying
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying::type_]
-          end
+          def to_hash: -> { type: :retrying }
         end
       end
     end

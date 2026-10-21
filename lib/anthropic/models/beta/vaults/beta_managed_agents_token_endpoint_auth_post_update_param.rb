@@ -7,9 +7,8 @@ module Anthropic
         class BetaManagedAgentsTokenEndpointAuthPostUpdateParam < Anthropic::Internal::Type::BaseModel
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostUpdateParam::Type]
-          required :type,
-                   enum: -> { Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostUpdateParam::Type }
+          #   @return [Symbol, :client_secret_post]
+          required :type, const: :client_secret_post
 
           # @!attribute client_secret
           #   A new OAuth client secret to replace the stored one.
@@ -21,26 +20,16 @@ module Anthropic
           #   @return [String, nil]
           optional :client_secret, String, nil?: true
 
-          # @!method initialize(type:, client_secret: nil)
+          # @!method initialize(client_secret: nil, type: :client_secret_post)
           #   Updated POST body authentication parameters for the token endpoint.
           #
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostUpdateParam}
           #   for more details.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostUpdateParam::Type]
-          #
           #   @param client_secret [String, nil] A new OAuth client secret to replace the stored one.
-
-          # @see Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostUpdateParam#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            CLIENT_SECRET_POST = :client_secret_post
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #
+          #   @param type [Symbol, :client_secret_post]
         end
       end
     end

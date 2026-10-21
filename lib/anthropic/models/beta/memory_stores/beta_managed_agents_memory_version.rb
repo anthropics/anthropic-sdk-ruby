@@ -43,8 +43,8 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryVersion::Type]
-          required :type, enum: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryVersion::Type }
+          #   @return [Symbol, :memory_version]
+          required :type, const: :memory_version
 
           # @!attribute content
           #   The memory's UTF-8 text content as of this version. `null` when `view=basic`,
@@ -111,7 +111,7 @@ module Anthropic
           #   @return [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsAPIActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor, nil]
           optional :redacted_by, union: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsActor }
 
-          # @!method initialize(id:, created_at:, memory_id:, memory_store_id:, operation:, type:, content: nil, content_sha256: nil, content_size_bytes: nil, created_by: nil, path: nil, redacted_at: nil, redacted_by: nil)
+          # @!method initialize(id:, created_at:, memory_id:, memory_store_id:, operation:, content: nil, content_sha256: nil, content_size_bytes: nil, created_by: nil, path: nil, redacted_at: nil, redacted_by: nil, type: :memory_version)
           #   One entry in a memory's history, recording a single change and who made it.
           #
           #   Every change to a memory adds one version. Only redaction can change a version
@@ -141,8 +141,6 @@ module Anthropic
           #
           #   @param operation [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryVersionOperation] The kind of mutation this version records: `created`, `modified`, or `deleted`.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryVersion::Type]
-          #
           #   @param content [String, nil] The memory's UTF-8 text content as of this version. `null` when `view=basic`, wh
           #
           #   @param content_sha256 [String, nil] Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `n
@@ -156,16 +154,8 @@ module Anthropic
           #   @param redacted_at [Time, nil] When the version was redacted, in RFC 3339, or `null` if it hasn't been.
           #
           #   @param redacted_by [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsAPIActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor] Who redacted this version, or `null` if it has not been redacted. In practice al
-
-          # @see Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryVersion#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            MEMORY_VERSION = :memory_version
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #
+          #   @param type [Symbol, :memory_version]
         end
       end
     end

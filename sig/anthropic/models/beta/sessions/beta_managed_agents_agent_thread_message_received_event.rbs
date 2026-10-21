@@ -8,7 +8,7 @@ module Anthropic
             content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageReceivedEvent::content],
             from_session_thread_id: String,
             processed_at: Time,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageReceivedEvent::type_,
+            type: :"agent.thread_message_received",
             from_agent_name: String?
           }
 
@@ -21,7 +21,7 @@ module Anthropic
 
           attr_accessor processed_at: Time
 
-          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageReceivedEvent::type_
+          attr_accessor type: :"agent.thread_message_received"
 
           attr_accessor from_agent_name: String?
 
@@ -30,8 +30,8 @@ module Anthropic
             content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageReceivedEvent::content],
             from_session_thread_id: String,
             processed_at: Time,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageReceivedEvent::type_,
-            ?from_agent_name: String?
+            ?from_agent_name: String?,
+            ?type: :"agent.thread_message_received"
           ) -> void
 
           def to_hash: -> {
@@ -39,7 +39,7 @@ module Anthropic
             content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageReceivedEvent::content],
             from_session_thread_id: String,
             processed_at: Time,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageReceivedEvent::type_,
+            type: :"agent.thread_message_received",
             from_agent_name: String?
           }
 
@@ -94,16 +94,6 @@ module Anthropic
                 ?context: String?,
                 ?title: String?
               ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageReceivedEvent::content
-          end
-
-          type type_ = :"agent.thread_message_received"
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            AGENT_THREAD_MESSAGE_RECEIVED: :"agent.thread_message_received"
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageReceivedEvent::type_]
           end
         end
       end

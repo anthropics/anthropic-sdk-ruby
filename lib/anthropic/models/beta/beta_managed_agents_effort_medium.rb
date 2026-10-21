@@ -6,23 +6,13 @@ module Anthropic
       class BetaManagedAgentsEffortMedium < Anthropic::Internal::Type::BaseModel
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsEffortMedium::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsEffortMedium::Type }
+        #   @return [Symbol, :medium]
+        required :type, const: :medium
 
-        # @!method initialize(type:)
+        # @!method initialize(type: :medium)
         #   Medium effort. Balances latency and reasoning depth.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsEffortMedium::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsEffortMedium#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          MEDIUM = :medium
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :medium]
       end
     end
 

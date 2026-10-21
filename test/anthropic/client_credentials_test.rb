@@ -13,7 +13,7 @@ class Anthropic::ClientCredentialsTest < Minitest::Test
     @original_env = ENV.to_h
     @tmpdir = Dir.mktmpdir
     ENV["ANTHROPIC_CONFIG_DIR"] = @tmpdir
-    ENV.delete("ANTHROPIC_BASE_URL")
+    %w[ANTHROPIC_BASE_URL ANTHROPIC_API_KEY ANTHROPIC_AUTH_TOKEN].each { ENV.delete(_1) }
     FileUtils.mkdir_p(File.join(@tmpdir, "configs"))
     FileUtils.mkdir_p(File.join(@tmpdir, "credentials"))
     WebMock.enable!
@@ -81,7 +81,202 @@ class Anthropic::ClientCredentialsTest < Minitest::Test
     client = Anthropic::Client.new
     refute_nil(client)
     assert_equal("sk-ant-key", client.api_key)
+    assert_nil(client.auth_token)
     assert_nil(client.token_cache)
+  end
+
+  def test_credential_precedence
+    stub_request(:post, "https://api.anthropic.com/v1/messages")
+      .to_return(status: 200, body: '{"content": []}', headers: {"Content-Type" => "application/json"})
+
+    write_user_oauth_profile(base_url: "https://profile.example.com")
+
+    both_env = {"ANTHROPIC_API_KEY" => "env-key", "ANTHROPIC_AUTH_TOKEN" => "env-token"}
+    provider = Anthropic::Credentials::StaticToken.new("provider-token")
+    cases = {
+      "a passed key" => [{}, {api_key: "passed-key"}, "passed-key"],
+      "the env key" => [{"ANTHROPIC_API_KEY" => "env-key"}, {}, "env-key"],
+      "the env key beats the env token" => [both_env, {}, "env-key"],
+      "an empty env key is unset" => [{**both_env, "ANTHROPIC_API_KEY" => ""}, {}, "env-token"],
+      "a passed token beats the env key" => [both_env, {auth_token: "passed-token"}, "passed-token"],
+      "a passed key beats the env token" => [both_env, {api_key: "passed-key"}, "passed-key"],
+      "a passed provider beats the env" => [both_env, {credentials: provider}, "provider-token"],
+      "a passed config beats the env" => [both_env, {config: user_oauth_config}, "oauth-token"]
+    }
+
+    cases.each do |name, (env, args, sent)|
+      WebMock.reset_executed_requests!
+      %w[ANTHROPIC_API_KEY ANTHROPIC_AUTH_TOKEN].each { ENV.delete(_1) }
+      ENV.update(env)
+
+      Anthropic::Client.new(**args).messages.create(
+        max_tokens: 1024,
+        messages: [{content: "Hello", role: :user}],
+        model: :"claude-3-opus"
+      )
+
+      assert_requested(:post, "https://api.anthropic.com/v1/messages") do |req|
+        assert_equal("Bearer #{sent}", req.headers["Authorization"], name)
+        assert_nil(req.headers["X-Api-Key"], name)
+      end
+    end
+  end
+
+  def test_empty_api_key_sends_no_credential
+    stub_request(:post, "https://api.anthropic.com/v1/messages")
+      .to_return(status: 200, body: '{"content": []}', headers: {"Content-Type" => "application/json"})
+
+    Anthropic::Client.new(api_key: "").messages.create(
+      max_tokens: 1024,
+      messages: [{content: "Hello", role: :user}],
+      model: :"claude-3-opus"
+    )
+
+    assert_requested(:post, "https://api.anthropic.com/v1/messages") do |req|
+      assert_nil(req.headers["Authorization"])
+    end
+  end
+
+  def test_env_credential_order
+    stub_request(:post, "https://api.anthropic.com/v1/messages")
+      .to_return(status: 200, body: '{"content": []}', headers: {"Content-Type" => "application/json"})
+    stub_request(:post, "https://api.anthropic.com/v1/oauth/token")
+      .to_return_json(status: 200, body: {access_token: "federated-token", expires_in: 3600})
+    write_user_oauth_profile(token: "active-profile-token")
+    write_user_oauth_profile(name: "named", token: "named-profile-token")
+
+    order = [
+      [{"ANTHROPIC_API_KEY" => "env-key"}, "env-key"],
+      [{"ANTHROPIC_AUTH_TOKEN" => "env-token"}, "env-token"],
+      [{"ANTHROPIC_PROFILE" => "named"}, "named-profile-token"],
+      [
+        {
+          "ANTHROPIC_IDENTITY_TOKEN" => "jwt",
+          "ANTHROPIC_FEDERATION_RULE_ID" => "fdrl_01abc",
+          "ANTHROPIC_ORGANIZATION_ID" => "org-123"
+        },
+        "federated-token"
+      ],
+      [{}, "active-profile-token"]
+    ]
+    ENV.update(*order.map(&:first))
+
+    order.each do |env, sent|
+      WebMock.reset_executed_requests!
+
+      Anthropic::Client.new.messages.create(
+        max_tokens: 1024,
+        messages: [{content: "Hello", role: :user}],
+        model: :"claude-3-opus"
+      )
+
+      assert_requested(:post, "https://api.anthropic.com/v1/messages") do |req|
+        assert_equal("Bearer #{sent}", req.headers["Authorization"])
+      end
+      env.each_key { ENV.delete(_1) }
+    end
+  end
+
+  def test_passed_credential_does_not_warn_about_the_env
+    ENV["ANTHROPIC_API_KEY"] = "env-key"
+
+    with_warning_not_yet_given(:@warned_env_shadow) do
+      _out, err = capture_io { Anthropic::Client.new(api_key: "passed-key") }
+      refute_match(/ANTHROPIC_API_KEY/, err)
+
+      _out, err = capture_io { Anthropic::Client.new }
+      assert_match(/ANTHROPIC_API_KEY is set and takes precedence/, err)
+    end
+  end
+
+  def test_env_key_and_env_token_warn_once
+    stub_request(:post, "https://api.anthropic.com/v1/messages")
+      .to_return(status: 200, body: '{"content": []}', headers: {"Content-Type" => "application/json"})
+    ENV.update("ANTHROPIC_API_KEY" => "env-key", "ANTHROPIC_AUTH_TOKEN" => "env-token")
+
+    with_warning_not_yet_given(:@warned_env_api_key_and_auth_token) do
+      _out, err = capture_io do
+        Anthropic::Client.new.messages.create(
+          max_tokens: 1024,
+          messages: [{content: "Hello", role: :user}],
+          model: :"claude-3-opus"
+        )
+      end
+
+      assert_equal(
+        1,
+        err.lines.count(
+          "Anthropic: ANTHROPIC_API_KEY and ANTHROPIC_AUTH_TOKEN are both set. Using ANTHROPIC_API_KEY.\n"
+        )
+      )
+      assert_requested(:post, "https://api.anthropic.com/v1/messages") do |req|
+        assert_equal("Bearer env-key", req.headers["Authorization"])
+      end
+
+      _out, err = capture_io { Anthropic::Client.new }
+      refute_match(/are both set/, err)
+    end
+  end
+
+  def test_env_key_and_env_token_warning_needs_both_and_no_passed_credential
+    both_env = {"ANTHROPIC_API_KEY" => "env-key", "ANTHROPIC_AUTH_TOKEN" => "env-token"}
+    cases = {
+      "only the env key" => [both_env.slice("ANTHROPIC_API_KEY"), {}],
+      "only the env token" => [both_env.slice("ANTHROPIC_AUTH_TOKEN"), {}],
+      "an empty env key" => [{**both_env, "ANTHROPIC_API_KEY" => ""}, {}],
+      "an empty env token" => [{**both_env, "ANTHROPIC_AUTH_TOKEN" => ""}, {}],
+      "a passed key" => [both_env, {api_key: "passed-key"}],
+      "a passed token" => [both_env, {auth_token: "passed-token"}],
+      "a passed provider" => [both_env, {credentials: Anthropic::Credentials::StaticToken.new("provider-token")}],
+      "a passed config" => [both_env, {config: user_oauth_config}]
+    }
+
+    with_warning_not_yet_given(:@warned_env_api_key_and_auth_token) do
+      cases.each do |name, (env, args)|
+        both_env.each_key { ENV.delete(_1) }
+        ENV.update(env)
+
+        _out, err = capture_io { Anthropic::Client.new(**args) }
+
+        refute_match(/are both set/, err, name)
+      end
+    end
+  end
+
+  def test_platform_client_does_not_warn_about_env_key_and_env_token
+    ENV.update("ANTHROPIC_API_KEY" => "env-key", "ANTHROPIC_AUTH_TOKEN" => "env-token")
+
+    with_warning_not_yet_given(:@warned_env_api_key_and_auth_token) do
+      _out, err = capture_io { Anthropic::AWSClient.new(skip_auth: true, base_url: "http://localhost") }
+      refute_match(/are both set/, err)
+    end
+  end
+
+  def test_api_key_header_set_by_hand
+    stub_request(:post, "https://api.anthropic.com/v1/messages")
+      .to_return(status: 307, headers: {"location" => "https://example.com/redirected"})
+    stub_request(:post, "https://example.com/redirected")
+      .to_return(status: 200, body: '{"content": []}', headers: {"Content-Type" => "application/json"})
+
+    send_x_api_key = lambda do |req, nxt|
+      next nxt.call(req) unless req.headers["authorization"] == "Bearer sk-ant-key"
+      nxt.call(req.with(headers: {**req.headers.except("authorization"), "x-api-key" => "sk-ant-key"}))
+    end
+
+    Anthropic::Client.new(api_key: "sk-ant-key", middleware: send_x_api_key).messages.create(
+      max_tokens: 1024,
+      messages: [{content: "Hello", role: :user}],
+      model: :"claude-3-opus"
+    )
+
+    assert_requested(:post, "https://api.anthropic.com/v1/messages") do |req|
+      assert_equal("sk-ant-key", req.headers["X-Api-Key"])
+      assert_nil(req.headers["Authorization"])
+    end
+    assert_requested(:post, "https://example.com/redirected") do |req|
+      assert_nil(req.headers["X-Api-Key"])
+      assert_nil(req.headers["Authorization"])
+    end
   end
 
   def test_config_parameter_creates_in_memory_config
@@ -100,21 +295,26 @@ class Anthropic::ClientCredentialsTest < Minitest::Test
     assert_instance_of(Anthropic::Credentials::InMemoryConfig, client.credentials)
   end
 
-  def test_config_and_credentials_mutually_exclusive
-    config = {
-      "organization_id" => "org-123",
-      "authentication" => {
-        "type" => "oidc_federation",
-        "federation_rule_id" => "rule-456"
-      }
+  def test_credential_options_mutually_exclusive
+    options = {
+      api_key: "passed-key",
+      auth_token: "passed-token",
+      credentials: Anthropic::Credentials::StaticToken.new("provider-token"),
+      config: user_oauth_config
     }
-    provider = Anthropic::Credentials::StaticToken.new("token")
 
-    error = assert_raises(ArgumentError) do
-      Anthropic::Client.new(config: config, credentials: provider)
+    options.keys.combination(2) do |pair|
+      error = assert_raises(ArgumentError) { Anthropic::Client.new(**options.slice(*pair)) }
+
+      assert_equal(
+        "Pass at most one of `api_key:`, `auth_token:`, `credentials:`, or `config:`. " \
+        "Received `#{pair.first}:`, `#{pair.last}:`.",
+        error.message
+      )
     end
 
-    assert_match(/at most one of.*credentials.*config/, error.message)
+    client = Anthropic::Client.new(**options.transform_values { nil }, auth_token: "passed-token")
+    assert_equal("passed-token", client.auth_token)
   end
 
   def test_config_with_base_url
@@ -305,14 +505,22 @@ class Anthropic::ClientCredentialsTest < Minitest::Test
 
   private
 
-  def write_user_oauth_profile(base_url:)
+  def with_warning_not_yet_given(flag)
+    given = Anthropic.instance_variable_get(flag)
+    Anthropic.instance_variable_set(flag, false)
+    yield
+  ensure
+    Anthropic.instance_variable_set(flag, given)
+  end
+
+  def write_user_oauth_profile(base_url: nil, name: "default", token: "profile-token")
     %w[ANTHROPIC_API_KEY ANTHROPIC_AUTH_TOKEN ANTHROPIC_PROFILE].each { ENV.delete(_1) }
     File.write(
-      File.join(@tmpdir, "configs", "default.json"),
-      JSON.generate({"base_url" => base_url, "authentication" => {"type" => "user_oauth"}})
+      File.join(@tmpdir, "configs", "#{name}.json"),
+      JSON.generate({"base_url" => base_url, "authentication" => {"type" => "user_oauth"}}.compact)
     )
-    creds_path = File.join(@tmpdir, "credentials", "default.json")
-    creds = {"access_token" => "profile-token", "expires_at" => Time.now.to_i + 3600}
+    creds_path = File.join(@tmpdir, "credentials", "#{name}.json")
+    creds = {"access_token" => token, "expires_at" => Time.now.to_i + 3600}
     File.write(creds_path, JSON.generate(creds))
     File.chmod(0o600, creds_path)
   end

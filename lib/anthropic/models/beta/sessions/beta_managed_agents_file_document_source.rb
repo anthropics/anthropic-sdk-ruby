@@ -13,25 +13,15 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileDocumentSource::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsFileDocumentSource::Type }
+          #   @return [Symbol, :file]
+          required :type, const: :file
 
-          # @!method initialize(file_id:, type:)
+          # @!method initialize(file_id:, type: :file)
           #   Document referenced by file ID.
           #
           #   @param file_id [String] ID of a previously uploaded file.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileDocumentSource::Type]
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileDocumentSource#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            FILE = :file
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :file]
         end
       end
     end

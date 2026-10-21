@@ -43,11 +43,7 @@ module Anthropic
           sig { returns(Time) }
           attr_accessor :processed_at
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelRequestEndEvent::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # Emitted when a model request completes.
@@ -59,8 +55,7 @@ module Anthropic
               model_usage:
                 Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelUsage::OrHash,
               processed_at: Time,
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelRequestEndEvent::Type::OrSymbol
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
@@ -74,7 +69,7 @@ module Anthropic
             model_usage:,
             # Timestamp when the model request completed.
             processed_at:,
-            type:
+            type: :"span.model_request_end"
           )
           end
 
@@ -87,41 +82,11 @@ module Anthropic
                 model_usage:
                   Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelUsage,
                 processed_at: Time,
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelRequestEndEvent::Type::TaggedSymbol
+                type: Symbol
               }
             )
           end
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelRequestEndEvent::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            SPAN_MODEL_REQUEST_END =
-              T.let(
-                :"span.model_request_end",
-                Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelRequestEndEvent::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelRequestEndEvent::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

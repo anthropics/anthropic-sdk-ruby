@@ -31,11 +31,10 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRunningEvent::Type]
-          required :type,
-                   enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRunningEvent::Type }
+          #   @return [Symbol, :"session.thread_status_running"]
+          required :type, const: :"session.thread_status_running"
 
-          # @!method initialize(id:, agent_name:, processed_at:, session_thread_id:, type:)
+          # @!method initialize(id:, agent_name:, processed_at:, session_thread_id:, type: :"session.thread_status_running")
           #   A session thread has begun executing. Emitted on the thread's own stream and
           #   cross-posted to the primary stream for child threads.
           #
@@ -47,17 +46,7 @@ module Anthropic
           #
           #   @param session_thread_id [String] Public sthr\_ ID of the thread that started running.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRunningEvent::Type]
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRunningEvent#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            SESSION_THREAD_STATUS_RUNNING = :"session.thread_status_running"
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :"session.thread_status_running"]
         end
       end
     end

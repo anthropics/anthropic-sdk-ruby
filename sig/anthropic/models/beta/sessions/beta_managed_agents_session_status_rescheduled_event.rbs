@@ -6,7 +6,7 @@ module Anthropic
           {
             id: String,
             processed_at: Time,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusRescheduledEvent::type_
+            type: :"session.status_rescheduled"
           }
 
         class BetaManagedAgentsSessionStatusRescheduledEvent < Anthropic::Internal::Type::BaseModel
@@ -14,29 +14,19 @@ module Anthropic
 
           attr_accessor processed_at: Time
 
-          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusRescheduledEvent::type_
+          attr_accessor type: :"session.status_rescheduled"
 
           def initialize: (
             id: String,
             processed_at: Time,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusRescheduledEvent::type_
+            ?type: :"session.status_rescheduled"
           ) -> void
 
           def to_hash: -> {
             id: String,
             processed_at: Time,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusRescheduledEvent::type_
+            type: :"session.status_rescheduled"
           }
-
-          type type_ = :"session.status_rescheduled"
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            SESSION_STATUS_RESCHEDULED: :"session.status_rescheduled"
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusRescheduledEvent::type_]
-          end
         end
       end
     end

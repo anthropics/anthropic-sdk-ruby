@@ -20,7 +20,7 @@ class Anthropic::Test::Resources::Beta::MemoryStores::MemoriesTest < Anthropic::
         memory_store_id: String,
         memory_version_id: String,
         path: String,
-        type: Anthropic::Beta::MemoryStores::BetaManagedAgentsMemory::Type,
+        type: Symbol,
         updated_at: Time,
         content: String | nil
       }
@@ -44,7 +44,7 @@ class Anthropic::Test::Resources::Beta::MemoryStores::MemoriesTest < Anthropic::
         memory_store_id: String,
         memory_version_id: String,
         path: String,
-        type: Anthropic::Beta::MemoryStores::BetaManagedAgentsMemory::Type,
+        type: Symbol,
         updated_at: Time,
         content: String | nil
       }
@@ -67,7 +67,7 @@ class Anthropic::Test::Resources::Beta::MemoryStores::MemoriesTest < Anthropic::
         memory_store_id: String,
         memory_version_id: String,
         path: String,
-        type: Anthropic::Beta::MemoryStores::BetaManagedAgentsMemory::Type,
+        type: Symbol,
         updated_at: Time,
         content: String | nil
       }
@@ -124,7 +124,7 @@ class Anthropic::Test::Resources::Beta::MemoryStores::MemoriesTest < Anthropic::
     assert_pattern do
       response => {
         id: String,
-        type: Anthropic::Beta::MemoryStores::BetaManagedAgentsDeletedMemory::Type
+        type: Symbol
       }
     end
   end

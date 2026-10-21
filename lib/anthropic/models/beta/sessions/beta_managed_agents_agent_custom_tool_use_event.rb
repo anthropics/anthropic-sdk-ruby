@@ -31,8 +31,8 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent::Type }
+          #   @return [Symbol, :"agent.custom_tool_use"]
+          required :type, const: :"agent.custom_tool_use"
 
           # @!attribute session_thread_id
           #   When set, this event was cross-posted from a subagent's thread to surface its
@@ -44,7 +44,7 @@ module Anthropic
           #   @return [String, nil]
           optional :session_thread_id, String, nil?: true
 
-          # @!method initialize(id:, input:, name:, processed_at:, type:, session_thread_id: nil)
+          # @!method initialize(id:, input:, name:, processed_at:, session_thread_id: nil, type: :"agent.custom_tool_use")
           #   Event emitted when the agent calls a custom tool. The session goes idle until
           #   the client sends a `user.custom_tool_result` event with the result. The client
           #   can send it as soon as this event arrives, without waiting for
@@ -62,19 +62,9 @@ module Anthropic
           #
           #   @param processed_at [Time] Timestamp when this tool use was processed.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent::Type]
-          #
           #   @param session_thread_id [String, nil] When set, this event was cross-posted from a subagent's thread to surface its cu
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            AGENT_CUSTOM_TOOL_USE = :"agent.custom_tool_use"
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #
+          #   @param type [Symbol, :"agent.custom_tool_use"]
         end
       end
     end

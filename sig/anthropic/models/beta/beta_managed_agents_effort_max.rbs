@@ -3,29 +3,14 @@ module Anthropic
     class BetaManagedAgentsEffortMax = Beta::BetaManagedAgentsEffortMax
 
     module Beta
-      type beta_managed_agents_effort_max =
-        { type: Anthropic::Models::Beta::BetaManagedAgentsEffortMax::type_ }
+      type beta_managed_agents_effort_max = { type: :max }
 
       class BetaManagedAgentsEffortMax < Anthropic::Internal::Type::BaseModel
-        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsEffortMax::type_
+        attr_accessor type: :max
 
-        def initialize: (
-          type: Anthropic::Models::Beta::BetaManagedAgentsEffortMax::type_
-        ) -> void
+        def initialize: (?type: :max) -> void
 
-        def to_hash: -> {
-          type: Anthropic::Models::Beta::BetaManagedAgentsEffortMax::type_
-        }
-
-        type type_ = :max
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          MAX: :max
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsEffortMax::type_]
-        end
+        def to_hash: -> { type: :max }
       end
     end
   end

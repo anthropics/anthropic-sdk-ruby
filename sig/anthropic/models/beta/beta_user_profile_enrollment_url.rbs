@@ -4,40 +4,22 @@ module Anthropic
 
     module Beta
       type beta_user_profile_enrollment_url =
-        {
-          expires_at: Time,
-          type: Anthropic::Models::Beta::BetaUserProfileEnrollmentURL::type_,
-          url: String
-        }
+        { expires_at: Time, type: :enrollment_url, url: String }
 
       class BetaUserProfileEnrollmentURL < Anthropic::Internal::Type::BaseModel
         attr_accessor expires_at: Time
 
-        attr_accessor type: Anthropic::Models::Beta::BetaUserProfileEnrollmentURL::type_
+        attr_accessor type: :enrollment_url
 
         attr_accessor url: String
 
         def initialize: (
           expires_at: Time,
-          type: Anthropic::Models::Beta::BetaUserProfileEnrollmentURL::type_,
-          url: String
+          url: String,
+          ?type: :enrollment_url
         ) -> void
 
-        def to_hash: -> {
-          expires_at: Time,
-          type: Anthropic::Models::Beta::BetaUserProfileEnrollmentURL::type_,
-          url: String
-        }
-
-        type type_ = :enrollment_url
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          ENROLLMENT_URL: :enrollment_url
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaUserProfileEnrollmentURL::type_]
-        end
+        def to_hash: -> { expires_at: Time, type: :enrollment_url, url: String }
       end
     end
   end

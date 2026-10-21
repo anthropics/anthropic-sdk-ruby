@@ -12,25 +12,15 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSessionResourceNotFoundRunError::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsSessionResourceNotFoundRunError::Type }
+        #   @return [Symbol, :session_resource_not_found_error]
+        required :type, const: :session_resource_not_found_error
 
-        # @!method initialize(message:, type:)
+        # @!method initialize(message:, type: :session_resource_not_found_error)
         #   A referenced resource no longer exists and its kind was not reported.
         #
         #   @param message [String] Human-readable error description.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSessionResourceNotFoundRunError::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsSessionResourceNotFoundRunError#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          SESSION_RESOURCE_NOT_FOUND_ERROR = :session_resource_not_found_error
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :session_resource_not_found_error]
       end
     end
 

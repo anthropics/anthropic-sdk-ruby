@@ -58,8 +58,8 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread::Type }
+          #   @return [Symbol, :session_thread]
+          required :type, const: :session_thread
 
           # @!attribute updated_at
           #   When the thread was last updated.
@@ -81,7 +81,7 @@ module Anthropic
           #   @return [String, nil]
           required :workflow_run_id, String, nil?: true
 
-          # @!method initialize(id:, agent:, archived_at:, created_at:, parent_thread_id:, session_id:, stats:, status:, type:, updated_at:, usage:, workflow_run_id:)
+          # @!method initialize(id:, agent:, archived_at:, created_at:, parent_thread_id:, session_id:, stats:, status:, updated_at:, usage:, workflow_run_id:, type: :session_thread)
           #   An execution thread within a `session`. Each session has one primary thread plus
           #   zero or more child threads.
           #
@@ -105,13 +105,13 @@ module Anthropic
           #
           #   @param status [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatus] Current execution status of the thread.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread::Type]
-          #
           #   @param updated_at [Time] When the thread was last updated.
           #
           #   @param usage [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadUsage, nil] Cumulative token usage for this thread. Null until the thread's first idle trans
           #
           #   @param workflow_run_id [String, nil] Identifier of the workflow run that created the thread, or `null` for any other
+          #
+          #   @param type [Symbol, :session_thread]
 
           # Resolved agent definition for this thread. Snapshot of the agent at thread
           # creation time.
@@ -181,25 +181,15 @@ module Anthropic
             def self.new(type:, **args)
               case type.to_sym
               when :agent
-                Anthropic::Beta::BetaManagedAgentsSessionThreadAgent.new(type: type, **args)
+                Anthropic::Beta::BetaManagedAgentsSessionThreadAgent.new(**args)
               when :advisor
-                Anthropic::Beta::BetaManagedAgentsAdvisor.new(type: type, **args)
+                Anthropic::Beta::BetaManagedAgentsAdvisor.new(**args)
               when :inline
                 Anthropic::Beta::Sessions::BetaManagedAgentsInlineAgent.new(**args)
               else
                 raise ArgumentError, "unknown type: #{type}"
               end
             end
-          end
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            SESSION_THREAD = :session_thread
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
           end
         end
       end

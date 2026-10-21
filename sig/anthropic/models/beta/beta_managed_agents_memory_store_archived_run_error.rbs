@@ -4,35 +4,19 @@ module Anthropic
 
     module Beta
       type beta_managed_agents_memory_store_archived_run_error =
-        {
-          message: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreArchivedRunError::type_
-        }
+        { message: String, type: :memory_store_archived_error }
 
       class BetaManagedAgentsMemoryStoreArchivedRunError < Anthropic::Internal::Type::BaseModel
         attr_accessor message: String
 
-        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreArchivedRunError::type_
+        attr_accessor type: :memory_store_archived_error
 
         def initialize: (
           message: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreArchivedRunError::type_
+          ?type: :memory_store_archived_error
         ) -> void
 
-        def to_hash: -> {
-          message: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreArchivedRunError::type_
-        }
-
-        type type_ = :memory_store_archived_error
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          MEMORY_STORE_ARCHIVED_ERROR: :memory_store_archived_error
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreArchivedRunError::type_]
-        end
+        def to_hash: -> { message: String, type: :memory_store_archived_error }
       end
     end
   end

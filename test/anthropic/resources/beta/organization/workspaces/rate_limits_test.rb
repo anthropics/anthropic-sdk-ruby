@@ -18,7 +18,6 @@ class Anthropic::Test::Resources::Beta::Organization::Workspaces::RateLimitsTest
     assert_pattern do
       response => {
         group: Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::Group,
-        group_type: Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::GroupType,
         limits: ^(Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimitValue]),
         models: ^(Anthropic::Internal::Type::ArrayOf[String]) | nil,
         rate_limit_id: String,
@@ -45,7 +44,6 @@ class Anthropic::Test::Resources::Beta::Organization::Workspaces::RateLimitsTest
     assert_pattern do
       row => {
         group: Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::Group,
-        group_type: Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::GroupType,
         limits: ^(Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimitValue]),
         models: ^(Anthropic::Internal::Type::ArrayOf[String]) | nil,
         rate_limit_id: String,

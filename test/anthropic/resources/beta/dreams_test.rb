@@ -25,7 +25,7 @@ class Anthropic::Test::Resources::Beta::DreamsTest < Anthropic::Test::ResourceTe
         outputs: ^(Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaDreamOutput]),
         session_id: String | nil,
         status: Anthropic::Beta::BetaDreamStatus,
-        type: Anthropic::Beta::BetaDream::Type,
+        type: Symbol,
         usage: Anthropic::Beta::BetaDreamUsage
       }
     end
@@ -52,7 +52,7 @@ class Anthropic::Test::Resources::Beta::DreamsTest < Anthropic::Test::ResourceTe
         outputs: ^(Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaDreamOutput]),
         session_id: String | nil,
         status: Anthropic::Beta::BetaDreamStatus,
-        type: Anthropic::Beta::BetaDream::Type,
+        type: Symbol,
         usage: Anthropic::Beta::BetaDreamUsage
       }
     end
@@ -86,7 +86,7 @@ class Anthropic::Test::Resources::Beta::DreamsTest < Anthropic::Test::ResourceTe
         outputs: ^(Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaDreamOutput]),
         session_id: String | nil,
         status: Anthropic::Beta::BetaDreamStatus,
-        type: Anthropic::Beta::BetaDream::Type,
+        type: Symbol,
         usage: Anthropic::Beta::BetaDreamUsage
       }
     end
@@ -113,7 +113,7 @@ class Anthropic::Test::Resources::Beta::DreamsTest < Anthropic::Test::ResourceTe
         outputs: ^(Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaDreamOutput]),
         session_id: String | nil,
         status: Anthropic::Beta::BetaDreamStatus,
-        type: Anthropic::Beta::BetaDream::Type,
+        type: Symbol,
         usage: Anthropic::Beta::BetaDreamUsage
       }
     end
@@ -140,7 +140,7 @@ class Anthropic::Test::Resources::Beta::DreamsTest < Anthropic::Test::ResourceTe
         outputs: ^(Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaDreamOutput]),
         session_id: String | nil,
         status: Anthropic::Beta::BetaDreamStatus,
-        type: Anthropic::Beta::BetaDream::Type,
+        type: Symbol,
         usage: Anthropic::Beta::BetaDreamUsage
       }
     end

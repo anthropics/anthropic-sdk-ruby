@@ -14,10 +14,10 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionRequiresAction::Type }
+          #   @return [Symbol, :requires_action]
+          required :type, const: :requires_action
 
-          # @!method initialize(event_ids:, type:)
+          # @!method initialize(event_ids:, type: :requires_action)
           #   The agent is idle waiting on one or more blocking user-input events (tool
           #   confirmation, custom tool result, etc.). Resolving all of them transitions the
           #   session back to running.
@@ -28,17 +28,7 @@ module Anthropic
           #
           #   @param event_ids [Array<String>] The ids of events the agent is blocked on. Resolving fewer than all re-emits `se
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction::Type]
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            REQUIRES_ACTION = :requires_action
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :requires_action]
         end
       end
     end

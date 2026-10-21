@@ -12,25 +12,15 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsWorkspaceArchivedRunError::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsWorkspaceArchivedRunError::Type }
+        #   @return [Symbol, :workspace_archived_error]
+        required :type, const: :workspace_archived_error
 
-        # @!method initialize(message:, type:)
+        # @!method initialize(message:, type: :workspace_archived_error)
         #   The deployment's workspace was archived.
         #
         #   @param message [String] Human-readable error description.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsWorkspaceArchivedRunError::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsWorkspaceArchivedRunError#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          WORKSPACE_ARCHIVED_ERROR = :workspace_archived_error
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :workspace_archived_error]
       end
     end
 

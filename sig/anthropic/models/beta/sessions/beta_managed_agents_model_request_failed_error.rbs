@@ -6,7 +6,7 @@ module Anthropic
           {
             message: String,
             retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::retry_status,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::type_
+            type: :model_request_failed_error
           }
 
         class BetaManagedAgentsModelRequestFailedError < Anthropic::Internal::Type::BaseModel
@@ -14,18 +14,18 @@ module Anthropic
 
           attr_accessor retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::retry_status
 
-          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::type_
+          attr_accessor type: :model_request_failed_error
 
           def initialize: (
             message: String,
             retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::retry_status,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::type_
+            ?type: :model_request_failed_error
           ) -> void
 
           def to_hash: -> {
             message: String,
             retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::retry_status,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::type_
+            type: :model_request_failed_error
           }
 
           type retry_status =
@@ -64,16 +64,6 @@ module Anthropic
                 type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::RetryStatus::type_
                 | String
               ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::retry_status
-          end
-
-          type type_ = :model_request_failed_error
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            MODEL_REQUEST_FAILED_ERROR: :model_request_failed_error
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::type_]
           end
         end
       end

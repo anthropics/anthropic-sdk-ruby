@@ -4,40 +4,22 @@ module Anthropic
 
     module Beta
       type beta_managed_agents_file_resource_config =
-        {
-          file_id: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsFileResourceConfig::type_,
-          mount_path: String?
-        }
+        { file_id: String, type: :file, mount_path: String? }
 
       class BetaManagedAgentsFileResourceConfig < Anthropic::Internal::Type::BaseModel
         attr_accessor file_id: String
 
-        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsFileResourceConfig::type_
+        attr_accessor type: :file
 
         attr_accessor mount_path: String?
 
         def initialize: (
           file_id: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsFileResourceConfig::type_,
-          ?mount_path: String?
+          ?mount_path: String?,
+          ?type: :file
         ) -> void
 
-        def to_hash: -> {
-          file_id: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsFileResourceConfig::type_,
-          mount_path: String?
-        }
-
-        type type_ = :file
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          FILE: :file
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsFileResourceConfig::type_]
-        end
+        def to_hash: -> { file_id: String, type: :file, mount_path: String? }
       end
     end
   end

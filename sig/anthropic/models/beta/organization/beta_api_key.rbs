@@ -13,8 +13,7 @@ module Anthropic
             principal: Anthropic::Models::Beta::Organization::BetaAPIKey::principal?,
             scope: Anthropic::Models::Beta::Organization::BetaAPIKey::scope,
             status: Anthropic::Models::Beta::Organization::BetaAPIKey::status,
-            type: :api_key,
-            workspace_id: String?
+            type: :api_key
           }
 
         class BetaAPIKey < Anthropic::Internal::Type::BaseModel
@@ -38,8 +37,6 @@ module Anthropic
 
           attr_accessor type: :api_key
 
-          attr_accessor workspace_id: String?
-
           def initialize: (
             id: String,
             created_at: Time,
@@ -50,7 +47,6 @@ module Anthropic
             principal: Anthropic::Models::Beta::Organization::BetaAPIKey::principal?,
             scope: Anthropic::Models::Beta::Organization::BetaAPIKey::scope,
             status: Anthropic::Models::Beta::Organization::BetaAPIKey::status,
-            workspace_id: String?,
             ?type: :api_key
           ) -> void
 
@@ -64,8 +60,7 @@ module Anthropic
             principal: Anthropic::Models::Beta::Organization::BetaAPIKey::principal?,
             scope: Anthropic::Models::Beta::Organization::BetaAPIKey::scope,
             status: Anthropic::Models::Beta::Organization::BetaAPIKey::status,
-            type: :api_key,
-            workspace_id: String?
+            type: :api_key
           }
 
           type principal =

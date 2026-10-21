@@ -181,19 +181,19 @@ module Anthropic
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Sessions::ResourceAddParams} for more details.
           #
-          # @overload add(session_id, file_id:, type:, mount_path: nil, betas: nil, workspace_id: nil, request_options: {})
+          # @overload add(session_id, file_id:, mount_path: nil, betas: nil, workspace_id: nil, type: :file, request_options: {})
           #
           # @param session_id [String] Path param
           #
           # @param file_id [String] Body param: ID of a previously uploaded file.
-          #
-          # @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsFileResourceParams::Type] Body param
           #
           # @param mount_path [String, nil] Body param: Mount path in the container. Defaults to `/mnt/session/uploads/<file
           #
           # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
+          #
+          # @param type [Symbol, :file] Body param
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #

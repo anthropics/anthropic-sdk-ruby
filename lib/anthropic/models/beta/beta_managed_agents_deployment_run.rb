@@ -52,10 +52,10 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeploymentRun::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsDeploymentRun::Type }
+        #   @return [Symbol, :deployment_run]
+        required :type, const: :deployment_run
 
-        # @!method initialize(id:, agent:, created_at:, deployment_id:, error:, session_id:, trigger_context:, type:)
+        # @!method initialize(id:, agent:, created_at:, deployment_id:, error:, session_id:, trigger_context:, type: :deployment_run)
         #   A persistent, append-only record of a single deployment execution. Records
         #   session creation success or failure — no session lifecycle tracking.
         #
@@ -76,7 +76,7 @@ module Anthropic
         #
         #   @param trigger_context [Anthropic::Models::Beta::BetaManagedAgentsScheduleTriggerContext, Anthropic::Models::Beta::BetaManagedAgentsManualTriggerContext] What triggered this run and trigger-specific metadata.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeploymentRun::Type]
+        #   @param type [Symbol, :deployment_run]
 
         # Populated on creation failure. Null on success. Exactly one of `session_id` or
         # `error` is non-null.
@@ -180,51 +180,41 @@ module Anthropic
           def self.new(type:, **args)
             case type.to_sym
             when :environment_archived_error
-              Anthropic::Beta::BetaManagedAgentsEnvironmentArchivedRunError.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsEnvironmentArchivedRunError.new(**args)
             when :agent_archived_error
-              Anthropic::Beta::BetaManagedAgentsAgentArchivedRunError.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsAgentArchivedRunError.new(**args)
             when :environment_not_found_error
-              Anthropic::Beta::BetaManagedAgentsEnvironmentNotFoundRunError.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsEnvironmentNotFoundRunError.new(**args)
             when :vault_not_found_error
-              Anthropic::Beta::BetaManagedAgentsVaultNotFoundRunError.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsVaultNotFoundRunError.new(**args)
             when :vault_archived_error
-              Anthropic::Beta::BetaManagedAgentsVaultArchivedRunError.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsVaultArchivedRunError.new(**args)
             when :file_not_found_error
-              Anthropic::Beta::BetaManagedAgentsFileNotFoundRunError.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsFileNotFoundRunError.new(**args)
             when :memory_store_archived_error
-              Anthropic::Beta::BetaManagedAgentsMemoryStoreArchivedRunError.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsMemoryStoreArchivedRunError.new(**args)
             when :skill_not_found_error
-              Anthropic::Beta::BetaManagedAgentsSkillNotFoundRunError.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsSkillNotFoundRunError.new(**args)
             when :session_resource_not_found_error
-              Anthropic::Beta::BetaManagedAgentsSessionResourceNotFoundRunError.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsSessionResourceNotFoundRunError.new(**args)
             when :workspace_archived_error
-              Anthropic::Beta::BetaManagedAgentsWorkspaceArchivedRunError.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsWorkspaceArchivedRunError.new(**args)
             when :organization_disabled_error
-              Anthropic::Beta::BetaManagedAgentsOrganizationDisabledRunError.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsOrganizationDisabledRunError.new(**args)
             when :session_rate_limited_error
-              Anthropic::Beta::BetaManagedAgentsSessionRateLimitedRunError.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsSessionRateLimitedRunError.new(**args)
             when :session_creation_rejected_error
-              Anthropic::Beta::BetaManagedAgentsSessionCreationRejectedRunError.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsSessionCreationRejectedRunError.new(**args)
             when :unknown_error
-              Anthropic::Beta::BetaManagedAgentsUnknownRunError.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsUnknownRunError.new(**args)
             when :self_hosted_resources_unsupported_error
-              Anthropic::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedRunError.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedRunError.new(**args)
             when :mcp_egress_blocked_error
-              Anthropic::Beta::BetaManagedAgentsMCPEgressBlockedRunError.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsMCPEgressBlockedRunError.new(**args)
             else
               raise ArgumentError, "unknown type: #{type}"
             end
           end
-        end
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsDeploymentRun#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          DEPLOYMENT_RUN = :deployment_run
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
         end
       end
     end

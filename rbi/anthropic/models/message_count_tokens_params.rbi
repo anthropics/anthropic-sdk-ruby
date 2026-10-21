@@ -83,7 +83,17 @@ module Anthropic
       # you can use the top-level `system` parameter.
       #
       # There is a limit of 100,000 messages in a single request.
-      sig { returns(T::Array[Anthropic::MessageParam]) }
+      sig do
+        returns(
+          T::Array[
+            T.any(
+              Anthropic::UserMessageParam,
+              Anthropic::AssistantMessageParam,
+              Anthropic::SystemMessageParam
+            )
+          ]
+        )
+      end
       attr_accessor :messages
 
       # The model that will complete your prompt.
@@ -373,7 +383,14 @@ module Anthropic
 
       sig do
         params(
-          messages: T::Array[Anthropic::MessageParam::OrHash],
+          messages:
+            T::Array[
+              T.any(
+                Anthropic::UserMessageParam::OrHash,
+                Anthropic::AssistantMessageParam::OrHash,
+                Anthropic::SystemMessageParam::OrHash
+              )
+            ],
           model: T.any(Anthropic::Model::OrSymbol, String),
           cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash),
           output_config: Anthropic::OutputConfig::OrHash,
@@ -629,7 +646,14 @@ module Anthropic
       sig do
         override.returns(
           {
-            messages: T::Array[Anthropic::MessageParam],
+            messages:
+              T::Array[
+                T.any(
+                  Anthropic::UserMessageParam,
+                  Anthropic::AssistantMessageParam,
+                  Anthropic::SystemMessageParam
+                )
+              ],
             model: T.any(Anthropic::Model::OrSymbol, String),
             cache_control: T.nilable(Anthropic::CacheControlEphemeral),
             output_config: Anthropic::OutputConfig,

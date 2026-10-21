@@ -58,7 +58,6 @@ module Anthropic
       GEN_AI_AGENT_NAME: "gen_ai.agent.name"
 
       module SpanName
-        COMPLETIONS_CREATE: "anthropic.completions.create"
         MESSAGES_CREATE: "anthropic.messages.create"
         MESSAGES_COUNT_TOKENS: "anthropic.messages.count_tokens"
         MESSAGES_BATCHES_CREATE: "anthropic.messages.batches.create"

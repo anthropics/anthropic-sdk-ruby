@@ -12,26 +12,16 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMCPEgressBlockedRunError::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsMCPEgressBlockedRunError::Type }
+        #   @return [Symbol, :mcp_egress_blocked_error]
+        required :type, const: :mcp_egress_blocked_error
 
-        # @!method initialize(message:, type:)
+        # @!method initialize(message:, type: :mcp_egress_blocked_error)
         #   An MCP server host used by the deployment's agent is blocked by the
         #   environment's network policy.
         #
         #   @param message [String] Human-readable error description.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMCPEgressBlockedRunError::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsMCPEgressBlockedRunError#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          MCP_EGRESS_BLOCKED_ERROR = :mcp_egress_blocked_error
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :mcp_egress_blocked_error]
       end
     end
 

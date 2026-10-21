@@ -29,11 +29,7 @@ module Anthropic
           sig { returns(Time) }
           attr_accessor :processed_at
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # When set, this event was cross-posted from a subagent's thread to surface its
@@ -54,9 +50,8 @@ module Anthropic
               input: T::Hash[Symbol, T.anything],
               name: String,
               processed_at: Time,
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent::Type::OrSymbol,
-              session_thread_id: T.nilable(String)
+              session_thread_id: T.nilable(String),
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
@@ -68,13 +63,13 @@ module Anthropic
             name:,
             # Timestamp when this tool use was processed.
             processed_at:,
-            type:,
             # When set, this event was cross-posted from a subagent's thread to surface its
             # custom tool use on the primary thread's stream. Empty on the thread's own
             # events. Informational only: the server routes the matching
             # `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it
             # back.
-            session_thread_id: nil
+            session_thread_id: nil,
+            type: :"agent.custom_tool_use"
           )
           end
 
@@ -85,42 +80,12 @@ module Anthropic
                 input: T::Hash[Symbol, T.anything],
                 name: String,
                 processed_at: Time,
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent::Type::TaggedSymbol,
+                type: Symbol,
                 session_thread_id: T.nilable(String)
               }
             )
           end
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            AGENT_CUSTOM_TOOL_USE =
-              T.let(
-                :"agent.custom_tool_use",
-                Anthropic::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

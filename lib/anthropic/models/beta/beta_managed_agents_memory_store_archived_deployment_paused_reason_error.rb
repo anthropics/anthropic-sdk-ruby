@@ -6,24 +6,13 @@ module Anthropic
       class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError < Anthropic::Internal::Type::BaseModel
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError::Type]
-        required :type,
-                 enum: -> { Anthropic::Beta::BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError::Type }
+        #   @return [Symbol, :memory_store_archived_error]
+        required :type, const: :memory_store_archived_error
 
-        # @!method initialize(type:)
+        # @!method initialize(type: :memory_store_archived_error)
         #   A memory store referenced by the deployment is archived.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          MEMORY_STORE_ARCHIVED_ERROR = :memory_store_archived_error
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :memory_store_archived_error]
       end
     end
 

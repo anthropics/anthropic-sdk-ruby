@@ -20,10 +20,10 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerCreateParams::Type]
-          required :type, enum: -> { Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerCreateParams::Type }
+          #   @return [Symbol, :static_bearer]
+          required :type, const: :static_bearer
 
-          # @!method initialize(token:, mcp_server_url:, type:)
+          # @!method initialize(token:, mcp_server_url:, type: :static_bearer)
           #   Parameters for creating a static bearer token credential.
           #
           #   Some parameter documentations has been truncated, see
@@ -34,17 +34,7 @@ module Anthropic
           #
           #   @param mcp_server_url [String] URL of the MCP server this credential authenticates against.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerCreateParams::Type]
-
-          # @see Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerCreateParams#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            STATIC_BEARER = :static_bearer
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :static_bearer]
         end
       end
     end

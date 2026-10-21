@@ -10,8 +10,7 @@ module Anthropic
       # `:rawPredict` publisher-model API (publisher model IDs, messages
       # only). This client speaks the full first-party Anthropic API: requests
       # pass through the gateway unchanged — standard `/v1/*` paths, standard
-      # model names. The deprecated text Completions endpoint is intentionally
-      # not exposed, and the gateway does not serve the User Profiles API.
+      # model names. The gateway does not serve the User Profiles API.
       class Client < Anthropic::Client
         # OAuth2 scope required to call the gateway.
         SCOPE = "https://www.googleapis.com/auth/cloud-platform"
@@ -156,9 +155,9 @@ module Anthropic
           # {#resolve_default_credentials?} keeps the parent from discovering
           # one; `base_url` is always resolved by this point, so the parent's
           # `ANTHROPIC_BASE_URL` fallback never applies. The parent wires up
-          # every resource; {#completions} and {#user_profiles} withhold the
-          # ones the gateway does not serve, and {#build_request} refuses the
-          # user profile routes however the resource is reached.
+          # every resource; {#user_profiles} withholds the one the gateway does
+          # not serve, and {#build_request} refuses the user profile routes
+          # however the resource is reached.
           super(
             base_url: base_url,
             timeout: timeout,
@@ -175,16 +174,6 @@ module Anthropic
         # @return [Boolean]
         # @see Anthropic::Client#resolve_default_credentials?
         private def resolve_default_credentials? = false
-
-        # The deprecated text Completions endpoint is not supported on the
-        # Google Cloud gateway.
-        #
-        # @raise [NotImplementedError]
-        def completions
-          raise NotImplementedError.new(
-            "The deprecated text Completions API is not supported on the Google Cloud gateway."
-          )
-        end
 
         # User profiles are not supported on the Google Cloud gateway.
         #
@@ -265,8 +254,8 @@ module Anthropic
 
         # @api private
         #
-        # Hard guarantee that no first-party `X-Api-Key` / `Authorization`
-        # header from static credentials reaches the wire; auth is the GCP
+        # Hard guarantee that no first-party `Authorization` header from
+        # static credentials reaches the wire; auth is the GCP
         # bearer token attached in {#provider_middleware}.
         #
         # @return [Hash{String=>String}]

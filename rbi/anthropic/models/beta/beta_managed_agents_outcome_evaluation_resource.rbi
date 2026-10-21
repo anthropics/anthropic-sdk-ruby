@@ -44,11 +44,7 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :result
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsOutcomeEvaluationResource::Type::TaggedSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # Evaluation state for a single outcome defined via a `define_outcome` event.
@@ -60,8 +56,7 @@ module Anthropic
             iteration: Integer,
             outcome_id: String,
             result: String,
-            type:
-              Anthropic::Beta::BetaManagedAgentsOutcomeEvaluationResource::Type::OrSymbol
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
@@ -82,7 +77,7 @@ module Anthropic
           # while producing or revising; `evaluating` while the grader scores;
           # `satisfied`/`max_iterations_reached`/`failed`/`interrupted` are terminal.
           result:,
-          type:
+          type: :outcome_evaluation
         )
         end
 
@@ -95,41 +90,11 @@ module Anthropic
               iteration: Integer,
               outcome_id: String,
               result: String,
-              type:
-                Anthropic::Beta::BetaManagedAgentsOutcomeEvaluationResource::Type::TaggedSymbol
+              type: Symbol
             }
           )
         end
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsOutcomeEvaluationResource::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          OUTCOME_EVALUATION =
-            T.let(
-              :outcome_evaluation,
-              Anthropic::Beta::BetaManagedAgentsOutcomeEvaluationResource::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsOutcomeEvaluationResource::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

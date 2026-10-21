@@ -11,30 +11,20 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsAgentReference::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsAgentReference::Type }
+        #   @return [Symbol, :agent]
+        required :type, const: :agent
 
         # @!attribute version
         #
         #   @return [Integer]
         required :version, Integer
 
-        # @!method initialize(id:, type:, version:)
+        # @!method initialize(id:, version:, type: :agent)
         #   A resolved agent reference with a concrete version.
         #
         #   @param id [String]
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsAgentReference::Type]
         #   @param version [Integer]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsAgentReference#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          AGENT = :agent
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :agent]
       end
     end
 

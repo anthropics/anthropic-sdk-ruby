@@ -24,10 +24,10 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Type }
+          #   @return [Symbol, :"session.error"]
+          required :type, const: :"session.error"
 
-          # @!method initialize(id:, error:, processed_at:, type:)
+          # @!method initialize(id:, error:, processed_at:, type: :"session.error")
           #   An error event indicating a problem occurred during session execution.
           #
           #   @param id [String] Unique identifier for this event.
@@ -36,7 +36,7 @@ module Anthropic
           #
           #   @param processed_at [Time] Timestamp when the error occurred.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Type]
+          #   @param type [Symbol, :"session.error"]
 
           # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent#error
           module Error
@@ -144,27 +144,21 @@ module Anthropic
             def self.new(type:, **args)
               case type.to_sym
               when :unknown_error
-                Anthropic::Beta::Sessions::BetaManagedAgentsUnknownError.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsUnknownError.new(**args)
               when :model_overloaded_error
-                Anthropic::Beta::Sessions::BetaManagedAgentsModelOverloadedError.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsModelOverloadedError.new(**args)
               when :model_rate_limited_error
-                Anthropic::Beta::Sessions::BetaManagedAgentsModelRateLimitedError.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsModelRateLimitedError.new(**args)
               when :model_request_failed_error
-                Anthropic::Beta::Sessions::BetaManagedAgentsModelRequestFailedError.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsModelRequestFailedError.new(**args)
               when :mcp_connection_failed_error
-                Anthropic::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError.new(**args)
               when :mcp_authentication_failed_error
-                Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError.new(
-                  type: type,
-                  **args
-                )
+                Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError.new(**args)
               when :billing_error
-                Anthropic::Beta::Sessions::BetaManagedAgentsBillingError.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsBillingError.new(**args)
               when :credential_host_unreachable_error
-                Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError.new(
-                  type: type,
-                  **args
-                )
+                Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError.new(**args)
               when :repository_authentication_error
                 Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError.new(**args)
               when :repository_forbidden_error
@@ -179,16 +173,6 @@ module Anthropic
                 raise ArgumentError, "unknown type: #{type}"
               end
             end
-          end
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            SESSION_ERROR = :"session.error"
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
           end
         end
       end

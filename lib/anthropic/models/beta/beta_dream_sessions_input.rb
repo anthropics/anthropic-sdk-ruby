@@ -19,10 +19,10 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaDreamSessionsInput::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaDreamSessionsInput::Type }
+        #   @return [Symbol, :sessions]
+        required :type, const: :sessions
 
-        # @!method initialize(session_ids:, type:)
+        # @!method initialize(session_ids:, type: :sessions)
         #   The sessions that a dream reads, given as an entry in `inputs`.
         #
         #   Some parameter documentations has been truncated, see
@@ -30,17 +30,7 @@ module Anthropic
         #
         #   @param session_ids [Array<String>] The IDs of the sessions whose transcripts the dream reads (`sesn_...`).
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaDreamSessionsInput::Type]
-
-        # @see Anthropic::Models::Beta::BetaDreamSessionsInput#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          SESSIONS = :sessions
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :sessions]
       end
     end
 

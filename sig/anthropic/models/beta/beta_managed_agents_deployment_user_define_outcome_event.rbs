@@ -7,7 +7,7 @@ module Anthropic
         {
           description: String,
           rubric: Anthropic::Models::Beta::BetaManagedAgentsDeploymentUserDefineOutcomeEvent::rubric,
-          type: Anthropic::Models::Beta::BetaManagedAgentsDeploymentUserDefineOutcomeEvent::type_,
+          type: :"user.define_outcome",
           max_iterations: Integer?
         }
 
@@ -16,21 +16,21 @@ module Anthropic
 
         attr_accessor rubric: Anthropic::Models::Beta::BetaManagedAgentsDeploymentUserDefineOutcomeEvent::rubric
 
-        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsDeploymentUserDefineOutcomeEvent::type_
+        attr_accessor type: :"user.define_outcome"
 
         attr_accessor max_iterations: Integer?
 
         def initialize: (
           description: String,
           rubric: Anthropic::Models::Beta::BetaManagedAgentsDeploymentUserDefineOutcomeEvent::rubric,
-          type: Anthropic::Models::Beta::BetaManagedAgentsDeploymentUserDefineOutcomeEvent::type_,
-          ?max_iterations: Integer?
+          ?max_iterations: Integer?,
+          ?type: :"user.define_outcome"
         ) -> void
 
         def to_hash: -> {
           description: String,
           rubric: Anthropic::Models::Beta::BetaManagedAgentsDeploymentUserDefineOutcomeEvent::rubric,
-          type: Anthropic::Models::Beta::BetaManagedAgentsDeploymentUserDefineOutcomeEvent::type_,
+          type: :"user.define_outcome",
           max_iterations: Integer?
         }
 
@@ -69,16 +69,6 @@ module Anthropic
               ?file_id: String,
               ?content: String
             ) -> Anthropic::Models::Beta::BetaManagedAgentsDeploymentUserDefineOutcomeEvent::rubric
-        end
-
-        type type_ = :"user.define_outcome"
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          USER_DEFINE_OUTCOME: :"user.define_outcome"
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsDeploymentUserDefineOutcomeEvent::type_]
         end
       end
     end

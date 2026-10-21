@@ -11,7 +11,7 @@ module Anthropic
             memory_store_id: String,
             memory_version_id: String,
             path: String,
-            type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemory::type_,
+            type: :memory,
             updated_at: Time,
             content: String?
           }
@@ -31,7 +31,7 @@ module Anthropic
 
           attr_accessor path: String
 
-          attr_accessor type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemory::type_
+          attr_accessor type: :memory
 
           attr_accessor updated_at: Time
 
@@ -45,9 +45,9 @@ module Anthropic
             memory_store_id: String,
             memory_version_id: String,
             path: String,
-            type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemory::type_,
             updated_at: Time,
-            ?content: String?
+            ?content: String?,
+            ?type: :memory
           ) -> void
 
           def to_hash: -> {
@@ -58,20 +58,10 @@ module Anthropic
             memory_store_id: String,
             memory_version_id: String,
             path: String,
-            type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemory::type_,
+            type: :memory,
             updated_at: Time,
             content: String?
           }
-
-          type type_ = :memory
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            MEMORY: :memory
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemory::type_]
-          end
         end
       end
     end

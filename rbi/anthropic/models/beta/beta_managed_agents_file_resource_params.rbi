@@ -19,11 +19,7 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :file_id
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsFileResourceParams::Type::OrSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
@@ -34,60 +30,25 @@ module Anthropic
         sig do
           params(
             file_id: String,
-            type:
-              Anthropic::Beta::BetaManagedAgentsFileResourceParams::Type::OrSymbol,
-            mount_path: T.nilable(String)
+            mount_path: T.nilable(String),
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
           # ID of a previously uploaded file.
           file_id:,
-          type:,
           # Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
-          mount_path: nil
+          mount_path: nil,
+          type: :file
         )
         end
 
         sig do
           override.returns(
-            {
-              file_id: String,
-              type:
-                Anthropic::Beta::BetaManagedAgentsFileResourceParams::Type::OrSymbol,
-              mount_path: T.nilable(String)
-            }
+            { file_id: String, type: Symbol, mount_path: T.nilable(String) }
           )
         end
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsFileResourceParams::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          FILE =
-            T.let(
-              :file,
-              Anthropic::Beta::BetaManagedAgentsFileResourceParams::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsFileResourceParams::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

@@ -23,27 +23,17 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMCPToolset::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsMCPToolset::Type }
+        #   @return [Symbol, :mcp_toolset]
+        required :type, const: :mcp_toolset
 
-        # @!method initialize(configs:, default_config:, mcp_server_name:, type:)
+        # @!method initialize(configs:, default_config:, mcp_server_name:, type: :mcp_toolset)
         #   @param configs [Array<Anthropic::Models::Beta::BetaManagedAgentsMCPToolConfig>]
         #
         #   @param default_config [Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetDefaultConfig] Resolved default configuration for all tools from an MCP server.
         #
         #   @param mcp_server_name [String]
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMCPToolset::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsMCPToolset#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          MCP_TOOLSET = :mcp_toolset
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :mcp_toolset]
       end
     end
 

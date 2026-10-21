@@ -15,10 +15,10 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaDreamOutput::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaDreamOutput::Type }
+        #   @return [Symbol, :memory_store]
+        required :type, const: :memory_store
 
-        # @!method initialize(memory_store_id:, type:)
+        # @!method initialize(memory_store_id:, type: :memory_store)
         #   An entry in a dream's `outputs` that references the memory store holding its
         #   result.
         #
@@ -27,17 +27,7 @@ module Anthropic
         #
         #   @param memory_store_id [String] The ID of the memory store that the dream writes its result to (`memstore_...`).
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaDreamOutput::Type]
-
-        # @see Anthropic::Models::Beta::BetaDreamOutput#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          MEMORY_STORE = :memory_store
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :memory_store]
       end
     end
 

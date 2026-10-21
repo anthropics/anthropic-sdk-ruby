@@ -2,8 +2,6 @@ module Anthropic
   module Helpers
     module Vertex
       class Client < Anthropic::Client
-        DEFAULT_VERSION: String
-
         attr_reader region: String
 
         attr_reader project_id: String

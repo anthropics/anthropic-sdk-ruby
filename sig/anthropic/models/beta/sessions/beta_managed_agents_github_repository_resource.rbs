@@ -7,7 +7,7 @@ module Anthropic
             id: String,
             created_at: Time,
             mount_path: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::type_,
+            type: :github_repository,
             updated_at: Time,
             url: String,
             checkout: Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::checkout?
@@ -20,7 +20,7 @@ module Anthropic
 
           attr_accessor mount_path: String
 
-          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::type_
+          attr_accessor type: :github_repository
 
           attr_accessor updated_at: Time
 
@@ -32,31 +32,21 @@ module Anthropic
             id: String,
             created_at: Time,
             mount_path: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::type_,
             updated_at: Time,
             url: String,
-            ?checkout: Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::checkout?
+            ?checkout: Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::checkout?,
+            ?type: :github_repository
           ) -> void
 
           def to_hash: -> {
             id: String,
             created_at: Time,
             mount_path: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::type_,
+            type: :github_repository,
             updated_at: Time,
             url: String,
             checkout: Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::checkout?
           }
-
-          type type_ = :github_repository
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            GITHUB_REPOSITORY: :github_repository
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::type_]
-          end
 
           type checkout =
             Anthropic::Beta::BetaManagedAgentsBranchCheckout

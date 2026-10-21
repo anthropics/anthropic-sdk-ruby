@@ -6,7 +6,7 @@ module Anthropic
           {
             message: String,
             retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError::retry_status,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError::type_
+            type: :model_overloaded_error
           }
 
         class BetaManagedAgentsModelOverloadedError < Anthropic::Internal::Type::BaseModel
@@ -14,18 +14,18 @@ module Anthropic
 
           attr_accessor retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError::retry_status
 
-          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError::type_
+          attr_accessor type: :model_overloaded_error
 
           def initialize: (
             message: String,
             retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError::retry_status,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError::type_
+            ?type: :model_overloaded_error
           ) -> void
 
           def to_hash: -> {
             message: String,
             retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError::retry_status,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError::type_
+            type: :model_overloaded_error
           }
 
           type retry_status =
@@ -64,16 +64,6 @@ module Anthropic
                 type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError::RetryStatus::type_
                 | String
               ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError::retry_status
-          end
-
-          type type_ = :model_overloaded_error
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            MODEL_OVERLOADED_ERROR: :model_overloaded_error
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError::type_]
           end
         end
       end

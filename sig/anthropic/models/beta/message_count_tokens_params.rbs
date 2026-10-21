@@ -3,7 +3,7 @@ module Anthropic
     module Beta
       type message_count_tokens_params =
         {
-          messages: ::Array[Anthropic::Beta::BetaMessageParam],
+          messages: ::Array[Anthropic::Models::Beta::beta_message_param],
           model: Anthropic::Models::model,
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           compaction: Anthropic::Beta::BetaCompactionConfig?,
@@ -26,7 +26,7 @@ module Anthropic
         extend Anthropic::Internal::Type::RequestParameters::Converter
         include Anthropic::Internal::Type::RequestParameters
 
-        attr_accessor messages: ::Array[Anthropic::Beta::BetaMessageParam]
+        attr_accessor messages: ::Array[Anthropic::Models::Beta::beta_message_param]
 
         attr_accessor model: Anthropic::Models::model
 
@@ -91,7 +91,7 @@ module Anthropic
         def workspace_id=: (String) -> String
 
         def initialize: (
-          messages: ::Array[Anthropic::Beta::BetaMessageParam],
+          messages: ::Array[Anthropic::Models::Beta::beta_message_param],
           model: Anthropic::Models::model,
           ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           ?compaction: Anthropic::Beta::BetaCompactionConfig?,
@@ -111,7 +111,7 @@ module Anthropic
         ) -> void
 
         def to_hash: -> {
-          messages: ::Array[Anthropic::Beta::BetaMessageParam],
+          messages: ::Array[Anthropic::Models::Beta::beta_message_param],
           model: Anthropic::Models::model,
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           compaction: Anthropic::Beta::BetaCompactionConfig?,

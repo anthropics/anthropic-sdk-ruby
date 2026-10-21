@@ -19,27 +19,17 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusRunningEvent::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusRunningEvent::Type }
+          #   @return [Symbol, :"session.status_running"]
+          required :type, const: :"session.status_running"
 
-          # @!method initialize(id:, processed_at:, type:)
+          # @!method initialize(id:, processed_at:, type: :"session.status_running")
           #   Indicates the session is actively running and the agent is working.
           #
           #   @param id [String] Unique identifier for this event.
           #
           #   @param processed_at [Time] Timestamp of status change.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusRunningEvent::Type]
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusRunningEvent#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            SESSION_STATUS_RUNNING = :"session.status_running"
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :"session.status_running"]
         end
       end
     end

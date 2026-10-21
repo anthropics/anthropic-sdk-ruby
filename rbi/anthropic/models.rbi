@@ -5,6 +5,8 @@ module Anthropic
 
   APIErrorObject = Anthropic::Models::APIErrorObject
 
+  AssistantMessageParam = Anthropic::Models::AssistantMessageParam
+
   AuthenticationError = Anthropic::Models::AuthenticationError
 
   Base64ImageSource = Anthropic::Models::Base64ImageSource
@@ -389,10 +391,6 @@ module Anthropic
   CodeExecutionToolResultErrorParam =
     Anthropic::Models::CodeExecutionToolResultErrorParam
 
-  Completion = Anthropic::Models::Completion
-
-  CompletionCreateParams = Anthropic::Models::CompletionCreateParams
-
   ComputerCursorPositionConfig = Anthropic::Models::ComputerCursorPositionConfig
 
   ComputerCursorPositionInput = Anthropic::Models::ComputerCursorPositionInput
@@ -596,6 +594,8 @@ module Anthropic
 
   Message = Anthropic::Models::Message
 
+  MessageContentParam = Anthropic::Models::MessageContentParam
+
   MessageCountTokensParams = Anthropic::Models::MessageCountTokensParams
 
   MessageCountTokensTool = Anthropic::Models::MessageCountTokensTool
@@ -703,6 +703,8 @@ module Anthropic
   SkillSource = Anthropic::Models::SkillSource
 
   StopReason = Anthropic::Models::StopReason
+
+  SystemMessageParam = Anthropic::Models::SystemMessageParam
 
   TextBlock = Anthropic::Models::TextBlock
 
@@ -833,6 +835,8 @@ module Anthropic
   Usage = Anthropic::Models::Usage
 
   UserLocation = Anthropic::Models::UserLocation
+
+  UserMessageParam = Anthropic::Models::UserMessageParam
 
   UserProfile = Anthropic::Models::UserProfile
 

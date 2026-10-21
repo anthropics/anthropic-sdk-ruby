@@ -4,9 +4,9 @@
 # Workload Identity Federation & Credential Providers examples.
 #
 # The Anthropic client resolves auth in this precedence order:
-#   1. Constructor args: api_key:, auth_token:, or credentials:
+#   1. One constructor arg: api_key:, auth_token:, credentials:, or config: (passing two raises)
 #   2. Env vars: ANTHROPIC_API_KEY, ANTHROPIC_AUTH_TOKEN, then the credential chain below
-#   3. Standard defaults: ~/.config/anthropic/credentials.json if it exists
+#   3. Standard defaults: the active profile under ~/.config/anthropic if it exists
 #
 # The `credentials:` arg accepts any AccessTokenProvider — a callable returning
 # AccessToken.new(token:, expires_at:). The client caches the token and proactively

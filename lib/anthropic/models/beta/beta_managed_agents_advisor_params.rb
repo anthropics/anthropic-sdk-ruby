@@ -13,10 +13,10 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsAdvisorParams::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsAdvisorParams::Type }
+        #   @return [Symbol, :advisor]
+        required :type, const: :advisor
 
-        # @!method initialize(model:, type:)
+        # @!method initialize(model:, type: :advisor)
         #   Platform advisor roster entry: a model the session's primary thread may consult
         #   mid-turn. At most one per roster; the entry occupies the roster name
         #   `anthropic.advisor`.
@@ -26,17 +26,7 @@ module Anthropic
         #
         #   @param model [String] A Claude model id. The model must be permitted as an advisor for this agent's mo
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsAdvisorParams::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsAdvisorParams#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          ADVISOR = :advisor
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :advisor]
       end
     end
 

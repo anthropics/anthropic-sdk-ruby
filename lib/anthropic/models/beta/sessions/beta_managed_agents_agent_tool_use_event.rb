@@ -31,8 +31,8 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::Type }
+          #   @return [Symbol, :"agent.tool_use"]
+          required :type, const: :"agent.tool_use"
 
           # @!attribute evaluated_permission
           #   The evaluated permission policy for this tool invocation.
@@ -63,7 +63,7 @@ module Anthropic
           #   @return [String, nil]
           optional :session_thread_id, String, nil?: true
 
-          # @!method initialize(id:, input:, name:, processed_at:, type:, evaluated_permission: nil, evaluation: nil, session_thread_id: nil)
+          # @!method initialize(id:, input:, name:, processed_at:, evaluated_permission: nil, evaluation: nil, session_thread_id: nil, type: :"agent.tool_use")
           #   Event emitted when the agent invokes a built-in agent tool.
           #
           #   Some parameter documentations has been truncated, see
@@ -78,23 +78,13 @@ module Anthropic
           #
           #   @param processed_at [Time] Timestamp when this event was processed.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::Type]
-          #
           #   @param evaluated_permission [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentEvaluatedPermission] The evaluated permission policy for this tool invocation.
           #
           #   @param evaluation [Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAllow, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAsk, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAuto] Which resolved permission_policy produced evaluated_permission: always_allow, al
           #
           #   @param session_thread_id [String, nil] When set, this event was cross-posted from a subagent's thread to surface its pe
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            AGENT_TOOL_USE = :"agent.tool_use"
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #
+          #   @param type [Symbol, :"agent.tool_use"]
         end
       end
     end

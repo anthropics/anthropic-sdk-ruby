@@ -4,35 +4,19 @@ module Anthropic
 
     module Beta
       type beta_output_behavior_update_existing =
-        {
-          memory_store_id: String,
-          type: Anthropic::Models::Beta::BetaOutputBehaviorUpdateExisting::type_
-        }
+        { memory_store_id: String, type: :update_existing }
 
       class BetaOutputBehaviorUpdateExisting < Anthropic::Internal::Type::BaseModel
         attr_accessor memory_store_id: String
 
-        attr_accessor type: Anthropic::Models::Beta::BetaOutputBehaviorUpdateExisting::type_
+        attr_accessor type: :update_existing
 
         def initialize: (
           memory_store_id: String,
-          type: Anthropic::Models::Beta::BetaOutputBehaviorUpdateExisting::type_
+          ?type: :update_existing
         ) -> void
 
-        def to_hash: -> {
-          memory_store_id: String,
-          type: Anthropic::Models::Beta::BetaOutputBehaviorUpdateExisting::type_
-        }
-
-        type type_ = :update_existing
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          UPDATE_EXISTING: :update_existing
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaOutputBehaviorUpdateExisting::type_]
-        end
+        def to_hash: -> { memory_store_id: String, type: :update_existing }
       end
     end
   end

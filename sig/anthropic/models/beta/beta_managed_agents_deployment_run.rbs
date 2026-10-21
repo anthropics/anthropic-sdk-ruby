@@ -12,7 +12,7 @@ module Anthropic
           error: Anthropic::Models::Beta::BetaManagedAgentsDeploymentRun::error?,
           session_id: String?,
           trigger_context: Anthropic::Models::Beta::beta_managed_agents_trigger_context,
-          type: Anthropic::Models::Beta::BetaManagedAgentsDeploymentRun::type_
+          type: :deployment_run
         }
 
       class BetaManagedAgentsDeploymentRun < Anthropic::Internal::Type::BaseModel
@@ -30,7 +30,7 @@ module Anthropic
 
         attr_accessor trigger_context: Anthropic::Models::Beta::beta_managed_agents_trigger_context
 
-        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsDeploymentRun::type_
+        attr_accessor type: :deployment_run
 
         def initialize: (
           id: String,
@@ -40,7 +40,7 @@ module Anthropic
           error: Anthropic::Models::Beta::BetaManagedAgentsDeploymentRun::error?,
           session_id: String?,
           trigger_context: Anthropic::Models::Beta::beta_managed_agents_trigger_context,
-          type: Anthropic::Models::Beta::BetaManagedAgentsDeploymentRun::type_
+          ?type: :deployment_run
         ) -> void
 
         def to_hash: -> {
@@ -51,7 +51,7 @@ module Anthropic
           error: Anthropic::Models::Beta::BetaManagedAgentsDeploymentRun::error?,
           session_id: String?,
           trigger_context: Anthropic::Models::Beta::beta_managed_agents_trigger_context,
-          type: Anthropic::Models::Beta::BetaManagedAgentsDeploymentRun::type_
+          type: :deployment_run
         }
 
         type error =
@@ -194,16 +194,6 @@ module Anthropic
               | String,
               message: String
             ) -> Anthropic::Models::Beta::BetaManagedAgentsDeploymentRun::error
-        end
-
-        type type_ = :deployment_run
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          DEPLOYMENT_RUN: :deployment_run
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsDeploymentRun::type_]
         end
       end
     end

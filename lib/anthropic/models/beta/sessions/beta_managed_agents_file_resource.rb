@@ -29,8 +29,8 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileResource::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsFileResource::Type }
+          #   @return [Symbol, :file]
+          required :type, const: :file
 
           # @!attribute updated_at
           #   A timestamp in RFC 3339 format
@@ -38,7 +38,7 @@ module Anthropic
           #   @return [Time]
           required :updated_at, Time
 
-          # @!method initialize(id:, created_at:, file_id:, mount_path:, type:, updated_at:)
+          # @!method initialize(id:, created_at:, file_id:, mount_path:, updated_at:, type: :file)
           #   @param id [String]
           #
           #   @param created_at [Time] A timestamp in RFC 3339 format
@@ -47,19 +47,9 @@ module Anthropic
           #
           #   @param mount_path [String]
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileResource::Type]
-          #
           #   @param updated_at [Time] A timestamp in RFC 3339 format
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileResource#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            FILE = :file
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #
+          #   @param type [Symbol, :file]
         end
       end
     end

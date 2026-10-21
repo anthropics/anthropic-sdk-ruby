@@ -33,11 +33,7 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :secret_value
 
-          sig do
-            returns(
-              Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams::Type::OrSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # Where in the outbound request the secret value may be substituted.
@@ -68,10 +64,9 @@ module Anthropic
                 ),
               secret_name: String,
               secret_value: String,
-              type:
-                Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams::Type::OrSymbol,
               injection_location:
-                Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationParams::OrHash
+                Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationParams::OrHash,
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
@@ -82,9 +77,9 @@ module Anthropic
             # The secret to substitute into the agent's outbound requests. It's write-only and
             # never returned in responses.
             secret_value:,
-            type:,
             # Where in the outbound request the secret value may be substituted.
-            injection_location: nil
+            injection_location: nil,
+            type: :environment_variable
           )
           end
 
@@ -98,43 +93,13 @@ module Anthropic
                   ),
                 secret_name: String,
                 secret_value: String,
-                type:
-                  Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams::Type::OrSymbol,
+                type: Symbol,
                 injection_location:
                   Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationParams
               }
             )
           end
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            ENVIRONMENT_VARIABLE =
-              T.let(
-                :environment_variable,
-                Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

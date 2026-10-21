@@ -20,17 +20,17 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::Type }
+          #   @return [Symbol, :model_request_failed_error]
+          required :type, const: :model_request_failed_error
 
-          # @!method initialize(message:, retry_status:, type:)
+          # @!method initialize(message:, retry_status:, type: :model_request_failed_error)
           #   A model request failed for a reason other than overload or rate-limiting.
           #
           #   @param message [String] Human-readable error description.
           #
           #   @param retry_status [Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal] What the client should do next.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::Type]
+          #   @param type [Symbol, :model_request_failed_error]
 
           # What the client should do next.
           #
@@ -75,25 +75,15 @@ module Anthropic
             def self.new(type:, **args)
               case type.to_sym
               when :retrying
-                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying.new(**args)
               when :exhausted
-                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted.new(**args)
               when :terminal
-                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal.new(**args)
               else
                 raise ArgumentError, "unknown type: #{type}"
               end
             end
-          end
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            MODEL_REQUEST_FAILED_ERROR = :model_request_failed_error
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
           end
         end
       end

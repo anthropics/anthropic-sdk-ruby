@@ -71,7 +71,7 @@ module Anthropic
             type params =
               {
                 max_tokens: Integer,
-                messages: ::Array[Anthropic::Beta::BetaMessageParam],
+                messages: ::Array[Anthropic::Models::Beta::beta_message_param],
                 model: Anthropic::Models::model,
                 cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
                 compaction: Anthropic::Beta::BetaCompactionConfig?,
@@ -90,18 +90,15 @@ module Anthropic
                 stop_sequences: ::Array[String],
                 stream: bool,
                 system_: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_,
-                temperature: Float,
                 thinking: Anthropic::Models::Beta::beta_thinking_config_param,
                 tool_choice: Anthropic::Models::Beta::beta_tool_choice,
-                tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
-                top_k: Integer,
-                top_p: Float
+                tools: ::Array[Anthropic::Models::Beta::beta_tool_union]
               }
 
             class Params < Anthropic::Internal::Type::BaseModel
               attr_accessor max_tokens: Integer
 
-              attr_accessor messages: ::Array[Anthropic::Beta::BetaMessageParam]
+              attr_accessor messages: ::Array[Anthropic::Models::Beta::beta_message_param]
 
               attr_accessor model: Anthropic::Models::model
 
@@ -163,10 +160,6 @@ module Anthropic
                 Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_
               ) -> Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_
 
-              attr_reader temperature: Float?
-
-              def temperature=: (Float) -> Float
-
               attr_reader thinking: Anthropic::Models::Beta::beta_thinking_config_param?
 
               def thinking=: (
@@ -185,17 +178,9 @@ module Anthropic
                 ::Array[Anthropic::Models::Beta::beta_tool_union]
               ) -> ::Array[Anthropic::Models::Beta::beta_tool_union]
 
-              attr_reader top_k: Integer?
-
-              def top_k=: (Integer) -> Integer
-
-              attr_reader top_p: Float?
-
-              def top_p=: (Float) -> Float
-
               def initialize: (
                 max_tokens: Integer,
-                messages: ::Array[Anthropic::Beta::BetaMessageParam],
+                messages: ::Array[Anthropic::Models::Beta::beta_message_param],
                 model: Anthropic::Models::model,
                 ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
                 ?compaction: Anthropic::Beta::BetaCompactionConfig?,
@@ -214,17 +199,14 @@ module Anthropic
                 ?stop_sequences: ::Array[String],
                 ?stream: bool,
                 ?system_: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_,
-                ?temperature: Float,
                 ?thinking: Anthropic::Models::Beta::beta_thinking_config_param,
                 ?tool_choice: Anthropic::Models::Beta::beta_tool_choice,
-                ?tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
-                ?top_k: Integer,
-                ?top_p: Float
+                ?tools: ::Array[Anthropic::Models::Beta::beta_tool_union]
               ) -> void
 
               def to_hash: -> {
                 max_tokens: Integer,
-                messages: ::Array[Anthropic::Beta::BetaMessageParam],
+                messages: ::Array[Anthropic::Models::Beta::beta_message_param],
                 model: Anthropic::Models::model,
                 cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
                 compaction: Anthropic::Beta::BetaCompactionConfig?,
@@ -243,12 +225,9 @@ module Anthropic
                 stop_sequences: ::Array[String],
                 stream: bool,
                 system_: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_,
-                temperature: Float,
                 thinking: Anthropic::Models::Beta::beta_thinking_config_param,
                 tool_choice: Anthropic::Models::Beta::beta_tool_choice,
-                tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
-                top_k: Integer,
-                top_p: Float
+                tools: ::Array[Anthropic::Models::Beta::beta_tool_union]
               }
 
               type container = Anthropic::Beta::BetaContainerParams | String

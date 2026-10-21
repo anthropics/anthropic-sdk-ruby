@@ -6,23 +6,13 @@ module Anthropic
       class BetaManagedAgentsEffortMax < Anthropic::Internal::Type::BaseModel
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsEffortMax::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsEffortMax::Type }
+        #   @return [Symbol, :max]
+        required :type, const: :max
 
-        # @!method initialize(type:)
+        # @!method initialize(type: :max)
         #   Maximum effort. Favors reasoning depth over latency.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsEffortMax::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsEffortMax#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          MAX = :max
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :max]
       end
     end
 

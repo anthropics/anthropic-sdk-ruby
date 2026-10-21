@@ -189,7 +189,7 @@ module Anthropic
           #
           # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
           #
-          #   @option args [String] :workspace_id ID of the Workspace the API key belongs to. Unlike the deprecated top-level `wor
+          #   @option args [String] :workspace_id ID of the Workspace the API key belongs to, including when it is the organizatio
           #
           # @raise [ArgumentError]
           # @return [Anthropic::Models::Organization::APIKeyOrganizationScope, Anthropic::Models::Organization::APIKeyWorkspaceScope]

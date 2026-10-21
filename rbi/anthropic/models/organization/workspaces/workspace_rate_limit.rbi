@@ -15,8 +15,7 @@ module Anthropic
               )
             end
 
-          # The rate-limit group this entry's limits apply to. Its `type` equals
-          # `group_type`.
+          # The rate-limit group this entry's limits apply to.
           sig do
             returns(
               Anthropic::Organization::Workspaces::WorkspaceRateLimit::Group::Variants
@@ -38,7 +37,7 @@ module Anthropic
           attr_accessor :limits
 
           # Model names this entry's limits apply to, including aliases. `null` when
-          # `group_type` is not `"model_group"`.
+          # `group.type` is not `"model_group"`.
           sig { returns(T.nilable(T::Array[String])) }
           attr_accessor :models
 
@@ -76,8 +75,7 @@ module Anthropic
             ).returns(T.attached_class)
           end
           def self.new(
-            # The rate-limit group this entry's limits apply to. Its `type` equals
-            # `group_type`.
+            # The rate-limit group this entry's limits apply to.
             group:,
             # The workspace's limiter values for this group. By default only the limiter types
             # with a workspace-level override are listed. With `include_inherited` set to
@@ -85,7 +83,7 @@ module Anthropic
             # listed too, each marked by `source`.
             limits:,
             # Model names this entry's limits apply to, including aliases. `null` when
-            # `group_type` is not `"model_group"`.
+            # `group.type` is not `"model_group"`.
             models:,
             # The `id` of the organization's RateLimit entry this entry applies to.
             rate_limit_id:,
@@ -115,8 +113,7 @@ module Anthropic
           def to_hash
           end
 
-          # The rate-limit group this entry's limits apply to. Its `type` equals
-          # `group_type`.
+          # The rate-limit group this entry's limits apply to.
           module Group
             extend Anthropic::Internal::Type::Union
 

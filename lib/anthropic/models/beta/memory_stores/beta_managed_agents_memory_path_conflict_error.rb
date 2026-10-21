@@ -7,8 +7,8 @@ module Anthropic
         class BetaManagedAgentsMemoryPathConflictError < Anthropic::Internal::Type::BaseModel
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryPathConflictError::Type]
-          required :type, enum: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryPathConflictError::Type }
+          #   @return [Symbol, :memory_path_conflict_error]
+          required :type, const: :memory_path_conflict_error
 
           # @!attribute conflicting_memory_id
           #   The ID of the memory that blocked the write (`mem_...`), or an empty string if
@@ -33,7 +33,7 @@ module Anthropic
           #   @return [String, nil]
           optional :message, String
 
-          # @!method initialize(type:, conflicting_memory_id: nil, conflicting_path: nil, message: nil)
+          # @!method initialize(conflicting_memory_id: nil, conflicting_path: nil, message: nil, type: :memory_path_conflict_error)
           #   The error returned with HTTP status 409 when you create or rename a memory and
           #   the path you give is already used by another memory or overlaps another memory's
           #   path.
@@ -47,23 +47,13 @@ module Anthropic
           #   {Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryPathConflictError}
           #   for more details.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryPathConflictError::Type]
-          #
           #   @param conflicting_memory_id [String] The ID of the memory that blocked the write (`mem_...`), or an empty string if t
           #
           #   @param conflicting_path [String] The path that blocked the write: the requested path, or the path of a memory tha
           #
           #   @param message [String] A human-readable explanation of the conflict. To handle the error in code, use `
-
-          # @see Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryPathConflictError#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            MEMORY_PATH_CONFLICT_ERROR = :memory_path_conflict_error
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #
+          #   @param type [Symbol, :memory_path_conflict_error]
         end
       end
     end

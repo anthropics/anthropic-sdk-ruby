@@ -12,26 +12,16 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsUnknownRunError::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsUnknownRunError::Type }
+        #   @return [Symbol, :unknown_error]
+        required :type, const: :unknown_error
 
-        # @!method initialize(message:, type:)
+        # @!method initialize(message:, type: :unknown_error)
         #   An unknown or unexpected error caused the run to fail. A fallback variant;
         #   clients that do not recognize a new error type can match on message alone.
         #
         #   @param message [String] Human-readable error description.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsUnknownRunError::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsUnknownRunError#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          UNKNOWN_ERROR = :unknown_error
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :unknown_error]
       end
     end
 

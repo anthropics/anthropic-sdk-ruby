@@ -22,8 +22,8 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsCronSchedule::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsCronSchedule::Type }
+        #   @return [Symbol, :cron]
+        required :type, const: :cron
 
         # @!attribute last_run_at
         #   Time the most recent scheduled run actually started. Null until one completes;
@@ -42,7 +42,7 @@ module Anthropic
         #   @return [Array<Time>, nil]
         optional :upcoming_runs_at, Anthropic::Internal::Type::ArrayOf[Time]
 
-        # @!method initialize(expression:, timezone:, type:, last_run_at: nil, upcoming_runs_at: nil)
+        # @!method initialize(expression:, timezone:, last_run_at: nil, upcoming_runs_at: nil, type: :cron)
         #   5-field POSIX cron schedule with computed runtime timestamps.
         #
         #   Some parameter documentations has been truncated, see
@@ -52,21 +52,11 @@ module Anthropic
         #
         #   @param timezone [String] IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsCronSchedule::Type]
-        #
         #   @param last_run_at [Time, nil] Time the most recent scheduled run actually started. Null until one completes; p
         #
         #   @param upcoming_runs_at [Array<Time>] Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsCronSchedule#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          CRON = :cron
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #
+        #   @param type [Symbol, :cron]
       end
     end
 

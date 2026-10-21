@@ -13,8 +13,8 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock::Type }
+          #   @return [Symbol, :document]
+          required :type, const: :document
 
           # @!attribute context
           #   Additional context about the document for the model.
@@ -28,17 +28,17 @@ module Anthropic
           #   @return [String, nil]
           optional :title, String, nil?: true
 
-          # @!method initialize(source:, type:, context: nil, title: nil)
+          # @!method initialize(source:, context: nil, title: nil, type: :document)
           #   Document content, either specified directly as base64 data, as text, or as a
           #   reference via a URL.
           #
           #   @param source [Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64DocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsURLDocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileDocumentSource] The source of the document data.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock::Type]
-          #
           #   @param context [String, nil] Additional context about the document for the model.
           #
           #   @param title [String, nil] The title of the document.
+          #
+          #   @param type [Symbol, :document]
 
           # The source of the document data.
           #
@@ -84,7 +84,7 @@ module Anthropic
             #
             #   @option args [String] :data Base64-encoded document data.
             #
-            #   @option args [String, Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource::MediaType] :media_type MIME type of the document (e.g., "application/pdf").
+            #   @option args [String, Symbol, :"text/plain"] :media_type MIME type of the document (e.g., "application/pdf").
             #
             #   @option args [String] :url URL of the document to fetch.
             #
@@ -95,27 +95,17 @@ module Anthropic
             def self.new(type:, **args)
               case type.to_sym
               when :base64
-                Anthropic::Beta::Sessions::BetaManagedAgentsBase64DocumentSource.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsBase64DocumentSource.new(**args)
               when :text
-                Anthropic::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource.new(**args)
               when :url
-                Anthropic::Beta::Sessions::BetaManagedAgentsURLDocumentSource.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsURLDocumentSource.new(**args)
               when :file
-                Anthropic::Beta::Sessions::BetaManagedAgentsFileDocumentSource.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsFileDocumentSource.new(**args)
               else
                 raise ArgumentError, "unknown type: #{type}"
               end
             end
-          end
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            DOCUMENT = :document
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
           end
         end
       end

@@ -14,8 +14,6 @@ module Anthropic
 
         attr_reader workspace_id: String?
 
-        def completions: -> bot
-
         def user_profiles: -> bot
 
         private def build_request: (

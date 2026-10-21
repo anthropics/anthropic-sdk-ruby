@@ -18,25 +18,15 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsAgentToolset20260401::Type }
+        #   @return [Symbol, :agent_toolset_20260401]
+        required :type, const: :agent_toolset_20260401
 
-        # @!method initialize(configs:, default_config:, type:)
+        # @!method initialize(configs:, default_config:, type: :agent_toolset_20260401)
         #   @param configs [Array<Anthropic::Models::Beta::BetaManagedAgentsBashToolConfig, Anthropic::Models::Beta::BetaManagedAgentsEditToolConfig, Anthropic::Models::Beta::BetaManagedAgentsReadToolConfig, Anthropic::Models::Beta::BetaManagedAgentsWriteToolConfig, Anthropic::Models::Beta::BetaManagedAgentsGlobToolConfig, Anthropic::Models::Beta::BetaManagedAgentsGrepToolConfig, Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfig, Anthropic::Models::Beta::BetaManagedAgentsWebSearchToolConfig>]
         #
         #   @param default_config [Anthropic::Models::Beta::BetaManagedAgentsAgentToolsetDefaultConfig] Resolved default configuration for agent tools.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          AGENT_TOOLSET_20260401 = :agent_toolset_20260401
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :agent_toolset_20260401]
       end
     end
 

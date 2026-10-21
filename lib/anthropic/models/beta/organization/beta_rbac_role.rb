@@ -26,15 +26,6 @@ module Anthropic
           #   @return [String]
           required :display_name, String
 
-          # @!attribute name
-          #   @deprecated Use `display_name` instead; `name` always has the same value.
-          #
-          #   Deprecated: use `display_name` instead. Name of the RBAC Role; always the same
-          #   value as `display_name`.
-          #
-          #   @return [String]
-          required :name, String
-
           # @!attribute type
           #   Object type.
           #
@@ -49,7 +40,7 @@ module Anthropic
           #   @return [Time]
           required :updated_at, Time
 
-          # @!method initialize(id:, created_at:, display_name:, name:, updated_at:, type: :rbac_role)
+          # @!method initialize(id:, created_at:, display_name:, updated_at:, type: :rbac_role)
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Organization::BetaRBACRole} for more details.
           #
@@ -58,8 +49,6 @@ module Anthropic
           #   @param created_at [Time] RFC 3339 datetime string indicating when the RBAC Role was created.
           #
           #   @param display_name [String] Name of the RBAC Role. For a role created by Anthropic, this name can differ fro
-          #
-          #   @param name [String] Deprecated: use `display_name` instead. Name of the RBAC Role; always the same v
           #
           #   @param updated_at [Time] RFC 3339 datetime string indicating when the RBAC Role was last updated.
           #

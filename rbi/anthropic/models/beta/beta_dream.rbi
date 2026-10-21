@@ -101,7 +101,7 @@ module Anthropic
         sig { returns(Anthropic::Beta::BetaDreamStatus::TaggedSymbol) }
         attr_accessor :status
 
-        sig { returns(Anthropic::Beta::BetaDream::Type::TaggedSymbol) }
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # The dream's token counts, which stop changing once its `status` is `completed`
@@ -150,8 +150,8 @@ module Anthropic
             outputs: T::Array[Anthropic::Beta::BetaDreamOutput::OrHash],
             session_id: T.nilable(String),
             status: Anthropic::Beta::BetaDreamStatus::OrSymbol,
-            type: Anthropic::Beta::BetaDream::Type::OrSymbol,
-            usage: Anthropic::Beta::BetaDreamUsage::OrHash
+            usage: Anthropic::Beta::BetaDreamUsage::OrHash,
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
@@ -211,10 +211,10 @@ module Anthropic
           # [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams#lifecycle)
           # for what each status means.
           status:,
-          type:,
           # The dream's token counts, which stop changing once its `status` is `completed`
           # or `failed`. After a cancel, they can keep changing.
-          usage:
+          usage:,
+          type: :dream
         )
         end
 
@@ -233,30 +233,12 @@ module Anthropic
               outputs: T::Array[Anthropic::Beta::BetaDreamOutput],
               session_id: T.nilable(String),
               status: Anthropic::Beta::BetaDreamStatus::TaggedSymbol,
-              type: Anthropic::Beta::BetaDream::Type::TaggedSymbol,
+              type: Symbol,
               usage: Anthropic::Beta::BetaDreamUsage
             }
           )
         end
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias { T.all(Symbol, Anthropic::Beta::BetaDream::Type) }
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          DREAM = T.let(:dream, Anthropic::Beta::BetaDream::Type::TaggedSymbol)
-
-          sig do
-            override.returns(
-              T::Array[Anthropic::Beta::BetaDream::Type::TaggedSymbol]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

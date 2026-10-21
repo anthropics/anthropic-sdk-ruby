@@ -21,69 +21,24 @@ module Anthropic
         sig { returns(Time) }
         attr_accessor :scheduled_at
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsScheduleTriggerContext::Type::TaggedSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # The run was fired by the deployment's cron schedule.
         sig do
-          params(
-            scheduled_at: Time,
-            type:
-              Anthropic::Beta::BetaManagedAgentsScheduleTriggerContext::Type::OrSymbol
-          ).returns(T.attached_class)
+          params(scheduled_at: Time, type: Symbol).returns(T.attached_class)
         end
         def self.new(
           # The UTC instant at which the cron expression matched in the configured timezone,
           # before jitter is applied. At most one run is recorded per (`deployment_id`,
           # `scheduled_at`) pair.
           scheduled_at:,
-          type:
+          type: :schedule
         )
         end
 
-        sig do
-          override.returns(
-            {
-              scheduled_at: Time,
-              type:
-                Anthropic::Beta::BetaManagedAgentsScheduleTriggerContext::Type::TaggedSymbol
-            }
-          )
-        end
+        sig { override.returns({ scheduled_at: Time, type: Symbol }) }
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsScheduleTriggerContext::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          SCHEDULE =
-            T.let(
-              :schedule,
-              Anthropic::Beta::BetaManagedAgentsScheduleTriggerContext::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsScheduleTriggerContext::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

@@ -3,31 +3,14 @@ module Anthropic
     class BetaManagedAgentsAlwaysAskPolicy = Beta::BetaManagedAgentsAlwaysAskPolicy
 
     module Beta
-      type beta_managed_agents_always_ask_policy =
-        {
-          type: Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy::type_
-        }
+      type beta_managed_agents_always_ask_policy = { type: :always_ask }
 
       class BetaManagedAgentsAlwaysAskPolicy < Anthropic::Internal::Type::BaseModel
-        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy::type_
+        attr_accessor type: :always_ask
 
-        def initialize: (
-          type: Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy::type_
-        ) -> void
+        def initialize: (?type: :always_ask) -> void
 
-        def to_hash: -> {
-          type: Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy::type_
-        }
-
-        type type_ = :always_ask
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          ALWAYS_ASK: :always_ask
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy::type_]
-        end
+        def to_hash: -> { type: :always_ask }
       end
     end
   end

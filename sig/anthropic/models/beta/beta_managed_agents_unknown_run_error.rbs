@@ -4,35 +4,16 @@ module Anthropic
 
     module Beta
       type beta_managed_agents_unknown_run_error =
-        {
-          message: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsUnknownRunError::type_
-        }
+        { message: String, type: :unknown_error }
 
       class BetaManagedAgentsUnknownRunError < Anthropic::Internal::Type::BaseModel
         attr_accessor message: String
 
-        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsUnknownRunError::type_
+        attr_accessor type: :unknown_error
 
-        def initialize: (
-          message: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsUnknownRunError::type_
-        ) -> void
+        def initialize: (message: String, ?type: :unknown_error) -> void
 
-        def to_hash: -> {
-          message: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsUnknownRunError::type_
-        }
-
-        type type_ = :unknown_error
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          UNKNOWN_ERROR: :unknown_error
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsUnknownRunError::type_]
-        end
+        def to_hash: -> { message: String, type: :unknown_error }
       end
     end
   end

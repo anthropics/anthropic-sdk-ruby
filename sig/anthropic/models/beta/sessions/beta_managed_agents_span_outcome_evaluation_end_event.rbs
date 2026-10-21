@@ -11,7 +11,7 @@ module Anthropic
             outcome_id: String,
             processed_at: Time,
             result: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationEndEvent::type_,
+            type: :"span.outcome_evaluation_end",
             usage: Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelUsage
           }
 
@@ -30,7 +30,7 @@ module Anthropic
 
           attr_accessor result: String
 
-          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationEndEvent::type_
+          attr_accessor type: :"span.outcome_evaluation_end"
 
           attr_accessor usage: Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelUsage
 
@@ -42,8 +42,8 @@ module Anthropic
             outcome_id: String,
             processed_at: Time,
             result: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationEndEvent::type_,
-            usage: Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelUsage
+            usage: Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelUsage,
+            ?type: :"span.outcome_evaluation_end"
           ) -> void
 
           def to_hash: -> {
@@ -54,19 +54,9 @@ module Anthropic
             outcome_id: String,
             processed_at: Time,
             result: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationEndEvent::type_,
+            type: :"span.outcome_evaluation_end",
             usage: Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelUsage
           }
-
-          type type_ = :"span.outcome_evaluation_end"
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            SPAN_OUTCOME_EVALUATION_END: :"span.outcome_evaluation_end"
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationEndEvent::type_]
-          end
         end
       end
     end

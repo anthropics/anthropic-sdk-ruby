@@ -19,11 +19,7 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :skill_id
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsCustomSkillParams::Type::OrSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # Version to pin. Defaults to latest if omitted.
@@ -34,60 +30,25 @@ module Anthropic
         sig do
           params(
             skill_id: String,
-            type:
-              Anthropic::Beta::BetaManagedAgentsCustomSkillParams::Type::OrSymbol,
-            version: T.nilable(String)
+            version: T.nilable(String),
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
           # Tagged ID of the custom skill (e.g., "skill_01XJ5...").
           skill_id:,
-          type:,
           # Version to pin. Defaults to latest if omitted.
-          version: nil
+          version: nil,
+          type: :custom
         )
         end
 
         sig do
           override.returns(
-            {
-              skill_id: String,
-              type:
-                Anthropic::Beta::BetaManagedAgentsCustomSkillParams::Type::OrSymbol,
-              version: T.nilable(String)
-            }
+            { skill_id: String, type: Symbol, version: T.nilable(String) }
           )
         end
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsCustomSkillParams::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          CUSTOM =
-            T.let(
-              :custom,
-              Anthropic::Beta::BetaManagedAgentsCustomSkillParams::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsCustomSkillParams::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

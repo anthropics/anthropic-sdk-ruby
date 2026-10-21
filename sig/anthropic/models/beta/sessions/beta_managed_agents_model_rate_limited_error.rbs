@@ -6,7 +6,7 @@ module Anthropic
           {
             message: String,
             retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError::retry_status,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError::type_
+            type: :model_rate_limited_error
           }
 
         class BetaManagedAgentsModelRateLimitedError < Anthropic::Internal::Type::BaseModel
@@ -14,18 +14,18 @@ module Anthropic
 
           attr_accessor retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError::retry_status
 
-          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError::type_
+          attr_accessor type: :model_rate_limited_error
 
           def initialize: (
             message: String,
             retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError::retry_status,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError::type_
+            ?type: :model_rate_limited_error
           ) -> void
 
           def to_hash: -> {
             message: String,
             retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError::retry_status,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError::type_
+            type: :model_rate_limited_error
           }
 
           type retry_status =
@@ -64,16 +64,6 @@ module Anthropic
                 type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError::RetryStatus::type_
                 | String
               ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError::retry_status
-          end
-
-          type type_ = :model_rate_limited_error
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            MODEL_RATE_LIMITED_ERROR: :model_rate_limited_error
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError::type_]
           end
         end
       end

@@ -29,11 +29,7 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :session_thread_id
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # Identifier of the workflow run that created the thread, or `null` for any other
@@ -49,9 +45,8 @@ module Anthropic
               agent_name: String,
               processed_at: Time,
               session_thread_id: String,
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent::Type::OrSymbol,
-              workflow_run_id: T.nilable(String)
+              workflow_run_id: T.nilable(String),
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
@@ -63,10 +58,10 @@ module Anthropic
             processed_at:,
             # Public `sthr_` ID of the newly created thread.
             session_thread_id:,
-            type:,
             # Identifier of the workflow run that created the thread, or `null` for any other
             # thread.
-            workflow_run_id:
+            workflow_run_id:,
+            type: :"session.thread_created"
           )
           end
 
@@ -77,42 +72,12 @@ module Anthropic
                 agent_name: String,
                 processed_at: Time,
                 session_thread_id: String,
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent::Type::TaggedSymbol,
+                type: Symbol,
                 workflow_run_id: T.nilable(String)
               }
             )
           end
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            SESSION_THREAD_CREATED =
-              T.let(
-                :"session.thread_created",
-                Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

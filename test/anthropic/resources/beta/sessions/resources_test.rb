@@ -153,7 +153,7 @@ class Anthropic::Test::Resources::Beta::Sessions::ResourcesTest < Anthropic::Tes
     assert_pattern do
       response => {
         id: String,
-        type: Anthropic::Beta::Sessions::BetaManagedAgentsDeleteSessionResource::Type
+        type: Symbol
       }
     end
   end
@@ -176,7 +176,7 @@ class Anthropic::Test::Resources::Beta::Sessions::ResourcesTest < Anthropic::Tes
         created_at: Time,
         file_id: String,
         mount_path: String,
-        type: Anthropic::Beta::Sessions::BetaManagedAgentsFileResource::Type,
+        type: Symbol,
         updated_at: Time
       }
     end

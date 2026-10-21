@@ -13,27 +13,17 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsAgentThinkingPreview::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsAgentThinkingPreview::Type }
+        #   @return [Symbol, :"agent.thinking"]
+        required :type, const: :"agent.thinking"
 
-        # @!method initialize(id:, type:)
+        # @!method initialize(id:, type: :"agent.thinking")
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsAgentThinkingPreview} for more
         #   details.
         #
         #   @param id [String] The id the buffered agent.thinking will carry if it is emitted. Start-only — no
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsAgentThinkingPreview::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsAgentThinkingPreview#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          AGENT_THINKING = :"agent.thinking"
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :"agent.thinking"]
       end
     end
 

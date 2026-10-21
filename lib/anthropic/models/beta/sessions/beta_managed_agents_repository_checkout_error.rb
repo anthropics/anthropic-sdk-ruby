@@ -90,11 +90,11 @@ module Anthropic
             def self.new(type:, **args)
               case type.to_sym
               when :retrying
-                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying.new(**args)
               when :exhausted
-                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted.new(**args)
               when :terminal
-                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal.new(**args)
               else
                 raise ArgumentError, "unknown type: #{type}"
               end

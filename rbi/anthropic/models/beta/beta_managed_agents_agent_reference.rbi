@@ -17,11 +17,7 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :id
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsAgentReference::Type::TaggedSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         sig { returns(Integer) }
@@ -29,56 +25,15 @@ module Anthropic
 
         # A resolved agent reference with a concrete version.
         sig do
-          params(
-            id: String,
-            type:
-              Anthropic::Beta::BetaManagedAgentsAgentReference::Type::OrSymbol,
-            version: Integer
-          ).returns(T.attached_class)
-        end
-        def self.new(id:, type:, version:)
-        end
-
-        sig do
-          override.returns(
-            {
-              id: String,
-              type:
-                Anthropic::Beta::BetaManagedAgentsAgentReference::Type::TaggedSymbol,
-              version: Integer
-            }
+          params(id: String, version: Integer, type: Symbol).returns(
+            T.attached_class
           )
         end
-        def to_hash
+        def self.new(id:, version:, type: :agent)
         end
 
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsAgentReference::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          AGENT =
-            T.let(
-              :agent,
-              Anthropic::Beta::BetaManagedAgentsAgentReference::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsAgentReference::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
+        sig { override.returns({ id: String, type: Symbol, version: Integer }) }
+        def to_hash
         end
       end
     end

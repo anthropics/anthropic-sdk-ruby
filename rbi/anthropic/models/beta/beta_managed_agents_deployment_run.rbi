@@ -60,11 +60,7 @@ module Anthropic
         end
         attr_accessor :trigger_context
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsDeploymentRun::Type::TaggedSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # A persistent, append-only record of a single deployment execution. Records
@@ -102,8 +98,7 @@ module Anthropic
                 Anthropic::Beta::BetaManagedAgentsScheduleTriggerContext::OrHash,
                 Anthropic::Beta::BetaManagedAgentsManualTriggerContext::OrHash
               ),
-            type:
-              Anthropic::Beta::BetaManagedAgentsDeploymentRun::Type::OrSymbol
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
@@ -124,7 +119,7 @@ module Anthropic
           session_id:,
           # What triggered this run and trigger-specific metadata.
           trigger_context:,
-          type:
+          type: :deployment_run
         )
         end
 
@@ -142,8 +137,7 @@ module Anthropic
               session_id: T.nilable(String),
               trigger_context:
                 Anthropic::Beta::BetaManagedAgentsTriggerContext::Variants,
-              type:
-                Anthropic::Beta::BetaManagedAgentsDeploymentRun::Type::TaggedSymbol
+              type: Symbol
             }
           )
         end
@@ -307,35 +301,6 @@ module Anthropic
             # Human-readable error description.
             message:
           )
-          end
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsDeploymentRun::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          DEPLOYMENT_RUN =
-            T.let(
-              :deployment_run,
-              Anthropic::Beta::BetaManagedAgentsDeploymentRun::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsDeploymentRun::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
           end
         end
       end

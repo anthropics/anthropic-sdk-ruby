@@ -4,35 +4,16 @@ module Anthropic
 
     module Beta
       type beta_managed_agents_deleted_session =
-        {
-          id: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsDeletedSession::type_
-        }
+        { id: String, type: :session_deleted }
 
       class BetaManagedAgentsDeletedSession < Anthropic::Internal::Type::BaseModel
         attr_accessor id: String
 
-        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsDeletedSession::type_
+        attr_accessor type: :session_deleted
 
-        def initialize: (
-          id: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsDeletedSession::type_
-        ) -> void
+        def initialize: (id: String, ?type: :session_deleted) -> void
 
-        def to_hash: -> {
-          id: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsDeletedSession::type_
-        }
-
-        type type_ = :session_deleted
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          SESSION_DELETED: :session_deleted
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsDeletedSession::type_]
-        end
+        def to_hash: -> { id: String, type: :session_deleted }
       end
     end
   end

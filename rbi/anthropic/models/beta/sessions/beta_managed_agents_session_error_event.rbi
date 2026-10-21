@@ -28,11 +28,7 @@ module Anthropic
           sig { returns(Time) }
           attr_accessor :processed_at
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # An error event indicating a problem occurred during session execution.
@@ -56,8 +52,7 @@ module Anthropic
                   Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCloneError::OrHash
                 ),
               processed_at: Time,
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Type::OrSymbol
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
@@ -66,7 +61,7 @@ module Anthropic
             error:,
             # Timestamp when the error occurred.
             processed_at:,
-            type:
+            type: :"session.error"
           )
           end
 
@@ -77,8 +72,7 @@ module Anthropic
                 error:
                   Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error::Variants,
                 processed_at: Time,
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Type::TaggedSymbol
+                type: Symbol
               }
             )
           end
@@ -243,35 +237,6 @@ module Anthropic
               # identified.
               repository_url: nil
             )
-            end
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            SESSION_ERROR =
-              T.let(
-                :"session.error",
-                Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
             end
           end
         end

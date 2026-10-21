@@ -42,9 +42,9 @@ module Anthropic
         def self.new(type:, **args)
           case type.to_sym
           when :"agent.message"
-            Anthropic::Beta::BetaManagedAgentsAgentMessagePreview.new(type: type, **args)
+            Anthropic::Beta::BetaManagedAgentsAgentMessagePreview.new(**args)
           when :"agent.thinking"
-            Anthropic::Beta::BetaManagedAgentsAgentThinkingPreview.new(type: type, **args)
+            Anthropic::Beta::BetaManagedAgentsAgentThinkingPreview.new(**args)
           else
             raise ArgumentError, "unknown type: #{type}"
           end

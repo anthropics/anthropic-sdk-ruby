@@ -14,10 +14,10 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsScheduleTriggerContext::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsScheduleTriggerContext::Type }
+        #   @return [Symbol, :schedule]
+        required :type, const: :schedule
 
-        # @!method initialize(scheduled_at:, type:)
+        # @!method initialize(scheduled_at:, type: :schedule)
         #   The run was fired by the deployment's cron schedule.
         #
         #   Some parameter documentations has been truncated, see
@@ -26,17 +26,7 @@ module Anthropic
         #
         #   @param scheduled_at [Time] The UTC instant at which the cron expression matched in the configured timezone,
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsScheduleTriggerContext::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsScheduleTriggerContext#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          SCHEDULE = :schedule
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :schedule]
       end
     end
 

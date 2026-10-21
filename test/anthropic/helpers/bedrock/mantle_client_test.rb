@@ -183,6 +183,22 @@ class Anthropic::Test::BedrockMantleClientTest < Minitest::Test
     end
   end
 
+  def test_api_key_mode_request_sends_api_key_as_bearer
+    stub_request(:post, "http://localhost/v1/messages").to_return_json(status: 200, body: {})
+
+    client = Anthropic::BedrockMantleClient.new(api_key: "sk-ant-test", base_url: "http://localhost")
+    client.messages.create(
+      max_tokens: 1024,
+      messages: [{content: "Hello", role: :user}],
+      model: :"claude-sonnet-4-20250514"
+    )
+
+    assert_requested(:post, "http://localhost/v1/messages") do |req|
+      assert_equal("Bearer sk-ant-test", req.headers.fetch("Authorization"))
+      assert_nil(req.headers["X-Api-Key"])
+    end
+  end
+
   # ---------------------------------------------------------------------------
   # User profile ID tests
   # ---------------------------------------------------------------------------
@@ -488,11 +504,6 @@ class Anthropic::Test::BedrockMantleClientTest < Minitest::Test
     client = Anthropic::BedrockMantleClient.new(api_key: "sk-ant-xxx", base_url: "http://localhost")
     assert_respond_to(client.beta, :messages)
     assert_kind_of(Anthropic::Resources::Beta::Messages, client.beta.messages)
-  end
-
-  def test_completions_raises_not_implemented
-    client = Anthropic::BedrockMantleClient.new(api_key: "sk-ant-xxx", base_url: "http://localhost")
-    assert_raises(NotImplementedError) { client.completions }
   end
 
   def test_models_raises_not_implemented

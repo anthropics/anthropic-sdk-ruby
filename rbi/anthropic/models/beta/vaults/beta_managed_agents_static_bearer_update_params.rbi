@@ -13,11 +13,7 @@ module Anthropic
               )
             end
 
-          sig do
-            returns(
-              Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams::Type::OrSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # The new static bearer token to replace the stored one.
@@ -27,58 +23,19 @@ module Anthropic
           # Parameters for updating a static bearer token credential. The `mcp_server_url`
           # is immutable.
           sig do
-            params(
-              type:
-                Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams::Type::OrSymbol,
-              token: T.nilable(String)
-            ).returns(T.attached_class)
+            params(token: T.nilable(String), type: Symbol).returns(
+              T.attached_class
+            )
           end
           def self.new(
-            type:,
             # The new static bearer token to replace the stored one.
-            token: nil
+            token: nil,
+            type: :static_bearer
           )
           end
 
-          sig do
-            override.returns(
-              {
-                type:
-                  Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams::Type::OrSymbol,
-                token: T.nilable(String)
-              }
-            )
-          end
+          sig { override.returns({ type: Symbol, token: T.nilable(String) }) }
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            STATIC_BEARER =
-              T.let(
-                :static_bearer,
-                Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

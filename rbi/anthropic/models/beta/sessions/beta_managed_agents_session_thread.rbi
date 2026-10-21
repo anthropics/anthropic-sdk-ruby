@@ -71,11 +71,7 @@ module Anthropic
           end
           attr_accessor :status
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # When the thread was last updated.
@@ -129,14 +125,13 @@ module Anthropic
                 ),
               status:
                 Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatus::OrSymbol,
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread::Type::OrSymbol,
               updated_at: Time,
               usage:
                 T.nilable(
                   Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadUsage::OrHash
                 ),
-              workflow_run_id: T.nilable(String)
+              workflow_run_id: T.nilable(String),
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
@@ -158,7 +153,6 @@ module Anthropic
             stats:,
             # Current execution status of the thread.
             status:,
-            type:,
             # When the thread was last updated.
             updated_at:,
             # Cumulative token usage for this thread. Null until the thread's first idle
@@ -166,7 +160,8 @@ module Anthropic
             usage:,
             # Identifier of the workflow run that created the thread, or `null` for any other
             # thread.
-            workflow_run_id:
+            workflow_run_id:,
+            type: :session_thread
           )
           end
 
@@ -186,8 +181,7 @@ module Anthropic
                   ),
                 status:
                   Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatus::TaggedSymbol,
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread::Type::TaggedSymbol,
+                type: Symbol,
                 updated_at: Time,
                 usage:
                   T.nilable(
@@ -325,35 +319,6 @@ module Anthropic
               tools: nil,
               version: nil
             )
-            end
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            SESSION_THREAD =
-              T.let(
-                :session_thread,
-                Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
             end
           end
         end

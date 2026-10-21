@@ -15,7 +15,11 @@ module Anthropic
 
         sig do
           params(
-            messages: Anthropic::Models::Beta::BetaMessageParam::OrHash
+            messages:
+              T.any(
+                Anthropic::Beta::BetaMessageParam::Variants,
+                Anthropic::Internal::AnyHash
+              )
           ).void
         end
         def feed_messages(*messages)

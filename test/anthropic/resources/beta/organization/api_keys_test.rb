@@ -21,8 +21,7 @@ class Anthropic::Test::Resources::Beta::Organization::APIKeysTest < Anthropic::T
         principal: Anthropic::Beta::Organization::BetaAPIKey::Principal | nil,
         scope: Anthropic::Beta::Organization::BetaAPIKey::Scope,
         status: Anthropic::Beta::Organization::BetaAPIKey::Status,
-        type: Symbol,
-        workspace_id: String | nil
+        type: Symbol
       }
     end
   end
@@ -45,8 +44,7 @@ class Anthropic::Test::Resources::Beta::Organization::APIKeysTest < Anthropic::T
         principal: Anthropic::Beta::Organization::BetaAPIKey::Principal | nil,
         scope: Anthropic::Beta::Organization::BetaAPIKey::Scope,
         status: Anthropic::Beta::Organization::BetaAPIKey::Status,
-        type: Symbol,
-        workspace_id: String | nil
+        type: Symbol
       }
     end
   end
@@ -76,8 +74,7 @@ class Anthropic::Test::Resources::Beta::Organization::APIKeysTest < Anthropic::T
         principal: Anthropic::Beta::Organization::BetaAPIKey::Principal | nil,
         scope: Anthropic::Beta::Organization::BetaAPIKey::Scope,
         status: Anthropic::Beta::Organization::BetaAPIKey::Status,
-        type: Symbol,
-        workspace_id: String | nil
+        type: Symbol
       }
     end
   end

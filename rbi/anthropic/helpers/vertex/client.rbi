@@ -4,8 +4,6 @@ module Anthropic
   module Helpers
     module Vertex
       class Client < Anthropic::Client
-        DEFAULT_VERSION = "vertex-2023-10-16"
-
         sig { returns(String) }
         attr_reader :region
 

@@ -15,11 +15,7 @@ module Anthropic
             )
           end
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsAgentToolset20260401Params::Type::OrSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # Per-tool configuration overrides.
@@ -86,8 +82,6 @@ module Anthropic
         # tools available to the agent.
         sig do
           params(
-            type:
-              Anthropic::Beta::BetaManagedAgentsAgentToolset20260401Params::Type::OrSymbol,
             configs:
               T::Array[
                 T.any(
@@ -104,23 +98,23 @@ module Anthropic
             default_config:
               T.nilable(
                 Anthropic::Beta::BetaManagedAgentsAgentToolsetDefaultConfigParams::OrHash
-              )
+              ),
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
-          type:,
           # Per-tool configuration overrides.
           configs: nil,
           # Default configuration applied to all tools in this set.
-          default_config: nil
+          default_config: nil,
+          type: :agent_toolset_20260401
         )
         end
 
         sig do
           override.returns(
             {
-              type:
-                Anthropic::Beta::BetaManagedAgentsAgentToolset20260401Params::Type::OrSymbol,
+              type: Symbol,
               configs:
                 T::Array[
                   T.any(
@@ -142,35 +136,6 @@ module Anthropic
           )
         end
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsAgentToolset20260401Params::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          AGENT_TOOLSET_20260401 =
-            T.let(
-              :agent_toolset_20260401,
-              Anthropic::Beta::BetaManagedAgentsAgentToolset20260401Params::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsAgentToolset20260401Params::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

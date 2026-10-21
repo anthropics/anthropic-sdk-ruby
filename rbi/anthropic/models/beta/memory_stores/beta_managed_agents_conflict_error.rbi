@@ -13,11 +13,7 @@ module Anthropic
               )
             end
 
-          sig do
-            returns(
-              Anthropic::Beta::MemoryStores::BetaManagedAgentsConflictError::Type::OrSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           sig { returns(T.nilable(String)) }
@@ -27,54 +23,13 @@ module Anthropic
           attr_writer :message
 
           sig do
-            params(
-              type:
-                Anthropic::Beta::MemoryStores::BetaManagedAgentsConflictError::Type::OrSymbol,
-              message: String
-            ).returns(T.attached_class)
+            params(message: String, type: Symbol).returns(T.attached_class)
           end
-          def self.new(type:, message: nil)
+          def self.new(message: nil, type: :conflict_error)
           end
 
-          sig do
-            override.returns(
-              {
-                type:
-                  Anthropic::Beta::MemoryStores::BetaManagedAgentsConflictError::Type::OrSymbol,
-                message: String
-              }
-            )
-          end
+          sig { override.returns({ type: Symbol, message: String }) }
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::MemoryStores::BetaManagedAgentsConflictError::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            CONFLICT_ERROR =
-              T.let(
-                :conflict_error,
-                Anthropic::Beta::MemoryStores::BetaManagedAgentsConflictError::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::MemoryStores::BetaManagedAgentsConflictError::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

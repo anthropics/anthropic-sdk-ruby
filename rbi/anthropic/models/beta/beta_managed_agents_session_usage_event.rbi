@@ -23,11 +23,7 @@ module Anthropic
         sig { returns(Time) }
         attr_accessor :processed_at
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsSessionUsageEvent::Type::TaggedSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # The session's cumulative usage at the snapshot time.
@@ -66,12 +62,11 @@ module Anthropic
           params(
             id: String,
             processed_at: Time,
-            type:
-              Anthropic::Beta::BetaManagedAgentsSessionUsageEvent::Type::OrSymbol,
             usage:
               Anthropic::Beta::Sessions::BetaManagedAgentsSessionUsageSnapshot::OrHash,
             budget:
-              T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit::OrHash)
+              T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit::OrHash),
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
@@ -79,12 +74,12 @@ module Anthropic
           id:,
           # Timestamp when the snapshot was taken.
           processed_at:,
-          type:,
           # The session's cumulative usage at the snapshot time.
           usage:,
           # The session's configured budget at the snapshot time, or null when the session
           # has no budget.
-          budget: nil
+          budget: nil,
+          type: :"session.usage"
         )
         end
 
@@ -93,8 +88,7 @@ module Anthropic
             {
               id: String,
               processed_at: Time,
-              type:
-                Anthropic::Beta::BetaManagedAgentsSessionUsageEvent::Type::TaggedSymbol,
+              type: Symbol,
               usage:
                 Anthropic::Beta::Sessions::BetaManagedAgentsSessionUsageSnapshot,
               budget: T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit)
@@ -102,35 +96,6 @@ module Anthropic
           )
         end
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsSessionUsageEvent::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          SESSION_USAGE =
-            T.let(
-              :"session.usage",
-              Anthropic::Beta::BetaManagedAgentsSessionUsageEvent::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsSessionUsageEvent::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

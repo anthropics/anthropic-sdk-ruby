@@ -14,8 +14,8 @@ module Anthropic
         # @!attribute type
         #   Object type. Always `enrollment_url`.
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaUserProfileEnrollmentURL::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaUserProfileEnrollmentURL::Type }
+        #   @return [Symbol, :enrollment_url]
+        required :type, const: :enrollment_url
 
         # @!attribute url
         #   Enrollment URL to send to the end user. Valid until `expires_at`.
@@ -23,27 +23,15 @@ module Anthropic
         #   @return [String]
         required :url, String
 
-        # @!method initialize(expires_at:, type:, url:)
+        # @!method initialize(expires_at:, url:, type: :enrollment_url)
         #   A URL to give to the entity that a user profile represents, so that the entity
         #   can enroll in a program.
         #
         #   @param expires_at [Time] When this enrollment URL expires, in RFC 3339 format.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaUserProfileEnrollmentURL::Type] Object type. Always `enrollment_url`.
-        #
         #   @param url [String] Enrollment URL to send to the end user. Valid until `expires_at`.
-
-        # Object type. Always `enrollment_url`.
         #
-        # @see Anthropic::Models::Beta::BetaUserProfileEnrollmentURL#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          ENROLLMENT_URL = :enrollment_url
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :enrollment_url] Object type. Always `enrollment_url`.
       end
     end
 

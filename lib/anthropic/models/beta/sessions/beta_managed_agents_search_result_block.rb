@@ -32,10 +32,10 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultBlock::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultBlock::Type }
+          #   @return [Symbol, :search_result]
+          required :type, const: :search_result
 
-          # @!method initialize(citations:, content:, source:, title:, type:)
+          # @!method initialize(citations:, content:, source:, title:, type: :search_result)
           #   A block containing a web search result.
           #
           #   @param citations [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultCitations] Citation settings for this search result.
@@ -46,17 +46,7 @@ module Anthropic
           #
           #   @param title [String] The title of the search result.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultBlock::Type]
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultBlock#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            SEARCH_RESULT = :search_result
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :search_result]
         end
       end
     end

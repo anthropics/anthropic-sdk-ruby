@@ -1,19 +1,16 @@
 # frozen_string_literal: true
 
 module Anthropic
-  @warned_explicit_shadow = false
   @warned_env_shadow = false
+  @warned_env_api_key_and_auth_token = false
 
   class << self
-    def warn_explicit_static_shadows_credentials(param)
-      return if @warned_explicit_shadow
-      @warned_explicit_shadow = true
+    # @api private
+    def warn_env_api_key_and_auth_token
+      return if @warned_env_api_key_and_auth_token
+      @warned_env_api_key_and_auth_token = true
 
-      warn(
-        "[anthropic-ruby] `#{param}:` was passed alongside `credentials:`; the static credential " \
-        "takes precedence and the credentials provider is silently disabled. " \
-        "Pass only one."
-      )
+      warn("Anthropic: ANTHROPIC_API_KEY and ANTHROPIC_AUTH_TOKEN are both set. Using ANTHROPIC_API_KEY.")
     end
 
     def warn_env_static_shadows_auto_discovery(env_var)
@@ -67,9 +64,6 @@ module Anthropic
     # @return [Anthropic::Credentials::TokenCache, nil]
     attr_reader :token_cache
 
-    # @return [Anthropic::Resources::Completions]
-    attr_reader :completions
-
     # @return [Anthropic::Resources::Messages]
     attr_reader :messages
 
@@ -98,7 +92,7 @@ module Anthropic
       headers = {}
 
       if @api_key
-        headers["x-api-key"] = @api_key
+        headers["authorization"] = "Bearer #{@api_key}" unless @api_key.empty?
       elsif @auth_token
         headers["authorization"] = "Bearer #{@auth_token}"
       elsif @token_cache
@@ -141,11 +135,14 @@ module Anthropic
     # Credential precedence, matching the credential-resolution spec and
     # the Workload Identity Federation user guide:
     #
-    # 1. Explicit constructor arguments — +api_key:+, +auth_token:+,
-    #    +credentials:+, +config:+. If the caller passed any of these,
-    #    the SDK uses it and does *not* read credential env vars.
-    # 2. +ANTHROPIC_API_KEY+ / +ANTHROPIC_AUTH_TOKEN+ env vars. Only
-    #    consulted when no explicit credential argument was passed.
+    # 1. An explicit constructor argument — one of +api_key:+,
+    #    +auth_token:+, +credentials:+, +config:+. The SDK uses it and
+    #    does *not* fall back to credential env vars or profiles on disk.
+    #    Passing more than one raises +ArgumentError+.
+    # 2. +ANTHROPIC_API_KEY+, then +ANTHROPIC_AUTH_TOKEN+. Only
+    #    consulted when no explicit credential argument was passed. An
+    #    empty variable counts as unset. When both are set, the SDK warns
+    #    once per process.
     # 3. +ANTHROPIC_PROFILE+ — explicit profile selection.
     # 4. Direct env-var federation (+ANTHROPIC_IDENTITY_TOKEN[_FILE]+ +
     #    +ANTHROPIC_FEDERATION_RULE_ID+ + +ANTHROPIC_ORGANIZATION_ID+).
@@ -155,16 +152,11 @@ module Anthropic
     # A static env credential (step 2) *shadows* steps 3–5, silently
     # disabling profile / federation auto-discovery.
     #
-    # Passing an explicit +api_key:+ or +auth_token:+ *argument*
-    # alongside an explicit +credentials:+ is supported: the
-    # static credential takes precedence at the request-header level and
-    # the credentials provider is silently disabled.
-    #
     # @param api_key [String, nil] Defaults to +ENV["ANTHROPIC_API_KEY"]+ when
     #   no explicit credential argument is passed.
     #
     # @param auth_token [String, nil] Defaults to +ENV["ANTHROPIC_AUTH_TOKEN"]+ when
-    #   no explicit credential argument is passed.
+    #   no explicit credential argument is passed and +ANTHROPIC_API_KEY+ is not set.
     #
     # @param credentials [#call, nil] Credential provider — any callable returning
     #   +AccessToken.new(token:, expires_at:)+. The provider is wrapped in a
@@ -174,9 +166,8 @@ module Anthropic
     #
     # @param config [Hash, nil] In-memory configuration hash with the same shape
     #   as +configs/<profile>.json+. Must include an +authentication+ object with
-    #   a +type+ field (+oidc_federation+ or +user_oauth+). Mutually exclusive
-    #   with +credentials:+. For +user_oauth+, must also include
-    #   +authentication.credentials_path+.
+    #   a +type+ field (+oidc_federation+ or +user_oauth+). For +user_oauth+,
+    #   must also include +authentication.credentials_path+.
     #
     # @param webhook_key [String, nil] Defaults to `ENV["ANTHROPIC_WEBHOOK_SIGNING_KEY"]`
     #
@@ -230,6 +221,9 @@ module Anthropic
     # @param middleware [Array<#call>, #call, nil] Per-attempt HTTP around-middleware. Each
     #   entry is a `#call(req, nxt) -> Anthropic::APIResponse` callable. See
     #   {Anthropic::Middleware}.
+    #
+    # @raise [ArgumentError] If more than one of +api_key:+, +auth_token:+,
+    #   +credentials:+, +config:+ is passed.
     def initialize(
       api_key: nil,
       auth_token: nil,
@@ -248,19 +242,18 @@ module Anthropic
       @timeout_overridden = !timeout.nil?
       timeout ||= self.class::DEFAULT_TIMEOUT_IN_SECONDS
 
-      if config && credentials
-        raise ArgumentError, "Pass at most one of `credentials:` or `config:`."
+      credential =
+        {api_key: api_key, auth_token: auth_token, credentials: credentials, config: config}.compact
+      if credential.length > 1
+        raise ArgumentError,
+              "Pass at most one of `api_key:`, `auth_token:`, `credentials:`, or `config:`. " \
+              "Received #{credential.keys.map { "`#{_1}:`" }.join(', ')}."
       end
 
-      has_explicit_credential = api_key || auth_token || credentials || config
+      credential = env_credential if credential.empty? && resolve_default_credentials?
 
-      if !has_explicit_credential && resolve_default_credentials?
-        api_key = ENV["ANTHROPIC_API_KEY"]
-        auth_token = ENV["ANTHROPIC_AUTH_TOKEN"]
-      end
-
-      @api_key = api_key&.to_s
-      @auth_token = auth_token&.to_s
+      @api_key = credential[:api_key]&.to_s
+      @auth_token = credential[:auth_token]&.to_s
       @credentials = nil
       @token_cache = nil
 
@@ -270,29 +263,28 @@ module Anthropic
 
       credential_headers = {}
 
-      if config
-        in_memory = Anthropic::Credentials::InMemoryConfig.new(config)
-        @credentials = in_memory
-        credential_headers = in_memory.extra_headers
-        if !base_url_is_explicit && in_memory.resolved_base_url
-          base_url = in_memory.resolved_base_url
+      result =
+        case credential
+        in {credentials:}
+          Anthropic::Credentials::CredentialResult.new(provider: credentials)
+        in {config:}
+          in_memory = Anthropic::Credentials::InMemoryConfig.new(config)
+          Anthropic::Credentials::CredentialResult.new(
+            provider: in_memory,
+            extra_headers: in_memory.extra_headers,
+            base_url: in_memory.resolved_base_url
+          )
+        in {} if resolve_default_credentials?
+          Anthropic::Credentials.default_credentials(base_url: base_url || "https://api.anthropic.com")
+        in {api_key: _} | {auth_token: _} | {}
+          nil
         end
-      else
-        @credentials = credentials
-      end
 
-      if @credentials.nil? && @api_key.nil? && @auth_token.nil? && resolve_default_credentials?
-        default_base_url = base_url || "https://api.anthropic.com"
-        result = Anthropic::Credentials.default_credentials(base_url: default_base_url)
-        if result
-          @credentials = result.provider
-          credential_headers = result.extra_headers
-          base_url = result.base_url if !base_url_is_explicit && result.base_url
-        end
+      if result
+        @credentials = result.provider
+        credential_headers = result.extra_headers
+        base_url = result.base_url if !base_url_is_explicit && result.base_url
       end
-
-      warn_explicit_shadow(api_key: api_key, auth_token: auth_token, credentials: credentials || config)
-      warn_env_shadow(api_key: api_key, auth_token: auth_token) if resolve_default_credentials?
 
       if @credentials
         @token_cache = Anthropic::Credentials::TokenCache.new(@credentials)
@@ -312,7 +304,7 @@ module Anthropic
       end
 
       headers = {
-        "anthropic-version" => "2023-06-01"
+        "anthropic-version" => "2026-10-21"
       }
       custom_headers_env = ENV["ANTHROPIC_CUSTOM_HEADERS"]
       unless custom_headers_env.nil?
@@ -340,7 +332,6 @@ module Anthropic
         middleware: middleware
       )
 
-      @completions = Anthropic::Resources::Completions.new(client: self)
       @messages = Anthropic::Resources::Messages.new(client: self)
       @models = Anthropic::Resources::Models.new(client: self)
       @files = Anthropic::Resources::Files.new(client: self)
@@ -371,7 +362,7 @@ module Anthropic
     # Whether to resolve credentials from the default chain (the static
     # +ANTHROPIC_API_KEY+ / +ANTHROPIC_AUTH_TOKEN+ env vars and the shared
     # config store / federation auto-discovery, precedence steps 2–5 above)
-    # when no explicit credential argument is passed. Called once from
+    # when no explicit credential argument is passed. Called from
     # {#initialize}, so overrides must not depend on subclass instance state.
     # Subclasses that bring their own auth scheme override this to +false+ so
     # ambient first-party credentials are never resolved or folded into
@@ -383,21 +374,23 @@ module Anthropic
     # @return [Boolean]
     def resolve_default_credentials? = true
 
-    def warn_explicit_shadow(api_key:, auth_token:, credentials:)
-      return if credentials.nil?
+    # @api private
+    #
+    # Precedence step 2 above, with its warnings.
+    #
+    # @return [Hash{Symbol=>String}] +{api_key: ...}+, +{auth_token: ...}+ or +{}+
+    def env_credential
+      present =
+        {api_key: "ANTHROPIC_API_KEY", auth_token: "ANTHROPIC_AUTH_TOKEN"}.reject { ENV[_2].to_s.empty? }
+      Anthropic.warn_env_api_key_and_auth_token if present.length > 1
 
-      Anthropic.warn_explicit_static_shadows_credentials("api_key") if api_key
-      Anthropic.warn_explicit_static_shadows_credentials("auth_token") if auth_token
-    end
+      option, env_var = present.first
+      return {} if option.nil?
 
-    def warn_env_shadow(api_key:, auth_token:)
-      return unless Anthropic::Credentials.auto_discoverable_credentials?
-
-      if api_key && ENV["ANTHROPIC_API_KEY"]
-        Anthropic.warn_env_static_shadows_auto_discovery("ANTHROPIC_API_KEY")
+      if Anthropic::Credentials.auto_discoverable_credentials?
+        Anthropic.warn_env_static_shadows_auto_discovery(env_var)
       end
-      return unless auth_token && ENV["ANTHROPIC_AUTH_TOKEN"]
-      Anthropic.warn_env_static_shadows_auto_discovery("ANTHROPIC_AUTH_TOKEN")
+      {option => ENV[env_var]}
     end
   end
 end

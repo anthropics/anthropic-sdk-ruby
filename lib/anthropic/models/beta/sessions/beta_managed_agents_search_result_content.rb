@@ -13,25 +13,15 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultContent::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultContent::Type }
+          #   @return [Symbol, :text]
+          required :type, const: :text
 
-          # @!method initialize(text:, type:)
+          # @!method initialize(text:, type: :text)
           #   Text content within a search result.
           #
           #   @param text [String] The text content.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultContent::Type]
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultContent#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TEXT = :text
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :text]
         end
       end
     end

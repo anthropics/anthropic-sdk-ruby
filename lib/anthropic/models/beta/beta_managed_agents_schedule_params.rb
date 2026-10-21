@@ -23,10 +23,10 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsScheduleParams::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsScheduleParams::Type }
+        #   @return [Symbol, :cron]
+        required :type, const: :cron
 
-        # @!method initialize(expression:, timezone:, type:)
+        # @!method initialize(expression:, timezone:, type: :cron)
         #   A recurring schedule. Discriminated union — only cron is supported currently.
         #
         #   Some parameter documentations has been truncated, see
@@ -36,17 +36,7 @@ module Anthropic
         #
         #   @param timezone [String] Required. IANA timezone identifier (e.g., "America/Los_Angeles", "UTC"). Validat
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsScheduleParams::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsScheduleParams#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          CRON = :cron
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :cron]
       end
     end
 

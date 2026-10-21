@@ -7,7 +7,7 @@ module Anthropic
         {
           id: String,
           content: ::Array[Anthropic::Beta::BetaManagedAgentsSystemContentBlock],
-          type: Anthropic::Models::Beta::BetaManagedAgentsSystemMessageEvent::type_,
+          type: :"system.message",
           processed_at: Time?
         }
 
@@ -16,33 +16,23 @@ module Anthropic
 
         attr_accessor content: ::Array[Anthropic::Beta::BetaManagedAgentsSystemContentBlock]
 
-        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsSystemMessageEvent::type_
+        attr_accessor type: :"system.message"
 
         attr_accessor processed_at: Time?
 
         def initialize: (
           id: String,
           content: ::Array[Anthropic::Beta::BetaManagedAgentsSystemContentBlock],
-          type: Anthropic::Models::Beta::BetaManagedAgentsSystemMessageEvent::type_,
-          ?processed_at: Time?
+          ?processed_at: Time?,
+          ?type: :"system.message"
         ) -> void
 
         def to_hash: -> {
           id: String,
           content: ::Array[Anthropic::Beta::BetaManagedAgentsSystemContentBlock],
-          type: Anthropic::Models::Beta::BetaManagedAgentsSystemMessageEvent::type_,
+          type: :"system.message",
           processed_at: Time?
         }
-
-        type type_ = :"system.message"
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          SYSTEM_MESSAGE: :"system.message"
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsSystemMessageEvent::type_]
-        end
       end
     end
   end

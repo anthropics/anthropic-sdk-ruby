@@ -7,23 +7,13 @@ module Anthropic
         class BetaManagedAgentsRedactedBlock < Anthropic::Internal::Type::BaseModel
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRedactedBlock::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsRedactedBlock::Type }
+          #   @return [Symbol, :redacted]
+          required :type, const: :redacted
 
-          # @!method initialize(type:)
+          # @!method initialize(type: :redacted)
           #   Placeholder for content withheld by Anthropic model policy.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRedactedBlock::Type]
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsRedactedBlock#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            REDACTED = :redacted
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :redacted]
         end
       end
     end

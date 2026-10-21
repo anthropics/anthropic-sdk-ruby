@@ -18,7 +18,7 @@ class Anthropic::Test::Resources::Beta::MemoryStoresTest < Anthropic::Test::Reso
         description: String,
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
         name: String,
-        type: Anthropic::Beta::BetaManagedAgentsMemoryStore::Type,
+        type: Symbol,
         updated_at: Time
       }
     end
@@ -39,7 +39,7 @@ class Anthropic::Test::Resources::Beta::MemoryStoresTest < Anthropic::Test::Reso
         description: String,
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
         name: String,
-        type: Anthropic::Beta::BetaManagedAgentsMemoryStore::Type,
+        type: Symbol,
         updated_at: Time
       }
     end
@@ -60,7 +60,7 @@ class Anthropic::Test::Resources::Beta::MemoryStoresTest < Anthropic::Test::Reso
         description: String,
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
         name: String,
-        type: Anthropic::Beta::BetaManagedAgentsMemoryStore::Type,
+        type: Symbol,
         updated_at: Time
       }
     end
@@ -88,7 +88,7 @@ class Anthropic::Test::Resources::Beta::MemoryStoresTest < Anthropic::Test::Reso
         description: String,
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
         name: String,
-        type: Anthropic::Beta::BetaManagedAgentsMemoryStore::Type,
+        type: Symbol,
         updated_at: Time
       }
     end
@@ -104,7 +104,7 @@ class Anthropic::Test::Resources::Beta::MemoryStoresTest < Anthropic::Test::Reso
     assert_pattern do
       response => {
         id: String,
-        type: Anthropic::Beta::BetaManagedAgentsDeletedMemoryStore::Type
+        type: Symbol
       }
     end
   end
@@ -124,7 +124,7 @@ class Anthropic::Test::Resources::Beta::MemoryStoresTest < Anthropic::Test::Reso
         description: String,
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
         name: String,
-        type: Anthropic::Beta::BetaManagedAgentsMemoryStore::Type,
+        type: Symbol,
         updated_at: Time
       }
     end

@@ -22,9 +22,6 @@ module Anthropic
     sig { returns(T.nilable(Anthropic::Credentials::TokenCache)) }
     attr_reader :token_cache
 
-    sig { returns(Anthropic::Resources::Completions) }
-    attr_reader :completions
-
     sig { returns(Anthropic::Resources::Messages) }
     attr_reader :messages
 
@@ -77,6 +74,8 @@ module Anthropic
         api_key: T.nilable(String),
         auth_token: T.nilable(String),
         webhook_key: T.nilable(String),
+        credentials: T.untyped,
+        config: T.nilable(T::Hash[String, T.untyped]),
         base_url: T.nilable(String),
         proxy: T.nilable(T.any(String, URI::Generic)),
         max_retries: Integer,
@@ -89,12 +88,25 @@ module Anthropic
       ).returns(T.attached_class)
     end
     def self.new(
-      # Defaults to `ENV["ANTHROPIC_API_KEY"]`
-      api_key: ENV["ANTHROPIC_API_KEY"],
-      # Defaults to `ENV["ANTHROPIC_AUTH_TOKEN"]`
-      auth_token: ENV["ANTHROPIC_AUTH_TOKEN"],
+      # Defaults to `ENV["ANTHROPIC_API_KEY"]` when no explicit credential argument is
+      # passed.
+      api_key: nil,
+      # Defaults to `ENV["ANTHROPIC_AUTH_TOKEN"]` when no explicit credential argument
+      # is passed and `ANTHROPIC_API_KEY` is not set.
+      auth_token: nil,
       # Defaults to `ENV["ANTHROPIC_WEBHOOK_SIGNING_KEY"]`
       webhook_key: ENV["ANTHROPIC_WEBHOOK_SIGNING_KEY"],
+      # Credential provider — any callable returning
+      # `AccessToken.new(token:, expires_at:)`. The provider is wrapped in a
+      # `TokenCache` for thread-safe caching and proactive refresh (120s advisory / 30s
+      # mandatory before expiry). Common providers: `WorkloadIdentity`,
+      # `CredentialsFile`, `StaticToken`, or a custom lambda.
+      credentials: nil,
+      # In-memory configuration hash with the same shape as `configs/<profile>.json`.
+      # Must include an `authentication` object with a `type` field (`oidc_federation`
+      # or `user_oauth`). For `user_oauth`, must also include
+      # `authentication.credentials_path`.
+      config: nil,
       # Override the default base URL for the API, e.g.,
       # `"https://api.example.com/v2/"`. Defaults to `ENV["ANTHROPIC_BASE_URL"]`
       base_url: ENV["ANTHROPIC_BASE_URL"],

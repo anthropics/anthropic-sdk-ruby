@@ -7,7 +7,7 @@ module Anthropic
             networking: Anthropic::Models::Beta::Vaults::beta_managed_agents_credential_networking_params,
             secret_name: String,
             secret_value: String,
-            type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams::type_,
+            type: :environment_variable,
             injection_location: Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationParams
           }
 
@@ -18,7 +18,7 @@ module Anthropic
 
           attr_accessor secret_value: String
 
-          attr_accessor type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams::type_
+          attr_accessor type: :environment_variable
 
           attr_reader injection_location: Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationParams?
 
@@ -30,27 +30,17 @@ module Anthropic
             networking: Anthropic::Models::Beta::Vaults::beta_managed_agents_credential_networking_params,
             secret_name: String,
             secret_value: String,
-            type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams::type_,
-            ?injection_location: Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationParams
+            ?injection_location: Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationParams,
+            ?type: :environment_variable
           ) -> void
 
           def to_hash: -> {
             networking: Anthropic::Models::Beta::Vaults::beta_managed_agents_credential_networking_params,
             secret_name: String,
             secret_value: String,
-            type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams::type_,
+            type: :environment_variable,
             injection_location: Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationParams
           }
-
-          type type_ = :environment_variable
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            ENVIRONMENT_VARIABLE: :environment_variable
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams::type_]
-          end
         end
       end
     end

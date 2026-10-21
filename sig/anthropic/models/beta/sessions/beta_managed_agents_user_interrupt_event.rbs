@@ -5,7 +5,7 @@ module Anthropic
         type beta_managed_agents_user_interrupt_event =
           {
             id: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEvent::type_,
+            type: :"user.interrupt",
             processed_at: Time?,
             session_thread_id: String?
           }
@@ -13,7 +13,7 @@ module Anthropic
         class BetaManagedAgentsUserInterruptEvent < Anthropic::Internal::Type::BaseModel
           attr_accessor id: String
 
-          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEvent::type_
+          attr_accessor type: :"user.interrupt"
 
           attr_accessor processed_at: Time?
 
@@ -21,27 +21,17 @@ module Anthropic
 
           def initialize: (
             id: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEvent::type_,
             ?processed_at: Time?,
-            ?session_thread_id: String?
+            ?session_thread_id: String?,
+            ?type: :"user.interrupt"
           ) -> void
 
           def to_hash: -> {
             id: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEvent::type_,
+            type: :"user.interrupt",
             processed_at: Time?,
             session_thread_id: String?
           }
-
-          type type_ = :"user.interrupt"
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            USER_INTERRUPT: :"user.interrupt"
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEvent::type_]
-          end
         end
       end
     end

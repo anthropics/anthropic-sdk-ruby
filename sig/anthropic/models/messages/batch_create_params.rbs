@@ -61,7 +61,7 @@ module Anthropic
           type params =
             {
               max_tokens: Integer,
-              messages: ::Array[Anthropic::MessageParam],
+              messages: ::Array[Anthropic::Models::message_param],
               model: Anthropic::Models::model,
               cache_control: Anthropic::CacheControlEphemeral?,
               container: Anthropic::Models::message_create_params_container?,
@@ -74,18 +74,15 @@ module Anthropic
               stop_sequences: ::Array[String],
               stream: bool,
               system_: Anthropic::Models::Messages::BatchCreateParams::Request::Params::system_,
-              temperature: Float,
               thinking: Anthropic::Models::thinking_config_param,
               tool_choice: Anthropic::Models::tool_choice,
-              tools: ::Array[Anthropic::Models::tool_union],
-              top_k: Integer,
-              top_p: Float
+              tools: ::Array[Anthropic::Models::tool_union]
             }
 
           class Params < Anthropic::Internal::Type::BaseModel
             attr_accessor max_tokens: Integer
 
-            attr_accessor messages: ::Array[Anthropic::MessageParam]
+            attr_accessor messages: ::Array[Anthropic::Models::message_param]
 
             attr_accessor model: Anthropic::Models::model
 
@@ -129,10 +126,6 @@ module Anthropic
               Anthropic::Models::Messages::BatchCreateParams::Request::Params::system_
             ) -> Anthropic::Models::Messages::BatchCreateParams::Request::Params::system_
 
-            attr_reader temperature: Float?
-
-            def temperature=: (Float) -> Float
-
             attr_reader thinking: Anthropic::Models::thinking_config_param?
 
             def thinking=: (
@@ -151,17 +144,9 @@ module Anthropic
               ::Array[Anthropic::Models::tool_union]
             ) -> ::Array[Anthropic::Models::tool_union]
 
-            attr_reader top_k: Integer?
-
-            def top_k=: (Integer) -> Integer
-
-            attr_reader top_p: Float?
-
-            def top_p=: (Float) -> Float
-
             def initialize: (
               max_tokens: Integer,
-              messages: ::Array[Anthropic::MessageParam],
+              messages: ::Array[Anthropic::Models::message_param],
               model: Anthropic::Models::model,
               ?cache_control: Anthropic::CacheControlEphemeral?,
               ?container: Anthropic::Models::message_create_params_container?,
@@ -174,17 +159,14 @@ module Anthropic
               ?stop_sequences: ::Array[String],
               ?stream: bool,
               ?system_: Anthropic::Models::Messages::BatchCreateParams::Request::Params::system_,
-              ?temperature: Float,
               ?thinking: Anthropic::Models::thinking_config_param,
               ?tool_choice: Anthropic::Models::tool_choice,
-              ?tools: ::Array[Anthropic::Models::tool_union],
-              ?top_k: Integer,
-              ?top_p: Float
+              ?tools: ::Array[Anthropic::Models::tool_union]
             ) -> void
 
             def to_hash: -> {
               max_tokens: Integer,
-              messages: ::Array[Anthropic::MessageParam],
+              messages: ::Array[Anthropic::Models::message_param],
               model: Anthropic::Models::model,
               cache_control: Anthropic::CacheControlEphemeral?,
               container: Anthropic::Models::message_create_params_container?,
@@ -197,12 +179,9 @@ module Anthropic
               stop_sequences: ::Array[String],
               stream: bool,
               system_: Anthropic::Models::Messages::BatchCreateParams::Request::Params::system_,
-              temperature: Float,
               thinking: Anthropic::Models::thinking_config_param,
               tool_choice: Anthropic::Models::tool_choice,
-              tools: ::Array[Anthropic::Models::tool_union],
-              top_k: Integer,
-              top_p: Float
+              tools: ::Array[Anthropic::Models::tool_union]
             }
 
             type service_tier = :auto | :standard_only

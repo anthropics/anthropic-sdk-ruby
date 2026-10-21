@@ -42,9 +42,9 @@ module Anthropic
         def self.new(type:, **args)
           case type.to_sym
           when :manual
-            Anthropic::Beta::BetaManagedAgentsManualDeploymentPausedReason.new(type: type, **args)
+            Anthropic::Beta::BetaManagedAgentsManualDeploymentPausedReason.new(**args)
           when :error
-            Anthropic::Beta::BetaManagedAgentsErrorDeploymentPausedReason.new(type: type, **args)
+            Anthropic::Beta::BetaManagedAgentsErrorDeploymentPausedReason.new(**args)
           else
             raise ArgumentError, "unknown type: #{type}"
           end

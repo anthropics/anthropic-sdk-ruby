@@ -22,10 +22,10 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsCustomTool::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsCustomTool::Type }
+        #   @return [Symbol, :custom]
+        required :type, const: :custom
 
-        # @!method initialize(description:, input_schema:, name:, type:)
+        # @!method initialize(description:, input_schema:, name:, type: :custom)
         #   A custom tool as returned in API responses.
         #
         #   @param description [String]
@@ -34,17 +34,7 @@ module Anthropic
         #
         #   @param name [String]
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsCustomTool::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsCustomTool#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          CUSTOM = :custom
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :custom]
       end
     end
 

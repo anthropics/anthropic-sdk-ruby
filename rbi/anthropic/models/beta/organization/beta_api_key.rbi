@@ -89,12 +89,6 @@ module Anthropic
           sig { returns(Symbol) }
           attr_accessor :type
 
-          # Deprecated: use `scope` instead. ID of the Workspace associated with the API
-          # key, or `null` if the API key belongs to the default Workspace. Also `null` for
-          # a principal-bound API key that has no Workspace; `scope` tells the two apart.
-          sig { returns(T.nilable(String)) }
-          attr_accessor :workspace_id
-
           sig do
             params(
               id: String,
@@ -120,7 +114,6 @@ module Anthropic
                 ),
               status:
                 Anthropic::Beta::Organization::BetaAPIKey::Status::OrSymbol,
-              workspace_id: T.nilable(String),
               type: Symbol
             ).returns(T.attached_class)
           end
@@ -151,10 +144,6 @@ module Anthropic
             scope:,
             # Status of the API key.
             status:,
-            # Deprecated: use `scope` instead. ID of the Workspace associated with the API
-            # key, or `null` if the API key belongs to the default Workspace. Also `null` for
-            # a principal-bound API key that has no Workspace; `scope` tells the two apart.
-            workspace_id:,
             # Object type.
             #
             # For API Keys, this is always `"api_key"`.
@@ -180,8 +169,7 @@ module Anthropic
                   Anthropic::Beta::Organization::BetaAPIKey::Scope::Variants,
                 status:
                   Anthropic::Beta::Organization::BetaAPIKey::Status::TaggedSymbol,
-                type: Symbol,
-                workspace_id: T.nilable(String)
+                type: Symbol
               }
             )
           end
@@ -340,9 +328,8 @@ module Anthropic
             end
             def self.new(
               type:,
-              # ID of the Workspace the API key belongs to. Unlike the deprecated top-level
-              # `workspace_id`, this is the Workspace's real ID even for the organization's
-              # default Workspace.
+              # ID of the Workspace the API key belongs to, including when it is the
+              # organization's default Workspace.
               workspace_id: nil
             )
             end

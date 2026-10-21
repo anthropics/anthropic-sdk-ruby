@@ -6,8 +6,8 @@ module Anthropic
       class BetaManagedAgentsAgentToolset20260401Params < Anthropic::Internal::Type::BaseModel
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401Params::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsAgentToolset20260401Params::Type }
+        #   @return [Symbol, :agent_toolset_20260401]
+        required :type, const: :agent_toolset_20260401
 
         # @!attribute configs
         #   Per-tool configuration overrides.
@@ -24,25 +24,15 @@ module Anthropic
                  -> { Anthropic::Beta::BetaManagedAgentsAgentToolsetDefaultConfigParams },
                  nil?: true
 
-        # @!method initialize(type:, configs: nil, default_config: nil)
+        # @!method initialize(configs: nil, default_config: nil, type: :agent_toolset_20260401)
         #   Configuration for built-in agent tools. Use this to enable or disable groups of
         #   tools available to the agent.
-        #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401Params::Type]
         #
         #   @param configs [Array<Anthropic::Models::Beta::BetaManagedAgentsBashToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsEditToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsReadToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsWriteToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsGlobToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsGrepToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsWebSearchToolConfigParams>] Per-tool configuration overrides.
         #
         #   @param default_config [Anthropic::Models::Beta::BetaManagedAgentsAgentToolsetDefaultConfigParams, nil] Default configuration applied to all tools in this set.
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401Params#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          AGENT_TOOLSET_20260401 = :agent_toolset_20260401
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #
+        #   @param type [Symbol, :agent_toolset_20260401]
       end
     end
 

@@ -7,9 +7,8 @@ module Anthropic
         class BetaManagedAgentsEnvironmentVariableUpdateParams < Anthropic::Internal::Type::BaseModel
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams::Type]
-          required :type,
-                   enum: -> { Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams::Type }
+          #   @return [Symbol, :environment_variable]
+          required :type, const: :environment_variable
 
           # @!attribute injection_location
           #   Updated injection location.
@@ -32,27 +31,17 @@ module Anthropic
           #   @return [String, nil]
           optional :secret_value, String, nil?: true
 
-          # @!method initialize(type:, injection_location: nil, networking: nil, secret_value: nil)
+          # @!method initialize(injection_location: nil, networking: nil, secret_value: nil, type: :environment_variable)
           #   Parameters for updating an environment variable credential. `secret_name` is
           #   immutable.
-          #
-          #   @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams::Type]
           #
           #   @param injection_location [Anthropic::Models::Beta::Vaults::BetaManagedAgentsInjectionLocationUpdateParams] Updated injection location.
           #
           #   @param networking [Anthropic::Models::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingParams, nil] The new networking scope, which replaces the stored one as a whole.
           #
           #   @param secret_value [String, nil] The new secret value to replace the stored one.
-
-          # @see Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            ENVIRONMENT_VARIABLE = :environment_variable
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #
+          #   @param type [Symbol, :environment_variable]
         end
       end
     end

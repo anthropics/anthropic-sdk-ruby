@@ -23,11 +23,7 @@ module Anthropic
         end
         attr_accessor :event
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsStartEvent::Type::TaggedSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # Opens a preview of a buffered event. Carries the previewed event's type and id
@@ -43,7 +39,7 @@ module Anthropic
                 Anthropic::Beta::BetaManagedAgentsAgentMessagePreview::OrHash,
                 Anthropic::Beta::BetaManagedAgentsAgentThinkingPreview::OrHash
               ),
-            type: Anthropic::Beta::BetaManagedAgentsStartEvent::Type::OrSymbol
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
@@ -52,7 +48,7 @@ module Anthropic
           # content_delta fragments; agent.thinking previews are start-only — no deltas
           # follow, and the buffered agent.thinking with the same id concludes them.
           event:,
-          type:
+          type: :event_start
         )
         end
 
@@ -61,38 +57,11 @@ module Anthropic
             {
               event:
                 Anthropic::Beta::BetaManagedAgentsStartEventPreview::Variants,
-              type:
-                Anthropic::Beta::BetaManagedAgentsStartEvent::Type::TaggedSymbol
+              type: Symbol
             }
           )
         end
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(Symbol, Anthropic::Beta::BetaManagedAgentsStartEvent::Type)
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          EVENT_START =
-            T.let(
-              :event_start,
-              Anthropic::Beta::BetaManagedAgentsStartEvent::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsStartEvent::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

@@ -38,8 +38,8 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsCredential::Type]
-          required :type, enum: -> { Anthropic::Beta::Vaults::BetaManagedAgentsCredential::Type }
+          #   @return [Symbol, :vault_credential]
+          required :type, const: :vault_credential
 
           # @!attribute updated_at
           #   A timestamp in RFC 3339 format
@@ -59,7 +59,7 @@ module Anthropic
           #   @return [String, nil]
           optional :display_name, String, nil?: true
 
-          # @!method initialize(id:, archived_at:, auth:, created_at:, metadata:, type:, updated_at:, vault_id:, display_name: nil)
+          # @!method initialize(id:, archived_at:, auth:, created_at:, metadata:, updated_at:, vault_id:, display_name: nil, type: :vault_credential)
           #   A credential stored in a vault. Sensitive fields are never returned in
           #   responses.
           #
@@ -73,13 +73,13 @@ module Anthropic
           #
           #   @param metadata [Hash{Symbol=>String}] Arbitrary key-value metadata attached to the credential.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsCredential::Type]
-          #
           #   @param updated_at [Time] A timestamp in RFC 3339 format
           #
           #   @param vault_id [String] Identifier of the vault this credential belongs to.
           #
           #   @param display_name [String, nil] Human-readable name for the credential.
+          #
+          #   @param type [Symbol, :vault_credential]
 
           # Authentication configuration for this credential.
           #
@@ -141,28 +141,15 @@ module Anthropic
             def self.new(type:, **args)
               case type.to_sym
               when :mcp_oauth
-                Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthAuthResponse.new(type: type, **args)
+                Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthAuthResponse.new(**args)
               when :static_bearer
-                Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerAuthResponse.new(type: type, **args)
+                Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerAuthResponse.new(**args)
               when :environment_variable
-                Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse.new(
-                  type: type,
-                  **args
-                )
+                Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse.new(**args)
               else
                 raise ArgumentError, "unknown type: #{type}"
               end
             end
-          end
-
-          # @see Anthropic::Models::Beta::Vaults::BetaManagedAgentsCredential#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            VAULT_CREDENTIAL = :vault_credential
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
           end
         end
       end

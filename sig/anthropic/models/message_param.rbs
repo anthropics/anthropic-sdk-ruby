@@ -1,35 +1,12 @@
 module Anthropic
   module Models
     type message_param =
-      {
-        content: Anthropic::Models::MessageParam::content,
-        role: Anthropic::Models::MessageParam::role
-      }
+      Anthropic::UserMessageParam
+      | Anthropic::AssistantMessageParam
+      | Anthropic::SystemMessageParam
 
-    class MessageParam < Anthropic::Internal::Type::BaseModel
-      attr_accessor content: Anthropic::Models::MessageParam::content
-
-      attr_accessor role: Anthropic::Models::MessageParam::role
-
-      def initialize: (
-        content: Anthropic::Models::MessageParam::content,
-        role: Anthropic::Models::MessageParam::role
-      ) -> void
-
-      def to_hash: -> {
-        content: Anthropic::Models::MessageParam::content,
-        role: Anthropic::Models::MessageParam::role
-      }
-
-      type content = String | ::Array[Anthropic::Models::content_block_param]
-
-      module Content
-        extend Anthropic::Internal::Type::Union
-
-        def self?.variants: -> ::Array[Anthropic::Models::MessageParam::content]
-
-        ContentBlockParamArray: Anthropic::Internal::Type::Converter
-      end
+    module MessageParam
+      extend Anthropic::Internal::Type::Union
 
       type role = :user | :assistant | :system
 
@@ -42,6 +19,27 @@ module Anthropic
 
         def self?.values: -> ::Array[Anthropic::Models::MessageParam::role]
       end
+
+      def self?.variants: -> ::Array[Anthropic::Models::message_param]
+
+      def self.new:
+        (
+          role: :user | "user",
+          content: Anthropic::Models::message_content_param
+        ) -> Anthropic::UserMessageParam
+        | (
+          role: :assistant | "assistant",
+          content: Anthropic::Models::message_content_param
+        ) -> Anthropic::AssistantMessageParam
+        | (
+          role: :system | "system",
+          content: Anthropic::Models::SystemMessageParam::content
+        ) -> Anthropic::SystemMessageParam
+        | (
+          role: Anthropic::Models::MessageParam::role | String,
+          content: Anthropic::Models::message_content_param
+          | Anthropic::Models::SystemMessageParam::content
+        ) -> Anthropic::Models::message_param
     end
   end
 end

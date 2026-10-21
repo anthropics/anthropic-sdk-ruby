@@ -40,10 +40,10 @@ module Anthropic
           def add: (
             String session_id,
             file_id: String,
-            type: Anthropic::Models::Beta::BetaManagedAgentsFileResourceParams::type_,
             ?mount_path: String?,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?workspace_id: String,
+            ?type: :file,
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Beta::Sessions::BetaManagedAgentsFileResource
 

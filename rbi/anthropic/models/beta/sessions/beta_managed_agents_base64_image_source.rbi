@@ -22,21 +22,14 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :media_type
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsBase64ImageSource::Type::OrSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # Base64-encoded image data.
           sig do
-            params(
-              data: String,
-              media_type: String,
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsBase64ImageSource::Type::OrSymbol
-            ).returns(T.attached_class)
+            params(data: String, media_type: String, type: Symbol).returns(
+              T.attached_class
+            )
           end
           def self.new(
             # Base64-encoded image data.
@@ -44,50 +37,14 @@ module Anthropic
             # MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif",
             # "image/webp").
             media_type:,
-            type:
+            type: :base64
           )
           end
 
           sig do
-            override.returns(
-              {
-                data: String,
-                media_type: String,
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsBase64ImageSource::Type::OrSymbol
-              }
-            )
+            override.returns({ data: String, media_type: String, type: Symbol })
           end
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsBase64ImageSource::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            BASE64 =
-              T.let(
-                :base64,
-                Anthropic::Beta::Sessions::BetaManagedAgentsBase64ImageSource::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsBase64ImageSource::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

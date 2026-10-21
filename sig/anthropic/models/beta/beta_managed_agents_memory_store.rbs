@@ -11,7 +11,7 @@ module Anthropic
           description: String,
           metadata: ::Hash[Symbol, String],
           name: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsMemoryStore::type_,
+          type: :memory_store,
           updated_at: Time
         }
 
@@ -28,7 +28,7 @@ module Anthropic
 
         attr_accessor name: String
 
-        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsMemoryStore::type_
+        attr_accessor type: :memory_store
 
         attr_accessor updated_at: Time
 
@@ -39,8 +39,8 @@ module Anthropic
           description: String,
           metadata: ::Hash[Symbol, String],
           name: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsMemoryStore::type_,
-          updated_at: Time
+          updated_at: Time,
+          ?type: :memory_store
         ) -> void
 
         def to_hash: -> {
@@ -50,19 +50,9 @@ module Anthropic
           description: String,
           metadata: ::Hash[Symbol, String],
           name: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsMemoryStore::type_,
+          type: :memory_store,
           updated_at: Time
         }
-
-        type type_ = :memory_store
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          MEMORY_STORE: :memory_store
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsMemoryStore::type_]
-        end
       end
     end
   end

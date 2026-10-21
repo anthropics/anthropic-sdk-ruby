@@ -3,31 +3,14 @@ module Anthropic
     class BetaManagedAgentsAlwaysAllowPolicy = Beta::BetaManagedAgentsAlwaysAllowPolicy
 
     module Beta
-      type beta_managed_agents_always_allow_policy =
-        {
-          type: Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy::type_
-        }
+      type beta_managed_agents_always_allow_policy = { type: :always_allow }
 
       class BetaManagedAgentsAlwaysAllowPolicy < Anthropic::Internal::Type::BaseModel
-        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy::type_
+        attr_accessor type: :always_allow
 
-        def initialize: (
-          type: Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy::type_
-        ) -> void
+        def initialize: (?type: :always_allow) -> void
 
-        def to_hash: -> {
-          type: Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy::type_
-        }
-
-        type type_ = :always_allow
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          ALWAYS_ALLOW: :always_allow
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy::type_]
-        end
+        def to_hash: -> { type: :always_allow }
       end
     end
   end

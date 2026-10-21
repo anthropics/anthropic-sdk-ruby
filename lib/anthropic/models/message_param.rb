@@ -2,39 +2,17 @@
 
 module Anthropic
   module Models
-    class MessageParam < Anthropic::Internal::Type::BaseModel
-      # @!attribute content
-      #
-      #   @return [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::SearchResultBlockParam, Anthropic::Models::ThinkingBlockParam, Anthropic::Models::RedactedThinkingBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::ServerToolUseBlockParam, Anthropic::Models::WebSearchToolResultBlockParam, Anthropic::Models::WebFetchToolResultBlockParam, Anthropic::Models::CodeExecutionToolResultBlockParam, Anthropic::Models::BashCodeExecutionToolResultBlockParam, Anthropic::Models::TextEditorCodeExecutionToolResultBlockParam, Anthropic::Models::ToolSearchToolResultBlockParam, Anthropic::Models::ContainerUploadBlockParam>]
-      required :content, union: -> { Anthropic::MessageParam::Content }
+    module MessageParam
+      extend Anthropic::Internal::Type::Union
 
-      # @!attribute role
-      #
-      #   @return [Symbol, Anthropic::Models::MessageParam::Role]
-      required :role, enum: -> { Anthropic::MessageParam::Role }
+      discriminator :role
 
-      # @!method initialize(content:, role:)
-      #   @param content [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::SearchResultBlockParam, Anthropic::Models::ThinkingBlockParam, Anthropic::Models::RedactedThinkingBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::ServerToolUseBlockParam, Anthropic::Models::WebSearchToolResultBlockParam, Anthropic::Models::WebFetchToolResultBlockParam, Anthropic::Models::CodeExecutionToolResultBlockParam, Anthropic::Models::BashCodeExecutionToolResultBlockParam, Anthropic::Models::TextEditorCodeExecutionToolResultBlockParam, Anthropic::Models::ToolSearchToolResultBlockParam, Anthropic::Models::ContainerUploadBlockParam>]
-      #   @param role [Symbol, Anthropic::Models::MessageParam::Role]
+      variant :user, -> { Anthropic::UserMessageParam }
 
-      # @see Anthropic::Models::MessageParam#content
-      module Content
-        extend Anthropic::Internal::Type::Union
+      variant :assistant, -> { Anthropic::AssistantMessageParam }
 
-        variant String
+      variant :system, -> { Anthropic::SystemMessageParam }
 
-        variant -> { Anthropic::Models::MessageParam::Content::ContentBlockParamArray }
-
-        # @!method self.variants
-        #   @return [Array(String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::SearchResultBlockParam, Anthropic::Models::ThinkingBlockParam, Anthropic::Models::RedactedThinkingBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::ServerToolUseBlockParam, Anthropic::Models::WebSearchToolResultBlockParam, Anthropic::Models::WebFetchToolResultBlockParam, Anthropic::Models::CodeExecutionToolResultBlockParam, Anthropic::Models::BashCodeExecutionToolResultBlockParam, Anthropic::Models::TextEditorCodeExecutionToolResultBlockParam, Anthropic::Models::ToolSearchToolResultBlockParam, Anthropic::Models::ContainerUploadBlockParam>)]
-
-        # @type [Anthropic::Internal::Type::Converter]
-        ContentBlockParamArray = Anthropic::Internal::Type::ArrayOf[union: -> {
-          Anthropic::ContentBlockParam
-        }]
-      end
-
-      # @see Anthropic::Models::MessageParam#role
       module Role
         extend Anthropic::Internal::Type::Enum
 
@@ -44,6 +22,33 @@ module Anthropic
 
         # @!method self.values
         #   @return [Array<Symbol>]
+      end
+
+      # @!method self.variants
+      #   @return [Array(Anthropic::Models::UserMessageParam, Anthropic::Models::AssistantMessageParam, Anthropic::Models::SystemMessageParam)]
+
+      # Creates a new instance of the variant class whose `role` matches the given
+      # value, passing the remaining arguments to its constructor.
+      #
+      # @param role [Symbol, Anthropic::Models::MessageParam::Role, String]
+      #
+      # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+      #
+      #   @option args [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::SearchResultBlockParam, Anthropic::Models::ThinkingBlockParam, Anthropic::Models::RedactedThinkingBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::ServerToolUseBlockParam, Anthropic::Models::WebSearchToolResultBlockParam, Anthropic::Models::WebFetchToolResultBlockParam, Anthropic::Models::CodeExecutionToolResultBlockParam, Anthropic::Models::BashCodeExecutionToolResultBlockParam, Anthropic::Models::TextEditorCodeExecutionToolResultBlockParam, Anthropic::Models::ToolSearchToolResultBlockParam, Anthropic::Models::ContainerUploadBlockParam>, String, Array<Anthropic::Models::TextBlockParam>] :content
+      #
+      # @raise [ArgumentError]
+      # @return [Anthropic::Models::UserMessageParam, Anthropic::Models::AssistantMessageParam, Anthropic::Models::SystemMessageParam]
+      def self.new(role:, **args)
+        case role.to_sym
+        when :user
+          Anthropic::UserMessageParam.new(**args)
+        when :assistant
+          Anthropic::AssistantMessageParam.new(**args)
+        when :system
+          Anthropic::SystemMessageParam.new(**args)
+        else
+          raise ArgumentError, "unknown role: #{role}"
+        end
       end
     end
   end

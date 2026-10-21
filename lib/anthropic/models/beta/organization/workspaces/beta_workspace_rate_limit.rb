@@ -8,24 +8,10 @@ module Anthropic
           # @see Anthropic::Resources::Beta::Organization::Workspaces::RateLimits#update
           class BetaWorkspaceRateLimit < Anthropic::Internal::Type::BaseModel
             # @!attribute group
-            #   The rate-limit group this entry's limits apply to. Its `type` equals
-            #   `group_type`.
+            #   The rate-limit group this entry's limits apply to.
             #
             #   @return [Anthropic::Models::Beta::Organization::BetaOrganizationRateLimitModelGroup, Anthropic::Models::Beta::Organization::BetaOrganizationRateLimitBatchGroup, Anthropic::Models::Beta::Organization::BetaOrganizationRateLimitTokenCountGroup, Anthropic::Models::Beta::Organization::BetaOrganizationRateLimitFilesGroup, Anthropic::Models::Beta::Organization::BetaOrganizationRateLimitSkillsGroup, Anthropic::Models::Beta::Organization::BetaOrganizationRateLimitWebSearchGroup]
             required :group, union: -> { Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::Group }
-
-            # @!attribute group_type
-            #   @deprecated Use `group.type` instead. `group_type` is still returned and always equals
-            #   `group.type`.
-            #
-            #   Deprecated: use `group.type` instead. The kind of rate-limit group this entry
-            #   represents. `model_group` entries apply to a family of models (listed in
-            #   `models`); other values apply to an API-surface category and have `models` set
-            #   to `null`. Always equal to `group.type`.
-            #
-            #   @return [Symbol, Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::GroupType]
-            required :group_type,
-                     enum: -> { Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::GroupType }
 
             # @!attribute limits
             #   The workspace's limiter values for this group. By default only the limiter types
@@ -39,7 +25,7 @@ module Anthropic
 
             # @!attribute models
             #   Model names this entry's limits apply to, including aliases. `null` when
-            #   `group_type` is not `"model_group"`.
+            #   `group.type` is not `"model_group"`.
             #
             #   @return [Array<String>, nil]
             required :models, Anthropic::Internal::Type::ArrayOf[String], nil?: true
@@ -62,19 +48,16 @@ module Anthropic
             #   @return [String]
             required :workspace_id, String
 
-            # @!method initialize(group:, group_type:, limits:, models:, rate_limit_id:, workspace_id:, type: :workspace_rate_limit)
+            # @!method initialize(group:, limits:, models:, rate_limit_id:, workspace_id:, type: :workspace_rate_limit)
             #   Some parameter documentations has been truncated, see
             #   {Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimit} for
             #   more details.
             #
-            #   @param group [Anthropic::Models::Beta::Organization::BetaOrganizationRateLimitModelGroup, Anthropic::Models::Beta::Organization::BetaOrganizationRateLimitBatchGroup, Anthropic::Models::Beta::Organization::BetaOrganizationRateLimitTokenCountGroup, Anthropic::Models::Beta::Organization::BetaOrganizationRateLimitFilesGroup, Anthropic::Models::Beta::Organization::BetaOrganizationRateLimitSkillsGroup, Anthropic::Models::Beta::Organization::BetaOrganizationRateLimitWebSearchGroup] The rate-limit group this entry's limits apply to. Its `type` equals `group_type
-            #
-            #   @param group_type [Symbol, Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimit::GroupType] Deprecated: use `group.type` instead. The kind of rate-limit group this entry re
+            #   @param group [Anthropic::Models::Beta::Organization::BetaOrganizationRateLimitModelGroup, Anthropic::Models::Beta::Organization::BetaOrganizationRateLimitBatchGroup, Anthropic::Models::Beta::Organization::BetaOrganizationRateLimitTokenCountGroup, Anthropic::Models::Beta::Organization::BetaOrganizationRateLimitFilesGroup, Anthropic::Models::Beta::Organization::BetaOrganizationRateLimitSkillsGroup, Anthropic::Models::Beta::Organization::BetaOrganizationRateLimitWebSearchGroup] The rate-limit group this entry's limits apply to.
             #
             #   @param limits [Array<Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimitValue>] The workspace's limiter values for this group. By default only the limiter types
             #
-            #   @param models [Array<String>, nil] Model names this entry's limits apply to, including aliases. `null` when
-            #   `group\_
+            #   @param models [Array<String>, nil] Model names this entry's limits apply to, including aliases. `null` when `group.
             #
             #   @param rate_limit_id [String] The `id` of the organization's RateLimit entry this entry applies to.
             #
@@ -82,8 +65,7 @@ module Anthropic
             #
             #   @param type [Symbol, :workspace_rate_limit] Object type. Always `workspace_rate_limit` for workspace rate-limit entries.
 
-            # The rate-limit group this entry's limits apply to. Its `type` equals
-            # `group_type`.
+            # The rate-limit group this entry's limits apply to.
             #
             # @see Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimit#group
             module Group
@@ -155,29 +137,6 @@ module Anthropic
                   raise ArgumentError, "unknown type: #{type}"
                 end
               end
-            end
-
-            # @deprecated Use `group.type` instead. `group_type` is still returned and always equals
-            # `group.type`.
-            #
-            # Deprecated: use `group.type` instead. The kind of rate-limit group this entry
-            # represents. `model_group` entries apply to a family of models (listed in
-            # `models`); other values apply to an API-surface category and have `models` set
-            # to `null`. Always equal to `group.type`.
-            #
-            # @see Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimit#group_type
-            module GroupType
-              extend Anthropic::Internal::Type::Enum
-
-              BATCH = :batch
-              FILES = :files
-              MODEL_GROUP = :model_group
-              SKILLS = :skills
-              TOKEN_COUNT = :token_count
-              WEB_SEARCH = :web_search
-
-              # @!method self.values
-              #   @return [Array<Symbol>]
             end
           end
         end

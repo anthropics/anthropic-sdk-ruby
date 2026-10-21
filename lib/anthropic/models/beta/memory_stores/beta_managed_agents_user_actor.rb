@@ -7,8 +7,8 @@ module Anthropic
         class BetaManagedAgentsUserActor < Anthropic::Internal::Type::BaseModel
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor::Type]
-          required :type, enum: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsUserActor::Type }
+          #   @return [Symbol, :user_actor]
+          required :type, const: :user_actor
 
           # @!attribute user_id
           #   ID of the user (a `user_...` value).
@@ -16,22 +16,12 @@ module Anthropic
           #   @return [String]
           required :user_id, String
 
-          # @!method initialize(type:, user_id:)
+          # @!method initialize(user_id:, type: :user_actor)
           #   A human user, for example acting through the Anthropic Console.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor::Type]
-          #
           #   @param user_id [String] ID of the user (a `user_...` value).
-
-          # @see Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            USER_ACTOR = :user_actor
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #
+          #   @param type [Symbol, :user_actor]
         end
       end
     end

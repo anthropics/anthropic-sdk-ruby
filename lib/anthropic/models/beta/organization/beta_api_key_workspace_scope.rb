@@ -12,9 +12,8 @@ module Anthropic
           required :type, const: :workspace
 
           # @!attribute workspace_id
-          #   ID of the Workspace the API key belongs to. Unlike the deprecated top-level
-          #   `workspace_id`, this is the Workspace's real ID even for the organization's
-          #   default Workspace.
+          #   ID of the Workspace the API key belongs to, including when it is the
+          #   organization's default Workspace.
           #
           #   @return [String]
           required :workspace_id, String
@@ -24,7 +23,7 @@ module Anthropic
           #   {Anthropic::Models::Beta::Organization::BetaAPIKeyWorkspaceScope} for more
           #   details.
           #
-          #   @param workspace_id [String] ID of the Workspace the API key belongs to. Unlike the deprecated top-level `wor
+          #   @param workspace_id [String] ID of the Workspace the API key belongs to, including when it is the organizatio
           #
           #   @param type [Symbol, :workspace] Scope type. Always `"workspace"`: the API key belongs to one Workspace.
         end

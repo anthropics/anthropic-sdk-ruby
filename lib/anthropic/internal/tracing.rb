@@ -87,7 +87,6 @@ module Anthropic
       # The span name of each SDK method. Code that names a span through these fails to
       # load once no method has the name.
       module SpanName
-        COMPLETIONS_CREATE = "anthropic.completions.create"
         MESSAGES_CREATE = "anthropic.messages.create"
         MESSAGES_COUNT_TOKENS = "anthropic.messages.count_tokens"
         MESSAGES_BATCHES_CREATE = "anthropic.messages.batches.create"
@@ -401,9 +400,9 @@ module Anthropic
             request: {
               GEN_AI_REQUEST_MODEL => [[:model], :string],
               GEN_AI_REQUEST_MAX_TOKENS => [[:max_tokens], :integer],
-              GEN_AI_REQUEST_TEMPERATURE => [[:temperature], :number],
-              GEN_AI_REQUEST_TOP_P => [[:top_p], :number],
-              GEN_AI_REQUEST_TOP_K => [[:top_k], :integer],
+              GEN_AI_REQUEST_TEMPERATURE => [[:temperature], :any],
+              GEN_AI_REQUEST_TOP_P => [[:top_p], :any],
+              GEN_AI_REQUEST_TOP_K => [[:top_k], :any],
               GEN_AI_REQUEST_REASONING_LEVEL => [[:output_config, :effort], :string],
               ANTHROPIC_REQUEST_SERVICE_TIER => [[:service_tier], :string],
               ANTHROPIC_THINKING_TYPE => [[:thinking, :type], :string],

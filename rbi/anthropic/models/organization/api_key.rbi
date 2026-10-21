@@ -286,9 +286,8 @@ module Anthropic
           end
           def self.new(
             type:,
-            # ID of the Workspace the API key belongs to. Unlike the deprecated top-level
-            # `workspace_id`, this is the Workspace's real ID even for the organization's
-            # default Workspace.
+            # ID of the Workspace the API key belongs to, including when it is the
+            # organization's default Workspace.
             workspace_id: nil
           )
           end

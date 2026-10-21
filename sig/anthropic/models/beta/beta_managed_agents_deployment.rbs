@@ -18,7 +18,7 @@ module Anthropic
           resources: ::Array[Anthropic::Models::Beta::beta_managed_agents_session_resource_config],
           schedule: Anthropic::Beta::BetaManagedAgentsSchedule?,
           status: Anthropic::Models::Beta::beta_managed_agents_deployment_status,
-          type: Anthropic::Models::Beta::BetaManagedAgentsDeployment::type_,
+          type: :deployment,
           updated_at: Time,
           vault_ids: ::Array[String],
           budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?
@@ -51,7 +51,7 @@ module Anthropic
 
         attr_accessor status: Anthropic::Models::Beta::beta_managed_agents_deployment_status
 
-        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsDeployment::type_
+        attr_accessor type: :deployment
 
         attr_accessor updated_at: Time
 
@@ -73,10 +73,10 @@ module Anthropic
           resources: ::Array[Anthropic::Models::Beta::beta_managed_agents_session_resource_config],
           schedule: Anthropic::Beta::BetaManagedAgentsSchedule?,
           status: Anthropic::Models::Beta::beta_managed_agents_deployment_status,
-          type: Anthropic::Models::Beta::BetaManagedAgentsDeployment::type_,
           updated_at: Time,
           vault_ids: ::Array[String],
-          ?budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?
+          ?budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?,
+          ?type: :deployment
         ) -> void
 
         def to_hash: -> {
@@ -93,21 +93,11 @@ module Anthropic
           resources: ::Array[Anthropic::Models::Beta::beta_managed_agents_session_resource_config],
           schedule: Anthropic::Beta::BetaManagedAgentsSchedule?,
           status: Anthropic::Models::Beta::beta_managed_agents_deployment_status,
-          type: Anthropic::Models::Beta::BetaManagedAgentsDeployment::type_,
+          type: :deployment,
           updated_at: Time,
           vault_ids: ::Array[String],
           budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?
         }
-
-        type type_ = :deployment
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          DEPLOYMENT: :deployment
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsDeployment::type_]
-        end
       end
     end
   end

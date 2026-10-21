@@ -27,11 +27,6 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :display_name
 
-          # Deprecated: use `display_name` instead. Name of the RBAC Role; always the same
-          # value as `display_name`.
-          sig { returns(String) }
-          attr_accessor :name
-
           # Object type.
           #
           # For RBAC Roles, this is always `"rbac_role"`.
@@ -47,7 +42,6 @@ module Anthropic
               id: String,
               created_at: Time,
               display_name: String,
-              name: String,
               updated_at: Time,
               type: Symbol
             ).returns(T.attached_class)
@@ -61,9 +55,6 @@ module Anthropic
             # from the label claude.ai shows, and Anthropic may change the name. To keep a
             # lasting reference to a role, store its `id`.
             display_name:,
-            # Deprecated: use `display_name` instead. Name of the RBAC Role; always the same
-            # value as `display_name`.
-            name:,
             # RFC 3339 datetime string indicating when the RBAC Role was last updated.
             updated_at:,
             # Object type.
@@ -79,7 +70,6 @@ module Anthropic
                 id: String,
                 created_at: Time,
                 display_name: String,
-                name: String,
                 type: Symbol,
                 updated_at: Time
               }

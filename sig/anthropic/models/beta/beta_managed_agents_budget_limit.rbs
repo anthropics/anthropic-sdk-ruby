@@ -4,35 +4,22 @@ module Anthropic
 
     module Beta
       type beta_managed_agents_budget_limit =
-        {
-          max_list_cost: Anthropic::BetaMonetaryAmount,
-          type: Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit::type_
-        }
+        { max_list_cost: Anthropic::BetaMonetaryAmount, type: :limit }
 
       class BetaManagedAgentsBudgetLimit < Anthropic::Internal::Type::BaseModel
         attr_accessor max_list_cost: Anthropic::BetaMonetaryAmount
 
-        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit::type_
+        attr_accessor type: :limit
 
         def initialize: (
           max_list_cost: Anthropic::BetaMonetaryAmount,
-          type: Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit::type_
+          ?type: :limit
         ) -> void
 
         def to_hash: -> {
           max_list_cost: Anthropic::BetaMonetaryAmount,
-          type: Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit::type_
+          type: :limit
         }
-
-        type type_ = :limit
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          LIMIT: :limit
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit::type_]
-        end
       end
     end
   end

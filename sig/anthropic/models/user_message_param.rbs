@@ -1,0 +1,22 @@
+module Anthropic
+  module Models
+    type user_message_param =
+      { content: Anthropic::Models::message_content_param, role: :user }
+
+    class UserMessageParam < Anthropic::Internal::Type::BaseModel
+      attr_accessor content: Anthropic::Models::message_content_param
+
+      attr_accessor role: :user
+
+      def initialize: (
+        content: Anthropic::Models::message_content_param,
+        ?role: :user
+      ) -> void
+
+      def to_hash: -> {
+        content: Anthropic::Models::message_content_param,
+        role: :user
+      }
+    end
+  end
+end

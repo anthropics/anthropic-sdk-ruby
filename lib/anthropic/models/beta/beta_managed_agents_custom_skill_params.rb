@@ -12,8 +12,8 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsCustomSkillParams::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsCustomSkillParams::Type }
+        #   @return [Symbol, :custom]
+        required :type, const: :custom
 
         # @!attribute version
         #   Version to pin. Defaults to latest if omitted.
@@ -21,24 +21,14 @@ module Anthropic
         #   @return [String, nil]
         optional :version, String, nil?: true
 
-        # @!method initialize(skill_id:, type:, version: nil)
+        # @!method initialize(skill_id:, version: nil, type: :custom)
         #   A user-created custom skill.
         #
         #   @param skill_id [String] Tagged ID of the custom skill (e.g., "skill_01XJ5...").
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsCustomSkillParams::Type]
-        #
         #   @param version [String, nil] Version to pin. Defaults to latest if omitted.
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsCustomSkillParams#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          CUSTOM = :custom
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #
+        #   @param type [Symbol, :custom]
       end
     end
 

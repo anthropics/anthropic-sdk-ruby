@@ -7,7 +7,7 @@ module Anthropic
             injection_location: Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationResponse,
             networking: Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::networking,
             secret_name: String,
-            type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::type_
+            type: :environment_variable
           }
 
         class BetaManagedAgentsEnvironmentVariableAuthResponse < Anthropic::Internal::Type::BaseModel
@@ -17,20 +17,20 @@ module Anthropic
 
           attr_accessor secret_name: String
 
-          attr_accessor type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::type_
+          attr_accessor type: :environment_variable
 
           def initialize: (
             injection_location: Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationResponse,
             networking: Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::networking,
             secret_name: String,
-            type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::type_
+            ?type: :environment_variable
           ) -> void
 
           def to_hash: -> {
             injection_location: Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationResponse,
             networking: Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::networking,
             secret_name: String,
-            type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::type_
+            type: :environment_variable
           }
 
           type networking =
@@ -66,16 +66,6 @@ module Anthropic
                 | String,
                 ?allowed_hosts: ::Array[String]
               ) -> Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::networking
-          end
-
-          type type_ = :environment_variable
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            ENVIRONMENT_VARIABLE: :environment_variable
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::type_]
           end
         end
       end

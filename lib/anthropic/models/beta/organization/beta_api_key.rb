@@ -76,18 +76,7 @@ module Anthropic
           #   @return [Symbol, :api_key]
           required :type, const: :api_key
 
-          # @!attribute workspace_id
-          #   @deprecated Use `scope` instead. `workspace_id` is `null` both for an API key in the default
-          #   Workspace and for a principal-bound API key that has no Workspace.
-          #
-          #   Deprecated: use `scope` instead. ID of the Workspace associated with the API
-          #   key, or `null` if the API key belongs to the default Workspace. Also `null` for
-          #   a principal-bound API key that has no Workspace; `scope` tells the two apart.
-          #
-          #   @return [String, nil]
-          required :workspace_id, String, nil?: true
-
-          # @!method initialize(id:, created_at:, created_by:, expires_at:, name:, partial_key_hint:, principal:, scope:, status:, workspace_id:, type: :api_key)
+          # @!method initialize(id:, created_at:, created_by:, expires_at:, name:, partial_key_hint:, principal:, scope:, status:, type: :api_key)
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Organization::BetaAPIKey} for more details.
           #
@@ -108,8 +97,6 @@ module Anthropic
           #   @param scope [Anthropic::Models::Beta::Organization::BetaAPIKeyOrganizationScope, Anthropic::Models::Beta::Organization::BetaAPIKeyWorkspaceScope] Where the API key belongs: its Workspace (`{"type": "workspace", "workspace_id":
           #
           #   @param status [Symbol, Anthropic::Models::Beta::Organization::BetaAPIKey::Status] Status of the API key.
-          #
-          #   @param workspace_id [String, nil] Deprecated: use `scope` instead. ID of the Workspace associated with the API key
           #
           #   @param type [Symbol, :api_key] Object type.
 
@@ -203,7 +190,7 @@ module Anthropic
             #
             # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
             #
-            #   @option args [String] :workspace_id ID of the Workspace the API key belongs to. Unlike the deprecated top-level `wor
+            #   @option args [String] :workspace_id ID of the Workspace the API key belongs to, including when it is the organizatio
             #
             # @raise [ArgumentError]
             # @return [Anthropic::Models::Beta::Organization::BetaAPIKeyOrganizationScope, Anthropic::Models::Beta::Organization::BetaAPIKeyWorkspaceScope]

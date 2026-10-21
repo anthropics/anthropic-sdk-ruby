@@ -4,35 +4,16 @@ module Anthropic
 
     module Beta
       type beta_managed_agents_agent_archived_run_error =
-        {
-          message: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsAgentArchivedRunError::type_
-        }
+        { message: String, type: :agent_archived_error }
 
       class BetaManagedAgentsAgentArchivedRunError < Anthropic::Internal::Type::BaseModel
         attr_accessor message: String
 
-        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsAgentArchivedRunError::type_
+        attr_accessor type: :agent_archived_error
 
-        def initialize: (
-          message: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsAgentArchivedRunError::type_
-        ) -> void
+        def initialize: (message: String, ?type: :agent_archived_error) -> void
 
-        def to_hash: -> {
-          message: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsAgentArchivedRunError::type_
-        }
-
-        type type_ = :agent_archived_error
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          AGENT_ARCHIVED_ERROR: :agent_archived_error
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsAgentArchivedRunError::type_]
-        end
+        def to_hash: -> { message: String, type: :agent_archived_error }
       end
     end
   end

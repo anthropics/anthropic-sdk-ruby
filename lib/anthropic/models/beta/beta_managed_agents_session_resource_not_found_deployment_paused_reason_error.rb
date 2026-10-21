@@ -6,24 +6,13 @@ module Anthropic
       class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError < Anthropic::Internal::Type::BaseModel
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError::Type]
-        required :type,
-                 enum: -> { Anthropic::Beta::BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError::Type }
+        #   @return [Symbol, :session_resource_not_found_error]
+        required :type, const: :session_resource_not_found_error
 
-        # @!method initialize(type:)
+        # @!method initialize(type: :session_resource_not_found_error)
         #   A referenced resource no longer exists and its kind was not reported.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          SESSION_RESOURCE_NOT_FOUND_ERROR = :session_resource_not_found_error
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :session_resource_not_found_error]
       end
     end
 

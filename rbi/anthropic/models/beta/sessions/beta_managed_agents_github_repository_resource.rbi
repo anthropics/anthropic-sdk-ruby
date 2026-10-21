@@ -23,11 +23,7 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :mount_path
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # A timestamp in RFC 3339 format
@@ -51,8 +47,6 @@ module Anthropic
               id: String,
               created_at: Time,
               mount_path: String,
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::Type::OrSymbol,
               updated_at: Time,
               url: String,
               checkout:
@@ -61,7 +55,8 @@ module Anthropic
                     Anthropic::Beta::BetaManagedAgentsBranchCheckout::OrHash,
                     Anthropic::Beta::BetaManagedAgentsCommitCheckout::OrHash
                   )
-                )
+                ),
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
@@ -69,11 +64,11 @@ module Anthropic
             # A timestamp in RFC 3339 format
             created_at:,
             mount_path:,
-            type:,
             # A timestamp in RFC 3339 format
             updated_at:,
             url:,
-            checkout: nil
+            checkout: nil,
+            type: :github_repository
           )
           end
 
@@ -83,8 +78,7 @@ module Anthropic
                 id: String,
                 created_at: Time,
                 mount_path: String,
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::Type::TaggedSymbol,
+                type: Symbol,
                 updated_at: Time,
                 url: String,
                 checkout:
@@ -95,35 +89,6 @@ module Anthropic
             )
           end
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            GITHUB_REPOSITORY =
-              T.let(
-                :github_repository,
-                Anthropic::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
 
           module Checkout

@@ -3,35 +3,16 @@ module Anthropic
     module Beta
       module MemoryStores
         type beta_managed_agents_memory_prefix =
-          {
-            path: String,
-            type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryPrefix::type_
-          }
+          { path: String, type: :memory_prefix }
 
         class BetaManagedAgentsMemoryPrefix < Anthropic::Internal::Type::BaseModel
           attr_accessor path: String
 
-          attr_accessor type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryPrefix::type_
+          attr_accessor type: :memory_prefix
 
-          def initialize: (
-            path: String,
-            type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryPrefix::type_
-          ) -> void
+          def initialize: (path: String, ?type: :memory_prefix) -> void
 
-          def to_hash: -> {
-            path: String,
-            type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryPrefix::type_
-          }
-
-          type type_ = :memory_prefix
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            MEMORY_PREFIX: :memory_prefix
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryPrefix::type_]
-          end
+          def to_hash: -> { path: String, type: :memory_prefix }
         end
       end
     end

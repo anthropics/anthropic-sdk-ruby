@@ -32,8 +32,8 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent::Type }
+          #   @return [Symbol, :"agent.thread_message_sent"]
+          required :type, const: :"agent.thread_message_sent"
 
           # @!attribute to_agent_name
           #   Name of the callable agent this message was sent to. Absent when sent to the
@@ -42,7 +42,7 @@ module Anthropic
           #   @return [String, nil]
           optional :to_agent_name, String, nil?: true
 
-          # @!method initialize(id:, content:, processed_at:, to_session_thread_id:, type:, to_agent_name: nil)
+          # @!method initialize(id:, content:, processed_at:, to_session_thread_id:, to_agent_name: nil, type: :"agent.thread_message_sent")
           #   Observability event emitted to the sender's output stream when an agent-to-agent
           #   message is sent.
           #
@@ -58,9 +58,9 @@ module Anthropic
           #
           #   @param to_session_thread_id [String] Public `sthr_` ID of the thread the message was sent to.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent::Type]
-          #
           #   @param to_agent_name [String, nil] Name of the callable agent this message was sent to. Absent when sent to the pri
+          #
+          #   @param type [Symbol, :"agent.thread_message_sent"]
 
           # Content block in a user message. Can be `text`, `image`, or `document`.
           module Content
@@ -115,27 +115,17 @@ module Anthropic
             def self.new(type:, **args)
               case type.to_sym
               when :text
-                Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock.new(**args)
               when :image
-                Anthropic::Beta::Sessions::BetaManagedAgentsImageBlock.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsImageBlock.new(**args)
               when :document
-                Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock.new(**args)
               when :redacted
-                Anthropic::Beta::Sessions::BetaManagedAgentsRedactedBlock.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsRedactedBlock.new(**args)
               else
                 raise ArgumentError, "unknown type: #{type}"
               end
             end
-          end
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            AGENT_THREAD_MESSAGE_SENT = :"agent.thread_message_sent"
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
           end
         end
       end

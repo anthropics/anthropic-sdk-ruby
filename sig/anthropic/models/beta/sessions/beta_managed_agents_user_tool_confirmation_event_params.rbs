@@ -6,7 +6,7 @@ module Anthropic
           {
             result: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::result,
             tool_use_id: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::type_,
+            type: :"user.tool_confirmation",
             deny_message: String?
           }
 
@@ -15,21 +15,21 @@ module Anthropic
 
           attr_accessor tool_use_id: String
 
-          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::type_
+          attr_accessor type: :"user.tool_confirmation"
 
           attr_accessor deny_message: String?
 
           def initialize: (
             result: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::result,
             tool_use_id: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::type_,
-            ?deny_message: String?
+            ?deny_message: String?,
+            ?type: :"user.tool_confirmation"
           ) -> void
 
           def to_hash: -> {
             result: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::result,
             tool_use_id: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::type_,
+            type: :"user.tool_confirmation",
             deny_message: String?
           }
 
@@ -42,16 +42,6 @@ module Anthropic
             DENY: :deny
 
             def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::result]
-          end
-
-          type type_ = :"user.tool_confirmation"
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            USER_TOOL_CONFIRMATION: :"user.tool_confirmation"
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::type_]
           end
         end
       end

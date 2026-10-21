@@ -20,10 +20,10 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64ImageSource::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsBase64ImageSource::Type }
+          #   @return [Symbol, :base64]
+          required :type, const: :base64
 
-          # @!method initialize(data:, media_type:, type:)
+          # @!method initialize(data:, media_type:, type: :base64)
           #   Base64-encoded image data.
           #
           #   Some parameter documentations has been truncated, see
@@ -34,17 +34,7 @@ module Anthropic
           #
           #   @param media_type [String] MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64ImageSource::Type]
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64ImageSource#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            BASE64 = :base64
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :base64]
         end
       end
     end

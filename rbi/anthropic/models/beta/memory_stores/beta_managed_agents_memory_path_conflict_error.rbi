@@ -13,11 +13,7 @@ module Anthropic
               )
             end
 
-          sig do
-            returns(
-              Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryPathConflictError::Type::OrSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # The ID of the memory that blocked the write (`mem_...`), or an empty string if
@@ -56,15 +52,13 @@ module Anthropic
           # creating a new one, update it.
           sig do
             params(
-              type:
-                Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryPathConflictError::Type::OrSymbol,
               conflicting_memory_id: String,
               conflicting_path: String,
-              message: String
+              message: String,
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
-            type:,
             # The ID of the memory that blocked the write (`mem_...`), or an empty string if
             # that memory can't be identified.
             #
@@ -75,15 +69,15 @@ module Anthropic
             conflicting_path: nil,
             # A human-readable explanation of the conflict. To handle the error in code, use
             # `conflicting_path` and `conflicting_memory_id` instead.
-            message: nil
+            message: nil,
+            type: :memory_path_conflict_error
           )
           end
 
           sig do
             override.returns(
               {
-                type:
-                  Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryPathConflictError::Type::OrSymbol,
+                type: Symbol,
                 conflicting_memory_id: String,
                 conflicting_path: String,
                 message: String
@@ -91,35 +85,6 @@ module Anthropic
             )
           end
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryPathConflictError::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            MEMORY_PATH_CONFLICT_ERROR =
-              T.let(
-                :memory_path_conflict_error,
-                Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryPathConflictError::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryPathConflictError::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

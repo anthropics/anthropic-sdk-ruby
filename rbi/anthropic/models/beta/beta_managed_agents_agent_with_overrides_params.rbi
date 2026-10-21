@@ -19,11 +19,7 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :id
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams::Type::OrSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # Replacement MCP server list. Full replacement: the provided array becomes the
@@ -152,8 +148,6 @@ module Anthropic
         sig do
           params(
             id: String,
-            type:
-              Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams::Type::OrSymbol,
             mcp_servers:
               T::Array[
                 Anthropic::Beta::BetaManagedAgentsURLMCPServerParams::OrHash
@@ -180,13 +174,13 @@ module Anthropic
                   Anthropic::Beta::BetaManagedAgentsCustomToolParams::OrHash
                 )
               ],
-            version: Integer
+            version: Integer,
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
           # The `agent` ID.
           id:,
-          type:,
           # Replacement MCP server list. Full replacement: the provided array becomes the
           # MCP servers. Send an empty array to clear; omit to preserve the agent's servers.
           mcp_servers: nil,
@@ -203,7 +197,8 @@ module Anthropic
           # configuration. Send an empty array to clear; omit to preserve the agent's tools.
           tools: nil,
           # The specific `agent` version to use. Omit to use the latest version.
-          version: nil
+          version: nil,
+          type: :agent_with_overrides
         )
         end
 
@@ -211,8 +206,7 @@ module Anthropic
           override.returns(
             {
               id: String,
-              type:
-                Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams::Type::OrSymbol,
+              type: Symbol,
               mcp_servers:
                 T::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams],
               model:
@@ -242,35 +236,6 @@ module Anthropic
           )
         end
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          AGENT_WITH_OVERRIDES =
-            T.let(
-              :agent_with_overrides,
-              Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
 
         # Replacement model. Accepts the model string, e.g. `claude-opus-5-5`, or a

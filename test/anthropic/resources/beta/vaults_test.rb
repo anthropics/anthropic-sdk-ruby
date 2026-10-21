@@ -17,7 +17,7 @@ class Anthropic::Test::Resources::Beta::VaultsTest < Anthropic::Test::ResourceTe
         created_at: Time,
         display_name: String,
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
-        type: Anthropic::Beta::BetaManagedAgentsVault::Type,
+        type: Symbol,
         updated_at: Time
       }
     end
@@ -37,7 +37,7 @@ class Anthropic::Test::Resources::Beta::VaultsTest < Anthropic::Test::ResourceTe
         created_at: Time,
         display_name: String,
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
-        type: Anthropic::Beta::BetaManagedAgentsVault::Type,
+        type: Symbol,
         updated_at: Time
       }
     end
@@ -57,7 +57,7 @@ class Anthropic::Test::Resources::Beta::VaultsTest < Anthropic::Test::ResourceTe
         created_at: Time,
         display_name: String,
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
-        type: Anthropic::Beta::BetaManagedAgentsVault::Type,
+        type: Symbol,
         updated_at: Time
       }
     end
@@ -84,7 +84,7 @@ class Anthropic::Test::Resources::Beta::VaultsTest < Anthropic::Test::ResourceTe
         created_at: Time,
         display_name: String,
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
-        type: Anthropic::Beta::BetaManagedAgentsVault::Type,
+        type: Symbol,
         updated_at: Time
       }
     end
@@ -100,7 +100,7 @@ class Anthropic::Test::Resources::Beta::VaultsTest < Anthropic::Test::ResourceTe
     assert_pattern do
       response => {
         id: String,
-        type: Anthropic::Beta::BetaManagedAgentsDeletedVault::Type
+        type: Symbol
       }
     end
   end
@@ -119,7 +119,7 @@ class Anthropic::Test::Resources::Beta::VaultsTest < Anthropic::Test::ResourceTe
         created_at: Time,
         display_name: String,
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
-        type: Anthropic::Beta::BetaManagedAgentsVault::Type,
+        type: Symbol,
         updated_at: Time
       }
     end

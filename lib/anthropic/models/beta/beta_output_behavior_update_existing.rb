@@ -14,10 +14,10 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaOutputBehaviorUpdateExisting::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaOutputBehaviorUpdateExisting::Type }
+        #   @return [Symbol, :update_existing]
+        required :type, const: :update_existing
 
-        # @!method initialize(memory_store_id:, type:)
+        # @!method initialize(memory_store_id:, type: :update_existing)
         #   Write the result into the input memory store instead of a new memory store.
         #
         #   The credential must be allowed to write memory stores, or the request returns a
@@ -29,17 +29,7 @@ module Anthropic
         #
         #   @param memory_store_id [String] The ID of the memory store for the dream to write its result to (`memstore_...`)
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaOutputBehaviorUpdateExisting::Type]
-
-        # @see Anthropic::Models::Beta::BetaOutputBehaviorUpdateExisting#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          UPDATE_EXISTING = :update_existing
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :update_existing]
       end
     end
 

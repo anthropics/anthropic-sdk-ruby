@@ -14,10 +14,10 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicParam::Type]
-          required :type, enum: -> { Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicParam::Type }
+          #   @return [Symbol, :client_secret_basic]
+          required :type, const: :client_secret_basic
 
-          # @!method initialize(client_secret:, type:)
+          # @!method initialize(client_secret:, type: :client_secret_basic)
           #   Token endpoint uses HTTP Basic authentication with client credentials.
           #
           #   Some parameter documentations has been truncated, see
@@ -26,17 +26,7 @@ module Anthropic
           #
           #   @param client_secret [String] The OAuth client secret, sent to `token_endpoint` with HTTP Basic authentication
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicParam::Type]
-
-          # @see Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicParam#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            CLIENT_SECRET_BASIC = :client_secret_basic
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :client_secret_basic]
         end
       end
     end

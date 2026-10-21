@@ -28,22 +28,15 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :timezone
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsCronScheduleParams::Type::OrSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # 5-field POSIX cron schedule. Literal wall-clock matching in the configured
         # timezone.
         sig do
-          params(
-            expression: String,
-            timezone: String,
-            type:
-              Anthropic::Beta::BetaManagedAgentsCronScheduleParams::Type::OrSymbol
-          ).returns(T.attached_class)
+          params(expression: String, timezone: String, type: Symbol).returns(
+            T.attached_class
+          )
         end
         def self.new(
           # 5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g.,
@@ -55,50 +48,16 @@ module Anthropic
           # Required. IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
           # Validated against the IANA timezone database.
           timezone:,
-          type:
+          type: :cron
         )
         end
 
         sig do
           override.returns(
-            {
-              expression: String,
-              timezone: String,
-              type:
-                Anthropic::Beta::BetaManagedAgentsCronScheduleParams::Type::OrSymbol
-            }
+            { expression: String, timezone: String, type: Symbol }
           )
         end
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsCronScheduleParams::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          CRON =
-            T.let(
-              :cron,
-              Anthropic::Beta::BetaManagedAgentsCronScheduleParams::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsCronScheduleParams::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

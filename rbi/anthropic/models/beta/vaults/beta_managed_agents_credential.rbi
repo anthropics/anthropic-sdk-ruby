@@ -37,11 +37,7 @@ module Anthropic
           sig { returns(T::Hash[Symbol, String]) }
           attr_accessor :metadata
 
-          sig do
-            returns(
-              Anthropic::Beta::Vaults::BetaManagedAgentsCredential::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # A timestamp in RFC 3339 format
@@ -70,11 +66,10 @@ module Anthropic
                 ),
               created_at: Time,
               metadata: T::Hash[Symbol, String],
-              type:
-                Anthropic::Beta::Vaults::BetaManagedAgentsCredential::Type::OrSymbol,
               updated_at: Time,
               vault_id: String,
-              display_name: T.nilable(String)
+              display_name: T.nilable(String),
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
@@ -88,13 +83,13 @@ module Anthropic
             created_at:,
             # Arbitrary key-value metadata attached to the credential.
             metadata:,
-            type:,
             # A timestamp in RFC 3339 format
             updated_at:,
             # Identifier of the vault this credential belongs to.
             vault_id:,
             # Human-readable name for the credential.
-            display_name: nil
+            display_name: nil,
+            type: :vault_credential
           )
           end
 
@@ -107,8 +102,7 @@ module Anthropic
                   Anthropic::Beta::Vaults::BetaManagedAgentsCredential::Auth::Variants,
                 created_at: Time,
                 metadata: T::Hash[Symbol, String],
-                type:
-                  Anthropic::Beta::Vaults::BetaManagedAgentsCredential::Type::TaggedSymbol,
+                type: Symbol,
                 updated_at: Time,
                 vault_id: String,
                 display_name: T.nilable(String)
@@ -220,35 +214,6 @@ module Anthropic
               # Name of the environment variable.
               secret_name: nil
             )
-            end
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Vaults::BetaManagedAgentsCredential::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            VAULT_CREDENTIAL =
-              T.let(
-                :vault_credential,
-                Anthropic::Beta::Vaults::BetaManagedAgentsCredential::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Vaults::BetaManagedAgentsCredential::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
             end
           end
         end

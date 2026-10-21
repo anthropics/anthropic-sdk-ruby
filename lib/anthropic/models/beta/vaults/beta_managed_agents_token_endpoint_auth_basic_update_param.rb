@@ -7,9 +7,8 @@ module Anthropic
         class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam < Anthropic::Internal::Type::BaseModel
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicUpdateParam::Type]
-          required :type,
-                   enum: -> { Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicUpdateParam::Type }
+          #   @return [Symbol, :client_secret_basic]
+          required :type, const: :client_secret_basic
 
           # @!attribute client_secret
           #   A new OAuth client secret to replace the stored one.
@@ -21,26 +20,16 @@ module Anthropic
           #   @return [String, nil]
           optional :client_secret, String, nil?: true
 
-          # @!method initialize(type:, client_secret: nil)
+          # @!method initialize(client_secret: nil, type: :client_secret_basic)
           #   Updated HTTP Basic authentication parameters for the token endpoint.
           #
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicUpdateParam}
           #   for more details.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicUpdateParam::Type]
-          #
           #   @param client_secret [String, nil] A new OAuth client secret to replace the stored one.
-
-          # @see Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicUpdateParam#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            CLIENT_SECRET_BASIC = :client_secret_basic
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #
+          #   @param type [Symbol, :client_secret_basic]
         end
       end
     end

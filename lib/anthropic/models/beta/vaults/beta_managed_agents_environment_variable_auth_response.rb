@@ -26,11 +26,10 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::Type]
-          required :type,
-                   enum: -> { Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::Type }
+          #   @return [Symbol, :environment_variable]
+          required :type, const: :environment_variable
 
-          # @!method initialize(injection_location:, networking:, secret_name:, type:)
+          # @!method initialize(injection_location:, networking:, secret_name:, type: :environment_variable)
           #   Environment variable credential details. The secret value is never returned.
           #
           #   @param injection_location [Anthropic::Models::Beta::Vaults::BetaManagedAgentsInjectionLocationResponse] Where in the outbound request the secret value is substituted.
@@ -39,7 +38,7 @@ module Anthropic
           #
           #   @param secret_name [String] Name of the environment variable.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::Type]
+          #   @param type [Symbol, :environment_variable]
 
           # Outbound hosts the secret value is substituted on.
           #
@@ -87,28 +86,13 @@ module Anthropic
             def self.new(type:, **args)
               case type.to_sym
               when :unrestricted
-                Anthropic::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingResponse.new(
-                  type: type, **args
-                )
+                Anthropic::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingResponse.new(**args)
               when :limited
-                Anthropic::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingResponse.new(
-                  type: type,
-                  **args
-                )
+                Anthropic::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingResponse.new(**args)
               else
                 raise ArgumentError, "unknown type: #{type}"
               end
             end
-          end
-
-          # @see Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            ENVIRONMENT_VARIABLE = :environment_variable
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
           end
         end
       end

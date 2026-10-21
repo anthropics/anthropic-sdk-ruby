@@ -18,69 +18,24 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :api_key_id
 
-          sig do
-            returns(
-              Anthropic::Beta::MemoryStores::BetaManagedAgentsAPIActor::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # A direct caller of the public API, identified by the API key that authenticated
           # the request.
           sig do
-            params(
-              api_key_id: String,
-              type:
-                Anthropic::Beta::MemoryStores::BetaManagedAgentsAPIActor::Type::OrSymbol
-            ).returns(T.attached_class)
+            params(api_key_id: String, type: Symbol).returns(T.attached_class)
           end
           def self.new(
             # ID of the API key (an `apikey_...` value). This identifies the key, not the
             # secret.
             api_key_id:,
-            type:
+            type: :api_actor
           )
           end
 
-          sig do
-            override.returns(
-              {
-                api_key_id: String,
-                type:
-                  Anthropic::Beta::MemoryStores::BetaManagedAgentsAPIActor::Type::TaggedSymbol
-              }
-            )
-          end
+          sig { override.returns({ api_key_id: String, type: Symbol }) }
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::MemoryStores::BetaManagedAgentsAPIActor::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            API_ACTOR =
-              T.let(
-                :api_actor,
-                Anthropic::Beta::MemoryStores::BetaManagedAgentsAPIActor::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::MemoryStores::BetaManagedAgentsAPIActor::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

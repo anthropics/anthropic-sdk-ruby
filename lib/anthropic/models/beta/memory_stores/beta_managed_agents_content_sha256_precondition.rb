@@ -7,9 +7,8 @@ module Anthropic
         class BetaManagedAgentsContentSha256Precondition < Anthropic::Internal::Type::BaseModel
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsContentSha256Precondition::Type]
-          required :type,
-                   enum: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsContentSha256Precondition::Type }
+          #   @return [Symbol, :content_sha256]
+          required :type, const: :content_sha256
 
           # @!attribute content_sha256
           #   Expected `content_sha256` of the stored memory (64 lowercase hexadecimal
@@ -20,7 +19,7 @@ module Anthropic
           #   @return [String, nil]
           optional :content_sha256, String
 
-          # @!method initialize(type:, content_sha256: nil)
+          # @!method initialize(content_sha256: nil, type: :content_sha256)
           #   A precondition that applies an update only if the memory's current content has
           #   the hash in `content_sha256`.
           #
@@ -32,19 +31,9 @@ module Anthropic
           #   {Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsContentSha256Precondition}
           #   for more details.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsContentSha256Precondition::Type]
-          #
           #   @param content_sha256 [String] Expected `content_sha256` of the stored memory (64 lowercase hexadecimal charact
-
-          # @see Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsContentSha256Precondition#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            CONTENT_SHA256 = :content_sha256
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #
+          #   @param type [Symbol, :content_sha256]
         end
       end
     end

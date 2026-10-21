@@ -67,8 +67,8 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemory::Type]
-          required :type, enum: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsMemory::Type }
+          #   @return [Symbol, :memory]
+          required :type, const: :memory
 
           # @!attribute updated_at
           #   When the memory was last changed, in RFC 3339.
@@ -87,7 +87,7 @@ module Anthropic
           #   @return [String, nil]
           optional :content, String, nil?: true
 
-          # @!method initialize(id:, content_sha256:, content_size_bytes:, created_at:, memory_store_id:, memory_version_id:, path:, type:, updated_at:, content: nil)
+          # @!method initialize(id:, content_sha256:, content_size_bytes:, created_at:, memory_store_id:, memory_version_id:, path:, updated_at:, content: nil, type: :memory)
           #   A text document at a path inside a memory store.
           #
           #   `content` is `null` when the response uses `view=basic`. `content_size_bytes`
@@ -118,21 +118,11 @@ module Anthropic
           #
           #   @param path [String] Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemory::Type]
-          #
           #   @param updated_at [Time] When the memory was last changed, in RFC 3339.
           #
           #   @param content [String, nil] The memory's UTF-8 text content, or `null` when the response uses `view=basic`.
-
-          # @see Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemory#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            MEMORY = :memory
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #
+          #   @param type [Symbol, :memory]
         end
       end
     end

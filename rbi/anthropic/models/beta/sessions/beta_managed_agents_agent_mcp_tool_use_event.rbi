@@ -33,11 +33,7 @@ module Anthropic
           sig { returns(Time) }
           attr_accessor :processed_at
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # The evaluated permission policy for this tool invocation.
@@ -101,8 +97,6 @@ module Anthropic
               mcp_server_name: String,
               name: String,
               processed_at: Time,
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::Type::OrSymbol,
               evaluated_permission:
                 Anthropic::Beta::Sessions::BetaManagedAgentsAgentEvaluatedPermission::OrSymbol,
               evaluation:
@@ -111,7 +105,8 @@ module Anthropic
                   Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAsk::OrHash,
                   Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAuto::OrHash
                 ),
-              session_thread_id: T.nilable(String)
+              session_thread_id: T.nilable(String),
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
@@ -125,7 +120,6 @@ module Anthropic
             name:,
             # Timestamp when this event was processed.
             processed_at:,
-            type:,
             # The evaluated permission policy for this tool invocation.
             evaluated_permission: nil,
             # Which resolved permission_policy produced evaluated_permission: always_allow,
@@ -140,7 +134,8 @@ module Anthropic
             # permission request on the primary thread's stream. Empty on the thread's own
             # events. Informational only: the server routes the matching
             # `user.tool_confirmation` by `tool_use_id`, so clients do not send it back.
-            session_thread_id: nil
+            session_thread_id: nil,
+            type: :"agent.mcp_tool_use"
           )
           end
 
@@ -152,8 +147,7 @@ module Anthropic
                 mcp_server_name: String,
                 name: String,
                 processed_at: Time,
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::Type::TaggedSymbol,
+                type: Symbol,
                 evaluated_permission:
                   Anthropic::Beta::Sessions::BetaManagedAgentsAgentEvaluatedPermission::TaggedSymbol,
                 evaluation:
@@ -163,35 +157,6 @@ module Anthropic
             )
           end
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            AGENT_MCP_TOOL_USE =
-              T.let(
-                :"agent.mcp_tool_use",
-                Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

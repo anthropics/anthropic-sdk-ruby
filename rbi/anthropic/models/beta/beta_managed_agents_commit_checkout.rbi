@@ -18,66 +18,19 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :sha
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsCommitCheckout::Type::OrSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
-        sig do
-          params(
-            sha: String,
-            type:
-              Anthropic::Beta::BetaManagedAgentsCommitCheckout::Type::OrSymbol
-          ).returns(T.attached_class)
-        end
+        sig { params(sha: String, type: Symbol).returns(T.attached_class) }
         def self.new(
           # Full commit SHA to check out.
           sha:,
-          type:
+          type: :commit
         )
         end
 
-        sig do
-          override.returns(
-            {
-              sha: String,
-              type:
-                Anthropic::Beta::BetaManagedAgentsCommitCheckout::Type::OrSymbol
-            }
-          )
-        end
+        sig { override.returns({ sha: String, type: Symbol }) }
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsCommitCheckout::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          COMMIT =
-            T.let(
-              :commit,
-              Anthropic::Beta::BetaManagedAgentsCommitCheckout::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsCommitCheckout::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

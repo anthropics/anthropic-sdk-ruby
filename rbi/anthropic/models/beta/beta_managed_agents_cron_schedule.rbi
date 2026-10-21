@@ -26,11 +26,7 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :timezone
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsCronSchedule::Type::OrSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # Time the most recent scheduled run actually started. Null until one completes;
@@ -54,10 +50,9 @@ module Anthropic
           params(
             expression: String,
             timezone: String,
-            type:
-              Anthropic::Beta::BetaManagedAgentsCronSchedule::Type::OrSymbol,
             last_run_at: T.nilable(Time),
-            upcoming_runs_at: T::Array[Time]
+            upcoming_runs_at: T::Array[Time],
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
@@ -69,7 +64,6 @@ module Anthropic
           expression:,
           # IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
           timezone:,
-          type:,
           # Time the most recent scheduled run actually started. Null until one completes;
           # preserved after the deployment is archived. Manual runs do not update this.
           last_run_at: nil,
@@ -78,7 +72,8 @@ module Anthropic
           # deployment is archived (`archived_at` set). Each fire is offset by a small
           # per-schedule jitter, so a run will actually start at or shortly after its listed
           # time.
-          upcoming_runs_at: nil
+          upcoming_runs_at: nil,
+          type: :cron
         )
         end
 
@@ -87,43 +82,13 @@ module Anthropic
             {
               expression: String,
               timezone: String,
-              type:
-                Anthropic::Beta::BetaManagedAgentsCronSchedule::Type::OrSymbol,
+              type: Symbol,
               last_run_at: T.nilable(Time),
               upcoming_runs_at: T::Array[Time]
             }
           )
         end
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsCronSchedule::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          CRON =
-            T.let(
-              :cron,
-              Anthropic::Beta::BetaManagedAgentsCronSchedule::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsCronSchedule::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

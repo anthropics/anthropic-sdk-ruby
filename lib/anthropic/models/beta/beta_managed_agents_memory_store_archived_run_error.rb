@@ -12,25 +12,15 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreArchivedRunError::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsMemoryStoreArchivedRunError::Type }
+        #   @return [Symbol, :memory_store_archived_error]
+        required :type, const: :memory_store_archived_error
 
-        # @!method initialize(message:, type:)
+        # @!method initialize(message:, type: :memory_store_archived_error)
         #   A memory store referenced by the deployment is archived.
         #
         #   @param message [String] Human-readable error description.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreArchivedRunError::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreArchivedRunError#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          MEMORY_STORE_ARCHIVED_ERROR = :memory_store_archived_error
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :memory_store_archived_error]
       end
     end
 

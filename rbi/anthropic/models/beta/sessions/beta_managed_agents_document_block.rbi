@@ -26,11 +26,7 @@ module Anthropic
           end
           attr_accessor :source
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock::Type::OrSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # Additional context about the document for the model.
@@ -52,20 +48,19 @@ module Anthropic
                   Anthropic::Beta::Sessions::BetaManagedAgentsURLDocumentSource::OrHash,
                   Anthropic::Beta::Sessions::BetaManagedAgentsFileDocumentSource::OrHash
                 ),
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock::Type::OrSymbol,
               context: T.nilable(String),
-              title: T.nilable(String)
+              title: T.nilable(String),
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
             # The source of the document data.
             source:,
-            type:,
             # Additional context about the document for the model.
             context: nil,
             # The title of the document.
-            title: nil
+            title: nil,
+            type: :document
           )
           end
 
@@ -79,8 +74,7 @@ module Anthropic
                     Anthropic::Beta::Sessions::BetaManagedAgentsURLDocumentSource,
                     Anthropic::Beta::Sessions::BetaManagedAgentsFileDocumentSource
                   ),
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock::Type::OrSymbol,
+                type: Symbol,
                 context: T.nilable(String),
                 title: T.nilable(String)
               }
@@ -164,11 +158,7 @@ module Anthropic
                 type:
                   Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock::Source::Type::OrSymbol,
                 data: String,
-                media_type:
-                  T.any(
-                    String,
-                    Anthropic::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource::MediaType::OrSymbol
-                  ),
+                media_type: T.any(String, Symbol),
                 url: String,
                 file_id: String
               ).returns(
@@ -186,35 +176,6 @@ module Anthropic
               # ID of a previously uploaded file.
               file_id: nil
             )
-            end
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            DOCUMENT =
-              T.let(
-                :document,
-                Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
             end
           end
         end

@@ -32,7 +32,7 @@ class Anthropic::Test::Resources::Beta::Agents::VersionsTest < Anthropic::Test::
         skills: ^(Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaManagedAgentsAgent::Skill]),
         system_: String | nil,
         tools: ^(Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaManagedAgentsAgent::Tool]),
-        type: Anthropic::Beta::BetaManagedAgentsAgent::Type,
+        type: Symbol,
         updated_at: Time,
         version: Integer
       }

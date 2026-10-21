@@ -24,7 +24,7 @@ class Anthropic::Test::Resources::Beta::Sessions::ThreadsTest < Anthropic::Test:
         session_id: String,
         stats: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStats | nil,
         status: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatus,
-        type: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread::Type,
+        type: Symbol,
         updated_at: Time,
         usage: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadUsage | nil,
         workflow_run_id: String | nil
@@ -56,7 +56,7 @@ class Anthropic::Test::Resources::Beta::Sessions::ThreadsTest < Anthropic::Test:
         session_id: String,
         stats: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStats | nil,
         status: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatus,
-        type: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread::Type,
+        type: Symbol,
         updated_at: Time,
         usage: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadUsage | nil,
         workflow_run_id: String | nil
@@ -85,7 +85,7 @@ class Anthropic::Test::Resources::Beta::Sessions::ThreadsTest < Anthropic::Test:
         session_id: String,
         stats: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStats | nil,
         status: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatus,
-        type: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread::Type,
+        type: Symbol,
         updated_at: Time,
         usage: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadUsage | nil,
         workflow_run_id: String | nil

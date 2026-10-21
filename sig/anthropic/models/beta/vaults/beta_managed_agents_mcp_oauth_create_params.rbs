@@ -6,7 +6,7 @@ module Anthropic
           {
             access_token: String,
             mcp_server_url: String,
-            type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthCreateParams::type_,
+            type: :mcp_oauth,
             expires_at: Time?,
             refresh: Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshParams?
           }
@@ -16,7 +16,7 @@ module Anthropic
 
           attr_accessor mcp_server_url: String
 
-          attr_accessor type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthCreateParams::type_
+          attr_accessor type: :mcp_oauth
 
           attr_accessor expires_at: Time?
 
@@ -25,28 +25,18 @@ module Anthropic
           def initialize: (
             access_token: String,
             mcp_server_url: String,
-            type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthCreateParams::type_,
             ?expires_at: Time?,
-            ?refresh: Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshParams?
+            ?refresh: Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshParams?,
+            ?type: :mcp_oauth
           ) -> void
 
           def to_hash: -> {
             access_token: String,
             mcp_server_url: String,
-            type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthCreateParams::type_,
+            type: :mcp_oauth,
             expires_at: Time?,
             refresh: Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshParams?
           }
-
-          type type_ = :mcp_oauth
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            MCP_OAUTH: :mcp_oauth
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthCreateParams::type_]
-          end
         end
       end
     end

@@ -12,25 +12,15 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsVaultArchivedRunError::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsVaultArchivedRunError::Type }
+        #   @return [Symbol, :vault_archived_error]
+        required :type, const: :vault_archived_error
 
-        # @!method initialize(message:, type:)
+        # @!method initialize(message:, type: :vault_archived_error)
         #   A vault referenced by the deployment is archived.
         #
         #   @param message [String] Human-readable error description.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsVaultArchivedRunError::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsVaultArchivedRunError#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          VAULT_ARCHIVED_ERROR = :vault_archived_error
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :vault_archived_error]
       end
     end
 

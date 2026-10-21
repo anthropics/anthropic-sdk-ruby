@@ -26,10 +26,10 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsCustomToolParams::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsCustomToolParams::Type }
+        #   @return [Symbol, :custom]
+        required :type, const: :custom
 
-        # @!method initialize(description:, input_schema:, name:, type:)
+        # @!method initialize(description:, input_schema:, name:, type: :custom)
         #   A custom tool that is executed by the API client rather than the agent. When the
         #   agent calls this tool, an `agent.custom_tool_use` event is emitted and the
         #   session goes idle, waiting for the client to provide the result via a
@@ -44,17 +44,7 @@ module Anthropic
         #
         #   @param name [String] Unique name for the tool. 1-128 characters; letters, digits, underscores, and hy
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsCustomToolParams::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsCustomToolParams#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          CUSTOM = :custom
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :custom]
       end
     end
 

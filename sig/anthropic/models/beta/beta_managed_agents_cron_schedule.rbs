@@ -7,7 +7,7 @@ module Anthropic
         {
           expression: String,
           timezone: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsCronSchedule::type_,
+          type: :cron,
           last_run_at: Time?,
           upcoming_runs_at: ::Array[Time]
         }
@@ -17,7 +17,7 @@ module Anthropic
 
         attr_accessor timezone: String
 
-        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsCronSchedule::type_
+        attr_accessor type: :cron
 
         attr_accessor last_run_at: Time?
 
@@ -28,28 +28,18 @@ module Anthropic
         def initialize: (
           expression: String,
           timezone: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsCronSchedule::type_,
           ?last_run_at: Time?,
-          ?upcoming_runs_at: ::Array[Time]
+          ?upcoming_runs_at: ::Array[Time],
+          ?type: :cron
         ) -> void
 
         def to_hash: -> {
           expression: String,
           timezone: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsCronSchedule::type_,
+          type: :cron,
           last_run_at: Time?,
           upcoming_runs_at: ::Array[Time]
         }
-
-        type type_ = :cron
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          CRON: :cron
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsCronSchedule::type_]
-        end
       end
     end
   end

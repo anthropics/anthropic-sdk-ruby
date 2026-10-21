@@ -7,7 +7,7 @@ module Anthropic
         {
           configs: ::Array[Anthropic::Models::Beta::beta_managed_agents_agent_tool_config],
           default_config: Anthropic::Beta::BetaManagedAgentsAgentToolsetDefaultConfig,
-          type: Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401::type_
+          type: :agent_toolset_20260401
         }
 
       class BetaManagedAgentsAgentToolset20260401 < Anthropic::Internal::Type::BaseModel
@@ -15,29 +15,19 @@ module Anthropic
 
         attr_accessor default_config: Anthropic::Beta::BetaManagedAgentsAgentToolsetDefaultConfig
 
-        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401::type_
+        attr_accessor type: :agent_toolset_20260401
 
         def initialize: (
           configs: ::Array[Anthropic::Models::Beta::beta_managed_agents_agent_tool_config],
           default_config: Anthropic::Beta::BetaManagedAgentsAgentToolsetDefaultConfig,
-          type: Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401::type_
+          ?type: :agent_toolset_20260401
         ) -> void
 
         def to_hash: -> {
           configs: ::Array[Anthropic::Models::Beta::beta_managed_agents_agent_tool_config],
           default_config: Anthropic::Beta::BetaManagedAgentsAgentToolsetDefaultConfig,
-          type: Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401::type_
+          type: :agent_toolset_20260401
         }
-
-        type type_ = :agent_toolset_20260401
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          AGENT_TOOLSET_20260401: :agent_toolset_20260401
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401::type_]
-        end
       end
     end
   end

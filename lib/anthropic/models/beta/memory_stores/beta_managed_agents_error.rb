@@ -106,14 +106,11 @@ module Anthropic
             when :overloaded_error
               Anthropic::BetaOverloadedError.new(**args)
             when :memory_precondition_failed_error
-              Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryPreconditionFailedError.new(
-                type: type,
-                **args
-              )
+              Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryPreconditionFailedError.new(**args)
             when :memory_path_conflict_error
-              Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryPathConflictError.new(type: type, **args)
+              Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryPathConflictError.new(**args)
             when :conflict_error
-              Anthropic::Beta::MemoryStores::BetaManagedAgentsConflictError.new(type: type, **args)
+              Anthropic::Beta::MemoryStores::BetaManagedAgentsConflictError.new(**args)
             else
               raise ArgumentError, "unknown type: #{type}"
             end

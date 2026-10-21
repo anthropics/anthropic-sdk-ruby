@@ -17,11 +17,7 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :skill_id
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsCustomSkill::Type::TaggedSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         sig { returns(String) }
@@ -29,52 +25,17 @@ module Anthropic
 
         # A resolved user-created custom skill.
         sig do
-          params(
-            skill_id: String,
-            type: Anthropic::Beta::BetaManagedAgentsCustomSkill::Type::OrSymbol,
-            version: String
-          ).returns(T.attached_class)
+          params(skill_id: String, version: String, type: Symbol).returns(
+            T.attached_class
+          )
         end
-        def self.new(skill_id:, type:, version:)
+        def self.new(skill_id:, version:, type: :custom)
         end
 
         sig do
-          override.returns(
-            {
-              skill_id: String,
-              type:
-                Anthropic::Beta::BetaManagedAgentsCustomSkill::Type::TaggedSymbol,
-              version: String
-            }
-          )
+          override.returns({ skill_id: String, type: Symbol, version: String })
         end
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(Symbol, Anthropic::Beta::BetaManagedAgentsCustomSkill::Type)
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          CUSTOM =
-            T.let(
-              :custom,
-              Anthropic::Beta::BetaManagedAgentsCustomSkill::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsCustomSkill::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

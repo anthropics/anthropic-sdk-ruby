@@ -18,68 +18,23 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :content
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsTextRubricParams::Type::OrSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # Rubric content provided inline as text.
           sig do
-            params(
-              content: String,
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsTextRubricParams::Type::OrSymbol
-            ).returns(T.attached_class)
+            params(content: String, type: Symbol).returns(T.attached_class)
           end
           def self.new(
             # Rubric content. Plain text or markdown — the grader treats it as freeform text.
             # Maximum 262144 characters.
             content:,
-            type:
+            type: :text
           )
           end
 
-          sig do
-            override.returns(
-              {
-                content: String,
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsTextRubricParams::Type::OrSymbol
-              }
-            )
-          end
+          sig { override.returns({ content: String, type: Symbol }) }
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsTextRubricParams::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            TEXT =
-              T.let(
-                :text,
-                Anthropic::Beta::Sessions::BetaManagedAgentsTextRubricParams::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsTextRubricParams::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

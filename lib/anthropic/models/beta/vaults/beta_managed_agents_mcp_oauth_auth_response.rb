@@ -13,8 +13,8 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthAuthResponse::Type]
-          required :type, enum: -> { Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthAuthResponse::Type }
+          #   @return [Symbol, :mcp_oauth]
+          required :type, const: :mcp_oauth
 
           # @!attribute expires_at
           #   When the credential's access token expires, in RFC 3339. Absent if the expiry
@@ -33,7 +33,7 @@ module Anthropic
                    },
                    nil?: true
 
-          # @!method initialize(mcp_server_url:, type:, expires_at: nil, refresh: nil)
+          # @!method initialize(mcp_server_url:, expires_at: nil, refresh: nil, type: :mcp_oauth)
           #   OAuth credential details for an MCP server.
           #
           #   Some parameter documentations has been truncated, see
@@ -42,21 +42,11 @@ module Anthropic
           #
           #   @param mcp_server_url [String] URL of the MCP server this credential authenticates against.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthAuthResponse::Type]
-          #
           #   @param expires_at [Time, nil] When the credential's access token expires, in RFC 3339. Absent if the expiry is
           #
           #   @param refresh [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshResponse, nil] Refresh token configuration, if the credential supports token refresh.
-
-          # @see Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthAuthResponse#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            MCP_OAUTH = :mcp_oauth
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #
+          #   @param type [Symbol, :mcp_oauth]
         end
       end
     end

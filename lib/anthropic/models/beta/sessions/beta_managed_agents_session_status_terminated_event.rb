@@ -19,28 +19,17 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusTerminatedEvent::Type]
-          required :type,
-                   enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusTerminatedEvent::Type }
+          #   @return [Symbol, :"session.status_terminated"]
+          required :type, const: :"session.status_terminated"
 
-          # @!method initialize(id:, processed_at:, type:)
+          # @!method initialize(id:, processed_at:, type: :"session.status_terminated")
           #   Indicates the session has terminated, either due to an error or completion.
           #
           #   @param id [String] Unique identifier for this event.
           #
           #   @param processed_at [Time] Timestamp of status change.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusTerminatedEvent::Type]
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusTerminatedEvent#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            SESSION_STATUS_TERMINATED = :"session.status_terminated"
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :"session.status_terminated"]
         end
       end
     end

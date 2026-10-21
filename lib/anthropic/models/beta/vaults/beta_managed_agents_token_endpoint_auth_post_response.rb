@@ -7,23 +7,13 @@ module Anthropic
         class BetaManagedAgentsTokenEndpointAuthPostResponse < Anthropic::Internal::Type::BaseModel
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostResponse::Type]
-          required :type, enum: -> { Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostResponse::Type }
+          #   @return [Symbol, :client_secret_post]
+          required :type, const: :client_secret_post
 
-          # @!method initialize(type:)
+          # @!method initialize(type: :client_secret_post)
           #   Token endpoint uses POST body authentication with client credentials.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostResponse::Type]
-
-          # @see Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostResponse#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            CLIENT_SECRET_POST = :client_secret_post
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :client_secret_post]
         end
       end
     end

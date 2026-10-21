@@ -19,27 +19,17 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64DocumentSource::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsBase64DocumentSource::Type }
+          #   @return [Symbol, :base64]
+          required :type, const: :base64
 
-          # @!method initialize(data:, media_type:, type:)
+          # @!method initialize(data:, media_type:, type: :base64)
           #   Base64-encoded document data.
           #
           #   @param data [String] Base64-encoded document data.
           #
           #   @param media_type [String] MIME type of the document (e.g., "application/pdf").
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64DocumentSource::Type]
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64DocumentSource#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            BASE64 = :base64
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :base64]
         end
       end
     end

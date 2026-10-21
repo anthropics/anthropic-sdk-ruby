@@ -4,35 +4,19 @@ module Anthropic
 
     module Beta
       type beta_managed_agents_session_rate_limited_run_error =
-        {
-          message: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsSessionRateLimitedRunError::type_
-        }
+        { message: String, type: :session_rate_limited_error }
 
       class BetaManagedAgentsSessionRateLimitedRunError < Anthropic::Internal::Type::BaseModel
         attr_accessor message: String
 
-        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsSessionRateLimitedRunError::type_
+        attr_accessor type: :session_rate_limited_error
 
         def initialize: (
           message: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsSessionRateLimitedRunError::type_
+          ?type: :session_rate_limited_error
         ) -> void
 
-        def to_hash: -> {
-          message: String,
-          type: Anthropic::Models::Beta::BetaManagedAgentsSessionRateLimitedRunError::type_
-        }
-
-        type type_ = :session_rate_limited_error
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          SESSION_RATE_LIMITED_ERROR: :session_rate_limited_error
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionRateLimitedRunError::type_]
-        end
+        def to_hash: -> { message: String, type: :session_rate_limited_error }
       end
     end
   end

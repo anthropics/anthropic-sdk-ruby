@@ -32,11 +32,10 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationStartEvent::Type]
-          required :type,
-                   enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationStartEvent::Type }
+          #   @return [Symbol, :"span.outcome_evaluation_start"]
+          required :type, const: :"span.outcome_evaluation_start"
 
-          # @!method initialize(id:, iteration:, outcome_id:, processed_at:, type:)
+          # @!method initialize(id:, iteration:, outcome_id:, processed_at:, type: :"span.outcome_evaluation_start")
           #   Emitted when an outcome evaluation cycle begins.
           #
           #   Some parameter documentations has been truncated, see
@@ -51,17 +50,7 @@ module Anthropic
           #
           #   @param processed_at [Time] Timestamp when outcome evaluation started.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationStartEvent::Type]
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationStartEvent#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            SPAN_OUTCOME_EVALUATION_START = :"span.outcome_evaluation_start"
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :"span.outcome_evaluation_start"]
         end
       end
     end

@@ -6,8 +6,8 @@ module Anthropic
       class BetaManagedAgentsGitHubRepositoryResourceParams < Anthropic::Internal::Type::BaseModel
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::Type }
+        #   @return [Symbol, :github_repository]
+        required :type, const: :github_repository
 
         # @!attribute url
         #   Github URL of the repository
@@ -36,14 +36,12 @@ module Anthropic
         #   @return [String, nil]
         optional :mount_path, String, nil?: true
 
-        # @!method initialize(type:, url:, authorization_token: nil, checkout: nil, mount_path: nil)
+        # @!method initialize(url:, authorization_token: nil, checkout: nil, mount_path: nil, type: :github_repository)
         #   Mount a GitHub repository into the session's container.
         #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams} for
         #   more details.
-        #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::Type]
         #
         #   @param url [String] Github URL of the repository
         #
@@ -52,16 +50,8 @@ module Anthropic
         #   @param checkout [Anthropic::Models::Beta::BetaManagedAgentsBranchCheckout, Anthropic::Models::Beta::BetaManagedAgentsCommitCheckout, nil] Branch or commit to check out. Defaults to the repository's default branch.
         #
         #   @param mount_path [String, nil] Mount path in the container. Defaults to `/workspace/<repo-name>`.
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          GITHUB_REPOSITORY = :github_repository
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #
+        #   @param type [Symbol, :github_repository]
 
         # Branch or commit to check out. Defaults to the repository's default branch.
         #
@@ -104,9 +94,9 @@ module Anthropic
           def self.new(type:, **args)
             case type.to_sym
             when :branch
-              Anthropic::Beta::BetaManagedAgentsBranchCheckout.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsBranchCheckout.new(**args)
             when :commit
-              Anthropic::Beta::BetaManagedAgentsCommitCheckout.new(type: type, **args)
+              Anthropic::Beta::BetaManagedAgentsCommitCheckout.new(**args)
             else
               raise ArgumentError, "unknown type: #{type}"
             end

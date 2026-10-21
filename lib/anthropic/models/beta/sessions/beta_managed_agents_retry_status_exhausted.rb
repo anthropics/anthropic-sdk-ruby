@@ -7,24 +7,14 @@ module Anthropic
         class BetaManagedAgentsRetryStatusExhausted < Anthropic::Internal::Type::BaseModel
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted::Type }
+          #   @return [Symbol, :exhausted]
+          required :type, const: :exhausted
 
-          # @!method initialize(type:)
+          # @!method initialize(type: :exhausted)
           #   This turn is dead; queued inputs are flushed and the session returns to idle.
           #   Client may send a new prompt.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted::Type]
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            EXHAUSTED = :exhausted
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :exhausted]
         end
       end
     end

@@ -20,8 +20,8 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEvent::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEvent::Type }
+          #   @return [Symbol, :"user.message"]
+          required :type, const: :"user.message"
 
           # @!attribute processed_at
           #   Timestamp when the agent finished processing this message.
@@ -29,16 +29,16 @@ module Anthropic
           #   @return [Time, nil]
           optional :processed_at, Time, nil?: true
 
-          # @!method initialize(id:, content:, type:, processed_at: nil)
+          # @!method initialize(id:, content:, processed_at: nil, type: :"user.message")
           #   A user message event in the session conversation.
           #
           #   @param id [String] Unique identifier for this event.
           #
           #   @param content [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRedactedBlock>] Array of content blocks comprising the user message.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEvent::Type]
-          #
           #   @param processed_at [Time, nil] Timestamp when the agent finished processing this message.
+          #
+          #   @param type [Symbol, :"user.message"]
 
           # Content block in a user message. Can be `text`, `image`, or `document`.
           module Content
@@ -93,27 +93,17 @@ module Anthropic
             def self.new(type:, **args)
               case type.to_sym
               when :text
-                Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock.new(**args)
               when :image
-                Anthropic::Beta::Sessions::BetaManagedAgentsImageBlock.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsImageBlock.new(**args)
               when :document
-                Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock.new(**args)
               when :redacted
-                Anthropic::Beta::Sessions::BetaManagedAgentsRedactedBlock.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsRedactedBlock.new(**args)
               else
                 raise ArgumentError, "unknown type: #{type}"
               end
             end
-          end
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEvent#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            USER_MESSAGE = :"user.message"
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
           end
         end
       end

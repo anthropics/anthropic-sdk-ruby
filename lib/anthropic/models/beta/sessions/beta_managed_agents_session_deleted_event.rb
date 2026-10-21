@@ -19,10 +19,10 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionDeletedEvent::Type]
-          required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionDeletedEvent::Type }
+          #   @return [Symbol, :"session.deleted"]
+          required :type, const: :"session.deleted"
 
-          # @!method initialize(id:, processed_at:, type:)
+          # @!method initialize(id:, processed_at:, type: :"session.deleted")
           #   Emitted when a session has been deleted. Terminates any active event stream — no
           #   further events will be emitted for this session.
           #
@@ -30,17 +30,7 @@ module Anthropic
           #
           #   @param processed_at [Time] Timestamp when the session was deleted.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionDeletedEvent::Type]
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionDeletedEvent#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            SESSION_DELETED = :"session.deleted"
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :"session.deleted"]
         end
       end
     end

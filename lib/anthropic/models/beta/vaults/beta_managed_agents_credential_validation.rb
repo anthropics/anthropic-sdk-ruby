@@ -40,8 +40,8 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsCredentialValidation::Type]
-          required :type, enum: -> { Anthropic::Beta::Vaults::BetaManagedAgentsCredentialValidation::Type }
+          #   @return [Symbol, :vault_credential_validation]
+          required :type, const: :vault_credential_validation
 
           # @!attribute validated_at
           #   When the validation probe was performed.
@@ -55,7 +55,7 @@ module Anthropic
           #   @return [String]
           required :vault_id, String
 
-          # @!method initialize(credential_id:, has_refresh_token:, mcp_probe:, refresh:, status:, type:, validated_at:, vault_id:)
+          # @!method initialize(credential_id:, has_refresh_token:, mcp_probe:, refresh:, status:, validated_at:, vault_id:, type: :vault_credential_validation)
           #   Result of live-probing a credential against its configured MCP server.
           #
           #   Some parameter documentations has been truncated, see
@@ -72,21 +72,11 @@ module Anthropic
           #
           #   @param status [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsCredentialValidationStatus] Overall verdict of the validation probe.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsCredentialValidation::Type]
-          #
           #   @param validated_at [Time] When the validation probe was performed.
           #
           #   @param vault_id [String] Identifier of the vault containing the credential.
-
-          # @see Anthropic::Models::Beta::Vaults::BetaManagedAgentsCredentialValidation#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            VAULT_CREDENTIAL_VALIDATION = :vault_credential_validation
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #
+          #   @param type [Symbol, :vault_credential_validation]
         end
       end
     end

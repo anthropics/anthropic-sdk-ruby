@@ -24,9 +24,7 @@ module Anthropic
         end
         attr_writer :max_list_cost
 
-        sig do
-          returns(Anthropic::Beta::BetaManagedAgentsBudgetLimit::Type::OrSymbol)
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # A hard spend ceiling. The session stops issuing new model requests once the
@@ -34,53 +32,23 @@ module Anthropic
         sig do
           params(
             max_list_cost: Anthropic::BetaMonetaryAmount::OrHash,
-            type: Anthropic::Beta::BetaManagedAgentsBudgetLimit::Type::OrSymbol
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
           # Maximum list cost the session may accrue. List price is used regardless of any
           # negotiated discount, so the cap fires at or before the actual charge.
           max_list_cost:,
-          type:
+          type: :limit
         )
         end
 
         sig do
           override.returns(
-            {
-              max_list_cost: Anthropic::BetaMonetaryAmount,
-              type:
-                Anthropic::Beta::BetaManagedAgentsBudgetLimit::Type::OrSymbol
-            }
+            { max_list_cost: Anthropic::BetaMonetaryAmount, type: Symbol }
           )
         end
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(Symbol, Anthropic::Beta::BetaManagedAgentsBudgetLimit::Type)
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          LIMIT =
-            T.let(
-              :limit,
-              Anthropic::Beta::BetaManagedAgentsBudgetLimit::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsBudgetLimit::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

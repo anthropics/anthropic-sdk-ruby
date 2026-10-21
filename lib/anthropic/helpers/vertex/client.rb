@@ -4,8 +4,6 @@ module Anthropic
   module Helpers
     module Vertex
       class Client < Anthropic::Client
-        DEFAULT_VERSION = "vertex-2023-10-16"
-
         # @return [String]
         attr_reader :region
 
@@ -247,8 +245,9 @@ module Anthropic
 
         # @api private
         #
-        # Rewrites the canonical Anthropic request into Vertex's shape — drops
-        # `:model` from the body (keeping `:stream`) and retargets the URL to
+        # Rewrites the canonical Anthropic request into Vertex's shape — moves
+        # the `anthropic-version` header into the body, drops `:model` from the
+        # body (keeping `:stream`) and retargets the URL to
         # `projects/{project}/locations/{region}/publishers/anthropic/models/{model}:{rawPredict|streamRawPredict}`.
         # Called from {#provider_middleware}, so user middleware sees the
         # canonical request. Pure: the incoming request, its body, headers,
@@ -263,9 +262,12 @@ module Anthropic
           path = url.path.to_s
           query_ok = url.query.nil? || url.query == "beta=true"
 
+          version = headers["anthropic-version"]
+          headers = headers.except("anthropic-version") if version
+
           if body.is_a?(Hash)
             body = body.dup
-            body[:anthropic_version] ||= DEFAULT_VERSION
+            body[:anthropic_version] ||= version if version
 
             if (anthropic_beta = body.delete(:"anthropic-beta"))
               headers = headers.merge("anthropic-beta" => Array(anthropic_beta).join(","))

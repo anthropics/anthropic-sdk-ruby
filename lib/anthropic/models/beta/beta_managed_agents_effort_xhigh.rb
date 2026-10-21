@@ -6,23 +6,13 @@ module Anthropic
       class BetaManagedAgentsEffortXhigh < Anthropic::Internal::Type::BaseModel
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsEffortXhigh::Type]
-        required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsEffortXhigh::Type }
+        #   @return [Symbol, :xhigh]
+        required :type, const: :xhigh
 
-        # @!method initialize(type:)
+        # @!method initialize(type: :xhigh)
         #   Extra-high effort. Not all models accept this level.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsEffortXhigh::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsEffortXhigh#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          XHIGH = :xhigh
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :xhigh]
       end
     end
 

@@ -9,7 +9,7 @@ module Anthropic
       # Auth is resolved by the same precedence as the AWS gateway client, with
       # Mantle-specific environment variables that fall back to the AWS equivalents:
       #
-      #   1. `api_key` constructor arg → API key mode (x-api-key header, no SigV4)
+      #   1. `api_key` constructor arg → API key mode (Authorization: Bearer header, no SigV4)
       #   2. `aws_access_key` + `aws_secret_access_key` args → SigV4 with explicit credentials
       #   3. `aws_profile` arg → SigV4 with named AWS profile
       #   4. `AWS_BEARER_TOKEN_BEDROCK` env (then `ANTHROPIC_AWS_API_KEY`) → API key mode
@@ -29,7 +29,7 @@ module Anthropic
         # Creates and returns a new client for interacting with Anthropic models via Bedrock Mantle.
         # Only the Messages API (/v1/messages) is supported.
         #
-        # @param api_key [String, nil] Anthropic API key (bypasses SigV4, uses x-api-key header)
+        # @param api_key [String, nil] Anthropic API key (bypasses SigV4, uses Authorization: Bearer header)
         #
         # @param aws_access_key [String, nil] AWS access key ID for SigV4 signing
         #
@@ -43,7 +43,6 @@ module Anthropic
         #   Defaults to `ENV["AWS_REGION"]`, then `ENV["AWS_DEFAULT_REGION"]`. Required in SigV4 mode.
         #
         # @param skip_auth [Boolean] When true, skip all auth.
-        #   Note: the base SDK may still send an X-Api-Key header if ANTHROPIC_API_KEY is set.
         #
         # @param base_url [String, nil] Override the default base URL for the API.
         #   Defaults to `ENV["ANTHROPIC_BEDROCK_MANTLE_BASE_URL"]`, then
@@ -88,8 +87,7 @@ module Anthropic
             service_name: "bedrock-mantle",
             env_api_key: "AWS_BEARER_TOKEN_BEDROCK",
             env_api_key_fallback: "ANTHROPIC_AWS_API_KEY",
-            derive_base_url: ->(region) { "https://bedrock-mantle.#{region}.api.aws/anthropic" },
-            use_bearer_auth: true
+            derive_base_url: ->(region) { "https://bedrock-mantle.#{region}.api.aws/anthropic" }
           )
 
           super(
@@ -105,12 +103,6 @@ module Anthropic
           # Only initialize supported resources
           @messages = Anthropic::Resources::Messages.new(client: self)
           @beta = MantleBeta.new(client: self)
-        end
-
-        # Completions are not supported on Bedrock Mantle. Only Messages (/v1/messages) is supported.
-        def completions
-          raise NotImplementedError,
-                "Completions are not supported on Bedrock Mantle. Only Messages (/v1/messages) is supported."
         end
 
         # Models listing is not supported on Bedrock Mantle. Only Messages (/v1/messages) is supported.

@@ -18,11 +18,10 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingParams::Type]
-          required :type,
-                   enum: -> { Anthropic::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingParams::Type }
+          #   @return [Symbol, :limited]
+          required :type, const: :limited
 
-          # @!method initialize(allowed_hosts:, type:)
+          # @!method initialize(allowed_hosts:, type: :limited)
           #   Substitute the secret only on requests to the listed hosts.
           #
           #   Some parameter documentations has been truncated, see
@@ -31,17 +30,7 @@ module Anthropic
           #
           #   @param allowed_hosts [Array<String>] The destination hosts of the outbound requests that the credential's secret is s
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingParams::Type]
-
-          # @see Anthropic::Models::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingParams#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            LIMITED = :limited
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param type [Symbol, :limited]
         end
       end
     end

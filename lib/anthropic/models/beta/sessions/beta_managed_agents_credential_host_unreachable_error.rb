@@ -26,9 +26,8 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError::Type]
-          required :type,
-                   enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError::Type }
+          #   @return [Symbol, :credential_host_unreachable_error]
+          required :type, const: :credential_host_unreachable_error
 
           # @!attribute vault_id
           #   ID of the vault containing the affected credential.
@@ -36,7 +35,7 @@ module Anthropic
           #   @return [String]
           required :vault_id, String
 
-          # @!method initialize(credential_id:, message:, retry_status:, type:, vault_id:)
+          # @!method initialize(credential_id:, message:, retry_status:, vault_id:, type: :credential_host_unreachable_error)
           #   An `environment_variable` credential's `auth.networking.allowed_hosts` includes
           #   a host the environment's network policy does not permit.
           #
@@ -46,9 +45,9 @@ module Anthropic
           #
           #   @param retry_status [Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal] What the client should do next.
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError::Type]
-          #
           #   @param vault_id [String] ID of the vault containing the affected credential.
+          #
+          #   @param type [Symbol, :credential_host_unreachable_error]
 
           # What the client should do next.
           #
@@ -93,25 +92,15 @@ module Anthropic
             def self.new(type:, **args)
               case type.to_sym
               when :retrying
-                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying.new(**args)
               when :exhausted
-                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted.new(**args)
               when :terminal
-                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal.new(type: type, **args)
+                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal.new(**args)
               else
                 raise ArgumentError, "unknown type: #{type}"
               end
             end
-          end
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            CREDENTIAL_HOST_UNREACHABLE_ERROR = :credential_host_unreachable_error
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
           end
         end
       end

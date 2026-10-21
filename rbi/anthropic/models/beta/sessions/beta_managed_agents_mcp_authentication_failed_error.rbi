@@ -29,11 +29,7 @@ module Anthropic
           end
           attr_accessor :retry_status
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # Authentication to an MCP server failed.
@@ -47,8 +43,7 @@ module Anthropic
                   Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted::OrHash,
                   Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal::OrHash
                 ),
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError::Type::OrSymbol
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
@@ -58,7 +53,7 @@ module Anthropic
             message:,
             # What the client should do next.
             retry_status:,
-            type:
+            type: :mcp_authentication_failed_error
           )
           end
 
@@ -69,8 +64,7 @@ module Anthropic
                 message: String,
                 retry_status:
                   Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError::RetryStatus::Variants,
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError::Type::TaggedSymbol
+                type: Symbol
               }
             )
           end
@@ -150,35 +144,6 @@ module Anthropic
               )
             end
             def self.new(type:)
-            end
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            MCP_AUTHENTICATION_FAILED_ERROR =
-              T.let(
-                :mcp_authentication_failed_error,
-                Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
             end
           end
         end

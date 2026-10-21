@@ -30,11 +30,7 @@ module Anthropic
           sig { returns(Time) }
           attr_accessor :processed_at
 
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationStartEvent::Type::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # Emitted when an outcome evaluation cycle begins.
@@ -44,8 +40,7 @@ module Anthropic
               iteration: Integer,
               outcome_id: String,
               processed_at: Time,
-              type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationStartEvent::Type::OrSymbol
+              type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
@@ -58,7 +53,7 @@ module Anthropic
             outcome_id:,
             # Timestamp when outcome evaluation started.
             processed_at:,
-            type:
+            type: :"span.outcome_evaluation_start"
           )
           end
 
@@ -69,41 +64,11 @@ module Anthropic
                 iteration: Integer,
                 outcome_id: String,
                 processed_at: Time,
-                type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationStartEvent::Type::TaggedSymbol
+                type: Symbol
               }
             )
           end
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationStartEvent::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            SPAN_OUTCOME_EVALUATION_START =
-              T.let(
-                :"span.outcome_evaluation_start",
-                Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationStartEvent::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationStartEvent::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

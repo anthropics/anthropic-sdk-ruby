@@ -19,70 +19,23 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :model
 
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsAdvisorParams::Type::OrSymbol
-          )
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # Platform advisor roster entry: a model the session's primary thread may consult
         # mid-turn. At most one per roster; the entry occupies the roster name
         # `anthropic.advisor`.
-        sig do
-          params(
-            model: String,
-            type:
-              Anthropic::Beta::BetaManagedAgentsAdvisorParams::Type::OrSymbol
-          ).returns(T.attached_class)
-        end
+        sig { params(model: String, type: Symbol).returns(T.attached_class) }
         def self.new(
           # A Claude model id. The model must be permitted as an advisor for this agent's
           # model.
           model:,
-          type:
+          type: :advisor
         )
         end
 
-        sig do
-          override.returns(
-            {
-              model: String,
-              type:
-                Anthropic::Beta::BetaManagedAgentsAdvisorParams::Type::OrSymbol
-            }
-          )
-        end
+        sig { override.returns({ model: String, type: Symbol }) }
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsAdvisorParams::Type
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          ADVISOR =
-            T.let(
-              :advisor,
-              Anthropic::Beta::BetaManagedAgentsAdvisorParams::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsAdvisorParams::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

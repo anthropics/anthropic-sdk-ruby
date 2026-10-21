@@ -34,9 +34,7 @@ module Anthropic
         sig { returns(T::Hash[Symbol, String]) }
         attr_accessor :metadata
 
-        sig do
-          returns(Anthropic::Beta::BetaManagedAgentsVault::Type::TaggedSymbol)
-        end
+        sig { returns(Symbol) }
         attr_accessor :type
 
         # A timestamp in RFC 3339 format
@@ -51,8 +49,8 @@ module Anthropic
             created_at: Time,
             display_name: String,
             metadata: T::Hash[Symbol, String],
-            type: Anthropic::Beta::BetaManagedAgentsVault::Type::OrSymbol,
-            updated_at: Time
+            updated_at: Time,
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
@@ -66,9 +64,9 @@ module Anthropic
           display_name:,
           # Arbitrary key-value metadata attached to the vault.
           metadata:,
-          type:,
           # A timestamp in RFC 3339 format
-          updated_at:
+          updated_at:,
+          type: :vault
         )
         end
 
@@ -80,38 +78,12 @@ module Anthropic
               created_at: Time,
               display_name: String,
               metadata: T::Hash[Symbol, String],
-              type: Anthropic::Beta::BetaManagedAgentsVault::Type::TaggedSymbol,
+              type: Symbol,
               updated_at: Time
             }
           )
         end
         def to_hash
-        end
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(Symbol, Anthropic::Beta::BetaManagedAgentsVault::Type)
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          VAULT =
-            T.let(
-              :vault,
-              Anthropic::Beta::BetaManagedAgentsVault::Type::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsVault::Type::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

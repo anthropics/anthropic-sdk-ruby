@@ -6,25 +6,14 @@ module Anthropic
       class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError < Anthropic::Internal::Type::BaseModel
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError::Type]
-        required :type,
-                 enum: -> { Anthropic::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError::Type }
+        #   @return [Symbol, :self_hosted_resources_unsupported_error]
+        required :type, const: :self_hosted_resources_unsupported_error
 
-        # @!method initialize(type:)
+        # @!method initialize(type: :self_hosted_resources_unsupported_error)
         #   The deployment configures resources, but its environment is self-hosted and
         #   cannot mount them.
         #
-        #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError::Type]
-
-        # @see Anthropic::Models::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          SELF_HOSTED_RESOURCES_UNSUPPORTED_ERROR = :self_hosted_resources_unsupported_error
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
+        #   @param type [Symbol, :self_hosted_resources_unsupported_error]
       end
     end
 

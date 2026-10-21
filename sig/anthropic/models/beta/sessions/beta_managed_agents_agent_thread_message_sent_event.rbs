@@ -8,7 +8,7 @@ module Anthropic
             content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent::content],
             processed_at: Time,
             to_session_thread_id: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent::type_,
+            type: :"agent.thread_message_sent",
             to_agent_name: String?
           }
 
@@ -21,7 +21,7 @@ module Anthropic
 
           attr_accessor to_session_thread_id: String
 
-          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent::type_
+          attr_accessor type: :"agent.thread_message_sent"
 
           attr_accessor to_agent_name: String?
 
@@ -30,8 +30,8 @@ module Anthropic
             content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent::content],
             processed_at: Time,
             to_session_thread_id: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent::type_,
-            ?to_agent_name: String?
+            ?to_agent_name: String?,
+            ?type: :"agent.thread_message_sent"
           ) -> void
 
           def to_hash: -> {
@@ -39,7 +39,7 @@ module Anthropic
             content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent::content],
             processed_at: Time,
             to_session_thread_id: String,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent::type_,
+            type: :"agent.thread_message_sent",
             to_agent_name: String?
           }
 
@@ -94,16 +94,6 @@ module Anthropic
                 ?context: String?,
                 ?title: String?
               ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent::content
-          end
-
-          type type_ = :"agent.thread_message_sent"
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            AGENT_THREAD_MESSAGE_SENT: :"agent.thread_message_sent"
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent::type_]
           end
         end
       end

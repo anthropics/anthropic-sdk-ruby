@@ -148,12 +148,11 @@ module Anthropic
             params(
               session_id: String,
               file_id: String,
-              type:
-                Anthropic::Beta::BetaManagedAgentsFileResourceParams::Type::OrSymbol,
               mount_path: T.nilable(String),
               betas:
                 T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               workspace_id: String,
+              type: Symbol,
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(Anthropic::Beta::Sessions::BetaManagedAgentsFileResource)
           end
@@ -162,8 +161,6 @@ module Anthropic
             session_id,
             # Body param: ID of a previously uploaded file.
             file_id:,
-            # Body param
-            type:,
             # Body param: Mount path in the container. Defaults to
             # `/mnt/session/uploads/<file_id>`.
             mount_path: nil,
@@ -177,6 +174,8 @@ module Anthropic
             # credential that belongs to a specific Workspace may omit it; if sent, it must
             # match that Workspace.
             workspace_id: nil,
+            # Body param
+            type: :file,
             request_options: {}
           )
           end

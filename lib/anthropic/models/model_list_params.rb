@@ -39,16 +39,6 @@ module Anthropic
       #   @return [Integer, nil]
       optional :limit, Integer
 
-      # @!attribute betas
-      #   @deprecated Deprecated. This parameter will be removed from this method in a future release.
-      #   To use beta features, call the beta models methods (`client.beta.models`)
-      #   instead.
-      #
-      #   Optional header to specify the beta version(s) you want to use.
-      #
-      #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
-      optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
-
       # @!attribute workspace_id
       #   Optional header to select the Workspace for this request. The value is a
       #   Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -60,7 +50,7 @@ module Anthropic
       #   @return [String, nil]
       optional :workspace_id, String
 
-      # @!method initialize(after_id: nil, before_id: nil, lifecycle: nil, limit: nil, betas: nil, workspace_id: nil, request_options: {})
+      # @!method initialize(after_id: nil, before_id: nil, lifecycle: nil, limit: nil, workspace_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Anthropic::Models::ModelListParams} for more details.
       #
@@ -71,8 +61,6 @@ module Anthropic
       #   @param lifecycle [Array<Symbol, Anthropic::Models::ModelListParams::Lifecycle>] Filter the list to models in any of the given lifecycle stages (`active`, `depre
       #
       #   @param limit [Integer] Number of items to return per page.
-      #
-      #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
       #
       #   @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
       #

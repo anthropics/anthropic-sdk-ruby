@@ -13,11 +13,7 @@ module Anthropic
               )
             end
 
-          sig do
-            returns(
-              Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryPreconditionFailedError::Type::OrSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :type
 
           # A human-readable explanation of why the precondition failed.
@@ -38,58 +34,17 @@ module Anthropic
           # [memory guide](https://platform.claude.com/docs/en/managed-agents/memory#safe-content-edits-optimistic-concurrency)
           # to learn more about safe content edits with content hash preconditions.
           sig do
-            params(
-              type:
-                Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryPreconditionFailedError::Type::OrSymbol,
-              message: String
-            ).returns(T.attached_class)
+            params(message: String, type: Symbol).returns(T.attached_class)
           end
           def self.new(
-            type:,
             # A human-readable explanation of why the precondition failed.
-            message: nil
+            message: nil,
+            type: :memory_precondition_failed_error
           )
           end
 
-          sig do
-            override.returns(
-              {
-                type:
-                  Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryPreconditionFailedError::Type::OrSymbol,
-                message: String
-              }
-            )
-          end
+          sig { override.returns({ type: Symbol, message: String }) }
           def to_hash
-          end
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryPreconditionFailedError::Type
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            MEMORY_PRECONDITION_FAILED_ERROR =
-              T.let(
-                :memory_precondition_failed_error,
-                Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryPreconditionFailedError::Type::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryPreconditionFailedError::Type::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

@@ -23,9 +23,8 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::Type]
-          required :type,
-                   enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::Type }
+          #   @return [Symbol, :"user.tool_confirmation"]
+          required :type, const: :"user.tool_confirmation"
 
           # @!attribute deny_message
           #   Optional message providing context for a 'deny' decision. Only allowed when
@@ -34,7 +33,7 @@ module Anthropic
           #   @return [String, nil]
           optional :deny_message, String, nil?: true
 
-          # @!method initialize(result:, tool_use_id:, type:, deny_message: nil)
+          # @!method initialize(result:, tool_use_id:, deny_message: nil, type: :"user.tool_confirmation")
           #   Parameters for confirming or denying a tool execution request.
           #
           #   Some parameter documentations has been truncated, see
@@ -45,9 +44,9 @@ module Anthropic
           #
           #   @param tool_use_id [String] The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresp
           #
-          #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::Type]
-          #
           #   @param deny_message [String, nil] Optional message providing context for a 'deny' decision. Only allowed when resu
+          #
+          #   @param type [Symbol, :"user.tool_confirmation"]
 
           # The confirmation result: 'allow' or 'deny'.
           #
@@ -57,16 +56,6 @@ module Anthropic
 
             ALLOW = :allow
             DENY = :deny
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
-
-          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams#type
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            USER_TOOL_CONFIRMATION = :"user.tool_confirmation"
 
             # @!method self.values
             #   @return [Array<Symbol>]
