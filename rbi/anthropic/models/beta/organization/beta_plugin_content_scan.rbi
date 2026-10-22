@@ -13,7 +13,8 @@ module Anthropic
               )
             end
 
-          # The scan's verdict; set only when `status` is `completed`.
+          # The scan's verdict; set only when `status` is `completed`. A `warn` can mean a
+          # `fail` that was allowed in claude.ai.
           sig do
             returns(
               T.nilable(
@@ -31,7 +32,9 @@ module Anthropic
           attr_accessor :reason
 
           # `processing` while a scan runs, `completed` when it ran to completion, `errored`
-          # when it could not run or its outcome cannot be read.
+          # when it could not run. Once a scan of the version has completed, `content_scan`
+          # describes the newest completed scan, even while a later scan runs. While the
+          # scan outcome cannot be read, `status` is `errored` instead.
           sig do
             returns(
               Anthropic::Beta::Organization::BetaPluginContentScan::Status::TaggedSymbol
@@ -51,7 +54,8 @@ module Anthropic
             ).returns(T.attached_class)
           end
           def self.new(
-            # The scan's verdict; set only when `status` is `completed`.
+            # The scan's verdict; set only when `status` is `completed`. A `warn` can mean a
+            # `fail` that was allowed in claude.ai.
             assessment:,
             # The primary mechanism behind a `warn` or `fail`, such as `credential-exposure`
             # or `guardrail-tampering`; a mechanism this API does not yet name reads as
@@ -59,7 +63,9 @@ module Anthropic
             # is reported for the verdict.
             reason:,
             # `processing` while a scan runs, `completed` when it ran to completion, `errored`
-            # when it could not run or its outcome cannot be read.
+            # when it could not run. Once a scan of the version has completed, `content_scan`
+            # describes the newest completed scan, even while a later scan runs. While the
+            # scan outcome cannot be read, `status` is `errored` instead.
             status:
           )
           end
@@ -80,7 +86,8 @@ module Anthropic
           def to_hash
           end
 
-          # The scan's verdict; set only when `status` is `completed`.
+          # The scan's verdict; set only when `status` is `completed`. A `warn` can mean a
+          # `fail` that was allowed in claude.ai.
           module Assessment
             extend Anthropic::Internal::Type::Enum
 
@@ -126,7 +133,9 @@ module Anthropic
           end
 
           # `processing` while a scan runs, `completed` when it ran to completion, `errored`
-          # when it could not run or its outcome cannot be read.
+          # when it could not run. Once a scan of the version has completed, `content_scan`
+          # describes the newest completed scan, even while a later scan runs. While the
+          # scan outcome cannot be read, `status` is `errored` instead.
           module Status
             extend Anthropic::Internal::Type::Enum
 
