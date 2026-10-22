@@ -12,6 +12,8 @@ module Anthropic
 
         private def resolve_default_credentials?: -> bool
 
+        def message_threads?: -> bool
+
         def files: -> bot
 
         def skills: -> bot

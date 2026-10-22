@@ -355,6 +355,14 @@ module Anthropic
       super
     end
 
+    # @api private
+    #
+    # Whether the platform this client talks to has message threads. Platform clients whose
+    # platform has none override this.
+    #
+    # @return [Boolean]
+    def message_threads? = true
+
     private
 
     # @api private

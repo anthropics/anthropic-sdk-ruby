@@ -1,0 +1,40 @@
+module Anthropic
+  module Helpers
+    module Tools
+      class Runner
+        type message =
+          Anthropic::Models::Beta::beta_message_param | ::Hash[Symbol, top]
+
+        type params =
+          Anthropic::Models::Beta::MessageCreateParams | ::Hash[Symbol, top]
+
+        def params: -> params
+
+        def params=: (params params) -> void
+
+        def finished?: -> bool
+
+        def feed_messages: (*message messages) -> void
+
+        def add_tools: (*top tools) -> void
+
+        def remove_tools: (*top tools) -> void
+
+        def compact_before_next_turn: (
+          ?(Anthropic::Beta::BetaCompactionConfig
+          | ::Hash[Symbol, top])? compaction
+        ) -> void
+
+        def next_message: -> Anthropic::Beta::BetaMessage?
+
+        def run_until_finished: -> ::Array[Anthropic::Beta::BetaMessage]
+
+        def each_message: { (Anthropic::Beta::BetaMessage) -> void } -> void
+
+        def each_streaming: {
+          (Anthropic::Helpers::Streaming::MessageStream) -> void
+        } -> void
+      end
+    end
+  end
+end

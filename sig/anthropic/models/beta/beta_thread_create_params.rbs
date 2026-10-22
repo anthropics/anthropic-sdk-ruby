@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    class BetaThreadCreateParams = Beta::BetaThreadCreateParams
+
+    module Beta
+      type beta_thread_create_params = { type: :create }
+
+      class BetaThreadCreateParams < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :create
+
+        def initialize: (?type: :create) -> void
+
+        def to_hash: -> { type: :create }
+      end
+    end
+  end
+end

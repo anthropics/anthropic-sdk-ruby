@@ -151,6 +151,7 @@ class Anthropic::Test::Helpers::ToolRunner::CompactBeforeNextTurnTest < Minitest
     runner = @client.beta.messages.tool_runner(
       {
         **basic_params,
+        thread: false,
         betas: ["compact-2026-09-04"],
         context_management:,
         # The compaction request is not a model turn, so both real turns still fit.
@@ -219,7 +220,7 @@ class Anthropic::Test::Helpers::ToolRunner::CompactBeforeNextTurnTest < Minitest
       requests = stub_responses(tool_use_response, compacted_response, text_response)
 
       runner = @client.beta.messages.tool_runner(
-        {**basic_params, system_: "Be brief.", betas: ["compact-2026-09-04"], **params}
+        {**basic_params, thread: false, system_: "Be brief.", betas: ["compact-2026-09-04"], **params}
       )
       compact_on(runner, :tool_use)
 
@@ -276,7 +277,7 @@ class Anthropic::Test::Helpers::ToolRunner::CompactBeforeNextTurnTest < Minitest
   def test_waits_out_a_paused_turn
     requests = stub_responses(paused_response, tool_use_response, compacted_response, text_response)
 
-    compact_on(@client.beta.messages.tool_runner(basic_params), :pause_turn)
+    compact_on(@client.beta.messages.tool_runner({**basic_params, thread: false}), :pause_turn)
 
     _, resumed, compaction, after = bodies(requests)
     refute_operator(resumed, :key?, :compaction)
@@ -304,7 +305,7 @@ class Anthropic::Test::Helpers::ToolRunner::CompactBeforeNextTurnTest < Minitest
   def test_is_skipped_on_a_final_turn_with_tool_calls_that_never_ran
     requests = stub_responses(tool_use_response(stop_reason: "max_tokens"))
 
-    runner = @client.beta.messages.tool_runner(basic_params)
+    runner = @client.beta.messages.tool_runner({**basic_params, thread: false})
     messages = nil
     _out, err = capture_io { messages = compact_on(runner, :max_tokens) }
 
@@ -350,7 +351,7 @@ class Anthropic::Test::Helpers::ToolRunner::CompactBeforeNextTurnTest < Minitest
       WebMock.reset!
       requests = stub_responses(tool_use_response, not_compacted, text_response)
 
-      runner = @client.beta.messages.tool_runner(basic_params)
+      runner = @client.beta.messages.tool_runner({**basic_params, thread: false})
       seen = 0
       _out, err = capture_io do
         # The second call is made on the compaction response, so it is ignored: no retry is sent.

@@ -131,6 +131,11 @@ module Anthropic
         # @return [Boolean]
         private def resolve_default_credentials? = false
 
+        # @api private
+        #
+        # @return [Boolean]
+        def message_threads? = false
+
         def files
           raise NotImplementedError, "Files are not supported on Vertex."
         end

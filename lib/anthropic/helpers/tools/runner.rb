@@ -33,12 +33,13 @@ module Anthropic
 
         # @param params [Anthropic::Models::Beta::MessageCreateParams]
         #
-        # @raise [ArgumentError] if `compaction` is set, if the messages are replaced while the
+        # @raise [ArgumentError] if `compaction` or `thread` is set, if the messages are replaced while the
         #   conversation is being compacted, or if a compaction edit is added while a compaction is due
         def params=(params)
           # The runner reads and writes its params as a symbol-keyed hash.
           params = params.to_h.transform_keys(&:to_sym)
           reject_compaction_param!(params)
+          reject_thread_param!(params)
           if @compaction_phase == :in_flight && !params[:messages].equal?(current_messages)
             raise ArgumentError.new(
               "Message params can't be changed while the conversation is being compacted, because the " \
@@ -125,8 +126,7 @@ module Anthropic
         def next_message
           message = nil
           fold do |params|
-            message =
-              @client.beta.messages.create(with_helper_header(params, StainlessHelperHeader::BETA_TOOL_RUNNER))
+            message = create_message(params)
             [true, message]
           end
           message
@@ -137,15 +137,14 @@ module Anthropic
           messages = []
           # Not `each_streaming`: an error from this block is the runner's, not the application's.
           fold do |params|
-            stream =
-              @client.beta.messages.stream(with_helper_header(params, StainlessHelperHeader::BETA_TOOL_RUNNER))
+            stream = stream_message(params)
             message = stream.accumulated_message
             messages << message
             [false, message]
           ensure
             stream&.close
           end
-          messages
+          messages.compact
         end
 
         # @yieldparam [Anthropic::Models::BetaMessage]
@@ -155,8 +154,7 @@ module Anthropic
           end
 
           fold do |params|
-            message =
-              @client.beta.messages.create(with_helper_header(params, StainlessHelperHeader::BETA_TOOL_RUNNER))
+            message = create_message(params)
             in_app { blk.call(message) }
             [false, message]
           end
@@ -169,13 +167,48 @@ module Anthropic
           end
 
           fold do |params|
-            stream =
-              @client.beta.messages.stream(with_helper_header(params, StainlessHelperHeader::BETA_TOOL_RUNNER))
+            stream = stream_message(params)
             in_app { blk.call(stream) }
             [false, stream.accumulated_message]
           ensure
             stream&.close
           end
+        end
+
+        # @api private
+        #
+        # @param params [Anthropic::Models::Beta::MessageCreateParams]
+        #
+        # @return [Anthropic::Models::BetaMessage]
+        private def create_message(params)
+          request = with_helper_header(params, StainlessHelperHeader::BETA_TOOL_RUNNER)
+          return @client.beta.messages.create(request) if @thread.nil?
+
+          @thread.send_message(**request.slice(:request_options))
+        end
+
+        # @api private
+        #
+        # @param params [Anthropic::Models::Beta::MessageCreateParams]
+        #
+        # @return [Anthropic::Streaming::MessageStream]
+        private def stream_message(params)
+          request = with_helper_header(params, StainlessHelperHeader::BETA_TOOL_RUNNER)
+          return @client.beta.messages.stream(request) if @thread.nil?
+
+          @thread.stream(**request.slice(:request_options))
+        end
+
+        # @api private
+        #
+        # The thread sends what `params` adds to the messages that the API holds. What was appended
+        # to the thread itself since it was last given the messages joins them first.
+        #
+        # @param params [Anthropic::Models::Beta::MessageCreateParams]
+        private def give_thread(params)
+          current_messages.concat(@thread.appended_after(@given_count))
+          @thread.replace_params(params.to_h.except(:stream, :thread))
+          @given_count = current_messages.length
         end
 
         # @api private
@@ -255,6 +288,7 @@ module Anthropic
             break if finished?
             return if @max_iterations && @iteration_count >= @max_iterations
 
+            reject_thread_param!(params)
             send_pending_tool_changes
 
             if @pending_compaction && !turn_paused?
@@ -265,15 +299,20 @@ module Anthropic
 
             reject_compaction_param!(params)
             tools = params[:tools].to_a.grep(Anthropic::Helpers::Tools::BaseTool)
+            give_thread(params) unless @thread.nil?
             messages = current_messages
+            sent = messages.dup
             brk, response = blk.call(params)
+            # A stream that ended before `message_start` has no message.
+            return if @thread && response.nil?
 
             @last_response = response
 
-            # Skip tool processing if messages were modified
-            next unless current_messages.equal?(messages)
-
             next_step = determine_next_step_from_stop_reason(response.stop_reason)
+
+            # Skip tool processing if messages were modified. A message thread holds the reply
+            # whatever the messages say, so its tool calls are answered all the same.
+            next unless current_messages.equal?(messages) || (@thread && next_step == :run_tools)
 
             if next_step == :stop
               @finished = true
@@ -281,6 +320,8 @@ module Anthropic
             end
 
             tool_uses = next_step == :run_tools ? client_tool_uses(response) : []
+            # No tool runs for a turn that the thread would refuse to send.
+            @thread&.check_create_only_fields!(params.to_h)
 
             # A `tool_removal` block only hints the model, so a call to a withdrawn tool can still
             # arrive; a name missing from this set routes down the same "not found" path as an
@@ -334,9 +375,15 @@ module Anthropic
               break
             end
 
-            messages << assistant_turn(response)
-            messages << {role: :user, content: mapped} unless mapped.empty?
+            if @thread.nil?
+              messages << assistant_turn(response)
+              messages << {role: :user, content: mapped} unless mapped.empty?
+            else
+              add_thread_turn(mapped, sent:)
+            end
             adopt_container(response)
+            # The run can end here, and the thread goes on from the results.
+            give_thread(params) unless @thread.nil?
 
             @iteration_count += 1
 
@@ -347,6 +394,32 @@ module Anthropic
 
           compact_after_final_turn(&blk) if finished? && !brk
           nil
+        end
+
+        # @api private
+        #
+        # Adds the reply, as the thread recorded it, and the results of its tool calls to the
+        # messages, so that they still begin with what the API holds. Both go after the last message
+        # that was sent, ahead of what the caller added while handling the reply.
+        #
+        # @param results [Array<Hash{Symbol=>Object}>]
+        #
+        # @param sent [Array<Hash{Symbol=>Object}>] the messages that were sent
+        private def add_thread_turn(results, sent:)
+          messages = current_messages
+          ids = results.map { _1.fetch(:tool_use_id) }
+          # A message that was sent is not the reply, even when it holds a call with the same id.
+          before_reply = Set.new.compare_by_identity.merge(sent)
+          index = messages.rindex do |message|
+            next false if before_reply.include?(message)
+
+            Array(read_field(message, :content)).any? { ids.include?(read_field(_1, :id)) }
+          end
+          if index.nil?
+            index = (messages.rindex { _1.equal?(sent.last) } || messages.rindex(sent.last))&.succ || messages.length
+            messages.insert(index, @thread.messages.fetch(sent.length))
+          end
+          messages.insert(index + 1, {role: :user, content: results}) unless results.empty?
         end
 
         # @api private
@@ -407,6 +480,19 @@ module Anthropic
         # @api private
         #
         # @param params [Anthropic::Models::Beta::MessageCreateParams]
+        private def reject_thread_param!(params)
+          return if params[:thread].nil?
+
+          raise ArgumentError.new(
+            "`thread` cannot be set in the params of a tool runner, got #{params[:thread].inspect}. " \
+            "The runner sets `thread` for each request itself. To run without a message thread, " \
+            "create the runner with `thread: false`."
+          )
+        end
+
+        # @api private
+        #
+        # @param params [Anthropic::Models::Beta::MessageCreateParams]
         private def check_can_compact!(params)
           # The compaction request is sent without `context_management`, so the API can't reject this
           # combination there: it would run and bill the compaction, then reject the next request,
@@ -439,6 +525,10 @@ module Anthropic
           request = {**without_compaction_incompatible_params(params), compaction:}
           @pending_compaction = nil
           @compaction_phase = :in_flight
+          unless @thread.nil?
+            @thread.start_new_thread
+            give_thread(request)
+          end
 
           brk, response = blk.call(request)
 
@@ -455,6 +545,8 @@ module Anthropic
           brk
         ensure
           @compaction_phase = nil if @compaction_phase == :in_flight
+          # The thread goes on with the runner's params, not with those of the compaction request.
+          give_thread(params) unless @thread.nil?
         end
 
         # @api private
@@ -665,8 +757,13 @@ module Anthropic
         # @param params [Anthropic::Models::Beta::MessageCreateParams]
         #
         # @param max_iterations [Integer, nil]
-        def initialize(client, params:, max_iterations: nil)
+        #
+        # @param thread [Anthropic::Helpers::Threads::BetaMessageThread, nil] sends the requests, each
+        #   with the whole history when `nil`
+        def initialize(client, params:, max_iterations: nil, thread: nil)
           @client = client
+          @thread = thread
+          @given_count = thread&.messages.to_a.length
           @params = params.to_h
           reject_compaction_param!(@params)
           @finished = false

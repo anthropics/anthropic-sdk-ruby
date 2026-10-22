@@ -198,7 +198,7 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
       text_response(id: "msg_2", text: "10 + 5 = 15")
     )
 
-    runner = @client.beta.messages.tool_runner({**basic_params, tools: [StrictCalculator.new]})
+    runner = @client.beta.messages.tool_runner({**basic_params, thread: false, tools: [StrictCalculator.new]})
     runner.each_message { nil }
 
     assert_requested(:post, "http://localhost/v1/messages?beta=true", times: 2) do |request|
@@ -432,7 +432,7 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
       text_response(id: "msg_2", text: "It is sunny in SF")
     )
 
-    messages = collect_messages(basic_params)
+    messages = collect_messages({**basic_params, thread: false})
 
     assert_pattern do
       messages => [
@@ -485,7 +485,7 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
       text_response(id: "msg_2", text: "10 + 5 = 15")
     )
 
-    messages = collect_messages(basic_params)
+    messages = collect_messages({**basic_params, thread: false})
 
     assert_pattern do
       messages => [
@@ -672,7 +672,7 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
       text_response(id: "msg_2", text: "I have no tide tool available")
     )
 
-    @client.beta.messages.tool_runner(basic_params).each_message { _1 }
+    @client.beta.messages.tool_runner({**basic_params, thread: false}).each_message { _1 }
 
     assert_empty(@calculator.call_history)
     assert_equal(2, bodies.length)
@@ -750,7 +750,7 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
       text_response(id: "msg_2", text: "10 + 5 = 15")
     )
 
-    @client.beta.messages.tool_runner(basic_params).each_message { _1 }
+    @client.beta.messages.tool_runner({**basic_params, thread: false}).each_message { _1 }
 
     assert_equal([{lhs: 10.0, rhs: 5.0, operator: :+}], @calculator.call_history)
     assert_pattern do
@@ -1040,7 +1040,7 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
       text_response(id: "msg_3", text: "Cannot calculate right now")
     )
 
-    runner = @client.beta.messages.tool_runner(basic_params)
+    runner = @client.beta.messages.tool_runner({**basic_params, thread: false})
     runner.each_message do
       runner.feed_messages(calculator_removal_message) if _1.id == "msg_1"
     end
@@ -1059,7 +1059,7 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
       text_response(id: "msg_3", text: "Cannot calculate right now")
     )
 
-    runner = @client.beta.messages.tool_runner(basic_params)
+    runner = @client.beta.messages.tool_runner({**basic_params, thread: false})
     runner.each_message do
       next unless _1.id == "msg_1"
 

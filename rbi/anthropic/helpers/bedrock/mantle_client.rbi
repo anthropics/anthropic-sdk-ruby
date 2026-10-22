@@ -55,6 +55,11 @@ module Anthropic
         def models
         end
 
+        # @api private
+        sig { returns(T::Boolean) }
+        def message_threads?
+        end
+
         sig { returns(T.noreturn) }
         def files
         end

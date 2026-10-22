@@ -382,6 +382,10 @@ client.beta.messages.tool_runner(
 ).each_message { puts _1.content }
 ```
 
+### Message Threads in the Tool Runner
+
+The tool runner keeps its conversation in a [message thread](#message-threads-beta) by default. Pass `thread: false` to send the whole history with every request. `system_` and `tools` cannot change during a run unless you pass `thread: false`.
+
 ### Tool Runner Methods
 
 #### `#each_message` - Process Messages as They Complete
@@ -446,7 +450,7 @@ end
 
 #### `#add_tools` / `#remove_tools` - Add and Remove Tools Mid-Conversation
 
-Changing `tools:` in the middle of a conversation misses the prompt cache for everything sent so far. With the `inline-tools-2026-09-15` beta a tool change is sent as a message instead, and `#add_tools` and `#remove_tools` do that for you. `tools:` is sent exactly as you first passed it on every request.
+Changing `tools:` in the middle of a conversation misses the prompt cache for everything sent so far. With the `inline-tools-2026-09-15` beta a tool change is sent as a message instead, and `#add_tools` and `#remove_tools` do that for you. `tools:` stays exactly as you first passed it.
 
 ```ruby
 runner = client.beta.messages.tool_runner(
@@ -480,7 +484,7 @@ A few things to know:
 - A change made on the same turn as `#compact_before_next_turn` goes out with the compaction request, and the tools you added or removed stay that way for the tool runner after the compaction.
 - In the rare case where a compaction response comes back without `tool_changes` even though the summarized messages added or removed tools, the model goes back to the tools in `tools:` and the tool runner does not detect it. Call `#add_tools` / `#remove_tools` again after that compaction if you need the change restored.
 - The runner doesn't add the beta for you, so pass `betas: ["inline-tools-2026-09-15"]`.
-- Changing `tools:` through `#params` still works, but misses the prompt cache.
+- Changing `tools:` through `#params` still works with `thread: false`, but misses the prompt cache. On a [message thread](#message-threads-in-the-tool-runner) the runner raises `Anthropic::Errors::Error`.
 - Use either these methods or `tool_addition` / `tool_removal` blocks you append yourself for a given tool, not both.
 
 #### `#run_until_finished` - Complete and Get All Messages
@@ -589,6 +593,30 @@ The tool runner does not call a tool defined this way; it only calls the tools p
 ## Examples
 
 See example files: `examples/tools*.rb` and `examples/auto_looping*.rb`
+
+# Message Threads (Beta)
+
+A message thread keeps the conversation on the server, so each request sends only the new messages instead of the whole history. `client.beta.messages.thread` takes what `client.beta.messages.create` takes and sends nothing until the first turn.
+
+```ruby
+thread = client.beta.messages.thread(
+  model: "claude-sonnet-5",
+  max_tokens: 1024,
+  system_: "You are a concise travel guide."
+)
+
+reply = thread.send_message({role: :user, content: "Name one thing to see in Lisbon."})
+puts reply.content.first.text
+
+# Sends this message alone, and continues from the first reply
+reply = thread.send_message({role: :user, content: "How do I get there from the airport?"})
+```
+
+`thread.tool_runner` runs the tool loop over this thread.
+
+## Examples
+
+- [`examples/message_threads.rb`](examples/message_threads.rb) - Message threads
 
 # Structured Outputs
 

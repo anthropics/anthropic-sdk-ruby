@@ -10,6 +10,8 @@ module Anthropic
 
         def models: -> bot
 
+        def message_threads?: -> bool
+
         def files: -> bot
 
         def skills: -> bot

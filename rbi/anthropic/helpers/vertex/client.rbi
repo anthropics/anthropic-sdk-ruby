@@ -21,6 +21,11 @@ module Anthropic
         private def resolve_default_credentials?
         end
 
+        # @api private
+        sig { returns(T::Boolean) }
+        def message_threads?
+        end
+
         sig { returns(T.noreturn) }
         def files
         end

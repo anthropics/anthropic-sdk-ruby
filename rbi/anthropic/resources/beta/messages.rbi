@@ -66,6 +66,7 @@ module Anthropic
               ],
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             max_iterations: T.nilable(Integer),
+            thread: T.nilable(FalseClass),
             stream: T.noreturn,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Helpers::Tools::Runner)
@@ -274,9 +275,160 @@ module Anthropic
           betas: nil,
           # The most requests the runner sends before it stops. No limit when `nil`.
           max_iterations: nil,
+          # The runner sends its requests on a message thread, so that each request after
+          # the first carries only the messages that are new. `false` sends the whole
+          # history with every request instead. `nil` leaves the thread on, and anything
+          # else raises `ArgumentError`.
+          thread: nil,
           # There is no need to provide `stream:`. Instead, use `#stream_raw` or `#create`
           # for streaming and non-streaming use cases, respectively.
           stream: false,
+          request_options: {}
+        )
+        end
+
+        # Creates a message thread: a conversation that the API keeps between requests, so
+        # that each turn sends only the messages that are new. It sends no request.
+        #
+        # Takes the keywords of `#create` except `thread` and `stream`.
+        sig do
+          params(
+            max_tokens: Integer,
+            model: T.any(Anthropic::Model::OrSymbol, String),
+            messages:
+              T::Array[
+                T.any(
+                  Anthropic::Beta::BetaUserMessageParam::OrHash,
+                  Anthropic::Beta::BetaAssistantMessageParam::OrHash,
+                  Anthropic::Beta::BetaSystemMessageParam::OrHash
+                )
+              ],
+            cache_control:
+              T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
+            compaction:
+              T.nilable(Anthropic::Beta::BetaCompactionConfig::OrHash),
+            container:
+              T.nilable(
+                T.any(Anthropic::Beta::BetaContainerParams::OrHash, String)
+              ),
+            context_management:
+              T.nilable(Anthropic::Beta::BetaContextManagementConfig::OrHash),
+            diagnostics:
+              T.nilable(Anthropic::Beta::BetaDiagnosticsParam::OrHash),
+            fallback_credit_token:
+              T.nilable(
+                T.any(
+                  Anthropic::Beta::BetaFallbackCreditTokenParam::OrHash,
+                  String
+                )
+              ),
+            fallbacks:
+              T.nilable(
+                T.any(
+                  Symbol,
+                  T::Array[Anthropic::Beta::BetaFallbackParam::OrHash]
+                )
+              ),
+            inference_geo: T.nilable(String),
+            mcp_servers:
+              T::Array[
+                Anthropic::Beta::BetaRequestMCPServerURLDefinition::OrHash
+              ],
+            metadata: Anthropic::Beta::BetaMetadata::OrHash,
+            output_config: Anthropic::Beta::BetaOutputConfig::OrHash,
+            output_format:
+              T.nilable(Anthropic::Beta::BetaJSONOutputFormat::OrHash),
+            service_tier:
+              Anthropic::Beta::MessageCreateParams::ServiceTier::OrSymbol,
+            speed:
+              T.nilable(Anthropic::Beta::MessageCreateParams::Speed::OrSymbol),
+            stop_sequences: T::Array[String],
+            system_: Anthropic::Beta::MessageCreateParams::System::Variants,
+            thinking:
+              T.any(
+                Anthropic::Beta::BetaThinkingConfigEnabled::OrHash,
+                Anthropic::Beta::BetaThinkingConfigDisabled::OrHash,
+                Anthropic::Beta::BetaThinkingConfigBetweenTools::OrHash,
+                Anthropic::Beta::BetaThinkingConfigAdaptive::OrHash
+              ),
+            tool_choice:
+              T.any(
+                Anthropic::Beta::BetaToolChoiceAuto::OrHash,
+                Anthropic::Beta::BetaToolChoiceAny::OrHash,
+                Anthropic::Beta::BetaToolChoiceTool::OrHash,
+                Anthropic::Beta::BetaToolChoiceNone::OrHash
+              ),
+            tools:
+              T::Array[
+                T.any(
+                  Anthropic::Beta::BetaTool::OrHash,
+                  Anthropic::Beta::BetaToolBash20241022::OrHash,
+                  Anthropic::Beta::BetaToolBash20250124::OrHash,
+                  Anthropic::Beta::BetaCodeExecutionTool20250522::OrHash,
+                  Anthropic::Beta::BetaCodeExecutionTool20250825::OrHash,
+                  Anthropic::Beta::BetaCodeExecutionTool20260120::OrHash,
+                  Anthropic::Beta::BetaCodeExecutionTool20260521::OrHash,
+                  Anthropic::Beta::BetaBrowserToolset20260801::OrHash,
+                  Anthropic::Beta::BetaToolComputerUse20241022::OrHash,
+                  Anthropic::Beta::BetaMemoryTool20250818::OrHash,
+                  Anthropic::Beta::BetaToolComputerUse20250124::OrHash,
+                  Anthropic::Beta::BetaToolTextEditor20241022::OrHash,
+                  Anthropic::Beta::BetaToolComputerUse20251124::OrHash,
+                  Anthropic::Beta::BetaComputerToolset20260801::OrHash,
+                  Anthropic::Beta::BetaToolTextEditor20250124::OrHash,
+                  Anthropic::Beta::BetaToolTextEditor20250429::OrHash,
+                  Anthropic::Beta::BetaToolTextEditor20250728::OrHash,
+                  Anthropic::Beta::BetaWebSearchTool20250305::OrHash,
+                  Anthropic::Beta::BetaWebFetchTool20250910::OrHash,
+                  Anthropic::Beta::BetaWebSearchTool20260209::OrHash,
+                  Anthropic::Beta::BetaWebFetchTool20260209::OrHash,
+                  Anthropic::Beta::BetaWebFetchTool20260309::OrHash,
+                  Anthropic::Beta::BetaWebSearchTool20260318::OrHash,
+                  Anthropic::Beta::BetaWebFetchTool20260318::OrHash,
+                  Anthropic::Beta::BetaAdvisorTool20260301::OrHash,
+                  Anthropic::Beta::BetaToolSearchToolBm25_20251119::OrHash,
+                  Anthropic::Beta::BetaToolSearchToolRegex20251119::OrHash,
+                  Anthropic::Beta::BetaMCPToolset::OrHash
+                )
+              ],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
+            user_profile_id: String,
+            workspace_id: String,
+            unsupported_request_behavior: Symbol,
+            request_options: Anthropic::RequestOptions::OrHash
+          ).returns(Anthropic::Helpers::Threads::BetaMessageThread)
+        end
+        def thread(
+          max_tokens:,
+          model:,
+          # The messages that seed the history. The first turn sends them.
+          messages: nil,
+          cache_control: nil,
+          compaction: nil,
+          container: nil,
+          context_management: nil,
+          diagnostics: nil,
+          fallback_credit_token: nil,
+          fallbacks: nil,
+          inference_geo: nil,
+          mcp_servers: nil,
+          metadata: nil,
+          output_config: nil,
+          output_format: nil,
+          service_tier: nil,
+          speed: nil,
+          stop_sequences: nil,
+          system_: nil,
+          thinking: nil,
+          tool_choice: nil,
+          tools: nil,
+          betas: nil,
+          user_profile_id: nil,
+          workspace_id: nil,
+          # What a turn does when the API cannot serve the request on a thread: `:error`
+          # (the default) raises the error, and `:continue_unthreaded` sends the turn again,
+          # and every later turn, with the whole history and no thread.
+          unsupported_request_behavior: :error,
           request_options: {}
         )
         end
@@ -350,6 +502,13 @@ module Anthropic
                 Anthropic::Beta::BetaThinkingConfigDisabled::OrHash,
                 Anthropic::Beta::BetaThinkingConfigBetweenTools::OrHash,
                 Anthropic::Beta::BetaThinkingConfigAdaptive::OrHash
+              ),
+            thread:
+              T.nilable(
+                T.any(
+                  Anthropic::Beta::BetaThreadCreateParams::OrHash,
+                  Anthropic::Beta::BetaThreadContinueParams::OrHash
+                )
               ),
             tool_choice:
               T.any(
@@ -598,6 +757,12 @@ module Anthropic
           # [thinking](https://platform.claude.com/docs/en/build-with-claude/thinking#configuring-thinking)
           # for each model's behavior.
           thinking: nil,
+          # Body param: Server-held conversation state (a Thread). `{"type": "create"}` asks
+          # the server to hold this conversation's state under the response's `id`;
+          # `{"type": "continue", "previous_message_id": ...}` resumes from a previous
+          # response so only the new turn's messages are sent. The response shape is
+          # unchanged.
+          thread: nil,
           # Body param: How the model should use the provided tools. The model can use a
           # specific tool, any available tool, decide by itself, or not use tools at all.
           tool_choice: nil,
@@ -767,6 +932,13 @@ module Anthropic
                 Anthropic::Beta::BetaThinkingConfigDisabled::OrHash,
                 Anthropic::Beta::BetaThinkingConfigBetweenTools::OrHash,
                 Anthropic::Beta::BetaThinkingConfigAdaptive::OrHash
+              ),
+            thread:
+              T.nilable(
+                T.any(
+                  Anthropic::Beta::BetaThreadCreateParams::OrHash,
+                  Anthropic::Beta::BetaThreadContinueParams::OrHash
+                )
               ),
             tool_choice:
               T.any(
@@ -1020,6 +1192,12 @@ module Anthropic
           # [thinking](https://platform.claude.com/docs/en/build-with-claude/thinking#configuring-thinking)
           # for each model's behavior.
           thinking: nil,
+          # Body param: Server-held conversation state (a Thread). `{"type": "create"}` asks
+          # the server to hold this conversation's state under the response's `id`;
+          # `{"type": "continue", "previous_message_id": ...}` resumes from a previous
+          # response so only the new turn's messages are sent. The response shape is
+          # unchanged.
+          thread: nil,
           # Body param: How the model should use the provided tools. The model can use a
           # specific tool, any available tool, decide by itself, or not use tools at all.
           tool_choice: nil,
@@ -1499,6 +1677,13 @@ module Anthropic
                 Anthropic::Beta::BetaThinkingConfigBetweenTools::OrHash,
                 Anthropic::Beta::BetaThinkingConfigAdaptive::OrHash
               ),
+            thread:
+              T.nilable(
+                T.any(
+                  Anthropic::Beta::BetaThreadCreateParams::OrHash,
+                  Anthropic::Beta::BetaThreadContinueParams::OrHash
+                )
+              ),
             tool_choice:
               T.any(
                 Anthropic::Beta::BetaToolChoiceAuto::OrHash,
@@ -1745,6 +1930,12 @@ module Anthropic
           # [thinking](https://platform.claude.com/docs/en/build-with-claude/thinking#configuring-thinking)
           # for each model's behavior.
           thinking: nil,
+          # Body param: Server-held conversation state (a Thread). `{"type": "create"}` asks
+          # the server to hold this conversation's state under the response's `id`;
+          # `{"type": "continue", "previous_message_id": ...}` resumes from a previous
+          # response so only the new turn's messages are sent. The response shape is
+          # unchanged.
+          thread: nil,
           # Body param: How the model should use the provided tools. The model can use a
           # specific tool, any available tool, decide by itself, or not use tools at all.
           tool_choice: nil,

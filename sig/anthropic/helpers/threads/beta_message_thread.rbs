@@ -1,0 +1,40 @@
+module Anthropic
+  module Helpers
+    module Threads
+      class BetaMessageThread
+        type unsupported_request_behavior = :error | :continue_unthreaded
+
+        type message =
+          Anthropic::Models::Beta::beta_message_param
+          | Anthropic::Beta::BetaMessage
+          | ::Hash[Symbol, top]
+
+        def messages: -> ::Array[::Hash[Symbol, top]]
+
+        def previous_message_id: -> String?
+
+        def params: -> ::Hash[Symbol, top]
+
+        def append: (*message messages) -> void
+
+        def update: (**top params) -> void
+
+        def fork: -> Anthropic::Helpers::Threads::BetaMessageThread
+
+        def tool_runner: (
+          ?max_iterations: Integer?
+        ) -> Anthropic::Helpers::Tools::Runner
+
+        def send_message: (
+          *message messages,
+          **top params
+        ) -> Anthropic::Beta::BetaMessage
+
+        def stream: (
+          *message messages,
+          **top params
+        ) -> Anthropic::Helpers::Streaming::MessageStream
+      end
+    end
+  end
+end

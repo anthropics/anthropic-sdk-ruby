@@ -611,6 +611,23 @@ module Anthropic
               end
               attr_writer :thinking
 
+              # Server-held conversation state (a Thread). `{"type": "create"}` asks the server
+              # to hold this conversation's state under the response's `id`;
+              # `{"type": "continue", "previous_message_id": ...}` resumes from a previous
+              # response so only the new turn's messages are sent. The response shape is
+              # unchanged.
+              sig do
+                returns(
+                  T.nilable(
+                    T.any(
+                      Anthropic::Beta::BetaThreadCreateParams,
+                      Anthropic::Beta::BetaThreadContinueParams
+                    )
+                  )
+                )
+              end
+              attr_accessor :thread
+
               # How the model should use the provided tools. The model can use a specific tool,
               # any available tool, decide by itself, or not use tools at all.
               sig do
@@ -872,6 +889,13 @@ module Anthropic
                       Anthropic::Beta::BetaThinkingConfigBetweenTools::OrHash,
                       Anthropic::Beta::BetaThinkingConfigAdaptive::OrHash
                     ),
+                  thread:
+                    T.nilable(
+                      T.any(
+                        Anthropic::Beta::BetaThreadCreateParams::OrHash,
+                        Anthropic::Beta::BetaThreadContinueParams::OrHash
+                      )
+                    ),
                   tool_choice:
                     T.any(
                       Anthropic::Beta::BetaToolChoiceAuto::OrHash,
@@ -1122,6 +1146,12 @@ module Anthropic
                 # [thinking](https://platform.claude.com/docs/en/build-with-claude/thinking#configuring-thinking)
                 # for each model's behavior.
                 thinking: nil,
+                # Server-held conversation state (a Thread). `{"type": "create"}` asks the server
+                # to hold this conversation's state under the response's `id`;
+                # `{"type": "continue", "previous_message_id": ...}` resumes from a previous
+                # response so only the new turn's messages are sent. The response shape is
+                # unchanged.
+                thread: nil,
                 # How the model should use the provided tools. The model can use a specific tool,
                 # any available tool, decide by itself, or not use tools at all.
                 tool_choice: nil,
@@ -1270,6 +1300,13 @@ module Anthropic
                         Anthropic::Beta::BetaThinkingConfigDisabled,
                         Anthropic::Beta::BetaThinkingConfigBetweenTools,
                         Anthropic::Beta::BetaThinkingConfigAdaptive
+                      ),
+                    thread:
+                      T.nilable(
+                        T.any(
+                          Anthropic::Beta::BetaThreadCreateParams,
+                          Anthropic::Beta::BetaThreadContinueParams
+                        )
                       ),
                     tool_choice:
                       T.any(

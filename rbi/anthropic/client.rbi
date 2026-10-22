@@ -60,6 +60,11 @@ module Anthropic
 
     # @api private
     sig { returns(T::Boolean) }
+    def message_threads?
+    end
+
+    # @api private
+    sig { returns(T::Boolean) }
     private def resolve_default_credentials?
     end
 

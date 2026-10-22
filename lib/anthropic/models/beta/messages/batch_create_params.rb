@@ -393,6 +393,16 @@ module Anthropic
               #   @return [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigBetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive, nil]
               optional :thinking, union: -> { Anthropic::Beta::BetaThinkingConfigParam }
 
+              # @!attribute thread
+              #   Server-held conversation state (a Thread). `{"type": "create"}` asks the server
+              #   to hold this conversation's state under the response's `id`;
+              #   `{"type": "continue", "previous_message_id": ...}` resumes from a previous
+              #   response so only the new turn's messages are sent. The response shape is
+              #   unchanged.
+              #
+              #   @return [Anthropic::Models::Beta::BetaThreadCreateParams, Anthropic::Models::Beta::BetaThreadContinueParams, nil]
+              optional :thread, union: -> { Anthropic::Beta::BetaMessageThreadParam }, nil?: true
+
               # @!attribute tool_choice
               #   How the model should use the provided tools. The model can use a specific tool,
               #   any available tool, decide by itself, or not use tools at all.
@@ -482,7 +492,7 @@ module Anthropic
               #   @return [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaCodeExecutionTool20250522, Anthropic::Models::Beta::BetaCodeExecutionTool20250825, Anthropic::Models::Beta::BetaCodeExecutionTool20260120, Anthropic::Models::Beta::BetaCodeExecutionTool20260521, Anthropic::Models::Beta::BetaBrowserToolset20260801, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaMemoryTool20250818, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20251124, Anthropic::Models::Beta::BetaComputerToolset20260801, Anthropic::Models::Beta::BetaToolTextEditor20250124, Anthropic::Models::Beta::BetaToolTextEditor20250429, Anthropic::Models::Beta::BetaToolTextEditor20250728, Anthropic::Models::Beta::BetaWebSearchTool20250305, Anthropic::Models::Beta::BetaWebFetchTool20250910, Anthropic::Models::Beta::BetaWebSearchTool20260209, Anthropic::Models::Beta::BetaWebFetchTool20260209, Anthropic::Models::Beta::BetaWebFetchTool20260309, Anthropic::Models::Beta::BetaWebSearchTool20260318, Anthropic::Models::Beta::BetaWebFetchTool20260318, Anthropic::Models::Beta::BetaAdvisorTool20260301, Anthropic::Models::Beta::BetaToolSearchToolBm25_20251119, Anthropic::Models::Beta::BetaToolSearchToolRegex20251119, Anthropic::Models::Beta::BetaMCPToolset>, nil]
               optional :tools, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaToolUnion] }
 
-              # @!method initialize(max_tokens:, messages:, model:, cache_control: nil, compaction: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, stream: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil)
+              # @!method initialize(max_tokens:, messages:, model:, cache_control: nil, compaction: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, stream: nil, system_: nil, thinking: nil, thread: nil, tool_choice: nil, tools: nil)
               #   Messages API creation parameters for the individual request.
               #
               #   See the
@@ -534,6 +544,8 @@ module Anthropic
               #   @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>] System prompt.
               #
               #   @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigBetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive] Configuration for Claude's thinking.
+              #
+              #   @param thread [Anthropic::Models::Beta::BetaThreadCreateParams, Anthropic::Models::Beta::BetaThreadContinueParams, nil] Server-held conversation state (a Thread). `{"type": "create"}` asks the server
               #
               #   @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
               #

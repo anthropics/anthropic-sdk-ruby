@@ -293,6 +293,16 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigBetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive, nil]
         optional :thinking, union: -> { Anthropic::Beta::BetaThinkingConfigParam }
 
+        # @!attribute thread
+        #   Server-held conversation state (a Thread). `{"type": "create"}` asks the server
+        #   to hold this conversation's state under the response's `id`;
+        #   `{"type": "continue", "previous_message_id": ...}` resumes from a previous
+        #   response so only the new turn's messages are sent. The response shape is
+        #   unchanged.
+        #
+        #   @return [Anthropic::Models::Beta::BetaThreadCreateParams, Anthropic::Models::Beta::BetaThreadContinueParams, nil]
+        optional :thread, union: -> { Anthropic::Beta::BetaMessageThreadParam }, nil?: true
+
         # @!attribute tool_choice
         #   How the model should use the provided tools. The model can use a specific tool,
         #   any available tool, decide by itself, or not use tools at all.
@@ -406,7 +416,7 @@ module Anthropic
         #   @return [String, nil]
         optional :workspace_id, String
 
-        # @!method initialize(max_tokens:, messages:, model:, cache_control: nil, compaction: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+        # @!method initialize(max_tokens:, messages:, model:, cache_control: nil, compaction: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, thinking: nil, thread: nil, tool_choice: nil, tools: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::MessageCreateParams} for more details.
         #
@@ -449,6 +459,8 @@ module Anthropic
         #   @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>] System prompt.
         #
         #   @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigBetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive] Configuration for Claude's thinking.
+        #
+        #   @param thread [Anthropic::Models::Beta::BetaThreadCreateParams, Anthropic::Models::Beta::BetaThreadContinueParams, nil] Server-held conversation state (a Thread). `{"type": "create"}` asks the server
         #
         #   @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
         #
