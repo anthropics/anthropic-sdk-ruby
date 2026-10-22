@@ -4,6 +4,7 @@
 
 ### Chores
 
+* **ci:** update the runner label for internal CI jobs
 * **docs:** clarify plugin served_version_pinned and updated_at
 
 ## [2.1.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v2.0.0...v2.1.0) (2026-10-21)
