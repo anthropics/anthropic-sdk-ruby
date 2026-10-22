@@ -135,8 +135,11 @@ module Anthropic
           required :served_version_id, String
 
           # @!attribute served_version_pinned
-          #   False while the served version follows each new version; true once it has been
-          #   pinned to one.
+          #   True once the served version has been pinned, through Update Plugin or in
+          #   claude.ai. While false, a new version normally becomes the served version when
+          #   it is stored. While the newest version is not the served version, as when a
+          #   version saved in claude.ai is waiting for its content scan, `served_version_id`
+          #   differs from `latest_version_id`.
           #
           #   @return [Boolean]
           required :served_version_pinned, Anthropic::Internal::Type::Boolean
@@ -148,8 +151,11 @@ module Anthropic
           required :type, const: :plugin
 
           # @!attribute updated_at
-          #   RFC 3339. Moves on a new version and on a served-version change; a change to the
-          #   Plugin's installation settings or shares does not move it.
+          #   RFC 3339. Moves on a served-version change (including pinning an unpinned Plugin
+          #   to the version it already serves) and, normally, on a new version. A version
+          #   saved in claude.ai that waits for its content scan moves it when it becomes the
+          #   served version, and not necessarily when it is stored. A change to the Plugin's
+          #   installation settings or shares does not move it.
           #
           #   @return [Time]
           required :updated_at, Time
@@ -190,9 +196,9 @@ module Anthropic
           #
           #   @param served_version_id [String] The version claude.ai serves to members.
           #
-          #   @param served_version_pinned [Boolean] False while the served version follows each new version; true once it has been p
+          #   @param served_version_pinned [Boolean] True once the served version has been pinned, through Update Plugin or in claude
           #
-          #   @param updated_at [Time] RFC 3339. Moves on a new version and on a served-version change; a change to the
+          #   @param updated_at [Time] RFC 3339. Moves on a served-version change (including pinning an unpinned Plugin
           #
           #   @param type [Symbol, :plugin] Always `plugin`.
 
