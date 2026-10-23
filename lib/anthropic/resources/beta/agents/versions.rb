@@ -32,6 +32,7 @@ module Anthropic
             parsed, options = Anthropic::Beta::Agents::VersionListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::AGENTS_VERSIONS_LIST,
               span_attributes: {"gen_ai.agent.id" => agent_id},
               span_route: "/v1/agents/{agent_id}/versions",

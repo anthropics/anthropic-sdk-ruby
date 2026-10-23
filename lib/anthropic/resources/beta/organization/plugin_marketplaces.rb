@@ -40,6 +40,7 @@ module Anthropic
             parsed, options = Anthropic::Beta::Organization::PluginMarketplaceRetrieveParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_PLUGIN_MARKETPLACES_RETRIEVE,
               span_attributes: {"anthropic.organization.plugin_marketplace.id" => marketplace_id},
               span_route: "/v1/organizations/plugin_marketplaces/{marketplace_id}",
@@ -90,6 +91,7 @@ module Anthropic
             parsed, options = Anthropic::Beta::Organization::PluginMarketplaceUpdateParams.dump_request(params)
             header_params = {betas: "anthropic-beta"}
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_PLUGIN_MARKETPLACES_UPDATE,
               span_attributes: {"anthropic.organization.plugin_marketplace.id" => marketplace_id},
               span_route: "/v1/organizations/plugin_marketplaces/{marketplace_id}",
@@ -150,6 +152,7 @@ module Anthropic
             parsed, options = Anthropic::Beta::Organization::PluginMarketplaceListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_PLUGIN_MARKETPLACES_LIST,
               span_route: "/v1/organizations/plugin_marketplaces",
               span_query: %w[limit organization_id owner_type page source],
@@ -215,6 +218,7 @@ module Anthropic
               Anthropic::Beta::Organization::PluginMarketplaceValidateArchiveParams.dump_request(params)
             header_params = {betas: "anthropic-beta"}
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_PLUGIN_MARKETPLACES_VALIDATE_ARCHIVE,
               span_route: "/v1/organizations/plugin_marketplaces/validate_archive",
               method: :post,
@@ -285,6 +289,7 @@ module Anthropic
               Anthropic::Beta::Organization::PluginMarketplaceValidateRepositoryParams.dump_request(params)
             header_params = {betas: "anthropic-beta"}
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_PLUGIN_MARKETPLACES_VALIDATE_REPOSITORY,
               span_route: "/v1/organizations/plugin_marketplaces/validate_repository",
               method: :post,

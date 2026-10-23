@@ -44,6 +44,7 @@ module Anthropic
           parsed, options = Anthropic::Beta::DeploymentCreateParams.dump_request(params)
           header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::DEPLOYMENTS_CREATE,
             span_created_id: "anthropic.deployment.id",
             span_route: "/v1/deployments",
@@ -77,6 +78,7 @@ module Anthropic
         def retrieve(deployment_id, params = {})
           parsed, options = Anthropic::Beta::DeploymentRetrieveParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::DEPLOYMENTS_RETRIEVE,
             span_attributes: {"anthropic.deployment.id" => deployment_id},
             span_route: "/v1/deployments/{deployment_id}",
@@ -130,6 +132,7 @@ module Anthropic
           parsed, options = Anthropic::Beta::DeploymentUpdateParams.dump_request(params)
           header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::DEPLOYMENTS_UPDATE,
             span_attributes: {"anthropic.deployment.id" => deployment_id},
             span_route: "/v1/deployments/{deployment_id}",
@@ -185,6 +188,7 @@ module Anthropic
           parsed, options = Anthropic::Beta::DeploymentListParams.dump_request(params)
           query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::DEPLOYMENTS_LIST,
             span_route: "/v1/deployments",
             span_query: %w[agent_id created_at[gte] created_at[lte] include_archived limit page status],
@@ -222,6 +226,7 @@ module Anthropic
         def archive(deployment_id, params = {})
           parsed, options = Anthropic::Beta::DeploymentArchiveParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::DEPLOYMENTS_ARCHIVE,
             span_attributes: {"anthropic.deployment.id" => deployment_id},
             span_route: "/v1/deployments/{deployment_id}/archive",
@@ -254,6 +259,7 @@ module Anthropic
         def pause(deployment_id, params = {})
           parsed, options = Anthropic::Beta::DeploymentPauseParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::DEPLOYMENTS_PAUSE,
             span_attributes: {"anthropic.deployment.id" => deployment_id},
             span_route: "/v1/deployments/{deployment_id}/pause",
@@ -286,6 +292,7 @@ module Anthropic
         def run(deployment_id, params = {})
           parsed, options = Anthropic::Beta::DeploymentRunParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::DEPLOYMENTS_RUN,
             span_attributes: {"anthropic.deployment.id" => deployment_id},
             span_route: "/v1/deployments/{deployment_id}/run",
@@ -318,6 +325,7 @@ module Anthropic
         def unpause(deployment_id, params = {})
           parsed, options = Anthropic::Beta::DeploymentUnpauseParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::DEPLOYMENTS_UNPAUSE,
             span_attributes: {"anthropic.deployment.id" => deployment_id},
             span_route: "/v1/deployments/{deployment_id}/unpause",

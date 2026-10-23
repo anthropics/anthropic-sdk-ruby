@@ -35,6 +35,7 @@ module Anthropic
                 raise ArgumentError.new("missing required path argument #{_1}")
               end
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_THREADS_RETRIEVE,
               span_attributes: {
                 "anthropic.session.id" => session_id,
@@ -78,6 +79,7 @@ module Anthropic
             parsed, options = Anthropic::Beta::Sessions::ThreadListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_THREADS_LIST,
               span_attributes: {"anthropic.session.id" => session_id},
               span_route: "/v1/sessions/{session_id}/threads",
@@ -122,6 +124,7 @@ module Anthropic
                 raise ArgumentError.new("missing required path argument #{_1}")
               end
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_THREADS_ARCHIVE,
               span_attributes: {
                 "anthropic.session.id" => session_id,

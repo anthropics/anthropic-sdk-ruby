@@ -169,6 +169,7 @@ module Anthropic
               workspace_id: "anthropic-workspace-id"
             }
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::MESSAGES_CREATE,
             span_route: "/v1/messages",
             method: :post,
@@ -273,6 +274,7 @@ module Anthropic
               workspace_id: "anthropic-workspace-id"
             }
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::MESSAGES_CREATE,
             span_route: "/v1/messages",
             method: :post,
@@ -350,6 +352,7 @@ module Anthropic
               workspace_id: "anthropic-workspace-id"
             }
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::MESSAGES_COUNT_TOKENS,
             span_route: "/v1/messages/count_tokens",
             method: :post,

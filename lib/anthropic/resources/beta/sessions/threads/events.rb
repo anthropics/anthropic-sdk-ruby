@@ -39,6 +39,7 @@ module Anthropic
                   raise ArgumentError.new("missing required path argument #{_1}")
                 end
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_THREADS_EVENTS_LIST,
                 span_attributes: {
                   "anthropic.session.id" => session_id,
@@ -91,6 +92,7 @@ module Anthropic
                   raise ArgumentError.new("missing required path argument #{_1}")
                 end
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_THREADS_EVENTS_STREAM,
                 span_attributes: {
                   "anthropic.session.id" => session_id,

@@ -35,6 +35,7 @@ module Anthropic
             parsed, options = Anthropic::Beta::MemoryStores::MemoryCreateParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::MEMORY_STORES_MEMORIES_CREATE,
               span_attributes: {"gen_ai.memory.store.id" => memory_store_id},
               span_created_id: "gen_ai.memory.record.id",
@@ -81,6 +82,7 @@ module Anthropic
                 raise ArgumentError.new("missing required path argument #{_1}")
               end
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::MEMORY_STORES_MEMORIES_RETRIEVE,
               span_attributes: {
                 "gen_ai.memory.store.id" => memory_store_id,
@@ -138,6 +140,7 @@ module Anthropic
                 raise ArgumentError.new("missing required path argument #{_1}")
               end
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::MEMORY_STORES_MEMORIES_UPDATE,
               span_attributes: {
                 "gen_ai.memory.store.id" => memory_store_id,
@@ -188,6 +191,7 @@ module Anthropic
             parsed, options = Anthropic::Beta::MemoryStores::MemoryListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::MEMORY_STORES_MEMORIES_LIST,
               span_attributes: {"gen_ai.memory.store.id" => memory_store_id},
               span_route: "/v1/memory_stores/{memory_store_id}/memories",
@@ -237,6 +241,7 @@ module Anthropic
                 raise ArgumentError.new("missing required path argument #{_1}")
               end
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::MEMORY_STORES_MEMORIES_DELETE,
               span_attributes: {
                 "gen_ai.memory.store.id" => memory_store_id,

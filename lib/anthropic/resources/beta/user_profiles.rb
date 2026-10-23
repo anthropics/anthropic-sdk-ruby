@@ -39,6 +39,7 @@ module Anthropic
           parsed, options = Anthropic::Beta::UserProfileCreateParams.dump_request(params)
           header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::USER_PROFILES_CREATE,
             span_created_id: "anthropic.user_profile.id",
             span_route: "/v1/user_profiles",
@@ -72,6 +73,7 @@ module Anthropic
         def retrieve(user_profile_id, params = {})
           parsed, options = Anthropic::Beta::UserProfileRetrieveParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::USER_PROFILES_RETRIEVE,
             span_attributes: {"anthropic.user_profile.id" => user_profile_id},
             span_route: "/v1/user_profiles/{user_profile_id}",
@@ -117,6 +119,7 @@ module Anthropic
           parsed, options = Anthropic::Beta::UserProfileUpdateParams.dump_request(params)
           header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::USER_PROFILES_UPDATE,
             span_attributes: {"anthropic.user_profile.id" => user_profile_id},
             span_route: "/v1/user_profiles/{user_profile_id}",
@@ -158,6 +161,7 @@ module Anthropic
           parsed, options = Anthropic::Beta::UserProfileListParams.dump_request(params)
           query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::USER_PROFILES_LIST,
             span_route: "/v1/user_profiles",
             span_query: %w[limit order order_by page],
@@ -195,6 +199,7 @@ module Anthropic
         def delete(user_profile_id, params = {})
           parsed, options = Anthropic::Beta::UserProfileDeleteParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::USER_PROFILES_DELETE,
             span_attributes: {"anthropic.user_profile.id" => user_profile_id},
             span_route: "/v1/user_profiles/{user_profile_id}",
@@ -228,6 +233,7 @@ module Anthropic
         def create_enrollment_url(user_profile_id, params = {})
           parsed, options = Anthropic::Beta::UserProfileCreateEnrollmentURLParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::USER_PROFILES_CREATE_ENROLLMENT_URL,
             span_attributes: {"anthropic.user_profile.id" => user_profile_id},
             span_route: "/v1/user_profiles/{user_profile_id}/enrollment_url",

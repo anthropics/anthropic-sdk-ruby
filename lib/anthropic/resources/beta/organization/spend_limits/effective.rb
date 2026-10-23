@@ -36,6 +36,7 @@ module Anthropic
               parsed, options = Anthropic::Beta::Organization::SpendLimits::EffectiveListParams.dump_request(params)
               query = Anthropic::Internal::Util.encode_query_params(parsed)
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SPEND_LIMITS_EFFECTIVE_LIST,
                 span_route: "/v1/organizations/spend_limits/effective",
                 span_query: %w[limit page period user_ids],

@@ -36,6 +36,7 @@ module Anthropic
             parsed, options = Anthropic::Beta::Organization::RateLimitListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed)
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_RATE_LIMITS_LIST,
               span_route: "/v1/organizations/rate_limits",
               span_query: %w[group_type limit model page],

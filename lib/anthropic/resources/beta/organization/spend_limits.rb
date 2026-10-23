@@ -24,6 +24,7 @@ module Anthropic
           # @see Anthropic::Models::Beta::Organization::SpendLimitRetrieveParams
           def retrieve(spend_limit_id, params = {})
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SPEND_LIMITS_RETRIEVE,
               span_attributes: {"anthropic.organization.spend_limit.id" => spend_limit_id},
               span_route: "/v1/organizations/spend_limits/{spend_limit_id}",
@@ -68,6 +69,7 @@ module Anthropic
             parsed, options = Anthropic::Beta::Organization::SpendLimitListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SPEND_LIMITS_LIST,
               span_route: "/v1/organizations/spend_limits",
               span_query: %w[limit page scope_type workspace_id],
@@ -101,6 +103,7 @@ module Anthropic
           # @see Anthropic::Models::Beta::Organization::SpendLimitDeleteParams
           def delete(spend_limit_id, params = {})
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SPEND_LIMITS_DELETE,
               span_attributes: {"anthropic.organization.spend_limit.id" => spend_limit_id},
               span_route: "/v1/organizations/spend_limits/{spend_limit_id}",
@@ -142,6 +145,7 @@ module Anthropic
             parsed, options = Anthropic::Beta::Organization::SpendLimitSetParams.dump_request(params)
             header_params = {betas: "anthropic-beta"}
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SPEND_LIMITS_SET,
               span_created_id: "anthropic.organization.spend_limit.id",
               span_route: "/v1/organizations/spend_limits",

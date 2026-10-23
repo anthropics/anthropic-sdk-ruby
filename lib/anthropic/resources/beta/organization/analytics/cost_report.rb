@@ -67,6 +67,7 @@ module Anthropic
               parsed, options = Anthropic::Beta::Organization::Analytics::CostReportListParams.dump_request(params)
               query = Anthropic::Internal::Util.encode_query_params(parsed)
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_ANALYTICS_COST_REPORT_LIST,
                 span_route: "/v1/organizations/analytics/cost_report",
                 span_query: %w[

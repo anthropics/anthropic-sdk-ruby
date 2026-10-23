@@ -41,6 +41,7 @@ module Anthropic
                   Anthropic::Beta::Organization::Federation::Rules::WorkspaceListParams.dump_request(params)
                 query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
                 @client.request(
+                  qualifiers: {beta: "true"},
                   span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_FEDERATION_RULES_WORKSPACES_LIST,
                   span_attributes: {"anthropic.organization.federation_rule.id" => federation_rule_id},
                   span_route: "/v1/organizations/federation_rules/{federation_rule_id}/workspaces",
@@ -88,6 +89,7 @@ module Anthropic
                   Anthropic::Beta::Organization::Federation::Rules::WorkspaceAddParams.dump_request(params)
                 header_params = {betas: "anthropic-beta"}
                 @client.request(
+                  qualifiers: {beta: "true"},
                   span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_FEDERATION_RULES_WORKSPACES_ADD,
                   span_attributes: {"anthropic.organization.federation_rule.id" => federation_rule_id},
                   span_created_id: {"anthropic.organization.federation_rule.workspace.id" => :workspace_id},
@@ -133,6 +135,7 @@ module Anthropic
                     raise ArgumentError.new("missing required path argument #{_1}")
                   end
                 @client.request(
+                  qualifiers: {beta: "true"},
                   span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_FEDERATION_RULES_WORKSPACES_REMOVE,
                   span_attributes: {
                     "anthropic.organization.federation_rule.id" => federation_rule_id,

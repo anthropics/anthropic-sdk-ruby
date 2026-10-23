@@ -25,6 +25,7 @@ module Anthropic
           def create(params)
             parsed, options = Anthropic::Beta::Organization::RBACGroupCreateParams.dump_request(params)
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_RBAC_GROUPS_CREATE,
               span_created_id: "anthropic.organization.rbac_group.id",
               span_route: "/v1/organizations/rbac_groups",
@@ -51,6 +52,7 @@ module Anthropic
           # @see Anthropic::Models::Beta::Organization::RBACGroupRetrieveParams
           def retrieve(rbac_group_id, params = {})
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_RBAC_GROUPS_RETRIEVE,
               span_attributes: {"anthropic.organization.rbac_group.id" => rbac_group_id},
               span_route: "/v1/organizations/rbac_groups/{rbac_group_id}",
@@ -81,6 +83,7 @@ module Anthropic
           def update(rbac_group_id, params = {})
             parsed, options = Anthropic::Beta::Organization::RBACGroupUpdateParams.dump_request(params)
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_RBAC_GROUPS_UPDATE,
               span_attributes: {"anthropic.organization.rbac_group.id" => rbac_group_id},
               span_route: "/v1/organizations/rbac_groups/{rbac_group_id}",
@@ -114,6 +117,7 @@ module Anthropic
             parsed, options = Anthropic::Beta::Organization::RBACGroupListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed)
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_RBAC_GROUPS_LIST,
               span_route: "/v1/organizations/rbac_groups",
               span_query: %w[limit page],
@@ -143,6 +147,7 @@ module Anthropic
           # @see Anthropic::Models::Beta::Organization::RBACGroupDeleteParams
           def delete(rbac_group_id, params = {})
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_RBAC_GROUPS_DELETE,
               span_attributes: {"anthropic.organization.rbac_group.id" => rbac_group_id},
               span_route: "/v1/organizations/rbac_groups/{rbac_group_id}",

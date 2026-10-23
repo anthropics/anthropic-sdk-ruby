@@ -627,6 +627,26 @@ class AnthropicTest < Minitest::Test
     end
   end
 
+  def test_every_attempt_has_the_qualifiers
+    stub_request(:get, /./).to_return_json(status: 500, body: {})
+    client = Anthropic::Client.new(
+      base_url: "http://localhost",
+      api_key: "my-anthropic-api-key",
+      max_retries: 1
+    )
+    seen = []
+    client.define_singleton_method(:send_request) do |request, **options|
+      seen << request.fetch(:qualifiers)
+      super(request, **options)
+    end
+
+    assert_raises(Anthropic::Errors::InternalServerError) do
+      client.request(method: :get, path: "cards", qualifiers: {variant: "b"})
+    end
+
+    assert_equal([{variant: "b"}] * 2, seen)
+  end
+
   def test_default_headers
     stub_request(:post, "http://localhost/v1/messages").to_return_json(status: 200, body: {})
 

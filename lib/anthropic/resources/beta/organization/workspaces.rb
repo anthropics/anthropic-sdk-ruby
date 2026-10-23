@@ -42,6 +42,7 @@ module Anthropic
             parsed, options = Anthropic::Beta::Organization::WorkspaceCreateParams.dump_request(params)
             header_params = {betas: "anthropic-beta"}
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_WORKSPACES_CREATE,
               span_created_id: "anthropic.organization.workspace.id",
               span_route: "/v1/organizations/workspaces",
@@ -67,6 +68,7 @@ module Anthropic
           # @see Anthropic::Models::Beta::Organization::WorkspaceRetrieveParams
           def retrieve(workspace_id, params = {})
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_WORKSPACES_RETRIEVE,
               span_attributes: {"anthropic.organization.workspace.id" => workspace_id},
               span_route: "/v1/organizations/workspaces/{workspace_id}",
@@ -104,6 +106,7 @@ module Anthropic
           def update(workspace_id, params = {})
             parsed, options = Anthropic::Beta::Organization::WorkspaceUpdateParams.dump_request(params)
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_WORKSPACES_UPDATE,
               span_attributes: {"anthropic.organization.workspace.id" => workspace_id},
               span_route: "/v1/organizations/workspaces/{workspace_id}",
@@ -141,6 +144,7 @@ module Anthropic
             parsed, options = Anthropic::Beta::Organization::WorkspaceListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed)
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_WORKSPACES_LIST,
               span_route: "/v1/organizations/workspaces",
               span_query: %w[after_id before_id include_archived include_default limit],
@@ -165,6 +169,7 @@ module Anthropic
           # @see Anthropic::Models::Beta::Organization::WorkspaceArchiveParams
           def archive(workspace_id, params = {})
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_WORKSPACES_ARCHIVE,
               span_attributes: {"anthropic.organization.workspace.id" => workspace_id},
               span_route: "/v1/organizations/workspaces/{workspace_id}/archive",

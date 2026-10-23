@@ -37,6 +37,7 @@ module Anthropic
                 raise ArgumentError.new("missing required path argument #{_1}")
               end
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::MEMORY_STORES_MEMORY_VERSIONS_RETRIEVE,
               span_attributes: {
                 "gen_ai.memory.store.id" => memory_store_id,
@@ -117,6 +118,7 @@ module Anthropic
             parsed, options = Anthropic::Beta::MemoryStores::MemoryVersionListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::MEMORY_STORES_MEMORY_VERSIONS_LIST,
               span_attributes: {"gen_ai.memory.store.id" => memory_store_id},
               span_route: "/v1/memory_stores/{memory_store_id}/memory_versions",
@@ -176,6 +178,7 @@ module Anthropic
                 raise ArgumentError.new("missing required path argument #{_1}")
               end
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::MEMORY_STORES_MEMORY_VERSIONS_REDACT,
               span_attributes: {
                 "gen_ai.memory.store.id" => memory_store_id,

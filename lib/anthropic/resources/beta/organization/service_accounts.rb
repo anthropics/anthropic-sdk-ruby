@@ -45,6 +45,7 @@ module Anthropic
             parsed, options = Anthropic::Beta::Organization::ServiceAccountCreateParams.dump_request(params)
             header_params = {betas: "anthropic-beta"}
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SERVICE_ACCOUNTS_CREATE,
               span_created_id: "anthropic.organization.service_account.id",
               span_route: "/v1/organizations/service_accounts",
@@ -78,6 +79,7 @@ module Anthropic
           def retrieve(service_account_id, params = {})
             parsed, options = Anthropic::Beta::Organization::ServiceAccountRetrieveParams.dump_request(params)
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SERVICE_ACCOUNTS_RETRIEVE,
               span_attributes: {"anthropic.organization.service_account.id" => service_account_id},
               span_route: "/v1/organizations/service_accounts/{service_account_id}",
@@ -124,6 +126,7 @@ module Anthropic
             parsed, options = Anthropic::Beta::Organization::ServiceAccountUpdateParams.dump_request(params)
             header_params = {betas: "anthropic-beta"}
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SERVICE_ACCOUNTS_UPDATE,
               span_attributes: {"anthropic.organization.service_account.id" => service_account_id},
               span_route: "/v1/organizations/service_accounts/{service_account_id}",
@@ -167,6 +170,7 @@ module Anthropic
             parsed, options = Anthropic::Beta::Organization::ServiceAccountListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SERVICE_ACCOUNTS_LIST,
               span_route: "/v1/organizations/service_accounts",
               span_query: %w[include_archived limit page],
@@ -206,6 +210,7 @@ module Anthropic
           def archive(service_account_id, params = {})
             parsed, options = Anthropic::Beta::Organization::ServiceAccountArchiveParams.dump_request(params)
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SERVICE_ACCOUNTS_ARCHIVE,
               span_attributes: {"anthropic.organization.service_account.id" => service_account_id},
               span_route: "/v1/organizations/service_accounts/{service_account_id}/archive",

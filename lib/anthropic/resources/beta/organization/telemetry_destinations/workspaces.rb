@@ -40,6 +40,7 @@ module Anthropic
                 Anthropic::Beta::Organization::TelemetryDestinations::WorkspaceListParams.dump_request(params)
               query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_TELEMETRY_DESTINATIONS_WORKSPACES_LIST,
                 span_attributes: {"anthropic.organization.telemetry_destination.id" => destination_id},
                 span_route: "/v1/organizations/telemetry_destinations/{destination_id}/workspaces",
@@ -94,6 +95,7 @@ module Anthropic
                   raise ArgumentError.new("missing required path argument #{_1}")
                 end
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_TELEMETRY_DESTINATIONS_WORKSPACES_ADD,
                 span_attributes: {
                   "anthropic.organization.telemetry_destination.id" => destination_id,
@@ -149,6 +151,7 @@ module Anthropic
                   raise ArgumentError.new("missing required path argument #{_1}")
                 end
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_TELEMETRY_DESTINATIONS_WORKSPACES_REMOVE,
                 span_attributes: {
                   "anthropic.organization.telemetry_destination.id" => destination_id,

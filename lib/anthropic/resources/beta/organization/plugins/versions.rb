@@ -60,6 +60,7 @@ module Anthropic
               parsed, options = Anthropic::Beta::Organization::Plugins::VersionCreateParams.dump_request(params)
               header_params = {betas: "anthropic-beta"}
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_PLUGINS_VERSIONS_CREATE,
                 span_attributes: {"anthropic.organization.plugin.id" => plugin_id},
                 span_created_id: "anthropic.organization.plugin.version.id",
@@ -119,6 +120,7 @@ module Anthropic
                   raise ArgumentError.new("missing required path argument #{_1}")
                 end
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_PLUGINS_VERSIONS_RETRIEVE,
                 span_attributes: {
                   "anthropic.organization.plugin.id" => plugin_id,
@@ -177,6 +179,7 @@ module Anthropic
               parsed, options = Anthropic::Beta::Organization::Plugins::VersionListParams.dump_request(params)
               query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_PLUGINS_VERSIONS_LIST,
                 span_attributes: {"anthropic.organization.plugin.id" => plugin_id},
                 span_route: "/v1/organizations/plugins/{plugin_id}/versions",
@@ -248,6 +251,7 @@ module Anthropic
                   raise ArgumentError.new("missing required path argument #{_1}")
                 end
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_PLUGINS_VERSIONS_DOWNLOAD,
                 span_attributes: {
                   "anthropic.organization.plugin.id" => plugin_id,

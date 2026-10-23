@@ -76,6 +76,7 @@ module Anthropic
                 Anthropic::Beta::Organization::Analytics::UserUsageReportListParams.dump_request(params)
               query = Anthropic::Internal::Util.encode_query_params(parsed)
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_ANALYTICS_USER_USAGE_REPORT_LIST,
                 span_route: "/v1/organizations/analytics/user_usage_report",
                 span_query: %w[

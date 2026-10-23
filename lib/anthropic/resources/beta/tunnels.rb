@@ -36,6 +36,7 @@ module Anthropic
           parsed, options = Anthropic::Beta::TunnelCreateParams.dump_request(params)
           header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::TUNNELS_CREATE,
             span_created_id: "anthropic.tunnel.id",
             span_route: "/v1/tunnels",
@@ -74,6 +75,7 @@ module Anthropic
         def retrieve(tunnel_id, params = {})
           parsed, options = Anthropic::Beta::TunnelRetrieveParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::TUNNELS_RETRIEVE,
             span_attributes: {"anthropic.tunnel.id" => tunnel_id},
             span_route: "/v1/tunnels/{tunnel_id}",
@@ -118,6 +120,7 @@ module Anthropic
           parsed, options = Anthropic::Beta::TunnelListParams.dump_request(params)
           query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::TUNNELS_LIST,
             span_route: "/v1/tunnels",
             span_query: %w[include_archived limit page],
@@ -163,6 +166,7 @@ module Anthropic
         def archive(tunnel_id, params = {})
           parsed, options = Anthropic::Beta::TunnelArchiveParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::TUNNELS_ARCHIVE,
             span_attributes: {"anthropic.tunnel.id" => tunnel_id},
             span_route: "/v1/tunnels/{tunnel_id}/archive",
@@ -203,6 +207,7 @@ module Anthropic
         def reveal_token(tunnel_id, params = {})
           parsed, options = Anthropic::Beta::TunnelRevealTokenParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::TUNNELS_REVEAL_TOKEN,
             span_attributes: {"anthropic.tunnel.id" => tunnel_id},
             span_route: "/v1/tunnels/{tunnel_id}/reveal_token",
@@ -245,6 +250,7 @@ module Anthropic
           parsed, options = Anthropic::Beta::TunnelRotateTokenParams.dump_request(params)
           header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::TUNNELS_ROTATE_TOKEN,
             span_attributes: {"anthropic.tunnel.id" => tunnel_id},
             span_route: "/v1/tunnels/{tunnel_id}/rotate_token",

@@ -49,6 +49,7 @@ module Anthropic
           parsed, options = Anthropic::Beta::SessionCreateParams.dump_request(params)
           header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_CREATE,
             span_created_id: "anthropic.session.id",
             span_route: "/v1/sessions",
@@ -82,6 +83,7 @@ module Anthropic
         def retrieve(session_id, params = {})
           parsed, options = Anthropic::Beta::SessionRetrieveParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_RETRIEVE,
             span_attributes: {"anthropic.session.id" => session_id},
             span_route: "/v1/sessions/{session_id}",
@@ -125,6 +127,7 @@ module Anthropic
           parsed, options = Anthropic::Beta::SessionUpdateParams.dump_request(params)
           header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_UPDATE,
             span_attributes: {"anthropic.session.id" => session_id},
             span_route: "/v1/sessions/{session_id}",
@@ -199,6 +202,7 @@ module Anthropic
           parsed, options = Anthropic::Beta::SessionListParams.dump_request(params)
           query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_LIST,
             span_route: "/v1/sessions",
             span_query: %w[
@@ -255,6 +259,7 @@ module Anthropic
         def delete(session_id, params = {})
           parsed, options = Anthropic::Beta::SessionDeleteParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_DELETE,
             span_attributes: {"anthropic.session.id" => session_id},
             span_route: "/v1/sessions/{session_id}",
@@ -287,6 +292,7 @@ module Anthropic
         def archive(session_id, params = {})
           parsed, options = Anthropic::Beta::SessionArchiveParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_ARCHIVE,
             span_attributes: {"anthropic.session.id" => session_id},
             span_route: "/v1/sessions/{session_id}/archive",

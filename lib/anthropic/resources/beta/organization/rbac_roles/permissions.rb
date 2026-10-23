@@ -31,6 +31,7 @@ module Anthropic
               parsed, options = Anthropic::Beta::Organization::RBACRoles::PermissionListParams.dump_request(params)
               query = Anthropic::Internal::Util.encode_query_params(parsed)
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_RBAC_ROLES_PERMISSIONS_LIST,
                 span_attributes: {"anthropic.organization.rbac_role.id" => rbac_role_id},
                 span_route: "/v1/organizations/rbac_roles/{rbac_role_id}/permissions",

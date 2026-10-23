@@ -26,6 +26,7 @@ module Anthropic
                   raise ArgumentError.new("missing required path argument #{_1}")
                 end
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_WORKSPACES_MEMBERS_RETRIEVE,
                 span_attributes: {
                   "anthropic.organization.workspace.id" => workspace_id,
@@ -61,6 +62,7 @@ module Anthropic
                   raise ArgumentError.new("missing required path argument #{_1}")
                 end
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_WORKSPACES_MEMBERS_UPDATE,
                 span_attributes: {
                   "anthropic.organization.workspace.id" => workspace_id,
@@ -100,6 +102,7 @@ module Anthropic
               parsed, options = Anthropic::Beta::Organization::Workspaces::MemberListParams.dump_request(params)
               query = Anthropic::Internal::Util.encode_query_params(parsed)
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_WORKSPACES_MEMBERS_LIST,
                 span_attributes: {"anthropic.organization.workspace.id" => workspace_id},
                 span_route: "/v1/organizations/workspaces/{workspace_id}/members",
@@ -131,6 +134,7 @@ module Anthropic
             def add(workspace_id, params)
               parsed, options = Anthropic::Beta::Organization::Workspaces::MemberAddParams.dump_request(params)
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_WORKSPACES_MEMBERS_ADD,
                 span_attributes: {"anthropic.organization.workspace.id" => workspace_id},
                 span_created_id: {"anthropic.organization.workspace.member.id" => :user_id},
@@ -163,6 +167,7 @@ module Anthropic
                   raise ArgumentError.new("missing required path argument #{_1}")
                 end
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_WORKSPACES_MEMBERS_REMOVE,
                 span_attributes: {
                   "anthropic.organization.workspace.id" => workspace_id,

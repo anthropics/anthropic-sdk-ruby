@@ -37,6 +37,7 @@ module Anthropic
                 raise ArgumentError.new("missing required path argument #{_1}")
               end
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ENVIRONMENTS_WORK_RETRIEVE,
               span_attributes: {
                 "anthropic.environment.id" => environment_id,
@@ -86,6 +87,7 @@ module Anthropic
               end
             header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ENVIRONMENTS_WORK_UPDATE,
               span_attributes: {
                 "anthropic.environment.id" => environment_id,
@@ -128,6 +130,7 @@ module Anthropic
             parsed, options = Anthropic::Beta::Environments::WorkListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ENVIRONMENTS_WORK_LIST,
               span_attributes: {"anthropic.environment.id" => environment_id},
               span_route: "/v1/environments/{environment_id}/work",
@@ -170,6 +173,7 @@ module Anthropic
                 raise ArgumentError.new("missing required path argument #{_1}")
               end
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ENVIRONMENTS_WORK_ACK,
               span_attributes: {
                 "anthropic.environment.id" => environment_id,
@@ -220,6 +224,7 @@ module Anthropic
                 raise ArgumentError.new("missing required path argument #{_1}")
               end
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ENVIRONMENTS_WORK_HEARTBEAT,
               span_attributes: {
                 "anthropic.environment.id" => environment_id,
@@ -268,6 +273,7 @@ module Anthropic
             parsed, options = Anthropic::Beta::Environments::WorkPollParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ENVIRONMENTS_WORK_POLL,
               span_attributes: {"anthropic.environment.id" => environment_id},
               span_route: "/v1/environments/{environment_id}/work/poll",
@@ -305,6 +311,7 @@ module Anthropic
           def stats(environment_id, params = {})
             parsed, options = Anthropic::Beta::Environments::WorkStatsParams.dump_request(params)
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ENVIRONMENTS_WORK_STATS,
               span_attributes: {"anthropic.environment.id" => environment_id},
               span_route: "/v1/environments/{environment_id}/work/stats",
@@ -351,6 +358,7 @@ module Anthropic
               end
             header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ENVIRONMENTS_WORK_STOP,
               span_attributes: {
                 "anthropic.environment.id" => environment_id,

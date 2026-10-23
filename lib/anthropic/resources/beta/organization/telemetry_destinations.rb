@@ -44,6 +44,7 @@ module Anthropic
             parsed, options = Anthropic::Beta::Organization::TelemetryDestinationCreateParams.dump_request(params)
             header_params = {betas: "anthropic-beta"}
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_TELEMETRY_DESTINATIONS_CREATE,
               span_created_id: "anthropic.organization.telemetry_destination.id",
               span_route: "/v1/organizations/telemetry_destinations",
@@ -80,6 +81,7 @@ module Anthropic
           def retrieve(destination_id, params = {})
             parsed, options = Anthropic::Beta::Organization::TelemetryDestinationRetrieveParams.dump_request(params)
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_TELEMETRY_DESTINATIONS_RETRIEVE,
               span_attributes: {"anthropic.organization.telemetry_destination.id" => destination_id},
               span_route: "/v1/organizations/telemetry_destinations/{destination_id}",
@@ -138,6 +140,7 @@ module Anthropic
             parsed, options = Anthropic::Beta::Organization::TelemetryDestinationUpdateParams.dump_request(params)
             header_params = {betas: "anthropic-beta"}
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_TELEMETRY_DESTINATIONS_UPDATE,
               span_attributes: {"anthropic.organization.telemetry_destination.id" => destination_id},
               span_route: "/v1/organizations/telemetry_destinations/{destination_id}",
@@ -181,6 +184,7 @@ module Anthropic
             parsed, options = Anthropic::Beta::Organization::TelemetryDestinationListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_TELEMETRY_DESTINATIONS_LIST,
               span_route: "/v1/organizations/telemetry_destinations",
               span_query: %w[limit page workspace_ids],
@@ -222,6 +226,7 @@ module Anthropic
           def delete(destination_id, params = {})
             parsed, options = Anthropic::Beta::Organization::TelemetryDestinationDeleteParams.dump_request(params)
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_TELEMETRY_DESTINATIONS_DELETE,
               span_attributes: {"anthropic.organization.telemetry_destination.id" => destination_id},
               span_route: "/v1/organizations/telemetry_destinations/{destination_id}",
@@ -260,6 +265,7 @@ module Anthropic
           def test_(destination_id, params = {})
             parsed, options = Anthropic::Beta::Organization::TelemetryDestinationTestParams.dump_request(params)
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_TELEMETRY_DESTINATIONS_TEST,
               span_attributes: {"anthropic.organization.telemetry_destination.id" => destination_id},
               span_route: "/v1/organizations/telemetry_destinations/{destination_id}/test",

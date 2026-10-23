@@ -29,6 +29,7 @@ module Anthropic
             parsed, options = Anthropic::Beta::UserProfiles::ActionURLCreateParams.dump_request(params)
             header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::USER_PROFILES_ACTION_URLS_CREATE,
               span_attributes: {"anthropic.user_profile.id" => user_profile_id},
               span_route: "/v1/user_profiles/{user_profile_id}/action_urls",

@@ -32,6 +32,7 @@ module Anthropic
                 raise ArgumentError.new("missing required path argument #{_1}")
               end
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_RESOURCES_RETRIEVE,
               span_attributes: {
                 "anthropic.session.id" => session_id,
@@ -76,6 +77,7 @@ module Anthropic
               end
             header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_RESOURCES_UPDATE,
               span_attributes: {
                 "anthropic.session.id" => session_id,
@@ -118,6 +120,7 @@ module Anthropic
             parsed, options = Anthropic::Beta::Sessions::ResourceListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_RESOURCES_LIST,
               span_attributes: {"anthropic.session.id" => session_id},
               span_route: "/v1/sessions/{session_id}/resources",
@@ -162,6 +165,7 @@ module Anthropic
                 raise ArgumentError.new("missing required path argument #{_1}")
               end
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_RESOURCES_DELETE,
               span_attributes: {
                 "anthropic.session.id" => session_id,
@@ -204,6 +208,7 @@ module Anthropic
             parsed, options = Anthropic::Beta::Sessions::ResourceAddParams.dump_request(params)
             header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_RESOURCES_ADD,
               span_attributes: {"anthropic.session.id" => session_id},
               span_created_id: "anthropic.session.resource.id",

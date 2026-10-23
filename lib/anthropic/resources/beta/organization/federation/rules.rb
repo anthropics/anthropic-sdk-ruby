@@ -66,6 +66,7 @@ module Anthropic
               parsed, options = Anthropic::Beta::Organization::Federation::RuleCreateParams.dump_request(params)
               header_params = {betas: "anthropic-beta"}
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_FEDERATION_RULES_CREATE,
                 span_created_id: "anthropic.organization.federation_rule.id",
                 span_route: "/v1/organizations/federation_rules",
@@ -99,6 +100,7 @@ module Anthropic
             def retrieve(federation_rule_id, params = {})
               parsed, options = Anthropic::Beta::Organization::Federation::RuleRetrieveParams.dump_request(params)
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_FEDERATION_RULES_RETRIEVE,
                 span_attributes: {"anthropic.organization.federation_rule.id" => federation_rule_id},
                 span_route: "/v1/organizations/federation_rules/{federation_rule_id}",
@@ -169,6 +171,7 @@ module Anthropic
               parsed, options = Anthropic::Beta::Organization::Federation::RuleUpdateParams.dump_request(params)
               header_params = {betas: "anthropic-beta"}
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_FEDERATION_RULES_UPDATE,
                 span_attributes: {"anthropic.organization.federation_rule.id" => federation_rule_id},
                 span_route: "/v1/organizations/federation_rules/{federation_rule_id}",
@@ -213,6 +216,7 @@ module Anthropic
               parsed, options = Anthropic::Beta::Organization::Federation::RuleListParams.dump_request(params)
               query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_FEDERATION_RULES_LIST,
                 span_route: "/v1/organizations/federation_rules",
                 span_query: %w[include_archived issuer_id limit page],
@@ -254,6 +258,7 @@ module Anthropic
             def archive(federation_rule_id, params = {})
               parsed, options = Anthropic::Beta::Organization::Federation::RuleArchiveParams.dump_request(params)
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_FEDERATION_RULES_ARCHIVE,
                 span_attributes: {"anthropic.organization.federation_rule.id" => federation_rule_id},
                 span_route: "/v1/organizations/federation_rules/{federation_rule_id}/archive",

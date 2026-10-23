@@ -31,6 +31,7 @@ module Anthropic
           parsed, options = Anthropic::Beta::VaultCreateParams.dump_request(params)
           header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::VAULTS_CREATE,
             span_created_id: "anthropic.vault.id",
             span_route: "/v1/vaults",
@@ -64,6 +65,7 @@ module Anthropic
         def retrieve(vault_id, params = {})
           parsed, options = Anthropic::Beta::VaultRetrieveParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::VAULTS_RETRIEVE,
             span_attributes: {"anthropic.vault.id" => vault_id},
             span_route: "/v1/vaults/{vault_id}",
@@ -101,6 +103,7 @@ module Anthropic
           parsed, options = Anthropic::Beta::VaultUpdateParams.dump_request(params)
           header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::VAULTS_UPDATE,
             span_attributes: {"anthropic.vault.id" => vault_id},
             span_route: "/v1/vaults/{vault_id}",
@@ -140,6 +143,7 @@ module Anthropic
           parsed, options = Anthropic::Beta::VaultListParams.dump_request(params)
           query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::VAULTS_LIST,
             span_route: "/v1/vaults",
             span_query: %w[include_archived limit page],
@@ -177,6 +181,7 @@ module Anthropic
         def delete(vault_id, params = {})
           parsed, options = Anthropic::Beta::VaultDeleteParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::VAULTS_DELETE,
             span_attributes: {"anthropic.vault.id" => vault_id},
             span_route: "/v1/vaults/{vault_id}",
@@ -209,6 +214,7 @@ module Anthropic
         def archive(vault_id, params = {})
           parsed, options = Anthropic::Beta::VaultArchiveParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::VAULTS_ARCHIVE,
             span_attributes: {"anthropic.vault.id" => vault_id},
             span_route: "/v1/vaults/{vault_id}/archive",

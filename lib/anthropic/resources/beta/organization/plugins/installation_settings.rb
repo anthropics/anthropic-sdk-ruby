@@ -53,6 +53,7 @@ module Anthropic
                 Anthropic::Beta::Organization::Plugins::InstallationSettingListParams.dump_request(params)
               query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_PLUGINS_INSTALLATION_SETTINGS_LIST,
                 span_attributes: {"anthropic.organization.plugin.id" => plugin_id},
                 span_route: "/v1/organizations/plugins/{plugin_id}/installation_settings",
@@ -120,6 +121,7 @@ module Anthropic
                   raise ArgumentError.new("missing required path argument #{_1}")
                 end
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_PLUGINS_INSTALLATION_SETTINGS_REMOVE,
                 span_attributes: {
                   "anthropic.organization.plugin.id" => plugin_id,
@@ -189,6 +191,7 @@ module Anthropic
                 end
               header_params = {betas: "anthropic-beta"}
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_PLUGINS_INSTALLATION_SETTINGS_SET,
                 span_attributes: {
                   "anthropic.organization.plugin.id" => plugin_id,

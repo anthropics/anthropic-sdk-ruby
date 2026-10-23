@@ -47,6 +47,7 @@ module Anthropic
           parsed, options = Anthropic::Beta::AgentCreateParams.dump_request(params)
           header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::AGENTS_CREATE,
             span_created_id: "gen_ai.agent.id",
             span_route: "/v1/agents",
@@ -84,6 +85,7 @@ module Anthropic
           parsed, options = Anthropic::Beta::AgentRetrieveParams.dump_request(params)
           query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::AGENTS_RETRIEVE,
             span_attributes: {"gen_ai.agent.id" => agent_id},
             span_route: "/v1/agents/{agent_id}",
@@ -144,6 +146,7 @@ module Anthropic
           parsed, options = Anthropic::Beta::AgentUpdateParams.dump_request(params)
           header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::AGENTS_UPDATE,
             span_attributes: {"gen_ai.agent.id" => agent_id},
             span_route: "/v1/agents/{agent_id}",
@@ -187,6 +190,7 @@ module Anthropic
           parsed, options = Anthropic::Beta::AgentListParams.dump_request(params)
           query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::AGENTS_LIST,
             span_route: "/v1/agents",
             span_query: %w[created_at[gte] created_at[lte] include_archived limit page],
@@ -224,6 +228,7 @@ module Anthropic
         def archive(agent_id, params = {})
           parsed, options = Anthropic::Beta::AgentArchiveParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::AGENTS_ARCHIVE,
             span_attributes: {"gen_ai.agent.id" => agent_id},
             span_route: "/v1/agents/{agent_id}/archive",

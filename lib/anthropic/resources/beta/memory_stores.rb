@@ -36,6 +36,7 @@ module Anthropic
           parsed, options = Anthropic::Beta::MemoryStoreCreateParams.dump_request(params)
           header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::MEMORY_STORES_CREATE,
             span_created_id: "gen_ai.memory.store.id",
             span_route: "/v1/memory_stores",
@@ -69,6 +70,7 @@ module Anthropic
         def retrieve(memory_store_id, params = {})
           parsed, options = Anthropic::Beta::MemoryStoreRetrieveParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::MEMORY_STORES_RETRIEVE,
             span_attributes: {"gen_ai.memory.store.id" => memory_store_id},
             span_route: "/v1/memory_stores/{memory_store_id}",
@@ -108,6 +110,7 @@ module Anthropic
           parsed, options = Anthropic::Beta::MemoryStoreUpdateParams.dump_request(params)
           header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::MEMORY_STORES_UPDATE,
             span_attributes: {"gen_ai.memory.store.id" => memory_store_id},
             span_route: "/v1/memory_stores/{memory_store_id}",
@@ -151,6 +154,7 @@ module Anthropic
           parsed, options = Anthropic::Beta::MemoryStoreListParams.dump_request(params)
           query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::MEMORY_STORES_LIST,
             span_route: "/v1/memory_stores",
             span_query: %w[created_at[gte] created_at[lte] include_archived limit page],
@@ -188,6 +192,7 @@ module Anthropic
         def delete(memory_store_id, params = {})
           parsed, options = Anthropic::Beta::MemoryStoreDeleteParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::MEMORY_STORES_DELETE,
             span_attributes: {"gen_ai.memory.store.id" => memory_store_id},
             span_route: "/v1/memory_stores/{memory_store_id}",
@@ -220,6 +225,7 @@ module Anthropic
         def archive(memory_store_id, params = {})
           parsed, options = Anthropic::Beta::MemoryStoreArchiveParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::MEMORY_STORES_ARCHIVE,
             span_attributes: {"gen_ai.memory.store.id" => memory_store_id},
             span_route: "/v1/memory_stores/{memory_store_id}/archive",

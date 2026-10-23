@@ -41,6 +41,7 @@ module Anthropic
                 workspace_id: "anthropic-workspace-id"
               }
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::MESSAGES_BATCHES_CREATE,
               span_created_id: "anthropic.message.batch.id",
               span_route: "/v1/messages/batches",
@@ -79,6 +80,7 @@ module Anthropic
           def retrieve(message_batch_id, params = {})
             parsed, options = Anthropic::Beta::Messages::BatchRetrieveParams.dump_request(params)
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::MESSAGES_BATCHES_RETRIEVE,
               span_attributes: {"anthropic.message.batch.id" => message_batch_id},
               span_route: "/v1/messages/batches/{message_batch_id}",
@@ -121,6 +123,7 @@ module Anthropic
             parsed, options = Anthropic::Beta::Messages::BatchListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::MESSAGES_BATCHES_LIST,
               span_route: "/v1/messages/batches",
               span_query: %w[after_id before_id limit],
@@ -164,6 +167,7 @@ module Anthropic
           def delete(message_batch_id, params = {})
             parsed, options = Anthropic::Beta::Messages::BatchDeleteParams.dump_request(params)
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::MESSAGES_BATCHES_DELETE,
               span_attributes: {"anthropic.message.batch.id" => message_batch_id},
               span_route: "/v1/messages/batches/{message_batch_id}",
@@ -207,6 +211,7 @@ module Anthropic
           def cancel(message_batch_id, params = {})
             parsed, options = Anthropic::Beta::Messages::BatchCancelParams.dump_request(params)
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::MESSAGES_BATCHES_CANCEL,
               span_attributes: {"anthropic.message.batch.id" => message_batch_id},
               span_route: "/v1/messages/batches/{message_batch_id}/cancel",
@@ -246,6 +251,7 @@ module Anthropic
           def results_streaming(message_batch_id, params = {})
             parsed, options = Anthropic::Beta::Messages::BatchResultsParams.dump_request(params)
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::MESSAGES_BATCHES_RESULTS,
               span_attributes: {"anthropic.message.batch.id" => message_batch_id},
               span_route: "/v1/messages/batches/{message_batch_id}/results",

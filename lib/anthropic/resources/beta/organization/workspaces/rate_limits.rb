@@ -41,6 +41,7 @@ module Anthropic
                   raise ArgumentError.new("missing required path argument #{_1}")
                 end
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_WORKSPACES_RATE_LIMITS_UPDATE,
                 span_attributes: {
                   "anthropic.organization.workspace.id" => workspace_id,
@@ -95,6 +96,7 @@ module Anthropic
               parsed, options = Anthropic::Beta::Organization::Workspaces::RateLimitListParams.dump_request(params)
               query = Anthropic::Internal::Util.encode_query_params(parsed)
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_WORKSPACES_RATE_LIMITS_LIST,
                 span_attributes: {"anthropic.organization.workspace.id" => workspace_id},
                 span_route: "/v1/organizations/workspaces/{workspace_id}/rate_limits",

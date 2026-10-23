@@ -31,6 +31,7 @@ module Anthropic
           parsed, options = Anthropic::Beta::SkillCreateParams.dump_request(params)
           header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::SKILLS_CREATE,
             span_created_id: "anthropic.skill.id",
             span_route: "/v1/skills",
@@ -69,6 +70,7 @@ module Anthropic
         def retrieve(skill_id, params = {})
           parsed, options = Anthropic::Beta::SkillRetrieveParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::SKILLS_RETRIEVE,
             span_attributes: {"anthropic.skill.id" => skill_id},
             span_route: "/v1/skills/{skill_id}",
@@ -107,6 +109,7 @@ module Anthropic
           parsed, options = Anthropic::Beta::SkillListParams.dump_request(params)
           query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::SKILLS_LIST,
             span_route: "/v1/skills",
             span_query: %w[limit page source],
@@ -144,6 +147,7 @@ module Anthropic
         def delete(skill_id, params = {})
           parsed, options = Anthropic::Beta::SkillDeleteParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::SKILLS_DELETE,
             span_attributes: {"anthropic.skill.id" => skill_id},
             span_route: "/v1/skills/{skill_id}",
