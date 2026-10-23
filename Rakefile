@@ -227,8 +227,15 @@ end
 desc("Typecheck everything")
 multitask(typecheck: [:"typecheck:steep", :"typecheck:sorbet"])
 
+desc("Lint `lib` with the cops in `lint/cop`")
+multitask(:"lint:cop") do
+  rubocop = %w[rubocop --require ./lint/cop/external_mixin --only Custom/ExternalMixin]
+  rubocop += %w[--format github] if ENV.key?("CI")
+  sh(*rubocop, "lib")
+end
+
 desc("Lint and typecheck")
-multitask(lint: [:"lint:rubocop", :typecheck])
+multitask(lint: [:"lint:rubocop", :"lint:cop", :typecheck])
 
 desc("Build yard docs")
 multitask(:"build:docs") do
