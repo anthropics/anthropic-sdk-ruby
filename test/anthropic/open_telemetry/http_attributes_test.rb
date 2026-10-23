@@ -12,7 +12,7 @@ class Anthropic::Test::OpenTelemetryHTTPAttributesTest < Anthropic::Test::OpenTe
   def stub_list(url) = stub_request(:get, url).to_return_json(body: {data: [], has_more: false})
 
   def test_a_span_starts_with_the_method_and_the_route_and_gets_the_url_of_its_first_request
-    stub_request(:delete, "#{BASE_URL}/v1/files/file_1?beta=true").to_return_json(body: {id: "file_1"})
+    stub_request(:delete, "#{BASE_URL}/v1/files/file_1").to_return_json(body: {id: "file_1"})
     sampler = recording_sampler
 
     client.beta.files.delete("file_1")
@@ -92,7 +92,7 @@ class Anthropic::Test::OpenTelemetryHTTPAttributesTest < Anthropic::Test::OpenTe
       request_options: {extra_query: {"trace" => "1", "page" => "p 2"}}
     )
 
-    # `beta=true` and `trace` are not parameters of the endpoint. `page` is, whoever set it.
+    # `trace` is not a parameter of the endpoint. `page` is, whoever set it.
     query = "ids%5B%5D=a+b&ids%5B%5D=c&limit=2&page=p+2"
     assert_equal(query, only_span.attributes["url.query"])
     assert_equal("http://localhost:4010/v1/files?#{query}", only_span.attributes["url.full"])
@@ -334,7 +334,7 @@ class Anthropic::Test::OpenTelemetryHTTPAttributesTest < Anthropic::Test::OpenTe
   end
 
   def test_a_beta_organization_plugins_method_has_a_span_with_its_route
-    stub_request(:get, "#{BASE_URL}/v1/organizations/plugins/plugin_1?beta=true")
+    stub_request(:get, "#{BASE_URL}/v1/organizations/plugins/plugin_1")
       .to_return_json(body: {id: "plugin_1", type: "plugin"})
 
     client.beta.organization.plugins.retrieve("plugin_1")
@@ -346,7 +346,7 @@ class Anthropic::Test::OpenTelemetryHTTPAttributesTest < Anthropic::Test::OpenTe
   end
 
   def test_url_query_is_absent_when_no_parameter_is_left
-    stub_messages(url: "#{MESSAGES_URL}?beta=true&trace=1")
+    stub_messages(url: "#{MESSAGES_URL}?trace=1")
 
     client.beta.messages.create(**PARAMS, request_options: {extra_query: {"trace" => "1"}})
 
@@ -357,9 +357,9 @@ class Anthropic::Test::OpenTelemetryHTTPAttributesTest < Anthropic::Test::OpenTe
   end
 
   def test_the_span_of_a_later_page_has_the_query_of_its_own_request
-    url = "#{BASE_URL}/v1/sessions/sess_1/events?beta=true"
+    url = "#{BASE_URL}/v1/sessions/sess_1/events"
     stub_request(:get, url).to_return_json(body: {data: [{id: "listed_1"}], next_page: "p2"})
-    stub_request(:get, "#{url}&page=p2").to_return_json(body: {data: [{id: "listed_2"}], next_page: nil})
+    stub_request(:get, "#{url}?page=p2").to_return_json(body: {data: [{id: "listed_2"}], next_page: nil})
 
     assert_equal(2, client.beta.sessions.events.list("sess_1").to_enum.to_a.length)
 

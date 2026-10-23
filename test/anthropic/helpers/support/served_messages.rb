@@ -5,7 +5,7 @@
 module Anthropic::Test::ServedMessages
   include WebMock::API
 
-  URL = "http://localhost/v1/messages?beta=true"
+  URL = "http://localhost/v1/messages"
   THREADS_BETA = "message-threads-2026-08-12"
 
   def before_all

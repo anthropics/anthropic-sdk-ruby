@@ -79,7 +79,7 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
 
   def stub_responses(*responses)
     call_count = 0
-    stub_request(:post, "http://localhost/v1/messages?beta=true")
+    stub_request(:post, "http://localhost/v1/messages")
       .to_return do |_request|
         call_count += 1
         responses[call_count - 1]
@@ -201,7 +201,7 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
     runner = @client.beta.messages.tool_runner({**basic_params, thread: false, tools: [StrictCalculator.new]})
     runner.each_message { nil }
 
-    assert_requested(:post, "http://localhost/v1/messages?beta=true", times: 2) do |request|
+    assert_requested(:post, "http://localhost/v1/messages", times: 2) do |request|
       assert_pattern do
         JSON.parse(request.body, symbolize_names: true) => {
           tools: [
@@ -408,7 +408,7 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
     assert_empty(@calculator.call_history)
     assert(runner.finished?)
     assert_nil(runner.next_message)
-    assert_requested(:post, "http://localhost/v1/messages?beta=true", times: 1)
+    assert_requested(:post, "http://localhost/v1/messages", times: 1)
   end
 
   def pause_turn_response(id:)
@@ -529,7 +529,7 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
     assert_empty(@calculator.call_history)
     assert(runner.finished?)
     assert_nil(runner.next_message)
-    assert_requested(:post, "http://localhost/v1/messages?beta=true", times: 1)
+    assert_requested(:post, "http://localhost/v1/messages", times: 1)
   end
 
   def test_every_stop_reason_is_classified_exactly_once
@@ -654,7 +654,7 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
   # Like `stub_responses`, but also records each request body the runner sends.
   def stub_responses_capturing_bodies(*responses)
     [].tap do |bodies|
-      stub_request(:post, "http://localhost/v1/messages?beta=true")
+      stub_request(:post, "http://localhost/v1/messages")
         .to_return do |request|
           bodies << JSON.parse(request.body, symbolize_names: true)
           responses[bodies.length - 1]
@@ -907,7 +907,7 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
   # walked like the hash form rather than raising when its content is read.
   def test_typed_system_message_with_empty_content_is_tolerated
     bodies = []
-    stub_request(:post, "http://localhost/v1/messages?beta=true")
+    stub_request(:post, "http://localhost/v1/messages")
       .with { bodies << JSON.parse(_1.body) }
       .to_return(
         calculator_tool_use_response(id: "msg_1", tool_id: "tool_1"),
@@ -962,7 +962,7 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
       text_response(id: "msg_2", text: "10 + 5 = 15")
     ]
     requests = 0
-    stub_request(:post, "http://localhost/v1/messages?beta=true")
+    stub_request(:post, "http://localhost/v1/messages")
       .to_return do |_request|
         requests += 1
         responses.fetch(requests - 1, {status: 400})

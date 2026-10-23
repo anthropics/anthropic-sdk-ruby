@@ -19,7 +19,7 @@ class Anthropic::Test::OpenTelemetryStartAttributesTest < Anthropic::Test::OpenT
   def http(method, route) = {"http.request.method" => method, "http.route" => route}
 
   def test_the_span_of_messages_create_starts_with_the_request_attributes
-    stub_messages(url: "#{MESSAGES_URL}?beta=true")
+    stub_messages(url: MESSAGES_URL)
     sampler = recording_sampler
 
     client.beta.messages.create(
@@ -55,8 +55,7 @@ class Anthropic::Test::OpenTelemetryStartAttributesTest < Anthropic::Test::OpenT
   end
 
   def test_the_span_of_a_streaming_call_starts_with_the_request_attributes
-    stub_messages(stream_response, stream_response)
-    stub_messages(stream_response, stream_response, url: "#{MESSAGES_URL}?beta=true")
+    stub_messages(stream_response, stream_response, stream_response, stream_response)
     sampler = recording_sampler
     options = {**REQUEST_OPTIONS, extra_headers: {"anthropic-beta" => "beta-a"}}
 
@@ -81,7 +80,6 @@ class Anthropic::Test::OpenTelemetryStartAttributesTest < Anthropic::Test::OpenT
 
   def test_the_span_of_count_tokens_starts_with_the_model
     stub_request(:post, "#{MESSAGES_URL}/count_tokens").to_return_json(body: {input_tokens: 42})
-    stub_request(:post, "#{MESSAGES_URL}/count_tokens?beta=true").to_return_json(body: {input_tokens: 42})
     sampler = recording_sampler
     params = {messages: PARAMS[:messages], model: "claude-sonnet-4-5", request_options: REQUEST_OPTIONS}
 
@@ -115,7 +113,7 @@ class Anthropic::Test::OpenTelemetryStartAttributesTest < Anthropic::Test::OpenT
   end
 
   def test_the_span_of_sessions_create_starts_with_the_agent_and_the_environment
-    stub_request(:post, "#{BASE_URL}/v1/sessions?beta=true").to_return_json(body: {id: "sess_1"})
+    stub_request(:post, "#{BASE_URL}/v1/sessions").to_return_json(body: {id: "sess_1"})
     sampler = recording_sampler
     params = {environment_id: "env_1", request_options: REQUEST_OPTIONS}
 
@@ -162,9 +160,9 @@ class Anthropic::Test::OpenTelemetryStartAttributesTest < Anthropic::Test::OpenT
   end
 
   def test_the_span_of_every_page_of_a_list_starts_with_the_ids_in_its_path_and_the_conversation_id
-    url = "#{BASE_URL}/v1/sessions/sess_1/events?beta=true"
+    url = "#{BASE_URL}/v1/sessions/sess_1/events"
     stub_request(:get, url).to_return_json(body: {data: [{id: "listed_1"}], next_page: "p2"})
-    stub_request(:get, "#{url}&page=p2").to_return_json(body: {data: [{id: "listed_2"}], next_page: nil})
+    stub_request(:get, "#{url}?page=p2").to_return_json(body: {data: [{id: "listed_2"}], next_page: nil})
     sampler = recording_sampler
 
     page = client.beta.sessions.events.list("sess_1", request_options: REQUEST_OPTIONS)

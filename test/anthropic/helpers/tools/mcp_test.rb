@@ -409,7 +409,7 @@ class Anthropic::Test::Helpers::Tools::McpTest < Minitest::Test
 
   def stub_anthropic(*responses)
     call_count = 0
-    stub_request(:post, "http://localhost/v1/messages?beta=true")
+    stub_request(:post, "http://localhost/v1/messages")
       .to_return do |_req|
         call_count += 1
         responses[call_count - 1]
@@ -418,7 +418,7 @@ class Anthropic::Test::Helpers::Tools::McpTest < Minitest::Test
 
   def stub_anthropic_with_capture(capture, *responses)
     call_count = 0
-    stub_request(:post, "http://localhost/v1/messages?beta=true")
+    stub_request(:post, "http://localhost/v1/messages")
       .to_return do |req|
         capture.call(req)
         call_count += 1

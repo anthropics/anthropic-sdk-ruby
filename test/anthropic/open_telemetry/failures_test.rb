@@ -206,7 +206,7 @@ class Anthropic::Test::OpenTelemetryFailuresTest < Anthropic::Test::OpenTelemetr
       stop_reason: "tool_use"
     )
     requests = []
-    stub_request(:post, "#{MESSAGES_URL}?beta=true").to_return(
+    stub_request(:post, MESSAGES_URL).to_return(
       *[tool_use, MESSAGE.merge(id: "msg_2")].map do |message|
         lambda do |request|
           requests << JSON.parse(request.body, symbolize_names: true)

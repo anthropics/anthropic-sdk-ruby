@@ -33,8 +33,7 @@ module Anthropic
         end
 
         def stub_message_request(response_body:, beta: false, &block) # rubocop:disable Lint/UnusedMethodArgument
-          url = beta ? "http://localhost/v1/messages?beta=true" : "http://localhost/v1/messages"
-          stub = stub_request(:post, url)
+          stub = stub_request(:post, "http://localhost/v1/messages")
                  .to_return(
                    status: 200,
                    body: response_body.to_json,

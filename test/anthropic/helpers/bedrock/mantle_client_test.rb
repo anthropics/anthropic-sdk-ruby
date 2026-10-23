@@ -580,7 +580,8 @@ class Anthropic::Test::BedrockMantleClientTest < Minitest::Test
   def each_messages_resource(subpath = "")
     client = Anthropic::BedrockMantleClient.new(skip_auth: true, base_url: "http://localhost")
     yield(client.messages, "http://localhost/v1/messages#{subpath}")
-    yield(client.beta.messages, "http://localhost/v1/messages#{subpath}?beta=true")
+    WebMock.reset_executed_requests!
+    yield(client.beta.messages, "http://localhost/v1/messages#{subpath}")
   end
 
   def message_sse

@@ -318,7 +318,7 @@ module Anthropic
             ],
             usage: {input_tokens: 10, output_tokens: 20}
           }
-          stub_request(:post, "http://localhost/v1/messages?beta=true")
+          stub_request(:post, "http://localhost/v1/messages")
             .to_return(
               status: 200,
               body: response_body.to_json,
@@ -349,7 +349,7 @@ module Anthropic
 
           message = @client.beta.messages.create(model: "claude-opus-4-6", max_tokens: 100, messages:)
 
-          assert_requested(:post, "http://localhost/v1/messages?beta=true") do
+          assert_requested(:post, "http://localhost/v1/messages") do
             assert_equal(as_tools_entries(weather, calculator, tool_hash, raw_tool), sent_definitions(_1))
           end
           assert_same(weather, messages.dig(1, :content, 0, :tool, :definition))
@@ -366,7 +366,7 @@ module Anthropic
         end
 
         def test_count_tokens_with_tool_added_by_value
-          stub_request(:post, "http://localhost/v1/messages/count_tokens?beta=true")
+          stub_request(:post, "http://localhost/v1/messages/count_tokens")
             .to_return(
               status: 200,
               body: {input_tokens: 10}.to_json,
@@ -379,7 +379,7 @@ module Anthropic
             messages: [{role: "user", content: "Weather?"}, tool_addition(weather)]
           )
 
-          assert_requested(:post, "http://localhost/v1/messages/count_tokens?beta=true") do
+          assert_requested(:post, "http://localhost/v1/messages/count_tokens") do
             assert_equal(as_tools_entries(weather), sent_definitions(_1))
           end
         end

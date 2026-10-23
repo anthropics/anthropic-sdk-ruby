@@ -57,7 +57,7 @@ class Anthropic::Test::Helpers::ToolRunner::StreamingTest < Minitest::Test
 
   def stub_streaming_responses(*bodies)
     count = 0
-    stub_request(:post, "http://localhost/v1/messages?beta=true")
+    stub_request(:post, "http://localhost/v1/messages")
       .to_return do |_|
       count += 1
       {
@@ -308,7 +308,7 @@ class Anthropic::Test::Helpers::ToolRunner::StreamingTest < Minitest::Test
     end
     assert_empty(@calculator.call_history)
     assert(runner.finished?)
-    assert_requested(:post, "http://localhost/v1/messages?beta=true", times: 1)
+    assert_requested(:post, "http://localhost/v1/messages", times: 1)
   end
 
   def test_unknown_tool_use_is_replayed_verbatim
@@ -323,7 +323,7 @@ class Anthropic::Test::Helpers::ToolRunner::StreamingTest < Minitest::Test
       stream_events(id: "msg_2", content: [{type: "text", text: "No tide tool"}], stop_reason: "end_turn")
     ]
     bodies = []
-    stub_request(:post, "http://localhost/v1/messages?beta=true")
+    stub_request(:post, "http://localhost/v1/messages")
       .to_return do |request|
       bodies << JSON.parse(request.body, symbolize_names: true)
       {status: 200, body: responses[bodies.length - 1], headers: {"content-type" => "text/event-stream"}}
@@ -367,7 +367,7 @@ class Anthropic::Test::Helpers::ToolRunner::StreamingTest < Minitest::Test
       stream_events(id: "msg_2", content: [{type: "text", text: "Result: 15"}], stop_reason: "end_turn")
     ]
     bodies = []
-    stub_request(:post, "http://localhost/v1/messages?beta=true")
+    stub_request(:post, "http://localhost/v1/messages")
       .to_return do |request|
       bodies << JSON.parse(request.body, symbolize_names: true)
       {status: 200, body: responses[bodies.length - 1], headers: {"content-type" => "text/event-stream"}}
@@ -415,7 +415,7 @@ class Anthropic::Test::Helpers::ToolRunner::StreamingTest < Minitest::Test
       stream_events(id: "msg_2", content: [{type: "text", text: "Result: 15"}], stop_reason: "end_turn")
     ]
     bodies = []
-    stub_request(:post, "http://localhost/v1/messages?beta=true")
+    stub_request(:post, "http://localhost/v1/messages")
       .to_return do |request|
       bodies << JSON.parse(request.body, symbolize_names: true)
       {status: 200, body: responses[bodies.length - 1], headers: {"content-type" => "text/event-stream"}}

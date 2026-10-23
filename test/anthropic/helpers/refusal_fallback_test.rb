@@ -74,7 +74,7 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
 
   def stub_responses(*bodies)
     responses = bodies.map { {status: 200, body: _1} }
-    stub_request(:post, "http://localhost/v1/messages?beta=true")
+    stub_request(:post, "http://localhost/v1/messages")
       .with do |req|
       @bodies << JSON.parse(req.body)
       @beta_headers << req.headers["Anthropic-Beta"]
@@ -327,7 +327,7 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
 
   def test_skips_a_failed_hop_and_continues
     json = {"content-type" => "application/json"}
-    stub_request(:post, "http://localhost/v1/messages?beta=true")
+    stub_request(:post, "http://localhost/v1/messages")
       .with do |req|
       @bodies << JSON.parse(req.body)
       true
@@ -363,7 +363,7 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
 
   def test_surfaces_the_prior_refusal_when_the_terminal_hop_fails
     json = {"content-type" => "application/json"}
-    stub_request(:post, "http://localhost/v1/messages?beta=true")
+    stub_request(:post, "http://localhost/v1/messages")
       .with do |req|
       @bodies << JSON.parse(req.body)
       true
@@ -824,7 +824,7 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
     responses = sse_bodies.map do |b|
       {status: 200, headers: {"content-type" => "text/event-stream"}, body: b}
     end
-    stub_request(:post, "http://localhost/v1/messages?beta=true")
+    stub_request(:post, "http://localhost/v1/messages")
       .with do |req|
       @bodies << JSON.parse(req.body)
       true
@@ -932,7 +932,7 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
   end
 
   def test_streaming_forwards_a_refused_spliced_hop_input_transformations_when_the_chain_degrades
-    stub_request(:post, "http://localhost/v1/messages?beta=true")
+    stub_request(:post, "http://localhost/v1/messages")
       .with do |req|
       @bodies << JSON.parse(req.body)
       true
@@ -1021,7 +1021,7 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
   end
 
   def test_streaming_skips_a_failed_hop_and_continues
-    stub_request(:post, "http://localhost/v1/messages?beta=true")
+    stub_request(:post, "http://localhost/v1/messages")
       .with do |req|
       @bodies << JSON.parse(req.body)
       true
@@ -1190,7 +1190,7 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
   end
 
   def test_streaming_retries_once_without_prefill_on_400
-    stub_request(:post, "http://localhost/v1/messages?beta=true")
+    stub_request(:post, "http://localhost/v1/messages")
       .with do |req|
       @bodies << JSON.parse(req.body)
       true
@@ -1232,7 +1232,7 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
   }.freeze
 
   def stub_sequence(*responses)
-    stub_request(:post, "http://localhost/v1/messages?beta=true")
+    stub_request(:post, "http://localhost/v1/messages")
       .with do |req|
       @bodies << JSON.parse(req.body)
       true

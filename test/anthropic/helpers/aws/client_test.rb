@@ -337,7 +337,7 @@ class Anthropic::Test::AWSClientTest < Minitest::Test
     # SigV4 signing must materialize them; otherwise Aws::Sigv4::Signer raises
     # "TypeError: no implicit conversion of Enumerator into String", and even if
     # it didn't, the consumed enumerator would replay empty over the wire.
-    stub_request(:post, "https://aws-external-anthropic.us-east-1.api.aws/v1/files?beta=true").to_return_json(
+    stub_request(:post, "https://aws-external-anthropic.us-east-1.api.aws/v1/files").to_return_json(
       status: 500,
       body: {}
     )
