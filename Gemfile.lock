@@ -280,6 +280,7 @@ DEPENDENCIES
   minitest-proveit
   minitest-rg
   opentelemetry-sdk
+  prism
   rake
   rbs
   redcarpet

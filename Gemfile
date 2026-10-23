@@ -37,6 +37,7 @@ group :development, :test do
   gem "minitest-rg"
   # exports the SDK's spans in tests; applications install their own
   gem "opentelemetry-sdk"
+  gem "prism"
   gem "webmock"
 end
 

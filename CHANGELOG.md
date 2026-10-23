@@ -8,6 +8,7 @@
 * **internal:** carry endpoint path query params to the request layer
 * **internal:** lint against mixing a module into a class from outside
 * **internal:** read the beta route qualifier instead of the beta=true query
+* **internal:** test that rbi and sig declare every public method
 
 
 ### Documentation
