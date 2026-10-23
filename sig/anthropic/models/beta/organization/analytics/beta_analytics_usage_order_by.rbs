@@ -1,0 +1,28 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Analytics
+          type beta_analytics_usage_order_by =
+            :output_tokens
+            | :requests
+            | :time
+            | :total_tokens
+            | :uncached_input_tokens
+
+          module BetaAnalyticsUsageOrderBy
+            extend Anthropic::Internal::Type::Enum
+
+            OUTPUT_TOKENS: :output_tokens
+            REQUESTS: :requests
+            TIME: :time
+            TOTAL_TOKENS: :total_tokens
+            UNCACHED_INPUT_TOKENS: :uncached_input_tokens
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Analytics::beta_analytics_usage_order_by]
+          end
+        end
+      end
+    end
+  end
+end

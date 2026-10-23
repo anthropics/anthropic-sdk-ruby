@@ -1,0 +1,41 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Analytics
+          type beta_analytics_cost_metrics =
+            {
+              amount: String,
+              currency: String,
+              list_amount: String,
+              requests: Integer?
+            }
+
+          class BetaAnalyticsCostMetrics < Anthropic::Internal::Type::BaseModel
+            attr_accessor amount: String
+
+            attr_accessor currency: String
+
+            attr_accessor list_amount: String
+
+            attr_accessor requests: Integer?
+
+            def initialize: (
+              amount: String,
+              currency: String,
+              list_amount: String,
+              requests: Integer?
+            ) -> void
+
+            def to_hash: -> {
+              amount: String,
+              currency: String,
+              list_amount: String,
+              requests: Integer?
+            }
+          end
+        end
+      end
+    end
+  end
+end

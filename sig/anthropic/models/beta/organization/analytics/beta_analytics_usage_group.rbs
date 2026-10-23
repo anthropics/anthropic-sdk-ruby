@@ -1,0 +1,116 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Analytics
+          type beta_analytics_usage_group =
+            {
+              actor: Anthropic::Models::Beta::Organization::beta_analytics_actor?,
+              actor_type: Anthropic::Models::Beta::Organization::beta_analytics_actor_type?,
+              agent_id: String?,
+              api_key_id: String?,
+              claude_tag_category: Anthropic::Models::Beta::Organization::beta_analytics_claude_tag_category?,
+              claude_tag_user_id: String?,
+              context_window: Anthropic::Models::Beta::Organization::beta_analytics_context_window?,
+              deployment_id: String?,
+              environment_id: String?,
+              inference_geo: Anthropic::Models::Beta::Organization::beta_analytics_usage_cost_inference_geo?,
+              model: String?,
+              product: String?,
+              rbac_group_id: String?,
+              service_tier: Anthropic::Models::Beta::Organization::beta_analytics_service_tier?,
+              session_id: String?,
+              slack_channel_id: String?,
+              speed: Anthropic::Models::Beta::Organization::beta_analytics_speed?,
+              user_profile_id: String?,
+              workspace_id: String?
+            }
+
+          class BetaAnalyticsUsageGroup < Anthropic::Internal::Type::BaseModel
+            attr_accessor actor: Anthropic::Models::Beta::Organization::beta_analytics_actor?
+
+            attr_accessor actor_type: Anthropic::Models::Beta::Organization::beta_analytics_actor_type?
+
+            attr_accessor agent_id: String?
+
+            attr_accessor api_key_id: String?
+
+            attr_accessor claude_tag_category: Anthropic::Models::Beta::Organization::beta_analytics_claude_tag_category?
+
+            attr_accessor claude_tag_user_id: String?
+
+            attr_accessor context_window: Anthropic::Models::Beta::Organization::beta_analytics_context_window?
+
+            attr_accessor deployment_id: String?
+
+            attr_accessor environment_id: String?
+
+            attr_accessor inference_geo: Anthropic::Models::Beta::Organization::beta_analytics_usage_cost_inference_geo?
+
+            attr_accessor model: String?
+
+            attr_accessor product: String?
+
+            attr_accessor rbac_group_id: String?
+
+            attr_accessor service_tier: Anthropic::Models::Beta::Organization::beta_analytics_service_tier?
+
+            attr_accessor session_id: String?
+
+            attr_accessor slack_channel_id: String?
+
+            attr_accessor speed: Anthropic::Models::Beta::Organization::beta_analytics_speed?
+
+            attr_accessor user_profile_id: String?
+
+            attr_accessor workspace_id: String?
+
+            def initialize: (
+              actor: Anthropic::Models::Beta::Organization::beta_analytics_actor?,
+              actor_type: Anthropic::Models::Beta::Organization::beta_analytics_actor_type?,
+              agent_id: String?,
+              api_key_id: String?,
+              claude_tag_category: Anthropic::Models::Beta::Organization::beta_analytics_claude_tag_category?,
+              claude_tag_user_id: String?,
+              context_window: Anthropic::Models::Beta::Organization::beta_analytics_context_window?,
+              deployment_id: String?,
+              environment_id: String?,
+              inference_geo: Anthropic::Models::Beta::Organization::beta_analytics_usage_cost_inference_geo?,
+              model: String?,
+              product: String?,
+              rbac_group_id: String?,
+              service_tier: Anthropic::Models::Beta::Organization::beta_analytics_service_tier?,
+              session_id: String?,
+              slack_channel_id: String?,
+              speed: Anthropic::Models::Beta::Organization::beta_analytics_speed?,
+              user_profile_id: String?,
+              workspace_id: String?
+            ) -> void
+
+            def to_hash: -> {
+              actor: Anthropic::Models::Beta::Organization::beta_analytics_actor?,
+              actor_type: Anthropic::Models::Beta::Organization::beta_analytics_actor_type?,
+              agent_id: String?,
+              api_key_id: String?,
+              claude_tag_category: Anthropic::Models::Beta::Organization::beta_analytics_claude_tag_category?,
+              claude_tag_user_id: String?,
+              context_window: Anthropic::Models::Beta::Organization::beta_analytics_context_window?,
+              deployment_id: String?,
+              environment_id: String?,
+              inference_geo: Anthropic::Models::Beta::Organization::beta_analytics_usage_cost_inference_geo?,
+              model: String?,
+              product: String?,
+              rbac_group_id: String?,
+              service_tier: Anthropic::Models::Beta::Organization::beta_analytics_service_tier?,
+              session_id: String?,
+              slack_channel_id: String?,
+              speed: Anthropic::Models::Beta::Organization::beta_analytics_speed?,
+              user_profile_id: String?,
+              workspace_id: String?
+            }
+          end
+        end
+      end
+    end
+  end
+end

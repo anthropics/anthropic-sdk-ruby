@@ -10,8 +10,8 @@ module Anthropic
     #   end
     #
     # @example
-    #   report_page_cursor.auto_paging_each do |usage_report|
-    #     puts(usage_report)
+    #   report_page_cursor.auto_paging_each do |usage|
+    #     puts(usage)
     #   end
     class ReportPageCursor
       include Anthropic::Internal::Type::BasePage

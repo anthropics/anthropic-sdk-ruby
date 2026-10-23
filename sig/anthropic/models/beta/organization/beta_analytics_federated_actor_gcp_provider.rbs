@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_federated_actor_gcp_provider =
+          { project_number: String, type: :gcp }
+
+        class BetaAnalyticsFederatedActorGCPProvider < Anthropic::Internal::Type::BaseModel
+          attr_accessor project_number: String
+
+          attr_accessor type: :gcp
+
+          def initialize: (project_number: String, ?type: :gcp) -> void
+
+          def to_hash: -> { project_number: String, type: :gcp }
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,40 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_usage_cost_product_filter =
+          :chat
+          | :chat_cowork_unified
+          | :claude_code
+          | :claude_console
+          | :claude_design
+          | :claude_in_chrome
+          | :claude_tag
+          | :cowork
+          | :managed_agents_api
+          | :message_batches_api
+          | :messages_api
+          | :office_agent
+
+        module BetaAnalyticsUsageCostProductFilter
+          extend Anthropic::Internal::Type::Enum
+
+          CHAT: :chat
+          CHAT_COWORK_UNIFIED: :chat_cowork_unified
+          CLAUDE_CODE: :claude_code
+          CLAUDE_CONSOLE: :claude_console
+          CLAUDE_DESIGN: :claude_design
+          CLAUDE_IN_CHROME: :claude_in_chrome
+          CLAUDE_TAG: :claude_tag
+          COWORK: :cowork
+          MANAGED_AGENTS_API: :managed_agents_api
+          MESSAGE_BATCHES_API: :message_batches_api
+          MESSAGES_API: :messages_api
+          OFFICE_AGENT: :office_agent
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::beta_analytics_usage_cost_product_filter]
+        end
+      end
+    end
+  end
+end

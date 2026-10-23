@@ -1,0 +1,60 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_federated_actor_provider =
+          Anthropic::Beta::Organization::BetaAnalyticsFederatedActorAWSProvider
+          | Anthropic::Beta::Organization::BetaAnalyticsFederatedActorAzureProvider
+          | Anthropic::Beta::Organization::BetaAnalyticsFederatedActorGCPProvider
+          | Anthropic::Beta::Organization::BetaAnalyticsFederatedActorOIDCProvider
+
+        module BetaAnalyticsFederatedActorProvider
+          extend Anthropic::Internal::Type::Union
+
+          type type_ = :aws | :azure | :gcp | :oidc
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            AWS: :aws
+            AZURE: :azure
+            GCP: :gcp
+            OIDC: :oidc
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaAnalyticsFederatedActorProvider::type_]
+          end
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::beta_analytics_federated_actor_provider]
+
+          def self.new:
+            (
+              type: :aws | "aws",
+              account_id: String,
+              signed_principal: String
+            ) -> Anthropic::Beta::Organization::BetaAnalyticsFederatedActorAWSProvider
+            | (
+              type: :azure | "azure",
+              subscription_id: String
+            ) -> Anthropic::Beta::Organization::BetaAnalyticsFederatedActorAzureProvider
+            | (
+              type: :gcp | "gcp",
+              project_number: String
+            ) -> Anthropic::Beta::Organization::BetaAnalyticsFederatedActorGCPProvider
+            | (
+              type: :oidc | "oidc",
+              issuer: String?
+            ) -> Anthropic::Beta::Organization::BetaAnalyticsFederatedActorOIDCProvider
+            | (
+              type: Anthropic::Models::Beta::Organization::BetaAnalyticsFederatedActorProvider::type_
+              | String,
+              ?account_id: String,
+              ?signed_principal: String,
+              ?subscription_id: String,
+              ?project_number: String,
+              ?issuer: String?
+            ) -> Anthropic::Models::Beta::Organization::beta_analytics_federated_actor_provider
+        end
+      end
+    end
+  end
+end

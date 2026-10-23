@@ -232,6 +232,11 @@ module Anthropic
           :"message-threads-2026-08-12",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
+      ANALYTICS_USAGE_COST_2026_08_24 =
+        T.let(
+          :"analytics-usage-cost-2026-08-24",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
     end
   end
 end

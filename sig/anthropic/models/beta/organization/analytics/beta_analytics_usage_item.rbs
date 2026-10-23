@@ -1,0 +1,41 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Analytics
+          type beta_analytics_usage_item =
+            {
+              ending_at: Time,
+              group: Anthropic::Beta::Organization::Analytics::BetaAnalyticsUsageGroup,
+              starting_at: Time,
+              usage: Anthropic::Beta::Organization::Analytics::BetaAnalyticsUsageMetrics
+            }
+
+          class BetaAnalyticsUsageItem < Anthropic::Internal::Type::BaseModel
+            attr_accessor ending_at: Time
+
+            attr_accessor group: Anthropic::Beta::Organization::Analytics::BetaAnalyticsUsageGroup
+
+            attr_accessor starting_at: Time
+
+            attr_accessor usage: Anthropic::Beta::Organization::Analytics::BetaAnalyticsUsageMetrics
+
+            def initialize: (
+              ending_at: Time,
+              group: Anthropic::Beta::Organization::Analytics::BetaAnalyticsUsageGroup,
+              starting_at: Time,
+              usage: Anthropic::Beta::Organization::Analytics::BetaAnalyticsUsageMetrics
+            ) -> void
+
+            def to_hash: -> {
+              ending_at: Time,
+              group: Anthropic::Beta::Organization::Analytics::BetaAnalyticsUsageGroup,
+              starting_at: Time,
+              usage: Anthropic::Beta::Organization::Analytics::BetaAnalyticsUsageMetrics
+            }
+          end
+        end
+      end
+    end
+  end
+end

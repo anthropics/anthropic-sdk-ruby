@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_federated_actor_oidc_provider =
+          { issuer: String?, type: :oidc }
+
+        class BetaAnalyticsFederatedActorOIDCProvider < Anthropic::Internal::Type::BaseModel
+          attr_accessor issuer: String?
+
+          attr_accessor type: :oidc
+
+          def initialize: (issuer: String?, ?type: :oidc) -> void
+
+          def to_hash: -> { issuer: String?, type: :oidc }
+        end
+      end
+    end
+  end
+end

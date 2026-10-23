@@ -1,0 +1,56 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Analytics
+          type beta_analytics_usage_metrics =
+            {
+              cache_creation: Anthropic::Beta::BetaCacheCreation,
+              cache_read_input_tokens: Integer,
+              output_tokens: Integer,
+              requests: Integer?,
+              server_tool_use: Anthropic::Beta::Organization::BetaAnalyticsServerToolUse,
+              total_tokens: Integer,
+              uncached_input_tokens: Integer
+            }
+
+          class BetaAnalyticsUsageMetrics < Anthropic::Internal::Type::BaseModel
+            attr_accessor cache_creation: Anthropic::Beta::BetaCacheCreation
+
+            attr_accessor cache_read_input_tokens: Integer
+
+            attr_accessor output_tokens: Integer
+
+            attr_accessor requests: Integer?
+
+            attr_accessor server_tool_use: Anthropic::Beta::Organization::BetaAnalyticsServerToolUse
+
+            attr_accessor total_tokens: Integer
+
+            attr_accessor uncached_input_tokens: Integer
+
+            def initialize: (
+              cache_creation: Anthropic::Beta::BetaCacheCreation,
+              cache_read_input_tokens: Integer,
+              output_tokens: Integer,
+              requests: Integer?,
+              server_tool_use: Anthropic::Beta::Organization::BetaAnalyticsServerToolUse,
+              total_tokens: Integer,
+              uncached_input_tokens: Integer
+            ) -> void
+
+            def to_hash: -> {
+              cache_creation: Anthropic::Beta::BetaCacheCreation,
+              cache_read_input_tokens: Integer,
+              output_tokens: Integer,
+              requests: Integer?,
+              server_tool_use: Anthropic::Beta::Organization::BetaAnalyticsServerToolUse,
+              total_tokens: Integer,
+              uncached_input_tokens: Integer
+            }
+          end
+        end
+      end
+    end
+  end
+end

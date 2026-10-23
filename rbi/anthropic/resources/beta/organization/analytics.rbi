@@ -49,6 +49,16 @@ module Anthropic
           attr_reader :artifacts
 
           sig do
+            returns(Anthropic::Resources::Beta::Organization::Analytics::Usage)
+          end
+          attr_reader :usage
+
+          sig do
+            returns(Anthropic::Resources::Beta::Organization::Analytics::Cost)
+          end
+          attr_reader :cost
+
+          sig do
             returns(
               Anthropic::Resources::Beta::Organization::Analytics::UsageReport
             )
