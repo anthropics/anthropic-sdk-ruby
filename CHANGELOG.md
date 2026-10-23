@@ -5,6 +5,7 @@
 ### Bug Fixes
 
 * **bedrock:** `BedrockClient` with an API key takes its region from `AWS_REGION`, then `AWS_DEFAULT_REGION`, when `aws_region` is not passed
+* **client:** link the long-request error message to the SDK documentation
 
 
 ### Chores
