@@ -1040,7 +1040,7 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
       text_response(id: "msg_3", text: "Cannot calculate right now")
     )
 
-    runner = @client.beta.messages.tool_runner({**basic_params, thread: false})
+    runner = @client.beta.messages.tool_runner(basic_params)
     runner.each_message do
       runner.feed_messages(calculator_removal_message) if _1.id == "msg_1"
     end
@@ -1059,7 +1059,7 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
       text_response(id: "msg_3", text: "Cannot calculate right now")
     )
 
-    runner = @client.beta.messages.tool_runner({**basic_params, thread: false})
+    runner = @client.beta.messages.tool_runner(basic_params)
     runner.each_message do
       next unless _1.id == "msg_1"
 

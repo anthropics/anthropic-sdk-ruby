@@ -206,7 +206,8 @@ module Anthropic
         #
         # @param params [Anthropic::Models::Beta::MessageCreateParams]
         private def give_thread(params)
-          current_messages.concat(@thread.appended_after(@given_count))
+          appended = @thread.appended_after(@given_count)
+          current_messages.concat(appended) unless appended.empty?
           @thread.replace_params(params.to_h.except(:stream, :thread))
           @given_count = current_messages.length
         end
@@ -299,20 +300,20 @@ module Anthropic
 
             reject_compaction_param!(params)
             tools = params[:tools].to_a.grep(Anthropic::Helpers::Tools::BaseTool)
+            # Checked first: messages that drop the last reply start a new thread, which takes any change.
+            @thread&.check_create_only_fields!(params.to_h)
             give_thread(params) unless @thread.nil?
             messages = current_messages
-            sent = messages.dup
             brk, response = blk.call(params)
             # A stream that ended before `message_start` has no message.
             return if @thread && response.nil?
 
             @last_response = response
 
-            next_step = determine_next_step_from_stop_reason(response.stop_reason)
+            # Skip tool processing if messages were modified
+            next unless current_messages.equal?(messages)
 
-            # Skip tool processing if messages were modified. A message thread holds the reply
-            # whatever the messages say, so its tool calls are answered all the same.
-            next unless current_messages.equal?(messages) || (@thread && next_step == :run_tools)
+            next_step = determine_next_step_from_stop_reason(response.stop_reason)
 
             if next_step == :stop
               @finished = true
@@ -375,12 +376,8 @@ module Anthropic
               break
             end
 
-            if @thread.nil?
-              messages << assistant_turn(response)
-              messages << {role: :user, content: mapped} unless mapped.empty?
-            else
-              add_thread_turn(mapped, sent:)
-            end
+            messages << assistant_turn(response)
+            messages << {role: :user, content: mapped} unless mapped.empty?
             adopt_container(response)
             # The run can end here, and the thread goes on from the results.
             give_thread(params) unless @thread.nil?
@@ -394,32 +391,6 @@ module Anthropic
 
           compact_after_final_turn(&blk) if finished? && !brk
           nil
-        end
-
-        # @api private
-        #
-        # Adds the reply, as the thread recorded it, and the results of its tool calls to the
-        # messages, so that they still begin with what the API holds. Both go after the last message
-        # that was sent, ahead of what the caller added while handling the reply.
-        #
-        # @param results [Array<Hash{Symbol=>Object}>]
-        #
-        # @param sent [Array<Hash{Symbol=>Object}>] the messages that were sent
-        private def add_thread_turn(results, sent:)
-          messages = current_messages
-          ids = results.map { _1.fetch(:tool_use_id) }
-          # A message that was sent is not the reply, even when it holds a call with the same id.
-          before_reply = Set.new.compare_by_identity.merge(sent)
-          index = messages.rindex do |message|
-            next false if before_reply.include?(message)
-
-            Array(read_field(message, :content)).any? { ids.include?(read_field(_1, :id)) }
-          end
-          if index.nil?
-            index = (messages.rindex { _1.equal?(sent.last) } || messages.rindex(sent.last))&.succ || messages.length
-            messages.insert(index, @thread.messages.fetch(sent.length))
-          end
-          messages.insert(index + 1, {role: :user, content: results}) unless results.empty?
         end
 
         # @api private

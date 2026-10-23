@@ -83,8 +83,8 @@ class Anthropic::Test::Helpers::ToolRunner::ThreadsTest < Minitest::Test
     {role: "user", content: [{type: "tool_result", tool_use_id: "toolu_#{id}", content: content, is_error: false}]}
   end
 
-  def tool_use_wire(id)
-    content = [{id: "toolu_#{id}", input: {lhs: 1, rhs: 2}, name: "adder", type: "tool_use"}]
+  def tool_use_wire(*ids)
+    content = ids.map { {id: "toolu_#{_1}", input: {lhs: 1, rhs: 2}, name: "adder", type: "tool_use"} }
     {role: "assistant", content: content}
   end
 
@@ -384,25 +384,162 @@ class Anthropic::Test::Helpers::ToolRunner::ThreadsTest < Minitest::Test
     assert_equal([["adder"], [[1, 2]]], [bodies[0][:tools].map { _1[:name] }, @adder.calls])
   end
 
-  def test_messages_added_while_handling_a_reply_follow_the_tool_results
-    added = [
-      ->(runner, _) { runner.feed_messages(user("more")) },
-      ->(runner, _) { runner.feed_messages(user("add")) },
-      ->(runner, _) { runner.params[:messages] << user("more") },
-      ->(runner, _) { runner.params = {**runner.params, messages: [user("add"), user("more")]} },
-      ->(runner, reply) {
-        runner.params = {**runner.params, messages: [user("add"), {role: :assistant, content: reply.content}, user("more")]}
-      }
+  # The settings of a runner, and the responses that it gets ahead of its first reply.
+  def runner_modes
+    {
+      default: [{}, []],
+      opted_out: [{thread: false}, []],
+      sends_the_whole_history: [{}, [api_error(400, "thread_unsupported_request")]]
+    }
+  end
+
+  def served(id, blocks, stop_reason, streaming:)
+    return json(reply_body(id, blocks, stop_reason)) unless streaming
+
+    start, *, delta, stop = stream_events(id, {}, stop_reason, [])
+    events = blocks.each_with_index.flat_map do |block, index|
+      empty, filled =
+        case block
+        in {type: "text", text:} then [{text: ""}, {type: "text_delta", text:}]
+        in {type: "tool_use", input:} then [{input: {}}, {type: "input_json_delta", partial_json: input.to_json}]
+        end
+      [
+        {type: "content_block_start", index:, content_block: {**block, **empty}},
+        {type: "content_block_delta", index:, delta: filled},
+        {type: "content_block_stop", index:}
+      ]
+    end
+    sse(start, *events, delta, stop)
+  end
+
+  def calls(*ids)
+    [ids.map { {type: "tool_use", id: "toolu_#{_1}", name: "adder", input: {lhs: 1, rhs: 2}} }, "tool_use"]
+  end
+
+  def final = [[{type: "text", text: "done"}], "end_turn"]
+
+  # Runs each loop that takes a block in each mode, and yields the mode, the runner and the
+  # requests that were answered with `replies`.
+  def in_every_mode(replies, on_first_reply, modes: runner_modes, **)
+    modes.each do |mode, (settings, rejections)|
+      [false, true].each do |streaming|
+        start_over
+        serve(*rejections, *replies.each_with_index.map { served("msg_#{_2 + 1}", *_1, streaming:) })
+        runner = new_runner(**settings, **)
+        handle = ->(reply) { on_first_reply.call(runner, reply) if reply.id == "msg_1" }
+
+        streaming ? runner.each_streaming { handle.call(_1.accumulated_message) } : runner.each_message(&handle)
+
+        yield(mode, runner, bodies.drop(rejections.length))
+      end
+    end
+  end
+
+  def turn(reply) = {role: :assistant, content: reply.content}
+
+  def own_result(id, **)
+    {role: :user, content: [{type: :tool_result, tool_use_id: "toolu_#{id}", content: "mine", **}]}
+  end
+
+  def own_result_wire(...) = JSON.parse(own_result(...).to_json, symbolize_names: true)
+
+  def test_messages_replaced_while_handling_a_reply_are_sent_as_they_are
+    answered = [user_wire("add"), tool_use_wire("msg_1"), own_result_wire("msg_1")]
+    set = ->(runner, *messages) { runner.params = {**runner.params, messages:} }
+    cases = [
+      [answered, ->(runner, reply) { runner.feed_messages(turn(reply), own_result("msg_1")) }],
+      [answered, ->(runner, reply) { runner.params[:messages] = [user("add"), turn(reply), own_result("msg_1")] }],
+      [answered, ->(runner, reply) { set.call(runner, user("add"), turn(reply), own_result("msg_1")) }],
+      [
+        [*answered.first(2), own_result_wire("msg_1", is_error: true)],
+        ->(runner, reply) { runner.feed_messages(turn(reply), own_result("msg_1", is_error: true)) }
+      ],
+      [[user_wire("add"), own_result_wire("msg_1")], ->(runner, _) { runner.feed_messages(own_result("msg_1")) }],
+      [[user_wire("add"), user_wire("more")], ->(runner, _) { runner.feed_messages(user("more")) }],
+      [[user_wire("add")], ->(runner, _) { runner.feed_messages }],
+      [[user_wire("over")], ->(runner, _) { set.call(runner, user("over")) }],
+      [
+        [user_wire("context"), user_wire("add")],
+        ->(runner, _) { set.call(runner, user("context"), *runner.params[:messages]) }
+      ],
+      [
+        [user_wire("again"), *answered.last(2)],
+        ->(runner, reply) { set.call(runner, user("again"), turn(reply), own_result("msg_1")) }
+      ]
     ]
-    added.each do |add|
-      start_over
-      serve(call_tool("msg_1"), text("msg_2"))
-      runner = new_runner
+    cases.each do |conversation, replace|
+      in_every_mode([calls("msg_1"), final], replace) do |mode, runner, requests|
+        assert_equal(2, requests.length)
+        assert_empty(@adder.calls)
+        assert_equal(conversation.length, runner.params[:messages].length)
+        expected =
+          case mode
+          in :default if conversation.first(2) == answered.first(2)
+            [continue_from("msg_1"), conversation.drop(2)]
+          in :default
+            [{type: "create"}, conversation]
+          else
+            [nil, conversation]
+          end
+        assert_equal(expected, requests[1].values_at(:thread, :messages))
+      end
+    end
+  end
 
-      runner.each_message { add.call(runner, _1) if _1.id == "msg_1" }
+  def test_an_answer_to_one_of_two_calls_is_sent_as_it_is
+    answer_one = ->(runner, reply) { runner.feed_messages(turn(reply), own_result("one")) }
 
-      assert_equal([{type: "create"}, continue_from("msg_1")], threads)
-      assert_equal([result_wire("msg_1"), user_wire(runner.params[:messages].last[:content])], bodies[1][:messages])
+    in_every_mode([calls("one", "two"), final], answer_one) do |mode, _, requests|
+      assert_equal(2, requests.length)
+      assert_empty(@adder.calls)
+      held = mode == :default ? [] : [user_wire("add"), tool_use_wire("one", "two")]
+      assert_equal([*held, own_result_wire("one")], requests[1][:messages])
+    end
+  end
+
+  def test_a_turn_whose_messages_were_replaced_is_not_counted
+    answer = ->(runner, reply) { runner.feed_messages(turn(reply), own_result("msg_1")) }
+
+    in_every_mode([calls("msg_1"), calls("msg_2")], answer, max_iterations: 1) do |_, runner, requests|
+      assert_equal(2, requests.length)
+      assert_equal([[1, 2]], @adder.calls)
+      assert_equal(5, runner.params[:messages].length)
+    end
+  end
+
+  def test_messages_edited_in_place_while_handling_a_reply_are_followed_by_the_turn
+    the_turn = [tool_use_wire("msg_1"), result_wire("msg_1")]
+    {
+      [user_wire("add"), user_wire("more")] => ->(runner, _) { runner.params[:messages] << user("more") },
+      [user_wire("context"), user_wire("add")] => ->(runner, _) { runner.params[:messages].unshift(user("context")) },
+      [user_wire("again")] => ->(runner, _) { runner.params[:messages][0][:content] = "again" }
+    }.each do |edited, edit|
+      in_every_mode([calls("msg_1"), final], edit) do |mode, _, requests|
+        assert_equal([[1, 2]], @adder.calls)
+        thread = mode == :default ? {type: "create"} : nil
+        assert_equal([thread, [*edited, *the_turn]], requests[1].values_at(:thread, :messages))
+      end
+    end
+  end
+
+  def test_the_turn_is_kept_as_typed_blocks_and_tool_calls_that_can_be_edited
+    said_and_called = [[{type: "text", text: "sure"}, *calls("msg_1").first], "tool_use"]
+
+    in_every_mode([said_and_called, final], ->(*) {}) do |mode, runner, requests|
+      assert_equal(mode == :default ? continue_from("msg_1") : nil, requests[1][:thread])
+      kept = runner.params[:messages][1]
+      assert_pattern { kept => {role: :assistant, content: [Anthropic::Beta::BetaTextBlock, Hash]} }
+      assert_equal("sure", kept[:content].first.text)
+      kept[:content].last[:cache_control] = {type: :ephemeral}
+      kept[:content] << {type: :text, text: "more"}
+      assert_equal(3, runner.params[:messages][1][:content].length)
+    end
+  end
+
+  def test_frozen_messages_are_sent_when_no_tool_is_called
+    in_every_mode([final], ->(*) {}, messages: [user("add")].freeze) do |_, runner, requests|
+      assert_equal([[user_wire("add")]], requests.map { _1[:messages] })
+      assert_predicate(runner, :finished?)
     end
   end
 
@@ -483,44 +620,6 @@ class Anthropic::Test::Helpers::ToolRunner::ThreadsTest < Minitest::Test
     assert_equal([1, [user_wire("add"), text_wire("wait"), user_wire("more")]], [@requests.length, held_by(thread)])
   end
 
-  def test_a_message_put_ahead_of_the_sent_ones_leaves_the_reply_after_them
-    put_ahead = [
-      ->(runner) { runner.params = {**runner.params, messages: [user("context"), *runner.params[:messages]]} },
-      ->(runner) { runner.params = {**runner.params, messages: [user("context"), user("add")]} },
-      ->(runner) { runner.params[:messages].unshift(user("context")) }
-    ]
-    put_ahead.each do |put|
-      start_over
-      serve(call_tool("msg_1"), text("msg_2"))
-      runner = new_runner
-
-      runner.each_message { put.call(runner) if _1.id == "msg_1" }
-
-      assert_equal([{type: "create"}, {type: "create"}], threads)
-      assert_equal(
-        [user_wire("context"), user_wire("add"), tool_use_wire("msg_1"), result_wire("msg_1")],
-        bodies[1][:messages]
-      )
-    end
-  end
-
-  def test_a_rewritten_history_starts_a_new_thread
-    rewritten = [
-      ->(runner, reply) { runner.params = {**runner.params, messages: [user("again"), {role: :assistant, content: reply.content}]} },
-      ->(runner, _) { runner.params[:messages][0][:content] = "again" }
-    ]
-    rewritten.each do |rewrite|
-      start_over
-      serve(call_tool("msg_1"), text("msg_2"))
-      runner = new_runner
-
-      runner.each_message { rewrite.call(runner, _1) if _1.id == "msg_1" }
-
-      assert_equal([{type: "create"}, {type: "create"}], threads)
-      assert_equal([user_wire("again"), tool_use_wire("msg_1"), result_wire("msg_1")], bodies[1][:messages])
-    end
-  end
-
   def test_params_set_replace_the_earlier_ones
     serve(call_tool("msg_1"), text("msg_2"))
     runner = new_runner(inference_geo: "us", request_options: {extra_headers: {"X-One" => "1"}})
@@ -540,10 +639,10 @@ class Anthropic::Test::Helpers::ToolRunner::ThreadsTest < Minitest::Test
 
     runner.each_message do
       next unless _1.id == "msg_1"
-      runner.params = {**runner.params, messages: [user("add")]}
+      runner.params = {**runner.params, messages: [user("add"), turn(_1), own_result("msg_1")]}
     end
 
-    assert_equal([continue_from("msg_1"), [result_wire("msg_1")]], bodies[1].values_at(:thread, :messages))
+    assert_equal([continue_from("msg_1"), [own_result_wire("msg_1")]], bodies[1].values_at(:thread, :messages))
   end
 
   def test_changed_system_or_tools_is_refused_before_a_tool_runs
@@ -559,6 +658,66 @@ class Anthropic::Test::Helpers::ToolRunner::ThreadsTest < Minitest::Test
       assert_includes(error.message, "Cannot change `#{field}` on a thread")
       assert_equal(field == :tools, error.message.end_with?("send `tool_addition` or `tool_removal` blocks in a `system` message."))
       assert_equal([1, []], [@requests.length, @adder.calls])
+    end
+  end
+
+  # Each way to replace the messages of a runner while it handles a reply, with what it leaves.
+  def ways_to_replace_the_messages
+    {
+      ->(runner, _) { runner.feed_messages(user("more")) } => [user_wire("add"), user_wire("more")],
+      ->(runner, _) { runner.feed_messages } => [user_wire("add")],
+      ->(runner, _) { runner.params[:messages] = [user("over")] } => [user_wire("over")],
+      ->(runner, reply) { runner.feed_messages(turn(reply), own_result("msg_1")) } =>
+        [user_wire("add"), tool_use_wire("msg_1"), own_result_wire("msg_1")]
+    }
+  end
+
+  def changed_fields = {system_: "two", tools: [@adder, {name: "other", input_schema: {type: "object"}}]}
+
+  def test_changed_system_or_tools_is_refused_when_the_messages_are_replaced_too
+    ways_to_replace_the_messages.keys.product(changed_fields.to_a, [false, true]) do |replace, (field, changed), streaming|
+      start_over
+      serve(served("msg_1", *calls("msg_1"), streaming:))
+      runner = new_runner(system_: "one")
+      handle = lambda do |reply|
+        replace.call(runner, reply)
+        runner.params[field] = changed
+      end
+
+      error = assert_raises(Anthropic::Errors::Error) do
+        streaming ? runner.each_streaming { handle.call(_1.accumulated_message) } : runner.each_message(&handle)
+      end
+
+      assert_includes(error.message, "Cannot change `#{field}` on a thread")
+      assert_equal([1, []], [@requests.length, @adder.calls])
+    end
+  end
+
+  def test_changed_system_or_tools_is_refused_when_the_messages_are_replaced_between_steps
+    serve(call_tool("msg_1"))
+    runner = new_runner(system_: "one")
+    runner.next_message
+    runner.params = {**runner.params, messages: [user("over")], system_: "two"}
+
+    error = assert_raises(Anthropic::Errors::Error) { runner.next_message }
+
+    assert_includes(error.message, "Cannot change `system_` on a thread")
+    assert_equal(1, @requests.length)
+  end
+
+  def test_system_and_tools_change_with_the_messages_on_a_runner_that_sends_the_whole_history
+    ways_to_replace_the_messages.to_a.product(changed_fields.to_a) do |(replace, conversation), (field, changed)|
+      change = lambda do |runner, reply|
+        replace.call(runner, reply)
+        runner.params[field] = changed
+      end
+
+      in_every_mode([calls("msg_1"), final], change, modes: runner_modes.except(:default), system_: "one") do |_, _, requests|
+        assert_empty(@adder.calls)
+        assert_equal(conversation, requests[1][:messages])
+        sent = [requests[1][:system], requests[1][:tools].map { _1[:name] }]
+        assert_equal(field == :system_ ? ["two", %w[adder]] : ["one", %w[adder other]], sent)
+      end
     end
   end
 
