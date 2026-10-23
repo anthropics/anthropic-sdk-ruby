@@ -100,8 +100,9 @@ module Anthropic
             optional :deployment_ids, Anthropic::Internal::Type::ArrayOf[String], nil?: true
 
             # @!attribute ending_at
-            #   End of range, exclusive. When omitted, defaults to the earlier of now and
-            #   `starting_at` + 31 days. The range may span at most 31 days.
+            #   End of range, exclusive. Required when `time_bucket_width` is set. Without
+            #   `time_bucket_width`, defaults to the earlier of now and `starting_at` + 31 days.
+            #   The range may span at most 31 days.
             #
             #   @return [Time, nil]
             optional :ending_at, Time, nil?: true
@@ -303,7 +304,7 @@ module Anthropic
             #
             #   @param deployment_ids [Array<String>, nil] Filter to usage incurred by Claude Managed Agents sessions that specific deploym
             #
-            #   @param ending_at [Time, nil] End of range, exclusive. When omitted, defaults to the earlier of now and `start
+            #   @param ending_at [Time, nil] End of range, exclusive. Required when `time_bucket_width` is set. Without `time
             #
             #   @param environment_ids [Array<String>, nil] Filter to usage incurred by Claude Managed Agents sessions that ran in specific
             #

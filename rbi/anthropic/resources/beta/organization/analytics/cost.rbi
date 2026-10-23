@@ -142,8 +142,9 @@ module Anthropic
               # specific deployments started. Use `group_by[]=deployment_id` to break out
               # per-deployment values. Claude Developer Platform organizations only.
               deployment_ids: nil,
-              # Query param: End of range, exclusive. When omitted, defaults to the earlier of
-              # now and `starting_at` + 31 days. The range may span at most 31 days.
+              # Query param: End of range, exclusive. Required when `time_bucket_width` is set.
+              # Without `time_bucket_width`, defaults to the earlier of now and `starting_at` +
+              # 31 days. The range may span at most 31 days.
               ending_at: nil,
               # Query param: Filter to usage incurred by Claude Managed Agents sessions that ran
               # in specific environments. Use `group_by[]=environment_id` to break out

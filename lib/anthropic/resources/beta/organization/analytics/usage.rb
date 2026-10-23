@@ -40,7 +40,7 @@ module Anthropic
             #
             # @param deployment_ids [Array<String>, nil] Query param: Filter to usage incurred by Claude Managed Agents sessions that spe
             #
-            # @param ending_at [Time, nil] Query param: End of range, exclusive. When omitted, defaults to the earlier of n
+            # @param ending_at [Time, nil] Query param: End of range, exclusive. Required when `time_bucket_width` is set.
             #
             # @param environment_ids [Array<String>, nil] Query param: Filter to usage incurred by Claude Managed Agents sessions that ran
             #

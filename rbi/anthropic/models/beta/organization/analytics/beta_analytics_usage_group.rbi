@@ -187,10 +187,7 @@ module Anthropic
 
             # Workspace the usage occurred in, as a tagged workspace ID, including the
             # organization's default workspace. Populated only when `workspace_id` is in
-            # `group_by[]`; null for Claude Enterprise usage. Usage a linked platform made on
-            # this organization's account is in none of its workspaces and carries the
-            # placeholder workspace ID `wrkspc_011111111111111111111111`, which
-            # `workspace_ids[]` also accepts.
+            # `group_by[]`; null for Claude Enterprise usage.
             sig { returns(T.nilable(String)) }
             attr_accessor :workspace_id
 
@@ -341,10 +338,7 @@ module Anthropic
               user_profile_id:,
               # Workspace the usage occurred in, as a tagged workspace ID, including the
               # organization's default workspace. Populated only when `workspace_id` is in
-              # `group_by[]`; null for Claude Enterprise usage. Usage a linked platform made on
-              # this organization's account is in none of its workspaces and carries the
-              # placeholder workspace ID `wrkspc_011111111111111111111111`, which
-              # `workspace_ids[]` also accepts.
+              # `group_by[]`; null for Claude Enterprise usage.
               workspace_id:
             )
             end
