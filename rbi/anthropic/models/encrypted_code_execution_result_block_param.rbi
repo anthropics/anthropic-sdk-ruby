@@ -26,7 +26,8 @@ module Anthropic
       sig { returns(Symbol) }
       attr_accessor :type
 
-      # Code execution result with encrypted stdout for PFC + web_search results.
+      # The output and exit code of Python code that Claude ran with the code execution
+      # tool, with standard output in encrypted form, sent back in a later request.
       sig do
         params(
           content: T::Array[Anthropic::CodeExecutionOutputBlockParam::OrHash],
