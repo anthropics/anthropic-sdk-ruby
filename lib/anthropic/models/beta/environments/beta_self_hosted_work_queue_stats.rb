@@ -7,7 +7,7 @@ module Anthropic
         # @see Anthropic::Resources::Beta::Environments::Work#stats
         class BetaSelfHostedWorkQueueStats < Anthropic::Internal::Type::BaseModel
           # @!attribute depth
-          #   Number of work items waiting to be picked up (lag from consumer group)
+          #   Number of work items waiting to be picked up
           #
           #   @return [Integer]
           required :depth, Integer
@@ -41,13 +41,11 @@ module Anthropic
           # @!method initialize(depth:, oldest_queued_at:, pending:, workers_polling:, type: :work_queue_stats)
           #   Statistics about the work queue for an environment.
           #
-          #   Uses Redis Stream consumer group metrics for O(1) queries.
-          #
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Environments::BetaSelfHostedWorkQueueStats} for more
           #   details.
           #
-          #   @param depth [Integer] Number of work items waiting to be picked up (lag from consumer group)
+          #   @param depth [Integer] Number of work items waiting to be picked up
           #
           #   @param oldest_queued_at [String, nil] RFC 3339 timestamp of oldest item in the work stream (includes both queued and p
           #

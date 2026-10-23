@@ -43,11 +43,12 @@ module Anthropic
               parsed, options = Anthropic::Beta::Organization::Analytics::SummaryListParams.dump_request(params)
               query = Anthropic::Internal::Util.encode_query_params(parsed)
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_ANALYTICS_SUMMARIES_LIST,
                 span_route: "/v1/organizations/analytics/summaries",
                 span_query: %w[ending_date filter limit page starting_date],
                 method: :get,
-                path: "v1/organizations/analytics/summaries?beta=true",
+                path: "v1/organizations/analytics/summaries",
                 query: query,
                 page: Anthropic::Internal::PageCursor,
                 model: Anthropic::Beta::Organization::BetaAnalyticsSingleDayActivitySummary,

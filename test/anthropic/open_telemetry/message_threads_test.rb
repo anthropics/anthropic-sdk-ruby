@@ -51,7 +51,7 @@ class Anthropic::Test::OpenTelemetryMessageThreadsTest < Anthropic::Test::OpenTe
     WebMock.reset!
     @exporter.reset
     @requests = []
-    stub_request(:post, "#{MESSAGES_URL}?beta=true").to_return do |request|
+    stub_request(:post, MESSAGES_URL).to_return do |request|
       body = JSON.parse(request.body, symbolize_names: true)
       @requests << {body: body, headers: request.headers.transform_keys(&:downcase)}
       response = responses.fetch(@requests.length - 1)

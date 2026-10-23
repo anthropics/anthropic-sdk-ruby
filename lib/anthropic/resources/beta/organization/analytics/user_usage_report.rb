@@ -11,9 +11,9 @@ module Anthropic
             # Returns usage per user, ranked by the chosen token metric; `group_by[]` or
             # `bucket_width` splits a user across several rows. Use this to see which users
             # consume the most tokens. Only usage attributed to a user account is included;
-            # usage with no user attributed to it, such as requests attributed only to an API
-            # key, is left out. Available to organizations on a Claude Enterprise plan.
-            # Requires an API key with the `read:analytics` scope.
+            # usage with no user attributed to it, such as Code Review usage and Claude Tag
+            # usage in Slack channels, is left out. Available to organizations on a Claude
+            # Enterprise plan. Requires an API key with the `read:analytics` scope.
             #
             # This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
             # new integrations, use
@@ -76,6 +76,7 @@ module Anthropic
                 Anthropic::Beta::Organization::Analytics::UserUsageReportListParams.dump_request(params)
               query = Anthropic::Internal::Util.encode_query_params(parsed)
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_ANALYTICS_USER_USAGE_REPORT_LIST,
                 span_route: "/v1/organizations/analytics/user_usage_report",
                 span_query: %w[
@@ -100,7 +101,7 @@ module Anthropic
                   user_ids
                 ],
                 method: :get,
-                path: "v1/organizations/analytics/user_usage_report?beta=true",
+                path: "v1/organizations/analytics/user_usage_report",
                 query: query,
                 page: Anthropic::Internal::ReportPageCursor,
                 model: Anthropic::Beta::Organization::BetaAnalyticsUsageUsersItem,

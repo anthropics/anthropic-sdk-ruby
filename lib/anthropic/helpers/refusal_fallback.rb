@@ -225,8 +225,7 @@ module Anthropic
       return false unless req.method == :post
       return false unless req.body.is_a?(Hash)
       return false unless req.url.path&.end_with?("/v1/messages")
-      query = URI.decode_www_form(req.url.query.to_s).to_h
-      query["beta"] == "true"
+      req.metadata.dig(:qualifiers, :beta) == "true"
     end
 
     # @return [Anthropic::APIRequest] `req` with `@betas` appended to the

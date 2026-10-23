@@ -7,7 +7,8 @@ class Anthropic::Test::Resources::Beta::Sessions::Threads::EventsTest < Anthropi
     response =
       @anthropic.beta.sessions.threads.events.list(
         "sthr_011CZkZVWa6oJjw1rgXZpnBt",
-        session_id: "sesn_011CZkZAtmR3yMPDzynEDxu7"
+        session_id: "sesn_011CZkZAtmR3yMPDzynEDxu7",
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do

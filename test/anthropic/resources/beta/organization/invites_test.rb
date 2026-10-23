@@ -4,7 +4,12 @@ require_relative "../../../test_helper"
 
 class Anthropic::Test::Resources::Beta::Organization::InvitesTest < Anthropic::Test::ResourceTest
   def test_create_required_params
-    response = @anthropic.beta.organization.invites.create(email: "user@emaildomain.com", role: :user)
+    response =
+      @anthropic.beta.organization.invites.create(
+        email: "user@emaildomain.com",
+        role: :user,
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaOrganizationInvite
@@ -26,7 +31,11 @@ class Anthropic::Test::Resources::Beta::Organization::InvitesTest < Anthropic::T
   end
 
   def test_retrieve
-    response = @anthropic.beta.organization.invites.retrieve("invite_id")
+    response =
+      @anthropic.beta.organization.invites.retrieve(
+        "invite_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaOrganizationInvite
@@ -48,7 +57,7 @@ class Anthropic::Test::Resources::Beta::Organization::InvitesTest < Anthropic::T
   end
 
   def test_list
-    response = @anthropic.beta.organization.invites.list
+    response = @anthropic.beta.organization.invites.list(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::Page
@@ -77,7 +86,8 @@ class Anthropic::Test::Resources::Beta::Organization::InvitesTest < Anthropic::T
   end
 
   def test_delete
-    response = @anthropic.beta.organization.invites.delete("invite_id")
+    response =
+      @anthropic.beta.organization.invites.delete("invite_id", request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Models::Beta::Organization::InviteDeleteResponse

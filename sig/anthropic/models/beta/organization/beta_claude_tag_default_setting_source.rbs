@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_claude_tag_default_setting_source = { type: :default }
+
+        class BetaClaudeTagDefaultSettingSource < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :default
+
+          def initialize: (?type: :default) -> void
+
+          def to_hash: -> { type: :default }
+        end
+      end
+    end
+  end
+end

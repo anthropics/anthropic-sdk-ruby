@@ -1,0 +1,73 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_claude_tag_setting_source =
+          Anthropic::Beta::Organization::BetaClaudeTagSlackChannelSettingSource
+          | Anthropic::Beta::Organization::BetaClaudeTagSlackWorkspaceSettingSource
+          | Anthropic::Beta::Organization::BetaClaudeTagSlackParentChannelSettingSource
+          | Anthropic::Beta::Organization::BetaClaudeTagSlackDefaultSettingSource
+          | Anthropic::Beta::Organization::BetaClaudeTagDefaultSettingSource
+          | Anthropic::Beta::Organization::BetaClaudeTagSlackGridChannelSettingSource
+
+        module BetaClaudeTagSettingSource
+          extend Anthropic::Internal::Type::Union
+
+          type type_ =
+            :slack_channel
+            | :slack_workspace
+            | :slack_parent_channel
+            | :slack_default
+            | :default
+            | :slack_grid_channel
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            SLACK_CHANNEL: :slack_channel
+            SLACK_WORKSPACE: :slack_workspace
+            SLACK_PARENT_CHANNEL: :slack_parent_channel
+            SLACK_DEFAULT: :slack_default
+            DEFAULT: :default
+            SLACK_GRID_CHANNEL: :slack_grid_channel
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaClaudeTagSettingSource::type_]
+          end
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source]
+
+          def self.new:
+            (
+              type: :slack_channel | "slack_channel",
+              slack_channel_id: String
+            ) -> Anthropic::Beta::Organization::BetaClaudeTagSlackChannelSettingSource
+            | (
+              type: :slack_workspace | "slack_workspace",
+              slack_workspace_id: String
+            ) -> Anthropic::Beta::Organization::BetaClaudeTagSlackWorkspaceSettingSource
+            | (
+              type: :slack_parent_channel | "slack_parent_channel",
+              slack_channel_id: String
+            ) -> Anthropic::Beta::Organization::BetaClaudeTagSlackParentChannelSettingSource
+            | (
+              type: :slack_default | "slack_default"
+            ) -> Anthropic::Beta::Organization::BetaClaudeTagSlackDefaultSettingSource
+            | (
+              type: :default | "default"
+            ) -> Anthropic::Beta::Organization::BetaClaudeTagDefaultSettingSource
+            | (
+              type: :slack_grid_channel | "slack_grid_channel",
+              slack: Anthropic::Beta::Organization::BetaClaudeTagSlackChannelIdentifiers
+            ) -> Anthropic::Beta::Organization::BetaClaudeTagSlackGridChannelSettingSource
+            | (
+              type: Anthropic::Models::Beta::Organization::BetaClaudeTagSettingSource::type_
+              | String,
+              ?slack_channel_id: String,
+              ?slack_workspace_id: String,
+              ?slack: Anthropic::Beta::Organization::BetaClaudeTagSlackChannelIdentifiers
+            ) -> Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source
+        end
+      end
+    end
+  end
+end

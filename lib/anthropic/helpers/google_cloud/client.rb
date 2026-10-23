@@ -3,14 +3,14 @@
 module Anthropic
   module Helpers
     module GoogleCloud
-      # Client for Claude Platform on Google Cloud — the first-party Anthropic
-      # API served through the Google Cloud gateway.
+      # Client for Claude Models on Google Cloud (Anthropic managed) — the
+      # first-party Anthropic API served through the Google Cloud gateway.
       #
       # This is distinct from {Anthropic::VertexClient}, which targets the
       # `:rawPredict` publisher-model API (publisher model IDs, messages
       # only). This client speaks the full first-party Anthropic API: requests
       # pass through the gateway unchanged — standard `/v1/*` paths, standard
-      # model names. The gateway does not serve the User Profiles API.
+      # model names.
       class Client < Anthropic::Client
         # OAuth2 scope required to call the gateway.
         SCOPE = "https://www.googleapis.com/auth/cloud-platform"
@@ -26,9 +26,9 @@ module Anthropic
         # served from a base with no workspace in it.
         ORGANIZATION_URL_TEMPLATE = "#{LOCATION_URL_TEMPLATE}/claudeOrganization/invoke".freeze
 
-        ORGANIZATION_PATH_PREFIX = "/v1/organizations/"
+        ORGANIZATION_PATH_PATTERN = %r{\A/v1/(?:organizations/|user_profiles(?:/|\z))}
 
-        private_constant :LOCATION_URL_TEMPLATE, :ORGANIZATION_PATH_PREFIX
+        private_constant :LOCATION_URL_TEMPLATE, :ORGANIZATION_PATH_PATTERN
 
         # @return [String, nil]
         attr_reader :project
@@ -63,7 +63,8 @@ module Anthropic
         # @param workspace_id [String, nil] Defaults to
         #   `ENV["ANTHROPIC_GOOGLE_CLOUD_WORKSPACE_ID"]`. Required when the base
         #   URL is derived, except for organization-level routes
-        #   (`/v1/organizations/`), which need no workspace ID.
+        #   (`/v1/organizations/` and `/v1/user_profiles`), which need no
+        #   workspace ID.
         #
         # @param base_url [String, nil] Override the gateway base URL for every
         #   route. Defaults to `ENV["ANTHROPIC_GOOGLE_CLOUD_BASE_URL"]`, otherwise
@@ -154,10 +155,7 @@ module Anthropic
           # No first-party credential is ever passed up, and
           # {#resolve_default_credentials?} keeps the parent from discovering
           # one; `base_url` is always resolved by this point, so the parent's
-          # `ANTHROPIC_BASE_URL` fallback never applies. The parent wires up
-          # every resource; {#user_profiles} withholds the one the gateway does
-          # not serve, and {#build_request} refuses the user profile routes
-          # however the resource is reached.
+          # `ANTHROPIC_BASE_URL` fallback never applies.
           super(
             base_url: base_url,
             timeout: timeout,
@@ -174,13 +172,6 @@ module Anthropic
         # @return [Boolean]
         # @see Anthropic::Client#resolve_default_credentials?
         private def resolve_default_credentials? = false
-
-        # User profiles are not supported on the Google Cloud gateway.
-        #
-        # @raise [NotImplementedError]
-        def user_profiles
-          raise NotImplementedError.new("User profiles are not supported on the Google Cloud gateway.")
-        end
 
         # @api private
         #
@@ -219,15 +210,8 @@ module Anthropic
         #   @option opts [Float, nil] :timeout
         #
         # @raise [ArgumentError]
-        # @raise [NotImplementedError]
         # @return [Hash{Symbol=>Object}]
         private def build_request(req, opts)
-          # Id-parameterized routes pass `path` as an Array whose first element
-          # is the format string (e.g. `["v1/user_profiles/%1$s", id]`).
-          if Array(req[:path]).first.to_s.start_with?("v1/user_profiles")
-            raise NotImplementedError.new("User profiles are not supported on the Google Cloud gateway.")
-          end
-
           request = super
           return request if @organization_base_url.nil?
 
@@ -238,7 +222,7 @@ module Anthropic
           return request unless under_base_url
 
           path = url.path.delete_prefix(base_url.path)
-          if path.start_with?(ORGANIZATION_PATH_PREFIX)
+          if path.match?(ORGANIZATION_PATH_PATTERN)
             url = url.dup
             url.path = "#{@organization_base_url.path}#{path}"
             {**request, url: url}

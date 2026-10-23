@@ -4,7 +4,11 @@ require_relative "../../../test_helper"
 
 class Anthropic::Test::Resources::Beta::Organization::RBACGroupsTest < Anthropic::Test::ResourceTest
   def test_create_required_params
-    response = @anthropic.beta.organization.rbac_groups.create(name: "Engineering")
+    response =
+      @anthropic.beta.organization.rbac_groups.create(
+        name: "Engineering",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaRBACGroup
@@ -24,7 +28,11 @@ class Anthropic::Test::Resources::Beta::Organization::RBACGroupsTest < Anthropic
   end
 
   def test_retrieve
-    response = @anthropic.beta.organization.rbac_groups.retrieve("rbac_group_id")
+    response =
+      @anthropic.beta.organization.rbac_groups.retrieve(
+        "rbac_group_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaRBACGroup
@@ -44,7 +52,11 @@ class Anthropic::Test::Resources::Beta::Organization::RBACGroupsTest < Anthropic
   end
 
   def test_update
-    response = @anthropic.beta.organization.rbac_groups.update("rbac_group_id")
+    response =
+      @anthropic.beta.organization.rbac_groups.update(
+        "rbac_group_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaRBACGroup
@@ -64,7 +76,7 @@ class Anthropic::Test::Resources::Beta::Organization::RBACGroupsTest < Anthropic
   end
 
   def test_list
-    response = @anthropic.beta.organization.rbac_groups.list
+    response = @anthropic.beta.organization.rbac_groups.list(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -91,7 +103,11 @@ class Anthropic::Test::Resources::Beta::Organization::RBACGroupsTest < Anthropic
   end
 
   def test_delete
-    response = @anthropic.beta.organization.rbac_groups.delete("rbac_group_id")
+    response =
+      @anthropic.beta.organization.rbac_groups.delete(
+        "rbac_group_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Models::Beta::Organization::RBACGroupDeleteResponse

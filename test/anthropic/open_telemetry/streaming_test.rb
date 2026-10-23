@@ -5,7 +5,7 @@ require_relative "support"
 # The tests stop reading streams early on purpose.
 # rubocop:disable Lint/EmptyBlock, Lint/UnreachableLoop
 class Anthropic::Test::OpenTelemetryStreamingTest < Anthropic::Test::OpenTelemetryTestCase
-  RESOURCES = {messages: MESSAGES_URL, beta_messages: "#{MESSAGES_URL}?beta=true"}.freeze
+  RESOURCES = {messages: MESSAGES_URL, beta_messages: MESSAGES_URL}.freeze
 
   def messages_resource(c, name) = name == :beta_messages ? c.beta.messages : c.messages
 
@@ -121,7 +121,7 @@ class Anthropic::Test::OpenTelemetryStreamingTest < Anthropic::Test::OpenTelemet
       {type: "content_block_stop", index: 1},
       *STREAM_EVENTS.last(2)
     ]
-    stub_messages(stream_response(events), stream_response(events), url: "#{MESSAGES_URL}?beta=true")
+    stub_messages(stream_response(events), stream_response(events), url: MESSAGES_URL)
     c = client
     c.beta.messages.stream_raw(**PARAMS).each {}
     message = c.beta.messages.stream(**PARAMS).accumulated_message
@@ -142,7 +142,7 @@ class Anthropic::Test::OpenTelemetryStreamingTest < Anthropic::Test::OpenTelemet
     delta = {**delta, usage: {**delta[:usage], iterations: iterations}}
     events = [*STREAM_EVENTS[0..3], delta, STREAM_EVENTS.last]
     responses = [events, events, events, events[0..4]].map { stream_response(_1) }
-    stub_messages(*responses, url: "#{MESSAGES_URL}?beta=true")
+    stub_messages(*responses, url: MESSAGES_URL)
 
     client.beta.messages.stream_raw(**PARAMS).each {}
     client.beta.messages.stream(**PARAMS).until_done
@@ -524,7 +524,7 @@ class Anthropic::Test::OpenTelemetryStreamingTest < Anthropic::Test::OpenTelemet
   end
 
   def stub_session_events(*events)
-    url = "#{BASE_URL}/v1/sessions/sess_1/events/stream?beta=true"
+    url = "#{BASE_URL}/v1/sessions/sess_1/events/stream"
     stub_request(:get, url).to_return(
       status: 200,
       body: sse(*events),

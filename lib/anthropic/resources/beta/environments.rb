@@ -37,11 +37,12 @@ module Anthropic
           parsed, options = Anthropic::Beta::EnvironmentCreateParams.dump_request(params)
           header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::ENVIRONMENTS_CREATE,
             span_created_id: "anthropic.environment.id",
             span_route: "/v1/environments",
             method: :post,
-            path: "v1/environments?beta=true",
+            path: "v1/environments",
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),
             body: parsed.except(*header_params.keys),
             model: Anthropic::Beta::BetaEnvironment,
@@ -70,11 +71,12 @@ module Anthropic
         def retrieve(environment_id, params = {})
           parsed, options = Anthropic::Beta::EnvironmentRetrieveParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::ENVIRONMENTS_RETRIEVE,
             span_attributes: {"anthropic.environment.id" => environment_id},
             span_route: "/v1/environments/{environment_id}",
             method: :get,
-            path: ["v1/environments/%1$s?beta=true", environment_id],
+            path: ["v1/environments/%1$s", environment_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaEnvironment,
             options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
@@ -113,11 +115,12 @@ module Anthropic
           parsed, options = Anthropic::Beta::EnvironmentUpdateParams.dump_request(params)
           header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::ENVIRONMENTS_UPDATE,
             span_attributes: {"anthropic.environment.id" => environment_id},
             span_route: "/v1/environments/{environment_id}",
             method: :post,
-            path: ["v1/environments/%1$s?beta=true", environment_id],
+            path: ["v1/environments/%1$s", environment_id],
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),
             body: parsed.except(*header_params.keys),
             model: Anthropic::Beta::BetaEnvironment,
@@ -152,11 +155,12 @@ module Anthropic
           parsed, options = Anthropic::Beta::EnvironmentListParams.dump_request(params)
           query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::ENVIRONMENTS_LIST,
             span_route: "/v1/environments",
             span_query: %w[include_archived limit page],
             method: :get,
-            path: "v1/environments?beta=true",
+            path: "v1/environments",
             query: query,
             headers: parsed.except(*query_params).transform_keys(
               betas: "anthropic-beta",
@@ -189,11 +193,12 @@ module Anthropic
         def delete(environment_id, params = {})
           parsed, options = Anthropic::Beta::EnvironmentDeleteParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::ENVIRONMENTS_DELETE,
             span_attributes: {"anthropic.environment.id" => environment_id},
             span_route: "/v1/environments/{environment_id}",
             method: :delete,
-            path: ["v1/environments/%1$s?beta=true", environment_id],
+            path: ["v1/environments/%1$s", environment_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaEnvironmentDeleteResponse,
             options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
@@ -222,11 +227,12 @@ module Anthropic
         def archive(environment_id, params = {})
           parsed, options = Anthropic::Beta::EnvironmentArchiveParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::ENVIRONMENTS_ARCHIVE,
             span_attributes: {"anthropic.environment.id" => environment_id},
             span_route: "/v1/environments/{environment_id}/archive",
             method: :post,
-            path: ["v1/environments/%1$s/archive?beta=true", environment_id],
+            path: ["v1/environments/%1$s/archive", environment_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaEnvironment,
             options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}

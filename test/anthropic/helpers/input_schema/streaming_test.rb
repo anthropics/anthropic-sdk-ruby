@@ -401,7 +401,7 @@ module Anthropic
             },
             {type: "message_stop"}
           )
-          stub_request(:post, "http://localhost/v1/messages?beta=true")
+          stub_request(:post, "http://localhost/v1/messages")
             .to_return(
               status: 200,
               body: ->(_) { @response_body },
@@ -422,7 +422,7 @@ module Anthropic
           assert_instance_of(GetWeatherInput, tool_use.parsed)
           assert_equal("Paris", tool_use.parsed.location)
           sent_as = {name: "weather_getter", input_schema: GetWeatherInput.to_json_schema}
-          assert_requested(:post, "http://localhost/v1/messages?beta=true") do
+          assert_requested(:post, "http://localhost/v1/messages") do
             sent = JSON.parse(_1.body, symbolize_names: true).dig(:messages, 1, :content, 0, :tool, :definition)
             assert_equal(JSON.parse(sent_as.to_json, symbolize_names: true), sent)
           end

@@ -13,7 +13,7 @@ module Anthropic
               )
             end
 
-          # Number of work items waiting to be picked up (lag from consumer group)
+          # Number of work items waiting to be picked up
           sig { returns(Integer) }
           attr_accessor :depth
 
@@ -36,8 +36,6 @@ module Anthropic
           attr_accessor :workers_polling
 
           # Statistics about the work queue for an environment.
-          #
-          # Uses Redis Stream consumer group metrics for O(1) queries.
           sig do
             params(
               depth: Integer,
@@ -48,7 +46,7 @@ module Anthropic
             ).returns(T.attached_class)
           end
           def self.new(
-            # Number of work items waiting to be picked up (lag from consumer group)
+            # Number of work items waiting to be picked up
             depth:,
             # RFC 3339 timestamp of oldest item in the work stream (includes both queued and
             # pending items), null if stream empty

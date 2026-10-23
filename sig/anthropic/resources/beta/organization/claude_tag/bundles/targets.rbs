@@ -1,0 +1,44 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class ClaudeTag
+          class Bundles
+            class Targets
+              def create: (
+                String bundle_id,
+                target: Anthropic::Models::Beta::Organization::ClaudeTag::Bundles::beta_claude_tag_bundle_target_create,
+                ?betas: ::Array[Anthropic::Models::anthropic_beta],
+                ?request_options: Anthropic::request_opts
+              ) -> Anthropic::Models::Beta::Organization::ClaudeTag::Bundles::beta_claude_tag_bundle_target
+
+              def retrieve: (
+                String target_id,
+                bundle_id: String,
+                ?betas: ::Array[Anthropic::Models::anthropic_beta],
+                ?request_options: Anthropic::request_opts
+              ) -> Anthropic::Models::Beta::Organization::ClaudeTag::Bundles::beta_claude_tag_bundle_target
+
+              def list: (
+                String bundle_id,
+                ?limit: Integer,
+                ?page: String,
+                ?betas: ::Array[Anthropic::Models::anthropic_beta],
+                ?request_options: Anthropic::request_opts
+              ) -> Anthropic::Internal::PageCursor[Anthropic::Models::Beta::Organization::ClaudeTag::Bundles::beta_claude_tag_bundle_target]
+
+              def delete: (
+                String target_id,
+                bundle_id: String,
+                ?betas: ::Array[Anthropic::Models::anthropic_beta],
+                ?request_options: Anthropic::request_opts
+              ) -> Anthropic::Beta::Organization::ClaudeTag::Bundles::BetaClaudeTagDeletedBundleTarget
+
+              def initialize: (client: Anthropic::Client) -> void
+            end
+          end
+        end
+      end
+    end
+  end
+end

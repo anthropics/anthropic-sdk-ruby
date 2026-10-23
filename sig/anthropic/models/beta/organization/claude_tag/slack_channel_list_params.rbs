@@ -1,0 +1,69 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeTag
+          type slack_channel_list_params =
+            {
+              slack_workspace_id: String,
+              include_inherited: bool,
+              limit: Integer,
+              page: String,
+              slack_channel_id: String,
+              betas: ::Array[Anthropic::Models::anthropic_beta]
+            }
+            & Anthropic::Internal::Type::request_parameters
+
+          class SlackChannelListParams < Anthropic::Internal::Type::BaseModel
+            extend Anthropic::Internal::Type::RequestParameters::Converter
+            include Anthropic::Internal::Type::RequestParameters
+
+            attr_accessor slack_workspace_id: String
+
+            attr_reader include_inherited: bool?
+
+            def include_inherited=: (bool) -> bool
+
+            attr_reader limit: Integer?
+
+            def limit=: (Integer) -> Integer
+
+            attr_reader page: String?
+
+            def page=: (String) -> String
+
+            attr_reader slack_channel_id: String?
+
+            def slack_channel_id=: (String) -> String
+
+            attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+            def betas=: (
+              ::Array[Anthropic::Models::anthropic_beta]
+            ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+            def initialize: (
+              slack_workspace_id: String,
+              ?include_inherited: bool,
+              ?limit: Integer,
+              ?page: String,
+              ?slack_channel_id: String,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> void
+
+            def to_hash: -> {
+              slack_workspace_id: String,
+              include_inherited: bool,
+              limit: Integer,
+              page: String,
+              slack_channel_id: String,
+              betas: ::Array[Anthropic::Models::anthropic_beta],
+              request_options: Anthropic::RequestOptions
+            }
+          end
+        end
+      end
+    end
+  end
+end

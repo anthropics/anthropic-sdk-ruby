@@ -7,7 +7,8 @@ class Anthropic::Test::Resources::Beta::AgentsTest < Anthropic::Test::ResourceTe
     response =
       @anthropic.beta.agents.create(
         model: Anthropic::Beta::BetaManagedAgentsModel::CLAUDE_OPUS_5_5,
-        name: "My First Agent"
+        name: "My First Agent",
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
@@ -37,7 +38,11 @@ class Anthropic::Test::Resources::Beta::AgentsTest < Anthropic::Test::ResourceTe
   end
 
   def test_retrieve
-    response = @anthropic.beta.agents.retrieve("agent_011CZkYpogX7uDKUyvBTophP")
+    response =
+      @anthropic.beta.agents.retrieve(
+        "agent_011CZkYpogX7uDKUyvBTophP",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsAgent
@@ -66,7 +71,11 @@ class Anthropic::Test::Resources::Beta::AgentsTest < Anthropic::Test::ResourceTe
   end
 
   def test_update
-    response = @anthropic.beta.agents.update("agent_011CZkYpogX7uDKUyvBTophP")
+    response =
+      @anthropic.beta.agents.update(
+        "agent_011CZkYpogX7uDKUyvBTophP",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsAgent
@@ -95,7 +104,7 @@ class Anthropic::Test::Resources::Beta::AgentsTest < Anthropic::Test::ResourceTe
   end
 
   def test_list
-    response = @anthropic.beta.agents.list
+    response = @anthropic.beta.agents.list(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -131,7 +140,11 @@ class Anthropic::Test::Resources::Beta::AgentsTest < Anthropic::Test::ResourceTe
   end
 
   def test_archive
-    response = @anthropic.beta.agents.archive("agent_011CZkYpogX7uDKUyvBTophP")
+    response =
+      @anthropic.beta.agents.archive(
+        "agent_011CZkYpogX7uDKUyvBTophP",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsAgent

@@ -1,0 +1,48 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeTag
+          module Bundles
+            type target_retrieve_params =
+              {
+                bundle_id: String,
+                target_id: String,
+                betas: ::Array[Anthropic::Models::anthropic_beta]
+              }
+              & Anthropic::Internal::Type::request_parameters
+
+            class TargetRetrieveParams < Anthropic::Internal::Type::BaseModel
+              extend Anthropic::Internal::Type::RequestParameters::Converter
+              include Anthropic::Internal::Type::RequestParameters
+
+              attr_accessor bundle_id: String
+
+              attr_accessor target_id: String
+
+              attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+              def betas=: (
+                ::Array[Anthropic::Models::anthropic_beta]
+              ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+              def initialize: (
+                bundle_id: String,
+                target_id: String,
+                ?betas: ::Array[Anthropic::Models::anthropic_beta],
+                ?request_options: Anthropic::request_opts
+              ) -> void
+
+              def to_hash: -> {
+                bundle_id: String,
+                target_id: String,
+                betas: ::Array[Anthropic::Models::anthropic_beta],
+                request_options: Anthropic::RequestOptions
+              }
+            end
+          end
+        end
+      end
+    end
+  end
+end

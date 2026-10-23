@@ -6,7 +6,7 @@ class Anthropic::Test::Helpers::ToolRunner::CompactBeforeNextTurnTest < Minitest
   extend Minitest::Serial
   include WebMock::API
 
-  MESSAGES_URL = "http://localhost/v1/messages?beta=true"
+  MESSAGES_URL = "http://localhost/v1/messages"
 
   def before_all
     super

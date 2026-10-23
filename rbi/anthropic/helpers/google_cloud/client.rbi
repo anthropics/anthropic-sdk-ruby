@@ -15,10 +15,6 @@ module Anthropic
         sig { returns(T.nilable(String)) }
         attr_reader :workspace_id
 
-        sig { returns(T.noreturn) }
-        def user_profiles
-        end
-
         # @api private
         sig do
           override

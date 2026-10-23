@@ -29,7 +29,8 @@ module Anthropic
       required :type, const: :encrypted_code_execution_result
 
       # @!method initialize(content:, encrypted_stdout:, return_code:, stderr:, type: :encrypted_code_execution_result)
-      #   Code execution result with encrypted stdout for PFC + web_search results.
+      #   The output and exit code of Python code that Claude ran with the code execution
+      #   tool, with standard output in encrypted form, sent back in a later request.
       #
       #   @param content [Array<Anthropic::Models::CodeExecutionOutputBlockParam>]
       #   @param encrypted_stdout [String]

@@ -7,7 +7,8 @@ class Anthropic::Test::Resources::Beta::UserProfiles::ActionURLsTest < Anthropic
     response =
       @anthropic.beta.user_profiles.action_urls.create(
         "uprof_011CZkZCu8hGbp5mYRQgUmz9",
-        action: {type: :enroll_end_user}
+        action: {type: :enroll_end_user},
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do

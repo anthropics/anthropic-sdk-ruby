@@ -60,12 +60,13 @@ module Anthropic
               parsed, options = Anthropic::Beta::Organization::Plugins::VersionCreateParams.dump_request(params)
               header_params = {betas: "anthropic-beta"}
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_PLUGINS_VERSIONS_CREATE,
                 span_attributes: {"anthropic.organization.plugin.id" => plugin_id},
                 span_created_id: "anthropic.organization.plugin.version.id",
                 span_route: "/v1/organizations/plugins/{plugin_id}/versions",
                 method: :post,
-                path: ["v1/organizations/plugins/%1$s/versions?beta=true", plugin_id],
+                path: ["v1/organizations/plugins/%1$s/versions", plugin_id],
                 headers: {
                   "content-type" => "multipart/form-data",
                   **parsed.slice(*header_params.keys)
@@ -119,6 +120,7 @@ module Anthropic
                   raise ArgumentError.new("missing required path argument #{_1}")
                 end
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_PLUGINS_VERSIONS_RETRIEVE,
                 span_attributes: {
                   "anthropic.organization.plugin.id" => plugin_id,
@@ -127,7 +129,7 @@ module Anthropic
                 span_route: "/v1/organizations/plugins/{plugin_id}/versions/{version}",
                 span_query: %w[organization_id],
                 method: :get,
-                path: ["v1/organizations/plugins/%1$s/versions/%2$s?beta=true", plugin_id, version],
+                path: ["v1/organizations/plugins/%1$s/versions/%2$s", plugin_id, version],
                 query: query,
                 headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
                 model: Anthropic::Beta::Organization::Plugins::BetaPluginVersion,
@@ -177,12 +179,13 @@ module Anthropic
               parsed, options = Anthropic::Beta::Organization::Plugins::VersionListParams.dump_request(params)
               query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_PLUGINS_VERSIONS_LIST,
                 span_attributes: {"anthropic.organization.plugin.id" => plugin_id},
                 span_route: "/v1/organizations/plugins/{plugin_id}/versions",
                 span_query: %w[limit organization_id page],
                 method: :get,
-                path: ["v1/organizations/plugins/%1$s/versions?beta=true", plugin_id],
+                path: ["v1/organizations/plugins/%1$s/versions", plugin_id],
                 query: query,
                 headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
                 page: Anthropic::Internal::PageCursor,
@@ -248,6 +251,7 @@ module Anthropic
                   raise ArgumentError.new("missing required path argument #{_1}")
                 end
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_PLUGINS_VERSIONS_DOWNLOAD,
                 span_attributes: {
                   "anthropic.organization.plugin.id" => plugin_id,
@@ -256,7 +260,7 @@ module Anthropic
                 span_route: "/v1/organizations/plugins/{plugin_id}/versions/{version}/content",
                 span_query: %w[organization_id],
                 method: :get,
-                path: ["v1/organizations/plugins/%1$s/versions/%2$s/content?beta=true", plugin_id, version],
+                path: ["v1/organizations/plugins/%1$s/versions/%2$s/content", plugin_id, version],
                 query: query,
                 headers: {
                   "accept" => "application/binary",

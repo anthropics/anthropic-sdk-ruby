@@ -22,7 +22,6 @@ class Anthropic::Test::MessagesTimeoutTest < Minitest::Test
   def setup
     super
     stub_request(:post, "http://localhost/v1/messages").to_return_json(status: 200, body: {})
-    stub_request(:post, "http://localhost/v1/messages?beta=true").to_return_json(status: 200, body: {})
   end
 
   def teardown
@@ -36,15 +35,13 @@ class Anthropic::Test::MessagesTimeoutTest < Minitest::Test
   end
 
   def stub_streams
-    [nil, "?beta=true"].each do |query|
-      stub_request(:post, "http://localhost/v1/messages#{query}")
-        .to_return(status: 200, headers: {"content-type" => "text/event-stream"}, body: SSE)
-    end
+    stub_request(:post, "http://localhost/v1/messages")
+      .to_return(status: 200, headers: {"content-type" => "text/event-stream"}, body: SSE)
   end
 
   def sent_timeouts
-    WebMock::RequestRegistry.instance.requested_signatures.hash.keys.map do
-      Float(_1.headers.fetch("X-Stainless-Timeout"))
+    WebMock::RequestRegistry.instance.requested_signatures.hash.flat_map do |signature, times|
+      [Float(signature.headers.fetch("X-Stainless-Timeout"))] * times
     end
   end
 

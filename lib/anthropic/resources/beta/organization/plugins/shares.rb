@@ -54,12 +54,13 @@ module Anthropic
               parsed, options = Anthropic::Beta::Organization::Plugins::ShareListParams.dump_request(params)
               query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_PLUGINS_SHARES_LIST,
                 span_attributes: {"anthropic.organization.plugin.id" => plugin_id},
                 span_route: "/v1/organizations/plugins/{plugin_id}/shares",
                 span_query: %w[limit organization_id page target_type],
                 method: :get,
-                path: ["v1/organizations/plugins/%1$s/shares?beta=true", plugin_id],
+                path: ["v1/organizations/plugins/%1$s/shares", plugin_id],
                 query: query,
                 headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
                 page: Anthropic::Internal::PageCursor,

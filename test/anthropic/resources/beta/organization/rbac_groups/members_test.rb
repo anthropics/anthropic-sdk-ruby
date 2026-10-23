@@ -4,7 +4,11 @@ require_relative "../../../../test_helper"
 
 class Anthropic::Test::Resources::Beta::Organization::RBACGroups::MembersTest < Anthropic::Test::ResourceTest
   def test_list
-    response = @anthropic.beta.organization.rbac_groups.members.list("rbac_group_id")
+    response =
+      @anthropic.beta.organization.rbac_groups.members.list(
+        "rbac_group_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -32,7 +36,8 @@ class Anthropic::Test::Resources::Beta::Organization::RBACGroups::MembersTest < 
     response =
       @anthropic.beta.organization.rbac_groups.members.add(
         "rbac_group_id",
-        user_id: "user_01WCz1FkmYMm4gnmykNKUu3Q"
+        user_id: "user_01WCz1FkmYMm4gnmykNKUu3Q",
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
@@ -52,7 +57,11 @@ class Anthropic::Test::Resources::Beta::Organization::RBACGroups::MembersTest < 
 
   def test_remove_required_params
     response =
-      @anthropic.beta.organization.rbac_groups.members.remove("user_id", rbac_group_id: "rbac_group_id")
+      @anthropic.beta.organization.rbac_groups.members.remove(
+        "user_id",
+        rbac_group_id: "rbac_group_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Models::Beta::Organization::RBACGroups::MemberRemoveResponse

@@ -4,7 +4,8 @@ require_relative "../../test_helper"
 
 class Anthropic::Test::Resources::Beta::MemoryStoresTest < Anthropic::Test::ResourceTest
   def test_create_required_params
-    response = @anthropic.beta.memory_stores.create(name: "x")
+    response =
+      @anthropic.beta.memory_stores.create(name: "x", request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsMemoryStore
@@ -25,7 +26,11 @@ class Anthropic::Test::Resources::Beta::MemoryStoresTest < Anthropic::Test::Reso
   end
 
   def test_retrieve
-    response = @anthropic.beta.memory_stores.retrieve("memory_store_id")
+    response =
+      @anthropic.beta.memory_stores.retrieve(
+        "memory_store_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsMemoryStore
@@ -46,7 +51,8 @@ class Anthropic::Test::Resources::Beta::MemoryStoresTest < Anthropic::Test::Reso
   end
 
   def test_update
-    response = @anthropic.beta.memory_stores.update("memory_store_id")
+    response =
+      @anthropic.beta.memory_stores.update("memory_store_id", request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsMemoryStore
@@ -67,7 +73,7 @@ class Anthropic::Test::Resources::Beta::MemoryStoresTest < Anthropic::Test::Reso
   end
 
   def test_list
-    response = @anthropic.beta.memory_stores.list
+    response = @anthropic.beta.memory_stores.list(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -95,7 +101,8 @@ class Anthropic::Test::Resources::Beta::MemoryStoresTest < Anthropic::Test::Reso
   end
 
   def test_delete
-    response = @anthropic.beta.memory_stores.delete("memory_store_id")
+    response =
+      @anthropic.beta.memory_stores.delete("memory_store_id", request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsDeletedMemoryStore
@@ -110,7 +117,8 @@ class Anthropic::Test::Resources::Beta::MemoryStoresTest < Anthropic::Test::Reso
   end
 
   def test_archive
-    response = @anthropic.beta.memory_stores.archive("memory_store_id")
+    response =
+      @anthropic.beta.memory_stores.archive("memory_store_id", request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsMemoryStore

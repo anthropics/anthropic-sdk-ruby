@@ -4,7 +4,11 @@ require_relative "../../test_helper"
 
 class Anthropic::Test::Resources::Beta::EnvironmentsTest < Anthropic::Test::ResourceTest
   def test_create_required_params
-    response = @anthropic.beta.environments.create(name: "python-data-analysis")
+    response =
+      @anthropic.beta.environments.create(
+        name: "python-data-analysis",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaEnvironment
@@ -27,7 +31,11 @@ class Anthropic::Test::Resources::Beta::EnvironmentsTest < Anthropic::Test::Reso
   end
 
   def test_retrieve
-    response = @anthropic.beta.environments.retrieve("env_011CZkZ9X2dpNyB7HsEFoRfW")
+    response =
+      @anthropic.beta.environments.retrieve(
+        "env_011CZkZ9X2dpNyB7HsEFoRfW",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaEnvironment
@@ -50,7 +58,11 @@ class Anthropic::Test::Resources::Beta::EnvironmentsTest < Anthropic::Test::Reso
   end
 
   def test_update
-    response = @anthropic.beta.environments.update("env_011CZkZ9X2dpNyB7HsEFoRfW")
+    response =
+      @anthropic.beta.environments.update(
+        "env_011CZkZ9X2dpNyB7HsEFoRfW",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaEnvironment
@@ -73,7 +85,7 @@ class Anthropic::Test::Resources::Beta::EnvironmentsTest < Anthropic::Test::Reso
   end
 
   def test_list
-    response = @anthropic.beta.environments.list
+    response = @anthropic.beta.environments.list(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -103,7 +115,11 @@ class Anthropic::Test::Resources::Beta::EnvironmentsTest < Anthropic::Test::Reso
   end
 
   def test_delete
-    response = @anthropic.beta.environments.delete("env_011CZkZ9X2dpNyB7HsEFoRfW")
+    response =
+      @anthropic.beta.environments.delete(
+        "env_011CZkZ9X2dpNyB7HsEFoRfW",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaEnvironmentDeleteResponse
@@ -118,7 +134,11 @@ class Anthropic::Test::Resources::Beta::EnvironmentsTest < Anthropic::Test::Reso
   end
 
   def test_archive
-    response = @anthropic.beta.environments.archive("env_011CZkZ9X2dpNyB7HsEFoRfW")
+    response =
+      @anthropic.beta.environments.archive(
+        "env_011CZkZ9X2dpNyB7HsEFoRfW",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaEnvironment

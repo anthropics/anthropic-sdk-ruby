@@ -106,7 +106,7 @@ class Anthropic::Test::Helpers::ToolRunner::ToolChangesTest < Minitest::Test
   # Serves `responses` in order and returns the request bodies as they arrive.
   def stub_responses(*responses)
     [].tap do |bodies|
-      stub_request(:post, "http://localhost/v1/messages?beta=true")
+      stub_request(:post, "http://localhost/v1/messages")
         .to_return do |request|
           bodies << JSON.parse(request.body, symbolize_names: true)
           responses.fetch(bodies.length - 1)
@@ -490,7 +490,7 @@ class Anthropic::Test::Helpers::ToolRunner::ToolChangesTest < Minitest::Test
     runner.remove_tools("get_weather")
     drive(runner)
 
-    assert_requested(:post, "http://localhost/v1/messages?beta=true", times: 1) do |request|
+    assert_requested(:post, "http://localhost/v1/messages", times: 1) do |request|
       refute(request.headers.keys.any? { _1.casecmp?("anthropic-beta") })
     end
   end

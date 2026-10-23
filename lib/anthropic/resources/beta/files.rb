@@ -33,11 +33,12 @@ module Anthropic
           parsed, options = Anthropic::Beta::FileListParams.dump_request(params)
           query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::FILES_LIST,
             span_route: "/v1/files",
             span_query: %w[ids limit page scope_id],
             method: :get,
-            path: "v1/files?beta=true",
+            path: "v1/files",
             query: query,
             headers: parsed.except(*query_params).transform_keys(
               betas: "anthropic-beta",
@@ -70,11 +71,12 @@ module Anthropic
         def delete(file_id, params = {})
           parsed, options = Anthropic::Beta::FileDeleteParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::FILES_DELETE,
             span_attributes: {"anthropic.file.id" => file_id},
             span_route: "/v1/files/{file_id}",
             method: :delete,
-            path: ["v1/files/%1$s?beta=true", file_id],
+            path: ["v1/files/%1$s", file_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaDeletedFile,
             options: options
@@ -102,11 +104,12 @@ module Anthropic
         def download(file_id, params = {})
           parsed, options = Anthropic::Beta::FileDownloadParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::FILES_DOWNLOAD,
             span_attributes: {"anthropic.file.id" => file_id},
             span_route: "/v1/files/{file_id}/content",
             method: :get,
-            path: ["v1/files/%1$s/content?beta=true", file_id],
+            path: ["v1/files/%1$s/content", file_id],
             headers: {"accept" => "application/binary", **parsed}.transform_keys(
               betas: "anthropic-beta",
               workspace_id: "anthropic-workspace-id"
@@ -137,11 +140,12 @@ module Anthropic
         def retrieve_metadata(file_id, params = {})
           parsed, options = Anthropic::Beta::FileRetrieveMetadataParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::FILES_RETRIEVE_METADATA,
             span_attributes: {"anthropic.file.id" => file_id},
             span_route: "/v1/files/{file_id}",
             method: :get,
-            path: ["v1/files/%1$s?beta=true", file_id],
+            path: ["v1/files/%1$s", file_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaFileMetadata,
             options: options
@@ -172,11 +176,12 @@ module Anthropic
           parsed, options = Anthropic::Beta::FileUploadParams.dump_request(params)
           header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::FILES_UPLOAD,
             span_created_id: "anthropic.file.id",
             span_route: "/v1/files",
             method: :post,
-            path: "v1/files?beta=true",
+            path: "v1/files",
             headers: {
               "content-type" => "multipart/form-data",
               **parsed.slice(*header_params.keys)

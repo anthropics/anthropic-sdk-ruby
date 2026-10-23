@@ -4,7 +4,11 @@ require_relative "../../../../test_helper"
 
 class Anthropic::Test::Resources::Beta::Organization::Plugins::InstallationSettingsTest < Anthropic::Test::ResourceTest
   def test_list
-    response = @anthropic.beta.organization.plugins.installation_settings.list("plugin_id")
+    response =
+      @anthropic.beta.organization.plugins.installation_settings.list(
+        "plugin_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -31,7 +35,11 @@ class Anthropic::Test::Resources::Beta::Organization::Plugins::InstallationSetti
 
   def test_remove_required_params
     response =
-      @anthropic.beta.organization.plugins.installation_settings.remove("target", plugin_id: "plugin_id")
+      @anthropic.beta.organization.plugins.installation_settings.remove(
+        "target",
+        plugin_id: "plugin_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::Plugins::BetaDeletedPluginInstallationSetting
@@ -51,7 +59,8 @@ class Anthropic::Test::Resources::Beta::Organization::Plugins::InstallationSetti
       @anthropic.beta.organization.plugins.installation_settings.set(
         "target",
         plugin_id: "plugin_id",
-        installation_preference: :required
+        installation_preference: :required,
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do

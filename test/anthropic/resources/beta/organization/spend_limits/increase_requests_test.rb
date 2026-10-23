@@ -5,7 +5,10 @@ require_relative "../../../../test_helper"
 class Anthropic::Test::Resources::Beta::Organization::SpendLimits::IncreaseRequestsTest < Anthropic::Test::ResourceTest
   def test_retrieve
     response =
-      @anthropic.beta.organization.spend_limits.increase_requests.retrieve("spend_limit_increase_request_id")
+      @anthropic.beta.organization.spend_limits.increase_requests.retrieve(
+        "spend_limit_increase_request_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::SpendLimits::BetaSpendLimitIncreaseRequest
@@ -27,7 +30,10 @@ class Anthropic::Test::Resources::Beta::Organization::SpendLimits::IncreaseReque
   end
 
   def test_list
-    response = @anthropic.beta.organization.spend_limits.increase_requests.list
+    response =
+      @anthropic.beta.organization.spend_limits.increase_requests.list(
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -59,7 +65,8 @@ class Anthropic::Test::Resources::Beta::Organization::SpendLimits::IncreaseReque
     response =
       @anthropic.beta.organization.spend_limits.increase_requests.approve(
         "spend_limit_increase_request_id",
-        amount: "50000"
+        amount: "50000",
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
@@ -84,7 +91,10 @@ class Anthropic::Test::Resources::Beta::Organization::SpendLimits::IncreaseReque
 
   def test_deny
     response =
-      @anthropic.beta.organization.spend_limits.increase_requests.deny("spend_limit_increase_request_id")
+      @anthropic.beta.organization.spend_limits.increase_requests.deny(
+        "spend_limit_increase_request_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::SpendLimits::BetaSpendLimitIncreaseRequest

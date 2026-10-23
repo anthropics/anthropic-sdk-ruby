@@ -4,7 +4,11 @@ require_relative "../../../../../test_helper"
 
 class Anthropic::Test::Resources::Beta::Organization::Federation::Rules::WorkspacesTest < Anthropic::Test::ResourceTest
   def test_list
-    response = @anthropic.beta.organization.federation.rules.workspaces.list("federation_rule_id")
+    response =
+      @anthropic.beta.organization.federation.rules.workspaces.list(
+        "federation_rule_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -33,7 +37,8 @@ class Anthropic::Test::Resources::Beta::Organization::Federation::Rules::Workspa
     response =
       @anthropic.beta.organization.federation.rules.workspaces.add(
         "federation_rule_id",
-        workspace_id: "workspace_id"
+        workspace_id: "workspace_id",
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
@@ -56,7 +61,8 @@ class Anthropic::Test::Resources::Beta::Organization::Federation::Rules::Workspa
     response =
       @anthropic.beta.organization.federation.rules.workspaces.remove(
         "workspace_id",
-        federation_rule_id: "federation_rule_id"
+        federation_rule_id: "federation_rule_id",
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do

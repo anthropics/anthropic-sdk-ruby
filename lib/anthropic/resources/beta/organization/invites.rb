@@ -31,11 +31,12 @@ module Anthropic
           def create(params)
             parsed, options = Anthropic::Beta::Organization::InviteCreateParams.dump_request(params)
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_INVITES_CREATE,
               span_created_id: "anthropic.organization.invite.id",
               span_route: "/v1/organizations/invites",
               method: :post,
-              path: "v1/organizations/invites?beta=true",
+              path: "v1/organizations/invites",
               body: parsed,
               model: Anthropic::Beta::Organization::BetaOrganizationInvite,
               options: options
@@ -55,11 +56,12 @@ module Anthropic
           # @see Anthropic::Models::Beta::Organization::InviteRetrieveParams
           def retrieve(invite_id, params = {})
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_INVITES_RETRIEVE,
               span_attributes: {"anthropic.organization.invite.id" => invite_id},
               span_route: "/v1/organizations/invites/{invite_id}",
               method: :get,
-              path: ["v1/organizations/invites/%1$s?beta=true", invite_id],
+              path: ["v1/organizations/invites/%1$s", invite_id],
               model: Anthropic::Beta::Organization::BetaOrganizationInvite,
               options: params[:request_options]
             )
@@ -93,11 +95,12 @@ module Anthropic
             parsed, options = Anthropic::Beta::Organization::InviteListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed)
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_INVITES_LIST,
               span_route: "/v1/organizations/invites",
               span_query: %w[after_id before_id email limit roles statuses],
               method: :get,
-              path: "v1/organizations/invites?beta=true",
+              path: "v1/organizations/invites",
               query: query,
               page: Anthropic::Internal::Page,
               model: Anthropic::Beta::Organization::BetaOrganizationInvite,
@@ -118,11 +121,12 @@ module Anthropic
           # @see Anthropic::Models::Beta::Organization::InviteDeleteParams
           def delete(invite_id, params = {})
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_INVITES_DELETE,
               span_attributes: {"anthropic.organization.invite.id" => invite_id},
               span_route: "/v1/organizations/invites/{invite_id}",
               method: :delete,
-              path: ["v1/organizations/invites/%1$s?beta=true", invite_id],
+              path: ["v1/organizations/invites/%1$s", invite_id],
               model: Anthropic::Models::Beta::Organization::InviteDeleteResponse,
               options: params[:request_options]
             )

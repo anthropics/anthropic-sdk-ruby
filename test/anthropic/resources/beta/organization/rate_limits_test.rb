@@ -4,7 +4,7 @@ require_relative "../../../test_helper"
 
 class Anthropic::Test::Resources::Beta::Organization::RateLimitsTest < Anthropic::Test::ResourceTest
   def test_list
-    response = @anthropic.beta.organization.rate_limits.list
+    response = @anthropic.beta.organization.rate_limits.list(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor

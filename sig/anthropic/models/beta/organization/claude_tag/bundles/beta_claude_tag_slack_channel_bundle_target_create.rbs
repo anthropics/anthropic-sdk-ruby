@@ -1,0 +1,27 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeTag
+          module Bundles
+            type beta_claude_tag_slack_channel_bundle_target_create =
+              { slack_channel_id: String, type: :slack_channel }
+
+            class BetaClaudeTagSlackChannelBundleTargetCreate < Anthropic::Internal::Type::BaseModel
+              attr_accessor slack_channel_id: String
+
+              attr_accessor type: :slack_channel
+
+              def initialize: (
+                slack_channel_id: String,
+                ?type: :slack_channel
+              ) -> void
+
+              def to_hash: -> { slack_channel_id: String, type: :slack_channel }
+            end
+          end
+        end
+      end
+    end
+  end
+end

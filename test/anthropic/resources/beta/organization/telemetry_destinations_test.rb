@@ -5,7 +5,11 @@ require_relative "../../../test_helper"
 class Anthropic::Test::Resources::Beta::Organization::TelemetryDestinationsTest < Anthropic::Test::ResourceTest
   def test_create_required_params
     response =
-      @anthropic.beta.organization.telemetry_destinations.create(endpoint_url: "x", workspaces: {type: :all})
+      @anthropic.beta.organization.telemetry_destinations.create(
+        endpoint_url: "x",
+        workspaces: {type: :all},
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaTelemetryDestination
@@ -29,7 +33,11 @@ class Anthropic::Test::Resources::Beta::Organization::TelemetryDestinationsTest 
   end
 
   def test_retrieve
-    response = @anthropic.beta.organization.telemetry_destinations.retrieve("destination_id")
+    response =
+      @anthropic.beta.organization.telemetry_destinations.retrieve(
+        "destination_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaTelemetryDestination
@@ -53,7 +61,11 @@ class Anthropic::Test::Resources::Beta::Organization::TelemetryDestinationsTest 
   end
 
   def test_update
-    response = @anthropic.beta.organization.telemetry_destinations.update("destination_id")
+    response =
+      @anthropic.beta.organization.telemetry_destinations.update(
+        "destination_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaTelemetryDestination
@@ -77,7 +89,8 @@ class Anthropic::Test::Resources::Beta::Organization::TelemetryDestinationsTest 
   end
 
   def test_list
-    response = @anthropic.beta.organization.telemetry_destinations.list
+    response =
+      @anthropic.beta.organization.telemetry_destinations.list(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -108,7 +121,11 @@ class Anthropic::Test::Resources::Beta::Organization::TelemetryDestinationsTest 
   end
 
   def test_delete
-    response = @anthropic.beta.organization.telemetry_destinations.delete("destination_id")
+    response =
+      @anthropic.beta.organization.telemetry_destinations.delete(
+        "destination_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaDeletedTelemetryDestination
@@ -123,7 +140,11 @@ class Anthropic::Test::Resources::Beta::Organization::TelemetryDestinationsTest 
   end
 
   def test_test_
-    response = @anthropic.beta.organization.telemetry_destinations.test_("destination_id")
+    response =
+      @anthropic.beta.organization.telemetry_destinations.test_(
+        "destination_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaTelemetryDestinationTestResponse

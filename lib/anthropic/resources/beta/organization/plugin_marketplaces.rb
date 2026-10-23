@@ -40,12 +40,13 @@ module Anthropic
             parsed, options = Anthropic::Beta::Organization::PluginMarketplaceRetrieveParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_PLUGIN_MARKETPLACES_RETRIEVE,
               span_attributes: {"anthropic.organization.plugin_marketplace.id" => marketplace_id},
               span_route: "/v1/organizations/plugin_marketplaces/{marketplace_id}",
               span_query: %w[organization_id],
               method: :get,
-              path: ["v1/organizations/plugin_marketplaces/%1$s?beta=true", marketplace_id],
+              path: ["v1/organizations/plugin_marketplaces/%1$s", marketplace_id],
               query: query,
               headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
               model: Anthropic::Beta::Organization::BetaPluginMarketplace,
@@ -90,11 +91,12 @@ module Anthropic
             parsed, options = Anthropic::Beta::Organization::PluginMarketplaceUpdateParams.dump_request(params)
             header_params = {betas: "anthropic-beta"}
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_PLUGIN_MARKETPLACES_UPDATE,
               span_attributes: {"anthropic.organization.plugin_marketplace.id" => marketplace_id},
               span_route: "/v1/organizations/plugin_marketplaces/{marketplace_id}",
               method: :post,
-              path: ["v1/organizations/plugin_marketplaces/%1$s?beta=true", marketplace_id],
+              path: ["v1/organizations/plugin_marketplaces/%1$s", marketplace_id],
               headers: parsed.slice(*header_params.keys).transform_keys(header_params),
               body: parsed.except(*header_params.keys),
               model: Anthropic::Beta::Organization::BetaPluginMarketplace,
@@ -150,11 +152,12 @@ module Anthropic
             parsed, options = Anthropic::Beta::Organization::PluginMarketplaceListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_PLUGIN_MARKETPLACES_LIST,
               span_route: "/v1/organizations/plugin_marketplaces",
               span_query: %w[limit organization_id owner_type page source],
               method: :get,
-              path: "v1/organizations/plugin_marketplaces?beta=true",
+              path: "v1/organizations/plugin_marketplaces",
               query: query,
               headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
               page: Anthropic::Internal::PageCursor,
@@ -215,10 +218,11 @@ module Anthropic
               Anthropic::Beta::Organization::PluginMarketplaceValidateArchiveParams.dump_request(params)
             header_params = {betas: "anthropic-beta"}
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_PLUGIN_MARKETPLACES_VALIDATE_ARCHIVE,
               span_route: "/v1/organizations/plugin_marketplaces/validate_archive",
               method: :post,
-              path: "v1/organizations/plugin_marketplaces/validate_archive?beta=true",
+              path: "v1/organizations/plugin_marketplaces/validate_archive",
               headers: {
                 "content-type" => "multipart/form-data",
                 **parsed.slice(*header_params.keys)
@@ -285,10 +289,11 @@ module Anthropic
               Anthropic::Beta::Organization::PluginMarketplaceValidateRepositoryParams.dump_request(params)
             header_params = {betas: "anthropic-beta"}
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_PLUGIN_MARKETPLACES_VALIDATE_REPOSITORY,
               span_route: "/v1/organizations/plugin_marketplaces/validate_repository",
               method: :post,
-              path: "v1/organizations/plugin_marketplaces/validate_repository?beta=true",
+              path: "v1/organizations/plugin_marketplaces/validate_repository",
               headers: parsed.slice(*header_params.keys).transform_keys(header_params),
               body: parsed.except(*header_params.keys),
               model: Anthropic::Beta::Organization::BetaPluginMarketplaceValidationReport,

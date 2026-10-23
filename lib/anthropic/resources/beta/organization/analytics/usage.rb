@@ -120,6 +120,7 @@ module Anthropic
               parsed, options = Anthropic::Beta::Organization::Analytics::UsageListParams.dump_request(params)
               query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_ANALYTICS_USAGE_LIST,
                 span_route: "/v1/organizations/analytics/usage",
                 span_query: %w[
@@ -153,7 +154,7 @@ module Anthropic
                   workspace_ids
                 ],
                 method: :get,
-                path: "v1/organizations/analytics/usage?beta=true",
+                path: "v1/organizations/analytics/usage",
                 query: query,
                 headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
                 page: Anthropic::Internal::ReportPageCursor,

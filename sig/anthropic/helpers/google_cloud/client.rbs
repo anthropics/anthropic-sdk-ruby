@@ -14,8 +14,6 @@ module Anthropic
 
         attr_reader workspace_id: String?
 
-        def user_profiles: -> bot
-
         private def build_request: (
           Anthropic::Internal::Transport::BaseClient::request_components req,
           Anthropic::request_options opts

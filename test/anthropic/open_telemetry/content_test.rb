@@ -289,7 +289,7 @@ class Anthropic::Test::OpenTelemetryContentTest < Anthropic::Test::OpenTelemetry
   def test_a_server_tool_use_and_an_mcp_tool_use_are_tool_calls
     stub_messages(
       {status: 200, body: MESSAGE.merge(content: SERVER_TOOL_USES).to_json},
-      url: "#{MESSAGES_URL}?beta=true"
+      url: MESSAGES_URL
     )
     content_client.beta.messages.create(
       **PARAMS,
@@ -315,7 +315,7 @@ class Anthropic::Test::OpenTelemetryContentTest < Anthropic::Test::OpenTelemetry
     end
     stub_messages(
       stream_response([STREAM_EVENTS[0], *blocks, *STREAM_EVENTS[4..]]),
-      url: "#{MESSAGES_URL}?beta=true"
+      url: MESSAGES_URL
     )
     content_client.beta.messages.stream(**PARAMS).until_done
 
@@ -363,7 +363,7 @@ class Anthropic::Test::OpenTelemetryContentTest < Anthropic::Test::OpenTelemetry
     count = beta ? 5 : 4
     [
       beta ? content_client.beta.messages : content_client.messages,
-      beta ? "#{MESSAGES_URL}?beta=true" : MESSAGES_URL,
+      MESSAGES_URL,
       TOOLSET_TOOL_USES.first(count),
       TOOLSET_TOOL_CALLS.first(count)
     ]
@@ -527,7 +527,7 @@ class Anthropic::Test::OpenTelemetryContentTest < Anthropic::Test::OpenTelemetry
     # The response's blocks are models, and the request's are Hashes.
     stub_messages(
       {status: 200, body: MESSAGE.merge(content: RESULT_BLOCKS).to_json},
-      url: "#{MESSAGES_URL}?beta=true"
+      url: MESSAGES_URL
     )
     content_client.beta.messages.create(
       **PARAMS,
@@ -590,7 +590,6 @@ class Anthropic::Test::OpenTelemetryContentTest < Anthropic::Test::OpenTelemetry
   def test_the_content_mode_adds_the_stop_sequences_as_an_array_of_strings
     stub_messages
     content_client.messages.create(**PARAMS, stop_sequences: %w[END STOP])
-    stub_messages(url: "#{MESSAGES_URL}?beta=true")
     content_client.beta.messages.create(**PARAMS, stop_sequences: ["END"])
     stub_messages(stream_response)
     content_client.messages.stream(**PARAMS, stop_sequences: ["END"]).each {}
@@ -666,9 +665,9 @@ class Anthropic::Test::OpenTelemetryContentTest < Anthropic::Test::OpenTelemetry
   # Each stream helper and each `create`, with the URL it requests.
   BOUNDED_CALLS = {
     create: [MESSAGES_URL, ->(c, **kw) { c.messages.create(**PARAMS, **kw) }],
-    beta_create: ["#{MESSAGES_URL}?beta=true", ->(c, **kw) { c.beta.messages.create(**PARAMS, **kw) }],
+    beta_create: [MESSAGES_URL, ->(c, **kw) { c.beta.messages.create(**PARAMS, **kw) }],
     stream: [MESSAGES_URL, ->(c, **kw) { c.messages.stream(**PARAMS, **kw).until_done }],
-    beta_stream: ["#{MESSAGES_URL}?beta=true", ->(c, **kw) { c.beta.messages.stream(**PARAMS, **kw).until_done }]
+    beta_stream: [MESSAGES_URL, ->(c, **kw) { c.beta.messages.stream(**PARAMS, **kw).until_done }]
   }.freeze
 
   BOUNDED_CALLS.each do |name, (url, call)|
@@ -785,7 +784,7 @@ class Anthropic::Test::OpenTelemetryContentTest < Anthropic::Test::OpenTelemetry
   end
 
   def test_a_streamed_beta_response_has_the_output_the_stream_helper_accumulated
-    url = "#{MESSAGES_URL}?beta=true"
+    url = MESSAGES_URL
     assert_output_from_the_stream_helper(url: url) { _1.beta.messages.stream(**PARAMS) }
   end
 
@@ -810,10 +809,10 @@ class Anthropic::Test::OpenTelemetryContentTest < Anthropic::Test::OpenTelemetry
     assert_nil(span.attributes["gen_ai.output.messages"])
   end
 
-  STREAM_HELPERS = {
-    MESSAGES_URL => ->(c, **kw) { c.messages.stream(**PARAMS, **kw) },
-    "#{MESSAGES_URL}?beta=true" => ->(c, **kw) { c.beta.messages.stream(**PARAMS, **kw) }
-  }.freeze
+  STREAM_HELPERS = [
+    ->(c, **kw) { c.messages.stream(**PARAMS, **kw) },
+    ->(c, **kw) { c.beta.messages.stream(**PARAMS, **kw) }
+  ].freeze
 
   TEXT_OUTPUT = [{"role" => "assistant", "parts" => [{"type" => "text", "content" => "Hi"}]}].freeze
 
@@ -831,9 +830,9 @@ class Anthropic::Test::OpenTelemetryContentTest < Anthropic::Test::OpenTelemetry
   # Calls `block` with the span of each stream helper, once `reads` has read the helper's stream of
   # `events`, and with the helper.
   def each_span_of_a_stream_helper(events, reads, client: content_client, **params, &block)
-    STREAM_HELPERS.each do |url, helper|
+    STREAM_HELPERS.each do |helper|
       @exporter.reset
-      stub_messages(stream_response(events), url: url)
+      stub_messages(stream_response(events))
       stream = helper.call(client, **params)
       reads.call(stream)
       block.call(only_span, stream)
@@ -932,9 +931,7 @@ class Anthropic::Test::OpenTelemetryContentTest < Anthropic::Test::OpenTelemetry
   end
 
   def test_a_raw_stream_that_ends_before_message_stop_has_no_output
-    STREAM_HELPERS.each_key do |url|
-      stub_messages(stream_response(TOOL_STREAM_EVENTS[0..5]), url: url)
-    end
+    stub_messages(stream_response(TOOL_STREAM_EVENTS[0..5]))
     c = content_client
     c.messages.stream_raw(**PARAMS).each {}
     c.beta.messages.stream_raw(**PARAMS).each { break if _1.type == :content_block_delta }

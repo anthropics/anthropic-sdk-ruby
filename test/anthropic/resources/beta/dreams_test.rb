@@ -5,7 +5,11 @@ require_relative "../../test_helper"
 class Anthropic::Test::Resources::Beta::DreamsTest < Anthropic::Test::ResourceTest
   def test_create_required_params
     response =
-      @anthropic.beta.dreams.create(inputs: [{memory_store_id: "x", type: :memory_store}], model: "string")
+      @anthropic.beta.dreams.create(
+        inputs: [{memory_store_id: "x", type: :memory_store}],
+        model: "string",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaDream
@@ -32,7 +36,7 @@ class Anthropic::Test::Resources::Beta::DreamsTest < Anthropic::Test::ResourceTe
   end
 
   def test_retrieve
-    response = @anthropic.beta.dreams.retrieve("dream_id")
+    response = @anthropic.beta.dreams.retrieve("dream_id", request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Beta::BetaDream
@@ -59,7 +63,7 @@ class Anthropic::Test::Resources::Beta::DreamsTest < Anthropic::Test::ResourceTe
   end
 
   def test_list
-    response = @anthropic.beta.dreams.list
+    response = @anthropic.beta.dreams.list(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -93,7 +97,7 @@ class Anthropic::Test::Resources::Beta::DreamsTest < Anthropic::Test::ResourceTe
   end
 
   def test_archive
-    response = @anthropic.beta.dreams.archive("dream_id")
+    response = @anthropic.beta.dreams.archive("dream_id", request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Beta::BetaDream
@@ -120,7 +124,7 @@ class Anthropic::Test::Resources::Beta::DreamsTest < Anthropic::Test::ResourceTe
   end
 
   def test_cancel
-    response = @anthropic.beta.dreams.cancel("dream_id")
+    response = @anthropic.beta.dreams.cancel("dream_id", request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Beta::BetaDream

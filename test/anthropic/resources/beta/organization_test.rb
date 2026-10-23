@@ -4,7 +4,7 @@ require_relative "../../test_helper"
 
 class Anthropic::Test::Resources::Beta::OrganizationTest < Anthropic::Test::ResourceTest
   def test_retrieve
-    response = @anthropic.beta.organization.retrieve
+    response = @anthropic.beta.organization.retrieve(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Beta::BetaOrganization

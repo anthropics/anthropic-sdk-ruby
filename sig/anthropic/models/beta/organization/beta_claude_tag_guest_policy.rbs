@@ -1,0 +1,45 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_claude_tag_guest_policy =
+          Anthropic::Beta::Organization::BetaClaudeTagGuestPolicyAllow
+          | Anthropic::Beta::Organization::BetaClaudeTagGuestPolicyRestrict
+          | Anthropic::Beta::Organization::BetaClaudeTagGuestPolicyChannelOnly
+
+        module BetaClaudeTagGuestPolicy
+          extend Anthropic::Internal::Type::Union
+
+          type type_ = :allow | :restrict | :channel_only
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            ALLOW: :allow
+            RESTRICT: :restrict
+            CHANNEL_ONLY: :channel_only
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaClaudeTagGuestPolicy::type_]
+          end
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::beta_claude_tag_guest_policy]
+
+          def self.new:
+            (
+              type: :allow | "allow"
+            ) -> Anthropic::Beta::Organization::BetaClaudeTagGuestPolicyAllow
+            | (
+              type: :restrict | "restrict"
+            ) -> Anthropic::Beta::Organization::BetaClaudeTagGuestPolicyRestrict
+            | (
+              type: :channel_only | "channel_only"
+            ) -> Anthropic::Beta::Organization::BetaClaudeTagGuestPolicyChannelOnly
+            | (
+              type: Anthropic::Models::Beta::Organization::BetaClaudeTagGuestPolicy::type_
+              | String
+            ) -> Anthropic::Models::Beta::Organization::beta_claude_tag_guest_policy
+        end
+      end
+    end
+  end
+end

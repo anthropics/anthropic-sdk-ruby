@@ -1,0 +1,50 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class ClaudeTag
+          class SlackChannels
+            def create: (
+              slack: Anthropic::Beta::Organization::BetaClaudeTagSlackChannelIdentifiers,
+              ?settings: Anthropic::Beta::Organization::BetaClaudeTagSettingsCreate,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Beta::Organization::ClaudeTag::BetaClaudeTagSlackChannel
+
+            def retrieve: (
+              String id,
+              ?include_inherited: bool,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Beta::Organization::ClaudeTag::BetaClaudeTagSlackChannel
+
+            def update: (
+              String id,
+              settings: Anthropic::Beta::Organization::BetaClaudeTagSettingsUpdate,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Beta::Organization::ClaudeTag::BetaClaudeTagSlackChannel
+
+            def list: (
+              slack_workspace_id: String,
+              ?include_inherited: bool,
+              ?limit: Integer,
+              ?page: String,
+              ?slack_channel_id: String,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Organization::ClaudeTag::BetaClaudeTagSlackChannel]
+
+            def delete: (
+              String id,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Beta::Organization::ClaudeTag::BetaClaudeTagDeletedSlackChannel
+
+            def initialize: (client: Anthropic::Client) -> void
+          end
+        end
+      end
+    end
+  end
+end

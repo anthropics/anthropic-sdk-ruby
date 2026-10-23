@@ -4,7 +4,11 @@ require_relative "../../../test_helper"
 
 class Anthropic::Test::Resources::Beta::Organization::PluginsTest < Anthropic::Test::ResourceTest
   def test_create_required_params
-    response = @anthropic.beta.organization.plugins.create(files: [StringIO.new("Example data")])
+    response =
+      @anthropic.beta.organization.plugins.create(
+        files: [StringIO.new("Example data")],
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaPlugin
@@ -36,7 +40,11 @@ class Anthropic::Test::Resources::Beta::Organization::PluginsTest < Anthropic::T
   end
 
   def test_retrieve
-    response = @anthropic.beta.organization.plugins.retrieve("plugin_id")
+    response =
+      @anthropic.beta.organization.plugins.retrieve(
+        "plugin_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaPlugin
@@ -71,7 +79,8 @@ class Anthropic::Test::Resources::Beta::Organization::PluginsTest < Anthropic::T
     response =
       @anthropic.beta.organization.plugins.update(
         "plugin_id",
-        served_version_id: "pluginver_01KaZmQpRsTuVwXyZ2b4c6d8"
+        served_version_id: "pluginver_01KaZmQpRsTuVwXyZ2b4c6d8",
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
@@ -104,7 +113,7 @@ class Anthropic::Test::Resources::Beta::Organization::PluginsTest < Anthropic::T
   end
 
   def test_list
-    response = @anthropic.beta.organization.plugins.list
+    response = @anthropic.beta.organization.plugins.list(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -143,7 +152,8 @@ class Anthropic::Test::Resources::Beta::Organization::PluginsTest < Anthropic::T
   end
 
   def test_delete
-    response = @anthropic.beta.organization.plugins.delete("plugin_id")
+    response =
+      @anthropic.beta.organization.plugins.delete("plugin_id", request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaDeletedPlugin

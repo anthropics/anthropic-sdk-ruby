@@ -393,14 +393,14 @@ class AnthropicTest < Minitest::Test
   end
 
   def test_beta_header_merges_endpoint_default_with_betas_param
-    stub_request(:get, "http://localhost/v1/vaults?beta=true")
+    stub_request(:get, "http://localhost/v1/vaults")
       .to_return_json(status: 200, body: {data: [], next_page: nil})
 
     anthropic = Anthropic::Client.new(base_url: "http://localhost", api_key: "my-anthropic-api-key")
 
     anthropic.beta.vaults.list(betas: ["agent-memory-2026-07-22"])
 
-    assert_requested(:get, "http://localhost/v1/vaults?beta=true") do |req|
+    assert_requested(:get, "http://localhost/v1/vaults") do |req|
       sent = req.headers["Anthropic-Beta"].split(",").map(&:strip)
       assert_includes(sent, "managed-agents-2026-04-01")
       assert_includes(sent, "agent-memory-2026-07-22")
@@ -408,7 +408,7 @@ class AnthropicTest < Minitest::Test
   end
 
   def test_beta_header_merges_endpoint_default_with_extra_headers
-    stub_request(:get, "http://localhost/v1/files?beta=true")
+    stub_request(:get, "http://localhost/v1/files")
       .to_return_json(status: 200, body: {data: [], has_more: false})
 
     anthropic = Anthropic::Client.new(base_url: "http://localhost", api_key: "my-anthropic-api-key")
@@ -418,7 +418,7 @@ class AnthropicTest < Minitest::Test
       request_options: {extra_headers: {"anthropic-beta" => "some-other-beta"}}
     )
 
-    assert_requested(:get, "http://localhost/v1/files?beta=true") do |req|
+    assert_requested(:get, "http://localhost/v1/files") do |req|
       sent = req.headers["Anthropic-Beta"].split(",").map(&:strip)
       assert_equal(%w[files-api-2025-04-14 some-other-beta], sent)
     end
@@ -625,6 +625,26 @@ class AnthropicTest < Minitest::Test
       recorded, = WebMock::RequestRegistry.instance.requested_signatures.hash.first
       assert_equal(expected, [recorded.uri.host, recorded.uri.path], "path #{path.inspect}")
     end
+  end
+
+  def test_every_attempt_has_the_qualifiers
+    stub_request(:get, /./).to_return_json(status: 500, body: {})
+    client = Anthropic::Client.new(
+      base_url: "http://localhost",
+      api_key: "my-anthropic-api-key",
+      max_retries: 1
+    )
+    seen = []
+    client.define_singleton_method(:send_request) do |request, **options|
+      seen << request.fetch(:qualifiers)
+      super(request, **options)
+    end
+
+    assert_raises(Anthropic::Errors::InternalServerError) do
+      client.request(method: :get, path: "cards", qualifiers: {variant: "b"})
+    end
+
+    assert_equal([{variant: "b"}] * 2, seen)
   end
 
   def test_default_headers

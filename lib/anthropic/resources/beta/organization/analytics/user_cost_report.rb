@@ -11,9 +11,9 @@ module Anthropic
             # Returns cost per user, ranked by spend; `group_by[]` or `bucket_width` splits a
             # user across several rows. Use this to see which users account for the most cost.
             # Only cost attributed to a user account is included; cost with no user attributed
-            # to it, such as requests attributed only to an API key, is left out. Available to
-            # organizations on a Claude Enterprise plan. Requires an API key with the
-            # `read:analytics` scope.
+            # to it, such as Code Review usage and Claude Tag usage in Slack channels, is left
+            # out. Available to organizations on a Claude Enterprise plan. Requires an API key
+            # with the `read:analytics` scope.
             #
             # This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
             # new integrations, use
@@ -75,6 +75,7 @@ module Anthropic
               parsed, options = Anthropic::Beta::Organization::Analytics::UserCostReportListParams.dump_request(params)
               query = Anthropic::Internal::Util.encode_query_params(parsed)
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_ANALYTICS_USER_COST_REPORT_LIST,
                 span_route: "/v1/organizations/analytics/user_cost_report",
                 span_query: %w[
@@ -99,7 +100,7 @@ module Anthropic
                   user_ids
                 ],
                 method: :get,
-                path: "v1/organizations/analytics/user_cost_report?beta=true",
+                path: "v1/organizations/analytics/user_cost_report",
                 query: query,
                 page: Anthropic::Internal::ReportPageCursor,
                 model: Anthropic::Beta::Organization::BetaAnalyticsCostUsersItem,

@@ -169,10 +169,11 @@ module Anthropic
               workspace_id: "anthropic-workspace-id"
             }
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::MESSAGES_CREATE,
             span_route: "/v1/messages",
             method: :post,
-            path: "v1/messages?beta=true",
+            path: "v1/messages",
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),
             body: parsed.except(*header_params.keys),
             model: Anthropic::Beta::BetaMessage,
@@ -273,10 +274,11 @@ module Anthropic
               workspace_id: "anthropic-workspace-id"
             }
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::MESSAGES_CREATE,
             span_route: "/v1/messages",
             method: :post,
-            path: "v1/messages?beta=true",
+            path: "v1/messages",
             headers: stream_headers(
               "accept" => "text/event-stream",
               "accept-encoding" => "identity",
@@ -350,10 +352,11 @@ module Anthropic
               workspace_id: "anthropic-workspace-id"
             }
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::MESSAGES_COUNT_TOKENS,
             span_route: "/v1/messages/count_tokens",
             method: :post,
-            path: "v1/messages/count_tokens?beta=true",
+            path: "v1/messages/count_tokens",
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),
             body: parsed.except(*header_params.keys),
             model: Anthropic::Beta::BetaMessageTokensCount,

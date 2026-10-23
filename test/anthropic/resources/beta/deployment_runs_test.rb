@@ -4,7 +4,11 @@ require_relative "../../test_helper"
 
 class Anthropic::Test::Resources::Beta::DeploymentRunsTest < Anthropic::Test::ResourceTest
   def test_retrieve
-    response = @anthropic.beta.deployment_runs.retrieve("deployment_run_id")
+    response =
+      @anthropic.beta.deployment_runs.retrieve(
+        "deployment_run_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsDeploymentRun
@@ -25,7 +29,7 @@ class Anthropic::Test::Resources::Beta::DeploymentRunsTest < Anthropic::Test::Re
   end
 
   def test_list
-    response = @anthropic.beta.deployment_runs.list
+    response = @anthropic.beta.deployment_runs.list(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor

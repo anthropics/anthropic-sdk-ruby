@@ -4,7 +4,11 @@ require_relative "../../../test_helper"
 
 class Anthropic::Test::Resources::Beta::Organization::APIKeysTest < Anthropic::Test::ResourceTest
   def test_retrieve
-    response = @anthropic.beta.organization.api_keys.retrieve("api_key_id")
+    response =
+      @anthropic.beta.organization.api_keys.retrieve(
+        "api_key_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaAPIKey
@@ -27,7 +31,11 @@ class Anthropic::Test::Resources::Beta::Organization::APIKeysTest < Anthropic::T
   end
 
   def test_update
-    response = @anthropic.beta.organization.api_keys.update("api_key_id")
+    response =
+      @anthropic.beta.organization.api_keys.update(
+        "api_key_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaAPIKey
@@ -50,7 +58,7 @@ class Anthropic::Test::Resources::Beta::Organization::APIKeysTest < Anthropic::T
   end
 
   def test_list
-    response = @anthropic.beta.organization.api_keys.list
+    response = @anthropic.beta.organization.api_keys.list(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::Page

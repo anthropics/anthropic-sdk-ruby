@@ -1,0 +1,56 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeTag
+          type beta_claude_tag_slack_workspace =
+            {
+              id: String,
+              created_at: Time,
+              settings: Anthropic::Beta::Organization::BetaClaudeTagSettings,
+              slack: Anthropic::Beta::Organization::BetaClaudeTagSlackWorkspaceIdentifiers,
+              sources: Anthropic::Beta::Organization::BetaClaudeTagSettingSources,
+              type: :slack_workspace,
+              updated_at: Time
+            }
+
+          class BetaClaudeTagSlackWorkspace < Anthropic::Internal::Type::BaseModel
+            attr_accessor id: String
+
+            attr_accessor created_at: Time
+
+            attr_accessor settings: Anthropic::Beta::Organization::BetaClaudeTagSettings
+
+            attr_accessor slack: Anthropic::Beta::Organization::BetaClaudeTagSlackWorkspaceIdentifiers
+
+            attr_accessor sources: Anthropic::Beta::Organization::BetaClaudeTagSettingSources
+
+            attr_accessor type: :slack_workspace
+
+            attr_accessor updated_at: Time
+
+            def initialize: (
+              id: String,
+              created_at: Time,
+              settings: Anthropic::Beta::Organization::BetaClaudeTagSettings,
+              slack: Anthropic::Beta::Organization::BetaClaudeTagSlackWorkspaceIdentifiers,
+              sources: Anthropic::Beta::Organization::BetaClaudeTagSettingSources,
+              updated_at: Time,
+              ?type: :slack_workspace
+            ) -> void
+
+            def to_hash: -> {
+              id: String,
+              created_at: Time,
+              settings: Anthropic::Beta::Organization::BetaClaudeTagSettings,
+              slack: Anthropic::Beta::Organization::BetaClaudeTagSlackWorkspaceIdentifiers,
+              sources: Anthropic::Beta::Organization::BetaClaudeTagSettingSources,
+              type: :slack_workspace,
+              updated_at: Time
+            }
+          end
+        end
+      end
+    end
+  end
+end

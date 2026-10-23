@@ -59,6 +59,7 @@ module Anthropic
                   ]
                 ),
               model: T.nilable(Anthropic::Internal::Type::Converter::Input),
+              qualifiers: T.nilable(T::Hash[Symbol, String]),
               span_name: T.nilable(String),
               span_attributes: T.nilable(T::Hash[String, T.anything]),
               span_created_id:
@@ -79,6 +80,7 @@ module Anthropic
               body: T.anything,
               max_retries: Integer,
               timeout: Float,
+              qualifiers: T.nilable(T::Hash[Symbol, String]),
               user_header_keys: T::Array[String],
               cast_to: T.nilable(Anthropic::Internal::Type::Converter::Input),
               stream: T.nilable(T::Class[T.anything]),
@@ -340,7 +342,7 @@ module Anthropic
         # Execute the request specified by `req`. This is the method that all resource
         # methods call into.
         #
-        # @overload request(method, path, query: {}, headers: {}, body: nil, unwrap: nil, page: nil, stream: nil, model: Anthropic::Internal::Type::Unknown, span_name: nil, span_attributes: nil, span_created_id: nil, span_route: nil, span_query: nil, span_content_query: nil, options: {})
+        # @overload request(method, path, query: {}, headers: {}, body: nil, unwrap: nil, page: nil, stream: nil, model: Anthropic::Internal::Type::Unknown, qualifiers: nil, span_name: nil, span_attributes: nil, span_created_id: nil, span_route: nil, span_query: nil, span_content_query: nil, options: {})
         sig do
           params(
             method: Symbol,
@@ -390,6 +392,7 @@ module Anthropic
                 ]
               ),
             model: T.nilable(Anthropic::Internal::Type::Converter::Input),
+            qualifiers: T.nilable(T::Hash[Symbol, String]),
             span_name: T.nilable(String),
             span_attributes: T.nilable(T::Hash[String, T.anything]),
             span_created_id: T.nilable(T.any(String, T::Hash[String, Symbol])),
@@ -409,6 +412,7 @@ module Anthropic
           page: nil,
           stream: nil,
           model: Anthropic::Internal::Type::Unknown,
+          qualifiers: nil,
           span_name: nil,
           span_attributes: nil,
           span_created_id: nil,

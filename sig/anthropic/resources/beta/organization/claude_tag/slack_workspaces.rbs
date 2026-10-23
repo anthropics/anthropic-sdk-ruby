@@ -1,0 +1,36 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class ClaudeTag
+          class SlackWorkspaces
+            def retrieve: (
+              String id,
+              ?include_inherited: bool,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Beta::Organization::ClaudeTag::BetaClaudeTagSlackWorkspace
+
+            def update: (
+              String id,
+              settings: Anthropic::Beta::Organization::BetaClaudeTagSettingsUpdate,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Beta::Organization::ClaudeTag::BetaClaudeTagSlackWorkspace
+
+            def list: (
+              ?include_inherited: bool,
+              ?limit: Integer,
+              ?page: String,
+              ?slack_workspace_id: String,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Organization::ClaudeTag::BetaClaudeTagSlackWorkspace]
+
+            def initialize: (client: Anthropic::Client) -> void
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,17 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class ClaudeTag
+          attr_reader slack_channels: Anthropic::Resources::Beta::Organization::ClaudeTag::SlackChannels
+
+          attr_reader slack_workspaces: Anthropic::Resources::Beta::Organization::ClaudeTag::SlackWorkspaces
+
+          attr_reader bundles: Anthropic::Resources::Beta::Organization::ClaudeTag::Bundles
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

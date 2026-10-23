@@ -5,7 +5,10 @@ require_relative "../../../../test_helper"
 class Anthropic::Test::Resources::Beta::Organization::Analytics::CostReportTest < Anthropic::Test::ResourceTest
   def test_list_required_params
     response =
-      @anthropic.beta.organization.analytics.cost_report.list(starting_at: "2019-12-27T18:11:19.117Z")
+      @anthropic.beta.organization.analytics.cost_report.list(
+        starting_at: "2019-12-27T18:11:19.117Z",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Internal::ReportPageCursor

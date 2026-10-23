@@ -28,6 +28,7 @@ module Anthropic
         #
         # @param aws_region [String, nil] Enforce the AWS Region to use. If unset, the region is set according to the
         #   AWS SDK's default resolution order, described at https://github.com/aws/aws-sdk-ruby?tab=readme-ov-file#configuration
+        #   With an API key, defaults to `ENV["AWS_REGION"]`, then `ENV["AWS_DEFAULT_REGION"]`.
         #
         # @param aws_access_key [String, nil]  Optional AWS access key to use for authentication. Overrides profile and credential provider chain
         #
@@ -118,7 +119,7 @@ module Anthropic
               credentials: @aws_credentials
             )
           else
-            @aws_region = aws_region
+            @aws_region = aws_region || env_lookup("AWS_REGION", "AWS_DEFAULT_REGION")
           end
 
           base_url = ENV["ANTHROPIC_BEDROCK_BASE_URL"] if base_url.to_s.empty?
@@ -309,14 +310,16 @@ module Anthropic
         private def validate_bedrock_request!(request_components)
           # Id-parameterized routes pass `path` as an Array whose first element
           # is the format string (e.g. `["v1/messages/batches/%1$s", id]`).
-          case Array(request_components[:path]).first.to_s
+          path = Array(request_components[:path]).first.to_s
+          beta = request_components.dig(:qualifiers, :beta) == "true" || path.include?("?beta=true")
+          case path
           in %r{^v1/messages/batches}
             message = "The Batch API is not supported in Bedrock yet"
             raise NotImplementedError.new(message)
           in %r{v1/messages/count_tokens}
             message = "Token counting is not supported in Bedrock yet"
             raise NotImplementedError.new(message)
-          in %r{v1/models\?beta=true}
+          in %r{v1/models(\?|\z)} if beta
             # rubocop:disable Layout/LineLength
             message = "Please instead use https://docs.anthropic.com/en/api/claude-on-amazon-bedrock#list-available-models to list available models on Bedrock."
             # rubocop:enable Layout/LineLength

@@ -50,11 +50,12 @@ module Anthropic
                     Anthropic::Beta::Organization::Analytics::Apps::Chat::ProjectListParams.dump_request(params)
                   query = Anthropic::Internal::Util.encode_query_params(parsed)
                   @client.request(
+                    qualifiers: {beta: "true"},
                     span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_ANALYTICS_APPS_CHAT_PROJECTS_LIST,
                     span_route: "/v1/organizations/analytics/apps/chat/projects",
                     span_query: %w[date ending_date filter group_by limit order order_by page starting_date],
                     method: :get,
-                    path: "v1/organizations/analytics/apps/chat/projects?beta=true",
+                    path: "v1/organizations/analytics/apps/chat/projects",
                     query: query,
                     page: Anthropic::Internal::PageCursor,
                     model: Anthropic::Beta::Organization::BetaAnalyticsProjectActivity,

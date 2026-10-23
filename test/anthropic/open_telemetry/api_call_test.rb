@@ -82,8 +82,7 @@ class Anthropic::Test::OpenTelemetryApiCallTest < Anthropic::Test::OpenTelemetry
   def test_a_request_with_a_json_output_format_has_the_json_output_type
     schema = {type: "object", properties: {summary: {type: "string"}}, required: ["summary"]}
     message = {status: 200, body: MESSAGE.to_json, headers: {"content-type" => "application/json"}}
-    stub_request(:post, MESSAGES_URL).to_return(message, message, stream_response, message)
-    stub_request(:post, "#{MESSAGES_URL}?beta=true").to_return(stream_response)
+    stub_request(:post, MESSAGES_URL).to_return(message, message, stream_response, stream_response, message)
     c = client
     c.messages.create(**PARAMS, output_config: {format: {type: :json_schema, schema: schema}})
     c.messages.create(**PARAMS, output_config: {"format" => {"type" => "json_schema", "schema" => schema}})
@@ -100,7 +99,6 @@ class Anthropic::Test::OpenTelemetryApiCallTest < Anthropic::Test::OpenTelemetry
   def test_typed_params_are_recorded_like_a_hash_of_them
     schema = {type: "object", properties: {summary: {type: "string"}}, required: ["summary"]}
     stub_messages
-    stub_messages(url: "#{MESSAGES_URL}?beta=true")
     output_config = {effort: :high, format: {type: :json_schema, schema: schema}}
     thinking = {type: :enabled, budget_tokens: 1024}
     c = client
@@ -270,7 +268,7 @@ class Anthropic::Test::OpenTelemetryApiCallTest < Anthropic::Test::OpenTelemetry
   end
 
   def test_beta_names_come_from_the_anthropic_beta_header
-    stub_messages(url: "#{MESSAGES_URL}?beta=true")
+    stub_messages(url: MESSAGES_URL)
     client.beta.messages.create(**PARAMS, betas: %w[beta-a beta-b])
 
     span = only_span
@@ -347,7 +345,7 @@ class Anthropic::Test::OpenTelemetryApiCallTest < Anthropic::Test::OpenTelemetry
     sampling = {**COMPACTION, type: "message", input_tokens: 10, output_tokens: 5}
     iterations = [COMPACTION, sampling, {**COMPACTION, input_tokens: 1, output_tokens: 2}]
     response = message_with_iterations(iterations)
-    stub_messages(response, response, url: "#{MESSAGES_URL}?beta=true")
+    stub_messages(response, response, url: MESSAGES_URL)
 
     [client, content_client].each { _1.beta.messages.create(**PARAMS) }
 
@@ -363,7 +361,7 @@ class Anthropic::Test::OpenTelemetryApiCallTest < Anthropic::Test::OpenTelemetry
       message_with_iterations([]),
       message_with_iterations(nil),
       {status: 200, body: MESSAGE.to_json},
-      url: "#{MESSAGES_URL}?beta=true"
+      url: MESSAGES_URL
     )
 
     5.times { client.beta.messages.create(**PARAMS) }
@@ -482,9 +480,9 @@ class Anthropic::Test::OpenTelemetryApiCallTest < Anthropic::Test::OpenTelemetry
 
   def test_beta_batch_methods_report_the_batch_id
     url = "#{MESSAGES_URL}/batches"
-    stub_request(:post, "#{url}?beta=true").to_return_json(body: {id: "batch_1", type: "message_batch"})
-    stub_request(:post, "#{url}/batch_2/cancel?beta=true").to_return_json(body: {id: "batch_2"})
-    stub_request(:delete, "#{url}/batch_3?beta=true").to_return_json(body: {id: "batch_3"})
+    stub_request(:post, url).to_return_json(body: {id: "batch_1", type: "message_batch"})
+    stub_request(:post, "#{url}/batch_2/cancel").to_return_json(body: {id: "batch_2"})
+    stub_request(:delete, "#{url}/batch_3").to_return_json(body: {id: "batch_3"})
 
     c = client
     c.beta.messages.batches.create(requests: [{custom_id: "a", params: PARAMS}])
@@ -623,11 +621,11 @@ class Anthropic::Test::OpenTelemetryApiCallTest < Anthropic::Test::OpenTelemetry
   def test_a_create_reports_the_id_of_the_object_it_created
     stub_request(
       :post,
-      "#{BASE_URL}/v1/sessions?beta=true"
+      "#{BASE_URL}/v1/sessions"
     ).to_return_json(body: {id: "sess_1", type: "session"})
     stub_request(
       :post,
-      "#{BASE_URL}/v1/agents?beta=true"
+      "#{BASE_URL}/v1/agents"
     ).to_return_json(body: {id: "agent_1", type: "agent"})
 
     client.beta.sessions.create(agent: "agent_0", environment_id: "env_1")
@@ -659,7 +657,7 @@ class Anthropic::Test::OpenTelemetryApiCallTest < Anthropic::Test::OpenTelemetry
   ].freeze
 
   def test_a_session_create_reports_the_agent_the_environment_and_the_model_of_the_session
-    stub_request(:post, "#{BASE_URL}/v1/sessions?beta=true").to_return_json(body: SESSION)
+    stub_request(:post, "#{BASE_URL}/v1/sessions").to_return_json(body: SESSION)
 
     [
       "agent_1",
@@ -694,10 +692,10 @@ class Anthropic::Test::OpenTelemetryApiCallTest < Anthropic::Test::OpenTelemetry
 
   def test_a_create_that_fails_has_no_created_id
     error = {type: "error", error: {type: "invalid_request_error", message: "bad"}}
-    stub_request(:post, "#{BASE_URL}/v1/sessions?beta=true").to_return_json(status: 400, body: error)
+    stub_request(:post, "#{BASE_URL}/v1/sessions").to_return_json(status: 400, body: error)
     stub_request(:post, "#{MESSAGES_URL}/batches").to_return_json(status: 400, body: error)
     # A response with no ID, and one that is not an object, have none either.
-    stub_request(:post, "#{BASE_URL}/v1/agents?beta=true").to_return_json({body: {type: "agent"}}, {body: []})
+    stub_request(:post, "#{BASE_URL}/v1/agents").to_return_json({body: {type: "agent"}}, {body: []})
 
     c = client(max_retries: 0)
     assert_raises(Anthropic::Errors::BadRequestError) do
@@ -727,8 +725,8 @@ class Anthropic::Test::OpenTelemetryApiCallTest < Anthropic::Test::OpenTelemetry
       "#{BASE_URL}/v1/agents/agent_1/versions",
       "#{BASE_URL}/v1/sessions"
     ].each do |url|
-      stub_request(:get, "#{url}?beta=true").to_return_json(body: first)
-      stub_request(:get, "#{url}?beta=true&page=p2").to_return_json(body: last)
+      stub_request(:get, url).to_return_json(body: first)
+      stub_request(:get, "#{url}?page=p2").to_return_json(body: last)
     end
 
     c = client
@@ -814,7 +812,7 @@ class Anthropic::Test::OpenTelemetryApiCallTest < Anthropic::Test::OpenTelemetry
   end
 
   def test_a_binary_download_ends_its_span_once_the_body_has_been_read
-    stub_request(:get, "#{BASE_URL}/v1/files/file_1/content?beta=true").to_return(
+    stub_request(:get, "#{BASE_URL}/v1/files/file_1/content").to_return(
       status: 200,
       body: "%PDF",
       headers: {"content-type" => "application/pdf", "request-id" => "req_1"}
@@ -831,15 +829,6 @@ class Anthropic::Test::OpenTelemetryApiCallTest < Anthropic::Test::OpenTelemetry
     stub_request(
       :get,
       "#{BASE_URL}/v1/models/m"
-    ).to_return_json(body: {
-                       id: "m",
-                       type: "model",
-                       display_name: "M",
-                       created_at: "2026-01-01T00:00:00Z"
-                     })
-    stub_request(
-      :get,
-      "#{BASE_URL}/v1/models/m?beta=true"
     ).to_return_json(body: {
                        id: "m",
                        type: "model",

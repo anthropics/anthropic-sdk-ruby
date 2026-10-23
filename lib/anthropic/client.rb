@@ -118,7 +118,7 @@ module Anthropic
       if expected_time > default_time || (max_nonstreaming_tokens && max_tokens > max_nonstreaming_tokens)
         raise ArgumentError.new(
           "Streaming is required for operations that may take longer than 10 minutes. " \
-          "See https://github.com/anthropics/anthropic-sdk-ruby#long-requests for more details"
+          "See https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/ruby#streaming for more details"
         )
       end
 

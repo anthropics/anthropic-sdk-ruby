@@ -29,11 +29,12 @@ module Anthropic
             parsed, options = Anthropic::Beta::UserProfiles::ActionURLCreateParams.dump_request(params)
             header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::USER_PROFILES_ACTION_URLS_CREATE,
               span_attributes: {"anthropic.user_profile.id" => user_profile_id},
               span_route: "/v1/user_profiles/{user_profile_id}/action_urls",
               method: :post,
-              path: ["v1/user_profiles/%1$s/action_urls?beta=true", user_profile_id],
+              path: ["v1/user_profiles/%1$s/action_urls", user_profile_id],
               headers: parsed.slice(*header_params.keys).transform_keys(header_params),
               body: parsed.except(*header_params.keys),
               model: Anthropic::Beta::UserProfiles::BetaUserProfileActionURL,

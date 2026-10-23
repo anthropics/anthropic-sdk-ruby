@@ -7,7 +7,8 @@ class Anthropic::Test::Resources::Beta::SessionsTest < Anthropic::Test::Resource
     response =
       @anthropic.beta.sessions.create(
         agent: "agent_011CZkYpogX7uDKUyvBTophP",
-        environment_id: "env_011CZkZ9X2dpNyB7HsEFoRfW"
+        environment_id: "env_011CZkZ9X2dpNyB7HsEFoRfW",
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
@@ -38,7 +39,11 @@ class Anthropic::Test::Resources::Beta::SessionsTest < Anthropic::Test::Resource
   end
 
   def test_retrieve
-    response = @anthropic.beta.sessions.retrieve("sesn_011CZkZAtmR3yMPDzynEDxu7")
+    response =
+      @anthropic.beta.sessions.retrieve(
+        "sesn_011CZkZAtmR3yMPDzynEDxu7",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsSession
@@ -68,7 +73,11 @@ class Anthropic::Test::Resources::Beta::SessionsTest < Anthropic::Test::Resource
   end
 
   def test_update
-    response = @anthropic.beta.sessions.update("sesn_011CZkZAtmR3yMPDzynEDxu7")
+    response =
+      @anthropic.beta.sessions.update(
+        "sesn_011CZkZAtmR3yMPDzynEDxu7",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsSession
@@ -98,7 +107,7 @@ class Anthropic::Test::Resources::Beta::SessionsTest < Anthropic::Test::Resource
   end
 
   def test_list
-    response = @anthropic.beta.sessions.list
+    response = @anthropic.beta.sessions.list(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::BidirectionalPageCursor
@@ -135,7 +144,11 @@ class Anthropic::Test::Resources::Beta::SessionsTest < Anthropic::Test::Resource
   end
 
   def test_delete
-    response = @anthropic.beta.sessions.delete("sesn_011CZkZAtmR3yMPDzynEDxu7")
+    response =
+      @anthropic.beta.sessions.delete(
+        "sesn_011CZkZAtmR3yMPDzynEDxu7",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsDeletedSession
@@ -150,7 +163,11 @@ class Anthropic::Test::Resources::Beta::SessionsTest < Anthropic::Test::Resource
   end
 
   def test_archive
-    response = @anthropic.beta.sessions.archive("sesn_011CZkZAtmR3yMPDzynEDxu7")
+    response =
+      @anthropic.beta.sessions.archive(
+        "sesn_011CZkZAtmR3yMPDzynEDxu7",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsSession

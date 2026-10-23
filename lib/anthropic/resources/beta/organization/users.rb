@@ -18,11 +18,12 @@ module Anthropic
           # @see Anthropic::Models::Beta::Organization::UserRetrieveParams
           def retrieve(user_id, params = {})
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_USERS_RETRIEVE,
               span_attributes: {"anthropic.organization.user.id" => user_id},
               span_route: "/v1/organizations/users/{user_id}",
               method: :get,
-              path: ["v1/organizations/users/%1$s?beta=true", user_id],
+              path: ["v1/organizations/users/%1$s", user_id],
               model: Anthropic::Beta::Organization::BetaOrganizationUser,
               options: params[:request_options]
             )
@@ -47,11 +48,12 @@ module Anthropic
           def update(user_id, params)
             parsed, options = Anthropic::Beta::Organization::UserUpdateParams.dump_request(params)
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_USERS_UPDATE,
               span_attributes: {"anthropic.organization.user.id" => user_id},
               span_route: "/v1/organizations/users/{user_id}",
               method: :post,
-              path: ["v1/organizations/users/%1$s?beta=true", user_id],
+              path: ["v1/organizations/users/%1$s", user_id],
               body: parsed,
               model: Anthropic::Beta::Organization::BetaOrganizationUser,
               options: options
@@ -84,11 +86,12 @@ module Anthropic
             parsed, options = Anthropic::Beta::Organization::UserListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed)
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_USERS_LIST,
               span_route: "/v1/organizations/users",
               span_query: %w[after_id before_id email limit roles],
               method: :get,
-              path: "v1/organizations/users?beta=true",
+              path: "v1/organizations/users",
               query: query,
               page: Anthropic::Internal::Page,
               model: Anthropic::Beta::Organization::BetaOrganizationUser,
@@ -109,11 +112,12 @@ module Anthropic
           # @see Anthropic::Models::Beta::Organization::UserRemoveParams
           def remove(user_id, params = {})
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_USERS_REMOVE,
               span_attributes: {"anthropic.organization.user.id" => user_id},
               span_route: "/v1/organizations/users/{user_id}",
               method: :delete,
-              path: ["v1/organizations/users/%1$s?beta=true", user_id],
+              path: ["v1/organizations/users/%1$s", user_id],
               model: Anthropic::Models::Beta::Organization::UserRemoveResponse,
               options: params[:request_options]
             )

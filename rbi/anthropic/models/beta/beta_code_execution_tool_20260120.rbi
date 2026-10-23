@@ -71,8 +71,16 @@ module Anthropic
         sig { params(strict: T::Boolean).void }
         attr_writer :strict
 
-        # Code execution tool with REPL state persistence (daemon mode + gVisor
-        # checkpoint).
+        # A `tools` entry for the code execution tool, version `code_execution_20260120`.
+        # It adds REPL state persistence to version `code_execution_20250825`.
+        #
+        # REPL state persistence applies with programmatic tool calling. With it, the
+        # Python interpreter state, such as variable bindings, persists across requests
+        # that reuse the container.
+        #
+        # See the
+        # [code execution tool guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool#tool-versions)
+        # to learn what each tool version adds.
         sig do
           params(
             allowed_callers:

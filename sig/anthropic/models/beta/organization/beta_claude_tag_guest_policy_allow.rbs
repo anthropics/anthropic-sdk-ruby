@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_claude_tag_guest_policy_allow = { type: :allow }
+
+        class BetaClaudeTagGuestPolicyAllow < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :allow
+
+          def initialize: (?type: :allow) -> void
+
+          def to_hash: -> { type: :allow }
+        end
+      end
+    end
+  end
+end

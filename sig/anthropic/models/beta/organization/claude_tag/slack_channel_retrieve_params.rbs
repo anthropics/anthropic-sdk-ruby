@@ -1,0 +1,48 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeTag
+          type slack_channel_retrieve_params =
+            {
+              id: String,
+              include_inherited: bool,
+              betas: ::Array[Anthropic::Models::anthropic_beta]
+            }
+            & Anthropic::Internal::Type::request_parameters
+
+          class SlackChannelRetrieveParams < Anthropic::Internal::Type::BaseModel
+            extend Anthropic::Internal::Type::RequestParameters::Converter
+            include Anthropic::Internal::Type::RequestParameters
+
+            attr_accessor id: String
+
+            attr_reader include_inherited: bool?
+
+            def include_inherited=: (bool) -> bool
+
+            attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+            def betas=: (
+              ::Array[Anthropic::Models::anthropic_beta]
+            ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+            def initialize: (
+              id: String,
+              ?include_inherited: bool,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> void
+
+            def to_hash: -> {
+              id: String,
+              include_inherited: bool,
+              betas: ::Array[Anthropic::Models::anthropic_beta],
+              request_options: Anthropic::RequestOptions
+            }
+          end
+        end
+      end
+    end
+  end
+end

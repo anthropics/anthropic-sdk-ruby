@@ -5,7 +5,11 @@ require_relative "../../../../test_helper"
 class Anthropic::Test::Resources::Beta::Organization::Workspaces::MembersTest < Anthropic::Test::ResourceTest
   def test_retrieve_required_params
     response =
-      @anthropic.beta.organization.workspaces.members.retrieve("user_id", workspace_id: "workspace_id")
+      @anthropic.beta.organization.workspaces.members.retrieve(
+        "user_id",
+        workspace_id: "workspace_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaWorkspaceMember
@@ -26,7 +30,8 @@ class Anthropic::Test::Resources::Beta::Organization::Workspaces::MembersTest < 
       @anthropic.beta.organization.workspaces.members.update(
         "user_id",
         workspace_id: "workspace_id",
-        workspace_role: :workspace_admin
+        workspace_role: :workspace_admin,
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
@@ -44,7 +49,11 @@ class Anthropic::Test::Resources::Beta::Organization::Workspaces::MembersTest < 
   end
 
   def test_list
-    response = @anthropic.beta.organization.workspaces.members.list("workspace_id")
+    response =
+      @anthropic.beta.organization.workspaces.members.list(
+        "workspace_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Internal::Page
@@ -72,7 +81,8 @@ class Anthropic::Test::Resources::Beta::Organization::Workspaces::MembersTest < 
       @anthropic.beta.organization.workspaces.members.add(
         "workspace_id",
         user_id: "user_01WCz1FkmYMm4gnmykNKUu3Q",
-        workspace_role: :workspace_admin
+        workspace_role: :workspace_admin,
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
@@ -91,7 +101,11 @@ class Anthropic::Test::Resources::Beta::Organization::Workspaces::MembersTest < 
 
   def test_remove_required_params
     response =
-      @anthropic.beta.organization.workspaces.members.remove("user_id", workspace_id: "workspace_id")
+      @anthropic.beta.organization.workspaces.members.remove(
+        "user_id",
+        workspace_id: "workspace_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Models::Beta::Organization::Workspaces::MemberRemoveResponse

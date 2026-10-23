@@ -39,6 +39,7 @@ module Anthropic
                   raise ArgumentError.new("missing required path argument #{_1}")
                 end
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_THREADS_EVENTS_LIST,
                 span_attributes: {
                   "anthropic.session.id" => session_id,
@@ -47,7 +48,7 @@ module Anthropic
                 span_route: "/v1/sessions/{session_id}/threads/{thread_id}/events",
                 span_query: %w[limit page],
                 method: :get,
-                path: ["v1/sessions/%1$s/threads/%2$s/events?beta=true", session_id, thread_id],
+                path: ["v1/sessions/%1$s/threads/%2$s/events", session_id, thread_id],
                 query: query,
                 headers: parsed.except(*query_params).transform_keys(
                   betas: "anthropic-beta",
@@ -91,6 +92,7 @@ module Anthropic
                   raise ArgumentError.new("missing required path argument #{_1}")
                 end
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_THREADS_EVENTS_STREAM,
                 span_attributes: {
                   "anthropic.session.id" => session_id,
@@ -99,7 +101,7 @@ module Anthropic
                 span_route: "/v1/sessions/{session_id}/threads/{thread_id}/stream",
                 span_query: %w[event_deltas],
                 method: :get,
-                path: ["v1/sessions/%1$s/threads/%2$s/stream?beta=true", session_id, thread_id],
+                path: ["v1/sessions/%1$s/threads/%2$s/stream", session_id, thread_id],
                 query: query,
                 headers: {"accept" => "text/event-stream", "accept-encoding" => "identity", **parsed.except(*query_params)}.transform_keys(
                   betas: "anthropic-beta",

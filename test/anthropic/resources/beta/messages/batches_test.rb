@@ -11,7 +11,8 @@ class Anthropic::Test::Resources::Beta::Messages::BatchesTest < Anthropic::Test:
             custom_id: "my-custom-id-1",
             params: {max_tokens: 1024, messages: [{content: "Hello, world", role: :user}], model: Anthropic::Model::CLAUDE_OPUS_5_5}
           }
-        ]
+        ],
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
@@ -35,7 +36,11 @@ class Anthropic::Test::Resources::Beta::Messages::BatchesTest < Anthropic::Test:
   end
 
   def test_retrieve
-    response = @anthropic.beta.messages.batches.retrieve("message_batch_id")
+    response =
+      @anthropic.beta.messages.batches.retrieve(
+        "message_batch_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Messages::BetaMessageBatch
@@ -58,7 +63,7 @@ class Anthropic::Test::Resources::Beta::Messages::BatchesTest < Anthropic::Test:
   end
 
   def test_list
-    response = @anthropic.beta.messages.batches.list
+    response = @anthropic.beta.messages.batches.list(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::Page
@@ -88,7 +93,11 @@ class Anthropic::Test::Resources::Beta::Messages::BatchesTest < Anthropic::Test:
   end
 
   def test_delete
-    response = @anthropic.beta.messages.batches.delete("message_batch_id")
+    response =
+      @anthropic.beta.messages.batches.delete(
+        "message_batch_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Messages::BetaDeletedMessageBatch
@@ -103,7 +112,11 @@ class Anthropic::Test::Resources::Beta::Messages::BatchesTest < Anthropic::Test:
   end
 
   def test_cancel
-    response = @anthropic.beta.messages.batches.cancel("message_batch_id")
+    response =
+      @anthropic.beta.messages.batches.cancel(
+        "message_batch_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Messages::BetaMessageBatch

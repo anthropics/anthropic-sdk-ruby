@@ -5,7 +5,11 @@ require_relative "../../../test_helper"
 class Anthropic::Test::Resources::Beta::Tunnels::CertificatesTest < Anthropic::Test::ResourceTest
   def test_create_required_params
     response =
-      @anthropic.beta.tunnels.certificates.create("tunnel_id", ca_certificate_pem: "ca_certificate_pem")
+      @anthropic.beta.tunnels.certificates.create(
+        "tunnel_id",
+        ca_certificate_pem: "ca_certificate_pem",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Tunnels::BetaTunnelCertificate
@@ -25,7 +29,12 @@ class Anthropic::Test::Resources::Beta::Tunnels::CertificatesTest < Anthropic::T
   end
 
   def test_retrieve_required_params
-    response = @anthropic.beta.tunnels.certificates.retrieve("certificate_id", tunnel_id: "tunnel_id")
+    response =
+      @anthropic.beta.tunnels.certificates.retrieve(
+        "certificate_id",
+        tunnel_id: "tunnel_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Tunnels::BetaTunnelCertificate
@@ -45,7 +54,8 @@ class Anthropic::Test::Resources::Beta::Tunnels::CertificatesTest < Anthropic::T
   end
 
   def test_list
-    response = @anthropic.beta.tunnels.certificates.list("tunnel_id")
+    response =
+      @anthropic.beta.tunnels.certificates.list("tunnel_id", request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -72,7 +82,12 @@ class Anthropic::Test::Resources::Beta::Tunnels::CertificatesTest < Anthropic::T
   end
 
   def test_archive_required_params
-    response = @anthropic.beta.tunnels.certificates.archive("certificate_id", tunnel_id: "tunnel_id")
+    response =
+      @anthropic.beta.tunnels.certificates.archive(
+        "certificate_id",
+        tunnel_id: "tunnel_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Tunnels::BetaTunnelCertificate

@@ -237,6 +237,11 @@ module Anthropic
           :"analytics-usage-cost-2026-08-24",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
+      EXPERIMENTAL_CLAUDE_TAG_2026_10_21 =
+        T.let(
+          :"experimental-claude-tag-2026-10-21",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
     end
   end
 end

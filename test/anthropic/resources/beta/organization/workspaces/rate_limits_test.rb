@@ -8,7 +8,8 @@ class Anthropic::Test::Resources::Beta::Organization::Workspaces::RateLimitsTest
       @anthropic.beta.organization.workspaces.rate_limits.update(
         "rate_limit_id",
         workspace_id: "workspace_id",
-        limits: [{type: :fast_itpmca, value: 0}]
+        limits: [{type: :fast_itpmca, value: 0}],
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
@@ -28,7 +29,11 @@ class Anthropic::Test::Resources::Beta::Organization::Workspaces::RateLimitsTest
   end
 
   def test_list
-    response = @anthropic.beta.organization.workspaces.rate_limits.list("workspace_id")
+    response =
+      @anthropic.beta.organization.workspaces.rate_limits.list(
+        "workspace_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor

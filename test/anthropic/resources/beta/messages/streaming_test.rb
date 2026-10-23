@@ -27,7 +27,7 @@ class Anthropic::Test::Resources::Beta::Messages::StreamingTest < Minitest::Test
   end
 
   def stub_streaming_response(response_body)
-    stub_request(:post, "http://localhost/v1/messages?beta=true")
+    stub_request(:post, "http://localhost/v1/messages")
       .with(
         headers: {
           "Accept" => "text/event-stream",
@@ -291,7 +291,7 @@ class Anthropic::Test::Resources::Beta::Messages::StreamingTest < Minitest::Test
 
     @client.beta.messages.stream(**compaction_params, workspace_id: "wrkspc_req").until_done
 
-    assert_requested(:post, "http://localhost/v1/messages?beta=true") do |req|
+    assert_requested(:post, "http://localhost/v1/messages") do |req|
       assert_equal("wrkspc_req", req.headers["Anthropic-Workspace-Id"])
       refute(JSON.parse(req.body).key?("workspace_id"))
       true

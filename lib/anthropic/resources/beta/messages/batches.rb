@@ -41,11 +41,12 @@ module Anthropic
                 workspace_id: "anthropic-workspace-id"
               }
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::MESSAGES_BATCHES_CREATE,
               span_created_id: "anthropic.message.batch.id",
               span_route: "/v1/messages/batches",
               method: :post,
-              path: "v1/messages/batches?beta=true",
+              path: "v1/messages/batches",
               headers: parsed.slice(*header_params.keys).transform_keys(header_params),
               body: parsed.except(*header_params.keys),
               model: Anthropic::Beta::Messages::BetaMessageBatch,
@@ -79,11 +80,12 @@ module Anthropic
           def retrieve(message_batch_id, params = {})
             parsed, options = Anthropic::Beta::Messages::BatchRetrieveParams.dump_request(params)
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::MESSAGES_BATCHES_RETRIEVE,
               span_attributes: {"anthropic.message.batch.id" => message_batch_id},
               span_route: "/v1/messages/batches/{message_batch_id}",
               method: :get,
-              path: ["v1/messages/batches/%1$s?beta=true", message_batch_id],
+              path: ["v1/messages/batches/%1$s", message_batch_id],
               headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
               model: Anthropic::Beta::Messages::BetaMessageBatch,
               options: {extra_headers: {"anthropic-beta" => "message-batches-2024-09-24"}, **options}
@@ -121,11 +123,12 @@ module Anthropic
             parsed, options = Anthropic::Beta::Messages::BatchListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::MESSAGES_BATCHES_LIST,
               span_route: "/v1/messages/batches",
               span_query: %w[after_id before_id limit],
               method: :get,
-              path: "v1/messages/batches?beta=true",
+              path: "v1/messages/batches",
               query: query,
               headers: parsed.except(*query_params).transform_keys(
                 betas: "anthropic-beta",
@@ -164,11 +167,12 @@ module Anthropic
           def delete(message_batch_id, params = {})
             parsed, options = Anthropic::Beta::Messages::BatchDeleteParams.dump_request(params)
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::MESSAGES_BATCHES_DELETE,
               span_attributes: {"anthropic.message.batch.id" => message_batch_id},
               span_route: "/v1/messages/batches/{message_batch_id}",
               method: :delete,
-              path: ["v1/messages/batches/%1$s?beta=true", message_batch_id],
+              path: ["v1/messages/batches/%1$s", message_batch_id],
               headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
               model: Anthropic::Beta::Messages::BetaDeletedMessageBatch,
               options: {extra_headers: {"anthropic-beta" => "message-batches-2024-09-24"}, **options}
@@ -207,11 +211,12 @@ module Anthropic
           def cancel(message_batch_id, params = {})
             parsed, options = Anthropic::Beta::Messages::BatchCancelParams.dump_request(params)
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::MESSAGES_BATCHES_CANCEL,
               span_attributes: {"anthropic.message.batch.id" => message_batch_id},
               span_route: "/v1/messages/batches/{message_batch_id}/cancel",
               method: :post,
-              path: ["v1/messages/batches/%1$s/cancel?beta=true", message_batch_id],
+              path: ["v1/messages/batches/%1$s/cancel", message_batch_id],
               headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
               model: Anthropic::Beta::Messages::BetaMessageBatch,
               options: {extra_headers: {"anthropic-beta" => "message-batches-2024-09-24"}, **options}
@@ -246,11 +251,12 @@ module Anthropic
           def results_streaming(message_batch_id, params = {})
             parsed, options = Anthropic::Beta::Messages::BatchResultsParams.dump_request(params)
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::MESSAGES_BATCHES_RESULTS,
               span_attributes: {"anthropic.message.batch.id" => message_batch_id},
               span_route: "/v1/messages/batches/{message_batch_id}/results",
               method: :get,
-              path: ["v1/messages/batches/%1$s/results?beta=true", message_batch_id],
+              path: ["v1/messages/batches/%1$s/results", message_batch_id],
               headers: {"accept" => "application/x-jsonl", "accept-encoding" => "identity", **parsed}.transform_keys(
                 betas: "anthropic-beta",
                 workspace_id: "anthropic-workspace-id"

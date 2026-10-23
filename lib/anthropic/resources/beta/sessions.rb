@@ -49,11 +49,12 @@ module Anthropic
           parsed, options = Anthropic::Beta::SessionCreateParams.dump_request(params)
           header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_CREATE,
             span_created_id: "anthropic.session.id",
             span_route: "/v1/sessions",
             method: :post,
-            path: "v1/sessions?beta=true",
+            path: "v1/sessions",
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),
             body: parsed.except(*header_params.keys),
             model: Anthropic::Beta::BetaManagedAgentsSession,
@@ -82,11 +83,12 @@ module Anthropic
         def retrieve(session_id, params = {})
           parsed, options = Anthropic::Beta::SessionRetrieveParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_RETRIEVE,
             span_attributes: {"anthropic.session.id" => session_id},
             span_route: "/v1/sessions/{session_id}",
             method: :get,
-            path: ["v1/sessions/%1$s?beta=true", session_id],
+            path: ["v1/sessions/%1$s", session_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaManagedAgentsSession,
             options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
@@ -125,11 +127,12 @@ module Anthropic
           parsed, options = Anthropic::Beta::SessionUpdateParams.dump_request(params)
           header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_UPDATE,
             span_attributes: {"anthropic.session.id" => session_id},
             span_route: "/v1/sessions/{session_id}",
             method: :post,
-            path: ["v1/sessions/%1$s?beta=true", session_id],
+            path: ["v1/sessions/%1$s", session_id],
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),
             body: parsed.except(*header_params.keys),
             model: Anthropic::Beta::BetaManagedAgentsSession,
@@ -199,6 +202,7 @@ module Anthropic
           parsed, options = Anthropic::Beta::SessionListParams.dump_request(params)
           query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_LIST,
             span_route: "/v1/sessions",
             span_query: %w[
@@ -217,7 +221,7 @@ module Anthropic
               statuses
             ],
             method: :get,
-            path: "v1/sessions?beta=true",
+            path: "v1/sessions",
             query: query.transform_keys(
               created_at_gt: "created_at[gt]",
               created_at_gte: "created_at[gte]",
@@ -255,11 +259,12 @@ module Anthropic
         def delete(session_id, params = {})
           parsed, options = Anthropic::Beta::SessionDeleteParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_DELETE,
             span_attributes: {"anthropic.session.id" => session_id},
             span_route: "/v1/sessions/{session_id}",
             method: :delete,
-            path: ["v1/sessions/%1$s?beta=true", session_id],
+            path: ["v1/sessions/%1$s", session_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaManagedAgentsDeletedSession,
             options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
@@ -287,11 +292,12 @@ module Anthropic
         def archive(session_id, params = {})
           parsed, options = Anthropic::Beta::SessionArchiveParams.dump_request(params)
           @client.request(
+            qualifiers: {beta: "true"},
             span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_ARCHIVE,
             span_attributes: {"anthropic.session.id" => session_id},
             span_route: "/v1/sessions/{session_id}/archive",
             method: :post,
-            path: ["v1/sessions/%1$s/archive?beta=true", session_id],
+            path: ["v1/sessions/%1$s/archive", session_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaManagedAgentsSession,
             options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}

@@ -4,7 +4,8 @@ require_relative "../../../test_helper"
 
 class Anthropic::Test::Resources::Beta::Organization::UsersTest < Anthropic::Test::ResourceTest
   def test_retrieve
-    response = @anthropic.beta.organization.users.retrieve("user_id")
+    response =
+      @anthropic.beta.organization.users.retrieve("user_id", request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaOrganizationUser
@@ -23,7 +24,12 @@ class Anthropic::Test::Resources::Beta::Organization::UsersTest < Anthropic::Tes
   end
 
   def test_update_required_params
-    response = @anthropic.beta.organization.users.update("user_id", role: :user)
+    response =
+      @anthropic.beta.organization.users.update(
+        "user_id",
+        role: :user,
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaOrganizationUser
@@ -42,7 +48,7 @@ class Anthropic::Test::Resources::Beta::Organization::UsersTest < Anthropic::Tes
   end
 
   def test_list
-    response = @anthropic.beta.organization.users.list
+    response = @anthropic.beta.organization.users.list(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::Page
@@ -68,7 +74,8 @@ class Anthropic::Test::Resources::Beta::Organization::UsersTest < Anthropic::Tes
   end
 
   def test_remove
-    response = @anthropic.beta.organization.users.remove("user_id")
+    response =
+      @anthropic.beta.organization.users.remove("user_id", request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Models::Beta::Organization::UserRemoveResponse

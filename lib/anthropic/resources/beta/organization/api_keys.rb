@@ -18,11 +18,12 @@ module Anthropic
           # @see Anthropic::Models::Beta::Organization::APIKeyRetrieveParams
           def retrieve(api_key_id, params = {})
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_API_KEYS_RETRIEVE,
               span_attributes: {"anthropic.organization.api_key.id" => api_key_id},
               span_route: "/v1/organizations/api_keys/{api_key_id}",
               method: :get,
-              path: ["v1/organizations/api_keys/%1$s?beta=true", api_key_id],
+              path: ["v1/organizations/api_keys/%1$s", api_key_id],
               model: Anthropic::Beta::Organization::BetaAPIKey,
               options: params[:request_options]
             )
@@ -46,11 +47,12 @@ module Anthropic
           def update(api_key_id, params = {})
             parsed, options = Anthropic::Beta::Organization::APIKeyUpdateParams.dump_request(params)
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_API_KEYS_UPDATE,
               span_attributes: {"anthropic.organization.api_key.id" => api_key_id},
               span_route: "/v1/organizations/api_keys/{api_key_id}",
               method: :post,
-              path: ["v1/organizations/api_keys/%1$s?beta=true", api_key_id],
+              path: ["v1/organizations/api_keys/%1$s", api_key_id],
               body: parsed,
               model: Anthropic::Beta::Organization::BetaAPIKey,
               options: options
@@ -85,11 +87,12 @@ module Anthropic
             parsed, options = Anthropic::Beta::Organization::APIKeyListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed)
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_API_KEYS_LIST,
               span_route: "/v1/organizations/api_keys",
               span_query: %w[after_id before_id created_by_user_id limit status workspace_id],
               method: :get,
-              path: "v1/organizations/api_keys?beta=true",
+              path: "v1/organizations/api_keys",
               query: query,
               page: Anthropic::Internal::Page,
               model: Anthropic::Beta::Organization::BetaAPIKey,

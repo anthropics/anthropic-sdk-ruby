@@ -46,12 +46,13 @@ module Anthropic
                 Anthropic::Beta::Organization::ServiceAccounts::WorkspaceListParams.dump_request(params)
               query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SERVICE_ACCOUNTS_WORKSPACES_LIST,
                 span_attributes: {"anthropic.organization.service_account.id" => service_account_id},
                 span_route: "/v1/organizations/service_accounts/{service_account_id}/workspaces",
                 span_query: %w[limit page],
                 method: :get,
-                path: ["v1/organizations/service_accounts/%1$s/workspaces?beta=true", service_account_id],
+                path: ["v1/organizations/service_accounts/%1$s/workspaces", service_account_id],
                 query: query,
                 headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
                 page: Anthropic::Internal::PageCursor,
@@ -92,12 +93,13 @@ module Anthropic
               parsed, options = Anthropic::Beta::Organization::ServiceAccounts::WorkspaceAddParams.dump_request(params)
               header_params = {betas: "anthropic-beta"}
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SERVICE_ACCOUNTS_WORKSPACES_ADD,
                 span_attributes: {"anthropic.organization.service_account.id" => service_account_id},
                 span_created_id: {"anthropic.organization.service_account.workspace.id" => :workspace_id},
                 span_route: "/v1/organizations/service_accounts/{service_account_id}/workspaces",
                 method: :post,
-                path: ["v1/organizations/service_accounts/%1$s/workspaces?beta=true", service_account_id],
+                path: ["v1/organizations/service_accounts/%1$s/workspaces", service_account_id],
                 headers: parsed.slice(*header_params.keys).transform_keys(header_params),
                 body: parsed.except(*header_params.keys),
                 model: Anthropic::Beta::Organization::BetaServiceAccountWorkspaceMember,
@@ -141,6 +143,7 @@ module Anthropic
                   raise ArgumentError.new("missing required path argument #{_1}")
                 end
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SERVICE_ACCOUNTS_WORKSPACES_REMOVE,
                 span_attributes: {
                   "anthropic.organization.service_account.id" => service_account_id,
@@ -149,7 +152,7 @@ module Anthropic
                 span_route: "/v1/organizations/service_accounts/{service_account_id}/workspaces/{workspace_id}",
                 method: :delete,
                 path: [
-                  "v1/organizations/service_accounts/%1$s/workspaces/%2$s?beta=true",
+                  "v1/organizations/service_accounts/%1$s/workspaces/%2$s",
                   service_account_id,
                   workspace_id
                 ],

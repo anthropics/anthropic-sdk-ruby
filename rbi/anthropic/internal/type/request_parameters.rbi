@@ -12,6 +12,10 @@ module Anthropic
         sig { params(request_options: Anthropic::RequestOptions::OrHash).void }
         attr_writer :request_options
 
+        sig { params(mod: Module).void }
+        def self.included(mod)
+        end
+
         # @api private
         module Converter
           # @api private

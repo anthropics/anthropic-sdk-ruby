@@ -41,6 +41,7 @@ module Anthropic
                   raise ArgumentError.new("missing required path argument #{_1}")
                 end
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_WORKSPACES_RATE_LIMITS_UPDATE,
                 span_attributes: {
                   "anthropic.organization.workspace.id" => workspace_id,
@@ -48,11 +49,7 @@ module Anthropic
                 },
                 span_route: "/v1/organizations/workspaces/{workspace_id}/rate_limits/{rate_limit_id}",
                 method: :post,
-                path: [
-                  "v1/organizations/workspaces/%1$s/rate_limits/%2$s?beta=true",
-                  workspace_id,
-                  rate_limit_id
-                ],
+                path: ["v1/organizations/workspaces/%1$s/rate_limits/%2$s", workspace_id, rate_limit_id],
                 body: parsed,
                 model: Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimit,
                 options: options
@@ -95,12 +92,13 @@ module Anthropic
               parsed, options = Anthropic::Beta::Organization::Workspaces::RateLimitListParams.dump_request(params)
               query = Anthropic::Internal::Util.encode_query_params(parsed)
               @client.request(
+                qualifiers: {beta: "true"},
                 span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_WORKSPACES_RATE_LIMITS_LIST,
                 span_attributes: {"anthropic.organization.workspace.id" => workspace_id},
                 span_route: "/v1/organizations/workspaces/{workspace_id}/rate_limits",
                 span_query: %w[group_type include_inherited limit page],
                 method: :get,
-                path: ["v1/organizations/workspaces/%1$s/rate_limits?beta=true", workspace_id],
+                path: ["v1/organizations/workspaces/%1$s/rate_limits", workspace_id],
                 query: query,
                 page: Anthropic::Internal::PageCursor,
                 model: Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimit,

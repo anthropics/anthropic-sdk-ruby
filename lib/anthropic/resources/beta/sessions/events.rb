@@ -54,6 +54,7 @@ module Anthropic
             parsed, options = Anthropic::Beta::Sessions::EventListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_EVENTS_LIST,
               span_attributes: {"anthropic.session.id" => session_id},
               span_route: "/v1/sessions/{session_id}/events",
@@ -68,7 +69,7 @@ module Anthropic
                 types
               ],
               method: :get,
-              path: ["v1/sessions/%1$s/events?beta=true", session_id],
+              path: ["v1/sessions/%1$s/events", session_id],
               query: query.transform_keys(
                 created_at_gt: "created_at[gt]",
                 created_at_gte: "created_at[gte]",
@@ -109,11 +110,12 @@ module Anthropic
             parsed, options = Anthropic::Beta::Sessions::EventSendParams.dump_request(params)
             header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_EVENTS_SEND,
               span_attributes: {"anthropic.session.id" => session_id},
               span_route: "/v1/sessions/{session_id}/events",
               method: :post,
-              path: ["v1/sessions/%1$s/events?beta=true", session_id],
+              path: ["v1/sessions/%1$s/events", session_id],
               headers: parsed.slice(*header_params.keys).transform_keys(header_params),
               body: parsed.except(*header_params.keys),
               model: Anthropic::Beta::Sessions::BetaManagedAgentsSendSessionEvents,
@@ -146,12 +148,13 @@ module Anthropic
             parsed, options = Anthropic::Beta::Sessions::EventStreamParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_EVENTS_STREAM,
               span_attributes: {"anthropic.session.id" => session_id},
               span_route: "/v1/sessions/{session_id}/events/stream",
               span_query: %w[event_deltas],
               method: :get,
-              path: ["v1/sessions/%1$s/events/stream?beta=true", session_id],
+              path: ["v1/sessions/%1$s/events/stream", session_id],
               query: query,
               headers: {"accept" => "text/event-stream", "accept-encoding" => "identity", **parsed.except(*query_params)}.transform_keys(
                 betas: "anthropic-beta",

@@ -41,6 +41,7 @@ module Anthropic
               :page,
               :stream,
               :model,
+              :qualifiers,
               :span_name,
               :span_attributes,
               :span_created_id,
@@ -99,6 +100,8 @@ module Anthropic
           #   @option request [Integer] :max_retries
           #
           #   @option request [Float] :timeout
+          #
+          #   @option request [Hash{Symbol=>String}, nil] :qualifiers
           #
           #   @option request [Array<String>, nil] :span_query
           #
@@ -335,6 +338,9 @@ module Anthropic
         #
         #   @option req [Anthropic::Internal::Type::Converter, Class, nil] :model
         #
+        #   @option req [Hash{Symbol=>String}, nil] :qualifiers internal: the query pairs that tell the operation apart from the others with its
+        #   path in the OpenAPI document
+        #
         #   @option req [String, nil] :span_name
         #
         #   @option req [Hash{String=>Object}, nil] :span_attributes
@@ -428,6 +434,7 @@ module Anthropic
             body: body,
             max_retries: opts.fetch(:max_retries, @max_retries),
             timeout: timeout,
+            qualifiers: req[:qualifiers],
             user_header_keys: user_header_keys,
             # For paginated requests `model` is the page's *item* type, not the
             # response envelope's — middleware `parse` falls back to the raw
@@ -439,7 +446,7 @@ module Anthropic
             span_content_query: req[:span_content_query],
             options: opts.except(:middleware),
             middleware: request_middleware,
-            metadata: {}
+            metadata: {qualifiers: req[:qualifiers]}.compact
           }
         end
 
@@ -539,6 +546,8 @@ module Anthropic
         #   @option request [Integer] :max_retries
         #
         #   @option request [Float] :timeout
+        #
+        #   @option request [Hash{Symbol=>String}, nil] :qualifiers
         #
         #   @option request [Array<String>, nil] :span_query
         #
@@ -738,7 +747,7 @@ module Anthropic
         # Execute the request specified by `req`. This is the method that all resource
         # methods call into.
         #
-        # @overload request(method, path, query: {}, headers: {}, body: nil, unwrap: nil, page: nil, stream: nil, model: Anthropic::Internal::Type::Unknown, span_name: nil, span_attributes: nil, span_created_id: nil, span_route: nil, span_query: nil, span_content_query: nil, options: {})
+        # @overload request(method, path, query: {}, headers: {}, body: nil, unwrap: nil, page: nil, stream: nil, model: Anthropic::Internal::Type::Unknown, qualifiers: nil, span_name: nil, span_attributes: nil, span_created_id: nil, span_route: nil, span_query: nil, span_content_query: nil, options: {})
         #
         # @param method [Symbol]
         #
@@ -757,6 +766,9 @@ module Anthropic
         # @param stream [Class<Anthropic::Internal::Type::BaseStream>, nil]
         #
         # @param model [Anthropic::Internal::Type::Converter, Class, nil]
+        #
+        # @param qualifiers [Hash{Symbol=>String}, nil] internal: the query pairs that tell the operation apart from the others with its
+        # path in the OpenAPI document
         #
         # @param span_name [String, nil]
         #
@@ -913,6 +925,7 @@ module Anthropic
                 T::Class[Anthropic::Internal::Type::BaseStream[T.anything, Anthropic::Internal::Type::BaseModel]]
               ),
               model: T.nilable(Anthropic::Internal::Type::Converter::Input),
+              qualifiers: T.nilable(T::Hash[Symbol, String]),
               span_name: T.nilable(String),
               span_attributes: T.nilable(T::Hash[String, T.anything]),
               span_created_id: T.nilable(T.any(String, T::Hash[String, Symbol])),
@@ -932,6 +945,7 @@ module Anthropic
               body: T.anything,
               max_retries: Integer,
               timeout: Float,
+              qualifiers: T.nilable(T::Hash[Symbol, String]),
               user_header_keys: T::Array[String],
               cast_to: T.nilable(Anthropic::Internal::Type::Converter::Input),
               stream: T.nilable(T::Class[T.anything]),

@@ -45,6 +45,8 @@ module Anthropic
         def to_enum
         end
 
+        alias_method :enum_for, :to_enum
+
         # @api private
         sig do
           params(

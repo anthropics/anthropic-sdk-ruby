@@ -5,7 +5,11 @@ require_relative "../../../test_helper"
 class Anthropic::Test::Resources::Beta::Environments::WorkTest < Anthropic::Test::ResourceTest
   def test_retrieve_required_params
     response =
-      @anthropic.beta.environments.work.retrieve("work_id", environment_id: "env_011CZkZ9X2dpNyB7HsEFoRfW")
+      @anthropic.beta.environments.work.retrieve(
+        "work_id",
+        environment_id: "env_011CZkZ9X2dpNyB7HsEFoRfW",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Environments::BetaSelfHostedWork
@@ -35,7 +39,8 @@ class Anthropic::Test::Resources::Beta::Environments::WorkTest < Anthropic::Test
       @anthropic.beta.environments.work.update(
         "work_id",
         environment_id: "env_011CZkZ9X2dpNyB7HsEFoRfW",
-        metadata: {foo: "string"}
+        metadata: {foo: "string"},
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
@@ -62,7 +67,11 @@ class Anthropic::Test::Resources::Beta::Environments::WorkTest < Anthropic::Test
   end
 
   def test_list
-    response = @anthropic.beta.environments.work.list("env_011CZkZ9X2dpNyB7HsEFoRfW")
+    response =
+      @anthropic.beta.environments.work.list(
+        "env_011CZkZ9X2dpNyB7HsEFoRfW",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -96,7 +105,11 @@ class Anthropic::Test::Resources::Beta::Environments::WorkTest < Anthropic::Test
 
   def test_ack_required_params
     response =
-      @anthropic.beta.environments.work.ack("work_id", environment_id: "env_011CZkZ9X2dpNyB7HsEFoRfW")
+      @anthropic.beta.environments.work.ack(
+        "work_id",
+        environment_id: "env_011CZkZ9X2dpNyB7HsEFoRfW",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Environments::BetaSelfHostedWork
@@ -123,7 +136,11 @@ class Anthropic::Test::Resources::Beta::Environments::WorkTest < Anthropic::Test
 
   def test_heartbeat_required_params
     response =
-      @anthropic.beta.environments.work.heartbeat("work_id", environment_id: "env_011CZkZ9X2dpNyB7HsEFoRfW")
+      @anthropic.beta.environments.work.heartbeat(
+        "work_id",
+        environment_id: "env_011CZkZ9X2dpNyB7HsEFoRfW",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Environments::BetaSelfHostedWorkHeartbeatResponse
@@ -141,7 +158,11 @@ class Anthropic::Test::Resources::Beta::Environments::WorkTest < Anthropic::Test
   end
 
   def test_poll
-    response = @anthropic.beta.environments.work.poll("env_011CZkZ9X2dpNyB7HsEFoRfW")
+    response =
+      @anthropic.beta.environments.work.poll(
+        "env_011CZkZ9X2dpNyB7HsEFoRfW",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Environments::BetaSelfHostedWork
@@ -167,7 +188,11 @@ class Anthropic::Test::Resources::Beta::Environments::WorkTest < Anthropic::Test
   end
 
   def test_stats
-    response = @anthropic.beta.environments.work.stats("env_011CZkZ9X2dpNyB7HsEFoRfW")
+    response =
+      @anthropic.beta.environments.work.stats(
+        "env_011CZkZ9X2dpNyB7HsEFoRfW",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Environments::BetaSelfHostedWorkQueueStats
@@ -186,7 +211,11 @@ class Anthropic::Test::Resources::Beta::Environments::WorkTest < Anthropic::Test
 
   def test_stop_required_params
     response =
-      @anthropic.beta.environments.work.stop("work_id", environment_id: "env_011CZkZ9X2dpNyB7HsEFoRfW")
+      @anthropic.beta.environments.work.stop(
+        "work_id",
+        environment_id: "env_011CZkZ9X2dpNyB7HsEFoRfW",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Environments::BetaSelfHostedWork

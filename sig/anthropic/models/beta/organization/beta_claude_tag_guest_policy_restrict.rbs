@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_claude_tag_guest_policy_restrict = { type: :restrict }
+
+        class BetaClaudeTagGuestPolicyRestrict < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :restrict
+
+          def initialize: (?type: :restrict) -> void
+
+          def to_hash: -> { type: :restrict }
+        end
+      end
+    end
+  end
+end

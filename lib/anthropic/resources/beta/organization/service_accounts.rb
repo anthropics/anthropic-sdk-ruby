@@ -45,11 +45,12 @@ module Anthropic
             parsed, options = Anthropic::Beta::Organization::ServiceAccountCreateParams.dump_request(params)
             header_params = {betas: "anthropic-beta"}
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SERVICE_ACCOUNTS_CREATE,
               span_created_id: "anthropic.organization.service_account.id",
               span_route: "/v1/organizations/service_accounts",
               method: :post,
-              path: "v1/organizations/service_accounts?beta=true",
+              path: "v1/organizations/service_accounts",
               headers: parsed.slice(*header_params.keys).transform_keys(header_params),
               body: parsed.except(*header_params.keys),
               model: Anthropic::Beta::Organization::BetaServiceAccount,
@@ -78,11 +79,12 @@ module Anthropic
           def retrieve(service_account_id, params = {})
             parsed, options = Anthropic::Beta::Organization::ServiceAccountRetrieveParams.dump_request(params)
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SERVICE_ACCOUNTS_RETRIEVE,
               span_attributes: {"anthropic.organization.service_account.id" => service_account_id},
               span_route: "/v1/organizations/service_accounts/{service_account_id}",
               method: :get,
-              path: ["v1/organizations/service_accounts/%1$s?beta=true", service_account_id],
+              path: ["v1/organizations/service_accounts/%1$s", service_account_id],
               headers: parsed.transform_keys(betas: "anthropic-beta"),
               model: Anthropic::Beta::Organization::BetaServiceAccount,
               options: options
@@ -124,11 +126,12 @@ module Anthropic
             parsed, options = Anthropic::Beta::Organization::ServiceAccountUpdateParams.dump_request(params)
             header_params = {betas: "anthropic-beta"}
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SERVICE_ACCOUNTS_UPDATE,
               span_attributes: {"anthropic.organization.service_account.id" => service_account_id},
               span_route: "/v1/organizations/service_accounts/{service_account_id}",
               method: :post,
-              path: ["v1/organizations/service_accounts/%1$s?beta=true", service_account_id],
+              path: ["v1/organizations/service_accounts/%1$s", service_account_id],
               headers: parsed.slice(*header_params.keys).transform_keys(header_params),
               body: parsed.except(*header_params.keys),
               model: Anthropic::Beta::Organization::BetaServiceAccount,
@@ -167,11 +170,12 @@ module Anthropic
             parsed, options = Anthropic::Beta::Organization::ServiceAccountListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SERVICE_ACCOUNTS_LIST,
               span_route: "/v1/organizations/service_accounts",
               span_query: %w[include_archived limit page],
               method: :get,
-              path: "v1/organizations/service_accounts?beta=true",
+              path: "v1/organizations/service_accounts",
               query: query,
               headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
               page: Anthropic::Internal::PageCursor,
@@ -206,11 +210,12 @@ module Anthropic
           def archive(service_account_id, params = {})
             parsed, options = Anthropic::Beta::Organization::ServiceAccountArchiveParams.dump_request(params)
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_SERVICE_ACCOUNTS_ARCHIVE,
               span_attributes: {"anthropic.organization.service_account.id" => service_account_id},
               span_route: "/v1/organizations/service_accounts/{service_account_id}/archive",
               method: :post,
-              path: ["v1/organizations/service_accounts/%1$s/archive?beta=true", service_account_id],
+              path: ["v1/organizations/service_accounts/%1$s/archive", service_account_id],
               headers: parsed.transform_keys(betas: "anthropic-beta"),
               model: Anthropic::Beta::Organization::BetaServiceAccount,
               options: options

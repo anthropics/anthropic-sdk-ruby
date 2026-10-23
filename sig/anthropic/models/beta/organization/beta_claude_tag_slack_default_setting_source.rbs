@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_claude_tag_slack_default_setting_source =
+          { type: :slack_default }
+
+        class BetaClaudeTagSlackDefaultSettingSource < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :slack_default
+
+          def initialize: (?type: :slack_default) -> void
+
+          def to_hash: -> { type: :slack_default }
+        end
+      end
+    end
+  end
+end

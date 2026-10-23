@@ -502,6 +502,32 @@ class Anthropic::Test::BedrockClientTest < Minitest::Test
     end
   end
 
+  def test_api_key_region_from_env
+    names = %w[AWS_REGION AWS_DEFAULT_REGION ANTHROPIC_BEDROCK_BASE_URL]
+    original = names.to_h { [_1, ENV.fetch(_1, nil)] }
+
+    [
+      [{"AWS_REGION" => "eu-west-1", "AWS_DEFAULT_REGION" => "ap-south-1"}, {}, "eu-west-1"],
+      [{"AWS_DEFAULT_REGION" => "ap-south-1"}, {}, "ap-south-1"],
+      [{"AWS_REGION" => "", "AWS_DEFAULT_REGION" => "ap-south-1"}, {}, "ap-south-1"],
+      [{"AWS_REGION" => "eu-west-1"}, {aws_region: "ca-west-1"}, "ca-west-1"]
+    ].each do |env, options, region|
+      names.each { ENV.delete(_1) }
+      ENV.update(env)
+      uri = "https://bedrock-runtime.#{region}.amazonaws.com/model/m/invoke"
+      stub_request(:post, uri).to_return_json(status: 200, body: {})
+
+      client = Anthropic::BedrockClient.new(api_key: "test-api-key", **options)
+      client.messages.create(max_tokens: 1024, messages: [{content: "hi", role: :user}], model: :m)
+
+      assert_equal(region, client.aws_region)
+      assert_requested(:post, uri, times: 1)
+      WebMock.reset!
+    end
+  ensure
+    original.each { |name, value| value.nil? ? ENV.delete(name) : ENV[name] = value }
+  end
+
   def test_api_key_mutual_exclusion
     assert_raises(ArgumentError) do
       Anthropic::BedrockClient.new(
@@ -605,6 +631,17 @@ class Anthropic::Test::BedrockClientTest < Minitest::Test
   def test_models_not_available
     err = assert_raises(NotImplementedError) { make_client.models }
     assert_match(/list-available-models/, err.message)
+  end
+
+  def test_beta_models_list_raises_before_sending
+    client = make_client
+    [
+      -> { client.beta.models.list },
+      -> { client.request(method: :get, path: "v1/models", qualifiers: {beta: "true"}) }
+    ].each do |call|
+      err = assert_raises(NotImplementedError, &call)
+      assert_match(/list-available-models/, err.message)
+    end
   end
 
   def test_files_raises_not_implemented

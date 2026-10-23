@@ -13,7 +13,8 @@ module Anthropic
               )
             end
 
-          # RFC 3339 timestamp of the actual heartbeat from DB
+          # RFC 3339 timestamp of the most recent heartbeat recorded for this work item, or
+          # an empty string if none has been recorded
           sig { returns(String) }
           attr_accessor :last_heartbeat
 
@@ -49,7 +50,8 @@ module Anthropic
             ).returns(T.attached_class)
           end
           def self.new(
-            # RFC 3339 timestamp of the actual heartbeat from DB
+            # RFC 3339 timestamp of the most recent heartbeat recorded for this work item, or
+            # an empty string if none has been recorded
             last_heartbeat:,
             # Whether the heartbeat succeeded in extending the lease
             lease_extended:,

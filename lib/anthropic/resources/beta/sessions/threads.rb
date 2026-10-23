@@ -35,6 +35,7 @@ module Anthropic
                 raise ArgumentError.new("missing required path argument #{_1}")
               end
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_THREADS_RETRIEVE,
               span_attributes: {
                 "anthropic.session.id" => session_id,
@@ -42,7 +43,7 @@ module Anthropic
               },
               span_route: "/v1/sessions/{session_id}/threads/{thread_id}",
               method: :get,
-              path: ["v1/sessions/%1$s/threads/%2$s?beta=true", session_id, thread_id],
+              path: ["v1/sessions/%1$s/threads/%2$s", session_id, thread_id],
               headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
               model: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread,
               options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
@@ -78,12 +79,13 @@ module Anthropic
             parsed, options = Anthropic::Beta::Sessions::ThreadListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_THREADS_LIST,
               span_attributes: {"anthropic.session.id" => session_id},
               span_route: "/v1/sessions/{session_id}/threads",
               span_query: %w[limit page statuses],
               method: :get,
-              path: ["v1/sessions/%1$s/threads?beta=true", session_id],
+              path: ["v1/sessions/%1$s/threads", session_id],
               query: query,
               headers: parsed.except(*query_params).transform_keys(
                 betas: "anthropic-beta",
@@ -122,6 +124,7 @@ module Anthropic
                 raise ArgumentError.new("missing required path argument #{_1}")
               end
             @client.request(
+              qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::SESSIONS_THREADS_ARCHIVE,
               span_attributes: {
                 "anthropic.session.id" => session_id,
@@ -129,7 +132,7 @@ module Anthropic
               },
               span_route: "/v1/sessions/{session_id}/threads/{thread_id}/archive",
               method: :post,
-              path: ["v1/sessions/%1$s/threads/%2$s/archive?beta=true", session_id, thread_id],
+              path: ["v1/sessions/%1$s/threads/%2$s/archive", session_id, thread_id],
               headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
               model: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread,
               options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}

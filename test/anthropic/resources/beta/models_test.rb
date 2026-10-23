@@ -4,7 +4,7 @@ require_relative "../../test_helper"
 
 class Anthropic::Test::Resources::Beta::ModelsTest < Anthropic::Test::ResourceTest
   def test_retrieve
-    response = @anthropic.beta.models.retrieve("model_id")
+    response = @anthropic.beta.models.retrieve("model_id", request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Beta::BetaModelInfo
@@ -29,7 +29,7 @@ class Anthropic::Test::Resources::Beta::ModelsTest < Anthropic::Test::ResourceTe
   end
 
   def test_list
-    response = @anthropic.beta.models.list
+    response = @anthropic.beta.models.list(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::Page

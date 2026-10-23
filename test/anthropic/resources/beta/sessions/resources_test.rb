@@ -7,7 +7,8 @@ class Anthropic::Test::Resources::Beta::Sessions::ResourcesTest < Anthropic::Tes
     response =
       @anthropic.beta.sessions.resources.retrieve(
         "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
-        session_id: "sesn_011CZkZAtmR3yMPDzynEDxu7"
+        session_id: "sesn_011CZkZAtmR3yMPDzynEDxu7",
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
@@ -52,7 +53,8 @@ class Anthropic::Test::Resources::Beta::Sessions::ResourcesTest < Anthropic::Tes
       @anthropic.beta.sessions.resources.update(
         "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
         session_id: "sesn_011CZkZAtmR3yMPDzynEDxu7",
-        authorization_token: "ghp_exampletoken"
+        authorization_token: "ghp_exampletoken",
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
@@ -93,7 +95,11 @@ class Anthropic::Test::Resources::Beta::Sessions::ResourcesTest < Anthropic::Tes
   end
 
   def test_list
-    response = @anthropic.beta.sessions.resources.list("sesn_011CZkZAtmR3yMPDzynEDxu7")
+    response =
+      @anthropic.beta.sessions.resources.list(
+        "sesn_011CZkZAtmR3yMPDzynEDxu7",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -143,7 +149,8 @@ class Anthropic::Test::Resources::Beta::Sessions::ResourcesTest < Anthropic::Tes
     response =
       @anthropic.beta.sessions.resources.delete(
         "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
-        session_id: "sesn_011CZkZAtmR3yMPDzynEDxu7"
+        session_id: "sesn_011CZkZAtmR3yMPDzynEDxu7",
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
@@ -163,7 +170,8 @@ class Anthropic::Test::Resources::Beta::Sessions::ResourcesTest < Anthropic::Tes
       @anthropic.beta.sessions.resources.add(
         "sesn_011CZkZAtmR3yMPDzynEDxu7",
         file_id: "file_011CNha8iCJcU1wXNR6q4V8w",
-        type: :file
+        type: :file,
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do

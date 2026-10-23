@@ -49,7 +49,7 @@ class Anthropic::Test::OpenTelemetryToolRunnerTest < Anthropic::Test::OpenTeleme
 
   def stub_runner(*messages)
     @requests = []
-    stub_request(:post, "#{MESSAGES_URL}?beta=true").to_return(
+    stub_request(:post, MESSAGES_URL).to_return(
       *messages.map do |message|
         lambda do |request|
           @requests << request.headers.transform_keys(&:downcase)
@@ -542,7 +542,7 @@ class Anthropic::Test::OpenTelemetryToolRunnerTest < Anthropic::Test::OpenTeleme
   def test_a_failed_request_fails_the_loop_with_its_error_type
     stub_messages(
       {status: 400, body: {type: "error", error: {type: "invalid_request_error", message: "x"}}.to_json},
-      url: "#{MESSAGES_URL}?beta=true"
+      url: MESSAGES_URL
     )
     assert_raises(Anthropic::Errors::BadRequestError) { runner.each_message { nil } }
 
@@ -554,7 +554,7 @@ class Anthropic::Test::OpenTelemetryToolRunnerTest < Anthropic::Test::OpenTeleme
   def test_a_failed_streamed_request_fails_the_loop_with_its_error_type
     stub_messages(
       {status: 400, body: {type: "error", error: {type: "invalid_request_error", message: "x"}}.to_json},
-      url: "#{MESSAGES_URL}?beta=true"
+      url: MESSAGES_URL
     )
     assert_raises(Anthropic::Errors::BadRequestError) { runner.each_streaming { nil } }
 
@@ -565,7 +565,7 @@ class Anthropic::Test::OpenTelemetryToolRunnerTest < Anthropic::Test::OpenTeleme
 
   def test_a_stream_that_fails_while_the_application_reads_it_fails_the_loop_with_its_error_type
     events = [STREAM_EVENTS.first, {type: "error", error: {type: "overloaded_error", message: "x"}}]
-    stub_messages(stream_response(events), url: "#{MESSAGES_URL}?beta=true")
+    stub_messages(stream_response(events), url: MESSAGES_URL)
     assert_raises(Anthropic::Errors::APIStatusError) { runner.each_streaming { _1.each {} } }
 
     loop_span = only_span("anthropic.messages.tool_runner")

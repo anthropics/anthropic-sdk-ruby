@@ -4,7 +4,11 @@ require_relative "../../../../test_helper"
 
 class Anthropic::Test::Resources::Beta::Organization::TelemetryDestinations::WorkspacesTest < Anthropic::Test::ResourceTest
   def test_list
-    response = @anthropic.beta.organization.telemetry_destinations.workspaces.list("destination_id")
+    response =
+      @anthropic.beta.organization.telemetry_destinations.workspaces.list(
+        "destination_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -31,7 +35,8 @@ class Anthropic::Test::Resources::Beta::Organization::TelemetryDestinations::Wor
     response =
       @anthropic.beta.organization.telemetry_destinations.workspaces.add(
         "workspace_id",
-        destination_id: "destination_id"
+        destination_id: "destination_id",
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
@@ -52,7 +57,8 @@ class Anthropic::Test::Resources::Beta::Organization::TelemetryDestinations::Wor
     response =
       @anthropic.beta.organization.telemetry_destinations.workspaces.remove(
         "workspace_id",
-        destination_id: "destination_id"
+        destination_id: "destination_id",
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
