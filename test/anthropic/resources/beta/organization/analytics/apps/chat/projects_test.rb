@@ -4,7 +4,10 @@ require_relative "../../../../../../test_helper"
 
 class Anthropic::Test::Resources::Beta::Organization::Analytics::Apps::Chat::ProjectsTest < Anthropic::Test::ResourceTest
   def test_list
-    response = @anthropic.beta.organization.analytics.apps.chat.projects.list
+    response =
+      @anthropic.beta.organization.analytics.apps.chat.projects.list(
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor

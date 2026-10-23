@@ -89,7 +89,7 @@ module Anthropic
                   user_ids
                 ],
                 method: :get,
-                path: "v1/organizations/analytics/cost_report?beta=true",
+                path: "v1/organizations/analytics/cost_report",
                 query: query,
                 page: Anthropic::Internal::ReportPageCursor,
                 model: Anthropic::Beta::Organization::BetaAnalyticsCostReportTimeBucket,

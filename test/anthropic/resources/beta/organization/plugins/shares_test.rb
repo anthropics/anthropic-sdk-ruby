@@ -4,7 +4,11 @@ require_relative "../../../../test_helper"
 
 class Anthropic::Test::Resources::Beta::Organization::Plugins::SharesTest < Anthropic::Test::ResourceTest
   def test_list
-    response = @anthropic.beta.organization.plugins.shares.list("plugin_id")
+    response =
+      @anthropic.beta.organization.plugins.shares.list(
+        "plugin_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor

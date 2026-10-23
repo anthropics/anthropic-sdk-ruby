@@ -4,7 +4,11 @@ require_relative "../../../test_helper"
 
 class Anthropic::Test::Resources::Beta::Organization::WorkspacesTest < Anthropic::Test::ResourceTest
   def test_create_required_params
-    response = @anthropic.beta.organization.workspaces.create(name: "x")
+    response =
+      @anthropic.beta.organization.workspaces.create(
+        name: "x",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaWorkspace
@@ -27,7 +31,11 @@ class Anthropic::Test::Resources::Beta::Organization::WorkspacesTest < Anthropic
   end
 
   def test_retrieve
-    response = @anthropic.beta.organization.workspaces.retrieve("workspace_id")
+    response =
+      @anthropic.beta.organization.workspaces.retrieve(
+        "workspace_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaWorkspace
@@ -50,7 +58,11 @@ class Anthropic::Test::Resources::Beta::Organization::WorkspacesTest < Anthropic
   end
 
   def test_update
-    response = @anthropic.beta.organization.workspaces.update("workspace_id")
+    response =
+      @anthropic.beta.organization.workspaces.update(
+        "workspace_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaWorkspace
@@ -73,7 +85,7 @@ class Anthropic::Test::Resources::Beta::Organization::WorkspacesTest < Anthropic
   end
 
   def test_list
-    response = @anthropic.beta.organization.workspaces.list
+    response = @anthropic.beta.organization.workspaces.list(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::Page
@@ -103,7 +115,11 @@ class Anthropic::Test::Resources::Beta::Organization::WorkspacesTest < Anthropic
   end
 
   def test_archive
-    response = @anthropic.beta.organization.workspaces.archive("workspace_id")
+    response =
+      @anthropic.beta.organization.workspaces.archive(
+        "workspace_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaWorkspace

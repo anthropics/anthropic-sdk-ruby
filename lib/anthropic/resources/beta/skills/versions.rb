@@ -35,7 +35,7 @@ module Anthropic
               span_created_id: "anthropic.skill.version.id",
               span_route: "/v1/skills/{skill_id}/versions",
               method: :post,
-              path: ["v1/skills/%1$s/versions?beta=true", skill_id],
+              path: ["v1/skills/%1$s/versions", skill_id],
               headers: {
                 "content-type" => "multipart/form-data",
                 **parsed.slice(*header_params.keys)
@@ -80,7 +80,7 @@ module Anthropic
               span_attributes: {"anthropic.skill.id" => skill_id, "anthropic.skill.version.id" => version},
               span_route: "/v1/skills/{skill_id}/versions/{version}",
               method: :get,
-              path: ["v1/skills/%1$s/versions/%2$s?beta=true", skill_id, version],
+              path: ["v1/skills/%1$s/versions/%2$s", skill_id, version],
               headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
               model: Anthropic::Beta::Skills::BetaSkillVersion,
               options: options
@@ -120,7 +120,7 @@ module Anthropic
               span_route: "/v1/skills/{skill_id}/versions",
               span_query: %w[limit page],
               method: :get,
-              path: ["v1/skills/%1$s/versions?beta=true", skill_id],
+              path: ["v1/skills/%1$s/versions", skill_id],
               query: query,
               headers: parsed.except(*query_params).transform_keys(
                 betas: "anthropic-beta",
@@ -164,7 +164,7 @@ module Anthropic
               span_attributes: {"anthropic.skill.id" => skill_id, "anthropic.skill.version.id" => version},
               span_route: "/v1/skills/{skill_id}/versions/{version}",
               method: :delete,
-              path: ["v1/skills/%1$s/versions/%2$s?beta=true", skill_id, version],
+              path: ["v1/skills/%1$s/versions/%2$s", skill_id, version],
               headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
               model: Anthropic::Beta::Skills::BetaDeletedSkillVersion,
               options: options
@@ -203,7 +203,7 @@ module Anthropic
               span_attributes: {"anthropic.skill.id" => skill_id, "anthropic.skill.version.id" => version},
               span_route: "/v1/skills/{skill_id}/versions/{version}/content",
               method: :get,
-              path: ["v1/skills/%1$s/versions/%2$s/content?beta=true", skill_id, version],
+              path: ["v1/skills/%1$s/versions/%2$s/content", skill_id, version],
               headers: {"accept" => "application/binary", **parsed}.transform_keys(
                 betas: "anthropic-beta",
                 workspace_id: "anthropic-workspace-id"

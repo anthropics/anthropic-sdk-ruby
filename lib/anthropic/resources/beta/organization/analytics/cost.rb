@@ -153,7 +153,7 @@ module Anthropic
                   workspace_ids
                 ],
                 method: :get,
-                path: "v1/organizations/analytics/cost?beta=true",
+                path: "v1/organizations/analytics/cost",
                 query: query,
                 headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
                 page: Anthropic::Internal::ReportPageCursor,

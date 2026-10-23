@@ -7,7 +7,8 @@ class Anthropic::Test::Resources::Beta::Organization::WebhooksTest < Anthropic::
     response =
       @anthropic.beta.organization.webhooks.create(
         enabled_events: [:"user_profile.enforcement_action_opened"],
-        url: "x"
+        url: "x",
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
@@ -31,7 +32,11 @@ class Anthropic::Test::Resources::Beta::Organization::WebhooksTest < Anthropic::
   end
 
   def test_retrieve
-    response = @anthropic.beta.organization.webhooks.retrieve("webhook_endpoint_id")
+    response =
+      @anthropic.beta.organization.webhooks.retrieve(
+        "webhook_endpoint_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaOrganizationWebhookEndpoint
@@ -53,7 +58,11 @@ class Anthropic::Test::Resources::Beta::Organization::WebhooksTest < Anthropic::
   end
 
   def test_update
-    response = @anthropic.beta.organization.webhooks.update("webhook_endpoint_id")
+    response =
+      @anthropic.beta.organization.webhooks.update(
+        "webhook_endpoint_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaOrganizationWebhookEndpoint
@@ -75,7 +84,7 @@ class Anthropic::Test::Resources::Beta::Organization::WebhooksTest < Anthropic::
   end
 
   def test_list
-    response = @anthropic.beta.organization.webhooks.list
+    response = @anthropic.beta.organization.webhooks.list(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::Page
@@ -104,7 +113,11 @@ class Anthropic::Test::Resources::Beta::Organization::WebhooksTest < Anthropic::
   end
 
   def test_delete
-    response = @anthropic.beta.organization.webhooks.delete("webhook_endpoint_id")
+    response =
+      @anthropic.beta.organization.webhooks.delete(
+        "webhook_endpoint_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaDeletedOrganizationWebhookEndpoint
@@ -119,7 +132,11 @@ class Anthropic::Test::Resources::Beta::Organization::WebhooksTest < Anthropic::
   end
 
   def test_regenerate_signing_secret
-    response = @anthropic.beta.organization.webhooks.regenerate_signing_secret("webhook_endpoint_id")
+    response =
+      @anthropic.beta.organization.webhooks.regenerate_signing_secret(
+        "webhook_endpoint_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaOrganizationWebhookEndpointSigningSecret

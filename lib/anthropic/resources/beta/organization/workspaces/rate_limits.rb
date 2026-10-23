@@ -49,11 +49,7 @@ module Anthropic
                 },
                 span_route: "/v1/organizations/workspaces/{workspace_id}/rate_limits/{rate_limit_id}",
                 method: :post,
-                path: [
-                  "v1/organizations/workspaces/%1$s/rate_limits/%2$s?beta=true",
-                  workspace_id,
-                  rate_limit_id
-                ],
+                path: ["v1/organizations/workspaces/%1$s/rate_limits/%2$s", workspace_id, rate_limit_id],
                 body: parsed,
                 model: Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimit,
                 options: options
@@ -102,7 +98,7 @@ module Anthropic
                 span_route: "/v1/organizations/workspaces/{workspace_id}/rate_limits",
                 span_query: %w[group_type include_inherited limit page],
                 method: :get,
-                path: ["v1/organizations/workspaces/%1$s/rate_limits?beta=true", workspace_id],
+                path: ["v1/organizations/workspaces/%1$s/rate_limits", workspace_id],
                 query: query,
                 page: Anthropic::Internal::PageCursor,
                 model: Anthropic::Beta::Organization::Workspaces::BetaWorkspaceRateLimit,

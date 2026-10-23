@@ -46,7 +46,7 @@ module Anthropic
                 span_route: "/v1/organizations/telemetry_destinations/{destination_id}/workspaces",
                 span_query: %w[limit page],
                 method: :get,
-                path: ["v1/organizations/telemetry_destinations/%1$s/workspaces?beta=true", destination_id],
+                path: ["v1/organizations/telemetry_destinations/%1$s/workspaces", destination_id],
                 query: query,
                 headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
                 page: Anthropic::Internal::PageCursor,
@@ -104,7 +104,7 @@ module Anthropic
                 span_route: "/v1/organizations/telemetry_destinations/{destination_id}/workspaces/{workspace_id}",
                 method: :post,
                 path: [
-                  "v1/organizations/telemetry_destinations/%1$s/workspaces/%2$s?beta=true",
+                  "v1/organizations/telemetry_destinations/%1$s/workspaces/%2$s",
                   destination_id,
                   workspace_id
                 ],
@@ -160,7 +160,7 @@ module Anthropic
                 span_route: "/v1/organizations/telemetry_destinations/{destination_id}/workspaces/{workspace_id}",
                 method: :delete,
                 path: [
-                  "v1/organizations/telemetry_destinations/%1$s/workspaces/%2$s?beta=true",
+                  "v1/organizations/telemetry_destinations/%1$s/workspaces/%2$s",
                   destination_id,
                   workspace_id
                 ],

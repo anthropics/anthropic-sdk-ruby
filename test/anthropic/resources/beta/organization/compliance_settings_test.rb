@@ -4,7 +4,8 @@ require_relative "../../../test_helper"
 
 class Anthropic::Test::Resources::Beta::Organization::ComplianceSettingsTest < Anthropic::Test::ResourceTest
   def test_retrieve
-    response = @anthropic.beta.organization.compliance_settings.retrieve
+    response =
+      @anthropic.beta.organization.compliance_settings.retrieve(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaComplianceSettings
@@ -19,7 +20,11 @@ class Anthropic::Test::Resources::Beta::Organization::ComplianceSettingsTest < A
   end
 
   def test_update_required_params
-    response = @anthropic.beta.organization.compliance_settings.update(state: {type: :enabled})
+    response =
+      @anthropic.beta.organization.compliance_settings.update(
+        state: {type: :enabled},
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaComplianceSettings

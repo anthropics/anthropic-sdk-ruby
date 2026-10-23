@@ -55,7 +55,7 @@ module Anthropic
                 span_query: %w[date ending_date filter group_by limit order order_by page starting_date],
                 span_content_query: %w[filter],
                 method: :get,
-                path: "v1/organizations/analytics/connectors?beta=true",
+                path: "v1/organizations/analytics/connectors",
                 query: query,
                 page: Anthropic::Internal::PageCursor,
                 model: Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity,

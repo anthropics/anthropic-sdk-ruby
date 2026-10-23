@@ -23,7 +23,7 @@ module Anthropic
               span_attributes: {"anthropic.organization.api_key.id" => api_key_id},
               span_route: "/v1/organizations/api_keys/{api_key_id}",
               method: :get,
-              path: ["v1/organizations/api_keys/%1$s?beta=true", api_key_id],
+              path: ["v1/organizations/api_keys/%1$s", api_key_id],
               model: Anthropic::Beta::Organization::BetaAPIKey,
               options: params[:request_options]
             )
@@ -52,7 +52,7 @@ module Anthropic
               span_attributes: {"anthropic.organization.api_key.id" => api_key_id},
               span_route: "/v1/organizations/api_keys/{api_key_id}",
               method: :post,
-              path: ["v1/organizations/api_keys/%1$s?beta=true", api_key_id],
+              path: ["v1/organizations/api_keys/%1$s", api_key_id],
               body: parsed,
               model: Anthropic::Beta::Organization::BetaAPIKey,
               options: options
@@ -92,7 +92,7 @@ module Anthropic
               span_route: "/v1/organizations/api_keys",
               span_query: %w[after_id before_id created_by_user_id limit status workspace_id],
               method: :get,
-              path: "v1/organizations/api_keys?beta=true",
+              path: "v1/organizations/api_keys",
               query: query,
               page: Anthropic::Internal::Page,
               model: Anthropic::Beta::Organization::BetaAPIKey,

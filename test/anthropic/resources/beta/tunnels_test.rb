@@ -4,7 +4,7 @@ require_relative "../../test_helper"
 
 class Anthropic::Test::Resources::Beta::TunnelsTest < Anthropic::Test::ResourceTest
   def test_create
-    response = @anthropic.beta.tunnels.create
+    response = @anthropic.beta.tunnels.create(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Beta::BetaTunnel
@@ -23,7 +23,7 @@ class Anthropic::Test::Resources::Beta::TunnelsTest < Anthropic::Test::ResourceT
   end
 
   def test_retrieve
-    response = @anthropic.beta.tunnels.retrieve("tunnel_id")
+    response = @anthropic.beta.tunnels.retrieve("tunnel_id", request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Beta::BetaTunnel
@@ -42,7 +42,7 @@ class Anthropic::Test::Resources::Beta::TunnelsTest < Anthropic::Test::ResourceT
   end
 
   def test_list
-    response = @anthropic.beta.tunnels.list
+    response = @anthropic.beta.tunnels.list(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -68,7 +68,7 @@ class Anthropic::Test::Resources::Beta::TunnelsTest < Anthropic::Test::ResourceT
   end
 
   def test_archive
-    response = @anthropic.beta.tunnels.archive("tunnel_id")
+    response = @anthropic.beta.tunnels.archive("tunnel_id", request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Beta::BetaTunnel
@@ -87,7 +87,8 @@ class Anthropic::Test::Resources::Beta::TunnelsTest < Anthropic::Test::ResourceT
   end
 
   def test_reveal_token
-    response = @anthropic.beta.tunnels.reveal_token("tunnel_id")
+    response =
+      @anthropic.beta.tunnels.reveal_token("tunnel_id", request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Beta::BetaTunnelToken
@@ -103,7 +104,8 @@ class Anthropic::Test::Resources::Beta::TunnelsTest < Anthropic::Test::ResourceT
   end
 
   def test_rotate_token
-    response = @anthropic.beta.tunnels.rotate_token("tunnel_id")
+    response =
+      @anthropic.beta.tunnels.rotate_token("tunnel_id", request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Beta::BetaTunnelToken

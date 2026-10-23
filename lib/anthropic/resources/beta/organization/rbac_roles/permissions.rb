@@ -37,7 +37,7 @@ module Anthropic
                 span_route: "/v1/organizations/rbac_roles/{rbac_role_id}/permissions",
                 span_query: %w[limit page],
                 method: :get,
-                path: ["v1/organizations/rbac_roles/%1$s/permissions?beta=true", rbac_role_id],
+                path: ["v1/organizations/rbac_roles/%1$s/permissions", rbac_role_id],
                 query: query,
                 page: Anthropic::Internal::PageCursor,
                 model: Anthropic::Beta::Organization::RBACRoles::BetaRBACRolePermission,

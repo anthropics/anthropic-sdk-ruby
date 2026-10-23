@@ -30,7 +30,7 @@ module Anthropic
               span_created_id: "anthropic.organization.rbac_group.id",
               span_route: "/v1/organizations/rbac_groups",
               method: :post,
-              path: "v1/organizations/rbac_groups?beta=true",
+              path: "v1/organizations/rbac_groups",
               body: parsed,
               model: Anthropic::Beta::Organization::BetaRBACGroup,
               options: options
@@ -57,7 +57,7 @@ module Anthropic
               span_attributes: {"anthropic.organization.rbac_group.id" => rbac_group_id},
               span_route: "/v1/organizations/rbac_groups/{rbac_group_id}",
               method: :get,
-              path: ["v1/organizations/rbac_groups/%1$s?beta=true", rbac_group_id],
+              path: ["v1/organizations/rbac_groups/%1$s", rbac_group_id],
               model: Anthropic::Beta::Organization::BetaRBACGroup,
               options: params[:request_options]
             )
@@ -88,7 +88,7 @@ module Anthropic
               span_attributes: {"anthropic.organization.rbac_group.id" => rbac_group_id},
               span_route: "/v1/organizations/rbac_groups/{rbac_group_id}",
               method: :post,
-              path: ["v1/organizations/rbac_groups/%1$s?beta=true", rbac_group_id],
+              path: ["v1/organizations/rbac_groups/%1$s", rbac_group_id],
               body: parsed,
               model: Anthropic::Beta::Organization::BetaRBACGroup,
               options: options
@@ -122,7 +122,7 @@ module Anthropic
               span_route: "/v1/organizations/rbac_groups",
               span_query: %w[limit page],
               method: :get,
-              path: "v1/organizations/rbac_groups?beta=true",
+              path: "v1/organizations/rbac_groups",
               query: query,
               page: Anthropic::Internal::PageCursor,
               model: Anthropic::Beta::Organization::BetaRBACGroup,
@@ -152,7 +152,7 @@ module Anthropic
               span_attributes: {"anthropic.organization.rbac_group.id" => rbac_group_id},
               span_route: "/v1/organizations/rbac_groups/{rbac_group_id}",
               method: :delete,
-              path: ["v1/organizations/rbac_groups/%1$s?beta=true", rbac_group_id],
+              path: ["v1/organizations/rbac_groups/%1$s", rbac_group_id],
               model: Anthropic::Models::Beta::Organization::RBACGroupDeleteResponse,
               options: params[:request_options]
             )

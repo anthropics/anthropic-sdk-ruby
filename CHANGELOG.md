@@ -9,6 +9,7 @@
 
 ### Chores
 
+* **client:** stop sending query params hardcoded in endpoint paths
 * **docs:** reword work queue, skill and external key descriptions
 * **internal:** carry endpoint path query params to the request layer
 * **internal:** lint against mixing a module into a class from outside

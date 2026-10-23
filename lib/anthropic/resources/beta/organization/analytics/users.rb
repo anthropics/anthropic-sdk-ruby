@@ -53,7 +53,7 @@ module Anthropic
                 span_query: %w[date ending_date filter group_by limit order order_by page starting_date],
                 span_content_query: %w[page],
                 method: :get,
-                path: "v1/organizations/analytics/users?beta=true",
+                path: "v1/organizations/analytics/users",
                 query: query,
                 page: Anthropic::Internal::PageCursor,
                 model: Anthropic::Beta::Organization::BetaAnalyticsUserActivity,

@@ -4,7 +4,11 @@ require_relative "../../../test_helper"
 
 class Anthropic::Test::Resources::Beta::Agents::VersionsTest < Anthropic::Test::ResourceTest
   def test_list
-    response = @anthropic.beta.agents.versions.list("agent_011CZkYpogX7uDKUyvBTophP")
+    response =
+      @anthropic.beta.agents.versions.list(
+        "agent_011CZkYpogX7uDKUyvBTophP",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor

@@ -9,7 +9,8 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
         agent: "string",
         environment_id: "x",
         initial_events: [{content: [{text: "Where is my order #1234?", type: :text}], type: :"user.message"}],
-        name: "x"
+        name: "x",
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
@@ -40,7 +41,11 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
   end
 
   def test_retrieve
-    response = @anthropic.beta.deployments.retrieve("depl_011CZkZcDH3vPqd7xnEfwTai")
+    response =
+      @anthropic.beta.deployments.retrieve(
+        "depl_011CZkZcDH3vPqd7xnEfwTai",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsDeployment
@@ -70,7 +75,11 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
   end
 
   def test_update
-    response = @anthropic.beta.deployments.update("depl_011CZkZcDH3vPqd7xnEfwTai")
+    response =
+      @anthropic.beta.deployments.update(
+        "depl_011CZkZcDH3vPqd7xnEfwTai",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsDeployment
@@ -100,7 +109,7 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
   end
 
   def test_list
-    response = @anthropic.beta.deployments.list
+    response = @anthropic.beta.deployments.list(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -137,7 +146,11 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
   end
 
   def test_archive
-    response = @anthropic.beta.deployments.archive("depl_011CZkZcDH3vPqd7xnEfwTai")
+    response =
+      @anthropic.beta.deployments.archive(
+        "depl_011CZkZcDH3vPqd7xnEfwTai",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsDeployment
@@ -167,7 +180,11 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
   end
 
   def test_pause
-    response = @anthropic.beta.deployments.pause("depl_011CZkZcDH3vPqd7xnEfwTai")
+    response =
+      @anthropic.beta.deployments.pause(
+        "depl_011CZkZcDH3vPqd7xnEfwTai",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsDeployment
@@ -197,7 +214,11 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
   end
 
   def test_run
-    response = @anthropic.beta.deployments.run("depl_011CZkZcDH3vPqd7xnEfwTai")
+    response =
+      @anthropic.beta.deployments.run(
+        "depl_011CZkZcDH3vPqd7xnEfwTai",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsDeploymentRun
@@ -218,7 +239,11 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
   end
 
   def test_unpause
-    response = @anthropic.beta.deployments.unpause("depl_011CZkZcDH3vPqd7xnEfwTai")
+    response =
+      @anthropic.beta.deployments.unpause(
+        "depl_011CZkZcDH3vPqd7xnEfwTai",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsDeployment

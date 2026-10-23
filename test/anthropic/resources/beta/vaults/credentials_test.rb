@@ -11,7 +11,8 @@ class Anthropic::Test::Resources::Beta::Vaults::CredentialsTest < Anthropic::Tes
           token: "bearer_exampletoken",
           mcp_server_url: "https://example-server.modelcontextprotocol.io/sse",
           type: :static_bearer
-        }
+        },
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
@@ -37,7 +38,8 @@ class Anthropic::Test::Resources::Beta::Vaults::CredentialsTest < Anthropic::Tes
     response =
       @anthropic.beta.vaults.credentials.retrieve(
         "vcrd_011CZkZEMt8gZan2iYPQfSkw",
-        vault_id: "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+        vault_id: "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
@@ -63,7 +65,8 @@ class Anthropic::Test::Resources::Beta::Vaults::CredentialsTest < Anthropic::Tes
     response =
       @anthropic.beta.vaults.credentials.update(
         "vcrd_011CZkZEMt8gZan2iYPQfSkw",
-        vault_id: "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+        vault_id: "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
@@ -86,7 +89,11 @@ class Anthropic::Test::Resources::Beta::Vaults::CredentialsTest < Anthropic::Tes
   end
 
   def test_list
-    response = @anthropic.beta.vaults.credentials.list("vlt_011CZkZDLs7fYzm1hXNPeRjv")
+    response =
+      @anthropic.beta.vaults.credentials.list(
+        "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -118,7 +125,8 @@ class Anthropic::Test::Resources::Beta::Vaults::CredentialsTest < Anthropic::Tes
     response =
       @anthropic.beta.vaults.credentials.delete(
         "vcrd_011CZkZEMt8gZan2iYPQfSkw",
-        vault_id: "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+        vault_id: "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
@@ -137,7 +145,8 @@ class Anthropic::Test::Resources::Beta::Vaults::CredentialsTest < Anthropic::Tes
     response =
       @anthropic.beta.vaults.credentials.archive(
         "vcrd_011CZkZEMt8gZan2iYPQfSkw",
-        vault_id: "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+        vault_id: "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
@@ -163,7 +172,8 @@ class Anthropic::Test::Resources::Beta::Vaults::CredentialsTest < Anthropic::Tes
     response =
       @anthropic.beta.vaults.credentials.mcp_oauth_validate(
         "vcrd_011CZkZEMt8gZan2iYPQfSkw",
-        vault_id: "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+        vault_id: "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do

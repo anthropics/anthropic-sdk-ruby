@@ -28,7 +28,7 @@ module Anthropic
               span_attributes: {"anthropic.organization.rbac_role.id" => rbac_role_id},
               span_route: "/v1/organizations/rbac_roles/{rbac_role_id}",
               method: :get,
-              path: ["v1/organizations/rbac_roles/%1$s?beta=true", rbac_role_id],
+              path: ["v1/organizations/rbac_roles/%1$s", rbac_role_id],
               model: Anthropic::Beta::Organization::BetaRBACRole,
               options: params[:request_options]
             )
@@ -61,7 +61,7 @@ module Anthropic
               span_route: "/v1/organizations/rbac_roles",
               span_query: %w[limit page],
               method: :get,
-              path: "v1/organizations/rbac_roles?beta=true",
+              path: "v1/organizations/rbac_roles",
               query: query,
               page: Anthropic::Internal::PageCursor,
               model: Anthropic::Beta::Organization::BetaRBACRole,

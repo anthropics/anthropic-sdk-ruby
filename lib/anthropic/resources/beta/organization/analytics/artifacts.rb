@@ -43,7 +43,7 @@ module Anthropic
                 span_route: "/v1/organizations/analytics/artifacts",
                 span_query: %w[date filter group_by limit page],
                 method: :get,
-                path: "v1/organizations/analytics/artifacts?beta=true",
+                path: "v1/organizations/analytics/artifacts",
                 query: query,
                 page: Anthropic::Internal::PageCursor,
                 model: Anthropic::Beta::Organization::BetaAnalyticsArtifactActivity,

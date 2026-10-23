@@ -37,7 +37,7 @@ module Anthropic
                 span_route: "/v1/organizations/rbac_groups/{rbac_group_id}/members",
                 span_query: %w[limit page],
                 method: :get,
-                path: ["v1/organizations/rbac_groups/%1$s/members?beta=true", rbac_group_id],
+                path: ["v1/organizations/rbac_groups/%1$s/members", rbac_group_id],
                 query: query,
                 page: Anthropic::Internal::PageCursor,
                 model: Anthropic::Beta::Organization::RBACGroups::BetaRBACGroupMember,
@@ -71,7 +71,7 @@ module Anthropic
                 span_created_id: {"anthropic.organization.rbac_group.member.id" => :user_id},
                 span_route: "/v1/organizations/rbac_groups/{rbac_group_id}/members",
                 method: :post,
-                path: ["v1/organizations/rbac_groups/%1$s/members?beta=true", rbac_group_id],
+                path: ["v1/organizations/rbac_groups/%1$s/members", rbac_group_id],
                 body: parsed,
                 model: Anthropic::Beta::Organization::RBACGroups::BetaRBACGroupMember,
                 options: options
@@ -110,7 +110,7 @@ module Anthropic
                 },
                 span_route: "/v1/organizations/rbac_groups/{rbac_group_id}/members/{user_id}",
                 method: :delete,
-                path: ["v1/organizations/rbac_groups/%1$s/members/%2$s?beta=true", rbac_group_id, user_id],
+                path: ["v1/organizations/rbac_groups/%1$s/members/%2$s", rbac_group_id, user_id],
                 model: Anthropic::Models::Beta::Organization::RBACGroups::MemberRemoveResponse,
                 options: options
               )

@@ -4,7 +4,12 @@ require_relative "../../../test_helper"
 
 class Anthropic::Test::Resources::Beta::Skills::VersionsTest < Anthropic::Test::ResourceTest
   def test_create_required_params
-    response = @anthropic.beta.skills.versions.create("skill_id", files: [StringIO.new("Example data")])
+    response =
+      @anthropic.beta.skills.versions.create(
+        "skill_id",
+        files: [StringIO.new("Example data")],
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Skills::BetaSkillVersion
@@ -23,7 +28,12 @@ class Anthropic::Test::Resources::Beta::Skills::VersionsTest < Anthropic::Test::
   end
 
   def test_retrieve_required_params
-    response = @anthropic.beta.skills.versions.retrieve("version", skill_id: "skill_id")
+    response =
+      @anthropic.beta.skills.versions.retrieve(
+        "version",
+        skill_id: "skill_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Skills::BetaSkillVersion
@@ -42,7 +52,8 @@ class Anthropic::Test::Resources::Beta::Skills::VersionsTest < Anthropic::Test::
   end
 
   def test_list
-    response = @anthropic.beta.skills.versions.list("skill_id")
+    response =
+      @anthropic.beta.skills.versions.list("skill_id", request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -68,7 +79,12 @@ class Anthropic::Test::Resources::Beta::Skills::VersionsTest < Anthropic::Test::
   end
 
   def test_delete_required_params
-    response = @anthropic.beta.skills.versions.delete("version", skill_id: "skill_id")
+    response =
+      @anthropic.beta.skills.versions.delete(
+        "version",
+        skill_id: "skill_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Skills::BetaDeletedSkillVersion
@@ -83,7 +99,12 @@ class Anthropic::Test::Resources::Beta::Skills::VersionsTest < Anthropic::Test::
   end
 
   def test_download_required_params
-    response = @anthropic.beta.skills.versions.download("version", skill_id: "skill_id")
+    response =
+      @anthropic.beta.skills.versions.download(
+        "version",
+        skill_id: "skill_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => StringIO

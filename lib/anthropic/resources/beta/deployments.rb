@@ -49,7 +49,7 @@ module Anthropic
             span_created_id: "anthropic.deployment.id",
             span_route: "/v1/deployments",
             method: :post,
-            path: "v1/deployments?beta=true",
+            path: "v1/deployments",
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),
             body: parsed.except(*header_params.keys),
             model: Anthropic::Beta::BetaManagedAgentsDeployment,
@@ -83,7 +83,7 @@ module Anthropic
             span_attributes: {"anthropic.deployment.id" => deployment_id},
             span_route: "/v1/deployments/{deployment_id}",
             method: :get,
-            path: ["v1/deployments/%1$s?beta=true", deployment_id],
+            path: ["v1/deployments/%1$s", deployment_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaManagedAgentsDeployment,
             options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
@@ -137,7 +137,7 @@ module Anthropic
             span_attributes: {"anthropic.deployment.id" => deployment_id},
             span_route: "/v1/deployments/{deployment_id}",
             method: :post,
-            path: ["v1/deployments/%1$s?beta=true", deployment_id],
+            path: ["v1/deployments/%1$s", deployment_id],
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),
             body: parsed.except(*header_params.keys),
             model: Anthropic::Beta::BetaManagedAgentsDeployment,
@@ -193,7 +193,7 @@ module Anthropic
             span_route: "/v1/deployments",
             span_query: %w[agent_id created_at[gte] created_at[lte] include_archived limit page status],
             method: :get,
-            path: "v1/deployments?beta=true",
+            path: "v1/deployments",
             query: query.transform_keys(created_at_gte: "created_at[gte]", created_at_lte: "created_at[lte]"),
             headers: parsed.except(*query_params).transform_keys(
               betas: "anthropic-beta",
@@ -231,7 +231,7 @@ module Anthropic
             span_attributes: {"anthropic.deployment.id" => deployment_id},
             span_route: "/v1/deployments/{deployment_id}/archive",
             method: :post,
-            path: ["v1/deployments/%1$s/archive?beta=true", deployment_id],
+            path: ["v1/deployments/%1$s/archive", deployment_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaManagedAgentsDeployment,
             options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
@@ -264,7 +264,7 @@ module Anthropic
             span_attributes: {"anthropic.deployment.id" => deployment_id},
             span_route: "/v1/deployments/{deployment_id}/pause",
             method: :post,
-            path: ["v1/deployments/%1$s/pause?beta=true", deployment_id],
+            path: ["v1/deployments/%1$s/pause", deployment_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaManagedAgentsDeployment,
             options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
@@ -297,7 +297,7 @@ module Anthropic
             span_attributes: {"anthropic.deployment.id" => deployment_id},
             span_route: "/v1/deployments/{deployment_id}/run",
             method: :post,
-            path: ["v1/deployments/%1$s/run?beta=true", deployment_id],
+            path: ["v1/deployments/%1$s/run", deployment_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaManagedAgentsDeploymentRun,
             options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
@@ -330,7 +330,7 @@ module Anthropic
             span_attributes: {"anthropic.deployment.id" => deployment_id},
             span_route: "/v1/deployments/{deployment_id}/unpause",
             method: :post,
-            path: ["v1/deployments/%1$s/unpause?beta=true", deployment_id],
+            path: ["v1/deployments/%1$s/unpause", deployment_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaManagedAgentsDeployment,
             options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}

@@ -8,7 +8,8 @@ class Anthropic::Test::Resources::Beta::Organization::ExternalKeysTest < Anthrop
       @anthropic.beta.organization.external_keys.create(
         provider_config: {
           kms_arn: "arn:aws:kms:us-east-1:111122223333:key/abcd1234-5678-90ab-cdef-000011112222", type: :aws
-        }
+        },
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
@@ -30,7 +31,11 @@ class Anthropic::Test::Resources::Beta::Organization::ExternalKeysTest < Anthrop
   end
 
   def test_retrieve
-    response = @anthropic.beta.organization.external_keys.retrieve("external_key_id")
+    response =
+      @anthropic.beta.organization.external_keys.retrieve(
+        "external_key_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaExternalKey
@@ -51,7 +56,11 @@ class Anthropic::Test::Resources::Beta::Organization::ExternalKeysTest < Anthrop
   end
 
   def test_update
-    response = @anthropic.beta.organization.external_keys.update("external_key_id")
+    response =
+      @anthropic.beta.organization.external_keys.update(
+        "external_key_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaExternalKey
@@ -72,7 +81,8 @@ class Anthropic::Test::Resources::Beta::Organization::ExternalKeysTest < Anthrop
   end
 
   def test_list
-    response = @anthropic.beta.organization.external_keys.list
+    response =
+      @anthropic.beta.organization.external_keys.list(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -100,7 +110,11 @@ class Anthropic::Test::Resources::Beta::Organization::ExternalKeysTest < Anthrop
   end
 
   def test_delete
-    response = @anthropic.beta.organization.external_keys.delete("external_key_id")
+    response =
+      @anthropic.beta.organization.external_keys.delete(
+        "external_key_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Models::Beta::Organization::ExternalKeyDeleteResponse
@@ -115,7 +129,11 @@ class Anthropic::Test::Resources::Beta::Organization::ExternalKeysTest < Anthrop
   end
 
   def test_validate
-    response = @anthropic.beta.organization.external_keys.validate("external_key_id")
+    response =
+      @anthropic.beta.organization.external_keys.validate(
+        "external_key_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Models::Beta::Organization::ExternalKeyValidateResponse

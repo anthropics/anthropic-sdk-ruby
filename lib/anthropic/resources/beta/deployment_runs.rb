@@ -30,7 +30,7 @@ module Anthropic
             span_attributes: {"anthropic.deployment_run.id" => deployment_run_id},
             span_route: "/v1/deployment_runs/{deployment_run_id}",
             method: :get,
-            path: ["v1/deployment_runs/%1$s?beta=true", deployment_run_id],
+            path: ["v1/deployment_runs/%1$s", deployment_run_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaManagedAgentsDeploymentRun,
             options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
@@ -102,7 +102,7 @@ module Anthropic
               trigger_type
             ],
             method: :get,
-            path: "v1/deployment_runs?beta=true",
+            path: "v1/deployment_runs",
             query: query.transform_keys(
               created_at_gt: "created_at[gt]",
               created_at_gte: "created_at[gte]",

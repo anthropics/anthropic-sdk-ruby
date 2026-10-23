@@ -48,7 +48,7 @@ module Anthropic
                 span_route: "/v1/organizations/analytics/summaries",
                 span_query: %w[ending_date filter limit page starting_date],
                 method: :get,
-                path: "v1/organizations/analytics/summaries?beta=true",
+                path: "v1/organizations/analytics/summaries",
                 query: query,
                 page: Anthropic::Internal::PageCursor,
                 model: Anthropic::Beta::Organization::BetaAnalyticsSingleDayActivitySummary,

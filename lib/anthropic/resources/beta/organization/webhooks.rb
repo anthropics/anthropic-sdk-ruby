@@ -50,7 +50,7 @@ module Anthropic
               span_created_id: "anthropic.organization.webhook.id",
               span_route: "/v1/organizations/webhooks",
               method: :post,
-              path: "v1/organizations/webhooks?beta=true",
+              path: "v1/organizations/webhooks",
               headers: parsed.slice(*header_params.keys).transform_keys(header_params),
               body: parsed.except(*header_params.keys),
               model: Anthropic::Beta::Organization::BetaNewOrganizationWebhookEndpoint,
@@ -89,7 +89,7 @@ module Anthropic
               span_attributes: {"anthropic.organization.webhook.id" => webhook_endpoint_id},
               span_route: "/v1/organizations/webhooks/{webhook_endpoint_id}",
               method: :get,
-              path: ["v1/organizations/webhooks/%1$s?beta=true", webhook_endpoint_id],
+              path: ["v1/organizations/webhooks/%1$s", webhook_endpoint_id],
               headers: parsed.transform_keys(betas: "anthropic-beta"),
               model: Anthropic::Beta::Organization::BetaOrganizationWebhookEndpoint,
               options: {extra_headers: {"anthropic-beta" => "webhooks-2026-10-07"}, **options}
@@ -138,7 +138,7 @@ module Anthropic
               span_attributes: {"anthropic.organization.webhook.id" => webhook_endpoint_id},
               span_route: "/v1/organizations/webhooks/{webhook_endpoint_id}",
               method: :post,
-              path: ["v1/organizations/webhooks/%1$s?beta=true", webhook_endpoint_id],
+              path: ["v1/organizations/webhooks/%1$s", webhook_endpoint_id],
               headers: parsed.slice(*header_params.keys).transform_keys(header_params),
               body: parsed.except(*header_params.keys),
               model: Anthropic::Beta::Organization::BetaOrganizationWebhookEndpoint,
@@ -189,7 +189,7 @@ module Anthropic
               span_route: "/v1/organizations/webhooks",
               span_query: %w[after_id before_id limit order],
               method: :get,
-              path: "v1/organizations/webhooks?beta=true",
+              path: "v1/organizations/webhooks",
               query: query,
               headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
               page: Anthropic::Internal::Page,
@@ -229,7 +229,7 @@ module Anthropic
               span_attributes: {"anthropic.organization.webhook.id" => webhook_endpoint_id},
               span_route: "/v1/organizations/webhooks/{webhook_endpoint_id}",
               method: :delete,
-              path: ["v1/organizations/webhooks/%1$s?beta=true", webhook_endpoint_id],
+              path: ["v1/organizations/webhooks/%1$s", webhook_endpoint_id],
               headers: parsed.transform_keys(betas: "anthropic-beta"),
               model: Anthropic::Beta::Organization::BetaDeletedOrganizationWebhookEndpoint,
               options: {extra_headers: {"anthropic-beta" => "webhooks-2026-10-07"}, **options}
@@ -270,10 +270,7 @@ module Anthropic
               span_attributes: {"anthropic.organization.webhook.id" => webhook_endpoint_id},
               span_route: "/v1/organizations/webhooks/{webhook_endpoint_id}/regenerate_signing_secret",
               method: :post,
-              path: [
-                "v1/organizations/webhooks/%1$s/regenerate_signing_secret?beta=true",
-                webhook_endpoint_id
-              ],
+              path: ["v1/organizations/webhooks/%1$s/regenerate_signing_secret", webhook_endpoint_id],
               headers: parsed.transform_keys(betas: "anthropic-beta"),
               model: Anthropic::Beta::Organization::BetaOrganizationWebhookEndpointSigningSecret,
               options: {extra_headers: {"anthropic-beta" => "webhooks-2026-10-07"}, **options}

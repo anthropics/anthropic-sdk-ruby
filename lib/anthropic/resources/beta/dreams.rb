@@ -47,7 +47,7 @@ module Anthropic
             span_created_id: "anthropic.dream.id",
             span_route: "/v1/dreams",
             method: :post,
-            path: "v1/dreams?beta=true",
+            path: "v1/dreams",
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),
             body: parsed.except(*header_params.keys),
             model: Anthropic::Beta::BetaDream,
@@ -87,7 +87,7 @@ module Anthropic
             span_attributes: {"anthropic.dream.id" => dream_id},
             span_route: "/v1/dreams/{dream_id}",
             method: :get,
-            path: ["v1/dreams/%1$s?beta=true", dream_id],
+            path: ["v1/dreams/%1$s", dream_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaDream,
             options: {extra_headers: {"anthropic-beta" => "dreaming-2026-04-21"}, **options}
@@ -138,7 +138,7 @@ module Anthropic
             span_route: "/v1/dreams",
             span_query: %w[created_at[gt] created_at[lt] include_archived limit page statuses],
             method: :get,
-            path: "v1/dreams?beta=true",
+            path: "v1/dreams",
             query: query.transform_keys(created_at_gt: "created_at[gt]", created_at_lt: "created_at[lt]"),
             headers: parsed.except(*query_params).transform_keys(
               betas: "anthropic-beta",
@@ -185,7 +185,7 @@ module Anthropic
             span_attributes: {"anthropic.dream.id" => dream_id},
             span_route: "/v1/dreams/{dream_id}/archive",
             method: :post,
-            path: ["v1/dreams/%1$s/archive?beta=true", dream_id],
+            path: ["v1/dreams/%1$s/archive", dream_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaDream,
             options: {extra_headers: {"anthropic-beta" => "dreaming-2026-04-21"}, **options}
@@ -227,7 +227,7 @@ module Anthropic
             span_attributes: {"anthropic.dream.id" => dream_id},
             span_route: "/v1/dreams/{dream_id}/cancel",
             method: :post,
-            path: ["v1/dreams/%1$s/cancel?beta=true", dream_id],
+            path: ["v1/dreams/%1$s/cancel", dream_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaDream,
             options: {extra_headers: {"anthropic-beta" => "dreaming-2026-04-21"}, **options}

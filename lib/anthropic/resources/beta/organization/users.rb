@@ -23,7 +23,7 @@ module Anthropic
               span_attributes: {"anthropic.organization.user.id" => user_id},
               span_route: "/v1/organizations/users/{user_id}",
               method: :get,
-              path: ["v1/organizations/users/%1$s?beta=true", user_id],
+              path: ["v1/organizations/users/%1$s", user_id],
               model: Anthropic::Beta::Organization::BetaOrganizationUser,
               options: params[:request_options]
             )
@@ -53,7 +53,7 @@ module Anthropic
               span_attributes: {"anthropic.organization.user.id" => user_id},
               span_route: "/v1/organizations/users/{user_id}",
               method: :post,
-              path: ["v1/organizations/users/%1$s?beta=true", user_id],
+              path: ["v1/organizations/users/%1$s", user_id],
               body: parsed,
               model: Anthropic::Beta::Organization::BetaOrganizationUser,
               options: options
@@ -91,7 +91,7 @@ module Anthropic
               span_route: "/v1/organizations/users",
               span_query: %w[after_id before_id email limit roles],
               method: :get,
-              path: "v1/organizations/users?beta=true",
+              path: "v1/organizations/users",
               query: query,
               page: Anthropic::Internal::Page,
               model: Anthropic::Beta::Organization::BetaOrganizationUser,
@@ -117,7 +117,7 @@ module Anthropic
               span_attributes: {"anthropic.organization.user.id" => user_id},
               span_route: "/v1/organizations/users/{user_id}",
               method: :delete,
-              path: ["v1/organizations/users/%1$s?beta=true", user_id],
+              path: ["v1/organizations/users/%1$s", user_id],
               model: Anthropic::Models::Beta::Organization::UserRemoveResponse,
               options: params[:request_options]
             )

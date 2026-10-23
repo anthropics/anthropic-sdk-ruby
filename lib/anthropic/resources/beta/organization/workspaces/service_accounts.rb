@@ -49,7 +49,7 @@ module Anthropic
                 span_route: "/v1/organizations/workspaces/{workspace_id}/service_accounts/{service_account_id}",
                 method: :get,
                 path: [
-                  "v1/organizations/workspaces/%1$s/service_accounts/%2$s?beta=true",
+                  "v1/organizations/workspaces/%1$s/service_accounts/%2$s",
                   workspace_id,
                   service_account_id
                 ],
@@ -105,7 +105,7 @@ module Anthropic
                 span_route: "/v1/organizations/workspaces/{workspace_id}/service_accounts/{service_account_id}",
                 method: :post,
                 path: [
-                  "v1/organizations/workspaces/%1$s/service_accounts/%2$s?beta=true",
+                  "v1/organizations/workspaces/%1$s/service_accounts/%2$s",
                   workspace_id,
                   service_account_id
                 ],
@@ -156,7 +156,7 @@ module Anthropic
                 span_route: "/v1/organizations/workspaces/{workspace_id}/service_accounts",
                 span_query: %w[limit page],
                 method: :get,
-                path: ["v1/organizations/workspaces/%1$s/service_accounts?beta=true", workspace_id],
+                path: ["v1/organizations/workspaces/%1$s/service_accounts", workspace_id],
                 query: query,
                 headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
                 page: Anthropic::Internal::PageCursor,
@@ -205,7 +205,7 @@ module Anthropic
                 span_created_id: {"anthropic.organization.workspace.service_account.id" => :service_account_id},
                 span_route: "/v1/organizations/workspaces/{workspace_id}/service_accounts",
                 method: :post,
-                path: ["v1/organizations/workspaces/%1$s/service_accounts?beta=true", workspace_id],
+                path: ["v1/organizations/workspaces/%1$s/service_accounts", workspace_id],
                 headers: parsed.slice(*header_params.keys).transform_keys(header_params),
                 body: parsed.except(*header_params.keys),
                 model: Anthropic::Beta::Organization::BetaServiceAccountWorkspaceMember,
@@ -256,7 +256,7 @@ module Anthropic
                 span_route: "/v1/organizations/workspaces/{workspace_id}/service_accounts/{service_account_id}",
                 method: :delete,
                 path: [
-                  "v1/organizations/workspaces/%1$s/service_accounts/%2$s?beta=true",
+                  "v1/organizations/workspaces/%1$s/service_accounts/%2$s",
                   workspace_id,
                   service_account_id
                 ],

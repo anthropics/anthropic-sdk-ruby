@@ -69,7 +69,7 @@ module Anthropic
                 types
               ],
               method: :get,
-              path: ["v1/sessions/%1$s/events?beta=true", session_id],
+              path: ["v1/sessions/%1$s/events", session_id],
               query: query.transform_keys(
                 created_at_gt: "created_at[gt]",
                 created_at_gte: "created_at[gte]",
@@ -115,7 +115,7 @@ module Anthropic
               span_attributes: {"anthropic.session.id" => session_id},
               span_route: "/v1/sessions/{session_id}/events",
               method: :post,
-              path: ["v1/sessions/%1$s/events?beta=true", session_id],
+              path: ["v1/sessions/%1$s/events", session_id],
               headers: parsed.slice(*header_params.keys).transform_keys(header_params),
               body: parsed.except(*header_params.keys),
               model: Anthropic::Beta::Sessions::BetaManagedAgentsSendSessionEvents,
@@ -154,7 +154,7 @@ module Anthropic
               span_route: "/v1/sessions/{session_id}/events/stream",
               span_query: %w[event_deltas],
               method: :get,
-              path: ["v1/sessions/%1$s/events/stream?beta=true", session_id],
+              path: ["v1/sessions/%1$s/events/stream", session_id],
               query: query,
               headers: {"accept" => "text/event-stream", "accept-encoding" => "identity", **parsed.except(*query_params)}.transform_keys(
                 betas: "anthropic-beta",

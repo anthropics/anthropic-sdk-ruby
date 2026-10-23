@@ -33,7 +33,7 @@ module Anthropic
             span_attributes: {"anthropic.model.id" => model_id},
             span_route: "/v1/models/{model_id}",
             method: :get,
-            path: ["v1/models/%1$s?beta=true", model_id],
+            path: ["v1/models/%1$s", model_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaModelInfo,
             options: options
@@ -77,7 +77,7 @@ module Anthropic
             span_route: "/v1/models",
             span_query: %w[after_id before_id lifecycle limit],
             method: :get,
-            path: "v1/models?beta=true",
+            path: "v1/models",
             query: query,
             headers: parsed.except(*query_params).transform_keys(
               betas: "anthropic-beta",

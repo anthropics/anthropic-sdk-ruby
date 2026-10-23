@@ -4,7 +4,11 @@ require_relative "../../../test_helper"
 
 class Anthropic::Test::Resources::Beta::Sessions::EventsTest < Anthropic::Test::ResourceTest
   def test_list
-    response = @anthropic.beta.sessions.events.list("sesn_011CZkZAtmR3yMPDzynEDxu7")
+    response =
+      @anthropic.beta.sessions.events.list(
+        "sesn_011CZkZAtmR3yMPDzynEDxu7",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -325,7 +329,8 @@ class Anthropic::Test::Resources::Beta::Sessions::EventsTest < Anthropic::Test::
     response =
       @anthropic.beta.sessions.events.send_(
         "sesn_011CZkZAtmR3yMPDzynEDxu7",
-        events: [{content: [{text: "Where is my order #1234?", type: :text}], type: :"user.message"}]
+        events: [{content: [{text: "Where is my order #1234?", type: :text}], type: :"user.message"}],
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do

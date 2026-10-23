@@ -10,7 +10,8 @@ class Anthropic::Test::Resources::Beta::Organization::Federation::RulesTest < An
         match: {},
         name: "x",
         oauth_scope: "x",
-        target: {service_account_id: "svac_01SDCCSbTxrXDpWc1phhtcfK", type: :service_account}
+        target: {service_account_id: "svac_01SDCCSbTxrXDpWc1phhtcfK", type: :service_account},
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
@@ -44,7 +45,11 @@ class Anthropic::Test::Resources::Beta::Organization::Federation::RulesTest < An
   end
 
   def test_retrieve
-    response = @anthropic.beta.organization.federation.rules.retrieve("federation_rule_id")
+    response =
+      @anthropic.beta.organization.federation.rules.retrieve(
+        "federation_rule_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::Federation::BetaFederationRule
@@ -77,7 +82,11 @@ class Anthropic::Test::Resources::Beta::Organization::Federation::RulesTest < An
   end
 
   def test_update
-    response = @anthropic.beta.organization.federation.rules.update("federation_rule_id")
+    response =
+      @anthropic.beta.organization.federation.rules.update(
+        "federation_rule_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::Federation::BetaFederationRule
@@ -110,7 +119,8 @@ class Anthropic::Test::Resources::Beta::Organization::Federation::RulesTest < An
   end
 
   def test_list
-    response = @anthropic.beta.organization.federation.rules.list
+    response =
+      @anthropic.beta.organization.federation.rules.list(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -150,7 +160,11 @@ class Anthropic::Test::Resources::Beta::Organization::Federation::RulesTest < An
   end
 
   def test_archive
-    response = @anthropic.beta.organization.federation.rules.archive("federation_rule_id")
+    response =
+      @anthropic.beta.organization.federation.rules.archive(
+        "federation_rule_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::Federation::BetaFederationRule

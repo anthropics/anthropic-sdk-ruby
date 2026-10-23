@@ -4,7 +4,11 @@ require_relative "../../../../test_helper"
 
 class Anthropic::Test::Resources::Beta::Organization::RBACRoles::PermissionsTest < Anthropic::Test::ResourceTest
   def test_list
-    response = @anthropic.beta.organization.rbac_roles.permissions.list("rbac_role_id")
+    response =
+      @anthropic.beta.organization.rbac_roles.permissions.list(
+        "rbac_role_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor

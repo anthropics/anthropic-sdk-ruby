@@ -7,7 +7,8 @@ class Anthropic::Test::Resources::Beta::MemoryStores::MemoryVersionsTest < Anthr
     response =
       @anthropic.beta.memory_stores.memory_versions.retrieve(
         "memory_version_id",
-        memory_store_id: "memory_store_id"
+        memory_store_id: "memory_store_id",
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
@@ -34,7 +35,11 @@ class Anthropic::Test::Resources::Beta::MemoryStores::MemoryVersionsTest < Anthr
   end
 
   def test_list
-    response = @anthropic.beta.memory_stores.memory_versions.list("memory_store_id")
+    response =
+      @anthropic.beta.memory_stores.memory_versions.list(
+        "memory_store_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -70,7 +75,8 @@ class Anthropic::Test::Resources::Beta::MemoryStores::MemoryVersionsTest < Anthr
     response =
       @anthropic.beta.memory_stores.memory_versions.redact(
         "memory_version_id",
-        memory_store_id: "memory_store_id"
+        memory_store_id: "memory_store_id",
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do

@@ -4,7 +4,11 @@ require_relative "../../test_helper"
 
 class Anthropic::Test::Resources::Beta::SkillsTest < Anthropic::Test::ResourceTest
   def test_create_required_params
-    response = @anthropic.beta.skills.create(files: [StringIO.new("Example data")])
+    response =
+      @anthropic.beta.skills.create(
+        files: [StringIO.new("Example data")],
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaSkill
@@ -24,7 +28,7 @@ class Anthropic::Test::Resources::Beta::SkillsTest < Anthropic::Test::ResourceTe
   end
 
   def test_retrieve
-    response = @anthropic.beta.skills.retrieve("skill_id")
+    response = @anthropic.beta.skills.retrieve("skill_id", request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Beta::BetaSkill
@@ -44,7 +48,7 @@ class Anthropic::Test::Resources::Beta::SkillsTest < Anthropic::Test::ResourceTe
   end
 
   def test_list
-    response = @anthropic.beta.skills.list
+    response = @anthropic.beta.skills.list(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -71,7 +75,7 @@ class Anthropic::Test::Resources::Beta::SkillsTest < Anthropic::Test::ResourceTe
   end
 
   def test_delete
-    response = @anthropic.beta.skills.delete("skill_id")
+    response = @anthropic.beta.skills.delete("skill_id", request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Beta::BetaDeletedSkill

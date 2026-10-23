@@ -4,7 +4,12 @@ require_relative "../../../../test_helper"
 
 class Anthropic::Test::Resources::Beta::Organization::Federation::IssuersTest < Anthropic::Test::ResourceTest
   def test_create_required_params
-    response = @anthropic.beta.organization.federation.issuers.create(issuer_url: "x", name: "x")
+    response =
+      @anthropic.beta.organization.federation.issuers.create(
+        issuer_url: "x",
+        name: "x",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::Federation::BetaFederationIssuer
@@ -32,7 +37,11 @@ class Anthropic::Test::Resources::Beta::Organization::Federation::IssuersTest < 
   end
 
   def test_retrieve
-    response = @anthropic.beta.organization.federation.issuers.retrieve("federation_issuer_id")
+    response =
+      @anthropic.beta.organization.federation.issuers.retrieve(
+        "federation_issuer_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::Federation::BetaFederationIssuer
@@ -60,7 +69,11 @@ class Anthropic::Test::Resources::Beta::Organization::Federation::IssuersTest < 
   end
 
   def test_update
-    response = @anthropic.beta.organization.federation.issuers.update("federation_issuer_id")
+    response =
+      @anthropic.beta.organization.federation.issuers.update(
+        "federation_issuer_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::Federation::BetaFederationIssuer
@@ -88,7 +101,8 @@ class Anthropic::Test::Resources::Beta::Organization::Federation::IssuersTest < 
   end
 
   def test_list
-    response = @anthropic.beta.organization.federation.issuers.list
+    response =
+      @anthropic.beta.organization.federation.issuers.list(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -123,7 +137,11 @@ class Anthropic::Test::Resources::Beta::Organization::Federation::IssuersTest < 
   end
 
   def test_archive
-    response = @anthropic.beta.organization.federation.issuers.archive("federation_issuer_id")
+    response =
+      @anthropic.beta.organization.federation.issuers.archive(
+        "federation_issuer_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::Federation::BetaFederationIssuer

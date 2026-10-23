@@ -4,7 +4,11 @@ require_relative "../../../test_helper"
 
 class Anthropic::Test::Resources::Beta::Organization::ServiceAccountsTest < Anthropic::Test::ResourceTest
   def test_create_required_params
-    response = @anthropic.beta.organization.service_accounts.create(name: "ci-deploy-bot")
+    response =
+      @anthropic.beta.organization.service_accounts.create(
+        name: "ci-deploy-bot",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaServiceAccount
@@ -28,7 +32,11 @@ class Anthropic::Test::Resources::Beta::Organization::ServiceAccountsTest < Anth
   end
 
   def test_retrieve
-    response = @anthropic.beta.organization.service_accounts.retrieve("service_account_id")
+    response =
+      @anthropic.beta.organization.service_accounts.retrieve(
+        "service_account_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaServiceAccount
@@ -52,7 +60,11 @@ class Anthropic::Test::Resources::Beta::Organization::ServiceAccountsTest < Anth
   end
 
   def test_update
-    response = @anthropic.beta.organization.service_accounts.update("service_account_id")
+    response =
+      @anthropic.beta.organization.service_accounts.update(
+        "service_account_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaServiceAccount
@@ -76,7 +88,8 @@ class Anthropic::Test::Resources::Beta::Organization::ServiceAccountsTest < Anth
   end
 
   def test_list
-    response = @anthropic.beta.organization.service_accounts.list
+    response =
+      @anthropic.beta.organization.service_accounts.list(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -107,7 +120,11 @@ class Anthropic::Test::Resources::Beta::Organization::ServiceAccountsTest < Anth
   end
 
   def test_archive
-    response = @anthropic.beta.organization.service_accounts.archive("service_account_id")
+    response =
+      @anthropic.beta.organization.service_accounts.archive(
+        "service_account_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaServiceAccount

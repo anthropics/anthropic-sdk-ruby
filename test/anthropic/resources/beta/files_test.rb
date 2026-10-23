@@ -4,7 +4,7 @@ require_relative "../../test_helper"
 
 class Anthropic::Test::Resources::Beta::FilesTest < Anthropic::Test::ResourceTest
   def test_list
-    response = @anthropic.beta.files.list
+    response = @anthropic.beta.files.list(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -33,7 +33,7 @@ class Anthropic::Test::Resources::Beta::FilesTest < Anthropic::Test::ResourceTes
   end
 
   def test_delete
-    response = @anthropic.beta.files.delete("file_id")
+    response = @anthropic.beta.files.delete("file_id", request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Beta::BetaDeletedFile
@@ -48,7 +48,7 @@ class Anthropic::Test::Resources::Beta::FilesTest < Anthropic::Test::ResourceTes
   end
 
   def test_download
-    response = @anthropic.beta.files.download("file_id")
+    response = @anthropic.beta.files.download("file_id", request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => StringIO
@@ -56,7 +56,8 @@ class Anthropic::Test::Resources::Beta::FilesTest < Anthropic::Test::ResourceTes
   end
 
   def test_retrieve_metadata
-    response = @anthropic.beta.files.retrieve_metadata("file_id")
+    response =
+      @anthropic.beta.files.retrieve_metadata("file_id", request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Beta::BetaFileMetadata
@@ -78,7 +79,11 @@ class Anthropic::Test::Resources::Beta::FilesTest < Anthropic::Test::ResourceTes
   end
 
   def test_upload_required_params
-    response = @anthropic.beta.files.upload(file: StringIO.new("Example data"))
+    response =
+      @anthropic.beta.files.upload(
+        file: StringIO.new("Example data"),
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaFileMetadata

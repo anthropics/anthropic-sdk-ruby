@@ -25,7 +25,7 @@ module Anthropic
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_COMPLIANCE_SETTINGS_RETRIEVE,
               span_route: "/v1/organizations/compliance_settings",
               method: :get,
-              path: "v1/organizations/compliance_settings?beta=true",
+              path: "v1/organizations/compliance_settings",
               model: Anthropic::Beta::Organization::BetaComplianceSettings,
               options: params[:request_options]
             )
@@ -65,7 +65,7 @@ module Anthropic
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_COMPLIANCE_SETTINGS_UPDATE,
               span_route: "/v1/organizations/compliance_settings",
               method: :post,
-              path: "v1/organizations/compliance_settings?beta=true",
+              path: "v1/organizations/compliance_settings",
               body: parsed,
               model: Anthropic::Beta::Organization::BetaComplianceSettings,
               options: options

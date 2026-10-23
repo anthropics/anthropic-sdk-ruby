@@ -100,7 +100,7 @@ module Anthropic
                   user_ids
                 ],
                 method: :get,
-                path: "v1/organizations/analytics/user_cost_report?beta=true",
+                path: "v1/organizations/analytics/user_cost_report",
                 query: query,
                 page: Anthropic::Internal::ReportPageCursor,
                 model: Anthropic::Beta::Organization::BetaAnalyticsCostUsersItem,

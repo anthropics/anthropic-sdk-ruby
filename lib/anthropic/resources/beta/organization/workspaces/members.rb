@@ -34,7 +34,7 @@ module Anthropic
                 },
                 span_route: "/v1/organizations/workspaces/{workspace_id}/members/{user_id}",
                 method: :get,
-                path: ["v1/organizations/workspaces/%1$s/members/%2$s?beta=true", workspace_id, user_id],
+                path: ["v1/organizations/workspaces/%1$s/members/%2$s", workspace_id, user_id],
                 model: Anthropic::Beta::Organization::BetaWorkspaceMember,
                 options: options
               )
@@ -70,7 +70,7 @@ module Anthropic
                 },
                 span_route: "/v1/organizations/workspaces/{workspace_id}/members/{user_id}",
                 method: :post,
-                path: ["v1/organizations/workspaces/%1$s/members/%2$s?beta=true", workspace_id, user_id],
+                path: ["v1/organizations/workspaces/%1$s/members/%2$s", workspace_id, user_id],
                 body: parsed,
                 model: Anthropic::Beta::Organization::BetaWorkspaceMember,
                 options: options
@@ -108,7 +108,7 @@ module Anthropic
                 span_route: "/v1/organizations/workspaces/{workspace_id}/members",
                 span_query: %w[after_id before_id limit],
                 method: :get,
-                path: ["v1/organizations/workspaces/%1$s/members?beta=true", workspace_id],
+                path: ["v1/organizations/workspaces/%1$s/members", workspace_id],
                 query: query,
                 page: Anthropic::Internal::Page,
                 model: Anthropic::Beta::Organization::BetaWorkspaceMember,
@@ -140,7 +140,7 @@ module Anthropic
                 span_created_id: {"anthropic.organization.workspace.member.id" => :user_id},
                 span_route: "/v1/organizations/workspaces/{workspace_id}/members",
                 method: :post,
-                path: ["v1/organizations/workspaces/%1$s/members?beta=true", workspace_id],
+                path: ["v1/organizations/workspaces/%1$s/members", workspace_id],
                 body: parsed,
                 model: Anthropic::Beta::Organization::BetaWorkspaceMember,
                 options: options
@@ -175,7 +175,7 @@ module Anthropic
                 },
                 span_route: "/v1/organizations/workspaces/{workspace_id}/members/{user_id}",
                 method: :delete,
-                path: ["v1/organizations/workspaces/%1$s/members/%2$s?beta=true", workspace_id, user_id],
+                path: ["v1/organizations/workspaces/%1$s/members/%2$s", workspace_id, user_id],
                 model: Anthropic::Models::Beta::Organization::Workspaces::MemberRemoveResponse,
                 options: options
               )

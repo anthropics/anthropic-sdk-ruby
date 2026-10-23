@@ -41,7 +41,7 @@ module Anthropic
                 span_route: "/v1/organizations/spend_limits/effective",
                 span_query: %w[limit page period user_ids],
                 method: :get,
-                path: "v1/organizations/spend_limits/effective?beta=true",
+                path: "v1/organizations/spend_limits/effective",
                 query: query,
                 page: Anthropic::Internal::PageCursor,
                 model: Anthropic::Beta::Organization::BetaSpendSummary,

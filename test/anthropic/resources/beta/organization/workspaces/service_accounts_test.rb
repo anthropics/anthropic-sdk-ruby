@@ -7,7 +7,8 @@ class Anthropic::Test::Resources::Beta::Organization::Workspaces::ServiceAccount
     response =
       @anthropic.beta.organization.workspaces.service_accounts.retrieve(
         "service_account_id",
-        workspace_id: "workspace_id"
+        workspace_id: "workspace_id",
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
@@ -31,7 +32,8 @@ class Anthropic::Test::Resources::Beta::Organization::Workspaces::ServiceAccount
       @anthropic.beta.organization.workspaces.service_accounts.update(
         "service_account_id",
         workspace_id: "workspace_id",
-        workspace_role: :workspace_admin
+        workspace_role: :workspace_admin,
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
@@ -51,7 +53,11 @@ class Anthropic::Test::Resources::Beta::Organization::Workspaces::ServiceAccount
   end
 
   def test_list
-    response = @anthropic.beta.organization.workspaces.service_accounts.list("workspace_id")
+    response =
+      @anthropic.beta.organization.workspaces.service_accounts.list(
+        "workspace_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -81,7 +87,8 @@ class Anthropic::Test::Resources::Beta::Organization::Workspaces::ServiceAccount
       @anthropic.beta.organization.workspaces.service_accounts.add(
         "workspace_id",
         service_account_id: "service_account_id",
-        workspace_role: :workspace_admin
+        workspace_role: :workspace_admin,
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
@@ -104,7 +111,8 @@ class Anthropic::Test::Resources::Beta::Organization::Workspaces::ServiceAccount
     response =
       @anthropic.beta.organization.workspaces.service_accounts.remove(
         "service_account_id",
-        workspace_id: "workspace_id"
+        workspace_id: "workspace_id",
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do

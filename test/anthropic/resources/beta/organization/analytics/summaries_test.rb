@@ -4,7 +4,11 @@ require_relative "../../../../test_helper"
 
 class Anthropic::Test::Resources::Beta::Organization::Analytics::SummariesTest < Anthropic::Test::ResourceTest
   def test_list_required_params
-    response = @anthropic.beta.organization.analytics.summaries.list(starting_date: "2019-12-27")
+    response =
+      @anthropic.beta.organization.analytics.summaries.list(
+        starting_date: "2019-12-27",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor

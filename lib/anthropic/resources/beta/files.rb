@@ -38,7 +38,7 @@ module Anthropic
             span_route: "/v1/files",
             span_query: %w[ids limit page scope_id],
             method: :get,
-            path: "v1/files?beta=true",
+            path: "v1/files",
             query: query,
             headers: parsed.except(*query_params).transform_keys(
               betas: "anthropic-beta",
@@ -76,7 +76,7 @@ module Anthropic
             span_attributes: {"anthropic.file.id" => file_id},
             span_route: "/v1/files/{file_id}",
             method: :delete,
-            path: ["v1/files/%1$s?beta=true", file_id],
+            path: ["v1/files/%1$s", file_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaDeletedFile,
             options: options
@@ -109,7 +109,7 @@ module Anthropic
             span_attributes: {"anthropic.file.id" => file_id},
             span_route: "/v1/files/{file_id}/content",
             method: :get,
-            path: ["v1/files/%1$s/content?beta=true", file_id],
+            path: ["v1/files/%1$s/content", file_id],
             headers: {"accept" => "application/binary", **parsed}.transform_keys(
               betas: "anthropic-beta",
               workspace_id: "anthropic-workspace-id"
@@ -145,7 +145,7 @@ module Anthropic
             span_attributes: {"anthropic.file.id" => file_id},
             span_route: "/v1/files/{file_id}",
             method: :get,
-            path: ["v1/files/%1$s?beta=true", file_id],
+            path: ["v1/files/%1$s", file_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaFileMetadata,
             options: options
@@ -181,7 +181,7 @@ module Anthropic
             span_created_id: "anthropic.file.id",
             span_route: "/v1/files",
             method: :post,
-            path: "v1/files?beta=true",
+            path: "v1/files",
             headers: {
               "content-type" => "multipart/form-data",
               **parsed.slice(*header_params.keys)

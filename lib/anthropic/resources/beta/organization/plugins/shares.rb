@@ -60,7 +60,7 @@ module Anthropic
                 span_route: "/v1/organizations/plugins/{plugin_id}/shares",
                 span_query: %w[limit organization_id page target_type],
                 method: :get,
-                path: ["v1/organizations/plugins/%1$s/shares?beta=true", plugin_id],
+                path: ["v1/organizations/plugins/%1$s/shares", plugin_id],
                 query: query,
                 headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
                 page: Anthropic::Internal::PageCursor,

@@ -78,7 +78,7 @@ module Anthropic
               span_created_id: "anthropic.organization.plugin.id",
               span_route: "/v1/organizations/plugins",
               method: :post,
-              path: "v1/organizations/plugins?beta=true",
+              path: "v1/organizations/plugins",
               headers: {
                 "content-type" => "multipart/form-data",
                 **parsed.slice(*header_params.keys)
@@ -131,7 +131,7 @@ module Anthropic
               span_route: "/v1/organizations/plugins/{plugin_id}",
               span_query: %w[organization_id],
               method: :get,
-              path: ["v1/organizations/plugins/%1$s?beta=true", plugin_id],
+              path: ["v1/organizations/plugins/%1$s", plugin_id],
               query: query,
               headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
               model: Anthropic::Beta::Organization::BetaPlugin,
@@ -199,7 +199,7 @@ module Anthropic
               span_attributes: {"anthropic.organization.plugin.id" => plugin_id},
               span_route: "/v1/organizations/plugins/{plugin_id}",
               method: :post,
-              path: ["v1/organizations/plugins/%1$s?beta=true", plugin_id],
+              path: ["v1/organizations/plugins/%1$s", plugin_id],
               headers: parsed.slice(*header_params.keys).transform_keys(header_params),
               body: parsed.except(*header_params.keys),
               model: Anthropic::Beta::Organization::BetaPlugin,
@@ -292,7 +292,7 @@ module Anthropic
                 page
               ],
               method: :get,
-              path: "v1/organizations/plugins?beta=true",
+              path: "v1/organizations/plugins",
               query: query.transform_keys(
                 created_at_gt: "created_at[gt]",
                 created_at_gte: "created_at[gte]",
@@ -350,7 +350,7 @@ module Anthropic
               span_attributes: {"anthropic.organization.plugin.id" => plugin_id},
               span_route: "/v1/organizations/plugins/{plugin_id}",
               method: :delete,
-              path: ["v1/organizations/plugins/%1$s?beta=true", plugin_id],
+              path: ["v1/organizations/plugins/%1$s", plugin_id],
               headers: parsed.transform_keys(betas: "anthropic-beta"),
               model: Anthropic::Beta::Organization::BetaDeletedPlugin,
               options: {extra_headers: {"anthropic-beta" => "ce-plugins-2026-09-01"}, **options}

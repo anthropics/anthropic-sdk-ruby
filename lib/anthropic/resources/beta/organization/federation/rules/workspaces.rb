@@ -47,7 +47,7 @@ module Anthropic
                   span_route: "/v1/organizations/federation_rules/{federation_rule_id}/workspaces",
                   span_query: %w[limit page],
                   method: :get,
-                  path: ["v1/organizations/federation_rules/%1$s/workspaces?beta=true", federation_rule_id],
+                  path: ["v1/organizations/federation_rules/%1$s/workspaces", federation_rule_id],
                   query: query,
                   headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
                   page: Anthropic::Internal::PageCursor,
@@ -95,7 +95,7 @@ module Anthropic
                   span_created_id: {"anthropic.organization.federation_rule.workspace.id" => :workspace_id},
                   span_route: "/v1/organizations/federation_rules/{federation_rule_id}/workspaces",
                   method: :post,
-                  path: ["v1/organizations/federation_rules/%1$s/workspaces?beta=true", federation_rule_id],
+                  path: ["v1/organizations/federation_rules/%1$s/workspaces", federation_rule_id],
                   headers: parsed.slice(*header_params.keys).transform_keys(header_params),
                   body: parsed.except(*header_params.keys),
                   model: Anthropic::Beta::Organization::Federation::BetaFederationRuleWorkspace,
@@ -144,7 +144,7 @@ module Anthropic
                   span_route: "/v1/organizations/federation_rules/{federation_rule_id}/workspaces/{workspace_id}",
                   method: :delete,
                   path: [
-                    "v1/organizations/federation_rules/%1$s/workspaces/%2$s?beta=true",
+                    "v1/organizations/federation_rules/%1$s/workspaces/%2$s",
                     federation_rule_id,
                     workspace_id
                   ],

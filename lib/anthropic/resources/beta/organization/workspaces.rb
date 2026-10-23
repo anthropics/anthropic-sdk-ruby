@@ -47,7 +47,7 @@ module Anthropic
               span_created_id: "anthropic.organization.workspace.id",
               span_route: "/v1/organizations/workspaces",
               method: :post,
-              path: "v1/organizations/workspaces?beta=true",
+              path: "v1/organizations/workspaces",
               headers: parsed.slice(*header_params.keys).transform_keys(header_params),
               body: parsed.except(*header_params.keys),
               model: Anthropic::Beta::Organization::BetaWorkspace,
@@ -73,7 +73,7 @@ module Anthropic
               span_attributes: {"anthropic.organization.workspace.id" => workspace_id},
               span_route: "/v1/organizations/workspaces/{workspace_id}",
               method: :get,
-              path: ["v1/organizations/workspaces/%1$s?beta=true", workspace_id],
+              path: ["v1/organizations/workspaces/%1$s", workspace_id],
               model: Anthropic::Beta::Organization::BetaWorkspace,
               options: params[:request_options]
             )
@@ -111,7 +111,7 @@ module Anthropic
               span_attributes: {"anthropic.organization.workspace.id" => workspace_id},
               span_route: "/v1/organizations/workspaces/{workspace_id}",
               method: :post,
-              path: ["v1/organizations/workspaces/%1$s?beta=true", workspace_id],
+              path: ["v1/organizations/workspaces/%1$s", workspace_id],
               body: parsed,
               model: Anthropic::Beta::Organization::BetaWorkspace,
               options: options
@@ -149,7 +149,7 @@ module Anthropic
               span_route: "/v1/organizations/workspaces",
               span_query: %w[after_id before_id include_archived include_default limit],
               method: :get,
-              path: "v1/organizations/workspaces?beta=true",
+              path: "v1/organizations/workspaces",
               query: query,
               page: Anthropic::Internal::Page,
               model: Anthropic::Beta::Organization::BetaWorkspace,
@@ -174,7 +174,7 @@ module Anthropic
               span_attributes: {"anthropic.organization.workspace.id" => workspace_id},
               span_route: "/v1/organizations/workspaces/{workspace_id}/archive",
               method: :post,
-              path: ["v1/organizations/workspaces/%1$s/archive?beta=true", workspace_id],
+              path: ["v1/organizations/workspaces/%1$s/archive", workspace_id],
               model: Anthropic::Beta::Organization::BetaWorkspace,
               options: params[:request_options]
             )

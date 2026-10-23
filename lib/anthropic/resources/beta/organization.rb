@@ -71,7 +71,7 @@ module Anthropic
             span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_RETRIEVE,
             span_route: "/v1/organizations/me",
             method: :get,
-            path: "v1/organizations/me?beta=true",
+            path: "v1/organizations/me",
             model: Anthropic::Beta::BetaOrganization,
             options: params[:request_options]
           )

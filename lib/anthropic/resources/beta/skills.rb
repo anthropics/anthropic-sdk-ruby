@@ -36,7 +36,7 @@ module Anthropic
             span_created_id: "anthropic.skill.id",
             span_route: "/v1/skills",
             method: :post,
-            path: "v1/skills?beta=true",
+            path: "v1/skills",
             headers: {
               "content-type" => "multipart/form-data",
               **parsed.slice(*header_params.keys)
@@ -75,7 +75,7 @@ module Anthropic
             span_attributes: {"anthropic.skill.id" => skill_id},
             span_route: "/v1/skills/{skill_id}",
             method: :get,
-            path: ["v1/skills/%1$s?beta=true", skill_id],
+            path: ["v1/skills/%1$s", skill_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaSkill,
             options: options
@@ -114,7 +114,7 @@ module Anthropic
             span_route: "/v1/skills",
             span_query: %w[limit page source],
             method: :get,
-            path: "v1/skills?beta=true",
+            path: "v1/skills",
             query: query,
             headers: parsed.except(*query_params).transform_keys(
               betas: "anthropic-beta",
@@ -152,7 +152,7 @@ module Anthropic
             span_attributes: {"anthropic.skill.id" => skill_id},
             span_route: "/v1/skills/{skill_id}",
             method: :delete,
-            path: ["v1/skills/%1$s?beta=true", skill_id],
+            path: ["v1/skills/%1$s", skill_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaDeletedSkill,
             options: options

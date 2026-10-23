@@ -59,7 +59,7 @@ module Anthropic
                 span_route: "/v1/organizations/plugins/{plugin_id}/installation_settings",
                 span_query: %w[limit organization_id page target_type],
                 method: :get,
-                path: ["v1/organizations/plugins/%1$s/installation_settings?beta=true", plugin_id],
+                path: ["v1/organizations/plugins/%1$s/installation_settings", plugin_id],
                 query: query,
                 headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
                 page: Anthropic::Internal::PageCursor,
@@ -129,11 +129,7 @@ module Anthropic
                 },
                 span_route: "/v1/organizations/plugins/{plugin_id}/installation_settings/{target}",
                 method: :delete,
-                path: [
-                  "v1/organizations/plugins/%1$s/installation_settings/%2$s?beta=true",
-                  plugin_id,
-                  target
-                ],
+                path: ["v1/organizations/plugins/%1$s/installation_settings/%2$s", plugin_id, target],
                 headers: parsed.transform_keys(betas: "anthropic-beta"),
                 model: Anthropic::Beta::Organization::Plugins::BetaDeletedPluginInstallationSetting,
                 options: {extra_headers: {"anthropic-beta" => "ce-plugins-2026-09-01"}, **options}
@@ -199,11 +195,7 @@ module Anthropic
                 },
                 span_route: "/v1/organizations/plugins/{plugin_id}/installation_settings/{target}",
                 method: :post,
-                path: [
-                  "v1/organizations/plugins/%1$s/installation_settings/%2$s?beta=true",
-                  plugin_id,
-                  target
-                ],
+                path: ["v1/organizations/plugins/%1$s/installation_settings/%2$s", plugin_id, target],
                 headers: parsed.slice(*header_params.keys).transform_keys(header_params),
                 body: parsed.except(*header_params.keys),
                 model: Anthropic::Beta::Organization::Plugins::BetaPluginInstallationSetting,

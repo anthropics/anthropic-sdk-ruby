@@ -4,7 +4,11 @@ require_relative "../../test_helper"
 
 class Anthropic::Test::Resources::Beta::VaultsTest < Anthropic::Test::ResourceTest
   def test_create_required_params
-    response = @anthropic.beta.vaults.create(display_name: "Example vault")
+    response =
+      @anthropic.beta.vaults.create(
+        display_name: "Example vault",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsVault
@@ -24,7 +28,11 @@ class Anthropic::Test::Resources::Beta::VaultsTest < Anthropic::Test::ResourceTe
   end
 
   def test_retrieve
-    response = @anthropic.beta.vaults.retrieve("vlt_011CZkZDLs7fYzm1hXNPeRjv")
+    response =
+      @anthropic.beta.vaults.retrieve(
+        "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsVault
@@ -44,7 +52,11 @@ class Anthropic::Test::Resources::Beta::VaultsTest < Anthropic::Test::ResourceTe
   end
 
   def test_update
-    response = @anthropic.beta.vaults.update("vlt_011CZkZDLs7fYzm1hXNPeRjv")
+    response =
+      @anthropic.beta.vaults.update(
+        "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsVault
@@ -64,7 +76,7 @@ class Anthropic::Test::Resources::Beta::VaultsTest < Anthropic::Test::ResourceTe
   end
 
   def test_list
-    response = @anthropic.beta.vaults.list
+    response = @anthropic.beta.vaults.list(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -91,7 +103,11 @@ class Anthropic::Test::Resources::Beta::VaultsTest < Anthropic::Test::ResourceTe
   end
 
   def test_delete
-    response = @anthropic.beta.vaults.delete("vlt_011CZkZDLs7fYzm1hXNPeRjv")
+    response =
+      @anthropic.beta.vaults.delete(
+        "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsDeletedVault
@@ -106,7 +122,11 @@ class Anthropic::Test::Resources::Beta::VaultsTest < Anthropic::Test::ResourceTe
   end
 
   def test_archive
-    response = @anthropic.beta.vaults.archive("vlt_011CZkZDLs7fYzm1hXNPeRjv")
+    response =
+      @anthropic.beta.vaults.archive(
+        "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsVault

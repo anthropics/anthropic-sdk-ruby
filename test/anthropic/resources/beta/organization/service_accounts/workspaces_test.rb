@@ -4,7 +4,11 @@ require_relative "../../../../test_helper"
 
 class Anthropic::Test::Resources::Beta::Organization::ServiceAccounts::WorkspacesTest < Anthropic::Test::ResourceTest
   def test_list
-    response = @anthropic.beta.organization.service_accounts.workspaces.list("service_account_id")
+    response =
+      @anthropic.beta.organization.service_accounts.workspaces.list(
+        "service_account_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -34,7 +38,8 @@ class Anthropic::Test::Resources::Beta::Organization::ServiceAccounts::Workspace
       @anthropic.beta.organization.service_accounts.workspaces.add(
         "service_account_id",
         workspace_id: "workspace_id",
-        workspace_role: :workspace_admin
+        workspace_role: :workspace_admin,
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
@@ -57,7 +62,8 @@ class Anthropic::Test::Resources::Beta::Organization::ServiceAccounts::Workspace
     response =
       @anthropic.beta.organization.service_accounts.workspaces.remove(
         "workspace_id",
-        service_account_id: "service_account_id"
+        service_account_id: "service_account_id",
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do

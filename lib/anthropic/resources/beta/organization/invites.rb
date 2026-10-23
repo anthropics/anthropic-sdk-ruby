@@ -36,7 +36,7 @@ module Anthropic
               span_created_id: "anthropic.organization.invite.id",
               span_route: "/v1/organizations/invites",
               method: :post,
-              path: "v1/organizations/invites?beta=true",
+              path: "v1/organizations/invites",
               body: parsed,
               model: Anthropic::Beta::Organization::BetaOrganizationInvite,
               options: options
@@ -61,7 +61,7 @@ module Anthropic
               span_attributes: {"anthropic.organization.invite.id" => invite_id},
               span_route: "/v1/organizations/invites/{invite_id}",
               method: :get,
-              path: ["v1/organizations/invites/%1$s?beta=true", invite_id],
+              path: ["v1/organizations/invites/%1$s", invite_id],
               model: Anthropic::Beta::Organization::BetaOrganizationInvite,
               options: params[:request_options]
             )
@@ -100,7 +100,7 @@ module Anthropic
               span_route: "/v1/organizations/invites",
               span_query: %w[after_id before_id email limit roles statuses],
               method: :get,
-              path: "v1/organizations/invites?beta=true",
+              path: "v1/organizations/invites",
               query: query,
               page: Anthropic::Internal::Page,
               model: Anthropic::Beta::Organization::BetaOrganizationInvite,
@@ -126,7 +126,7 @@ module Anthropic
               span_attributes: {"anthropic.organization.invite.id" => invite_id},
               span_route: "/v1/organizations/invites/{invite_id}",
               method: :delete,
-              path: ["v1/organizations/invites/%1$s?beta=true", invite_id],
+              path: ["v1/organizations/invites/%1$s", invite_id],
               model: Anthropic::Models::Beta::Organization::InviteDeleteResponse,
               options: params[:request_options]
             )

@@ -4,7 +4,11 @@ require_relative "../../../test_helper"
 
 class Anthropic::Test::Resources::Beta::Organization::PluginMarketplacesTest < Anthropic::Test::ResourceTest
   def test_retrieve
-    response = @anthropic.beta.organization.plugin_marketplaces.retrieve("marketplace_id")
+    response =
+      @anthropic.beta.organization.plugin_marketplaces.retrieve(
+        "marketplace_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaPluginMarketplace
@@ -30,7 +34,8 @@ class Anthropic::Test::Resources::Beta::Organization::PluginMarketplacesTest < A
     response =
       @anthropic.beta.organization.plugin_marketplaces.update(
         "marketplace_id",
-        default_installation_preference: :available
+        default_installation_preference: :available,
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
@@ -54,7 +59,8 @@ class Anthropic::Test::Resources::Beta::Organization::PluginMarketplacesTest < A
   end
 
   def test_list
-    response = @anthropic.beta.organization.plugin_marketplaces.list
+    response =
+      @anthropic.beta.organization.plugin_marketplaces.list(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -85,7 +91,10 @@ class Anthropic::Test::Resources::Beta::Organization::PluginMarketplacesTest < A
 
   def test_validate_archive_required_params
     response =
-      @anthropic.beta.organization.plugin_marketplaces.validate_archive(archive: StringIO.new("Example data"))
+      @anthropic.beta.organization.plugin_marketplaces.validate_archive(
+        archive: StringIO.new("Example data"),
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaPluginMarketplaceValidationReport
@@ -109,7 +118,8 @@ class Anthropic::Test::Resources::Beta::Organization::PluginMarketplacesTest < A
   def test_validate_repository_required_params
     response =
       @anthropic.beta.organization.plugin_marketplaces.validate_repository(
-        repository_url: "https://github.com/example-org/example-marketplace"
+        repository_url: "https://github.com/example-org/example-marketplace",
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do

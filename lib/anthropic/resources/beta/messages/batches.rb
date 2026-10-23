@@ -46,7 +46,7 @@ module Anthropic
               span_created_id: "anthropic.message.batch.id",
               span_route: "/v1/messages/batches",
               method: :post,
-              path: "v1/messages/batches?beta=true",
+              path: "v1/messages/batches",
               headers: parsed.slice(*header_params.keys).transform_keys(header_params),
               body: parsed.except(*header_params.keys),
               model: Anthropic::Beta::Messages::BetaMessageBatch,
@@ -85,7 +85,7 @@ module Anthropic
               span_attributes: {"anthropic.message.batch.id" => message_batch_id},
               span_route: "/v1/messages/batches/{message_batch_id}",
               method: :get,
-              path: ["v1/messages/batches/%1$s?beta=true", message_batch_id],
+              path: ["v1/messages/batches/%1$s", message_batch_id],
               headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
               model: Anthropic::Beta::Messages::BetaMessageBatch,
               options: {extra_headers: {"anthropic-beta" => "message-batches-2024-09-24"}, **options}
@@ -128,7 +128,7 @@ module Anthropic
               span_route: "/v1/messages/batches",
               span_query: %w[after_id before_id limit],
               method: :get,
-              path: "v1/messages/batches?beta=true",
+              path: "v1/messages/batches",
               query: query,
               headers: parsed.except(*query_params).transform_keys(
                 betas: "anthropic-beta",
@@ -172,7 +172,7 @@ module Anthropic
               span_attributes: {"anthropic.message.batch.id" => message_batch_id},
               span_route: "/v1/messages/batches/{message_batch_id}",
               method: :delete,
-              path: ["v1/messages/batches/%1$s?beta=true", message_batch_id],
+              path: ["v1/messages/batches/%1$s", message_batch_id],
               headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
               model: Anthropic::Beta::Messages::BetaDeletedMessageBatch,
               options: {extra_headers: {"anthropic-beta" => "message-batches-2024-09-24"}, **options}
@@ -216,7 +216,7 @@ module Anthropic
               span_attributes: {"anthropic.message.batch.id" => message_batch_id},
               span_route: "/v1/messages/batches/{message_batch_id}/cancel",
               method: :post,
-              path: ["v1/messages/batches/%1$s/cancel?beta=true", message_batch_id],
+              path: ["v1/messages/batches/%1$s/cancel", message_batch_id],
               headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
               model: Anthropic::Beta::Messages::BetaMessageBatch,
               options: {extra_headers: {"anthropic-beta" => "message-batches-2024-09-24"}, **options}
@@ -256,7 +256,7 @@ module Anthropic
               span_attributes: {"anthropic.message.batch.id" => message_batch_id},
               span_route: "/v1/messages/batches/{message_batch_id}/results",
               method: :get,
-              path: ["v1/messages/batches/%1$s/results?beta=true", message_batch_id],
+              path: ["v1/messages/batches/%1$s/results", message_batch_id],
               headers: {"accept" => "application/x-jsonl", "accept-encoding" => "identity", **parsed}.transform_keys(
                 betas: "anthropic-beta",
                 workspace_id: "anthropic-workspace-id"

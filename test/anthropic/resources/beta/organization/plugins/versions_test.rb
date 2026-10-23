@@ -5,7 +5,11 @@ require_relative "../../../../test_helper"
 class Anthropic::Test::Resources::Beta::Organization::Plugins::VersionsTest < Anthropic::Test::ResourceTest
   def test_create_required_params
     response =
-      @anthropic.beta.organization.plugins.versions.create("plugin_id", files: [StringIO.new("Example data")])
+      @anthropic.beta.organization.plugins.versions.create(
+        "plugin_id",
+        files: [StringIO.new("Example data")],
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::Plugins::BetaPluginVersion
@@ -30,7 +34,12 @@ class Anthropic::Test::Resources::Beta::Organization::Plugins::VersionsTest < An
   end
 
   def test_retrieve_required_params
-    response = @anthropic.beta.organization.plugins.versions.retrieve("version", plugin_id: "plugin_id")
+    response =
+      @anthropic.beta.organization.plugins.versions.retrieve(
+        "version",
+        plugin_id: "plugin_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::Plugins::BetaPluginVersion
@@ -55,7 +64,11 @@ class Anthropic::Test::Resources::Beta::Organization::Plugins::VersionsTest < An
   end
 
   def test_list
-    response = @anthropic.beta.organization.plugins.versions.list("plugin_id")
+    response =
+      @anthropic.beta.organization.plugins.versions.list(
+        "plugin_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -87,7 +100,12 @@ class Anthropic::Test::Resources::Beta::Organization::Plugins::VersionsTest < An
   end
 
   def test_download_required_params
-    response = @anthropic.beta.organization.plugins.versions.download("version", plugin_id: "plugin_id")
+    response =
+      @anthropic.beta.organization.plugins.versions.download(
+        "version",
+        plugin_id: "plugin_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => StringIO

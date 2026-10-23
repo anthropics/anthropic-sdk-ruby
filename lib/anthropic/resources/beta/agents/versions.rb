@@ -38,7 +38,7 @@ module Anthropic
               span_route: "/v1/agents/{agent_id}/versions",
               span_query: %w[limit page],
               method: :get,
-              path: ["v1/agents/%1$s/versions?beta=true", agent_id],
+              path: ["v1/agents/%1$s/versions", agent_id],
               query: query,
               headers: parsed.except(*query_params).transform_keys(
                 betas: "anthropic-beta",

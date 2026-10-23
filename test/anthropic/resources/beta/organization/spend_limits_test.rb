@@ -4,7 +4,11 @@ require_relative "../../../test_helper"
 
 class Anthropic::Test::Resources::Beta::Organization::SpendLimitsTest < Anthropic::Test::ResourceTest
   def test_retrieve
-    response = @anthropic.beta.organization.spend_limits.retrieve("spend_limit_id")
+    response =
+      @anthropic.beta.organization.spend_limits.retrieve(
+        "spend_limit_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaSpendLimit
@@ -26,7 +30,7 @@ class Anthropic::Test::Resources::Beta::Organization::SpendLimitsTest < Anthropi
   end
 
   def test_list
-    response = @anthropic.beta.organization.spend_limits.list
+    response = @anthropic.beta.organization.spend_limits.list(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -55,7 +59,11 @@ class Anthropic::Test::Resources::Beta::Organization::SpendLimitsTest < Anthropi
   end
 
   def test_delete
-    response = @anthropic.beta.organization.spend_limits.delete("spend_limit_id")
+    response =
+      @anthropic.beta.organization.spend_limits.delete(
+        "spend_limit_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Models::Beta::Organization::SpendLimitDeleteResponse
@@ -73,7 +81,8 @@ class Anthropic::Test::Resources::Beta::Organization::SpendLimitsTest < Anthropi
     response =
       @anthropic.beta.organization.spend_limits.set(
         amount: "50000",
-        scope: {type: :user, user_id: "user_01WCz1FkmYMm4gnmykNKUu3Q"}
+        scope: {type: :user, user_id: "user_01WCz1FkmYMm4gnmykNKUu3Q"},
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do

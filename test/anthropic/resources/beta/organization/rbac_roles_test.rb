@@ -4,7 +4,11 @@ require_relative "../../../test_helper"
 
 class Anthropic::Test::Resources::Beta::Organization::RBACRolesTest < Anthropic::Test::ResourceTest
   def test_retrieve
-    response = @anthropic.beta.organization.rbac_roles.retrieve("rbac_role_id")
+    response =
+      @anthropic.beta.organization.rbac_roles.retrieve(
+        "rbac_role_id",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::Organization::BetaRBACRole
@@ -22,7 +26,7 @@ class Anthropic::Test::Resources::Beta::Organization::RBACRolesTest < Anthropic:
   end
 
   def test_list
-    response = @anthropic.beta.organization.rbac_roles.list
+    response = @anthropic.beta.organization.rbac_roles.list(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor

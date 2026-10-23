@@ -4,7 +4,7 @@ require_relative "../../test_helper"
 
 class Anthropic::Test::Resources::Beta::UserProfilesTest < Anthropic::Test::ResourceTest
   def test_create
-    response = @anthropic.beta.user_profiles.create
+    response = @anthropic.beta.user_profiles.create(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Beta::BetaUserProfile
@@ -28,7 +28,11 @@ class Anthropic::Test::Resources::Beta::UserProfilesTest < Anthropic::Test::Reso
   end
 
   def test_retrieve
-    response = @anthropic.beta.user_profiles.retrieve("uprof_011CZkZCu8hGbp5mYRQgUmz9")
+    response =
+      @anthropic.beta.user_profiles.retrieve(
+        "uprof_011CZkZCu8hGbp5mYRQgUmz9",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaUserProfile
@@ -52,7 +56,11 @@ class Anthropic::Test::Resources::Beta::UserProfilesTest < Anthropic::Test::Reso
   end
 
   def test_update
-    response = @anthropic.beta.user_profiles.update("uprof_011CZkZCu8hGbp5mYRQgUmz9")
+    response =
+      @anthropic.beta.user_profiles.update(
+        "uprof_011CZkZCu8hGbp5mYRQgUmz9",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaUserProfile
@@ -76,7 +84,7 @@ class Anthropic::Test::Resources::Beta::UserProfilesTest < Anthropic::Test::Reso
   end
 
   def test_list
-    response = @anthropic.beta.user_profiles.list
+    response = @anthropic.beta.user_profiles.list(request_options: {extra_query: {beta: "true"}})
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -107,7 +115,11 @@ class Anthropic::Test::Resources::Beta::UserProfilesTest < Anthropic::Test::Reso
   end
 
   def test_delete
-    response = @anthropic.beta.user_profiles.delete("uprof_011CZkZCu8hGbp5mYRQgUmz9")
+    response =
+      @anthropic.beta.user_profiles.delete(
+        "uprof_011CZkZCu8hGbp5mYRQgUmz9",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaDeletedUserProfile
@@ -122,7 +134,11 @@ class Anthropic::Test::Resources::Beta::UserProfilesTest < Anthropic::Test::Reso
   end
 
   def test_create_enrollment_url
-    response = @anthropic.beta.user_profiles.create_enrollment_url("uprof_011CZkZCu8hGbp5mYRQgUmz9")
+    response =
+      @anthropic.beta.user_profiles.create_enrollment_url(
+        "uprof_011CZkZCu8hGbp5mYRQgUmz9",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaUserProfileEnrollmentURL

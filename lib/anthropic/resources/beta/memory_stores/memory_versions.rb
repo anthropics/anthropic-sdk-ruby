@@ -46,11 +46,7 @@ module Anthropic
               span_route: "/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}",
               span_query: %w[view],
               method: :get,
-              path: [
-                "v1/memory_stores/%1$s/memory_versions/%2$s?beta=true",
-                memory_store_id,
-                memory_version_id
-              ],
+              path: ["v1/memory_stores/%1$s/memory_versions/%2$s", memory_store_id, memory_version_id],
               query: query,
               headers: parsed.except(*query_params).transform_keys(
                 betas: "anthropic-beta",
@@ -135,7 +131,7 @@ module Anthropic
                 view
               ],
               method: :get,
-              path: ["v1/memory_stores/%1$s/memory_versions?beta=true", memory_store_id],
+              path: ["v1/memory_stores/%1$s/memory_versions", memory_store_id],
               query: query.transform_keys(
                 created_at_gte: "created_at[gte]",
                 created_at_lte: "created_at[lte]"
@@ -186,11 +182,7 @@ module Anthropic
               },
               span_route: "/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}/redact",
               method: :post,
-              path: [
-                "v1/memory_stores/%1$s/memory_versions/%2$s/redact?beta=true",
-                memory_store_id,
-                memory_version_id
-              ],
+              path: ["v1/memory_stores/%1$s/memory_versions/%2$s/redact", memory_store_id, memory_version_id],
               headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
               model: Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryVersion,
               options: {extra_headers: {"anthropic-beta" => "agent-memory-2026-07-22"}, **options}

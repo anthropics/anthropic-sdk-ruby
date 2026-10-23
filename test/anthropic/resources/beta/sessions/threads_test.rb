@@ -7,7 +7,8 @@ class Anthropic::Test::Resources::Beta::Sessions::ThreadsTest < Anthropic::Test:
     response =
       @anthropic.beta.sessions.threads.retrieve(
         "sthr_011CZkZVWa6oJjw1rgXZpnBt",
-        session_id: "sesn_011CZkZAtmR3yMPDzynEDxu7"
+        session_id: "sesn_011CZkZAtmR3yMPDzynEDxu7",
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do
@@ -33,7 +34,11 @@ class Anthropic::Test::Resources::Beta::Sessions::ThreadsTest < Anthropic::Test:
   end
 
   def test_list
-    response = @anthropic.beta.sessions.threads.list("sesn_011CZkZAtmR3yMPDzynEDxu7")
+    response =
+      @anthropic.beta.sessions.threads.list(
+        "sesn_011CZkZAtmR3yMPDzynEDxu7",
+        request_options: {extra_query: {beta: "true"}}
+      )
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -68,7 +73,8 @@ class Anthropic::Test::Resources::Beta::Sessions::ThreadsTest < Anthropic::Test:
     response =
       @anthropic.beta.sessions.threads.archive(
         "sthr_011CZkZVWa6oJjw1rgXZpnBt",
-        session_id: "sesn_011CZkZAtmR3yMPDzynEDxu7"
+        session_id: "sesn_011CZkZAtmR3yMPDzynEDxu7",
+        request_options: {extra_query: {beta: "true"}}
       )
 
     assert_pattern do

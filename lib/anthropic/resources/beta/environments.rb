@@ -42,7 +42,7 @@ module Anthropic
             span_created_id: "anthropic.environment.id",
             span_route: "/v1/environments",
             method: :post,
-            path: "v1/environments?beta=true",
+            path: "v1/environments",
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),
             body: parsed.except(*header_params.keys),
             model: Anthropic::Beta::BetaEnvironment,
@@ -76,7 +76,7 @@ module Anthropic
             span_attributes: {"anthropic.environment.id" => environment_id},
             span_route: "/v1/environments/{environment_id}",
             method: :get,
-            path: ["v1/environments/%1$s?beta=true", environment_id],
+            path: ["v1/environments/%1$s", environment_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaEnvironment,
             options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
@@ -120,7 +120,7 @@ module Anthropic
             span_attributes: {"anthropic.environment.id" => environment_id},
             span_route: "/v1/environments/{environment_id}",
             method: :post,
-            path: ["v1/environments/%1$s?beta=true", environment_id],
+            path: ["v1/environments/%1$s", environment_id],
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),
             body: parsed.except(*header_params.keys),
             model: Anthropic::Beta::BetaEnvironment,
@@ -160,7 +160,7 @@ module Anthropic
             span_route: "/v1/environments",
             span_query: %w[include_archived limit page],
             method: :get,
-            path: "v1/environments?beta=true",
+            path: "v1/environments",
             query: query,
             headers: parsed.except(*query_params).transform_keys(
               betas: "anthropic-beta",
@@ -198,7 +198,7 @@ module Anthropic
             span_attributes: {"anthropic.environment.id" => environment_id},
             span_route: "/v1/environments/{environment_id}",
             method: :delete,
-            path: ["v1/environments/%1$s?beta=true", environment_id],
+            path: ["v1/environments/%1$s", environment_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaEnvironmentDeleteResponse,
             options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
@@ -232,7 +232,7 @@ module Anthropic
             span_attributes: {"anthropic.environment.id" => environment_id},
             span_route: "/v1/environments/{environment_id}/archive",
             method: :post,
-            path: ["v1/environments/%1$s/archive?beta=true", environment_id],
+            path: ["v1/environments/%1$s/archive", environment_id],
             headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaEnvironment,
             options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
