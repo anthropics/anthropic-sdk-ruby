@@ -353,6 +353,26 @@ module Anthropic
         ORGANIZATION_WEBHOOKS_DELETE = "anthropic.organization.webhooks.delete"
         ORGANIZATION_WEBHOOKS_REGENERATE_SIGNING_SECRET =
           "anthropic.organization.webhooks.regenerate_signing_secret"
+        ORGANIZATION_CLAUDE_TAG_SLACK_CHANNELS_CREATE = "anthropic.organization.claude_tag.slack_channels.create"
+        ORGANIZATION_CLAUDE_TAG_SLACK_CHANNELS_RETRIEVE =
+          "anthropic.organization.claude_tag.slack_channels.retrieve"
+        ORGANIZATION_CLAUDE_TAG_SLACK_CHANNELS_UPDATE = "anthropic.organization.claude_tag.slack_channels.update"
+        ORGANIZATION_CLAUDE_TAG_SLACK_CHANNELS_LIST = "anthropic.organization.claude_tag.slack_channels.list"
+        ORGANIZATION_CLAUDE_TAG_SLACK_CHANNELS_DELETE = "anthropic.organization.claude_tag.slack_channels.delete"
+        ORGANIZATION_CLAUDE_TAG_SLACK_WORKSPACES_RETRIEVE =
+          "anthropic.organization.claude_tag.slack_workspaces.retrieve"
+        ORGANIZATION_CLAUDE_TAG_SLACK_WORKSPACES_UPDATE =
+          "anthropic.organization.claude_tag.slack_workspaces.update"
+        ORGANIZATION_CLAUDE_TAG_SLACK_WORKSPACES_LIST = "anthropic.organization.claude_tag.slack_workspaces.list"
+        ORGANIZATION_CLAUDE_TAG_BUNDLES_RETRIEVE = "anthropic.organization.claude_tag.bundles.retrieve"
+        ORGANIZATION_CLAUDE_TAG_BUNDLES_LIST = "anthropic.organization.claude_tag.bundles.list"
+        ORGANIZATION_CLAUDE_TAG_BUNDLES_TARGETS_CREATE =
+          "anthropic.organization.claude_tag.bundles.targets.create"
+        ORGANIZATION_CLAUDE_TAG_BUNDLES_TARGETS_RETRIEVE =
+          "anthropic.organization.claude_tag.bundles.targets.retrieve"
+        ORGANIZATION_CLAUDE_TAG_BUNDLES_TARGETS_LIST = "anthropic.organization.claude_tag.bundles.targets.list"
+        ORGANIZATION_CLAUDE_TAG_BUNDLES_TARGETS_DELETE =
+          "anthropic.organization.claude_tag.bundles.targets.delete"
       end
 
       # @type [Hash{String=>String}]

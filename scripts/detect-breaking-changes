@@ -110,6 +110,11 @@ TEST_PATHS=(
 	test/anthropic/resources/beta/organization/telemetry_destinations_test.rb
 	test/anthropic/resources/beta/organization/telemetry_destinations/workspaces_test.rb
 	test/anthropic/resources/beta/organization/webhooks_test.rb
+	test/anthropic/resources/beta/organization/claude_tag_test.rb
+	test/anthropic/resources/beta/organization/claude_tag/slack_channels_test.rb
+	test/anthropic/resources/beta/organization/claude_tag/slack_workspaces_test.rb
+	test/anthropic/resources/beta/organization/claude_tag/bundles_test.rb
+	test/anthropic/resources/beta/organization/claude_tag/bundles/targets_test.rb
 	test/anthropic/client_test.rb
 )
 

@@ -39,6 +39,11 @@ module Anthropic
             end
           end
 
+          module ClaudeTag
+            module Bundles
+            end
+          end
+
           module Federation
             module Rules
             end
@@ -84,7 +89,15 @@ module Anthropic
         end
       end
 
+      module Bundles
+      end
+
       module Chat
+      end
+
+      module ClaudeTag
+        module Bundles
+        end
       end
 
       module Environments
@@ -106,6 +119,11 @@ module Anthropic
           module Apps
             module Chat
             end
+          end
+        end
+
+        module ClaudeTag
+          module Bundles
           end
         end
 

@@ -1,0 +1,30 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeTag
+          module Bundles
+            type beta_claude_tag_slack_workspace_bundle_target_create =
+              { slack_workspace_id: String, type: :slack_workspace }
+
+            class BetaClaudeTagSlackWorkspaceBundleTargetCreate < Anthropic::Internal::Type::BaseModel
+              attr_accessor slack_workspace_id: String
+
+              attr_accessor type: :slack_workspace
+
+              def initialize: (
+                slack_workspace_id: String,
+                ?type: :slack_workspace
+              ) -> void
+
+              def to_hash: -> {
+                slack_workspace_id: String,
+                type: :slack_workspace
+              }
+            end
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,44 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_claude_tag_settings_create =
+          {
+            enabled: bool?,
+            environment_id: String?,
+            guest_policy: Anthropic::Models::Beta::Organization::beta_claude_tag_guest_policy?,
+            instructions: String?,
+            model: String?
+          }
+
+        class BetaClaudeTagSettingsCreate < Anthropic::Internal::Type::BaseModel
+          attr_accessor enabled: bool?
+
+          attr_accessor environment_id: String?
+
+          attr_accessor guest_policy: Anthropic::Models::Beta::Organization::beta_claude_tag_guest_policy?
+
+          attr_accessor instructions: String?
+
+          attr_accessor model: String?
+
+          def initialize: (
+            ?enabled: bool?,
+            ?environment_id: String?,
+            ?guest_policy: Anthropic::Models::Beta::Organization::beta_claude_tag_guest_policy?,
+            ?instructions: String?,
+            ?model: String?
+          ) -> void
+
+          def to_hash: -> {
+            enabled: bool?,
+            environment_id: String?,
+            guest_policy: Anthropic::Models::Beta::Organization::beta_claude_tag_guest_policy?,
+            instructions: String?,
+            model: String?
+          }
+        end
+      end
+    end
+  end
+end

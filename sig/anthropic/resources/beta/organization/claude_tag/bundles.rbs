@@ -1,0 +1,28 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class ClaudeTag
+          class Bundles
+            attr_reader targets: Anthropic::Resources::Beta::Organization::ClaudeTag::Bundles::Targets
+
+            def retrieve: (
+              String bundle_id,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Beta::Organization::ClaudeTag::BetaClaudeTagBundle
+
+            def list: (
+              ?limit: Integer,
+              ?page: String,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Organization::ClaudeTag::BetaClaudeTagBundle]
+
+            def initialize: (client: Anthropic::Client) -> void
+          end
+        end
+      end
+    end
+  end
+end

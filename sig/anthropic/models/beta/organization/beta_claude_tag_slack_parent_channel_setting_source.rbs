@@ -1,0 +1,26 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_claude_tag_slack_parent_channel_setting_source =
+          { slack_channel_id: String, type: :slack_parent_channel }
+
+        class BetaClaudeTagSlackParentChannelSettingSource < Anthropic::Internal::Type::BaseModel
+          attr_accessor slack_channel_id: String
+
+          attr_accessor type: :slack_parent_channel
+
+          def initialize: (
+            slack_channel_id: String,
+            ?type: :slack_parent_channel
+          ) -> void
+
+          def to_hash: -> {
+            slack_channel_id: String,
+            type: :slack_parent_channel
+          }
+        end
+      end
+    end
+  end
+end

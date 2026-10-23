@@ -1,0 +1,51 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeTag
+          type beta_claude_tag_bundle =
+            {
+              id: String,
+              created_at: Time,
+              description: String?,
+              display_name: String,
+              type: :bundle,
+              updated_at: Time
+            }
+
+          class BetaClaudeTagBundle < Anthropic::Internal::Type::BaseModel
+            attr_accessor id: String
+
+            attr_accessor created_at: Time
+
+            attr_accessor description: String?
+
+            attr_accessor display_name: String
+
+            attr_accessor type: :bundle
+
+            attr_accessor updated_at: Time
+
+            def initialize: (
+              id: String,
+              created_at: Time,
+              description: String?,
+              display_name: String,
+              updated_at: Time,
+              ?type: :bundle
+            ) -> void
+
+            def to_hash: -> {
+              id: String,
+              created_at: Time,
+              description: String?,
+              display_name: String,
+              type: :bundle,
+              updated_at: Time
+            }
+          end
+        end
+      end
+    end
+  end
+end

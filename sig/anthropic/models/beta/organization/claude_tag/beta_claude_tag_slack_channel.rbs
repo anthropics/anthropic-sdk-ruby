@@ -1,0 +1,56 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeTag
+          type beta_claude_tag_slack_channel =
+            {
+              id: String,
+              created_at: Time,
+              settings: Anthropic::Beta::Organization::BetaClaudeTagSettings,
+              slack: Anthropic::Beta::Organization::BetaClaudeTagSlackChannelIdentifiers,
+              sources: Anthropic::Beta::Organization::BetaClaudeTagSettingSources,
+              type: :slack_channel,
+              updated_at: Time
+            }
+
+          class BetaClaudeTagSlackChannel < Anthropic::Internal::Type::BaseModel
+            attr_accessor id: String
+
+            attr_accessor created_at: Time
+
+            attr_accessor settings: Anthropic::Beta::Organization::BetaClaudeTagSettings
+
+            attr_accessor slack: Anthropic::Beta::Organization::BetaClaudeTagSlackChannelIdentifiers
+
+            attr_accessor sources: Anthropic::Beta::Organization::BetaClaudeTagSettingSources
+
+            attr_accessor type: :slack_channel
+
+            attr_accessor updated_at: Time
+
+            def initialize: (
+              id: String,
+              created_at: Time,
+              settings: Anthropic::Beta::Organization::BetaClaudeTagSettings,
+              slack: Anthropic::Beta::Organization::BetaClaudeTagSlackChannelIdentifiers,
+              sources: Anthropic::Beta::Organization::BetaClaudeTagSettingSources,
+              updated_at: Time,
+              ?type: :slack_channel
+            ) -> void
+
+            def to_hash: -> {
+              id: String,
+              created_at: Time,
+              settings: Anthropic::Beta::Organization::BetaClaudeTagSettings,
+              slack: Anthropic::Beta::Organization::BetaClaudeTagSlackChannelIdentifiers,
+              sources: Anthropic::Beta::Organization::BetaClaudeTagSettingSources,
+              type: :slack_channel,
+              updated_at: Time
+            }
+          end
+        end
+      end
+    end
+  end
+end

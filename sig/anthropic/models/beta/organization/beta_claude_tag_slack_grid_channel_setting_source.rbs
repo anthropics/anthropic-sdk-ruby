@@ -1,0 +1,29 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_claude_tag_slack_grid_channel_setting_source =
+          {
+            slack: Anthropic::Beta::Organization::BetaClaudeTagSlackChannelIdentifiers,
+            type: :slack_grid_channel
+          }
+
+        class BetaClaudeTagSlackGridChannelSettingSource < Anthropic::Internal::Type::BaseModel
+          attr_accessor slack: Anthropic::Beta::Organization::BetaClaudeTagSlackChannelIdentifiers
+
+          attr_accessor type: :slack_grid_channel
+
+          def initialize: (
+            slack: Anthropic::Beta::Organization::BetaClaudeTagSlackChannelIdentifiers,
+            ?type: :slack_grid_channel
+          ) -> void
+
+          def to_hash: -> {
+            slack: Anthropic::Beta::Organization::BetaClaudeTagSlackChannelIdentifiers,
+            type: :slack_grid_channel
+          }
+        end
+      end
+    end
+  end
+end

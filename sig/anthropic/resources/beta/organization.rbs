@@ -36,6 +36,8 @@ module Anthropic
 
         attr_reader webhooks: Anthropic::Resources::Beta::Organization::Webhooks
 
+        attr_reader claude_tag: Anthropic::Resources::Beta::Organization::ClaudeTag
+
         def retrieve: (
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaOrganization

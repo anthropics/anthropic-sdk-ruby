@@ -113,6 +113,8 @@ module Anthropic
 
       variant const: -> { Anthropic::Models::AnthropicBeta::ANALYTICS_USAGE_COST_2026_08_24 }
 
+      variant const: -> { Anthropic::Models::AnthropicBeta::EXPERIMENTAL_CLAUDE_TAG_2026_10_21 }
+
       variant String
 
       # @!method self.variants
@@ -178,6 +180,7 @@ module Anthropic
       WEBHOOKS_2026_10_07 = :"webhooks-2026-10-07"
       MESSAGE_THREADS_2026_08_12 = :"message-threads-2026-08-12"
       ANALYTICS_USAGE_COST_2026_08_24 = :"analytics-usage-cost-2026-08-24"
+      EXPERIMENTAL_CLAUDE_TAG_2026_10_21 = :"experimental-claude-tag-2026-10-21"
 
       # @!endgroup
     end

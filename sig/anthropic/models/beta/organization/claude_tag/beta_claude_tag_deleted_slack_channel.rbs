@@ -1,0 +1,22 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeTag
+          type beta_claude_tag_deleted_slack_channel =
+            { id: String, type: :slack_channel_deleted }
+
+          class BetaClaudeTagDeletedSlackChannel < Anthropic::Internal::Type::BaseModel
+            attr_accessor id: String
+
+            attr_accessor type: :slack_channel_deleted
+
+            def initialize: (id: String, ?type: :slack_channel_deleted) -> void
+
+            def to_hash: -> { id: String, type: :slack_channel_deleted }
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,48 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeTag
+          module Bundles
+            type beta_claude_tag_bundle_target_create =
+              Anthropic::Beta::Organization::ClaudeTag::Bundles::BetaClaudeTagSlackChannelBundleTargetCreate
+              | Anthropic::Beta::Organization::ClaudeTag::Bundles::BetaClaudeTagSlackWorkspaceBundleTargetCreate
+
+            module BetaClaudeTagBundleTargetCreate
+              extend Anthropic::Internal::Type::Union
+
+              type type_ = :slack_channel | :slack_workspace
+
+              module Type
+                extend Anthropic::Internal::Type::Enum
+
+                SLACK_CHANNEL: :slack_channel
+                SLACK_WORKSPACE: :slack_workspace
+
+                def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::ClaudeTag::Bundles::BetaClaudeTagBundleTargetCreate::type_]
+              end
+
+              def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::ClaudeTag::Bundles::beta_claude_tag_bundle_target_create]
+
+              def self.new:
+                (
+                  type: :slack_channel | "slack_channel",
+                  slack_channel_id: String
+                ) -> Anthropic::Beta::Organization::ClaudeTag::Bundles::BetaClaudeTagSlackChannelBundleTargetCreate
+                | (
+                  type: :slack_workspace | "slack_workspace",
+                  slack_workspace_id: String
+                ) -> Anthropic::Beta::Organization::ClaudeTag::Bundles::BetaClaudeTagSlackWorkspaceBundleTargetCreate
+                | (
+                  type: Anthropic::Models::Beta::Organization::ClaudeTag::Bundles::BetaClaudeTagBundleTargetCreate::type_
+                  | String,
+                  ?slack_channel_id: String,
+                  ?slack_workspace_id: String
+                ) -> Anthropic::Models::Beta::Organization::ClaudeTag::Bundles::beta_claude_tag_bundle_target_create
+            end
+          end
+        end
+      end
+    end
+  end
+end

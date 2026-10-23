@@ -55,6 +55,9 @@ module Anthropic
         # @return [Anthropic::Resources::Beta::Organization::Webhooks]
         attr_reader :webhooks
 
+        # @return [Anthropic::Resources::Beta::Organization::ClaudeTag]
+        attr_reader :claude_tag
+
         # Retrieve information about the organization associated with the authenticated
         # API key.
         #
@@ -100,6 +103,7 @@ module Anthropic
           @telemetry_destinations =
             Anthropic::Resources::Beta::Organization::TelemetryDestinations.new(client: client)
           @webhooks = Anthropic::Resources::Beta::Organization::Webhooks.new(client: client)
+          @claude_tag = Anthropic::Resources::Beta::Organization::ClaudeTag.new(client: client)
         end
       end
     end

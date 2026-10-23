@@ -1,0 +1,54 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeTag
+          module Bundles
+            type beta_claude_tag_bundle_target =
+              Anthropic::Beta::Organization::ClaudeTag::Bundles::BetaClaudeTagSlackChannelBundleTarget
+              | Anthropic::Beta::Organization::ClaudeTag::Bundles::BetaClaudeTagSlackWorkspaceBundleTarget
+
+            module BetaClaudeTagBundleTarget
+              extend Anthropic::Internal::Type::Union
+
+              type type_ = :slack_channel | :slack_workspace
+
+              module Type
+                extend Anthropic::Internal::Type::Enum
+
+                SLACK_CHANNEL: :slack_channel
+                SLACK_WORKSPACE: :slack_workspace
+
+                def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::ClaudeTag::Bundles::BetaClaudeTagBundleTarget::type_]
+              end
+
+              def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::ClaudeTag::Bundles::beta_claude_tag_bundle_target]
+
+              def self.new:
+                (
+                  type: :slack_channel | "slack_channel",
+                  id: String,
+                  created_at: Time,
+                  slack_channel_id: String
+                ) -> Anthropic::Beta::Organization::ClaudeTag::Bundles::BetaClaudeTagSlackChannelBundleTarget
+                | (
+                  type: :slack_workspace | "slack_workspace",
+                  id: String,
+                  created_at: Time,
+                  slack_workspace_id: String
+                ) -> Anthropic::Beta::Organization::ClaudeTag::Bundles::BetaClaudeTagSlackWorkspaceBundleTarget
+                | (
+                  type: Anthropic::Models::Beta::Organization::ClaudeTag::Bundles::BetaClaudeTagBundleTarget::type_
+                  | String,
+                  id: String,
+                  created_at: Time,
+                  ?slack_channel_id: String,
+                  ?slack_workspace_id: String
+                ) -> Anthropic::Models::Beta::Organization::ClaudeTag::Bundles::beta_claude_tag_bundle_target
+            end
+          end
+        end
+      end
+    end
+  end
+end

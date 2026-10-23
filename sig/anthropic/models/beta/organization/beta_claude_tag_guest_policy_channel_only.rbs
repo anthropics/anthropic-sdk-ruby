@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_claude_tag_guest_policy_channel_only = { type: :channel_only }
+
+        class BetaClaudeTagGuestPolicyChannelOnly < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :channel_only
+
+          def initialize: (?type: :channel_only) -> void
+
+          def to_hash: -> { type: :channel_only }
+        end
+      end
+    end
+  end
+end

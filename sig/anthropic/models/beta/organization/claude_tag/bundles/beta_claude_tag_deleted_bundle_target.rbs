@@ -1,0 +1,27 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeTag
+          module Bundles
+            type beta_claude_tag_deleted_bundle_target =
+              { id: String, type: :bundle_target_deleted }
+
+            class BetaClaudeTagDeletedBundleTarget < Anthropic::Internal::Type::BaseModel
+              attr_accessor id: String
+
+              attr_accessor type: :bundle_target_deleted
+
+              def initialize: (
+                id: String,
+                ?type: :bundle_target_deleted
+              ) -> void
+
+              def to_hash: -> { id: String, type: :bundle_target_deleted }
+            end
+          end
+        end
+      end
+    end
+  end
+end

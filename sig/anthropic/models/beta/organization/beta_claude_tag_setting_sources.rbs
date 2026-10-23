@@ -1,0 +1,44 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_claude_tag_setting_sources =
+          {
+            enabled: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?,
+            environment_id: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?,
+            guest_policy: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?,
+            instructions: ::Array[Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source],
+            model: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?
+          }
+
+        class BetaClaudeTagSettingSources < Anthropic::Internal::Type::BaseModel
+          attr_accessor enabled: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?
+
+          attr_accessor environment_id: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?
+
+          attr_accessor guest_policy: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?
+
+          attr_accessor instructions: ::Array[Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source]
+
+          attr_accessor model: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?
+
+          def initialize: (
+            enabled: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?,
+            environment_id: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?,
+            guest_policy: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?,
+            instructions: ::Array[Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source],
+            model: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?
+          ) -> void
+
+          def to_hash: -> {
+            enabled: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?,
+            environment_id: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?,
+            guest_policy: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?,
+            instructions: ::Array[Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source],
+            model: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?
+          }
+        end
+      end
+    end
+  end
+end

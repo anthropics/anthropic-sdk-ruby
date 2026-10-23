@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_claude_tag_slack_workspace_identifiers =
+          { workspace_id: String }
+
+        class BetaClaudeTagSlackWorkspaceIdentifiers < Anthropic::Internal::Type::BaseModel
+          attr_accessor workspace_id: String
+
+          def initialize: (workspace_id: String) -> void
+
+          def to_hash: -> { workspace_id: String }
+        end
+      end
+    end
+  end
+end
