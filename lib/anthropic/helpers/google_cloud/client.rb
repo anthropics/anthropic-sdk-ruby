@@ -3,8 +3,8 @@
 module Anthropic
   module Helpers
     module GoogleCloud
-      # Client for Claude Platform on Google Cloud — the first-party Anthropic
-      # API served through the Google Cloud gateway.
+      # Client for Claude Models on Google Cloud (Anthropic managed) — the
+      # first-party Anthropic API served through the Google Cloud gateway.
       #
       # This is distinct from {Anthropic::VertexClient}, which targets the
       # `:rawPredict` publisher-model API (publisher model IDs, messages
