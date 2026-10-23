@@ -2,6 +2,11 @@
 
 ## [2.2.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v2.2.0...v2.2.1) (2026-10-23)
 
+### Bug Fixes
+
+* **bedrock:** `BedrockClient` with an API key takes its region from `AWS_REGION`, then `AWS_DEFAULT_REGION`, when `aws_region` is not passed
+
+
 ### Chores
 
 * **docs:** reword work queue, skill and external key descriptions

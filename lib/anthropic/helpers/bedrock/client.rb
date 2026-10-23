@@ -28,6 +28,7 @@ module Anthropic
         #
         # @param aws_region [String, nil] Enforce the AWS Region to use. If unset, the region is set according to the
         #   AWS SDK's default resolution order, described at https://github.com/aws/aws-sdk-ruby?tab=readme-ov-file#configuration
+        #   With an API key, defaults to `ENV["AWS_REGION"]`, then `ENV["AWS_DEFAULT_REGION"]`.
         #
         # @param aws_access_key [String, nil]  Optional AWS access key to use for authentication. Overrides profile and credential provider chain
         #
@@ -118,7 +119,7 @@ module Anthropic
               credentials: @aws_credentials
             )
           else
-            @aws_region = aws_region
+            @aws_region = aws_region || env_lookup("AWS_REGION", "AWS_DEFAULT_REGION")
           end
 
           base_url = ENV["ANTHROPIC_BEDROCK_BASE_URL"] if base_url.to_s.empty?
