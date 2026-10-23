@@ -607,6 +607,17 @@ class Anthropic::Test::BedrockClientTest < Minitest::Test
     assert_match(/list-available-models/, err.message)
   end
 
+  def test_beta_models_list_raises_before_sending
+    client = make_client
+    [
+      -> { client.beta.models.list },
+      -> { client.request(method: :get, path: "v1/models", qualifiers: {beta: "true"}) }
+    ].each do |call|
+      err = assert_raises(NotImplementedError, &call)
+      assert_match(/list-available-models/, err.message)
+    end
+  end
+
   def test_files_raises_not_implemented
     assert_raises(NotImplementedError) { make_client.files }
   end

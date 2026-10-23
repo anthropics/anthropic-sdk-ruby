@@ -309,14 +309,16 @@ module Anthropic
         private def validate_bedrock_request!(request_components)
           # Id-parameterized routes pass `path` as an Array whose first element
           # is the format string (e.g. `["v1/messages/batches/%1$s", id]`).
-          case Array(request_components[:path]).first.to_s
+          path = Array(request_components[:path]).first.to_s
+          beta = request_components.dig(:qualifiers, :beta) == "true" || path.include?("?beta=true")
+          case path
           in %r{^v1/messages/batches}
             message = "The Batch API is not supported in Bedrock yet"
             raise NotImplementedError.new(message)
           in %r{v1/messages/count_tokens}
             message = "Token counting is not supported in Bedrock yet"
             raise NotImplementedError.new(message)
-          in %r{v1/models\?beta=true}
+          in %r{v1/models(\?|\z)} if beta
             # rubocop:disable Layout/LineLength
             message = "Please instead use https://docs.anthropic.com/en/api/claude-on-amazon-bedrock#list-available-models to list available models on Bedrock."
             # rubocop:enable Layout/LineLength

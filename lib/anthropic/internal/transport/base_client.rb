@@ -446,7 +446,7 @@ module Anthropic
             span_content_query: req[:span_content_query],
             options: opts.except(:middleware),
             middleware: request_middleware,
-            metadata: {}
+            metadata: {qualifiers: req[:qualifiers]}.compact
           }
         end
 
