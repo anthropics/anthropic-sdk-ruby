@@ -7,7 +7,8 @@ module Anthropic
         # @see Anthropic::Resources::Beta::Environments::Work#heartbeat
         class BetaSelfHostedWorkHeartbeatResponse < Anthropic::Internal::Type::BaseModel
           # @!attribute last_heartbeat
-          #   RFC 3339 timestamp of the actual heartbeat from DB
+          #   RFC 3339 timestamp of the most recent heartbeat recorded for this work item, or
+          #   an empty string if none has been recorded
           #
           #   @return [String]
           required :last_heartbeat, String
@@ -39,7 +40,11 @@ module Anthropic
           # @!method initialize(last_heartbeat:, lease_extended:, state:, ttl_seconds:, type: :work_heartbeat)
           #   Response after recording a heartbeat for a work item.
           #
-          #   @param last_heartbeat [String] RFC 3339 timestamp of the actual heartbeat from DB
+          #   Some parameter documentations has been truncated, see
+          #   {Anthropic::Models::Beta::Environments::BetaSelfHostedWorkHeartbeatResponse} for
+          #   more details.
+          #
+          #   @param last_heartbeat [String] RFC 3339 timestamp of the most recent heartbeat recorded for this work item, or
           #
           #   @param lease_extended [Boolean] Whether the heartbeat succeeded in extending the lease
           #

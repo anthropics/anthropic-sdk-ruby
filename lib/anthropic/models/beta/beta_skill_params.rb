@@ -23,7 +23,7 @@ module Anthropic
         optional :version, String
 
         # @!method initialize(skill_id:, type:, version: nil)
-        #   Specification for a skill to be loaded in a container (request model).
+        #   Specification for a skill to be loaded in a container.
         #
         #   @param skill_id [String] Skill ID
         #

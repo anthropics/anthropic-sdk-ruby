@@ -34,8 +34,8 @@ module Anthropic
           required :display_name, String, nil?: true
 
           # @!attribute geo
-          #   Data residency geo. Selects which regional validator handles this key's
-          #   encrypt/decrypt roundtrips.
+          #   Data residency geo. Selects the region that handles this key's encrypt/decrypt
+          #   roundtrips.
           #
           #   @return [String]
           required :geo, String
@@ -74,7 +74,7 @@ module Anthropic
           #
           #   @param display_name [String, nil] Human-friendly display name. Null if none was set.
           #
-          #   @param geo [String] Data residency geo. Selects which regional validator handles this key's encrypt/
+          #   @param geo [String] Data residency geo. Selects the region that handles this key's encrypt/decrypt r
           #
           #   @param provider_config [Anthropic::Models::Beta::Organization::BetaAWSExternalKeyConfig, Anthropic::Models::Beta::Organization::BetaGCPExternalKeyConfig, Anthropic::Models::Beta::Organization::BetaAzureExternalKeyConfig] KMS provider identity and auth coordinates.
           #

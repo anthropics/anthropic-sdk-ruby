@@ -23,7 +23,7 @@ module Anthropic
       sig { params(version: String).void }
       attr_writer :version
 
-      # Specification for a skill to be loaded in a container (request model).
+      # Specification for a skill to be loaded in a container.
       sig do
         params(
           skill_id: String,

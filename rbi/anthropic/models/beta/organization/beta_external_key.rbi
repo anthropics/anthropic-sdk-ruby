@@ -36,8 +36,8 @@ module Anthropic
           sig { returns(T.nilable(String)) }
           attr_accessor :display_name
 
-          # Data residency geo. Selects which regional validator handles this key's
-          # encrypt/decrypt roundtrips.
+          # Data residency geo. Selects the region that handles this key's encrypt/decrypt
+          # roundtrips.
           sig { returns(String) }
           attr_accessor :geo
 
@@ -93,8 +93,8 @@ module Anthropic
             created_at:,
             # Human-friendly display name. Null if none was set.
             display_name:,
-            # Data residency geo. Selects which regional validator handles this key's
-            # encrypt/decrypt roundtrips.
+            # Data residency geo. Selects the region that handles this key's encrypt/decrypt
+            # roundtrips.
             geo:,
             # KMS provider identity and auth coordinates.
             provider_config:,
