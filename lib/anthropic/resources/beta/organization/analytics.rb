@@ -26,6 +26,12 @@ module Anthropic
           # @return [Anthropic::Resources::Beta::Organization::Analytics::Artifacts]
           attr_reader :artifacts
 
+          # @return [Anthropic::Resources::Beta::Organization::Analytics::Usage]
+          attr_reader :usage
+
+          # @return [Anthropic::Resources::Beta::Organization::Analytics::Cost]
+          attr_reader :cost
+
           # @return [Anthropic::Resources::Beta::Organization::Analytics::UsageReport]
           attr_reader :usage_report
 
@@ -50,6 +56,8 @@ module Anthropic
             @plugins = Anthropic::Resources::Beta::Organization::Analytics::Plugins.new(client: client)
             @skills = Anthropic::Resources::Beta::Organization::Analytics::Skills.new(client: client)
             @artifacts = Anthropic::Resources::Beta::Organization::Analytics::Artifacts.new(client: client)
+            @usage = Anthropic::Resources::Beta::Organization::Analytics::Usage.new(client: client)
+            @cost = Anthropic::Resources::Beta::Organization::Analytics::Cost.new(client: client)
             @usage_report = Anthropic::Resources::Beta::Organization::Analytics::UsageReport.new(client: client)
             @user_usage_report =
               Anthropic::Resources::Beta::Organization::Analytics::UserUsageReport.new(client: client)

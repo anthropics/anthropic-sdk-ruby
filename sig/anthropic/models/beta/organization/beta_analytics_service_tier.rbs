@@ -1,0 +1,28 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_service_tier =
+          :batch
+          | :flex
+          | :flex_discount
+          | :priority
+          | :priority_on_demand
+          | :standard
+
+        module BetaAnalyticsServiceTier
+          extend Anthropic::Internal::Type::Enum
+
+          BATCH: :batch
+          FLEX: :flex
+          FLEX_DISCOUNT: :flex_discount
+          PRIORITY: :priority
+          PRIORITY_ON_DEMAND: :priority_on_demand
+          STANDARD: :standard
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::beta_analytics_service_tier]
+        end
+      end
+    end
+  end
+end

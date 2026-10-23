@@ -9,6 +9,8 @@ module Anthropic
 
       FALLBACK_REFUSAL_MIDDLEWARE = T.let("fallback-refusal-middleware", String)
 
+      MESSAGE_THREAD = T.let("message-thread", String)
+
       class << self
         sig { params(headers: T::Hash[T.any(String, Symbol), T.untyped], value: String).returns(String) }
         def merged_value(headers, value)

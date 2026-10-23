@@ -1,0 +1,21 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_actor_type =
+          :api_actor | :federated_actor | :service_account_actor | :user_actor
+
+        module BetaAnalyticsActorType
+          extend Anthropic::Internal::Type::Enum
+
+          API_ACTOR: :api_actor
+          FEDERATED_ACTOR: :federated_actor
+          SERVICE_ACCOUNT_ACTOR: :service_account_actor
+          USER_ACTOR: :user_actor
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::beta_analytics_actor_type]
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_federated_actor_azure_provider =
+          { subscription_id: String, type: :azure }
+
+        class BetaAnalyticsFederatedActorAzureProvider < Anthropic::Internal::Type::BaseModel
+          attr_accessor subscription_id: String
+
+          attr_accessor type: :azure
+
+          def initialize: (subscription_id: String, ?type: :azure) -> void
+
+          def to_hash: -> { subscription_id: String, type: :azure }
+        end
+      end
+    end
+  end
+end

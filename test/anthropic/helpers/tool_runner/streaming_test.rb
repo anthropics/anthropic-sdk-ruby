@@ -330,6 +330,7 @@ class Anthropic::Test::Helpers::ToolRunner::StreamingTest < Minitest::Test
     end
 
     @client.beta.messages.tool_runner(
+      thread: false,
       max_tokens: 1024,
       messages: [{content: "Tides?", role: :user}],
       model: :"claude-3-7-sonnet-latest",
@@ -373,6 +374,7 @@ class Anthropic::Test::Helpers::ToolRunner::StreamingTest < Minitest::Test
     end
 
     @client.beta.messages.tool_runner(
+      thread: false,
       max_tokens: 1024,
       messages: [{content: "What is 10 + 5?", role: :user}],
       model: :"claude-3-7-sonnet-latest",

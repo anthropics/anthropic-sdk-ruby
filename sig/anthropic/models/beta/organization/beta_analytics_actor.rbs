@@ -1,0 +1,67 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_actor =
+          Anthropic::Beta::Organization::BetaAnalyticsReportUserActor
+          | Anthropic::Beta::Organization::BetaAnalyticsServiceAccountActor
+          | Anthropic::Beta::Organization::BetaAnalyticsFederatedActor
+          | Anthropic::Beta::Organization::BetaAnalyticsAPIActor
+
+        module BetaAnalyticsActor
+          extend Anthropic::Internal::Type::Union
+
+          type type_ =
+            :user_actor | :service_account_actor | :federated_actor | :api_actor
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            USER_ACTOR: :user_actor
+            SERVICE_ACCOUNT_ACTOR: :service_account_actor
+            FEDERATED_ACTOR: :federated_actor
+            API_ACTOR: :api_actor
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaAnalyticsActor::type_]
+          end
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::beta_analytics_actor]
+
+          def self.new:
+            (
+              type: :user_actor | "user_actor",
+              deleted: bool,
+              email_address: String?,
+              name: String?,
+              user_id: String
+            ) -> Anthropic::Beta::Organization::BetaAnalyticsReportUserActor
+            | (
+              type: :service_account_actor | "service_account_actor",
+              service_account_id: String
+            ) -> Anthropic::Beta::Organization::BetaAnalyticsServiceAccountActor
+            | (
+              type: :federated_actor | "federated_actor",
+              provider: Anthropic::Models::Beta::Organization::beta_analytics_federated_actor_provider,
+              subject: String?
+            ) -> Anthropic::Beta::Organization::BetaAnalyticsFederatedActor
+            | (
+              type: :api_actor | "api_actor",
+              api_key_id: String
+            ) -> Anthropic::Beta::Organization::BetaAnalyticsAPIActor
+            | (
+              type: Anthropic::Models::Beta::Organization::BetaAnalyticsActor::type_
+              | String,
+              ?deleted: bool,
+              ?email_address: String?,
+              ?name: String?,
+              ?user_id: String,
+              ?service_account_id: String,
+              ?provider: Anthropic::Models::Beta::Organization::beta_analytics_federated_actor_provider,
+              ?subject: String?,
+              ?api_key_id: String
+            ) -> Anthropic::Models::Beta::Organization::beta_analytics_actor
+        end
+      end
+    end
+  end
+end

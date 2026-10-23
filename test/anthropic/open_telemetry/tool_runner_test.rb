@@ -180,7 +180,8 @@ class Anthropic::Test::OpenTelemetryToolRunnerTest < Anthropic::Test::OpenTeleme
     schema = {type: "object", properties: {summary: {type: "string"}}, required: ["summary"]}
     stub_runner(tool_use_message("msg_1", "Paris"), MESSAGE.merge(id: "msg_2"))
     sampler = recording_sampler
-    runner(output_config: {format: {type: :json_schema, schema: schema}}, betas: %w[beta-a]).run_until_finished
+    output_config = {format: {type: :json_schema, schema: schema}}
+    runner(thread: false, output_config: output_config, betas: %w[beta-a]).run_until_finished
 
     shared = {"gen_ai.provider.name" => "anthropic", "gen_ai.conversation.id" => "conv_1"}
     # Only the span of an API call has the server, the method and the route.

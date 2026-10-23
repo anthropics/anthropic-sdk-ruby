@@ -1,5 +1,28 @@
 # Changelog
 
+## [2.2.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v2.1.0...v2.2.0) (2026-10-23)
+
+### Features
+
+* **api:** add support for message threads
+* **api:** add usage and cost reports by dimension, mark older reports legacy
+
+
+### Bug Fixes
+
+* **tools:** a tool runner whose messages are replaced while a reply is handled skips that turn again: no tool runs and the next request sends the new messages as they are
+* **tools:** the tool runner takes a frozen `messages` array again when no tool is called
+* **tools:** the assistant turn that the tool runner adds to `params[:messages]` can be edited again, and its blocks other than tool calls are typed blocks again
+
+
+### Chores
+
+* **ci:** update the runner label for internal CI jobs
+* **docs:** clarify plugin content scan and validation descriptions
+* **docs:** clarify plugin served_version_pinned and updated_at
+* **docs:** fix usage and cost report examples and ending_at docs
+* **docs:** rate limit model lists vary by organization and workspace
+
 ## [2.1.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v2.0.0...v2.1.0) (2026-10-21)
 
 ### Features

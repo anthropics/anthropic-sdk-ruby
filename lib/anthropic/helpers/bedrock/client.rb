@@ -155,6 +155,11 @@ module Anthropic
           raise NotImplementedError.new(message)
         end
 
+        # @api private
+        #
+        # @return [Boolean]
+        def message_threads? = false
+
         def files
           raise NotImplementedError, "Files are not supported on Bedrock."
         end

@@ -37,7 +37,8 @@ module Anthropic
           attr_accessor :limits
 
           # Model names this entry's limits apply to, including aliases. `null` when
-          # `group.type` is not `"model_group"`.
+          # `group.type` is not `"model_group"`. The list covers the models this workspace
+          # has access to, so it can differ between workspaces.
           sig { returns(T.nilable(T::Array[String])) }
           attr_accessor :models
 
@@ -83,7 +84,8 @@ module Anthropic
             # listed too, each marked by `source`.
             limits:,
             # Model names this entry's limits apply to, including aliases. `null` when
-            # `group.type` is not `"model_group"`.
+            # `group.type` is not `"model_group"`. The list covers the models this workspace
+            # has access to, so it can differ between workspaces.
             models:,
             # The `id` of the organization's RateLimit entry this entry applies to.
             rate_limit_id:,

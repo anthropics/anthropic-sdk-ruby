@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_time_bucket_width = :"1d" | :"1h" | :"1m"
+
+        module BetaAnalyticsTimeBucketWidth
+          extend Anthropic::Internal::Type::Enum
+
+          DAY: :"1d"
+          HOUR: :"1h"
+          MINUTE: :"1m"
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::beta_analytics_time_bucket_width]
+        end
+      end
+    end
+  end
+end

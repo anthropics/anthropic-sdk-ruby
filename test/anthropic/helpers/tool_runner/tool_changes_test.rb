@@ -151,7 +151,7 @@ class Anthropic::Test::Helpers::ToolRunner::ToolChangesTest < Minitest::Test
       final_response("msg_3")
     )
 
-    runner = new_runner
+    runner = new_runner(thread: false)
     drive(runner, "msg_1" => -> { runner.add_tools(@get_time) })
 
     assert_pattern do
@@ -211,7 +211,7 @@ class Anthropic::Test::Helpers::ToolRunner::ToolChangesTest < Minitest::Test
       final_response("msg_3")
     )
 
-    runner = new_runner
+    runner = new_runner(thread: false)
     drive(
       runner,
       "msg_1" => -> { runner.remove_tools("get_weather") },
@@ -346,7 +346,7 @@ class Anthropic::Test::Helpers::ToolRunner::ToolChangesTest < Minitest::Test
       final_response("msg_3")
     )
 
-    runner = new_runner
+    runner = new_runner(thread: false)
     drive(runner, "msg_1" => -> { runner.remove_tools("get_weather") })
 
     assert_empty(@calls)
@@ -360,7 +360,7 @@ class Anthropic::Test::Helpers::ToolRunner::ToolChangesTest < Minitest::Test
     compaction = [{type: "compaction", content: "Summary of the conversation so far."}]
     bodies = stub_responses(response("msg_1", compaction, stop_reason: "compaction"), final_response("msg_2"))
 
-    runner = new_runner
+    runner = new_runner(thread: false)
     drive(runner, "msg_1" => -> { runner.add_tools(@get_time) })
 
     assert_pattern do
@@ -385,7 +385,7 @@ class Anthropic::Test::Helpers::ToolRunner::ToolChangesTest < Minitest::Test
       final_response("msg_4")
     )
 
-    runner = new_compacting_runner
+    runner = new_compacting_runner(thread: false)
     drive(
       runner,
       "msg_1" => lambda {
@@ -485,7 +485,7 @@ class Anthropic::Test::Helpers::ToolRunner::ToolChangesTest < Minitest::Test
   def test_changes_do_not_add_a_beta_header
     stub_responses(final_response("msg_1"))
 
-    runner = new_runner(betas: nil)
+    runner = new_runner(thread: false, betas: nil)
     runner.add_tools(@get_time)
     runner.remove_tools("get_weather")
     drive(runner)

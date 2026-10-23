@@ -1,0 +1,21 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_grouped_cost_type =
+          :code_execution | :session_usage | :tokens | :web_search
+
+        module BetaAnalyticsGroupedCostType
+          extend Anthropic::Internal::Type::Enum
+
+          CODE_EXECUTION: :code_execution
+          SESSION_USAGE: :session_usage
+          TOKENS: :tokens
+          WEB_SEARCH: :web_search
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::beta_analytics_grouped_cost_type]
+        end
+      end
+    end
+  end
+end

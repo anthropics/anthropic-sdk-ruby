@@ -1,0 +1,40 @@
+module Anthropic
+  module Models
+    module BetaMessageThreadParam = Beta::BetaMessageThreadParam
+
+    module Beta
+      type beta_message_thread_param =
+        Anthropic::Beta::BetaThreadCreateParams
+        | Anthropic::Beta::BetaThreadContinueParams
+
+      module BetaMessageThreadParam
+        extend Anthropic::Internal::Type::Union
+
+        type type_ = :create | :continue
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          CREATE: :create
+          CONTINUE: :continue
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaMessageThreadParam::type_]
+        end
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_message_thread_param]
+
+        def self.new:
+          (type: :create | "create") -> Anthropic::Beta::BetaThreadCreateParams
+          | (
+            type: :continue | "continue",
+            previous_message_id: String
+          ) -> Anthropic::Beta::BetaThreadContinueParams
+          | (
+            type: Anthropic::Models::Beta::BetaMessageThreadParam::type_
+            | String,
+            ?previous_message_id: String
+          ) -> Anthropic::Models::Beta::beta_message_thread_param
+      end
+    end
+  end
+end

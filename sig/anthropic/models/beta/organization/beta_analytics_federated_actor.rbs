@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_federated_actor =
+          {
+            provider: Anthropic::Models::Beta::Organization::beta_analytics_federated_actor_provider,
+            subject: String?,
+            type: :federated_actor
+          }
+
+        class BetaAnalyticsFederatedActor < Anthropic::Internal::Type::BaseModel
+          attr_accessor provider: Anthropic::Models::Beta::Organization::beta_analytics_federated_actor_provider
+
+          attr_accessor subject: String?
+
+          attr_accessor type: :federated_actor
+
+          def initialize: (
+            provider: Anthropic::Models::Beta::Organization::beta_analytics_federated_actor_provider,
+            subject: String?,
+            ?type: :federated_actor
+          ) -> void
+
+          def to_hash: -> {
+            provider: Anthropic::Models::Beta::Organization::beta_analytics_federated_actor_provider,
+            subject: String?,
+            type: :federated_actor
+          }
+        end
+      end
+    end
+  end
+end

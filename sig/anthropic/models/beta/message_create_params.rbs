@@ -23,6 +23,7 @@ module Anthropic
           stop_sequences: ::Array[String],
           system_: Anthropic::Models::Beta::MessageCreateParams::system_,
           thinking: Anthropic::Models::Beta::beta_thinking_config_param,
+          thread: Anthropic::Models::Beta::beta_message_thread_param?,
           tool_choice: Anthropic::Models::Beta::beta_tool_choice,
           tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
           betas: ::Array[Anthropic::Models::anthropic_beta],
@@ -101,6 +102,8 @@ module Anthropic
           Anthropic::Models::Beta::beta_thinking_config_param
         ) -> Anthropic::Models::Beta::beta_thinking_config_param
 
+        attr_accessor thread: Anthropic::Models::Beta::beta_message_thread_param?
+
         attr_reader tool_choice: Anthropic::Models::Beta::beta_tool_choice?
 
         def tool_choice=: (
@@ -148,6 +151,7 @@ module Anthropic
           ?stop_sequences: ::Array[String],
           ?system_: Anthropic::Models::Beta::MessageCreateParams::system_,
           ?thinking: Anthropic::Models::Beta::beta_thinking_config_param,
+          ?thread: Anthropic::Models::Beta::beta_message_thread_param?,
           ?tool_choice: Anthropic::Models::Beta::beta_tool_choice,
           ?tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
@@ -177,6 +181,7 @@ module Anthropic
           stop_sequences: ::Array[String],
           system_: Anthropic::Models::Beta::MessageCreateParams::system_,
           thinking: Anthropic::Models::Beta::beta_thinking_config_param,
+          thread: Anthropic::Models::Beta::beta_message_thread_param?,
           tool_choice: Anthropic::Models::Beta::beta_tool_choice,
           tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
           betas: ::Array[Anthropic::Models::anthropic_beta],

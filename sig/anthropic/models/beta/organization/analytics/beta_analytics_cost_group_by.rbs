@@ -1,0 +1,60 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Analytics
+          type beta_analytics_cost_group_by =
+            :actor
+            | :actor_type
+            | :agent_id
+            | :api_key_id
+            | :claude_tag_category
+            | :claude_tag_user_id
+            | :context_window
+            | :cost_type
+            | :deployment_id
+            | :environment_id
+            | :inference_geo
+            | :model
+            | :product
+            | :rbac_group_id
+            | :service_tier
+            | :session_id
+            | :slack_channel_id
+            | :speed
+            | :token_type
+            | :user_profile_id
+            | :workspace_id
+
+          module BetaAnalyticsCostGroupBy
+            extend Anthropic::Internal::Type::Enum
+
+            ACTOR: :actor
+            ACTOR_TYPE: :actor_type
+            AGENT_ID: :agent_id
+            API_KEY_ID: :api_key_id
+            CLAUDE_TAG_CATEGORY: :claude_tag_category
+            CLAUDE_TAG_USER_ID: :claude_tag_user_id
+            CONTEXT_WINDOW: :context_window
+            COST_TYPE: :cost_type
+            DEPLOYMENT_ID: :deployment_id
+            ENVIRONMENT_ID: :environment_id
+            INFERENCE_GEO: :inference_geo
+            MODEL: :model
+            PRODUCT: :product
+            RBAC_GROUP_ID: :rbac_group_id
+            SERVICE_TIER: :service_tier
+            SESSION_ID: :session_id
+            SLACK_CHANNEL_ID: :slack_channel_id
+            SPEED: :speed
+            TOKEN_TYPE: :token_type
+            USER_PROFILE_ID: :user_profile_id
+            WORKSPACE_ID: :workspace_id
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Analytics::beta_analytics_cost_group_by]
+          end
+        end
+      end
+    end
+  end
+end

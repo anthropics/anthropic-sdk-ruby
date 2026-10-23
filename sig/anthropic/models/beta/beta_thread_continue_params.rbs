@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    class BetaThreadContinueParams = Beta::BetaThreadContinueParams
+
+    module Beta
+      type beta_thread_continue_params =
+        { previous_message_id: String, type: :continue }
+
+      class BetaThreadContinueParams < Anthropic::Internal::Type::BaseModel
+        attr_accessor previous_message_id: String
+
+        attr_accessor type: :continue
+
+        def initialize: (previous_message_id: String, ?type: :continue) -> void
+
+        def to_hash: -> { previous_message_id: String, type: :continue }
+      end
+    end
+  end
+end

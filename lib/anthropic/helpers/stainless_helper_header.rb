@@ -18,6 +18,7 @@ module Anthropic
       # hyphenated lowercase.
       BETA_TOOL_RUNNER = "BetaToolRunner"
       FALLBACK_REFUSAL_MIDDLEWARE = "fallback-refusal-middleware"
+      MESSAGE_THREAD = "message-thread"
 
       class << self
         # The {HEADER} value to set after appending `value` to whatever is

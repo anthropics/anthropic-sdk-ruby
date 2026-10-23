@@ -1,0 +1,41 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Analytics
+          type beta_analytics_cost_item =
+            {
+              cost: Anthropic::Beta::Organization::Analytics::BetaAnalyticsCostMetrics,
+              ending_at: Time,
+              group: Anthropic::Beta::Organization::Analytics::BetaAnalyticsCostGroup,
+              starting_at: Time
+            }
+
+          class BetaAnalyticsCostItem < Anthropic::Internal::Type::BaseModel
+            attr_accessor cost: Anthropic::Beta::Organization::Analytics::BetaAnalyticsCostMetrics
+
+            attr_accessor ending_at: Time
+
+            attr_accessor group: Anthropic::Beta::Organization::Analytics::BetaAnalyticsCostGroup
+
+            attr_accessor starting_at: Time
+
+            def initialize: (
+              cost: Anthropic::Beta::Organization::Analytics::BetaAnalyticsCostMetrics,
+              ending_at: Time,
+              group: Anthropic::Beta::Organization::Analytics::BetaAnalyticsCostGroup,
+              starting_at: Time
+            ) -> void
+
+            def to_hash: -> {
+              cost: Anthropic::Beta::Organization::Analytics::BetaAnalyticsCostMetrics,
+              ending_at: Time,
+              group: Anthropic::Beta::Organization::Analytics::BetaAnalyticsCostGroup,
+              starting_at: Time
+            }
+          end
+        end
+      end
+    end
+  end
+end

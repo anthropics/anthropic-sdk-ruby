@@ -185,6 +185,9 @@ module Anthropic
       module Sessions
       end
 
+      module Threads
+      end
+
       module ToolRunner
       end
 

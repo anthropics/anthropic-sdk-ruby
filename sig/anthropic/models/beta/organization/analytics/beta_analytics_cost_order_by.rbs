@@ -1,0 +1,21 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Analytics
+          type beta_analytics_cost_order_by = :amount | :list_amount | :time
+
+          module BetaAnalyticsCostOrderBy
+            extend Anthropic::Internal::Type::Enum
+
+            AMOUNT: :amount
+            LIST_AMOUNT: :list_amount
+            TIME: :time
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Analytics::beta_analytics_cost_order_by]
+          end
+        end
+      end
+    end
+  end
+end

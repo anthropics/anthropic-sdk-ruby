@@ -1,0 +1,46 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class Analytics
+          class Usage
+            def list: (
+              starting_at: Time,
+              ?actor_ids: ::Array[String]?,
+              ?actor_types: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_actor_type]?,
+              ?agent_ids: ::Array[String]?,
+              ?api_key_ids: ::Array[String]?,
+              ?claude_tag_categories: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_claude_tag_category]?,
+              ?claude_tag_user_ids: ::Array[String]?,
+              ?context_windows: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_context_window]?,
+              ?deployment_ids: ::Array[String]?,
+              ?ending_at: Time?,
+              ?environment_ids: ::Array[String]?,
+              ?exclude_deleted_users: bool,
+              ?group_by: ::Array[Anthropic::Models::Beta::Organization::Analytics::beta_analytics_usage_group_by]?,
+              ?inference_geos: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_inference_geo_filter]?,
+              ?limit: Integer,
+              ?models: ::Array[String]?,
+              ?order: Anthropic::Models::Beta::Organization::beta_analytics_usage_cost_sort_order,
+              ?order_by: Anthropic::Models::Beta::Organization::Analytics::beta_analytics_usage_order_by,
+              ?page: String?,
+              ?products: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_usage_cost_product_filter]?,
+              ?rbac_group_ids: ::Array[String]?,
+              ?service_tiers: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_service_tier]?,
+              ?session_ids: ::Array[String]?,
+              ?slack_channel_ids: ::Array[String]?,
+              ?speeds: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_speed]?,
+              ?time_bucket_width: Anthropic::Models::Beta::Organization::beta_analytics_time_bucket_width?,
+              ?user_profile_ids: ::Array[String]?,
+              ?workspace_ids: ::Array[String]?,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Internal::ReportPageCursor[Anthropic::Beta::Organization::Analytics::BetaAnalyticsUsageItem]
+
+            def initialize: (client: Anthropic::Client) -> void
+          end
+        end
+      end
+    end
+  end
+end

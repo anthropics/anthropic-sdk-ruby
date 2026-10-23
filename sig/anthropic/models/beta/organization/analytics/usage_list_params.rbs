@@ -1,0 +1,188 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Analytics
+          type usage_list_params =
+            {
+              starting_at: Time,
+              actor_ids: ::Array[String]?,
+              actor_types: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_actor_type]?,
+              agent_ids: ::Array[String]?,
+              api_key_ids: ::Array[String]?,
+              claude_tag_categories: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_claude_tag_category]?,
+              claude_tag_user_ids: ::Array[String]?,
+              context_windows: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_context_window]?,
+              deployment_ids: ::Array[String]?,
+              ending_at: Time?,
+              environment_ids: ::Array[String]?,
+              exclude_deleted_users: bool,
+              group_by: ::Array[Anthropic::Models::Beta::Organization::Analytics::beta_analytics_usage_group_by]?,
+              inference_geos: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_inference_geo_filter]?,
+              limit: Integer,
+              models: ::Array[String]?,
+              order: Anthropic::Models::Beta::Organization::beta_analytics_usage_cost_sort_order,
+              order_by: Anthropic::Models::Beta::Organization::Analytics::beta_analytics_usage_order_by,
+              page: String?,
+              products: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_usage_cost_product_filter]?,
+              rbac_group_ids: ::Array[String]?,
+              service_tiers: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_service_tier]?,
+              session_ids: ::Array[String]?,
+              slack_channel_ids: ::Array[String]?,
+              speeds: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_speed]?,
+              time_bucket_width: Anthropic::Models::Beta::Organization::beta_analytics_time_bucket_width?,
+              user_profile_ids: ::Array[String]?,
+              workspace_ids: ::Array[String]?,
+              betas: ::Array[Anthropic::Models::anthropic_beta]
+            }
+            & Anthropic::Internal::Type::request_parameters
+
+          class UsageListParams < Anthropic::Internal::Type::BaseModel
+            extend Anthropic::Internal::Type::RequestParameters::Converter
+            include Anthropic::Internal::Type::RequestParameters
+
+            attr_accessor starting_at: Time
+
+            attr_accessor actor_ids: ::Array[String]?
+
+            attr_accessor actor_types: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_actor_type]?
+
+            attr_accessor agent_ids: ::Array[String]?
+
+            attr_accessor api_key_ids: ::Array[String]?
+
+            attr_accessor claude_tag_categories: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_claude_tag_category]?
+
+            attr_accessor claude_tag_user_ids: ::Array[String]?
+
+            attr_accessor context_windows: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_context_window]?
+
+            attr_accessor deployment_ids: ::Array[String]?
+
+            attr_accessor ending_at: Time?
+
+            attr_accessor environment_ids: ::Array[String]?
+
+            attr_reader exclude_deleted_users: bool?
+
+            def exclude_deleted_users=: (bool) -> bool
+
+            attr_accessor group_by: ::Array[Anthropic::Models::Beta::Organization::Analytics::beta_analytics_usage_group_by]?
+
+            attr_accessor inference_geos: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_inference_geo_filter]?
+
+            attr_reader limit: Integer?
+
+            def limit=: (Integer) -> Integer
+
+            attr_accessor models: ::Array[String]?
+
+            attr_reader order: Anthropic::Models::Beta::Organization::beta_analytics_usage_cost_sort_order?
+
+            def order=: (
+              Anthropic::Models::Beta::Organization::beta_analytics_usage_cost_sort_order
+            ) -> Anthropic::Models::Beta::Organization::beta_analytics_usage_cost_sort_order
+
+            attr_reader order_by: Anthropic::Models::Beta::Organization::Analytics::beta_analytics_usage_order_by?
+
+            def order_by=: (
+              Anthropic::Models::Beta::Organization::Analytics::beta_analytics_usage_order_by
+            ) -> Anthropic::Models::Beta::Organization::Analytics::beta_analytics_usage_order_by
+
+            attr_accessor page: String?
+
+            attr_accessor products: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_usage_cost_product_filter]?
+
+            attr_accessor rbac_group_ids: ::Array[String]?
+
+            attr_accessor service_tiers: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_service_tier]?
+
+            attr_accessor session_ids: ::Array[String]?
+
+            attr_accessor slack_channel_ids: ::Array[String]?
+
+            attr_accessor speeds: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_speed]?
+
+            attr_accessor time_bucket_width: Anthropic::Models::Beta::Organization::beta_analytics_time_bucket_width?
+
+            attr_accessor user_profile_ids: ::Array[String]?
+
+            attr_accessor workspace_ids: ::Array[String]?
+
+            attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+            def betas=: (
+              ::Array[Anthropic::Models::anthropic_beta]
+            ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+            def initialize: (
+              starting_at: Time,
+              ?actor_ids: ::Array[String]?,
+              ?actor_types: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_actor_type]?,
+              ?agent_ids: ::Array[String]?,
+              ?api_key_ids: ::Array[String]?,
+              ?claude_tag_categories: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_claude_tag_category]?,
+              ?claude_tag_user_ids: ::Array[String]?,
+              ?context_windows: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_context_window]?,
+              ?deployment_ids: ::Array[String]?,
+              ?ending_at: Time?,
+              ?environment_ids: ::Array[String]?,
+              ?exclude_deleted_users: bool,
+              ?group_by: ::Array[Anthropic::Models::Beta::Organization::Analytics::beta_analytics_usage_group_by]?,
+              ?inference_geos: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_inference_geo_filter]?,
+              ?limit: Integer,
+              ?models: ::Array[String]?,
+              ?order: Anthropic::Models::Beta::Organization::beta_analytics_usage_cost_sort_order,
+              ?order_by: Anthropic::Models::Beta::Organization::Analytics::beta_analytics_usage_order_by,
+              ?page: String?,
+              ?products: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_usage_cost_product_filter]?,
+              ?rbac_group_ids: ::Array[String]?,
+              ?service_tiers: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_service_tier]?,
+              ?session_ids: ::Array[String]?,
+              ?slack_channel_ids: ::Array[String]?,
+              ?speeds: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_speed]?,
+              ?time_bucket_width: Anthropic::Models::Beta::Organization::beta_analytics_time_bucket_width?,
+              ?user_profile_ids: ::Array[String]?,
+              ?workspace_ids: ::Array[String]?,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> void
+
+            def to_hash: -> {
+              starting_at: Time,
+              actor_ids: ::Array[String]?,
+              actor_types: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_actor_type]?,
+              agent_ids: ::Array[String]?,
+              api_key_ids: ::Array[String]?,
+              claude_tag_categories: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_claude_tag_category]?,
+              claude_tag_user_ids: ::Array[String]?,
+              context_windows: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_context_window]?,
+              deployment_ids: ::Array[String]?,
+              ending_at: Time?,
+              environment_ids: ::Array[String]?,
+              exclude_deleted_users: bool,
+              group_by: ::Array[Anthropic::Models::Beta::Organization::Analytics::beta_analytics_usage_group_by]?,
+              inference_geos: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_inference_geo_filter]?,
+              limit: Integer,
+              models: ::Array[String]?,
+              order: Anthropic::Models::Beta::Organization::beta_analytics_usage_cost_sort_order,
+              order_by: Anthropic::Models::Beta::Organization::Analytics::beta_analytics_usage_order_by,
+              page: String?,
+              products: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_usage_cost_product_filter]?,
+              rbac_group_ids: ::Array[String]?,
+              service_tiers: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_service_tier]?,
+              session_ids: ::Array[String]?,
+              slack_channel_ids: ::Array[String]?,
+              speeds: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_speed]?,
+              time_bucket_width: Anthropic::Models::Beta::Organization::beta_analytics_time_bucket_width?,
+              user_profile_ids: ::Array[String]?,
+              workspace_ids: ::Array[String]?,
+              betas: ::Array[Anthropic::Models::anthropic_beta],
+              request_options: Anthropic::RequestOptions
+            }
+          end
+        end
+      end
+    end
+  end
+end

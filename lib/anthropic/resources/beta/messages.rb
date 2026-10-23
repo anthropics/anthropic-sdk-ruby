@@ -7,14 +7,59 @@ module Anthropic
         # @return [Anthropic::Resources::Beta::Messages::Batches]
         attr_reader :batches
 
+        # Runs the tool calls of a conversation until the model gives its final reply.
+        #
+        # The runner sends its requests on a message thread, so that each request after the first
+        # carries only the messages that are new. Pass `thread: false` to send the whole history
+        # with every request instead.
+        #
         # @param params [Anthropic::Models::Beta::MessageCreateParams]
+        #
+        # @option params [false, nil] :thread `false` turns the message thread off; `nil` leaves it on.
+        #
+        # @raise [ArgumentError] if `thread` is anything else
         #
         # @return [Anthropic::Helpers::Tools::Runner]
         def tool_runner(params)
           params = params.to_h.transform_keys(&:to_sym)
           warn_thinking_enabled(params)
           max_iterations = params.delete(:max_iterations)
-          Anthropic::Helpers::Tools::Runner.new(@client, params:, max_iterations:)
+          thread = runner_thread(params)
+          Anthropic::Helpers::Tools::Runner.new(@client, params:, max_iterations:, thread:)
+        end
+
+        # Creates a message thread: a conversation that the API keeps between requests, so that
+        # each turn sends only the messages that are new. It sends no request.
+        #
+        # Takes the keywords of {#create} except `thread` and `stream`. `messages` is optional and
+        # seeds the history, which the first turn sends.
+        #
+        # @param params [Hash{Symbol=>Object}]
+        #
+        # @option params [Symbol] :unsupported_request_behavior What a turn does when the API cannot
+        #   serve the request on a thread: `:error` (the default) raises the error, and
+        #   `:continue_unthreaded` sends the turn again, and every later turn, with the whole
+        #   history and no thread.
+        #
+        # @raise [ArgumentError] if `thread` or `stream` is given
+        #
+        # @raise [NotImplementedError] if the client's platform has no message threads
+        #
+        # @return [Anthropic::Helpers::Threads::BetaMessageThread]
+        def thread(params)
+          unless @client.message_threads?
+            raise NotImplementedError.new(
+              "Message threads are not available on this client. Use `#create` with the whole history instead."
+            )
+          end
+
+          params = params.to_h.transform_keys(&:to_sym)
+          unsupported_request_behavior = params.delete(:unsupported_request_behavior) || :error
+          Anthropic::Helpers::Threads::BetaMessageThread.new(
+            @client,
+            params:,
+            unsupported_request_behavior:
+          )
         end
 
         # See {Anthropic::Resources::Beta::Messages#stream_raw} for streaming counterpart.
@@ -31,7 +76,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MessageCreateParams} for more details.
         #
-        # @overload create(max_tokens:, messages:, model:, cache_control: nil, compaction: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+        # @overload create(max_tokens:, messages:, model:, cache_control: nil, compaction: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, thinking: nil, thread: nil, tool_choice: nil, tools: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
         #
         # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
         #
@@ -72,6 +117,8 @@ module Anthropic
         # @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>] Body param: System prompt.
         #
         # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigBetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive] Body param: Configuration for Claude's thinking.
+        #
+        # @param thread [Anthropic::Models::Beta::BetaThreadCreateParams, Anthropic::Models::Beta::BetaThreadContinueParams, nil] Body param: Server-held conversation state (a Thread). `{"type": "create"}` asks
         #
         # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
         #
@@ -148,7 +195,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MessageCreateParams} for more details.
         #
-        # @overload stream_raw(max_tokens:, messages:, model:, cache_control: nil, compaction: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+        # @overload stream_raw(max_tokens:, messages:, model:, cache_control: nil, compaction: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, thinking: nil, thread: nil, tool_choice: nil, tools: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
         #
         # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
         #
@@ -189,6 +236,8 @@ module Anthropic
         # @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>] Body param: System prompt.
         #
         # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigBetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive] Body param: Configuration for Claude's thinking.
+        #
+        # @param thread [Anthropic::Models::Beta::BetaThreadCreateParams, Anthropic::Models::Beta::BetaThreadContinueParams, nil] Body param: Server-held conversation state (a Thread). `{"type": "create"}` asks
         #
         # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
         #
@@ -318,7 +367,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MessageCreateParams} for more details.
         #
-        # @overload stream(max_tokens:, messages:, model:, cache_control: nil, compaction: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+        # @overload stream(max_tokens:, messages:, model:, cache_control: nil, compaction: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, thinking: nil, thread: nil, tool_choice: nil, tools: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
         #
         # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
         #
@@ -360,6 +409,8 @@ module Anthropic
         #
         # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigBetweenTools, Anthropic::Models::Beta::BetaThinkingConfigAdaptive] Body param: Configuration for Claude's thinking.
         #
+        # @param thread [Anthropic::Models::Beta::BetaThreadCreateParams, Anthropic::Models::Beta::BetaThreadContinueParams, nil] Body param: Server-held conversation state (a Thread). `{"type": "create"}` asks
+        #
         # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
         #
         # @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaCodeExecutionTool20250522, Anthropic::Models::Beta::BetaCodeExecutionTool20250825, Anthropic::Models::Beta::BetaCodeExecutionTool20260120, Anthropic::Models::Beta::BetaCodeExecutionTool20260521, Anthropic::Models::Beta::BetaBrowserToolset20260801, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaMemoryTool20250818, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20251124, Anthropic::Models::Beta::BetaComputerToolset20260801, Anthropic::Models::Beta::BetaToolTextEditor20250124, Anthropic::Models::Beta::BetaToolTextEditor20250429, Anthropic::Models::Beta::BetaToolTextEditor20250728, Anthropic::Models::Beta::BetaWebSearchTool20250305, Anthropic::Models::Beta::BetaWebFetchTool20250910, Anthropic::Models::Beta::BetaWebSearchTool20260209, Anthropic::Models::Beta::BetaWebFetchTool20260209, Anthropic::Models::Beta::BetaWebFetchTool20260309, Anthropic::Models::Beta::BetaWebSearchTool20260318, Anthropic::Models::Beta::BetaWebFetchTool20260318, Anthropic::Models::Beta::BetaAdvisorTool20260301, Anthropic::Models::Beta::BetaToolSearchToolBm25_20251119, Anthropic::Models::Beta::BetaToolSearchToolRegex20251119, Anthropic::Models::Beta::BetaMCPToolset>] Body param: Definitions of tools that the model may use.
@@ -380,6 +431,29 @@ module Anthropic
         end
 
         private
+
+        # The message thread of a tool runner, `nil` when the runner sends the whole history with
+        # every request. Removes `thread` from `params`.
+        #
+        # @param params [Hash{Symbol=>Object}]
+        #
+        # @return [Anthropic::Helpers::Threads::BetaMessageThread, nil]
+        def runner_thread(params)
+          thread = params.delete(:thread)
+          unless thread.nil? || thread == false
+            raise ArgumentError.new(
+              "`thread` on a tool runner can only be `false`, got #{thread.inspect}. " \
+              "The runner sets `thread` for each request itself."
+            )
+          end
+          return nil if thread == false || !@client.message_threads?
+
+          Anthropic::Helpers::Threads::BetaMessageThread.new(
+            @client,
+            params: {},
+            unsupported_request_behavior: :continue_unthreaded
+          )
+        end
 
         def warn_thinking_enabled(parsed)
           if Anthropic::Resources::Messages::MODELS_TO_WARN_WITH_THINKING_ENABLED.include?(parsed[:model]) &&

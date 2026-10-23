@@ -6,7 +6,8 @@ module Anthropic
       module Organization
         class BetaPluginContentScan < Anthropic::Internal::Type::BaseModel
           # @!attribute assessment
-          #   The scan's verdict; set only when `status` is `completed`.
+          #   The scan's verdict; set only when `status` is `completed`. A `warn` can mean a
+          #   `fail` that was allowed in claude.ai.
           #
           #   @return [Symbol, Anthropic::Models::Beta::Organization::BetaPluginContentScan::Assessment, nil]
           required :assessment,
@@ -24,7 +25,9 @@ module Anthropic
 
           # @!attribute status
           #   `processing` while a scan runs, `completed` when it ran to completion, `errored`
-          #   when it could not run or its outcome cannot be read.
+          #   when it could not run. Once a scan of the version has completed, `content_scan`
+          #   describes the newest completed scan, even while a later scan runs. While the
+          #   scan outcome cannot be read, `status` is `errored` instead.
           #
           #   @return [Symbol, Anthropic::Models::Beta::Organization::BetaPluginContentScan::Status]
           required :status, enum: -> { Anthropic::Beta::Organization::BetaPluginContentScan::Status }
@@ -33,13 +36,14 @@ module Anthropic
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Organization::BetaPluginContentScan} for more details.
           #
-          #   @param assessment [Symbol, Anthropic::Models::Beta::Organization::BetaPluginContentScan::Assessment, nil] The scan's verdict; set only when `status` is `completed`.
+          #   @param assessment [Symbol, Anthropic::Models::Beta::Organization::BetaPluginContentScan::Assessment, nil] The scan's verdict; set only when `status` is `completed`. A `warn` can mean a `
           #
           #   @param reason [String, nil] The primary mechanism behind a `warn` or `fail`, such as `credential-exposure` o
           #
           #   @param status [Symbol, Anthropic::Models::Beta::Organization::BetaPluginContentScan::Status] `processing` while a scan runs, `completed` when it ran to completion, `errored`
 
-          # The scan's verdict; set only when `status` is `completed`.
+          # The scan's verdict; set only when `status` is `completed`. A `warn` can mean a
+          # `fail` that was allowed in claude.ai.
           #
           # @see Anthropic::Models::Beta::Organization::BetaPluginContentScan#assessment
           module Assessment
@@ -55,7 +59,9 @@ module Anthropic
           end
 
           # `processing` while a scan runs, `completed` when it ran to completion, `errored`
-          # when it could not run or its outcome cannot be read.
+          # when it could not run. Once a scan of the version has completed, `content_scan`
+          # describes the newest completed scan, even while a later scan runs. While the
+          # scan outcome cannot be read, `status` is `errored` instead.
           #
           # @see Anthropic::Models::Beta::Organization::BetaPluginContentScan#status
           module Status

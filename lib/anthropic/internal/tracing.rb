@@ -281,6 +281,8 @@ module Anthropic
         ORGANIZATION_ANALYTICS_PLUGINS_LIST = "anthropic.organization.analytics.plugins.list"
         ORGANIZATION_ANALYTICS_SKILLS_LIST = "anthropic.organization.analytics.skills.list"
         ORGANIZATION_ANALYTICS_ARTIFACTS_LIST = "anthropic.organization.analytics.artifacts.list"
+        ORGANIZATION_ANALYTICS_USAGE_LIST = "anthropic.organization.analytics.usage.list"
+        ORGANIZATION_ANALYTICS_COST_LIST = "anthropic.organization.analytics.cost.list"
         ORGANIZATION_ANALYTICS_USAGE_REPORT_LIST = "anthropic.organization.analytics.usage_report.list"
         ORGANIZATION_ANALYTICS_USER_USAGE_REPORT_LIST = "anthropic.organization.analytics.user_usage_report.list"
         ORGANIZATION_ANALYTICS_COST_REPORT_LIST = "anthropic.organization.analytics.cost_report.list"
