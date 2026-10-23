@@ -74,6 +74,12 @@ class Anthropic::Test::GoogleCloudClientLiveTest < Minitest::Test
     assert_equal(client.workspace_id, workspace.id)
   end
 
+  def test_live_user_profiles_route
+    skip_unless_live
+    client = make_client
+    assert_kind_of(Anthropic::Internal::PageCursor, client.user_profiles.list(limit: 1))
+  end
+
   def test_live_managed_agents_routes
     skip_unless_live
     client = make_client

@@ -519,51 +519,86 @@ class Anthropic::Test::GoogleCloudClientTest < Minitest::Test
     assert_not_requested(:any, /./)
   end
 
-  def test_user_profile_routes_raise_before_sending
-    no_workspace = Anthropic::GoogleCloudClient.new(
-      project: "test-proj", location: "us-central1", google_credentials: fake_credentials
-    )
+  def test_user_profile_routes_use_organization_base
+    url = "#{organization_base_url}/v1/user_profiles"
+    stub_request(:any, /./).to_return_json(status: 200, body: {})
 
-    [make_client, make_client(base_url: "http://localhost"), no_workspace].each do |client|
-      # Built directly: the routes are refused however the resource is reached.
-      profiles = Anthropic::Resources::UserProfiles.new(client: client)
-      beta_profiles = client.beta.user_profiles
-      [
-        -> { profiles.create },
-        -> { profiles.retrieve("uprof_test") },
-        -> { profiles.update("uprof_test") },
-        -> { profiles.list },
-        -> { profiles.delete("uprof_test") },
-        -> { profiles.action_urls.create("uprof_test", action: {type: :enroll_end_user}) },
-        -> { beta_profiles.create },
-        -> { beta_profiles.retrieve("uprof_test") },
-        -> { beta_profiles.update("uprof_test") },
-        -> { beta_profiles.list },
-        -> { beta_profiles.delete("uprof_test") },
-        -> { beta_profiles.create_enrollment_url("uprof_test") },
-        -> { beta_profiles.action_urls.create("uprof_test", action: {type: :enroll_end_user}) }
-      ].each do |call|
-        err = assert_raises(NotImplementedError, &call)
-        assert_equal("User profiles are not supported on the Google Cloud gateway.", err.message)
+    client = make_client
+    profiles = client.user_profiles
+    beta_profiles = client.beta.user_profiles
+    action = {type: :enroll_end_user}
+    calls = [
+      [:post, url, -> { profiles.create }],
+      [:get, "#{url}/uprof_test", -> { profiles.retrieve("uprof_test") }],
+      [:post, "#{url}/uprof_test", -> { profiles.update("uprof_test") }],
+      [:get, url, -> { profiles.list }],
+      [:delete, "#{url}/uprof_test", -> { profiles.delete("uprof_test") }],
+      [:post, "#{url}/uprof_test/action_urls", -> { profiles.action_urls.create("uprof_test", action: action) }],
+      [:post, url, -> { beta_profiles.create }],
+      [:get, "#{url}/uprof_test", -> { beta_profiles.retrieve("uprof_test") }],
+      [:post, "#{url}/uprof_test", -> { beta_profiles.update("uprof_test") }],
+      [:get, url, -> { beta_profiles.list }],
+      [:delete, "#{url}/uprof_test", -> { beta_profiles.delete("uprof_test") }],
+      [:post, "#{url}/uprof_test/enrollment_url", -> { beta_profiles.create_enrollment_url("uprof_test") }],
+      [:post, "#{url}/uprof_test/action_urls", -> { beta_profiles.action_urls.create("uprof_test", action: action) }]
+    ]
+    calls.each { _1.last.call }
+
+    assert_requested(:any, /./, times: calls.length)
+    calls.map { _1.first(2) }.tally.each do |(method, requested_url), times|
+      assert_requested(method, requested_url, times: times) do |req|
+        assert_equal("Bearer gcp-token", req.headers["Authorization"])
+        assert_nil(req.headers["Anthropic-Workspace-Id"])
       end
     end
+  end
 
-    assert_not_requested(:any, /./)
+  def test_user_profile_routes_need_no_workspace_id
+    url = "#{organization_base_url}/v1/user_profiles"
+    stub_request(:get, url).to_return_json(status: 200, body: {data: []})
+    stub_request(:get, "#{url}/uprof_test").to_return_json(status: 200, body: {})
+
+    client = Anthropic::GoogleCloudClient.new(
+      project: "test-proj", location: "us-central1", google_credentials: fake_credentials
+    )
+    client.user_profiles.list
+    client.beta.user_profiles.retrieve("uprof_test")
+
+    assert_requested(:any, /./, times: 2)
+    assert_requested(:get, url) do |req|
+      assert_equal("Bearer gcp-token", req.headers["Authorization"])
+    end
+    assert_requested(:get, "#{url}/uprof_test")
+  end
+
+  def test_path_sharing_the_user_profiles_prefix_keeps_workspace_base
+    url = "#{derived_base_url}/v1/user_profilesX"
+    stub_request(:get, url).to_return_json(status: 200, body: {})
+
+    make_client.request(method: :get, path: "v1/user_profilesX")
+
+    assert_requested(:any, /./, times: 1)
+    assert_requested(:get, url) do |req|
+      assert_equal("Bearer gcp-token", req.headers["Authorization"])
+    end
   end
 
   def test_explicit_base_url_takes_every_route
     stub_request(:get, "http://localhost/v1/organizations/workspaces")
       .to_return_json(status: 200, body: {data: [], has_more: false})
+    stub_request(:get, "http://localhost/v1/user_profiles").to_return_json(status: 200, body: {data: []})
     stub_request(:post, "http://localhost/v1/messages").to_return_json(status: 200, body: {})
 
     client = make_client(base_url: "http://localhost")
     client.beta.organization.workspaces.list
+    client.user_profiles.list
     client.messages.create(max_tokens: 1, messages: [{content: "hi", role: :user}], model: :m)
 
-    assert_requested(:any, /./, times: 2)
+    assert_requested(:any, /./, times: 3)
     assert_requested(:get, "http://localhost/v1/organizations/workspaces") do |req|
       assert_equal("Bearer gcp-token", req.headers["Authorization"])
     end
+    assert_requested(:get, "http://localhost/v1/user_profiles")
     assert_requested(:post, "http://localhost/v1/messages")
   end
 
@@ -743,23 +778,8 @@ class Anthropic::Test::GoogleCloudClientTest < Minitest::Test
     assert_kind_of(Anthropic::Resources::Skills, make_client.skills)
   end
 
-  def test_user_profiles_raises
-    err = assert_raises(NotImplementedError) { make_client.user_profiles }
-    assert_equal("User profiles are not supported on the Google Cloud gateway.", err.message)
-  end
-
-  def test_beta_user_profiles_raise_before_sending
-    profiles = make_client.beta.user_profiles
-    [
-      -> { profiles.create },
-      -> { profiles.retrieve("uprof_test") },
-      -> { profiles.list },
-      -> { profiles.create_enrollment_url("uprof_test") },
-      -> { profiles.action_urls.create("uprof_test", action: {type: :enroll_end_user}) }
-    ].each do |call|
-      err = assert_raises(NotImplementedError, &call)
-      assert_equal("User profiles are not supported on the Google Cloud gateway.", err.message)
-    end
+  def test_user_profiles_resource_available
+    assert_kind_of(Anthropic::Resources::UserProfiles, make_client.user_profiles)
   end
 
   # ---------------------------------------------------------------------------

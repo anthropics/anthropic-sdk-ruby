@@ -2,6 +2,11 @@
 
 ## [2.2.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v2.2.0...v2.2.1) (2026-10-23)
 
+### Features
+
+* **google-cloud:** add user profiles and send them to the organization endpoint; `user_profiles` calls used to raise `NotImplementedError`
+
+
 ### Bug Fixes
 
 * **bedrock:** `BedrockClient` with an API key takes its region from `AWS_REGION`, then `AWS_DEFAULT_REGION`, when `aws_region` is not passed
