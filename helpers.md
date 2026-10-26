@@ -600,7 +600,7 @@ A message thread keeps the conversation on the server, so each request sends onl
 
 ```ruby
 thread = client.beta.messages.thread(
-  model: "claude-sonnet-5",
+  model: "claude-sonnet-5-5",
   max_tokens: 1024,
   system_: "You are a concise travel guide."
 )

@@ -9,7 +9,7 @@ require_relative "../lib/anthropic"
 # to the API directly.
 client = Anthropic::Client.new
 served = client.beta.messages.create(
-  model: :"claude-fable-5",
+  model: :"claude-fable-5-1",
   max_tokens: 1024,
   messages: [{role: :user, content: "Some prompt that triggers a refusal"}],
   fallbacks: [{model: "claude-opus-4-8"}],
@@ -28,7 +28,7 @@ state = Anthropic::BetaFallbackState.new # pins follow-ups to the model that acc
 # fallback's events onto the open stream — one continuous message, with a
 # `fallback` content block marking the model boundary.
 stream = fallback_client.beta.messages.stream(
-  model: :"claude-fable-5",
+  model: :"claude-fable-5-1",
   max_tokens: 1024,
   messages: [{role: :user, content: "Some prompt that triggers a refusal"}],
   request_options: {fallback_state: state}
@@ -50,7 +50,7 @@ puts("\nstreaming, served by: #{stream.accumulated_message.model}")
 # 3. Non-streaming: same middleware, the retry just happens before you get
 # the message back.
 message = fallback_client.beta.messages.create(
-  model: :"claude-fable-5",
+  model: :"claude-fable-5-1",
   max_tokens: 1024,
   messages: [{role: :user, content: "Some prompt that triggers a refusal"}],
   request_options: {fallback_state: state} # reusing the state keeps the conversation pinned

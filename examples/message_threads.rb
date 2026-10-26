@@ -11,7 +11,7 @@ anthropic = Anthropic::Client.new
 # messages that are new.
 thread = anthropic.beta.messages.thread(
   max_tokens: 1024,
-  model: :"claude-sonnet-5",
+  model: :"claude-sonnet-5-5",
   system_: "You are a concise travel guide."
 )
 
