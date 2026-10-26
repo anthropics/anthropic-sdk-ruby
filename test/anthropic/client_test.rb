@@ -755,6 +755,36 @@ class AnthropicTest < Minitest::Test
     assert_nil(err.type)
   end
 
+  def test_status_error_type_field_nil_when_error_is_not_a_hash
+    anthropic =
+      Anthropic::Client.new(base_url: "http://localhost", api_key: "my-anthropic-api-key", max_retries: 0)
+    statuses = {403 => Anthropic::Errors::PermissionDeniedError, 502 => Anthropic::Errors::InternalServerError}
+    bodies = [
+      {error: "Bad gateway"},
+      {error: ["Bad gateway"]},
+      {error: nil},
+      "Bad gateway",
+      [{error: {code: 403, message: "Permission denied on resource", status: "PERMISSION_DENIED"}}]
+    ]
+
+    statuses.to_a.product(bodies).each do |(status, error_class), body|
+      stub_request(:post, "http://localhost/v1/messages")
+        .to_return_json(status: status, body: JSON.generate(body))
+
+      err = assert_raises(error_class, "#{status} #{body}") do
+        anthropic.messages.create(
+          max_tokens: 1024,
+          messages: [{content: "Hello", role: :user}],
+          model: :"claude-opus-4-6"
+        )
+      end
+
+      assert_nil(err.type)
+      assert_equal(status, err.status)
+      assert_equal(body, err.body)
+    end
+  end
+
   def test_status_error_request_id_and_workspace_id
     stub_request(:post, "http://localhost/v1/messages")
       .to_return_json(

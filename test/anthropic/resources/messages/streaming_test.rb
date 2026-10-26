@@ -817,4 +817,19 @@ class Anthropic::Test::Resources::Messages::StreamingTest < Minitest::Test
 
     assert_equal(:overloaded_error, err.type)
   end
+
+  def test_streaming_error_event_type_nil_when_error_is_not_a_hash
+    stub_streaming_response(<<~SSE)
+      event: error
+      data: {"error":"Bad gateway"}
+
+    SSE
+
+    err = assert_raises(Anthropic::Errors::APIStatusError) do
+      @client.messages.stream(**basic_params).until_done
+    end
+
+    assert_nil(err.type)
+    assert_equal({error: "Bad gateway"}, err.body)
+  end
 end

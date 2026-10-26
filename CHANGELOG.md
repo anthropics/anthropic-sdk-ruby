@@ -7,6 +7,11 @@
 * **api:** add user_profile_id to External Keys and Workspaces
 
 
+### Bug Fixes
+
+* **client:** raise the typed API error, not `TypeError`, when the `error` in an error response is not a hash
+
+
 ### Chores
 
 * **ci:** remove unused build upload steps

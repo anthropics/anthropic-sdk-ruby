@@ -525,8 +525,7 @@ module Anthropic
         # Whether the turn should be sent again because the API rejected its `thread` in a way the
         # thread has now adjusted for.
         def recovers_from?(error)
-          body = error.body
-          code = body.is_a?(Hash) ? body.dig(:error, :details, :error_code) : nil
+          code = Anthropic::Internal::Util.dig(error.body, [:error, :details, :error_code])
           unsupported = code == UNSUPPORTED_REQUEST_ERROR_CODE
           not_found = code == NOT_FOUND_ERROR_CODE
           # The API may be unable to store a conversation whose new thread it does not hold either.

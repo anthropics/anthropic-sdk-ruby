@@ -516,6 +516,14 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
     assert_equal(user("b"), thread.messages.last)
   end
 
+  def test_error_that_is_not_a_hash_is_raised
+    serve({**json({error: "Bad gateway"}), status: 502})
+    thread = new_thread
+
+    assert_raises(Anthropic::Errors::InternalServerError) { thread.send_message(user("a")) }
+    assert_equal(1, @requests.length)
+  end
+
   def test_failed_replay_then_create
     serve(reply("msg_1", text: "one"), api_error(404, code: "thread_not_found"), api_error(500, type: "api_error"), reply("msg_2"))
     thread = new_thread

@@ -156,7 +156,7 @@ module Anthropic
       #
       # @return [self]
       def self.for(url:, status:, headers:, body:, request:, response:, message: nil)
-        error_type = body.dig(:error, :type) if body.is_a?(Hash)
+        error_type = Anthropic::Internal::Util.dig(body, [:error, :type])
         error_type = error_type.to_sym if error_type.is_a?(String)
 
         kwargs =
