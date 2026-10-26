@@ -6,9 +6,9 @@ module Anthropic
       module Organization
         class BetaAWSExternalKeyConfig < Anthropic::Internal::Type::BaseModel
           # @!attribute kms_arn
-          #   Full ARN of the AWS KMS key. On Claude Platform on AWS the key must be a
-          #   single-Region key in your organization's own AWS account; cross-account keys,
-          #   multi-Region keys, and alias ARNs are rejected.
+          #   Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected,
+          #   and your organization's own key must be a single-Region key in your
+          #   organization's AWS account.
           #
           #   @return [String]
           required :kms_arn, String
@@ -27,9 +27,7 @@ module Anthropic
           # @!attribute role_arn
           #   @deprecated
           #
-          #   IAM role ARN. Deprecated — Anthropic reaches the KMS key through its own
-          #   intermediate role (or, on Claude Platform on AWS, with credentials AWS issues
-          #   for the Workspace); this field is ignored.
+          #   IAM role ARN. Deprecated; this field is ignored.
           #
           #   @return [String, nil]
           optional :role_arn, String, nil?: true
@@ -39,11 +37,11 @@ module Anthropic
           #   {Anthropic::Models::Beta::Organization::BetaAWSExternalKeyConfig} for more
           #   details.
           #
-          #   @param kms_arn [String] Full ARN of the AWS KMS key. On Claude Platform on AWS the key must be a single-
+          #   @param kms_arn [String] Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected,
           #
           #   @param region [String, nil] AWS region. Derived from `kms_arn` if omitted.
           #
-          #   @param role_arn [String, nil] IAM role ARN. Deprecated — Anthropic reaches the KMS key through its own interme
+          #   @param role_arn [String, nil] IAM role ARN. Deprecated; this field is ignored.
           #
           #   @param type [Symbol, :aws]
         end

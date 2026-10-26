@@ -17,6 +17,7 @@ module Anthropic
               display_name: T.nilable(String),
               geo:
                 Anthropic::Beta::Organization::ExternalKeyCreateParams::Geo::OrSymbol,
+              user_profile_id: T.nilable(String),
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(Anthropic::Beta::Organization::BetaExternalKey)
           end
@@ -27,6 +28,11 @@ module Anthropic
             display_name: nil,
             # Data residency geo. Only `us` is supported.
             geo: nil,
+            # ID of a user profile to bind the key to. Omit this field for a key that isn't
+            # bound to a user profile. Such a key can be attached to a Workspace whatever its
+            # user profile. The binding cannot be changed later. A key bound to a user profile
+            # can only be attached to a Workspace that has the same user profile.
+            user_profile_id: nil,
             request_options: {}
           )
           end

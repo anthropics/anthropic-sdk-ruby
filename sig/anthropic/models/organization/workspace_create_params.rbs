@@ -7,7 +7,8 @@ module Anthropic
           data_residency: Anthropic::Organization::DataResidencyCreateConfig?,
           display_color: String?,
           external_key_id: String?,
-          tags: ::Hash[Symbol, String]?
+          tags: ::Hash[Symbol, String]?,
+          user_profile_id: String?
         }
         & Anthropic::Internal::Type::request_parameters
 
@@ -25,12 +26,15 @@ module Anthropic
 
         attr_accessor tags: ::Hash[Symbol, String]?
 
+        attr_accessor user_profile_id: String?
+
         def initialize: (
           name: String,
           ?data_residency: Anthropic::Organization::DataResidencyCreateConfig?,
           ?display_color: String?,
           ?external_key_id: String?,
           ?tags: ::Hash[Symbol, String]?,
+          ?user_profile_id: String?,
           ?request_options: Anthropic::request_opts
         ) -> void
 
@@ -40,6 +44,7 @@ module Anthropic
           display_color: String?,
           external_key_id: String?,
           tags: ::Hash[Symbol, String]?,
+          user_profile_id: String?,
           request_options: Anthropic::RequestOptions
         }
       end

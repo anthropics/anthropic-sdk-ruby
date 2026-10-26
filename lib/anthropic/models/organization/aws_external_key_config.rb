@@ -5,9 +5,9 @@ module Anthropic
     module Organization
       class AWSExternalKeyConfig < Anthropic::Internal::Type::BaseModel
         # @!attribute kms_arn
-        #   Full ARN of the AWS KMS key. On Claude Platform on AWS the key must be a
-        #   single-Region key in your organization's own AWS account; cross-account keys,
-        #   multi-Region keys, and alias ARNs are rejected.
+        #   Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected,
+        #   and your organization's own key must be a single-Region key in your
+        #   organization's AWS account.
         #
         #   @return [String]
         required :kms_arn, String
@@ -27,7 +27,7 @@ module Anthropic
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Organization::AWSExternalKeyConfig} for more details.
         #
-        #   @param kms_arn [String] Full ARN of the AWS KMS key. On Claude Platform on AWS the key must be a single-
+        #   @param kms_arn [String] Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected,
         #
         #   @param region [String, nil] AWS region. Derived from `kms_arn` if omitted.
         #

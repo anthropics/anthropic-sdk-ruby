@@ -28,12 +28,27 @@ module Anthropic
           #   @return [Symbol, Anthropic::Models::Beta::Organization::ExternalKeyCreateParams::Geo, nil]
           optional :geo, enum: -> { Anthropic::Beta::Organization::ExternalKeyCreateParams::Geo }
 
-          # @!method initialize(provider_config:, display_name: nil, geo: nil, request_options: {})
+          # @!attribute user_profile_id
+          #   ID of a user profile to bind the key to. Omit this field for a key that isn't
+          #   bound to a user profile. Such a key can be attached to a Workspace whatever its
+          #   user profile. The binding cannot be changed later. A key bound to a user profile
+          #   can only be attached to a Workspace that has the same user profile.
+          #
+          #   @return [String, nil]
+          optional :user_profile_id, String, nil?: true
+
+          # @!method initialize(provider_config:, display_name: nil, geo: nil, user_profile_id: nil, request_options: {})
+          #   Some parameter documentations has been truncated, see
+          #   {Anthropic::Models::Beta::Organization::ExternalKeyCreateParams} for more
+          #   details.
+          #
           #   @param provider_config [Anthropic::Models::Beta::Organization::BetaAWSExternalKeyConfig, Anthropic::Models::Beta::Organization::BetaGCPExternalKeyConfig, Anthropic::Models::Beta::Organization::BetaAzureExternalKeyConfigParam] KMS provider identity and auth coordinates.
           #
           #   @param display_name [String, nil] Human-friendly display name.
           #
           #   @param geo [Symbol, Anthropic::Models::Beta::Organization::ExternalKeyCreateParams::Geo] Data residency geo. Only `us` is supported.
+          #
+          #   @param user_profile_id [String, nil] ID of a user profile to bind the key to. Omit this field for a key that isn't bo
           #
           #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 
@@ -75,11 +90,11 @@ module Anthropic
             #
             # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
             #
-            #   @option args [String] :kms_arn Full ARN of the AWS KMS key. On Claude Platform on AWS the key must be a single-
+            #   @option args [String] :kms_arn Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected,
             #
             #   @option args [String, nil] :region AWS region. Derived from `kms_arn` if omitted.
             #
-            #   @option args [String, nil] :role_arn IAM role ARN. Deprecated — Anthropic reaches the KMS key through its own interme
+            #   @option args [String, nil] :role_arn IAM role ARN. Deprecated; this field is ignored.
             #
             #   @option args [String] :key_name Full resource name of the Cloud KMS key.
             #

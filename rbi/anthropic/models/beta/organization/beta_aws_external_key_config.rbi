@@ -13,9 +13,9 @@ module Anthropic
               )
             end
 
-          # Full ARN of the AWS KMS key. On Claude Platform on AWS the key must be a
-          # single-Region key in your organization's own AWS account; cross-account keys,
-          # multi-Region keys, and alias ARNs are rejected.
+          # Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected,
+          # and your organization's own key must be a single-Region key in your
+          # organization's AWS account.
           sig { returns(String) }
           attr_accessor :kms_arn
 
@@ -26,9 +26,7 @@ module Anthropic
           sig { returns(T.nilable(String)) }
           attr_accessor :region
 
-          # IAM role ARN. Deprecated — Anthropic reaches the KMS key through its own
-          # intermediate role (or, on Claude Platform on AWS, with credentials AWS issues
-          # for the Workspace); this field is ignored.
+          # IAM role ARN. Deprecated; this field is ignored.
           sig { returns(T.nilable(String)) }
           attr_accessor :role_arn
 
@@ -41,15 +39,13 @@ module Anthropic
             ).returns(T.attached_class)
           end
           def self.new(
-            # Full ARN of the AWS KMS key. On Claude Platform on AWS the key must be a
-            # single-Region key in your organization's own AWS account; cross-account keys,
-            # multi-Region keys, and alias ARNs are rejected.
+            # Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected,
+            # and your organization's own key must be a single-Region key in your
+            # organization's AWS account.
             kms_arn:,
             # AWS region. Derived from `kms_arn` if omitted.
             region: nil,
-            # IAM role ARN. Deprecated — Anthropic reaches the KMS key through its own
-            # intermediate role (or, on Claude Platform on AWS, with credentials AWS issues
-            # for the Workspace); this field is ignored.
+            # IAM role ARN. Deprecated; this field is ignored.
             role_arn: nil,
             type: :aws
           )

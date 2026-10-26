@@ -93,7 +93,7 @@ module Anthropic
           #
           # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
           #
-          #   @option args [String] :kms_arn Full ARN of the AWS KMS key. On Claude Platform on AWS the key must be a single-
+          #   @option args [String] :kms_arn Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected,
           #
           #   @option args [String, nil] :region AWS region. Derived from `kms_arn` if omitted.
           #

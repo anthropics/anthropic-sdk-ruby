@@ -6,8 +6,8 @@ module Anthropic
       # @see Anthropic::Resources::Organization::ExternalKeys#create
       class ExternalKey < Anthropic::Internal::Type::BaseModel
         # @!attribute id
-        #   Identifier of the external key config. A tagged ID prefixed `ekey_`, or — for
-        #   organizations on the Claude Platform on AWS — the AWS KMS key ARN.
+        #   Identifier of the external key config: a tagged ID prefixed `ekey_`, or, on
+        #   Claude Platform on AWS, an AWS KMS key's ARN.
         #
         #   @return [String]
         required :id, String
@@ -55,7 +55,16 @@ module Anthropic
         #   @return [Time]
         required :updated_at, Time
 
-        # @!method initialize(id:, attachment:, created_at:, display_name:, geo:, provider_config:, updated_at:, type: :external_key)
+        # @!attribute user_profile_id
+        #   ID of the user profile the key is bound to, or null if the key is not bound to
+        #   one. A key bound to a user profile can only be attached to a Workspace that has
+        #   the same user profile. A key that isn't bound can be attached to a Workspace
+        #   whatever its user profile.
+        #
+        #   @return [String, nil]
+        required :user_profile_id, String, nil?: true
+
+        # @!method initialize(id:, attachment:, created_at:, display_name:, geo:, provider_config:, updated_at:, user_profile_id:, type: :external_key)
         #   CMEK external key config belonging to the caller's organization.
         #
         #   Configs are organization-scoped. Workspaces attach to a config; once any
@@ -65,7 +74,7 @@ module Anthropic
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Organization::ExternalKey} for more details.
         #
-        #   @param id [String] Identifier of the external key config. A tagged ID prefixed `ekey_`, or — for or
+        #   @param id [String] Identifier of the external key config: a tagged ID prefixed `ekey_`, or, on Clau
         #
         #   @param attachment [Anthropic::Models::Organization::ExternalKeyAttachedAttachment, Anthropic::Models::Organization::ExternalKeyUnattachedAttachment] Whether any workspace uses this config to encrypt its data — counting live and a
         #
@@ -78,6 +87,8 @@ module Anthropic
         #   @param provider_config [Anthropic::Models::Organization::AWSExternalKeyConfig, Anthropic::Models::Organization::GCPExternalKeyConfig, Anthropic::Models::Organization::AzureExternalKeyConfig] KMS provider identity and auth coordinates.
         #
         #   @param updated_at [Time]
+        #
+        #   @param user_profile_id [String, nil] ID of the user profile the key is bound to, or null if the key is not bound to o
         #
         #   @param type [Symbol, :external_key]
 
@@ -168,7 +179,7 @@ module Anthropic
           #
           # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
           #
-          #   @option args [String] :kms_arn Full ARN of the AWS KMS key. On Claude Platform on AWS the key must be a single-
+          #   @option args [String] :kms_arn Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected,
           #
           #   @option args [String, nil] :region AWS region. Derived from `kms_arn` if omitted.
           #
