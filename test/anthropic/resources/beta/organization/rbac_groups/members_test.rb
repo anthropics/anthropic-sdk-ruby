@@ -36,7 +36,7 @@ class Anthropic::Test::Resources::Beta::Organization::RBACGroups::MembersTest < 
     response =
       @anthropic.beta.organization.rbac_groups.members.add(
         "rbac_group_id",
-        user_id: "user_01WCz1FkmYMm4gnmykNKUu3Q",
+        user_id: "user_01WxYzAbCdEfGhJkMnPqRsTu",
         request_options: {extra_query: {beta: "true"}}
       )
 

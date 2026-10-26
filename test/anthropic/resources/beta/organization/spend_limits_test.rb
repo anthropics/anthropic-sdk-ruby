@@ -81,7 +81,7 @@ class Anthropic::Test::Resources::Beta::Organization::SpendLimitsTest < Anthropi
     response =
       @anthropic.beta.organization.spend_limits.set(
         amount: "50000",
-        scope: {type: :user, user_id: "user_01WCz1FkmYMm4gnmykNKUu3Q"},
+        scope: {type: :user, user_id: "user_01WxYzAbCdEfGhJkMnPqRsTu"},
         request_options: {extra_query: {beta: "true"}}
       )
 

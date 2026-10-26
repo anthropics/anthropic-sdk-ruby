@@ -80,7 +80,7 @@ class Anthropic::Test::Resources::Beta::Organization::Workspaces::MembersTest < 
     response =
       @anthropic.beta.organization.workspaces.members.add(
         "workspace_id",
-        user_id: "user_01WCz1FkmYMm4gnmykNKUu3Q",
+        user_id: "user_01WxYzAbCdEfGhJkMnPqRsTu",
         workspace_role: :workspace_admin,
         request_options: {extra_query: {beta: "true"}}
       )
