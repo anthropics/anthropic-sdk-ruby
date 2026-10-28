@@ -22,6 +22,7 @@
 
 * add a description to the AnthropicBeta type
 * **examples:** use current model IDs
+* **readme:** point to the docs site for documentation
 
 ## [2.3.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v2.2.0...v2.3.0) (2026-10-23)
 
