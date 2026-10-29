@@ -30,7 +30,7 @@ module Anthropic
     end
     attr_accessor :extra_query
 
-    # Extra headers to send with the request. These are `.merged`’d into any
+    # Extra headers to send with the request. These are `.merge`’d into any
     # `extra_headers` given at the client level.
     sig { returns(T.nilable(T::Hash[String, T.nilable(String)])) }
     attr_accessor :extra_headers

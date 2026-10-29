@@ -116,7 +116,7 @@ This can be installed along side Ruby LSP.
 
 ### Sorbet
 
-[Sorbet](https://sorbet.org) should mostly work out of the box when editing this library directly. However, there are a some caveats due to the colocation of `*.rb` and `*.rbi` files in the same project. These issues should not otherwise manifest when this library is used as a dependency.
+[Sorbet](https://sorbet.org) should mostly work out of the box when editing this library directly. However, there are some caveats due to the colocation of `*.rb` and `*.rbi` files in the same project. These issues should not otherwise manifest when this library is used as a dependency.
 
 1. For go to definition usages, sorbet might get confused and may not always navigate to the correct location.
 

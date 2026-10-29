@@ -35,7 +35,7 @@ module Anthropic
         !data.to_a.empty? && (@req.dig(:query, :before_id) ? !first_id.to_s.empty? : !last_id.to_s.empty?)
       end
 
-      # @raise [Anthropic::HTTP::Error]
+      # @raise [Anthropic::Errors::APIError]
       # @return [self]
       def next_page
         unless next_page?
