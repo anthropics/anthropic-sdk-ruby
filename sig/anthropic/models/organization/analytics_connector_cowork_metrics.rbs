@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module Organization
+      type analytics_connector_cowork_metrics =
+        { distinct_session_connector_used_count: Integer? }
+
+      class AnalyticsConnectorCoworkMetrics < Anthropic::Internal::Type::BaseModel
+        attr_accessor distinct_session_connector_used_count: Integer?
+
+        def initialize: (
+          distinct_session_connector_used_count: Integer?
+        ) -> void
+
+        def to_hash: -> { distinct_session_connector_used_count: Integer? }
+      end
+    end
+  end
+end

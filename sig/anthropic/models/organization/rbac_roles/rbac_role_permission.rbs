@@ -1,0 +1,99 @@
+module Anthropic
+  module Models
+    module Organization
+      class RBACRolePermission = RBACRoles::RBACRolePermission
+
+      module RBACRoles
+        type rbac_role_permission =
+          {
+            action: String,
+            resource: Anthropic::Models::Organization::RBACRoles::RBACRolePermission::resource,
+            type: :rbac_role_permission
+          }
+
+        class RBACRolePermission < Anthropic::Internal::Type::BaseModel
+          attr_accessor action: String
+
+          attr_accessor resource: Anthropic::Models::Organization::RBACRoles::RBACRolePermission::resource
+
+          attr_accessor type: :rbac_role_permission
+
+          def initialize: (
+            action: String,
+            resource: Anthropic::Models::Organization::RBACRoles::RBACRolePermission::resource,
+            ?type: :rbac_role_permission
+          ) -> void
+
+          def to_hash: -> {
+            action: String,
+            resource: Anthropic::Models::Organization::RBACRoles::RBACRolePermission::resource,
+            type: :rbac_role_permission
+          }
+
+          type resource =
+            Anthropic::Organization::RBACRoles::RBACOrganizationPermissionResource
+            | Anthropic::Organization::RBACRoles::RBACConnectorToolPermissionResource
+            | Anthropic::Organization::RBACRoles::RBACConnectorScopePermissionResource
+            | Anthropic::Organization::RBACRoles::RBACConnectorPermissionResource
+            | Anthropic::Organization::RBACRoles::RBACAllConnectorsPermissionResource
+
+          module Resource
+            extend Anthropic::Internal::Type::Union
+
+            type type_ =
+              :organization
+              | :connector_tool
+              | :connector_scope
+              | :connector
+              | :all_connectors
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              ORGANIZATION: :organization
+              CONNECTOR_TOOL: :connector_tool
+              CONNECTOR_SCOPE: :connector_scope
+              CONNECTOR: :connector
+              ALL_CONNECTORS: :all_connectors
+
+              def self?.values: -> ::Array[Anthropic::Models::Organization::RBACRoles::RBACRolePermission::Resource::type_]
+            end
+
+            def self?.variants: -> ::Array[Anthropic::Models::Organization::RBACRoles::RBACRolePermission::resource]
+
+            def self.new:
+              (
+                type: :organization | "organization",
+                organization_id: String
+              ) -> Anthropic::Organization::RBACRoles::RBACOrganizationPermissionResource
+              | (
+                type: :connector_tool | "connector_tool",
+                connector_id: String,
+                tool_name: String
+              ) -> Anthropic::Organization::RBACRoles::RBACConnectorToolPermissionResource
+              | (
+                type: :connector_scope | "connector_scope",
+                connector_id: String,
+                scope: String
+              ) -> Anthropic::Organization::RBACRoles::RBACConnectorScopePermissionResource
+              | (
+                type: :connector | "connector",
+                connector_id: String
+              ) -> Anthropic::Organization::RBACRoles::RBACConnectorPermissionResource
+              | (
+                type: :all_connectors | "all_connectors"
+              ) -> Anthropic::Organization::RBACRoles::RBACAllConnectorsPermissionResource
+              | (
+                type: Anthropic::Models::Organization::RBACRoles::RBACRolePermission::Resource::type_
+                | String,
+                ?organization_id: String,
+                ?connector_id: String,
+                ?tool_name: String,
+                ?scope: String
+              ) -> Anthropic::Models::Organization::RBACRoles::RBACRolePermission::resource
+          end
+        end
+      end
+    end
+  end
+end

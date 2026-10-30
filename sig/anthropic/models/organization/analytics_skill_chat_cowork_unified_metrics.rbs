@@ -1,0 +1,27 @@
+module Anthropic
+  module Models
+    module Organization
+      type analytics_skill_chat_cowork_unified_metrics =
+        {
+          chat: Anthropic::Organization::AnalyticsSkillChatCoworkUnifiedChatMetrics,
+          sessions: Anthropic::Organization::AnalyticsSkillChatCoworkUnifiedSessionsMetrics
+        }
+
+      class AnalyticsSkillChatCoworkUnifiedMetrics < Anthropic::Internal::Type::BaseModel
+        attr_accessor chat: Anthropic::Organization::AnalyticsSkillChatCoworkUnifiedChatMetrics
+
+        attr_accessor sessions: Anthropic::Organization::AnalyticsSkillChatCoworkUnifiedSessionsMetrics
+
+        def initialize: (
+          chat: Anthropic::Organization::AnalyticsSkillChatCoworkUnifiedChatMetrics,
+          sessions: Anthropic::Organization::AnalyticsSkillChatCoworkUnifiedSessionsMetrics
+        ) -> void
+
+        def to_hash: -> {
+          chat: Anthropic::Organization::AnalyticsSkillChatCoworkUnifiedChatMetrics,
+          sessions: Anthropic::Organization::AnalyticsSkillChatCoworkUnifiedSessionsMetrics
+        }
+      end
+    end
+  end
+end

@@ -1,0 +1,13 @@
+module Anthropic
+  module Resources
+    class Organization
+      class SpendLimits
+        attr_reader effective: Anthropic::Resources::Organization::SpendLimits::Effective
+
+        attr_reader increase_requests: Anthropic::Resources::Organization::SpendLimits::IncreaseRequests
+
+        def initialize: (client: Anthropic::Client) -> void
+      end
+    end
+  end
+end

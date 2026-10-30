@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module Organization
+      type spend_limit_user_scope = { type: :user, user_id: String }
+
+      class SpendLimitUserScope < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :user
+
+        attr_accessor user_id: String
+
+        def initialize: (user_id: String, ?type: :user) -> void
+
+        def to_hash: -> { type: :user, user_id: String }
+      end
+    end
+  end
+end

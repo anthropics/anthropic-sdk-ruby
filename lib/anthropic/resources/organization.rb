@@ -30,6 +30,18 @@ module Anthropic
       # @return [Anthropic::Resources::Organization::ComplianceSettings]
       attr_reader :compliance_settings
 
+      # @return [Anthropic::Resources::Organization::Analytics]
+      attr_reader :analytics
+
+      # @return [Anthropic::Resources::Organization::SpendLimits]
+      attr_reader :spend_limits
+
+      # @return [Anthropic::Resources::Organization::RBACGroups]
+      attr_reader :rbac_groups
+
+      # @return [Anthropic::Resources::Organization::RBACRoles]
+      attr_reader :rbac_roles
+
       # Retrieve information about the organization associated with the authenticated
       # API key.
       #
@@ -65,6 +77,10 @@ module Anthropic
         @workspaces = Anthropic::Resources::Organization::Workspaces.new(client: client)
         @rate_limits = Anthropic::Resources::Organization::RateLimits.new(client: client)
         @compliance_settings = Anthropic::Resources::Organization::ComplianceSettings.new(client: client)
+        @analytics = Anthropic::Resources::Organization::Analytics.new(client: client)
+        @spend_limits = Anthropic::Resources::Organization::SpendLimits.new(client: client)
+        @rbac_groups = Anthropic::Resources::Organization::RBACGroups.new(client: client)
+        @rbac_roles = Anthropic::Resources::Organization::RBACRoles.new(client: client)
       end
     end
   end

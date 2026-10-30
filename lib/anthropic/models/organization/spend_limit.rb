@@ -1,0 +1,182 @@
+# frozen_string_literal: true
+
+module Anthropic
+  module Models
+    module Organization
+      class SpendLimit < Anthropic::Internal::Type::BaseModel
+        # @!attribute id
+        #   Unique tagged ID of the spend limit (`spl_...`).
+        #
+        #   @return [String]
+        required :id, String
+
+        # @!attribute amount
+        #   Limit amount as a non-negative integer decimal string in the minor unit of
+        #   `currency` (cents for USD): "50000" is $500.00. `null` means no numeric cap is
+        #   configured at this scope — see the effective report for whether a limit applies.
+        #
+        #   @return [String, nil]
+        required :amount, String, nil?: true
+
+        # @!attribute created_at
+        #   RFC 3339 datetime at which the spend limit was created.
+        #
+        #   @return [Time]
+        required :created_at, Time
+
+        # @!attribute currency
+        #   ISO 4217 code of the organization's billing currency; the unit for `amount`.
+        #
+        #   @return [String]
+        required :currency, String
+
+        # @!attribute is_enabled
+        #   Read-only. `false` when extra usage is switched off for this organization
+        #   (`organization` limit); `amount` is kept and applies again when it's switched
+        #   back on. Always `true` for other limits.
+        #
+        #   @return [Boolean]
+        required :is_enabled, Anthropic::Internal::Type::Boolean
+
+        # @!attribute period
+        #   Length of the window the limit resets over. `amount` caps spend within each
+        #   period.
+        #
+        #   @return [Symbol, Anthropic::Models::Organization::SpendLimitPeriod]
+        required :period, enum: -> { Anthropic::Organization::SpendLimitPeriod }
+
+        # @!attribute scope
+        #   What the limit applies to. A tagged union on `type`; each variant carries the
+        #   identifier for its scope.
+        #
+        #   @return [Anthropic::Models::Organization::SpendLimitUserScope, Anthropic::Models::Organization::SpendLimitSeatTierScope, Anthropic::Models::Organization::SpendLimitRBACGroupScope, Anthropic::Models::Organization::SpendLimitOrganizationServiceScope, Anthropic::Models::Organization::SpendLimitOrganizationScope, Anthropic::Models::Organization::SpendLimitWorkspaceScope, Anthropic::Models::Organization::SpendLimitUsageTierScope]
+        required :scope, union: -> { Anthropic::Organization::SpendLimit::Scope }
+
+        # @!attribute type
+        #   Object type. Always `spend_limit`.
+        #
+        #   @return [Symbol, :spend_limit]
+        required :type, const: :spend_limit
+
+        # @!attribute updated_at
+        #   RFC 3339 datetime at which the spend limit was last modified.
+        #
+        #   @return [Time]
+        required :updated_at, Time
+
+        # @!method initialize(id:, amount:, created_at:, currency:, is_enabled:, period:, scope:, updated_at:, type: :spend_limit)
+        #   A configured spend limit: a cap on metered spend for one scope and period.
+        #
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Organization::SpendLimit} for more details.
+        #
+        #   @param id [String] Unique tagged ID of the spend limit (`spl_...`).
+        #
+        #   @param amount [String, nil] Limit amount as a non-negative integer decimal string in the minor unit of `curr
+        #
+        #   @param created_at [Time] RFC 3339 datetime at which the spend limit was created.
+        #
+        #   @param currency [String] ISO 4217 code of the organization's billing currency; the unit for `amount`.
+        #
+        #   @param is_enabled [Boolean] Read-only. `false` when extra usage is switched off for this organization (`orga
+        #
+        #   @param period [Symbol, Anthropic::Models::Organization::SpendLimitPeriod] Length of the window the limit resets over. `amount` caps spend within each peri
+        #
+        #   @param scope [Anthropic::Models::Organization::SpendLimitUserScope, Anthropic::Models::Organization::SpendLimitSeatTierScope, Anthropic::Models::Organization::SpendLimitRBACGroupScope, Anthropic::Models::Organization::SpendLimitOrganizationServiceScope, Anthropic::Models::Organization::SpendLimitOrganizationScope, Anthropic::Models::Organization::SpendLimitWorkspaceScope, Anthropic::Models::Organization::SpendLimitUsageTierScope] What the limit applies to. A tagged union on `type`; each variant carries the id
+        #
+        #   @param updated_at [Time] RFC 3339 datetime at which the spend limit was last modified.
+        #
+        #   @param type [Symbol, :spend_limit] Object type. Always `spend_limit`.
+
+        # What the limit applies to. A tagged union on `type`; each variant carries the
+        # identifier for its scope.
+        #
+        # @see Anthropic::Models::Organization::SpendLimit#scope
+        module Scope
+          extend Anthropic::Internal::Type::Union
+
+          discriminator :type
+
+          # Scope selecting a single member of the organization.
+          variant :user, -> { Anthropic::Organization::SpendLimitUserScope }
+
+          variant :seat_tier, -> { Anthropic::Organization::SpendLimitSeatTierScope }
+
+          variant :rbac_group, -> { Anthropic::Organization::SpendLimitRBACGroupScope }
+
+          variant :organization_service, -> { Anthropic::Organization::SpendLimitOrganizationServiceScope }
+
+          variant :organization, -> { Anthropic::Organization::SpendLimitOrganizationScope }
+
+          # Scope selecting one workspace of a Claude Console organization.
+          variant :workspace, -> { Anthropic::Organization::SpendLimitWorkspaceScope }
+
+          # Scope of the monthly spend cap Anthropic sets for a Claude Console
+          # organization from its usage tier, or a higher cap Anthropic granted the
+          # organization. Read-only; its `created_at` and `updated_at` are the
+          # organization's creation time, so `amount` can change while `updated_at` stays
+          # the same.
+          variant :usage_tier, -> { Anthropic::Organization::SpendLimitUsageTierScope }
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            USER = :user
+            SEAT_TIER = :seat_tier
+            RBAC_GROUP = :rbac_group
+            ORGANIZATION_SERVICE = :organization_service
+            ORGANIZATION = :organization
+            WORKSPACE = :workspace
+            USAGE_TIER = :usage_tier
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
+          # @!method self.variants
+          #   @return [Array(Anthropic::Models::Organization::SpendLimitUserScope, Anthropic::Models::Organization::SpendLimitSeatTierScope, Anthropic::Models::Organization::SpendLimitRBACGroupScope, Anthropic::Models::Organization::SpendLimitOrganizationServiceScope, Anthropic::Models::Organization::SpendLimitOrganizationScope, Anthropic::Models::Organization::SpendLimitWorkspaceScope, Anthropic::Models::Organization::SpendLimitUsageTierScope)]
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          #
+          # @param type [Symbol, Anthropic::Models::Organization::SpendLimit::Scope::Type, String]
+          #
+          # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+          #
+          #   @option args [String] :user_id Tagged ID of the member the spend limit applies to.
+          #
+          #   @option args [String] :seat_tier
+          #
+          #   @option args [String] :rbac_group_id
+          #
+          #   @option args [String] :service
+          #
+          #   @option args [String] :workspace_id Tagged ID of the workspace the spend limit applies to.
+          #
+          # @raise [ArgumentError]
+          # @return [Anthropic::Models::Organization::SpendLimitUserScope, Anthropic::Models::Organization::SpendLimitSeatTierScope, Anthropic::Models::Organization::SpendLimitRBACGroupScope, Anthropic::Models::Organization::SpendLimitOrganizationServiceScope, Anthropic::Models::Organization::SpendLimitOrganizationScope, Anthropic::Models::Organization::SpendLimitWorkspaceScope, Anthropic::Models::Organization::SpendLimitUsageTierScope]
+          def self.new(type:, **args)
+            case type.to_sym
+            when :user
+              Anthropic::Organization::SpendLimitUserScope.new(**args)
+            when :seat_tier
+              Anthropic::Organization::SpendLimitSeatTierScope.new(**args)
+            when :rbac_group
+              Anthropic::Organization::SpendLimitRBACGroupScope.new(**args)
+            when :organization_service
+              Anthropic::Organization::SpendLimitOrganizationServiceScope.new(**args)
+            when :organization
+              Anthropic::Organization::SpendLimitOrganizationScope.new(**args)
+            when :workspace
+              Anthropic::Organization::SpendLimitWorkspaceScope.new(**args)
+            when :usage_tier
+              Anthropic::Organization::SpendLimitUsageTierScope.new(**args)
+            else
+              raise ArgumentError, "unknown type: #{type}"
+            end
+          end
+        end
+      end
+    end
+  end
+end

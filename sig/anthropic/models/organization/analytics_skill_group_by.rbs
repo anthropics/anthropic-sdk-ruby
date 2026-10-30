@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module Organization
+      type analytics_skill_group_by = :product | :rbac_group_id | :user_id
+
+      module AnalyticsSkillGroupBy
+        extend Anthropic::Internal::Type::Enum
+
+        PRODUCT: :product
+        RBAC_GROUP_ID: :rbac_group_id
+        USER_ID: :user_id
+
+        def self?.values: -> ::Array[Anthropic::Models::Organization::analytics_skill_group_by]
+      end
+    end
+  end
+end

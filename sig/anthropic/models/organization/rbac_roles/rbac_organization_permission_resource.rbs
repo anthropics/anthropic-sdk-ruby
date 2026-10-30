@@ -1,0 +1,23 @@
+module Anthropic
+  module Models
+    module Organization
+      module RBACRoles
+        type rbac_organization_permission_resource =
+          { organization_id: String, type: :organization }
+
+        class RBACOrganizationPermissionResource < Anthropic::Internal::Type::BaseModel
+          attr_accessor organization_id: String
+
+          attr_accessor type: :organization
+
+          def initialize: (
+            organization_id: String,
+            ?type: :organization
+          ) -> void
+
+          def to_hash: -> { organization_id: String, type: :organization }
+        end
+      end
+    end
+  end
+end

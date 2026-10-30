@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module Organization
+      type spend_limit_seat_tier_scope = { seat_tier: String, type: :seat_tier }
+
+      class SpendLimitSeatTierScope < Anthropic::Internal::Type::BaseModel
+        attr_accessor seat_tier: String
+
+        attr_accessor type: :seat_tier
+
+        def initialize: (seat_tier: String, ?type: :seat_tier) -> void
+
+        def to_hash: -> { seat_tier: String, type: :seat_tier }
+      end
+    end
+  end
+end

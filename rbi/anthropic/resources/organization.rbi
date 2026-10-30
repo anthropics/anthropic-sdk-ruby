@@ -30,6 +30,18 @@ module Anthropic
       sig { returns(Anthropic::Resources::Organization::ComplianceSettings) }
       attr_reader :compliance_settings
 
+      sig { returns(Anthropic::Resources::Organization::Analytics) }
+      attr_reader :analytics
+
+      sig { returns(Anthropic::Resources::Organization::SpendLimits) }
+      attr_reader :spend_limits
+
+      sig { returns(Anthropic::Resources::Organization::RBACGroups) }
+      attr_reader :rbac_groups
+
+      sig { returns(Anthropic::Resources::Organization::RBACRoles) }
+      attr_reader :rbac_roles
+
       # Retrieve information about the organization associated with the authenticated
       # API key.
       sig do

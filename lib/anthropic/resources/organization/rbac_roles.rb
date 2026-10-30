@@ -1,0 +1,79 @@
+# frozen_string_literal: true
+
+module Anthropic
+  module Resources
+    class Organization
+      class RBACRoles
+        # @return [Anthropic::Resources::Organization::RBACRoles::Permissions]
+        attr_reader :permissions
+
+        # Retrieve an RBAC Role by ID.
+        #
+        # The RBAC Roles API is available to Claude Enterprise organizations only.
+        #
+        # @overload retrieve(rbac_role_id, request_options: {})
+        #
+        # @param rbac_role_id [String] ID of the RBAC Role.
+        #
+        # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [Anthropic::Models::Organization::RBACRole]
+        #
+        # @see Anthropic::Models::Organization::RBACRoleRetrieveParams
+        def retrieve(rbac_role_id, params = {})
+          @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_RBAC_ROLES_RETRIEVE,
+            span_attributes: {"anthropic.organization.rbac_role.id" => rbac_role_id},
+            span_route: "/v1/organizations/rbac_roles/{rbac_role_id}",
+            method: :get,
+            path: ["v1/organizations/rbac_roles/%1$s", rbac_role_id],
+            model: Anthropic::Organization::RBACRole,
+            options: params[:request_options]
+          )
+        end
+
+        # List RBAC Roles in the organization.
+        #
+        # The RBAC Roles API is available to Claude Enterprise organizations only.
+        #
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Organization::RBACRoleListParams} for more details.
+        #
+        # @overload list(limit: nil, page: nil, request_options: {})
+        #
+        # @param limit [Integer] Number of items to return per page.
+        #
+        # @param page [String, nil] Optionally set to the `next_page` token from the previous response.
+        #
+        # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [Anthropic::Internal::PageCursor<Anthropic::Models::Organization::RBACRole>]
+        #
+        # @see Anthropic::Models::Organization::RBACRoleListParams
+        def list(params = {})
+          parsed, options = Anthropic::Organization::RBACRoleListParams.dump_request(params)
+          query = Anthropic::Internal::Util.encode_query_params(parsed)
+          @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_RBAC_ROLES_LIST,
+            span_route: "/v1/organizations/rbac_roles",
+            span_query: %w[limit page],
+            method: :get,
+            path: "v1/organizations/rbac_roles",
+            query: query,
+            page: Anthropic::Internal::PageCursor,
+            model: Anthropic::Organization::RBACRole,
+            options: options
+          )
+        end
+
+        # @api private
+        #
+        # @param client [Anthropic::Client]
+        def initialize(client:)
+          @client = client
+          @permissions = Anthropic::Resources::Organization::RBACRoles::Permissions.new(client: client)
+        end
+      end
+    end
+  end
+end

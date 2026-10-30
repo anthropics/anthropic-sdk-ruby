@@ -1,0 +1,69 @@
+module Anthropic
+  module Models
+    module Organization
+      module SpendLimits
+        type increase_request_approve_response =
+          {
+            id: String,
+            actor: Anthropic::Models::Organization::SpendLimits::spend_limit_increase_request_actor,
+            created_at: Time,
+            period: Anthropic::Models::Organization::spend_limit_period,
+            resolved_at: Time?,
+            resolved_by: Anthropic::Models::Organization::SpendLimits::spend_limit_increase_request_resolved_by?,
+            spend_limit: Anthropic::Organization::SpendLimit,
+            spend_summary: Anthropic::Organization::SpendSummary?,
+            status: Anthropic::Models::Organization::SpendLimits::spend_limit_increase_request_status,
+            type: :spend_limit_increase_request
+          }
+
+        class IncreaseRequestApproveResponse < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor actor: Anthropic::Models::Organization::SpendLimits::spend_limit_increase_request_actor
+
+          attr_accessor created_at: Time
+
+          attr_accessor period: Anthropic::Models::Organization::spend_limit_period
+
+          attr_accessor resolved_at: Time?
+
+          attr_accessor resolved_by: Anthropic::Models::Organization::SpendLimits::spend_limit_increase_request_resolved_by?
+
+          attr_accessor spend_limit: Anthropic::Organization::SpendLimit
+
+          attr_accessor spend_summary: Anthropic::Organization::SpendSummary?
+
+          attr_accessor status: Anthropic::Models::Organization::SpendLimits::spend_limit_increase_request_status
+
+          attr_accessor type: :spend_limit_increase_request
+
+          def initialize: (
+            id: String,
+            actor: Anthropic::Models::Organization::SpendLimits::spend_limit_increase_request_actor,
+            created_at: Time,
+            period: Anthropic::Models::Organization::spend_limit_period,
+            resolved_at: Time?,
+            resolved_by: Anthropic::Models::Organization::SpendLimits::spend_limit_increase_request_resolved_by?,
+            spend_limit: Anthropic::Organization::SpendLimit,
+            spend_summary: Anthropic::Organization::SpendSummary?,
+            status: Anthropic::Models::Organization::SpendLimits::spend_limit_increase_request_status,
+            ?type: :spend_limit_increase_request
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            actor: Anthropic::Models::Organization::SpendLimits::spend_limit_increase_request_actor,
+            created_at: Time,
+            period: Anthropic::Models::Organization::spend_limit_period,
+            resolved_at: Time?,
+            resolved_by: Anthropic::Models::Organization::SpendLimits::spend_limit_increase_request_resolved_by?,
+            spend_limit: Anthropic::Organization::SpendLimit,
+            spend_summary: Anthropic::Organization::SpendSummary?,
+            status: Anthropic::Models::Organization::SpendLimits::spend_limit_increase_request_status,
+            type: :spend_limit_increase_request
+          }
+        end
+      end
+    end
+  end
+end

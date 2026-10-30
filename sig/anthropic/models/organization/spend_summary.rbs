@@ -1,0 +1,250 @@
+module Anthropic
+  module Models
+    module Organization
+      type spend_summary =
+        {
+          actor: Anthropic::Models::Organization::SpendSummary::actor,
+          amount: String?,
+          currency: String,
+          period: Anthropic::Models::Organization::spend_limit_period,
+          period_to_date_spend: String,
+          scope: Anthropic::Models::Organization::SpendSummary::scope,
+          source: Anthropic::Models::Organization::SpendSummary::source,
+          spend_limit_id: String
+        }
+
+      class SpendSummary < Anthropic::Internal::Type::BaseModel
+        attr_accessor actor: Anthropic::Models::Organization::SpendSummary::actor
+
+        attr_accessor amount: String?
+
+        attr_accessor currency: String
+
+        attr_accessor period: Anthropic::Models::Organization::spend_limit_period
+
+        attr_accessor period_to_date_spend: String
+
+        attr_accessor scope: Anthropic::Models::Organization::SpendSummary::scope
+
+        attr_accessor source: Anthropic::Models::Organization::SpendSummary::source
+
+        attr_accessor spend_limit_id: String
+
+        def initialize: (
+          actor: Anthropic::Models::Organization::SpendSummary::actor,
+          amount: String?,
+          currency: String,
+          period: Anthropic::Models::Organization::spend_limit_period,
+          period_to_date_spend: String,
+          scope: Anthropic::Models::Organization::SpendSummary::scope,
+          source: Anthropic::Models::Organization::SpendSummary::source,
+          spend_limit_id: String
+        ) -> void
+
+        def to_hash: -> {
+          actor: Anthropic::Models::Organization::SpendSummary::actor,
+          amount: String?,
+          currency: String,
+          period: Anthropic::Models::Organization::spend_limit_period,
+          period_to_date_spend: String,
+          scope: Anthropic::Models::Organization::SpendSummary::scope,
+          source: Anthropic::Models::Organization::SpendSummary::source,
+          spend_limit_id: String
+        }
+
+        type actor =
+          Anthropic::Organization::SpendLimitUserActor
+          | Anthropic::Organization::SpendLimitScopedAPIKeyActor
+
+        module Actor
+          extend Anthropic::Internal::Type::Union
+
+          type type_ = :user_actor | :scoped_api_key_actor
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            USER_ACTOR: :user_actor
+            SCOPED_API_KEY_ACTOR: :scoped_api_key_actor
+
+            def self?.values: -> ::Array[Anthropic::Models::Organization::SpendSummary::Actor::type_]
+          end
+
+          def self?.variants: -> ::Array[Anthropic::Models::Organization::SpendSummary::actor]
+
+          def self.new:
+            (
+              type: :user_actor | "user_actor",
+              deleted: bool,
+              email_address: String?,
+              name: String?,
+              user_id: String
+            ) -> Anthropic::Organization::SpendLimitUserActor
+            | (
+              type: :scoped_api_key_actor | "scoped_api_key_actor",
+              scoped_api_key_id: String
+            ) -> Anthropic::Organization::SpendLimitScopedAPIKeyActor
+            | (
+              type: Anthropic::Models::Organization::SpendSummary::Actor::type_
+              | String,
+              ?deleted: bool,
+              ?email_address: String?,
+              ?name: String?,
+              ?user_id: String,
+              ?scoped_api_key_id: String
+            ) -> Anthropic::Models::Organization::SpendSummary::actor
+        end
+
+        type scope =
+          Anthropic::Organization::SpendLimitUserScope
+          | Anthropic::Organization::SpendLimitSeatTierScope
+          | Anthropic::Organization::SpendLimitRBACGroupScope
+          | Anthropic::Organization::SpendLimitOrganizationServiceScope
+          | Anthropic::Organization::SpendLimitOrganizationScope
+          | Anthropic::Organization::SpendLimitWorkspaceScope
+          | Anthropic::Organization::SpendLimitUsageTierScope
+
+        module Scope
+          extend Anthropic::Internal::Type::Union
+
+          type type_ =
+            :user
+            | :seat_tier
+            | :rbac_group
+            | :organization_service
+            | :organization
+            | :workspace
+            | :usage_tier
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            USER: :user
+            SEAT_TIER: :seat_tier
+            RBAC_GROUP: :rbac_group
+            ORGANIZATION_SERVICE: :organization_service
+            ORGANIZATION: :organization
+            WORKSPACE: :workspace
+            USAGE_TIER: :usage_tier
+
+            def self?.values: -> ::Array[Anthropic::Models::Organization::SpendSummary::Scope::type_]
+          end
+
+          def self?.variants: -> ::Array[Anthropic::Models::Organization::SpendSummary::scope]
+
+          def self.new:
+            (
+              type: :user | "user",
+              user_id: String
+            ) -> Anthropic::Organization::SpendLimitUserScope
+            | (
+              type: :seat_tier | "seat_tier",
+              seat_tier: String
+            ) -> Anthropic::Organization::SpendLimitSeatTierScope
+            | (
+              type: :rbac_group | "rbac_group",
+              rbac_group_id: String
+            ) -> Anthropic::Organization::SpendLimitRBACGroupScope
+            | (
+              type: :organization_service | "organization_service",
+              service: String
+            ) -> Anthropic::Organization::SpendLimitOrganizationServiceScope
+            | (
+              type: :organization | "organization"
+            ) -> Anthropic::Organization::SpendLimitOrganizationScope
+            | (
+              type: :workspace | "workspace",
+              workspace_id: String
+            ) -> Anthropic::Organization::SpendLimitWorkspaceScope
+            | (
+              type: :usage_tier | "usage_tier"
+            ) -> Anthropic::Organization::SpendLimitUsageTierScope
+            | (
+              type: Anthropic::Models::Organization::SpendSummary::Scope::type_
+              | String,
+              ?user_id: String,
+              ?seat_tier: String,
+              ?rbac_group_id: String,
+              ?service: String,
+              ?workspace_id: String
+            ) -> Anthropic::Models::Organization::SpendSummary::scope
+        end
+
+        type source =
+          Anthropic::Organization::SpendLimitUserScope
+          | Anthropic::Organization::SpendLimitSeatTierScope
+          | Anthropic::Organization::SpendLimitRBACGroupScope
+          | Anthropic::Organization::SpendLimitOrganizationServiceScope
+          | Anthropic::Organization::SpendLimitOrganizationScope
+          | Anthropic::Organization::SpendLimitWorkspaceScope
+          | Anthropic::Organization::SpendLimitUsageTierScope
+
+        module Source
+          extend Anthropic::Internal::Type::Union
+
+          type type_ =
+            :user
+            | :seat_tier
+            | :rbac_group
+            | :organization_service
+            | :organization
+            | :workspace
+            | :usage_tier
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            USER: :user
+            SEAT_TIER: :seat_tier
+            RBAC_GROUP: :rbac_group
+            ORGANIZATION_SERVICE: :organization_service
+            ORGANIZATION: :organization
+            WORKSPACE: :workspace
+            USAGE_TIER: :usage_tier
+
+            def self?.values: -> ::Array[Anthropic::Models::Organization::SpendSummary::Source::type_]
+          end
+
+          def self?.variants: -> ::Array[Anthropic::Models::Organization::SpendSummary::source]
+
+          def self.new:
+            (
+              type: :user | "user",
+              user_id: String
+            ) -> Anthropic::Organization::SpendLimitUserScope
+            | (
+              type: :seat_tier | "seat_tier",
+              seat_tier: String
+            ) -> Anthropic::Organization::SpendLimitSeatTierScope
+            | (
+              type: :rbac_group | "rbac_group",
+              rbac_group_id: String
+            ) -> Anthropic::Organization::SpendLimitRBACGroupScope
+            | (
+              type: :organization_service | "organization_service",
+              service: String
+            ) -> Anthropic::Organization::SpendLimitOrganizationServiceScope
+            | (
+              type: :organization | "organization"
+            ) -> Anthropic::Organization::SpendLimitOrganizationScope
+            | (
+              type: :workspace | "workspace",
+              workspace_id: String
+            ) -> Anthropic::Organization::SpendLimitWorkspaceScope
+            | (
+              type: :usage_tier | "usage_tier"
+            ) -> Anthropic::Organization::SpendLimitUsageTierScope
+            | (
+              type: Anthropic::Models::Organization::SpendSummary::Source::type_
+              | String,
+              ?user_id: String,
+              ?seat_tier: String,
+              ?rbac_group_id: String,
+              ?service: String,
+              ?workspace_id: String
+            ) -> Anthropic::Models::Organization::SpendSummary::source
+        end
+      end
+    end
+  end
+end
