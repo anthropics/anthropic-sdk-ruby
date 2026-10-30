@@ -10,7 +10,7 @@ module Anthropic
               ?filter: ::Array[String]?,
               ?group_by: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_skill_group_by]?,
               ?limit: Integer?,
-              ?order: Anthropic::Models::Beta::Organization::Analytics::SkillListParams::order?,
+              ?order: Anthropic::Models::Beta::Organization::beta_analytics_order?,
               ?order_by: String?,
               ?page: String?,
               ?starting_date: Date?,

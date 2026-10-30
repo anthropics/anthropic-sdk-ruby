@@ -17,11 +17,11 @@ class Anthropic::Test::Resources::Beta::Organization::SpendLimits::IncreaseReque
     assert_pattern do
       response => {
         id: String,
-        actor: Anthropic::Beta::Organization::SpendLimits::BetaSpendLimitIncreaseRequest::Actor,
+        actor: Anthropic::Beta::Organization::SpendLimits::BetaSpendLimitIncreaseRequestActor,
         created_at: Time,
         period: Anthropic::Beta::Organization::BetaSpendLimitPeriod,
         resolved_at: Time | nil,
-        resolved_by: Anthropic::Beta::Organization::SpendLimits::BetaSpendLimitIncreaseRequest::ResolvedBy | nil,
+        resolved_by: Anthropic::Beta::Organization::SpendLimits::BetaSpendLimitIncreaseRequestResolvedBy | nil,
         spend_summary: Anthropic::Beta::Organization::BetaSpendSummary | nil,
         status: Anthropic::Beta::Organization::SpendLimits::BetaSpendLimitIncreaseRequestStatus,
         type: Symbol
@@ -49,11 +49,11 @@ class Anthropic::Test::Resources::Beta::Organization::SpendLimits::IncreaseReque
     assert_pattern do
       row => {
         id: String,
-        actor: Anthropic::Beta::Organization::SpendLimits::BetaSpendLimitIncreaseRequest::Actor,
+        actor: Anthropic::Beta::Organization::SpendLimits::BetaSpendLimitIncreaseRequestActor,
         created_at: Time,
         period: Anthropic::Beta::Organization::BetaSpendLimitPeriod,
         resolved_at: Time | nil,
-        resolved_by: Anthropic::Beta::Organization::SpendLimits::BetaSpendLimitIncreaseRequest::ResolvedBy | nil,
+        resolved_by: Anthropic::Beta::Organization::SpendLimits::BetaSpendLimitIncreaseRequestResolvedBy | nil,
         spend_summary: Anthropic::Beta::Organization::BetaSpendSummary | nil,
         status: Anthropic::Beta::Organization::SpendLimits::BetaSpendLimitIncreaseRequestStatus,
         type: Symbol
@@ -76,11 +76,11 @@ class Anthropic::Test::Resources::Beta::Organization::SpendLimits::IncreaseReque
     assert_pattern do
       response => {
         id: String,
-        actor: Anthropic::Models::Beta::Organization::SpendLimits::IncreaseRequestApproveResponse::Actor,
+        actor: Anthropic::Beta::Organization::SpendLimits::BetaSpendLimitIncreaseRequestActor,
         created_at: Time,
         period: Anthropic::Beta::Organization::BetaSpendLimitPeriod,
         resolved_at: Time | nil,
-        resolved_by: Anthropic::Models::Beta::Organization::SpendLimits::IncreaseRequestApproveResponse::ResolvedBy | nil,
+        resolved_by: Anthropic::Beta::Organization::SpendLimits::BetaSpendLimitIncreaseRequestResolvedBy | nil,
         spend_limit: Anthropic::Beta::Organization::BetaSpendLimit,
         spend_summary: Anthropic::Beta::Organization::BetaSpendSummary | nil,
         status: Anthropic::Beta::Organization::SpendLimits::BetaSpendLimitIncreaseRequestStatus,
@@ -103,11 +103,11 @@ class Anthropic::Test::Resources::Beta::Organization::SpendLimits::IncreaseReque
     assert_pattern do
       response => {
         id: String,
-        actor: Anthropic::Beta::Organization::SpendLimits::BetaSpendLimitIncreaseRequest::Actor,
+        actor: Anthropic::Beta::Organization::SpendLimits::BetaSpendLimitIncreaseRequestActor,
         created_at: Time,
         period: Anthropic::Beta::Organization::BetaSpendLimitPeriod,
         resolved_at: Time | nil,
-        resolved_by: Anthropic::Beta::Organization::SpendLimits::BetaSpendLimitIncreaseRequest::ResolvedBy | nil,
+        resolved_by: Anthropic::Beta::Organization::SpendLimits::BetaSpendLimitIncreaseRequestResolvedBy | nil,
         spend_summary: Anthropic::Beta::Organization::BetaSpendSummary | nil,
         status: Anthropic::Beta::Organization::SpendLimits::BetaSpendLimitIncreaseRequestStatus,
         type: Symbol

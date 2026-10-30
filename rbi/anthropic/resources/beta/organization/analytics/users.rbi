@@ -27,7 +27,7 @@ module Anthropic
                 limit: T.nilable(Integer),
                 order:
                   T.nilable(
-                    Anthropic::Beta::Organization::Analytics::UserListParams::Order::OrSymbol
+                    Anthropic::Beta::Organization::BetaAnalyticsOrder::OrSymbol
                   ),
                 order_by: T.nilable(String),
                 page: T.nilable(String),

@@ -12,7 +12,7 @@ module Anthropic
                   filter: ::Array[String]?,
                   group_by: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_project_group_by]?,
                   limit: Integer?,
-                  order: Anthropic::Models::Beta::Organization::Analytics::Apps::Chat::ProjectListParams::order?,
+                  order: Anthropic::Models::Beta::Organization::beta_analytics_order?,
                   order_by: String?,
                   page: String?,
                   starting_date: Date?
@@ -33,7 +33,7 @@ module Anthropic
 
                 attr_accessor limit: Integer?
 
-                attr_accessor order: Anthropic::Models::Beta::Organization::Analytics::Apps::Chat::ProjectListParams::order?
+                attr_accessor order: Anthropic::Models::Beta::Organization::beta_analytics_order?
 
                 attr_accessor order_by: String?
 
@@ -47,7 +47,7 @@ module Anthropic
                   ?filter: ::Array[String]?,
                   ?group_by: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_project_group_by]?,
                   ?limit: Integer?,
-                  ?order: Anthropic::Models::Beta::Organization::Analytics::Apps::Chat::ProjectListParams::order?,
+                  ?order: Anthropic::Models::Beta::Organization::beta_analytics_order?,
                   ?order_by: String?,
                   ?page: String?,
                   ?starting_date: Date?,
@@ -60,23 +60,12 @@ module Anthropic
                   filter: ::Array[String]?,
                   group_by: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_project_group_by]?,
                   limit: Integer?,
-                  order: Anthropic::Models::Beta::Organization::Analytics::Apps::Chat::ProjectListParams::order?,
+                  order: Anthropic::Models::Beta::Organization::beta_analytics_order?,
                   order_by: String?,
                   page: String?,
                   starting_date: Date?,
                   request_options: Anthropic::RequestOptions
                 }
-
-                type order = :asc | :desc
-
-                module Order
-                  extend Anthropic::Internal::Type::Enum
-
-                  ASC: :asc
-                  DESC: :desc
-
-                  def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Analytics::Apps::Chat::ProjectListParams::order]
-                end
               end
             end
           end

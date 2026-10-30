@@ -29,7 +29,7 @@ module Anthropic
                     limit: T.nilable(Integer),
                     order:
                       T.nilable(
-                        Anthropic::Beta::Organization::Analytics::Apps::Chat::ProjectListParams::Order::OrSymbol
+                        Anthropic::Beta::Organization::BetaAnalyticsOrder::OrSymbol
                       ),
                     order_by: T.nilable(String),
                     page: T.nilable(String),

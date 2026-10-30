@@ -1,0 +1,52 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module SpendLimits
+          type beta_spend_limit_increase_request_resolved_by =
+            Anthropic::Beta::Organization::BetaSpendLimitUserActor
+            | Anthropic::Beta::Organization::BetaSpendLimitScopedAPIKeyActor
+
+          module BetaSpendLimitIncreaseRequestResolvedBy
+            extend Anthropic::Internal::Type::Union
+
+            type type_ = :user_actor | :scoped_api_key_actor
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              USER_ACTOR: :user_actor
+              SCOPED_API_KEY_ACTOR: :scoped_api_key_actor
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::SpendLimits::BetaSpendLimitIncreaseRequestResolvedBy::type_]
+            end
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::SpendLimits::beta_spend_limit_increase_request_resolved_by]
+
+            def self.new:
+              (
+                type: :user_actor | "user_actor",
+                deleted: bool,
+                email_address: String?,
+                name: String?,
+                user_id: String
+              ) -> Anthropic::Beta::Organization::BetaSpendLimitUserActor
+              | (
+                type: :scoped_api_key_actor | "scoped_api_key_actor",
+                scoped_api_key_id: String
+              ) -> Anthropic::Beta::Organization::BetaSpendLimitScopedAPIKeyActor
+              | (
+                type: Anthropic::Models::Beta::Organization::SpendLimits::BetaSpendLimitIncreaseRequestResolvedBy::type_
+                | String,
+                ?deleted: bool,
+                ?email_address: String?,
+                ?name: String?,
+                ?user_id: String,
+                ?scoped_api_key_id: String
+              ) -> Anthropic::Models::Beta::Organization::SpendLimits::beta_spend_limit_increase_request_resolved_by
+          end
+        end
+      end
+    end
+  end
+end
