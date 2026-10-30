@@ -390,6 +390,8 @@ module Anthropic
                     Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError::OrHash,
                     Anthropic::Beta::Sessions::BetaManagedAgentsBillingError::OrHash,
                     Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsToolUseLimitReachedError::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsCompactionLimitReachedError::OrHash,
                     Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError::OrHash,
                     Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError::OrHash,
                     Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError::OrHash,

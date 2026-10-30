@@ -13,7 +13,7 @@ module Anthropic
 
           # @!attribute error
           #
-          #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCloneError]
+          #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsToolUseLimitReachedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsCompactionLimitReachedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCloneError]
           required :error, union: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error }
 
           # @!attribute processed_at
@@ -32,7 +32,7 @@ module Anthropic
           #
           #   @param id [String] Unique identifier for this event.
           #
-          #   @param error [Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCloneError]
+          #   @param error [Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsToolUseLimitReachedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsCompactionLimitReachedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCloneError]
           #
           #   @param processed_at [Time] Timestamp when the error occurred.
           #
@@ -73,6 +73,14 @@ module Anthropic
             variant :credential_host_unreachable_error,
                     -> { Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError }
 
+            # The turn stopped because the agent loop reached its limit on tool-use rounds (one model response that calls tools, plus running those tools, is one round), not because a request failed. The thread goes idle with `stop_reason: retries_exhausted` (a child thread then terminates); the next `user.message` starts a new turn.
+            variant :tool_use_limit_reached_error,
+                    -> { Anthropic::Beta::Sessions::BetaManagedAgentsToolUseLimitReachedError }
+
+            # The turn stopped because the context was compacted the maximum number of times in a row without the model producing a message or a tool call, not because a request failed. The thread goes idle with `stop_reason: retries_exhausted` (a child thread then terminates); the next `user.message` starts a new turn.
+            variant :compaction_limit_reached_error,
+                    -> { Anthropic::Beta::Sessions::BetaManagedAgentsCompactionLimitReachedError }
+
             # The repository host rejected the credentials, or required credentials and received none.
             variant :repository_authentication_error,
                     -> { Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError }
@@ -103,6 +111,8 @@ module Anthropic
               MCP_AUTHENTICATION_FAILED_ERROR = :mcp_authentication_failed_error
               BILLING_ERROR = :billing_error
               CREDENTIAL_HOST_UNREACHABLE_ERROR = :credential_host_unreachable_error
+              TOOL_USE_LIMIT_REACHED_ERROR = :tool_use_limit_reached_error
+              COMPACTION_LIMIT_REACHED_ERROR = :compaction_limit_reached_error
               REPOSITORY_AUTHENTICATION_ERROR = :repository_authentication_error
               REPOSITORY_FORBIDDEN_ERROR = :repository_forbidden_error
               REPOSITORY_NOT_FOUND_ERROR = :repository_not_found_error
@@ -114,7 +124,7 @@ module Anthropic
             end
 
             # @!method self.variants
-            #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCloneError)]
+            #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsToolUseLimitReachedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsCompactionLimitReachedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCloneError)]
 
             # Creates a new instance of the variant class whose `type` matches the given
             # value, passing the remaining arguments to its constructor.
@@ -140,7 +150,7 @@ module Anthropic
             #   @option args [String, nil] :repository_url URL of the repository that could not be cloned. Null when it could not be identi
             #
             # @raise [ArgumentError]
-            # @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCloneError]
+            # @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsToolUseLimitReachedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsCompactionLimitReachedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCloneError]
             def self.new(type:, **args)
               case type.to_sym
               when :unknown_error
@@ -159,6 +169,10 @@ module Anthropic
                 Anthropic::Beta::Sessions::BetaManagedAgentsBillingError.new(**args)
               when :credential_host_unreachable_error
                 Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError.new(**args)
+              when :tool_use_limit_reached_error
+                Anthropic::Beta::Sessions::BetaManagedAgentsToolUseLimitReachedError.new(**args)
+              when :compaction_limit_reached_error
+                Anthropic::Beta::Sessions::BetaManagedAgentsCompactionLimitReachedError.new(**args)
               when :repository_authentication_error
                 Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError.new(**args)
               when :repository_forbidden_error
