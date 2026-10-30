@@ -46,12 +46,13 @@ module Anthropic
           attr_accessor :resolved_by
 
           # A configured spend limit: a cap on metered spend for one scope and period.
-          sig { returns(Anthropic::Organization::SpendLimit) }
+          sig { returns(T.nilable(Anthropic::Organization::SpendLimit)) }
           attr_reader :spend_limit
 
           sig do
             params(
-              spend_limit: Anthropic::Organization::SpendLimit::OrHash
+              spend_limit:
+                T.nilable(Anthropic::Organization::SpendLimit::OrHash)
             ).void
           end
           attr_writer :spend_limit
@@ -96,7 +97,8 @@ module Anthropic
                     Anthropic::Organization::SpendLimitScopedAPIKeyActor::OrHash
                   )
                 ),
-              spend_limit: Anthropic::Organization::SpendLimit::OrHash,
+              spend_limit:
+                T.nilable(Anthropic::Organization::SpendLimit::OrHash),
               spend_summary:
                 T.nilable(Anthropic::Organization::SpendSummary::OrHash),
               status:
@@ -135,7 +137,7 @@ module Anthropic
                   T.nilable(
                     Anthropic::Organization::SpendLimits::SpendLimitIncreaseRequestResolvedBy::Variants
                   ),
-                spend_limit: Anthropic::Organization::SpendLimit,
+                spend_limit: T.nilable(Anthropic::Organization::SpendLimit),
                 spend_summary: T.nilable(Anthropic::Organization::SpendSummary),
                 status:
                   Anthropic::Organization::SpendLimits::SpendLimitIncreaseRequestStatus::TaggedSymbol,

@@ -10,7 +10,7 @@ module Anthropic
             period: Anthropic::Models::Organization::spend_limit_period,
             resolved_at: Time?,
             resolved_by: Anthropic::Models::Organization::SpendLimits::spend_limit_increase_request_resolved_by?,
-            spend_limit: Anthropic::Organization::SpendLimit,
+            spend_limit: Anthropic::Organization::SpendLimit?,
             spend_summary: Anthropic::Organization::SpendSummary?,
             status: Anthropic::Models::Organization::SpendLimits::spend_limit_increase_request_status,
             type: :spend_limit_increase_request
@@ -29,7 +29,7 @@ module Anthropic
 
           attr_accessor resolved_by: Anthropic::Models::Organization::SpendLimits::spend_limit_increase_request_resolved_by?
 
-          attr_accessor spend_limit: Anthropic::Organization::SpendLimit
+          attr_accessor spend_limit: Anthropic::Organization::SpendLimit?
 
           attr_accessor spend_summary: Anthropic::Organization::SpendSummary?
 
@@ -44,7 +44,7 @@ module Anthropic
             period: Anthropic::Models::Organization::spend_limit_period,
             resolved_at: Time?,
             resolved_by: Anthropic::Models::Organization::SpendLimits::spend_limit_increase_request_resolved_by?,
-            spend_limit: Anthropic::Organization::SpendLimit,
+            spend_limit: Anthropic::Organization::SpendLimit?,
             spend_summary: Anthropic::Organization::SpendSummary?,
             status: Anthropic::Models::Organization::SpendLimits::spend_limit_increase_request_status,
             ?type: :spend_limit_increase_request
@@ -57,7 +57,7 @@ module Anthropic
             period: Anthropic::Models::Organization::spend_limit_period,
             resolved_at: Time?,
             resolved_by: Anthropic::Models::Organization::SpendLimits::spend_limit_increase_request_resolved_by?,
-            spend_limit: Anthropic::Organization::SpendLimit,
+            spend_limit: Anthropic::Organization::SpendLimit?,
             spend_summary: Anthropic::Organization::SpendSummary?,
             status: Anthropic::Models::Organization::SpendLimits::spend_limit_increase_request_status,
             type: :spend_limit_increase_request

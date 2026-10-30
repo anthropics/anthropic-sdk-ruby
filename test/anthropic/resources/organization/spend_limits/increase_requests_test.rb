@@ -74,7 +74,7 @@ class Anthropic::Test::Resources::Organization::SpendLimits::IncreaseRequestsTes
         period: Anthropic::Organization::SpendLimitPeriod,
         resolved_at: Time | nil,
         resolved_by: Anthropic::Organization::SpendLimits::SpendLimitIncreaseRequestResolvedBy | nil,
-        spend_limit: Anthropic::Organization::SpendLimit,
+        spend_limit: Anthropic::Organization::SpendLimit | nil,
         spend_summary: Anthropic::Organization::SpendSummary | nil,
         status: Anthropic::Organization::SpendLimits::SpendLimitIncreaseRequestStatus,
         type: Symbol

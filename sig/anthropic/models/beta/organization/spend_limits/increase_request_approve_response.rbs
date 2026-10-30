@@ -11,7 +11,7 @@ module Anthropic
               period: Anthropic::Models::Beta::Organization::beta_spend_limit_period,
               resolved_at: Time?,
               resolved_by: Anthropic::Models::Beta::Organization::SpendLimits::beta_spend_limit_increase_request_resolved_by?,
-              spend_limit: Anthropic::Beta::Organization::BetaSpendLimit,
+              spend_limit: Anthropic::Beta::Organization::BetaSpendLimit?,
               spend_summary: Anthropic::Beta::Organization::BetaSpendSummary?,
               status: Anthropic::Models::Beta::Organization::SpendLimits::beta_spend_limit_increase_request_status,
               type: :spend_limit_increase_request
@@ -30,7 +30,7 @@ module Anthropic
 
             attr_accessor resolved_by: Anthropic::Models::Beta::Organization::SpendLimits::beta_spend_limit_increase_request_resolved_by?
 
-            attr_accessor spend_limit: Anthropic::Beta::Organization::BetaSpendLimit
+            attr_accessor spend_limit: Anthropic::Beta::Organization::BetaSpendLimit?
 
             attr_accessor spend_summary: Anthropic::Beta::Organization::BetaSpendSummary?
 
@@ -45,7 +45,7 @@ module Anthropic
               period: Anthropic::Models::Beta::Organization::beta_spend_limit_period,
               resolved_at: Time?,
               resolved_by: Anthropic::Models::Beta::Organization::SpendLimits::beta_spend_limit_increase_request_resolved_by?,
-              spend_limit: Anthropic::Beta::Organization::BetaSpendLimit,
+              spend_limit: Anthropic::Beta::Organization::BetaSpendLimit?,
               spend_summary: Anthropic::Beta::Organization::BetaSpendSummary?,
               status: Anthropic::Models::Beta::Organization::SpendLimits::beta_spend_limit_increase_request_status,
               ?type: :spend_limit_increase_request
@@ -58,7 +58,7 @@ module Anthropic
               period: Anthropic::Models::Beta::Organization::beta_spend_limit_period,
               resolved_at: Time?,
               resolved_by: Anthropic::Models::Beta::Organization::SpendLimits::beta_spend_limit_increase_request_resolved_by?,
-              spend_limit: Anthropic::Beta::Organization::BetaSpendLimit,
+              spend_limit: Anthropic::Beta::Organization::BetaSpendLimit?,
               spend_summary: Anthropic::Beta::Organization::BetaSpendSummary?,
               status: Anthropic::Models::Beta::Organization::SpendLimits::beta_spend_limit_increase_request_status,
               type: :spend_limit_increase_request

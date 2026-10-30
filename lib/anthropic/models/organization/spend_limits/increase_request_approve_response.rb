@@ -43,8 +43,8 @@ module Anthropic
           # @!attribute spend_limit
           #   A configured spend limit: a cap on metered spend for one scope and period.
           #
-          #   @return [Anthropic::Models::Organization::SpendLimit]
-          required :spend_limit, -> { Anthropic::Organization::SpendLimit }
+          #   @return [Anthropic::Models::Organization::SpendLimit, nil]
+          required :spend_limit, -> { Anthropic::Organization::SpendLimit }, nil?: true
 
           # @!attribute spend_summary
           #   Per-member effective-limit report row (`GET /spend_limits/effective`).
@@ -75,7 +75,7 @@ module Anthropic
           #
           #   @param resolved_by [Anthropic::Models::Organization::SpendLimitUserActor, Anthropic::Models::Organization::SpendLimitScopedAPIKeyActor, nil] Who approved or denied the increase request.
           #
-          #   @param spend_limit [Anthropic::Models::Organization::SpendLimit] A configured spend limit: a cap on metered spend for one scope and period.
+          #   @param spend_limit [Anthropic::Models::Organization::SpendLimit, nil] A configured spend limit: a cap on metered spend for one scope and period.
           #
           #   @param spend_summary [Anthropic::Models::Organization::SpendSummary, nil] Per-member effective-limit report row (`GET /spend_limits/effective`).
           #

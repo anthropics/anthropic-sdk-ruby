@@ -81,7 +81,7 @@ class Anthropic::Test::Resources::Beta::Organization::SpendLimits::IncreaseReque
         period: Anthropic::Beta::Organization::BetaSpendLimitPeriod,
         resolved_at: Time | nil,
         resolved_by: Anthropic::Beta::Organization::SpendLimits::BetaSpendLimitIncreaseRequestResolvedBy | nil,
-        spend_limit: Anthropic::Beta::Organization::BetaSpendLimit,
+        spend_limit: Anthropic::Beta::Organization::BetaSpendLimit | nil,
         spend_summary: Anthropic::Beta::Organization::BetaSpendSummary | nil,
         status: Anthropic::Beta::Organization::SpendLimits::BetaSpendLimitIncreaseRequestStatus,
         type: Symbol
