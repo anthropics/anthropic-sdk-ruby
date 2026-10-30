@@ -22,7 +22,7 @@ module Anthropic
         #   In the object form, `speed` can only be `standard`.
         #
         #   The
-        #   [limits table in the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams#limits)
+        #   [Availability section of the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams#feature-availability)
         #   lists the supported models.
         #
         #   @return [Anthropic::Models::Beta::BetaDreamModelConfigParam, String]
@@ -88,7 +88,7 @@ module Anthropic
         # In the object form, `speed` can only be `standard`.
         #
         # The
-        # [limits table in the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams#limits)
+        # [Availability section of the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams#feature-availability)
         # lists the supported models.
         module Model
           extend Anthropic::Internal::Type::Union
