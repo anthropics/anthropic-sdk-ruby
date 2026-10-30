@@ -46,10 +46,10 @@ module Anthropic
             #   any point during the requested UTC day, so grouped rows are not an exclusive
             #   partition. At most 100 entries.
             #
-            #   @return [Array<Symbol, Anthropic::Models::Beta::Organization::Analytics::ArtifactListParams::GroupBy>, nil]
+            #   @return [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsArtifactGroupBy>, nil]
             optional :group_by,
                      -> {
-                       Anthropic::Internal::Type::ArrayOf[enum: Anthropic::Beta::Organization::Analytics::ArtifactListParams::GroupBy]
+                       Anthropic::Internal::Type::ArrayOf[enum: Anthropic::Beta::Organization::BetaAnalyticsArtifactGroupBy]
                      },
                      nil?: true
 
@@ -77,24 +77,13 @@ module Anthropic
             #
             #   @param filter [Array<String>, nil] Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the par
             #
-            #   @param group_by [Array<Symbol, Anthropic::Models::Beta::Organization::Analytics::ArtifactListParams::GroupBy>, nil] Dimensions to break results out by: `product`, `user_id` and/or `rbac_group_id`.
+            #   @param group_by [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsArtifactGroupBy>, nil] Dimensions to break results out by: `product`, `user_id` and/or `rbac_group_id`.
             #
             #   @param limit [Integer, nil] Maximum rows to return (1-1000, default 100). The ungrouped artifact-type cube i
             #
             #   @param page [String, nil] Opaque cursor from a previous response's `next_page` field. Only valid with `gro
             #
             #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
-
-            module GroupBy
-              extend Anthropic::Internal::Type::Enum
-
-              PRODUCT = :product
-              RBAC_GROUP_ID = :rbac_group_id
-              USER_ID = :user_id
-
-              # @!method self.values
-              #   @return [Array<Symbol>]
-            end
           end
         end
       end

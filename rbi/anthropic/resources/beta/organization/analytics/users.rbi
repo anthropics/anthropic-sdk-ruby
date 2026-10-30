@@ -21,7 +21,7 @@ module Anthropic
                 group_by:
                   T.nilable(
                     T::Array[
-                      Anthropic::Beta::Organization::Analytics::UserListParams::GroupBy::OrSymbol
+                      Anthropic::Beta::Organization::BetaAnalyticsUserGroupBy::OrSymbol
                     ]
                   ),
                 limit: T.nilable(Integer),

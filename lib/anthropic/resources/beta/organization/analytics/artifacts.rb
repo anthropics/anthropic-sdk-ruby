@@ -23,7 +23,7 @@ module Anthropic
             #
             # @param filter [Array<String>, nil] Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the par
             #
-            # @param group_by [Array<Symbol, Anthropic::Models::Beta::Organization::Analytics::ArtifactListParams::GroupBy>, nil] Dimensions to break results out by: `product`, `user_id` and/or `rbac_group_id`.
+            # @param group_by [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsArtifactGroupBy>, nil] Dimensions to break results out by: `product`, `user_id` and/or `rbac_group_id`.
             #
             # @param limit [Integer, nil] Maximum rows to return (1-1000, default 100). The ungrouped artifact-type cube i
             #

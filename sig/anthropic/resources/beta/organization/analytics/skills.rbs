@@ -8,7 +8,7 @@ module Anthropic
               ?date: Date?,
               ?ending_date: Date?,
               ?filter: ::Array[String]?,
-              ?group_by: ::Array[Anthropic::Models::Beta::Organization::Analytics::SkillListParams::group_by]?,
+              ?group_by: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_skill_group_by]?,
               ?limit: Integer?,
               ?order: Anthropic::Models::Beta::Organization::Analytics::SkillListParams::order?,
               ?order_by: String?,

@@ -59,10 +59,10 @@ module Anthropic
             #   day, so grouped rows are not an exclusive partition and can sum above org-level
             #   totals. At most 100 entries.
             #
-            #   @return [Array<Symbol, Anthropic::Models::Beta::Organization::Analytics::ConnectorListParams::GroupBy>, nil]
+            #   @return [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsConnectorGroupBy>, nil]
             optional :group_by,
                      -> {
-                       Anthropic::Internal::Type::ArrayOf[enum: Anthropic::Beta::Organization::Analytics::ConnectorListParams::GroupBy]
+                       Anthropic::Internal::Type::ArrayOf[enum: Anthropic::Beta::Organization::BetaAnalyticsConnectorGroupBy]
                      },
                      nil?: true
 
@@ -124,7 +124,7 @@ module Anthropic
             #
             #   @param filter [Array<String>, nil] Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the par
             #
-            #   @param group_by [Array<Symbol, Anthropic::Models::Beta::Organization::Analytics::ConnectorListParams::GroupBy>, nil] Dimensions to break results out by (e.g. `group_by[]=user_id`). Supported on thi
+            #   @param group_by [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsConnectorGroupBy>, nil] Dimensions to break results out by (e.g. `group_by[]=user_id`). Supported on thi
             #
             #   @param limit [Integer, nil] Number of results per page (1-1000, default 100).
             #
@@ -137,17 +137,6 @@ module Anthropic
             #   @param starting_date [Date, nil] UTC date in YYYY-MM-DD format. Start of a date range (inclusive). Enables rollup
             #
             #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
-
-            module GroupBy
-              extend Anthropic::Internal::Type::Enum
-
-              PRODUCT = :product
-              RBAC_GROUP_ID = :rbac_group_id
-              USER_ID = :user_id
-
-              # @!method self.values
-              #   @return [Array<Symbol>]
-            end
 
             # Sort direction: `asc` or `desc`. Defaults to `asc` for the endpoint's sort
             # column and to `desc` when `order_by` names a metric (a top-N ranking). Applies

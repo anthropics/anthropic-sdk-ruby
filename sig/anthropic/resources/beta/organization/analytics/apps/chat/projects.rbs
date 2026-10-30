@@ -10,7 +10,7 @@ module Anthropic
                   ?date: Date?,
                   ?ending_date: Date?,
                   ?filter: ::Array[String]?,
-                  ?group_by: ::Array[Anthropic::Models::Beta::Organization::Analytics::Apps::Chat::ProjectListParams::group_by]?,
+                  ?group_by: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_project_group_by]?,
                   ?limit: Integer?,
                   ?order: Anthropic::Models::Beta::Organization::Analytics::Apps::Chat::ProjectListParams::order?,
                   ?order_by: String?,

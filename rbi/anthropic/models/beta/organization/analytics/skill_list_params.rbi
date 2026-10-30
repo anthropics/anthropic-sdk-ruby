@@ -60,7 +60,7 @@ module Anthropic
               returns(
                 T.nilable(
                   T::Array[
-                    Anthropic::Beta::Organization::Analytics::SkillListParams::GroupBy::OrSymbol
+                    Anthropic::Beta::Organization::BetaAnalyticsSkillGroupBy::OrSymbol
                   ]
                 )
               )
@@ -116,7 +116,7 @@ module Anthropic
                 group_by:
                   T.nilable(
                     T::Array[
-                      Anthropic::Beta::Organization::Analytics::SkillListParams::GroupBy::OrSymbol
+                      Anthropic::Beta::Organization::BetaAnalyticsSkillGroupBy::OrSymbol
                     ]
                   ),
                 limit: T.nilable(Integer),
@@ -203,7 +203,7 @@ module Anthropic
                   group_by:
                     T.nilable(
                       T::Array[
-                        Anthropic::Beta::Organization::Analytics::SkillListParams::GroupBy::OrSymbol
+                        Anthropic::Beta::Organization::BetaAnalyticsSkillGroupBy::OrSymbol
                       ]
                     ),
                   limit: T.nilable(Integer),
@@ -219,45 +219,6 @@ module Anthropic
               )
             end
             def to_hash
-            end
-
-            module GroupBy
-              extend Anthropic::Internal::Type::Enum
-
-              TaggedSymbol =
-                T.type_alias do
-                  T.all(
-                    Symbol,
-                    Anthropic::Beta::Organization::Analytics::SkillListParams::GroupBy
-                  )
-                end
-              OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-              PRODUCT =
-                T.let(
-                  :product,
-                  Anthropic::Beta::Organization::Analytics::SkillListParams::GroupBy::TaggedSymbol
-                )
-              RBAC_GROUP_ID =
-                T.let(
-                  :rbac_group_id,
-                  Anthropic::Beta::Organization::Analytics::SkillListParams::GroupBy::TaggedSymbol
-                )
-              USER_ID =
-                T.let(
-                  :user_id,
-                  Anthropic::Beta::Organization::Analytics::SkillListParams::GroupBy::TaggedSymbol
-                )
-
-              sig do
-                override.returns(
-                  T::Array[
-                    Anthropic::Beta::Organization::Analytics::SkillListParams::GroupBy::TaggedSymbol
-                  ]
-                )
-              end
-              def self.values
-              end
             end
 
             # Sort direction: `asc` or `desc`. Defaults to `asc` for the endpoint's sort

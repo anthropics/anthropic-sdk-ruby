@@ -26,7 +26,7 @@ module Anthropic
             #
             # @param filter [Array<String>, nil] Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the par
             #
-            # @param group_by [Array<Symbol, Anthropic::Models::Beta::Organization::Analytics::UserListParams::GroupBy>, nil] Dimensions to break results out by (e.g. `group_by[]=rbac_group_id`). Supported
+            # @param group_by [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsUserGroupBy>, nil] Dimensions to break results out by (e.g. `group_by[]=rbac_group_id`). Supported
             #
             # @param limit [Integer, nil] Number of results per page (1-1000, default 100).
             #

@@ -27,10 +27,10 @@ module Anthropic
             #   Restrict the report to these limit periods. Omit to return one row per period
             #   each member resolves a spend limit for.
             #
-            #   @return [Array<Symbol, Anthropic::Models::Beta::Organization::SpendLimits::EffectiveListParams::Period>, nil]
+            #   @return [Array<Symbol, Anthropic::Models::Beta::Organization::BetaSpendLimitPeriod>, nil]
             optional :period,
                      -> {
-                       Anthropic::Internal::Type::ArrayOf[enum: Anthropic::Beta::Organization::SpendLimits::EffectiveListParams::Period]
+                       Anthropic::Internal::Type::ArrayOf[enum: Anthropic::Beta::Organization::BetaSpendLimitPeriod]
                      },
                      nil?: true
 
@@ -50,22 +50,11 @@ module Anthropic
             #
             #   @param page [String, nil] Opaque cursor from a previous response's `next_page` field.
             #
-            #   @param period [Array<Symbol, Anthropic::Models::Beta::Organization::SpendLimits::EffectiveListParams::Period>, nil] Restrict the report to these limit periods. Omit to return one row per period ea
+            #   @param period [Array<Symbol, Anthropic::Models::Beta::Organization::BetaSpendLimitPeriod>, nil] Restrict the report to these limit periods. Omit to return one row per period ea
             #
             #   @param user_ids [Array<String>, nil] Restrict the report to these members, by tagged user ID (`user_...`). At most 10
             #
             #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
-
-            module Period
-              extend Anthropic::Internal::Type::Enum
-
-              DAILY = :daily
-              MONTHLY = :monthly
-              WEEKLY = :weekly
-
-              # @!method self.values
-              #   @return [Array<Symbol>]
-            end
           end
         end
       end

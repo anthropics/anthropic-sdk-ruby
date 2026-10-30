@@ -8,7 +8,7 @@ module Anthropic
               date: Date?,
               ending_date: Date?,
               filter: ::Array[String]?,
-              group_by: ::Array[Anthropic::Models::Beta::Organization::Analytics::SkillListParams::group_by]?,
+              group_by: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_skill_group_by]?,
               limit: Integer?,
               order: Anthropic::Models::Beta::Organization::Analytics::SkillListParams::order?,
               order_by: String?,
@@ -27,7 +27,7 @@ module Anthropic
 
             attr_accessor filter: ::Array[String]?
 
-            attr_accessor group_by: ::Array[Anthropic::Models::Beta::Organization::Analytics::SkillListParams::group_by]?
+            attr_accessor group_by: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_skill_group_by]?
 
             attr_accessor limit: Integer?
 
@@ -43,7 +43,7 @@ module Anthropic
               ?date: Date?,
               ?ending_date: Date?,
               ?filter: ::Array[String]?,
-              ?group_by: ::Array[Anthropic::Models::Beta::Organization::Analytics::SkillListParams::group_by]?,
+              ?group_by: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_skill_group_by]?,
               ?limit: Integer?,
               ?order: Anthropic::Models::Beta::Organization::Analytics::SkillListParams::order?,
               ?order_by: String?,
@@ -56,7 +56,7 @@ module Anthropic
               date: Date?,
               ending_date: Date?,
               filter: ::Array[String]?,
-              group_by: ::Array[Anthropic::Models::Beta::Organization::Analytics::SkillListParams::group_by]?,
+              group_by: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_skill_group_by]?,
               limit: Integer?,
               order: Anthropic::Models::Beta::Organization::Analytics::SkillListParams::order?,
               order_by: String?,
@@ -64,18 +64,6 @@ module Anthropic
               starting_date: Date?,
               request_options: Anthropic::RequestOptions
             }
-
-            type group_by = :product | :rbac_group_id | :user_id
-
-            module GroupBy
-              extend Anthropic::Internal::Type::Enum
-
-              PRODUCT: :product
-              RBAC_GROUP_ID: :rbac_group_id
-              USER_ID: :user_id
-
-              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Analytics::SkillListParams::group_by]
-            end
 
             type order = :asc | :desc
 

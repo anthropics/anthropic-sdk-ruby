@@ -19,7 +19,7 @@ module Anthropic
                 period:
                   T.nilable(
                     T::Array[
-                      Anthropic::Beta::Organization::SpendLimits::EffectiveListParams::Period::OrSymbol
+                      Anthropic::Beta::Organization::BetaSpendLimitPeriod::OrSymbol
                     ]
                   ),
                 user_ids: T.nilable(T::Array[String]),
