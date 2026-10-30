@@ -62,6 +62,12 @@ module Anthropic
           sig { returns(Integer) }
           attr_accessor :invocation_count
 
+          # Stable plugin identifier when available (e.g. `serena@claude-plugins-official`).
+          # Null for third-party Claude Code plugins (redacted at the source) and Cowork
+          # slash commands that carry only a hashed id.
+          sig { returns(T.nilable(String)) }
+          attr_accessor :plugin_id
+
           # Name of the plugin
           sig { returns(String) }
           attr_accessor :plugin_name
@@ -88,12 +94,6 @@ module Anthropic
             ).void
           end
           attr_writer :chat_cowork_unified_metrics
-
-          # Stable plugin identifier when available (e.g. `serena@claude-plugins-official`).
-          # Null for third-party Claude Code plugins (redacted at the source) and Cowork
-          # slash commands that carry only a hashed id.
-          sig { returns(T.nilable(String)) }
-          attr_accessor :plugin_id
 
           # Product that produced this row's activity: one of `chat`, `claude_code`,
           # `cowork`, `office_agent`, or `chat_cowork_unified` (Chat and Cowork unified).
@@ -139,12 +139,12 @@ module Anthropic
               distinct_user_count: Integer,
               install_count: T.nilable(Integer),
               invocation_count: Integer,
+              plugin_id: T.nilable(String),
               plugin_name: String,
               chat_cowork_unified_metrics:
                 T.nilable(
                   Anthropic::Beta::Organization::BetaAnalyticsPluginActivity::ChatCoworkUnifiedMetrics::OrHash
                 ),
-              plugin_id: T.nilable(String),
               product: T.nilable(String),
               rbac_group_id: T.nilable(String),
               rbac_group_name: T.nilable(String),
@@ -167,6 +167,10 @@ module Anthropic
             install_count:,
             # Number of plugin invocations on the requested day
             invocation_count:,
+            # Stable plugin identifier when available (e.g. `serena@claude-plugins-official`).
+            # Null for third-party Claude Code plugins (redacted at the source) and Cowork
+            # slash commands that carry only a hashed id.
+            plugin_id:,
             # Name of the plugin
             plugin_name:,
             # Plugin use recorded while members had Chat and Cowork unified (Cowork's features
@@ -174,10 +178,6 @@ module Anthropic
             # cannot be computed. Omitted from the response on deployments that do not offer
             # Chat and Cowork unified.
             chat_cowork_unified_metrics: nil,
-            # Stable plugin identifier when available (e.g. `serena@claude-plugins-official`).
-            # Null for third-party Claude Code plugins (redacted at the source) and Cowork
-            # slash commands that carry only a hashed id.
-            plugin_id: nil,
             # Product that produced this row's activity: one of `chat`, `claude_code`,
             # `cowork`, `office_agent`, or `chat_cowork_unified` (Chat and Cowork unified).
             # These are the canonical Cost & Usage product names; an `office_agent` row's
@@ -212,12 +212,12 @@ module Anthropic
                 distinct_user_count: Integer,
                 install_count: T.nilable(Integer),
                 invocation_count: Integer,
+                plugin_id: T.nilable(String),
                 plugin_name: String,
                 chat_cowork_unified_metrics:
                   T.nilable(
                     Anthropic::Beta::Organization::BetaAnalyticsPluginActivity::ChatCoworkUnifiedMetrics
                   ),
-                plugin_id: T.nilable(String),
                 product: T.nilable(String),
                 rbac_group_id: T.nilable(String),
                 rbac_group_name: T.nilable(String),

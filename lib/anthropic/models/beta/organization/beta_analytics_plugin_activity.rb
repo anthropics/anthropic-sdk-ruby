@@ -40,6 +40,14 @@ module Anthropic
           #   @return [Integer]
           required :invocation_count, Integer
 
+          # @!attribute plugin_id
+          #   Stable plugin identifier when available (e.g. `serena@claude-plugins-official`).
+          #   Null for third-party Claude Code plugins (redacted at the source) and Cowork
+          #   slash commands that carry only a hashed id.
+          #
+          #   @return [String, nil]
+          required :plugin_id, String, nil?: true
+
           # @!attribute plugin_name
           #   Name of the plugin
           #
@@ -58,14 +66,6 @@ module Anthropic
                      Anthropic::Beta::Organization::BetaAnalyticsPluginActivity::ChatCoworkUnifiedMetrics
                    },
                    nil?: true
-
-          # @!attribute plugin_id
-          #   Stable plugin identifier when available (e.g. `serena@claude-plugins-official`).
-          #   Null for third-party Claude Code plugins (redacted at the source) and Cowork
-          #   slash commands that carry only a hashed id.
-          #
-          #   @return [String, nil]
-          optional :plugin_id, String, nil?: true
 
           # @!attribute product
           #   Product that produced this row's activity: one of `chat`, `claude_code`,
@@ -104,7 +104,7 @@ module Anthropic
           #   @return [String, nil]
           optional :user_id, String, nil?: true
 
-          # @!method initialize(claude_code_metrics:, cowork_metrics:, distinct_user_count:, install_count:, invocation_count:, plugin_name:, chat_cowork_unified_metrics: nil, plugin_id: nil, product: nil, rbac_group_id: nil, rbac_group_name: nil, user_id: nil)
+          # @!method initialize(claude_code_metrics:, cowork_metrics:, distinct_user_count:, install_count:, invocation_count:, plugin_id:, plugin_name:, chat_cowork_unified_metrics: nil, product: nil, rbac_group_id: nil, rbac_group_name: nil, user_id: nil)
           #   Per-plugin install + invocation activity for a given day.
           #
           #   With `group_by[]=user_id` / `rbac_group_id` / `product` (`cowork`, `claude_code`
@@ -126,11 +126,11 @@ module Anthropic
           #
           #   @param invocation_count [Integer] Number of plugin invocations on the requested day
           #
+          #   @param plugin_id [String, nil] Stable plugin identifier when available (e.g. `serena@claude-plugins-official`).
+          #
           #   @param plugin_name [String] Name of the plugin
           #
           #   @param chat_cowork_unified_metrics [Anthropic::Models::Beta::Organization::BetaAnalyticsPluginActivity::ChatCoworkUnifiedMetrics, nil] Plugin use recorded while members had Chat and Cowork unified (Cowork's features
-          #
-          #   @param plugin_id [String, nil] Stable plugin identifier when available (e.g. `serena@claude-plugins-official`).
           #
           #   @param product [String, nil] Product that produced this row's activity: one of `chat`, `claude_code`, `cowork
           #

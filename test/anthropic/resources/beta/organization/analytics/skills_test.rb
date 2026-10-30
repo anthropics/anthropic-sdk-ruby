@@ -20,23 +20,23 @@ class Anthropic::Test::Resources::Beta::Organization::Analytics::SkillsTest < An
 
     assert_pattern do
       row => {
+        attributed_list_price: String | nil,
         chat_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillChatMetrics,
         claude_code_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillClaudeCodeMetrics,
         cowork_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillCoworkMetrics,
-        distinct_user_count: Integer,
-        office_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillOfficeMetrics,
-        skill_name: String,
-        attributed_list_price: String | nil,
-        chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics | nil,
         currency: String | nil,
+        distinct_user_count: Integer,
         enable_count: Integer | nil,
         estimated_overage_spend: String | nil,
         invocation_count: Integer | nil,
+        office_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillOfficeMetrics,
+        share_status: Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ShareStatus | nil,
+        skill_display_name: String | nil,
+        skill_name: String,
+        chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics | nil,
         product: String | nil,
         rbac_group_id: String | nil,
         rbac_group_name: String | nil,
-        share_status: Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ShareStatus | nil,
-        skill_display_name: String | nil,
         user_id: String | nil
       }
     end

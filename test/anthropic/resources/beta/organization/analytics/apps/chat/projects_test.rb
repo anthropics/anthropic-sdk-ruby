@@ -22,14 +22,13 @@ class Anthropic::Test::Resources::Beta::Organization::Analytics::Apps::Chat::Pro
 
     assert_pattern do
       row => {
+        created_at: Time | nil,
+        created_by: Anthropic::Beta::Organization::BetaAnalyticsUser | nil,
+        distinct_conversation_count: Integer | nil,
         distinct_user_count: Integer,
         message_count: Integer,
         project_id: String,
         project_name: String,
-        created_at: Time | nil,
-        created_by: Anthropic::Beta::Organization::BetaAnalyticsUser | nil,
-        distinct_conversation_count: Integer | nil,
-        product: String | nil,
         rbac_group_id: String | nil,
         rbac_group_name: String | nil,
         user_id: String | nil

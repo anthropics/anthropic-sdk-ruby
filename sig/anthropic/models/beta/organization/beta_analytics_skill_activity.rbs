@@ -4,44 +4,38 @@ module Anthropic
       module Organization
         type beta_analytics_skill_activity =
           {
+            attributed_list_price: String?,
             chat_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillChatMetrics,
             claude_code_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillClaudeCodeMetrics,
             cowork_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillCoworkMetrics,
-            distinct_user_count: Integer,
-            office_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillOfficeMetrics,
-            skill_name: String,
-            attributed_list_price: String?,
-            chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics?,
             currency: String?,
+            distinct_user_count: Integer,
             enable_count: Integer?,
             estimated_overage_spend: String?,
             invocation_count: Integer?,
+            office_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillOfficeMetrics,
+            share_status: Anthropic::Models::Beta::Organization::BetaAnalyticsSkillActivity::share_status?,
+            skill_display_name: String?,
+            skill_name: String,
+            chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics?,
             product: String?,
             rbac_group_id: String?,
             rbac_group_name: String?,
-            share_status: Anthropic::Models::Beta::Organization::BetaAnalyticsSkillActivity::share_status?,
-            skill_display_name: String?,
             user_id: String?
           }
 
         class BetaAnalyticsSkillActivity < Anthropic::Internal::Type::BaseModel
+          attr_accessor attributed_list_price: String?
+
           attr_accessor chat_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillChatMetrics
 
           attr_accessor claude_code_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillClaudeCodeMetrics
 
           attr_accessor cowork_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillCoworkMetrics
 
-          attr_accessor distinct_user_count: Integer
-
-          attr_accessor office_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillOfficeMetrics
-
-          attr_accessor skill_name: String
-
-          attr_accessor attributed_list_price: String?
-
-          attr_accessor chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics?
-
           attr_accessor currency: String?
+
+          attr_accessor distinct_user_count: Integer
 
           attr_accessor enable_count: Integer?
 
@@ -49,59 +43,77 @@ module Anthropic
 
           attr_accessor invocation_count: Integer?
 
+          attr_accessor office_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillOfficeMetrics
+
+          attr_accessor share_status: Anthropic::Models::Beta::Organization::BetaAnalyticsSkillActivity::share_status?
+
+          attr_accessor skill_display_name: String?
+
+          attr_accessor skill_name: String
+
+          attr_accessor chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics?
+
           attr_accessor product: String?
 
           attr_accessor rbac_group_id: String?
 
           attr_accessor rbac_group_name: String?
 
-          attr_accessor share_status: Anthropic::Models::Beta::Organization::BetaAnalyticsSkillActivity::share_status?
-
-          attr_accessor skill_display_name: String?
-
           attr_accessor user_id: String?
 
           def initialize: (
+            attributed_list_price: String?,
             chat_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillChatMetrics,
             claude_code_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillClaudeCodeMetrics,
             cowork_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillCoworkMetrics,
+            currency: String?,
             distinct_user_count: Integer,
+            enable_count: Integer?,
+            estimated_overage_spend: String?,
+            invocation_count: Integer?,
             office_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillOfficeMetrics,
+            share_status: Anthropic::Models::Beta::Organization::BetaAnalyticsSkillActivity::share_status?,
+            skill_display_name: String?,
             skill_name: String,
-            ?attributed_list_price: String?,
             ?chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics?,
-            ?currency: String?,
-            ?enable_count: Integer?,
-            ?estimated_overage_spend: String?,
-            ?invocation_count: Integer?,
             ?product: String?,
             ?rbac_group_id: String?,
             ?rbac_group_name: String?,
-            ?share_status: Anthropic::Models::Beta::Organization::BetaAnalyticsSkillActivity::share_status?,
-            ?skill_display_name: String?,
             ?user_id: String?
           ) -> void
 
           def to_hash: -> {
+            attributed_list_price: String?,
             chat_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillChatMetrics,
             claude_code_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillClaudeCodeMetrics,
             cowork_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillCoworkMetrics,
-            distinct_user_count: Integer,
-            office_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillOfficeMetrics,
-            skill_name: String,
-            attributed_list_price: String?,
-            chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics?,
             currency: String?,
+            distinct_user_count: Integer,
             enable_count: Integer?,
             estimated_overage_spend: String?,
             invocation_count: Integer?,
+            office_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillOfficeMetrics,
+            share_status: Anthropic::Models::Beta::Organization::BetaAnalyticsSkillActivity::share_status?,
+            skill_display_name: String?,
+            skill_name: String,
+            chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics?,
             product: String?,
             rbac_group_id: String?,
             rbac_group_name: String?,
-            share_status: Anthropic::Models::Beta::Organization::BetaAnalyticsSkillActivity::share_status?,
-            skill_display_name: String?,
             user_id: String?
           }
+
+          type share_status = :organization | :private | :public
+
+          module ShareStatus
+            extend Anthropic::Internal::Type::Enum
+
+            ORGANIZATION: :organization
+            PRIVATE: :private
+            PUBLIC: :public
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaAnalyticsSkillActivity::share_status]
+          end
 
           type chat_cowork_unified_metrics =
             {
@@ -123,18 +135,6 @@ module Anthropic
               chat: Anthropic::Beta::Organization::BetaAnalyticsSkillChatCoworkUnifiedChatMetrics,
               sessions: Anthropic::Beta::Organization::BetaAnalyticsSkillChatCoworkUnifiedSessionsMetrics
             }
-          end
-
-          type share_status = :organization | :private | :public
-
-          module ShareStatus
-            extend Anthropic::Internal::Type::Enum
-
-            ORGANIZATION: :organization
-            PRIVATE: :private
-            PUBLIC: :public
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaAnalyticsSkillActivity::share_status]
           end
         end
       end

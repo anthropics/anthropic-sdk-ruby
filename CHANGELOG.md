@@ -10,6 +10,7 @@
 
 ### Bug Fixes
 
+* **api:** require always-sent analytics fields and drop the unused project product field
 * **client:** raise the typed API error, not `TypeError`, when the `error` in an error response is not a hash
 
 
