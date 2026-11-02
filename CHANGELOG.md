@@ -32,6 +32,7 @@
 ### Documentation
 
 * add a description to the AnthropicBeta type
+* **api:** show each field's own description for `speed`
 * correct the error class documented for next_page and fix typos
 * **examples:** use current model IDs
 * **readme:** point to the docs site for documentation
