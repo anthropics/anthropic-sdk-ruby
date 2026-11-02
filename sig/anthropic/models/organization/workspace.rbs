@@ -12,7 +12,8 @@ module Anthropic
           external_key_id: String?,
           name: String,
           tags: ::Hash[Symbol, String],
-          type: :workspace
+          type: :workspace,
+          user_profile_id: String?
         }
 
       class Workspace < Anthropic::Internal::Type::BaseModel
@@ -36,6 +37,8 @@ module Anthropic
 
         attr_accessor type: :workspace
 
+        attr_accessor user_profile_id: String?
+
         def initialize: (
           id: String,
           archived_at: Time?,
@@ -46,6 +49,7 @@ module Anthropic
           external_key_id: String?,
           name: String,
           tags: ::Hash[Symbol, String],
+          user_profile_id: String?,
           ?type: :workspace
         ) -> void
 
@@ -59,7 +63,8 @@ module Anthropic
           external_key_id: String?,
           name: String,
           tags: ::Hash[Symbol, String],
-          type: :workspace
+          type: :workspace,
+          user_profile_id: String?
         }
       end
     end

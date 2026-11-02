@@ -19,7 +19,7 @@ module Anthropic
                 group_by:
                   T.nilable(
                     T::Array[
-                      Anthropic::Beta::Organization::Analytics::ArtifactListParams::GroupBy::OrSymbol
+                      Anthropic::Beta::Organization::BetaAnalyticsArtifactGroupBy::OrSymbol
                     ]
                   ),
                 limit: T.nilable(Integer),

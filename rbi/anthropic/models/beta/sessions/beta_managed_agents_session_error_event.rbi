@@ -45,6 +45,8 @@ module Anthropic
                   Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError::OrHash,
                   Anthropic::Beta::Sessions::BetaManagedAgentsBillingError::OrHash,
                   Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsToolUseLimitReachedError::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsCompactionLimitReachedError::OrHash,
                   Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError::OrHash,
                   Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError::OrHash,
                   Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError::OrHash,
@@ -93,6 +95,8 @@ module Anthropic
                   Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError,
                   Anthropic::Beta::Sessions::BetaManagedAgentsBillingError,
                   Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsToolUseLimitReachedError,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsCompactionLimitReachedError,
                   Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError,
                   Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError,
                   Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError,
@@ -151,6 +155,16 @@ module Anthropic
               CREDENTIAL_HOST_UNREACHABLE_ERROR =
                 T.let(
                   :credential_host_unreachable_error,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error::Type::TaggedSymbol
+                )
+              TOOL_USE_LIMIT_REACHED_ERROR =
+                T.let(
+                  :tool_use_limit_reached_error,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error::Type::TaggedSymbol
+                )
+              COMPACTION_LIMIT_REACHED_ERROR =
+                T.let(
+                  :compaction_limit_reached_error,
                   Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error::Type::TaggedSymbol
                 )
               REPOSITORY_AUTHENTICATION_ERROR =

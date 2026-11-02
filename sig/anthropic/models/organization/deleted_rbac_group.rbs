@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module Organization
+      type deleted_rbac_group = { id: String, type: :rbac_group_deleted }
+
+      class DeletedRBACGroup < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor type: :rbac_group_deleted
+
+        def initialize: (id: String, ?type: :rbac_group_deleted) -> void
+
+        def to_hash: -> { id: String, type: :rbac_group_deleted }
+      end
+    end
+  end
+end

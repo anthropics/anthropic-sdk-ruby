@@ -92,7 +92,7 @@ module Anthropic
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #
-            # @return [Anthropic::Models::Beta::Organization::RBACGroups::MemberRemoveResponse]
+            # @return [Anthropic::Models::Beta::Organization::RBACGroups::BetaDeletedRBACGroupMember]
             #
             # @see Anthropic::Models::Beta::Organization::RBACGroups::MemberRemoveParams
             def remove(user_id, params)
@@ -111,7 +111,7 @@ module Anthropic
                 span_route: "/v1/organizations/rbac_groups/{rbac_group_id}/members/{user_id}",
                 method: :delete,
                 path: ["v1/organizations/rbac_groups/%1$s/members/%2$s", rbac_group_id, user_id],
-                model: Anthropic::Models::Beta::Organization::RBACGroups::MemberRemoveResponse,
+                model: Anthropic::Beta::Organization::RBACGroups::BetaDeletedRBACGroupMember,
                 options: options
               )
             end

@@ -1,0 +1,15 @@
+module Anthropic
+  module Models
+    module Organization
+      type spend_limit_organization_scope = { type: :organization }
+
+      class SpendLimitOrganizationScope < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :organization
+
+        def initialize: (?type: :organization) -> void
+
+        def to_hash: -> { type: :organization }
+      end
+    end
+  end
+end

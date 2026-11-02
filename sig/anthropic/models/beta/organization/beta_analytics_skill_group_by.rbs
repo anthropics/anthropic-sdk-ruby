@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_skill_group_by =
+          :product | :rbac_group_id | :user_id
+
+        module BetaAnalyticsSkillGroupBy
+          extend Anthropic::Internal::Type::Enum
+
+          PRODUCT: :product
+          RBAC_GROUP_ID: :rbac_group_id
+          USER_ID: :user_id
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::beta_analytics_skill_group_by]
+        end
+      end
+    end
+  end
+end

@@ -19,6 +19,14 @@ module Anthropic
 
       attr_reader compliance_settings: Anthropic::Resources::Organization::ComplianceSettings
 
+      attr_reader analytics: Anthropic::Resources::Organization::Analytics
+
+      attr_reader spend_limits: Anthropic::Resources::Organization::SpendLimits
+
+      attr_reader rbac_groups: Anthropic::Resources::Organization::RBACGroups
+
+      attr_reader rbac_roles: Anthropic::Resources::Organization::RBACRoles
+
       def retrieve: (
         ?request_options: Anthropic::request_opts
       ) -> Anthropic::OrganizationInfo

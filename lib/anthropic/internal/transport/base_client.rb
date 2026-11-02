@@ -132,7 +132,7 @@ module Anthropic
 
             case [url.scheme, location.scheme]
             in ["https", "http"]
-              message = "Tried to redirect to a insecure URL"
+              message = "Tried to redirect to an insecure URL"
               raise Anthropic::Errors::APIConnectionError.new(
                 url: url,
                 response: response_headers,

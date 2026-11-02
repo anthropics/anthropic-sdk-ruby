@@ -1,0 +1,30 @@
+# frozen_string_literal: true
+
+module Anthropic
+  module Models
+    module Organization
+      class AnalyticsSkillCoworkMetrics < Anthropic::Internal::Type::BaseModel
+        # @!attribute distinct_session_skill_used_count
+        #   Number of distinct Cowork sessions in which the skill was used. A skill counts
+        #   as used only when it is explicitly activated — the model (or the user, via the
+        #   skill's slash command) invokes it, reading its instructions into context as part
+        #   of that activation. Skills that are merely installed or listed as available, or
+        #   whose content reaches the context without an activation (preloaded,
+        #   hook-injected, or read as a plain file), are not counted. Approximate (HLL,
+        #   typical error <2%) in date-range mode. Null on aggregated rows where a distinct
+        #   count cannot be computed.
+        #
+        #   @return [Integer, nil]
+        required :distinct_session_skill_used_count, Integer, nil?: true
+
+        # @!method initialize(distinct_session_skill_used_count:)
+        #   Cowork activity metrics for a single skill on a given day.
+        #
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Organization::AnalyticsSkillCoworkMetrics} for more details.
+        #
+        #   @param distinct_session_skill_used_count [Integer, nil] Number of distinct Cowork sessions in which the skill was used. A skill counts a
+      end
+    end
+  end
+end

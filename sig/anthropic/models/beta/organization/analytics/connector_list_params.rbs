@@ -8,9 +8,9 @@ module Anthropic
               date: Date?,
               ending_date: Date?,
               filter: ::Array[String]?,
-              group_by: ::Array[Anthropic::Models::Beta::Organization::Analytics::ConnectorListParams::group_by]?,
+              group_by: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_connector_group_by]?,
               limit: Integer?,
-              order: Anthropic::Models::Beta::Organization::Analytics::ConnectorListParams::order?,
+              order: Anthropic::Models::Beta::Organization::beta_analytics_order?,
               order_by: String?,
               page: String?,
               starting_date: Date?
@@ -27,11 +27,11 @@ module Anthropic
 
             attr_accessor filter: ::Array[String]?
 
-            attr_accessor group_by: ::Array[Anthropic::Models::Beta::Organization::Analytics::ConnectorListParams::group_by]?
+            attr_accessor group_by: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_connector_group_by]?
 
             attr_accessor limit: Integer?
 
-            attr_accessor order: Anthropic::Models::Beta::Organization::Analytics::ConnectorListParams::order?
+            attr_accessor order: Anthropic::Models::Beta::Organization::beta_analytics_order?
 
             attr_accessor order_by: String?
 
@@ -43,9 +43,9 @@ module Anthropic
               ?date: Date?,
               ?ending_date: Date?,
               ?filter: ::Array[String]?,
-              ?group_by: ::Array[Anthropic::Models::Beta::Organization::Analytics::ConnectorListParams::group_by]?,
+              ?group_by: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_connector_group_by]?,
               ?limit: Integer?,
-              ?order: Anthropic::Models::Beta::Organization::Analytics::ConnectorListParams::order?,
+              ?order: Anthropic::Models::Beta::Organization::beta_analytics_order?,
               ?order_by: String?,
               ?page: String?,
               ?starting_date: Date?,
@@ -56,37 +56,14 @@ module Anthropic
               date: Date?,
               ending_date: Date?,
               filter: ::Array[String]?,
-              group_by: ::Array[Anthropic::Models::Beta::Organization::Analytics::ConnectorListParams::group_by]?,
+              group_by: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_connector_group_by]?,
               limit: Integer?,
-              order: Anthropic::Models::Beta::Organization::Analytics::ConnectorListParams::order?,
+              order: Anthropic::Models::Beta::Organization::beta_analytics_order?,
               order_by: String?,
               page: String?,
               starting_date: Date?,
               request_options: Anthropic::RequestOptions
             }
-
-            type group_by = :product | :rbac_group_id | :user_id
-
-            module GroupBy
-              extend Anthropic::Internal::Type::Enum
-
-              PRODUCT: :product
-              RBAC_GROUP_ID: :rbac_group_id
-              USER_ID: :user_id
-
-              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Analytics::ConnectorListParams::group_by]
-            end
-
-            type order = :asc | :desc
-
-            module Order
-              extend Anthropic::Internal::Type::Enum
-
-              ASC: :asc
-              DESC: :desc
-
-              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Analytics::ConnectorListParams::order]
-            end
           end
         end
       end

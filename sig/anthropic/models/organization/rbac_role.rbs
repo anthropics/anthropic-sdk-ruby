@@ -1,0 +1,42 @@
+module Anthropic
+  module Models
+    module Organization
+      type rbac_role =
+        {
+          id: String,
+          created_at: Time,
+          display_name: String,
+          type: :rbac_role,
+          updated_at: Time
+        }
+
+      class RBACRole < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor created_at: Time
+
+        attr_accessor display_name: String
+
+        attr_accessor type: :rbac_role
+
+        attr_accessor updated_at: Time
+
+        def initialize: (
+          id: String,
+          created_at: Time,
+          display_name: String,
+          updated_at: Time,
+          ?type: :rbac_role
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          created_at: Time,
+          display_name: String,
+          type: :rbac_role,
+          updated_at: Time
+        }
+      end
+    end
+  end
+end

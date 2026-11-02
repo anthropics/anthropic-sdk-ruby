@@ -39,6 +39,13 @@ module Anthropic
           sig { returns(T.nilable(Integer)) }
           attr_accessor :distinct_connectors_used_count
 
+          # Number of distinct plugins used in Cowork sessions. Null while Cowork plugin-use
+          # metrics are not enabled for this organization. Approximate (HLL, typical error
+          # <2%) in date-range mode. Null on aggregated rows where a distinct count cannot
+          # be computed.
+          sig { returns(T.nilable(Integer)) }
+          attr_accessor :distinct_plugins_used_count
+
           # Number of distinct Cowork sessions. Approximate (HLL, typical error <2%) in
           # date-range mode. Null on aggregated rows where a distinct count cannot be
           # computed.
@@ -51,21 +58,6 @@ module Anthropic
           sig { returns(T.nilable(Integer)) }
           attr_accessor :distinct_skills_used_count
 
-          # Number of messages sent in Cowork sessions
-          sig { returns(Integer) }
-          attr_accessor :message_count
-
-          # Total number of skill invocations in Cowork sessions
-          sig { returns(Integer) }
-          attr_accessor :skills_used_count
-
-          # Number of distinct plugins used in Cowork sessions. Null while Cowork plugin-use
-          # metrics are not enabled for this organization. Approximate (HLL, typical error
-          # <2%) in date-range mode. Null on aggregated rows where a distinct count cannot
-          # be computed.
-          sig { returns(T.nilable(Integer)) }
-          attr_accessor :distinct_plugins_used_count
-
           # Number of successful Edit tool calls in Cowork sessions. Null while the
           # file-edit metrics are not enabled for this organization.
           sig { returns(T.nilable(Integer)) }
@@ -76,6 +68,10 @@ module Anthropic
           # for this organization.
           sig { returns(T.nilable(Integer)) }
           attr_accessor :file_edit_count
+
+          # Number of messages sent in Cowork sessions
+          sig { returns(Integer) }
+          attr_accessor :message_count
 
           # Number of successful MultiEdit tool calls in Cowork sessions. Null while the
           # file-edit metrics are not enabled for this organization.
@@ -99,6 +95,10 @@ module Anthropic
           sig { returns(T.nilable(Integer)) }
           attr_accessor :sessions_with_file_edits_count
 
+          # Total number of skill invocations in Cowork sessions
+          sig { returns(Integer) }
+          attr_accessor :skills_used_count
+
           # Number of successful Write tool calls in Cowork sessions. Null while the
           # file-edit metrics are not enabled for this organization.
           sig { returns(T.nilable(Integer)) }
@@ -112,17 +112,17 @@ module Anthropic
               connectors_used_count: Integer,
               dispatch_turn_count: Integer,
               distinct_connectors_used_count: T.nilable(Integer),
+              distinct_plugins_used_count: T.nilable(Integer),
               distinct_session_count: T.nilable(Integer),
               distinct_skills_used_count: T.nilable(Integer),
-              message_count: Integer,
-              skills_used_count: Integer,
-              distinct_plugins_used_count: T.nilable(Integer),
               edit_tool_count: T.nilable(Integer),
               file_edit_count: T.nilable(Integer),
+              message_count: Integer,
               multi_edit_tool_count: T.nilable(Integer),
               notebook_edit_tool_count: T.nilable(Integer),
               plugins_used_count: T.nilable(Integer),
               sessions_with_file_edits_count: T.nilable(Integer),
+              skills_used_count: Integer,
               write_tool_count: T.nilable(Integer)
             ).returns(T.attached_class)
           end
@@ -143,6 +143,11 @@ module Anthropic
             # error <2%) in date-range mode. Null on aggregated rows where a distinct count
             # cannot be computed.
             distinct_connectors_used_count:,
+            # Number of distinct plugins used in Cowork sessions. Null while Cowork plugin-use
+            # metrics are not enabled for this organization. Approximate (HLL, typical error
+            # <2%) in date-range mode. Null on aggregated rows where a distinct count cannot
+            # be computed.
+            distinct_plugins_used_count:,
             # Number of distinct Cowork sessions. Approximate (HLL, typical error <2%) in
             # date-range mode. Null on aggregated rows where a distinct count cannot be
             # computed.
@@ -151,39 +156,34 @@ module Anthropic
             # error <2%) in date-range mode. Null on aggregated rows where a distinct count
             # cannot be computed.
             distinct_skills_used_count:,
-            # Number of messages sent in Cowork sessions
-            message_count:,
-            # Total number of skill invocations in Cowork sessions
-            skills_used_count:,
-            # Number of distinct plugins used in Cowork sessions. Null while Cowork plugin-use
-            # metrics are not enabled for this organization. Approximate (HLL, typical error
-            # <2%) in date-range mode. Null on aggregated rows where a distinct count cannot
-            # be computed.
-            distinct_plugins_used_count: nil,
             # Number of successful Edit tool calls in Cowork sessions. Null while the
             # file-edit metrics are not enabled for this organization.
-            edit_tool_count: nil,
+            edit_tool_count:,
             # Number of successful file-edit tool calls (Edit, MultiEdit, Write, NotebookEdit)
             # in Cowork sessions. Null, never 0, while the file-edit metrics are not enabled
             # for this organization.
-            file_edit_count: nil,
+            file_edit_count:,
+            # Number of messages sent in Cowork sessions
+            message_count:,
             # Number of successful MultiEdit tool calls in Cowork sessions. Null while the
             # file-edit metrics are not enabled for this organization.
-            multi_edit_tool_count: nil,
+            multi_edit_tool_count:,
             # Number of successful NotebookEdit tool calls in Cowork sessions. Null while the
             # file-edit metrics are not enabled for this organization.
-            notebook_edit_tool_count: nil,
+            notebook_edit_tool_count:,
             # Total number of plugin invocations in Cowork sessions. Null while Cowork
             # plugin-use metrics are not enabled for this organization.
-            plugins_used_count: nil,
+            plugins_used_count:,
             # Number of distinct Cowork sessions with at least one successful file-edit tool
             # call. Null while the file-edit metrics are not enabled for this organization.
             # Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows
             # where a distinct count cannot be computed.
-            sessions_with_file_edits_count: nil,
+            sessions_with_file_edits_count:,
+            # Total number of skill invocations in Cowork sessions
+            skills_used_count:,
             # Number of successful Write tool calls in Cowork sessions. Null while the
             # file-edit metrics are not enabled for this organization.
-            write_tool_count: nil
+            write_tool_count:
           )
           end
 
@@ -195,17 +195,17 @@ module Anthropic
                 connectors_used_count: Integer,
                 dispatch_turn_count: Integer,
                 distinct_connectors_used_count: T.nilable(Integer),
+                distinct_plugins_used_count: T.nilable(Integer),
                 distinct_session_count: T.nilable(Integer),
                 distinct_skills_used_count: T.nilable(Integer),
-                message_count: Integer,
-                skills_used_count: Integer,
-                distinct_plugins_used_count: T.nilable(Integer),
                 edit_tool_count: T.nilable(Integer),
                 file_edit_count: T.nilable(Integer),
+                message_count: Integer,
                 multi_edit_tool_count: T.nilable(Integer),
                 notebook_edit_tool_count: T.nilable(Integer),
                 plugins_used_count: T.nilable(Integer),
                 sessions_with_file_edits_count: T.nilable(Integer),
+                skills_used_count: Integer,
                 write_tool_count: T.nilable(Integer)
               }
             )

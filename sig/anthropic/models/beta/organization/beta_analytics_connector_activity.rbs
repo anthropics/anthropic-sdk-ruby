@@ -6,21 +6,21 @@ module Anthropic
           {
             chat_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatMetrics,
             claude_code_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorClaudeCodeMetrics,
+            connector_display_name: String?,
             connector_name: String,
             cowork_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorCoworkMetrics,
             distinct_user_count: Integer,
-            office_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeMetrics,
-            chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics?,
-            connector_display_name: String?,
             individual_auth_distinct_user_count: Integer?,
             managed_auth_distinct_user_count: Integer?,
+            office_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeMetrics,
+            read_call_count: Integer?,
+            unclassified_call_count: Integer?,
+            write_call_count: Integer?,
+            chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedMetrics?,
             product: String?,
             rbac_group_id: String?,
             rbac_group_name: String?,
-            read_call_count: Integer?,
-            unclassified_call_count: Integer?,
-            user_id: String?,
-            write_call_count: Integer?
+            user_id: String?
           }
 
         class BetaAnalyticsConnectorActivity < Anthropic::Internal::Type::BaseModel
@@ -28,21 +28,27 @@ module Anthropic
 
           attr_accessor claude_code_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorClaudeCodeMetrics
 
+          attr_accessor connector_display_name: String?
+
           attr_accessor connector_name: String
 
           attr_accessor cowork_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorCoworkMetrics
 
           attr_accessor distinct_user_count: Integer
 
-          attr_accessor office_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeMetrics
-
-          attr_accessor chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics?
-
-          attr_accessor connector_display_name: String?
-
           attr_accessor individual_auth_distinct_user_count: Integer?
 
           attr_accessor managed_auth_distinct_user_count: Integer?
+
+          attr_accessor office_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeMetrics
+
+          attr_accessor read_call_count: Integer?
+
+          attr_accessor unclassified_call_count: Integer?
+
+          attr_accessor write_call_count: Integer?
+
+          attr_accessor chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedMetrics?
 
           attr_accessor product: String?
 
@@ -50,75 +56,47 @@ module Anthropic
 
           attr_accessor rbac_group_name: String?
 
-          attr_accessor read_call_count: Integer?
-
-          attr_accessor unclassified_call_count: Integer?
-
           attr_accessor user_id: String?
-
-          attr_accessor write_call_count: Integer?
 
           def initialize: (
             chat_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatMetrics,
             claude_code_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorClaudeCodeMetrics,
+            connector_display_name: String?,
             connector_name: String,
             cowork_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorCoworkMetrics,
             distinct_user_count: Integer,
+            individual_auth_distinct_user_count: Integer?,
+            managed_auth_distinct_user_count: Integer?,
             office_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeMetrics,
-            ?chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics?,
-            ?connector_display_name: String?,
-            ?individual_auth_distinct_user_count: Integer?,
-            ?managed_auth_distinct_user_count: Integer?,
+            read_call_count: Integer?,
+            unclassified_call_count: Integer?,
+            write_call_count: Integer?,
+            ?chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedMetrics?,
             ?product: String?,
             ?rbac_group_id: String?,
             ?rbac_group_name: String?,
-            ?read_call_count: Integer?,
-            ?unclassified_call_count: Integer?,
-            ?user_id: String?,
-            ?write_call_count: Integer?
+            ?user_id: String?
           ) -> void
 
           def to_hash: -> {
             chat_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatMetrics,
             claude_code_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorClaudeCodeMetrics,
+            connector_display_name: String?,
             connector_name: String,
             cowork_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorCoworkMetrics,
             distinct_user_count: Integer,
-            office_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeMetrics,
-            chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics?,
-            connector_display_name: String?,
             individual_auth_distinct_user_count: Integer?,
             managed_auth_distinct_user_count: Integer?,
+            office_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorOfficeMetrics,
+            read_call_count: Integer?,
+            unclassified_call_count: Integer?,
+            write_call_count: Integer?,
+            chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedMetrics?,
             product: String?,
             rbac_group_id: String?,
             rbac_group_name: String?,
-            read_call_count: Integer?,
-            unclassified_call_count: Integer?,
-            user_id: String?,
-            write_call_count: Integer?
+            user_id: String?
           }
-
-          type chat_cowork_unified_metrics =
-            {
-              chat: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics,
-              sessions: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics
-            }
-
-          class ChatCoworkUnifiedMetrics < Anthropic::Internal::Type::BaseModel
-            attr_accessor chat: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics
-
-            attr_accessor sessions: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics
-
-            def initialize: (
-              chat: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics,
-              sessions: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics
-            ) -> void
-
-            def to_hash: -> {
-              chat: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics,
-              sessions: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics
-            }
-          end
         end
       end
     end

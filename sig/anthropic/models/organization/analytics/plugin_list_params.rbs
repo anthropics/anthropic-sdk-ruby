@@ -1,0 +1,70 @@
+module Anthropic
+  module Models
+    module Organization
+      module Analytics
+        type plugin_list_params =
+          {
+            date: Date?,
+            ending_date: Date?,
+            filter: ::Array[String]?,
+            group_by: ::Array[Anthropic::Models::Organization::analytics_plugin_group_by]?,
+            limit: Integer?,
+            order: Anthropic::Models::Organization::analytics_order?,
+            order_by: String?,
+            page: String?,
+            starting_date: Date?
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class PluginListParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor date: Date?
+
+          attr_accessor ending_date: Date?
+
+          attr_accessor filter: ::Array[String]?
+
+          attr_accessor group_by: ::Array[Anthropic::Models::Organization::analytics_plugin_group_by]?
+
+          attr_accessor limit: Integer?
+
+          attr_accessor order: Anthropic::Models::Organization::analytics_order?
+
+          attr_accessor order_by: String?
+
+          attr_accessor page: String?
+
+          attr_accessor starting_date: Date?
+
+          def initialize: (
+            ?date: Date?,
+            ?ending_date: Date?,
+            ?filter: ::Array[String]?,
+            ?group_by: ::Array[Anthropic::Models::Organization::analytics_plugin_group_by]?,
+            ?limit: Integer?,
+            ?order: Anthropic::Models::Organization::analytics_order?,
+            ?order_by: String?,
+            ?page: String?,
+            ?starting_date: Date?,
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            date: Date?,
+            ending_date: Date?,
+            filter: ::Array[String]?,
+            group_by: ::Array[Anthropic::Models::Organization::analytics_plugin_group_by]?,
+            limit: Integer?,
+            order: Anthropic::Models::Organization::analytics_order?,
+            order_by: String?,
+            page: String?,
+            starting_date: Date?,
+            request_options: Anthropic::RequestOptions
+          }
+        end
+      end
+    end
+  end
+end

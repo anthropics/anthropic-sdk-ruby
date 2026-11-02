@@ -13,8 +13,8 @@ module Anthropic
               )
             end
 
-          # Identifier of the external key config. A tagged ID prefixed `ekey_`, or — for
-          # organizations on the Claude Platform on AWS — the AWS KMS key ARN.
+          # Identifier of the external key config: a tagged ID prefixed `ekey_`, or, on
+          # Claude Platform on AWS, an AWS KMS key's ARN.
           sig { returns(String) }
           attr_accessor :id
 
@@ -55,6 +55,13 @@ module Anthropic
           sig { returns(Time) }
           attr_accessor :updated_at
 
+          # ID of the user profile the key is bound to, or null if the key is not bound to
+          # one. A key bound to a user profile can only be attached to a Workspace that has
+          # the same user profile. A key that isn't bound can be attached to a Workspace
+          # whatever its user profile.
+          sig { returns(T.nilable(String)) }
+          attr_accessor :user_profile_id
+
           # CMEK external key config belonging to the caller's organization.
           #
           # Configs are organization-scoped. Workspaces attach to a config; once any
@@ -78,12 +85,13 @@ module Anthropic
                   Anthropic::Beta::Organization::BetaAzureExternalKeyConfig::OrHash
                 ),
               updated_at: Time,
+              user_profile_id: T.nilable(String),
               type: Symbol
             ).returns(T.attached_class)
           end
           def self.new(
-            # Identifier of the external key config. A tagged ID prefixed `ekey_`, or — for
-            # organizations on the Claude Platform on AWS — the AWS KMS key ARN.
+            # Identifier of the external key config: a tagged ID prefixed `ekey_`, or, on
+            # Claude Platform on AWS, an AWS KMS key's ARN.
             id:,
             # Whether any workspace uses this config to encrypt its data — counting live and
             # archived workspaces (an archived workspace's data remains encrypted under the
@@ -99,6 +107,11 @@ module Anthropic
             # KMS provider identity and auth coordinates.
             provider_config:,
             updated_at:,
+            # ID of the user profile the key is bound to, or null if the key is not bound to
+            # one. A key bound to a user profile can only be attached to a Workspace that has
+            # the same user profile. A key that isn't bound can be attached to a Workspace
+            # whatever its user profile.
+            user_profile_id:,
             type: :external_key
           )
           end
@@ -115,7 +128,8 @@ module Anthropic
                 provider_config:
                   Anthropic::Beta::Organization::BetaExternalKey::ProviderConfig::Variants,
                 type: Symbol,
-                updated_at: Time
+                updated_at: Time,
+                user_profile_id: T.nilable(String)
               }
             )
           end
@@ -276,15 +290,13 @@ module Anthropic
             end
             def self.new(
               type:,
-              # Full ARN of the AWS KMS key. On Claude Platform on AWS the key must be a
-              # single-Region key in your organization's own AWS account; cross-account keys,
-              # multi-Region keys, and alias ARNs are rejected.
+              # Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected,
+              # and your organization's own key must be a single-Region key in your
+              # organization's AWS account.
               kms_arn: nil,
               # AWS region. Derived from `kms_arn` if omitted.
               region: nil,
-              # IAM role ARN. Deprecated — Anthropic reaches the KMS key through its own
-              # intermediate role (or, on Claude Platform on AWS, with credentials AWS issues
-              # for the Workspace); this field is ignored.
+              # IAM role ARN. Deprecated; this field is ignored.
               role_arn: nil,
               # Full resource name of the Cloud KMS key.
               key_name: nil,

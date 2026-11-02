@@ -24,15 +24,15 @@ class Anthropic::Test::Resources::Beta::Organization::Analytics::UsersTest < Ant
         claude_code_metrics: Anthropic::Beta::Organization::BetaAnalyticsClaudeCodeMetrics,
         cowork_metrics: Anthropic::Beta::Organization::BetaAnalyticsCoworkMetrics,
         design_metrics: Anthropic::Beta::Organization::BetaAnalyticsDesignMetrics,
+        distinct_user_count: Integer | nil,
         office_metrics: Anthropic::Beta::Organization::BetaAnalyticsOfficeMetrics,
         science_metrics: Anthropic::Beta::Organization::BetaAnalyticsScienceMetrics,
+        user: Anthropic::Beta::Organization::BetaAnalyticsUser | nil,
         web_search_count: Integer,
-        chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics | nil,
-        distinct_user_count: Integer | nil,
+        chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedMetrics | nil,
         last_activity_date: Date | nil,
         rbac_group_id: String | nil,
-        rbac_group_name: String | nil,
-        user: Anthropic::Beta::Organization::BetaAnalyticsUser | nil
+        rbac_group_name: String | nil
       }
     end
   end

@@ -110,7 +110,7 @@ class Anthropic::Test::Resources::Beta::Organization::RBACGroupsTest < Anthropic
       )
 
     assert_pattern do
-      response => Anthropic::Models::Beta::Organization::RBACGroupDeleteResponse
+      response => Anthropic::Beta::Organization::BetaDeletedRBACGroup
     end
 
     assert_pattern do

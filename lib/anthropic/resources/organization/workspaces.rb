@@ -18,7 +18,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Organization::WorkspaceCreateParams} for more details.
         #
-        # @overload create(name:, data_residency: nil, display_color: nil, external_key_id: nil, tags: nil, request_options: {})
+        # @overload create(name:, data_residency: nil, display_color: nil, external_key_id: nil, tags: nil, user_profile_id: nil, request_options: {})
         #
         # @param name [String] Name of the Workspace.
         #
@@ -29,6 +29,8 @@ module Anthropic
         # @param external_key_id [String, nil] ID of the customer-managed encryption key (CMEK) configuration to use for this
         #
         # @param tags [Hash{Symbol=>String}, nil] User-defined tags as string key-value pairs. Keys may not begin with `anthropic`
+        #
+        # @param user_profile_id [String, nil] ID of a user profile to attach to the Workspace. Every inference request through
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -77,7 +79,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Organization::WorkspaceUpdateParams} for more details.
         #
-        # @overload update(workspace_id, data_residency: nil, display_color: nil, external_key_id: nil, name: nil, tags: nil, request_options: {})
+        # @overload update(workspace_id, data_residency: nil, display_color: nil, external_key_id: nil, name: nil, tags: nil, user_profile_id: nil, request_options: {})
         #
         # @param workspace_id [String]
         #
@@ -90,6 +92,8 @@ module Anthropic
         # @param name [String] Name of the Workspace.
         #
         # @param tags [Hash{Symbol=>String, nil}, nil] User-defined tags as string key-value pairs. Keys may not begin with `anthropic`
+        #
+        # @param user_profile_id [String] ID of a user profile to attach to the Workspace. Every inference request through
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #

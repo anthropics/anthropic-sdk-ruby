@@ -21,13 +21,13 @@ module Anthropic
                 group_by:
                   T.nilable(
                     T::Array[
-                      Anthropic::Beta::Organization::Analytics::UserListParams::GroupBy::OrSymbol
+                      Anthropic::Beta::Organization::BetaAnalyticsUserGroupBy::OrSymbol
                     ]
                   ),
                 limit: T.nilable(Integer),
                 order:
                   T.nilable(
-                    Anthropic::Beta::Organization::Analytics::UserListParams::Order::OrSymbol
+                    Anthropic::Beta::Organization::BetaAnalyticsOrder::OrSymbol
                   ),
                 order_by: T.nilable(String),
                 page: T.nilable(String),

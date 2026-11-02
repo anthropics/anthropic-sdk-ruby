@@ -1,0 +1,77 @@
+module Anthropic
+  module Models
+    module Organization
+      type analytics_plugin_activity =
+        {
+          claude_code_metrics: Anthropic::Organization::AnalyticsPluginClaudeCodeMetrics,
+          cowork_metrics: Anthropic::Organization::AnalyticsPluginCoworkMetrics,
+          distinct_user_count: Integer,
+          install_count: Integer?,
+          invocation_count: Integer,
+          plugin_id: String?,
+          plugin_name: String,
+          chat_cowork_unified_metrics: Anthropic::Organization::AnalyticsPluginChatCoworkUnifiedMetrics?,
+          product: String?,
+          rbac_group_id: String?,
+          rbac_group_name: String?,
+          user_id: String?
+        }
+
+      class AnalyticsPluginActivity < Anthropic::Internal::Type::BaseModel
+        attr_accessor claude_code_metrics: Anthropic::Organization::AnalyticsPluginClaudeCodeMetrics
+
+        attr_accessor cowork_metrics: Anthropic::Organization::AnalyticsPluginCoworkMetrics
+
+        attr_accessor distinct_user_count: Integer
+
+        attr_accessor install_count: Integer?
+
+        attr_accessor invocation_count: Integer
+
+        attr_accessor plugin_id: String?
+
+        attr_accessor plugin_name: String
+
+        attr_accessor chat_cowork_unified_metrics: Anthropic::Organization::AnalyticsPluginChatCoworkUnifiedMetrics?
+
+        attr_accessor product: String?
+
+        attr_accessor rbac_group_id: String?
+
+        attr_accessor rbac_group_name: String?
+
+        attr_accessor user_id: String?
+
+        def initialize: (
+          claude_code_metrics: Anthropic::Organization::AnalyticsPluginClaudeCodeMetrics,
+          cowork_metrics: Anthropic::Organization::AnalyticsPluginCoworkMetrics,
+          distinct_user_count: Integer,
+          install_count: Integer?,
+          invocation_count: Integer,
+          plugin_id: String?,
+          plugin_name: String,
+          ?chat_cowork_unified_metrics: Anthropic::Organization::AnalyticsPluginChatCoworkUnifiedMetrics?,
+          ?product: String?,
+          ?rbac_group_id: String?,
+          ?rbac_group_name: String?,
+          ?user_id: String?
+        ) -> void
+
+        def to_hash: -> {
+          claude_code_metrics: Anthropic::Organization::AnalyticsPluginClaudeCodeMetrics,
+          cowork_metrics: Anthropic::Organization::AnalyticsPluginCoworkMetrics,
+          distinct_user_count: Integer,
+          install_count: Integer?,
+          invocation_count: Integer,
+          plugin_id: String?,
+          plugin_name: String,
+          chat_cowork_unified_metrics: Anthropic::Organization::AnalyticsPluginChatCoworkUnifiedMetrics?,
+          product: String?,
+          rbac_group_id: String?,
+          rbac_group_name: String?,
+          user_id: String?
+        }
+      end
+    end
+  end
+end

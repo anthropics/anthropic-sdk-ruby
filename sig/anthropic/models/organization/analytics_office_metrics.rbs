@@ -1,0 +1,37 @@
+module Anthropic
+  module Models
+    module Organization
+      type analytics_office_metrics =
+        {
+          excel: Anthropic::Organization::AnalyticsOfficeProductMetrics,
+          outlook: Anthropic::Organization::AnalyticsOfficeProductMetrics,
+          powerpoint: Anthropic::Organization::AnalyticsOfficeProductMetrics,
+          word: Anthropic::Organization::AnalyticsOfficeProductMetrics
+        }
+
+      class AnalyticsOfficeMetrics < Anthropic::Internal::Type::BaseModel
+        attr_accessor excel: Anthropic::Organization::AnalyticsOfficeProductMetrics
+
+        attr_accessor outlook: Anthropic::Organization::AnalyticsOfficeProductMetrics
+
+        attr_accessor powerpoint: Anthropic::Organization::AnalyticsOfficeProductMetrics
+
+        attr_accessor word: Anthropic::Organization::AnalyticsOfficeProductMetrics
+
+        def initialize: (
+          excel: Anthropic::Organization::AnalyticsOfficeProductMetrics,
+          outlook: Anthropic::Organization::AnalyticsOfficeProductMetrics,
+          powerpoint: Anthropic::Organization::AnalyticsOfficeProductMetrics,
+          word: Anthropic::Organization::AnalyticsOfficeProductMetrics
+        ) -> void
+
+        def to_hash: -> {
+          excel: Anthropic::Organization::AnalyticsOfficeProductMetrics,
+          outlook: Anthropic::Organization::AnalyticsOfficeProductMetrics,
+          powerpoint: Anthropic::Organization::AnalyticsOfficeProductMetrics,
+          word: Anthropic::Organization::AnalyticsOfficeProductMetrics
+        }
+      end
+    end
+  end
+end

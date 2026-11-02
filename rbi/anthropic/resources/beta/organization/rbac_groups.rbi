@@ -100,9 +100,7 @@ module Anthropic
             params(
               rbac_group_id: String,
               request_options: Anthropic::RequestOptions::OrHash
-            ).returns(
-              Anthropic::Models::Beta::Organization::RBACGroupDeleteResponse
-            )
+            ).returns(Anthropic::Beta::Organization::BetaDeletedRBACGroup)
           end
           def delete(
             # ID of the RBAC Group.

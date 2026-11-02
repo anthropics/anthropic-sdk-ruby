@@ -71,6 +71,13 @@ module Anthropic
           end
           attr_writer :design_metrics
 
+          # Number of distinct active users represented by this row. Only set for grouped
+          # rollups (`group_by[]`); null for per-user rows. In date-range mode, recomputed
+          # as an exact distinct count of the group's active members over the requested
+          # window, never a sum of per-day values.
+          sig { returns(T.nilable(Integer)) }
+          attr_accessor :distinct_user_count
+
           # Office Agent activity metrics for a single user on a given day, broken out by
           # Office product.
           sig do
@@ -100,6 +107,22 @@ module Anthropic
           end
           attr_writer :science_metrics
 
+          # The user this row describes. Null on rows aggregated across users.
+          sig do
+            returns(T.nilable(Anthropic::Beta::Organization::BetaAnalyticsUser))
+          end
+          attr_reader :user
+
+          sig do
+            params(
+              user:
+                T.nilable(
+                  Anthropic::Beta::Organization::BetaAnalyticsUser::OrHash
+                )
+            ).void
+          end
+          attr_writer :user
+
           # Number of web searches performed
           sig { returns(Integer) }
           attr_accessor :web_search_count
@@ -111,7 +134,7 @@ module Anthropic
           sig do
             returns(
               T.nilable(
-                Anthropic::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics
+                Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedMetrics
               )
             )
           end
@@ -121,18 +144,11 @@ module Anthropic
             params(
               chat_cowork_unified_metrics:
                 T.nilable(
-                  Anthropic::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics::OrHash
+                  Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedMetrics::OrHash
                 )
             ).void
           end
           attr_writer :chat_cowork_unified_metrics
-
-          # Number of distinct active users represented by this row. Only set for grouped
-          # rollups (`group_by[]`); null for per-user rows. In date-range mode, recomputed
-          # as an exact distinct count of the group's active members over the requested
-          # window, never a sum of per-day values.
-          sig { returns(T.nilable(Integer)) }
-          attr_accessor :distinct_user_count
 
           # Most recent UTC day (YYYY-MM-DD) on which the user had any counted activity,
           # within the requested window: equal to the requested `date` in single-day mode,
@@ -158,22 +174,6 @@ module Anthropic
           sig { returns(T.nilable(String)) }
           attr_accessor :rbac_group_name
 
-          # The user this row describes. Null on rows aggregated across users.
-          sig do
-            returns(T.nilable(Anthropic::Beta::Organization::BetaAnalyticsUser))
-          end
-          attr_reader :user
-
-          sig do
-            params(
-              user:
-                T.nilable(
-                  Anthropic::Beta::Organization::BetaAnalyticsUser::OrHash
-                )
-            ).void
-          end
-          attr_writer :user
-
           # Per-user activity data for a given day.
           sig do
             params(
@@ -185,23 +185,23 @@ module Anthropic
                 Anthropic::Beta::Organization::BetaAnalyticsCoworkMetrics::OrHash,
               design_metrics:
                 Anthropic::Beta::Organization::BetaAnalyticsDesignMetrics::OrHash,
+              distinct_user_count: T.nilable(Integer),
               office_metrics:
                 Anthropic::Beta::Organization::BetaAnalyticsOfficeMetrics::OrHash,
               science_metrics:
                 Anthropic::Beta::Organization::BetaAnalyticsScienceMetrics::OrHash,
-              web_search_count: Integer,
-              chat_cowork_unified_metrics:
-                T.nilable(
-                  Anthropic::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics::OrHash
-                ),
-              distinct_user_count: T.nilable(Integer),
-              last_activity_date: T.nilable(Date),
-              rbac_group_id: T.nilable(String),
-              rbac_group_name: T.nilable(String),
               user:
                 T.nilable(
                   Anthropic::Beta::Organization::BetaAnalyticsUser::OrHash
-                )
+                ),
+              web_search_count: Integer,
+              chat_cowork_unified_metrics:
+                T.nilable(
+                  Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedMetrics::OrHash
+                ),
+              last_activity_date: T.nilable(Date),
+              rbac_group_id: T.nilable(String),
+              rbac_group_name: T.nilable(String)
             ).returns(T.attached_class)
           end
           def self.new(
@@ -213,11 +213,18 @@ module Anthropic
             cowork_metrics:,
             # Claude Design activity metrics for a single user on a given day.
             design_metrics:,
+            # Number of distinct active users represented by this row. Only set for grouped
+            # rollups (`group_by[]`); null for per-user rows. In date-range mode, recomputed
+            # as an exact distinct count of the group's active members over the requested
+            # window, never a sum of per-day values.
+            distinct_user_count:,
             # Office Agent activity metrics for a single user on a given day, broken out by
             # Office product.
             office_metrics:,
             # Claude Science activity metrics for a single user on a given day.
             science_metrics:,
+            # The user this row describes. Null on rows aggregated across users.
+            user:,
             # Number of web searches performed
             web_search_count:,
             # Activity recorded while the member had Chat and Cowork unified (Cowork's
@@ -225,11 +232,6 @@ module Anthropic
             # `sessions` (Cowork activity). Omitted from the response on deployments that do
             # not offer Chat and Cowork unified.
             chat_cowork_unified_metrics: nil,
-            # Number of distinct active users represented by this row. Only set for grouped
-            # rollups (`group_by[]`); null for per-user rows. In date-range mode, recomputed
-            # as an exact distinct count of the group's active members over the requested
-            # window, never a sum of per-day values.
-            distinct_user_count: nil,
             # Most recent UTC day (YYYY-MM-DD) on which the user had any counted activity,
             # within the requested window: equal to the requested `date` in single-day mode,
             # and to the latest active day from `starting_date` (inclusive) to `ending_date`
@@ -247,9 +249,7 @@ module Anthropic
             # Resolved RBAC group display name, alongside `rbac_group_id` when name resolution
             # is available. Null if the group has been deleted or its name could not be
             # resolved; `rbac_group_id` remains the stable key.
-            rbac_group_name: nil,
-            # The user this row describes. Null on rows aggregated across users.
-            user: nil
+            rbac_group_name: nil
           )
           end
 
@@ -264,102 +264,25 @@ module Anthropic
                   Anthropic::Beta::Organization::BetaAnalyticsCoworkMetrics,
                 design_metrics:
                   Anthropic::Beta::Organization::BetaAnalyticsDesignMetrics,
+                distinct_user_count: T.nilable(Integer),
                 office_metrics:
                   Anthropic::Beta::Organization::BetaAnalyticsOfficeMetrics,
                 science_metrics:
                   Anthropic::Beta::Organization::BetaAnalyticsScienceMetrics,
+                user:
+                  T.nilable(Anthropic::Beta::Organization::BetaAnalyticsUser),
                 web_search_count: Integer,
                 chat_cowork_unified_metrics:
                   T.nilable(
-                    Anthropic::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics
+                    Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedMetrics
                   ),
-                distinct_user_count: T.nilable(Integer),
                 last_activity_date: T.nilable(Date),
                 rbac_group_id: T.nilable(String),
-                rbac_group_name: T.nilable(String),
-                user:
-                  T.nilable(Anthropic::Beta::Organization::BetaAnalyticsUser)
+                rbac_group_name: T.nilable(String)
               }
             )
           end
           def to_hash
-          end
-
-          class ChatCoworkUnifiedMetrics < Anthropic::Internal::Type::BaseModel
-            OrHash =
-              T.type_alias do
-                T.any(
-                  Anthropic::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics,
-                  Anthropic::Internal::AnyHash
-                )
-              end
-
-            # Chat activity recorded while members had Chat and Cowork unified turned on.
-            sig do
-              returns(
-                Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedChatMetrics
-              )
-            end
-            attr_reader :chat
-
-            sig do
-              params(
-                chat:
-                  Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedChatMetrics::OrHash
-              ).void
-            end
-            attr_writer :chat
-
-            # Cowork session activity recorded while members had Chat and Cowork unified
-            # turned on.
-            sig do
-              returns(
-                Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedSessionsMetrics
-              )
-            end
-            attr_reader :sessions
-
-            sig do
-              params(
-                sessions:
-                  Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedSessionsMetrics::OrHash
-              ).void
-            end
-            attr_writer :sessions
-
-            # Activity recorded while the member had Chat and Cowork unified (Cowork's
-            # features inside claude.ai chat) turned on, split into `chat` (chat activity) and
-            # `sessions` (Cowork activity). Omitted from the response on deployments that do
-            # not offer Chat and Cowork unified.
-            sig do
-              params(
-                chat:
-                  Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedChatMetrics::OrHash,
-                sessions:
-                  Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedSessionsMetrics::OrHash
-              ).returns(T.attached_class)
-            end
-            def self.new(
-              # Chat activity recorded while members had Chat and Cowork unified turned on.
-              chat:,
-              # Cowork session activity recorded while members had Chat and Cowork unified
-              # turned on.
-              sessions:
-            )
-            end
-
-            sig do
-              override.returns(
-                {
-                  chat:
-                    Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedChatMetrics,
-                  sessions:
-                    Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedSessionsMetrics
-                }
-              )
-            end
-            def to_hash
-            end
           end
         end
       end

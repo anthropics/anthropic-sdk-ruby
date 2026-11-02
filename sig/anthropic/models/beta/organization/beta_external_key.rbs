@@ -11,7 +11,8 @@ module Anthropic
             geo: String,
             provider_config: Anthropic::Models::Beta::Organization::BetaExternalKey::provider_config,
             type: :external_key,
-            updated_at: Time
+            updated_at: Time,
+            user_profile_id: String?
           }
 
         class BetaExternalKey < Anthropic::Internal::Type::BaseModel
@@ -31,6 +32,8 @@ module Anthropic
 
           attr_accessor updated_at: Time
 
+          attr_accessor user_profile_id: String?
+
           def initialize: (
             id: String,
             attachment: Anthropic::Models::Beta::Organization::BetaExternalKey::attachment,
@@ -39,6 +42,7 @@ module Anthropic
             geo: String,
             provider_config: Anthropic::Models::Beta::Organization::BetaExternalKey::provider_config,
             updated_at: Time,
+            user_profile_id: String?,
             ?type: :external_key
           ) -> void
 
@@ -50,7 +54,8 @@ module Anthropic
             geo: String,
             provider_config: Anthropic::Models::Beta::Organization::BetaExternalKey::provider_config,
             type: :external_key,
-            updated_at: Time
+            updated_at: Time,
+            user_profile_id: String?
           }
 
           type attachment =

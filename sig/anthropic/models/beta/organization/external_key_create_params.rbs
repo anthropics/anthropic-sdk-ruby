@@ -6,7 +6,8 @@ module Anthropic
           {
             provider_config: Anthropic::Models::Beta::Organization::ExternalKeyCreateParams::provider_config,
             display_name: String?,
-            geo: Anthropic::Models::Beta::Organization::ExternalKeyCreateParams::geo
+            geo: Anthropic::Models::Beta::Organization::ExternalKeyCreateParams::geo,
+            user_profile_id: String?
           }
           & Anthropic::Internal::Type::request_parameters
 
@@ -24,10 +25,13 @@ module Anthropic
             Anthropic::Models::Beta::Organization::ExternalKeyCreateParams::geo
           ) -> Anthropic::Models::Beta::Organization::ExternalKeyCreateParams::geo
 
+          attr_accessor user_profile_id: String?
+
           def initialize: (
             provider_config: Anthropic::Models::Beta::Organization::ExternalKeyCreateParams::provider_config,
             ?display_name: String?,
             ?geo: Anthropic::Models::Beta::Organization::ExternalKeyCreateParams::geo,
+            ?user_profile_id: String?,
             ?request_options: Anthropic::request_opts
           ) -> void
 
@@ -35,6 +39,7 @@ module Anthropic
             provider_config: Anthropic::Models::Beta::Organization::ExternalKeyCreateParams::provider_config,
             display_name: String?,
             geo: Anthropic::Models::Beta::Organization::ExternalKeyCreateParams::geo,
+            user_profile_id: String?,
             request_options: Anthropic::RequestOptions
           }
 

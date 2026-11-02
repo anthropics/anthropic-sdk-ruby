@@ -1,0 +1,16 @@
+module Anthropic
+  module Models
+    module Organization
+      type analytics_project_group_by = :rbac_group_id | :user_id
+
+      module AnalyticsProjectGroupBy
+        extend Anthropic::Internal::Type::Enum
+
+        RBAC_GROUP_ID: :rbac_group_id
+        USER_ID: :user_id
+
+        def self?.values: -> ::Array[Anthropic::Models::Organization::analytics_project_group_by]
+      end
+    end
+  end
+end

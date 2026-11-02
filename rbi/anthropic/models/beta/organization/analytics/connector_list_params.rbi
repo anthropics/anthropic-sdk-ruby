@@ -62,7 +62,7 @@ module Anthropic
               returns(
                 T.nilable(
                   T::Array[
-                    Anthropic::Beta::Organization::Analytics::ConnectorListParams::GroupBy::OrSymbol
+                    Anthropic::Beta::Organization::BetaAnalyticsConnectorGroupBy::OrSymbol
                   ]
                 )
               )
@@ -80,7 +80,7 @@ module Anthropic
             sig do
               returns(
                 T.nilable(
-                  Anthropic::Beta::Organization::Analytics::ConnectorListParams::Order::OrSymbol
+                  Anthropic::Beta::Organization::BetaAnalyticsOrder::OrSymbol
                 )
               )
             end
@@ -118,13 +118,13 @@ module Anthropic
                 group_by:
                   T.nilable(
                     T::Array[
-                      Anthropic::Beta::Organization::Analytics::ConnectorListParams::GroupBy::OrSymbol
+                      Anthropic::Beta::Organization::BetaAnalyticsConnectorGroupBy::OrSymbol
                     ]
                   ),
                 limit: T.nilable(Integer),
                 order:
                   T.nilable(
-                    Anthropic::Beta::Organization::Analytics::ConnectorListParams::Order::OrSymbol
+                    Anthropic::Beta::Organization::BetaAnalyticsOrder::OrSymbol
                   ),
                 order_by: T.nilable(String),
                 page: T.nilable(String),
@@ -207,13 +207,13 @@ module Anthropic
                   group_by:
                     T.nilable(
                       T::Array[
-                        Anthropic::Beta::Organization::Analytics::ConnectorListParams::GroupBy::OrSymbol
+                        Anthropic::Beta::Organization::BetaAnalyticsConnectorGroupBy::OrSymbol
                       ]
                     ),
                   limit: T.nilable(Integer),
                   order:
                     T.nilable(
-                      Anthropic::Beta::Organization::Analytics::ConnectorListParams::Order::OrSymbol
+                      Anthropic::Beta::Organization::BetaAnalyticsOrder::OrSymbol
                     ),
                   order_by: T.nilable(String),
                   page: T.nilable(String),
@@ -223,83 +223,6 @@ module Anthropic
               )
             end
             def to_hash
-            end
-
-            module GroupBy
-              extend Anthropic::Internal::Type::Enum
-
-              TaggedSymbol =
-                T.type_alias do
-                  T.all(
-                    Symbol,
-                    Anthropic::Beta::Organization::Analytics::ConnectorListParams::GroupBy
-                  )
-                end
-              OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-              PRODUCT =
-                T.let(
-                  :product,
-                  Anthropic::Beta::Organization::Analytics::ConnectorListParams::GroupBy::TaggedSymbol
-                )
-              RBAC_GROUP_ID =
-                T.let(
-                  :rbac_group_id,
-                  Anthropic::Beta::Organization::Analytics::ConnectorListParams::GroupBy::TaggedSymbol
-                )
-              USER_ID =
-                T.let(
-                  :user_id,
-                  Anthropic::Beta::Organization::Analytics::ConnectorListParams::GroupBy::TaggedSymbol
-                )
-
-              sig do
-                override.returns(
-                  T::Array[
-                    Anthropic::Beta::Organization::Analytics::ConnectorListParams::GroupBy::TaggedSymbol
-                  ]
-                )
-              end
-              def self.values
-              end
-            end
-
-            # Sort direction: `asc` or `desc`. Defaults to `asc` for the endpoint's sort
-            # column and to `desc` when `order_by` names a metric (a top-N ranking). Applies
-            # to `order_by`, or to the endpoint's default sort field when `order_by` is
-            # omitted.
-            module Order
-              extend Anthropic::Internal::Type::Enum
-
-              TaggedSymbol =
-                T.type_alias do
-                  T.all(
-                    Symbol,
-                    Anthropic::Beta::Organization::Analytics::ConnectorListParams::Order
-                  )
-                end
-              OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-              ASC =
-                T.let(
-                  :asc,
-                  Anthropic::Beta::Organization::Analytics::ConnectorListParams::Order::TaggedSymbol
-                )
-              DESC =
-                T.let(
-                  :desc,
-                  Anthropic::Beta::Organization::Analytics::ConnectorListParams::Order::TaggedSymbol
-                )
-
-              sig do
-                override.returns(
-                  T::Array[
-                    Anthropic::Beta::Organization::Analytics::ConnectorListParams::Order::TaggedSymbol
-                  ]
-                )
-              end
-              def self.values
-              end
             end
           end
         end

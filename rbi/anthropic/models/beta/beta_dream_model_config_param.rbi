@@ -19,7 +19,7 @@ module Anthropic
         # The ID can be 1 to 256 characters long.
         #
         # The
-        # [limits table in the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams#limits)
+        # [Availability section of the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams#feature-availability)
         # lists the supported models.
         sig { returns(String) }
         attr_accessor :id
@@ -52,7 +52,7 @@ module Anthropic
           # The ID can be 1 to 256 characters long.
           #
           # The
-          # [limits table in the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams#limits)
+          # [Availability section of the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams#feature-availability)
           # lists the supported models.
           id:,
           # How fast the model generates output for the dream. Defaults to `standard`.

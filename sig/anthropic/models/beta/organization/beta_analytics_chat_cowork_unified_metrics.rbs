@@ -1,0 +1,29 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_chat_cowork_unified_metrics =
+          {
+            chat: Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedChatMetrics,
+            sessions: Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedSessionsMetrics
+          }
+
+        class BetaAnalyticsChatCoworkUnifiedMetrics < Anthropic::Internal::Type::BaseModel
+          attr_accessor chat: Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedChatMetrics
+
+          attr_accessor sessions: Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedSessionsMetrics
+
+          def initialize: (
+            chat: Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedChatMetrics,
+            sessions: Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedSessionsMetrics
+          ) -> void
+
+          def to_hash: -> {
+            chat: Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedChatMetrics,
+            sessions: Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedSessionsMetrics
+          }
+        end
+      end
+    end
+  end
+end

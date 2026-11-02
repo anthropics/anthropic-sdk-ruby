@@ -1,0 +1,23 @@
+module Anthropic
+  module Resources
+    class Organization
+      class Analytics
+        attr_reader summaries: Anthropic::Resources::Organization::Analytics::Summaries
+
+        attr_reader users: Anthropic::Resources::Organization::Analytics::Users
+
+        attr_reader apps: Anthropic::Resources::Organization::Analytics::Apps
+
+        attr_reader connectors: Anthropic::Resources::Organization::Analytics::Connectors
+
+        attr_reader plugins: Anthropic::Resources::Organization::Analytics::Plugins
+
+        attr_reader skills: Anthropic::Resources::Organization::Analytics::Skills
+
+        attr_reader artifacts: Anthropic::Resources::Organization::Analytics::Artifacts
+
+        def initialize: (client: Anthropic::Client) -> void
+      end
+    end
+  end
+end

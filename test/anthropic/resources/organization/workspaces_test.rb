@@ -21,7 +21,8 @@ class Anthropic::Test::Resources::Organization::WorkspacesTest < Anthropic::Test
         external_key_id: String | nil,
         name: String,
         tags: ^(Anthropic::Internal::Type::HashOf[String]),
-        type: Symbol
+        type: Symbol,
+        user_profile_id: String | nil
       }
     end
   end
@@ -44,7 +45,8 @@ class Anthropic::Test::Resources::Organization::WorkspacesTest < Anthropic::Test
         external_key_id: String | nil,
         name: String,
         tags: ^(Anthropic::Internal::Type::HashOf[String]),
-        type: Symbol
+        type: Symbol,
+        user_profile_id: String | nil
       }
     end
   end
@@ -67,7 +69,8 @@ class Anthropic::Test::Resources::Organization::WorkspacesTest < Anthropic::Test
         external_key_id: String | nil,
         name: String,
         tags: ^(Anthropic::Internal::Type::HashOf[String]),
-        type: Symbol
+        type: Symbol,
+        user_profile_id: String | nil
       }
     end
   end
@@ -97,7 +100,8 @@ class Anthropic::Test::Resources::Organization::WorkspacesTest < Anthropic::Test
         external_key_id: String | nil,
         name: String,
         tags: ^(Anthropic::Internal::Type::HashOf[String]),
-        type: Symbol
+        type: Symbol,
+        user_profile_id: String | nil
       }
     end
   end
@@ -120,7 +124,8 @@ class Anthropic::Test::Resources::Organization::WorkspacesTest < Anthropic::Test
         external_key_id: String | nil,
         name: String,
         tags: ^(Anthropic::Internal::Type::HashOf[String]),
-        type: Symbol
+        type: Symbol,
+        user_profile_id: String | nil
       }
     end
   end

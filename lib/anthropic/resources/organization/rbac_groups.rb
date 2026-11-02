@@ -1,0 +1,165 @@
+# frozen_string_literal: true
+
+module Anthropic
+  module Resources
+    class Organization
+      class RBACGroups
+        # @return [Anthropic::Resources::Organization::RBACGroups::Members]
+        attr_reader :members
+
+        # Create an RBAC Group in the Claude Enterprise tenant. Groups created via the API
+        # have source type `"direct"`.
+        #
+        # The RBAC Groups API is available to Claude Enterprise organizations only.
+        #
+        # @overload create(name:, request_options: {})
+        #
+        # @param name [String] Name of the RBAC Group. Not uniqueness-enforced.
+        #
+        # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [Anthropic::Models::Organization::RBACGroup]
+        #
+        # @see Anthropic::Models::Organization::RBACGroupCreateParams
+        def create(params)
+          parsed, options = Anthropic::Organization::RBACGroupCreateParams.dump_request(params)
+          @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_RBAC_GROUPS_CREATE,
+            span_created_id: "anthropic.organization.rbac_group.id",
+            span_route: "/v1/organizations/rbac_groups",
+            method: :post,
+            path: "v1/organizations/rbac_groups",
+            body: parsed,
+            model: Anthropic::Organization::RBACGroup,
+            options: options
+          )
+        end
+
+        # Retrieve an RBAC Group by ID.
+        #
+        # The RBAC Groups API is available to Claude Enterprise organizations only.
+        #
+        # @overload retrieve(rbac_group_id, request_options: {})
+        #
+        # @param rbac_group_id [String] ID of the RBAC Group.
+        #
+        # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [Anthropic::Models::Organization::RBACGroup]
+        #
+        # @see Anthropic::Models::Organization::RBACGroupRetrieveParams
+        def retrieve(rbac_group_id, params = {})
+          @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_RBAC_GROUPS_RETRIEVE,
+            span_attributes: {"anthropic.organization.rbac_group.id" => rbac_group_id},
+            span_route: "/v1/organizations/rbac_groups/{rbac_group_id}",
+            method: :get,
+            path: ["v1/organizations/rbac_groups/%1$s", rbac_group_id],
+            model: Anthropic::Organization::RBACGroup,
+            options: params[:request_options]
+          )
+        end
+
+        # Update an RBAC Group's name. Groups provisioned by an identity provider (source
+        # type `"scim"`) cannot be modified via the API while an organization in the
+        # tenant uses SCIM provisioning.
+        #
+        # The RBAC Groups API is available to Claude Enterprise organizations only.
+        #
+        # @overload update(rbac_group_id, name: nil, request_options: {})
+        #
+        # @param rbac_group_id [String] ID of the RBAC Group.
+        #
+        # @param name [String, nil] Name of the RBAC Group. Not uniqueness-enforced.
+        #
+        # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [Anthropic::Models::Organization::RBACGroup]
+        #
+        # @see Anthropic::Models::Organization::RBACGroupUpdateParams
+        def update(rbac_group_id, params = {})
+          parsed, options = Anthropic::Organization::RBACGroupUpdateParams.dump_request(params)
+          @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_RBAC_GROUPS_UPDATE,
+            span_attributes: {"anthropic.organization.rbac_group.id" => rbac_group_id},
+            span_route: "/v1/organizations/rbac_groups/{rbac_group_id}",
+            method: :post,
+            path: ["v1/organizations/rbac_groups/%1$s", rbac_group_id],
+            body: parsed,
+            model: Anthropic::Organization::RBACGroup,
+            options: options
+          )
+        end
+
+        # List RBAC Groups in the Claude Enterprise tenant.
+        #
+        # The RBAC Groups API is available to Claude Enterprise organizations only.
+        #
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Organization::RBACGroupListParams} for more details.
+        #
+        # @overload list(limit: nil, page: nil, request_options: {})
+        #
+        # @param limit [Integer] Number of items to return per page.
+        #
+        # @param page [String, nil] Optionally set to the `next_page` token from the previous response.
+        #
+        # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [Anthropic::Internal::PageCursor<Anthropic::Models::Organization::RBACGroup>]
+        #
+        # @see Anthropic::Models::Organization::RBACGroupListParams
+        def list(params = {})
+          parsed, options = Anthropic::Organization::RBACGroupListParams.dump_request(params)
+          query = Anthropic::Internal::Util.encode_query_params(parsed)
+          @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_RBAC_GROUPS_LIST,
+            span_route: "/v1/organizations/rbac_groups",
+            span_query: %w[limit page],
+            method: :get,
+            path: "v1/organizations/rbac_groups",
+            query: query,
+            page: Anthropic::Internal::PageCursor,
+            model: Anthropic::Organization::RBACGroup,
+            options: options
+          )
+        end
+
+        # Delete an RBAC Group. Groups provisioned by an identity provider (source type
+        # `"scim"`) cannot be deleted via the API while an organization in the tenant uses
+        # SCIM provisioning.
+        #
+        # The RBAC Groups API is available to Claude Enterprise organizations only.
+        #
+        # @overload delete(rbac_group_id, request_options: {})
+        #
+        # @param rbac_group_id [String] ID of the RBAC Group.
+        #
+        # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [Anthropic::Models::Organization::DeletedRBACGroup]
+        #
+        # @see Anthropic::Models::Organization::RBACGroupDeleteParams
+        def delete(rbac_group_id, params = {})
+          @client.request(
+            span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_RBAC_GROUPS_DELETE,
+            span_attributes: {"anthropic.organization.rbac_group.id" => rbac_group_id},
+            span_route: "/v1/organizations/rbac_groups/{rbac_group_id}",
+            method: :delete,
+            path: ["v1/organizations/rbac_groups/%1$s", rbac_group_id],
+            model: Anthropic::Organization::DeletedRBACGroup,
+            options: params[:request_options]
+          )
+        end
+
+        # @api private
+        #
+        # @param client [Anthropic::Client]
+        def initialize(client:)
+          @client = client
+          @members = Anthropic::Resources::Organization::RBACGroups::Members.new(client: client)
+        end
+      end
+    end
+  end
+end

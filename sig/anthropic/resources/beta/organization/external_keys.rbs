@@ -7,6 +7,7 @@ module Anthropic
             provider_config: Anthropic::Models::Beta::Organization::ExternalKeyCreateParams::provider_config,
             ?display_name: String?,
             ?geo: Anthropic::Models::Beta::Organization::ExternalKeyCreateParams::geo,
+            ?user_profile_id: String?,
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Beta::Organization::BetaExternalKey
 

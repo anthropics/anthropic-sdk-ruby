@@ -68,7 +68,7 @@ module Anthropic
                 rbac_group_id: String,
                 request_options: Anthropic::RequestOptions::OrHash
               ).returns(
-                Anthropic::Models::Beta::Organization::RBACGroups::MemberRemoveResponse
+                Anthropic::Beta::Organization::RBACGroups::BetaDeletedRBACGroupMember
               )
             end
             def remove(

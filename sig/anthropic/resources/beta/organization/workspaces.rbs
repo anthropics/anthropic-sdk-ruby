@@ -15,6 +15,7 @@ module Anthropic
             ?display_color: String?,
             ?external_key_id: String?,
             ?tags: ::Hash[Symbol, String]?,
+            ?user_profile_id: String?,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Beta::Organization::BetaWorkspace
@@ -31,6 +32,7 @@ module Anthropic
             ?external_key_id: String,
             ?name: String,
             ?tags: ::Hash[Symbol, String?]?,
+            ?user_profile_id: String,
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Beta::Organization::BetaWorkspace
 

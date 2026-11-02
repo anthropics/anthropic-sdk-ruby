@@ -18,10 +18,6 @@ module Anthropic
         #
         # Give 1 to 100 IDs, with no duplicates. Each session must be in the same
         # workspace as the dream. Responses list the IDs in sorted order.
-        #
-        # The
-        # [limits table in the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams#limits)
-        # lists all the limits on a dream.
         sig { returns(T::Array[String]) }
         attr_accessor :session_ids
 
@@ -39,10 +35,6 @@ module Anthropic
           #
           # Give 1 to 100 IDs, with no duplicates. Each session must be in the same
           # workspace as the dream. Responses list the IDs in sorted order.
-          #
-          # The
-          # [limits table in the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams#limits)
-          # lists all the limits on a dream.
           session_ids:,
           type: :sessions
         )

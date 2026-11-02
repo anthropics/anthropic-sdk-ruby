@@ -70,7 +70,7 @@ class Anthropic::Test::Resources::Organization::Workspaces::MembersTest < Anthro
     response =
       @anthropic.organization.workspaces.members.add(
         "workspace_id",
-        user_id: "user_01WCz1FkmYMm4gnmykNKUu3Q",
+        user_id: "user_01WxYzAbCdEfGhJkMnPqRsTu",
         workspace_role: :workspace_admin
       )
 

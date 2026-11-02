@@ -31,11 +31,11 @@ module Anthropic
             #
             # @param filter [Array<String>, nil] Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the par
             #
-            # @param group_by [Array<Symbol, Anthropic::Models::Beta::Organization::Analytics::PluginListParams::GroupBy>, nil] Dimensions to break results out by (e.g. `group_by[]=user_id`). Supported on thi
+            # @param group_by [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsPluginGroupBy>, nil] Dimensions to break results out by (e.g. `group_by[]=user_id`). Supported on thi
             #
             # @param limit [Integer, nil] Number of results per page (1-1000, default 100).
             #
-            # @param order [Symbol, Anthropic::Models::Beta::Organization::Analytics::PluginListParams::Order, nil] Sort direction: `asc` or `desc`. Defaults to `asc` for the endpoint's sort colum
+            # @param order [Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsOrder, nil] Sort direction: `asc` or `desc`. Defaults to `asc` for the endpoint's sort colum
             #
             # @param order_by [String, nil] Sort field. Restricted to the endpoint's sort column plus its rankable metrics (
             #

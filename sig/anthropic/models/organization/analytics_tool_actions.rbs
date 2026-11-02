@@ -1,0 +1,37 @@
+module Anthropic
+  module Models
+    module Organization
+      type analytics_tool_actions =
+        {
+          edit_tool: Anthropic::Organization::AnalyticsToolActionCounts,
+          multi_edit_tool: Anthropic::Organization::AnalyticsToolActionCounts,
+          notebook_edit_tool: Anthropic::Organization::AnalyticsToolActionCounts,
+          write_tool: Anthropic::Organization::AnalyticsToolActionCounts
+        }
+
+      class AnalyticsToolActions < Anthropic::Internal::Type::BaseModel
+        attr_accessor edit_tool: Anthropic::Organization::AnalyticsToolActionCounts
+
+        attr_accessor multi_edit_tool: Anthropic::Organization::AnalyticsToolActionCounts
+
+        attr_accessor notebook_edit_tool: Anthropic::Organization::AnalyticsToolActionCounts
+
+        attr_accessor write_tool: Anthropic::Organization::AnalyticsToolActionCounts
+
+        def initialize: (
+          edit_tool: Anthropic::Organization::AnalyticsToolActionCounts,
+          multi_edit_tool: Anthropic::Organization::AnalyticsToolActionCounts,
+          notebook_edit_tool: Anthropic::Organization::AnalyticsToolActionCounts,
+          write_tool: Anthropic::Organization::AnalyticsToolActionCounts
+        ) -> void
+
+        def to_hash: -> {
+          edit_tool: Anthropic::Organization::AnalyticsToolActionCounts,
+          multi_edit_tool: Anthropic::Organization::AnalyticsToolActionCounts,
+          notebook_edit_tool: Anthropic::Organization::AnalyticsToolActionCounts,
+          write_tool: Anthropic::Organization::AnalyticsToolActionCounts
+        }
+      end
+    end
+  end
+end

@@ -7,7 +7,7 @@ module Anthropic
             def list: (
               ?limit: Integer,
               ?page: String?,
-              ?period: ::Array[Anthropic::Models::Beta::Organization::SpendLimits::EffectiveListParams::period]?,
+              ?period: ::Array[Anthropic::Models::Beta::Organization::beta_spend_limit_period]?,
               ?user_ids: ::Array[String]?,
               ?request_options: Anthropic::request_opts
             ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Organization::BetaSpendSummary]

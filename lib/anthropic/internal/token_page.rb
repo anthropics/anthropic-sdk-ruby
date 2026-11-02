@@ -32,7 +32,7 @@ module Anthropic
         !data.to_a.empty? && !next_page_.to_s.empty?
       end
 
-      # @raise [Anthropic::HTTP::Error]
+      # @raise [Anthropic::Errors::APIError]
       # @return [self]
       def next_page
         unless next_page?

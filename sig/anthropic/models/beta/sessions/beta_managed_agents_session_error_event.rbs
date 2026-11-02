@@ -42,6 +42,8 @@ module Anthropic
             | Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError
             | Anthropic::Beta::Sessions::BetaManagedAgentsBillingError
             | Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError
+            | Anthropic::Beta::Sessions::BetaManagedAgentsToolUseLimitReachedError
+            | Anthropic::Beta::Sessions::BetaManagedAgentsCompactionLimitReachedError
             | Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError
             | Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError
             | Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError
@@ -60,6 +62,8 @@ module Anthropic
               | :mcp_authentication_failed_error
               | :billing_error
               | :credential_host_unreachable_error
+              | :tool_use_limit_reached_error
+              | :compaction_limit_reached_error
               | :repository_authentication_error
               | :repository_forbidden_error
               | :repository_not_found_error
@@ -77,6 +81,8 @@ module Anthropic
               MCP_AUTHENTICATION_FAILED_ERROR: :mcp_authentication_failed_error
               BILLING_ERROR: :billing_error
               CREDENTIAL_HOST_UNREACHABLE_ERROR: :credential_host_unreachable_error
+              TOOL_USE_LIMIT_REACHED_ERROR: :tool_use_limit_reached_error
+              COMPACTION_LIMIT_REACHED_ERROR: :compaction_limit_reached_error
               REPOSITORY_AUTHENTICATION_ERROR: :repository_authentication_error
               REPOSITORY_FORBIDDEN_ERROR: :repository_forbidden_error
               REPOSITORY_NOT_FOUND_ERROR: :repository_not_found_error
@@ -138,6 +144,18 @@ module Anthropic
                 vault_id: String
               ) -> Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError
               | (
+                type: :tool_use_limit_reached_error
+                | "tool_use_limit_reached_error",
+                message: String,
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsToolUseLimitReachedError::retry_status
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsToolUseLimitReachedError
+              | (
+                type: :compaction_limit_reached_error
+                | "compaction_limit_reached_error",
+                message: String,
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsCompactionLimitReachedError::retry_status
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsCompactionLimitReachedError
+              | (
                 type: :repository_authentication_error
                 | "repository_authentication_error",
                 message: String,
@@ -182,6 +200,8 @@ module Anthropic
                 | Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError::retry_status
                 | Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError::retry_status
                 | Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError::retry_status
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsToolUseLimitReachedError::retry_status
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsCompactionLimitReachedError::retry_status
                 | Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError::retry_status
                 | Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError::retry_status
                 | Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError::retry_status

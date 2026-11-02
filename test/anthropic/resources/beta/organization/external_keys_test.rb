@@ -25,7 +25,8 @@ class Anthropic::Test::Resources::Beta::Organization::ExternalKeysTest < Anthrop
         geo: String,
         provider_config: Anthropic::Beta::Organization::BetaExternalKey::ProviderConfig,
         type: Symbol,
-        updated_at: Time
+        updated_at: Time,
+        user_profile_id: String | nil
       }
     end
   end
@@ -50,7 +51,8 @@ class Anthropic::Test::Resources::Beta::Organization::ExternalKeysTest < Anthrop
         geo: String,
         provider_config: Anthropic::Beta::Organization::BetaExternalKey::ProviderConfig,
         type: Symbol,
-        updated_at: Time
+        updated_at: Time,
+        user_profile_id: String | nil
       }
     end
   end
@@ -75,7 +77,8 @@ class Anthropic::Test::Resources::Beta::Organization::ExternalKeysTest < Anthrop
         geo: String,
         provider_config: Anthropic::Beta::Organization::BetaExternalKey::ProviderConfig,
         type: Symbol,
-        updated_at: Time
+        updated_at: Time,
+        user_profile_id: String | nil
       }
     end
   end
@@ -104,7 +107,8 @@ class Anthropic::Test::Resources::Beta::Organization::ExternalKeysTest < Anthrop
         geo: String,
         provider_config: Anthropic::Beta::Organization::BetaExternalKey::ProviderConfig,
         type: Symbol,
-        updated_at: Time
+        updated_at: Time,
+        user_profile_id: String | nil
       }
     end
   end

@@ -41,6 +41,15 @@ module Anthropic
           #   @return [Integer, nil]
           required :distinct_connectors_used_count, Integer, nil?: true
 
+          # @!attribute distinct_plugins_used_count
+          #   Number of distinct plugins used in Cowork sessions. Null while Cowork plugin-use
+          #   metrics are not enabled for this organization. Approximate (HLL, typical error
+          #   <2%) in date-range mode. Null on aggregated rows where a distinct count cannot
+          #   be computed.
+          #
+          #   @return [Integer, nil]
+          required :distinct_plugins_used_count, Integer, nil?: true
+
           # @!attribute distinct_session_count
           #   Number of distinct Cowork sessions. Approximate (HLL, typical error <2%) in
           #   date-range mode. Null on aggregated rows where a distinct count cannot be
@@ -57,33 +66,12 @@ module Anthropic
           #   @return [Integer, nil]
           required :distinct_skills_used_count, Integer, nil?: true
 
-          # @!attribute message_count
-          #   Number of messages sent in Cowork sessions
-          #
-          #   @return [Integer]
-          required :message_count, Integer
-
-          # @!attribute skills_used_count
-          #   Total number of skill invocations in Cowork sessions
-          #
-          #   @return [Integer]
-          required :skills_used_count, Integer
-
-          # @!attribute distinct_plugins_used_count
-          #   Number of distinct plugins used in Cowork sessions. Null while Cowork plugin-use
-          #   metrics are not enabled for this organization. Approximate (HLL, typical error
-          #   <2%) in date-range mode. Null on aggregated rows where a distinct count cannot
-          #   be computed.
-          #
-          #   @return [Integer, nil]
-          optional :distinct_plugins_used_count, Integer, nil?: true
-
           # @!attribute edit_tool_count
           #   Number of successful Edit tool calls in Cowork sessions. Null while the
           #   file-edit metrics are not enabled for this organization.
           #
           #   @return [Integer, nil]
-          optional :edit_tool_count, Integer, nil?: true
+          required :edit_tool_count, Integer, nil?: true
 
           # @!attribute file_edit_count
           #   Number of successful file-edit tool calls (Edit, MultiEdit, Write, NotebookEdit)
@@ -91,28 +79,34 @@ module Anthropic
           #   for this organization.
           #
           #   @return [Integer, nil]
-          optional :file_edit_count, Integer, nil?: true
+          required :file_edit_count, Integer, nil?: true
+
+          # @!attribute message_count
+          #   Number of messages sent in Cowork sessions
+          #
+          #   @return [Integer]
+          required :message_count, Integer
 
           # @!attribute multi_edit_tool_count
           #   Number of successful MultiEdit tool calls in Cowork sessions. Null while the
           #   file-edit metrics are not enabled for this organization.
           #
           #   @return [Integer, nil]
-          optional :multi_edit_tool_count, Integer, nil?: true
+          required :multi_edit_tool_count, Integer, nil?: true
 
           # @!attribute notebook_edit_tool_count
           #   Number of successful NotebookEdit tool calls in Cowork sessions. Null while the
           #   file-edit metrics are not enabled for this organization.
           #
           #   @return [Integer, nil]
-          optional :notebook_edit_tool_count, Integer, nil?: true
+          required :notebook_edit_tool_count, Integer, nil?: true
 
           # @!attribute plugins_used_count
           #   Total number of plugin invocations in Cowork sessions. Null while Cowork
           #   plugin-use metrics are not enabled for this organization.
           #
           #   @return [Integer, nil]
-          optional :plugins_used_count, Integer, nil?: true
+          required :plugins_used_count, Integer, nil?: true
 
           # @!attribute sessions_with_file_edits_count
           #   Number of distinct Cowork sessions with at least one successful file-edit tool
@@ -121,16 +115,22 @@ module Anthropic
           #   where a distinct count cannot be computed.
           #
           #   @return [Integer, nil]
-          optional :sessions_with_file_edits_count, Integer, nil?: true
+          required :sessions_with_file_edits_count, Integer, nil?: true
+
+          # @!attribute skills_used_count
+          #   Total number of skill invocations in Cowork sessions
+          #
+          #   @return [Integer]
+          required :skills_used_count, Integer
 
           # @!attribute write_tool_count
           #   Number of successful Write tool calls in Cowork sessions. Null while the
           #   file-edit metrics are not enabled for this organization.
           #
           #   @return [Integer, nil]
-          optional :write_tool_count, Integer, nil?: true
+          required :write_tool_count, Integer, nil?: true
 
-          # @!method initialize(action_count:, artifacts_created_count:, connectors_used_count:, dispatch_turn_count:, distinct_connectors_used_count:, distinct_session_count:, distinct_skills_used_count:, message_count:, skills_used_count:, distinct_plugins_used_count: nil, edit_tool_count: nil, file_edit_count: nil, multi_edit_tool_count: nil, notebook_edit_tool_count: nil, plugins_used_count: nil, sessions_with_file_edits_count: nil, write_tool_count: nil)
+          # @!method initialize(action_count:, artifacts_created_count:, connectors_used_count:, dispatch_turn_count:, distinct_connectors_used_count:, distinct_plugins_used_count:, distinct_session_count:, distinct_skills_used_count:, edit_tool_count:, file_edit_count:, message_count:, multi_edit_tool_count:, notebook_edit_tool_count:, plugins_used_count:, sessions_with_file_edits_count:, skills_used_count:, write_tool_count:)
           #   Cowork activity metrics for a single user on a given day.
           #
           #   Some parameter documentations has been truncated, see
@@ -147,19 +147,17 @@ module Anthropic
           #
           #   @param distinct_connectors_used_count [Integer, nil] Number of distinct connectors used in Cowork sessions. Approximate (HLL, typical
           #
+          #   @param distinct_plugins_used_count [Integer, nil] Number of distinct plugins used in Cowork sessions. Null while Cowork plugin-use
+          #
           #   @param distinct_session_count [Integer, nil] Number of distinct Cowork sessions. Approximate (HLL, typical error <2%) in date
           #
           #   @param distinct_skills_used_count [Integer, nil] Number of distinct skills used in Cowork sessions. Approximate (HLL, typical err
           #
-          #   @param message_count [Integer] Number of messages sent in Cowork sessions
-          #
-          #   @param skills_used_count [Integer] Total number of skill invocations in Cowork sessions
-          #
-          #   @param distinct_plugins_used_count [Integer, nil] Number of distinct plugins used in Cowork sessions. Null while Cowork plugin-use
-          #
           #   @param edit_tool_count [Integer, nil] Number of successful Edit tool calls in Cowork sessions. Null while the file-edi
           #
           #   @param file_edit_count [Integer, nil] Number of successful file-edit tool calls (Edit, MultiEdit, Write, NotebookEdit)
+          #
+          #   @param message_count [Integer] Number of messages sent in Cowork sessions
           #
           #   @param multi_edit_tool_count [Integer, nil] Number of successful MultiEdit tool calls in Cowork sessions. Null while the fil
           #
@@ -168,6 +166,8 @@ module Anthropic
           #   @param plugins_used_count [Integer, nil] Total number of plugin invocations in Cowork sessions. Null while Cowork plugin-
           #
           #   @param sessions_with_file_edits_count [Integer, nil] Number of distinct Cowork sessions with at least one successful file-edit tool c
+          #
+          #   @param skills_used_count [Integer] Total number of skill invocations in Cowork sessions
           #
           #   @param write_tool_count [Integer, nil] Number of successful Write tool calls in Cowork sessions. Null while the file-ed
         end

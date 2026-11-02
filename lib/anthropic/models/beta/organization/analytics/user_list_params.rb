@@ -60,10 +60,10 @@ module Anthropic
             #   day, so grouped rows are not an exclusive partition and can sum above org-level
             #   totals. At most 100 entries.
             #
-            #   @return [Array<Symbol, Anthropic::Models::Beta::Organization::Analytics::UserListParams::GroupBy>, nil]
+            #   @return [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsUserGroupBy>, nil]
             optional :group_by,
                      -> {
-                       Anthropic::Internal::Type::ArrayOf[enum: Anthropic::Beta::Organization::Analytics::UserListParams::GroupBy]
+                       Anthropic::Internal::Type::ArrayOf[enum: Anthropic::Beta::Organization::BetaAnalyticsUserGroupBy]
                      },
                      nil?: true
 
@@ -79,12 +79,8 @@ module Anthropic
             #   to `order_by`, or to the endpoint's default sort field when `order_by` is
             #   omitted.
             #
-            #   @return [Symbol, Anthropic::Models::Beta::Organization::Analytics::UserListParams::Order, nil]
-            optional :order,
-                     enum: -> {
-                       Anthropic::Beta::Organization::Analytics::UserListParams::Order
-                     },
-                     nil?: true
+            #   @return [Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsOrder, nil]
+            optional :order, enum: -> { Anthropic::Beta::Organization::BetaAnalyticsOrder }, nil?: true
 
             # @!attribute order_by
             #   Sort field. Restricted to the endpoint's sort column plus its rankable metrics
@@ -127,11 +123,11 @@ module Anthropic
             #
             #   @param filter [Array<String>, nil] Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the par
             #
-            #   @param group_by [Array<Symbol, Anthropic::Models::Beta::Organization::Analytics::UserListParams::GroupBy>, nil] Dimensions to break results out by (e.g. `group_by[]=rbac_group_id`). Supported
+            #   @param group_by [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsUserGroupBy>, nil] Dimensions to break results out by (e.g. `group_by[]=rbac_group_id`). Supported
             #
             #   @param limit [Integer, nil] Number of results per page (1-1000, default 100).
             #
-            #   @param order [Symbol, Anthropic::Models::Beta::Organization::Analytics::UserListParams::Order, nil] Sort direction: `asc` or `desc`. Defaults to `asc` for the endpoint's sort colum
+            #   @param order [Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsOrder, nil] Sort direction: `asc` or `desc`. Defaults to `asc` for the endpoint's sort colum
             #
             #   @param order_by [String, nil] Sort field. Restricted to the endpoint's sort column plus its rankable metrics (
             #
@@ -140,29 +136,6 @@ module Anthropic
             #   @param starting_date [Date, nil] UTC date in YYYY-MM-DD format. Start of a date range (inclusive). Enables rollup
             #
             #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
-
-            module GroupBy
-              extend Anthropic::Internal::Type::Enum
-
-              RBAC_GROUP_ID = :rbac_group_id
-
-              # @!method self.values
-              #   @return [Array<Symbol>]
-            end
-
-            # Sort direction: `asc` or `desc`. Defaults to `asc` for the endpoint's sort
-            # column and to `desc` when `order_by` names a metric (a top-N ranking). Applies
-            # to `order_by`, or to the endpoint's default sort field when `order_by` is
-            # omitted.
-            module Order
-              extend Anthropic::Internal::Type::Enum
-
-              ASC = :asc
-              DESC = :desc
-
-              # @!method self.values
-              #   @return [Array<Symbol>]
-            end
           end
         end
       end

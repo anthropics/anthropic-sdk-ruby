@@ -1,0 +1,67 @@
+module Anthropic
+  module Models
+    module Organization
+      type analytics_project_activity =
+        {
+          created_at: Time?,
+          created_by: Anthropic::Organization::AnalyticsUser?,
+          distinct_conversation_count: Integer?,
+          distinct_user_count: Integer,
+          message_count: Integer,
+          project_id: String,
+          project_name: String,
+          rbac_group_id: String?,
+          rbac_group_name: String?,
+          user_id: String?
+        }
+
+      class AnalyticsProjectActivity < Anthropic::Internal::Type::BaseModel
+        attr_accessor created_at: Time?
+
+        attr_accessor created_by: Anthropic::Organization::AnalyticsUser?
+
+        attr_accessor distinct_conversation_count: Integer?
+
+        attr_accessor distinct_user_count: Integer
+
+        attr_accessor message_count: Integer
+
+        attr_accessor project_id: String
+
+        attr_accessor project_name: String
+
+        attr_accessor rbac_group_id: String?
+
+        attr_accessor rbac_group_name: String?
+
+        attr_accessor user_id: String?
+
+        def initialize: (
+          created_at: Time?,
+          created_by: Anthropic::Organization::AnalyticsUser?,
+          distinct_conversation_count: Integer?,
+          distinct_user_count: Integer,
+          message_count: Integer,
+          project_id: String,
+          project_name: String,
+          ?rbac_group_id: String?,
+          ?rbac_group_name: String?,
+          ?user_id: String?
+        ) -> void
+
+        def to_hash: -> {
+          created_at: Time?,
+          created_by: Anthropic::Organization::AnalyticsUser?,
+          distinct_conversation_count: Integer?,
+          distinct_user_count: Integer,
+          message_count: Integer,
+          project_id: String,
+          project_name: String,
+          rbac_group_id: String?,
+          rbac_group_name: String?,
+          user_id: String?
+        }
+      end
+    end
+  end
+end

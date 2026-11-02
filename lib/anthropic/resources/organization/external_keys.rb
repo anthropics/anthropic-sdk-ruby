@@ -6,13 +6,18 @@ module Anthropic
       class ExternalKeys
         # Create an external key config owned by the caller's organization.
         #
-        # @overload create(provider_config:, display_name: nil, geo: nil, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Organization::ExternalKeyCreateParams} for more details.
+        #
+        # @overload create(provider_config:, display_name: nil, geo: nil, user_profile_id: nil, request_options: {})
         #
         # @param provider_config [Anthropic::Models::Organization::AWSExternalKeyConfig, Anthropic::Models::Organization::GCPExternalKeyConfig, Anthropic::Models::Organization::AzureExternalKeyConfigParam] KMS provider identity and auth coordinates.
         #
         # @param display_name [String, nil] Human-friendly display name.
         #
         # @param geo [Symbol, Anthropic::Models::Organization::ExternalKeyCreateParams::Geo] Data residency geo. Only `us` is supported.
+        #
+        # @param user_profile_id [String, nil] ID of a user profile to bind the key to. Omit this field for a key that isn't bo
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #

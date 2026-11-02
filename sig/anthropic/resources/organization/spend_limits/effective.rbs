@@ -1,0 +1,19 @@
+module Anthropic
+  module Resources
+    class Organization
+      class SpendLimits
+        class Effective
+          def list: (
+            ?limit: Integer,
+            ?page: String?,
+            ?period: ::Array[Anthropic::Models::Organization::spend_limit_period]?,
+            ?user_ids: ::Array[String]?,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Internal::PageCursor[Anthropic::Organization::SpendSummary]
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

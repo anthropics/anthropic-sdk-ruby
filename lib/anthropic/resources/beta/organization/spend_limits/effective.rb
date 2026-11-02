@@ -23,7 +23,7 @@ module Anthropic
             #
             # @param page [String, nil] Opaque cursor from a previous response's `next_page` field.
             #
-            # @param period [Array<Symbol, Anthropic::Models::Beta::Organization::SpendLimits::EffectiveListParams::Period>, nil] Restrict the report to these limit periods. Omit to return one row per period ea
+            # @param period [Array<Symbol, Anthropic::Models::Beta::Organization::BetaSpendLimitPeriod>, nil] Restrict the report to these limit periods. Omit to return one row per period ea
             #
             # @param user_ids [Array<String>, nil] Restrict the report to these members, by tagged user ID (`user_...`). At most 10
             #

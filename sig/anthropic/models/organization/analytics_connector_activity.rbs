@@ -1,0 +1,102 @@
+module Anthropic
+  module Models
+    module Organization
+      type analytics_connector_activity =
+        {
+          chat_metrics: Anthropic::Organization::AnalyticsConnectorChatMetrics,
+          claude_code_metrics: Anthropic::Organization::AnalyticsConnectorClaudeCodeMetrics,
+          connector_display_name: String?,
+          connector_name: String,
+          cowork_metrics: Anthropic::Organization::AnalyticsConnectorCoworkMetrics,
+          distinct_user_count: Integer,
+          individual_auth_distinct_user_count: Integer?,
+          managed_auth_distinct_user_count: Integer?,
+          office_metrics: Anthropic::Organization::AnalyticsConnectorOfficeMetrics,
+          read_call_count: Integer?,
+          unclassified_call_count: Integer?,
+          write_call_count: Integer?,
+          chat_cowork_unified_metrics: Anthropic::Organization::AnalyticsConnectorChatCoworkUnifiedMetrics?,
+          product: String?,
+          rbac_group_id: String?,
+          rbac_group_name: String?,
+          user_id: String?
+        }
+
+      class AnalyticsConnectorActivity < Anthropic::Internal::Type::BaseModel
+        attr_accessor chat_metrics: Anthropic::Organization::AnalyticsConnectorChatMetrics
+
+        attr_accessor claude_code_metrics: Anthropic::Organization::AnalyticsConnectorClaudeCodeMetrics
+
+        attr_accessor connector_display_name: String?
+
+        attr_accessor connector_name: String
+
+        attr_accessor cowork_metrics: Anthropic::Organization::AnalyticsConnectorCoworkMetrics
+
+        attr_accessor distinct_user_count: Integer
+
+        attr_accessor individual_auth_distinct_user_count: Integer?
+
+        attr_accessor managed_auth_distinct_user_count: Integer?
+
+        attr_accessor office_metrics: Anthropic::Organization::AnalyticsConnectorOfficeMetrics
+
+        attr_accessor read_call_count: Integer?
+
+        attr_accessor unclassified_call_count: Integer?
+
+        attr_accessor write_call_count: Integer?
+
+        attr_accessor chat_cowork_unified_metrics: Anthropic::Organization::AnalyticsConnectorChatCoworkUnifiedMetrics?
+
+        attr_accessor product: String?
+
+        attr_accessor rbac_group_id: String?
+
+        attr_accessor rbac_group_name: String?
+
+        attr_accessor user_id: String?
+
+        def initialize: (
+          chat_metrics: Anthropic::Organization::AnalyticsConnectorChatMetrics,
+          claude_code_metrics: Anthropic::Organization::AnalyticsConnectorClaudeCodeMetrics,
+          connector_display_name: String?,
+          connector_name: String,
+          cowork_metrics: Anthropic::Organization::AnalyticsConnectorCoworkMetrics,
+          distinct_user_count: Integer,
+          individual_auth_distinct_user_count: Integer?,
+          managed_auth_distinct_user_count: Integer?,
+          office_metrics: Anthropic::Organization::AnalyticsConnectorOfficeMetrics,
+          read_call_count: Integer?,
+          unclassified_call_count: Integer?,
+          write_call_count: Integer?,
+          ?chat_cowork_unified_metrics: Anthropic::Organization::AnalyticsConnectorChatCoworkUnifiedMetrics?,
+          ?product: String?,
+          ?rbac_group_id: String?,
+          ?rbac_group_name: String?,
+          ?user_id: String?
+        ) -> void
+
+        def to_hash: -> {
+          chat_metrics: Anthropic::Organization::AnalyticsConnectorChatMetrics,
+          claude_code_metrics: Anthropic::Organization::AnalyticsConnectorClaudeCodeMetrics,
+          connector_display_name: String?,
+          connector_name: String,
+          cowork_metrics: Anthropic::Organization::AnalyticsConnectorCoworkMetrics,
+          distinct_user_count: Integer,
+          individual_auth_distinct_user_count: Integer?,
+          managed_auth_distinct_user_count: Integer?,
+          office_metrics: Anthropic::Organization::AnalyticsConnectorOfficeMetrics,
+          read_call_count: Integer?,
+          unclassified_call_count: Integer?,
+          write_call_count: Integer?,
+          chat_cowork_unified_metrics: Anthropic::Organization::AnalyticsConnectorChatCoworkUnifiedMetrics?,
+          product: String?,
+          rbac_group_id: String?,
+          rbac_group_name: String?,
+          user_id: String?
+        }
+      end
+    end
+  end
+end

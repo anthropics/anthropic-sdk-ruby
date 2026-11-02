@@ -1,0 +1,15 @@
+module Anthropic
+  module Models
+    module Organization
+      type spend_limit_usage_tier_scope = { type: :usage_tier }
+
+      class SpendLimitUsageTierScope < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :usage_tier
+
+        def initialize: (?type: :usage_tier) -> void
+
+        def to_hash: -> { type: :usage_tier }
+      end
+    end
+  end
+end

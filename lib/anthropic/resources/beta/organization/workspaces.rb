@@ -19,7 +19,7 @@ module Anthropic
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Organization::WorkspaceCreateParams} for more details.
           #
-          # @overload create(name:, data_residency: nil, display_color: nil, external_key_id: nil, tags: nil, betas: nil, request_options: {})
+          # @overload create(name:, data_residency: nil, display_color: nil, external_key_id: nil, tags: nil, user_profile_id: nil, betas: nil, request_options: {})
           #
           # @param name [String] Body param: Name of the Workspace.
           #
@@ -30,6 +30,8 @@ module Anthropic
           # @param external_key_id [String, nil] Body param: ID of the customer-managed encryption key (CMEK) configuration to us
           #
           # @param tags [Hash{Symbol=>String}, nil] Body param: User-defined tags as string key-value pairs. Keys may not begin with
+          #
+          # @param user_profile_id [String, nil] Body param: ID of a user profile to attach to the Workspace. Every inference req
           #
           # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #
@@ -84,7 +86,7 @@ module Anthropic
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Organization::WorkspaceUpdateParams} for more details.
           #
-          # @overload update(workspace_id, data_residency: nil, display_color: nil, external_key_id: nil, name: nil, tags: nil, request_options: {})
+          # @overload update(workspace_id, data_residency: nil, display_color: nil, external_key_id: nil, name: nil, tags: nil, user_profile_id: nil, request_options: {})
           #
           # @param workspace_id [String]
           #
@@ -97,6 +99,8 @@ module Anthropic
           # @param name [String] Name of the Workspace.
           #
           # @param tags [Hash{Symbol=>String, nil}, nil] User-defined tags as string key-value pairs. Keys may not begin with `anthropic`
+          #
+          # @param user_profile_id [String] ID of a user profile to attach to the Workspace. Every inference request through
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #

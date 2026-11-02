@@ -1,0 +1,140 @@
+# frozen_string_literal: true
+
+module Anthropic
+  module Models
+    module Organization
+      class AnalyticsUserActivity < Anthropic::Internal::Type::BaseModel
+        # @!attribute chat_metrics
+        #   Claude.ai activity metrics for a single user on a given day.
+        #
+        #   @return [Anthropic::Models::Organization::AnalyticsChatMetrics]
+        required :chat_metrics, -> { Anthropic::Organization::AnalyticsChatMetrics }
+
+        # @!attribute claude_code_metrics
+        #   Claude Code activity metrics for a single user on a given day.
+        #
+        #   @return [Anthropic::Models::Organization::AnalyticsClaudeCodeMetrics]
+        required :claude_code_metrics, -> { Anthropic::Organization::AnalyticsClaudeCodeMetrics }
+
+        # @!attribute cowork_metrics
+        #   Cowork activity metrics for a single user on a given day.
+        #
+        #   @return [Anthropic::Models::Organization::AnalyticsCoworkMetrics]
+        required :cowork_metrics, -> { Anthropic::Organization::AnalyticsCoworkMetrics }
+
+        # @!attribute design_metrics
+        #   Claude Design activity metrics for a single user on a given day.
+        #
+        #   @return [Anthropic::Models::Organization::AnalyticsDesignMetrics]
+        required :design_metrics, -> { Anthropic::Organization::AnalyticsDesignMetrics }
+
+        # @!attribute distinct_user_count
+        #   Number of distinct active users represented by this row. Only set for grouped
+        #   rollups (`group_by[]`); null for per-user rows. In date-range mode, recomputed
+        #   as an exact distinct count of the group's active members over the requested
+        #   window, never a sum of per-day values.
+        #
+        #   @return [Integer, nil]
+        required :distinct_user_count, Integer, nil?: true
+
+        # @!attribute office_metrics
+        #   Office Agent activity metrics for a single user on a given day, broken out by
+        #   Office product.
+        #
+        #   @return [Anthropic::Models::Organization::AnalyticsOfficeMetrics]
+        required :office_metrics, -> { Anthropic::Organization::AnalyticsOfficeMetrics }
+
+        # @!attribute science_metrics
+        #   Claude Science activity metrics for a single user on a given day.
+        #
+        #   @return [Anthropic::Models::Organization::AnalyticsScienceMetrics]
+        required :science_metrics, -> { Anthropic::Organization::AnalyticsScienceMetrics }
+
+        # @!attribute user
+        #   The user this row describes. Null on rows aggregated across users.
+        #
+        #   @return [Anthropic::Models::Organization::AnalyticsUser, nil]
+        required :user, -> { Anthropic::Organization::AnalyticsUser }, nil?: true
+
+        # @!attribute web_search_count
+        #   Number of web searches performed
+        #
+        #   @return [Integer]
+        required :web_search_count, Integer
+
+        # @!attribute chat_cowork_unified_metrics
+        #   Activity recorded while the member had Chat and Cowork unified (Cowork's
+        #   features inside claude.ai chat) turned on, split into `chat` (chat activity) and
+        #   `sessions` (Cowork activity). Omitted from the response on deployments that do
+        #   not offer Chat and Cowork unified.
+        #
+        #   @return [Anthropic::Models::Organization::AnalyticsChatCoworkUnifiedMetrics, nil]
+        optional :chat_cowork_unified_metrics,
+                 -> { Anthropic::Organization::AnalyticsChatCoworkUnifiedMetrics },
+                 nil?: true
+
+        # @!attribute last_activity_date
+        #   Most recent UTC day (YYYY-MM-DD) on which the user had any counted activity,
+        #   within the requested window: equal to the requested `date` in single-day mode,
+        #   and to the latest active day from `starting_date` (inclusive) to `ending_date`
+        #   (exclusive) in date-range rollup mode — never a day earlier than the window
+        #   start. On filtered requests (`filter[]`) only days matching the filter count:
+        #   with `filter[]=rbac_group_id:{id}` it is the last day the user was active while
+        #   a member of that group, consistent with the row's other metrics. On grouped
+        #   (`group_by[]`) rows it is the latest day any member of the group was active (the
+        #   requested `date` in single-day mode). Omitted from the response while
+        #   last-activity reporting is not enabled for this organization.
+        #
+        #   @return [Date, nil]
+        optional :last_activity_date, Date, nil?: true
+
+        # @!attribute rbac_group_id
+        #   Tagged RBAC group identifier (`rbac_group_...`), matching the spend-limits API
+        #   spelling. Present only when the request grouped by `rbac_group_id`.
+        #
+        #   @return [String, nil]
+        optional :rbac_group_id, String, nil?: true
+
+        # @!attribute rbac_group_name
+        #   Resolved RBAC group display name, alongside `rbac_group_id` when name resolution
+        #   is available. Null if the group has been deleted or its name could not be
+        #   resolved; `rbac_group_id` remains the stable key.
+        #
+        #   @return [String, nil]
+        optional :rbac_group_name, String, nil?: true
+
+        # @!method initialize(chat_metrics:, claude_code_metrics:, cowork_metrics:, design_metrics:, distinct_user_count:, office_metrics:, science_metrics:, user:, web_search_count:, chat_cowork_unified_metrics: nil, last_activity_date: nil, rbac_group_id: nil, rbac_group_name: nil)
+        #   Per-user activity data for a given day.
+        #
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Organization::AnalyticsUserActivity} for more details.
+        #
+        #   @param chat_metrics [Anthropic::Models::Organization::AnalyticsChatMetrics] Claude.ai activity metrics for a single user on a given day.
+        #
+        #   @param claude_code_metrics [Anthropic::Models::Organization::AnalyticsClaudeCodeMetrics] Claude Code activity metrics for a single user on a given day.
+        #
+        #   @param cowork_metrics [Anthropic::Models::Organization::AnalyticsCoworkMetrics] Cowork activity metrics for a single user on a given day.
+        #
+        #   @param design_metrics [Anthropic::Models::Organization::AnalyticsDesignMetrics] Claude Design activity metrics for a single user on a given day.
+        #
+        #   @param distinct_user_count [Integer, nil] Number of distinct active users represented by this row. Only set for grouped ro
+        #
+        #   @param office_metrics [Anthropic::Models::Organization::AnalyticsOfficeMetrics] Office Agent activity metrics for a single user on a given day, broken out by Of
+        #
+        #   @param science_metrics [Anthropic::Models::Organization::AnalyticsScienceMetrics] Claude Science activity metrics for a single user on a given day.
+        #
+        #   @param user [Anthropic::Models::Organization::AnalyticsUser, nil] The user this row describes. Null on rows aggregated across users.
+        #
+        #   @param web_search_count [Integer] Number of web searches performed
+        #
+        #   @param chat_cowork_unified_metrics [Anthropic::Models::Organization::AnalyticsChatCoworkUnifiedMetrics, nil] Activity recorded while the member had Chat and Cowork unified (Cowork's feature
+        #
+        #   @param last_activity_date [Date, nil] Most recent UTC day (YYYY-MM-DD) on which the user had any counted activity, wit
+        #
+        #   @param rbac_group_id [String, nil] Tagged RBAC group identifier (`rbac_group_...`), matching the spend-limits API s
+        #
+        #   @param rbac_group_name [String, nil] Resolved RBAC group display name, alongside `rbac_group_id` when name resolution
+      end
+    end
+  end
+end

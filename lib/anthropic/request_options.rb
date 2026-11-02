@@ -39,7 +39,7 @@ module Anthropic
     optional :extra_query, Anthropic::Internal::Type::HashOf[Anthropic::Internal::Type::ArrayOf[String]]
 
     # @!attribute extra_headers
-    #   Extra headers to send with the request. These are `.merged`’d into any
+    #   Extra headers to send with the request. These are `.merge`’d into any
     #   `extra_headers` given at the client level.
     #
     #   @return [Hash{String=>String, nil}, nil]

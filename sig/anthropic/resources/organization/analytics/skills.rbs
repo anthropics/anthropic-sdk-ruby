@@ -1,0 +1,24 @@
+module Anthropic
+  module Resources
+    class Organization
+      class Analytics
+        class Skills
+          def list: (
+            ?date: Date?,
+            ?ending_date: Date?,
+            ?filter: ::Array[String]?,
+            ?group_by: ::Array[Anthropic::Models::Organization::analytics_skill_group_by]?,
+            ?limit: Integer?,
+            ?order: Anthropic::Models::Organization::analytics_order?,
+            ?order_by: String?,
+            ?page: String?,
+            ?starting_date: Date?,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Internal::PageCursor[Anthropic::Organization::AnalyticsSkillActivity]
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

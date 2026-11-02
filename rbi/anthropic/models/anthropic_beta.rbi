@@ -2,6 +2,10 @@
 
 module Anthropic
   module Models
+    # Beta names you can send in the `anthropic-beta` header.
+    #
+    # See [Beta headers](https://platform.claude.com/docs/en/api/beta-headers) for how
+    # to send them and where to find the name a feature needs.
     module AnthropicBeta
       extend Anthropic::Internal::Type::Union
 
