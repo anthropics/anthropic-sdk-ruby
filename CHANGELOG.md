@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.4.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v2.4.0...v2.4.1) (2026-11-02)
+
+### Chores
+
+* **api:** update example values for pattern-constrained string fields
+
+
+### Documentation
+
+* **api:** show each field's own description for `speed`
+
 ## [2.4.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v2.3.0...v2.4.0) (2026-11-02)
 
 ### Features
@@ -32,7 +43,6 @@
 ### Documentation
 
 * add a description to the AnthropicBeta type
-* **api:** show each field's own description for `speed`
 * correct the error class documented for next_page and fix typos
 * **examples:** use current model IDs
 * **readme:** point to the docs site for documentation
