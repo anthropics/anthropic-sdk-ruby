@@ -175,9 +175,9 @@ module Anthropic
           #   Omitted from the response on deployments that do not offer Chat and Cowork
           #   unified.
           #
-          #   @return [Anthropic::Models::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics, nil]
+          #   @return [Anthropic::Models::Beta::Organization::BetaAnalyticsSkillChatCoworkUnifiedMetrics, nil]
           optional :chat_cowork_unified_metrics,
-                   -> { Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics },
+                   -> { Anthropic::Beta::Organization::BetaAnalyticsSkillChatCoworkUnifiedMetrics },
                    nil?: true
 
           # @!attribute product
@@ -250,7 +250,7 @@ module Anthropic
           #
           #   @param skill_name [String] Name of the skill
           #
-          #   @param chat_cowork_unified_metrics [Anthropic::Models::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics, nil] Skill use recorded while members had Chat and Cowork unified (Cowork's features
+          #   @param chat_cowork_unified_metrics [Anthropic::Models::Beta::Organization::BetaAnalyticsSkillChatCoworkUnifiedMetrics, nil] Skill use recorded while members had Chat and Cowork unified (Cowork's features
           #
           #   @param product [String, nil] Product that produced this row's activity: one of `chat`, `claude_code`, `cowork
           #
@@ -275,39 +275,6 @@ module Anthropic
 
             # @!method self.values
             #   @return [Array<Symbol>]
-          end
-
-          # @see Anthropic::Models::Beta::Organization::BetaAnalyticsSkillActivity#chat_cowork_unified_metrics
-          class ChatCoworkUnifiedMetrics < Anthropic::Internal::Type::BaseModel
-            # @!attribute chat
-            #   A skill's use in chat conversations recorded while members had Chat and Cowork
-            #   unified turned on.
-            #
-            #   @return [Anthropic::Models::Beta::Organization::BetaAnalyticsSkillChatCoworkUnifiedChatMetrics]
-            required :chat, -> { Anthropic::Beta::Organization::BetaAnalyticsSkillChatCoworkUnifiedChatMetrics }
-
-            # @!attribute sessions
-            #   A skill's use in Cowork sessions recorded while members had Chat and Cowork
-            #   unified turned on.
-            #
-            #   @return [Anthropic::Models::Beta::Organization::BetaAnalyticsSkillChatCoworkUnifiedSessionsMetrics]
-            required :sessions,
-                     -> { Anthropic::Beta::Organization::BetaAnalyticsSkillChatCoworkUnifiedSessionsMetrics }
-
-            # @!method initialize(chat:, sessions:)
-            #   Skill use recorded while members had Chat and Cowork unified (Cowork's features
-            #   inside claude.ai chat) turned on, split into chat conversations and Cowork
-            #   sessions. A count is null in date-range mode where it cannot be computed.
-            #   Omitted from the response on deployments that do not offer Chat and Cowork
-            #   unified.
-            #
-            #   Some parameter documentations has been truncated, see
-            #   {Anthropic::Models::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics}
-            #   for more details.
-            #
-            #   @param chat [Anthropic::Models::Beta::Organization::BetaAnalyticsSkillChatCoworkUnifiedChatMetrics] A skill's use in chat conversations recorded while members had
-            #
-            #   @param sessions [Anthropic::Models::Beta::Organization::BetaAnalyticsSkillChatCoworkUnifiedSessionsMetrics] A skill's use in Cowork sessions recorded while members had Chat
           end
         end
       end

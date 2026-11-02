@@ -33,7 +33,7 @@ class Anthropic::Test::Resources::Beta::Organization::Analytics::SkillsTest < An
         share_status: Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ShareStatus | nil,
         skill_display_name: String | nil,
         skill_name: String,
-        chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics | nil,
+        chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillChatCoworkUnifiedMetrics | nil,
         product: String | nil,
         rbac_group_id: String | nil,
         rbac_group_name: String | nil,

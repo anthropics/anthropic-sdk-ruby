@@ -143,11 +143,9 @@ module Anthropic
           #   Omitted from the response on deployments that do not offer Chat and Cowork
           #   unified.
           #
-          #   @return [Anthropic::Models::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics, nil]
+          #   @return [Anthropic::Models::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedMetrics, nil]
           optional :chat_cowork_unified_metrics,
-                   -> {
-                     Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics
-                   },
+                   -> { Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedMetrics },
                    nil?: true
 
           # @!attribute product
@@ -218,7 +216,7 @@ module Anthropic
           #
           #   @param write_call_count [Integer, nil] Number of connector tool calls on the requested day whose trusted read-only anno
           #
-          #   @param chat_cowork_unified_metrics [Anthropic::Models::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics, nil] Connector use recorded while members had Chat and Cowork unified (Cowork's featu
+          #   @param chat_cowork_unified_metrics [Anthropic::Models::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedMetrics, nil] Connector use recorded while members had Chat and Cowork unified (Cowork's featu
           #
           #   @param product [String, nil] Product that produced this row's activity: one of `chat`, `claude_code`, `cowork
           #
@@ -227,39 +225,6 @@ module Anthropic
           #   @param rbac_group_name [String, nil] Resolved RBAC group display name, alongside `rbac_group_id` when name resolution
           #
           #   @param user_id [String, nil] Tagged user identifier (e.g. `user_...`). Present only when the request grouped
-
-          # @see Anthropic::Models::Beta::Organization::BetaAnalyticsConnectorActivity#chat_cowork_unified_metrics
-          class ChatCoworkUnifiedMetrics < Anthropic::Internal::Type::BaseModel
-            # @!attribute chat
-            #   A connector's use in chat conversations recorded while members had Chat and
-            #   Cowork unified turned on.
-            #
-            #   @return [Anthropic::Models::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics]
-            required :chat, -> { Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics }
-
-            # @!attribute sessions
-            #   A connector's use in Cowork sessions recorded while members had Chat and Cowork
-            #   unified turned on.
-            #
-            #   @return [Anthropic::Models::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics]
-            required :sessions,
-                     -> { Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics }
-
-            # @!method initialize(chat:, sessions:)
-            #   Connector use recorded while members had Chat and Cowork unified (Cowork's
-            #   features inside claude.ai chat) turned on, split into chat conversations and
-            #   Cowork sessions. A count is null in date-range mode where it cannot be computed.
-            #   Omitted from the response on deployments that do not offer Chat and Cowork
-            #   unified.
-            #
-            #   Some parameter documentations has been truncated, see
-            #   {Anthropic::Models::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics}
-            #   for more details.
-            #
-            #   @param chat [Anthropic::Models::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics] A connector's use in chat conversations recorded while members had
-            #
-            #   @param sessions [Anthropic::Models::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics] A connector's use in Cowork sessions recorded while members had
-          end
         end
       end
     end

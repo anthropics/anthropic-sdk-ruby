@@ -6,7 +6,7 @@ module Anthropic
       module Organization
         module RBACGroups
           # @see Anthropic::Resources::Beta::Organization::RBACGroups::Members#remove
-          class MemberRemoveResponse < Anthropic::Internal::Type::BaseModel
+          class BetaDeletedRBACGroupMember < Anthropic::Internal::Type::BaseModel
             # @!attribute rbac_group_id
             #   ID of the RBAC Group.
             #
@@ -28,8 +28,8 @@ module Anthropic
 
             # @!method initialize(rbac_group_id:, user_id:, type: :rbac_group_member_deleted)
             #   Some parameter documentations has been truncated, see
-            #   {Anthropic::Models::Beta::Organization::RBACGroups::MemberRemoveResponse} for
-            #   more details.
+            #   {Anthropic::Models::Beta::Organization::RBACGroups::BetaDeletedRBACGroupMember}
+            #   for more details.
             #
             #   @param rbac_group_id [String] ID of the RBAC Group.
             #

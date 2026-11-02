@@ -27,7 +27,7 @@ class Anthropic::Test::Resources::Beta::Organization::Analytics::PluginsTest < A
         invocation_count: Integer,
         plugin_id: String | nil,
         plugin_name: String,
-        chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsPluginActivity::ChatCoworkUnifiedMetrics | nil,
+        chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsPluginChatCoworkUnifiedMetrics | nil,
         product: String | nil,
         rbac_group_id: String | nil,
         rbac_group_name: String | nil,

@@ -32,7 +32,7 @@ class Anthropic::Test::Resources::Beta::Organization::Analytics::ConnectorsTest 
         read_call_count: Integer | nil,
         unclassified_call_count: Integer | nil,
         write_call_count: Integer | nil,
-        chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics | nil,
+        chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedMetrics | nil,
         product: String | nil,
         rbac_group_id: String | nil,
         rbac_group_name: String | nil,

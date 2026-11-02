@@ -30,7 +30,7 @@ module Anthropic
           def delete: (
             String rbac_group_id,
             ?request_options: Anthropic::request_opts
-          ) -> Anthropic::Models::Beta::Organization::RBACGroupDeleteResponse
+          ) -> Anthropic::Beta::Organization::BetaDeletedRBACGroup
 
           def initialize: (client: Anthropic::Client) -> void
         end

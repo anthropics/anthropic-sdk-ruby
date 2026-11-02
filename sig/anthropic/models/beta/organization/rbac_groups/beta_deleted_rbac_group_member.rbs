@@ -3,14 +3,14 @@ module Anthropic
     module Beta
       module Organization
         module RBACGroups
-          type member_remove_response =
+          type beta_deleted_rbac_group_member =
             {
               rbac_group_id: String,
               type: :rbac_group_member_deleted,
               user_id: String
             }
 
-          class MemberRemoveResponse < Anthropic::Internal::Type::BaseModel
+          class BetaDeletedRBACGroupMember < Anthropic::Internal::Type::BaseModel
             attr_accessor rbac_group_id: String
 
             attr_accessor type: :rbac_group_member_deleted

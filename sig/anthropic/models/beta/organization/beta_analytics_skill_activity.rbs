@@ -17,7 +17,7 @@ module Anthropic
             share_status: Anthropic::Models::Beta::Organization::BetaAnalyticsSkillActivity::share_status?,
             skill_display_name: String?,
             skill_name: String,
-            chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics?,
+            chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillChatCoworkUnifiedMetrics?,
             product: String?,
             rbac_group_id: String?,
             rbac_group_name: String?,
@@ -51,7 +51,7 @@ module Anthropic
 
           attr_accessor skill_name: String
 
-          attr_accessor chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics?
+          attr_accessor chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillChatCoworkUnifiedMetrics?
 
           attr_accessor product: String?
 
@@ -75,7 +75,7 @@ module Anthropic
             share_status: Anthropic::Models::Beta::Organization::BetaAnalyticsSkillActivity::share_status?,
             skill_display_name: String?,
             skill_name: String,
-            ?chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics?,
+            ?chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillChatCoworkUnifiedMetrics?,
             ?product: String?,
             ?rbac_group_id: String?,
             ?rbac_group_name: String?,
@@ -96,7 +96,7 @@ module Anthropic
             share_status: Anthropic::Models::Beta::Organization::BetaAnalyticsSkillActivity::share_status?,
             skill_display_name: String?,
             skill_name: String,
-            chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillActivity::ChatCoworkUnifiedMetrics?,
+            chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsSkillChatCoworkUnifiedMetrics?,
             product: String?,
             rbac_group_id: String?,
             rbac_group_name: String?,
@@ -113,28 +113,6 @@ module Anthropic
             PUBLIC: :public
 
             def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaAnalyticsSkillActivity::share_status]
-          end
-
-          type chat_cowork_unified_metrics =
-            {
-              chat: Anthropic::Beta::Organization::BetaAnalyticsSkillChatCoworkUnifiedChatMetrics,
-              sessions: Anthropic::Beta::Organization::BetaAnalyticsSkillChatCoworkUnifiedSessionsMetrics
-            }
-
-          class ChatCoworkUnifiedMetrics < Anthropic::Internal::Type::BaseModel
-            attr_accessor chat: Anthropic::Beta::Organization::BetaAnalyticsSkillChatCoworkUnifiedChatMetrics
-
-            attr_accessor sessions: Anthropic::Beta::Organization::BetaAnalyticsSkillChatCoworkUnifiedSessionsMetrics
-
-            def initialize: (
-              chat: Anthropic::Beta::Organization::BetaAnalyticsSkillChatCoworkUnifiedChatMetrics,
-              sessions: Anthropic::Beta::Organization::BetaAnalyticsSkillChatCoworkUnifiedSessionsMetrics
-            ) -> void
-
-            def to_hash: -> {
-              chat: Anthropic::Beta::Organization::BetaAnalyticsSkillChatCoworkUnifiedChatMetrics,
-              sessions: Anthropic::Beta::Organization::BetaAnalyticsSkillChatCoworkUnifiedSessionsMetrics
-            }
           end
         end
       end

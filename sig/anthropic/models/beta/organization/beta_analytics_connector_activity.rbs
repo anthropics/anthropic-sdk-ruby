@@ -16,7 +16,7 @@ module Anthropic
             read_call_count: Integer?,
             unclassified_call_count: Integer?,
             write_call_count: Integer?,
-            chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics?,
+            chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedMetrics?,
             product: String?,
             rbac_group_id: String?,
             rbac_group_name: String?,
@@ -48,7 +48,7 @@ module Anthropic
 
           attr_accessor write_call_count: Integer?
 
-          attr_accessor chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics?
+          attr_accessor chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedMetrics?
 
           attr_accessor product: String?
 
@@ -71,7 +71,7 @@ module Anthropic
             read_call_count: Integer?,
             unclassified_call_count: Integer?,
             write_call_count: Integer?,
-            ?chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics?,
+            ?chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedMetrics?,
             ?product: String?,
             ?rbac_group_id: String?,
             ?rbac_group_name: String?,
@@ -91,34 +91,12 @@ module Anthropic
             read_call_count: Integer?,
             unclassified_call_count: Integer?,
             write_call_count: Integer?,
-            chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics?,
+            chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedMetrics?,
             product: String?,
             rbac_group_id: String?,
             rbac_group_name: String?,
             user_id: String?
           }
-
-          type chat_cowork_unified_metrics =
-            {
-              chat: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics,
-              sessions: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics
-            }
-
-          class ChatCoworkUnifiedMetrics < Anthropic::Internal::Type::BaseModel
-            attr_accessor chat: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics
-
-            attr_accessor sessions: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics
-
-            def initialize: (
-              chat: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics,
-              sessions: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics
-            ) -> void
-
-            def to_hash: -> {
-              chat: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics,
-              sessions: Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics
-            }
-          end
         end
       end
     end

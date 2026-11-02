@@ -79,7 +79,7 @@ module Anthropic
           sig do
             returns(
               T.nilable(
-                Anthropic::Beta::Organization::BetaAnalyticsPluginActivity::ChatCoworkUnifiedMetrics
+                Anthropic::Beta::Organization::BetaAnalyticsPluginChatCoworkUnifiedMetrics
               )
             )
           end
@@ -89,7 +89,7 @@ module Anthropic
             params(
               chat_cowork_unified_metrics:
                 T.nilable(
-                  Anthropic::Beta::Organization::BetaAnalyticsPluginActivity::ChatCoworkUnifiedMetrics::OrHash
+                  Anthropic::Beta::Organization::BetaAnalyticsPluginChatCoworkUnifiedMetrics::OrHash
                 )
             ).void
           end
@@ -143,7 +143,7 @@ module Anthropic
               plugin_name: String,
               chat_cowork_unified_metrics:
                 T.nilable(
-                  Anthropic::Beta::Organization::BetaAnalyticsPluginActivity::ChatCoworkUnifiedMetrics::OrHash
+                  Anthropic::Beta::Organization::BetaAnalyticsPluginChatCoworkUnifiedMetrics::OrHash
                 ),
               product: T.nilable(String),
               rbac_group_id: T.nilable(String),
@@ -216,7 +216,7 @@ module Anthropic
                 plugin_name: String,
                 chat_cowork_unified_metrics:
                   T.nilable(
-                    Anthropic::Beta::Organization::BetaAnalyticsPluginActivity::ChatCoworkUnifiedMetrics
+                    Anthropic::Beta::Organization::BetaAnalyticsPluginChatCoworkUnifiedMetrics
                   ),
                 product: T.nilable(String),
                 rbac_group_id: T.nilable(String),
@@ -226,47 +226,6 @@ module Anthropic
             )
           end
           def to_hash
-          end
-
-          class ChatCoworkUnifiedMetrics < Anthropic::Internal::Type::BaseModel
-            OrHash =
-              T.type_alias do
-                T.any(
-                  Anthropic::Beta::Organization::BetaAnalyticsPluginActivity::ChatCoworkUnifiedMetrics,
-                  Anthropic::Internal::AnyHash
-                )
-              end
-
-            # Same measure as `cowork_metrics.distinct_session_plugin_used_count`, for
-            # activity recorded while members had Chat and Cowork unified turned on. Null on
-            # aggregated rows where a distinct count cannot be computed.
-            sig { returns(T.nilable(Integer)) }
-            attr_accessor :distinct_session_plugin_used_count
-
-            # Plugin use recorded while members had Chat and Cowork unified (Cowork's features
-            # inside claude.ai chat) turned on. A count is null in date-range mode where it
-            # cannot be computed. Omitted from the response on deployments that do not offer
-            # Chat and Cowork unified.
-            sig do
-              params(
-                distinct_session_plugin_used_count: T.nilable(Integer)
-              ).returns(T.attached_class)
-            end
-            def self.new(
-              # Same measure as `cowork_metrics.distinct_session_plugin_used_count`, for
-              # activity recorded while members had Chat and Cowork unified turned on. Null on
-              # aggregated rows where a distinct count cannot be computed.
-              distinct_session_plugin_used_count:
-            )
-            end
-
-            sig do
-              override.returns(
-                { distinct_session_plugin_used_count: T.nilable(Integer) }
-              )
-            end
-            def to_hash
-            end
           end
         end
       end

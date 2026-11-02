@@ -175,7 +175,7 @@ module Anthropic
           sig do
             returns(
               T.nilable(
-                Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics
+                Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedMetrics
               )
             )
           end
@@ -185,7 +185,7 @@ module Anthropic
             params(
               chat_cowork_unified_metrics:
                 T.nilable(
-                  Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::OrHash
+                  Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedMetrics::OrHash
                 )
             ).void
           end
@@ -241,7 +241,7 @@ module Anthropic
               write_call_count: T.nilable(Integer),
               chat_cowork_unified_metrics:
                 T.nilable(
-                  Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics::OrHash
+                  Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedMetrics::OrHash
                 ),
               product: T.nilable(String),
               rbac_group_id: T.nilable(String),
@@ -383,7 +383,7 @@ module Anthropic
                 write_call_count: T.nilable(Integer),
                 chat_cowork_unified_metrics:
                   T.nilable(
-                    Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics
+                    Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedMetrics
                   ),
                 product: T.nilable(String),
                 rbac_group_id: T.nilable(String),
@@ -393,86 +393,6 @@ module Anthropic
             )
           end
           def to_hash
-          end
-
-          class ChatCoworkUnifiedMetrics < Anthropic::Internal::Type::BaseModel
-            OrHash =
-              T.type_alias do
-                T.any(
-                  Anthropic::Beta::Organization::BetaAnalyticsConnectorActivity::ChatCoworkUnifiedMetrics,
-                  Anthropic::Internal::AnyHash
-                )
-              end
-
-            # A connector's use in chat conversations recorded while members had Chat and
-            # Cowork unified turned on.
-            sig do
-              returns(
-                Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics
-              )
-            end
-            attr_reader :chat
-
-            sig do
-              params(
-                chat:
-                  Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics::OrHash
-              ).void
-            end
-            attr_writer :chat
-
-            # A connector's use in Cowork sessions recorded while members had Chat and Cowork
-            # unified turned on.
-            sig do
-              returns(
-                Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics
-              )
-            end
-            attr_reader :sessions
-
-            sig do
-              params(
-                sessions:
-                  Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics::OrHash
-              ).void
-            end
-            attr_writer :sessions
-
-            # Connector use recorded while members had Chat and Cowork unified (Cowork's
-            # features inside claude.ai chat) turned on, split into chat conversations and
-            # Cowork sessions. A count is null in date-range mode where it cannot be computed.
-            # Omitted from the response on deployments that do not offer Chat and Cowork
-            # unified.
-            sig do
-              params(
-                chat:
-                  Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics::OrHash,
-                sessions:
-                  Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics::OrHash
-              ).returns(T.attached_class)
-            end
-            def self.new(
-              # A connector's use in chat conversations recorded while members had Chat and
-              # Cowork unified turned on.
-              chat:,
-              # A connector's use in Cowork sessions recorded while members had Chat and Cowork
-              # unified turned on.
-              sessions:
-            )
-            end
-
-            sig do
-              override.returns(
-                {
-                  chat:
-                    Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics,
-                  sessions:
-                    Anthropic::Beta::Organization::BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics
-                }
-              )
-            end
-            def to_hash
-            end
           end
         end
       end

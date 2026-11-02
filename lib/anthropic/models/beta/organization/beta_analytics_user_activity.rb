@@ -69,9 +69,9 @@ module Anthropic
           #   `sessions` (Cowork activity). Omitted from the response on deployments that do
           #   not offer Chat and Cowork unified.
           #
-          #   @return [Anthropic::Models::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics, nil]
+          #   @return [Anthropic::Models::Beta::Organization::BetaAnalyticsChatCoworkUnifiedMetrics, nil]
           optional :chat_cowork_unified_metrics,
-                   -> { Anthropic::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics },
+                   -> { Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedMetrics },
                    nil?: true
 
           # @!attribute last_activity_date
@@ -129,43 +129,13 @@ module Anthropic
           #
           #   @param web_search_count [Integer] Number of web searches performed
           #
-          #   @param chat_cowork_unified_metrics [Anthropic::Models::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics, nil] Activity recorded while the member had Chat and Cowork unified (Cowork's feature
+          #   @param chat_cowork_unified_metrics [Anthropic::Models::Beta::Organization::BetaAnalyticsChatCoworkUnifiedMetrics, nil] Activity recorded while the member had Chat and Cowork unified (Cowork's feature
           #
           #   @param last_activity_date [Date, nil] Most recent UTC day (YYYY-MM-DD) on which the user had any counted activity, wit
           #
           #   @param rbac_group_id [String, nil] Tagged RBAC group identifier (`rbac_group_...`), matching the spend-limits API s
           #
           #   @param rbac_group_name [String, nil] Resolved RBAC group display name, alongside `rbac_group_id` when name resolution
-
-          # @see Anthropic::Models::Beta::Organization::BetaAnalyticsUserActivity#chat_cowork_unified_metrics
-          class ChatCoworkUnifiedMetrics < Anthropic::Internal::Type::BaseModel
-            # @!attribute chat
-            #   Chat activity recorded while members had Chat and Cowork unified turned on.
-            #
-            #   @return [Anthropic::Models::Beta::Organization::BetaAnalyticsChatCoworkUnifiedChatMetrics]
-            required :chat, -> { Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedChatMetrics }
-
-            # @!attribute sessions
-            #   Cowork session activity recorded while members had Chat and Cowork unified
-            #   turned on.
-            #
-            #   @return [Anthropic::Models::Beta::Organization::BetaAnalyticsChatCoworkUnifiedSessionsMetrics]
-            required :sessions, -> { Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedSessionsMetrics }
-
-            # @!method initialize(chat:, sessions:)
-            #   Activity recorded while the member had Chat and Cowork unified (Cowork's
-            #   features inside claude.ai chat) turned on, split into `chat` (chat activity) and
-            #   `sessions` (Cowork activity). Omitted from the response on deployments that do
-            #   not offer Chat and Cowork unified.
-            #
-            #   Some parameter documentations has been truncated, see
-            #   {Anthropic::Models::Beta::Organization::BetaAnalyticsUserActivity::ChatCoworkUnifiedMetrics}
-            #   for more details.
-            #
-            #   @param chat [Anthropic::Models::Beta::Organization::BetaAnalyticsChatCoworkUnifiedChatMetrics] Chat activity recorded while members had Chat and Cowork unified turned
-            #
-            #   @param sessions [Anthropic::Models::Beta::Organization::BetaAnalyticsChatCoworkUnifiedSessionsMetrics] Cowork session activity recorded while members had Chat and Cowork
-          end
         end
       end
     end

@@ -64,7 +64,7 @@ class Anthropic::Test::Resources::Beta::Organization::RBACGroups::MembersTest < 
       )
 
     assert_pattern do
-      response => Anthropic::Models::Beta::Organization::RBACGroups::MemberRemoveResponse
+      response => Anthropic::Beta::Organization::RBACGroups::BetaDeletedRBACGroupMember
     end
 
     assert_pattern do

@@ -5,11 +5,11 @@ module Anthropic
     module Beta
       module Organization
         module RBACGroups
-          class MemberRemoveResponse < Anthropic::Internal::Type::BaseModel
+          class BetaDeletedRBACGroupMember < Anthropic::Internal::Type::BaseModel
             OrHash =
               T.type_alias do
                 T.any(
-                  Anthropic::Models::Beta::Organization::RBACGroups::MemberRemoveResponse,
+                  Anthropic::Beta::Organization::RBACGroups::BetaDeletedRBACGroupMember,
                   Anthropic::Internal::AnyHash
                 )
               end
