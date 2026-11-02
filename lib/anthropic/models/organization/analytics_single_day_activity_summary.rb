@@ -94,8 +94,7 @@ module Anthropic
 
         # @!attribute chat_cowork_unified_daily_active_user_count
         #   Number of users with activity in Chat and Cowork unified on the requested day.
-        #   Omitted from the response on deployments that do not offer Chat and Cowork
-        #   unified.
+        #   Omitted from the response where Chat and Cowork unified is not available.
         #
         #   @return [Integer, nil]
         optional :chat_cowork_unified_daily_active_user_count, Integer, nil?: true
@@ -103,15 +102,15 @@ module Anthropic
         # @!attribute chat_cowork_unified_monthly_active_user_count
         #   Number of users with activity in Chat and Cowork unified in the 28-day rolling
         #   window (30 days when the request filters by `rbac_group_id`). Omitted from the
-        #   response on deployments that do not offer Chat and Cowork unified.
+        #   response where Chat and Cowork unified is not available.
         #
         #   @return [Integer, nil]
         optional :chat_cowork_unified_monthly_active_user_count, Integer, nil?: true
 
         # @!attribute chat_cowork_unified_weekly_active_user_count
         #   Number of users with activity in Chat and Cowork unified in the 7-day rolling
-        #   window. Omitted from the response on deployments that do not offer Chat and
-        #   Cowork unified.
+        #   window. Omitted from the response where Chat and Cowork unified is not
+        #   available.
         #
         #   @return [Integer, nil]
         optional :chat_cowork_unified_weekly_active_user_count, Integer, nil?: true

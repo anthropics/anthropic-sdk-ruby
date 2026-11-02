@@ -108,8 +108,8 @@ module Anthropic
 
         # Activity recorded while the member had Chat and Cowork unified (Cowork's
         # features inside claude.ai chat) turned on, split into `chat` (chat activity) and
-        # `sessions` (Cowork activity). Omitted from the response on deployments that do
-        # not offer Chat and Cowork unified.
+        # `sessions` (Cowork activity). Omitted from the response where Chat and Cowork
+        # unified is not available.
         sig do
           returns(
             T.nilable(
@@ -204,8 +204,8 @@ module Anthropic
           web_search_count:,
           # Activity recorded while the member had Chat and Cowork unified (Cowork's
           # features inside claude.ai chat) turned on, split into `chat` (chat activity) and
-          # `sessions` (Cowork activity). Omitted from the response on deployments that do
-          # not offer Chat and Cowork unified.
+          # `sessions` (Cowork activity). Omitted from the response where Chat and Cowork
+          # unified is not available.
           chat_cowork_unified_metrics: nil,
           # Most recent UTC day (YYYY-MM-DD) on which the user had any counted activity,
           # within the requested window: equal to the requested `date` in single-day mode,
