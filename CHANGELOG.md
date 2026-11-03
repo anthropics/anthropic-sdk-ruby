@@ -1,10 +1,11 @@
 # Changelog
 
-## [2.4.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v2.4.0...v2.4.1) (2026-11-02)
+## [2.4.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v2.4.0...v2.4.1) (2026-11-03)
 
 ### Chores
 
 * **api:** update example values for pattern-constrained string fields
+* **ci:** build the gem
 * **docs:** clarify some API field descriptions
 * **docs:** update the telemetry destination headers description
 
