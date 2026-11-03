@@ -39,6 +39,7 @@ module Anthropic
           def list: (
             ?after_id: String,
             ?before_id: String,
+            ?ids: ::Array[String],
             ?include_archived: bool,
             ?include_default: bool,
             ?limit: Integer,

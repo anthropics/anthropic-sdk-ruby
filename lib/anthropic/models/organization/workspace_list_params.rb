@@ -22,6 +22,14 @@ module Anthropic
         #   @return [String, nil]
         optional :before_id, String
 
+        # @!attribute ids
+        #   Only the Workspaces with these IDs, at most 100. `include_archived` and
+        #   `include_default` still apply, and IDs of Workspaces the caller can't list are
+        #   left out.
+        #
+        #   @return [Array<String>, nil]
+        optional :ids, Anthropic::Internal::Type::ArrayOf[String]
+
         # @!attribute include_archived
         #   Whether to include Workspaces that have been archived in the response
         #
@@ -42,13 +50,15 @@ module Anthropic
         #   @return [Integer, nil]
         optional :limit, Integer
 
-        # @!method initialize(after_id: nil, before_id: nil, include_archived: nil, include_default: nil, limit: nil, request_options: {})
+        # @!method initialize(after_id: nil, before_id: nil, ids: nil, include_archived: nil, include_default: nil, limit: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Organization::WorkspaceListParams} for more details.
         #
         #   @param after_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
         #
         #   @param before_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
+        #
+        #   @param ids [Array<String>] Only the Workspaces with these IDs, at most 100. `include_archived` and `include
         #
         #   @param include_archived [Boolean] Whether to include Workspaces that have been archived in the response
         #

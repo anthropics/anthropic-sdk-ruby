@@ -127,11 +127,13 @@ module Anthropic
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Organization::WorkspaceListParams} for more details.
           #
-          # @overload list(after_id: nil, before_id: nil, include_archived: nil, include_default: nil, limit: nil, request_options: {})
+          # @overload list(after_id: nil, before_id: nil, ids: nil, include_archived: nil, include_default: nil, limit: nil, request_options: {})
           #
           # @param after_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
           #
           # @param before_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
+          #
+          # @param ids [Array<String>] Only the Workspaces with these IDs, at most 100. `include_archived` and `include
           #
           # @param include_archived [Boolean] Whether to include Workspaces that have been archived in the response
           #
@@ -151,7 +153,7 @@ module Anthropic
               qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_WORKSPACES_LIST,
               span_route: "/v1/organizations/workspaces",
-              span_query: %w[after_id before_id include_archived include_default limit],
+              span_query: %w[after_id before_id ids include_archived include_default limit],
               method: :get,
               path: "v1/organizations/workspaces",
               query: query,
