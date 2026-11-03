@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    class BetaEnvironmentUpdateDisabledErrorDetails = Beta::BetaEnvironmentUpdateDisabledErrorDetails
+
+    module Beta
+      type beta_environment_update_disabled_error_details =
+        { error_code: :environment_update_disabled }
+
+      class BetaEnvironmentUpdateDisabledErrorDetails < Anthropic::Internal::Type::BaseModel
+        attr_accessor error_code: :environment_update_disabled
+
+        def initialize: (?error_code: :environment_update_disabled) -> void
+
+        def to_hash: -> { error_code: :environment_update_disabled }
+      end
+    end
+  end
+end

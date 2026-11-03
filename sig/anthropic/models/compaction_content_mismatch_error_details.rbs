@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type compaction_content_mismatch_error_details =
+      { error_code: :compaction_content_mismatch }
+
+    class CompactionContentMismatchErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :compaction_content_mismatch
+
+      def initialize: (?error_code: :compaction_content_mismatch) -> void
+
+      def to_hash: -> { error_code: :compaction_content_mismatch }
+    end
+  end
+end

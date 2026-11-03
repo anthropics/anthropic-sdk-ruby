@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type cmek_key_network_blocked_error_details =
+      { error_code: :cmek_key_network_blocked }
+
+    class CmekKeyNetworkBlockedErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :cmek_key_network_blocked
+
+      def initialize: (?error_code: :cmek_key_network_blocked) -> void
+
+      def to_hash: -> { error_code: :cmek_key_network_blocked }
+    end
+  end
+end

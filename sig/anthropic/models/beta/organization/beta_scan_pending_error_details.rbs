@@ -1,0 +1,26 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_scan_pending_error_details =
+          { error_code: :scan_pending, plugin_version_id: String }
+
+        class BetaScanPendingErrorDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor error_code: :scan_pending
+
+          attr_accessor plugin_version_id: String
+
+          def initialize: (
+            plugin_version_id: String,
+            ?error_code: :scan_pending
+          ) -> void
+
+          def to_hash: -> {
+            error_code: :scan_pending,
+            plugin_version_id: String
+          }
+        end
+      end
+    end
+  end
+end

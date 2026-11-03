@@ -12,6 +12,7 @@ module Anthropic
         T.let(:invalid_request_error, Anthropic::ErrorType::TaggedSymbol)
       AUTHENTICATION_ERROR =
         T.let(:authentication_error, Anthropic::ErrorType::TaggedSymbol)
+      BILLING_ERROR = T.let(:billing_error, Anthropic::ErrorType::TaggedSymbol)
       PERMISSION_ERROR =
         T.let(:permission_error, Anthropic::ErrorType::TaggedSymbol)
       NOT_FOUND_ERROR =
@@ -19,10 +20,18 @@ module Anthropic
       RATE_LIMIT_ERROR =
         T.let(:rate_limit_error, Anthropic::ErrorType::TaggedSymbol)
       TIMEOUT_ERROR = T.let(:timeout_error, Anthropic::ErrorType::TaggedSymbol)
+      API_ERROR = T.let(:api_error, Anthropic::ErrorType::TaggedSymbol)
       OVERLOADED_ERROR =
         T.let(:overloaded_error, Anthropic::ErrorType::TaggedSymbol)
-      API_ERROR = T.let(:api_error, Anthropic::ErrorType::TaggedSymbol)
-      BILLING_ERROR = T.let(:billing_error, Anthropic::ErrorType::TaggedSymbol)
+      MEMORY_PRECONDITION_FAILED_ERROR =
+        T.let(
+          :memory_precondition_failed_error,
+          Anthropic::ErrorType::TaggedSymbol
+        )
+      MEMORY_PATH_CONFLICT_ERROR =
+        T.let(:memory_path_conflict_error, Anthropic::ErrorType::TaggedSymbol)
+      CONFLICT_ERROR =
+        T.let(:conflict_error, Anthropic::ErrorType::TaggedSymbol)
 
       sig { override.returns(T::Array[Anthropic::ErrorType::TaggedSymbol]) }
       def self.values

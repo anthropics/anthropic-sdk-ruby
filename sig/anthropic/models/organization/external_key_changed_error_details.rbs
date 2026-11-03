@@ -1,0 +1,16 @@
+module Anthropic
+  module Models
+    module Organization
+      type external_key_changed_error_details =
+        { error_code: :external_key_changed }
+
+      class ExternalKeyChangedErrorDetails < Anthropic::Internal::Type::BaseModel
+        attr_accessor error_code: :external_key_changed
+
+        def initialize: (?error_code: :external_key_changed) -> void
+
+        def to_hash: -> { error_code: :external_key_changed }
+      end
+    end
+  end
+end

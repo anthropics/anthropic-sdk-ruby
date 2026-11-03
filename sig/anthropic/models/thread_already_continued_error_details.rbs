@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type thread_already_continued_error_details =
+      { error_code: :thread_already_continued }
+
+    class ThreadAlreadyContinuedErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :thread_already_continued
+
+      def initialize: (?error_code: :thread_already_continued) -> void
+
+      def to_hash: -> { error_code: :thread_already_continued }
+    end
+  end
+end

@@ -1,0 +1,16 @@
+module Anthropic
+  module Models
+    type compaction_too_many_tool_references_error_details =
+      { error_code: :compaction_too_many_tool_references }
+
+    class CompactionTooManyToolReferencesErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :compaction_too_many_tool_references
+
+      def initialize: (
+        ?error_code: :compaction_too_many_tool_references
+      ) -> void
+
+      def to_hash: -> { error_code: :compaction_too_many_tool_references }
+    end
+  end
+end

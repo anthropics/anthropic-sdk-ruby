@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    type thread_not_found_error_details = { error_code: :thread_not_found }
+
+    class ThreadNotFoundErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :thread_not_found
+
+      def initialize: (?error_code: :thread_not_found) -> void
+
+      def to_hash: -> { error_code: :thread_not_found }
+    end
+  end
+end

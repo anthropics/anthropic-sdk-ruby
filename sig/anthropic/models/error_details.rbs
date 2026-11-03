@@ -1,0 +1,512 @@
+module Anthropic
+  module Models
+    type error_details =
+      Anthropic::AvailableToolsLimitExceededErrorDetails
+      | Anthropic::ClaudeCodeKeyCreatorNotMemberErrorDetails
+      | Anthropic::ClaudeCodeVersionTooOldErrorDetails
+      | Anthropic::CmekKeyDisabledErrorDetails
+      | Anthropic::CmekKeyNetworkBlockedErrorDetails
+      | Anthropic::CompactionBlockAmbiguousErrorDetails
+      | Anthropic::CompactionBlockMisplacedErrorDetails
+      | Anthropic::CompactionContentMismatchErrorDetails
+      | Anthropic::CompactionIncompleteTurnErrorDetails
+      | Anthropic::CompactionNothingToSummarizeErrorDetails
+      | Anthropic::CompactionSignatureInvalidErrorDetails
+      | Anthropic::CompactionTooManyToolReferencesErrorDetails
+      | Anthropic::CompactionToolChangesMismatchErrorDetails
+      | Anthropic::OrganizationOnHoldErrorDetails
+      | Anthropic::RequestBodyEncodingInvalidErrorDetails
+      | Anthropic::RequestBodyEncodingUnsupportedErrorDetails
+      | Anthropic::ThreadAlreadyContinuedErrorDetails
+      | Anthropic::ThreadContinueInFlightErrorDetails
+      | Anthropic::ThreadFingerprintMismatchErrorDetails
+      | Anthropic::ThreadUnsupportedRequestErrorDetails
+      | Anthropic::ToolNameConflictErrorDetails
+      | Anthropic::ToolReferenceUnresolvedErrorDetails
+      | Anthropic::ThreadNotFoundErrorDetails
+      | Anthropic::SkillReadBlockedUndecryptableErrorDetails
+      | Anthropic::RequestBodyTooLargeAfterDecodingErrorDetails
+      | Anthropic::EnforcedSpendLimitReachedErrorDetails
+      | Anthropic::CmekKeyUnreachableErrorDetails
+      | Anthropic::CompactionUnavailableErrorDetails
+      | Anthropic::StorageQuotaExceededErrorDetails
+      | Anthropic::FileNotDownloadableErrorDetails
+      | Anthropic::FileExpiredErrorDetails
+      | Anthropic::CmekContextUnavailableErrorDetails
+      | Anthropic::Organization::OrgAPIKeyLimitExceededErrorDetails
+      | Anthropic::Organization::WorkspaceAPIKeyLimitExceededErrorDetails
+      | Anthropic::UserProfileNotFoundErrorDetails
+      | Anthropic::Organization::ExternalKeyInWorkspacePolicyErrorDetails
+      | Anthropic::Organization::AlreadyMemberErrorDetails
+      | Anthropic::Organization::CannotInviteEmailsWithUnverifiedDomainsErrorDetails
+      | Anthropic::Organization::EmailDomainNotAllowedErrorDetails
+      | Anthropic::Organization::InviteAlreadyExistsErrorDetails
+      | Anthropic::Organization::OrgMemberLimitExceededErrorDetails
+      | Anthropic::RBACGroupGrantsOwnerAccessErrorDetails
+      | Anthropic::RBACGroupOwnerAccessUnconfirmedErrorDetails
+      | Anthropic::Organization::CannotRemoveLastMemberErrorDetails
+      | Anthropic::ConcurrentMembershipChangeErrorDetails
+      | Anthropic::Organization::KeyProfileMismatchErrorDetails
+      | Anthropic::Organization::WorkspacePolicyViolationErrorDetails
+      | Anthropic::Organization::ExternalKeyChangedErrorDetails
+      | Anthropic::Organization::WorkspaceMemberLimitExceededErrorDetails
+      | Anthropic::OrganizationTypeNotSupportedErrorDetails
+      | Anthropic::Beta::BetaEnvironmentCreateDisabledErrorDetails
+      | Anthropic::Beta::BetaEnvironmentArchivedErrorDetails
+      | Anthropic::Beta::BetaInvalidConfigTypeChangeErrorDetails
+      | Anthropic::Beta::BetaEnvironmentUpdateDisabledErrorDetails
+      | Anthropic::Beta::Environments::BetaHeartbeatPreconditionFailedErrorDetails
+      | Anthropic::Beta::BetaInvalidMetadataErrorDetails
+      | Anthropic::Beta::BetaBillingFrozenErrorDetails
+      | Anthropic::Beta::Organization::BetaSpendLimitsAdminAPIWritesNotEnabledErrorDetails
+      | Anthropic::Beta::BetaUnsupportedCharsetErrorDetails
+      | Anthropic::Beta::Organization::BetaPluginNameTakenErrorDetails
+      | Anthropic::Beta::Organization::BetaSkillNameTakenErrorDetails
+      | Anthropic::Beta::Organization::BetaRegistrationPendingErrorDetails
+      | Anthropic::Beta::Organization::BetaScanFailedErrorDetails
+      | Anthropic::Beta::Organization::BetaScanPendingErrorDetails
+      | Anthropic::Beta::Organization::BetaSlackChannelSetUpSettingsRefusedErrorDetails
+      | Anthropic::Beta::Organization::BetaAPIKeyScopeMissingErrorDetails
+      | Anthropic::Beta::Organization::BetaClaudeTagWritesNotEnabledErrorDetails
+      | Anthropic::Beta::Organization::BetaComplianceConfigurationRestrictedErrorDetails
+      | Anthropic::Beta::Organization::BetaOrganizationLevelScopedAPIKeyRequiredErrorDetails
+      | Anthropic::Beta::Organization::BetaEnvironmentNotFoundErrorDetails
+      | Anthropic::Beta::Organization::BetaSlackChannelSetUpEnvironmentNotFoundErrorDetails
+      | Anthropic::Beta::Organization::BetaSlackChannelSetUpSettingsConflictErrorDetails
+
+    module ErrorDetails
+      extend Anthropic::Internal::Type::Union
+
+      type error_code =
+        :available_tools_limit_exceeded
+        | :claude_code_key_creator_not_member
+        | :claude_code_version_too_old
+        | :cmek_key_disabled
+        | :cmek_key_network_blocked
+        | :compaction_block_ambiguous
+        | :compaction_block_misplaced
+        | :compaction_content_mismatch
+        | :compaction_incomplete_turn
+        | :compaction_nothing_to_summarize
+        | :compaction_signature_invalid
+        | :compaction_too_many_tool_references
+        | :compaction_tool_changes_mismatch
+        | :organization_on_hold
+        | :request_body_encoding_invalid
+        | :request_body_encoding_unsupported
+        | :thread_already_continued
+        | :thread_continue_in_flight
+        | :thread_fingerprint_mismatch
+        | :thread_unsupported_request
+        | :tool_name_conflict
+        | :tool_reference_unresolved
+        | :thread_not_found
+        | :skill_read_blocked_undecryptable
+        | :request_body_too_large_after_decoding
+        | :enforced_spend_limit_reached
+        | :cmek_key_unreachable
+        | :compaction_unavailable
+        | :storage_quota_exceeded
+        | :file_not_downloadable
+        | :file_expired
+        | :cmek_context_unavailable
+        | :org_api_key_limit_exceeded
+        | :workspace_api_key_limit_exceeded
+        | :user_profile_not_found
+        | :external_key_in_workspace_policy
+        | :already_member
+        | :cannot_invite_emails_with_unverified_domains
+        | :email_domain_not_allowed
+        | :invite_already_exists
+        | :org_member_limit_exceeded
+        | :rbac_group_grants_owner_access
+        | :rbac_group_owner_access_unconfirmed
+        | :cannot_remove_last_member
+        | :concurrent_membership_change
+        | :key_profile_mismatch
+        | :workspace_policy_violation
+        | :external_key_changed
+        | :workspace_member_limit_exceeded
+        | :organization_type_not_supported
+        | :environment_create_disabled
+        | :environment_archived
+        | :invalid_config_type_change
+        | :environment_update_disabled
+        | :heartbeat_precondition_failed
+        | :invalid_metadata
+        | :billing_frozen
+        | :spend_limits_admin_api_writes_not_enabled
+        | :unsupported_charset
+        | :plugin_name_taken
+        | :skill_name_taken
+        | :registration_pending
+        | :scan_failed
+        | :scan_pending
+        | :slack_channel_set_up_settings_refused
+        | :api_key_scope_missing
+        | :claude_tag_writes_not_enabled
+        | :compliance_configuration_restricted
+        | :organization_level_scoped_api_key_required
+        | :environment_not_found
+        | :slack_channel_set_up_environment_not_found
+        | :slack_channel_set_up_settings_conflict
+
+      module ErrorCode
+        extend Anthropic::Internal::Type::Enum
+
+        AVAILABLE_TOOLS_LIMIT_EXCEEDED: :available_tools_limit_exceeded
+        CLAUDE_CODE_KEY_CREATOR_NOT_MEMBER: :claude_code_key_creator_not_member
+        CLAUDE_CODE_VERSION_TOO_OLD: :claude_code_version_too_old
+        CMEK_KEY_DISABLED: :cmek_key_disabled
+        CMEK_KEY_NETWORK_BLOCKED: :cmek_key_network_blocked
+        COMPACTION_BLOCK_AMBIGUOUS: :compaction_block_ambiguous
+        COMPACTION_BLOCK_MISPLACED: :compaction_block_misplaced
+        COMPACTION_CONTENT_MISMATCH: :compaction_content_mismatch
+        COMPACTION_INCOMPLETE_TURN: :compaction_incomplete_turn
+        COMPACTION_NOTHING_TO_SUMMARIZE: :compaction_nothing_to_summarize
+        COMPACTION_SIGNATURE_INVALID: :compaction_signature_invalid
+        COMPACTION_TOO_MANY_TOOL_REFERENCES: :compaction_too_many_tool_references
+        COMPACTION_TOOL_CHANGES_MISMATCH: :compaction_tool_changes_mismatch
+        ORGANIZATION_ON_HOLD: :organization_on_hold
+        REQUEST_BODY_ENCODING_INVALID: :request_body_encoding_invalid
+        REQUEST_BODY_ENCODING_UNSUPPORTED: :request_body_encoding_unsupported
+        THREAD_ALREADY_CONTINUED: :thread_already_continued
+        THREAD_CONTINUE_IN_FLIGHT: :thread_continue_in_flight
+        THREAD_FINGERPRINT_MISMATCH: :thread_fingerprint_mismatch
+        THREAD_UNSUPPORTED_REQUEST: :thread_unsupported_request
+        TOOL_NAME_CONFLICT: :tool_name_conflict
+        TOOL_REFERENCE_UNRESOLVED: :tool_reference_unresolved
+        THREAD_NOT_FOUND: :thread_not_found
+        SKILL_READ_BLOCKED_UNDECRYPTABLE: :skill_read_blocked_undecryptable
+        REQUEST_BODY_TOO_LARGE_AFTER_DECODING: :request_body_too_large_after_decoding
+        ENFORCED_SPEND_LIMIT_REACHED: :enforced_spend_limit_reached
+        CMEK_KEY_UNREACHABLE: :cmek_key_unreachable
+        COMPACTION_UNAVAILABLE: :compaction_unavailable
+        STORAGE_QUOTA_EXCEEDED: :storage_quota_exceeded
+        FILE_NOT_DOWNLOADABLE: :file_not_downloadable
+        FILE_EXPIRED: :file_expired
+        CMEK_CONTEXT_UNAVAILABLE: :cmek_context_unavailable
+        ORG_API_KEY_LIMIT_EXCEEDED: :org_api_key_limit_exceeded
+        WORKSPACE_API_KEY_LIMIT_EXCEEDED: :workspace_api_key_limit_exceeded
+        USER_PROFILE_NOT_FOUND: :user_profile_not_found
+        EXTERNAL_KEY_IN_WORKSPACE_POLICY: :external_key_in_workspace_policy
+        ALREADY_MEMBER: :already_member
+        CANNOT_INVITE_EMAILS_WITH_UNVERIFIED_DOMAINS: :cannot_invite_emails_with_unverified_domains
+        EMAIL_DOMAIN_NOT_ALLOWED: :email_domain_not_allowed
+        INVITE_ALREADY_EXISTS: :invite_already_exists
+        ORG_MEMBER_LIMIT_EXCEEDED: :org_member_limit_exceeded
+        RBAC_GROUP_GRANTS_OWNER_ACCESS: :rbac_group_grants_owner_access
+        RBAC_GROUP_OWNER_ACCESS_UNCONFIRMED: :rbac_group_owner_access_unconfirmed
+        CANNOT_REMOVE_LAST_MEMBER: :cannot_remove_last_member
+        CONCURRENT_MEMBERSHIP_CHANGE: :concurrent_membership_change
+        KEY_PROFILE_MISMATCH: :key_profile_mismatch
+        WORKSPACE_POLICY_VIOLATION: :workspace_policy_violation
+        EXTERNAL_KEY_CHANGED: :external_key_changed
+        WORKSPACE_MEMBER_LIMIT_EXCEEDED: :workspace_member_limit_exceeded
+        ORGANIZATION_TYPE_NOT_SUPPORTED: :organization_type_not_supported
+        ENVIRONMENT_CREATE_DISABLED: :environment_create_disabled
+        ENVIRONMENT_ARCHIVED: :environment_archived
+        INVALID_CONFIG_TYPE_CHANGE: :invalid_config_type_change
+        ENVIRONMENT_UPDATE_DISABLED: :environment_update_disabled
+        HEARTBEAT_PRECONDITION_FAILED: :heartbeat_precondition_failed
+        INVALID_METADATA: :invalid_metadata
+        BILLING_FROZEN: :billing_frozen
+        SPEND_LIMITS_ADMIN_API_WRITES_NOT_ENABLED: :spend_limits_admin_api_writes_not_enabled
+        UNSUPPORTED_CHARSET: :unsupported_charset
+        PLUGIN_NAME_TAKEN: :plugin_name_taken
+        SKILL_NAME_TAKEN: :skill_name_taken
+        REGISTRATION_PENDING: :registration_pending
+        SCAN_FAILED: :scan_failed
+        SCAN_PENDING: :scan_pending
+        SLACK_CHANNEL_SET_UP_SETTINGS_REFUSED: :slack_channel_set_up_settings_refused
+        API_KEY_SCOPE_MISSING: :api_key_scope_missing
+        CLAUDE_TAG_WRITES_NOT_ENABLED: :claude_tag_writes_not_enabled
+        COMPLIANCE_CONFIGURATION_RESTRICTED: :compliance_configuration_restricted
+        ORGANIZATION_LEVEL_SCOPED_API_KEY_REQUIRED: :organization_level_scoped_api_key_required
+        ENVIRONMENT_NOT_FOUND: :environment_not_found
+        SLACK_CHANNEL_SET_UP_ENVIRONMENT_NOT_FOUND: :slack_channel_set_up_environment_not_found
+        SLACK_CHANNEL_SET_UP_SETTINGS_CONFLICT: :slack_channel_set_up_settings_conflict
+
+        def self?.values: -> ::Array[Anthropic::Models::ErrorDetails::error_code]
+      end
+
+      def self?.variants: -> ::Array[Anthropic::Models::error_details]
+
+      def self.new:
+        (
+          error_code: :available_tools_limit_exceeded
+          | "available_tools_limit_exceeded"
+        ) -> Anthropic::AvailableToolsLimitExceededErrorDetails
+        | (
+          error_code: :claude_code_key_creator_not_member
+          | "claude_code_key_creator_not_member"
+        ) -> Anthropic::ClaudeCodeKeyCreatorNotMemberErrorDetails
+        | (
+          error_code: :claude_code_version_too_old
+          | "claude_code_version_too_old"
+        ) -> Anthropic::ClaudeCodeVersionTooOldErrorDetails
+        | (
+          error_code: :cmek_key_disabled | "cmek_key_disabled"
+        ) -> Anthropic::CmekKeyDisabledErrorDetails
+        | (
+          error_code: :cmek_key_network_blocked | "cmek_key_network_blocked"
+        ) -> Anthropic::CmekKeyNetworkBlockedErrorDetails
+        | (
+          error_code: :compaction_block_ambiguous | "compaction_block_ambiguous"
+        ) -> Anthropic::CompactionBlockAmbiguousErrorDetails
+        | (
+          error_code: :compaction_block_misplaced | "compaction_block_misplaced"
+        ) -> Anthropic::CompactionBlockMisplacedErrorDetails
+        | (
+          error_code: :compaction_content_mismatch
+          | "compaction_content_mismatch"
+        ) -> Anthropic::CompactionContentMismatchErrorDetails
+        | (
+          error_code: :compaction_incomplete_turn | "compaction_incomplete_turn"
+        ) -> Anthropic::CompactionIncompleteTurnErrorDetails
+        | (
+          error_code: :compaction_nothing_to_summarize
+          | "compaction_nothing_to_summarize"
+        ) -> Anthropic::CompactionNothingToSummarizeErrorDetails
+        | (
+          error_code: :compaction_signature_invalid
+          | "compaction_signature_invalid"
+        ) -> Anthropic::CompactionSignatureInvalidErrorDetails
+        | (
+          error_code: :compaction_too_many_tool_references
+          | "compaction_too_many_tool_references"
+        ) -> Anthropic::CompactionTooManyToolReferencesErrorDetails
+        | (
+          error_code: :compaction_tool_changes_mismatch
+          | "compaction_tool_changes_mismatch"
+        ) -> Anthropic::CompactionToolChangesMismatchErrorDetails
+        | (
+          error_code: :organization_on_hold | "organization_on_hold",
+          ?appeal_url: String?
+        ) -> Anthropic::OrganizationOnHoldErrorDetails
+        | (
+          error_code: :request_body_encoding_invalid
+          | "request_body_encoding_invalid"
+        ) -> Anthropic::RequestBodyEncodingInvalidErrorDetails
+        | (
+          error_code: :request_body_encoding_unsupported
+          | "request_body_encoding_unsupported"
+        ) -> Anthropic::RequestBodyEncodingUnsupportedErrorDetails
+        | (
+          error_code: :thread_already_continued | "thread_already_continued"
+        ) -> Anthropic::ThreadAlreadyContinuedErrorDetails
+        | (
+          error_code: :thread_continue_in_flight | "thread_continue_in_flight"
+        ) -> Anthropic::ThreadContinueInFlightErrorDetails
+        | (
+          error_code: :thread_fingerprint_mismatch
+          | "thread_fingerprint_mismatch"
+        ) -> Anthropic::ThreadFingerprintMismatchErrorDetails
+        | (
+          error_code: :thread_unsupported_request
+          | "thread_unsupported_request",
+          ?unsupported: ::Array[Anthropic::Models::thread_unsupported_feature_name]?
+        ) -> Anthropic::ThreadUnsupportedRequestErrorDetails
+        | (
+          error_code: :tool_name_conflict | "tool_name_conflict"
+        ) -> Anthropic::ToolNameConflictErrorDetails
+        | (
+          error_code: :tool_reference_unresolved | "tool_reference_unresolved"
+        ) -> Anthropic::ToolReferenceUnresolvedErrorDetails
+        | (
+          error_code: :thread_not_found | "thread_not_found"
+        ) -> Anthropic::ThreadNotFoundErrorDetails
+        | (
+          error_code: :skill_read_blocked_undecryptable
+          | "skill_read_blocked_undecryptable"
+        ) -> Anthropic::SkillReadBlockedUndecryptableErrorDetails
+        | (
+          error_code: :request_body_too_large_after_decoding
+          | "request_body_too_large_after_decoding"
+        ) -> Anthropic::RequestBodyTooLargeAfterDecodingErrorDetails
+        | (
+          error_code: :enforced_spend_limit_reached
+          | "enforced_spend_limit_reached"
+        ) -> Anthropic::EnforcedSpendLimitReachedErrorDetails
+        | (
+          error_code: :cmek_key_unreachable | "cmek_key_unreachable"
+        ) -> Anthropic::CmekKeyUnreachableErrorDetails
+        | (
+          error_code: :compaction_unavailable | "compaction_unavailable"
+        ) -> Anthropic::CompactionUnavailableErrorDetails
+        | (
+          error_code: :storage_quota_exceeded | "storage_quota_exceeded"
+        ) -> Anthropic::StorageQuotaExceededErrorDetails
+        | (
+          error_code: :file_not_downloadable | "file_not_downloadable"
+        ) -> Anthropic::FileNotDownloadableErrorDetails
+        | (
+          error_code: :file_expired | "file_expired"
+        ) -> Anthropic::FileExpiredErrorDetails
+        | (
+          error_code: :cmek_context_unavailable | "cmek_context_unavailable"
+        ) -> Anthropic::CmekContextUnavailableErrorDetails
+        | (
+          error_code: :org_api_key_limit_exceeded | "org_api_key_limit_exceeded"
+        ) -> Anthropic::Organization::OrgAPIKeyLimitExceededErrorDetails
+        | (
+          error_code: :workspace_api_key_limit_exceeded
+          | "workspace_api_key_limit_exceeded"
+        ) -> Anthropic::Organization::WorkspaceAPIKeyLimitExceededErrorDetails
+        | (
+          error_code: :user_profile_not_found | "user_profile_not_found"
+        ) -> Anthropic::UserProfileNotFoundErrorDetails
+        | (
+          error_code: :external_key_in_workspace_policy
+          | "external_key_in_workspace_policy"
+        ) -> Anthropic::Organization::ExternalKeyInWorkspacePolicyErrorDetails
+        | (
+          error_code: :already_member | "already_member"
+        ) -> Anthropic::Organization::AlreadyMemberErrorDetails
+        | (
+          error_code: :cannot_invite_emails_with_unverified_domains
+          | "cannot_invite_emails_with_unverified_domains"
+        ) -> Anthropic::Organization::CannotInviteEmailsWithUnverifiedDomainsErrorDetails
+        | (
+          error_code: :email_domain_not_allowed | "email_domain_not_allowed"
+        ) -> Anthropic::Organization::EmailDomainNotAllowedErrorDetails
+        | (
+          error_code: :invite_already_exists | "invite_already_exists"
+        ) -> Anthropic::Organization::InviteAlreadyExistsErrorDetails
+        | (
+          error_code: :org_member_limit_exceeded | "org_member_limit_exceeded"
+        ) -> Anthropic::Organization::OrgMemberLimitExceededErrorDetails
+        | (
+          error_code: :rbac_group_grants_owner_access
+          | "rbac_group_grants_owner_access"
+        ) -> Anthropic::RBACGroupGrantsOwnerAccessErrorDetails
+        | (
+          error_code: :rbac_group_owner_access_unconfirmed
+          | "rbac_group_owner_access_unconfirmed"
+        ) -> Anthropic::RBACGroupOwnerAccessUnconfirmedErrorDetails
+        | (
+          error_code: :cannot_remove_last_member | "cannot_remove_last_member"
+        ) -> Anthropic::Organization::CannotRemoveLastMemberErrorDetails
+        | (
+          error_code: :concurrent_membership_change
+          | "concurrent_membership_change"
+        ) -> Anthropic::ConcurrentMembershipChangeErrorDetails
+        | (
+          error_code: :key_profile_mismatch | "key_profile_mismatch"
+        ) -> Anthropic::Organization::KeyProfileMismatchErrorDetails
+        | (
+          error_code: :workspace_policy_violation
+          | "workspace_policy_violation",
+          field: Anthropic::Models::Organization::workspace_policy_field
+        ) -> Anthropic::Organization::WorkspacePolicyViolationErrorDetails
+        | (
+          error_code: :external_key_changed | "external_key_changed"
+        ) -> Anthropic::Organization::ExternalKeyChangedErrorDetails
+        | (
+          error_code: :workspace_member_limit_exceeded
+          | "workspace_member_limit_exceeded"
+        ) -> Anthropic::Organization::WorkspaceMemberLimitExceededErrorDetails
+        | (
+          error_code: :organization_type_not_supported
+          | "organization_type_not_supported"
+        ) -> Anthropic::OrganizationTypeNotSupportedErrorDetails
+        | (
+          error_code: :environment_create_disabled
+          | "environment_create_disabled"
+        ) -> Anthropic::Beta::BetaEnvironmentCreateDisabledErrorDetails
+        | (
+          error_code: :environment_archived | "environment_archived"
+        ) -> Anthropic::Beta::BetaEnvironmentArchivedErrorDetails
+        | (
+          error_code: :invalid_config_type_change | "invalid_config_type_change"
+        ) -> Anthropic::Beta::BetaInvalidConfigTypeChangeErrorDetails
+        | (
+          error_code: :environment_update_disabled
+          | "environment_update_disabled"
+        ) -> Anthropic::Beta::BetaEnvironmentUpdateDisabledErrorDetails
+        | (
+          error_code: :heartbeat_precondition_failed
+          | "heartbeat_precondition_failed",
+          current_state: Anthropic::Beta::Environments::BetaWorkLeaseState
+        ) -> Anthropic::Beta::Environments::BetaHeartbeatPreconditionFailedErrorDetails
+        | (
+          error_code: :invalid_metadata | "invalid_metadata"
+        ) -> Anthropic::Beta::BetaInvalidMetadataErrorDetails
+        | (
+          error_code: :billing_frozen | "billing_frozen"
+        ) -> Anthropic::Beta::BetaBillingFrozenErrorDetails
+        | (
+          error_code: :spend_limits_admin_api_writes_not_enabled
+          | "spend_limits_admin_api_writes_not_enabled"
+        ) -> Anthropic::Beta::Organization::BetaSpendLimitsAdminAPIWritesNotEnabledErrorDetails
+        | (
+          error_code: :unsupported_charset | "unsupported_charset"
+        ) -> Anthropic::Beta::BetaUnsupportedCharsetErrorDetails
+        | (
+          error_code: :plugin_name_taken | "plugin_name_taken",
+          ?plugin_id: String?
+        ) -> Anthropic::Beta::Organization::BetaPluginNameTakenErrorDetails
+        | (
+          error_code: :skill_name_taken | "skill_name_taken",
+          skill_name: String
+        ) -> Anthropic::Beta::Organization::BetaSkillNameTakenErrorDetails
+        | (
+          error_code: :registration_pending | "registration_pending",
+          plugin_id: String,
+          plugin_version_id: String
+        ) -> Anthropic::Beta::Organization::BetaRegistrationPendingErrorDetails
+        | (
+          error_code: :scan_failed | "scan_failed",
+          plugin_version_id: String
+        ) -> Anthropic::Beta::Organization::BetaScanFailedErrorDetails
+        | (
+          error_code: :scan_pending | "scan_pending",
+          plugin_version_id: String
+        ) -> Anthropic::Beta::Organization::BetaScanPendingErrorDetails
+        | (
+          error_code: :slack_channel_set_up_settings_refused
+          | "slack_channel_set_up_settings_refused",
+          slack_channel_id: String
+        ) -> Anthropic::Beta::Organization::BetaSlackChannelSetUpSettingsRefusedErrorDetails
+        | (
+          error_code: :api_key_scope_missing | "api_key_scope_missing"
+        ) -> Anthropic::Beta::Organization::BetaAPIKeyScopeMissingErrorDetails
+        | (
+          error_code: :claude_tag_writes_not_enabled
+          | "claude_tag_writes_not_enabled"
+        ) -> Anthropic::Beta::Organization::BetaClaudeTagWritesNotEnabledErrorDetails
+        | (
+          error_code: :compliance_configuration_restricted
+          | "compliance_configuration_restricted"
+        ) -> Anthropic::Beta::Organization::BetaComplianceConfigurationRestrictedErrorDetails
+        | (
+          error_code: :organization_level_scoped_api_key_required
+          | "organization_level_scoped_api_key_required"
+        ) -> Anthropic::Beta::Organization::BetaOrganizationLevelScopedAPIKeyRequiredErrorDetails
+        | (
+          error_code: :environment_not_found | "environment_not_found"
+        ) -> Anthropic::Beta::Organization::BetaEnvironmentNotFoundErrorDetails
+        | (
+          error_code: :slack_channel_set_up_environment_not_found
+          | "slack_channel_set_up_environment_not_found",
+          slack_channel_id: String
+        ) -> Anthropic::Beta::Organization::BetaSlackChannelSetUpEnvironmentNotFoundErrorDetails
+        | (
+          error_code: :slack_channel_set_up_settings_conflict
+          | "slack_channel_set_up_settings_conflict",
+          slack_channel_id: String
+        ) -> Anthropic::Beta::Organization::BetaSlackChannelSetUpSettingsConflictErrorDetails
+        | (
+          error_code: Anthropic::Models::ErrorDetails::error_code | String,
+          ?appeal_url: String?,
+          ?unsupported: ::Array[Anthropic::Models::thread_unsupported_feature_name]?,
+          ?field: Anthropic::Models::Organization::workspace_policy_field,
+          ?current_state: Anthropic::Beta::Environments::BetaWorkLeaseState,
+          ?plugin_id: String? | String,
+          ?skill_name: String,
+          ?plugin_version_id: String,
+          ?slack_channel_id: String
+        ) -> Anthropic::Models::error_details
+    end
+  end
+end

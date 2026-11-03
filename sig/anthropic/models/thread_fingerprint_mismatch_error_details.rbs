@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type thread_fingerprint_mismatch_error_details =
+      { error_code: :thread_fingerprint_mismatch }
+
+    class ThreadFingerprintMismatchErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :thread_fingerprint_mismatch
+
+      def initialize: (?error_code: :thread_fingerprint_mismatch) -> void
+
+      def to_hash: -> { error_code: :thread_fingerprint_mismatch }
+    end
+  end
+end

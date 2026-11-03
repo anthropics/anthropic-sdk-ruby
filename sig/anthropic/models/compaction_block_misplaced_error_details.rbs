@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type compaction_block_misplaced_error_details =
+      { error_code: :compaction_block_misplaced }
+
+    class CompactionBlockMisplacedErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :compaction_block_misplaced
+
+      def initialize: (?error_code: :compaction_block_misplaced) -> void
+
+      def to_hash: -> { error_code: :compaction_block_misplaced }
+    end
+  end
+end

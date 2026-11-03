@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type file_not_downloadable_error_details =
+      { error_code: :file_not_downloadable }
+
+    class FileNotDownloadableErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :file_not_downloadable
+
+      def initialize: (?error_code: :file_not_downloadable) -> void
+
+      def to_hash: -> { error_code: :file_not_downloadable }
+    end
+  end
+end

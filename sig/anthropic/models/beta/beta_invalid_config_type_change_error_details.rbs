@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    class BetaInvalidConfigTypeChangeErrorDetails = Beta::BetaInvalidConfigTypeChangeErrorDetails
+
+    module Beta
+      type beta_invalid_config_type_change_error_details =
+        { error_code: :invalid_config_type_change }
+
+      class BetaInvalidConfigTypeChangeErrorDetails < Anthropic::Internal::Type::BaseModel
+        attr_accessor error_code: :invalid_config_type_change
+
+        def initialize: (?error_code: :invalid_config_type_change) -> void
+
+        def to_hash: -> { error_code: :invalid_config_type_change }
+      end
+    end
+  end
+end

@@ -1,0 +1,15 @@
+module Anthropic
+  module Models
+    module Organization
+      type workspace_policy_field = :external_key_id
+
+      module WorkspacePolicyField
+        extend Anthropic::Internal::Type::Enum
+
+        EXTERNAL_KEY_ID: :external_key_id
+
+        def self?.values: -> ::Array[Anthropic::Models::Organization::workspace_policy_field]
+      end
+    end
+  end
+end

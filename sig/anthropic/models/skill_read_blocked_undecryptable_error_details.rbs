@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type skill_read_blocked_undecryptable_error_details =
+      { error_code: :skill_read_blocked_undecryptable }
+
+    class SkillReadBlockedUndecryptableErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :skill_read_blocked_undecryptable
+
+      def initialize: (?error_code: :skill_read_blocked_undecryptable) -> void
+
+      def to_hash: -> { error_code: :skill_read_blocked_undecryptable }
+    end
+  end
+end

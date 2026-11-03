@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type claude_code_version_too_old_error_details =
+      { error_code: :claude_code_version_too_old }
+
+    class ClaudeCodeVersionTooOldErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :claude_code_version_too_old
+
+      def initialize: (?error_code: :claude_code_version_too_old) -> void
+
+      def to_hash: -> { error_code: :claude_code_version_too_old }
+    end
+  end
+end

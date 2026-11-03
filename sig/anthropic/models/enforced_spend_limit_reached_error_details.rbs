@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type enforced_spend_limit_reached_error_details =
+      { error_code: :enforced_spend_limit_reached }
+
+    class EnforcedSpendLimitReachedErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :enforced_spend_limit_reached
+
+      def initialize: (?error_code: :enforced_spend_limit_reached) -> void
+
+      def to_hash: -> { error_code: :enforced_spend_limit_reached }
+    end
+  end
+end

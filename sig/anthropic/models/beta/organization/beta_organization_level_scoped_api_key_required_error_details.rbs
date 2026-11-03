@@ -1,0 +1,22 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_organization_level_scoped_api_key_required_error_details =
+          { error_code: :organization_level_scoped_api_key_required }
+
+        class BetaOrganizationLevelScopedAPIKeyRequiredErrorDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor error_code: :organization_level_scoped_api_key_required
+
+          def initialize: (
+            ?error_code: :organization_level_scoped_api_key_required
+          ) -> void
+
+          def to_hash: -> {
+            error_code: :organization_level_scoped_api_key_required
+          }
+        end
+      end
+    end
+  end
+end

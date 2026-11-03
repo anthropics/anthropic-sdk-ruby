@@ -1,0 +1,15 @@
+module Anthropic
+  module Models
+    module Organization
+      type already_member_error_details = { error_code: :already_member }
+
+      class AlreadyMemberErrorDetails < Anthropic::Internal::Type::BaseModel
+        attr_accessor error_code: :already_member
+
+        def initialize: (?error_code: :already_member) -> void
+
+        def to_hash: -> { error_code: :already_member }
+      end
+    end
+  end
+end

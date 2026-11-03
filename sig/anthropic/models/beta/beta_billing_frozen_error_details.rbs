@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    class BetaBillingFrozenErrorDetails = Beta::BetaBillingFrozenErrorDetails
+
+    module Beta
+      type beta_billing_frozen_error_details = { error_code: :billing_frozen }
+
+      class BetaBillingFrozenErrorDetails < Anthropic::Internal::Type::BaseModel
+        attr_accessor error_code: :billing_frozen
+
+        def initialize: (?error_code: :billing_frozen) -> void
+
+        def to_hash: -> { error_code: :billing_frozen }
+      end
+    end
+  end
+end

@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    class BetaEnvironmentCreateDisabledErrorDetails = Beta::BetaEnvironmentCreateDisabledErrorDetails
+
+    module Beta
+      type beta_environment_create_disabled_error_details =
+        { error_code: :environment_create_disabled }
+
+      class BetaEnvironmentCreateDisabledErrorDetails < Anthropic::Internal::Type::BaseModel
+        attr_accessor error_code: :environment_create_disabled
+
+        def initialize: (?error_code: :environment_create_disabled) -> void
+
+        def to_hash: -> { error_code: :environment_create_disabled }
+      end
+    end
+  end
+end

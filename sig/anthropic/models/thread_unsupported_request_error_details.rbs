@@ -1,0 +1,25 @@
+module Anthropic
+  module Models
+    type thread_unsupported_request_error_details =
+      {
+        error_code: :thread_unsupported_request,
+        unsupported: ::Array[Anthropic::Models::thread_unsupported_feature_name]?
+      }
+
+    class ThreadUnsupportedRequestErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :thread_unsupported_request
+
+      attr_accessor unsupported: ::Array[Anthropic::Models::thread_unsupported_feature_name]?
+
+      def initialize: (
+        ?unsupported: ::Array[Anthropic::Models::thread_unsupported_feature_name]?,
+        ?error_code: :thread_unsupported_request
+      ) -> void
+
+      def to_hash: -> {
+        error_code: :thread_unsupported_request,
+        unsupported: ::Array[Anthropic::Models::thread_unsupported_feature_name]?
+      }
+    end
+  end
+end

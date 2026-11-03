@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    type tool_name_conflict_error_details = { error_code: :tool_name_conflict }
+
+    class ToolNameConflictErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :tool_name_conflict
+
+      def initialize: (?error_code: :tool_name_conflict) -> void
+
+      def to_hash: -> { error_code: :tool_name_conflict }
+    end
+  end
+end

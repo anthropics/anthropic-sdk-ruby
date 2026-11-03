@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_registration_pending_error_details =
+          {
+            error_code: :registration_pending,
+            plugin_id: String,
+            plugin_version_id: String
+          }
+
+        class BetaRegistrationPendingErrorDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor error_code: :registration_pending
+
+          attr_accessor plugin_id: String
+
+          attr_accessor plugin_version_id: String
+
+          def initialize: (
+            plugin_id: String,
+            plugin_version_id: String,
+            ?error_code: :registration_pending
+          ) -> void
+
+          def to_hash: -> {
+            error_code: :registration_pending,
+            plugin_id: String,
+            plugin_version_id: String
+          }
+        end
+      end
+    end
+  end
+end

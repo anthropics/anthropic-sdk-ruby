@@ -1,0 +1,29 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_slack_channel_set_up_environment_not_found_error_details =
+          {
+            error_code: :slack_channel_set_up_environment_not_found,
+            slack_channel_id: String
+          }
+
+        class BetaSlackChannelSetUpEnvironmentNotFoundErrorDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor error_code: :slack_channel_set_up_environment_not_found
+
+          attr_accessor slack_channel_id: String
+
+          def initialize: (
+            slack_channel_id: String,
+            ?error_code: :slack_channel_set_up_environment_not_found
+          ) -> void
+
+          def to_hash: -> {
+            error_code: :slack_channel_set_up_environment_not_found,
+            slack_channel_id: String
+          }
+        end
+      end
+    end
+  end
+end

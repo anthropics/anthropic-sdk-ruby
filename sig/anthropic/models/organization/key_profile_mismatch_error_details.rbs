@@ -1,0 +1,16 @@
+module Anthropic
+  module Models
+    module Organization
+      type key_profile_mismatch_error_details =
+        { error_code: :key_profile_mismatch }
+
+      class KeyProfileMismatchErrorDetails < Anthropic::Internal::Type::BaseModel
+        attr_accessor error_code: :key_profile_mismatch
+
+        def initialize: (?error_code: :key_profile_mismatch) -> void
+
+        def to_hash: -> { error_code: :key_profile_mismatch }
+      end
+    end
+  end
+end

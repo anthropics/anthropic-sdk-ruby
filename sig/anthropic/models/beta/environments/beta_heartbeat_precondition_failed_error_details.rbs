@@ -1,0 +1,29 @@
+module Anthropic
+  module Models
+    module Beta
+      module Environments
+        type beta_heartbeat_precondition_failed_error_details =
+          {
+            current_state: Anthropic::Beta::Environments::BetaWorkLeaseState,
+            error_code: :heartbeat_precondition_failed
+          }
+
+        class BetaHeartbeatPreconditionFailedErrorDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor current_state: Anthropic::Beta::Environments::BetaWorkLeaseState
+
+          attr_accessor error_code: :heartbeat_precondition_failed
+
+          def initialize: (
+            current_state: Anthropic::Beta::Environments::BetaWorkLeaseState,
+            ?error_code: :heartbeat_precondition_failed
+          ) -> void
+
+          def to_hash: -> {
+            current_state: Anthropic::Beta::Environments::BetaWorkLeaseState,
+            error_code: :heartbeat_precondition_failed
+          }
+        end
+      end
+    end
+  end
+end

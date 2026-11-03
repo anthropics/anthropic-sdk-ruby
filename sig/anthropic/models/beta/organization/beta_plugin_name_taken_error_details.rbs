@@ -1,0 +1,23 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_plugin_name_taken_error_details =
+          { error_code: :plugin_name_taken, plugin_id: String? }
+
+        class BetaPluginNameTakenErrorDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor error_code: :plugin_name_taken
+
+          attr_accessor plugin_id: String?
+
+          def initialize: (
+            ?plugin_id: String?,
+            ?error_code: :plugin_name_taken
+          ) -> void
+
+          def to_hash: -> { error_code: :plugin_name_taken, plugin_id: String? }
+        end
+      end
+    end
+  end
+end
