@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type beta_unsupported_charset_error_details =
+      { error_code: :unsupported_charset }
+
+    class BetaUnsupportedCharsetErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :unsupported_charset
+
+      def initialize: (?error_code: :unsupported_charset) -> void
+
+      def to_hash: -> { error_code: :unsupported_charset }
+    end
+  end
+end

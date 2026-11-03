@@ -41,9 +41,9 @@ module Anthropic
       | Anthropic::Organization::CannotInviteEmailsWithUnverifiedDomainsErrorDetails
       | Anthropic::Organization::EmailDomainNotAllowedErrorDetails
       | Anthropic::Organization::InviteAlreadyExistsErrorDetails
-      | Anthropic::Organization::OrgMemberLimitExceededErrorDetails
-      | Anthropic::RBACGroupGrantsOwnerAccessErrorDetails
-      | Anthropic::RBACGroupOwnerAccessUnconfirmedErrorDetails
+      | Anthropic::OrgMemberLimitExceededErrorDetails
+      | Anthropic::Organization::RBACGroupGrantsOwnerAccessErrorDetails
+      | Anthropic::Organization::RBACGroupOwnerAccessUnconfirmedErrorDetails
       | Anthropic::Organization::CannotRemoveLastMemberErrorDetails
       | Anthropic::ConcurrentMembershipChangeErrorDetails
       | Anthropic::Organization::KeyProfileMismatchErrorDetails
@@ -59,7 +59,7 @@ module Anthropic
       | Anthropic::Beta::BetaInvalidMetadataErrorDetails
       | Anthropic::Beta::BetaBillingFrozenErrorDetails
       | Anthropic::Beta::Organization::BetaSpendLimitsAdminAPIWritesNotEnabledErrorDetails
-      | Anthropic::Beta::BetaUnsupportedCharsetErrorDetails
+      | Anthropic::BetaUnsupportedCharsetErrorDetails
       | Anthropic::Beta::Organization::BetaPluginNameTakenErrorDetails
       | Anthropic::Beta::Organization::BetaSkillNameTakenErrorDetails
       | Anthropic::Beta::Organization::BetaRegistrationPendingErrorDetails
@@ -70,7 +70,7 @@ module Anthropic
       | Anthropic::Beta::Organization::BetaClaudeTagWritesNotEnabledErrorDetails
       | Anthropic::Beta::Organization::BetaComplianceConfigurationRestrictedErrorDetails
       | Anthropic::Beta::Organization::BetaOrganizationLevelScopedAPIKeyRequiredErrorDetails
-      | Anthropic::Beta::Organization::BetaEnvironmentNotFoundErrorDetails
+      | Anthropic::Beta::BetaEnvironmentNotFoundErrorDetails
       | Anthropic::Beta::Organization::BetaSlackChannelSetUpEnvironmentNotFoundErrorDetails
       | Anthropic::Beta::Organization::BetaSlackChannelSetUpSettingsConflictErrorDetails
 
@@ -375,15 +375,15 @@ module Anthropic
         ) -> Anthropic::Organization::InviteAlreadyExistsErrorDetails
         | (
           error_code: :org_member_limit_exceeded | "org_member_limit_exceeded"
-        ) -> Anthropic::Organization::OrgMemberLimitExceededErrorDetails
+        ) -> Anthropic::OrgMemberLimitExceededErrorDetails
         | (
           error_code: :rbac_group_grants_owner_access
           | "rbac_group_grants_owner_access"
-        ) -> Anthropic::RBACGroupGrantsOwnerAccessErrorDetails
+        ) -> Anthropic::Organization::RBACGroupGrantsOwnerAccessErrorDetails
         | (
           error_code: :rbac_group_owner_access_unconfirmed
           | "rbac_group_owner_access_unconfirmed"
-        ) -> Anthropic::RBACGroupOwnerAccessUnconfirmedErrorDetails
+        ) -> Anthropic::Organization::RBACGroupOwnerAccessUnconfirmedErrorDetails
         | (
           error_code: :cannot_remove_last_member | "cannot_remove_last_member"
         ) -> Anthropic::Organization::CannotRemoveLastMemberErrorDetails
@@ -441,7 +441,7 @@ module Anthropic
         ) -> Anthropic::Beta::Organization::BetaSpendLimitsAdminAPIWritesNotEnabledErrorDetails
         | (
           error_code: :unsupported_charset | "unsupported_charset"
-        ) -> Anthropic::Beta::BetaUnsupportedCharsetErrorDetails
+        ) -> Anthropic::BetaUnsupportedCharsetErrorDetails
         | (
           error_code: :plugin_name_taken | "plugin_name_taken",
           ?plugin_id: String?
@@ -485,7 +485,7 @@ module Anthropic
         ) -> Anthropic::Beta::Organization::BetaOrganizationLevelScopedAPIKeyRequiredErrorDetails
         | (
           error_code: :environment_not_found | "environment_not_found"
-        ) -> Anthropic::Beta::Organization::BetaEnvironmentNotFoundErrorDetails
+        ) -> Anthropic::Beta::BetaEnvironmentNotFoundErrorDetails
         | (
           error_code: :slack_channel_set_up_environment_not_found
           | "slack_channel_set_up_environment_not_found",

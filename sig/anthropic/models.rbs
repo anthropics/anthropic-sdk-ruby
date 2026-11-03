@@ -59,6 +59,8 @@ module Anthropic
 
   class BetaRateLimitError = Anthropic::Models::BetaRateLimitError
 
+  class BetaUnsupportedCharsetErrorDetails = Anthropic::Models::BetaUnsupportedCharsetErrorDetails
+
   class BillingError = Anthropic::Models::BillingError
 
   module BrowserClickTarget = Anthropic::Models::BrowserClickTarget
@@ -631,6 +633,8 @@ module Anthropic
 
   class OrganizationTypeNotSupportedErrorDetails = Anthropic::Models::OrganizationTypeNotSupportedErrorDetails
 
+  class OrgMemberLimitExceededErrorDetails = Anthropic::Models::OrgMemberLimitExceededErrorDetails
+
   class OutputConfig = Anthropic::Models::OutputConfig
 
   class OutputTokensDetails = Anthropic::Models::OutputTokensDetails
@@ -658,10 +662,6 @@ module Anthropic
   class RawMessageStopEvent = Anthropic::Models::RawMessageStopEvent
 
   module RawMessageStreamEvent = Anthropic::Models::RawMessageStreamEvent
-
-  class RBACGroupGrantsOwnerAccessErrorDetails = Anthropic::Models::RBACGroupGrantsOwnerAccessErrorDetails
-
-  class RBACGroupOwnerAccessUnconfirmedErrorDetails = Anthropic::Models::RBACGroupOwnerAccessUnconfirmedErrorDetails
 
   class RedactedThinkingBlock = Anthropic::Models::RedactedThinkingBlock
 
