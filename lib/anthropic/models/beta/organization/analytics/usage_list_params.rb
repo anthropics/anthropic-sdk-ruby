@@ -41,8 +41,8 @@ module Anthropic
 
             # @!attribute agent_ids
             #   Filter to usage incurred by sessions of specific Claude Managed Agents agents.
-            #   Use `group_by[]=agent_id` to break out per-agent values. Claude Developer
-            #   Platform organizations only.
+            #   Use `group_by[]=agent_id` to break out per-agent values. Claude Platform
+            #   organizations only.
             #
             #   @return [Array<String>, nil]
             optional :agent_ids, Anthropic::Internal::Type::ArrayOf[String], nil?: true
@@ -52,7 +52,7 @@ module Anthropic
             #   (`apikey_...`), whichever identity the usage is attributed to. Include an empty
             #   entry (`api_key_ids[]=`) to also match usage that no API key authenticated. Use
             #   `group_by[]=api_key_id` to break out per-key values; usage without a key has a
-            #   null `api_key_id`. Claude Developer Platform organizations only.
+            #   null `api_key_id`. Claude Platform organizations only.
             #
             #   @return [Array<String>, nil]
             optional :api_key_ids, Anthropic::Internal::Type::ArrayOf[String], nil?: true
@@ -94,7 +94,7 @@ module Anthropic
             # @!attribute deployment_ids
             #   Filter to usage incurred by Claude Managed Agents sessions that specific
             #   deployments started. Use `group_by[]=deployment_id` to break out per-deployment
-            #   values. Claude Developer Platform organizations only.
+            #   values. Claude Platform organizations only.
             #
             #   @return [Array<String>, nil]
             optional :deployment_ids, Anthropic::Internal::Type::ArrayOf[String], nil?: true
@@ -110,7 +110,7 @@ module Anthropic
             # @!attribute environment_ids
             #   Filter to usage incurred by Claude Managed Agents sessions that ran in specific
             #   environments. Use `group_by[]=environment_id` to break out per-environment
-            #   values. Claude Developer Platform organizations only.
+            #   values. Claude Platform organizations only.
             #
             #   @return [Array<String>, nil]
             optional :environment_ids, Anthropic::Internal::Type::ArrayOf[String], nil?: true
@@ -207,8 +207,8 @@ module Anthropic
 
             # @!attribute service_tiers
             #   Filter to specific service tiers. Use `group_by[]=service_tier` to break out
-            #   per-tier values. Claude Developer Platform organizations only; matches nothing
-            #   for a Claude Enterprise organization.
+            #   per-tier values. Claude Platform organizations only; matches nothing for a
+            #   Claude Enterprise organization.
             #
             #   @return [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsServiceTier>, nil]
             optional :service_tiers,
@@ -220,7 +220,7 @@ module Anthropic
             # @!attribute session_ids
             #   Filter to usage incurred by specific Claude Managed Agents sessions, by tagged
             #   session ID (`sesn_...`). Use `group_by[]=session_id` to break out per-session
-            #   values. Claude Developer Platform organizations only.
+            #   values. Claude Platform organizations only.
             #
             #   @return [Array<String>, nil]
             optional :session_ids, Anthropic::Internal::Type::ArrayOf[String], nil?: true
@@ -260,16 +260,15 @@ module Anthropic
             # @!attribute user_profile_ids
             #   Filter to usage attributed to specific user profiles, by tagged user profile ID
             #   (`uprof_...`). Use `group_by[]=user_profile_id` to break out per-profile values.
-            #   Claude Developer Platform organizations only.
+            #   Claude Platform organizations only.
             #
             #   @return [Array<String>, nil]
             optional :user_profile_ids, Anthropic::Internal::Type::ArrayOf[String], nil?: true
 
             # @!attribute workspace_ids
             #   Filter to usage in specific workspaces, by tagged workspace ID (`wrkspc_...`).
-            #   Use `group_by[]=workspace_id` to break out per-workspace values. Claude
-            #   Developer Platform organizations only; matches nothing for a Claude Enterprise
-            #   organization.
+            #   Use `group_by[]=workspace_id` to break out per-workspace values. Claude Platform
+            #   organizations only; matches nothing for a Claude Enterprise organization.
             #
             #   @return [Array<String>, nil]
             optional :workspace_ids, Anthropic::Internal::Type::ArrayOf[String], nil?: true
