@@ -1,23 +1,43 @@
 # Changelog
 
-## [2.5.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v2.4.0...v2.5.0) (2026-11-03)
+## [2.5.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v2.4.0...v2.5.0) (2026-11-04)
 
 ### Features
 
 * **api:** add error details types and new error type values
+* **api:** add ids filter to list workspaces
+* **client:** add error classes for HTTP statuses and API error codes, and #api_message, #error_code and #details on APIStatusError
+* **foundry:** add Microsoft Foundry client
+
+
+### Bug Fixes
+
+* **api:** capitalize CMEK in error details type names
+* **api:** move some error details types to the resource they describe
+* **client:** reject ..;x, .;x and ;x in path parameters
 
 
 ### Chores
 
 * **api:** update example values for pattern-constrained string fields
 * **ci:** build the gem
+* **docs:** clarify plugin reach values
+* **docs:** clarify plugin version description and plugin reach
+* **docs:** clarify plugin version description length
 * **docs:** clarify some API field descriptions
+* **docs:** clarify three error descriptions
+* **docs:** clarify which blocks to send back around a fallback block
+* **docs:** correct Claude Tag direct message notes in usage reports
+* **docs:** reword Dream and RBAC role permission descriptions
 * **docs:** update the telemetry destination headers description
+* **docs:** use the Claude Platform name in analytics filter docs
+* **internal:** accept changelog entry files in the changelog check
 
 
 ### Documentation
 
 * **api:** show each field's own description for `speed`
+* clean up escapes and code spans in doc comments
 
 ## [2.4.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v2.3.0...v2.4.0) (2026-11-02)
 
