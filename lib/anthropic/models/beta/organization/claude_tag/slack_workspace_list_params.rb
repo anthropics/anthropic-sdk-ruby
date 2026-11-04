@@ -57,9 +57,9 @@ module Anthropic
             #
             #   @param page [String] Opaque cursor from a previous response's `next_page`.
             #
-            #   @param slack_workspace_id [String] Slack's identifier for one workspace, as in the workspace object's `slack.worksp
+            #   @param slack_workspace_id [String] Slack's identifier for one workspace, as in the workspace object's
             #
-            #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21
+            #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send
             #
             #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
           end

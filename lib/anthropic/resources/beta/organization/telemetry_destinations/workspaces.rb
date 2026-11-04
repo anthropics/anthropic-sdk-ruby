@@ -27,7 +27,7 @@ module Anthropic
             #
             # @param page [String] Query param: Opaque cursor from a previous response's `next_page`. Leave it out
             #
-            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `telemetry-destinatio
+            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #
@@ -80,7 +80,7 @@ module Anthropic
             #
             # @param destination_id [String] Path param: ID of the destination (`tdst_...`).
             #
-            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `telemetry-destinatio
+            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #
@@ -136,7 +136,7 @@ module Anthropic
             #
             # @param destination_id [String] Path param: ID of the destination (`tdst_...`).
             #
-            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `telemetry-destinatio
+            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #

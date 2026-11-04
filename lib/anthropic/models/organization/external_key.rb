@@ -186,7 +186,7 @@ module Anthropic
           #
           #   @option args [String] :tenant_id Azure AD tenant ID.
           #
-          #   @option args [String] :vault_uri Key Vault data-plane URI — `https://{vault-name}.vault.azure.net` or `https://{h
+          #   @option args [String] :vault_uri Key Vault data-plane URI — `https://{vault-name}.vault.azure.net` or
           #
           #   @option args [String, nil] :client_id Azure AD application (client) ID. Omit to use Anthropic's multitenant app. Provi
           #

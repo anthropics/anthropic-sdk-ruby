@@ -70,7 +70,7 @@ module Anthropic
         #
         #   @param metadata [Hash{Symbol=>String}] Key-value pairs for your own use, such as the end user that the store belongs to
         #
-        #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `manag
+        #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `agent-memory-2026-07-22` or
         #
         #   @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #

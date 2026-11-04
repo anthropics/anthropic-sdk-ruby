@@ -43,9 +43,9 @@ module Anthropic
               #
               # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
               #
-              #   @option args [String] :slack_channel_id The identifier of the Slack channel to attach the Bundle to, starting with `slch
+              #   @option args [String] :slack_channel_id The identifier of the Slack channel to attach the Bundle to, starting with
               #
-              #   @option args [String] :slack_workspace_id The identifier of the Slack workspace to attach the Bundle to, starting with `sl
+              #   @option args [String] :slack_workspace_id The identifier of the Slack workspace to attach the Bundle to, starting with
               #
               # @raise [ArgumentError]
               # @return [Anthropic::Models::Beta::Organization::ClaudeTag::Bundles::BetaClaudeTagSlackChannelBundleTargetCreate, Anthropic::Models::Beta::Organization::ClaudeTag::Bundles::BetaClaudeTagSlackWorkspaceBundleTargetCreate]

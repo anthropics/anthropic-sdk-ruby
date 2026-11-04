@@ -57,7 +57,7 @@ module Anthropic
           #
           #   @param email_address [String, nil] The user's email address, including for users who are no longer members of the o
           #
-          #   @param name [String, nil] The user's full name. Null when the user has not set a name. Returns `"Deleted U
+          #   @param name [String, nil] The user's full name. Null when the user has not set a name. Returns
           #
           #   @param user_id [String] Tagged user ID.
           #

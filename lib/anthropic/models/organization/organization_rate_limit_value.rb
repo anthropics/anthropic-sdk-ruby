@@ -21,7 +21,7 @@ module Anthropic
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Organization::OrganizationRateLimitValue} for more details.
         #
-        #   @param type [String] The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute
+        #   @param type [String] The limiter type (for example, `requests_per_minute` or
         #
         #   @param value [Integer] The configured limit value for this limiter type.
       end

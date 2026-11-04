@@ -50,7 +50,7 @@ module Anthropic
             #
             #   @param target [String] The target whose setting is written: the literal `organization` for the Plugin's
             #
-            #   @param installation_preference [Symbol, Anthropic::Models::Beta::Organization::Plugins::InstallationSettingSetParams::InstallationPreference] The installation setting the target is to hold for this Plugin: one of `required
+            #   @param installation_preference [Symbol, Anthropic::Models::Beta::Organization::Plugins::InstallationSettingSetParams::InstallationPreference] The installation setting the target is to hold for this Plugin: one of
             #
             #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this hea
             #

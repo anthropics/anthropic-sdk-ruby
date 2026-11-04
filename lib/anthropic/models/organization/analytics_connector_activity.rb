@@ -214,7 +214,7 @@ module Anthropic
         #
         #   @param chat_cowork_unified_metrics [Anthropic::Models::Organization::AnalyticsConnectorChatCoworkUnifiedMetrics, nil] Connector use recorded while members had Chat and Cowork unified (Cowork's featu
         #
-        #   @param product [String, nil] Product that produced this row's activity: one of `chat`, `claude_code`, `cowork
+        #   @param product [String, nil] Product that produced this row's activity: one of `chat`, `claude_code`,
         #
         #   @param rbac_group_id [String, nil] Tagged RBAC group identifier (`rbac_group_...`), matching the spend-limits API s
         #

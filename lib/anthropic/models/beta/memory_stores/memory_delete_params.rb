@@ -59,7 +59,7 @@ module Anthropic
           #
           #   @param expected_content_sha256 [String] Delete the memory only if its current `content_sha256` equals this value, given
           #
-          #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `manag
+          #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `agent-memory-2026-07-22` or
           #
           #   @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
           #

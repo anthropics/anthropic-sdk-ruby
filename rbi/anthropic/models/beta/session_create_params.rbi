@@ -483,8 +483,8 @@ module Anthropic
             mount_path: nil,
             # ID of a previously uploaded file.
             file_id: nil,
-            # The memory store ID (memstore\_...). Must belong to the caller's organization
-            # and workspace.
+            # The memory store ID (memstore_...). Must belong to the caller's organization and
+            # workspace.
             memory_store_id: nil,
             # Access mode for the mounted store. Defaults to read_write. read_only mounts the
             # store as a read-only filesystem.

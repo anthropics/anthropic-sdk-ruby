@@ -24,7 +24,7 @@ module Anthropic
             #
             # @param include_inherited [Boolean] Query param: When `true`, `settings` holds what applies in the workspace once th
             #
-            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `experimental-claude-
+            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #
@@ -68,7 +68,7 @@ module Anthropic
             #
             # @param settings [Anthropic::Models::Beta::Organization::BetaClaudeTagSettingsUpdate] Body param: The settings to change.
             #
-            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `experimental-claude-
+            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #
@@ -119,7 +119,7 @@ module Anthropic
             #
             # @param slack_workspace_id [String] Query param: Slack's identifier for one workspace, as in the workspace object's
             #
-            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `experimental-claude-
+            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #

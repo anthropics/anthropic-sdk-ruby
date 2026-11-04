@@ -18,7 +18,7 @@ module Anthropic
         #
         # @param metadata [Hash{Symbol=>String}] Body param: Arbitrary key-value metadata to attach to the vault. Maximum 16 pair
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -90,7 +90,7 @@ module Anthropic
         #
         # @param metadata [Hash{Symbol=>String, nil}, nil] Body param: Metadata patch. Set a key to a string to upsert it, or to null to de
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -123,13 +123,13 @@ module Anthropic
         #
         # @overload list(include_archived: nil, limit: nil, page: nil, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param include_archived [Boolean] Query param: Whether to include archived vaults in the results. Defaults to `fal
+        # @param include_archived [Boolean] Query param: Whether to include archived vaults in the results. Defaults to
         #
         # @param limit [Integer] Query param: Maximum number of vaults to return per page. Defaults to 20, maximu
         #
         # @param page [String] Query param: The `next_page` value from a previous [List Vaults](https://platfor
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #

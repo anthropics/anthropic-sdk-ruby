@@ -93,9 +93,9 @@ module Anthropic
         #
         #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.
         #
-        #   @param max_tokens [Integer, nil] The `max_tokens` for the fallback attempt that uses this `fallbacks` entry's `mo
+        #   @param max_tokens [Integer, nil] The `max_tokens` for the fallback attempt that uses this `fallbacks` entry's
         #
-        #   @param output_config [Anthropic::Models::Beta::BetaOutputConfig, nil] Output parameters for the fallback attempt that uses this `fallbacks` entry's `m
+        #   @param output_config [Anthropic::Models::Beta::BetaOutputConfig, nil] Output parameters for the fallback attempt that uses this `fallbacks` entry's
         #
         #   @param speed [Symbol, Anthropic::Models::Beta::BetaFallbackParam::Speed, nil] The inference speed mode for the fallback attempt that uses this `fallbacks` ent
         #

@@ -26,7 +26,7 @@ module Anthropic
               #   {Anthropic::Models::Beta::Organization::ClaudeTag::Bundles::BetaClaudeTagSlackWorkspaceBundleTargetCreate}
               #   for more details.
               #
-              #   @param slack_workspace_id [String] The identifier of the Slack workspace to attach the Bundle to, starting with `sl
+              #   @param slack_workspace_id [String] The identifier of the Slack workspace to attach the Bundle to, starting with
               #
               #   @param type [Symbol, :slack_workspace]
             end

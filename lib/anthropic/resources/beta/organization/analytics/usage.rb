@@ -26,7 +26,7 @@ module Anthropic
             #
             # @param actor_ids [Array<String>, nil] Query param: Filter to usage attributed to specific identities, by tagged ID: a
             #
-            # @param actor_types [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsActorType>, nil] Query param: Filter to usage attributed to specific kinds of identity. Use `grou
+            # @param actor_types [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsActorType>, nil] Query param: Filter to usage attributed to specific kinds of identity. Use
             #
             # @param agent_ids [Array<String>, nil] Query param: Filter to usage incurred by sessions of specific Claude Managed Age
             #
@@ -36,7 +36,7 @@ module Anthropic
             #
             # @param claude_tag_user_ids [Array<String>, nil] Query param: Filter to Claude Tag (Claude in Slack) usage attributed to specific
             #
-            # @param context_windows [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsContextWindow>, nil] Query param: Filter to specific context-window pricing tiers. Use `group_by[]=co
+            # @param context_windows [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsContextWindow>, nil] Query param: Filter to specific context-window pricing tiers. Use
             #
             # @param deployment_ids [Array<String>, nil] Query param: Filter to usage incurred by Claude Managed Agents sessions that spe
             #
@@ -44,13 +44,13 @@ module Anthropic
             #
             # @param environment_ids [Array<String>, nil] Query param: Filter to usage incurred by Claude Managed Agents sessions that ran
             #
-            # @param exclude_deleted_users [Boolean] Query param: If true, omit rows whose `actor` is a `user_actor` with `deleted: t
+            # @param exclude_deleted_users [Boolean] Query param: If true, omit rows whose `actor` is a `user_actor` with
             #
             # @param group_by [Array<Symbol, Anthropic::Models::Beta::Organization::Analytics::BetaAnalyticsUsageGroupBy>, nil] Query param: Dimensions to break usage out by (at most 5): one row per combinati
             #
             # @param inference_geos [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsInferenceGeoFilter>, nil] Query param: Filter to specific inference regions. `not_available` matches rows
             #
-            # @param limit [Integer] Query param: Number of rows per page (1-1000, default 20). `cost_type`/`token_ty
+            # @param limit [Integer] Query param: Number of rows per page (1-1000, default 20). `cost_type`/
             #
             # @param models [Array<String>, nil] Query param: Models to include. Defaults to all models. Use `group_by[]=model` t
             #
@@ -68,7 +68,7 @@ module Anthropic
             #
             # @param session_ids [Array<String>, nil] Query param: Filter to usage incurred by specific Claude Managed Agents sessions
             #
-            # @param slack_channel_ids [Array<String>, nil] Query param: Filter to usage originating from specific Slack channels. Use `grou
+            # @param slack_channel_ids [Array<String>, nil] Query param: Filter to usage originating from specific Slack channels. Use
             #
             # @param speeds [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsSpeed>, nil] Query param: Filter to fast or standard inference mode. Use `group_by[]=speed` t
             #
@@ -76,9 +76,9 @@ module Anthropic
             #
             # @param user_profile_ids [Array<String>, nil] Query param: Filter to usage attributed to specific user profiles, by tagged use
             #
-            # @param workspace_ids [Array<String>, nil] Query param: Filter to usage in specific workspaces, by tagged workspace ID (`wr
+            # @param workspace_ids [Array<String>, nil] Query param: Filter to usage in specific workspaces, by tagged workspace ID (
             #
-            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `analytics-usage-cost
+            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #

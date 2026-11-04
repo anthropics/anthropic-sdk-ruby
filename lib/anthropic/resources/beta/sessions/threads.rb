@@ -19,7 +19,7 @@ module Anthropic
           #
           # @param session_id [String] Path param
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
@@ -65,7 +65,7 @@ module Anthropic
           #
           # @param statuses [Array<Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatus>] Query param: Return only threads that have one of these statuses.
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
@@ -108,7 +108,7 @@ module Anthropic
           #
           # @param session_id [String] Path param
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #

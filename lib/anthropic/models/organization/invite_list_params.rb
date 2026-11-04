@@ -71,7 +71,7 @@ module Anthropic
         #
         #   @param roles [Array<String>] Filter to items whose `role` equals one of the supplied values. Repeatable; valu
         #
-        #   @param statuses [Array<Symbol, Anthropic::Models::Organization::InviteListParams::Status>] Filter by Invite status. Repeatable; values are OR'ed together. Omit to return `
+        #   @param statuses [Array<Symbol, Anthropic::Models::Organization::InviteListParams::Status>] Filter by Invite status. Repeatable; values are OR'ed together. Omit to return
         #
         #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 

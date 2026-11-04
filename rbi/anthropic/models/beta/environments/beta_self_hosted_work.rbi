@@ -13,7 +13,7 @@ module Anthropic
               )
             end
 
-          # Work identifier (e.g., 'work\_...')
+          # Work identifier (e.g., 'work_...')
           sig { returns(String) }
           attr_accessor :id
 
@@ -102,7 +102,7 @@ module Anthropic
             ).returns(T.attached_class)
           end
           def self.new(
-            # Work identifier (e.g., 'work\_...')
+            # Work identifier (e.g., 'work_...')
             id:,
             # RFC 3339 timestamp when the work item was acknowledged and assigned to a
             # self-hosted sandbox

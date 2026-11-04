@@ -110,7 +110,7 @@ module Anthropic
           #
           #   @param source [Symbol, Anthropic::Models::Beta::Organization::BetaPluginMarketplace::Source] Where the plugin marketplace's Plugins come from: `manual` when they are uploade
           #
-          #   @param sync_status [Symbol, Anthropic::Models::Beta::Organization::BetaPluginMarketplace::SyncStatus, nil] Outcome of the plugin marketplace's most recent synchronization: one of `success
+          #   @param sync_status [Symbol, Anthropic::Models::Beta::Organization::BetaPluginMarketplace::SyncStatus, nil] Outcome of the plugin marketplace's most recent synchronization: one of
           #
           #   @param type [Symbol, :plugin_marketplace] Always `plugin_marketplace`.
 

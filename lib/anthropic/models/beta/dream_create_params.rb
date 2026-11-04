@@ -68,9 +68,9 @@ module Anthropic
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::DreamCreateParams} for more details.
         #
-        #   @param inputs [Array<Anthropic::Models::Beta::BetaDreamMemoryStoreInput, Anthropic::Models::Beta::BetaDreamSessionsInput>] The memory store and sessions for the dream to read, as exactly one `memory_stor
+        #   @param inputs [Array<Anthropic::Models::Beta::BetaDreamMemoryStoreInput, Anthropic::Models::Beta::BetaDreamSessionsInput>] The memory store and sessions for the dream to read, as exactly one
         #
-        #   @param model [Anthropic::Models::Beta::BetaDreamModelConfigParam, String] The model that runs a dream, given as a model ID or as an object with `id` and `
+        #   @param model [Anthropic::Models::Beta::BetaDreamModelConfigParam, String] The model that runs a dream, given as a model ID or as an object with `id` and
         #
         #   @param instructions [String, nil] Guidance that steers how the dream reads the sessions and organizes the output m
         #

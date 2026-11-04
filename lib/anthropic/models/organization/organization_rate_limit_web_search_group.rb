@@ -23,7 +23,7 @@ module Anthropic
         #   {Anthropic::Models::Organization::OrganizationRateLimitWebSearchGroup} for more
         #   details.
         #
-        #   @param id [String] Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxY
+        #   @param id [String] Opaque identifier of the rate-limit group (for example,
         #
         #   @param type [Symbol, :web_search] Always `web_search`: the Messages API web search tool.
       end

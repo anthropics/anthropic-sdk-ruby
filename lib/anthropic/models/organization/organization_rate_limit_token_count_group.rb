@@ -23,7 +23,7 @@ module Anthropic
         #   {Anthropic::Models::Organization::OrganizationRateLimitTokenCountGroup} for more
         #   details.
         #
-        #   @param id [String] Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxY
+        #   @param id [String] Opaque identifier of the rate-limit group (for example,
         #
         #   @param type [Symbol, :token_count] Always `token_count`: the Token Count API.
       end

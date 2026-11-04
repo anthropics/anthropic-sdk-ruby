@@ -114,7 +114,7 @@ module Anthropic
         #
         #   @param id [String]
         #
-        #   @param agent [Anthropic::Models::Beta::BetaManagedAgentsSessionAgent] Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session
+        #   @param agent [Anthropic::Models::Beta::BetaManagedAgentsSessionAgent] Resolved `agent` definition for a `session`. Snapshot of the `agent` at
         #
         #   @param archived_at [Time, nil] When the session was archived. Null if not archived.
         #

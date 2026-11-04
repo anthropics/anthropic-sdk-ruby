@@ -47,7 +47,7 @@ module Anthropic
       #
       #   @option args [Time] :opened_at When Anthropic opened the action, in RFC 3339 format.
       #
-      #   @option args [Symbol, Anthropic::Models::UserProfileEnforcementActionReason] :reason Why Anthropic placed the limit: `unsupported_region`, `fraud_or_abuse`, `high_ha
+      #   @option args [Symbol, Anthropic::Models::UserProfileEnforcementActionReason] :reason Why Anthropic placed the limit: `unsupported_region`, `fraud_or_abuse`,
       #
       # @raise [ArgumentError]
       # @return [Anthropic::Models::UserProfileEnforcementActionRestriction, Anthropic::Models::UserProfileEnforcementActionBan]

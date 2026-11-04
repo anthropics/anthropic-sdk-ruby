@@ -24,7 +24,7 @@ module Anthropic
           required :processed_at, Time
 
           # @!attribute session_thread_id
-          #   Public sthr\_ ID of the thread that went idle.
+          #   Public sthr_ ID of the thread that went idle.
           #
           #   @return [String]
           required :session_thread_id, String
@@ -63,7 +63,7 @@ module Anthropic
           #
           #   @param processed_at [Time] Timestamp of the status transition.
           #
-          #   @param session_thread_id [String] Public sthr\_ ID of the thread that went idle.
+          #   @param session_thread_id [String] Public sthr_ ID of the thread that went idle.
           #
           #   @param stop_details [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRefusalStopDetails, nil] Structured information about why the thread stopped. `null` when there is nothin
           #
@@ -119,7 +119,7 @@ module Anthropic
             #
             # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
             #
-            #   @option args [Array<String>] :event_ids The ids of events the agent is blocked on. Resolving fewer than all re-emits `se
+            #   @option args [Array<String>] :event_ids The ids of events the agent is blocked on. Resolving fewer than all re-emits
             #
             # @raise [ArgumentError]
             # @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionBudgetReached, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRefusal]

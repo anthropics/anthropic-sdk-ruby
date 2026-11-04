@@ -118,7 +118,7 @@ module Anthropic
           #
           # @param name [String] Body param: A short label for the endpoint.
           #
-          # @param state [Symbol, Anthropic::Models::Beta::Organization::WebhookUpdateParams::State] Body param: `disabled` stops deliveries. `enabled` resumes them and clears `disa
+          # @param state [Symbol, Anthropic::Models::Beta::Organization::WebhookUpdateParams::State] Body param: `disabled` stops deliveries. `enabled` resumes them and clears
           #
           # @param url [String] Body param: The HTTPS URL that deliveries are sent to.
           #
@@ -166,7 +166,7 @@ module Anthropic
           #
           # @param after_id [String, nil] Query param: ID of the object to use as a cursor for pagination. When provided,
           #
-          # @param before_id [String, nil] Query param: ID of a webhook endpoint to use as a cursor. Returns the first `lim
+          # @param before_id [String, nil] Query param: ID of a webhook endpoint to use as a cursor. Returns the first
           #
           # @param limit [Integer] Query param: Number of items to return per page, up to `100`. The default, `0`,
           #

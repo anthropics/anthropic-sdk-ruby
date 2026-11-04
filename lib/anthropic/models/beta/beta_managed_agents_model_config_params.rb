@@ -49,7 +49,7 @@ module Anthropic
         #
         #   @param id [Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel] The model that will power your agent.
         #
-        #   @param effort [Symbol, Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams::Effort::BetaManagedAgentsEffortLevel, Anthropic::Models::Beta::BetaManagedAgentsEffortLow, Anthropic::Models::Beta::BetaManagedAgentsEffortMedium, Anthropic::Models::Beta::BetaManagedAgentsEffortHigh, Anthropic::Models::Beta::BetaManagedAgentsEffortXhigh, Anthropic::Models::Beta::BetaManagedAgentsEffortMax, nil] How hard Claude works on each inference call. Accepts a bare level string (`"hig
+        #   @param effort [Symbol, Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams::Effort::BetaManagedAgentsEffortLevel, Anthropic::Models::Beta::BetaManagedAgentsEffortLow, Anthropic::Models::Beta::BetaManagedAgentsEffortMedium, Anthropic::Models::Beta::BetaManagedAgentsEffortHigh, Anthropic::Models::Beta::BetaManagedAgentsEffortXhigh, Anthropic::Models::Beta::BetaManagedAgentsEffortMax, nil] How hard Claude works on each inference call. Accepts a bare level string (
         #
         #   @param inference_geo [String, nil] Geographic region for model inference. When unset, requests fall through to the
         #

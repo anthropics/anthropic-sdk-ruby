@@ -23,7 +23,7 @@ module Anthropic
           #
           # @param ca_certificate_pem [String] Body param: PEM-encoded X.509 CA certificate. Must contain exactly one certifica
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `mcp-tunnels-2026-06-
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
@@ -66,7 +66,7 @@ module Anthropic
           #
           # @param tunnel_id [String] Path param: ID of the tunnel (`tnl_...`).
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `mcp-tunnels-2026-06-
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
@@ -118,7 +118,7 @@ module Anthropic
           #
           # @param page [String] Query param: Opaque pagination cursor from a previous `list_tunnel_certificates`
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `mcp-tunnels-2026-06-
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
@@ -169,7 +169,7 @@ module Anthropic
           #
           # @param tunnel_id [String] Path param: ID of the tunnel (`tnl_...`).
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `mcp-tunnels-2026-06-
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #

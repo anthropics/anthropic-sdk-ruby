@@ -23,7 +23,7 @@ module Anthropic
       #   Some parameter documentations has been truncated, see
       #   {Anthropic::Models::ImageTransformationsParam} for more details.
       #
-      #   @param oversized_image [Symbol, Anthropic::Models::ImageTransformationsParam::OversizedImage] What the server does when this image exceeds the model's maximum image size. `"d
+      #   @param oversized_image [Symbol, Anthropic::Models::ImageTransformationsParam::OversizedImage] What the server does when this image exceeds the model's maximum image size.
 
       # What the server does when this image exceeds the model's maximum image size.
       # `"downsize"` (the default) scales the image down to fit, which changes the

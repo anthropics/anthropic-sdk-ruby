@@ -55,7 +55,7 @@ module Anthropic
         #
         #   @option args [Integer, nil] :estimated_tokens Per-frame increment of a coarse, running estimate of the tokens this thinking bl
         #
-        #   @option args [String] :thinking The incremental `thinking` text for this content block. Concatenate the `thinkin
+        #   @option args [String] :thinking The incremental `thinking` text for this content block. Concatenate the
         #
         #   @option args [String] :signature The `signature` for this thinking block: an opaque value used to verify that the
         #

@@ -185,7 +185,7 @@ module Anthropic
             #
             #   @param updated_by_actor_id [String, nil] Tagged ID (`user_`/`svac_`) of the actor that last updated this rule.
             #
-            #   @param workspace_id [String, nil] Legacy single-workspace binding. Prefer `workspace_ids` and the `/federation_rul
+            #   @param workspace_id [String, nil] Legacy single-workspace binding. Prefer `workspace_ids` and the
             #
             #   @param workspace_ids [Array<String>] Tagged IDs of the workspaces this rule is enabled for. May be empty for older ru
             #

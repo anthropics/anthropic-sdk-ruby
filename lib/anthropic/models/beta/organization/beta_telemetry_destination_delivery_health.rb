@@ -59,7 +59,7 @@ module Anthropic
           #
           #   @param last_error [String, nil] A message that describes the most recent failed delivery to the destination, or
           #
-          #   @param last_error_at [Time, nil] Time of the failure that `last_error` describes. Changes together with `last_err
+          #   @param last_error_at [Time, nil] Time of the failure that `last_error` describes. Changes together with
           #
           #   @param last_success_at [Time, nil] Time of the most recent successful delivery to the destination, or `null` if no
         end

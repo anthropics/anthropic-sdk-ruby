@@ -139,7 +139,7 @@ module Anthropic
         #
         # @param limit [Integer] Query param: Maximum number of environments to return
         #
-        # @param page [String, nil] Query param: Opaque cursor from previous response for pagination. Pass the `next
+        # @param page [String, nil] Query param: Opaque cursor from previous response for pagination. Pass the
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #

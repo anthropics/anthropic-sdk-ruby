@@ -49,7 +49,7 @@ module Anthropic
       #
       #   @option args [Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation, Anthropic::Models::CitationsWebSearchResultLocation, Anthropic::Models::CitationsSearchResultLocation] :citation
       #
-      #   @option args [String] :thinking The incremental `thinking` text for this content block. Concatenate the `thinkin
+      #   @option args [String] :thinking The incremental `thinking` text for this content block. Concatenate the
       #
       #   @option args [String] :signature The `signature` for this thinking block: an opaque value used to verify that the
       #

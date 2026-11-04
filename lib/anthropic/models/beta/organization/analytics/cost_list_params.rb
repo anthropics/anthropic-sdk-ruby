@@ -291,13 +291,13 @@ module Anthropic
             #
             #   @param starting_at [Time] Start of range, inclusive. RFC 3339 tz-aware. Must be within the last 365 days a
             #
-            #   @param actor_ids [Array<String>, nil] Filter to usage attributed to specific identities, by tagged ID: a `user_...`, `
+            #   @param actor_ids [Array<String>, nil] Filter to usage attributed to specific identities, by tagged ID: a `user_...`,
             #
-            #   @param actor_types [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsActorType>, nil] Filter to usage attributed to specific kinds of identity. Use `group*by[]=actor*
+            #   @param actor_types [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsActorType>, nil] Filter to usage attributed to specific kinds of identity. Use
             #
             #   @param agent_ids [Array<String>, nil] Filter to usage incurred by sessions of specific Claude Managed Agents agents. U
             #
-            #   @param api_key_ids [Array<String>, nil] Filter to usage authenticated by specific API keys, by tagged API key ID (`apike
+            #   @param api_key_ids [Array<String>, nil] Filter to usage authenticated by specific API keys, by tagged API key ID (
             #
             #   @param claude_tag_categories [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsClaudeTagCategory>, nil] Filter to Claude Tag (Claude in Slack) usage in specific spend categories. Usage
             #
@@ -307,14 +307,13 @@ module Anthropic
             #
             #   @param deployment_ids [Array<String>, nil] Filter to usage incurred by Claude Managed Agents sessions that specific deploym
             #
-            #   @param ending_at [Time, nil] End of range, exclusive. Required when `time_bucket_width` is set. Without `time
+            #   @param ending_at [Time, nil] End of range, exclusive. Required when `time_bucket_width` is set. Without
             #
             #   @param environment_ids [Array<String>, nil] Filter to usage incurred by Claude Managed Agents sessions that ran in specific
             #
             #   @param exclude_deleted_users [Boolean] If true, omit rows whose `actor` is a `user_actor` with `deleted: true`. Require
             #
             #   @param group_by [Array<Symbol, Anthropic::Models::Beta::Organization::Analytics::BetaAnalyticsCostGroupBy>, nil] Dimensions to break cost out by (at most 5, not counting `cost_type` and
-            #   `token\_
             #
             #   @param inference_geos [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsInferenceGeoFilter>, nil] Filter to specific inference regions. `not_available` matches rows where the reg
             #
@@ -336,7 +335,7 @@ module Anthropic
             #
             #   @param session_ids [Array<String>, nil] Filter to usage incurred by specific Claude Managed Agents sessions, by tagged s
             #
-            #   @param slack_channel_ids [Array<String>, nil] Filter to usage originating from specific Slack channels. Use `group*by[]=slack*
+            #   @param slack_channel_ids [Array<String>, nil] Filter to usage originating from specific Slack channels. Use
             #
             #   @param speeds [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsSpeed>, nil] Filter to fast or standard inference mode. Use `group_by[]=speed` to break out p
             #

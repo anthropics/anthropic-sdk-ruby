@@ -6,7 +6,7 @@ module Anthropic
       # @see Anthropic::Resources::Beta::Environments#create
       class BetaEnvironment < Anthropic::Internal::Type::BaseModel
         # @!attribute id
-        #   Environment identifier (e.g., 'env\_...')
+        #   Environment identifier (e.g., 'env_...')
         #
         #   @return [String]
         required :id, String
@@ -72,7 +72,7 @@ module Anthropic
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaEnvironment} for more details.
         #
-        #   @param id [String] Environment identifier (e.g., 'env\_...')
+        #   @param id [String] Environment identifier (e.g., 'env_...')
         #
         #   @param archived_at [String, nil] RFC 3339 timestamp when environment was archived, or null if not archived
         #

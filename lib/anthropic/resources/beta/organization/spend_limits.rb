@@ -57,7 +57,7 @@ module Anthropic
           #
           # @param workspace_id [String, nil] Query param: Return only the limits whose `scope.workspace_id` is this workspace
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `spend-limit-reads-20
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -130,7 +130,7 @@ module Anthropic
           #
           # @param amount [String, nil] Body param: Limit amount as a non-negative integer decimal string in the minor u
           #
-          # @param scope [Anthropic::Models::Beta::Organization::BetaSpendLimitUserScope, Anthropic::Models::Beta::Organization::BetaSpendLimitOrganizationScope, Anthropic::Models::Beta::Organization::BetaSpendLimitWorkspaceScope] Body param: What the limit applies to. Claude Enterprise organizations set `user
+          # @param scope [Anthropic::Models::Beta::Organization::BetaSpendLimitUserScope, Anthropic::Models::Beta::Organization::BetaSpendLimitOrganizationScope, Anthropic::Models::Beta::Organization::BetaSpendLimitWorkspaceScope] Body param: What the limit applies to. Claude Enterprise organizations set
           #
           # @param period [Symbol, Anthropic::Models::Beta::Organization::BetaSpendLimitPeriod] Body param
           #

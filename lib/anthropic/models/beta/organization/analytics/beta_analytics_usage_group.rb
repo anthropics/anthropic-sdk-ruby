@@ -214,26 +214,25 @@ module Anthropic
             #
             #   @param context_window [Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsContextWindow, nil] Context-window pricing tier of the usage or cost. Null unless `context_window` i
             #
-            #   @param deployment_id [String, nil] Deployment that started the Claude Managed Agents session. Populated only when `
+            #   @param deployment_id [String, nil] Deployment that started the Claude Managed Agents session. Populated only when
             #
-            #   @param environment_id [String, nil] Claude Managed Agents environment the session ran in. Populated only when `envir
+            #   @param environment_id [String, nil] Claude Managed Agents environment the session ran in. Populated only when
             #
             #   @param inference_geo [Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsUsageCostInferenceGeo, nil] Inference region of the usage or cost. Null unless `inference_geo` is in
-            #   `group\_
             #
-            #   @param model [String, nil] Model that produced the usage or cost, as a model name in the form the `models[]
+            #   @param model [String, nil] Model that produced the usage or cost, as a model name in the form the
             #
-            #   @param product [String, nil] Product surface that produced the usage or cost. Null unless product is in `grou
+            #   @param product [String, nil] Product surface that produced the usage or cost. Null unless product is in
             #
-            #   @param rbac_group_id [String, nil] RBAC group (team) the usage is attributed to, in the public tagged `rbac*group*.
+            #   @param rbac_group_id [String, nil] RBAC group (team) the usage is attributed to, in the public tagged
             #
-            #   @param service_tier [Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsServiceTier, nil] Service tier the usage was served at. Populated only when `service_tier` is in `
+            #   @param service_tier [Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsServiceTier, nil] Service tier the usage was served at. Populated only when `service_tier` is in
             #
-            #   @param session_id [String, nil] Claude Managed Agents session that incurred the usage. Populated only when `sess
+            #   @param session_id [String, nil] Claude Managed Agents session that incurred the usage. Populated only when
             #
             #   @param slack_channel_id [String, nil] Slack channel the usage originated from. Populated only when `slack_channel_id`
             #
-            #   @param speed [Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsSpeed, nil] Inference speed mode of the usage or cost: `fast` or `standard`. Null unless `sp
+            #   @param speed [Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsSpeed, nil] Inference speed mode of the usage or cost: `fast` or `standard`. Null unless
             #
             #   @param user_profile_id [String, nil] User profile the usage was attributed to, as a tagged `uprof_` ID. Populated onl
             #

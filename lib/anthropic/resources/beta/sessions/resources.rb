@@ -16,7 +16,7 @@ module Anthropic
           #
           # @param session_id [String] Path param
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
@@ -58,9 +58,9 @@ module Anthropic
           #
           # @param session_id [String] Path param
           #
-          # @param authorization_token [String] Body param: New authorization token for the resource. Currently only `github_rep
+          # @param authorization_token [String] Body param: New authorization token for the resource. Currently only
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
@@ -106,7 +106,7 @@ module Anthropic
           #
           # @param page [String] Query param: Opaque cursor from a previous response's `next_page` field.
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
@@ -149,7 +149,7 @@ module Anthropic
           #
           # @param session_id [String] Path param
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
@@ -191,9 +191,9 @@ module Anthropic
           #
           # @param file_id [String] Body param: ID of a previously uploaded file.
           #
-          # @param mount_path [String, nil] Body param: Mount path in the container. Defaults to `/mnt/session/uploads/<file
+          # @param mount_path [String, nil] Body param: Mount path in the container. Defaults to
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #

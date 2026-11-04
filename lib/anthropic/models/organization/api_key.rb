@@ -93,7 +93,7 @@ module Anthropic
         #
         #   @param principal [Anthropic::Models::Organization::APIKeyUserActor, Anthropic::Models::Organization::APIKeyServiceAccountActor, nil] The principal the API key acts as (a User or a Service Account), or `null` if th
         #
-        #   @param scope [Anthropic::Models::Organization::APIKeyOrganizationScope, Anthropic::Models::Organization::APIKeyWorkspaceScope] Where the API key belongs: its Workspace (`{"type": "workspace", "workspace_id":
+        #   @param scope [Anthropic::Models::Organization::APIKeyOrganizationScope, Anthropic::Models::Organization::APIKeyWorkspaceScope] Where the API key belongs: its Workspace (
         #
         #   @param status [Symbol, Anthropic::Models::Organization::APIKey::Status] Status of the API key.
         #

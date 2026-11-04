@@ -5,8 +5,8 @@ module Anthropic
     module Beta
       class BetaManagedAgentsMemoryStoreResourceConfig < Anthropic::Internal::Type::BaseModel
         # @!attribute memory_store_id
-        #   The memory store ID (memstore\_...). Must belong to the caller's organization
-        #   and workspace.
+        #   The memory store ID (memstore_...). Must belong to the caller's organization and
+        #   workspace.
         #
         #   @return [String]
         required :memory_store_id, String
@@ -39,8 +39,7 @@ module Anthropic
         #   {Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceConfig} for more
         #   details.
         #
-        #   @param memory_store_id [String] The memory store ID (memstore\_...). Must belong to the caller's organization
-        #   and
+        #   @param memory_store_id [String] The memory store ID (memstore_...). Must belong to the caller's organization and
         #
         #   @param access [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceConfig::Access, nil] Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts
         #

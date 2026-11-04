@@ -40,7 +40,7 @@ module Anthropic
             #
             # @param target_type [Symbol, Anthropic::Models::Beta::Organization::Plugins::InstallationSettingListParams::TargetType, nil] Query param: Only settings for this kind of target: `organization` (the organiza
             #
-            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `ce-plugins-2026-09-0
+            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #
@@ -106,7 +106,7 @@ module Anthropic
             #
             # @param plugin_id [String] Path param: ID of the Plugin (prefixed `plugin_`).
             #
-            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `ce-plugins-2026-09-0
+            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #
@@ -171,7 +171,7 @@ module Anthropic
             #
             # @param installation_preference [Symbol, Anthropic::Models::Beta::Organization::Plugins::InstallationSettingSetParams::InstallationPreference] Body param: The installation setting the target is to hold for this Plugin: one
             #
-            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `ce-plugins-2026-09-0
+            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #

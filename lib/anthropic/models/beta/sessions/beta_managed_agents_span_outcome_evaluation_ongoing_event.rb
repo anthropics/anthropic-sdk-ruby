@@ -47,7 +47,7 @@ module Anthropic
           #
           #   @param id [String] Unique identifier for this event.
           #
-          #   @param iteration [Integer] 0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_st
+          #   @param iteration [Integer] 0-indexed revision cycle, matching the corresponding
           #
           #   @param outcome_id [String] The `outc_` ID of the outcome being evaluated.
           #

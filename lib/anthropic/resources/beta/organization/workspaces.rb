@@ -133,7 +133,7 @@ module Anthropic
           #
           # @param before_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
           #
-          # @param ids [Array<String>] Only the Workspaces with these IDs, at most 100. `include_archived` and `include
+          # @param ids [Array<String>] Only the Workspaces with these IDs, at most 100. `include_archived` and
           #
           # @param include_archived [Boolean] Whether to include Workspaces that have been archived in the response
           #

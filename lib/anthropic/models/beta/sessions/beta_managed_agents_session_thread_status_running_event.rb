@@ -24,7 +24,7 @@ module Anthropic
           required :processed_at, Time
 
           # @!attribute session_thread_id
-          #   Public sthr\_ ID of the thread that started running.
+          #   Public sthr_ ID of the thread that started running.
           #
           #   @return [String]
           required :session_thread_id, String
@@ -44,7 +44,7 @@ module Anthropic
           #
           #   @param processed_at [Time] Timestamp of the status transition.
           #
-          #   @param session_thread_id [String] Public sthr\_ ID of the thread that started running.
+          #   @param session_thread_id [String] Public sthr_ ID of the thread that started running.
           #
           #   @param type [Symbol, :"session.thread_status_running"]
         end

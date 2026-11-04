@@ -54,7 +54,7 @@ module Anthropic
         #
         # @param before_id [String] Query param: ID of the object to use as a cursor for pagination. When provided,
         #
-        # @param lifecycle [Array<Symbol, Anthropic::Models::Beta::ModelListParams::Lifecycle>] Query param: Filter the list to models in any of the given lifecycle stages (`ac
+        # @param lifecycle [Array<Symbol, Anthropic::Models::Beta::ModelListParams::Lifecycle>] Query param: Filter the list to models in any of the given lifecycle stages (
         #
         # @param limit [Integer] Query param: Number of items to return per page.
         #

@@ -73,7 +73,7 @@ module Anthropic
           #   {Anthropic::Models::Beta::Organization::TelemetryDestinationCreateParams} for
           #   more details.
           #
-          #   @param endpoint_url [String] The base URL of your collector's OTLP/HTTP endpoint, for example `https://gatewa
+          #   @param endpoint_url [String] The base URL of your collector's OTLP/HTTP endpoint, for example
           #
           #   @param workspaces [Anthropic::Models::Beta::Organization::BetaTelemetryDestinationWorkspacesAllParams, Anthropic::Models::Beta::Organization::BetaTelemetryDestinationWorkspacesIncludeParams, Anthropic::Models::Beta::Organization::BetaTelemetryDestinationWorkspacesExcludeParams] Which of the organization's workspaces the destination covers.
           #

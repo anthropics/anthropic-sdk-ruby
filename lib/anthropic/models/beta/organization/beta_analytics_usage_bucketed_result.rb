@@ -160,15 +160,14 @@ module Anthropic
           #   @param context_window [Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsContextWindow, nil] Context-window pricing tier of the usage or cost. Null unless `context_window` i
           #
           #   @param inference_geo [Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsUsageBucketedResult::InferenceGeo, nil] Inference region of the usage or cost. Null unless `inference_geo` is in
-          #   `group\_
           #
-          #   @param model [String, nil] Model that produced the usage or cost, as a model name in the form the `models[]
+          #   @param model [String, nil] Model that produced the usage or cost, as a model name in the form the
           #
           #   @param output_tokens [Integer] The number of output tokens generated.
           #
-          #   @param product [String, nil] Product surface that produced the usage or cost. Null unless product is in `grou
+          #   @param product [String, nil] Product surface that produced the usage or cost. Null unless product is in
           #
-          #   @param rbac_group_id [String, nil] RBAC group (team) the usage is attributed to, in the public tagged `rbac*group*.
+          #   @param rbac_group_id [String, nil] RBAC group (team) the usage is attributed to, in the public tagged
           #
           #   @param requests [Integer, nil] Number of API requests in this row's scope. For sandbox / code-execution events,
           #
@@ -176,7 +175,7 @@ module Anthropic
           #
           #   @param slack_channel_id [String, nil] Slack channel the usage originated from. Populated only when `slack_channel_id`
           #
-          #   @param speed [Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsUsageBucketedResult::Speed, nil] Inference speed mode of the usage or cost: `fast` or `standard`. Null unless `sp
+          #   @param speed [Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsUsageBucketedResult::Speed, nil] Inference speed mode of the usage or cost: `fast` or `standard`. Null unless
           #
           #   @param uncached_input_tokens [Integer] The number of uncached input tokens processed.
 

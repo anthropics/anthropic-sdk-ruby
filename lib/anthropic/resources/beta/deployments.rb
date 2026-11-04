@@ -31,7 +31,7 @@ module Anthropic
         #
         # @param vault_ids [Array<String>] Body param: Vault IDs for stored credentials the agent can use during sessions c
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -119,7 +119,7 @@ module Anthropic
         #
         # @param vault_ids [Array<String>, nil] Body param: Vault IDs. Full replacement. Omit to preserve; send empty array or n
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -166,7 +166,7 @@ module Anthropic
         #
         # @param status [Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeploymentStatus] Query param: Filter by status: `active` or `paused`. Omit for both. To include a
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #

@@ -51,7 +51,7 @@ module Anthropic
           #
           #   @param page [String] Opaque cursor from a previous response's `next_page`. Leave it out to get the fi
           #
-          #   @param workspace_ids [Array<String>] Return only the destinations that cover at least one of these workspaces (`wrksp
+          #   @param workspace_ids [Array<String>] Return only the destinations that cover at least one of these workspaces (
           #
           #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11`
           #

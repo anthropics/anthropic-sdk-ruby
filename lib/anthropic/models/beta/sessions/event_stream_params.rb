@@ -55,7 +55,6 @@ module Anthropic
           #   @param session_id [String]
           #
           #   @param event_deltas [Array<Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeltaType>] When set, this connection also receives streaming deltas (`event_start`,
-          #   `event\_
           #
           #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
           #

@@ -42,11 +42,11 @@ module Anthropic
             #
             #   @param org_limit [Integer, nil] The organization-level value for the same limiter type, for reference. `null` wh
             #
-            #   @param source [Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimitWorkspaceSource, Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimitOrganizationSource] Where `value` comes from. `organization` values are listed only when `include_in
+            #   @param source [Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimitWorkspaceSource, Anthropic::Models::Beta::Organization::Workspaces::BetaWorkspaceRateLimitOrganizationSource] Where `value` comes from. `organization` values are listed only when
             #
-            #   @param type [String] The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute
+            #   @param type [String] The limiter type (for example, `requests_per_minute` or
             #
-            #   @param value [Integer] The workspace's value for this limiter type: the workspace-level override when `
+            #   @param value [Integer] The workspace's value for this limiter type: the workspace-level override when
 
             # Where `value` comes from. `organization` values are listed only when
             # `include_inherited` is `true`, and then `value` equals `org_limit`.

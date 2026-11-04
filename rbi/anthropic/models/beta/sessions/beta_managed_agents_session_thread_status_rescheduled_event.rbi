@@ -25,7 +25,7 @@ module Anthropic
           sig { returns(Time) }
           attr_accessor :processed_at
 
-          # Public sthr\_ ID of the thread that is retrying.
+          # Public sthr_ ID of the thread that is retrying.
           sig { returns(String) }
           attr_accessor :session_thread_id
 
@@ -51,7 +51,7 @@ module Anthropic
             agent_name:,
             # Timestamp of the status transition.
             processed_at:,
-            # Public sthr\_ ID of the thread that is retrying.
+            # Public sthr_ ID of the thread that is retrying.
             session_thread_id:,
             type: :"session.thread_status_rescheduled"
           )

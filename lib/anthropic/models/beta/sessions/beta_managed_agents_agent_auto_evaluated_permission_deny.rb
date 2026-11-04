@@ -26,8 +26,7 @@ module Anthropic
           #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentAutoEvaluatedPermissionDeny}
           #   for more details.
           #
-          #   @param reason_code [String] The judgement's grounds in registry-bound terms. Open registry; currently
-          #   "high\_
+          #   @param reason_code [String] The judgement's grounds in registry-bound terms. Open registry; currently "high_
           #
           #   @param type [Symbol, :deny]
         end

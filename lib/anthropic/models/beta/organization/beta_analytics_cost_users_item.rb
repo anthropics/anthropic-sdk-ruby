@@ -191,22 +191,20 @@ module Anthropic
           #   @param ending_at [Time, nil] End of the row's UTC time bucket (exclusive), as an RFC 3339 timestamp; equal to
           #
           #   @param inference_geo [Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsCostUsersItem::InferenceGeo, nil] Inference region of the usage or cost. Null unless `inference_geo` is in
-          #   `group\_
           #
           #   @param list_amount [String] List-price amount (pre-discount) in fractional cents.
           #
-          #   @param model [String, nil] Model that produced the usage or cost, as a model name in the form the `models[]
+          #   @param model [String, nil] Model that produced the usage or cost, as a model name in the form the
           #
-          #   @param product [String, nil] Product surface that produced the usage or cost. Null unless product is in `grou
+          #   @param product [String, nil] Product surface that produced the usage or cost. Null unless product is in
           #
-          #   @param rbac_group_id [String, nil] RBAC group (team) the usage is attributed to, in the public tagged `rbac*group*.
+          #   @param rbac_group_id [String, nil] RBAC group (team) the usage is attributed to, in the public tagged
           #
           #   @param requests [Integer, nil] Number of API requests in this row's scope. Null when `group_by` includes
-          #   `cost\_
           #
           #   @param slack_channel_id [String, nil] Slack channel the usage originated from. Populated only when `slack_channel_id`
           #
-          #   @param speed [Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsCostUsersItem::Speed, nil] Inference speed mode of the usage or cost: `fast` or `standard`. Null unless `sp
+          #   @param speed [Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsCostUsersItem::Speed, nil] Inference speed mode of the usage or cost: `fast` or `standard`. Null unless
           #
           #   @param starting_at [Time, nil] Start of the row's UTC time bucket (inclusive), as an RFC 3339 timestamp. Null u
           #

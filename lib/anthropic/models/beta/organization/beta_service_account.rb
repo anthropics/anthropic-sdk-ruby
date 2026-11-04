@@ -98,7 +98,7 @@ module Anthropic
           #
           #   @param name [String] Admin-chosen slug identifier.
           #
-          #   @param organization_role [Symbol, Anthropic::Models::Beta::Organization::BetaServiceAccount::OrganizationRole] Org-level role. A federation rule may only be created or retargeted to grant `or
+          #   @param organization_role [Symbol, Anthropic::Models::Beta::Organization::BetaServiceAccount::OrganizationRole] Org-level role. A federation rule may only be created or retargeted to grant
           #
           #   @param updated_at [Time] When this service account was last updated.
           #

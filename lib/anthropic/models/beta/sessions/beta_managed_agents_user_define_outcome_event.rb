@@ -62,7 +62,7 @@ module Anthropic
           #
           #   @param max_iterations [Integer, nil] Evaluate-then-revise cycles before giving up. Default 3, max 20.
           #
-          #   @param outcome_id [String] Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evalua
+          #   @param outcome_id [String] Server-generated `outc_` ID for this outcome. Referenced by
           #
           #   @param processed_at [Time] Timestamp when the outcome was accepted.
           #

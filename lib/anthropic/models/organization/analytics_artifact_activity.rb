@@ -103,7 +103,7 @@ module Anthropic
         #
         #   @param published_artifacts_created_count [Integer] Number of those artifacts that have been published (for Claude Code / Cowork art
         #
-        #   @param product [String, nil] Product that produced this row's activity: one of `chat`, `claude_code`, `cowork
+        #   @param product [String, nil] Product that produced this row's activity: one of `chat`, `claude_code`,
         #
         #   @param rbac_group_id [String, nil] Tagged RBAC group identifier (`rbac_group_...`), matching the spend-limits API s
         #

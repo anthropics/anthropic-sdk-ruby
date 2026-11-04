@@ -46,7 +46,7 @@ module Anthropic
           #
           #   @option args [String, nil] :email_address The user's current email address, including for users who are no longer members
           #
-          #   @option args [String, nil] :name The user's current full name. Null when the user has not set one. `"Deleted User
+          #   @option args [String, nil] :name The user's current full name. Null when the user has not set one.
           #
           #   @option args [String] :user_id Tagged user ID.
           #

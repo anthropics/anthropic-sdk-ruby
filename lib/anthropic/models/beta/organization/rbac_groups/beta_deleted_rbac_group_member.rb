@@ -35,7 +35,7 @@ module Anthropic
             #
             #   @param user_id [String] ID of the User.
             #
-            #   @param type [Symbol, :rbac_group_member_deleted] Deleted object type. For RBAC Group Members, this is always `"rbac*group_member*
+            #   @param type [Symbol, :rbac_group_member_deleted] Deleted object type. For RBAC Group Members, this is always
           end
         end
       end

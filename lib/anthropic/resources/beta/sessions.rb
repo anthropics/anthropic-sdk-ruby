@@ -36,7 +36,7 @@ module Anthropic
         #
         # @param vault_ids [Array<String>] Body param: Vault IDs for stored credentials the agent can use during the sessio
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -114,7 +114,7 @@ module Anthropic
         #
         # @param vault_ids [Array<String>] Body param: Vault IDs (`vlt_*`) to attach to the session. Not yet supported; req
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -167,13 +167,13 @@ module Anthropic
         #
         # @param memory_store_id [String] Query param: Filter sessions whose resources contain a `memory_store` with this
         #
-        # @param order [Symbol, Anthropic::Models::Beta::SessionListParams::Order] Query param: Sort direction for results, ordered by `created_at`. Defaults to `d
+        # @param order [Symbol, Anthropic::Models::Beta::SessionListParams::Order] Query param: Sort direction for results, ordered by `created_at`. Defaults to
         #
         # @param page [String] Query param: Opaque pagination cursor from a previous response.
         #
         # @param statuses [Array<Symbol, Anthropic::Models::Beta::SessionListParams::Status>] Query param: Filter by session status. Repeat the parameter to match any of mult
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #

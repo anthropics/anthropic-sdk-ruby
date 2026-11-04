@@ -57,7 +57,7 @@ module Anthropic
           #
           #   @param limits [Array<Anthropic::Models::Organization::Workspaces::WorkspaceRateLimitValue>] The workspace's limiter values for this group. By default only the limiter types
           #
-          #   @param models [Array<String>, nil] Model names this entry's limits apply to, including aliases. `null` when `group.
+          #   @param models [Array<String>, nil] Model names this entry's limits apply to, including aliases. `null` when
           #
           #   @param rate_limit_id [String] The `id` of the organization's RateLimit entry this entry applies to.
           #
@@ -113,7 +113,7 @@ module Anthropic
             #
             # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
             #
-            #   @option args [String] :id Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxY
+            #   @option args [String] :id Opaque identifier of the rate-limit group (for example,
             #
             #   @option args [String] :display_name Human-readable name of the model group (for example, `Claude Sonnet 4.x`). For d
             #

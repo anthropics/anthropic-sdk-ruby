@@ -93,7 +93,7 @@ module Anthropic
           #
           #   @param precondition [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsPrecondition] The condition that the memory must meet for the update to apply. Omit it to upda
           #
-          #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `manag
+          #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `agent-memory-2026-07-22` or
           #
           #   @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
           #

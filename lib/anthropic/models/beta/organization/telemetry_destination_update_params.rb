@@ -109,7 +109,7 @@ module Anthropic
           #
           #   @param traces [Anthropic::Models::Beta::Organization::BetaTelemetryDestinationTracesParams, nil] The traces settings to change. Omitted settings keep their stored values.
           #
-          #   @param workspaces [Anthropic::Models::Beta::Organization::BetaTelemetryDestinationWorkspacesAllParams, Anthropic::Models::Beta::Organization::BetaTelemetryDestinationWorkspacesIncludeParams, Anthropic::Models::Beta::Organization::BetaTelemetryDestinationWorkspacesExcludeParams] The new workspace scope, in the same form as on create. The field can't be `null
+          #   @param workspaces [Anthropic::Models::Beta::Organization::BetaTelemetryDestinationWorkspacesAllParams, Anthropic::Models::Beta::Organization::BetaTelemetryDestinationWorkspacesIncludeParams, Anthropic::Models::Beta::Organization::BetaTelemetryDestinationWorkspacesExcludeParams] The new workspace scope, in the same form as on create. The field can't be
           #
           #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11`
           #

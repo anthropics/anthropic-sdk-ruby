@@ -159,7 +159,7 @@ module Anthropic
         #
         # @overload upload(file:, expires_in_seconds: nil, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param file [Pathname, StringIO, IO, String, Anthropic::FilePart] Body param: The file to upload. Only the final path component of the part's `fil
+        # @param file [Pathname, StringIO, IO, String, Anthropic::FilePart] Body param: The file to upload. Only the final path component of the part's
         #
         # @param expires_in_seconds [Integer] Body param: Seconds from upload until the file expires and its bytes become perm
         #

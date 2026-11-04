@@ -26,7 +26,7 @@ module Anthropic
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaAdvisorResultBlock} for more details.
         #
-        #   @param stop_reason [String, nil] The advisor sub-inference's stop reason (same values as the top-level message `s
+        #   @param stop_reason [String, nil] The advisor sub-inference's stop reason (same values as the top-level message
         #
         #   @param text [String]
         #

@@ -23,7 +23,7 @@ module Anthropic
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaFallbackRefusalTrigger} for more details.
         #
-        #   @param category [Symbol, Anthropic::Models::Beta::BetaFallbackRefusalTrigger::Category, nil] The policy category that triggered the `from` model's refusal at this hop. `null
+        #   @param category [Symbol, Anthropic::Models::Beta::BetaFallbackRefusalTrigger::Category, nil] The policy category that triggered the `from` model's refusal at this hop.
         #
         #   @param type [Symbol, :refusal]
 

@@ -31,7 +31,7 @@ module Anthropic
           #   {Anthropic::Models::Beta::Organization::BetaOrganizationRateLimitModelGroup} for
           #   more details.
           #
-          #   @param id [String] Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxY
+          #   @param id [String] Opaque identifier of the rate-limit group (for example,
           #
           #   @param display_name [String] Human-readable name of the model group (for example, `Claude Sonnet 4.x`). For d
           #

@@ -29,7 +29,7 @@ module Anthropic
           #   {Anthropic::Models::Beta::Vaults::BetaManagedAgentsRefreshObject} for more
           #   details.
           #
-          #   @param http_response [Anthropic::Models::Beta::Vaults::BetaManagedAgentsRefreshHTTPResponse, nil] The captured HTTP error response from the token endpoint. Populated only when `s
+          #   @param http_response [Anthropic::Models::Beta::Vaults::BetaManagedAgentsRefreshHTTPResponse, nil] The captured HTTP error response from the token endpoint. Populated only when
           #
           #   @param status [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsRefreshObject::Status] Outcome of the refresh attempt.
 

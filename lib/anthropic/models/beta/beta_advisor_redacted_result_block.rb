@@ -29,7 +29,7 @@ module Anthropic
         #
         #   @param encrypted_content [String] Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect
         #
-        #   @param stop_reason [String, nil] The advisor sub-inference's stop reason (same values as the top-level message `s
+        #   @param stop_reason [String, nil] The advisor sub-inference's stop reason (same values as the top-level message
         #
         #   @param type [Symbol, :advisor_redacted_result]
       end

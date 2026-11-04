@@ -36,7 +36,7 @@ module Anthropic
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Organization::BetaPluginContentScan} for more details.
           #
-          #   @param assessment [Symbol, Anthropic::Models::Beta::Organization::BetaPluginContentScan::Assessment, nil] The scan's verdict; set only when `status` is `completed`. A `warn` can mean a `
+          #   @param assessment [Symbol, Anthropic::Models::Beta::Organization::BetaPluginContentScan::Assessment, nil] The scan's verdict; set only when `status` is `completed`. A `warn` can mean a
           #
           #   @param reason [String, nil] The primary mechanism behind a `warn` or `fail`, such as `credential-exposure` o
           #

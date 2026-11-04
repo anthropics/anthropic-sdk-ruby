@@ -102,7 +102,7 @@ module Anthropic
           #
           #   @param limit [Integer]
           #
-          #   @param order [Symbol, Anthropic::Models::Beta::Sessions::EventListParams::Order] Sort direction for results, ordered by the event's `processed_at`. Defaults to `
+          #   @param order [Symbol, Anthropic::Models::Beta::Sessions::EventListParams::Order] Sort direction for results, ordered by the event's `processed_at`. Defaults to
           #
           #   @param page [String] Opaque pagination cursor from a previous response's `next_page`.
           #

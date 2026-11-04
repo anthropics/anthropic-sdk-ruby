@@ -27,7 +27,7 @@ module Anthropic
         #
         # @param instructions [String, nil] Body param: Guidance that steers how the dream reads the sessions and organizes
         #
-        # @param output_behavior [Anthropic::Models::Beta::BetaOutputBehaviorCreateNew, Anthropic::Models::Beta::BetaOutputBehaviorUpdateExisting] Body param: Which memory store a dream writes its result to. Defaults to `create
+        # @param output_behavior [Anthropic::Models::Beta::BetaOutputBehaviorCreateNew, Anthropic::Models::Beta::BetaOutputBehaviorUpdateExisting] Body param: Which memory store a dream writes its result to. Defaults to
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `dreaming-2026-04-21`
         #

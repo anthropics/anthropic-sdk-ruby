@@ -24,7 +24,7 @@ module Anthropic
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaResponseToolAdditionBlock} for more details.
         #
-        #   @param tool [Anthropic::Models::Beta::BetaResponseToolChangeToolReference, Anthropic::Models::Beta::BetaResponseToolChangeMCPToolReference, Anthropic::Models::Beta::BetaResponseToolChangeMCPToolsetReference, Anthropic::Models::Beta::BetaToolChangeToolDefinition] The tool made available: a reference to a `tools` entry or MCP toolset, or a `to
+        #   @param tool [Anthropic::Models::Beta::BetaResponseToolChangeToolReference, Anthropic::Models::Beta::BetaResponseToolChangeMCPToolReference, Anthropic::Models::Beta::BetaResponseToolChangeMCPToolsetReference, Anthropic::Models::Beta::BetaToolChangeToolDefinition] The tool made available: a reference to a `tools` entry or MCP toolset, or a
         #
         #   @param type [Symbol, :tool_addition]
 

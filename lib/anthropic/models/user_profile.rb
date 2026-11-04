@@ -109,7 +109,7 @@ module Anthropic
       #
       #   @param id [String] Unique identifier for this user profile, prefixed `uprof_`.
       #
-      #   @param access_type [Symbol, Anthropic::Models::UserProfileAccessType] How the platform uses the API for this entity: `application` (default) or `passt
+      #   @param access_type [Symbol, Anthropic::Models::UserProfileAccessType] How the platform uses the API for this entity: `application` (default) or
       #
       #   @param created_at [Time] When this user profile was created, in RFC 3339 format.
       #
