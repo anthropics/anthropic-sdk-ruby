@@ -23,7 +23,7 @@ module Anthropic
           #
           # @overload create(endpoint_url:, workspaces:, display_name: nil, headers: nil, traces: nil, betas: nil, request_options: {})
           #
-          # @param endpoint_url [String] Body param: The base URL of your collector's OTLP/HTTP endpoint, for example `ht
+          # @param endpoint_url [String] Body param: The base URL of your collector's OTLP/HTTP endpoint, for example
           #
           # @param workspaces [Anthropic::Models::Beta::Organization::BetaTelemetryDestinationWorkspacesAllParams, Anthropic::Models::Beta::Organization::BetaTelemetryDestinationWorkspacesIncludeParams, Anthropic::Models::Beta::Organization::BetaTelemetryDestinationWorkspacesExcludeParams] Body param: Which of the organization's workspaces the destination covers.
           #
@@ -33,7 +33,7 @@ module Anthropic
           #
           # @param traces [Anthropic::Models::Beta::Organization::BetaTelemetryDestinationTracesParams] Body param: The settings for the traces that the destination receives. If you le
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `telemetry-destinatio
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -129,7 +129,7 @@ module Anthropic
           #
           # @param workspaces [Anthropic::Models::Beta::Organization::BetaTelemetryDestinationWorkspacesAllParams, Anthropic::Models::Beta::Organization::BetaTelemetryDestinationWorkspacesIncludeParams, Anthropic::Models::Beta::Organization::BetaTelemetryDestinationWorkspacesExcludeParams] Body param: The new workspace scope, in the same form as on create. The field ca
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `telemetry-destinatio
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -172,7 +172,7 @@ module Anthropic
           #
           # @param workspace_ids [Array<String>] Query param: Return only the destinations that cover at least one of these works
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `telemetry-destinatio
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #

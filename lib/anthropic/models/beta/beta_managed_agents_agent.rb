@@ -111,7 +111,7 @@ module Anthropic
         #
         #   @param description [String, nil]
         #
-        #   @param execution_identity [Anthropic::Models::Beta::BetaManagedAgentsAWSRoleExecutionIdentity, Anthropic::Models::Beta::BetaManagedAgentsServiceAccountExecutionIdentity] Execution principal for runs of this agent. Always present; `{"type": "service_a
+        #   @param execution_identity [Anthropic::Models::Beta::BetaManagedAgentsAWSRoleExecutionIdentity, Anthropic::Models::Beta::BetaManagedAgentsServiceAccountExecutionIdentity] Execution principal for runs of this agent. Always present;
         #
         #   @param mcp_servers [Array<Anthropic::Models::Beta::BetaManagedAgentsMCPServerURLDefinition>]
         #

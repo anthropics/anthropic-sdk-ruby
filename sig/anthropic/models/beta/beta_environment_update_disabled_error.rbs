@@ -1,0 +1,11 @@
+module Anthropic
+  module Models
+    module Beta
+      class BetaEnvironmentUpdateDisabledError < Anthropic::Errors::PermissionDeniedError
+        def error_code: -> :environment_update_disabled
+
+        def details: -> Anthropic::Beta::BetaEnvironmentUpdateDisabledErrorDetails
+      end
+    end
+  end
+end

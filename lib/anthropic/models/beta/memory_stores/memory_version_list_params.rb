@@ -131,7 +131,7 @@ module Anthropic
           #
           #   @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Whether a `memory` or `memory_version` in the response includes its `content`. D
           #
-          #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `manag
+          #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `agent-memory-2026-07-22` or
           #
           #   @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
           #

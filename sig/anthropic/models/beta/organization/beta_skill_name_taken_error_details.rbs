@@ -1,0 +1,23 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_skill_name_taken_error_details =
+          { error_code: :skill_name_taken, skill_name: String }
+
+        class BetaSkillNameTakenErrorDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor error_code: :skill_name_taken
+
+          attr_accessor skill_name: String
+
+          def initialize: (
+            skill_name: String,
+            ?error_code: :skill_name_taken
+          ) -> void
+
+          def to_hash: -> { error_code: :skill_name_taken, skill_name: String }
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    type file_expired_error_details = { error_code: :file_expired }
+
+    class FileExpiredErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :file_expired
+
+      def initialize: (?error_code: :file_expired) -> void
+
+      def to_hash: -> { error_code: :file_expired }
+    end
+  end
+end

@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class CMEKKeyNetworkBlockedError < Anthropic::Errors::BadRequestError
+      def error_code: -> :cmek_key_network_blocked
+
+      def details: -> Anthropic::CMEKKeyNetworkBlockedErrorDetails
+    end
+  end
+end

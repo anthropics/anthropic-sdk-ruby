@@ -1,0 +1,11 @@
+module Anthropic
+  module Models
+    module Beta
+      class BetaEnvironmentCreateDisabledError < Anthropic::Errors::PermissionDeniedError
+        def error_code: -> :environment_create_disabled
+
+        def details: -> Anthropic::Beta::BetaEnvironmentCreateDisabledErrorDetails
+      end
+    end
+  end
+end

@@ -32,7 +32,7 @@ module Anthropic
         required :iteration, Integer
 
         # @!attribute outcome_id
-        #   Server-generated outc\_ ID for this outcome.
+        #   Server-generated outc_ ID for this outcome.
         #
         #   @return [String]
         required :outcome_id, String
@@ -57,7 +57,7 @@ module Anthropic
         #   {Anthropic::Models::Beta::BetaManagedAgentsOutcomeEvaluationResource} for more
         #   details.
         #
-        #   @param completed_at [Time, nil] When the outcome reached a terminal result. Null while `pending`/`running`/`eval
+        #   @param completed_at [Time, nil] When the outcome reached a terminal result. Null while `pending`/`running`/
         #
         #   @param description [String] What the agent should produce.
         #
@@ -65,7 +65,7 @@ module Anthropic
         #
         #   @param iteration [Integer] 0-indexed revision cycle the outcome is currently on.
         #
-        #   @param outcome_id [String] Server-generated outc\_ ID for this outcome.
+        #   @param outcome_id [String] Server-generated outc_ ID for this outcome.
         #
         #   @param result [String] Current evaluation state. `pending` before the agent begins work; `running` whil
         #

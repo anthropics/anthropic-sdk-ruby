@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class ThreadAlreadyContinuedError < Anthropic::Errors::BadRequestError
+      def error_code: -> :thread_already_continued
+
+      def details: -> Anthropic::ThreadAlreadyContinuedErrorDetails
+    end
+  end
+end

@@ -22,9 +22,7 @@ module Anthropic
           # addressed), `scheduled` (a scheduled routine ran), `monitoring` (Claude watching
           # a channel it was asked to monitor), or `dm` (direct messages with Claude).
           # Populated only when `claude_tag_category` is in `group_by[]`; null for usage
-          # that is not Claude Tag. Direct-message usage is billed to the individual user
-          # and is reported under that user's product, not under `claude-tag`. New
-          # categories may be added over time.
+          # that is not Claude Tag. New categories may be added over time.
           sig do
             returns(
               T.nilable(
@@ -102,8 +100,8 @@ module Anthropic
           # `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside
           # claude.ai chat: chat and Cowork usage by a member who has it turned on is
           # reported under this value instead of `chat` or `cowork`. It is accepted as a
-          # filter only on deployments that offer Chat and Cowork unified. Some unattributed
-          # usage is reported as "other".
+          # filter only where Chat and Cowork unified is available. Some unattributed usage
+          # is reported as "other".
           sig { returns(T.nilable(String)) }
           attr_accessor :product
 
@@ -128,8 +126,9 @@ module Anthropic
           attr_accessor :requests
 
           # Slack channel the usage originated from. Populated only when `slack_channel_id`
-          # is in `group_by[]`; null for usage outside Slack (and for rows recorded before
-          # channel attribution was enabled).
+          # is in `group_by[]`; null for usage outside Slack, for some Claude Tag usage that
+          # has no channel recorded, and for usage recorded before channel attribution was
+          # enabled.
           sig { returns(T.nilable(String)) }
           attr_accessor :slack_channel_id
 
@@ -199,9 +198,7 @@ module Anthropic
             # addressed), `scheduled` (a scheduled routine ran), `monitoring` (Claude watching
             # a channel it was asked to monitor), or `dm` (direct messages with Claude).
             # Populated only when `claude_tag_category` is in `group_by[]`; null for usage
-            # that is not Claude Tag. Direct-message usage is billed to the individual user
-            # and is reported under that user's product, not under `claude-tag`. New
-            # categories may be added over time.
+            # that is not Claude Tag. New categories may be added over time.
             claude_tag_category:,
             # Slack user ID (for example `U0123ABCDEF`) of the member the Claude Tag (Claude
             # in Slack) usage is attributed to, not a claude.ai user ID. Populated only when
@@ -239,8 +236,8 @@ module Anthropic
             # `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside
             # claude.ai chat: chat and Cowork usage by a member who has it turned on is
             # reported under this value instead of `chat` or `cowork`. It is accepted as a
-            # filter only on deployments that offer Chat and Cowork unified. Some unattributed
-            # usage is reported as "other".
+            # filter only where Chat and Cowork unified is available. Some unattributed usage
+            # is reported as "other".
             product:,
             # RBAC group (team) the usage is attributed to, in the public tagged
             # `rbac_group_...` spelling — the same spelling the activity resources use for
@@ -259,8 +256,9 @@ module Anthropic
             # `product: null`).
             requests:,
             # Slack channel the usage originated from. Populated only when `slack_channel_id`
-            # is in `group_by[]`; null for usage outside Slack (and for rows recorded before
-            # channel attribution was enabled).
+            # is in `group_by[]`; null for usage outside Slack, for some Claude Tag usage that
+            # has no channel recorded, and for usage recorded before channel attribution was
+            # enabled.
             slack_channel_id:,
             # Inference speed mode of the usage or cost: `fast` or `standard`. Null unless
             # `speed` is in `group_by[]`.

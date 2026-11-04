@@ -6,7 +6,7 @@ module Anthropic
       module Environments
         class BetaSessionWorkData < Anthropic::Internal::Type::BaseModel
           # @!attribute id
-          #   Session identifier (e.g., 'session\_...')
+          #   Session identifier (e.g., 'session_...')
           #
           #   @return [String]
           required :id, String
@@ -23,7 +23,7 @@ module Anthropic
           #   This resource type is used when work represents a session that needs to be
           #   executed in a self-hosted environment.
           #
-          #   @param id [String] Session identifier (e.g., 'session\_...')
+          #   @param id [String] Session identifier (e.g., 'session_...')
           #
           #   @param type [Symbol, :session] Type of work data
         end

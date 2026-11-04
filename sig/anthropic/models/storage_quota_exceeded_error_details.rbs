@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type storage_quota_exceeded_error_details =
+      { error_code: :storage_quota_exceeded }
+
+    class StorageQuotaExceededErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :storage_quota_exceeded
+
+      def initialize: (?error_code: :storage_quota_exceeded) -> void
+
+      def to_hash: -> { error_code: :storage_quota_exceeded }
+    end
+  end
+end

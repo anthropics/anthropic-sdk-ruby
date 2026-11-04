@@ -141,8 +141,36 @@ module Anthropic
     end
 
     class APIStatusError < Anthropic::Errors::APIError
-      # @return [Anthropic::ErrorType::TaggedSymbol, nil]
-      attr_reader :type
+      # `error.message` from the response body, if present.
+      #
+      # @return [String, nil]
+      def api_message = Anthropic::Internal::Util.dig(body, [:error, :message])
+
+      # `error.type` from the response body, if present.
+      #
+      # @return [Symbol, Anthropic::Models::ErrorType, nil]
+      def type
+        value = Anthropic::Internal::Util.dig(body, [:error, :type])
+        value.is_a?(String) ? value.to_sym : value
+      end
+
+      # `error.details.error_code` from the response body, if present and a string.
+      #
+      # @return [Symbol, nil]
+      def error_code
+        code = Anthropic::Internal::Util.dig(body, [:error, :details, :error_code])
+        code.to_sym if code.is_a?(String)
+      end
+
+      # `error.details` from the response body, if present.
+      #
+      # @return [Anthropic::Models::ErrorDetails, nil]
+      def details
+        Anthropic::Internal::Type::Converter.coerce(
+          Anthropic::ErrorDetails,
+          Anthropic::Internal::Util.dig(body, [:error, :details])
+        )
+      end
 
       # @api private
       #
@@ -156,9 +184,6 @@ module Anthropic
       #
       # @return [self]
       def self.for(url:, status:, headers:, body:, request:, response:, message: nil)
-        error_type = Anthropic::Internal::Util.dig(body, [:error, :type])
-        error_type = error_type.to_sym if error_type.is_a?(String)
-
         kwargs =
           {
             url: url,
@@ -167,30 +192,14 @@ module Anthropic
             body: body,
             request: request,
             response: response,
-            message: message,
-            type: error_type
+            message: message
           }
 
-        case status
-        in 400
-          Anthropic::Errors::BadRequestError.new(**kwargs)
-        in 401
-          Anthropic::Errors::AuthenticationError.new(**kwargs)
-        in 403
-          Anthropic::Errors::PermissionDeniedError.new(**kwargs)
-        in 404
-          Anthropic::Errors::NotFoundError.new(**kwargs)
-        in 409
-          Anthropic::Errors::ConflictError.new(**kwargs)
-        in 422
-          Anthropic::Errors::UnprocessableEntityError.new(**kwargs)
-        in 429
-          Anthropic::Errors::RateLimitError.new(**kwargs)
-        in (500..)
-          Anthropic::Errors::InternalServerError.new(**kwargs)
-        else
-          Anthropic::Errors::APIStatusError.new(**kwargs)
-        end
+        error_code = Anthropic::Internal::Util.dig(body, [:error, :details, :error_code])
+        error_class = Anthropic::Errors::ERROR_CLASSES[[status, error_code]]
+        error_class ||= Anthropic::Errors::ERROR_CLASSES[[status, nil]]
+        error_class ||= status >= 500 ? Anthropic::Errors::InternalServerError : Anthropic::Errors::APIStatusError
+        error_class.new(**kwargs)
       end
 
       # @!parse
@@ -206,9 +215,7 @@ module Anthropic
       # @param request [nil]
       # @param response [nil]
       # @param message [String, nil]
-      # @param type [Anthropic::ErrorType::TaggedSymbol, nil]
-      def initialize(url:, status:, headers:, body:, request:, response:, message: nil, type: nil)
-        @type = type
+      def initialize(url:, status:, headers:, body:, request:, response:, message: nil)
         message ||= {url: url.to_s, status: status, body: body}
         super(
           url: url,
@@ -238,8 +245,20 @@ module Anthropic
       HTTP_STATUS = 404
     end
 
+    class RequestTimeoutError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS = 408
+    end
+
     class ConflictError < Anthropic::Errors::APIStatusError
       HTTP_STATUS = 409
+    end
+
+    class PreconditionFailedError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS = 412
+    end
+
+    class ContentTooLargeError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS = 413
     end
 
     class UnprocessableEntityError < Anthropic::Errors::APIStatusError
@@ -250,8 +269,32 @@ module Anthropic
       HTTP_STATUS = 429
     end
 
+    class RequestHeaderFieldsTooLargeError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS = 431
+    end
+
+    class ClientClosedRequestError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS = 499
+    end
+
     class InternalServerError < Anthropic::Errors::APIStatusError
       HTTP_STATUS = (500..)
+    end
+
+    class HTTPNotImplementedError < Anthropic::Errors::InternalServerError
+      HTTP_STATUS = 501
+    end
+
+    class ServiceUnavailableError < Anthropic::Errors::InternalServerError
+      HTTP_STATUS = 503
+    end
+
+    class GatewayTimeoutError < Anthropic::Errors::InternalServerError
+      HTTP_STATUS = 504
+    end
+
+    class OverloadedError < Anthropic::Errors::InternalServerError
+      HTTP_STATUS = 529
     end
 
     class ConfigurationError < Anthropic::Errors::Error

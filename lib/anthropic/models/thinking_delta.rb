@@ -20,7 +20,7 @@ module Anthropic
       #   Some parameter documentations has been truncated, see
       #   {Anthropic::Models::ThinkingDelta} for more details.
       #
-      #   @param thinking [String] The incremental `thinking` text for this content block. Concatenate the `thinkin
+      #   @param thinking [String] The incremental `thinking` text for this content block. Concatenate the
       #
       #   @param type [Symbol, :thinking_delta]
     end

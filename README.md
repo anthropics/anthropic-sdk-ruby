@@ -1,8 +1,8 @@
-# Claude SDK for Ruby
+# Anthropic SDK for Ruby
 
 [![Gem Version](https://img.shields.io/gem/v/anthropic.svg)](https://rubygems.org/gems/anthropic)
 
-The Claude SDK for Ruby provides access to the [Claude API](https://docs.anthropic.com/en/api/) from Ruby applications.
+The Anthropic SDK for Ruby provides access to the [Claude API](https://docs.anthropic.com/en/api/) from Ruby applications.
 
 ## Documentation
 

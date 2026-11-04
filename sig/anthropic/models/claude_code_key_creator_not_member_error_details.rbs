@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type claude_code_key_creator_not_member_error_details =
+      { error_code: :claude_code_key_creator_not_member }
+
+    class ClaudeCodeKeyCreatorNotMemberErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :claude_code_key_creator_not_member
+
+      def initialize: (?error_code: :claude_code_key_creator_not_member) -> void
+
+      def to_hash: -> { error_code: :claude_code_key_creator_not_member }
+    end
+  end
+end

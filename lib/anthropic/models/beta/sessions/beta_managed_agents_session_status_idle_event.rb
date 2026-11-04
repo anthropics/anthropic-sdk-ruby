@@ -102,7 +102,7 @@ module Anthropic
             #
             # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
             #
-            #   @option args [Array<String>] :event_ids The ids of events the agent is blocked on. Resolving fewer than all re-emits `se
+            #   @option args [Array<String>] :event_ids The ids of events the agent is blocked on. Resolving fewer than all re-emits
             #
             # @raise [ArgumentError]
             # @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionBudgetReached, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRefusal]

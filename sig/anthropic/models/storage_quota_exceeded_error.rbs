@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class StorageQuotaExceededError < Anthropic::Errors::BadRequestError
+      def error_code: -> :storage_quota_exceeded
+
+      def details: -> Anthropic::StorageQuotaExceededErrorDetails
+    end
+  end
+end

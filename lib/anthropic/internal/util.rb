@@ -308,11 +308,11 @@ module Anthropic
           in [String => p, *interpolations]
             encoded = interpolations.map { encode_path(_1) }
             interpolated = format(p, *encoded)
-            dot_segment = encoded.find { _1 == "." || _1 == ".." }
+            dot_segment = encoded.find { _1 == "." || _1 == ".." || _1.start_with?(".;", "..;") }
             if dot_segment
               raise ArgumentError.new("The request was not sent: path #{interpolated.inspect} has the dot segment #{dot_segment.inspect}, which would send it to a different URL")
             end
-            if encoded.include?("")
+            if encoded.any? { _1.empty? || _1.start_with?(";") }
               raise ArgumentError.new("The request was not sent: path #{interpolated.inspect} has an empty path parameter, which would send it to a different URL")
             end
             interpolated

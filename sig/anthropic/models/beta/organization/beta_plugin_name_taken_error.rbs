@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        class BetaPluginNameTakenError < Anthropic::Errors::ConflictError
+          def error_code: -> :plugin_name_taken
+
+          def details: -> Anthropic::Beta::Organization::BetaPluginNameTakenErrorDetails
+        end
+      end
+    end
+  end
+end

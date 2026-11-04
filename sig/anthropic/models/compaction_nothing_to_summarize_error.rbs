@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class CompactionNothingToSummarizeError < Anthropic::Errors::BadRequestError
+      def error_code: -> :compaction_nothing_to_summarize
+
+      def details: -> Anthropic::CompactionNothingToSummarizeErrorDetails
+    end
+  end
+end

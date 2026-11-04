@@ -72,7 +72,7 @@ module Anthropic
         #
         #   @param mcp_servers [Array<Anthropic::Models::Beta::BetaManagedAgentsURLMCPServerParams>] Replacement MCP server list. Full replacement: the provided array becomes the MC
         #
-        #   @param model [Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams, Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel] Replacement model. Accepts the model string, e.g. `claude-opus-5-5`, or a `model
+        #   @param model [Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams, Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel] Replacement model. Accepts the model string, e.g. `claude-opus-5-5`, or a
         #
         #   @param skills [Array<Anthropic::Models::Beta::BetaManagedAgentsAnthropicSkillParams, Anthropic::Models::Beta::BetaManagedAgentsCustomSkillParams>] Replacement skill list. Full replacement: the provided array becomes the skills.
         #

@@ -26,7 +26,7 @@ module Anthropic
               #   {Anthropic::Models::Beta::Organization::ClaudeTag::Bundles::BetaClaudeTagSlackChannelBundleTargetCreate}
               #   for more details.
               #
-              #   @param slack_channel_id [String] The identifier of the Slack channel to attach the Bundle to, starting with `slch
+              #   @param slack_channel_id [String] The identifier of the Slack channel to attach the Bundle to, starting with
               #
               #   @param type [Symbol, :slack_channel]
             end

@@ -1,0 +1,26 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_scan_failed_error_details =
+          { error_code: :scan_failed, plugin_version_id: String }
+
+        class BetaScanFailedErrorDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor error_code: :scan_failed
+
+          attr_accessor plugin_version_id: String
+
+          def initialize: (
+            plugin_version_id: String,
+            ?error_code: :scan_failed
+          ) -> void
+
+          def to_hash: -> {
+            error_code: :scan_failed,
+            plugin_version_id: String
+          }
+        end
+      end
+    end
+  end
+end

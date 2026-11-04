@@ -26,10 +26,8 @@ module Anthropic
 
             # @!attribute claude_tag_categories
             #   Filter to Claude Tag (Claude in Slack) usage in specific spend categories. Usage
-            #   with no category never matches. `dm` usage is reported under the user's product
-            #   rather than `claude-tag`, so combining this filter with `products[]=claude-tag`
-            #   excludes it. Use `group_by[]=claude_tag_category` to break out per-category
-            #   values.
+            #   with no category never matches. Use `group_by[]=claude_tag_category` to break
+            #   out per-category values.
             #
             #   @return [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsClaudeTagCategory>, nil]
             optional :claude_tag_categories,
@@ -169,13 +167,13 @@ module Anthropic
             #
             #   @param context_windows [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsContextWindow>, nil] Filter to specific context-window pricing tiers. Use `group_by[]=context_window`
             #
-            #   @param ending_at [Time, nil] End of range, exclusive. When omitted, defaults to the earlier of now and `start
+            #   @param ending_at [Time, nil] End of range, exclusive. When omitted, defaults to the earlier of now and
             #
             #   @param group_by [Array<Symbol, Anthropic::Models::Beta::Organization::Analytics::CostReportListParams::GroupBy>, nil] Dimensions to break each time bucket out by. Defaults to no grouping (one total
             #
             #   @param inference_geos [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsInferenceGeoFilter>, nil] Filter to specific inference regions. `not_available` matches rows where the reg
             #
-            #   @param limit [Integer, nil] Maximum number of time buckets per page. Defaults and caps vary by `bucket_width
+            #   @param limit [Integer, nil] Maximum number of time buckets per page. Defaults and caps vary by
             #
             #   @param models [Array<String>, nil] Models to include. Defaults to all models. Use `group_by[]=model` to break out p
             #
@@ -185,7 +183,7 @@ module Anthropic
             #
             #   @param rbac_group_ids [Array<String>, nil] Filter to usage attributed to specific RBAC groups. Accepts tagged RBAC group ID
             #
-            #   @param slack_channel_ids [Array<String>, nil] Filter to usage originating from specific Slack channels. Use `group*by[]=slack*
+            #   @param slack_channel_ids [Array<String>, nil] Filter to usage originating from specific Slack channels. Use
             #
             #   @param speeds [Array<Symbol, Anthropic::Models::Beta::Organization::Analytics::CostReportListParams::Speed>, nil] Filter to fast or standard inference mode. Use `group_by[]=speed` to break out p
             #

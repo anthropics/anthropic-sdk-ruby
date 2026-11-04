@@ -41,8 +41,7 @@ module Anthropic
           #   Request headers that the API sends with every delivery, typically your
           #   collector's authentication header (for example `authorization`).
           #
-          #   The API stores the values encrypted and never returns them. Reads show only
-          #   `header_names`.
+          #   The API never returns the values. Reads show only `header_names`.
           #
           #   At most 20 headers. Names are at most 128 characters. Two names can't differ
           #   only in case. Values are printable ASCII, at most 4,096 characters, and can't
@@ -74,7 +73,7 @@ module Anthropic
           #   {Anthropic::Models::Beta::Organization::TelemetryDestinationCreateParams} for
           #   more details.
           #
-          #   @param endpoint_url [String] The base URL of your collector's OTLP/HTTP endpoint, for example `https://gatewa
+          #   @param endpoint_url [String] The base URL of your collector's OTLP/HTTP endpoint, for example
           #
           #   @param workspaces [Anthropic::Models::Beta::Organization::BetaTelemetryDestinationWorkspacesAllParams, Anthropic::Models::Beta::Organization::BetaTelemetryDestinationWorkspacesIncludeParams, Anthropic::Models::Beta::Organization::BetaTelemetryDestinationWorkspacesExcludeParams] Which of the organization's workspaces the destination covers.
           #

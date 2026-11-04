@@ -7,7 +7,7 @@ module Anthropic
         # @see Anthropic::Resources::Beta::Environments::Work#retrieve
         class BetaSelfHostedWork < Anthropic::Internal::Type::BaseModel
           # @!attribute id
-          #   Work identifier (e.g., 'work\_...')
+          #   Work identifier (e.g., 'work_...')
           #
           #   @return [String]
           required :id, String
@@ -96,7 +96,7 @@ module Anthropic
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Environments::BetaSelfHostedWork} for more details.
           #
-          #   @param id [String] Work identifier (e.g., 'work\_...')
+          #   @param id [String] Work identifier (e.g., 'work_...')
           #
           #   @param acknowledged_at [String, nil] RFC 3339 timestamp when the work item was acknowledged and assigned to a self-ho
           #

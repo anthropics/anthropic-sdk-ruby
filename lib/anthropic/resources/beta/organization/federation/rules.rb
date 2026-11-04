@@ -41,7 +41,7 @@ module Anthropic
             #
             # @param name [String] Body param: Slug identifier (lowercase, digits, hyphens). Unique within the orga
             #
-            # @param oauth_scope [String] Body param: Space-separated OAuth scopes. OAuth callers may only set `workspace:
+            # @param oauth_scope [String] Body param: Space-separated OAuth scopes. OAuth callers may only set
             #
             # @param target [Anthropic::Models::Beta::Organization::Federation::BetaServiceAccountTarget] Body param: Identity that tokens minted via this rule act as. Currently always a
             #
@@ -154,7 +154,7 @@ module Anthropic
             #
             # @param oauth_scope [String, nil] Body param: Replaces the space-separated OAuth scopes granted on minted tokens.
             #
-            # @param target [Anthropic::Models::Beta::Organization::Federation::BetaServiceAccountTarget, nil] Body param: Replaces the entire target object. Currently always a `service_accou
+            # @param target [Anthropic::Models::Beta::Organization::Federation::BetaServiceAccountTarget, nil] Body param: Replaces the entire target object. Currently always a
             #
             # @param token_lifetime_seconds [Integer, nil] Body param: Replaces the lifetime in seconds for access tokens minted via this r
             #

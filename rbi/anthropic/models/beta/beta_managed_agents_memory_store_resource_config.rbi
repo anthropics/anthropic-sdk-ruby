@@ -15,8 +15,8 @@ module Anthropic
             )
           end
 
-        # The memory store ID (memstore\_...). Must belong to the caller's organization
-        # and workspace.
+        # The memory store ID (memstore_...). Must belong to the caller's organization and
+        # workspace.
         sig { returns(String) }
         attr_accessor :memory_store_id
 
@@ -52,8 +52,8 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
-          # The memory store ID (memstore\_...). Must belong to the caller's organization
-          # and workspace.
+          # The memory store ID (memstore_...). Must belong to the caller's organization and
+          # workspace.
           memory_store_id:,
           # Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts
           # the store as a read-only filesystem.

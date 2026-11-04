@@ -34,10 +34,8 @@ module Anthropic
 
             # @!attribute claude_tag_categories
             #   Filter to Claude Tag (Claude in Slack) usage in specific spend categories. Usage
-            #   with no category never matches. `dm` usage is reported under the user's product
-            #   rather than `claude-tag`, so combining this filter with `products[]=claude-tag`
-            #   excludes it. Use `group_by[]=claude_tag_category` to break out per-category
-            #   values.
+            #   with no category never matches. Use `group_by[]=claude_tag_category` to break
+            #   out per-category values.
             #
             #   @return [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsClaudeTagCategory>, nil]
             optional :claude_tag_categories,
@@ -198,7 +196,7 @@ module Anthropic
             #
             #   @param context_windows [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsContextWindow>, nil] Filter to specific context-window pricing tiers. Use `group_by[]=context_window`
             #
-            #   @param ending_at [Time, nil] End of range, exclusive. When omitted, defaults to the earlier of now and `start
+            #   @param ending_at [Time, nil] End of range, exclusive. When omitted, defaults to the earlier of now and
             #
             #   @param exclude_deleted_users [Boolean] If true, omit rows for users who are deleted (`deleted: true`). A page may conta
             #
@@ -206,7 +204,7 @@ module Anthropic
             #
             #   @param inference_geos [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsInferenceGeoFilter>, nil] Filter to specific inference regions. `not_available` matches rows where the reg
             #
-            #   @param limit [Integer] Number of rows per page (1-1000, default 20). One row per actor unless `group_by
+            #   @param limit [Integer] Number of rows per page (1-1000, default 20). One row per actor unless
             #
             #   @param models [Array<String>, nil] Models to include. Defaults to all models. Use `group_by[]=model` to break out p
             #
@@ -220,7 +218,7 @@ module Anthropic
             #
             #   @param rbac_group_ids [Array<String>, nil] Filter to usage attributed to specific RBAC groups. Accepts tagged RBAC group ID
             #
-            #   @param slack_channel_ids [Array<String>, nil] Filter to usage originating from specific Slack channels. Use `group*by[]=slack*
+            #   @param slack_channel_ids [Array<String>, nil] Filter to usage originating from specific Slack channels. Use
             #
             #   @param speeds [Array<Symbol, Anthropic::Models::Beta::Organization::Analytics::UserUsageReportListParams::Speed>, nil] Filter to fast or standard inference mode. Use `group_by[]=speed` to break out p
             #

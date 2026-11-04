@@ -51,9 +51,9 @@ module Anthropic
               #
               #   @option args [Time] :created_at Time the Bundle was attached.
               #
-              #   @option args [String] :slack_channel_id The identifier of the Slack channel the Bundle is attached to, starting with `sl
+              #   @option args [String] :slack_channel_id The identifier of the Slack channel the Bundle is attached to, starting with
               #
-              #   @option args [String] :slack_workspace_id The identifier of the Slack workspace the Bundle is attached to, starting with `
+              #   @option args [String] :slack_workspace_id The identifier of the Slack workspace the Bundle is attached to, starting with
               #
               # @raise [ArgumentError]
               # @return [Anthropic::Models::Beta::Organization::ClaudeTag::Bundles::BetaClaudeTagSlackChannelBundleTarget, Anthropic::Models::Beta::Organization::ClaudeTag::Bundles::BetaClaudeTagSlackWorkspaceBundleTarget]

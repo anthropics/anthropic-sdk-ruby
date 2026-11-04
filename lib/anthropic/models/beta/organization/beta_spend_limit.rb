@@ -74,13 +74,13 @@ module Anthropic
           #
           #   @param id [String] Unique tagged ID of the spend limit (`spl_...`).
           #
-          #   @param amount [String, nil] Limit amount as a non-negative integer decimal string in the minor unit of `curr
+          #   @param amount [String, nil] Limit amount as a non-negative integer decimal string in the minor unit of
           #
           #   @param created_at [Time] RFC 3339 datetime at which the spend limit was created.
           #
           #   @param currency [String] ISO 4217 code of the organization's billing currency; the unit for `amount`.
           #
-          #   @param is_enabled [Boolean] Read-only. `false` when extra usage is switched off for this organization (`orga
+          #   @param is_enabled [Boolean] Read-only. `false` when extra usage is switched off for this organization (
           #
           #   @param period [Symbol, Anthropic::Models::Beta::Organization::BetaSpendLimitPeriod] Length of the window the limit resets over. `amount` caps spend within each peri
           #

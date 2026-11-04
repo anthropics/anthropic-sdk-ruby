@@ -24,7 +24,7 @@ module Anthropic
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaThinkingBlockBinding} for more details.
         #
-        #   @param prefix_mismatch_behavior [Symbol, Anthropic::Models::Beta::BetaThinkingPrefixMismatchBehavior, nil] "error" (default) | "drop_block". What happens when a thinking block in `message
+        #   @param prefix_mismatch_behavior [Symbol, Anthropic::Models::Beta::BetaThinkingPrefixMismatchBehavior, nil] "error" (default) | "drop_block". What happens when a thinking block in
       end
     end
 

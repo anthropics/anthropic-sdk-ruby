@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type organization_type_not_supported_error_details =
+      { error_code: :organization_type_not_supported }
+
+    class OrganizationTypeNotSupportedErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :organization_type_not_supported
+
+      def initialize: (?error_code: :organization_type_not_supported) -> void
+
+      def to_hash: -> { error_code: :organization_type_not_supported }
+    end
+  end
+end

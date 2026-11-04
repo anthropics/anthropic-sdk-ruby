@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type tool_reference_unresolved_error_details =
+      { error_code: :tool_reference_unresolved }
+
+    class ToolReferenceUnresolvedErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :tool_reference_unresolved
+
+      def initialize: (?error_code: :tool_reference_unresolved) -> void
+
+      def to_hash: -> { error_code: :tool_reference_unresolved }
+    end
+  end
+end

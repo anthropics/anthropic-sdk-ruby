@@ -20,7 +20,7 @@ module Anthropic
           #
           # @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Query param: Whether a `memory` or `memory_version` in the response includes its
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `agent-memory-2026-07
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
@@ -64,7 +64,7 @@ module Anthropic
           #
           # @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Query param: Whether a `memory` or `memory_version` in the response includes its
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `agent-memory-2026-07
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
@@ -121,7 +121,7 @@ module Anthropic
           #
           # @param precondition [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsPrecondition] Body param: The condition that the memory must meet for the update to apply. Omi
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `agent-memory-2026-07
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
@@ -173,11 +173,11 @@ module Anthropic
           #
           # @param page [String] Query param: The `next_page` value from a previous response, to get the next pag
           #
-          # @param path_prefix [String] Query param: Return only memories whose path starts with this prefix, such as `/
+          # @param path_prefix [String] Query param: Return only memories whose path starts with this prefix, such as
           #
           # @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Query param: Whether each memory in the response includes `content`. Defaults to
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `agent-memory-2026-07
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
@@ -223,7 +223,7 @@ module Anthropic
           #
           # @param expected_content_sha256 [String] Query param: Delete the memory only if its current `content_sha256` equals this
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `agent-memory-2026-07
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #

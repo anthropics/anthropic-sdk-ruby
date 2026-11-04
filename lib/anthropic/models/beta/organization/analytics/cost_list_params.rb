@@ -41,8 +41,8 @@ module Anthropic
 
             # @!attribute agent_ids
             #   Filter to usage incurred by sessions of specific Claude Managed Agents agents.
-            #   Use `group_by[]=agent_id` to break out per-agent values. Claude Developer
-            #   Platform organizations only.
+            #   Use `group_by[]=agent_id` to break out per-agent values. Claude Platform
+            #   organizations only.
             #
             #   @return [Array<String>, nil]
             optional :agent_ids, Anthropic::Internal::Type::ArrayOf[String], nil?: true
@@ -52,17 +52,15 @@ module Anthropic
             #   (`apikey_...`), whichever identity the usage is attributed to. Include an empty
             #   entry (`api_key_ids[]=`) to also match usage that no API key authenticated. Use
             #   `group_by[]=api_key_id` to break out per-key values; usage without a key has a
-            #   null `api_key_id`. Claude Developer Platform organizations only.
+            #   null `api_key_id`. Claude Platform organizations only.
             #
             #   @return [Array<String>, nil]
             optional :api_key_ids, Anthropic::Internal::Type::ArrayOf[String], nil?: true
 
             # @!attribute claude_tag_categories
             #   Filter to Claude Tag (Claude in Slack) usage in specific spend categories. Usage
-            #   with no category never matches. `dm` usage is reported under the user's product
-            #   rather than `claude_tag`, so combining this filter with `products[]=claude_tag`
-            #   excludes it. Use `group_by[]=claude_tag_category` to break out per-category
-            #   values.
+            #   with no category never matches. Use `group_by[]=claude_tag_category` to break
+            #   out per-category values.
             #
             #   @return [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsClaudeTagCategory>, nil]
             optional :claude_tag_categories,
@@ -94,7 +92,7 @@ module Anthropic
             # @!attribute deployment_ids
             #   Filter to usage incurred by Claude Managed Agents sessions that specific
             #   deployments started. Use `group_by[]=deployment_id` to break out per-deployment
-            #   values. Claude Developer Platform organizations only.
+            #   values. Claude Platform organizations only.
             #
             #   @return [Array<String>, nil]
             optional :deployment_ids, Anthropic::Internal::Type::ArrayOf[String], nil?: true
@@ -110,7 +108,7 @@ module Anthropic
             # @!attribute environment_ids
             #   Filter to usage incurred by Claude Managed Agents sessions that ran in specific
             #   environments. Use `group_by[]=environment_id` to break out per-environment
-            #   values. Claude Developer Platform organizations only.
+            #   values. Claude Platform organizations only.
             #
             #   @return [Array<String>, nil]
             optional :environment_ids, Anthropic::Internal::Type::ArrayOf[String], nil?: true
@@ -213,8 +211,8 @@ module Anthropic
 
             # @!attribute service_tiers
             #   Filter to specific service tiers. Use `group_by[]=service_tier` to break out
-            #   per-tier values. Claude Developer Platform organizations only; matches nothing
-            #   for a Claude Enterprise organization.
+            #   per-tier values. Claude Platform organizations only; matches nothing for a
+            #   Claude Enterprise organization.
             #
             #   @return [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsServiceTier>, nil]
             optional :service_tiers,
@@ -226,7 +224,7 @@ module Anthropic
             # @!attribute session_ids
             #   Filter to usage incurred by specific Claude Managed Agents sessions, by tagged
             #   session ID (`sesn_...`). Use `group_by[]=session_id` to break out per-session
-            #   values. Claude Developer Platform organizations only.
+            #   values. Claude Platform organizations only.
             #
             #   @return [Array<String>, nil]
             optional :session_ids, Anthropic::Internal::Type::ArrayOf[String], nil?: true
@@ -266,16 +264,15 @@ module Anthropic
             # @!attribute user_profile_ids
             #   Filter to usage attributed to specific user profiles, by tagged user profile ID
             #   (`uprof_...`). Use `group_by[]=user_profile_id` to break out per-profile values.
-            #   Claude Developer Platform organizations only.
+            #   Claude Platform organizations only.
             #
             #   @return [Array<String>, nil]
             optional :user_profile_ids, Anthropic::Internal::Type::ArrayOf[String], nil?: true
 
             # @!attribute workspace_ids
             #   Filter to usage in specific workspaces, by tagged workspace ID (`wrkspc_...`).
-            #   Use `group_by[]=workspace_id` to break out per-workspace values. Claude
-            #   Developer Platform organizations only; matches nothing for a Claude Enterprise
-            #   organization.
+            #   Use `group_by[]=workspace_id` to break out per-workspace values. Claude Platform
+            #   organizations only; matches nothing for a Claude Enterprise organization.
             #
             #   @return [Array<String>, nil]
             optional :workspace_ids, Anthropic::Internal::Type::ArrayOf[String], nil?: true
@@ -294,13 +291,13 @@ module Anthropic
             #
             #   @param starting_at [Time] Start of range, inclusive. RFC 3339 tz-aware. Must be within the last 365 days a
             #
-            #   @param actor_ids [Array<String>, nil] Filter to usage attributed to specific identities, by tagged ID: a `user_...`, `
+            #   @param actor_ids [Array<String>, nil] Filter to usage attributed to specific identities, by tagged ID: a `user_...`,
             #
-            #   @param actor_types [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsActorType>, nil] Filter to usage attributed to specific kinds of identity. Use `group*by[]=actor*
+            #   @param actor_types [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsActorType>, nil] Filter to usage attributed to specific kinds of identity. Use
             #
             #   @param agent_ids [Array<String>, nil] Filter to usage incurred by sessions of specific Claude Managed Agents agents. U
             #
-            #   @param api_key_ids [Array<String>, nil] Filter to usage authenticated by specific API keys, by tagged API key ID (`apike
+            #   @param api_key_ids [Array<String>, nil] Filter to usage authenticated by specific API keys, by tagged API key ID (
             #
             #   @param claude_tag_categories [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsClaudeTagCategory>, nil] Filter to Claude Tag (Claude in Slack) usage in specific spend categories. Usage
             #
@@ -310,14 +307,13 @@ module Anthropic
             #
             #   @param deployment_ids [Array<String>, nil] Filter to usage incurred by Claude Managed Agents sessions that specific deploym
             #
-            #   @param ending_at [Time, nil] End of range, exclusive. Required when `time_bucket_width` is set. Without `time
+            #   @param ending_at [Time, nil] End of range, exclusive. Required when `time_bucket_width` is set. Without
             #
             #   @param environment_ids [Array<String>, nil] Filter to usage incurred by Claude Managed Agents sessions that ran in specific
             #
             #   @param exclude_deleted_users [Boolean] If true, omit rows whose `actor` is a `user_actor` with `deleted: true`. Require
             #
             #   @param group_by [Array<Symbol, Anthropic::Models::Beta::Organization::Analytics::BetaAnalyticsCostGroupBy>, nil] Dimensions to break cost out by (at most 5, not counting `cost_type` and
-            #   `token\_
             #
             #   @param inference_geos [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsInferenceGeoFilter>, nil] Filter to specific inference regions. `not_available` matches rows where the reg
             #
@@ -339,7 +335,7 @@ module Anthropic
             #
             #   @param session_ids [Array<String>, nil] Filter to usage incurred by specific Claude Managed Agents sessions, by tagged s
             #
-            #   @param slack_channel_ids [Array<String>, nil] Filter to usage originating from specific Slack channels. Use `group*by[]=slack*
+            #   @param slack_channel_ids [Array<String>, nil] Filter to usage originating from specific Slack channels. Use
             #
             #   @param speeds [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsSpeed>, nil] Filter to fast or standard inference mode. Use `group_by[]=speed` to break out p
             #

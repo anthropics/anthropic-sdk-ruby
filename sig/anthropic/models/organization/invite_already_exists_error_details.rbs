@@ -1,0 +1,16 @@
+module Anthropic
+  module Models
+    module Organization
+      type invite_already_exists_error_details =
+        { error_code: :invite_already_exists }
+
+      class InviteAlreadyExistsErrorDetails < Anthropic::Internal::Type::BaseModel
+        attr_accessor error_code: :invite_already_exists
+
+        def initialize: (?error_code: :invite_already_exists) -> void
+
+        def to_hash: -> { error_code: :invite_already_exists }
+      end
+    end
+  end
+end

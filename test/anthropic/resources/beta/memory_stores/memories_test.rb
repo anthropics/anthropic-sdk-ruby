@@ -8,7 +8,7 @@ class Anthropic::Test::Resources::Beta::MemoryStores::MemoriesTest < Anthropic::
       @anthropic.beta.memory_stores.memories.create(
         "memory_store_id",
         content: "content",
-        path: "xx",
+        path: "/P",
         request_options: {extra_query: {beta: "true"}}
       )
 

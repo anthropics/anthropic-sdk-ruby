@@ -27,7 +27,7 @@ module Anthropic
           #   {Anthropic::Models::Beta::Organization::BetaClaudeTagSlackChannelIdentifiers}
           #   for more details.
           #
-          #   @param channel_id [String] Slack's identifier for the channel, starting with `C` or `G`, such as `C0456EFGH
+          #   @param channel_id [String] Slack's identifier for the channel, starting with `C` or `G`, such as
           #
           #   @param workspace_id [String] Slack's identifier for the workspace the channel is in, starting with `T`, such
         end

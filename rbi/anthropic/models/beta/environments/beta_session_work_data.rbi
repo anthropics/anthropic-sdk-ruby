@@ -13,7 +13,7 @@ module Anthropic
               )
             end
 
-          # Session identifier (e.g., 'session\_...')
+          # Session identifier (e.g., 'session_...')
           sig { returns(String) }
           attr_accessor :id
 
@@ -27,7 +27,7 @@ module Anthropic
           # executed in a self-hosted environment.
           sig { params(id: String, type: Symbol).returns(T.attached_class) }
           def self.new(
-            # Session identifier (e.g., 'session\_...')
+            # Session identifier (e.g., 'session_...')
             id:,
             # Type of work data
             type: :session

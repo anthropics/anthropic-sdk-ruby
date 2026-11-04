@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        class BetaSlackChannelSetUpEnvironmentNotFoundError < Anthropic::Errors::NotFoundError
+          def error_code: -> :slack_channel_set_up_environment_not_found
+
+          def details: -> Anthropic::Beta::Organization::BetaSlackChannelSetUpEnvironmentNotFoundErrorDetails
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,16 @@
+module Anthropic
+  module Models
+    module Organization
+      type cannot_remove_last_member_error_details =
+        { error_code: :cannot_remove_last_member }
+
+      class CannotRemoveLastMemberErrorDetails < Anthropic::Internal::Type::BaseModel
+        attr_accessor error_code: :cannot_remove_last_member
+
+        def initialize: (?error_code: :cannot_remove_last_member) -> void
+
+        def to_hash: -> { error_code: :cannot_remove_last_member }
+      end
+    end
+  end
+end

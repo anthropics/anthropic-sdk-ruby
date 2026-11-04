@@ -1,0 +1,11 @@
+module Anthropic
+  module Models
+    module Organization
+      class RBACGroupGrantsOwnerAccessError < Anthropic::Errors::BadRequestError
+        def error_code: -> :rbac_group_grants_owner_access
+
+        def details: -> Anthropic::Organization::RBACGroupGrantsOwnerAccessErrorDetails
+      end
+    end
+  end
+end

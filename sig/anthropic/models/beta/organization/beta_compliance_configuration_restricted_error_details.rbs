@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_compliance_configuration_restricted_error_details =
+          { error_code: :compliance_configuration_restricted }
+
+        class BetaComplianceConfigurationRestrictedErrorDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor error_code: :compliance_configuration_restricted
+
+          def initialize: (
+            ?error_code: :compliance_configuration_restricted
+          ) -> void
+
+          def to_hash: -> { error_code: :compliance_configuration_restricted }
+        end
+      end
+    end
+  end
+end

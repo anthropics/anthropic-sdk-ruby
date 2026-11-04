@@ -26,7 +26,7 @@ module Anthropic
           #
           # @param limit [Integer, nil] Maximum rows to return (1-1000, default 100). The ungrouped artifact-type cube i
           #
-          # @param page [String, nil] Opaque cursor from a previous response's `next_page` field. Only valid with `gro
+          # @param page [String, nil] Opaque cursor from a previous response's `next_page` field. Only valid with
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #

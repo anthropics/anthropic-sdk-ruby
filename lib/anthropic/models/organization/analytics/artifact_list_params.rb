@@ -30,8 +30,8 @@ module Anthropic
           #   bare group UUID, and matches users who held the group at any point during each
           #   covered UTC day (time-of-usage attribution); `user_id` takes a tagged user id
           #   (`user_...`), as emitted in responses. An unsupported dimension returns 400. At
-          #   most 100 entries. `chat_cowork_unified` is accepted as a `product` value only on
-          #   deployments that offer Chat and Cowork unified.
+          #   most 100 entries. `chat_cowork_unified` is accepted as a `product` value only
+          #   where Chat and Cowork unified is available.
           #
           #   @return [Array<String>, nil]
           optional :filter, Anthropic::Internal::Type::ArrayOf[String], nil?: true
@@ -80,7 +80,7 @@ module Anthropic
           #
           #   @param limit [Integer, nil] Maximum rows to return (1-1000, default 100). The ungrouped artifact-type cube i
           #
-          #   @param page [String, nil] Opaque cursor from a previous response's `next_page` field. Only valid with `gro
+          #   @param page [String, nil] Opaque cursor from a previous response's `next_page` field. Only valid with
           #
           #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
         end

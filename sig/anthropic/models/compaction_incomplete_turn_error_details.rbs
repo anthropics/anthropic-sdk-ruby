@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type compaction_incomplete_turn_error_details =
+      { error_code: :compaction_incomplete_turn }
+
+    class CompactionIncompleteTurnErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :compaction_incomplete_turn
+
+      def initialize: (?error_code: :compaction_incomplete_turn) -> void
+
+      def to_hash: -> { error_code: :compaction_incomplete_turn }
+    end
+  end
+end

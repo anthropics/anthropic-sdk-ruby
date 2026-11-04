@@ -1,0 +1,16 @@
+module Anthropic
+  module Models
+    type request_body_too_large_after_decoding_error_details =
+      { error_code: :request_body_too_large_after_decoding }
+
+    class RequestBodyTooLargeAfterDecodingErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :request_body_too_large_after_decoding
+
+      def initialize: (
+        ?error_code: :request_body_too_large_after_decoding
+      ) -> void
+
+      def to_hash: -> { error_code: :request_body_too_large_after_decoding }
+    end
+  end
+end

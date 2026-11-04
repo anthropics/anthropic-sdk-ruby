@@ -19,6 +19,18 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
+        # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError] The API key belongs to the Claude Code workspace, and the user who created it is
+        #   no longer a member of the organization or of that workspace.
+        # @raise [Anthropic::Models::CMEKKeyDisabledError] The workspace's customer-managed encryption key is disabled or revoked.
+        #   Re-enable the key, then retry.
+        # @raise [Anthropic::Models::CMEKKeyNetworkBlockedError] The key management service's network access controls blocked the request to the
+        #   workspace's customer-managed encryption key. The key itself may be healthy.
+        # @raise [Anthropic::Models::OrganizationOnHoldError] Anthropic has disabled the organization for trust and safety reasons. An
+        #   organization disabled for any other reason, such as billing, does not get this
+        #   code. `appeal_url`, when present, is where the organization can appeal.
+        # @raise [Anthropic::Models::CMEKContextUnavailableError] The workspace's encryption settings could not be read, so the request was
+        #   refused. Retry in a few minutes.
+        #
         # @return [Anthropic::Models::Skills::SkillVersion]
         #
         # @see Anthropic::Models::Skills::VersionCreateParams
@@ -59,6 +71,12 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
+        # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError] The API key belongs to the Claude Code workspace, and the user who created it is
+        #   no longer a member of the organization or of that workspace.
+        # @raise [Anthropic::Models::OrganizationOnHoldError] Anthropic has disabled the organization for trust and safety reasons. An
+        #   organization disabled for any other reason, such as billing, does not get this
+        #   code. `appeal_url`, when present, is where the organization can appeal.
+        #
         # @return [Anthropic::Models::Skills::SkillVersion]
         #
         # @see Anthropic::Models::Skills::VersionRetrieveParams
@@ -97,6 +115,12 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
+        # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError] The API key belongs to the Claude Code workspace, and the user who created it is
+        #   no longer a member of the organization or of that workspace.
+        # @raise [Anthropic::Models::OrganizationOnHoldError] Anthropic has disabled the organization for trust and safety reasons. An
+        #   organization disabled for any other reason, such as billing, does not get this
+        #   code. `appeal_url`, when present, is where the organization can appeal.
+        #
         # @return [Anthropic::Internal::PageCursor<Anthropic::Models::Skills::SkillVersion>]
         #
         # @see Anthropic::Models::Skills::VersionListParams
@@ -133,6 +157,12 @@ module Anthropic
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError] The API key belongs to the Claude Code workspace, and the user who created it is
+        #   no longer a member of the organization or of that workspace.
+        # @raise [Anthropic::Models::OrganizationOnHoldError] Anthropic has disabled the organization for trust and safety reasons. An
+        #   organization disabled for any other reason, such as billing, does not get this
+        #   code. `appeal_url`, when present, is where the organization can appeal.
         #
         # @return [Anthropic::Models::Skills::DeletedSkillVersion]
         #

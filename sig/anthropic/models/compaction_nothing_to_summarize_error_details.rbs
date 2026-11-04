@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type compaction_nothing_to_summarize_error_details =
+      { error_code: :compaction_nothing_to_summarize }
+
+    class CompactionNothingToSummarizeErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :compaction_nothing_to_summarize
+
+      def initialize: (?error_code: :compaction_nothing_to_summarize) -> void
+
+      def to_hash: -> { error_code: :compaction_nothing_to_summarize }
+    end
+  end
+end

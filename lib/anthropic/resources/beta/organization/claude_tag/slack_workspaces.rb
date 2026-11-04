@@ -24,9 +24,16 @@ module Anthropic
             #
             # @param include_inherited [Boolean] Query param: When `true`, `settings` holds what applies in the workspace once th
             #
-            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `experimental-claude-
+            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+            #
+            # @raise [Anthropic::Models::Beta::Organization::BetaAPIKeyScopeMissingError] The API key lacks the scope the request needs: `read:claude_tag` for a read,
+            #   `write:claude_tag` for a change.
+            # @raise [Anthropic::Models::Beta::Organization::BetaClaudeTagWritesNotEnabledError] Changes through the Claude Tag API are not enabled for the organization.
+            # @raise [Anthropic::Models::Beta::Organization::BetaComplianceConfigurationRestrictedError] The organization's compliance configuration does not let Claude Tag store
+            #   anything new.
+            # @raise [Anthropic::Models::Beta::Organization::BetaOrganizationLevelScopedAPIKeyRequiredError] The credential is not a scoped API key that is bound at the organization level.
             #
             # @return [Anthropic::Models::Beta::Organization::ClaudeTag::BetaClaudeTagSlackWorkspace]
             #
@@ -68,9 +75,22 @@ module Anthropic
             #
             # @param settings [Anthropic::Models::Beta::Organization::BetaClaudeTagSettingsUpdate] Body param: The settings to change.
             #
-            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `experimental-claude-
+            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+            #
+            # @raise [Anthropic::Models::Beta::Organization::BetaAPIKeyScopeMissingError] The API key lacks the scope the request needs: `read:claude_tag` for a read,
+            #   `write:claude_tag` for a change.
+            # @raise [Anthropic::Models::Beta::Organization::BetaClaudeTagWritesNotEnabledError] Changes through the Claude Tag API are not enabled for the organization.
+            # @raise [Anthropic::Models::Beta::Organization::BetaComplianceConfigurationRestrictedError] The organization's compliance configuration does not let Claude Tag store
+            #   anything new.
+            # @raise [Anthropic::Models::Beta::Organization::BetaOrganizationLevelScopedAPIKeyRequiredError] The credential is not a scoped API key that is bound at the organization level.
+            # @raise [Anthropic::Models::Beta::BetaEnvironmentNotFoundError] `settings.environment_id` names no Environment within the organization's reach.
+            # @raise [Anthropic::Models::Beta::Organization::BetaSlackChannelSetUpEnvironmentNotFoundError] `settings.environment_id` names no Environment within the organization's reach,
+            #   and the request had set the channel up by then. The channel stays set up with
+            #   every setting unset.
+            # @raise [Anthropic::Models::Beta::Organization::BetaSlackChannelSetUpSettingsConflictError] The request set the channel up, and something else then changed the channel or
+            #   removed it. Nothing of `settings` was stored.
             #
             # @return [Anthropic::Models::Beta::Organization::ClaudeTag::BetaClaudeTagSlackWorkspace]
             #
@@ -119,9 +139,16 @@ module Anthropic
             #
             # @param slack_workspace_id [String] Query param: Slack's identifier for one workspace, as in the workspace object's
             #
-            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `experimental-claude-
+            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+            #
+            # @raise [Anthropic::Models::Beta::Organization::BetaAPIKeyScopeMissingError] The API key lacks the scope the request needs: `read:claude_tag` for a read,
+            #   `write:claude_tag` for a change.
+            # @raise [Anthropic::Models::Beta::Organization::BetaClaudeTagWritesNotEnabledError] Changes through the Claude Tag API are not enabled for the organization.
+            # @raise [Anthropic::Models::Beta::Organization::BetaComplianceConfigurationRestrictedError] The organization's compliance configuration does not let Claude Tag store
+            #   anything new.
+            # @raise [Anthropic::Models::Beta::Organization::BetaOrganizationLevelScopedAPIKeyRequiredError] The credential is not a scoped API key that is bound at the organization level.
             #
             # @return [Anthropic::Internal::PageCursor<Anthropic::Models::Beta::Organization::ClaudeTag::BetaClaudeTagSlackWorkspace>]
             #

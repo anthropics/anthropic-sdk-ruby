@@ -171,8 +171,7 @@ module Anthropic
         #   Skill use recorded while members had Chat and Cowork unified (Cowork's features
         #   inside claude.ai chat) turned on, split into chat conversations and Cowork
         #   sessions. A count is null in date-range mode where it cannot be computed.
-        #   Omitted from the response on deployments that do not offer Chat and Cowork
-        #   unified.
+        #   Omitted from the response where Chat and Cowork unified is not available.
         #
         #   @return [Anthropic::Models::Organization::AnalyticsSkillChatCoworkUnifiedMetrics, nil]
         optional :chat_cowork_unified_metrics,
@@ -230,7 +229,7 @@ module Anthropic
         #
         #   @param cowork_metrics [Anthropic::Models::Organization::AnalyticsSkillCoworkMetrics] Cowork activity metrics for a single skill on a given day.
         #
-        #   @param currency [String, nil] Currency for this row's monetary fields (`estimated_overage_spend` and `attribut
+        #   @param currency [String, nil] Currency for this row's monetary fields (`estimated_overage_spend` and
         #
         #   @param distinct_user_count [Integer] Number of distinct users who used the skill on the requested day, or, in date-ra
         #
@@ -242,7 +241,7 @@ module Anthropic
         #
         #   @param office_metrics [Anthropic::Models::Organization::AnalyticsSkillOfficeMetrics] Office Agent activity metrics for a single skill on a given day, broken out by O
         #
-        #   @param share_status [Symbol, Anthropic::Models::Organization::AnalyticsSkillActivity::ShareStatus, nil] Skill share status (claude.ai only): one of `private`, `organization`, or `publi
+        #   @param share_status [Symbol, Anthropic::Models::Organization::AnalyticsSkillActivity::ShareStatus, nil] Skill share status (claude.ai only): one of `private`, `organization`, or
         #
         #   @param skill_display_name [String, nil] Human-readable display name for rows whose `skill_name` is an opaque skill id (u
         #
@@ -250,7 +249,7 @@ module Anthropic
         #
         #   @param chat_cowork_unified_metrics [Anthropic::Models::Organization::AnalyticsSkillChatCoworkUnifiedMetrics, nil] Skill use recorded while members had Chat and Cowork unified (Cowork's features
         #
-        #   @param product [String, nil] Product that produced this row's activity: one of `chat`, `claude_code`, `cowork
+        #   @param product [String, nil] Product that produced this row's activity: one of `chat`, `claude_code`,
         #
         #   @param rbac_group_id [String, nil] Tagged RBAC group identifier (`rbac_group_...`), matching the spend-limits API s
         #

@@ -423,7 +423,7 @@ module Anthropic
             #
             #   @param stop_sequences [Array<String>] Custom text sequences that will cause the model to stop generating.
             #
-            #   @param stream [Boolean] Whether to incrementally stream the response using server-sent events. When `tru
+            #   @param stream [Boolean] Whether to incrementally stream the response using server-sent events. When
             #
             #   @param system_ [String, Array<Anthropic::Models::TextBlockParam>] System prompt.
             #

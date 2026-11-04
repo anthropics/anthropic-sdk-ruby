@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_api_key_scope_missing_error_details =
+          { error_code: :api_key_scope_missing }
+
+        class BetaAPIKeyScopeMissingErrorDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor error_code: :api_key_scope_missing
+
+          def initialize: (?error_code: :api_key_scope_missing) -> void
+
+          def to_hash: -> { error_code: :api_key_scope_missing }
+        end
+      end
+    end
+  end
+end

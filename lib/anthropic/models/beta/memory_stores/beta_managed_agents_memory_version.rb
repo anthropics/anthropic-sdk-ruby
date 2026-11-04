@@ -143,7 +143,7 @@ module Anthropic
           #
           #   @param content [String, nil] The memory's UTF-8 text content as of this version. `null` when `view=basic`, wh
           #
-          #   @param content_sha256 [String, nil] Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `n
+          #   @param content_sha256 [String, nil] Lowercase hex SHA-256 digest of `content` as of this version (64 characters).
           #
           #   @param content_size_bytes [Integer, nil] Size of `content` in bytes as of this version. `null` when `redacted_at` is set
           #

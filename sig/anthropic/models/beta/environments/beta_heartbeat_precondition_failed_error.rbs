@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    module Beta
+      module Environments
+        class BetaHeartbeatPreconditionFailedError < Anthropic::Errors::PreconditionFailedError
+          def error_code: -> :heartbeat_precondition_failed
+
+          def details: -> Anthropic::Beta::Environments::BetaHeartbeatPreconditionFailedErrorDetails
+        end
+      end
+    end
+  end
+end

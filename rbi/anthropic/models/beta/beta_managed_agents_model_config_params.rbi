@@ -51,7 +51,9 @@ module Anthropic
         sig { returns(T.nilable(String)) }
         attr_accessor :inference_geo
 
-        # Inference speed mode. Defaults to `standard`.
+        # Inference speed mode. `fast` provides significantly faster output token
+        # generation at premium pricing. Defaults to `standard`. Not all models support
+        # `fast`; invalid combinations are rejected at create time.
         sig do
           returns(
             T.nilable(
@@ -98,7 +100,9 @@ module Anthropic
           # workspace's default_inference_geo. On update, `model` is whole-object
           # replacement — omitting inference_geo clears it.
           inference_geo: nil,
-          # Inference speed mode. Defaults to `standard`.
+          # Inference speed mode. `fast` provides significantly faster output token
+          # generation at premium pricing. Defaults to `standard`. Not all models support
+          # `fast`; invalid combinations are rejected at create time.
           speed: nil
         )
         end
@@ -223,7 +227,9 @@ module Anthropic
           end
         end
 
-        # Inference speed mode. Defaults to `standard`.
+        # Inference speed mode. `fast` provides significantly faster output token
+        # generation at premium pricing. Defaults to `standard`. Not all models support
+        # `fast`; invalid combinations are rejected at create time.
         module Speed
           extend Anthropic::Internal::Type::Enum
 

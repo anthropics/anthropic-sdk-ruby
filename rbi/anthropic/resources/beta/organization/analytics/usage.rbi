@@ -115,20 +115,17 @@ module Anthropic
               actor_types: nil,
               # Query param: Filter to usage incurred by sessions of specific Claude Managed
               # Agents agents. Use `group_by[]=agent_id` to break out per-agent values. Claude
-              # Developer Platform organizations only.
+              # Platform organizations only.
               agent_ids: nil,
               # Query param: Filter to usage authenticated by specific API keys, by tagged API
               # key ID (`apikey_...`), whichever identity the usage is attributed to. Include an
               # empty entry (`api_key_ids[]=`) to also match usage that no API key
               # authenticated. Use `group_by[]=api_key_id` to break out per-key values; usage
-              # without a key has a null `api_key_id`. Claude Developer Platform organizations
-              # only.
+              # without a key has a null `api_key_id`. Claude Platform organizations only.
               api_key_ids: nil,
               # Query param: Filter to Claude Tag (Claude in Slack) usage in specific spend
-              # categories. Usage with no category never matches. `dm` usage is reported under
-              # the user's product rather than `claude_tag`, so combining this filter with
-              # `products[]=claude_tag` excludes it. Use `group_by[]=claude_tag_category` to
-              # break out per-category values.
+              # categories. Usage with no category never matches. Use
+              # `group_by[]=claude_tag_category` to break out per-category values.
               claude_tag_categories: nil,
               # Query param: Filter to Claude Tag (Claude in Slack) usage attributed to specific
               # Slack users, by Slack user ID (for example `U0123ABCDEF`), not claude.ai user
@@ -141,7 +138,7 @@ module Anthropic
               context_windows: nil,
               # Query param: Filter to usage incurred by Claude Managed Agents sessions that
               # specific deployments started. Use `group_by[]=deployment_id` to break out
-              # per-deployment values. Claude Developer Platform organizations only.
+              # per-deployment values. Claude Platform organizations only.
               deployment_ids: nil,
               # Query param: End of range, exclusive. Required when `time_bucket_width` is set.
               # Without `time_bucket_width`, defaults to the earlier of now and `starting_at` +
@@ -149,7 +146,7 @@ module Anthropic
               ending_at: nil,
               # Query param: Filter to usage incurred by Claude Managed Agents sessions that ran
               # in specific environments. Use `group_by[]=environment_id` to break out
-              # per-environment values. Claude Developer Platform organizations only.
+              # per-environment values. Claude Platform organizations only.
               environment_ids: nil,
               # Query param: If true, omit rows whose `actor` is a `user_actor` with
               # `deleted: true`. Requires `group_by[]=actor`. Rows for other actor types, and
@@ -191,12 +188,12 @@ module Anthropic
               # usage with no group attribution never matches.
               rbac_group_ids: nil,
               # Query param: Filter to specific service tiers. Use `group_by[]=service_tier` to
-              # break out per-tier values. Claude Developer Platform organizations only; matches
-              # nothing for a Claude Enterprise organization.
+              # break out per-tier values. Claude Platform organizations only; matches nothing
+              # for a Claude Enterprise organization.
               service_tiers: nil,
               # Query param: Filter to usage incurred by specific Claude Managed Agents
               # sessions, by tagged session ID (`sesn_...`). Use `group_by[]=session_id` to
-              # break out per-session values. Claude Developer Platform organizations only.
+              # break out per-session values. Claude Platform organizations only.
               session_ids: nil,
               # Query param: Filter to usage originating from specific Slack channels. Use
               # `group_by[]=slack_channel_id` to break out per-channel values.
@@ -214,12 +211,12 @@ module Anthropic
               time_bucket_width: nil,
               # Query param: Filter to usage attributed to specific user profiles, by tagged
               # user profile ID (`uprof_...`). Use `group_by[]=user_profile_id` to break out
-              # per-profile values. Claude Developer Platform organizations only.
+              # per-profile values. Claude Platform organizations only.
               user_profile_ids: nil,
               # Query param: Filter to usage in specific workspaces, by tagged workspace ID
               # (`wrkspc_...`). Use `group_by[]=workspace_id` to break out per-workspace values.
-              # Claude Developer Platform organizations only; matches nothing for a Claude
-              # Enterprise organization.
+              # Claude Platform organizations only; matches nothing for a Claude Enterprise
+              # organization.
               workspace_ids: nil,
               # Header param: This endpoint is in beta: requests must send
               # `analytics-usage-cost-2026-08-24` in this header.

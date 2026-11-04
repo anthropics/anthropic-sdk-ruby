@@ -1,0 +1,16 @@
+module Anthropic
+  module Models
+    module Organization
+      type email_domain_not_allowed_error_details =
+        { error_code: :email_domain_not_allowed }
+
+      class EmailDomainNotAllowedErrorDetails < Anthropic::Internal::Type::BaseModel
+        attr_accessor error_code: :email_domain_not_allowed
+
+        def initialize: (?error_code: :email_domain_not_allowed) -> void
+
+        def to_hash: -> { error_code: :email_domain_not_allowed }
+      end
+    end
+  end
+end

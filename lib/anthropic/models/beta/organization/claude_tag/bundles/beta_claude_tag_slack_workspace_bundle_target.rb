@@ -45,7 +45,7 @@ module Anthropic
               #
               #   @param created_at [Time] Time the Bundle was attached.
               #
-              #   @param slack_workspace_id [String] The identifier of the Slack workspace the Bundle is attached to, starting with `
+              #   @param slack_workspace_id [String] The identifier of the Slack workspace the Bundle is attached to, starting with
               #
               #   @param type [Symbol, :slack_workspace]
             end

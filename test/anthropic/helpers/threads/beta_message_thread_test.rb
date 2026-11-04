@@ -933,13 +933,14 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
   def test_thread_creates_on_providers_that_pass_through
     clients = [
       Anthropic::AWSClient.new(aws_region: "us-east-1", api_key: "k", workspace_id: "w", base_url: "http://localhost"),
-      Anthropic::GoogleCloudClient.new(project: "p", skip_auth: true, base_url: "http://localhost")
+      Anthropic::GoogleCloudClient.new(project: "p", skip_auth: true, base_url: "http://localhost"),
+      Anthropic::FoundryClient.new(api_key: "k", base_url: "http://localhost")
     ]
-    serve(reply("msg_1"), reply("msg_2"))
+    serve(reply("msg_1"), reply("msg_2"), reply("msg_3"))
 
     clients.each { new_thread(client: _1).send_message(user("a")) }
 
-    assert_equal([{type: "create"}] * 2, bodies.map { _1[:thread] })
+    assert_equal([{type: "create"}] * 3, bodies.map { _1[:thread] })
     assert_equal([THREADS_BETA], betas(0))
   end
 

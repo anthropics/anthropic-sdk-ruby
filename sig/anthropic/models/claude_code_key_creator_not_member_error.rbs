@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class ClaudeCodeKeyCreatorNotMemberError < Anthropic::Errors::BadRequestError
+      def error_code: -> :claude_code_key_creator_not_member
+
+      def details: -> Anthropic::ClaudeCodeKeyCreatorNotMemberErrorDetails
+    end
+  end
+end

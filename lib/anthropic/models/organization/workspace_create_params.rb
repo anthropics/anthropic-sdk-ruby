@@ -66,7 +66,7 @@ module Anthropic
         #
         #   @param name [String] Name of the Workspace.
         #
-        #   @param data_residency [Anthropic::Models::Organization::DataResidencyCreateConfig, nil] Data residency configuration for the workspace. If omitted, defaults to `workspa
+        #   @param data_residency [Anthropic::Models::Organization::DataResidencyCreateConfig, nil] Data residency configuration for the workspace. If omitted, defaults to
         #
         #   @param display_color [String, nil] Hex color code representing the Workspace in the Anthropic Console.
         #

@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type org_member_limit_exceeded_error_details =
+      { error_code: :org_member_limit_exceeded }
+
+    class OrgMemberLimitExceededErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :org_member_limit_exceeded
+
+      def initialize: (?error_code: :org_member_limit_exceeded) -> void
+
+      def to_hash: -> { error_code: :org_member_limit_exceeded }
+    end
+  end
+end

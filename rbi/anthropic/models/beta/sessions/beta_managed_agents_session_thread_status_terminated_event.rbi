@@ -25,7 +25,7 @@ module Anthropic
           sig { returns(Time) }
           attr_accessor :processed_at
 
-          # Public sthr\_ ID of the thread that terminated.
+          # Public sthr_ ID of the thread that terminated.
           sig { returns(String) }
           attr_accessor :session_thread_id
 
@@ -50,7 +50,7 @@ module Anthropic
             agent_name:,
             # Timestamp of the status transition.
             processed_at:,
-            # Public sthr\_ ID of the thread that terminated.
+            # Public sthr_ ID of the thread that terminated.
             session_thread_id:,
             type: :"session.thread_status_terminated"
           )

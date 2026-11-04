@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        class BetaOrganizationLevelScopedAPIKeyRequiredError < Anthropic::Errors::PermissionDeniedError
+          def error_code: -> :organization_level_scoped_api_key_required
+
+          def details: -> Anthropic::Beta::Organization::BetaOrganizationLevelScopedAPIKeyRequiredErrorDetails
+        end
+      end
+    end
+  end
+end

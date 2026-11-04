@@ -34,7 +34,9 @@ module Anthropic
         optional :inference_geo, String, nil?: true
 
         # @!attribute speed
-        #   Inference speed mode. Defaults to `standard`.
+        #   Inference speed mode. `fast` provides significantly faster output token
+        #   generation at premium pricing. Defaults to `standard`. Not all models support
+        #   `fast`; invalid combinations are rejected at create time.
         #
         #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams::Speed, nil]
         optional :speed, enum: -> { Anthropic::Beta::BetaManagedAgentsModelConfigParams::Speed }, nil?: true
@@ -47,11 +49,11 @@ module Anthropic
         #
         #   @param id [Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel] The model that will power your agent.
         #
-        #   @param effort [Symbol, Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams::Effort::BetaManagedAgentsEffortLevel, Anthropic::Models::Beta::BetaManagedAgentsEffortLow, Anthropic::Models::Beta::BetaManagedAgentsEffortMedium, Anthropic::Models::Beta::BetaManagedAgentsEffortHigh, Anthropic::Models::Beta::BetaManagedAgentsEffortXhigh, Anthropic::Models::Beta::BetaManagedAgentsEffortMax, nil] How hard Claude works on each inference call. Accepts a bare level string (`"hig
+        #   @param effort [Symbol, Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams::Effort::BetaManagedAgentsEffortLevel, Anthropic::Models::Beta::BetaManagedAgentsEffortLow, Anthropic::Models::Beta::BetaManagedAgentsEffortMedium, Anthropic::Models::Beta::BetaManagedAgentsEffortHigh, Anthropic::Models::Beta::BetaManagedAgentsEffortXhigh, Anthropic::Models::Beta::BetaManagedAgentsEffortMax, nil] How hard Claude works on each inference call. Accepts a bare level string (
         #
         #   @param inference_geo [String, nil] Geographic region for model inference. When unset, requests fall through to the
         #
-        #   @param speed [Symbol, Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams::Speed, nil] Inference speed mode. Defaults to `standard`.
+        #   @param speed [Symbol, Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams::Speed, nil] Inference speed mode. `fast` provides significantly faster output token generati
 
         # How hard Claude works on each inference call. Accepts a bare level string
         # (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model
@@ -108,7 +110,9 @@ module Anthropic
           #   @return [Array(Symbol, Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams::Effort::BetaManagedAgentsEffortLevel, Anthropic::Models::Beta::BetaManagedAgentsEffortLow, Anthropic::Models::Beta::BetaManagedAgentsEffortMedium, Anthropic::Models::Beta::BetaManagedAgentsEffortHigh, Anthropic::Models::Beta::BetaManagedAgentsEffortXhigh, Anthropic::Models::Beta::BetaManagedAgentsEffortMax)]
         end
 
-        # Inference speed mode. Defaults to `standard`.
+        # Inference speed mode. `fast` provides significantly faster output token
+        # generation at premium pricing. Defaults to `standard`. Not all models support
+        # `fast`; invalid combinations are rejected at create time.
         #
         # @see Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams#speed
         module Speed

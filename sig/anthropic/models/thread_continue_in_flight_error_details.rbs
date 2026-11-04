@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type thread_continue_in_flight_error_details =
+      { error_code: :thread_continue_in_flight }
+
+    class ThreadContinueInFlightErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :thread_continue_in_flight
+
+      def initialize: (?error_code: :thread_continue_in_flight) -> void
+
+      def to_hash: -> { error_code: :thread_continue_in_flight }
+    end
+  end
+end

@@ -21,7 +21,7 @@ module Anthropic
             #
             # @param page [String] Query param
             #
-            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
+            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
             #
             # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
             #
@@ -72,9 +72,9 @@ module Anthropic
             #
             # @param session_id [String] Path param
             #
-            # @param event_deltas [Array<Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeltaType>] Query param: When set, this connection also receives streaming deltas (`event_st
+            # @param event_deltas [Array<Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeltaType>] Query param: When set, this connection also receives streaming deltas (
             #
-            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `managed-agents-2026-
+            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
             #
             # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
             #

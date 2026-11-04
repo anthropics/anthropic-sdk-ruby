@@ -36,7 +36,7 @@ module Anthropic
         #
         #   @param estimated_tokens [Integer, nil] Per-frame increment of a coarse, running estimate of the tokens this thinking bl
         #
-        #   @param thinking [String] The incremental `thinking` text for this content block. Concatenate the `thinkin
+        #   @param thinking [String] The incremental `thinking` text for this content block. Concatenate the
         #
         #   @param type [Symbol, :thinking_delta]
       end

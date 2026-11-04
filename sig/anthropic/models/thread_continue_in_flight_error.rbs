@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class ThreadContinueInFlightError < Anthropic::Errors::BadRequestError
+      def error_code: -> :thread_continue_in_flight
+
+      def details: -> Anthropic::ThreadContinueInFlightErrorDetails
+    end
+  end
+end

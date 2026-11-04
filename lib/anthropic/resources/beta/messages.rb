@@ -132,6 +132,63 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
+        # @raise [Anthropic::Models::AvailableToolsLimitExceededError] The tools available after a message exceed a limit on their number or their
+        #   size.
+        # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError] The API key belongs to the Claude Code workspace, and the user who created it is
+        #   no longer a member of the organization or of that workspace.
+        # @raise [Anthropic::Models::ClaudeCodeVersionTooOldError] The request comes from a Claude Code version older than the minimum that the
+        #   requested model or the organization requires. Update Claude Code, then retry.
+        # @raise [Anthropic::Models::CMEKKeyDisabledError] The workspace's customer-managed encryption key is disabled or revoked.
+        #   Re-enable the key, then retry.
+        # @raise [Anthropic::Models::CMEKKeyNetworkBlockedError] The key management service's network access controls blocked the request to the
+        #   workspace's customer-managed encryption key. The key itself may be healthy.
+        # @raise [Anthropic::Models::CompactionBlockAmbiguousError] `messages` holds more than one `compaction` block with content. Send only the
+        #   block the conversation returned last.
+        # @raise [Anthropic::Models::CompactionBlockMisplacedError] The `compaction` block is not the first block of the conversation, or is in a
+        #   `system` message.
+        # @raise [Anthropic::Models::CompactionContentMismatchError] The `compaction` block's `content` differs from the text its `signature`
+        #   recorded.
+        # @raise [Anthropic::Models::CompactionIncompleteTurnError] The compaction request ends on an `assistant` turn that is not finished.
+        # @raise [Anthropic::Models::CompactionNothingToSummarizeError] `messages` holds no `user` or `assistant` content to summarize or adopt.
+        # @raise [Anthropic::Models::CompactionSignatureInvalidError] The `compaction` block's `signature` does not verify.
+        # @raise [Anthropic::Models::CompactionTooManyToolReferencesError] The conversation references more distinct tools than a `compaction` block can
+        #   record.
+        # @raise [Anthropic::Models::CompactionToolChangesMismatchError] The `compaction` block's `tool_changes` differs from what was returned with the
+        #   block.
+        # @raise [Anthropic::Models::OrganizationOnHoldError] Anthropic has disabled the organization for trust and safety reasons. An
+        #   organization disabled for any other reason, such as billing, does not get this
+        #   code. `appeal_url`, when present, is where the organization can appeal.
+        # @raise [Anthropic::Models::RequestBodyEncodingInvalidError] The request body is not valid for its `Content-Encoding`.
+        # @raise [Anthropic::Models::RequestBodyEncodingUnsupportedError] The request's `Content-Encoding` is not supported.
+        # @raise [Anthropic::Models::ThreadAlreadyContinuedError] The response that `previous_message_id` names has already been continued, and
+        #   each response can be continued only once. Continue from the Thread's most recent
+        #   response `id`.
+        # @raise [Anthropic::Models::ThreadContinueInFlightError] Another request is still continuing from the same `previous_message_id`. Wait
+        #   for it to complete and continue from its response `id`, or replay the full
+        #   conversation with `thread: {"type": "create"}`.
+        # @raise [Anthropic::Models::ThreadFingerprintMismatchError] A field that must stay the same across a Thread's turns differs from the value
+        #   stored with the Thread; the message names each such field. Send the stored
+        #   values, or replay the full conversation with `thread: {"type": "create"}` to
+        #   change them.
+        # @raise [Anthropic::Models::ThreadUnsupportedRequestError] The request combines `thread` with a request field or an organization setting
+        #   that Threads do not support; `unsupported`, when present, names it. Send the
+        #   full conversation without `thread`, or change that field.
+        # @raise [Anthropic::Models::ToolNameConflictError] A tool made available in `messages` takes a name that an available tool of
+        #   another kind, or of another MCP server, already holds.
+        # @raise [Anthropic::Models::ToolReferenceUnresolvedError] A tool change or MCP tool listing references a tool or MCP server that is not
+        #   defined at that position in the conversation.
+        # @raise [Anthropic::Models::ThreadNotFoundError] No usable Thread state was found for `previous_message_id`. Replay the full
+        #   conversation with `thread: {"type": "create"}` to start a new Thread.
+        # @raise [Anthropic::Models::SkillReadBlockedUndecryptableError] A custom skill the request names is stored under an encryption key state the
+        #   workspace cannot currently decrypt.
+        # @raise [Anthropic::Models::RequestBodyTooLargeAfterDecodingError] The compressed request body exceeds the request size limit once decoded.
+        # @raise [Anthropic::Models::EnforcedSpendLimitReachedError] The organization has crossed the monthly API usage threshold of its API tier.
+        # @raise [Anthropic::Models::CMEKKeyUnreachableError] The workspace's customer-managed encryption key could not be reached. Retry the
+        #   request; if this continues, check that the key is available in your key
+        #   management service, or contact Anthropic support.
+        # @raise [Anthropic::Models::CompactionUnavailableError] The compaction could not be completed for a transient server reason. Retry the
+        #   request.
+        #
         # @return [Anthropic::Models::Beta::BetaMessage]
         #
         # @see Anthropic::Models::Beta::MessageCreateParams
@@ -252,6 +309,63 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
+        # @raise [Anthropic::Models::AvailableToolsLimitExceededError] The tools available after a message exceed a limit on their number or their
+        #   size.
+        # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError] The API key belongs to the Claude Code workspace, and the user who created it is
+        #   no longer a member of the organization or of that workspace.
+        # @raise [Anthropic::Models::ClaudeCodeVersionTooOldError] The request comes from a Claude Code version older than the minimum that the
+        #   requested model or the organization requires. Update Claude Code, then retry.
+        # @raise [Anthropic::Models::CMEKKeyDisabledError] The workspace's customer-managed encryption key is disabled or revoked.
+        #   Re-enable the key, then retry.
+        # @raise [Anthropic::Models::CMEKKeyNetworkBlockedError] The key management service's network access controls blocked the request to the
+        #   workspace's customer-managed encryption key. The key itself may be healthy.
+        # @raise [Anthropic::Models::CompactionBlockAmbiguousError] `messages` holds more than one `compaction` block with content. Send only the
+        #   block the conversation returned last.
+        # @raise [Anthropic::Models::CompactionBlockMisplacedError] The `compaction` block is not the first block of the conversation, or is in a
+        #   `system` message.
+        # @raise [Anthropic::Models::CompactionContentMismatchError] The `compaction` block's `content` differs from the text its `signature`
+        #   recorded.
+        # @raise [Anthropic::Models::CompactionIncompleteTurnError] The compaction request ends on an `assistant` turn that is not finished.
+        # @raise [Anthropic::Models::CompactionNothingToSummarizeError] `messages` holds no `user` or `assistant` content to summarize or adopt.
+        # @raise [Anthropic::Models::CompactionSignatureInvalidError] The `compaction` block's `signature` does not verify.
+        # @raise [Anthropic::Models::CompactionTooManyToolReferencesError] The conversation references more distinct tools than a `compaction` block can
+        #   record.
+        # @raise [Anthropic::Models::CompactionToolChangesMismatchError] The `compaction` block's `tool_changes` differs from what was returned with the
+        #   block.
+        # @raise [Anthropic::Models::OrganizationOnHoldError] Anthropic has disabled the organization for trust and safety reasons. An
+        #   organization disabled for any other reason, such as billing, does not get this
+        #   code. `appeal_url`, when present, is where the organization can appeal.
+        # @raise [Anthropic::Models::RequestBodyEncodingInvalidError] The request body is not valid for its `Content-Encoding`.
+        # @raise [Anthropic::Models::RequestBodyEncodingUnsupportedError] The request's `Content-Encoding` is not supported.
+        # @raise [Anthropic::Models::ThreadAlreadyContinuedError] The response that `previous_message_id` names has already been continued, and
+        #   each response can be continued only once. Continue from the Thread's most recent
+        #   response `id`.
+        # @raise [Anthropic::Models::ThreadContinueInFlightError] Another request is still continuing from the same `previous_message_id`. Wait
+        #   for it to complete and continue from its response `id`, or replay the full
+        #   conversation with `thread: {"type": "create"}`.
+        # @raise [Anthropic::Models::ThreadFingerprintMismatchError] A field that must stay the same across a Thread's turns differs from the value
+        #   stored with the Thread; the message names each such field. Send the stored
+        #   values, or replay the full conversation with `thread: {"type": "create"}` to
+        #   change them.
+        # @raise [Anthropic::Models::ThreadUnsupportedRequestError] The request combines `thread` with a request field or an organization setting
+        #   that Threads do not support; `unsupported`, when present, names it. Send the
+        #   full conversation without `thread`, or change that field.
+        # @raise [Anthropic::Models::ToolNameConflictError] A tool made available in `messages` takes a name that an available tool of
+        #   another kind, or of another MCP server, already holds.
+        # @raise [Anthropic::Models::ToolReferenceUnresolvedError] A tool change or MCP tool listing references a tool or MCP server that is not
+        #   defined at that position in the conversation.
+        # @raise [Anthropic::Models::ThreadNotFoundError] No usable Thread state was found for `previous_message_id`. Replay the full
+        #   conversation with `thread: {"type": "create"}` to start a new Thread.
+        # @raise [Anthropic::Models::SkillReadBlockedUndecryptableError] A custom skill the request names is stored under an encryption key state the
+        #   workspace cannot currently decrypt.
+        # @raise [Anthropic::Models::RequestBodyTooLargeAfterDecodingError] The compressed request body exceeds the request size limit once decoded.
+        # @raise [Anthropic::Models::EnforcedSpendLimitReachedError] The organization has crossed the monthly API usage threshold of its API tier.
+        # @raise [Anthropic::Models::CMEKKeyUnreachableError] The workspace's customer-managed encryption key could not be reached. Retry the
+        #   request; if this continues, check that the key is available in your key
+        #   management service, or contact Anthropic support.
+        # @raise [Anthropic::Models::CompactionUnavailableError] The compaction could not be completed for a transient server reason. Retry the
+        #   request.
+        #
         # @return [Anthropic::Internal::Type::BaseStream<Anthropic::Models::Beta::BetaRawMessageStartEvent, Anthropic::Models::Beta::BetaRawMessageDeltaEvent, Anthropic::Models::Beta::BetaRawMessageStopEvent, Anthropic::Models::Beta::BetaRawContentBlockStartEvent, Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent, Anthropic::Models::Beta::BetaRawContentBlockStopEvent>]
         #
         # @see Anthropic::Models::Beta::MessageCreateParams
@@ -337,6 +451,34 @@ module Anthropic
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @raise [Anthropic::Models::AvailableToolsLimitExceededError] The tools available after a message exceed a limit on their number or their
+        #   size.
+        # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError] The API key belongs to the Claude Code workspace, and the user who created it is
+        #   no longer a member of the organization or of that workspace.
+        # @raise [Anthropic::Models::CompactionBlockAmbiguousError] `messages` holds more than one `compaction` block with content. Send only the
+        #   block the conversation returned last.
+        # @raise [Anthropic::Models::CompactionBlockMisplacedError] The `compaction` block is not the first block of the conversation, or is in a
+        #   `system` message.
+        # @raise [Anthropic::Models::CompactionContentMismatchError] The `compaction` block's `content` differs from the text its `signature`
+        #   recorded.
+        # @raise [Anthropic::Models::CompactionNothingToSummarizeError] `messages` holds no `user` or `assistant` content to summarize or adopt.
+        # @raise [Anthropic::Models::CompactionSignatureInvalidError] The `compaction` block's `signature` does not verify.
+        # @raise [Anthropic::Models::CompactionToolChangesMismatchError] The `compaction` block's `tool_changes` differs from what was returned with the
+        #   block.
+        # @raise [Anthropic::Models::OrganizationOnHoldError] Anthropic has disabled the organization for trust and safety reasons. An
+        #   organization disabled for any other reason, such as billing, does not get this
+        #   code. `appeal_url`, when present, is where the organization can appeal.
+        # @raise [Anthropic::Models::RequestBodyEncodingInvalidError] The request body is not valid for its `Content-Encoding`.
+        # @raise [Anthropic::Models::RequestBodyEncodingUnsupportedError] The request's `Content-Encoding` is not supported.
+        # @raise [Anthropic::Models::ToolNameConflictError] A tool made available in `messages` takes a name that an available tool of
+        #   another kind, or of another MCP server, already holds.
+        # @raise [Anthropic::Models::ToolReferenceUnresolvedError] A tool change or MCP tool listing references a tool or MCP server that is not
+        #   defined at that position in the conversation.
+        # @raise [Anthropic::Models::RequestBodyTooLargeAfterDecodingError] The compressed request body exceeds the request size limit once decoded.
+        # @raise [Anthropic::Models::EnforcedSpendLimitReachedError] The organization has crossed the monthly API usage threshold of its API tier.
+        # @raise [Anthropic::Models::CompactionUnavailableError] The compaction could not be completed for a transient server reason. Retry the
+        #   request.
         #
         # @return [Anthropic::Models::Beta::BetaMessageTokensCount]
         #

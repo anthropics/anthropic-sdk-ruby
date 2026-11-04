@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        class BetaSpendLimitsAdminAPIWritesNotEnabledError < Anthropic::Errors::PermissionDeniedError
+          def error_code: -> :spend_limits_admin_api_writes_not_enabled
+
+          def details: -> Anthropic::Beta::Organization::BetaSpendLimitsAdminAPIWritesNotEnabledErrorDetails
+        end
+      end
+    end
+  end
+end

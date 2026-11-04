@@ -65,7 +65,7 @@ module Anthropic
         #
         #   @param limit [Integer] Number of items to return per page.
         #
-        #   @param page [String, nil] Opaque page cursor returned in a prior list response's `next_page`. Prefixed `pa
+        #   @param page [String, nil] Opaque page cursor returned in a prior list response's `next_page`. Prefixed
         #
         #   @param scope_id [String] Filter by scope ID. Only returns files associated with the specified scope (e.g.
         #

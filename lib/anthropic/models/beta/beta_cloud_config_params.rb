@@ -34,7 +34,7 @@ module Anthropic
         #
         #   @param networking [Anthropic::Models::Beta::BetaUnrestrictedNetwork, Anthropic::Models::Beta::BetaLimitedNetworkParams, nil] Network configuration policy. Omit on update to preserve the existing value.
         #
-        #   @param packages [Anthropic::Models::Beta::BetaPackagesParams, nil] Package manager configuration. Under `limited` networking, requires `networking.
+        #   @param packages [Anthropic::Models::Beta::BetaPackagesParams, nil] Package manager configuration. Under `limited` networking, requires
         #
         #   @param type [Symbol, :cloud] Environment type
 

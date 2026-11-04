@@ -1,0 +1,11 @@
+module Anthropic
+  module Models
+    module Organization
+      class WorkspaceAPIKeyLimitExceededError < Anthropic::Errors::BadRequestError
+        def error_code: -> :workspace_api_key_limit_exceeded
+
+        def details: -> Anthropic::Organization::WorkspaceAPIKeyLimitExceededErrorDetails
+      end
+    end
+  end
+end

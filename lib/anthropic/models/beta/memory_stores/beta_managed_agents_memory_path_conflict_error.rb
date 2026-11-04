@@ -51,7 +51,7 @@ module Anthropic
           #
           #   @param conflicting_path [String] The path that blocked the write: the requested path, or the path of a memory tha
           #
-          #   @param message [String] A human-readable explanation of the conflict. To handle the error in code, use `
+          #   @param message [String] A human-readable explanation of the conflict. To handle the error in code, use
           #
           #   @param type [Symbol, :memory_path_conflict_error]
         end

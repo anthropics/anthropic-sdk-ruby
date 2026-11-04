@@ -23,9 +23,16 @@ module Anthropic
               #
               # @param target [Anthropic::Models::Beta::Organization::ClaudeTag::Bundles::BetaClaudeTagSlackChannelBundleTargetCreate, Anthropic::Models::Beta::Organization::ClaudeTag::Bundles::BetaClaudeTagSlackWorkspaceBundleTargetCreate] Body param
               #
-              # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `experimental-claude-
+              # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
               #
               # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+              #
+              # @raise [Anthropic::Models::Beta::Organization::BetaAPIKeyScopeMissingError] The API key lacks the scope the request needs: `read:claude_tag` for a read,
+              #   `write:claude_tag` for a change.
+              # @raise [Anthropic::Models::Beta::Organization::BetaClaudeTagWritesNotEnabledError] Changes through the Claude Tag API are not enabled for the organization.
+              # @raise [Anthropic::Models::Beta::Organization::BetaComplianceConfigurationRestrictedError] The organization's compliance configuration does not let Claude Tag store
+              #   anything new.
+              # @raise [Anthropic::Models::Beta::Organization::BetaOrganizationLevelScopedAPIKeyRequiredError] The credential is not a scoped API key that is bound at the organization level.
               #
               # @return [Anthropic::Models::Beta::Organization::ClaudeTag::Bundles::BetaClaudeTagSlackChannelBundleTarget, Anthropic::Models::Beta::Organization::ClaudeTag::Bundles::BetaClaudeTagSlackWorkspaceBundleTarget]
               #
@@ -63,9 +70,16 @@ module Anthropic
               #
               # @param bundle_id [String] Path param: The Bundle's identifier, starting with `capp_`.
               #
-              # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `experimental-claude-
+              # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
               #
               # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+              #
+              # @raise [Anthropic::Models::Beta::Organization::BetaAPIKeyScopeMissingError] The API key lacks the scope the request needs: `read:claude_tag` for a read,
+              #   `write:claude_tag` for a change.
+              # @raise [Anthropic::Models::Beta::Organization::BetaClaudeTagWritesNotEnabledError] Changes through the Claude Tag API are not enabled for the organization.
+              # @raise [Anthropic::Models::Beta::Organization::BetaComplianceConfigurationRestrictedError] The organization's compliance configuration does not let Claude Tag store
+              #   anything new.
+              # @raise [Anthropic::Models::Beta::Organization::BetaOrganizationLevelScopedAPIKeyRequiredError] The credential is not a scoped API key that is bound at the organization level.
               #
               # @return [Anthropic::Models::Beta::Organization::ClaudeTag::Bundles::BetaClaudeTagSlackChannelBundleTarget, Anthropic::Models::Beta::Organization::ClaudeTag::Bundles::BetaClaudeTagSlackWorkspaceBundleTarget]
               #
@@ -112,9 +126,16 @@ module Anthropic
               #
               # @param page [String] Query param: Opaque cursor from a previous response's `next_page`.
               #
-              # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `experimental-claude-
+              # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
               #
               # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+              #
+              # @raise [Anthropic::Models::Beta::Organization::BetaAPIKeyScopeMissingError] The API key lacks the scope the request needs: `read:claude_tag` for a read,
+              #   `write:claude_tag` for a change.
+              # @raise [Anthropic::Models::Beta::Organization::BetaClaudeTagWritesNotEnabledError] Changes through the Claude Tag API are not enabled for the organization.
+              # @raise [Anthropic::Models::Beta::Organization::BetaComplianceConfigurationRestrictedError] The organization's compliance configuration does not let Claude Tag store
+              #   anything new.
+              # @raise [Anthropic::Models::Beta::Organization::BetaOrganizationLevelScopedAPIKeyRequiredError] The credential is not a scoped API key that is bound at the organization level.
               #
               # @return [Anthropic::Internal::PageCursor<Anthropic::Models::Beta::Organization::ClaudeTag::Bundles::BetaClaudeTagSlackChannelBundleTarget, Anthropic::Models::Beta::Organization::ClaudeTag::Bundles::BetaClaudeTagSlackWorkspaceBundleTarget>]
               #
@@ -156,9 +177,16 @@ module Anthropic
               #
               # @param bundle_id [String] Path param: The Bundle's identifier, starting with `capp_`.
               #
-              # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `experimental-claude-
+              # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
               #
               # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+              #
+              # @raise [Anthropic::Models::Beta::Organization::BetaAPIKeyScopeMissingError] The API key lacks the scope the request needs: `read:claude_tag` for a read,
+              #   `write:claude_tag` for a change.
+              # @raise [Anthropic::Models::Beta::Organization::BetaClaudeTagWritesNotEnabledError] Changes through the Claude Tag API are not enabled for the organization.
+              # @raise [Anthropic::Models::Beta::Organization::BetaComplianceConfigurationRestrictedError] The organization's compliance configuration does not let Claude Tag store
+              #   anything new.
+              # @raise [Anthropic::Models::Beta::Organization::BetaOrganizationLevelScopedAPIKeyRequiredError] The credential is not a scoped API key that is bound at the organization level.
               #
               # @return [Anthropic::Models::Beta::Organization::ClaudeTag::Bundles::BetaClaudeTagDeletedBundleTarget]
               #

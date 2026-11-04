@@ -98,7 +98,7 @@ module Anthropic
         #
         #   @param deployment_id [String] Filter to a specific deployment. Omit to list across all deployments in the work
         #
-        #   @param has_error [Boolean] Filter: true for runs with non-null `error`, false for runs with non-null `sessi
+        #   @param has_error [Boolean] Filter: true for runs with non-null `error`, false for runs with non-null
         #
         #   @param limit [Integer] Maximum results per page. Default 20, maximum 1000.
         #

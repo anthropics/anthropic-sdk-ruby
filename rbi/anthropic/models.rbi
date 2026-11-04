@@ -9,6 +9,12 @@ module Anthropic
 
   AuthenticationError = Anthropic::Models::AuthenticationError
 
+  AvailableToolsLimitExceededError =
+    Anthropic::Models::AvailableToolsLimitExceededError
+
+  AvailableToolsLimitExceededErrorDetails =
+    Anthropic::Models::AvailableToolsLimitExceededErrorDetails
+
   Base64ImageSource = Anthropic::Models::Base64ImageSource
 
   Base64PDFSource = Anthropic::Models::Base64PDFSource
@@ -65,6 +71,11 @@ module Anthropic
   BetaPermissionError = Anthropic::Models::BetaPermissionError
 
   BetaRateLimitError = Anthropic::Models::BetaRateLimitError
+
+  BetaUnsupportedCharsetError = Anthropic::Models::BetaUnsupportedCharsetError
+
+  BetaUnsupportedCharsetErrorDetails =
+    Anthropic::Models::BetaUnsupportedCharsetErrorDetails
 
   BillingError = Anthropic::Models::BillingError
 
@@ -354,6 +365,36 @@ module Anthropic
   CitationWebSearchResultLocationParam =
     Anthropic::Models::CitationWebSearchResultLocationParam
 
+  ClaudeCodeKeyCreatorNotMemberError =
+    Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError
+
+  ClaudeCodeKeyCreatorNotMemberErrorDetails =
+    Anthropic::Models::ClaudeCodeKeyCreatorNotMemberErrorDetails
+
+  ClaudeCodeVersionTooOldError = Anthropic::Models::ClaudeCodeVersionTooOldError
+
+  ClaudeCodeVersionTooOldErrorDetails =
+    Anthropic::Models::ClaudeCodeVersionTooOldErrorDetails
+
+  CMEKContextUnavailableError = Anthropic::Models::CMEKContextUnavailableError
+
+  CMEKContextUnavailableErrorDetails =
+    Anthropic::Models::CMEKContextUnavailableErrorDetails
+
+  CMEKKeyDisabledError = Anthropic::Models::CMEKKeyDisabledError
+
+  CMEKKeyDisabledErrorDetails = Anthropic::Models::CMEKKeyDisabledErrorDetails
+
+  CMEKKeyNetworkBlockedError = Anthropic::Models::CMEKKeyNetworkBlockedError
+
+  CMEKKeyNetworkBlockedErrorDetails =
+    Anthropic::Models::CMEKKeyNetworkBlockedErrorDetails
+
+  CMEKKeyUnreachableError = Anthropic::Models::CMEKKeyUnreachableError
+
+  CMEKKeyUnreachableErrorDetails =
+    Anthropic::Models::CMEKKeyUnreachableErrorDetails
+
   CodeExecutionOutputBlock = Anthropic::Models::CodeExecutionOutputBlock
 
   CodeExecutionOutputBlockParam =
@@ -390,6 +431,59 @@ module Anthropic
 
   CodeExecutionToolResultErrorParam =
     Anthropic::Models::CodeExecutionToolResultErrorParam
+
+  CompactionBlockAmbiguousError =
+    Anthropic::Models::CompactionBlockAmbiguousError
+
+  CompactionBlockAmbiguousErrorDetails =
+    Anthropic::Models::CompactionBlockAmbiguousErrorDetails
+
+  CompactionBlockMisplacedError =
+    Anthropic::Models::CompactionBlockMisplacedError
+
+  CompactionBlockMisplacedErrorDetails =
+    Anthropic::Models::CompactionBlockMisplacedErrorDetails
+
+  CompactionContentMismatchError =
+    Anthropic::Models::CompactionContentMismatchError
+
+  CompactionContentMismatchErrorDetails =
+    Anthropic::Models::CompactionContentMismatchErrorDetails
+
+  CompactionIncompleteTurnError =
+    Anthropic::Models::CompactionIncompleteTurnError
+
+  CompactionIncompleteTurnErrorDetails =
+    Anthropic::Models::CompactionIncompleteTurnErrorDetails
+
+  CompactionNothingToSummarizeError =
+    Anthropic::Models::CompactionNothingToSummarizeError
+
+  CompactionNothingToSummarizeErrorDetails =
+    Anthropic::Models::CompactionNothingToSummarizeErrorDetails
+
+  CompactionSignatureInvalidError =
+    Anthropic::Models::CompactionSignatureInvalidError
+
+  CompactionSignatureInvalidErrorDetails =
+    Anthropic::Models::CompactionSignatureInvalidErrorDetails
+
+  CompactionToolChangesMismatchError =
+    Anthropic::Models::CompactionToolChangesMismatchError
+
+  CompactionToolChangesMismatchErrorDetails =
+    Anthropic::Models::CompactionToolChangesMismatchErrorDetails
+
+  CompactionTooManyToolReferencesError =
+    Anthropic::Models::CompactionTooManyToolReferencesError
+
+  CompactionTooManyToolReferencesErrorDetails =
+    Anthropic::Models::CompactionTooManyToolReferencesErrorDetails
+
+  CompactionUnavailableError = Anthropic::Models::CompactionUnavailableError
+
+  CompactionUnavailableErrorDetails =
+    Anthropic::Models::CompactionUnavailableErrorDetails
 
   ComputerCursorPositionConfig = Anthropic::Models::ComputerCursorPositionConfig
 
@@ -512,6 +606,12 @@ module Anthropic
 
   ComputerZoomToolUseBlock = Anthropic::Models::ComputerZoomToolUseBlock
 
+  ConcurrentMembershipChangeError =
+    Anthropic::Models::ConcurrentMembershipChangeError
+
+  ConcurrentMembershipChangeErrorDetails =
+    Anthropic::Models::ConcurrentMembershipChangeErrorDetails
+
   Container = Anthropic::Models::Container
 
   ContainerParams = Anthropic::Models::ContainerParams
@@ -556,6 +656,14 @@ module Anthropic
   EncryptedCodeExecutionResultBlockParam =
     Anthropic::Models::EncryptedCodeExecutionResultBlockParam
 
+  EnforcedSpendLimitReachedError =
+    Anthropic::Models::EnforcedSpendLimitReachedError
+
+  EnforcedSpendLimitReachedErrorDetails =
+    Anthropic::Models::EnforcedSpendLimitReachedErrorDetails
+
+  ErrorDetails = Anthropic::Models::ErrorDetails
+
   ErrorObject = Anthropic::Models::ErrorObject
 
   ErrorResponse = Anthropic::Models::ErrorResponse
@@ -568,11 +676,20 @@ module Anthropic
 
   FileDownloadParams = Anthropic::Models::FileDownloadParams
 
+  FileExpiredError = Anthropic::Models::FileExpiredError
+
+  FileExpiredErrorDetails = Anthropic::Models::FileExpiredErrorDetails
+
   FileImageSource = Anthropic::Models::FileImageSource
 
   FileListParams = Anthropic::Models::FileListParams
 
   FileMetadata = Anthropic::Models::FileMetadata
+
+  FileNotDownloadableError = Anthropic::Models::FileNotDownloadableError
+
+  FileNotDownloadableErrorDetails =
+    Anthropic::Models::FileNotDownloadableErrorDetails
 
   FileRetrieveMetadataParams = Anthropic::Models::FileRetrieveMetadataParams
 
@@ -632,9 +749,25 @@ module Anthropic
 
   OrganizationInfo = Anthropic::Models::OrganizationInfo
 
+  OrganizationOnHoldError = Anthropic::Models::OrganizationOnHoldError
+
+  OrganizationOnHoldErrorDetails =
+    Anthropic::Models::OrganizationOnHoldErrorDetails
+
   OrganizationRetrieveParams = Anthropic::Models::OrganizationRetrieveParams
 
   OrganizationRole = Anthropic::Models::OrganizationRole
+
+  OrganizationTypeNotSupportedError =
+    Anthropic::Models::OrganizationTypeNotSupportedError
+
+  OrganizationTypeNotSupportedErrorDetails =
+    Anthropic::Models::OrganizationTypeNotSupportedErrorDetails
+
+  OrgMemberLimitExceededError = Anthropic::Models::OrgMemberLimitExceededError
+
+  OrgMemberLimitExceededErrorDetails =
+    Anthropic::Models::OrgMemberLimitExceededErrorDetails
 
   OutputConfig = Anthropic::Models::OutputConfig
 
@@ -670,6 +803,24 @@ module Anthropic
 
   RefusalStopDetails = Anthropic::Models::RefusalStopDetails
 
+  RequestBodyEncodingInvalidError =
+    Anthropic::Models::RequestBodyEncodingInvalidError
+
+  RequestBodyEncodingInvalidErrorDetails =
+    Anthropic::Models::RequestBodyEncodingInvalidErrorDetails
+
+  RequestBodyEncodingUnsupportedError =
+    Anthropic::Models::RequestBodyEncodingUnsupportedError
+
+  RequestBodyEncodingUnsupportedErrorDetails =
+    Anthropic::Models::RequestBodyEncodingUnsupportedErrorDetails
+
+  RequestBodyTooLargeAfterDecodingError =
+    Anthropic::Models::RequestBodyTooLargeAfterDecodingError
+
+  RequestBodyTooLargeAfterDecodingErrorDetails =
+    Anthropic::Models::RequestBodyTooLargeAfterDecodingErrorDetails
+
   SearchResultBlockParam = Anthropic::Models::SearchResultBlockParam
 
   ServerToolCaller = Anthropic::Models::ServerToolCaller
@@ -696,6 +847,12 @@ module Anthropic
 
   SkillParams = Anthropic::Models::SkillParams
 
+  SkillReadBlockedUndecryptableError =
+    Anthropic::Models::SkillReadBlockedUndecryptableError
+
+  SkillReadBlockedUndecryptableErrorDetails =
+    Anthropic::Models::SkillReadBlockedUndecryptableErrorDetails
+
   SkillRetrieveParams = Anthropic::Models::SkillRetrieveParams
 
   Skills = Anthropic::Models::Skills
@@ -703,6 +860,11 @@ module Anthropic
   SkillSource = Anthropic::Models::SkillSource
 
   StopReason = Anthropic::Models::StopReason
+
+  StorageQuotaExceededError = Anthropic::Models::StorageQuotaExceededError
+
+  StorageQuotaExceededErrorDetails =
+    Anthropic::Models::StorageQuotaExceededErrorDetails
 
   SystemMessageParam = Anthropic::Models::SystemMessageParam
 
@@ -769,6 +931,34 @@ module Anthropic
 
   ThinkingTypes = Anthropic::Models::ThinkingTypes
 
+  ThreadAlreadyContinuedError = Anthropic::Models::ThreadAlreadyContinuedError
+
+  ThreadAlreadyContinuedErrorDetails =
+    Anthropic::Models::ThreadAlreadyContinuedErrorDetails
+
+  ThreadContinueInFlightError = Anthropic::Models::ThreadContinueInFlightError
+
+  ThreadContinueInFlightErrorDetails =
+    Anthropic::Models::ThreadContinueInFlightErrorDetails
+
+  ThreadFingerprintMismatchError =
+    Anthropic::Models::ThreadFingerprintMismatchError
+
+  ThreadFingerprintMismatchErrorDetails =
+    Anthropic::Models::ThreadFingerprintMismatchErrorDetails
+
+  ThreadNotFoundError = Anthropic::Models::ThreadNotFoundError
+
+  ThreadNotFoundErrorDetails = Anthropic::Models::ThreadNotFoundErrorDetails
+
+  ThreadUnsupportedFeatureName = Anthropic::Models::ThreadUnsupportedFeatureName
+
+  ThreadUnsupportedRequestError =
+    Anthropic::Models::ThreadUnsupportedRequestError
+
+  ThreadUnsupportedRequestErrorDetails =
+    Anthropic::Models::ThreadUnsupportedRequestErrorDetails
+
   Tool = Anthropic::Models::Tool
 
   ToolBash20250124 = Anthropic::Models::ToolBash20250124
@@ -783,9 +973,18 @@ module Anthropic
 
   ToolChoiceTool = Anthropic::Models::ToolChoiceTool
 
+  ToolNameConflictError = Anthropic::Models::ToolNameConflictError
+
+  ToolNameConflictErrorDetails = Anthropic::Models::ToolNameConflictErrorDetails
+
   ToolReferenceBlock = Anthropic::Models::ToolReferenceBlock
 
   ToolReferenceBlockParam = Anthropic::Models::ToolReferenceBlockParam
+
+  ToolReferenceUnresolvedError = Anthropic::Models::ToolReferenceUnresolvedError
+
+  ToolReferenceUnresolvedErrorDetails =
+    Anthropic::Models::ToolReferenceUnresolvedErrorDetails
 
   ToolResultBlockParam = Anthropic::Models::ToolResultBlockParam
 
@@ -889,6 +1088,11 @@ module Anthropic
   UserProfileListOrderBy = Anthropic::Models::UserProfileListOrderBy
 
   UserProfileListParams = Anthropic::Models::UserProfileListParams
+
+  UserProfileNotFoundError = Anthropic::Models::UserProfileNotFoundError
+
+  UserProfileNotFoundErrorDetails =
+    Anthropic::Models::UserProfileNotFoundErrorDetails
 
   UserProfilePrograms = Anthropic::Models::UserProfilePrograms
 

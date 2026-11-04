@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        class BetaScanPendingError < Anthropic::Errors::ConflictError
+          def error_code: -> :scan_pending
+
+          def details: -> Anthropic::Beta::Organization::BetaScanPendingErrorDetails
+        end
+      end
+    end
+  end
+end

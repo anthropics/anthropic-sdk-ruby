@@ -45,7 +45,7 @@ module Anthropic
               #
               #   @param created_at [Time] Time the Bundle was attached.
               #
-              #   @param slack_channel_id [String] The identifier of the Slack channel the Bundle is attached to, starting with `sl
+              #   @param slack_channel_id [String] The identifier of the Slack channel the Bundle is attached to, starting with
               #
               #   @param type [Symbol, :slack_channel]
             end

@@ -159,8 +159,7 @@ module Anthropic
         # Connector use recorded while members had Chat and Cowork unified (Cowork's
         # features inside claude.ai chat) turned on, split into chat conversations and
         # Cowork sessions. A count is null in date-range mode where it cannot be computed.
-        # Omitted from the response on deployments that do not offer Chat and Cowork
-        # unified.
+        # Omitted from the response where Chat and Cowork unified is not available.
         sig do
           returns(
             T.nilable(
@@ -324,8 +323,7 @@ module Anthropic
           # Connector use recorded while members had Chat and Cowork unified (Cowork's
           # features inside claude.ai chat) turned on, split into chat conversations and
           # Cowork sessions. A count is null in date-range mode where it cannot be computed.
-          # Omitted from the response on deployments that do not offer Chat and Cowork
-          # unified.
+          # Omitted from the response where Chat and Cowork unified is not available.
           chat_cowork_unified_metrics: nil,
           # Product that produced this row's activity: one of `chat`, `claude_code`,
           # `cowork`, `office_agent`, or `chat_cowork_unified` (Chat and Cowork unified).

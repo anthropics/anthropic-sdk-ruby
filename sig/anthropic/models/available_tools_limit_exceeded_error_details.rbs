@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type available_tools_limit_exceeded_error_details =
+      { error_code: :available_tools_limit_exceeded }
+
+    class AvailableToolsLimitExceededErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :available_tools_limit_exceeded
+
+      def initialize: (?error_code: :available_tools_limit_exceeded) -> void
+
+      def to_hash: -> { error_code: :available_tools_limit_exceeded }
+    end
+  end
+end

@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    type cmek_key_disabled_error_details = { error_code: :cmek_key_disabled }
+
+    class CMEKKeyDisabledErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :cmek_key_disabled
+
+      def initialize: (?error_code: :cmek_key_disabled) -> void
+
+      def to_hash: -> { error_code: :cmek_key_disabled }
+    end
+  end
+end

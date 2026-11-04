@@ -26,7 +26,7 @@ module Anthropic
           #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction} for
           #   more details.
           #
-          #   @param event_ids [Array<String>] The ids of events the agent is blocked on. Resolving fewer than all re-emits `se
+          #   @param event_ids [Array<String>] The ids of events the agent is blocked on. Resolving fewer than all re-emits
           #
           #   @param type [Symbol, :requires_action]
         end

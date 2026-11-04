@@ -34,8 +34,7 @@ module Anthropic
           required :display_name, String, nil?: true
 
           # @!attribute geo
-          #   Data residency geo. Selects the region that handles this key's encrypt/decrypt
-          #   roundtrips.
+          #   Data residency geo. Selects the region this key is used in.
           #
           #   @return [String]
           required :geo, String
@@ -83,7 +82,7 @@ module Anthropic
           #
           #   @param display_name [String, nil] Human-friendly display name. Null if none was set.
           #
-          #   @param geo [String] Data residency geo. Selects the region that handles this key's encrypt/decrypt r
+          #   @param geo [String] Data residency geo. Selects the region this key is used in.
           #
           #   @param provider_config [Anthropic::Models::Beta::Organization::BetaAWSExternalKeyConfig, Anthropic::Models::Beta::Organization::BetaGCPExternalKeyConfig, Anthropic::Models::Beta::Organization::BetaAzureExternalKeyConfig] KMS provider identity and auth coordinates.
           #
@@ -191,7 +190,7 @@ module Anthropic
             #
             #   @option args [String] :tenant_id Azure AD tenant ID.
             #
-            #   @option args [String] :vault_uri Key Vault data-plane URI — `https://{vault-name}.vault.azure.net` or `https://{h
+            #   @option args [String] :vault_uri Key Vault data-plane URI — `https://{vault-name}.vault.azure.net` or
             #
             #   @option args [String, nil] :client_id Azure AD application (client) ID. Omit to use Anthropic's multitenant app. Provi
             #

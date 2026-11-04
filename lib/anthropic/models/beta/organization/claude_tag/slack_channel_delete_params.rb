@@ -30,7 +30,7 @@ module Anthropic
             #
             #   @param id [String] The channel's identifier, starting with `slch_`.
             #
-            #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21
+            #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send
             #
             #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
           end

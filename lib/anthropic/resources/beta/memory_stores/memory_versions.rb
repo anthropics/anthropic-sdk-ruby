@@ -19,7 +19,7 @@ module Anthropic
           #
           # @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Query param: Whether a `memory` or `memory_version` in the response includes its
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `agent-memory-2026-07
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
@@ -65,8 +65,7 @@ module Anthropic
           #
           # @overload list(memory_store_id, api_key_id: nil, created_at_gte: nil, created_at_lte: nil, limit: nil, memory_id: nil, operation: nil, page: nil, service_account_id: nil, session_id: nil, view: nil, betas: nil, workspace_id: nil, request_options: {})
           #
-          # @param memory_store_id [String] Path param: The ID of the memory store whose version history to list
-          # (`memstore\_
+          # @param memory_store_id [String] Path param: The ID of the memory store whose version history to list (
           #
           # @param api_key_id [String] Query param: Return only versions written with the API key that has this ID.
           #
@@ -82,13 +81,13 @@ module Anthropic
           #
           # @param page [String] Query param: The `next_page` value from a previous response, to get the next pag
           #
-          # @param service_account_id [String] Query param: Return only versions written by the service account with this ID (`
+          # @param service_account_id [String] Query param: Return only versions written by the service account with this ID (
           #
           # @param session_id [String] Query param: Return only versions written by the session with this ID.
           #
           # @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Query param: Whether a `memory` or `memory_version` in the response includes its
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `agent-memory-2026-07
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
@@ -158,7 +157,7 @@ module Anthropic
           #
           # @param memory_store_id [String] Path param: The ID of the memory store that holds the version (`memstore_...`).
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `agent-memory-2026-07
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #

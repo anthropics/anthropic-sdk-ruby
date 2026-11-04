@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class FileExpiredError < Anthropic::Errors::NotFoundError
+      def error_code: -> :file_expired
+
+      def details: -> Anthropic::FileExpiredErrorDetails
+    end
+  end
+end

@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        class BetaComplianceConfigurationRestrictedError < Anthropic::Errors::PermissionDeniedError
+          def error_code: -> :compliance_configuration_restricted
+
+          def details: -> Anthropic::Beta::Organization::BetaComplianceConfigurationRestrictedErrorDetails
+        end
+      end
+    end
+  end
+end

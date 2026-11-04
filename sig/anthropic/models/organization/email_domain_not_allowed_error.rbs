@@ -1,0 +1,11 @@
+module Anthropic
+  module Models
+    module Organization
+      class EmailDomainNotAllowedError < Anthropic::Errors::BadRequestError
+        def error_code: -> :email_domain_not_allowed
+
+        def details: -> Anthropic::Organization::EmailDomainNotAllowedErrorDetails
+      end
+    end
+  end
+end

@@ -107,6 +107,11 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
+          # @raise [Anthropic::Models::Organization::CannotRemoveLastMemberError] The user is the organization's only member. Add another member before removing
+          #   this one.
+          # @raise [Anthropic::Models::ConcurrentMembershipChangeError] Another change to the organization's members is in progress. Retry the request
+          #   once it completes.
+          #
           # @return [Anthropic::Models::Beta::Organization::UserRemoveResponse]
           #
           # @see Anthropic::Models::Beta::Organization::UserRemoveParams

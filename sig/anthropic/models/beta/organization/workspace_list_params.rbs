@@ -6,6 +6,7 @@ module Anthropic
           {
             after_id: String,
             before_id: String,
+            ids: ::Array[String],
             include_archived: bool,
             include_default: bool,
             limit: Integer
@@ -24,6 +25,10 @@ module Anthropic
 
           def before_id=: (String) -> String
 
+          attr_reader ids: ::Array[String]?
+
+          def ids=: (::Array[String]) -> ::Array[String]
+
           attr_reader include_archived: bool?
 
           def include_archived=: (bool) -> bool
@@ -39,6 +44,7 @@ module Anthropic
           def initialize: (
             ?after_id: String,
             ?before_id: String,
+            ?ids: ::Array[String],
             ?include_archived: bool,
             ?include_default: bool,
             ?limit: Integer,
@@ -48,6 +54,7 @@ module Anthropic
           def to_hash: -> {
             after_id: String,
             before_id: String,
+            ids: ::Array[String],
             include_archived: bool,
             include_default: bool,
             limit: Integer,

@@ -71,7 +71,7 @@ module Anthropic
             #
             #   @param page [String, nil] Optionally set to the `next_page` token from the previous response.
             #
-            #   @param target_type [Symbol, Anthropic::Models::Beta::Organization::Plugins::ShareListParams::TargetType, nil] Only shares with this kind of target: `organization` (every member), `rbac_group
+            #   @param target_type [Symbol, Anthropic::Models::Beta::Organization::Plugins::ShareListParams::TargetType, nil] Only shares with this kind of target: `organization` (every member),
             #
             #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this hea
             #

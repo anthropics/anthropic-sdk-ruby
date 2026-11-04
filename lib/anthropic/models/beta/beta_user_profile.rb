@@ -117,7 +117,7 @@ module Anthropic
         #
         #   @param updated_at [Time] When this user profile was last modified, in RFC 3339 format. It normally also u
         #
-        #   @param access_type [Symbol, Anthropic::Models::Beta::BetaUserProfile::AccessType] How the platform uses the API for this entity: `application` (default) or `passt
+        #   @param access_type [Symbol, Anthropic::Models::Beta::BetaUserProfile::AccessType] How the platform uses the API for this entity: `application` (default) or
         #
         #   @param external_id [String, nil] Platform's own identifier for this user. Not enforced unique. Legacy field, pres
         #

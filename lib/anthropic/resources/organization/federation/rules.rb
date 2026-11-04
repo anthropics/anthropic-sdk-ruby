@@ -42,7 +42,7 @@ module Anthropic
           #
           # @param oauth_scope [String] Space-separated OAuth scopes. OAuth callers may only set `workspace:developer` o
           #
-          # @param target [Anthropic::Models::Organization::Federation::ServiceAccountTarget] Identity that tokens minted via this rule act as. Currently always a `service_ac
+          # @param target [Anthropic::Models::Organization::Federation::ServiceAccountTarget] Identity that tokens minted via this rule act as. Currently always a
           #
           # @param applies_to_all_workspaces [Boolean] When true, enable this rule for every workspace in the org (including workspaces
           #
@@ -50,7 +50,7 @@ module Anthropic
           #
           # @param token_lifetime_seconds [Integer] Lifetime in seconds for access tokens minted via this rule (60-86400). Defaults
           #
-          # @param workspace_id [String, nil] Tagged ID of the workspace to enable this rule for. Required unless `applies*to*
+          # @param workspace_id [String, nil] Tagged ID of the workspace to enable this rule for. Required unless
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #

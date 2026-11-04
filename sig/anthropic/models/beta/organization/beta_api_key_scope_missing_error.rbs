@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        class BetaAPIKeyScopeMissingError < Anthropic::Errors::PermissionDeniedError
+          def error_code: -> :api_key_scope_missing
+
+          def details: -> Anthropic::Beta::Organization::BetaAPIKeyScopeMissingErrorDetails
+        end
+      end
+    end
+  end
+end

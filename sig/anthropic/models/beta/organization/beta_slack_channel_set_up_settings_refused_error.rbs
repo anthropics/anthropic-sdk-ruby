@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        class BetaSlackChannelSetUpSettingsRefusedError < Anthropic::Errors::BadRequestError
+          def error_code: -> :slack_channel_set_up_settings_refused
+
+          def details: -> Anthropic::Beta::Organization::BetaSlackChannelSetUpSettingsRefusedErrorDetails
+        end
+      end
+    end
+  end
+end

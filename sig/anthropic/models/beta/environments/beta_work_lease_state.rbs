@@ -1,0 +1,53 @@
+module Anthropic
+  module Models
+    module Beta
+      module Environments
+        type beta_work_lease_state =
+          {
+            last_heartbeat: String?,
+            lease_extended: bool,
+            state: Anthropic::Models::Beta::Environments::BetaWorkLeaseState::state,
+            ttl_seconds: Integer
+          }
+
+        class BetaWorkLeaseState < Anthropic::Internal::Type::BaseModel
+          attr_accessor last_heartbeat: String?
+
+          attr_accessor lease_extended: bool
+
+          attr_accessor state: Anthropic::Models::Beta::Environments::BetaWorkLeaseState::state
+
+          attr_accessor ttl_seconds: Integer
+
+          def initialize: (
+            last_heartbeat: String?,
+            lease_extended: bool,
+            state: Anthropic::Models::Beta::Environments::BetaWorkLeaseState::state,
+            ttl_seconds: Integer
+          ) -> void
+
+          def to_hash: -> {
+            last_heartbeat: String?,
+            lease_extended: bool,
+            state: Anthropic::Models::Beta::Environments::BetaWorkLeaseState::state,
+            ttl_seconds: Integer
+          }
+
+          type state = :queued | :starting | :active | :stopping | :stopped
+
+          module State
+            extend Anthropic::Internal::Type::Enum
+
+            QUEUED: :queued
+            STARTING: :starting
+            ACTIVE: :active
+            STOPPING: :stopping
+            STOPPED: :stopped
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Environments::BetaWorkLeaseState::state]
+          end
+        end
+      end
+    end
+  end
+end

@@ -23,9 +23,7 @@ module Anthropic
           #   addressed), `scheduled` (a scheduled routine ran), `monitoring` (Claude watching
           #   a channel it was asked to monitor), or `dm` (direct messages with Claude).
           #   Populated only when `claude_tag_category` is in `group_by[]`; null for usage
-          #   that is not Claude Tag. Direct-message usage is billed to the individual user
-          #   and is reported under that user's product, not under `claude-tag`. New
-          #   categories may be added over time.
+          #   that is not Claude Tag. New categories may be added over time.
           #
           #   @return [Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsClaudeTagCategory, nil]
           required :claude_tag_category,
@@ -88,8 +86,8 @@ module Anthropic
           #   `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside
           #   claude.ai chat: chat and Cowork usage by a member who has it turned on is
           #   reported under this value instead of `chat` or `cowork`. It is accepted as a
-          #   filter only on deployments that offer Chat and Cowork unified. Some unattributed
-          #   usage is reported as "other".
+          #   filter only where Chat and Cowork unified is available. Some unattributed usage
+          #   is reported as "other".
           #
           #   @return [String, nil]
           required :product, String, nil?: true
@@ -124,8 +122,9 @@ module Anthropic
 
           # @!attribute slack_channel_id
           #   Slack channel the usage originated from. Populated only when `slack_channel_id`
-          #   is in `group_by[]`; null for usage outside Slack (and for rows recorded before
-          #   channel attribution was enabled).
+          #   is in `group_by[]`; null for usage outside Slack, for some Claude Tag usage that
+          #   has no channel recorded, and for usage recorded before channel attribution was
+          #   enabled.
           #
           #   @return [String, nil]
           required :slack_channel_id, String, nil?: true
@@ -161,15 +160,14 @@ module Anthropic
           #   @param context_window [Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsContextWindow, nil] Context-window pricing tier of the usage or cost. Null unless `context_window` i
           #
           #   @param inference_geo [Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsUsageBucketedResult::InferenceGeo, nil] Inference region of the usage or cost. Null unless `inference_geo` is in
-          #   `group\_
           #
-          #   @param model [String, nil] Model that produced the usage or cost, as a model name in the form the `models[]
+          #   @param model [String, nil] Model that produced the usage or cost, as a model name in the form the
           #
           #   @param output_tokens [Integer] The number of output tokens generated.
           #
-          #   @param product [String, nil] Product surface that produced the usage or cost. Null unless product is in `grou
+          #   @param product [String, nil] Product surface that produced the usage or cost. Null unless product is in
           #
-          #   @param rbac_group_id [String, nil] RBAC group (team) the usage is attributed to, in the public tagged `rbac*group*.
+          #   @param rbac_group_id [String, nil] RBAC group (team) the usage is attributed to, in the public tagged
           #
           #   @param requests [Integer, nil] Number of API requests in this row's scope. For sandbox / code-execution events,
           #
@@ -177,7 +175,7 @@ module Anthropic
           #
           #   @param slack_channel_id [String, nil] Slack channel the usage originated from. Populated only when `slack_channel_id`
           #
-          #   @param speed [Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsUsageBucketedResult::Speed, nil] Inference speed mode of the usage or cost: `fast` or `standard`. Null unless `sp
+          #   @param speed [Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsUsageBucketedResult::Speed, nil] Inference speed mode of the usage or cost: `fast` or `standard`. Null unless
           #
           #   @param uncached_input_tokens [Integer] The number of uncached input tokens processed.
 

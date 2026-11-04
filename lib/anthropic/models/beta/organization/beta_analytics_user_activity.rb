@@ -66,8 +66,8 @@ module Anthropic
           # @!attribute chat_cowork_unified_metrics
           #   Activity recorded while the member had Chat and Cowork unified (Cowork's
           #   features inside claude.ai chat) turned on, split into `chat` (chat activity) and
-          #   `sessions` (Cowork activity). Omitted from the response on deployments that do
-          #   not offer Chat and Cowork unified.
+          #   `sessions` (Cowork activity). Omitted from the response where Chat and Cowork
+          #   unified is not available.
           #
           #   @return [Anthropic::Models::Beta::Organization::BetaAnalyticsChatCoworkUnifiedMetrics, nil]
           optional :chat_cowork_unified_metrics,

@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class UserProfileNotFoundError < Anthropic::Errors::BadRequestError
+      def error_code: -> :user_profile_not_found
+
+      def details: -> Anthropic::UserProfileNotFoundErrorDetails
+    end
+  end
+end

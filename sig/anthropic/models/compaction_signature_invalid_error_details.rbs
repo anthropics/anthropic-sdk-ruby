@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type compaction_signature_invalid_error_details =
+      { error_code: :compaction_signature_invalid }
+
+    class CompactionSignatureInvalidErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :compaction_signature_invalid
+
+      def initialize: (?error_code: :compaction_signature_invalid) -> void
+
+      def to_hash: -> { error_code: :compaction_signature_invalid }
+    end
+  end
+end

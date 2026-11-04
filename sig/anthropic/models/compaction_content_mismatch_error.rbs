@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class CompactionContentMismatchError < Anthropic::Errors::BadRequestError
+      def error_code: -> :compaction_content_mismatch
+
+      def details: -> Anthropic::CompactionContentMismatchErrorDetails
+    end
+  end
+end

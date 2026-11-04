@@ -37,6 +37,18 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
+          # @raise [Anthropic::Models::Organization::KeyProfileMismatchError] The External Key is bound to a user profile, and the Workspace does not have
+          #   that user profile. A Workspace can use only a key bound to its own user profile
+          #   or a key that isn't bound to one.
+          # @raise [Anthropic::Models::UserProfileNotFoundError] The request depends on a user profile that does not exist in the organization or
+          #   is no longer active. The request either names this user profile by ID, or names
+          #   a resource, such as an External Key, that is bound to it.
+          # @raise [Anthropic::Models::Organization::WorkspacePolicyViolationError] The request breaks the organization's Workspace Policy. The message says which
+          #   rule it broke; an organization admin can see and change the policy in the
+          #   Console.
+          # @raise [Anthropic::Models::Organization::ExternalKeyChangedError] The external key changed while the request was validating it. Send the request
+          #   again.
+          #
           # @return [Anthropic::Models::Beta::Organization::BetaWorkspace]
           #
           # @see Anthropic::Models::Beta::Organization::WorkspaceCreateParams
@@ -104,6 +116,18 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
+          # @raise [Anthropic::Models::Organization::KeyProfileMismatchError] The External Key is bound to a user profile, and the Workspace does not have
+          #   that user profile. A Workspace can use only a key bound to its own user profile
+          #   or a key that isn't bound to one.
+          # @raise [Anthropic::Models::UserProfileNotFoundError] The request depends on a user profile that does not exist in the organization or
+          #   is no longer active. The request either names this user profile by ID, or names
+          #   a resource, such as an External Key, that is bound to it.
+          # @raise [Anthropic::Models::Organization::WorkspacePolicyViolationError] The request breaks the organization's Workspace Policy. The message says which
+          #   rule it broke; an organization admin can see and change the policy in the
+          #   Console.
+          # @raise [Anthropic::Models::Organization::ExternalKeyChangedError] The external key changed while the request was validating it. Send the request
+          #   again.
+          #
           # @return [Anthropic::Models::Beta::Organization::BetaWorkspace]
           #
           # @see Anthropic::Models::Beta::Organization::WorkspaceUpdateParams
@@ -127,11 +151,13 @@ module Anthropic
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Organization::WorkspaceListParams} for more details.
           #
-          # @overload list(after_id: nil, before_id: nil, include_archived: nil, include_default: nil, limit: nil, request_options: {})
+          # @overload list(after_id: nil, before_id: nil, ids: nil, include_archived: nil, include_default: nil, limit: nil, request_options: {})
           #
           # @param after_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
           #
           # @param before_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
+          #
+          # @param ids [Array<String>] Only the Workspaces with these IDs, at most 100. `include_archived` and
           #
           # @param include_archived [Boolean] Whether to include Workspaces that have been archived in the response
           #
@@ -151,7 +177,7 @@ module Anthropic
               qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_WORKSPACES_LIST,
               span_route: "/v1/organizations/workspaces",
-              span_query: %w[after_id before_id include_archived include_default limit],
+              span_query: %w[after_id before_id ids include_archived include_default limit],
               method: :get,
               path: "v1/organizations/workspaces",
               query: query,

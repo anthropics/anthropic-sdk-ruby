@@ -89,7 +89,7 @@ module Anthropic
       #
       #   @param pdf_input [Anthropic::Models::CapabilitySupport] Whether the model accepts PDF content blocks.
       #
-      #   @param server_tools [Anthropic::Models::ServerToolsCapability] Whether this model supports the web search and code execution server tools. `sup
+      #   @param server_tools [Anthropic::Models::ServerToolsCapability] Whether this model supports the web search and code execution server tools.
       #
       #   @param structured_outputs [Anthropic::Models::CapabilitySupport] Whether the model supports structured output / JSON mode / strict tool schemas.
       #

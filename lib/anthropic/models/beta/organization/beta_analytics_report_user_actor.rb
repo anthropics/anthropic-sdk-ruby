@@ -53,7 +53,7 @@ module Anthropic
           #
           #   @param email_address [String, nil] The user's current email address, including for users who are no longer members
           #
-          #   @param name [String, nil] The user's current full name. Null when the user has not set one. `"Deleted User
+          #   @param name [String, nil] The user's current full name. Null when the user has not set one.
           #
           #   @param user_id [String] Tagged user ID.
           #

@@ -98,7 +98,7 @@ module Anthropic
             #
             #   @option args [Integer, nil] :max_iterations Evaluate-then-revise cycles before giving up. Default 3, max 20.
             #
-            #   @option args [String] :outcome_id Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evalua
+            #   @option args [String] :outcome_id Server-generated `outc_` ID for this outcome. Referenced by
             #
             #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubric, Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubric] :rubric How to grade the outcome. File rubrics are currently resolved to their text cont
             #

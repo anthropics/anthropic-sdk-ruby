@@ -1,0 +1,22 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_spend_limits_admin_api_writes_not_enabled_error_details =
+          { error_code: :spend_limits_admin_api_writes_not_enabled }
+
+        class BetaSpendLimitsAdminAPIWritesNotEnabledErrorDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor error_code: :spend_limits_admin_api_writes_not_enabled
+
+          def initialize: (
+            ?error_code: :spend_limits_admin_api_writes_not_enabled
+          ) -> void
+
+          def to_hash: -> {
+            error_code: :spend_limits_admin_api_writes_not_enabled
+          }
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type user_profile_not_found_error_details =
+      { error_code: :user_profile_not_found }
+
+    class UserProfileNotFoundErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :user_profile_not_found
+
+      def initialize: (?error_code: :user_profile_not_found) -> void
+
+      def to_hash: -> { error_code: :user_profile_not_found }
+    end
+  end
+end

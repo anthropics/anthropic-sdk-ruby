@@ -65,13 +65,13 @@ module Anthropic
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaUserProfileExternalUserDetails} for more details.
         #
-        #   @param account_status [Symbol, Anthropic::Models::Beta::BetaUserProfileExternalUserDetails::AccountStatus, nil] The status of the entity's account on the platform: `active`, `suspended` or `bl
+        #   @param account_status [Symbol, Anthropic::Models::Beta::BetaUserProfileExternalUserDetails::AccountStatus, nil] The status of the entity's account on the platform: `active`, `suspended` or
         #
         #   @param country [String, nil] The country the platform associates with the entity, as an ISO 3166-1 alpha-2 co
         #
         #   @param email_hash [String, nil] The platform-computed hash of the entity's email address. `null` until the platf
         #
-        #   @param entity_type [Symbol, Anthropic::Models::Beta::BetaUserProfileExternalUserDetails::EntityType, nil] What kind of entity the profile represents: `individual`, `business`, `non_profi
+        #   @param entity_type [Symbol, Anthropic::Models::Beta::BetaUserProfileExternalUserDetails::EntityType, nil] What kind of entity the profile represents: `individual`, `business`,
         #
         #   @param name_hash [String, nil] The platform-computed hash of the entity's name. `null` until the platform suppl
         #

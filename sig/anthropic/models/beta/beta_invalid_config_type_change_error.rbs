@@ -1,0 +1,11 @@
+module Anthropic
+  module Models
+    module Beta
+      class BetaInvalidConfigTypeChangeError < Anthropic::Errors::BadRequestError
+        def error_code: -> :invalid_config_type_change
+
+        def details: -> Anthropic::Beta::BetaInvalidConfigTypeChangeErrorDetails
+      end
+    end
+  end
+end

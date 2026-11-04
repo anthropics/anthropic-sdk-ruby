@@ -69,7 +69,7 @@ module Anthropic
       #
       #   @param limit [Integer] The maximum number of user profiles to return, from 1 to 100. Defaults to 20.
       #
-      #   @param order [Symbol, Anthropic::Models::UserProfileListOrder] The sort direction, applied to the field that `order_by` selects. Defaults to `d
+      #   @param order [Symbol, Anthropic::Models::UserProfileListOrder] The sort direction, applied to the field that `order_by` selects. Defaults to
       #
       #   @param order_by [Symbol, Anthropic::Models::UserProfileListOrderBy] The field to sort user profiles by, in the direction that `order` sets. Defaults
       #

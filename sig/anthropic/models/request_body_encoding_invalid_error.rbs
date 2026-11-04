@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class RequestBodyEncodingInvalidError < Anthropic::Errors::BadRequestError
+      def error_code: -> :request_body_encoding_invalid
+
+      def details: -> Anthropic::RequestBodyEncodingInvalidErrorDetails
+    end
+  end
+end

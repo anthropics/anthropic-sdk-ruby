@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class CMEKKeyDisabledError < Anthropic::Errors::BadRequestError
+      def error_code: -> :cmek_key_disabled
+
+      def details: -> Anthropic::CMEKKeyDisabledErrorDetails
+    end
+  end
+end

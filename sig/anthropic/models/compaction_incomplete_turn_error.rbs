@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class CompactionIncompleteTurnError < Anthropic::Errors::BadRequestError
+      def error_code: -> :compaction_incomplete_turn
+
+      def details: -> Anthropic::CompactionIncompleteTurnErrorDetails
+    end
+  end
+end

@@ -31,8 +31,7 @@ module Anthropic
           #   no longer a member of the organization or its associated organizations and the
           #   organization has chosen to hide the names of removed users. Otherwise, the name
           #   stays populated for removed users. Rows for system-minted service accounts
-          #   render the service name (for example, `"Claude Security"` for usage by
-          #   Anthropic's security-patching service) or null.
+          #   render the service name (for example, `"Claude Security"`) or null.
           #
           #   @return [String, nil]
           required :name, String, nil?: true
@@ -58,7 +57,7 @@ module Anthropic
           #
           #   @param email_address [String, nil] The user's email address, including for users who are no longer members of the o
           #
-          #   @param name [String, nil] The user's full name. Null when the user has not set a name. Returns `"Deleted U
+          #   @param name [String, nil] The user's full name. Null when the user has not set a name. Returns
           #
           #   @param user_id [String] Tagged user ID.
           #

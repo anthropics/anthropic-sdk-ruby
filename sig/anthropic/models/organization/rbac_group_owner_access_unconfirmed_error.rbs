@@ -1,0 +1,11 @@
+module Anthropic
+  module Models
+    module Organization
+      class RBACGroupOwnerAccessUnconfirmedError < Anthropic::Errors::BadRequestError
+        def error_code: -> :rbac_group_owner_access_unconfirmed
+
+        def details: -> Anthropic::Organization::RBACGroupOwnerAccessUnconfirmedErrorDetails
+      end
+    end
+  end
+end

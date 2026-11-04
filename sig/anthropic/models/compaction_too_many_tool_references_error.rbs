@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class CompactionTooManyToolReferencesError < Anthropic::Errors::BadRequestError
+      def error_code: -> :compaction_too_many_tool_references
+
+      def details: -> Anthropic::CompactionTooManyToolReferencesErrorDetails
+    end
+  end
+end

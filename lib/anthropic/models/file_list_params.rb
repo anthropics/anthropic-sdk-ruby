@@ -51,7 +51,7 @@ module Anthropic
       #
       #   @param limit [Integer] Number of items to return per page.
       #
-      #   @param page [String, nil] Opaque page cursor returned in a prior list response's `next_page`. Prefixed `pa
+      #   @param page [String, nil] Opaque page cursor returned in a prior list response's `next_page`. Prefixed
       #
       #   @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
       #

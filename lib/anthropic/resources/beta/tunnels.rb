@@ -23,7 +23,7 @@ module Anthropic
         #
         # @param display_name [String, nil] Body param: Optional human-readable name for the tunnel (1-255 characters).
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `mcp-tunnels-2026-06-
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -106,7 +106,7 @@ module Anthropic
         #
         # @param page [String] Query param: Opaque pagination cursor from a previous `list_tunnels` response.
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `mcp-tunnels-2026-06-
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -237,7 +237,7 @@ module Anthropic
         #
         # @param reason [String, nil] Body param: Optional free-text reason for the rotation, recorded for audit.
         #
-        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `mcp-tunnels-2026-06-
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #

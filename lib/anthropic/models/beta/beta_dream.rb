@@ -130,8 +130,8 @@ module Anthropic
         #   writes its result into the input memory store instead.
         #
         #   The Dreams API is in research preview: the request and response shapes are
-        #   volatile and may change without the deprecation period that applies to
-        #   generally-available endpoints.
+        #   volatile and may change without the deprecation period that applies to stable
+        #   endpoints.
         #
         #   See the
         #   [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams#how-it-works)
@@ -146,7 +146,7 @@ module Anthropic
         #
         #   @param created_at [Time] When the dream was created, in RFC 3339.
         #
-        #   @param ended_at [Time, nil] When the dream reached `completed`, `failed`, or `canceled`, in RFC 3339, or `nu
+        #   @param ended_at [Time, nil] When the dream reached `completed`, `failed`, or `canceled`, in RFC 3339, or
         #
         #   @param error [Anthropic::Models::Beta::BetaDreamError, nil] Why the dream failed, or `null` if `status` isn't `failed`.
         #

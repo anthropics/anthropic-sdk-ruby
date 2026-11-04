@@ -1,0 +1,27 @@
+module Anthropic
+  module Models
+    module Organization
+      type workspace_policy_violation_error_details =
+        {
+          error_code: :workspace_policy_violation,
+          field: Anthropic::Models::Organization::workspace_policy_field
+        }
+
+      class WorkspacePolicyViolationErrorDetails < Anthropic::Internal::Type::BaseModel
+        attr_accessor error_code: :workspace_policy_violation
+
+        attr_accessor field: Anthropic::Models::Organization::workspace_policy_field
+
+        def initialize: (
+          field: Anthropic::Models::Organization::workspace_policy_field,
+          ?error_code: :workspace_policy_violation
+        ) -> void
+
+        def to_hash: -> {
+          error_code: :workspace_policy_violation,
+          field: Anthropic::Models::Organization::workspace_policy_field
+        }
+      end
+    end
+  end
+end

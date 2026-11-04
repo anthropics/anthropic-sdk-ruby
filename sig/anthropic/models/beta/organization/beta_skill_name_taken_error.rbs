@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        class BetaSkillNameTakenError < Anthropic::Errors::ConflictError
+          def error_code: -> :skill_name_taken
+
+          def details: -> Anthropic::Beta::Organization::BetaSkillNameTakenErrorDetails
+        end
+      end
+    end
+  end
+end

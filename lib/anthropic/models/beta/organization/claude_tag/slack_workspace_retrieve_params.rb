@@ -41,7 +41,7 @@ module Anthropic
             #
             #   @param include_inherited [Boolean] When `true`, `settings` holds what applies in the workspace once the organizatio
             #
-            #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21
+            #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send
             #
             #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
           end

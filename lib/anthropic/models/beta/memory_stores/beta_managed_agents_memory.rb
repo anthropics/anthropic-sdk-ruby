@@ -107,14 +107,13 @@ module Anthropic
           #
           #   @param content_sha256 [String] Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The s
           #
-          #   @param content_size_bytes [Integer] The size of the memory's `content` in UTF-8 bytes. It is set regardless of `view
+          #   @param content_size_bytes [Integer] The size of the memory's `content` in UTF-8 bytes. It is set regardless of
           #
           #   @param created_at [Time] When this memory was created, in RFC 3339 format.
           #
           #   @param memory_store_id [String] ID of the memory store this memory belongs to (a `memstore_...` value).
           #
-          #   @param memory_version_id [String] The ID of the memory version that holds the memory's current content
-          #   (`memver\_..
+          #   @param memory_version_id [String] The ID of the memory version that holds the memory's current content (
           #
           #   @param path [String] Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`.
           #

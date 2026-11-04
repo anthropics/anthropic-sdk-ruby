@@ -14,7 +14,7 @@ module Anthropic
             )
           end
 
-        # Environment identifier (e.g., 'env\_...')
+        # Environment identifier (e.g., 'env_...')
         sig { returns(String) }
         attr_accessor :id
 
@@ -84,7 +84,7 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
-          # Environment identifier (e.g., 'env\_...')
+          # Environment identifier (e.g., 'env_...')
           id:,
           # RFC 3339 timestamp when environment was archived, or null if not archived
           archived_at:,

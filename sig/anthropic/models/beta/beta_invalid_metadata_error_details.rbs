@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    class BetaInvalidMetadataErrorDetails = Beta::BetaInvalidMetadataErrorDetails
+
+    module Beta
+      type beta_invalid_metadata_error_details =
+        { error_code: :invalid_metadata }
+
+      class BetaInvalidMetadataErrorDetails < Anthropic::Internal::Type::BaseModel
+        attr_accessor error_code: :invalid_metadata
+
+        def initialize: (?error_code: :invalid_metadata) -> void
+
+        def to_hash: -> { error_code: :invalid_metadata }
+      end
+    end
+  end
+end

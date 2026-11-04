@@ -99,7 +99,7 @@ module Anthropic
           #
           # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
           #
-          #   @option args [Anthropic::Models::Beta::BetaResponseToolChangeToolReference, Anthropic::Models::Beta::BetaResponseToolChangeMCPToolReference, Anthropic::Models::Beta::BetaResponseToolChangeMCPToolsetReference, Anthropic::Models::Beta::BetaToolChangeToolDefinition, Anthropic::Models::Beta::BetaResponseToolChangeToolReference, Anthropic::Models::Beta::BetaResponseToolChangeMCPToolReference, Anthropic::Models::Beta::BetaResponseToolChangeMCPToolsetReference] :tool The tool made available: a reference to a `tools` entry or MCP toolset, or a `to
+          #   @option args [Anthropic::Models::Beta::BetaResponseToolChangeToolReference, Anthropic::Models::Beta::BetaResponseToolChangeMCPToolReference, Anthropic::Models::Beta::BetaResponseToolChangeMCPToolsetReference, Anthropic::Models::Beta::BetaToolChangeToolDefinition, Anthropic::Models::Beta::BetaResponseToolChangeToolReference, Anthropic::Models::Beta::BetaResponseToolChangeMCPToolReference, Anthropic::Models::Beta::BetaResponseToolChangeMCPToolsetReference] :tool The tool made available: a reference to a `tools` entry or MCP toolset, or a
           #
           # @raise [ArgumentError]
           # @return [Anthropic::Models::Beta::BetaResponseToolAdditionBlock, Anthropic::Models::Beta::BetaResponseToolRemovalBlock]

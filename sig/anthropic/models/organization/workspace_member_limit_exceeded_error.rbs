@@ -1,0 +1,11 @@
+module Anthropic
+  module Models
+    module Organization
+      class WorkspaceMemberLimitExceededError < Anthropic::Errors::BadRequestError
+        def error_code: -> :workspace_member_limit_exceeded
+
+        def details: -> Anthropic::Organization::WorkspaceMemberLimitExceededErrorDetails
+      end
+    end
+  end
+end

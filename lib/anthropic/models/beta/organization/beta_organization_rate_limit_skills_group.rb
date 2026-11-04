@@ -24,7 +24,7 @@ module Anthropic
           #   {Anthropic::Models::Beta::Organization::BetaOrganizationRateLimitSkillsGroup}
           #   for more details.
           #
-          #   @param id [String] Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxY
+          #   @param id [String] Opaque identifier of the rate-limit group (for example,
           #
           #   @param type [Symbol, :skills] Always `skills`: the Skills API.
         end

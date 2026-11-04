@@ -28,7 +28,7 @@ module Anthropic
           #
           # @param organization_id [String, nil] Query param: For a `read:org_audit` or `read:compliance_org_data` key created fo
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `ce-plugins-2026-09-0
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -80,7 +80,7 @@ module Anthropic
           #
           # @param default_installation_preference [Symbol, Anthropic::Models::Beta::Organization::PluginMarketplaceUpdateParams::DefaultInstallationPreference] Body param: The organization-wide installation setting every Plugin in the marke
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `ce-plugins-2026-09-0
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -140,7 +140,7 @@ module Anthropic
           #
           # @param source [Symbol, Anthropic::Models::Beta::Organization::PluginMarketplaceListParams::Source, nil] Query param: Only plugin marketplaces with this `source`: `manual` for those who
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `ce-plugins-2026-09-0
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -206,9 +206,12 @@ module Anthropic
           #
           # @param archive [Pathname, StringIO, IO, String, Anthropic::FilePart] Body param: A .zip of the marketplace directory (its contents at the root, or wr
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `ce-plugins-2026-09-0
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+          #
+          # @raise [Anthropic::Models::BetaUnsupportedCharsetError] The request's `Content-Type` header names a charset other than UTF-8, ISO-8859-1
+          #   or US-ASCII. Send the request with no charset, or with one of these.
           #
           # @return [Anthropic::Models::Beta::Organization::BetaPluginMarketplaceValidationReport]
           #
@@ -277,7 +280,7 @@ module Anthropic
           #
           # @param ref [String, nil] Body param: The branch to validate the tip of, or the full 40-character SHA of t
           #
-          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send `ce-plugins-2026-09-0
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #

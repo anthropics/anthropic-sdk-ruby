@@ -31,6 +31,15 @@ module Anthropic
         sig { params(before_id: String).void }
         attr_writer :before_id
 
+        # Only the Workspaces with these IDs, at most 100. `include_archived` and
+        # `include_default` still apply, and IDs of Workspaces the caller can't list are
+        # left out.
+        sig { returns(T.nilable(T::Array[String])) }
+        attr_reader :ids
+
+        sig { params(ids: T::Array[String]).void }
+        attr_writer :ids
+
         # Whether to include Workspaces that have been archived in the response
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :include_archived
@@ -58,6 +67,7 @@ module Anthropic
           params(
             after_id: String,
             before_id: String,
+            ids: T::Array[String],
             include_archived: T::Boolean,
             include_default: T::Boolean,
             limit: Integer,
@@ -71,6 +81,10 @@ module Anthropic
           # ID of the object to use as a cursor for pagination. When provided, returns the
           # page of results immediately before this object.
           before_id: nil,
+          # Only the Workspaces with these IDs, at most 100. `include_archived` and
+          # `include_default` still apply, and IDs of Workspaces the caller can't list are
+          # left out.
+          ids: nil,
           # Whether to include Workspaces that have been archived in the response
           include_archived: nil,
           # Whether to include the organization's default Workspace in the response
@@ -88,6 +102,7 @@ module Anthropic
             {
               after_id: String,
               before_id: String,
+              ids: T::Array[String],
               include_archived: T::Boolean,
               include_default: T::Boolean,
               limit: Integer,

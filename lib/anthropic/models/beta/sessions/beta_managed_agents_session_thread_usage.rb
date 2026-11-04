@@ -62,7 +62,7 @@ module Anthropic
           #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadUsage} for
           #   more details.
           #
-          #   @param active_seconds [Float] Cumulative time in seconds this thread spent in running status. Equal to `stats.
+          #   @param active_seconds [Float] Cumulative time in seconds this thread spent in running status. Equal to
           #
           #   @param cache_creation [Anthropic::Models::Beta::BetaManagedAgentsCacheCreationUsage] Tokens used to create prompt cache entries, broken down by cache TTL.
           #

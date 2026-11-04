@@ -68,7 +68,7 @@ module Anthropic
             #
             #   @param server_tool_use [Anthropic::Models::Beta::Organization::BetaAnalyticsServerToolUse] Server-side tool usage metrics.
             #
-            #   @param total_tokens [Integer] Total token count across all token types. This is the value the default `order_b
+            #   @param total_tokens [Integer] Total token count across all token types. This is the value the default
             #
             #   @param uncached_input_tokens [Integer] The number of uncached input tokens processed.
           end

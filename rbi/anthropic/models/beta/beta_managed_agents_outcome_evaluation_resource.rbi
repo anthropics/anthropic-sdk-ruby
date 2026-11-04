@@ -34,7 +34,7 @@ module Anthropic
         sig { returns(Integer) }
         attr_accessor :iteration
 
-        # Server-generated outc\_ ID for this outcome.
+        # Server-generated outc_ ID for this outcome.
         sig { returns(String) }
         attr_accessor :outcome_id
 
@@ -71,7 +71,7 @@ module Anthropic
           explanation:,
           # 0-indexed revision cycle the outcome is currently on.
           iteration:,
-          # Server-generated outc\_ ID for this outcome.
+          # Server-generated outc_ ID for this outcome.
           outcome_id:,
           # Current evaluation state. `pending` before the agent begins work; `running`
           # while producing or revising; `evaluating` while the grader scores;

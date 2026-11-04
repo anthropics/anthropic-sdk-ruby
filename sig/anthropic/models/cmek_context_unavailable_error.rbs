@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class CMEKContextUnavailableError < Anthropic::Errors::ServiceUnavailableError
+      def error_code: -> :cmek_context_unavailable
+
+      def details: -> Anthropic::CMEKContextUnavailableErrorDetails
+    end
+  end
+end

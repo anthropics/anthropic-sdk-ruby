@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    type organization_on_hold_error_details =
+      { error_code: :organization_on_hold, appeal_url: String? }
+
+    class OrganizationOnHoldErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :organization_on_hold
+
+      attr_accessor appeal_url: String?
+
+      def initialize: (
+        ?appeal_url: String?,
+        ?error_code: :organization_on_hold
+      ) -> void
+
+      def to_hash: -> { error_code: :organization_on_hold, appeal_url: String? }
+    end
+  end
+end

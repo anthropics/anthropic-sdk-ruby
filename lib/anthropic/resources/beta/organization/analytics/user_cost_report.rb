@@ -10,10 +10,12 @@ module Anthropic
             #
             # Returns cost per user, ranked by spend; `group_by[]` or `bucket_width` splits a
             # user across several rows. Use this to see which users account for the most cost.
-            # Only cost attributed to a user account is included; cost with no user attributed
-            # to it, such as Code Review usage and Claude Tag usage in Slack channels, is left
-            # out. Available to organizations on a Claude Enterprise plan. Requires an API key
-            # with the `read:analytics` scope.
+            # Only cost attributed to a user account is included, so cost with no user
+            # account, such as Code Review usage and Claude Tag usage in Slack channels, is
+            # left out. Claude Tag one-to-one direct messages are included, with product
+            # `claude-tag`, only for members who have connected a Claude account. Available to
+            # organizations on a Claude Enterprise plan. Requires an API key with the
+            # `read:analytics` scope.
             #
             # This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
             # new integrations, use
@@ -38,7 +40,7 @@ module Anthropic
             #
             # @param context_windows [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsContextWindow>, nil] Filter to specific context-window pricing tiers. Use `group_by[]=context_window`
             #
-            # @param ending_at [Time, nil] End of range, exclusive. When omitted, defaults to the earlier of now and `start
+            # @param ending_at [Time, nil] End of range, exclusive. When omitted, defaults to the earlier of now and
             #
             # @param exclude_deleted_users [Boolean] If true, omit rows for users who are deleted (`deleted: true`). A page may conta
             #
@@ -46,7 +48,7 @@ module Anthropic
             #
             # @param inference_geos [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsInferenceGeoFilter>, nil] Filter to specific inference regions. `not_available` matches rows where the reg
             #
-            # @param limit [Integer] Number of rows per page (1-1000, default 20). One row per actor unless `group_by
+            # @param limit [Integer] Number of rows per page (1-1000, default 20). One row per actor unless
             #
             # @param models [Array<String>, nil] Models to include. Defaults to all models. Use `group_by[]=model` to break out p
             #
@@ -60,7 +62,7 @@ module Anthropic
             #
             # @param rbac_group_ids [Array<String>, nil] Filter to usage attributed to specific RBAC groups. Accepts tagged RBAC group ID
             #
-            # @param slack_channel_ids [Array<String>, nil] Filter to usage originating from specific Slack channels. Use `group*by[]=slack*
+            # @param slack_channel_ids [Array<String>, nil] Filter to usage originating from specific Slack channels. Use
             #
             # @param speeds [Array<Symbol, Anthropic::Models::Beta::Organization::Analytics::UserCostReportListParams::Speed>, nil] Filter to fast or standard inference mode. Use `group_by[]=speed` to break out p
             #

@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type compaction_tool_changes_mismatch_error_details =
+      { error_code: :compaction_tool_changes_mismatch }
+
+    class CompactionToolChangesMismatchErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :compaction_tool_changes_mismatch
+
+      def initialize: (?error_code: :compaction_tool_changes_mismatch) -> void
+
+      def to_hash: -> { error_code: :compaction_tool_changes_mismatch }
+    end
+  end
+end

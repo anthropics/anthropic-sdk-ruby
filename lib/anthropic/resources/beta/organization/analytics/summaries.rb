@@ -28,7 +28,7 @@ module Anthropic
             #
             # @param ending_date [Date, nil] UTC date in YYYY-MM-DD format. End of the date range (exclusive). Data is typica
             #
-            # @param filter [Array<String>, nil] Filters as `dimension:value`. Only `rbac_group_id` is supported (e.g. `filter[]=
+            # @param filter [Array<String>, nil] Filters as `dimension:value`. Only `rbac_group_id` is supported (e.g.
             #
             # @param limit [Integer, nil] Number of results per page (1-1000, default 100). The day series (at most 366 en
             #

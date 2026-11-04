@@ -95,8 +95,7 @@ module Anthropic
 
           # @!attribute chat_cowork_unified_daily_active_user_count
           #   Number of users with activity in Chat and Cowork unified on the requested day.
-          #   Omitted from the response on deployments that do not offer Chat and Cowork
-          #   unified.
+          #   Omitted from the response where Chat and Cowork unified is not available.
           #
           #   @return [Integer, nil]
           optional :chat_cowork_unified_daily_active_user_count, Integer, nil?: true
@@ -104,15 +103,15 @@ module Anthropic
           # @!attribute chat_cowork_unified_monthly_active_user_count
           #   Number of users with activity in Chat and Cowork unified in the 28-day rolling
           #   window (30 days when the request filters by `rbac_group_id`). Omitted from the
-          #   response on deployments that do not offer Chat and Cowork unified.
+          #   response where Chat and Cowork unified is not available.
           #
           #   @return [Integer, nil]
           optional :chat_cowork_unified_monthly_active_user_count, Integer, nil?: true
 
           # @!attribute chat_cowork_unified_weekly_active_user_count
           #   Number of users with activity in Chat and Cowork unified in the 7-day rolling
-          #   window. Omitted from the response on deployments that do not offer Chat and
-          #   Cowork unified.
+          #   window. Omitted from the response where Chat and Cowork unified is not
+          #   available.
           #
           #   @return [Integer, nil]
           optional :chat_cowork_unified_weekly_active_user_count, Integer, nil?: true
@@ -263,13 +262,13 @@ module Anthropic
           #
           #   @param daily_active_user_count [Integer] Number of users with token consumption on the requested day
           #
-          #   @param daily_adoption_rate [Float, nil] Percentage of assigned seats with activity on the requested day (`DAU / assigned
+          #   @param daily_adoption_rate [Float, nil] Percentage of assigned seats with activity on the requested day (
           #
           #   @param ending_at [Time] End of the aggregation period (exclusive), UTC midnight in RFC 3339 format (e.g.
           #
           #   @param monthly_active_user_count [Integer] Number of users with token consumption in the 30-day rolling window
           #
-          #   @param monthly_adoption_rate [Float, nil] Percentage of assigned seats with activity in the 30-day rolling window (`MAU /
+          #   @param monthly_adoption_rate [Float, nil] Percentage of assigned seats with activity in the 30-day rolling window (
           #
           #   @param pending_invite_count [Integer, nil] Number of pending invitations to join the organization. Null when the response i
           #
@@ -277,7 +276,7 @@ module Anthropic
           #
           #   @param weekly_active_user_count [Integer] Number of users with token consumption in the 7-day rolling window
           #
-          #   @param weekly_adoption_rate [Float, nil] Percentage of assigned seats with activity in the 7-day rolling window (`WAU / a
+          #   @param weekly_adoption_rate [Float, nil] Percentage of assigned seats with activity in the 7-day rolling window (
           #
           #   @param chat_cowork_unified_daily_active_user_count [Integer, nil] Number of users with activity in Chat and Cowork unified on the requested day. O
           #

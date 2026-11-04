@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class ClaudeCodeVersionTooOldError < Anthropic::Errors::BadRequestError
+      def error_code: -> :claude_code_version_too_old
+
+      def details: -> Anthropic::ClaudeCodeVersionTooOldErrorDetails
+    end
+  end
+end

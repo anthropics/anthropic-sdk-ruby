@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class OrgMemberLimitExceededError < Anthropic::Errors::BadRequestError
+      def error_code: -> :org_member_limit_exceeded
+
+      def details: -> Anthropic::OrgMemberLimitExceededErrorDetails
+    end
+  end
+end

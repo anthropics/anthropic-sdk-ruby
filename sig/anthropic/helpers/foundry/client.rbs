@@ -1,0 +1,44 @@
+module Anthropic
+  module Helpers
+    module Foundry
+      class Client < Anthropic::Client
+        ENTRA_ID_SCOPE: String
+
+        attr_reader resource: String?
+
+        def models: -> bot
+
+        private def resolve_default_credentials?: -> bool
+
+        private def auth_headers: -> ::Hash[String, String]
+
+        private def open_telemetry_scope: -> String
+
+        private def provider_middleware: -> Anthropic::Middleware::entry
+
+        private def buffer_body: (
+          Anthropic::APIRequest req
+        ) -> Anthropic::APIRequest
+
+        private def apply_auth: (
+          Anthropic::APIRequest req
+        ) -> Anthropic::APIRequest
+
+        private def arg_or_env: (String? arg, String env) -> String?
+
+        def initialize: (
+          ?resource: String?,
+          ?api_key: String?,
+          ?azure_ad_token_provider: (^-> String)?,
+          ?base_url: String?,
+          ?max_retries: Integer,
+          ?timeout: Float?,
+          ?initial_retry_delay: Float,
+          ?max_retry_delay: Float,
+          ?middleware: Anthropic::Middleware::entry_or_array?,
+          ?open_telemetry: Anthropic::Internal::Tracing::client_option?
+        ) -> void
+      end
+    end
+  end
+end

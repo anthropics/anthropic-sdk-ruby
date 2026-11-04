@@ -1,0 +1,26 @@
+module Anthropic
+  module Models
+    type thread_unsupported_feature_name =
+      :cache_control
+      | :context_management
+      | :fallbacks
+      | :hipaa
+      | :inference_hooks
+      | :thinking
+      | :zdr
+
+    module ThreadUnsupportedFeatureName
+      extend Anthropic::Internal::Type::Enum
+
+      CACHE_CONTROL: :cache_control
+      CONTEXT_MANAGEMENT: :context_management
+      FALLBACKS: :fallbacks
+      HIPAA: :hipaa
+      INFERENCE_HOOKS: :inference_hooks
+      THINKING: :thinking
+      ZDR: :zdr
+
+      def self?.values: -> ::Array[Anthropic::Models::thread_unsupported_feature_name]
+    end
+  end
+end

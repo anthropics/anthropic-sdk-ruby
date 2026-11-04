@@ -48,7 +48,7 @@ module Anthropic
           #
           #   @param memory_version_id [String] The ID of the memory version to redact (`memver_...`).
           #
-          #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `manag
+          #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `agent-memory-2026-07-22` or
           #
           #   @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
           #

@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type request_body_encoding_invalid_error_details =
+      { error_code: :request_body_encoding_invalid }
+
+    class RequestBodyEncodingInvalidErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :request_body_encoding_invalid
+
+      def initialize: (?error_code: :request_body_encoding_invalid) -> void
+
+      def to_hash: -> { error_code: :request_body_encoding_invalid }
+    end
+  end
+end

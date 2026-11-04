@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type compaction_unavailable_error_details =
+      { error_code: :compaction_unavailable }
+
+    class CompactionUnavailableErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :compaction_unavailable
+
+      def initialize: (?error_code: :compaction_unavailable) -> void
+
+      def to_hash: -> { error_code: :compaction_unavailable }
+    end
+  end
+end

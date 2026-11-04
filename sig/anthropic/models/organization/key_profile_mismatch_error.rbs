@@ -1,0 +1,11 @@
+module Anthropic
+  module Models
+    module Organization
+      class KeyProfileMismatchError < Anthropic::Errors::BadRequestError
+        def error_code: -> :key_profile_mismatch
+
+        def details: -> Anthropic::Organization::KeyProfileMismatchErrorDetails
+      end
+    end
+  end
+end

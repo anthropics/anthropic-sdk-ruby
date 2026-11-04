@@ -1,0 +1,29 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_slack_channel_set_up_settings_conflict_error_details =
+          {
+            error_code: :slack_channel_set_up_settings_conflict,
+            slack_channel_id: String
+          }
+
+        class BetaSlackChannelSetUpSettingsConflictErrorDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor error_code: :slack_channel_set_up_settings_conflict
+
+          attr_accessor slack_channel_id: String
+
+          def initialize: (
+            slack_channel_id: String,
+            ?error_code: :slack_channel_set_up_settings_conflict
+          ) -> void
+
+          def to_hash: -> {
+            error_code: :slack_channel_set_up_settings_conflict,
+            slack_channel_id: String
+          }
+        end
+      end
+    end
+  end
+end

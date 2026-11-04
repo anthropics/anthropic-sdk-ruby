@@ -1,0 +1,16 @@
+module Anthropic
+  module Models
+    module Organization
+      type workspace_api_key_limit_exceeded_error_details =
+        { error_code: :workspace_api_key_limit_exceeded }
+
+      class WorkspaceAPIKeyLimitExceededErrorDetails < Anthropic::Internal::Type::BaseModel
+        attr_accessor error_code: :workspace_api_key_limit_exceeded
+
+        def initialize: (?error_code: :workspace_api_key_limit_exceeded) -> void
+
+        def to_hash: -> { error_code: :workspace_api_key_limit_exceeded }
+      end
+    end
+  end
+end

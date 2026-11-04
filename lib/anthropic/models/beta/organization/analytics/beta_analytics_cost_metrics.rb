@@ -48,7 +48,6 @@ module Anthropic
             #   @param list_amount [String] List-price amount (pre-discount) in fractional cents.
             #
             #   @param requests [Integer, nil] Number of API requests in this row's scope. Null when `group_by` includes
-            #   `cost\_
           end
         end
       end
