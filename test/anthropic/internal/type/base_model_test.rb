@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "open3"
+
 require_relative "../../test_helper"
 
 class Anthropic::Test::PrimitiveModelTest < Minitest::Test
@@ -414,6 +416,20 @@ class Anthropic::Test::BaseModelTest < Minitest::Test
         Anthropic::Internal::Type::Converter.dump(target, input) => ^expect
       end
     end
+  end
+
+  def test_to_yaml_in_a_program_that_only_requires_the_gem
+    program = <<~RUBY
+      class M1 < Anthropic::Internal::Type::BaseModel
+        required :a, Integer
+      end
+
+      print(M1.new(a: 1).to_yaml)
+    RUBY
+
+    yaml, err = Open3.capture3(RbConfig.ruby, "-r./lib/anthropic", "-e", program)
+
+    assert_equal(M1.new(a: 1).to_yaml, yaml, err)
   end
 
   def test_accessors
