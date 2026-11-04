@@ -712,3 +712,40 @@ result = anthropic.messages.count_tokens(
 See example files:
 - [`examples/structured_output.rb`](examples/structured_output.rb) - Basic structured output
 - [`examples/structured_output_stream.rb`](examples/structured_output_stream.rb) - Streaming structured output
+
+# Microsoft Foundry
+
+`Anthropic::FoundryClient` talks to [Claude in Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry). It has the same interface as `Anthropic::Client`, except for the Models and Message Batches APIs, which Foundry does not serve.
+
+```ruby
+anthropic = Anthropic::FoundryClient.new(
+  resource: "example-resource", # defaults to ENV["ANTHROPIC_FOUNDRY_RESOURCE"]
+  api_key: "my-foundry-api-key" # defaults to ENV["ANTHROPIC_FOUNDRY_API_KEY"]
+)
+
+message = anthropic.messages.create(
+  model: "claude-sonnet-5-5", # the name of your deployment
+  max_tokens: 1024,
+  messages: [{role: "user", content: "Hello, Claude"}]
+)
+```
+
+Requests go to `https://{resource}.services.ai.azure.com/anthropic/`. To use another endpoint, pass `base_url` (or set `ANTHROPIC_FOUNDRY_BASE_URL`) instead of `resource`.
+
+Foundry requires a `Content-Length`, so a file or skill upload is held in memory while it is sent rather than streamed.
+
+## Microsoft Entra ID
+
+Instead of an API key, pass `azure_ad_token_provider`: a callable that returns an access token for the `Anthropic::FoundryClient::ENTRA_ID_SCOPE` scope. It is called on every attempt, including retries, so it should cache the token until it is close to expiry.
+
+```ruby
+anthropic = Anthropic::FoundryClient.new(
+  resource: "example-resource",
+  azure_ad_token_provider: -> { fetch_entra_id_token(scope: Anthropic::FoundryClient::ENTRA_ID_SCOPE) }
+)
+```
+
+## Examples
+
+See example files:
+- [`examples/foundry.rb`](examples/foundry.rb) - Basic usage with an API key

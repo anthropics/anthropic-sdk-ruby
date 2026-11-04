@@ -190,6 +190,30 @@ class Anthropic::Test::OpenTelemetryProvidersTest < Anthropic::Test::OpenTelemet
     )
   end
 
+  def test_the_foundry_client_reports_the_anthropic_provider_and_its_host
+    url = "https://example-resource.services.ai.azure.com/anthropic/v1/messages"
+    stub_messages(url: url)
+    sampler = recording_sampler
+    Anthropic::FoundryClient.new(
+      resource: "example-resource",
+      api_key: "k",
+      open_telemetry: {tracer_provider: @provider}
+    )
+                            .messages.create(**PARAMS)
+
+    started = {
+      "gen_ai.provider.name" => "anthropic",
+      "server.address" => "example-resource.services.ai.azure.com",
+      "server.port" => 443
+    }
+    assert_equal(started, sampler.started.first.last.slice(*started.keys))
+    assert_equal(started, only_span.attributes.to_h.slice(*started.keys))
+    assert_equal(
+      {"http.route" => "/v1/messages", "url.path" => "/anthropic/v1/messages", "url.full" => url},
+      only_span.attributes.to_h.slice("http.route", "url.path", "url.full")
+    )
+  end
+
   def test_the_url_of_a_client_for_another_platform_is_that_of_its_request
     urls = SIGNING_CLIENTS.keys.grep(%r{/v1/messages\z})
     urls.each do |url|
@@ -219,10 +243,11 @@ class Anthropic::Test::OpenTelemetryProvidersTest < Anthropic::Test::OpenTelemet
         skip_auth: true,
         open_telemetry: option
       )
+      clients << Anthropic::FoundryClient.new(resource: "example-resource", api_key: "k", open_telemetry: option)
       Google::Auth.stub(:get_application_default, creds) { clients.each { _1.messages.create(**PARAMS) } }
     end
 
-    names = %w[bedrock aws bedrock vertex google_cloud].map { "com.anthropic.sdk.ruby.#{_1}" }
+    names = %w[bedrock aws bedrock vertex google_cloud foundry].map { "com.anthropic.sdk.ruby.#{_1}" }
     assert_equal(names, spans.map { scope(_1).name })
     assert_equal([Anthropic::VERSION], spans.map { scope(_1).version }.uniq)
   end
@@ -232,6 +257,7 @@ class Anthropic::Test::OpenTelemetryProvidersTest < Anthropic::Test::OpenTelemet
     clients << Anthropic::VertexClient.new(region: "us-east5", project_id: "p", **kw)
     gateway = "https://gateway.example.com"
     clients << Anthropic::GoogleCloudClient.new(base_url: gateway, skip_auth: true, **kw)
+    clients << Anthropic::FoundryClient.new(resource: "example-resource", api_key: "k", **kw)
   end
 
   def test_a_client_for_another_platform_that_is_given_no_option_reads_the_environment
@@ -255,7 +281,7 @@ class Anthropic::Test::OpenTelemetryProvidersTest < Anthropic::Test::OpenTelemet
       Google::Auth.stub(:get_application_default, creds) { clients.each { _1.messages.create(**PARAMS) } }
     end
 
-    assert_equal(([true] * 5) + ([false] * 5), spans.map { _1.attributes.key?("gen_ai.input.messages") })
-    assert_equal(([false] * 5) + ([true] * 5) + ([false] * 5), @requests.map { _1["traceparent"].nil? })
+    assert_equal(([true] * 6) + ([false] * 6), spans.map { _1.attributes.key?("gen_ai.input.messages") })
+    assert_equal(([false] * 6) + ([true] * 6) + ([false] * 6), @requests.map { _1["traceparent"].nil? })
   end
 end
