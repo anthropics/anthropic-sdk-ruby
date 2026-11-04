@@ -44,9 +44,12 @@ module Anthropic
                      nil?: true
 
             # @!attribute description
-            #   The manifest's description; null when it declares none. If that description is
-            #   the first 500 characters of exactly one distinct skill `description` in
-            #   `components`, that skill `description` is returned instead.
+            #   The manifest's description; null when it declares none. The value can be longer
+            #   than 500 characters, the limit on `description` in an uploaded manifest. A
+            #   description that the manifest takes from a `SKILL.md` is cut to its first 500
+            #   characters. So if the manifest's description is the first 500 characters of
+            #   exactly one distinct skill `description` in `components`, that skill
+            #   `description` is returned instead.
             #
             #   @return [String, nil]
             required :description, String, nil?: true
@@ -113,7 +116,7 @@ module Anthropic
             #
             #   @param created_by [Anthropic::Models::Beta::Organization::BetaPluginUserActor, Anthropic::Models::Beta::Organization::BetaPluginAPIActor, nil] Who uploaded this version; null when not recorded.
             #
-            #   @param description [String, nil] The manifest's description; null when it declares none. If that description is t
+            #   @param description [String, nil] The manifest's description; null when it declares none. The value can be longer
             #
             #   @param display_name [String, nil] The manifest's display name; null when it declares none.
             #
