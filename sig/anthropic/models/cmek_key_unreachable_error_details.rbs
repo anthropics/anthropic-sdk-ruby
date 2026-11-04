@@ -3,7 +3,7 @@ module Anthropic
     type cmek_key_unreachable_error_details =
       { error_code: :cmek_key_unreachable }
 
-    class CmekKeyUnreachableErrorDetails < Anthropic::Internal::Type::BaseModel
+    class CMEKKeyUnreachableErrorDetails < Anthropic::Internal::Type::BaseModel
       attr_accessor error_code: :cmek_key_unreachable
 
       def initialize: (?error_code: :cmek_key_unreachable) -> void

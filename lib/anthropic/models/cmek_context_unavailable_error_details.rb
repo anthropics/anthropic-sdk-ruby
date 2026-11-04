@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class CmekContextUnavailableErrorDetails < Anthropic::Internal::Type::BaseModel
+    class CMEKContextUnavailableErrorDetails < Anthropic::Internal::Type::BaseModel
       # @!attribute error_code
       #
       #   @return [Symbol, :cmek_context_unavailable]

@@ -331,13 +331,13 @@ module Anthropic
 
   class ClaudeCodeVersionTooOldErrorDetails = Anthropic::Models::ClaudeCodeVersionTooOldErrorDetails
 
-  class CmekContextUnavailableErrorDetails = Anthropic::Models::CmekContextUnavailableErrorDetails
+  class CMEKContextUnavailableErrorDetails = Anthropic::Models::CMEKContextUnavailableErrorDetails
 
-  class CmekKeyDisabledErrorDetails = Anthropic::Models::CmekKeyDisabledErrorDetails
+  class CMEKKeyDisabledErrorDetails = Anthropic::Models::CMEKKeyDisabledErrorDetails
 
-  class CmekKeyNetworkBlockedErrorDetails = Anthropic::Models::CmekKeyNetworkBlockedErrorDetails
+  class CMEKKeyNetworkBlockedErrorDetails = Anthropic::Models::CMEKKeyNetworkBlockedErrorDetails
 
-  class CmekKeyUnreachableErrorDetails = Anthropic::Models::CmekKeyUnreachableErrorDetails
+  class CMEKKeyUnreachableErrorDetails = Anthropic::Models::CMEKKeyUnreachableErrorDetails
 
   class CodeExecutionOutputBlock = Anthropic::Models::CodeExecutionOutputBlock
 

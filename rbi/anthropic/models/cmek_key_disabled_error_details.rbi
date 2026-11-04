@@ -2,11 +2,11 @@
 
 module Anthropic
   module Models
-    class CmekKeyDisabledErrorDetails < Anthropic::Internal::Type::BaseModel
+    class CMEKKeyDisabledErrorDetails < Anthropic::Internal::Type::BaseModel
       OrHash =
         T.type_alias do
           T.any(
-            Anthropic::CmekKeyDisabledErrorDetails,
+            Anthropic::CMEKKeyDisabledErrorDetails,
             Anthropic::Internal::AnyHash
           )
         end

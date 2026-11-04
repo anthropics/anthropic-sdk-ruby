@@ -4,8 +4,8 @@ module Anthropic
       Anthropic::AvailableToolsLimitExceededErrorDetails
       | Anthropic::ClaudeCodeKeyCreatorNotMemberErrorDetails
       | Anthropic::ClaudeCodeVersionTooOldErrorDetails
-      | Anthropic::CmekKeyDisabledErrorDetails
-      | Anthropic::CmekKeyNetworkBlockedErrorDetails
+      | Anthropic::CMEKKeyDisabledErrorDetails
+      | Anthropic::CMEKKeyNetworkBlockedErrorDetails
       | Anthropic::CompactionBlockAmbiguousErrorDetails
       | Anthropic::CompactionBlockMisplacedErrorDetails
       | Anthropic::CompactionContentMismatchErrorDetails
@@ -27,12 +27,12 @@ module Anthropic
       | Anthropic::SkillReadBlockedUndecryptableErrorDetails
       | Anthropic::RequestBodyTooLargeAfterDecodingErrorDetails
       | Anthropic::EnforcedSpendLimitReachedErrorDetails
-      | Anthropic::CmekKeyUnreachableErrorDetails
+      | Anthropic::CMEKKeyUnreachableErrorDetails
       | Anthropic::CompactionUnavailableErrorDetails
       | Anthropic::StorageQuotaExceededErrorDetails
       | Anthropic::FileNotDownloadableErrorDetails
       | Anthropic::FileExpiredErrorDetails
-      | Anthropic::CmekContextUnavailableErrorDetails
+      | Anthropic::CMEKContextUnavailableErrorDetails
       | Anthropic::Organization::OrgAPIKeyLimitExceededErrorDetails
       | Anthropic::Organization::WorkspaceAPIKeyLimitExceededErrorDetails
       | Anthropic::UserProfileNotFoundErrorDetails
@@ -247,10 +247,10 @@ module Anthropic
         ) -> Anthropic::ClaudeCodeVersionTooOldErrorDetails
         | (
           error_code: :cmek_key_disabled | "cmek_key_disabled"
-        ) -> Anthropic::CmekKeyDisabledErrorDetails
+        ) -> Anthropic::CMEKKeyDisabledErrorDetails
         | (
           error_code: :cmek_key_network_blocked | "cmek_key_network_blocked"
-        ) -> Anthropic::CmekKeyNetworkBlockedErrorDetails
+        ) -> Anthropic::CMEKKeyNetworkBlockedErrorDetails
         | (
           error_code: :compaction_block_ambiguous | "compaction_block_ambiguous"
         ) -> Anthropic::CompactionBlockAmbiguousErrorDetails
@@ -330,7 +330,7 @@ module Anthropic
         ) -> Anthropic::EnforcedSpendLimitReachedErrorDetails
         | (
           error_code: :cmek_key_unreachable | "cmek_key_unreachable"
-        ) -> Anthropic::CmekKeyUnreachableErrorDetails
+        ) -> Anthropic::CMEKKeyUnreachableErrorDetails
         | (
           error_code: :compaction_unavailable | "compaction_unavailable"
         ) -> Anthropic::CompactionUnavailableErrorDetails
@@ -345,7 +345,7 @@ module Anthropic
         ) -> Anthropic::FileExpiredErrorDetails
         | (
           error_code: :cmek_context_unavailable | "cmek_context_unavailable"
-        ) -> Anthropic::CmekContextUnavailableErrorDetails
+        ) -> Anthropic::CMEKContextUnavailableErrorDetails
         | (
           error_code: :org_api_key_limit_exceeded | "org_api_key_limit_exceeded"
         ) -> Anthropic::Organization::OrgAPIKeyLimitExceededErrorDetails

@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class CmekKeyUnreachableErrorDetails < Anthropic::Internal::Type::BaseModel
+    class CMEKKeyUnreachableErrorDetails < Anthropic::Internal::Type::BaseModel
       # @!attribute error_code
       #
       #   @return [Symbol, :cmek_key_unreachable]

@@ -2,11 +2,11 @@
 
 module Anthropic
   module Models
-    class CmekContextUnavailableErrorDetails < Anthropic::Internal::Type::BaseModel
+    class CMEKContextUnavailableErrorDetails < Anthropic::Internal::Type::BaseModel
       OrHash =
         T.type_alias do
           T.any(
-            Anthropic::CmekContextUnavailableErrorDetails,
+            Anthropic::CMEKContextUnavailableErrorDetails,
             Anthropic::Internal::AnyHash
           )
         end

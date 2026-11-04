@@ -3,7 +3,7 @@ module Anthropic
     type cmek_context_unavailable_error_details =
       { error_code: :cmek_context_unavailable }
 
-    class CmekContextUnavailableErrorDetails < Anthropic::Internal::Type::BaseModel
+    class CMEKContextUnavailableErrorDetails < Anthropic::Internal::Type::BaseModel
       attr_accessor error_code: :cmek_context_unavailable
 
       def initialize: (?error_code: :cmek_context_unavailable) -> void

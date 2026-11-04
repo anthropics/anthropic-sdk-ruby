@@ -2,11 +2,11 @@
 
 module Anthropic
   module Models
-    class CmekKeyUnreachableErrorDetails < Anthropic::Internal::Type::BaseModel
+    class CMEKKeyUnreachableErrorDetails < Anthropic::Internal::Type::BaseModel
       OrHash =
         T.type_alias do
           T.any(
-            Anthropic::CmekKeyUnreachableErrorDetails,
+            Anthropic::CMEKKeyUnreachableErrorDetails,
             Anthropic::Internal::AnyHash
           )
         end

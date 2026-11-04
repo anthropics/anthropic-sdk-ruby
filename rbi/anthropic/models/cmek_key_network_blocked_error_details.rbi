@@ -2,11 +2,11 @@
 
 module Anthropic
   module Models
-    class CmekKeyNetworkBlockedErrorDetails < Anthropic::Internal::Type::BaseModel
+    class CMEKKeyNetworkBlockedErrorDetails < Anthropic::Internal::Type::BaseModel
       OrHash =
         T.type_alias do
           T.any(
-            Anthropic::CmekKeyNetworkBlockedErrorDetails,
+            Anthropic::CMEKKeyNetworkBlockedErrorDetails,
             Anthropic::Internal::AnyHash
           )
         end

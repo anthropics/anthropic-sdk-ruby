@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class CmekKeyNetworkBlockedErrorDetails < Anthropic::Internal::Type::BaseModel
+    class CMEKKeyNetworkBlockedErrorDetails < Anthropic::Internal::Type::BaseModel
       # @!attribute error_code
       #
       #   @return [Symbol, :cmek_key_network_blocked]

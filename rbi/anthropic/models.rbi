@@ -366,16 +366,16 @@ module Anthropic
   ClaudeCodeVersionTooOldErrorDetails =
     Anthropic::Models::ClaudeCodeVersionTooOldErrorDetails
 
-  CmekContextUnavailableErrorDetails =
-    Anthropic::Models::CmekContextUnavailableErrorDetails
+  CMEKContextUnavailableErrorDetails =
+    Anthropic::Models::CMEKContextUnavailableErrorDetails
 
-  CmekKeyDisabledErrorDetails = Anthropic::Models::CmekKeyDisabledErrorDetails
+  CMEKKeyDisabledErrorDetails = Anthropic::Models::CMEKKeyDisabledErrorDetails
 
-  CmekKeyNetworkBlockedErrorDetails =
-    Anthropic::Models::CmekKeyNetworkBlockedErrorDetails
+  CMEKKeyNetworkBlockedErrorDetails =
+    Anthropic::Models::CMEKKeyNetworkBlockedErrorDetails
 
-  CmekKeyUnreachableErrorDetails =
-    Anthropic::Models::CmekKeyUnreachableErrorDetails
+  CMEKKeyUnreachableErrorDetails =
+    Anthropic::Models::CMEKKeyUnreachableErrorDetails
 
   CodeExecutionOutputBlock = Anthropic::Models::CodeExecutionOutputBlock
 

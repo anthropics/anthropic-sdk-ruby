@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class CmekKeyDisabledErrorDetails < Anthropic::Internal::Type::BaseModel
+    class CMEKKeyDisabledErrorDetails < Anthropic::Internal::Type::BaseModel
       # @!attribute error_code
       #
       #   @return [Symbol, :cmek_key_disabled]
