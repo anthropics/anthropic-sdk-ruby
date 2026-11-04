@@ -210,8 +210,7 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @raise [Anthropic::Models::BetaUnsupportedCharsetError] The request's `Content-Type` header names a charset other than UTF-8, ISO-8859-1
-          #   or US-ASCII. Send the request with no charset, or with one of these.
+          # @raise [Anthropic::Models::BetaUnsupportedCharsetError]
           #
           # @return [Anthropic::Models::Beta::Organization::BetaPluginMarketplaceValidationReport]
           #

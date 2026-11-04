@@ -27,11 +27,8 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError] The API key belongs to the Claude Code workspace, and the user who created it is
-          #   no longer a member of the organization or of that workspace.
-          # @raise [Anthropic::Models::OrganizationOnHoldError] Anthropic has disabled the organization for trust and safety reasons. An
-          #   organization disabled for any other reason, such as billing, does not get this
-          #   code. `appeal_url`, when present, is where the organization can appeal.
+          # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError]
+          # @raise [Anthropic::Models::OrganizationOnHoldError]
           #
           # @return [Anthropic::Models::Beta::Environments::BetaSelfHostedWork]
           #
@@ -82,13 +79,9 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError] The API key belongs to the Claude Code workspace, and the user who created it is
-          #   no longer a member of the organization or of that workspace.
-          # @raise [Anthropic::Models::Beta::BetaInvalidMetadataError] `metadata` has too many keys, a key or value that is too long, or a reserved
-          #   key. The message names each problem.
-          # @raise [Anthropic::Models::OrganizationOnHoldError] Anthropic has disabled the organization for trust and safety reasons. An
-          #   organization disabled for any other reason, such as billing, does not get this
-          #   code. `appeal_url`, when present, is where the organization can appeal.
+          # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError]
+          # @raise [Anthropic::Models::Beta::BetaInvalidMetadataError]
+          # @raise [Anthropic::Models::OrganizationOnHoldError]
           #
           # @return [Anthropic::Models::Beta::Environments::BetaSelfHostedWork]
           #
@@ -226,8 +219,7 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @raise [Anthropic::Models::Beta::Environments::BetaHeartbeatPreconditionFailedError] `expected_last_heartbeat` does not match the stored heartbeat, so another worker
-          #   may hold the lease.
+          # @raise [Anthropic::Models::Beta::Environments::BetaHeartbeatPreconditionFailedError]
           #
           # @return [Anthropic::Models::Beta::Environments::BetaSelfHostedWorkHeartbeatResponse]
           #
@@ -322,11 +314,8 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError] The API key belongs to the Claude Code workspace, and the user who created it is
-          #   no longer a member of the organization or of that workspace.
-          # @raise [Anthropic::Models::OrganizationOnHoldError] Anthropic has disabled the organization for trust and safety reasons. An
-          #   organization disabled for any other reason, such as billing, does not get this
-          #   code. `appeal_url`, when present, is where the organization can appeal.
+          # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError]
+          # @raise [Anthropic::Models::OrganizationOnHoldError]
           #
           # @return [Anthropic::Models::Beta::Environments::BetaSelfHostedWorkQueueStats]
           #
@@ -370,11 +359,8 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError] The API key belongs to the Claude Code workspace, and the user who created it is
-          #   no longer a member of the organization or of that workspace.
-          # @raise [Anthropic::Models::OrganizationOnHoldError] Anthropic has disabled the organization for trust and safety reasons. An
-          #   organization disabled for any other reason, such as billing, does not get this
-          #   code. `appeal_url`, when present, is where the organization can appeal.
+          # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError]
+          # @raise [Anthropic::Models::OrganizationOnHoldError]
           #
           # @return [Anthropic::Models::Beta::Environments::BetaSelfHostedWork]
           #

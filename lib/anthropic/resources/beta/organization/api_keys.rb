@@ -41,8 +41,8 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @raise [Anthropic::Models::Organization::OrgAPIKeyLimitExceededError] The organization has reached its limit of active API keys.
-          # @raise [Anthropic::Models::Organization::WorkspaceAPIKeyLimitExceededError] The workspace has reached its limit of active API keys.
+          # @raise [Anthropic::Models::Organization::OrgAPIKeyLimitExceededError]
+          # @raise [Anthropic::Models::Organization::WorkspaceAPIKeyLimitExceededError]
           #
           # @return [Anthropic::Models::Beta::Organization::BetaAPIKey]
           #

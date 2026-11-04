@@ -66,18 +66,12 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @raise [Anthropic::Models::CMEKKeyDisabledError] The workspace's customer-managed encryption key is disabled or revoked.
-          #   Re-enable the key, then retry.
-          # @raise [Anthropic::Models::CMEKKeyNetworkBlockedError] The key management service's network access controls blocked the request to the
-          #   workspace's customer-managed encryption key. The key itself may be healthy.
-          # @raise [Anthropic::Models::BetaUnsupportedCharsetError] The request's `Content-Type` header names a charset other than UTF-8, ISO-8859-1
-          #   or US-ASCII. Send the request with no charset, or with one of these.
-          # @raise [Anthropic::Models::Beta::Organization::BetaPluginNameTakenError] The marketplace already holds this name. `plugin_id` is the Plugin that holds
-          #   it, and can be absent.
-          # @raise [Anthropic::Models::Beta::Organization::BetaSkillNameTakenError] One of the Plugin's skills has the name of an organization skill. `skill_name`
-          #   is that name.
-          # @raise [Anthropic::Models::Beta::Organization::BetaRegistrationPendingError] The Plugin version was stored but is not yet usable in claude.ai. `plugin_id`
-          #   and `plugin_version_id` identify what was stored.
+          # @raise [Anthropic::Models::CMEKKeyDisabledError]
+          # @raise [Anthropic::Models::CMEKKeyNetworkBlockedError]
+          # @raise [Anthropic::Models::BetaUnsupportedCharsetError]
+          # @raise [Anthropic::Models::Beta::Organization::BetaPluginNameTakenError]
+          # @raise [Anthropic::Models::Beta::Organization::BetaSkillNameTakenError]
+          # @raise [Anthropic::Models::Beta::Organization::BetaRegistrationPendingError]
           #
           # @return [Anthropic::Models::Beta::Organization::BetaPlugin]
           #
@@ -200,16 +194,11 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @raise [Anthropic::Models::CMEKKeyDisabledError] The workspace's customer-managed encryption key is disabled or revoked.
-          #   Re-enable the key, then retry.
-          # @raise [Anthropic::Models::CMEKKeyNetworkBlockedError] The key management service's network access controls blocked the request to the
-          #   workspace's customer-managed encryption key. The key itself may be healthy.
-          # @raise [Anthropic::Models::Beta::Organization::BetaScanFailedError] The version in `plugin_version_id` did not pass its content scan, so it cannot
-          #   be served.
-          # @raise [Anthropic::Models::Beta::Organization::BetaScanPendingError] The content scan of the version in `plugin_version_id` is still running. Retry
-          #   once the scan finishes.
-          # @raise [Anthropic::Models::Beta::Organization::BetaSkillNameTakenError] One of the Plugin's skills has the name of an organization skill. `skill_name`
-          #   is that name.
+          # @raise [Anthropic::Models::CMEKKeyDisabledError]
+          # @raise [Anthropic::Models::CMEKKeyNetworkBlockedError]
+          # @raise [Anthropic::Models::Beta::Organization::BetaScanFailedError]
+          # @raise [Anthropic::Models::Beta::Organization::BetaScanPendingError]
+          # @raise [Anthropic::Models::Beta::Organization::BetaSkillNameTakenError]
           #
           # @return [Anthropic::Models::Beta::Organization::BetaPlugin]
           #
@@ -363,8 +352,7 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @raise [Anthropic::Models::CMEKKeyDisabledError] The workspace's customer-managed encryption key is disabled or revoked.
-          #   Re-enable the key, then retry.
+          # @raise [Anthropic::Models::CMEKKeyDisabledError]
           #
           # @return [Anthropic::Models::Beta::Organization::BetaDeletedPlugin]
           #
