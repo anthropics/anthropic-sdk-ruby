@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class CompactionBlockAmbiguousError < Anthropic::Errors::BadRequestError
+      def error_code: -> :compaction_block_ambiguous
+
+      def details: -> Anthropic::CompactionBlockAmbiguousErrorDetails
+    end
+  end
+end

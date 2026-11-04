@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class CompactionBlockMisplacedError < Anthropic::Errors::BadRequestError
+      def error_code: -> :compaction_block_misplaced
+
+      def details: -> Anthropic::CompactionBlockMisplacedErrorDetails
+    end
+  end
+end

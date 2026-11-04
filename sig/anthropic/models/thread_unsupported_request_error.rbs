@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class ThreadUnsupportedRequestError < Anthropic::Errors::BadRequestError
+      def error_code: -> :thread_unsupported_request
+
+      def details: -> Anthropic::ThreadUnsupportedRequestErrorDetails
+    end
+  end
+end

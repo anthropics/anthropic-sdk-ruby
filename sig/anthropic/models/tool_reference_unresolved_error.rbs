@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class ToolReferenceUnresolvedError < Anthropic::Errors::BadRequestError
+      def error_code: -> :tool_reference_unresolved
+
+      def details: -> Anthropic::ToolReferenceUnresolvedErrorDetails
+    end
+  end
+end

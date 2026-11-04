@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class RequestBodyTooLargeAfterDecodingError < Anthropic::Errors::ContentTooLargeError
+      def error_code: -> :request_body_too_large_after_decoding
+
+      def details: -> Anthropic::RequestBodyTooLargeAfterDecodingErrorDetails
+    end
+  end
+end

@@ -1,0 +1,11 @@
+module Anthropic
+  module Models
+    module Organization
+      class InviteAlreadyExistsError < Anthropic::Errors::BadRequestError
+        def error_code: -> :invite_already_exists
+
+        def details: -> Anthropic::Organization::InviteAlreadyExistsErrorDetails
+      end
+    end
+  end
+end

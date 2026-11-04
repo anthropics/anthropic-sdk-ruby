@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class AvailableToolsLimitExceededError < Anthropic::Errors::BadRequestError
+      def error_code: -> :available_tools_limit_exceeded
+
+      def details: -> Anthropic::AvailableToolsLimitExceededErrorDetails
+    end
+  end
+end

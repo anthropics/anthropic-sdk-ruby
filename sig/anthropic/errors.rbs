@@ -68,7 +68,13 @@ module Anthropic
     end
 
     class APIStatusError < Anthropic::Errors::APIError
-      attr_reader type: Anthropic::Models::error_type?
+      def api_message: -> String?
+
+      def `type`: -> Anthropic::Models::error_type?
+
+      def error_code: -> Symbol?
+
+      def details: -> Anthropic::Models::error_details?
 
       def self.for: (
         url: URI::Generic,
@@ -87,8 +93,7 @@ module Anthropic
         body: Object?,
         request: nil,
         response: nil,
-        ?message: String?,
-        ?type: Anthropic::Models::error_type?
+        ?message: String?
       ) -> void
     end
 
@@ -108,8 +113,20 @@ module Anthropic
       HTTP_STATUS: 404
     end
 
+    class RequestTimeoutError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS: 408
+    end
+
     class ConflictError < Anthropic::Errors::APIStatusError
       HTTP_STATUS: 409
+    end
+
+    class PreconditionFailedError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS: 412
+    end
+
+    class ContentTooLargeError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS: 413
     end
 
     class UnprocessableEntityError < Anthropic::Errors::APIStatusError
@@ -120,8 +137,32 @@ module Anthropic
       HTTP_STATUS: 429
     end
 
+    class RequestHeaderFieldsTooLargeError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS: 431
+    end
+
+    class ClientClosedRequestError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS: 499
+    end
+
     class InternalServerError < Anthropic::Errors::APIStatusError
       HTTP_STATUS: Range[Integer]
+    end
+
+    class HTTPNotImplementedError < Anthropic::Errors::InternalServerError
+      HTTP_STATUS: 501
+    end
+
+    class ServiceUnavailableError < Anthropic::Errors::InternalServerError
+      HTTP_STATUS: 503
+    end
+
+    class GatewayTimeoutError < Anthropic::Errors::InternalServerError
+      HTTP_STATUS: 504
+    end
+
+    class OverloadedError < Anthropic::Errors::InternalServerError
+      HTTP_STATUS: 529
     end
   end
 end

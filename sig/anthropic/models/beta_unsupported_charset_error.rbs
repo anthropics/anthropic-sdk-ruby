@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class BetaUnsupportedCharsetError < Anthropic::Errors::BadRequestError
+      def error_code: -> :unsupported_charset
+
+      def details: -> Anthropic::BetaUnsupportedCharsetErrorDetails
+    end
+  end
+end

@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class SkillReadBlockedUndecryptableError < Anthropic::Errors::ConflictError
+      def error_code: -> :skill_read_blocked_undecryptable
+
+      def details: -> Anthropic::SkillReadBlockedUndecryptableErrorDetails
+    end
+  end
+end

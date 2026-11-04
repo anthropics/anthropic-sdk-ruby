@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        class BetaRegistrationPendingError < Anthropic::Errors::ServiceUnavailableError
+          def error_code: -> :registration_pending
+
+          def details: -> Anthropic::Beta::Organization::BetaRegistrationPendingErrorDetails
+        end
+      end
+    end
+  end
+end

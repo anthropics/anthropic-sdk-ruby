@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        class BetaClaudeTagWritesNotEnabledError < Anthropic::Errors::PermissionDeniedError
+          def error_code: -> :claude_tag_writes_not_enabled
+
+          def details: -> Anthropic::Beta::Organization::BetaClaudeTagWritesNotEnabledErrorDetails
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class CompactionSignatureInvalidError < Anthropic::Errors::BadRequestError
+      def error_code: -> :compaction_signature_invalid
+
+      def details: -> Anthropic::CompactionSignatureInvalidErrorDetails
+    end
+  end
+end

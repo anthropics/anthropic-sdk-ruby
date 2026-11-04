@@ -37,6 +37,18 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
+          # @raise [Anthropic::Models::Organization::KeyProfileMismatchError] The External Key is bound to a user profile, and the Workspace does not have
+          #   that user profile. A Workspace can use only a key bound to its own user profile
+          #   or a key that isn't bound to one.
+          # @raise [Anthropic::Models::UserProfileNotFoundError] The request depends on a user profile that does not exist in the organization or
+          #   is no longer active. The request either names this user profile by ID, or names
+          #   a resource, such as an External Key, that is bound to it.
+          # @raise [Anthropic::Models::Organization::WorkspacePolicyViolationError] The request breaks the organization's Workspace Policy. The message says which
+          #   rule it broke; an organization admin can see and change the policy in the
+          #   Console.
+          # @raise [Anthropic::Models::Organization::ExternalKeyChangedError] The external key changed while the request was validating it. Send the request
+          #   again.
+          #
           # @return [Anthropic::Models::Beta::Organization::BetaWorkspace]
           #
           # @see Anthropic::Models::Beta::Organization::WorkspaceCreateParams
@@ -103,6 +115,18 @@ module Anthropic
           # @param user_profile_id [String] ID of a user profile to attach to the Workspace. Every inference request through
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+          #
+          # @raise [Anthropic::Models::Organization::KeyProfileMismatchError] The External Key is bound to a user profile, and the Workspace does not have
+          #   that user profile. A Workspace can use only a key bound to its own user profile
+          #   or a key that isn't bound to one.
+          # @raise [Anthropic::Models::UserProfileNotFoundError] The request depends on a user profile that does not exist in the organization or
+          #   is no longer active. The request either names this user profile by ID, or names
+          #   a resource, such as an External Key, that is bound to it.
+          # @raise [Anthropic::Models::Organization::WorkspacePolicyViolationError] The request breaks the organization's Workspace Policy. The message says which
+          #   rule it broke; an organization admin can see and change the policy in the
+          #   Console.
+          # @raise [Anthropic::Models::Organization::ExternalKeyChangedError] The external key changed while the request was validating it. Send the request
+          #   again.
           #
           # @return [Anthropic::Models::Beta::Organization::BetaWorkspace]
           #

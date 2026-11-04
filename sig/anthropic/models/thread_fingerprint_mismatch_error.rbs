@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class ThreadFingerprintMismatchError < Anthropic::Errors::BadRequestError
+      def error_code: -> :thread_fingerprint_mismatch
+
+      def details: -> Anthropic::ThreadFingerprintMismatchErrorDetails
+    end
+  end
+end

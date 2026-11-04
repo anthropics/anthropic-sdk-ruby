@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class EnforcedSpendLimitReachedError < Anthropic::Errors::RateLimitError
+      def error_code: -> :enforced_spend_limit_reached
+
+      def details: -> Anthropic::EnforcedSpendLimitReachedErrorDetails
+    end
+  end
+end

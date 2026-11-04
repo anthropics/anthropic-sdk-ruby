@@ -50,6 +50,8 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
+          # @raise [Anthropic::Models::Organization::WorkspaceMemberLimitExceededError] The workspace has reached the member limit that Anthropic set for it.
+          #
           # @return [Anthropic::Models::Organization::WorkspaceMember]
           #
           # @see Anthropic::Models::Organization::Workspaces::MemberUpdateParams
@@ -123,6 +125,8 @@ module Anthropic
           # @param workspace_role [Symbol, Anthropic::Models::Organization::NoBillingWorkspaceRole] Role of the new Workspace Member. Cannot be `workspace_billing`.
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+          #
+          # @raise [Anthropic::Models::Organization::WorkspaceMemberLimitExceededError] The workspace has reached the member limit that Anthropic set for it.
           #
           # @return [Anthropic::Models::Organization::WorkspaceMember]
           #

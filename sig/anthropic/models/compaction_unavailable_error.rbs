@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class CompactionUnavailableError < Anthropic::Errors::OverloadedError
+      def error_code: -> :compaction_unavailable
+
+      def details: -> Anthropic::CompactionUnavailableErrorDetails
+    end
+  end
+end

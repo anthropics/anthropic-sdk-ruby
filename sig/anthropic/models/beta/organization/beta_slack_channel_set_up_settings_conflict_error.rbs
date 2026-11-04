@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        class BetaSlackChannelSetUpSettingsConflictError < Anthropic::Errors::ConflictError
+          def error_code: -> :slack_channel_set_up_settings_conflict
+
+          def details: -> Anthropic::Beta::Organization::BetaSlackChannelSetUpSettingsConflictErrorDetails
+        end
+      end
+    end
+  end
+end

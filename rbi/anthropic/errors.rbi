@@ -133,8 +133,25 @@ module Anthropic
     end
 
     class APIStatusError < Anthropic::Errors::APIError
+      # `error.message` from the response body, if present.
+      sig { returns(T.nilable(String)) }
+      def api_message
+      end
+
+      # `error.type` from the response body, if present.
       sig { returns(T.nilable(Anthropic::ErrorType::TaggedSymbol)) }
-      attr_reader :type
+      def type
+      end
+
+      # `error.details.error_code` from the response body, if present and a string.
+      sig { returns(T.nilable(Symbol)) }
+      def error_code
+      end
+
+      # `error.details` from the response body, if present.
+      sig { returns(T.nilable(Anthropic::ErrorDetails::Variants)) }
+      def details
+      end
 
       # @api private
       sig do
@@ -171,8 +188,7 @@ module Anthropic
           body: T.nilable(Object),
           request: NilClass,
           response: NilClass,
-          message: T.nilable(String),
-          type: T.nilable(Anthropic::ErrorType::TaggedSymbol)
+          message: T.nilable(String)
         ).returns(T.attached_class)
       end
       def self.new(
@@ -182,8 +198,7 @@ module Anthropic
         body:,
         request:,
         response:,
-        message: nil,
-        type: nil
+        message: nil
       )
       end
     end
@@ -204,8 +219,20 @@ module Anthropic
       HTTP_STATUS = 404
     end
 
+    class RequestTimeoutError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS = 408
+    end
+
     class ConflictError < Anthropic::Errors::APIStatusError
       HTTP_STATUS = 409
+    end
+
+    class PreconditionFailedError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS = 412
+    end
+
+    class ContentTooLargeError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS = 413
     end
 
     class UnprocessableEntityError < Anthropic::Errors::APIStatusError
@@ -216,8 +243,32 @@ module Anthropic
       HTTP_STATUS = 429
     end
 
+    class RequestHeaderFieldsTooLargeError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS = 431
+    end
+
+    class ClientClosedRequestError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS = 499
+    end
+
     class InternalServerError < Anthropic::Errors::APIStatusError
       HTTP_STATUS = T.let((500..), T::Range[Integer])
+    end
+
+    class HTTPNotImplementedError < Anthropic::Errors::InternalServerError
+      HTTP_STATUS = 501
+    end
+
+    class ServiceUnavailableError < Anthropic::Errors::InternalServerError
+      HTTP_STATUS = 503
+    end
+
+    class GatewayTimeoutError < Anthropic::Errors::InternalServerError
+      HTTP_STATUS = 504
+    end
+
+    class OverloadedError < Anthropic::Errors::InternalServerError
+      HTTP_STATUS = 529
     end
   end
 end

@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        class BetaScanFailedError < Anthropic::Errors::BadRequestError
+          def error_code: -> :scan_failed
+
+          def details: -> Anthropic::Beta::Organization::BetaScanFailedErrorDetails
+        end
+      end
+    end
+  end
+end

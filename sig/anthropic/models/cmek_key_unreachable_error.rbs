@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class CMEKKeyUnreachableError < Anthropic::Errors::ServiceUnavailableError
+      def error_code: -> :cmek_key_unreachable
+
+      def details: -> Anthropic::CMEKKeyUnreachableErrorDetails
+    end
+  end
+end

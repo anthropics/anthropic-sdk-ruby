@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class ToolNameConflictError < Anthropic::Errors::BadRequestError
+      def error_code: -> :tool_name_conflict
+
+      def details: -> Anthropic::ToolNameConflictErrorDetails
+    end
+  end
+end

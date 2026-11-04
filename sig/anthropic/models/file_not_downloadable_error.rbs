@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class FileNotDownloadableError < Anthropic::Errors::BadRequestError
+      def error_code: -> :file_not_downloadable
+
+      def details: -> Anthropic::FileNotDownloadableErrorDetails
+    end
+  end
+end

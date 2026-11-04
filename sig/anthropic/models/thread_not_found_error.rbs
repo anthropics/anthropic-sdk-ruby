@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class ThreadNotFoundError < Anthropic::Errors::NotFoundError
+      def error_code: -> :thread_not_found
+
+      def details: -> Anthropic::ThreadNotFoundErrorDetails
+    end
+  end
+end

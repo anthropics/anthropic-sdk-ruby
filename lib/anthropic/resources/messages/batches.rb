@@ -26,6 +26,15 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
+        # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError] The API key belongs to the Claude Code workspace, and the user who created it is
+        #   no longer a member of the organization or of that workspace.
+        # @raise [Anthropic::Models::CMEKKeyDisabledError] The workspace's customer-managed encryption key is disabled or revoked.
+        #   Re-enable the key, then retry.
+        # @raise [Anthropic::Models::OrganizationOnHoldError] Anthropic has disabled the organization for trust and safety reasons. An
+        #   organization disabled for any other reason, such as billing, does not get this
+        #   code. `appeal_url`, when present, is where the organization can appeal.
+        # @raise [Anthropic::Models::EnforcedSpendLimitReachedError] The organization has crossed the monthly API usage threshold of its API tier.
+        #
         # @return [Anthropic::Models::Messages::MessageBatch]
         #
         # @see Anthropic::Models::Messages::BatchCreateParams
@@ -66,6 +75,12 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
+        # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError] The API key belongs to the Claude Code workspace, and the user who created it is
+        #   no longer a member of the organization or of that workspace.
+        # @raise [Anthropic::Models::OrganizationOnHoldError] Anthropic has disabled the organization for trust and safety reasons. An
+        #   organization disabled for any other reason, such as billing, does not get this
+        #   code. `appeal_url`, when present, is where the organization can appeal.
+        #
         # @return [Anthropic::Models::Messages::MessageBatch]
         #
         # @see Anthropic::Models::Messages::BatchRetrieveParams
@@ -103,6 +118,12 @@ module Anthropic
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError] The API key belongs to the Claude Code workspace, and the user who created it is
+        #   no longer a member of the organization or of that workspace.
+        # @raise [Anthropic::Models::OrganizationOnHoldError] Anthropic has disabled the organization for trust and safety reasons. An
+        #   organization disabled for any other reason, such as billing, does not get this
+        #   code. `appeal_url`, when present, is where the organization can appeal.
         #
         # @return [Anthropic::Internal::Page<Anthropic::Models::Messages::MessageBatch>]
         #
@@ -143,6 +164,12 @@ module Anthropic
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError] The API key belongs to the Claude Code workspace, and the user who created it is
+        #   no longer a member of the organization or of that workspace.
+        # @raise [Anthropic::Models::OrganizationOnHoldError] Anthropic has disabled the organization for trust and safety reasons. An
+        #   organization disabled for any other reason, such as billing, does not get this
+        #   code. `appeal_url`, when present, is where the organization can appeal.
         #
         # @return [Anthropic::Models::Messages::DeletedMessageBatch]
         #
@@ -185,6 +212,12 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
+        # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError] The API key belongs to the Claude Code workspace, and the user who created it is
+        #   no longer a member of the organization or of that workspace.
+        # @raise [Anthropic::Models::OrganizationOnHoldError] Anthropic has disabled the organization for trust and safety reasons. An
+        #   organization disabled for any other reason, such as billing, does not get this
+        #   code. `appeal_url`, when present, is where the organization can appeal.
+        #
         # @return [Anthropic::Models::Messages::MessageBatch]
         #
         # @see Anthropic::Models::Messages::BatchCancelParams
@@ -221,6 +254,14 @@ module Anthropic
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError] The API key belongs to the Claude Code workspace, and the user who created it is
+        #   no longer a member of the organization or of that workspace.
+        # @raise [Anthropic::Models::CMEKKeyDisabledError] The workspace's customer-managed encryption key is disabled or revoked.
+        #   Re-enable the key, then retry.
+        # @raise [Anthropic::Models::OrganizationOnHoldError] Anthropic has disabled the organization for trust and safety reasons. An
+        #   organization disabled for any other reason, such as billing, does not get this
+        #   code. `appeal_url`, when present, is where the organization can appeal.
         #
         # @return [Anthropic::Internal::Type::BaseStream<Anthropic::Models::Messages::MessageBatchIndividualResponse>]
         #

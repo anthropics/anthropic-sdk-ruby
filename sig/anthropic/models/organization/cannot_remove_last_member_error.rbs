@@ -1,0 +1,11 @@
+module Anthropic
+  module Models
+    module Organization
+      class CannotRemoveLastMemberError < Anthropic::Errors::BadRequestError
+        def error_code: -> :cannot_remove_last_member
+
+        def details: -> Anthropic::Organization::CannotRemoveLastMemberErrorDetails
+      end
+    end
+  end
+end

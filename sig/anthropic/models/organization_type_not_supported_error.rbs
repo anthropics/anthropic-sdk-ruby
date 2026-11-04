@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class OrganizationTypeNotSupportedError < Anthropic::Errors::BadRequestError
+      def error_code: -> :organization_type_not_supported
+
+      def details: -> Anthropic::OrganizationTypeNotSupportedErrorDetails
+    end
+  end
+end

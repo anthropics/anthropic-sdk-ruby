@@ -23,6 +23,10 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
+          # @raise [Anthropic::Models::UserProfileNotFoundError] The request depends on a user profile that does not exist in the organization or
+          #   is no longer active. The request either names this user profile by ID, or names
+          #   a resource, such as an External Key, that is bound to it.
+          #
           # @return [Anthropic::Models::Beta::Organization::BetaExternalKey]
           #
           # @see Anthropic::Models::Beta::Organization::ExternalKeyCreateParams
@@ -82,6 +86,9 @@ module Anthropic
           # @param provider_config [Anthropic::Models::Beta::Organization::BetaAWSExternalKeyConfig, Anthropic::Models::Beta::Organization::BetaGCPExternalKeyConfig, Anthropic::Models::Beta::Organization::BetaAzureExternalKeyConfigParam, nil] KMS provider identity and auth coordinates.
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+          #
+          # @raise [Anthropic::Models::Organization::ExternalKeyInWorkspacePolicyError] The External Key can't be deleted or reconfigured while the organization's
+          #   Workspace Policy lists it as an allowed key.
           #
           # @return [Anthropic::Models::Beta::Organization::BetaExternalKey]
           #
@@ -143,6 +150,9 @@ module Anthropic
           # @param external_key_id [String] ID of the External Key.
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+          #
+          # @raise [Anthropic::Models::Organization::ExternalKeyInWorkspacePolicyError] The External Key can't be deleted or reconfigured while the organization's
+          #   Workspace Policy lists it as an allowed key.
           #
           # @return [Anthropic::Models::Beta::Organization::ExternalKeyDeleteResponse]
           #

@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class ConcurrentMembershipChangeError < Anthropic::Errors::ConflictError
+      def error_code: -> :concurrent_membership_change
+
+      def details: -> Anthropic::ConcurrentMembershipChangeErrorDetails
+    end
+  end
+end

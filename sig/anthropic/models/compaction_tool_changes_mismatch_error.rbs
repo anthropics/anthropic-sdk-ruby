@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class CompactionToolChangesMismatchError < Anthropic::Errors::BadRequestError
+      def error_code: -> :compaction_tool_changes_mismatch
+
+      def details: -> Anthropic::CompactionToolChangesMismatchErrorDetails
+    end
+  end
+end

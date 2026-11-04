@@ -1,0 +1,11 @@
+module Anthropic
+  module Models
+    module Organization
+      class CannotInviteEmailsWithUnverifiedDomainsError < Anthropic::Errors::BadRequestError
+        def error_code: -> :cannot_invite_emails_with_unverified_domains
+
+        def details: -> Anthropic::Organization::CannotInviteEmailsWithUnverifiedDomainsErrorDetails
+      end
+    end
+  end
+end
