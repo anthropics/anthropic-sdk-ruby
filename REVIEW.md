@@ -28,3 +28,19 @@
 The generator writes the rest of this file. Rules for reviewing this
 repository's hand-written code go in this section, and a change anywhere else in
 the file belongs in the generator.
+
+### Report these as Important, as well as functional bugs
+
+- A `case … in` on an event, content block or other API value with no `else` or
+  catch-all arm that lets the value through, because an unmatched value raises
+  `NoMatchingPatternError`
+- Request rewriting, signing or response decoding for one platform that does not
+  run from that client's `provider_middleware`
+- A middleware, or a middleware API for users, built from separate request and
+  response hooks. A middleware is an object with `#call(req, nxt)`
+
+### Don't report these
+
+- `String#downcase` on a header name as sensitive to the locale
+- `Data.define` or `Struct.new` that `private_constant` or an `Internal`
+  namespace hides from users
