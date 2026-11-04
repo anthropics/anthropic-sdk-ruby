@@ -9,8 +9,8 @@ module Anthropic
       required :error_code, const: :cmek_context_unavailable
 
       # @!method initialize(error_code: :cmek_context_unavailable)
-      #   The request's workspace encryption context could not be resolved, so the request
-      #   was refused. Retry in a few minutes.
+      #   The workspace's encryption settings could not be read, so the request was
+      #   refused. Retry in a few minutes.
       #
       #   @param error_code [Symbol, :cmek_context_unavailable]
     end

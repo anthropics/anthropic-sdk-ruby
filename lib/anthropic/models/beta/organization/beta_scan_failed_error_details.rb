@@ -16,8 +16,8 @@ module Anthropic
           required :plugin_version_id, String
 
           # @!method initialize(plugin_version_id:, error_code: :scan_failed)
-          #   The content scan of the version in `plugin_version_id` failed, errored or
-          #   reached no verdict, so the version cannot be served.
+          #   The version in `plugin_version_id` did not pass its content scan, so it cannot
+          #   be served.
           #
           #   @param plugin_version_id [String]
           #   @param error_code [Symbol, :scan_failed]

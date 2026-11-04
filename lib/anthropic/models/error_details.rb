@@ -102,7 +102,7 @@ module Anthropic
       # The file's `expires_at` has passed, so its content is no longer available.
       variant :file_expired, -> { Anthropic::FileExpiredErrorDetails }
 
-      # The request's workspace encryption context could not be resolved, so the request was refused. Retry in a few minutes.
+      # The workspace's encryption settings could not be read, so the request was refused. Retry in a few minutes.
       variant :cmek_context_unavailable, -> { Anthropic::CMEKContextUnavailableErrorDetails }
 
       # The organization has reached its limit of active API keys.
@@ -139,7 +139,7 @@ module Anthropic
       variant :rbac_group_grants_owner_access,
               -> { Anthropic::Organization::RBACGroupGrantsOwnerAccessErrorDetails }
 
-      # The API could not finish checking whether an RBAC Group in the request grants owner access (the check reached a fixed limit), so it made no change. Retrying the same request will not help. Make the change in the organization's admin settings in Claude.
+      # The API could not finish checking whether an RBAC Group in the request grants owner access, so it made no change. Retrying the same request will not help. Make the change in the organization's admin settings in Claude.
       variant :rbac_group_owner_access_unconfirmed,
               -> { Anthropic::Organization::RBACGroupOwnerAccessUnconfirmedErrorDetails }
 
@@ -203,7 +203,7 @@ module Anthropic
       # The Plugin version was stored but is not yet usable in claude.ai. `plugin_id` and `plugin_version_id` identify what was stored.
       variant :registration_pending, -> { Anthropic::Beta::Organization::BetaRegistrationPendingErrorDetails }
 
-      # The content scan of the version in `plugin_version_id` failed, errored or reached no verdict, so the version cannot be served.
+      # The version in `plugin_version_id` did not pass its content scan, so it cannot be served.
       variant :scan_failed, -> { Anthropic::Beta::Organization::BetaScanFailedErrorDetails }
 
       # The content scan of the version in `plugin_version_id` is still running. Retry once the scan finishes.
