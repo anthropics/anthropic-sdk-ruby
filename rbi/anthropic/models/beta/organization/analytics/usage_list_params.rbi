@@ -59,10 +59,8 @@ module Anthropic
             attr_accessor :api_key_ids
 
             # Filter to Claude Tag (Claude in Slack) usage in specific spend categories. Usage
-            # with no category never matches. `dm` usage is reported under the user's product
-            # rather than `claude_tag`, so combining this filter with `products[]=claude_tag`
-            # excludes it. Use `group_by[]=claude_tag_category` to break out per-category
-            # values.
+            # with no category never matches. Use `group_by[]=claude_tag_category` to break
+            # out per-category values.
             sig do
               returns(
                 T.nilable(
@@ -418,10 +416,8 @@ module Anthropic
               # null `api_key_id`. Claude Platform organizations only.
               api_key_ids: nil,
               # Filter to Claude Tag (Claude in Slack) usage in specific spend categories. Usage
-              # with no category never matches. `dm` usage is reported under the user's product
-              # rather than `claude_tag`, so combining this filter with `products[]=claude_tag`
-              # excludes it. Use `group_by[]=claude_tag_category` to break out per-category
-              # values.
+              # with no category never matches. Use `group_by[]=claude_tag_category` to break
+              # out per-category values.
               claude_tag_categories: nil,
               # Filter to Claude Tag (Claude in Slack) usage attributed to specific Slack users,
               # by Slack user ID (for example `U0123ABCDEF`), not claude.ai user ID. Usage that
