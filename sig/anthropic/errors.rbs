@@ -164,5 +164,8 @@ module Anthropic
     class OverloadedError < Anthropic::Errors::InternalServerError
       HTTP_STATUS: 529
     end
+
+    class ConfigurationError < Anthropic::Errors::Error
+    end
   end
 end
