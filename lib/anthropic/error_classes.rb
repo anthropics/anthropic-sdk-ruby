@@ -42,6 +42,8 @@ module Anthropic
         [400, "email_domain_not_allowed"] => Anthropic::Models::Organization::EmailDomainNotAllowedError,
         [400, "environment_archived"] => Anthropic::Models::Beta::BetaEnvironmentArchivedError,
         [400, "external_key_in_workspace_policy"] => Anthropic::Models::Organization::ExternalKeyInWorkspacePolicyError,
+        [400, "external_key_validation_failed"] => Anthropic::Models::Organization::ExternalKeyValidationFailedError,
+        [400, "external_key_validation_timed_out"] => Anthropic::Models::Organization::ExternalKeyValidationTimedOutError,
         [400, "file_not_downloadable"] => Anthropic::Models::FileNotDownloadableError,
         [400, "invalid_config_type_change"] => Anthropic::Models::Beta::BetaInvalidConfigTypeChangeError,
         [400, "invalid_metadata"] => Anthropic::Models::Beta::BetaInvalidMetadataError,

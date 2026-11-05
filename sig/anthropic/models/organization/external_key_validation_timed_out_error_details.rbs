@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module Organization
+      type external_key_validation_timed_out_error_details =
+        { error_code: :external_key_validation_timed_out }
+
+      class ExternalKeyValidationTimedOutErrorDetails < Anthropic::Internal::Type::BaseModel
+        attr_accessor error_code: :external_key_validation_timed_out
+
+        def initialize: (
+          ?error_code: :external_key_validation_timed_out
+        ) -> void
+
+        def to_hash: -> { error_code: :external_key_validation_timed_out }
+      end
+    end
+  end
+end

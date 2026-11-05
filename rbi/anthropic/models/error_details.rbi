@@ -54,6 +54,8 @@ module Anthropic
             Anthropic::Organization::RBACGroupOwnerAccessUnconfirmedErrorDetails,
             Anthropic::Organization::CannotRemoveLastMemberErrorDetails,
             Anthropic::ConcurrentMembershipChangeErrorDetails,
+            Anthropic::Organization::ExternalKeyValidationFailedErrorDetails,
+            Anthropic::Organization::ExternalKeyValidationTimedOutErrorDetails,
             Anthropic::Organization::KeyProfileMismatchErrorDetails,
             Anthropic::Organization::WorkspacePolicyViolationErrorDetails,
             Anthropic::Organization::ExternalKeyChangedErrorDetails,
@@ -316,6 +318,16 @@ module Anthropic
         CONCURRENT_MEMBERSHIP_CHANGE =
           T.let(
             :concurrent_membership_change,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        EXTERNAL_KEY_VALIDATION_FAILED =
+          T.let(
+            :external_key_validation_failed,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        EXTERNAL_KEY_VALIDATION_TIMED_OUT =
+          T.let(
+            :external_key_validation_timed_out,
             Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
           )
         KEY_PROFILE_MISMATCH =

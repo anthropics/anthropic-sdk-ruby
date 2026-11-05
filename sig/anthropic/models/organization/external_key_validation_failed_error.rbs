@@ -1,0 +1,11 @@
+module Anthropic
+  module Models
+    module Organization
+      class ExternalKeyValidationFailedError < Anthropic::Errors::BadRequestError
+        def error_code: -> :external_key_validation_failed
+
+        def details: -> Anthropic::Organization::ExternalKeyValidationFailedErrorDetails
+      end
+    end
+  end
+end

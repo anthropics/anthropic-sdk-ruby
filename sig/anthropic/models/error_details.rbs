@@ -47,6 +47,8 @@ module Anthropic
       | Anthropic::Organization::RBACGroupOwnerAccessUnconfirmedErrorDetails
       | Anthropic::Organization::CannotRemoveLastMemberErrorDetails
       | Anthropic::ConcurrentMembershipChangeErrorDetails
+      | Anthropic::Organization::ExternalKeyValidationFailedErrorDetails
+      | Anthropic::Organization::ExternalKeyValidationTimedOutErrorDetails
       | Anthropic::Organization::KeyProfileMismatchErrorDetails
       | Anthropic::Organization::WorkspacePolicyViolationErrorDetails
       | Anthropic::Organization::ExternalKeyChangedErrorDetails
@@ -125,6 +127,8 @@ module Anthropic
         | :rbac_group_owner_access_unconfirmed
         | :cannot_remove_last_member
         | :concurrent_membership_change
+        | :external_key_validation_failed
+        | :external_key_validation_timed_out
         | :key_profile_mismatch
         | :workspace_policy_violation
         | :external_key_changed
@@ -202,6 +206,8 @@ module Anthropic
         RBAC_GROUP_OWNER_ACCESS_UNCONFIRMED: :rbac_group_owner_access_unconfirmed
         CANNOT_REMOVE_LAST_MEMBER: :cannot_remove_last_member
         CONCURRENT_MEMBERSHIP_CHANGE: :concurrent_membership_change
+        EXTERNAL_KEY_VALIDATION_FAILED: :external_key_validation_failed
+        EXTERNAL_KEY_VALIDATION_TIMED_OUT: :external_key_validation_timed_out
         KEY_PROFILE_MISMATCH: :key_profile_mismatch
         WORKSPACE_POLICY_VIOLATION: :workspace_policy_violation
         EXTERNAL_KEY_CHANGED: :external_key_changed
@@ -397,6 +403,14 @@ module Anthropic
           error_code: :concurrent_membership_change
           | "concurrent_membership_change"
         ) -> Anthropic::ConcurrentMembershipChangeErrorDetails
+        | (
+          error_code: :external_key_validation_failed
+          | "external_key_validation_failed"
+        ) -> Anthropic::Organization::ExternalKeyValidationFailedErrorDetails
+        | (
+          error_code: :external_key_validation_timed_out
+          | "external_key_validation_timed_out"
+        ) -> Anthropic::Organization::ExternalKeyValidationTimedOutErrorDetails
         | (
           error_code: :key_profile_mismatch | "key_profile_mismatch"
         ) -> Anthropic::Organization::KeyProfileMismatchErrorDetails

@@ -37,6 +37,8 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
+          # @raise [Anthropic::Models::Organization::ExternalKeyValidationFailedError]
+          # @raise [Anthropic::Models::Organization::ExternalKeyValidationTimedOutError]
           # @raise [Anthropic::Models::Organization::KeyProfileMismatchError]
           # @raise [Anthropic::Models::UserProfileNotFoundError]
           # @raise [Anthropic::Models::Organization::WorkspacePolicyViolationError]
@@ -109,6 +111,8 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
+          # @raise [Anthropic::Models::Organization::ExternalKeyValidationFailedError]
+          # @raise [Anthropic::Models::Organization::ExternalKeyValidationTimedOutError]
           # @raise [Anthropic::Models::Organization::KeyProfileMismatchError]
           # @raise [Anthropic::Models::UserProfileNotFoundError]
           # @raise [Anthropic::Models::Organization::WorkspacePolicyViolationError]
