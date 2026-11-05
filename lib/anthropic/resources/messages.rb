@@ -88,6 +88,7 @@ module Anthropic
       # @raise [Anthropic::Models::SkillReadBlockedUndecryptableError]
       # @raise [Anthropic::Models::RequestBodyTooLargeAfterDecodingError]
       # @raise [Anthropic::Models::EnforcedSpendLimitReachedError]
+      # @raise [Anthropic::Models::RampLimitExceededError]
       # @raise [Anthropic::Models::CMEKKeyUnreachableError]
       # @raise [Anthropic::Models::CompactionUnavailableError]
       #
@@ -213,6 +214,7 @@ module Anthropic
       # @raise [Anthropic::Models::SkillReadBlockedUndecryptableError]
       # @raise [Anthropic::Models::RequestBodyTooLargeAfterDecodingError]
       # @raise [Anthropic::Models::EnforcedSpendLimitReachedError]
+      # @raise [Anthropic::Models::RampLimitExceededError]
       # @raise [Anthropic::Models::CMEKKeyUnreachableError]
       # @raise [Anthropic::Models::CompactionUnavailableError]
       #

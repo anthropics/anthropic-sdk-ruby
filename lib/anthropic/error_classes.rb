@@ -91,6 +91,7 @@ module Anthropic
         [412, "heartbeat_precondition_failed"] => Anthropic::Models::Beta::Environments::BetaHeartbeatPreconditionFailedError,
         [413, "request_body_too_large_after_decoding"] => Anthropic::Models::RequestBodyTooLargeAfterDecodingError,
         [429, "enforced_spend_limit_reached"] => Anthropic::Models::EnforcedSpendLimitReachedError,
+        [429, "ramp_limit_exceeded"] => Anthropic::Models::RampLimitExceededError,
         [503, "cmek_context_unavailable"] => Anthropic::Models::CMEKContextUnavailableError,
         [503, "cmek_key_unreachable"] => Anthropic::Models::CMEKKeyUnreachableError,
         [503, "registration_pending"] => Anthropic::Models::Beta::Organization::BetaRegistrationPendingError,

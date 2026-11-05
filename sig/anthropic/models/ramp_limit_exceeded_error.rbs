@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class RampLimitExceededError < Anthropic::Errors::RateLimitError
+      def error_code: -> :ramp_limit_exceeded
+
+      def details: -> Anthropic::RampLimitExceededErrorDetails
+    end
+  end
+end

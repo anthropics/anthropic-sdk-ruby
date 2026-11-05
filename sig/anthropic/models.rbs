@@ -693,6 +693,10 @@ module Anthropic
 
   class PlainTextSource = Anthropic::Models::PlainTextSource
 
+  class RampLimitExceededError = Anthropic::Models::RampLimitExceededError
+
+  class RampLimitExceededErrorDetails = Anthropic::Models::RampLimitExceededErrorDetails
+
   class RateLimitError = Anthropic::Models::RateLimitError
 
   module RawContentBlockDelta = Anthropic::Models::RawContentBlockDelta

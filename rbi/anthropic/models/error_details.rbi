@@ -34,6 +34,7 @@ module Anthropic
             Anthropic::SkillReadBlockedUndecryptableErrorDetails,
             Anthropic::RequestBodyTooLargeAfterDecodingErrorDetails,
             Anthropic::EnforcedSpendLimitReachedErrorDetails,
+            Anthropic::RampLimitExceededErrorDetails,
             Anthropic::CMEKKeyUnreachableErrorDetails,
             Anthropic::CompactionUnavailableErrorDetails,
             Anthropic::StorageQuotaExceededErrorDetails,
@@ -218,6 +219,11 @@ module Anthropic
         ENFORCED_SPEND_LIMIT_REACHED =
           T.let(
             :enforced_spend_limit_reached,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        RAMP_LIMIT_EXCEEDED =
+          T.let(
+            :ramp_limit_exceeded,
             Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
           )
         CMEK_KEY_UNREACHABLE =

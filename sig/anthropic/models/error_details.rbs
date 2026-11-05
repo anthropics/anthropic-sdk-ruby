@@ -27,6 +27,7 @@ module Anthropic
       | Anthropic::SkillReadBlockedUndecryptableErrorDetails
       | Anthropic::RequestBodyTooLargeAfterDecodingErrorDetails
       | Anthropic::EnforcedSpendLimitReachedErrorDetails
+      | Anthropic::RampLimitExceededErrorDetails
       | Anthropic::CMEKKeyUnreachableErrorDetails
       | Anthropic::CompactionUnavailableErrorDetails
       | Anthropic::StorageQuotaExceededErrorDetails
@@ -104,6 +105,7 @@ module Anthropic
         | :skill_read_blocked_undecryptable
         | :request_body_too_large_after_decoding
         | :enforced_spend_limit_reached
+        | :ramp_limit_exceeded
         | :cmek_key_unreachable
         | :compaction_unavailable
         | :storage_quota_exceeded
@@ -180,6 +182,7 @@ module Anthropic
         SKILL_READ_BLOCKED_UNDECRYPTABLE: :skill_read_blocked_undecryptable
         REQUEST_BODY_TOO_LARGE_AFTER_DECODING: :request_body_too_large_after_decoding
         ENFORCED_SPEND_LIMIT_REACHED: :enforced_spend_limit_reached
+        RAMP_LIMIT_EXCEEDED: :ramp_limit_exceeded
         CMEK_KEY_UNREACHABLE: :cmek_key_unreachable
         COMPACTION_UNAVAILABLE: :compaction_unavailable
         STORAGE_QUOTA_EXCEEDED: :storage_quota_exceeded
@@ -328,6 +331,9 @@ module Anthropic
           error_code: :enforced_spend_limit_reached
           | "enforced_spend_limit_reached"
         ) -> Anthropic::EnforcedSpendLimitReachedErrorDetails
+        | (
+          error_code: :ramp_limit_exceeded | "ramp_limit_exceeded"
+        ) -> Anthropic::RampLimitExceededErrorDetails
         | (
           error_code: :cmek_key_unreachable | "cmek_key_unreachable"
         ) -> Anthropic::CMEKKeyUnreachableErrorDetails
