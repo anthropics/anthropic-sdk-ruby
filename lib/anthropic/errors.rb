@@ -141,11 +141,16 @@ module Anthropic
     end
 
     class APIStatusError < Anthropic::Errors::APIError
+      # A human-readable explanation of the error. Its wording can change, so don't
+      # match on it.
+      #
       # `error.message` from the response body, if present.
       #
       # @return [String, nil]
       def api_message = Anthropic::Internal::Util.dig(body, [:error, :message])
 
+      # The broad category of the error.
+      #
       # `error.type` from the response body, if present.
       #
       # @return [Symbol, Anthropic::Models::ErrorType, nil]
@@ -154,6 +159,8 @@ module Anthropic
         value.is_a?(String) ? value.to_sym : value
       end
 
+      # A stable code that names the cause.
+      #
       # `error.details.error_code` from the response body, if present and a string.
       #
       # @return [Symbol, nil]
@@ -162,6 +169,10 @@ module Anthropic
         code.to_sym if code.is_a?(String)
       end
 
+      # Machine-readable detail about the cause of the error. `error_code` names the
+      # cause; branch on it rather than on `message`. Absent when the error has no code.
+      # Treat an unrecognized `error_code` as the bare `type`.
+      #
       # `error.details` from the response body, if present.
       #
       # @return [Anthropic::Models::ErrorDetails, nil]

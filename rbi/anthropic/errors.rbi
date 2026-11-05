@@ -133,21 +133,32 @@ module Anthropic
     end
 
     class APIStatusError < Anthropic::Errors::APIError
+      # A human-readable explanation of the error. Its wording can change, so don't
+      # match on it.
+      #
       # `error.message` from the response body, if present.
       sig { returns(T.nilable(String)) }
       def api_message
       end
 
+      # The broad category of the error.
+      #
       # `error.type` from the response body, if present.
       sig { returns(T.nilable(Anthropic::ErrorType::TaggedSymbol)) }
       def type
       end
 
+      # A stable code that names the cause.
+      #
       # `error.details.error_code` from the response body, if present and a string.
       sig { returns(T.nilable(Symbol)) }
       def error_code
       end
 
+      # Machine-readable detail about the cause of the error. `error_code` names the
+      # cause; branch on it rather than on `message`. Absent when the error has no code.
+      # Treat an unrecognized `error_code` as the bare `type`.
+      #
       # `error.details` from the response body, if present.
       sig { returns(T.nilable(Anthropic::ErrorDetails::Variants)) }
       def details
