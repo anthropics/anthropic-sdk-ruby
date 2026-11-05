@@ -22,13 +22,8 @@ module Anthropic
 
       # @api private
       #
-      # Walking every model costs about 360k allocations, so it waits for the
-      # first `const_missing` on an SDK module instead of running at `require`.
-      sig { void }
-      def self.define_sorbet_constants!
-      end
-
-      # @api private
+      # Walking every model is most of what `require` allocates, so it waits
+      # for the first `const_missing` on an SDK module instead.
       sig { void }
       def self.define_model_sorbet_constants!
       end
