@@ -11,6 +11,8 @@ module Anthropic
         Module | Class ns
       ) -> Enumerable[(Module | Class)]
 
+      def self?.define_model_sorbet_constants!: -> void
+
       def self?.arch: -> String
 
       def self?.os: -> String
