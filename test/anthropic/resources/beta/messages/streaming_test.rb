@@ -322,6 +322,32 @@ class Anthropic::Test::Resources::Beta::Messages::StreamingTest < Minitest::Test
     content_block = message.content[0]
     assert_equal(:compaction, content_block.type)
     assert_equal("Summary of the conversation so far.", content_block.content)
+    assert_nil(content_block.encrypted_content)
+    # as in the non-streaming message: a key the API left out is not sent back as null
+    assert_equal({type: :compaction, content: "Summary of the conversation so far."}, content_block.to_h)
+  end
+
+  def test_compaction_accumulated_message_carries_encrypted_content
+    stub_streaming_response(compaction_sse_response(content: "Summary.", encrypted_content: "opaque"))
+
+    content_block = @client.beta.messages.stream(**compaction_params).accumulated_message.content[0]
+
+    assert_equal("Summary.", content_block.content)
+    assert_equal("opaque", content_block.encrypted_content)
+  end
+
+  def test_failed_compaction_streaming
+    stub_streaming_response(compaction_sse_response(content: nil))
+
+    stream = @client.beta.messages.stream(**compaction_params)
+    compaction_events = stream.select { _1.type == :compaction }
+    content_block = stream.accumulated_message.content[0]
+
+    assert_equal(1, compaction_events.length)
+    assert_nil(compaction_events.first.content)
+    assert_nil(content_block.content)
+    assert_nil(content_block.encrypted_content)
+    assert_equal({type: :compaction, content: nil}, content_block.to_h)
   end
 
   def test_fallback_accumulated_message_model
@@ -603,7 +629,7 @@ class Anthropic::Test::Resources::Beta::Messages::StreamingTest < Minitest::Test
     SSE
   end
 
-  def compaction_sse_response
+  def compaction_sse_response(delta = {content: "Summary of the conversation so far."})
     <<~SSE
       event: message_start
       data: {"type":"message_start","message":{"id":"msg_compaction","type":"message","role":"assistant","content":[],"model":"claude-sonnet-4-20250514","stop_reason":null,"stop_sequence":null,"usage":{"input_tokens":10,"output_tokens":1}}}
@@ -612,7 +638,7 @@ class Anthropic::Test::Resources::Beta::Messages::StreamingTest < Minitest::Test
       data: {"type":"content_block_start","index":0,"content_block":{"type":"compaction","content":null}}
 
       event: content_block_delta
-      data: {"type":"content_block_delta","index":0,"delta":{"type":"compaction_delta","content":"Summary of the conversation so far."}}
+      data: {"type":"content_block_delta","index":0,"delta":#{{type: :compaction_delta, **delta}.to_json}}
 
       event: content_block_stop
       data: {"type":"content_block_stop","index":0}

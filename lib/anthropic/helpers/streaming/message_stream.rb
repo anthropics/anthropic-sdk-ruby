@@ -140,8 +140,10 @@ module Anthropic
             in Anthropic::Models::SignatureDelta | Anthropic::Models::BetaSignatureDelta if content.type == :thinking
               content.signature = delta.signature
             in Anthropic::Models::BetaCompactionContentBlockDelta if content.type == :compaction
-              content.content = delta.content
-              content.encrypted_content = delta.encrypted_content
+              # The generated setters cannot take a nil: a failed compaction keeps the null
+              # placeholder from content_block_start.
+              content.content = delta.content unless delta.content.nil?
+              content.encrypted_content = delta.encrypted_content unless delta.encrypted_content.nil?
             else
             end
           in Anthropic::Models::RawContentBlockStopEvent | Anthropic::Models::BetaRawContentBlockStopEvent
@@ -267,9 +269,9 @@ module Anthropic
                 signature: content_block.signature
               )
             in Anthropic::Models::BetaCompactionContentBlockDelta if content_block.type == :compaction
+              # `new` goes through the same setters, so a failed compaction's nil is left out.
               events_to_yield << Anthropic::Streaming::CompactionEvent.new(
-                type: :compaction,
-                content: content_block.content
+                {type: :compaction, content: content_block.content}.compact
               )
             else
             end
