@@ -40,6 +40,10 @@ class Anthropic::Test::SorbetRuntimeSupportTest < Minitest::Test
     assert_raises(err) { E::TaggedSymbol }
     assert_raises(err) { U::Variants }
     assert_raises(err) { M::OrHash }
+    assert_raises(err) { Anthropic::Models::Message::OrHash }
+    assert_raises(err) { Anthropic::Models::StopReason::TaggedSymbol }
+    assert_raises(err) { Anthropic::Models::ContentBlock::Variants }
+    assert_raises(NameError) { Anthropic::Models::Message::Missing }
   end
 
   def test_stubbed_aliases
