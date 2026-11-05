@@ -134,7 +134,8 @@ module Anthropic
           end
           def self.new(
             type:,
-            # A human-readable explanation of why the precondition failed.
+            # A human-readable explanation of the error. Its wording can change, so don't
+            # match on it.
             message: nil,
             # The ID of the memory that blocked the write (`mem_...`), or an empty string if
             # that memory can't be identified.

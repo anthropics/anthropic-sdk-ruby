@@ -111,8 +111,8 @@ module Anthropic
         end
         def self.new(
           type:,
-          # A human-readable explanation of why the memory store can't be used yet, with the
-          # ID of the dream that is using it when the server can identify it.
+          # A human-readable explanation of the error. Its wording can change, so don't
+          # match on it.
           message: nil
         )
         end

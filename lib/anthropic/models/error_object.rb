@@ -48,11 +48,14 @@ module Anthropic
       # Creates a new instance of the variant class whose `type` matches the given
       # value, passing the remaining arguments to its constructor.
       #
+      # Some parameter documentations has been truncated, see
+      # {Anthropic::Models::ErrorObject} for more details.
+      #
       # @param type [Symbol, Anthropic::Models::ErrorObject::Type, String]
       #
       # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
       #
-      #   @option args [String] :message
+      #   @option args [String] :message A human-readable explanation of the error. Its wording can change, so don't matc
       #
       # @raise [ArgumentError]
       # @return [Anthropic::Models::InvalidRequestError, Anthropic::Models::AuthenticationError, Anthropic::Models::BillingError, Anthropic::Models::PermissionError, Anthropic::Models::NotFoundError, Anthropic::Models::RateLimitError, Anthropic::Models::GatewayTimeoutError, Anthropic::Models::APIErrorObject, Anthropic::Models::OverloadedError]

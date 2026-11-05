@@ -27,8 +27,6 @@ module Anthropic
           optional :conflicting_path, String
 
           # @!attribute message
-          #   A human-readable explanation of the conflict. To handle the error in code, use
-          #   `conflicting_path` and `conflicting_memory_id` instead.
           #
           #   @return [String, nil]
           optional :message, String
@@ -43,6 +41,9 @@ module Anthropic
           #   `conflicting_memory_id` references, then retry. To change that memory instead of
           #   creating a new one, update it.
           #
+          #   To handle the error in code, use `conflicting_path` and `conflicting_memory_id`
+          #   instead of `message`.
+          #
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryPathConflictError}
           #   for more details.
@@ -51,7 +52,7 @@ module Anthropic
           #
           #   @param conflicting_path [String] The path that blocked the write: the requested path, or the path of a memory tha
           #
-          #   @param message [String] A human-readable explanation of the conflict. To handle the error in code, use
+          #   @param message [String]
           #
           #   @param type [Symbol, :memory_path_conflict_error]
         end

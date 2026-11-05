@@ -11,7 +11,6 @@ module Anthropic
           required :type, const: :memory_precondition_failed_error
 
           # @!attribute message
-          #   A human-readable explanation of why the precondition failed.
           #
           #   @return [String, nil]
           optional :message, String
@@ -28,8 +27,7 @@ module Anthropic
           #   [memory guide](https://platform.claude.com/docs/en/managed-agents/memory#safe-content-edits-optimistic-concurrency)
           #   to learn more about safe content edits with content hash preconditions.
           #
-          #   @param message [String] A human-readable explanation of why the precondition failed.
-          #
+          #   @param message [String]
           #   @param type [Symbol, :memory_precondition_failed_error]
         end
       end

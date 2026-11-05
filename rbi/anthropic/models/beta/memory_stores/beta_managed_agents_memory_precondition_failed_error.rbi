@@ -16,7 +16,6 @@ module Anthropic
           sig { returns(Symbol) }
           attr_accessor :type
 
-          # A human-readable explanation of why the precondition failed.
           sig { returns(T.nilable(String)) }
           attr_reader :message
 
@@ -36,11 +35,7 @@ module Anthropic
           sig do
             params(message: String, type: Symbol).returns(T.attached_class)
           end
-          def self.new(
-            # A human-readable explanation of why the precondition failed.
-            message: nil,
-            type: :memory_precondition_failed_error
-          )
+          def self.new(message: nil, type: :memory_precondition_failed_error)
           end
 
           sig { override.returns({ type: Symbol, message: String }) }

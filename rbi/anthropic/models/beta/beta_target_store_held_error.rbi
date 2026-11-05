@@ -17,8 +17,6 @@ module Anthropic
         sig { returns(Symbol) }
         attr_accessor :type
 
-        # A human-readable explanation of why the memory store can't be used yet, with the
-        # ID of the dream that is using it when the server can identify it.
         sig { returns(T.nilable(String)) }
         attr_reader :message
 
@@ -36,12 +34,7 @@ module Anthropic
         # end or cancel it, then retry. The response sets the `x-should-retry` header to
         # `false`.
         sig { params(message: String, type: Symbol).returns(T.attached_class) }
-        def self.new(
-          # A human-readable explanation of why the memory store can't be used yet, with the
-          # ID of the dream that is using it when the server can identify it.
-          message: nil,
-          type: :conflict_error
-        )
+        def self.new(message: nil, type: :conflict_error)
         end
 
         sig { override.returns({ type: Symbol, message: String }) }

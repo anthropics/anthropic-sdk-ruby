@@ -38,6 +38,8 @@ module Anthropic
           # The error returned with HTTP status 409 when you create or rename a memory and the path you give is already used by another memory or overlaps another memory's path.
           #
           # Two paths overlap when one is an ancestor of the other, such as `/notes` and `/notes/todo.md`. To free the path, rename or delete the memory that `conflicting_memory_id` references, then retry. To change that memory instead of creating a new one, update it.
+          #
+          # To handle the error in code, use `conflicting_path` and `conflicting_memory_id` instead of `message`.
           variant :memory_path_conflict_error,
                   -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryPathConflictError }
 
@@ -77,7 +79,7 @@ module Anthropic
           #
           # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
           #
-          #   @option args [String] :message A human-readable explanation of why the precondition failed.
+          #   @option args [String] :message A human-readable explanation of the error. Its wording can change, so don't matc
           #
           #   @option args [String] :conflicting_memory_id The ID of the memory that blocked the write (`mem_...`), or an empty string if t
           #

@@ -62,7 +62,7 @@ module Anthropic
         #
         # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
         #
-        #   @option args [String] :message A human-readable explanation of why the memory store can't be used yet, with the
+        #   @option args [String] :message A human-readable explanation of the error. Its wording can change, so don't matc
         #
         # @raise [ArgumentError]
         # @return [Anthropic::Models::BetaInvalidRequestError, Anthropic::Models::BetaAuthenticationError, Anthropic::Models::BetaBillingError, Anthropic::Models::BetaPermissionError, Anthropic::Models::BetaNotFoundError, Anthropic::Models::BetaRateLimitError, Anthropic::Models::BetaGatewayTimeoutError, Anthropic::Models::BetaAPIError, Anthropic::Models::BetaOverloadedError, Anthropic::Models::Beta::BetaTargetStoreHeldError]
