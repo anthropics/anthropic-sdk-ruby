@@ -554,6 +554,19 @@ module Anthropic
       JSON_CONTENT = %r{^application/(?:[a-zA-Z0-9.-]+\+)?json(?!l)}
       # @type [Regexp]
       JSONL_CONTENT = %r{^application/(:?x-(?:n|l)djson)|(:?(?:x-)?jsonl)}
+      # The file types the Messages API reads from an uploaded `file_id`: PDF and
+      # plain-text documents, and the image types of `Base64ImageSource`.
+      #
+      # @type [Hash{String=>String}]
+      MULTIPART_CONTENT_TYPE_BY_FILE_EXTENSION = {
+        ".pdf" => "application/pdf",
+        ".txt" => "text/plain",
+        ".jpg" => "image/jpeg",
+        ".jpeg" => "image/jpeg",
+        ".png" => "image/png",
+        ".gif" => "image/gif",
+        ".webp" => "image/webp"
+      }.freeze
 
       class << self
         # @api private
@@ -617,7 +630,7 @@ module Anthropic
               y,
               val: val.content,
               closing: closing,
-              content_type: val.content_type
+              content_type: val.content_type || content_type
             )
           in Pathname
             y << format(content_line, content_type || "application/octet-stream")
@@ -670,7 +683,8 @@ module Anthropic
           end
           y << "\r\n"
 
-          write_multipart_content(y, val: val, closing: closing)
+          content_type = MULTIPART_CONTENT_TYPE_BY_FILE_EXTENSION[::File.extname(filename.to_s).downcase]
+          write_multipart_content(y, val: val, closing: closing, content_type: content_type)
         end
 
         # @api private
