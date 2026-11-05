@@ -87,6 +87,9 @@ module Anthropic
       # The organization has crossed the monthly API usage threshold of its API tier.
       variant :enforced_spend_limit_reached, -> { Anthropic::EnforcedSpendLimitReachedErrorDetails }
 
+      # The request would exceed a ramp limit, which caps how fast usage can grow. Retry after the time in the `retry-after` header.
+      variant :ramp_limit_exceeded, -> { Anthropic::RampLimitExceededErrorDetails }
+
       # The workspace's customer-managed encryption key could not be reached. Retry the request; if this continues, check that the key is available in your key management service, or contact Anthropic support.
       variant :cmek_key_unreachable, -> { Anthropic::CMEKKeyUnreachableErrorDetails }
 
@@ -149,6 +152,14 @@ module Anthropic
       # Another change to the organization's members is in progress. Retry the request once it completes.
       variant :concurrent_membership_change, -> { Anthropic::ConcurrentMembershipChangeErrorDetails }
 
+      # The External Key failed Anthropic's validation, so the request was refused. The message gives the reason, if there is one.
+      variant :external_key_validation_failed,
+              -> { Anthropic::Organization::ExternalKeyValidationFailedErrorDetails }
+
+      # Anthropic's validation of the External Key did not finish in time, so the request was refused. Wait a moment, then send the request again.
+      variant :external_key_validation_timed_out,
+              -> { Anthropic::Organization::ExternalKeyValidationTimedOutErrorDetails }
+
       # The External Key is bound to a user profile, and the Workspace does not have that user profile. A Workspace can use only a key bound to its own user profile or a key that isn't bound to one.
       variant :key_profile_mismatch, -> { Anthropic::Organization::KeyProfileMismatchErrorDetails }
 
@@ -183,6 +194,32 @@ module Anthropic
 
       # `metadata` has too many keys, a key or value that is too long, or a reserved key. The message names each problem.
       variant :invalid_metadata, -> { Anthropic::Beta::BetaInvalidMetadataErrorDetails }
+
+      # The member is the organization's primary owner, whom no API key or token can sign out.
+      variant :cannot_sign_out_primary_owner,
+              -> { Anthropic::Beta::Organization::BetaCannotSignOutPrimaryOwnerErrorDetails }
+
+      # The member is the user the API key or token belongs to.
+      variant :cannot_sign_out_self, -> { Anthropic::Beta::Organization::BetaCannotSignOutSelfErrorDetails }
+
+      # The beta that the endpoint requires is not enabled for the organization. The message names the beta value.
+      variant :organization_not_enrolled_in_beta,
+              -> { Anthropic::BetaOrganizationNotEnrolledInBetaErrorDetails }
+
+      # On a public-sector deployment, only an API key or token that belongs to a person with owner permissions can sign out a member with the `managed` role.
+      variant :cannot_sign_out_managed_member,
+              -> { Anthropic::Beta::Organization::BetaCannotSignOutManagedMemberErrorDetails }
+
+      # The member is a membership admin, and the person the API key or token belongs to is not allowed to sign out membership admins.
+      variant :cannot_sign_out_membership_admin,
+              -> { Anthropic::Beta::Organization::BetaCannotSignOutMembershipAdminErrorDetails }
+
+      # The member is an owner or has owner permissions, and this API key or token cannot sign them out. In a Claude Enterprise organization, an API key with the `write:members` scope can.
+      variant :cannot_sign_out_owner, -> { Anthropic::Beta::Organization::BetaCannotSignOutOwnerErrorDetails }
+
+      # This OAuth token cannot sign out a membership admin or a member whose roles grant owner, user management, or identity and access management.
+      variant :cannot_sign_out_privileged_member,
+              -> { Anthropic::Beta::Organization::BetaCannotSignOutPrivilegedMemberErrorDetails }
 
       # Anthropic has temporarily disabled billing changes for the user account the credential belongs to. Contact support.
       variant :billing_frozen, -> { Anthropic::Beta::BetaBillingFrozenErrorDetails }
@@ -268,6 +305,7 @@ module Anthropic
         SKILL_READ_BLOCKED_UNDECRYPTABLE = :skill_read_blocked_undecryptable
         REQUEST_BODY_TOO_LARGE_AFTER_DECODING = :request_body_too_large_after_decoding
         ENFORCED_SPEND_LIMIT_REACHED = :enforced_spend_limit_reached
+        RAMP_LIMIT_EXCEEDED = :ramp_limit_exceeded
         CMEK_KEY_UNREACHABLE = :cmek_key_unreachable
         COMPACTION_UNAVAILABLE = :compaction_unavailable
         STORAGE_QUOTA_EXCEEDED = :storage_quota_exceeded
@@ -287,6 +325,8 @@ module Anthropic
         RBAC_GROUP_OWNER_ACCESS_UNCONFIRMED = :rbac_group_owner_access_unconfirmed
         CANNOT_REMOVE_LAST_MEMBER = :cannot_remove_last_member
         CONCURRENT_MEMBERSHIP_CHANGE = :concurrent_membership_change
+        EXTERNAL_KEY_VALIDATION_FAILED = :external_key_validation_failed
+        EXTERNAL_KEY_VALIDATION_TIMED_OUT = :external_key_validation_timed_out
         KEY_PROFILE_MISMATCH = :key_profile_mismatch
         WORKSPACE_POLICY_VIOLATION = :workspace_policy_violation
         EXTERNAL_KEY_CHANGED = :external_key_changed
@@ -298,6 +338,13 @@ module Anthropic
         ENVIRONMENT_UPDATE_DISABLED = :environment_update_disabled
         HEARTBEAT_PRECONDITION_FAILED = :heartbeat_precondition_failed
         INVALID_METADATA = :invalid_metadata
+        CANNOT_SIGN_OUT_PRIMARY_OWNER = :cannot_sign_out_primary_owner
+        CANNOT_SIGN_OUT_SELF = :cannot_sign_out_self
+        ORGANIZATION_NOT_ENROLLED_IN_BETA = :organization_not_enrolled_in_beta
+        CANNOT_SIGN_OUT_MANAGED_MEMBER = :cannot_sign_out_managed_member
+        CANNOT_SIGN_OUT_MEMBERSHIP_ADMIN = :cannot_sign_out_membership_admin
+        CANNOT_SIGN_OUT_OWNER = :cannot_sign_out_owner
+        CANNOT_SIGN_OUT_PRIVILEGED_MEMBER = :cannot_sign_out_privileged_member
         BILLING_FROZEN = :billing_frozen
         SPEND_LIMITS_ADMIN_API_WRITES_NOT_ENABLED = :spend_limits_admin_api_writes_not_enabled
         UNSUPPORTED_CHARSET = :unsupported_charset
@@ -320,7 +367,7 @@ module Anthropic
       end
 
       # @!method self.variants
-      #   @return [Array(Anthropic::Models::AvailableToolsLimitExceededErrorDetails, Anthropic::Models::ClaudeCodeKeyCreatorNotMemberErrorDetails, Anthropic::Models::ClaudeCodeVersionTooOldErrorDetails, Anthropic::Models::CMEKKeyDisabledErrorDetails, Anthropic::Models::CMEKKeyNetworkBlockedErrorDetails, Anthropic::Models::CompactionBlockAmbiguousErrorDetails, Anthropic::Models::CompactionBlockMisplacedErrorDetails, Anthropic::Models::CompactionContentMismatchErrorDetails, Anthropic::Models::CompactionIncompleteTurnErrorDetails, Anthropic::Models::CompactionNothingToSummarizeErrorDetails, Anthropic::Models::CompactionSignatureInvalidErrorDetails, Anthropic::Models::CompactionTooManyToolReferencesErrorDetails, Anthropic::Models::CompactionToolChangesMismatchErrorDetails, Anthropic::Models::OrganizationOnHoldErrorDetails, Anthropic::Models::RequestBodyEncodingInvalidErrorDetails, Anthropic::Models::RequestBodyEncodingUnsupportedErrorDetails, Anthropic::Models::ThreadAlreadyContinuedErrorDetails, Anthropic::Models::ThreadContinueInFlightErrorDetails, Anthropic::Models::ThreadFingerprintMismatchErrorDetails, Anthropic::Models::ThreadUnsupportedRequestErrorDetails, Anthropic::Models::ToolNameConflictErrorDetails, Anthropic::Models::ToolReferenceUnresolvedErrorDetails, Anthropic::Models::ThreadNotFoundErrorDetails, Anthropic::Models::SkillReadBlockedUndecryptableErrorDetails, Anthropic::Models::RequestBodyTooLargeAfterDecodingErrorDetails, Anthropic::Models::EnforcedSpendLimitReachedErrorDetails, Anthropic::Models::CMEKKeyUnreachableErrorDetails, Anthropic::Models::CompactionUnavailableErrorDetails, Anthropic::Models::StorageQuotaExceededErrorDetails, Anthropic::Models::FileNotDownloadableErrorDetails, Anthropic::Models::FileExpiredErrorDetails, Anthropic::Models::CMEKContextUnavailableErrorDetails, Anthropic::Models::Organization::OrgAPIKeyLimitExceededErrorDetails, Anthropic::Models::Organization::WorkspaceAPIKeyLimitExceededErrorDetails, Anthropic::Models::UserProfileNotFoundErrorDetails, Anthropic::Models::Organization::ExternalKeyInWorkspacePolicyErrorDetails, Anthropic::Models::Organization::AlreadyMemberErrorDetails, Anthropic::Models::Organization::CannotInviteEmailsWithUnverifiedDomainsErrorDetails, Anthropic::Models::Organization::EmailDomainNotAllowedErrorDetails, Anthropic::Models::Organization::InviteAlreadyExistsErrorDetails, Anthropic::Models::OrgMemberLimitExceededErrorDetails, Anthropic::Models::Organization::RBACGroupGrantsOwnerAccessErrorDetails, Anthropic::Models::Organization::RBACGroupOwnerAccessUnconfirmedErrorDetails, Anthropic::Models::Organization::CannotRemoveLastMemberErrorDetails, Anthropic::Models::ConcurrentMembershipChangeErrorDetails, Anthropic::Models::Organization::KeyProfileMismatchErrorDetails, Anthropic::Models::Organization::WorkspacePolicyViolationErrorDetails, Anthropic::Models::Organization::ExternalKeyChangedErrorDetails, Anthropic::Models::Organization::WorkspaceMemberLimitExceededErrorDetails, Anthropic::Models::OrganizationTypeNotSupportedErrorDetails, Anthropic::Models::Beta::BetaEnvironmentCreateDisabledErrorDetails, Anthropic::Models::Beta::BetaEnvironmentArchivedErrorDetails, Anthropic::Models::Beta::BetaInvalidConfigTypeChangeErrorDetails, Anthropic::Models::Beta::BetaEnvironmentUpdateDisabledErrorDetails, Anthropic::Models::Beta::Environments::BetaHeartbeatPreconditionFailedErrorDetails, Anthropic::Models::Beta::BetaInvalidMetadataErrorDetails, Anthropic::Models::Beta::BetaBillingFrozenErrorDetails, Anthropic::Models::Beta::Organization::BetaSpendLimitsAdminAPIWritesNotEnabledErrorDetails, Anthropic::Models::BetaUnsupportedCharsetErrorDetails, Anthropic::Models::Beta::Organization::BetaPluginNameTakenErrorDetails, Anthropic::Models::Beta::Organization::BetaSkillNameTakenErrorDetails, Anthropic::Models::Beta::Organization::BetaRegistrationPendingErrorDetails, Anthropic::Models::Beta::Organization::BetaScanFailedErrorDetails, Anthropic::Models::Beta::Organization::BetaScanPendingErrorDetails, Anthropic::Models::Beta::Organization::BetaSlackChannelSetUpSettingsRefusedErrorDetails, Anthropic::Models::Beta::Organization::BetaAPIKeyScopeMissingErrorDetails, Anthropic::Models::Beta::Organization::BetaClaudeTagWritesNotEnabledErrorDetails, Anthropic::Models::Beta::Organization::BetaComplianceConfigurationRestrictedErrorDetails, Anthropic::Models::Beta::Organization::BetaOrganizationLevelScopedAPIKeyRequiredErrorDetails, Anthropic::Models::Beta::BetaEnvironmentNotFoundErrorDetails, Anthropic::Models::Beta::Organization::BetaSlackChannelSetUpEnvironmentNotFoundErrorDetails, Anthropic::Models::Beta::Organization::BetaSlackChannelSetUpSettingsConflictErrorDetails)]
+      #   @return [Array(Anthropic::Models::AvailableToolsLimitExceededErrorDetails, Anthropic::Models::ClaudeCodeKeyCreatorNotMemberErrorDetails, Anthropic::Models::ClaudeCodeVersionTooOldErrorDetails, Anthropic::Models::CMEKKeyDisabledErrorDetails, Anthropic::Models::CMEKKeyNetworkBlockedErrorDetails, Anthropic::Models::CompactionBlockAmbiguousErrorDetails, Anthropic::Models::CompactionBlockMisplacedErrorDetails, Anthropic::Models::CompactionContentMismatchErrorDetails, Anthropic::Models::CompactionIncompleteTurnErrorDetails, Anthropic::Models::CompactionNothingToSummarizeErrorDetails, Anthropic::Models::CompactionSignatureInvalidErrorDetails, Anthropic::Models::CompactionTooManyToolReferencesErrorDetails, Anthropic::Models::CompactionToolChangesMismatchErrorDetails, Anthropic::Models::OrganizationOnHoldErrorDetails, Anthropic::Models::RequestBodyEncodingInvalidErrorDetails, Anthropic::Models::RequestBodyEncodingUnsupportedErrorDetails, Anthropic::Models::ThreadAlreadyContinuedErrorDetails, Anthropic::Models::ThreadContinueInFlightErrorDetails, Anthropic::Models::ThreadFingerprintMismatchErrorDetails, Anthropic::Models::ThreadUnsupportedRequestErrorDetails, Anthropic::Models::ToolNameConflictErrorDetails, Anthropic::Models::ToolReferenceUnresolvedErrorDetails, Anthropic::Models::ThreadNotFoundErrorDetails, Anthropic::Models::SkillReadBlockedUndecryptableErrorDetails, Anthropic::Models::RequestBodyTooLargeAfterDecodingErrorDetails, Anthropic::Models::EnforcedSpendLimitReachedErrorDetails, Anthropic::Models::RampLimitExceededErrorDetails, Anthropic::Models::CMEKKeyUnreachableErrorDetails, Anthropic::Models::CompactionUnavailableErrorDetails, Anthropic::Models::StorageQuotaExceededErrorDetails, Anthropic::Models::FileNotDownloadableErrorDetails, Anthropic::Models::FileExpiredErrorDetails, Anthropic::Models::CMEKContextUnavailableErrorDetails, Anthropic::Models::Organization::OrgAPIKeyLimitExceededErrorDetails, Anthropic::Models::Organization::WorkspaceAPIKeyLimitExceededErrorDetails, Anthropic::Models::UserProfileNotFoundErrorDetails, Anthropic::Models::Organization::ExternalKeyInWorkspacePolicyErrorDetails, Anthropic::Models::Organization::AlreadyMemberErrorDetails, Anthropic::Models::Organization::CannotInviteEmailsWithUnverifiedDomainsErrorDetails, Anthropic::Models::Organization::EmailDomainNotAllowedErrorDetails, Anthropic::Models::Organization::InviteAlreadyExistsErrorDetails, Anthropic::Models::OrgMemberLimitExceededErrorDetails, Anthropic::Models::Organization::RBACGroupGrantsOwnerAccessErrorDetails, Anthropic::Models::Organization::RBACGroupOwnerAccessUnconfirmedErrorDetails, Anthropic::Models::Organization::CannotRemoveLastMemberErrorDetails, Anthropic::Models::ConcurrentMembershipChangeErrorDetails, Anthropic::Models::Organization::ExternalKeyValidationFailedErrorDetails, Anthropic::Models::Organization::ExternalKeyValidationTimedOutErrorDetails, Anthropic::Models::Organization::KeyProfileMismatchErrorDetails, Anthropic::Models::Organization::WorkspacePolicyViolationErrorDetails, Anthropic::Models::Organization::ExternalKeyChangedErrorDetails, Anthropic::Models::Organization::WorkspaceMemberLimitExceededErrorDetails, Anthropic::Models::OrganizationTypeNotSupportedErrorDetails, Anthropic::Models::Beta::BetaEnvironmentCreateDisabledErrorDetails, Anthropic::Models::Beta::BetaEnvironmentArchivedErrorDetails, Anthropic::Models::Beta::BetaInvalidConfigTypeChangeErrorDetails, Anthropic::Models::Beta::BetaEnvironmentUpdateDisabledErrorDetails, Anthropic::Models::Beta::Environments::BetaHeartbeatPreconditionFailedErrorDetails, Anthropic::Models::Beta::BetaInvalidMetadataErrorDetails, Anthropic::Models::Beta::Organization::BetaCannotSignOutPrimaryOwnerErrorDetails, Anthropic::Models::Beta::Organization::BetaCannotSignOutSelfErrorDetails, Anthropic::Models::BetaOrganizationNotEnrolledInBetaErrorDetails, Anthropic::Models::Beta::Organization::BetaCannotSignOutManagedMemberErrorDetails, Anthropic::Models::Beta::Organization::BetaCannotSignOutMembershipAdminErrorDetails, Anthropic::Models::Beta::Organization::BetaCannotSignOutOwnerErrorDetails, Anthropic::Models::Beta::Organization::BetaCannotSignOutPrivilegedMemberErrorDetails, Anthropic::Models::Beta::BetaBillingFrozenErrorDetails, Anthropic::Models::Beta::Organization::BetaSpendLimitsAdminAPIWritesNotEnabledErrorDetails, Anthropic::Models::BetaUnsupportedCharsetErrorDetails, Anthropic::Models::Beta::Organization::BetaPluginNameTakenErrorDetails, Anthropic::Models::Beta::Organization::BetaSkillNameTakenErrorDetails, Anthropic::Models::Beta::Organization::BetaRegistrationPendingErrorDetails, Anthropic::Models::Beta::Organization::BetaScanFailedErrorDetails, Anthropic::Models::Beta::Organization::BetaScanPendingErrorDetails, Anthropic::Models::Beta::Organization::BetaSlackChannelSetUpSettingsRefusedErrorDetails, Anthropic::Models::Beta::Organization::BetaAPIKeyScopeMissingErrorDetails, Anthropic::Models::Beta::Organization::BetaClaudeTagWritesNotEnabledErrorDetails, Anthropic::Models::Beta::Organization::BetaComplianceConfigurationRestrictedErrorDetails, Anthropic::Models::Beta::Organization::BetaOrganizationLevelScopedAPIKeyRequiredErrorDetails, Anthropic::Models::Beta::BetaEnvironmentNotFoundErrorDetails, Anthropic::Models::Beta::Organization::BetaSlackChannelSetUpEnvironmentNotFoundErrorDetails, Anthropic::Models::Beta::Organization::BetaSlackChannelSetUpSettingsConflictErrorDetails)]
 
       # Creates a new instance of the variant class whose `error_code` matches the given
       # value, passing the remaining arguments to its constructor.
@@ -349,7 +396,7 @@ module Anthropic
       #   @option args [String] :slack_channel_id The identifier of the channel the request set up, starting with `slch_`.
       #
       # @raise [ArgumentError]
-      # @return [Anthropic::Models::AvailableToolsLimitExceededErrorDetails, Anthropic::Models::ClaudeCodeKeyCreatorNotMemberErrorDetails, Anthropic::Models::ClaudeCodeVersionTooOldErrorDetails, Anthropic::Models::CMEKKeyDisabledErrorDetails, Anthropic::Models::CMEKKeyNetworkBlockedErrorDetails, Anthropic::Models::CompactionBlockAmbiguousErrorDetails, Anthropic::Models::CompactionBlockMisplacedErrorDetails, Anthropic::Models::CompactionContentMismatchErrorDetails, Anthropic::Models::CompactionIncompleteTurnErrorDetails, Anthropic::Models::CompactionNothingToSummarizeErrorDetails, Anthropic::Models::CompactionSignatureInvalidErrorDetails, Anthropic::Models::CompactionTooManyToolReferencesErrorDetails, Anthropic::Models::CompactionToolChangesMismatchErrorDetails, Anthropic::Models::OrganizationOnHoldErrorDetails, Anthropic::Models::RequestBodyEncodingInvalidErrorDetails, Anthropic::Models::RequestBodyEncodingUnsupportedErrorDetails, Anthropic::Models::ThreadAlreadyContinuedErrorDetails, Anthropic::Models::ThreadContinueInFlightErrorDetails, Anthropic::Models::ThreadFingerprintMismatchErrorDetails, Anthropic::Models::ThreadUnsupportedRequestErrorDetails, Anthropic::Models::ToolNameConflictErrorDetails, Anthropic::Models::ToolReferenceUnresolvedErrorDetails, Anthropic::Models::ThreadNotFoundErrorDetails, Anthropic::Models::SkillReadBlockedUndecryptableErrorDetails, Anthropic::Models::RequestBodyTooLargeAfterDecodingErrorDetails, Anthropic::Models::EnforcedSpendLimitReachedErrorDetails, Anthropic::Models::CMEKKeyUnreachableErrorDetails, Anthropic::Models::CompactionUnavailableErrorDetails, Anthropic::Models::StorageQuotaExceededErrorDetails, Anthropic::Models::FileNotDownloadableErrorDetails, Anthropic::Models::FileExpiredErrorDetails, Anthropic::Models::CMEKContextUnavailableErrorDetails, Anthropic::Models::Organization::OrgAPIKeyLimitExceededErrorDetails, Anthropic::Models::Organization::WorkspaceAPIKeyLimitExceededErrorDetails, Anthropic::Models::UserProfileNotFoundErrorDetails, Anthropic::Models::Organization::ExternalKeyInWorkspacePolicyErrorDetails, Anthropic::Models::Organization::AlreadyMemberErrorDetails, Anthropic::Models::Organization::CannotInviteEmailsWithUnverifiedDomainsErrorDetails, Anthropic::Models::Organization::EmailDomainNotAllowedErrorDetails, Anthropic::Models::Organization::InviteAlreadyExistsErrorDetails, Anthropic::Models::OrgMemberLimitExceededErrorDetails, Anthropic::Models::Organization::RBACGroupGrantsOwnerAccessErrorDetails, Anthropic::Models::Organization::RBACGroupOwnerAccessUnconfirmedErrorDetails, Anthropic::Models::Organization::CannotRemoveLastMemberErrorDetails, Anthropic::Models::ConcurrentMembershipChangeErrorDetails, Anthropic::Models::Organization::KeyProfileMismatchErrorDetails, Anthropic::Models::Organization::WorkspacePolicyViolationErrorDetails, Anthropic::Models::Organization::ExternalKeyChangedErrorDetails, Anthropic::Models::Organization::WorkspaceMemberLimitExceededErrorDetails, Anthropic::Models::OrganizationTypeNotSupportedErrorDetails, Anthropic::Models::Beta::BetaEnvironmentCreateDisabledErrorDetails, Anthropic::Models::Beta::BetaEnvironmentArchivedErrorDetails, Anthropic::Models::Beta::BetaInvalidConfigTypeChangeErrorDetails, Anthropic::Models::Beta::BetaEnvironmentUpdateDisabledErrorDetails, Anthropic::Models::Beta::Environments::BetaHeartbeatPreconditionFailedErrorDetails, Anthropic::Models::Beta::BetaInvalidMetadataErrorDetails, Anthropic::Models::Beta::BetaBillingFrozenErrorDetails, Anthropic::Models::Beta::Organization::BetaSpendLimitsAdminAPIWritesNotEnabledErrorDetails, Anthropic::Models::BetaUnsupportedCharsetErrorDetails, Anthropic::Models::Beta::Organization::BetaPluginNameTakenErrorDetails, Anthropic::Models::Beta::Organization::BetaSkillNameTakenErrorDetails, Anthropic::Models::Beta::Organization::BetaRegistrationPendingErrorDetails, Anthropic::Models::Beta::Organization::BetaScanFailedErrorDetails, Anthropic::Models::Beta::Organization::BetaScanPendingErrorDetails, Anthropic::Models::Beta::Organization::BetaSlackChannelSetUpSettingsRefusedErrorDetails, Anthropic::Models::Beta::Organization::BetaAPIKeyScopeMissingErrorDetails, Anthropic::Models::Beta::Organization::BetaClaudeTagWritesNotEnabledErrorDetails, Anthropic::Models::Beta::Organization::BetaComplianceConfigurationRestrictedErrorDetails, Anthropic::Models::Beta::Organization::BetaOrganizationLevelScopedAPIKeyRequiredErrorDetails, Anthropic::Models::Beta::BetaEnvironmentNotFoundErrorDetails, Anthropic::Models::Beta::Organization::BetaSlackChannelSetUpEnvironmentNotFoundErrorDetails, Anthropic::Models::Beta::Organization::BetaSlackChannelSetUpSettingsConflictErrorDetails]
+      # @return [Anthropic::Models::AvailableToolsLimitExceededErrorDetails, Anthropic::Models::ClaudeCodeKeyCreatorNotMemberErrorDetails, Anthropic::Models::ClaudeCodeVersionTooOldErrorDetails, Anthropic::Models::CMEKKeyDisabledErrorDetails, Anthropic::Models::CMEKKeyNetworkBlockedErrorDetails, Anthropic::Models::CompactionBlockAmbiguousErrorDetails, Anthropic::Models::CompactionBlockMisplacedErrorDetails, Anthropic::Models::CompactionContentMismatchErrorDetails, Anthropic::Models::CompactionIncompleteTurnErrorDetails, Anthropic::Models::CompactionNothingToSummarizeErrorDetails, Anthropic::Models::CompactionSignatureInvalidErrorDetails, Anthropic::Models::CompactionTooManyToolReferencesErrorDetails, Anthropic::Models::CompactionToolChangesMismatchErrorDetails, Anthropic::Models::OrganizationOnHoldErrorDetails, Anthropic::Models::RequestBodyEncodingInvalidErrorDetails, Anthropic::Models::RequestBodyEncodingUnsupportedErrorDetails, Anthropic::Models::ThreadAlreadyContinuedErrorDetails, Anthropic::Models::ThreadContinueInFlightErrorDetails, Anthropic::Models::ThreadFingerprintMismatchErrorDetails, Anthropic::Models::ThreadUnsupportedRequestErrorDetails, Anthropic::Models::ToolNameConflictErrorDetails, Anthropic::Models::ToolReferenceUnresolvedErrorDetails, Anthropic::Models::ThreadNotFoundErrorDetails, Anthropic::Models::SkillReadBlockedUndecryptableErrorDetails, Anthropic::Models::RequestBodyTooLargeAfterDecodingErrorDetails, Anthropic::Models::EnforcedSpendLimitReachedErrorDetails, Anthropic::Models::RampLimitExceededErrorDetails, Anthropic::Models::CMEKKeyUnreachableErrorDetails, Anthropic::Models::CompactionUnavailableErrorDetails, Anthropic::Models::StorageQuotaExceededErrorDetails, Anthropic::Models::FileNotDownloadableErrorDetails, Anthropic::Models::FileExpiredErrorDetails, Anthropic::Models::CMEKContextUnavailableErrorDetails, Anthropic::Models::Organization::OrgAPIKeyLimitExceededErrorDetails, Anthropic::Models::Organization::WorkspaceAPIKeyLimitExceededErrorDetails, Anthropic::Models::UserProfileNotFoundErrorDetails, Anthropic::Models::Organization::ExternalKeyInWorkspacePolicyErrorDetails, Anthropic::Models::Organization::AlreadyMemberErrorDetails, Anthropic::Models::Organization::CannotInviteEmailsWithUnverifiedDomainsErrorDetails, Anthropic::Models::Organization::EmailDomainNotAllowedErrorDetails, Anthropic::Models::Organization::InviteAlreadyExistsErrorDetails, Anthropic::Models::OrgMemberLimitExceededErrorDetails, Anthropic::Models::Organization::RBACGroupGrantsOwnerAccessErrorDetails, Anthropic::Models::Organization::RBACGroupOwnerAccessUnconfirmedErrorDetails, Anthropic::Models::Organization::CannotRemoveLastMemberErrorDetails, Anthropic::Models::ConcurrentMembershipChangeErrorDetails, Anthropic::Models::Organization::ExternalKeyValidationFailedErrorDetails, Anthropic::Models::Organization::ExternalKeyValidationTimedOutErrorDetails, Anthropic::Models::Organization::KeyProfileMismatchErrorDetails, Anthropic::Models::Organization::WorkspacePolicyViolationErrorDetails, Anthropic::Models::Organization::ExternalKeyChangedErrorDetails, Anthropic::Models::Organization::WorkspaceMemberLimitExceededErrorDetails, Anthropic::Models::OrganizationTypeNotSupportedErrorDetails, Anthropic::Models::Beta::BetaEnvironmentCreateDisabledErrorDetails, Anthropic::Models::Beta::BetaEnvironmentArchivedErrorDetails, Anthropic::Models::Beta::BetaInvalidConfigTypeChangeErrorDetails, Anthropic::Models::Beta::BetaEnvironmentUpdateDisabledErrorDetails, Anthropic::Models::Beta::Environments::BetaHeartbeatPreconditionFailedErrorDetails, Anthropic::Models::Beta::BetaInvalidMetadataErrorDetails, Anthropic::Models::Beta::Organization::BetaCannotSignOutPrimaryOwnerErrorDetails, Anthropic::Models::Beta::Organization::BetaCannotSignOutSelfErrorDetails, Anthropic::Models::BetaOrganizationNotEnrolledInBetaErrorDetails, Anthropic::Models::Beta::Organization::BetaCannotSignOutManagedMemberErrorDetails, Anthropic::Models::Beta::Organization::BetaCannotSignOutMembershipAdminErrorDetails, Anthropic::Models::Beta::Organization::BetaCannotSignOutOwnerErrorDetails, Anthropic::Models::Beta::Organization::BetaCannotSignOutPrivilegedMemberErrorDetails, Anthropic::Models::Beta::BetaBillingFrozenErrorDetails, Anthropic::Models::Beta::Organization::BetaSpendLimitsAdminAPIWritesNotEnabledErrorDetails, Anthropic::Models::BetaUnsupportedCharsetErrorDetails, Anthropic::Models::Beta::Organization::BetaPluginNameTakenErrorDetails, Anthropic::Models::Beta::Organization::BetaSkillNameTakenErrorDetails, Anthropic::Models::Beta::Organization::BetaRegistrationPendingErrorDetails, Anthropic::Models::Beta::Organization::BetaScanFailedErrorDetails, Anthropic::Models::Beta::Organization::BetaScanPendingErrorDetails, Anthropic::Models::Beta::Organization::BetaSlackChannelSetUpSettingsRefusedErrorDetails, Anthropic::Models::Beta::Organization::BetaAPIKeyScopeMissingErrorDetails, Anthropic::Models::Beta::Organization::BetaClaudeTagWritesNotEnabledErrorDetails, Anthropic::Models::Beta::Organization::BetaComplianceConfigurationRestrictedErrorDetails, Anthropic::Models::Beta::Organization::BetaOrganizationLevelScopedAPIKeyRequiredErrorDetails, Anthropic::Models::Beta::BetaEnvironmentNotFoundErrorDetails, Anthropic::Models::Beta::Organization::BetaSlackChannelSetUpEnvironmentNotFoundErrorDetails, Anthropic::Models::Beta::Organization::BetaSlackChannelSetUpSettingsConflictErrorDetails]
       def self.new(error_code:, **args)
         case error_code.to_sym
         when :available_tools_limit_exceeded
@@ -404,6 +451,8 @@ module Anthropic
           Anthropic::RequestBodyTooLargeAfterDecodingErrorDetails.new(**args)
         when :enforced_spend_limit_reached
           Anthropic::EnforcedSpendLimitReachedErrorDetails.new(**args)
+        when :ramp_limit_exceeded
+          Anthropic::RampLimitExceededErrorDetails.new(**args)
         when :cmek_key_unreachable
           Anthropic::CMEKKeyUnreachableErrorDetails.new(**args)
         when :compaction_unavailable
@@ -442,6 +491,10 @@ module Anthropic
           Anthropic::Organization::CannotRemoveLastMemberErrorDetails.new(**args)
         when :concurrent_membership_change
           Anthropic::ConcurrentMembershipChangeErrorDetails.new(**args)
+        when :external_key_validation_failed
+          Anthropic::Organization::ExternalKeyValidationFailedErrorDetails.new(**args)
+        when :external_key_validation_timed_out
+          Anthropic::Organization::ExternalKeyValidationTimedOutErrorDetails.new(**args)
         when :key_profile_mismatch
           Anthropic::Organization::KeyProfileMismatchErrorDetails.new(**args)
         when :workspace_policy_violation
@@ -464,6 +517,20 @@ module Anthropic
           Anthropic::Beta::Environments::BetaHeartbeatPreconditionFailedErrorDetails.new(**args)
         when :invalid_metadata
           Anthropic::Beta::BetaInvalidMetadataErrorDetails.new(**args)
+        when :cannot_sign_out_primary_owner
+          Anthropic::Beta::Organization::BetaCannotSignOutPrimaryOwnerErrorDetails.new(**args)
+        when :cannot_sign_out_self
+          Anthropic::Beta::Organization::BetaCannotSignOutSelfErrorDetails.new(**args)
+        when :organization_not_enrolled_in_beta
+          Anthropic::BetaOrganizationNotEnrolledInBetaErrorDetails.new(**args)
+        when :cannot_sign_out_managed_member
+          Anthropic::Beta::Organization::BetaCannotSignOutManagedMemberErrorDetails.new(**args)
+        when :cannot_sign_out_membership_admin
+          Anthropic::Beta::Organization::BetaCannotSignOutMembershipAdminErrorDetails.new(**args)
+        when :cannot_sign_out_owner
+          Anthropic::Beta::Organization::BetaCannotSignOutOwnerErrorDetails.new(**args)
+        when :cannot_sign_out_privileged_member
+          Anthropic::Beta::Organization::BetaCannotSignOutPrivilegedMemberErrorDetails.new(**args)
         when :billing_frozen
           Anthropic::Beta::BetaBillingFrozenErrorDetails.new(**args)
         when :spend_limits_admin_api_writes_not_enabled

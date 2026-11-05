@@ -1,0 +1,16 @@
+module Anthropic
+  module Models
+    module Organization
+      type external_key_validation_failed_error_details =
+        { error_code: :external_key_validation_failed }
+
+      class ExternalKeyValidationFailedErrorDetails < Anthropic::Internal::Type::BaseModel
+        attr_accessor error_code: :external_key_validation_failed
+
+        def initialize: (?error_code: :external_key_validation_failed) -> void
+
+        def to_hash: -> { error_code: :external_key_validation_failed }
+      end
+    end
+  end
+end

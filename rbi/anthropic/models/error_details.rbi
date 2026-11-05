@@ -34,6 +34,7 @@ module Anthropic
             Anthropic::SkillReadBlockedUndecryptableErrorDetails,
             Anthropic::RequestBodyTooLargeAfterDecodingErrorDetails,
             Anthropic::EnforcedSpendLimitReachedErrorDetails,
+            Anthropic::RampLimitExceededErrorDetails,
             Anthropic::CMEKKeyUnreachableErrorDetails,
             Anthropic::CompactionUnavailableErrorDetails,
             Anthropic::StorageQuotaExceededErrorDetails,
@@ -53,6 +54,8 @@ module Anthropic
             Anthropic::Organization::RBACGroupOwnerAccessUnconfirmedErrorDetails,
             Anthropic::Organization::CannotRemoveLastMemberErrorDetails,
             Anthropic::ConcurrentMembershipChangeErrorDetails,
+            Anthropic::Organization::ExternalKeyValidationFailedErrorDetails,
+            Anthropic::Organization::ExternalKeyValidationTimedOutErrorDetails,
             Anthropic::Organization::KeyProfileMismatchErrorDetails,
             Anthropic::Organization::WorkspacePolicyViolationErrorDetails,
             Anthropic::Organization::ExternalKeyChangedErrorDetails,
@@ -64,6 +67,13 @@ module Anthropic
             Anthropic::Beta::BetaEnvironmentUpdateDisabledErrorDetails,
             Anthropic::Beta::Environments::BetaHeartbeatPreconditionFailedErrorDetails,
             Anthropic::Beta::BetaInvalidMetadataErrorDetails,
+            Anthropic::Beta::Organization::BetaCannotSignOutPrimaryOwnerErrorDetails,
+            Anthropic::Beta::Organization::BetaCannotSignOutSelfErrorDetails,
+            Anthropic::BetaOrganizationNotEnrolledInBetaErrorDetails,
+            Anthropic::Beta::Organization::BetaCannotSignOutManagedMemberErrorDetails,
+            Anthropic::Beta::Organization::BetaCannotSignOutMembershipAdminErrorDetails,
+            Anthropic::Beta::Organization::BetaCannotSignOutOwnerErrorDetails,
+            Anthropic::Beta::Organization::BetaCannotSignOutPrivilegedMemberErrorDetails,
             Anthropic::Beta::BetaBillingFrozenErrorDetails,
             Anthropic::Beta::Organization::BetaSpendLimitsAdminAPIWritesNotEnabledErrorDetails,
             Anthropic::BetaUnsupportedCharsetErrorDetails,
@@ -220,6 +230,11 @@ module Anthropic
             :enforced_spend_limit_reached,
             Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
           )
+        RAMP_LIMIT_EXCEEDED =
+          T.let(
+            :ramp_limit_exceeded,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
         CMEK_KEY_UNREACHABLE =
           T.let(
             :cmek_key_unreachable,
@@ -312,6 +327,16 @@ module Anthropic
             :concurrent_membership_change,
             Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
           )
+        EXTERNAL_KEY_VALIDATION_FAILED =
+          T.let(
+            :external_key_validation_failed,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        EXTERNAL_KEY_VALIDATION_TIMED_OUT =
+          T.let(
+            :external_key_validation_timed_out,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
         KEY_PROFILE_MISMATCH =
           T.let(
             :key_profile_mismatch,
@@ -365,6 +390,41 @@ module Anthropic
         INVALID_METADATA =
           T.let(
             :invalid_metadata,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        CANNOT_SIGN_OUT_PRIMARY_OWNER =
+          T.let(
+            :cannot_sign_out_primary_owner,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        CANNOT_SIGN_OUT_SELF =
+          T.let(
+            :cannot_sign_out_self,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        ORGANIZATION_NOT_ENROLLED_IN_BETA =
+          T.let(
+            :organization_not_enrolled_in_beta,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        CANNOT_SIGN_OUT_MANAGED_MEMBER =
+          T.let(
+            :cannot_sign_out_managed_member,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        CANNOT_SIGN_OUT_MEMBERSHIP_ADMIN =
+          T.let(
+            :cannot_sign_out_membership_admin,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        CANNOT_SIGN_OUT_OWNER =
+          T.let(
+            :cannot_sign_out_owner,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        CANNOT_SIGN_OUT_PRIVILEGED_MEMBER =
+          T.let(
+            :cannot_sign_out_privileged_member,
             Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
           )
         BILLING_FROZEN =

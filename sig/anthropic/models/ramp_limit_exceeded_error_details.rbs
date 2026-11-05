@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type ramp_limit_exceeded_error_details =
+      { error_code: :ramp_limit_exceeded }
+
+    class RampLimitExceededErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :ramp_limit_exceeded
+
+      def initialize: (?error_code: :ramp_limit_exceeded) -> void
+
+      def to_hash: -> { error_code: :ramp_limit_exceeded }
+    end
+  end
+end

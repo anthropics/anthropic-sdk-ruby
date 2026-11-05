@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        class BetaCannotSignOutPrimaryOwnerError < Anthropic::Errors::BadRequestError
+          def error_code: -> :cannot_sign_out_primary_owner
+
+          def details: -> Anthropic::Beta::Organization::BetaCannotSignOutPrimaryOwnerErrorDetails
+        end
+      end
+    end
+  end
+end

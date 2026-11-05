@@ -71,7 +71,12 @@ module Anthropic
           message: String
         ).returns(Anthropic::ErrorObject::Variants)
       end
-      def self.new(type:, message:)
+      def self.new(
+        type:,
+        # A human-readable explanation of the error. Its wording can change, so don't
+        # match on it.
+        message:
+      )
       end
     end
   end

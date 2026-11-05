@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_cannot_sign_out_self_error_details =
+          { error_code: :cannot_sign_out_self }
+
+        class BetaCannotSignOutSelfErrorDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor error_code: :cannot_sign_out_self
+
+          def initialize: (?error_code: :cannot_sign_out_self) -> void
+
+          def to_hash: -> { error_code: :cannot_sign_out_self }
+        end
+      end
+    end
+  end
+end

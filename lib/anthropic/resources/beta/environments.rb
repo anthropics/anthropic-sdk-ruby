@@ -30,13 +30,9 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError] The API key belongs to the Claude Code workspace, and the user who created it is
-        #   no longer a member of the organization or of that workspace.
-        # @raise [Anthropic::Models::OrganizationOnHoldError] Anthropic has disabled the organization for trust and safety reasons. An
-        #   organization disabled for any other reason, such as billing, does not get this
-        #   code. `appeal_url`, when present, is where the organization can appeal.
-        # @raise [Anthropic::Models::Beta::BetaEnvironmentCreateDisabledError] Anthropic has turned off creating environments for this organization. Existing
-        #   environments still work.
+        # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError]
+        # @raise [Anthropic::Models::OrganizationOnHoldError]
+        # @raise [Anthropic::Models::Beta::BetaEnvironmentCreateDisabledError]
         #
         # @return [Anthropic::Models::Beta::BetaEnvironment]
         #
@@ -73,11 +69,8 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError] The API key belongs to the Claude Code workspace, and the user who created it is
-        #   no longer a member of the organization or of that workspace.
-        # @raise [Anthropic::Models::OrganizationOnHoldError] Anthropic has disabled the organization for trust and safety reasons. An
-        #   organization disabled for any other reason, such as billing, does not get this
-        #   code. `appeal_url`, when present, is where the organization can appeal.
+        # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError]
+        # @raise [Anthropic::Models::OrganizationOnHoldError]
         #
         # @return [Anthropic::Models::Beta::BetaEnvironment]
         #
@@ -122,16 +115,11 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError] The API key belongs to the Claude Code workspace, and the user who created it is
-        #   no longer a member of the organization or of that workspace.
-        # @raise [Anthropic::Models::Beta::BetaEnvironmentArchivedError] The environment is archived, so it cannot be updated.
-        # @raise [Anthropic::Models::Beta::BetaInvalidConfigTypeChangeError] `config.type` differs from the environment's stored type, which cannot change
-        #   after creation.
-        # @raise [Anthropic::Models::OrganizationOnHoldError] Anthropic has disabled the organization for trust and safety reasons. An
-        #   organization disabled for any other reason, such as billing, does not get this
-        #   code. `appeal_url`, when present, is where the organization can appeal.
-        # @raise [Anthropic::Models::Beta::BetaEnvironmentUpdateDisabledError] Anthropic has turned off updating environments for this organization. Existing
-        #   environments still work as they are.
+        # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError]
+        # @raise [Anthropic::Models::Beta::BetaEnvironmentArchivedError]
+        # @raise [Anthropic::Models::Beta::BetaInvalidConfigTypeChangeError]
+        # @raise [Anthropic::Models::OrganizationOnHoldError]
+        # @raise [Anthropic::Models::Beta::BetaEnvironmentUpdateDisabledError]
         #
         # @return [Anthropic::Models::Beta::BetaEnvironment]
         #
@@ -172,11 +160,8 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError] The API key belongs to the Claude Code workspace, and the user who created it is
-        #   no longer a member of the organization or of that workspace.
-        # @raise [Anthropic::Models::OrganizationOnHoldError] Anthropic has disabled the organization for trust and safety reasons. An
-        #   organization disabled for any other reason, such as billing, does not get this
-        #   code. `appeal_url`, when present, is where the organization can appeal.
+        # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError]
+        # @raise [Anthropic::Models::OrganizationOnHoldError]
         #
         # @return [Anthropic::Internal::PageCursor<Anthropic::Models::Beta::BetaEnvironment>]
         #
@@ -218,11 +203,8 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError] The API key belongs to the Claude Code workspace, and the user who created it is
-        #   no longer a member of the organization or of that workspace.
-        # @raise [Anthropic::Models::OrganizationOnHoldError] Anthropic has disabled the organization for trust and safety reasons. An
-        #   organization disabled for any other reason, such as billing, does not get this
-        #   code. `appeal_url`, when present, is where the organization can appeal.
+        # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError]
+        # @raise [Anthropic::Models::OrganizationOnHoldError]
         #
         # @return [Anthropic::Models::Beta::BetaEnvironmentDeleteResponse]
         #
@@ -258,11 +240,8 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError] The API key belongs to the Claude Code workspace, and the user who created it is
-        #   no longer a member of the organization or of that workspace.
-        # @raise [Anthropic::Models::OrganizationOnHoldError] Anthropic has disabled the organization for trust and safety reasons. An
-        #   organization disabled for any other reason, such as billing, does not get this
-        #   code. `appeal_url`, when present, is where the organization can appeal.
+        # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError]
+        # @raise [Anthropic::Models::OrganizationOnHoldError]
         #
         # @return [Anthropic::Models::Beta::BetaEnvironment]
         #

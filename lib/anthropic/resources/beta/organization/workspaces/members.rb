@@ -52,7 +52,7 @@ module Anthropic
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #
-            # @raise [Anthropic::Models::Organization::WorkspaceMemberLimitExceededError] The workspace has reached the member limit that Anthropic set for it.
+            # @raise [Anthropic::Models::Organization::WorkspaceMemberLimitExceededError]
             #
             # @return [Anthropic::Models::Beta::Organization::BetaWorkspaceMember]
             #
@@ -130,7 +130,7 @@ module Anthropic
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #
-            # @raise [Anthropic::Models::Organization::WorkspaceMemberLimitExceededError] The workspace has reached the member limit that Anthropic set for it.
+            # @raise [Anthropic::Models::Organization::WorkspaceMemberLimitExceededError]
             #
             # @return [Anthropic::Models::Beta::Organization::BetaWorkspaceMember]
             #

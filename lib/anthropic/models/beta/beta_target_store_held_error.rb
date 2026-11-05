@@ -10,8 +10,6 @@ module Anthropic
         required :type, const: :conflict_error
 
         # @!attribute message
-        #   A human-readable explanation of why the memory store can't be used yet, with the
-        #   ID of the dream that is using it when the server can identify it.
         #
         #   @return [String, nil]
         optional :message, String
@@ -28,11 +26,7 @@ module Anthropic
         #   end or cancel it, then retry. The response sets the `x-should-retry` header to
         #   `false`.
         #
-        #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Models::Beta::BetaTargetStoreHeldError} for more details.
-        #
-        #   @param message [String] A human-readable explanation of why the memory store can't be used yet, with the
-        #
+        #   @param message [String]
         #   @param type [Symbol, :conflict_error]
       end
     end

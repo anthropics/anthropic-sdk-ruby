@@ -19,8 +19,7 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @raise [Anthropic::Models::Beta::Organization::BetaSpendLimitsAdminAPIWritesNotEnabledError] The organization cannot retrieve, set or delete spend limits with an Admin API
-          #   credential.
+          # @raise [Anthropic::Models::Beta::Organization::BetaSpendLimitsAdminAPIWritesNotEnabledError]
           #
           # @return [Anthropic::Models::Beta::Organization::BetaSpendLimit]
           #
@@ -64,8 +63,7 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @raise [Anthropic::Models::OrganizationTypeNotSupportedError] The endpoint does not support the organization's type. Each endpoint's
-          #   description says which organization types it supports.
+          # @raise [Anthropic::Models::OrganizationTypeNotSupportedError]
           #
           # @return [Anthropic::Internal::PageCursor<Anthropic::Models::Beta::Organization::BetaSpendLimit>]
           #
@@ -104,10 +102,8 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @raise [Anthropic::Models::Beta::BetaBillingFrozenError] Anthropic has temporarily disabled billing changes for the user account the
-          #   credential belongs to. Contact support.
-          # @raise [Anthropic::Models::Beta::Organization::BetaSpendLimitsAdminAPIWritesNotEnabledError] The organization cannot retrieve, set or delete spend limits with an Admin API
-          #   credential.
+          # @raise [Anthropic::Models::Beta::BetaBillingFrozenError]
+          # @raise [Anthropic::Models::Beta::Organization::BetaSpendLimitsAdminAPIWritesNotEnabledError]
           #
           # @return [Anthropic::Models::Beta::Organization::SpendLimitDeleteResponse]
           #
@@ -149,10 +145,8 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @raise [Anthropic::Models::Beta::BetaBillingFrozenError] Anthropic has temporarily disabled billing changes for the user account the
-          #   credential belongs to. Contact support.
-          # @raise [Anthropic::Models::Beta::Organization::BetaSpendLimitsAdminAPIWritesNotEnabledError] The organization cannot retrieve, set or delete spend limits with an Admin API
-          #   credential.
+          # @raise [Anthropic::Models::Beta::BetaBillingFrozenError]
+          # @raise [Anthropic::Models::Beta::Organization::BetaSpendLimitsAdminAPIWritesNotEnabledError]
           #
           # @return [Anthropic::Models::Beta::Organization::BetaSpendLimit]
           #

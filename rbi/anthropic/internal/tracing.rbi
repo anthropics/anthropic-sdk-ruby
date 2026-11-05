@@ -380,6 +380,7 @@ module Anthropic
           "anthropic.tunnels.certificates.retrieve"
         TUNNELS_CERTIFICATES_LIST = "anthropic.tunnels.certificates.list"
         TUNNELS_CERTIFICATES_ARCHIVE = "anthropic.tunnels.certificates.archive"
+        ORGANIZATION_USERS_SIGN_OUT = "anthropic.organization.users.sign_out"
         ORGANIZATION_ANALYTICS_USAGE_LIST =
           "anthropic.organization.analytics.usage.list"
         ORGANIZATION_ANALYTICS_COST_LIST =

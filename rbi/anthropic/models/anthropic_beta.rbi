@@ -231,6 +231,11 @@ module Anthropic
         )
       WEBHOOKS_2026_10_07 =
         T.let(:"webhooks-2026-10-07", Anthropic::AnthropicBeta::TaggedSymbol)
+      ADMIN_USER_SIGN_OUT_2026_10_08 =
+        T.let(
+          :"admin-user-sign-out-2026-10-08",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
       MESSAGE_THREADS_2026_08_12 =
         T.let(
           :"message-threads-2026-08-12",

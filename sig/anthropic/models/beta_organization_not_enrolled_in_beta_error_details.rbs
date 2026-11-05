@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type beta_organization_not_enrolled_in_beta_error_details =
+      { error_code: :organization_not_enrolled_in_beta }
+
+    class BetaOrganizationNotEnrolledInBetaErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :organization_not_enrolled_in_beta
+
+      def initialize: (?error_code: :organization_not_enrolled_in_beta) -> void
+
+      def to_hash: -> { error_code: :organization_not_enrolled_in_beta }
+    end
+  end
+end

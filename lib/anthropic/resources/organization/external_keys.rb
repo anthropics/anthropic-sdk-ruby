@@ -21,9 +21,7 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @raise [Anthropic::Models::UserProfileNotFoundError] The request depends on a user profile that does not exist in the organization or
-        #   is no longer active. The request either names this user profile by ID, or names
-        #   a resource, such as an External Key, that is bound to it.
+        # @raise [Anthropic::Models::UserProfileNotFoundError]
         #
         # @return [Anthropic::Models::Organization::ExternalKey]
         #
@@ -83,8 +81,7 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @raise [Anthropic::Models::Organization::ExternalKeyInWorkspacePolicyError] The External Key can't be deleted or reconfigured while the organization's
-        #   Workspace Policy lists it as an allowed key.
+        # @raise [Anthropic::Models::Organization::ExternalKeyInWorkspacePolicyError]
         #
         # @return [Anthropic::Models::Organization::ExternalKey]
         #
@@ -145,8 +142,7 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @raise [Anthropic::Models::Organization::ExternalKeyInWorkspacePolicyError] The External Key can't be deleted or reconfigured while the organization's
-        #   Workspace Policy lists it as an allowed key.
+        # @raise [Anthropic::Models::Organization::ExternalKeyInWorkspacePolicyError]
         #
         # @return [Anthropic::Models::Organization::ExternalKeyDeleteResponse]
         #

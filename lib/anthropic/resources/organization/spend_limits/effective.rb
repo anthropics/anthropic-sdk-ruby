@@ -28,8 +28,7 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @raise [Anthropic::Models::OrganizationTypeNotSupportedError] The endpoint does not support the organization's type. Each endpoint's
-          #   description says which organization types it supports.
+          # @raise [Anthropic::Models::OrganizationTypeNotSupportedError]
           #
           # @return [Anthropic::Internal::PageCursor<Anthropic::Models::Organization::SpendSummary>]
           #

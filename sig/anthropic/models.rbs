@@ -55,6 +55,10 @@ module Anthropic
 
   class BetaNotFoundError = Anthropic::Models::BetaNotFoundError
 
+  class BetaOrganizationNotEnrolledInBetaError = Anthropic::Models::BetaOrganizationNotEnrolledInBetaError
+
+  class BetaOrganizationNotEnrolledInBetaErrorDetails = Anthropic::Models::BetaOrganizationNotEnrolledInBetaErrorDetails
+
   class BetaOverloadedError = Anthropic::Models::BetaOverloadedError
 
   class BetaPermissionError = Anthropic::Models::BetaPermissionError
@@ -692,6 +696,10 @@ module Anthropic
   class PermissionError = Anthropic::Models::PermissionError
 
   class PlainTextSource = Anthropic::Models::PlainTextSource
+
+  class RampLimitExceededError = Anthropic::Models::RampLimitExceededError
+
+  class RampLimitExceededErrorDetails = Anthropic::Models::RampLimitExceededErrorDetails
 
   class RateLimitError = Anthropic::Models::RateLimitError
 

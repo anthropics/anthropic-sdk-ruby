@@ -27,6 +27,7 @@ module Anthropic
       | Anthropic::SkillReadBlockedUndecryptableErrorDetails
       | Anthropic::RequestBodyTooLargeAfterDecodingErrorDetails
       | Anthropic::EnforcedSpendLimitReachedErrorDetails
+      | Anthropic::RampLimitExceededErrorDetails
       | Anthropic::CMEKKeyUnreachableErrorDetails
       | Anthropic::CompactionUnavailableErrorDetails
       | Anthropic::StorageQuotaExceededErrorDetails
@@ -46,6 +47,8 @@ module Anthropic
       | Anthropic::Organization::RBACGroupOwnerAccessUnconfirmedErrorDetails
       | Anthropic::Organization::CannotRemoveLastMemberErrorDetails
       | Anthropic::ConcurrentMembershipChangeErrorDetails
+      | Anthropic::Organization::ExternalKeyValidationFailedErrorDetails
+      | Anthropic::Organization::ExternalKeyValidationTimedOutErrorDetails
       | Anthropic::Organization::KeyProfileMismatchErrorDetails
       | Anthropic::Organization::WorkspacePolicyViolationErrorDetails
       | Anthropic::Organization::ExternalKeyChangedErrorDetails
@@ -57,6 +60,13 @@ module Anthropic
       | Anthropic::Beta::BetaEnvironmentUpdateDisabledErrorDetails
       | Anthropic::Beta::Environments::BetaHeartbeatPreconditionFailedErrorDetails
       | Anthropic::Beta::BetaInvalidMetadataErrorDetails
+      | Anthropic::Beta::Organization::BetaCannotSignOutPrimaryOwnerErrorDetails
+      | Anthropic::Beta::Organization::BetaCannotSignOutSelfErrorDetails
+      | Anthropic::BetaOrganizationNotEnrolledInBetaErrorDetails
+      | Anthropic::Beta::Organization::BetaCannotSignOutManagedMemberErrorDetails
+      | Anthropic::Beta::Organization::BetaCannotSignOutMembershipAdminErrorDetails
+      | Anthropic::Beta::Organization::BetaCannotSignOutOwnerErrorDetails
+      | Anthropic::Beta::Organization::BetaCannotSignOutPrivilegedMemberErrorDetails
       | Anthropic::Beta::BetaBillingFrozenErrorDetails
       | Anthropic::Beta::Organization::BetaSpendLimitsAdminAPIWritesNotEnabledErrorDetails
       | Anthropic::BetaUnsupportedCharsetErrorDetails
@@ -104,6 +114,7 @@ module Anthropic
         | :skill_read_blocked_undecryptable
         | :request_body_too_large_after_decoding
         | :enforced_spend_limit_reached
+        | :ramp_limit_exceeded
         | :cmek_key_unreachable
         | :compaction_unavailable
         | :storage_quota_exceeded
@@ -123,6 +134,8 @@ module Anthropic
         | :rbac_group_owner_access_unconfirmed
         | :cannot_remove_last_member
         | :concurrent_membership_change
+        | :external_key_validation_failed
+        | :external_key_validation_timed_out
         | :key_profile_mismatch
         | :workspace_policy_violation
         | :external_key_changed
@@ -134,6 +147,13 @@ module Anthropic
         | :environment_update_disabled
         | :heartbeat_precondition_failed
         | :invalid_metadata
+        | :cannot_sign_out_primary_owner
+        | :cannot_sign_out_self
+        | :organization_not_enrolled_in_beta
+        | :cannot_sign_out_managed_member
+        | :cannot_sign_out_membership_admin
+        | :cannot_sign_out_owner
+        | :cannot_sign_out_privileged_member
         | :billing_frozen
         | :spend_limits_admin_api_writes_not_enabled
         | :unsupported_charset
@@ -180,6 +200,7 @@ module Anthropic
         SKILL_READ_BLOCKED_UNDECRYPTABLE: :skill_read_blocked_undecryptable
         REQUEST_BODY_TOO_LARGE_AFTER_DECODING: :request_body_too_large_after_decoding
         ENFORCED_SPEND_LIMIT_REACHED: :enforced_spend_limit_reached
+        RAMP_LIMIT_EXCEEDED: :ramp_limit_exceeded
         CMEK_KEY_UNREACHABLE: :cmek_key_unreachable
         COMPACTION_UNAVAILABLE: :compaction_unavailable
         STORAGE_QUOTA_EXCEEDED: :storage_quota_exceeded
@@ -199,6 +220,8 @@ module Anthropic
         RBAC_GROUP_OWNER_ACCESS_UNCONFIRMED: :rbac_group_owner_access_unconfirmed
         CANNOT_REMOVE_LAST_MEMBER: :cannot_remove_last_member
         CONCURRENT_MEMBERSHIP_CHANGE: :concurrent_membership_change
+        EXTERNAL_KEY_VALIDATION_FAILED: :external_key_validation_failed
+        EXTERNAL_KEY_VALIDATION_TIMED_OUT: :external_key_validation_timed_out
         KEY_PROFILE_MISMATCH: :key_profile_mismatch
         WORKSPACE_POLICY_VIOLATION: :workspace_policy_violation
         EXTERNAL_KEY_CHANGED: :external_key_changed
@@ -210,6 +233,13 @@ module Anthropic
         ENVIRONMENT_UPDATE_DISABLED: :environment_update_disabled
         HEARTBEAT_PRECONDITION_FAILED: :heartbeat_precondition_failed
         INVALID_METADATA: :invalid_metadata
+        CANNOT_SIGN_OUT_PRIMARY_OWNER: :cannot_sign_out_primary_owner
+        CANNOT_SIGN_OUT_SELF: :cannot_sign_out_self
+        ORGANIZATION_NOT_ENROLLED_IN_BETA: :organization_not_enrolled_in_beta
+        CANNOT_SIGN_OUT_MANAGED_MEMBER: :cannot_sign_out_managed_member
+        CANNOT_SIGN_OUT_MEMBERSHIP_ADMIN: :cannot_sign_out_membership_admin
+        CANNOT_SIGN_OUT_OWNER: :cannot_sign_out_owner
+        CANNOT_SIGN_OUT_PRIVILEGED_MEMBER: :cannot_sign_out_privileged_member
         BILLING_FROZEN: :billing_frozen
         SPEND_LIMITS_ADMIN_API_WRITES_NOT_ENABLED: :spend_limits_admin_api_writes_not_enabled
         UNSUPPORTED_CHARSET: :unsupported_charset
@@ -329,6 +359,9 @@ module Anthropic
           | "enforced_spend_limit_reached"
         ) -> Anthropic::EnforcedSpendLimitReachedErrorDetails
         | (
+          error_code: :ramp_limit_exceeded | "ramp_limit_exceeded"
+        ) -> Anthropic::RampLimitExceededErrorDetails
+        | (
           error_code: :cmek_key_unreachable | "cmek_key_unreachable"
         ) -> Anthropic::CMEKKeyUnreachableErrorDetails
         | (
@@ -392,6 +425,14 @@ module Anthropic
           | "concurrent_membership_change"
         ) -> Anthropic::ConcurrentMembershipChangeErrorDetails
         | (
+          error_code: :external_key_validation_failed
+          | "external_key_validation_failed"
+        ) -> Anthropic::Organization::ExternalKeyValidationFailedErrorDetails
+        | (
+          error_code: :external_key_validation_timed_out
+          | "external_key_validation_timed_out"
+        ) -> Anthropic::Organization::ExternalKeyValidationTimedOutErrorDetails
+        | (
           error_code: :key_profile_mismatch | "key_profile_mismatch"
         ) -> Anthropic::Organization::KeyProfileMismatchErrorDetails
         | (
@@ -432,6 +473,32 @@ module Anthropic
         | (
           error_code: :invalid_metadata | "invalid_metadata"
         ) -> Anthropic::Beta::BetaInvalidMetadataErrorDetails
+        | (
+          error_code: :cannot_sign_out_primary_owner
+          | "cannot_sign_out_primary_owner"
+        ) -> Anthropic::Beta::Organization::BetaCannotSignOutPrimaryOwnerErrorDetails
+        | (
+          error_code: :cannot_sign_out_self | "cannot_sign_out_self"
+        ) -> Anthropic::Beta::Organization::BetaCannotSignOutSelfErrorDetails
+        | (
+          error_code: :organization_not_enrolled_in_beta
+          | "organization_not_enrolled_in_beta"
+        ) -> Anthropic::BetaOrganizationNotEnrolledInBetaErrorDetails
+        | (
+          error_code: :cannot_sign_out_managed_member
+          | "cannot_sign_out_managed_member"
+        ) -> Anthropic::Beta::Organization::BetaCannotSignOutManagedMemberErrorDetails
+        | (
+          error_code: :cannot_sign_out_membership_admin
+          | "cannot_sign_out_membership_admin"
+        ) -> Anthropic::Beta::Organization::BetaCannotSignOutMembershipAdminErrorDetails
+        | (
+          error_code: :cannot_sign_out_owner | "cannot_sign_out_owner"
+        ) -> Anthropic::Beta::Organization::BetaCannotSignOutOwnerErrorDetails
+        | (
+          error_code: :cannot_sign_out_privileged_member
+          | "cannot_sign_out_privileged_member"
+        ) -> Anthropic::Beta::Organization::BetaCannotSignOutPrivilegedMemberErrorDetails
         | (
           error_code: :billing_frozen | "billing_frozen"
         ) -> Anthropic::Beta::BetaBillingFrozenErrorDetails
