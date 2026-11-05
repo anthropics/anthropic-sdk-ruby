@@ -49,6 +49,15 @@ class AnthropicTest < Minitest::Test
     refute(conn.started?)
   end
 
+  def test_clients_share_one_cert_store
+    cert_stores = Array.new(2) do
+      Anthropic::Client.new(api_key: "my-anthropic-api-key").requester.instance_variable_get(:@cert_store)
+    end
+
+    assert_kind_of(OpenSSL::X509::Store, cert_stores.first)
+    assert_same(*cert_stores)
+  end
+
   def test_client_proxy_defaults_to_env
     conn = Anthropic::Internal::Transport::PooledNetRequester.connect(
       cert_store: OpenSSL::X509::Store.new,
