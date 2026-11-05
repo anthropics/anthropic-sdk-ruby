@@ -20,6 +20,19 @@ module Anthropic
       def self.walk_namespaces(ns)
       end
 
+      # @api private
+      #
+      # Walking every model costs about 360k allocations, so it waits for the
+      # first `const_missing` on an SDK module instead of running at `require`.
+      sig { void }
+      def self.define_sorbet_constants!
+      end
+
+      # @api private
+      sig { void }
+      def self.define_model_sorbet_constants!
+      end
+
       class << self
         # @api private
         sig { params(obj: T.anything).returns(T.anything) }
