@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class BetaOrganizationNotEnrolledInBetaError < Anthropic::Errors::BadRequestError
+      def error_code: -> :organization_not_enrolled_in_beta
+
+      def details: -> Anthropic::BetaOrganizationNotEnrolledInBetaErrorDetails
+    end
+  end
+end

@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_cannot_sign_out_membership_admin_error_details =
+          { error_code: :cannot_sign_out_membership_admin }
+
+        class BetaCannotSignOutMembershipAdminErrorDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor error_code: :cannot_sign_out_membership_admin
+
+          def initialize: (
+            ?error_code: :cannot_sign_out_membership_admin
+          ) -> void
+
+          def to_hash: -> { error_code: :cannot_sign_out_membership_admin }
+        end
+      end
+    end
+  end
+end

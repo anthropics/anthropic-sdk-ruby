@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        class BetaCannotSignOutSelfError < Anthropic::Errors::BadRequestError
+          def error_code: -> :cannot_sign_out_self
+
+          def details: -> Anthropic::Beta::Organization::BetaCannotSignOutSelfErrorDetails
+        end
+      end
+    end
+  end
+end

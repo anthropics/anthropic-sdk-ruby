@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_cannot_sign_out_privileged_member_error_details =
+          { error_code: :cannot_sign_out_privileged_member }
+
+        class BetaCannotSignOutPrivilegedMemberErrorDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor error_code: :cannot_sign_out_privileged_member
+
+          def initialize: (
+            ?error_code: :cannot_sign_out_privileged_member
+          ) -> void
+
+          def to_hash: -> { error_code: :cannot_sign_out_privileged_member }
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_cannot_sign_out_primary_owner_error_details =
+          { error_code: :cannot_sign_out_primary_owner }
+
+        class BetaCannotSignOutPrimaryOwnerErrorDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor error_code: :cannot_sign_out_primary_owner
+
+          def initialize: (?error_code: :cannot_sign_out_primary_owner) -> void
+
+          def to_hash: -> { error_code: :cannot_sign_out_primary_owner }
+        end
+      end
+    end
+  end
+end

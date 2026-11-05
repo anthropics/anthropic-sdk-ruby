@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        class BetaCannotSignOutPrivilegedMemberError < Anthropic::Errors::PermissionDeniedError
+          def error_code: -> :cannot_sign_out_privileged_member
+
+          def details: -> Anthropic::Beta::Organization::BetaCannotSignOutPrivilegedMemberErrorDetails
+        end
+      end
+    end
+  end
+end

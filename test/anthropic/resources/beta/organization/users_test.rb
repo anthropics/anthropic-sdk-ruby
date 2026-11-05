@@ -88,4 +88,24 @@ class Anthropic::Test::Resources::Beta::Organization::UsersTest < Anthropic::Tes
       }
     end
   end
+
+  def test_sign_out
+    response =
+      @anthropic.beta.organization.users.sign_out("user_id", request_options: {extra_query: {beta: "true"}})
+
+    assert_pattern do
+      response => Anthropic::Beta::Organization::BetaOrganizationUser
+    end
+
+    assert_pattern do
+      response => {
+        id: String,
+        added_at: Time,
+        email: String,
+        name: String,
+        role: Anthropic::Beta::BetaOrganizationRole,
+        type: Symbol
+      }
+    end
+  end
 end

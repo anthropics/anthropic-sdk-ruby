@@ -66,6 +66,12 @@ module Anthropic
 
   BetaNotFoundError = Anthropic::Models::BetaNotFoundError
 
+  BetaOrganizationNotEnrolledInBetaError =
+    Anthropic::Models::BetaOrganizationNotEnrolledInBetaError
+
+  BetaOrganizationNotEnrolledInBetaErrorDetails =
+    Anthropic::Models::BetaOrganizationNotEnrolledInBetaErrorDetails
+
   BetaOverloadedError = Anthropic::Models::BetaOverloadedError
 
   BetaPermissionError = Anthropic::Models::BetaPermissionError

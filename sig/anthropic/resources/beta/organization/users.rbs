@@ -28,6 +28,12 @@ module Anthropic
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Models::Beta::Organization::UserRemoveResponse
 
+          def sign_out: (
+            String user_id,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaOrganizationUser
+
           def initialize: (client: Anthropic::Client) -> void
         end
       end

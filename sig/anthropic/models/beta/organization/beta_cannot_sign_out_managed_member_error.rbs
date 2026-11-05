@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        class BetaCannotSignOutManagedMemberError < Anthropic::Errors::PermissionDeniedError
+          def error_code: -> :cannot_sign_out_managed_member
+
+          def details: -> Anthropic::Beta::Organization::BetaCannotSignOutManagedMemberErrorDetails
+        end
+      end
+    end
+  end
+end

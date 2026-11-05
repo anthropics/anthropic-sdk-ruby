@@ -60,6 +60,13 @@ module Anthropic
       | Anthropic::Beta::BetaEnvironmentUpdateDisabledErrorDetails
       | Anthropic::Beta::Environments::BetaHeartbeatPreconditionFailedErrorDetails
       | Anthropic::Beta::BetaInvalidMetadataErrorDetails
+      | Anthropic::Beta::Organization::BetaCannotSignOutPrimaryOwnerErrorDetails
+      | Anthropic::Beta::Organization::BetaCannotSignOutSelfErrorDetails
+      | Anthropic::BetaOrganizationNotEnrolledInBetaErrorDetails
+      | Anthropic::Beta::Organization::BetaCannotSignOutManagedMemberErrorDetails
+      | Anthropic::Beta::Organization::BetaCannotSignOutMembershipAdminErrorDetails
+      | Anthropic::Beta::Organization::BetaCannotSignOutOwnerErrorDetails
+      | Anthropic::Beta::Organization::BetaCannotSignOutPrivilegedMemberErrorDetails
       | Anthropic::Beta::BetaBillingFrozenErrorDetails
       | Anthropic::Beta::Organization::BetaSpendLimitsAdminAPIWritesNotEnabledErrorDetails
       | Anthropic::BetaUnsupportedCharsetErrorDetails
@@ -140,6 +147,13 @@ module Anthropic
         | :environment_update_disabled
         | :heartbeat_precondition_failed
         | :invalid_metadata
+        | :cannot_sign_out_primary_owner
+        | :cannot_sign_out_self
+        | :organization_not_enrolled_in_beta
+        | :cannot_sign_out_managed_member
+        | :cannot_sign_out_membership_admin
+        | :cannot_sign_out_owner
+        | :cannot_sign_out_privileged_member
         | :billing_frozen
         | :spend_limits_admin_api_writes_not_enabled
         | :unsupported_charset
@@ -219,6 +233,13 @@ module Anthropic
         ENVIRONMENT_UPDATE_DISABLED: :environment_update_disabled
         HEARTBEAT_PRECONDITION_FAILED: :heartbeat_precondition_failed
         INVALID_METADATA: :invalid_metadata
+        CANNOT_SIGN_OUT_PRIMARY_OWNER: :cannot_sign_out_primary_owner
+        CANNOT_SIGN_OUT_SELF: :cannot_sign_out_self
+        ORGANIZATION_NOT_ENROLLED_IN_BETA: :organization_not_enrolled_in_beta
+        CANNOT_SIGN_OUT_MANAGED_MEMBER: :cannot_sign_out_managed_member
+        CANNOT_SIGN_OUT_MEMBERSHIP_ADMIN: :cannot_sign_out_membership_admin
+        CANNOT_SIGN_OUT_OWNER: :cannot_sign_out_owner
+        CANNOT_SIGN_OUT_PRIVILEGED_MEMBER: :cannot_sign_out_privileged_member
         BILLING_FROZEN: :billing_frozen
         SPEND_LIMITS_ADMIN_API_WRITES_NOT_ENABLED: :spend_limits_admin_api_writes_not_enabled
         UNSUPPORTED_CHARSET: :unsupported_charset
@@ -452,6 +473,32 @@ module Anthropic
         | (
           error_code: :invalid_metadata | "invalid_metadata"
         ) -> Anthropic::Beta::BetaInvalidMetadataErrorDetails
+        | (
+          error_code: :cannot_sign_out_primary_owner
+          | "cannot_sign_out_primary_owner"
+        ) -> Anthropic::Beta::Organization::BetaCannotSignOutPrimaryOwnerErrorDetails
+        | (
+          error_code: :cannot_sign_out_self | "cannot_sign_out_self"
+        ) -> Anthropic::Beta::Organization::BetaCannotSignOutSelfErrorDetails
+        | (
+          error_code: :organization_not_enrolled_in_beta
+          | "organization_not_enrolled_in_beta"
+        ) -> Anthropic::BetaOrganizationNotEnrolledInBetaErrorDetails
+        | (
+          error_code: :cannot_sign_out_managed_member
+          | "cannot_sign_out_managed_member"
+        ) -> Anthropic::Beta::Organization::BetaCannotSignOutManagedMemberErrorDetails
+        | (
+          error_code: :cannot_sign_out_membership_admin
+          | "cannot_sign_out_membership_admin"
+        ) -> Anthropic::Beta::Organization::BetaCannotSignOutMembershipAdminErrorDetails
+        | (
+          error_code: :cannot_sign_out_owner | "cannot_sign_out_owner"
+        ) -> Anthropic::Beta::Organization::BetaCannotSignOutOwnerErrorDetails
+        | (
+          error_code: :cannot_sign_out_privileged_member
+          | "cannot_sign_out_privileged_member"
+        ) -> Anthropic::Beta::Organization::BetaCannotSignOutPrivilegedMemberErrorDetails
         | (
           error_code: :billing_frozen | "billing_frozen"
         ) -> Anthropic::Beta::BetaBillingFrozenErrorDetails
