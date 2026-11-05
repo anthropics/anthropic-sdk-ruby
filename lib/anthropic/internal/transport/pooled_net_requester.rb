@@ -13,7 +13,21 @@ module Anthropic
 
         DEFAULT_MAX_CONNECTIONS = [Etc.nprocessors, 99].max
 
+        @default_cert_store_lock = Mutex.new
+
         class << self
+          # @api private
+          #
+          # Loading the system CA bundle takes a few milliseconds and about 1 MB, so
+          # all requesters share one store.
+          #
+          # @return [OpenSSL::X509::Store]
+          def default_cert_store
+            @default_cert_store_lock.synchronize do
+              @default_cert_store ||= OpenSSL::X509::Store.new.tap(&:set_default_paths)
+            end
+          end
+
           # @api private
           #
           # @param cert_store [OpenSSL::X509::Store]
@@ -253,7 +267,7 @@ module Anthropic
           @mutex = Mutex.new
           @size = size
           @proxy = self.class.parse_proxy(proxy)
-          @cert_store = OpenSSL::X509::Store.new.tap(&:set_default_paths)
+          @cert_store = PooledNetRequester.default_cert_store
           @pools = {}
         end
 
