@@ -470,6 +470,74 @@ class Anthropic::Test::AWSClientTest < Minitest::Test
     assert_equal("https://aws-external-anthropic.us-west-2.api.aws", client.base_url.to_s)
   end
 
+  def test_constructor_middleware_sees_the_unsigned_request_and_its_change_is_signed
+    url = "https://aws-external-anthropic.us-east-1.api.aws/v1/messages"
+    stub_request(:post, url).to_return_json(status: 200, body: {})
+    seen = nil
+    add_header = lambda do |req, nxt|
+      seen = req
+      nxt.call(req.with(headers: {**req.headers, "x-test-middleware" => "1"}))
+    end
+    client = Anthropic::AWSClient.new(
+      aws_access_key: "my-aws-access",
+      aws_secret_access_key: "my-aws-secret",
+      aws_region: "us-east-1",
+      workspace_id: "ws-test-123",
+      middleware: [add_header]
+    )
+
+    client.messages.create(
+      max_tokens: 1024,
+      messages: [{content: "Hello", role: :user}],
+      model: :"claude-sonnet-4-20250514"
+    )
+
+    refute_nil(seen)
+    refute_includes(seen.headers.keys, "authorization")
+    assert_requested(:post, url, times: 1) do |req|
+      assert_equal("1", req.headers.fetch("X-Test-Middleware"))
+      auth = req.headers.fetch("Authorization")
+      assert_match(/^AWS4-HMAC-SHA256 Credential=my-aws-access/, auth)
+      assert_includes(auth[/SignedHeaders=([^,]+)/, 1].split(";"), "x-test-middleware")
+    end
+  end
+
+  def test_constructor_middleware_runs_on_each_attempt_and_each_attempt_is_signed
+    Thread.current.thread_variable_set(:mock_sleep, [])
+    url = "https://aws-external-anthropic.us-east-1.api.aws/v1/messages"
+    stub_request(:post, url).to_return_json({status: 503, body: {}}, {status: 200, body: {}})
+    retry_counts = []
+    probe = lambda do |req, nxt|
+      retry_counts << req.retry_count
+      nxt.call(req)
+    end
+    client = Anthropic::AWSClient.new(
+      aws_access_key: "my-aws-access",
+      aws_secret_access_key: "my-aws-secret",
+      aws_region: "us-east-1",
+      workspace_id: "ws-test-123",
+      max_retries: 1,
+      middleware: [probe]
+    )
+
+    client.messages.create(
+      max_tokens: 1024,
+      messages: [{content: "Hello", role: :user}],
+      model: :"claude-sonnet-4-20250514"
+    )
+
+    assert_equal([0, 1], retry_counts)
+    signatures = []
+    assert_requested(:post, url, times: 2) do |req|
+      auth = req.headers.fetch("Authorization")
+      signatures << auth[/Signature=(\h+)/, 1]
+      assert_match(/^AWS4-HMAC-SHA256 Credential=my-aws-access/, auth)
+    end
+    assert_equal(2, signatures.uniq.length)
+  ensure
+    Thread.current.thread_variable_set(:mock_sleep, nil)
+  end
+
   # ---------------------------------------------------------------------------
   # skip_auth tests
   # ---------------------------------------------------------------------------

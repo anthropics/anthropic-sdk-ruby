@@ -1480,4 +1480,47 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
       assert_equal(0, state.index)
     end
   end
+
+  # — as constructor middleware on the clients that sign with SigV4 —
+
+  SIGV4_CLIENTS = {
+    aws: [
+      Anthropic::AWSClient,
+      {workspace_id: "ws-test-123"},
+      "https://aws-external-anthropic.us-east-1.api.aws/v1/messages"
+    ],
+    bedrock_mantle: [
+      Anthropic::BedrockMantleClient,
+      {},
+      "https://bedrock-mantle.us-east-1.api.aws/anthropic/v1/messages"
+    ]
+  }.freeze
+
+  SIGV4_CLIENTS.to_a.product([:create, :stream_raw]).each do |(name, (client_class, opts, url)), method|
+    define_method(:"test_#{method}_on_the_#{name}_client_falls_back_and_signs_each_request") do
+      sent = []
+      stub_request(:post, url)
+        .with { sent << _1 }
+        .to_return(
+          refusal_response(method, "primary-model", token: "tok"),
+          accept_response(method, "claude-sonnet-5")
+        )
+      client = client_class.new(
+        aws_access_key: "my-aws-access",
+        aws_secret_access_key: "my-aws-secret",
+        aws_region: "us-east-1",
+        middleware: [Anthropic::BetaRefusalFallbackMiddleware.new([{model: "claude-sonnet-5"}])],
+        **opts
+      )
+
+      result = send_message(method, client, request_options: {fallback_state: Anthropic::BetaFallbackState.new})
+
+      assert_equal({stop_reason: :end_turn, text: "ok"}, result)
+      assert_equal(%w[primary-model claude-sonnet-5], sent.map { JSON.parse(_1.body)["model"] })
+      sent.each do |req|
+        assert_match(/^AWS4-HMAC-SHA256 Credential=my-aws-access/, req.headers.fetch("Authorization"))
+        assert_equal(Digest::SHA256.hexdigest(req.body), req.headers["X-Amz-Content-Sha256"])
+      end
+    end
+  end
 end

@@ -25,6 +25,7 @@ module Anthropic
             timeout: T.nilable(Float),
             initial_retry_delay: Float,
             max_retry_delay: Float,
+            middleware: T.nilable(Anthropic::Middleware::EntryOrArray),
             open_telemetry:
               T.nilable(T.any(T::Boolean, Anthropic::Internal::AnyHash))
           ).returns(T.attached_class)
@@ -45,6 +46,10 @@ module Anthropic
           timeout: nil,
           initial_retry_delay: Anthropic::Client::DEFAULT_INITIAL_RETRY_DELAY,
           max_retry_delay: Anthropic::Client::DEFAULT_MAX_RETRY_DELAY,
+          # Per-attempt HTTP around-middleware. See {Anthropic::Middleware}. The
+          # workspace ID header and SigV4 signing are applied per attempt, after
+          # user middleware.
+          middleware: nil,
           # OpenTelemetry tracing of this client's API calls. See {Anthropic::Client}.
           open_telemetry: nil
         )
