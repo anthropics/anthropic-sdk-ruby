@@ -167,7 +167,8 @@ module Anthropic
             # concurrency). Use literal 'NO_HEARTBEAT' to claim an unclaimed lease (first
             # heartbeat). For subsequent heartbeats, echo the server's previous last_heartbeat
             # value exactly. Returns 412 Precondition Failed if the actual value doesn't
-            # match.
+            # match. The server does not compare the value when the work item is 'stopping' or
+            # 'stopped'.
             expected_last_heartbeat: nil,
             # Header param: Optional header to specify the beta version(s) you want to use.
             betas: nil,

@@ -29,7 +29,8 @@ module Anthropic
           # Expected last_heartbeat for conditional update (optimistic concurrency). Use
           # literal 'NO_HEARTBEAT' to claim an unclaimed lease (first heartbeat). For
           # subsequent heartbeats, echo the server's previous last_heartbeat value exactly.
-          # Returns 412 Precondition Failed if the actual value doesn't match.
+          # Returns 412 Precondition Failed if the actual value doesn't match. The server
+          # does not compare the value when the work item is 'stopping' or 'stopped'.
           sig { returns(T.nilable(String)) }
           attr_accessor :expected_last_heartbeat
 
@@ -69,7 +70,8 @@ module Anthropic
             # Expected last_heartbeat for conditional update (optimistic concurrency). Use
             # literal 'NO_HEARTBEAT' to claim an unclaimed lease (first heartbeat). For
             # subsequent heartbeats, echo the server's previous last_heartbeat value exactly.
-            # Returns 412 Precondition Failed if the actual value doesn't match.
+            # Returns 412 Precondition Failed if the actual value doesn't match. The server
+            # does not compare the value when the work item is 'stopping' or 'stopped'.
             expected_last_heartbeat: nil,
             # Optional header to specify the beta version(s) you want to use.
             betas: nil,
