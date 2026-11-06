@@ -80,7 +80,8 @@ module Anthropic
                 Anthropic::Beta::BetaWebhookMemoryStoreDeletedEventData::OrHash,
                 Anthropic::Beta::BetaWebhookSessionBudgetReachedEventData::OrHash,
                 Anthropic::Beta::BetaWebhookUserProfileEnforcementActionOpenedEventData::OrHash,
-                Anthropic::Beta::BetaWebhookUserProfileEnforcementActionResolvedEventData::OrHash
+                Anthropic::Beta::BetaWebhookUserProfileEnforcementActionResolvedEventData::OrHash,
+                Anthropic::Beta::BetaWebhookUserProfileProgramStatusUpdatedEventData::OrHash
               ),
             type: Symbol
           ).returns(T.attached_class)

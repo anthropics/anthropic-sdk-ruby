@@ -50,6 +50,7 @@ module Anthropic
         | Anthropic::Beta::BetaWebhookSessionBudgetReachedEventData
         | Anthropic::Beta::BetaWebhookUserProfileEnforcementActionOpenedEventData
         | Anthropic::Beta::BetaWebhookUserProfileEnforcementActionResolvedEventData
+        | Anthropic::Beta::BetaWebhookUserProfileProgramStatusUpdatedEventData
 
       module BetaWebhookEventData
         extend Anthropic::Internal::Type::Union
@@ -101,6 +102,7 @@ module Anthropic
           | :"session.budget_reached"
           | :"user_profile.enforcement_action_opened"
           | :"user_profile.enforcement_action_resolved"
+          | :"user_profile.program_status_updated"
 
         module Type
           extend Anthropic::Internal::Type::Enum
@@ -151,6 +153,7 @@ module Anthropic
           SESSION_BUDGET_REACHED: :"session.budget_reached"
           USER_PROFILE_ENFORCEMENT_ACTION_OPENED: :"user_profile.enforcement_action_opened"
           USER_PROFILE_ENFORCEMENT_ACTION_RESOLVED: :"user_profile.enforcement_action_resolved"
+          USER_PROFILE_PROGRAM_STATUS_UPDATED: :"user_profile.program_status_updated"
 
           def self?.values: -> ::Array[Anthropic::Models::Beta::BetaWebhookEventData::type_]
         end
@@ -445,6 +448,12 @@ module Anthropic
             enforcement_action_id: String,
             organization_id: String
           ) -> Anthropic::Beta::BetaWebhookUserProfileEnforcementActionResolvedEventData
+          | (
+            type: :"user_profile.program_status_updated"
+            | "user_profile.program_status_updated",
+            id: String,
+            organization_id: String
+          ) -> Anthropic::Beta::BetaWebhookUserProfileProgramStatusUpdatedEventData
           | (
             type: Anthropic::Models::Beta::BetaWebhookEventData::type_ | String,
             id: String,
