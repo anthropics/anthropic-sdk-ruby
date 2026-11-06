@@ -59,6 +59,7 @@ module Anthropic
           #
           # @raise [Anthropic::Models::Organization::RBACGroupGrantsOwnerAccessError]
           # @raise [Anthropic::Models::Organization::RBACGroupOwnerAccessUnconfirmedError]
+          # @raise [Anthropic::Models::SandboxEgressRestrictedError]
           #
           # @return [Anthropic::Models::Organization::RBACGroups::RBACGroupMember]
           #
@@ -94,6 +95,7 @@ module Anthropic
           #
           # @raise [Anthropic::Models::Organization::RBACGroupGrantsOwnerAccessError]
           # @raise [Anthropic::Models::Organization::RBACGroupOwnerAccessUnconfirmedError]
+          # @raise [Anthropic::Models::SandboxEgressRestrictedError]
           #
           # @return [Anthropic::Models::Organization::RBACGroups::DeletedRBACGroupMember]
           #

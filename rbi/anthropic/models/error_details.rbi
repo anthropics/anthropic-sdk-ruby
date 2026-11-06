@@ -43,6 +43,7 @@ module Anthropic
             Anthropic::CMEKContextUnavailableErrorDetails,
             Anthropic::Organization::OrgAPIKeyLimitExceededErrorDetails,
             Anthropic::Organization::WorkspaceAPIKeyLimitExceededErrorDetails,
+            Anthropic::SandboxEgressRestrictedErrorDetails,
             Anthropic::UserProfileNotFoundErrorDetails,
             Anthropic::Organization::ExternalKeyInWorkspacePolicyErrorDetails,
             Anthropic::Organization::AlreadyMemberErrorDetails,
@@ -269,6 +270,11 @@ module Anthropic
         WORKSPACE_API_KEY_LIMIT_EXCEEDED =
           T.let(
             :workspace_api_key_limit_exceeded,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        SANDBOX_EGRESS_RESTRICTED =
+          T.let(
+            :sandbox_egress_restricted,
             Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
           )
         USER_PROFILE_NOT_FOUND =

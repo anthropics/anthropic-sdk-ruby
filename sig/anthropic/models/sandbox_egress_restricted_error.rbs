@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class SandboxEgressRestrictedError < Anthropic::Errors::PermissionDeniedError
+      def error_code: -> :sandbox_egress_restricted
+
+      def details: -> Anthropic::SandboxEgressRestrictedErrorDetails
+    end
+  end
+end

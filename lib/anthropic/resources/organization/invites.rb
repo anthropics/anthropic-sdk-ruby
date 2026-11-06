@@ -31,6 +31,7 @@ module Anthropic
         # @raise [Anthropic::Models::OrgMemberLimitExceededError]
         # @raise [Anthropic::Models::Organization::RBACGroupGrantsOwnerAccessError]
         # @raise [Anthropic::Models::Organization::RBACGroupOwnerAccessUnconfirmedError]
+        # @raise [Anthropic::Models::SandboxEgressRestrictedError]
         #
         # @return [Anthropic::Models::Organization::OrganizationInvite]
         #
@@ -119,6 +120,8 @@ module Anthropic
         # @param invite_id [String] ID of the Invite.
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @raise [Anthropic::Models::SandboxEgressRestrictedError]
         #
         # @return [Anthropic::Models::Organization::InviteDeleteResponse]
         #

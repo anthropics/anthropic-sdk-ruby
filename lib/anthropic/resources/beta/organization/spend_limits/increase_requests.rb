@@ -96,6 +96,8 @@ module Anthropic
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #
+            # @raise [Anthropic::Models::SandboxEgressRestrictedError]
+            #
             # @return [Anthropic::Models::Beta::Organization::SpendLimits::IncreaseRequestApproveResponse]
             #
             # @see Anthropic::Models::Beta::Organization::SpendLimits::IncreaseRequestApproveParams
@@ -130,6 +132,8 @@ module Anthropic
             # @param suppress_notification [Boolean]
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+            #
+            # @raise [Anthropic::Models::SandboxEgressRestrictedError]
             #
             # @return [Anthropic::Models::Beta::Organization::SpendLimits::BetaSpendLimitIncreaseRequest]
             #

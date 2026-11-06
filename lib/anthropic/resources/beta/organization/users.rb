@@ -42,6 +42,8 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
+          # @raise [Anthropic::Models::SandboxEgressRestrictedError]
+          #
           # @return [Anthropic::Models::Beta::Organization::BetaOrganizationUser]
           #
           # @see Anthropic::Models::Beta::Organization::UserUpdateParams
@@ -108,6 +110,7 @@ module Anthropic
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
           # @raise [Anthropic::Models::Organization::CannotRemoveLastMemberError]
+          # @raise [Anthropic::Models::SandboxEgressRestrictedError]
           # @raise [Anthropic::Models::ConcurrentMembershipChangeError]
           #
           # @return [Anthropic::Models::Beta::Organization::UserRemoveResponse]
@@ -170,6 +173,7 @@ module Anthropic
           # @raise [Anthropic::Models::Beta::Organization::BetaCannotSignOutMembershipAdminError]
           # @raise [Anthropic::Models::Beta::Organization::BetaCannotSignOutOwnerError]
           # @raise [Anthropic::Models::Beta::Organization::BetaCannotSignOutPrivilegedMemberError]
+          # @raise [Anthropic::Models::SandboxEgressRestrictedError]
           #
           # @return [Anthropic::Models::Beta::Organization::BetaOrganizationUser]
           #

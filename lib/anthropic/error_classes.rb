@@ -84,6 +84,7 @@ module Anthropic
         [403, "environment_create_disabled"] => Anthropic::Models::Beta::BetaEnvironmentCreateDisabledError,
         [403, "environment_update_disabled"] => Anthropic::Models::Beta::BetaEnvironmentUpdateDisabledError,
         [403, "organization_level_scoped_api_key_required"] => Anthropic::Models::Beta::Organization::BetaOrganizationLevelScopedAPIKeyRequiredError,
+        [403, "sandbox_egress_restricted"] => Anthropic::Models::SandboxEgressRestrictedError,
         [403, "spend_limits_admin_api_writes_not_enabled"] => Anthropic::Models::Beta::Organization::BetaSpendLimitsAdminAPIWritesNotEnabledError,
         [404, "environment_not_found"] => Anthropic::Models::Beta::BetaEnvironmentNotFoundError,
         [404, "file_expired"] => Anthropic::Models::FileExpiredError,

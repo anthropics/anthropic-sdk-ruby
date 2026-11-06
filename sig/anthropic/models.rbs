@@ -737,6 +737,10 @@ module Anthropic
 
   class RequestBodyTooLargeAfterDecodingErrorDetails = Anthropic::Models::RequestBodyTooLargeAfterDecodingErrorDetails
 
+  class SandboxEgressRestrictedError = Anthropic::Models::SandboxEgressRestrictedError
+
+  class SandboxEgressRestrictedErrorDetails = Anthropic::Models::SandboxEgressRestrictedErrorDetails
+
   class SearchResultBlockParam = Anthropic::Models::SearchResultBlockParam
 
   class ServerToolCaller = Anthropic::Models::ServerToolCaller

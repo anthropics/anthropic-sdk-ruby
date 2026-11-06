@@ -76,6 +76,8 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
+          # @raise [Anthropic::Models::SandboxEgressRestrictedError]
+          #
           # @return [Anthropic::Models::Organization::ServiceAccountWorkspaceMember]
           #
           # @see Anthropic::Models::Organization::Workspaces::ServiceAccountUpdateParams
@@ -172,6 +174,8 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
+          # @raise [Anthropic::Models::SandboxEgressRestrictedError]
+          #
           # @return [Anthropic::Models::Organization::ServiceAccountWorkspaceMember]
           #
           # @see Anthropic::Models::Organization::Workspaces::ServiceAccountAddParams
@@ -210,6 +214,8 @@ module Anthropic
           # @param workspace_id [String] ID of the workspace.
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+          #
+          # @raise [Anthropic::Models::SandboxEgressRestrictedError]
           #
           # @return [Anthropic::Models::Organization::Workspaces::ServiceAccountRemoveResponse]
           #

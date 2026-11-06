@@ -22,6 +22,7 @@ module Anthropic
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @raise [Anthropic::Models::UserProfileNotFoundError]
+        # @raise [Anthropic::Models::SandboxEgressRestrictedError]
         #
         # @return [Anthropic::Models::Organization::ExternalKey]
         #
@@ -82,6 +83,7 @@ module Anthropic
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @raise [Anthropic::Models::Organization::ExternalKeyInWorkspacePolicyError]
+        # @raise [Anthropic::Models::SandboxEgressRestrictedError]
         #
         # @return [Anthropic::Models::Organization::ExternalKey]
         #
@@ -143,6 +145,7 @@ module Anthropic
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @raise [Anthropic::Models::Organization::ExternalKeyInWorkspacePolicyError]
+        # @raise [Anthropic::Models::SandboxEgressRestrictedError]
         #
         # @return [Anthropic::Models::Organization::ExternalKeyDeleteResponse]
         #
@@ -171,6 +174,8 @@ module Anthropic
         # @param external_key_id [String] ID of the External Key.
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @raise [Anthropic::Models::SandboxEgressRestrictedError]
         #
         # @return [Anthropic::Models::Organization::ExternalKeyValidateResponse]
         #

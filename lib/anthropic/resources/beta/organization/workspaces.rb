@@ -42,6 +42,7 @@ module Anthropic
           # @raise [Anthropic::Models::Organization::KeyProfileMismatchError]
           # @raise [Anthropic::Models::UserProfileNotFoundError]
           # @raise [Anthropic::Models::Organization::WorkspacePolicyViolationError]
+          # @raise [Anthropic::Models::SandboxEgressRestrictedError]
           # @raise [Anthropic::Models::Organization::ExternalKeyChangedError]
           #
           # @return [Anthropic::Models::Beta::Organization::BetaWorkspace]
@@ -116,6 +117,7 @@ module Anthropic
           # @raise [Anthropic::Models::Organization::KeyProfileMismatchError]
           # @raise [Anthropic::Models::UserProfileNotFoundError]
           # @raise [Anthropic::Models::Organization::WorkspacePolicyViolationError]
+          # @raise [Anthropic::Models::SandboxEgressRestrictedError]
           # @raise [Anthropic::Models::Organization::ExternalKeyChangedError]
           #
           # @return [Anthropic::Models::Beta::Organization::BetaWorkspace]
@@ -183,6 +185,8 @@ module Anthropic
           #
           # @param workspace_id [String]
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+          #
+          # @raise [Anthropic::Models::SandboxEgressRestrictedError]
           #
           # @return [Anthropic::Models::Beta::Organization::BetaWorkspace]
           #

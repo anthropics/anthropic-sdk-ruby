@@ -102,6 +102,7 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
+          # @raise [Anthropic::Models::SandboxEgressRestrictedError]
           # @raise [Anthropic::Models::Beta::Organization::BetaSpendLimitsAdminAPIWritesNotEnabledError]
           #
           # @return [Anthropic::Models::Beta::Organization::SpendLimitDeleteResponse]
@@ -144,6 +145,7 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
+          # @raise [Anthropic::Models::SandboxEgressRestrictedError]
           # @raise [Anthropic::Models::Beta::Organization::BetaSpendLimitsAdminAPIWritesNotEnabledError]
           #
           # @return [Anthropic::Models::Beta::Organization::BetaSpendLimit]

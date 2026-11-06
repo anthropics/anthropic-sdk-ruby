@@ -51,6 +51,7 @@ module Anthropic
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
           # @raise [Anthropic::Models::Organization::WorkspaceMemberLimitExceededError]
+          # @raise [Anthropic::Models::SandboxEgressRestrictedError]
           #
           # @return [Anthropic::Models::Organization::WorkspaceMember]
           #
@@ -127,6 +128,7 @@ module Anthropic
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
           # @raise [Anthropic::Models::Organization::WorkspaceMemberLimitExceededError]
+          # @raise [Anthropic::Models::SandboxEgressRestrictedError]
           #
           # @return [Anthropic::Models::Organization::WorkspaceMember]
           #
@@ -155,6 +157,8 @@ module Anthropic
           # @param workspace_id [String] ID of the Workspace.
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+          #
+          # @raise [Anthropic::Models::SandboxEgressRestrictedError]
           #
           # @return [Anthropic::Models::Organization::Workspaces::MemberRemoveResponse]
           #

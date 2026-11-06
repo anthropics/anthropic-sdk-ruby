@@ -832,6 +832,11 @@ module Anthropic
   RequestBodyTooLargeAfterDecodingErrorDetails =
     Anthropic::Models::RequestBodyTooLargeAfterDecodingErrorDetails
 
+  SandboxEgressRestrictedError = Anthropic::Models::SandboxEgressRestrictedError
+
+  SandboxEgressRestrictedErrorDetails =
+    Anthropic::Models::SandboxEgressRestrictedErrorDetails
+
   SearchResultBlockParam = Anthropic::Models::SearchResultBlockParam
 
   ServerToolCaller = Anthropic::Models::ServerToolCaller

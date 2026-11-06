@@ -77,6 +77,8 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
+          # @raise [Anthropic::Models::SandboxEgressRestrictedError]
+          #
           # @return [Anthropic::Models::Organization::ServiceAccountWorkspaceMember]
           #
           # @see Anthropic::Models::Organization::ServiceAccounts::WorkspaceAddParams
@@ -117,6 +119,8 @@ module Anthropic
           # @param service_account_id [String] ID of the service account.
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+          #
+          # @raise [Anthropic::Models::SandboxEgressRestrictedError]
           #
           # @return [Anthropic::Models::Organization::ServiceAccounts::WorkspaceRemoveResponse]
           #

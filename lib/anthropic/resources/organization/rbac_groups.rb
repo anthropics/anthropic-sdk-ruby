@@ -18,6 +18,8 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
+        # @raise [Anthropic::Models::SandboxEgressRestrictedError]
+        #
         # @return [Anthropic::Models::Organization::RBACGroup]
         #
         # @see Anthropic::Models::Organization::RBACGroupCreateParams
@@ -73,6 +75,8 @@ module Anthropic
         # @param name [String, nil] Name of the RBAC Group. Not uniqueness-enforced.
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @raise [Anthropic::Models::SandboxEgressRestrictedError]
         #
         # @return [Anthropic::Models::Organization::RBACGroup]
         #
@@ -139,6 +143,7 @@ module Anthropic
         #
         # @raise [Anthropic::Models::Organization::RBACGroupGrantsOwnerAccessError]
         # @raise [Anthropic::Models::Organization::RBACGroupOwnerAccessUnconfirmedError]
+        # @raise [Anthropic::Models::SandboxEgressRestrictedError]
         #
         # @return [Anthropic::Models::Organization::DeletedRBACGroup]
         #
