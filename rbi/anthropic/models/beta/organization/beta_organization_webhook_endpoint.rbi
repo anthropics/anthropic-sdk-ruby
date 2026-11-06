@@ -146,6 +146,11 @@ module Anthropic
                 :"user_profile.enforcement_action_resolved",
                 Anthropic::Beta::Organization::BetaOrganizationWebhookEndpoint::EnabledEvent::TaggedSymbol
               )
+            USER_PROFILE_PROGRAM_STATUS_UPDATED =
+              T.let(
+                :"user_profile.program_status_updated",
+                Anthropic::Beta::Organization::BetaOrganizationWebhookEndpoint::EnabledEvent::TaggedSymbol
+              )
 
             sig do
               override.returns(

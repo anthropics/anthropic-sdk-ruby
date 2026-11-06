@@ -81,6 +81,7 @@ module Anthropic
 
             USER_PROFILE_ENFORCEMENT_ACTION_OPENED = :"user_profile.enforcement_action_opened"
             USER_PROFILE_ENFORCEMENT_ACTION_RESOLVED = :"user_profile.enforcement_action_resolved"
+            USER_PROFILE_PROGRAM_STATUS_UPDATED = :"user_profile.program_status_updated"
 
             # @!method self.values
             #   @return [Array<Symbol>]
