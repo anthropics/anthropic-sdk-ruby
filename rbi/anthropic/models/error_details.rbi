@@ -74,7 +74,6 @@ module Anthropic
             Anthropic::Beta::Organization::BetaCannotSignOutMembershipAdminErrorDetails,
             Anthropic::Beta::Organization::BetaCannotSignOutOwnerErrorDetails,
             Anthropic::Beta::Organization::BetaCannotSignOutPrivilegedMemberErrorDetails,
-            Anthropic::Beta::BetaBillingFrozenErrorDetails,
             Anthropic::Beta::Organization::BetaSpendLimitsAdminAPIWritesNotEnabledErrorDetails,
             Anthropic::BetaUnsupportedCharsetErrorDetails,
             Anthropic::Beta::Organization::BetaPluginNameTakenErrorDetails,
@@ -425,11 +424,6 @@ module Anthropic
         CANNOT_SIGN_OUT_PRIVILEGED_MEMBER =
           T.let(
             :cannot_sign_out_privileged_member,
-            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
-          )
-        BILLING_FROZEN =
-          T.let(
-            :billing_frozen,
             Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
           )
         SPEND_LIMITS_ADMIN_API_WRITES_NOT_ENABLED =

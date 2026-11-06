@@ -67,7 +67,6 @@ module Anthropic
       | Anthropic::Beta::Organization::BetaCannotSignOutMembershipAdminErrorDetails
       | Anthropic::Beta::Organization::BetaCannotSignOutOwnerErrorDetails
       | Anthropic::Beta::Organization::BetaCannotSignOutPrivilegedMemberErrorDetails
-      | Anthropic::Beta::BetaBillingFrozenErrorDetails
       | Anthropic::Beta::Organization::BetaSpendLimitsAdminAPIWritesNotEnabledErrorDetails
       | Anthropic::BetaUnsupportedCharsetErrorDetails
       | Anthropic::Beta::Organization::BetaPluginNameTakenErrorDetails
@@ -154,7 +153,6 @@ module Anthropic
         | :cannot_sign_out_membership_admin
         | :cannot_sign_out_owner
         | :cannot_sign_out_privileged_member
-        | :billing_frozen
         | :spend_limits_admin_api_writes_not_enabled
         | :unsupported_charset
         | :plugin_name_taken
@@ -240,7 +238,6 @@ module Anthropic
         CANNOT_SIGN_OUT_MEMBERSHIP_ADMIN: :cannot_sign_out_membership_admin
         CANNOT_SIGN_OUT_OWNER: :cannot_sign_out_owner
         CANNOT_SIGN_OUT_PRIVILEGED_MEMBER: :cannot_sign_out_privileged_member
-        BILLING_FROZEN: :billing_frozen
         SPEND_LIMITS_ADMIN_API_WRITES_NOT_ENABLED: :spend_limits_admin_api_writes_not_enabled
         UNSUPPORTED_CHARSET: :unsupported_charset
         PLUGIN_NAME_TAKEN: :plugin_name_taken
@@ -499,9 +496,6 @@ module Anthropic
           error_code: :cannot_sign_out_privileged_member
           | "cannot_sign_out_privileged_member"
         ) -> Anthropic::Beta::Organization::BetaCannotSignOutPrivilegedMemberErrorDetails
-        | (
-          error_code: :billing_frozen | "billing_frozen"
-        ) -> Anthropic::Beta::BetaBillingFrozenErrorDetails
         | (
           error_code: :spend_limits_admin_api_writes_not_enabled
           | "spend_limits_admin_api_writes_not_enabled"

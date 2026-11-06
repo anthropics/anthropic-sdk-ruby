@@ -30,7 +30,6 @@ module Anthropic
         )
       THINKING =
         T.let(:thinking, Anthropic::ThreadUnsupportedFeatureName::TaggedSymbol)
-      ZDR = T.let(:zdr, Anthropic::ThreadUnsupportedFeatureName::TaggedSymbol)
 
       sig do
         override.returns(

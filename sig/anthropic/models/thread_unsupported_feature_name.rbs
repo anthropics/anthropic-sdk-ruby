@@ -7,7 +7,6 @@ module Anthropic
       | :hipaa
       | :inference_hooks
       | :thinking
-      | :zdr
 
     module ThreadUnsupportedFeatureName
       extend Anthropic::Internal::Type::Enum
@@ -18,7 +17,6 @@ module Anthropic
       HIPAA: :hipaa
       INFERENCE_HOOKS: :inference_hooks
       THINKING: :thinking
-      ZDR: :zdr
 
       def self?.values: -> ::Array[Anthropic::Models::thread_unsupported_feature_name]
     end

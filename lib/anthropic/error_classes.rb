@@ -75,7 +75,6 @@ module Anthropic
         [400, "workspace_member_limit_exceeded"] => Anthropic::Models::Organization::WorkspaceMemberLimitExceededError,
         [400, "workspace_policy_violation"] => Anthropic::Models::Organization::WorkspacePolicyViolationError,
         [403, "api_key_scope_missing"] => Anthropic::Models::Beta::Organization::BetaAPIKeyScopeMissingError,
-        [403, "billing_frozen"] => Anthropic::Models::Beta::BetaBillingFrozenError,
         [403, "cannot_sign_out_managed_member"] => Anthropic::Models::Beta::Organization::BetaCannotSignOutManagedMemberError,
         [403, "cannot_sign_out_membership_admin"] => Anthropic::Models::Beta::Organization::BetaCannotSignOutMembershipAdminError,
         [403, "cannot_sign_out_owner"] => Anthropic::Models::Beta::Organization::BetaCannotSignOutOwnerError,

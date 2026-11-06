@@ -16,8 +16,8 @@ module Anthropic
           sig { returns(Symbol) }
           attr_accessor :error_code
 
-          # On a public-sector deployment, only an API key or token that belongs to a person
-          # with owner permissions can sign out a member with the `managed` role.
+          # The member has the `managed` role, and this API key or token cannot sign them
+          # out. The error message says which keys and tokens can.
           sig { params(error_code: Symbol).returns(T.attached_class) }
           def self.new(error_code: :cannot_sign_out_managed_member)
           end

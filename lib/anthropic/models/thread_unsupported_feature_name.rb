@@ -11,7 +11,6 @@ module Anthropic
       HIPAA = :hipaa
       INFERENCE_HOOKS = :inference_hooks
       THINKING = :thinking
-      ZDR = :zdr
 
       # @!method self.values
       #   @return [Array<Symbol>]
