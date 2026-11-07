@@ -184,6 +184,15 @@ module Anthropic
             #   @return [Symbol, Anthropic::Models::Beta::Organization::Analytics::BetaAnalyticsCostOrderBy, nil]
             optional :order_by, enum: -> { Anthropic::Beta::Organization::Analytics::BetaAnalyticsCostOrderBy }
 
+            # @!attribute organization_ids
+            #   Filter a parent organization's report to specific child organizations, by
+            #   organization UUID or `org_` ID; an ID that is not one of its child organizations
+            #   matches nothing. Requires an API key created at the parent organization level.
+            #   Use `group_by[]=organization_id` to break out per-organization values.
+            #
+            #   @return [Array<String>, nil]
+            optional :organization_ids, Anthropic::Internal::Type::ArrayOf[String], nil?: true
+
             # @!attribute page
             #   Opaque cursor from a previous response's `next_page` field.
             #
@@ -284,7 +293,7 @@ module Anthropic
             #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
             optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-            # @!method initialize(starting_at:, actor_ids: nil, actor_types: nil, agent_ids: nil, api_key_ids: nil, claude_tag_categories: nil, claude_tag_user_ids: nil, context_windows: nil, deployment_ids: nil, ending_at: nil, environment_ids: nil, exclude_deleted_users: nil, group_by: nil, inference_geos: nil, limit: nil, models: nil, order: nil, order_by: nil, page: nil, products: nil, rbac_group_ids: nil, service_tiers: nil, session_ids: nil, slack_channel_ids: nil, speeds: nil, time_bucket_width: nil, user_profile_ids: nil, workspace_ids: nil, betas: nil, request_options: {})
+            # @!method initialize(starting_at:, actor_ids: nil, actor_types: nil, agent_ids: nil, api_key_ids: nil, claude_tag_categories: nil, claude_tag_user_ids: nil, context_windows: nil, deployment_ids: nil, ending_at: nil, environment_ids: nil, exclude_deleted_users: nil, group_by: nil, inference_geos: nil, limit: nil, models: nil, order: nil, order_by: nil, organization_ids: nil, page: nil, products: nil, rbac_group_ids: nil, service_tiers: nil, session_ids: nil, slack_channel_ids: nil, speeds: nil, time_bucket_width: nil, user_profile_ids: nil, workspace_ids: nil, betas: nil, request_options: {})
             #   Some parameter documentations has been truncated, see
             #   {Anthropic::Models::Beta::Organization::Analytics::CostListParams} for more
             #   details.
@@ -324,6 +333,8 @@ module Anthropic
             #   @param order [Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsUsageCostSortOrder] Sort direction of the `order_by` metric, or of the time buckets when `order_by`
             #
             #   @param order_by [Symbol, Anthropic::Models::Beta::Organization::Analytics::BetaAnalyticsCostOrderBy] Row order. A metric ranks rows by that metric in the `order` direction. `time` o
+            #
+            #   @param organization_ids [Array<String>, nil] Filter a parent organization's report to specific child organizations, by organi
             #
             #   @param page [String, nil] Opaque cursor from a previous response's `next_page` field.
             #

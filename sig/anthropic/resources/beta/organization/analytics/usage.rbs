@@ -23,6 +23,7 @@ module Anthropic
               ?models: ::Array[String]?,
               ?order: Anthropic::Models::Beta::Organization::beta_analytics_usage_cost_sort_order,
               ?order_by: Anthropic::Models::Beta::Organization::Analytics::beta_analytics_usage_order_by,
+              ?organization_ids: ::Array[String]?,
               ?page: String?,
               ?products: ::Array[Anthropic::Models::Beta::Organization::beta_analytics_usage_cost_product_filter]?,
               ?rbac_group_ids: ::Array[String]?,

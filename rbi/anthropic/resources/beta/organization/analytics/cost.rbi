@@ -61,6 +61,7 @@ module Anthropic
                   Anthropic::Beta::Organization::BetaAnalyticsUsageCostSortOrder::OrSymbol,
                 order_by:
                   Anthropic::Beta::Organization::Analytics::BetaAnalyticsCostOrderBy::OrSymbol,
+                organization_ids: T.nilable(T::Array[String]),
                 page: T.nilable(String),
                 products:
                   T.nilable(
@@ -183,6 +184,12 @@ module Anthropic
               # effect only with `time_bucket_width`; without it, `time` is the same as
               # `amount`. Defaults to `amount`.
               order_by: nil,
+              # Query param: Filter a parent organization's report to specific child
+              # organizations, by organization UUID or `org_` ID; an ID that is not one of its
+              # child organizations matches nothing. Requires an API key created at the parent
+              # organization level. Use `group_by[]=organization_id` to break out
+              # per-organization values.
+              organization_ids: nil,
               # Query param: Opaque cursor from a previous response's `next_page` field.
               page: nil,
               # Query param: Product surfaces to include. Defaults to all products.

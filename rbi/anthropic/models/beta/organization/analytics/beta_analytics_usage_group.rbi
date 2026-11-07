@@ -118,6 +118,11 @@ module Anthropic
             sig { returns(T.nilable(String)) }
             attr_accessor :model
 
+            # UUID of the child organization the usage belongs to, on a parent organization's
+            # report across its children. Null unless `organization_id` is in `group_by[]`.
+            sig { returns(T.nilable(String)) }
+            attr_accessor :organization_id
+
             # Product surface that produced the usage or cost. Null unless product is in
             # `group_by[]`; it can also be null on grouped rows whose usage cannot be
             # attributed to a known surface. Values include `chat`, `claude_code`, `cowork`,
@@ -225,6 +230,7 @@ module Anthropic
                     Anthropic::Beta::Organization::BetaAnalyticsUsageCostInferenceGeo::OrSymbol
                   ),
                 model: T.nilable(String),
+                organization_id: T.nilable(String),
                 product: T.nilable(String),
                 rbac_group_id: T.nilable(String),
                 service_tier:
@@ -294,6 +300,9 @@ module Anthropic
               # is in `group_by[]`; it can also be null on grouped rows whose usage or cost is
               # not attributed to a specific model, such as code execution.
               model:,
+              # UUID of the child organization the usage belongs to, on a parent organization's
+              # report across its children. Null unless `organization_id` is in `group_by[]`.
+              organization_id:,
               # Product surface that produced the usage or cost. Null unless product is in
               # `group_by[]`; it can also be null on grouped rows whose usage cannot be
               # attributed to a known surface. Values include `chat`, `claude_code`, `cowork`,
@@ -370,6 +379,7 @@ module Anthropic
                       Anthropic::Beta::Organization::BetaAnalyticsUsageCostInferenceGeo::TaggedSymbol
                     ),
                   model: T.nilable(String),
+                  organization_id: T.nilable(String),
                   product: T.nilable(String),
                   rbac_group_id: T.nilable(String),
                   service_tier:

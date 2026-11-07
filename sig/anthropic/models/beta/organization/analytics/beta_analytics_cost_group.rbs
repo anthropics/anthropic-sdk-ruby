@@ -17,6 +17,7 @@ module Anthropic
               environment_id: String?,
               inference_geo: Anthropic::Models::Beta::Organization::beta_analytics_usage_cost_inference_geo?,
               model: String?,
+              organization_id: String?,
               product: String?,
               rbac_group_id: String?,
               service_tier: Anthropic::Models::Beta::Organization::beta_analytics_service_tier?,
@@ -53,6 +54,8 @@ module Anthropic
 
             attr_accessor model: String?
 
+            attr_accessor organization_id: String?
+
             attr_accessor product: String?
 
             attr_accessor rbac_group_id: String?
@@ -84,6 +87,7 @@ module Anthropic
               environment_id: String?,
               inference_geo: Anthropic::Models::Beta::Organization::beta_analytics_usage_cost_inference_geo?,
               model: String?,
+              organization_id: String?,
               product: String?,
               rbac_group_id: String?,
               service_tier: Anthropic::Models::Beta::Organization::beta_analytics_service_tier?,
@@ -108,6 +112,7 @@ module Anthropic
               environment_id: String?,
               inference_geo: Anthropic::Models::Beta::Organization::beta_analytics_usage_cost_inference_geo?,
               model: String?,
+              organization_id: String?,
               product: String?,
               rbac_group_id: String?,
               service_tier: Anthropic::Models::Beta::Organization::beta_analytics_service_tier?,
