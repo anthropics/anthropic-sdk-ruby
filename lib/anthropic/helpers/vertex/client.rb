@@ -279,26 +279,40 @@ module Anthropic
             end
           end
 
+          models_path = -> do
+            Anthropic::Internal::Util.interpolate_path(
+              ["projects/%1$s/locations/%2$s/publishers/anthropic/models", @project_id, region]
+            )
+          end
+
           if req.method == :post && query_ok && path.end_with?("/v1/messages")
             unless body.is_a?(Hash)
               raise ArgumentError.new("Expected json data to be a hash for post /v1/messages")
             end
 
-            model = body.delete(:model)
+            model = Anthropic::Internal::Util.encode_path(body.delete(:model).to_s)
             specifier = body[:stream] ? "streamRawPredict" : "rawPredict"
+            predict_path = ->(name) { "#{models_path.call}/#{name}:#{specifier}" }
+            # With its `:specifier` a model of `..` is not a dot segment. Some servers and proxies
+            # drop a segment's `;` parameters, though, and here the specifier goes with them.
+            problem =
+              if model.empty? || model.start_with?(";")
+                "an empty path parameter"
+              elsif model.start_with?(".;", "..;")
+                "the dot segment #{model.inspect}"
+              end
+            if problem
+              raise ArgumentError.new(
+                "The request was not sent: path #{predict_path.call(model).inspect} has #{problem}, " \
+                "which would send it to a different URL"
+              )
+            end
 
-            url = rewrite_path(
-              url,
-              %r{v1/messages\z},
-              "projects/#{@project_id}/locations/#{region}/publishers/anthropic/models/#{model}:#{specifier}"
-            )
+            # A server that drops `;` and the rest of a segment would drop the specifier too.
+            url = rewrite_path(url, %r{v1/messages\z}, predict_path.call(model.gsub(";", "%3B")))
           elsif req.method == :post && query_ok && path.end_with?("/v1/messages/count_tokens")
-            url = rewrite_path(
-              url,
-              %r{v1/messages/count_tokens\z},
-              "projects/#{@project_id}/locations/#{region}/publishers/anthropic/" \
-              "models/count-tokens:rawPredict"
-            )
+            count_tokens_path = "#{models_path.call}/count-tokens:rawPredict"
+            url = rewrite_path(url, %r{v1/messages/count_tokens\z}, count_tokens_path)
           end
 
           return req if body.equal?(req.body) && headers.equal?(req.headers) && url.equal?(req.url)

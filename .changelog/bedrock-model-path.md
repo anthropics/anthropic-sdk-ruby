@@ -1,0 +1,1 @@
+fix(bedrock): raise `ArgumentError` before sending when the model is empty, `"."` or `".."`, which would send the request to a different URL, and send the model ID's `:` as it is in the request path rather than as `%3A`
