@@ -72,6 +72,8 @@ module Anthropic
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #
+            # @raise [Anthropic::Models::SandboxEgressRestrictedError]
+            #
             # @return [Anthropic::Models::Organization::Federation::FederationRuleWorkspace]
             #
             # @see Anthropic::Models::Organization::Federation::Rules::WorkspaceAddParams
@@ -108,6 +110,8 @@ module Anthropic
             # @param federation_rule_id [String] ID of the federation rule.
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+            #
+            # @raise [Anthropic::Models::SandboxEgressRestrictedError]
             #
             # @return [Anthropic::Models::Organization::Federation::Rules::WorkspaceRemoveResponse]
             #

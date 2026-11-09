@@ -54,6 +54,8 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
+          # @raise [Anthropic::Models::SandboxEgressRestrictedError]
+          #
           # @return [Anthropic::Models::Organization::Federation::FederationRule]
           #
           # @see Anthropic::Models::Organization::Federation::RuleCreateParams
@@ -147,6 +149,8 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
+          # @raise [Anthropic::Models::SandboxEgressRestrictedError]
+          #
           # @return [Anthropic::Models::Organization::Federation::FederationRule]
           #
           # @see Anthropic::Models::Organization::Federation::RuleUpdateParams
@@ -224,6 +228,8 @@ module Anthropic
           # @param federation_rule_id [String] ID of the federation rule to archive.
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+          #
+          # @raise [Anthropic::Models::SandboxEgressRestrictedError]
           #
           # @return [Anthropic::Models::Organization::Federation::FederationRule]
           #

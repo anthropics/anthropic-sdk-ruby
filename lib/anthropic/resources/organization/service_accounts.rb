@@ -34,6 +34,8 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
+        # @raise [Anthropic::Models::SandboxEgressRestrictedError]
+        #
         # @return [Anthropic::Models::Organization::ServiceAccount]
         #
         # @see Anthropic::Models::Organization::ServiceAccountCreateParams
@@ -103,6 +105,8 @@ module Anthropic
         # @param organization_role [Symbol, Anthropic::Models::Organization::ServiceAccountUpdateParams::OrganizationRole, nil] Replaces the org-level role. Omit or send `null` to leave unchanged.
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @raise [Anthropic::Models::SandboxEgressRestrictedError]
         #
         # @return [Anthropic::Models::Organization::ServiceAccount]
         #
@@ -178,6 +182,8 @@ module Anthropic
         # @param service_account_id [String] ID of the service account to archive.
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @raise [Anthropic::Models::SandboxEgressRestrictedError]
         #
         # @return [Anthropic::Models::Organization::ServiceAccount]
         #

@@ -122,6 +122,13 @@ module Anthropic
             #   @return [String, nil]
             required :model, String, nil?: true
 
+            # @!attribute organization_id
+            #   UUID of the child organization the usage belongs to, on a parent organization's
+            #   report across its children. Null unless `organization_id` is in `group_by[]`.
+            #
+            #   @return [String, nil]
+            required :organization_id, String, nil?: true
+
             # @!attribute product
             #   Product surface that produced the usage or cost. Null unless product is in
             #   `group_by[]`; it can also be null on grouped rows whose usage cannot be
@@ -212,7 +219,7 @@ module Anthropic
             #   @return [String, nil]
             required :workspace_id, String, nil?: true
 
-            # @!method initialize(actor:, actor_type:, agent_id:, api_key_id:, claude_tag_category:, claude_tag_user_id:, context_window:, cost_type:, deployment_id:, environment_id:, inference_geo:, model:, product:, rbac_group_id:, service_tier:, session_id:, slack_channel_id:, speed:, token_type:, user_profile_id:, workspace_id:)
+            # @!method initialize(actor:, actor_type:, agent_id:, api_key_id:, claude_tag_category:, claude_tag_user_id:, context_window:, cost_type:, deployment_id:, environment_id:, inference_geo:, model:, organization_id:, product:, rbac_group_id:, service_tier:, session_id:, slack_channel_id:, speed:, token_type:, user_profile_id:, workspace_id:)
             #   The dimension values one cost row is broken out by, including `cost_type` and
             #   `token_type`.
             #
@@ -243,6 +250,8 @@ module Anthropic
             #   @param inference_geo [Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsUsageCostInferenceGeo, nil] Inference region of the usage or cost. Null unless `inference_geo` is in
             #
             #   @param model [String, nil] Model that produced the usage or cost, as a model name in the form the
+            #
+            #   @param organization_id [String, nil] UUID of the child organization the usage belongs to, on a parent organization's
             #
             #   @param product [String, nil] Product surface that produced the usage or cost. Null unless product is in
             #

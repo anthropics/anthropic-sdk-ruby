@@ -72,6 +72,11 @@ module Anthropic
                 :model,
                 Anthropic::Beta::Organization::Analytics::BetaAnalyticsUsageGroupBy::TaggedSymbol
               )
+            ORGANIZATION_ID =
+              T.let(
+                :organization_id,
+                Anthropic::Beta::Organization::Analytics::BetaAnalyticsUsageGroupBy::TaggedSymbol
+              )
             PRODUCT =
               T.let(
                 :product,

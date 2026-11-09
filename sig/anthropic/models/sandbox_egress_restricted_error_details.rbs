@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type sandbox_egress_restricted_error_details =
+      { error_code: :sandbox_egress_restricted }
+
+    class SandboxEgressRestrictedErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :sandbox_egress_restricted
+
+      def initialize: (?error_code: :sandbox_egress_restricted) -> void
+
+      def to_hash: -> { error_code: :sandbox_egress_restricted }
+    end
+  end
+end

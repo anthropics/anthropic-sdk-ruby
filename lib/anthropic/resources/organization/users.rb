@@ -40,6 +40,8 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
+        # @raise [Anthropic::Models::SandboxEgressRestrictedError]
+        #
         # @return [Anthropic::Models::Organization::OrganizationUser]
         #
         # @see Anthropic::Models::Organization::UserUpdateParams
@@ -104,6 +106,7 @@ module Anthropic
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @raise [Anthropic::Models::Organization::CannotRemoveLastMemberError]
+        # @raise [Anthropic::Models::SandboxEgressRestrictedError]
         # @raise [Anthropic::Models::ConcurrentMembershipChangeError]
         #
         # @return [Anthropic::Models::Organization::UserRemoveResponse]

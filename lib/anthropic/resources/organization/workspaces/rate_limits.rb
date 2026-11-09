@@ -30,6 +30,8 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
+          # @raise [Anthropic::Models::SandboxEgressRestrictedError]
+          #
           # @return [Anthropic::Models::Organization::Workspaces::WorkspaceRateLimit]
           #
           # @see Anthropic::Models::Organization::Workspaces::RateLimitUpdateParams

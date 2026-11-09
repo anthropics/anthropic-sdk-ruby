@@ -43,6 +43,7 @@ module Anthropic
             Anthropic::CMEKContextUnavailableErrorDetails,
             Anthropic::Organization::OrgAPIKeyLimitExceededErrorDetails,
             Anthropic::Organization::WorkspaceAPIKeyLimitExceededErrorDetails,
+            Anthropic::SandboxEgressRestrictedErrorDetails,
             Anthropic::UserProfileNotFoundErrorDetails,
             Anthropic::Organization::ExternalKeyInWorkspacePolicyErrorDetails,
             Anthropic::Organization::AlreadyMemberErrorDetails,
@@ -74,7 +75,6 @@ module Anthropic
             Anthropic::Beta::Organization::BetaCannotSignOutMembershipAdminErrorDetails,
             Anthropic::Beta::Organization::BetaCannotSignOutOwnerErrorDetails,
             Anthropic::Beta::Organization::BetaCannotSignOutPrivilegedMemberErrorDetails,
-            Anthropic::Beta::BetaBillingFrozenErrorDetails,
             Anthropic::Beta::Organization::BetaSpendLimitsAdminAPIWritesNotEnabledErrorDetails,
             Anthropic::BetaUnsupportedCharsetErrorDetails,
             Anthropic::Beta::Organization::BetaPluginNameTakenErrorDetails,
@@ -272,6 +272,11 @@ module Anthropic
             :workspace_api_key_limit_exceeded,
             Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
           )
+        SANDBOX_EGRESS_RESTRICTED =
+          T.let(
+            :sandbox_egress_restricted,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
         USER_PROFILE_NOT_FOUND =
           T.let(
             :user_profile_not_found,
@@ -425,11 +430,6 @@ module Anthropic
         CANNOT_SIGN_OUT_PRIVILEGED_MEMBER =
           T.let(
             :cannot_sign_out_privileged_member,
-            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
-          )
-        BILLING_FROZEN =
-          T.let(
-            :billing_frozen,
             Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
           )
         SPEND_LIMITS_ADMIN_API_WRITES_NOT_ENABLED =

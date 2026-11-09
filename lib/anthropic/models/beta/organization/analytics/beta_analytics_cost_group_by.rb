@@ -20,6 +20,7 @@ module Anthropic
             ENVIRONMENT_ID = :environment_id
             INFERENCE_GEO = :inference_geo
             MODEL = :model
+            ORGANIZATION_ID = :organization_id
             PRODUCT = :product
             RBAC_GROUP_ID = :rbac_group_id
             SERVICE_TIER = :service_tier

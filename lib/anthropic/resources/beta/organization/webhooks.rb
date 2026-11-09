@@ -218,6 +218,8 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
+          # @raise [Anthropic::Models::SandboxEgressRestrictedError]
+          #
           # @return [Anthropic::Models::Beta::Organization::BetaDeletedOrganizationWebhookEndpoint]
           #
           # @see Anthropic::Models::Beta::Organization::WebhookDeleteParams
@@ -257,6 +259,8 @@ module Anthropic
           # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] This endpoint is in beta: requests must send `webhooks-2026-10-07` in this heade
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+          #
+          # @raise [Anthropic::Models::SandboxEgressRestrictedError]
           #
           # @return [Anthropic::Models::Beta::Organization::BetaOrganizationWebhookEndpointSigningSecret]
           #

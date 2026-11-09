@@ -56,7 +56,8 @@ module Anthropic
               Anthropic::Beta::BetaWebhookMemoryStoreDeletedEventData,
               Anthropic::Beta::BetaWebhookSessionBudgetReachedEventData,
               Anthropic::Beta::BetaWebhookUserProfileEnforcementActionOpenedEventData,
-              Anthropic::Beta::BetaWebhookUserProfileEnforcementActionResolvedEventData
+              Anthropic::Beta::BetaWebhookUserProfileEnforcementActionResolvedEventData,
+              Anthropic::Beta::BetaWebhookUserProfileProgramStatusUpdatedEventData
             )
           end
 
@@ -297,6 +298,11 @@ module Anthropic
           USER_PROFILE_ENFORCEMENT_ACTION_RESOLVED =
             T.let(
               :"user_profile.enforcement_action_resolved",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          USER_PROFILE_PROGRAM_STATUS_UPDATED =
+            T.let(
+              :"user_profile.program_status_updated",
               Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
             )
 

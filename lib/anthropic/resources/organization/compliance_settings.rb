@@ -56,6 +56,8 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
+        # @raise [Anthropic::Models::SandboxEgressRestrictedError]
+        #
         # @return [Anthropic::Models::Organization::OrganizationComplianceSettings]
         #
         # @see Anthropic::Models::Organization::ComplianceSettingUpdateParams

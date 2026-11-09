@@ -57,6 +57,10 @@ module Anthropic
         #
         # @param max_retry_delay [Float]
         #
+        # @param middleware [Array<#call>, #call, nil] Per-attempt HTTP around-middleware. See
+        #   {Anthropic::Middleware}. The user profile ID moves into the body and the request is
+        #   SigV4-signed per attempt, after user middleware.
+        #
         # @param open_telemetry [Hash{Symbol=>Object}, Boolean, nil] OpenTelemetry tracing of this
         #   client's API calls. See {Anthropic::Client#initialize}.
         #
@@ -73,6 +77,7 @@ module Anthropic
           timeout: nil,
           initial_retry_delay: self.class::DEFAULT_INITIAL_RETRY_DELAY,
           max_retry_delay: self.class::DEFAULT_MAX_RETRY_DELAY,
+          middleware: nil,
           open_telemetry: nil
         )
           effective_api_key, resolved_base_url = setup_aws_auth(
@@ -97,6 +102,7 @@ module Anthropic
             timeout: timeout,
             initial_retry_delay: initial_retry_delay,
             max_retry_delay: max_retry_delay,
+            middleware: middleware,
             open_telemetry: open_telemetry
           )
 

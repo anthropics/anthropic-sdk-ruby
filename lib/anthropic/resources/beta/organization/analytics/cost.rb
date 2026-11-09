@@ -19,7 +19,7 @@ module Anthropic
             # {Anthropic::Models::Beta::Organization::Analytics::CostListParams} for more
             # details.
             #
-            # @overload list(starting_at:, actor_ids: nil, actor_types: nil, agent_ids: nil, api_key_ids: nil, claude_tag_categories: nil, claude_tag_user_ids: nil, context_windows: nil, deployment_ids: nil, ending_at: nil, environment_ids: nil, exclude_deleted_users: nil, group_by: nil, inference_geos: nil, limit: nil, models: nil, order: nil, order_by: nil, page: nil, products: nil, rbac_group_ids: nil, service_tiers: nil, session_ids: nil, slack_channel_ids: nil, speeds: nil, time_bucket_width: nil, user_profile_ids: nil, workspace_ids: nil, betas: nil, request_options: {})
+            # @overload list(starting_at:, actor_ids: nil, actor_types: nil, agent_ids: nil, api_key_ids: nil, claude_tag_categories: nil, claude_tag_user_ids: nil, context_windows: nil, deployment_ids: nil, ending_at: nil, environment_ids: nil, exclude_deleted_users: nil, group_by: nil, inference_geos: nil, limit: nil, models: nil, order: nil, order_by: nil, organization_ids: nil, page: nil, products: nil, rbac_group_ids: nil, service_tiers: nil, session_ids: nil, slack_channel_ids: nil, speeds: nil, time_bucket_width: nil, user_profile_ids: nil, workspace_ids: nil, betas: nil, request_options: {})
             #
             # @param starting_at [Time] Query param: Start of range, inclusive. RFC 3339 tz-aware. Must be within the la
             #
@@ -56,6 +56,8 @@ module Anthropic
             # @param order [Symbol, Anthropic::Models::Beta::Organization::BetaAnalyticsUsageCostSortOrder] Query param: Sort direction of the `order_by` metric, or of the time buckets whe
             #
             # @param order_by [Symbol, Anthropic::Models::Beta::Organization::Analytics::BetaAnalyticsCostOrderBy] Query param: Row order. A metric ranks rows by that metric in the `order` direct
+            #
+            # @param organization_ids [Array<String>, nil] Query param: Filter a parent organization's report to specific child organizatio
             #
             # @param page [String, nil] Query param: Opaque cursor from a previous response's `next_page` field.
             #
@@ -105,6 +107,7 @@ module Anthropic
                   :models,
                   :order,
                   :order_by,
+                  :organization_ids,
                   :page,
                   :products,
                   :rbac_group_ids,
@@ -140,6 +143,7 @@ module Anthropic
                   models
                   order
                   order_by
+                  organization_ids
                   page
                   products
                   rbac_group_ids

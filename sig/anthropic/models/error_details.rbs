@@ -36,6 +36,7 @@ module Anthropic
       | Anthropic::CMEKContextUnavailableErrorDetails
       | Anthropic::Organization::OrgAPIKeyLimitExceededErrorDetails
       | Anthropic::Organization::WorkspaceAPIKeyLimitExceededErrorDetails
+      | Anthropic::SandboxEgressRestrictedErrorDetails
       | Anthropic::UserProfileNotFoundErrorDetails
       | Anthropic::Organization::ExternalKeyInWorkspacePolicyErrorDetails
       | Anthropic::Organization::AlreadyMemberErrorDetails
@@ -67,7 +68,6 @@ module Anthropic
       | Anthropic::Beta::Organization::BetaCannotSignOutMembershipAdminErrorDetails
       | Anthropic::Beta::Organization::BetaCannotSignOutOwnerErrorDetails
       | Anthropic::Beta::Organization::BetaCannotSignOutPrivilegedMemberErrorDetails
-      | Anthropic::Beta::BetaBillingFrozenErrorDetails
       | Anthropic::Beta::Organization::BetaSpendLimitsAdminAPIWritesNotEnabledErrorDetails
       | Anthropic::BetaUnsupportedCharsetErrorDetails
       | Anthropic::Beta::Organization::BetaPluginNameTakenErrorDetails
@@ -123,6 +123,7 @@ module Anthropic
         | :cmek_context_unavailable
         | :org_api_key_limit_exceeded
         | :workspace_api_key_limit_exceeded
+        | :sandbox_egress_restricted
         | :user_profile_not_found
         | :external_key_in_workspace_policy
         | :already_member
@@ -154,7 +155,6 @@ module Anthropic
         | :cannot_sign_out_membership_admin
         | :cannot_sign_out_owner
         | :cannot_sign_out_privileged_member
-        | :billing_frozen
         | :spend_limits_admin_api_writes_not_enabled
         | :unsupported_charset
         | :plugin_name_taken
@@ -209,6 +209,7 @@ module Anthropic
         CMEK_CONTEXT_UNAVAILABLE: :cmek_context_unavailable
         ORG_API_KEY_LIMIT_EXCEEDED: :org_api_key_limit_exceeded
         WORKSPACE_API_KEY_LIMIT_EXCEEDED: :workspace_api_key_limit_exceeded
+        SANDBOX_EGRESS_RESTRICTED: :sandbox_egress_restricted
         USER_PROFILE_NOT_FOUND: :user_profile_not_found
         EXTERNAL_KEY_IN_WORKSPACE_POLICY: :external_key_in_workspace_policy
         ALREADY_MEMBER: :already_member
@@ -240,7 +241,6 @@ module Anthropic
         CANNOT_SIGN_OUT_MEMBERSHIP_ADMIN: :cannot_sign_out_membership_admin
         CANNOT_SIGN_OUT_OWNER: :cannot_sign_out_owner
         CANNOT_SIGN_OUT_PRIVILEGED_MEMBER: :cannot_sign_out_privileged_member
-        BILLING_FROZEN: :billing_frozen
         SPEND_LIMITS_ADMIN_API_WRITES_NOT_ENABLED: :spend_limits_admin_api_writes_not_enabled
         UNSUPPORTED_CHARSET: :unsupported_charset
         PLUGIN_NAME_TAKEN: :plugin_name_taken
@@ -387,6 +387,9 @@ module Anthropic
           | "workspace_api_key_limit_exceeded"
         ) -> Anthropic::Organization::WorkspaceAPIKeyLimitExceededErrorDetails
         | (
+          error_code: :sandbox_egress_restricted | "sandbox_egress_restricted"
+        ) -> Anthropic::SandboxEgressRestrictedErrorDetails
+        | (
           error_code: :user_profile_not_found | "user_profile_not_found"
         ) -> Anthropic::UserProfileNotFoundErrorDetails
         | (
@@ -499,9 +502,6 @@ module Anthropic
           error_code: :cannot_sign_out_privileged_member
           | "cannot_sign_out_privileged_member"
         ) -> Anthropic::Beta::Organization::BetaCannotSignOutPrivilegedMemberErrorDetails
-        | (
-          error_code: :billing_frozen | "billing_frozen"
-        ) -> Anthropic::Beta::BetaBillingFrozenErrorDetails
         | (
           error_code: :spend_limits_admin_api_writes_not_enabled
           | "spend_limits_admin_api_writes_not_enabled"

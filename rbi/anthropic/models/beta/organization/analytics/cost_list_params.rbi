@@ -209,6 +209,13 @@ module Anthropic
             end
             attr_writer :order_by
 
+            # Filter a parent organization's report to specific child organizations, by
+            # organization UUID or `org_` ID; an ID that is not one of its child organizations
+            # matches nothing. Requires an API key created at the parent organization level.
+            # Use `group_by[]=organization_id` to break out per-organization values.
+            sig { returns(T.nilable(T::Array[String])) }
+            attr_accessor :organization_ids
+
             # Opaque cursor from a previous response's `next_page` field.
             sig { returns(T.nilable(String)) }
             attr_accessor :page
@@ -364,6 +371,7 @@ module Anthropic
                   Anthropic::Beta::Organization::BetaAnalyticsUsageCostSortOrder::OrSymbol,
                 order_by:
                   Anthropic::Beta::Organization::Analytics::BetaAnalyticsCostOrderBy::OrSymbol,
+                organization_ids: T.nilable(T::Array[String]),
                 page: T.nilable(String),
                 products:
                   T.nilable(
@@ -480,6 +488,11 @@ module Anthropic
               # `time_bucket_width`; without it, `time` is the same as `amount`. Defaults to
               # `amount`.
               order_by: nil,
+              # Filter a parent organization's report to specific child organizations, by
+              # organization UUID or `org_` ID; an ID that is not one of its child organizations
+              # matches nothing. Requires an API key created at the parent organization level.
+              # Use `group_by[]=organization_id` to break out per-organization values.
+              organization_ids: nil,
               # Opaque cursor from a previous response's `next_page` field.
               page: nil,
               # Product surfaces to include. Defaults to all products.
@@ -574,6 +587,7 @@ module Anthropic
                     Anthropic::Beta::Organization::BetaAnalyticsUsageCostSortOrder::OrSymbol,
                   order_by:
                     Anthropic::Beta::Organization::Analytics::BetaAnalyticsCostOrderBy::OrSymbol,
+                  organization_ids: T.nilable(T::Array[String]),
                   page: T.nilable(String),
                   products:
                     T.nilable(

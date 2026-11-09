@@ -40,6 +40,8 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
+          # @raise [Anthropic::Models::SandboxEgressRestrictedError]
+          #
           # @return [Anthropic::Models::Organization::Federation::FederationIssuer]
           #
           # @see Anthropic::Models::Organization::Federation::IssuerCreateParams
@@ -120,6 +122,8 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
+          # @raise [Anthropic::Models::SandboxEgressRestrictedError]
+          #
           # @return [Anthropic::Models::Organization::Federation::FederationIssuer]
           #
           # @see Anthropic::Models::Organization::Federation::IssuerUpdateParams
@@ -192,6 +196,8 @@ module Anthropic
           # @param federation_issuer_id [String] ID of the federation issuer to archive.
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+          #
+          # @raise [Anthropic::Models::SandboxEgressRestrictedError]
           #
           # @return [Anthropic::Models::Organization::Federation::FederationIssuer]
           #

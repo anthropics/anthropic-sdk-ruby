@@ -84,6 +84,8 @@ module Anthropic
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #
+            # @raise [Anthropic::Models::SandboxEgressRestrictedError]
+            #
             # @return [Anthropic::Models::Beta::Organization::BetaServiceAccountWorkspaceMember]
             #
             # @see Anthropic::Models::Beta::Organization::Workspaces::ServiceAccountUpdateParams
@@ -192,6 +194,8 @@ module Anthropic
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #
+            # @raise [Anthropic::Models::SandboxEgressRestrictedError]
+            #
             # @return [Anthropic::Models::Beta::Organization::BetaServiceAccountWorkspaceMember]
             #
             # @see Anthropic::Models::Beta::Organization::Workspaces::ServiceAccountAddParams
@@ -235,6 +239,8 @@ module Anthropic
             # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+            #
+            # @raise [Anthropic::Models::SandboxEgressRestrictedError]
             #
             # @return [Anthropic::Models::Beta::Organization::Workspaces::ServiceAccountRemoveResponse]
             #

@@ -43,6 +43,8 @@ module Anthropic
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #
+            # @raise [Anthropic::Models::SandboxEgressRestrictedError]
+            #
             # @return [Anthropic::Models::Beta::Organization::Federation::BetaFederationIssuer]
             #
             # @see Anthropic::Models::Beta::Organization::Federation::IssuerCreateParams
@@ -133,6 +135,8 @@ module Anthropic
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #
+            # @raise [Anthropic::Models::SandboxEgressRestrictedError]
+            #
             # @return [Anthropic::Models::Beta::Organization::Federation::BetaFederationIssuer]
             #
             # @see Anthropic::Models::Beta::Organization::Federation::IssuerUpdateParams
@@ -215,6 +219,8 @@ module Anthropic
             # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+            #
+            # @raise [Anthropic::Models::SandboxEgressRestrictedError]
             #
             # @return [Anthropic::Models::Beta::Organization::Federation::BetaFederationIssuer]
             #

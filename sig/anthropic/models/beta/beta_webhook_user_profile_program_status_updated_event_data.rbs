@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    class BetaWebhookUserProfileProgramStatusUpdatedEventData = Beta::BetaWebhookUserProfileProgramStatusUpdatedEventData
+
+    module Beta
+      type beta_webhook_user_profile_program_status_updated_event_data =
+        {
+          id: String,
+          organization_id: String,
+          type: :"user_profile.program_status_updated"
+        }
+
+      class BetaWebhookUserProfileProgramStatusUpdatedEventData < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor organization_id: String
+
+        attr_accessor type: :"user_profile.program_status_updated"
+
+        def initialize: (
+          id: String,
+          organization_id: String,
+          ?type: :"user_profile.program_status_updated"
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          organization_id: String,
+          type: :"user_profile.program_status_updated"
+        }
+      end
+    end
+  end
+end

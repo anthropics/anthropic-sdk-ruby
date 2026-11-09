@@ -43,6 +43,7 @@ module Anthropic
           #
           # @raise [Anthropic::Models::Organization::OrgAPIKeyLimitExceededError]
           # @raise [Anthropic::Models::Organization::WorkspaceAPIKeyLimitExceededError]
+          # @raise [Anthropic::Models::SandboxEgressRestrictedError]
           #
           # @return [Anthropic::Models::Beta::Organization::BetaAPIKey]
           #
