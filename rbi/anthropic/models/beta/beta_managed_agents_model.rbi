@@ -31,7 +31,7 @@ module Anthropic
           end
         OrSymbol = T.type_alias { T.any(Symbol, String) }
 
-        # Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+        # Frontier intelligence for ambitious work in coding, enterprise workflows, and the sciences
         CLAUDE_FABLE_5_2 =
           T.let(
             :"claude-fable-5-2",

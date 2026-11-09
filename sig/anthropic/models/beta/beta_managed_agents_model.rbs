@@ -29,7 +29,7 @@ module Anthropic
 
         def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_model]
 
-        # Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+        # Frontier intelligence for ambitious work in coding, enterprise workflows, and the sciences
         CLAUDE_FABLE_5_2: :"claude-fable-5-2"
 
         # Fastest model for high-volume, real-time tasks
