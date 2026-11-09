@@ -18,6 +18,14 @@ module Anthropic
       TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Model) }
       OrSymbol = T.type_alias { T.any(Symbol, String) }
 
+      # Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+      CLAUDE_FABLE_5_2 =
+        T.let(:"claude-fable-5-2", Anthropic::Model::TaggedSymbol)
+
+      # Our most capable model for cybersecurity and biology research, available through trusted access programs
+      CLAUDE_MYTHOS_5_2 =
+        T.let(:"claude-mythos-5-2", Anthropic::Model::TaggedSymbol)
+
       # Fastest model for high-volume, real-time tasks
       CLAUDE_HAIKU_5_5 =
         T.let(:"claude-haiku-5-5", Anthropic::Model::TaggedSymbol)

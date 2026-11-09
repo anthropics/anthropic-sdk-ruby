@@ -10,6 +10,8 @@ module Anthropic
       module BetaManagedAgentsModel
         extend Anthropic::Internal::Type::Union
 
+        variant const: -> { Anthropic::Models::Beta::BetaManagedAgentsModel::CLAUDE_FABLE_5_2 }
+
         variant const: -> { Anthropic::Models::Beta::BetaManagedAgentsModel::CLAUDE_HAIKU_5_5 }
 
         variant const: -> { Anthropic::Models::Beta::BetaManagedAgentsModel::CLAUDE_SONNET_5_5 }
@@ -54,6 +56,9 @@ module Anthropic
         end
 
         # @!group
+
+        # Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+        CLAUDE_FABLE_5_2 = :"claude-fable-5-2"
 
         # Fastest model for high-volume, real-time tasks
         CLAUDE_HAIKU_5_5 = :"claude-haiku-5-5"
