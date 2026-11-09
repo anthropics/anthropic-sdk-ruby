@@ -6,7 +6,7 @@ class Anthropic::Test::Resources::Beta::Organization::Analytics::SummariesTest <
   def test_list_required_params
     response =
       @anthropic.beta.organization.analytics.summaries.list(
-        starting_date: "2019-12-27",
+        starting_date: Date.parse("2019-12-27"),
         request_options: {extra_query: {beta: "true"}}
       )
 
