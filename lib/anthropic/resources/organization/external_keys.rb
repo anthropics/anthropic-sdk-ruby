@@ -17,7 +17,7 @@ module Anthropic
         #
         # @param geo [Symbol, Anthropic::Models::Organization::ExternalKeyCreateParams::Geo] Data residency geo. Only `us` is supported.
         #
-        # @param user_profile_id [String, nil] ID of a user profile to bind the key to. Omit this field for a key that isn't bo
+        # @param user_profile_id [String, nil] ID of a user profile to bind the key to. A user profile represents one of your c
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
