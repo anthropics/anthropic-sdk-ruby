@@ -47,6 +47,27 @@ module Anthropic
           sig { returns(T.nilable(String)) }
           attr_accessor :model
 
+          # How Claude takes part in the channel: `automatic`, `mention_only`,
+          # `always_awake` or `thread`. Only a channel takes one: an update of a workspace
+          # that sends a value is refused, and one that sends null changes nothing. Null
+          # never clears it: sent to a channel that stores none it changes nothing, and sent
+          # to a channel that stores one it is refused, because a stored reply mode can be
+          # changed but never cleared; a caller that wants Claude's default behavior sends
+          # `automatic`.
+          sig do
+            returns(
+              T.nilable(
+                T.any(
+                  Anthropic::Beta::Organization::BetaClaudeTagReplyModeAutomatic,
+                  Anthropic::Beta::Organization::BetaClaudeTagReplyModeMentionOnly,
+                  Anthropic::Beta::Organization::BetaClaudeTagReplyModeAlwaysAwake,
+                  Anthropic::Beta::Organization::BetaClaudeTagReplyModeThread
+                )
+              )
+            )
+          end
+          attr_accessor :reply_mode
+
           # The settings in a request that sets a Slack channel up. A setting left out is
           # not set. A setting sent as null is cleared.
           sig do
@@ -62,7 +83,16 @@ module Anthropic
                   )
                 ),
               instructions: T.nilable(String),
-              model: T.nilable(String)
+              model: T.nilable(String),
+              reply_mode:
+                T.nilable(
+                  T.any(
+                    Anthropic::Beta::Organization::BetaClaudeTagReplyModeAutomatic::OrHash,
+                    Anthropic::Beta::Organization::BetaClaudeTagReplyModeMentionOnly::OrHash,
+                    Anthropic::Beta::Organization::BetaClaudeTagReplyModeAlwaysAwake::OrHash,
+                    Anthropic::Beta::Organization::BetaClaudeTagReplyModeThread::OrHash
+                  )
+                )
             ).returns(T.attached_class)
           end
           def self.new(
@@ -79,7 +109,15 @@ module Anthropic
             instructions: nil,
             # The model Claude uses: the identifier of a model, or the name of a model line,
             # that the organization is entitled to for Claude Tag. Null clears it.
-            model: nil
+            model: nil,
+            # How Claude takes part in the channel: `automatic`, `mention_only`,
+            # `always_awake` or `thread`. Only a channel takes one: an update of a workspace
+            # that sends a value is refused, and one that sends null changes nothing. Null
+            # never clears it: sent to a channel that stores none it changes nothing, and sent
+            # to a channel that stores one it is refused, because a stored reply mode can be
+            # changed but never cleared; a caller that wants Claude's default behavior sends
+            # `automatic`.
+            reply_mode: nil
           )
           end
 
@@ -97,7 +135,16 @@ module Anthropic
                     )
                   ),
                 instructions: T.nilable(String),
-                model: T.nilable(String)
+                model: T.nilable(String),
+                reply_mode:
+                  T.nilable(
+                    T.any(
+                      Anthropic::Beta::Organization::BetaClaudeTagReplyModeAutomatic,
+                      Anthropic::Beta::Organization::BetaClaudeTagReplyModeMentionOnly,
+                      Anthropic::Beta::Organization::BetaClaudeTagReplyModeAlwaysAwake,
+                      Anthropic::Beta::Organization::BetaClaudeTagReplyModeThread
+                    )
+                  )
               }
             )
           end

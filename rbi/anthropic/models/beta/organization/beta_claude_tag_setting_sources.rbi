@@ -64,6 +64,17 @@ module Anthropic
           end
           attr_accessor :model
 
+          # The settings level `reply_mode` comes from: the channel when it stores one. With
+          # `include_inherited=true` and no stored mode it is `default`.
+          sig do
+            returns(
+              T.nilable(
+                Anthropic::Beta::Organization::BetaClaudeTagSettingSource::Variants
+              )
+            )
+          end
+          attr_accessor :reply_mode
+
           # For each setting, the settings level its value in `settings` comes from. Without
           # `include_inherited`, a setting the channel or workspace stores has a source that
           # names the channel or workspace itself, and one it does not store has null, or an
@@ -125,6 +136,17 @@ module Anthropic
                     Anthropic::Beta::Organization::BetaClaudeTagDefaultSettingSource::OrHash,
                     Anthropic::Beta::Organization::BetaClaudeTagSlackGridChannelSettingSource::OrHash
                   )
+                ),
+              reply_mode:
+                T.nilable(
+                  T.any(
+                    Anthropic::Beta::Organization::BetaClaudeTagSlackChannelSettingSource::OrHash,
+                    Anthropic::Beta::Organization::BetaClaudeTagSlackWorkspaceSettingSource::OrHash,
+                    Anthropic::Beta::Organization::BetaClaudeTagSlackParentChannelSettingSource::OrHash,
+                    Anthropic::Beta::Organization::BetaClaudeTagSlackDefaultSettingSource::OrHash,
+                    Anthropic::Beta::Organization::BetaClaudeTagDefaultSettingSource::OrHash,
+                    Anthropic::Beta::Organization::BetaClaudeTagSlackGridChannelSettingSource::OrHash
+                  )
                 )
             ).returns(T.attached_class)
           end
@@ -139,7 +161,10 @@ module Anthropic
             # the order their text is joined. Empty when none does.
             instructions:,
             # The settings level `model` comes from.
-            model:
+            model:,
+            # The settings level `reply_mode` comes from: the channel when it stores one. With
+            # `include_inherited=true` and no stored mode it is `default`.
+            reply_mode:
           )
           end
 
@@ -163,6 +188,10 @@ module Anthropic
                     Anthropic::Beta::Organization::BetaClaudeTagSettingSource::Variants
                   ],
                 model:
+                  T.nilable(
+                    Anthropic::Beta::Organization::BetaClaudeTagSettingSource::Variants
+                  ),
+                reply_mode:
                   T.nilable(
                     Anthropic::Beta::Organization::BetaClaudeTagSettingSource::Variants
                   )
