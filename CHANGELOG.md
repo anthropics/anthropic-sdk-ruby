@@ -1,5 +1,28 @@
 # Changelog
 
+## [2.7.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v2.6.0...v2.7.0) (2026-11-09)
+
+### Features
+
+* **api:** accept user_profile.program_status_updated on organization webhook endpoints
+* **api:** add claude-fable-5-2 and claude-mythos-5-2
+* **api:** add parent organization filtering and grouping to the usage and cost reports
+* **api:** add the sandbox_egress_restricted error to Admin API write methods
+* **api:** add the user_profile.program_status_updated webhook event
+* **aws,bedrock:** accept middleware: on the AWS and Bedrock Mantle clients
+
+
+### Bug Fixes
+
+* **streaming:** keep compaction block fields readable when a delta leaves them null
+
+
+### Chores
+
+* **api:** remove some error detail types and update descriptions
+* **docs:** say when a work heartbeat does not compare its value
+* **docs:** update model descriptions
+
 ## [2.6.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v2.5.0...v2.6.0) (2026-11-05)
 
 ### Features
