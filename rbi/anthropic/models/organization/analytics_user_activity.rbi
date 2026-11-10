@@ -129,6 +129,25 @@ module Anthropic
         end
         attr_writer :chat_cowork_unified_metrics
 
+        # Claude Tag activity in Slack by a user who has linked a Claude account. Activity
+        # by Slack users who have not linked an account appears only in the `/summaries`
+        # Claude Tag counts, so these rows do not add up to those counts. Omitted from the
+        # response on deployments that do not offer Claude Tag reporting.
+        sig do
+          returns(T.nilable(Anthropic::Organization::AnalyticsClaudeTagMetrics))
+        end
+        attr_reader :claude_tag_metrics
+
+        sig do
+          params(
+            claude_tag_metrics:
+              T.nilable(
+                Anthropic::Organization::AnalyticsClaudeTagMetrics::OrHash
+              )
+          ).void
+        end
+        attr_writer :claude_tag_metrics
+
         # Most recent UTC day (YYYY-MM-DD) on which the user had any counted activity,
         # within the requested window: equal to the requested `date` in single-day mode,
         # and to the latest active day from `starting_date` (inclusive) to `ending_date`
@@ -174,6 +193,10 @@ module Anthropic
               T.nilable(
                 Anthropic::Organization::AnalyticsChatCoworkUnifiedMetrics::OrHash
               ),
+            claude_tag_metrics:
+              T.nilable(
+                Anthropic::Organization::AnalyticsClaudeTagMetrics::OrHash
+              ),
             last_activity_date: T.nilable(Date),
             rbac_group_id: T.nilable(String),
             rbac_group_name: T.nilable(String)
@@ -207,6 +230,11 @@ module Anthropic
           # `sessions` (Cowork activity). Omitted from the response where Chat and Cowork
           # unified is not available.
           chat_cowork_unified_metrics: nil,
+          # Claude Tag activity in Slack by a user who has linked a Claude account. Activity
+          # by Slack users who have not linked an account appears only in the `/summaries`
+          # Claude Tag counts, so these rows do not add up to those counts. Omitted from the
+          # response on deployments that do not offer Claude Tag reporting.
+          claude_tag_metrics: nil,
           # Most recent UTC day (YYYY-MM-DD) on which the user had any counted activity,
           # within the requested window: equal to the requested `date` in single-day mode,
           # and to the latest active day from `starting_date` (inclusive) to `ending_date`
@@ -245,6 +273,8 @@ module Anthropic
                 T.nilable(
                   Anthropic::Organization::AnalyticsChatCoworkUnifiedMetrics
                 ),
+              claude_tag_metrics:
+                T.nilable(Anthropic::Organization::AnalyticsClaudeTagMetrics),
               last_activity_date: T.nilable(Date),
               rbac_group_id: T.nilable(String),
               rbac_group_name: T.nilable(String)
