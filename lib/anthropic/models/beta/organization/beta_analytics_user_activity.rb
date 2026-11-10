@@ -74,6 +74,17 @@ module Anthropic
                    -> { Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedMetrics },
                    nil?: true
 
+          # @!attribute claude_tag_metrics
+          #   Claude Tag activity in Slack by a user who has linked a Claude account. Activity
+          #   by Slack users who have not linked an account appears only in the `/summaries`
+          #   Claude Tag counts, so these rows do not add up to those counts. Omitted from the
+          #   response on deployments that do not offer Claude Tag reporting.
+          #
+          #   @return [Anthropic::Models::Beta::Organization::BetaAnalyticsClaudeTagMetrics, nil]
+          optional :claude_tag_metrics,
+                   -> { Anthropic::Beta::Organization::BetaAnalyticsClaudeTagMetrics },
+                   nil?: true
+
           # @!attribute last_activity_date
           #   Most recent UTC day (YYYY-MM-DD) on which the user had any counted activity,
           #   within the requested window: equal to the requested `date` in single-day mode,
@@ -104,7 +115,7 @@ module Anthropic
           #   @return [String, nil]
           optional :rbac_group_name, String, nil?: true
 
-          # @!method initialize(chat_metrics:, claude_code_metrics:, cowork_metrics:, design_metrics:, distinct_user_count:, office_metrics:, science_metrics:, user:, web_search_count:, chat_cowork_unified_metrics: nil, last_activity_date: nil, rbac_group_id: nil, rbac_group_name: nil)
+          # @!method initialize(chat_metrics:, claude_code_metrics:, cowork_metrics:, design_metrics:, distinct_user_count:, office_metrics:, science_metrics:, user:, web_search_count:, chat_cowork_unified_metrics: nil, claude_tag_metrics: nil, last_activity_date: nil, rbac_group_id: nil, rbac_group_name: nil)
           #   Per-user activity data for a given day.
           #
           #   Some parameter documentations has been truncated, see
@@ -130,6 +141,8 @@ module Anthropic
           #   @param web_search_count [Integer] Number of web searches performed
           #
           #   @param chat_cowork_unified_metrics [Anthropic::Models::Beta::Organization::BetaAnalyticsChatCoworkUnifiedMetrics, nil] Activity recorded while the member had Chat and Cowork unified (Cowork's feature
+          #
+          #   @param claude_tag_metrics [Anthropic::Models::Beta::Organization::BetaAnalyticsClaudeTagMetrics, nil] Claude Tag activity in Slack by a user who has linked a Claude account. Activity
           #
           #   @param last_activity_date [Date, nil] Most recent UTC day (YYYY-MM-DD) on which the user had any counted activity, wit
           #

@@ -209,6 +209,70 @@ class Anthropic::Test::GoogleCloudClientTest < Minitest::Test
     assert_equal(derived_base_url, client.base_url.to_s)
   end
 
+  # The URLs exactly as the transport is handed them (WebMock normalizes what it reports).
+  def requested_urls(**kw)
+    stub_request(:any, /./).to_return_json(status: 200, body: {data: [], has_more: false})
+    urls = []
+    capture = lambda do |req, nxt|
+      urls << req.url.to_s
+      nxt.call(req)
+    end
+    client = make_client(middleware: capture, **kw)
+    client.messages.create(max_tokens: 1, messages: [{content: "hi", role: :user}], model: :m)
+    client.beta.organization.workspaces.list
+    urls
+  end
+
+  def test_derived_base_url_keeps_ordinary_values
+    [
+      {project: "my-project", location: "global", workspace_id: "wrkspc_01AbCdEf"},
+      {project: "example.com:my-project", location: "us-central1", workspace_id: "wrkspc_01AbCdEf"},
+      {project: "a;b", location: "...;x", workspace_id: "x;.."},
+      {project: "a;b", location: "a;b", workspace_id: "a;b"}
+    ].each do |given|
+      assert_equal(
+        [
+          "#{derived_base_url(**given)}/v1/messages",
+          "#{organization_base_url(**given.except(:workspace_id))}/v1/organizations/workspaces"
+        ],
+        requested_urls(**given)
+      )
+    end
+    assert_requested(:any, /./, times: 8)
+  end
+
+  def test_derived_base_url_percent_encodes_each_value
+    location = "https://claude.googleapis.com/v1/projects/a%2Fb/locations/us%2F..%2Fx"
+
+    assert_equal(
+      [
+        "#{location}/workspaces/w%2F..%2F..%2Fx/invoke/v1/messages",
+        "#{location}/claudeOrganization/invoke/v1/organizations/workspaces"
+      ],
+      requested_urls(project: "a/b", location: "us/../x", workspace_id: "w/../../x")
+    )
+    assert_requested(:any, /./, times: 2)
+  end
+
+  def test_dot_segment_or_empty_value_raises_before_sending
+    problems = {
+      "." => "has the dot segment \".\", which would send it to a different URL",
+      ".." => "has the dot segment \"..\", which would send it to a different URL",
+      ".;x" => "has the dot segment \".;x\", which would send it to a different URL",
+      "..;x" => "has the dot segment \"..;x\", which would send it to a different URL",
+      "" => "has an empty path parameter, which would send it to a different URL",
+      ";x" => "has an empty path parameter, which would send it to a different URL"
+    }
+
+    [:project, :location, :workspace_id].each do |key|
+      problems.each do |value, problem|
+        err = assert_raises(ArgumentError, "#{key}: #{value.inspect}") { requested_urls(key => value) }
+        assert_includes(err.message, problem)
+      end
+    end
+    assert_not_requested(:any, /./)
+  end
+
   def test_false_base_url_derived_not_first_party_env
     ENV["ANTHROPIC_BASE_URL"] = "http://wrong-host.example.com"
     client = make_client(base_url: false)

@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_claude_tag_reply_mode_mention_only = { type: :mention_only }
+
+        class BetaClaudeTagReplyModeMentionOnly < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :mention_only
+
+          def initialize: (?type: :mention_only) -> void
+
+          def to_hash: -> { type: :mention_only }
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,50 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_claude_tag_reply_mode =
+          Anthropic::Beta::Organization::BetaClaudeTagReplyModeAutomatic
+          | Anthropic::Beta::Organization::BetaClaudeTagReplyModeMentionOnly
+          | Anthropic::Beta::Organization::BetaClaudeTagReplyModeAlwaysAwake
+          | Anthropic::Beta::Organization::BetaClaudeTagReplyModeThread
+
+        module BetaClaudeTagReplyMode
+          extend Anthropic::Internal::Type::Union
+
+          type type_ = :automatic | :mention_only | :always_awake | :thread
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            AUTOMATIC: :automatic
+            MENTION_ONLY: :mention_only
+            ALWAYS_AWAKE: :always_awake
+            THREAD: :thread
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaClaudeTagReplyMode::type_]
+          end
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::beta_claude_tag_reply_mode]
+
+          def self.new:
+            (
+              type: :automatic | "automatic"
+            ) -> Anthropic::Beta::Organization::BetaClaudeTagReplyModeAutomatic
+            | (
+              type: :mention_only | "mention_only"
+            ) -> Anthropic::Beta::Organization::BetaClaudeTagReplyModeMentionOnly
+            | (
+              type: :always_awake | "always_awake"
+            ) -> Anthropic::Beta::Organization::BetaClaudeTagReplyModeAlwaysAwake
+            | (
+              type: :thread | "thread"
+            ) -> Anthropic::Beta::Organization::BetaClaudeTagReplyModeThread
+            | (
+              type: Anthropic::Models::Beta::Organization::BetaClaudeTagReplyMode::type_
+              | String
+            ) -> Anthropic::Models::Beta::Organization::beta_claude_tag_reply_mode
+        end
+      end
+    end
+  end
+end

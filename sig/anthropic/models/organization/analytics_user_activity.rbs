@@ -13,6 +13,7 @@ module Anthropic
           user: Anthropic::Organization::AnalyticsUser?,
           web_search_count: Integer,
           chat_cowork_unified_metrics: Anthropic::Organization::AnalyticsChatCoworkUnifiedMetrics?,
+          claude_tag_metrics: Anthropic::Organization::AnalyticsClaudeTagMetrics?,
           last_activity_date: Date?,
           rbac_group_id: String?,
           rbac_group_name: String?
@@ -39,6 +40,8 @@ module Anthropic
 
         attr_accessor chat_cowork_unified_metrics: Anthropic::Organization::AnalyticsChatCoworkUnifiedMetrics?
 
+        attr_accessor claude_tag_metrics: Anthropic::Organization::AnalyticsClaudeTagMetrics?
+
         attr_accessor last_activity_date: Date?
 
         attr_accessor rbac_group_id: String?
@@ -56,6 +59,7 @@ module Anthropic
           user: Anthropic::Organization::AnalyticsUser?,
           web_search_count: Integer,
           ?chat_cowork_unified_metrics: Anthropic::Organization::AnalyticsChatCoworkUnifiedMetrics?,
+          ?claude_tag_metrics: Anthropic::Organization::AnalyticsClaudeTagMetrics?,
           ?last_activity_date: Date?,
           ?rbac_group_id: String?,
           ?rbac_group_name: String?
@@ -72,6 +76,7 @@ module Anthropic
           user: Anthropic::Organization::AnalyticsUser?,
           web_search_count: Integer,
           chat_cowork_unified_metrics: Anthropic::Organization::AnalyticsChatCoworkUnifiedMetrics?,
+          claude_tag_metrics: Anthropic::Organization::AnalyticsClaudeTagMetrics?,
           last_activity_date: Date?,
           rbac_group_id: String?,
           rbac_group_name: String?

@@ -62,7 +62,7 @@ class Anthropic::Test::BedrockClientTest < Minitest::Test
 
     adapted = make_client.send(:adapt_request, req)
 
-    assert_equal("/model/us.anthropic.claude-3-5-haiku-20241022-v1%3A0/invoke", adapted.url.path)
+    assert_equal("/model/us.anthropic.claude-3-5-haiku-20241022-v1:0/invoke", adapted.url.path)
     assert_nil(adapted.url.query)
     assert_equal(
       {
@@ -71,6 +71,91 @@ class Anthropic::Test::BedrockClientTest < Minitest::Test
       },
       adapted.body
     )
+  end
+
+  def test_model_is_sent_as_one_encoded_path_segment
+    base = "https://bedrock-runtime.us-east-1.amazonaws.com"
+    stub_request(:post, %r{\A#{Regexp.escape(base)}/model/}).to_return_json(status: 200, body: {})
+    # WebMock normalizes the URLs it matches and reports.
+    sent = nil
+    capture = ->(req, nxt) { nxt.call(req).tap { sent = _1.request.url.to_s } }
+    params = {
+      max_tokens: 1024,
+      messages: [{content: "Hello, world", role: :user}],
+      request_options: {middleware: capture}
+    }
+    arn = "arn:aws:bedrock:us-east-1:123456789012:inference-profile"
+    profile = "us.anthropic.claude-sonnet-4-5-20250929-v1:0"
+    models = {
+      "anthropic.claude-sonnet-4-5-20250929-v1:0" => "anthropic.claude-sonnet-4-5-20250929-v1:0",
+      "#{arn}/#{profile}" => "#{arn}%2F#{profile}",
+      "a b" => "a%20b",
+      "a+b" => "a+b",
+      "a;b" => "a;b",
+      "...;x" => "...;x",
+      "..x;y" => "..x;y",
+      "x;.." => "x;.."
+    }
+    clients = [
+      make_client,
+      Anthropic::BedrockClient.new(aws_region: "us-east-1", aws_access_key: "ak", aws_secret_key: "sk")
+    ]
+
+    clients.product(models.to_a).each do |client, (model, encoded)|
+      [
+        [-> { client.messages.create(model: model, **params) }, "invoke"],
+        [-> { client.beta.messages.create(model: model, **params) }, "invoke"],
+        [-> { client.messages.stream_raw(model: model, **params).close }, "invoke-with-response-stream"]
+      ].each do |call, action|
+        sent = nil
+        call.call
+
+        assert_equal("#{base}/model/#{encoded}/#{action}", sent)
+      end
+    end
+  end
+
+  def test_dot_segment_model_raises_before_sending
+    client = make_client
+    params = {max_tokens: 1024, messages: [{content: "Hello, world", role: :user}]}
+
+    %w[. .. ..;x .;x ..; .;a=b].each do |model|
+      [
+        [-> { client.messages.create(model: model, **params) }, "invoke"],
+        [-> { client.beta.messages.create(model: model, **params) }, "invoke"],
+        [-> { client.messages.stream_raw(model: model, **params) }, "invoke-with-response-stream"]
+      ].each do |call, action|
+        err = assert_raises(ArgumentError, &call)
+        assert_equal(
+          "The request was not sent: path \"model/#{model}/#{action}\" has the dot segment \"#{model}\", " \
+          "which would send it to a different URL",
+          err.message
+        )
+      end
+    end
+    assert_not_requested(:any, /./)
+  end
+
+  def test_empty_model_raises_before_sending
+    client = make_client
+    params = {max_tokens: 1024, messages: [{content: "Hello, world", role: :user}]}
+
+    [{model: ""}, {model: nil}, {}, {model: ";x"}, {model: ";"}, {model: ";a=b"}].each do |given|
+      model = given[:model]
+      [
+        [-> { client.messages.create(**given, **params) }, "model/#{model}/invoke"],
+        [-> { client.beta.messages.create(**given, **params) }, "model/#{model}/invoke"],
+        [-> { client.messages.stream_raw(**given, **params) }, "model/#{model}/invoke-with-response-stream"]
+      ].each do |call, path|
+        err = assert_raises(ArgumentError, &call)
+        assert_equal(
+          "The request was not sent: path #{path.inspect} has an empty path parameter, " \
+          "which would send it to a different URL",
+          err.message
+        )
+      end
+    end
+    assert_not_requested(:any, /./)
   end
 
   def test_adapt_request_drops_version_header
@@ -373,7 +458,7 @@ class Anthropic::Test::BedrockClientTest < Minitest::Test
   # what the SDK produced before adapt_request was introduced. SigV4
   # timestamp-dependent headers are checked for shape only.
   def test_empty_chain_wire_bytes_regression
-    uri = "http://localhost/model/claude-3-5-haiku-20241022-v1%3A0/invoke"
+    uri = "http://localhost/model/claude-3-5-haiku-20241022-v1:0/invoke"
     stub_request(:post, uri).to_return_json(status: 200, body: {})
 
     Anthropic::BedrockClient.new(

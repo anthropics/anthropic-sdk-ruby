@@ -145,6 +145,197 @@ class Anthropic::Test::VertexClientTest < Minitest::Test
     assert_equal("/v1/v1/messages", req.url.path)
   end
 
+  def test_adapt_request_percent_encodes_model
+    client = Anthropic::VertexClient.new(region: "us-east5", project_id: "proj")
+    models = {
+      "claude-sonnet-4-5@20250929" => "claude-sonnet-4-5@20250929",
+      "../../x" => "..%2F..%2Fx",
+      "a;b" => "a%3Bb",
+      "...;x" => "...%3Bx",
+      # with the specifier these are not dot segments
+      "." => ".",
+      ".." => ".."
+    }
+
+    ["", "?beta=true"].each do |query|
+      models.each do |model, encoded|
+        req = make_api_request(
+          url: "https://us-east5-aiplatform.googleapis.com/v1/v1/messages#{query}",
+          body: {model: model}
+        )
+
+        assert_equal(
+          "/v1/projects/proj/locations/us-east5/publishers/anthropic/models/#{encoded}:rawPredict",
+          client.send(:adapt_request, req).url.path
+        )
+      end
+    end
+  end
+
+  def test_adapt_request_percent_encodes_project_and_region
+    base = "https://h/v1"
+    cases = [
+      ["my-proj-123", "us-east5", "projects/my-proj-123/locations/us-east5"],
+      ["example.com:my-proj", "global", "projects/example.com:my-proj/locations/global"],
+      ["a/../b", "us/east5", "projects/a%2F..%2Fb/locations/us%2Feast5"],
+      ["..x;y", "x;..", "projects/..x;y/locations/x;.."]
+    ]
+
+    cases.each do |project, region, prefix|
+      client = Anthropic::VertexClient.new(region: region, project_id: project, base_url: base)
+      create = make_api_request(url: "#{base}/v1/messages", body: {model: "claude-sonnet-4-5@20250929"})
+      count_tokens = make_api_request(url: "#{base}/v1/messages/count_tokens", body: {})
+
+      assert_equal(
+        "/v1/#{prefix}/publishers/anthropic/models/claude-sonnet-4-5@20250929:rawPredict",
+        client.send(:adapt_request, create).url.path
+      )
+      assert_equal(
+        "/v1/#{prefix}/publishers/anthropic/models/count-tokens:rawPredict",
+        client.send(:adapt_request, count_tokens).url.path
+      )
+    end
+  end
+
+  def test_semicolon_in_project_and_region_is_sent_as_it_is
+    stub_request(:post, %r{\Ahttps://h/v1/}).to_return_json(status: 200, body: {})
+    # WebMock normalizes the URLs it matches and reports.
+    sent = []
+    capture = ->(req, nxt) { nxt.call(req).tap { sent << _1.request.url.to_s } }
+    params = {max_tokens: 1024, messages: [{content: "Hello, world", role: :user}], model: "m"}
+    creds = Object.new.tap do |c|
+      c.define_singleton_method(:apply) { |h| h.merge("authorization" => "Bearer tok") }
+    end
+
+    Google::Auth.stub(:get_application_default, creds) do
+      client = Anthropic::VertexClient.new(
+        region: "a;b",
+        project_id: "a;b",
+        base_url: "https://h/v1",
+        middleware: capture
+      )
+      client.messages.create(**params)
+      client.messages.count_tokens(**params.except(:max_tokens))
+    end
+
+    models = "https://h/v1/projects/a;b/locations/a;b/publishers/anthropic/models"
+    assert_equal(["#{models}/m:rawPredict", "#{models}/count-tokens:rawPredict"], sent)
+    assert_requested(:post, /./, times: 2)
+  end
+
+  def test_semicolon_in_model_is_sent_percent_encoded
+    stub_request(:post, %r{\Ahttps://h/v1/}).to_return_json(status: 200, body: {})
+    # WebMock normalizes the URLs it matches and reports.
+    sent = []
+    capture = ->(req, nxt) { nxt.call(req).tap { sent << _1.request.url.to_s } }
+    params = {max_tokens: 1024, messages: [{content: "Hello, world", role: :user}]}
+    creds = Object.new.tap do |c|
+      c.define_singleton_method(:apply) { |h| h.merge("authorization" => "Bearer tok") }
+    end
+    models = {
+      "a;b" => "a%3Bb",
+      "a;b;c" => "a%3Bb%3Bc",
+      "a;" => "a%3B",
+      "...;x" => "...%3Bx",
+      "..x;y" => "..x%3By",
+      "x;.." => "x%3B..",
+      "m:otherVerb;x" => "m:otherVerb%3Bx",
+      "a%3Bb" => "a%253Bb",
+      "." => ".",
+      ".." => "..",
+      "../../x" => "..%2F..%2Fx",
+      "claude-sonnet-4-5@20250929" => "claude-sonnet-4-5@20250929"
+    }
+
+    Google::Auth.stub(:get_application_default, creds) do
+      client = Anthropic::VertexClient.new(
+        region: "a;b",
+        project_id: "c;d",
+        base_url: "https://h/v1",
+        middleware: capture
+      )
+      models.each do |model, encoded|
+        [
+          [-> { client.messages.create(model: model, **params) }, "rawPredict"],
+          [-> { client.beta.messages.create(model: model, **params) }, "rawPredict"],
+          [-> { client.messages.stream(model: model, **params).close }, "streamRawPredict"],
+          [-> { client.messages.stream_raw(model: model, **params).close }, "streamRawPredict"],
+          [-> { client.beta.messages.stream(model: model, **params).close }, "streamRawPredict"]
+        ].each do |call, specifier|
+          sent.clear
+          call.call
+
+          assert_equal(
+            ["https://h/v1/projects/c;d/locations/a;b/publishers/anthropic/models/#{encoded}:#{specifier}"],
+            sent
+          )
+        end
+      end
+    end
+  end
+
+  def test_dot_segment_or_empty_project_or_region_raises_before_sending
+    params = {max_tokens: 1024, messages: [{content: "Hello, world", role: :user}], model: "m"}
+    creds = Object.new.tap do |c|
+      c.define_singleton_method(:apply) { |h| h.merge("authorization" => "Bearer tok") }
+    end
+    problems = %w[. .. .;x ..;x].to_h { [_1, "has the dot segment #{_1.inspect}"] }.merge(
+      ";x" => "has an empty path parameter"
+    )
+
+    # with auth stubbed, a request that is not refused reaches WebMock, whatever credentials the machine has
+    Google::Auth.stub(:get_application_default, creds) do
+      problems.each do |value, problem|
+        [{project_id: value, region: "us-east5"}, {project_id: "proj", region: value}].each do |given|
+          client = Anthropic::VertexClient.new(base_url: "https://h/v1", **given)
+          [
+            -> { client.messages.create(**params) },
+            -> { client.beta.messages.create(**params) },
+            -> { client.messages.count_tokens(**params.except(:max_tokens)) }
+          ].each do |call|
+            err = assert_raises(ArgumentError, given.inspect, &call)
+            assert_includes(err.message, "#{problem}, which would send it to a different URL")
+          end
+        end
+      end
+    end
+    assert_not_requested(:any, /./)
+  end
+
+  def test_empty_or_dot_segment_model_raises_before_sending
+    params = {max_tokens: 1024, messages: [{content: "Hello, world", role: :user}]}
+    models = "projects/proj/locations/us-east5/publishers/anthropic/models"
+    creds = Object.new.tap do |c|
+      c.define_singleton_method(:apply) { |h| h.merge("authorization" => "Bearer tok") }
+    end
+    empty = [{model: ""}, {model: nil}, {}, {model: ";x"}, {model: ";"}, {model: ";a=b"}]
+    problems = empty.to_h { [_1, "an empty path parameter"] }.merge(
+      %w[..;x .;x ..; .;a=b].to_h { [{model: _1}, "the dot segment #{_1.inspect}"] }
+    )
+
+    # with auth stubbed, a request that is not refused reaches WebMock, whatever credentials the machine has
+    Google::Auth.stub(:get_application_default, creds) do
+      client = Anthropic::VertexClient.new(region: "us-east5", project_id: "proj", base_url: "https://h/v1")
+      problems.each do |given, problem|
+        model = given[:model]
+        [
+          [-> { client.messages.create(**given, **params) }, "rawPredict"],
+          [-> { client.beta.messages.create(**given, **params) }, "rawPredict"],
+          [-> { client.messages.stream(**given, **params) }, "streamRawPredict"],
+          [-> { client.messages.stream_raw(**given, **params) }, "streamRawPredict"]
+        ].each do |call, specifier|
+          err = assert_raises(ArgumentError, &call)
+          assert_equal(
+            "The request was not sent: path \"#{models}/#{model}:#{specifier}\" has #{problem}, " \
+            "which would send it to a different URL",
+            err.message
+          )
+        end
+      end
+    end
+    assert_not_requested(:any, /./)
+  end
+
   def test_adapt_request_moves_version_header_into_body
     client = Anthropic::VertexClient.new(region: "us-east5", project_id: "proj")
     req = make_api_request(

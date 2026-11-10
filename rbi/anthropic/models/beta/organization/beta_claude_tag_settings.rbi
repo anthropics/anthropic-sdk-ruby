@@ -45,10 +45,25 @@ module Anthropic
           sig { returns(T.nilable(String)) }
           attr_accessor :model
 
+          # How Claude takes part in the channel. Only a channel stores one, and no settings
+          # level passes one on, so it is always null on a workspace. Null on a channel
+          # means the channel stores none yet: Claude then follows the reply mode chosen in
+          # Slack, if one was, else `automatic`. A stored reply mode can be changed but
+          # never cleared.
+          sig do
+            returns(
+              T.nilable(
+                Anthropic::Beta::Organization::BetaClaudeTagReplyMode::Variants
+              )
+            )
+          end
+          attr_accessor :reply_mode
+
           # Claude Tag settings. Without `include_inherited`, a setting that is null is not
           # set on the settings level and is inherited. With it, `enabled` and
-          # `guest_policy` are never null, and `instructions`, `model` and `environment_id`
-          # are null when no settings level sets them.
+          # `guest_policy` are never null, `instructions`, `model` and `environment_id` are
+          # null when no settings level sets them, and `reply_mode` is null unless the
+          # channel itself stores one.
           sig do
             params(
               enabled: T.nilable(T::Boolean),
@@ -62,7 +77,16 @@ module Anthropic
                   )
                 ),
               instructions: T.nilable(String),
-              model: T.nilable(String)
+              model: T.nilable(String),
+              reply_mode:
+                T.nilable(
+                  T.any(
+                    Anthropic::Beta::Organization::BetaClaudeTagReplyModeAutomatic::OrHash,
+                    Anthropic::Beta::Organization::BetaClaudeTagReplyModeMentionOnly::OrHash,
+                    Anthropic::Beta::Organization::BetaClaudeTagReplyModeAlwaysAwake::OrHash,
+                    Anthropic::Beta::Organization::BetaClaudeTagReplyModeThread::OrHash
+                  )
+                )
             ).returns(T.attached_class)
           end
           def self.new(
@@ -81,7 +105,13 @@ module Anthropic
             # The model Claude uses: a model identifier or the name of a model line. The
             # nearest settings level that sets it decides. When none does, Claude uses the
             # product's default model.
-            model:
+            model:,
+            # How Claude takes part in the channel. Only a channel stores one, and no settings
+            # level passes one on, so it is always null on a workspace. Null on a channel
+            # means the channel stores none yet: Claude then follows the reply mode chosen in
+            # Slack, if one was, else `automatic`. A stored reply mode can be changed but
+            # never cleared.
+            reply_mode:
           )
           end
 
@@ -95,7 +125,11 @@ module Anthropic
                     Anthropic::Beta::Organization::BetaClaudeTagGuestPolicy::Variants
                   ),
                 instructions: T.nilable(String),
-                model: T.nilable(String)
+                model: T.nilable(String),
+                reply_mode:
+                  T.nilable(
+                    Anthropic::Beta::Organization::BetaClaudeTagReplyMode::Variants
+                  )
               }
             )
           end

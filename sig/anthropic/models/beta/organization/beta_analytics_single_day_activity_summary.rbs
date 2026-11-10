@@ -29,6 +29,9 @@ module Anthropic
             claude_design_daily_active_user_count: Integer?,
             claude_design_monthly_active_user_count: Integer?,
             claude_design_weekly_active_user_count: Integer?,
+            claude_tag_daily_active_user_count: Integer?,
+            claude_tag_monthly_active_user_count: Integer?,
+            claude_tag_weekly_active_user_count: Integer?,
             office_agent_daily_active_user_count: Integer?,
             office_agent_monthly_active_user_count: Integer?,
             office_agent_weekly_active_user_count: Integer?,
@@ -89,6 +92,12 @@ module Anthropic
 
           attr_accessor claude_design_weekly_active_user_count: Integer?
 
+          attr_accessor claude_tag_daily_active_user_count: Integer?
+
+          attr_accessor claude_tag_monthly_active_user_count: Integer?
+
+          attr_accessor claude_tag_weekly_active_user_count: Integer?
+
           attr_accessor office_agent_daily_active_user_count: Integer?
 
           attr_accessor office_agent_monthly_active_user_count: Integer?
@@ -129,6 +138,9 @@ module Anthropic
             ?claude_design_daily_active_user_count: Integer?,
             ?claude_design_monthly_active_user_count: Integer?,
             ?claude_design_weekly_active_user_count: Integer?,
+            ?claude_tag_daily_active_user_count: Integer?,
+            ?claude_tag_monthly_active_user_count: Integer?,
+            ?claude_tag_weekly_active_user_count: Integer?,
             ?office_agent_daily_active_user_count: Integer?,
             ?office_agent_monthly_active_user_count: Integer?,
             ?office_agent_weekly_active_user_count: Integer?,
@@ -164,6 +176,9 @@ module Anthropic
             claude_design_daily_active_user_count: Integer?,
             claude_design_monthly_active_user_count: Integer?,
             claude_design_weekly_active_user_count: Integer?,
+            claude_tag_daily_active_user_count: Integer?,
+            claude_tag_monthly_active_user_count: Integer?,
+            claude_tag_weekly_active_user_count: Integer?,
             office_agent_daily_active_user_count: Integer?,
             office_agent_monthly_active_user_count: Integer?,
             office_agent_weekly_active_user_count: Integer?,

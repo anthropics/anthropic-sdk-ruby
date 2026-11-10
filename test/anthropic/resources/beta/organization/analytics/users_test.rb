@@ -30,6 +30,7 @@ class Anthropic::Test::Resources::Beta::Organization::Analytics::UsersTest < Ant
         user: Anthropic::Beta::Organization::BetaAnalyticsUser | nil,
         web_search_count: Integer,
         chat_cowork_unified_metrics: Anthropic::Beta::Organization::BetaAnalyticsChatCoworkUnifiedMetrics | nil,
+        claude_tag_metrics: Anthropic::Beta::Organization::BetaAnalyticsClaudeTagMetrics | nil,
         last_activity_date: Date | nil,
         rbac_group_id: String | nil,
         rbac_group_name: String | nil

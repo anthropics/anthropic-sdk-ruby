@@ -301,7 +301,10 @@ module Anthropic
               "application default credentials with a project."
             )
           end
-          format(template, project: @project, location: @location, workspace_id: @workspace_id)
+          segments = {project: @project, location: @location, workspace_id: @workspace_id}.transform_values do
+            _1 && Anthropic::Internal::Util.interpolate_path(["%1$s", _1])
+          end
+          format(template, **segments)
         end
 
         # @api private

@@ -29,6 +29,7 @@ class Anthropic::Test::Resources::Organization::Analytics::UsersTest < Anthropic
         user: Anthropic::Organization::AnalyticsUser | nil,
         web_search_count: Integer,
         chat_cowork_unified_metrics: Anthropic::Organization::AnalyticsChatCoworkUnifiedMetrics | nil,
+        claude_tag_metrics: Anthropic::Organization::AnalyticsClaudeTagMetrics | nil,
         last_activity_date: Date | nil,
         rbac_group_id: String | nil,
         rbac_group_name: String | nil

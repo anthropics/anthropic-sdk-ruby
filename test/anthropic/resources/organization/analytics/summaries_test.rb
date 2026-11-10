@@ -4,7 +4,7 @@ require_relative "../../../test_helper"
 
 class Anthropic::Test::Resources::Organization::Analytics::SummariesTest < Anthropic::Test::ResourceTest
   def test_list_required_params
-    response = @anthropic.organization.analytics.summaries.list(starting_date: "2019-12-27")
+    response = @anthropic.organization.analytics.summaries.list(starting_date: Date.parse("2019-12-27"))
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor
@@ -44,6 +44,9 @@ class Anthropic::Test::Resources::Organization::Analytics::SummariesTest < Anthr
         claude_design_daily_active_user_count: Integer | nil,
         claude_design_monthly_active_user_count: Integer | nil,
         claude_design_weekly_active_user_count: Integer | nil,
+        claude_tag_daily_active_user_count: Integer | nil,
+        claude_tag_monthly_active_user_count: Integer | nil,
+        claude_tag_weekly_active_user_count: Integer | nil,
         office_agent_daily_active_user_count: Integer | nil,
         office_agent_monthly_active_user_count: Integer | nil,
         office_agent_weekly_active_user_count: Integer | nil,

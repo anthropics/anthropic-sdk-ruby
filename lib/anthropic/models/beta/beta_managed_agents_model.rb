@@ -57,7 +57,7 @@ module Anthropic
 
         # @!group
 
-        # Frontier intelligence for ambitious work in coding, enterprise workflows, and the sciences
+        # Built for the most ambitious work in coding, enterprise workflows, and the sciences
         CLAUDE_FABLE_5_2 = :"claude-fable-5-2"
 
         # Fastest model for high-volume, real-time tasks

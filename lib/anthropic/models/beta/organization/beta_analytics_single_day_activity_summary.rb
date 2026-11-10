@@ -187,6 +187,42 @@ module Anthropic
           #   @return [Integer, nil]
           optional :claude_design_weekly_active_user_count, Integer, nil?: true
 
+          # @!attribute claude_tag_daily_active_user_count
+          #   Number of Slack users active in Claude Tag on the requested day. Counts distinct
+          #   Slack users, including users who have not linked a Claude account, so it can
+          #   exceed `daily_active_user_count` and `assigned_seat_count`. Null on a day with
+          #   no measured value, when Claude Tag data cannot be read for the request, and when
+          #   the response is scoped to an RBAC group, because an unlinked user belongs to no
+          #   group. Omitted from the response on deployments that do not offer Claude Tag
+          #   reporting.
+          #
+          #   @return [Integer, nil]
+          optional :claude_tag_daily_active_user_count, Integer, nil?: true
+
+          # @!attribute claude_tag_monthly_active_user_count
+          #   Number of Slack users active in Claude Tag in the 28-day rolling window. Counts
+          #   distinct Slack users, including users who have not linked a Claude account, so
+          #   it can exceed `daily_active_user_count` and `assigned_seat_count`. Null on a day
+          #   with no measured value, when Claude Tag data cannot be read for the request, and
+          #   when the response is scoped to an RBAC group, because an unlinked user belongs
+          #   to no group. Omitted from the response on deployments that do not offer Claude
+          #   Tag reporting.
+          #
+          #   @return [Integer, nil]
+          optional :claude_tag_monthly_active_user_count, Integer, nil?: true
+
+          # @!attribute claude_tag_weekly_active_user_count
+          #   Number of Slack users active in Claude Tag in the 7-day rolling window. Counts
+          #   distinct Slack users, including users who have not linked a Claude account, so
+          #   it can exceed `daily_active_user_count` and `assigned_seat_count`. Null on a day
+          #   with no measured value, when Claude Tag data cannot be read for the request, and
+          #   when the response is scoped to an RBAC group, because an unlinked user belongs
+          #   to no group. Omitted from the response on deployments that do not offer Claude
+          #   Tag reporting.
+          #
+          #   @return [Integer, nil]
+          optional :claude_tag_weekly_active_user_count, Integer, nil?: true
+
           # @!attribute office_agent_daily_active_user_count
           #   Number of users with Claude in Office activity on the requested day. Omitted
           #   from the response while the per-product breakdown is not enabled for this
@@ -245,7 +281,7 @@ module Anthropic
           #   @return [Integer, nil]
           optional :science_weekly_active_user_count, Integer, nil?: true
 
-          # @!method initialize(assigned_seat_count:, cowork_daily_active_user_count:, cowork_monthly_active_user_count:, cowork_weekly_active_user_count:, daily_active_user_count:, daily_adoption_rate:, ending_at:, monthly_active_user_count:, monthly_adoption_rate:, pending_invite_count:, starting_at:, weekly_active_user_count:, weekly_adoption_rate:, chat_cowork_unified_daily_active_user_count: nil, chat_cowork_unified_monthly_active_user_count: nil, chat_cowork_unified_weekly_active_user_count: nil, chat_daily_active_user_count: nil, chat_monthly_active_user_count: nil, chat_weekly_active_user_count: nil, claude_code_daily_active_user_count: nil, claude_code_monthly_active_user_count: nil, claude_code_weekly_active_user_count: nil, claude_design_daily_active_user_count: nil, claude_design_monthly_active_user_count: nil, claude_design_weekly_active_user_count: nil, office_agent_daily_active_user_count: nil, office_agent_monthly_active_user_count: nil, office_agent_weekly_active_user_count: nil, science_daily_active_user_count: nil, science_entitled_user_count: nil, science_monthly_active_user_count: nil, science_weekly_active_user_count: nil)
+          # @!method initialize(assigned_seat_count:, cowork_daily_active_user_count:, cowork_monthly_active_user_count:, cowork_weekly_active_user_count:, daily_active_user_count:, daily_adoption_rate:, ending_at:, monthly_active_user_count:, monthly_adoption_rate:, pending_invite_count:, starting_at:, weekly_active_user_count:, weekly_adoption_rate:, chat_cowork_unified_daily_active_user_count: nil, chat_cowork_unified_monthly_active_user_count: nil, chat_cowork_unified_weekly_active_user_count: nil, chat_daily_active_user_count: nil, chat_monthly_active_user_count: nil, chat_weekly_active_user_count: nil, claude_code_daily_active_user_count: nil, claude_code_monthly_active_user_count: nil, claude_code_weekly_active_user_count: nil, claude_design_daily_active_user_count: nil, claude_design_monthly_active_user_count: nil, claude_design_weekly_active_user_count: nil, claude_tag_daily_active_user_count: nil, claude_tag_monthly_active_user_count: nil, claude_tag_weekly_active_user_count: nil, office_agent_daily_active_user_count: nil, office_agent_monthly_active_user_count: nil, office_agent_weekly_active_user_count: nil, science_daily_active_user_count: nil, science_entitled_user_count: nil, science_monthly_active_user_count: nil, science_weekly_active_user_count: nil)
           #   Per-day entry in the /summaries response.
           #
           #   Some parameter documentations has been truncated, see
@@ -301,6 +337,12 @@ module Anthropic
           #   @param claude_design_monthly_active_user_count [Integer, nil] Number of users with Claude Design activity in the 30-day rolling window. Omitte
           #
           #   @param claude_design_weekly_active_user_count [Integer, nil] Number of users with Claude Design activity in the 7-day rolling window. Omitted
+          #
+          #   @param claude_tag_daily_active_user_count [Integer, nil] Number of Slack users active in Claude Tag on the requested day. Counts distinct
+          #
+          #   @param claude_tag_monthly_active_user_count [Integer, nil] Number of Slack users active in Claude Tag in the 28-day rolling window. Counts
+          #
+          #   @param claude_tag_weekly_active_user_count [Integer, nil] Number of Slack users active in Claude Tag in the 7-day rolling window. Counts d
           #
           #   @param office_agent_daily_active_user_count [Integer, nil] Number of users with Claude in Office activity on the requested day. Omitted fro
           #

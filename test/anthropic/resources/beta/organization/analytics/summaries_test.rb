@@ -6,7 +6,7 @@ class Anthropic::Test::Resources::Beta::Organization::Analytics::SummariesTest <
   def test_list_required_params
     response =
       @anthropic.beta.organization.analytics.summaries.list(
-        starting_date: "2019-12-27",
+        starting_date: Date.parse("2019-12-27"),
         request_options: {extra_query: {beta: "true"}}
       )
 
@@ -48,6 +48,9 @@ class Anthropic::Test::Resources::Beta::Organization::Analytics::SummariesTest <
         claude_design_daily_active_user_count: Integer | nil,
         claude_design_monthly_active_user_count: Integer | nil,
         claude_design_weekly_active_user_count: Integer | nil,
+        claude_tag_daily_active_user_count: Integer | nil,
+        claude_tag_monthly_active_user_count: Integer | nil,
+        claude_tag_weekly_active_user_count: Integer | nil,
         office_agent_daily_active_user_count: Integer | nil,
         office_agent_monthly_active_user_count: Integer | nil,
         office_agent_weekly_active_user_count: Integer | nil,

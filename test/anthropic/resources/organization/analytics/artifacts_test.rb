@@ -4,7 +4,7 @@ require_relative "../../../test_helper"
 
 class Anthropic::Test::Resources::Organization::Analytics::ArtifactsTest < Anthropic::Test::ResourceTest
   def test_list_required_params
-    response = @anthropic.organization.analytics.artifacts.list(date: "2019-12-27")
+    response = @anthropic.organization.analytics.artifacts.list(date: Date.parse("2019-12-27"))
 
     assert_pattern do
       response => Anthropic::Internal::PageCursor

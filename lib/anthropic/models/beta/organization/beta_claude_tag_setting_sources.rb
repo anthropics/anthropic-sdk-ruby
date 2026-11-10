@@ -45,7 +45,18 @@ module Anthropic
           #   @return [Anthropic::Models::Beta::Organization::BetaClaudeTagSlackChannelSettingSource, Anthropic::Models::Beta::Organization::BetaClaudeTagSlackWorkspaceSettingSource, Anthropic::Models::Beta::Organization::BetaClaudeTagSlackParentChannelSettingSource, Anthropic::Models::Beta::Organization::BetaClaudeTagSlackDefaultSettingSource, Anthropic::Models::Beta::Organization::BetaClaudeTagDefaultSettingSource, Anthropic::Models::Beta::Organization::BetaClaudeTagSlackGridChannelSettingSource, nil]
           required :model, union: -> { Anthropic::Beta::Organization::BetaClaudeTagSettingSource }, nil?: true
 
-          # @!method initialize(enabled:, environment_id:, guest_policy:, instructions:, model:)
+          # @!attribute reply_mode
+          #   The settings level `reply_mode` comes from: the channel when it stores one. With
+          #   `include_inherited=true` and no stored mode it is `default`.
+          #
+          #   @return [Anthropic::Models::Beta::Organization::BetaClaudeTagSlackChannelSettingSource, Anthropic::Models::Beta::Organization::BetaClaudeTagSlackWorkspaceSettingSource, Anthropic::Models::Beta::Organization::BetaClaudeTagSlackParentChannelSettingSource, Anthropic::Models::Beta::Organization::BetaClaudeTagSlackDefaultSettingSource, Anthropic::Models::Beta::Organization::BetaClaudeTagDefaultSettingSource, Anthropic::Models::Beta::Organization::BetaClaudeTagSlackGridChannelSettingSource, nil]
+          required :reply_mode,
+                   union: -> {
+                     Anthropic::Beta::Organization::BetaClaudeTagSettingSource
+                   },
+                   nil?: true
+
+          # @!method initialize(enabled:, environment_id:, guest_policy:, instructions:, model:, reply_mode:)
           #   For each setting, the settings level its value in `settings` comes from. Without
           #   `include_inherited`, a setting the channel or workspace stores has a source that
           #   names the channel or workspace itself, and one it does not store has null, or an
@@ -65,6 +76,8 @@ module Anthropic
           #   @param instructions [Array<Anthropic::Models::Beta::Organization::BetaClaudeTagSlackChannelSettingSource, Anthropic::Models::Beta::Organization::BetaClaudeTagSlackWorkspaceSettingSource, Anthropic::Models::Beta::Organization::BetaClaudeTagSlackParentChannelSettingSource, Anthropic::Models::Beta::Organization::BetaClaudeTagSlackDefaultSettingSource, Anthropic::Models::Beta::Organization::BetaClaudeTagDefaultSettingSource, Anthropic::Models::Beta::Organization::BetaClaudeTagSlackGridChannelSettingSource>] Every settings level that contributes text to `instructions`, broadest first, in
           #
           #   @param model [Anthropic::Models::Beta::Organization::BetaClaudeTagSlackChannelSettingSource, Anthropic::Models::Beta::Organization::BetaClaudeTagSlackWorkspaceSettingSource, Anthropic::Models::Beta::Organization::BetaClaudeTagSlackParentChannelSettingSource, Anthropic::Models::Beta::Organization::BetaClaudeTagSlackDefaultSettingSource, Anthropic::Models::Beta::Organization::BetaClaudeTagDefaultSettingSource, Anthropic::Models::Beta::Organization::BetaClaudeTagSlackGridChannelSettingSource, nil] The settings level `model` comes from.
+          #
+          #   @param reply_mode [Anthropic::Models::Beta::Organization::BetaClaudeTagSlackChannelSettingSource, Anthropic::Models::Beta::Organization::BetaClaudeTagSlackWorkspaceSettingSource, Anthropic::Models::Beta::Organization::BetaClaudeTagSlackParentChannelSettingSource, Anthropic::Models::Beta::Organization::BetaClaudeTagSlackDefaultSettingSource, Anthropic::Models::Beta::Organization::BetaClaudeTagDefaultSettingSource, Anthropic::Models::Beta::Organization::BetaClaudeTagSlackGridChannelSettingSource, nil] The settings level `reply_mode` comes from: the channel when it stores one. With
         end
       end
     end

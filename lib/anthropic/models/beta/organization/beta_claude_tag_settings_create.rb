@@ -14,7 +14,9 @@ module Anthropic
 
           # @!attribute environment_id
           #   The environment Claude's sessions run in: the identifier of an active
-          #   environment of the organization, starting with `env_`. Null clears it.
+          #   environment of the organization, starting with `env_`, or of a self-hosted
+          #   runner pool of the organization that every member may use, starting with
+          #   `ccpool_`. Null clears it.
           #
           #   @return [String, nil]
           optional :environment_id, String, nil?: true
@@ -43,7 +45,23 @@ module Anthropic
           #   @return [String, nil]
           optional :model, String, nil?: true
 
-          # @!method initialize(enabled: nil, environment_id: nil, guest_policy: nil, instructions: nil, model: nil)
+          # @!attribute reply_mode
+          #   How Claude takes part in the channel: `automatic`, `mention_only`,
+          #   `always_awake` or `thread`. Only a channel takes one: an update of a workspace
+          #   that sends a value is refused, and one that sends null changes nothing. Null
+          #   never clears it: sent to a channel that stores none it changes nothing, and sent
+          #   to a channel that stores one it is refused, because a stored reply mode can be
+          #   changed but never cleared; a caller that wants Claude's default behavior sends
+          #   `automatic`.
+          #
+          #   @return [Anthropic::Models::Beta::Organization::BetaClaudeTagReplyModeAutomatic, Anthropic::Models::Beta::Organization::BetaClaudeTagReplyModeMentionOnly, Anthropic::Models::Beta::Organization::BetaClaudeTagReplyModeAlwaysAwake, Anthropic::Models::Beta::Organization::BetaClaudeTagReplyModeThread, nil]
+          optional :reply_mode,
+                   union: -> {
+                     Anthropic::Beta::Organization::BetaClaudeTagReplyMode
+                   },
+                   nil?: true
+
+          # @!method initialize(enabled: nil, environment_id: nil, guest_policy: nil, instructions: nil, model: nil, reply_mode: nil)
           #   The settings in a request that sets a Slack channel up. A setting left out is
           #   not set. A setting sent as null is cleared.
           #
@@ -60,6 +78,8 @@ module Anthropic
           #   @param instructions [String, nil] Instructions for Claude, up to 8,192 characters after leading and trailing white
           #
           #   @param model [String, nil] The model Claude uses: the identifier of a model, or the name of a model line, t
+          #
+          #   @param reply_mode [Anthropic::Models::Beta::Organization::BetaClaudeTagReplyModeAutomatic, Anthropic::Models::Beta::Organization::BetaClaudeTagReplyModeMentionOnly, Anthropic::Models::Beta::Organization::BetaClaudeTagReplyModeAlwaysAwake, Anthropic::Models::Beta::Organization::BetaClaudeTagReplyModeThread, nil] How Claude takes part in the channel: `automatic`, `mention_only`,
         end
       end
     end

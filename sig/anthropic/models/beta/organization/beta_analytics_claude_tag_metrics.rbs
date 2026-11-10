@@ -1,0 +1,26 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_analytics_claude_tag_metrics =
+          { active_day_count: Integer?, active_message_count: Integer? }
+
+        class BetaAnalyticsClaudeTagMetrics < Anthropic::Internal::Type::BaseModel
+          attr_accessor active_day_count: Integer?
+
+          attr_accessor active_message_count: Integer?
+
+          def initialize: (
+            active_day_count: Integer?,
+            active_message_count: Integer?
+          ) -> void
+
+          def to_hash: -> {
+            active_day_count: Integer?,
+            active_message_count: Integer?
+          }
+        end
+      end
+    end
+  end
+end

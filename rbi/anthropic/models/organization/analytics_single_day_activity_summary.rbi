@@ -144,6 +144,36 @@ module Anthropic
         sig { returns(T.nilable(Integer)) }
         attr_accessor :claude_design_weekly_active_user_count
 
+        # Number of Slack users active in Claude Tag on the requested day. Counts distinct
+        # Slack users, including users who have not linked a Claude account, so it can
+        # exceed `daily_active_user_count` and `assigned_seat_count`. Null on a day with
+        # no measured value, when Claude Tag data cannot be read for the request, and when
+        # the response is scoped to an RBAC group, because an unlinked user belongs to no
+        # group. Omitted from the response on deployments that do not offer Claude Tag
+        # reporting.
+        sig { returns(T.nilable(Integer)) }
+        attr_accessor :claude_tag_daily_active_user_count
+
+        # Number of Slack users active in Claude Tag in the 28-day rolling window. Counts
+        # distinct Slack users, including users who have not linked a Claude account, so
+        # it can exceed `daily_active_user_count` and `assigned_seat_count`. Null on a day
+        # with no measured value, when Claude Tag data cannot be read for the request, and
+        # when the response is scoped to an RBAC group, because an unlinked user belongs
+        # to no group. Omitted from the response on deployments that do not offer Claude
+        # Tag reporting.
+        sig { returns(T.nilable(Integer)) }
+        attr_accessor :claude_tag_monthly_active_user_count
+
+        # Number of Slack users active in Claude Tag in the 7-day rolling window. Counts
+        # distinct Slack users, including users who have not linked a Claude account, so
+        # it can exceed `daily_active_user_count` and `assigned_seat_count`. Null on a day
+        # with no measured value, when Claude Tag data cannot be read for the request, and
+        # when the response is scoped to an RBAC group, because an unlinked user belongs
+        # to no group. Omitted from the response on deployments that do not offer Claude
+        # Tag reporting.
+        sig { returns(T.nilable(Integer)) }
+        attr_accessor :claude_tag_weekly_active_user_count
+
         # Number of users with Claude in Office activity on the requested day. Omitted
         # from the response while the per-product breakdown is not enabled for this
         # organization.
@@ -216,6 +246,9 @@ module Anthropic
             claude_design_daily_active_user_count: T.nilable(Integer),
             claude_design_monthly_active_user_count: T.nilable(Integer),
             claude_design_weekly_active_user_count: T.nilable(Integer),
+            claude_tag_daily_active_user_count: T.nilable(Integer),
+            claude_tag_monthly_active_user_count: T.nilable(Integer),
+            claude_tag_weekly_active_user_count: T.nilable(Integer),
             office_agent_daily_active_user_count: T.nilable(Integer),
             office_agent_monthly_active_user_count: T.nilable(Integer),
             office_agent_weekly_active_user_count: T.nilable(Integer),
@@ -308,6 +341,30 @@ module Anthropic
           # from the response while the per-product breakdown is not enabled for this
           # organization.
           claude_design_weekly_active_user_count: nil,
+          # Number of Slack users active in Claude Tag on the requested day. Counts distinct
+          # Slack users, including users who have not linked a Claude account, so it can
+          # exceed `daily_active_user_count` and `assigned_seat_count`. Null on a day with
+          # no measured value, when Claude Tag data cannot be read for the request, and when
+          # the response is scoped to an RBAC group, because an unlinked user belongs to no
+          # group. Omitted from the response on deployments that do not offer Claude Tag
+          # reporting.
+          claude_tag_daily_active_user_count: nil,
+          # Number of Slack users active in Claude Tag in the 28-day rolling window. Counts
+          # distinct Slack users, including users who have not linked a Claude account, so
+          # it can exceed `daily_active_user_count` and `assigned_seat_count`. Null on a day
+          # with no measured value, when Claude Tag data cannot be read for the request, and
+          # when the response is scoped to an RBAC group, because an unlinked user belongs
+          # to no group. Omitted from the response on deployments that do not offer Claude
+          # Tag reporting.
+          claude_tag_monthly_active_user_count: nil,
+          # Number of Slack users active in Claude Tag in the 7-day rolling window. Counts
+          # distinct Slack users, including users who have not linked a Claude account, so
+          # it can exceed `daily_active_user_count` and `assigned_seat_count`. Null on a day
+          # with no measured value, when Claude Tag data cannot be read for the request, and
+          # when the response is scoped to an RBAC group, because an unlinked user belongs
+          # to no group. Omitted from the response on deployments that do not offer Claude
+          # Tag reporting.
+          claude_tag_weekly_active_user_count: nil,
           # Number of users with Claude in Office activity on the requested day. Omitted
           # from the response while the per-product breakdown is not enabled for this
           # organization.
@@ -369,6 +426,9 @@ module Anthropic
               claude_design_daily_active_user_count: T.nilable(Integer),
               claude_design_monthly_active_user_count: T.nilable(Integer),
               claude_design_weekly_active_user_count: T.nilable(Integer),
+              claude_tag_daily_active_user_count: T.nilable(Integer),
+              claude_tag_monthly_active_user_count: T.nilable(Integer),
+              claude_tag_weekly_active_user_count: T.nilable(Integer),
               office_agent_daily_active_user_count: T.nilable(Integer),
               office_agent_monthly_active_user_count: T.nilable(Integer),
               office_agent_weekly_active_user_count: T.nilable(Integer),

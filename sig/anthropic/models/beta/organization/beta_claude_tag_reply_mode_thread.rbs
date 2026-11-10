@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_claude_tag_reply_mode_thread = { type: :thread }
+
+        class BetaClaudeTagReplyModeThread < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :thread
+
+          def initialize: (?type: :thread) -> void
+
+          def to_hash: -> { type: :thread }
+        end
+      end
+    end
+  end
+end

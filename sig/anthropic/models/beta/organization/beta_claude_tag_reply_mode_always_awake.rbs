@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_claude_tag_reply_mode_always_awake = { type: :always_awake }
+
+        class BetaClaudeTagReplyModeAlwaysAwake < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :always_awake
+
+          def initialize: (?type: :always_awake) -> void
+
+          def to_hash: -> { type: :always_awake }
+        end
+      end
+    end
+  end
+end

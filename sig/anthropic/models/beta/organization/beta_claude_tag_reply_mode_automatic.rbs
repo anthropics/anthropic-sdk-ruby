@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_claude_tag_reply_mode_automatic = { type: :automatic }
+
+        class BetaClaudeTagReplyModeAutomatic < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :automatic
+
+          def initialize: (?type: :automatic) -> void
+
+          def to_hash: -> { type: :automatic }
+        end
+      end
+    end
+  end
+end

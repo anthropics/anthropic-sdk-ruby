@@ -8,7 +8,8 @@ module Anthropic
             environment_id: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?,
             guest_policy: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?,
             instructions: ::Array[Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source],
-            model: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?
+            model: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?,
+            reply_mode: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?
           }
 
         class BetaClaudeTagSettingSources < Anthropic::Internal::Type::BaseModel
@@ -22,12 +23,15 @@ module Anthropic
 
           attr_accessor model: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?
 
+          attr_accessor reply_mode: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?
+
           def initialize: (
             enabled: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?,
             environment_id: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?,
             guest_policy: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?,
             instructions: ::Array[Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source],
-            model: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?
+            model: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?,
+            reply_mode: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?
           ) -> void
 
           def to_hash: -> {
@@ -35,7 +39,8 @@ module Anthropic
             environment_id: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?,
             guest_policy: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?,
             instructions: ::Array[Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source],
-            model: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?
+            model: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?,
+            reply_mode: Anthropic::Models::Beta::Organization::beta_claude_tag_setting_source?
           }
         end
       end

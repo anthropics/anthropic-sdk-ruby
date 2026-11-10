@@ -6,7 +6,7 @@ class Anthropic::Test::Resources::Beta::Organization::Analytics::UsageReportTest
   def test_list_required_params
     response =
       @anthropic.beta.organization.analytics.usage_report.list(
-        starting_at: "2019-12-27T18:11:19.117Z",
+        starting_at: Time.parse("2019-12-27T18:11:19.117Z"),
         request_options: {extra_query: {beta: "true"}}
       )
 

@@ -8,7 +8,8 @@ module Anthropic
             environment_id: String?,
             guest_policy: Anthropic::Models::Beta::Organization::beta_claude_tag_guest_policy?,
             instructions: String?,
-            model: String?
+            model: String?,
+            reply_mode: Anthropic::Models::Beta::Organization::beta_claude_tag_reply_mode?
           }
 
         class BetaClaudeTagSettings < Anthropic::Internal::Type::BaseModel
@@ -22,12 +23,15 @@ module Anthropic
 
           attr_accessor model: String?
 
+          attr_accessor reply_mode: Anthropic::Models::Beta::Organization::beta_claude_tag_reply_mode?
+
           def initialize: (
             enabled: bool?,
             environment_id: String?,
             guest_policy: Anthropic::Models::Beta::Organization::beta_claude_tag_guest_policy?,
             instructions: String?,
-            model: String?
+            model: String?,
+            reply_mode: Anthropic::Models::Beta::Organization::beta_claude_tag_reply_mode?
           ) -> void
 
           def to_hash: -> {
@@ -35,7 +39,8 @@ module Anthropic
             environment_id: String?,
             guest_policy: Anthropic::Models::Beta::Organization::beta_claude_tag_guest_policy?,
             instructions: String?,
-            model: String?
+            model: String?,
+            reply_mode: Anthropic::Models::Beta::Organization::beta_claude_tag_reply_mode?
           }
         end
       end

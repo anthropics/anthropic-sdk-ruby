@@ -357,14 +357,26 @@ module Anthropic
 
           return req.with(body: body) unless req.method == :post && messages_route
 
-          model = URI.encode_www_form_component(body.delete(:model).to_s)
+          model = Anthropic::Internal::Util.encode_path(body.delete(:model).to_s)
           stream = body.delete(:stream) || false
+          invoke_path = stream ? "model/#{model}/invoke-with-response-stream" : "model/#{model}/invoke"
+          # Servers and proxies collapse an empty segment and resolve a dot segment,
+          # some of them after dropping the segment's `;` parameters.
+          problem =
+            if model.empty? || model.start_with?(";")
+              "an empty path parameter"
+            elsif model == "." || model == ".." || model.start_with?(".;", "..;")
+              "the dot segment #{model.inspect}"
+            end
+          if problem
+            raise ArgumentError.new(
+              "The request was not sent: path #{invoke_path.inspect} has #{problem}, " \
+              "which would send it to a different URL"
+            )
+          end
 
           url = req.url.dup
-          url.path = path.sub(
-            %r{v1/messages\z},
-            stream ? "model/#{model}/invoke-with-response-stream" : "model/#{model}/invoke"
-          )
+          url.path = path.sub(%r{v1/messages\z}, invoke_path)
           url.query = nil
 
           req.with(body: body, url: url)
