@@ -1,1 +1,0 @@
-fix(vertex): raise `ArgumentError` before sending when the model is empty, missing or only `;` parameters, such as `";x"`, rather than sending the request to `.../models/:rawPredict`, and when it is `"."` or `".."` followed by `;` parameters, such as `"..;x"`, which some servers and proxies read as the dot segment

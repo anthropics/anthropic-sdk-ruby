@@ -1,1 +1,0 @@
-fix(google-cloud): percent-encode the project, location and workspace ID in the derived base URL, so a `/` in one no longer adds path segments, and raise `ArgumentError` when one is empty, `"."` or `".."`

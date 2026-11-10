@@ -1,1 +1,0 @@
-fix(vertex): percent-encode the project ID, region and model in the request path, so a `/` in one no longer adds path segments, and raise `ArgumentError` before sending when the project ID or region is `"."` or `".."`

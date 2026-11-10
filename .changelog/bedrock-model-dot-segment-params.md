@@ -1,1 +1,0 @@
-fix(bedrock): raise `ArgumentError` before sending when the model is empty, `"."` or `".."` before its `;` parameters, such as `";x"` or `"..;x"`, which some servers and proxies read as the empty or dot segment
