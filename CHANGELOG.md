@@ -1,5 +1,31 @@
 # Changelog
 
+## [2.8.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v2.7.0...v2.8.0) (2026-11-10)
+
+### Features
+
+* **api:** add Claude Tag metrics to the analytics summaries and users reports
+* **api:** add reply_mode to Claude Tag Slack channel settings
+
+
+### Bug Fixes
+
+* **bedrock:** raise `ArgumentError` before sending when the model is empty, `"."` or `".."` before its `;` parameters, such as `";x"` or `"..;x"`, which some servers and proxies read as the empty or dot segment
+* **bedrock:** raise `ArgumentError` before sending when the model is empty, `"."` or `".."`, which would send the request to a different URL, and send the model ID's `:` as it is in the request path rather than as `%3A`
+* **google-cloud:** percent-encode the project, location and workspace ID in the derived base URL, so a `/` in one no longer adds path segments, and raise `ArgumentError` when one is empty, `"."` or `".."`
+* **vertex:** percent-encode the project ID, region and model in the request path, so a `/` in one no longer adds path segments, and raise `ArgumentError` before sending when the project ID or region is `"."` or `".."`
+* **vertex:** raise `ArgumentError` before sending when the model is empty, missing or only `;` parameters, such as `";x"`, rather than sending the request to `.../models/:rawPredict`, and when it is `"."` or `".."` followed by `;` parameters, such as `"..;x"`, which some servers and proxies read as the dot segment
+* **vertex:** send a `;` in the model as `%3B` in the request path, so a server or proxy that drops `;` and the rest of a path segment no longer drops `:rawPredict` or `:streamRawPredict` with it
+
+
+### Chores
+
+* **docs:** clarify display_name for RBAC Roles created by Anthropic
+* **docs:** clarify plugin delete and skill name conflict descriptions
+* **docs:** clarify when to omit user_profile_id on external keys
+* **docs:** note that Claude Tag settings accept self-hosted runner pools
+* **docs:** update model descriptions
+
 ## [2.7.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v2.6.0...v2.7.0) (2026-11-09)
 
 ### Features
