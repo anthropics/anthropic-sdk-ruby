@@ -19,7 +19,9 @@ module Anthropic
           attr_accessor :enabled
 
           # The environment Claude's sessions run in: the identifier of an active
-          # environment of the organization, starting with `env_`. Null clears it.
+          # environment of the organization, starting with `env_`, or of a self-hosted
+          # runner pool of the organization that every member may use, starting with
+          # `ccpool_`. Null clears it.
           sig { returns(T.nilable(String)) }
           attr_accessor :environment_id
 
@@ -100,7 +102,9 @@ module Anthropic
             # workspace stores `false`. Null clears it.
             enabled: nil,
             # The environment Claude's sessions run in: the identifier of an active
-            # environment of the organization, starting with `env_`. Null clears it.
+            # environment of the organization, starting with `env_`, or of a self-hosted
+            # runner pool of the organization that every member may use, starting with
+            # `ccpool_`. Null clears it.
             environment_id: nil,
             # What Claude does in a channel while a Slack guest is in it. Null clears it.
             guest_policy: nil,
