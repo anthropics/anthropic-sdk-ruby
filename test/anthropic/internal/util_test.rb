@@ -439,13 +439,19 @@ class Anthropic::Test::UtilFormDataEncodingTest < Minitest::Test
   def test_multipart_content_type_from_filename
     Dir.mktmpdir do |dir|
       pdf = Pathname(dir).join("report.pdf").tap { _1.write("%PDF-1.7") }
-      inferred = Anthropic::Internal::Util::MULTIPART_CONTENT_TYPE_BY_FILE_EXTENSION.to_h do |extension, content_type|
-        [Anthropic::FilePart.new(StringIO.new("x"), filename: "upload#{extension.upcase}"), [content_type]]
-      end
+      inferred = {
+        "notes.TXT" => "text/plain",
+        "photo.JPG" => "image/jpeg",
+        "photo.jpeg" => "image/jpeg",
+        "chart.png" => "image/png",
+        "animation.gif" => "image/gif",
+        "picture.webp" => "image/webp"
+      }.to_h { [Anthropic::FilePart.new(StringIO.new("x"), filename: _1), [_2]] }
       cases = {
         **inferred,
         pdf => ["application/pdf"],
         pdf.open => ["application/pdf"],
+        Anthropic::FilePart.new(pdf, filename: "chart.png") => ["image/png"],
         [pdf, Anthropic::FilePart.new(StringIO.new("x"), filename: "my-skill/SKILL.md")] => ["application/pdf", "application/octet-stream"],
         Anthropic::FilePart.new(pdf, content_type: "application/x-custom") => ["application/x-custom"],
         StringIO.new("x") => ["application/octet-stream"]
