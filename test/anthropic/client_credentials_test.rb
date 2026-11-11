@@ -479,6 +479,59 @@ class Anthropic::ClientCredentialsTest < Minitest::Test
     Thread.current.thread_variable_set(:mock_sleep, nil)
   end
 
+  def test_slow_workload_identity_failure_does_not_send_expired_token
+    original_time = Thread.current.thread_variable_get(:time_now)
+    Thread.current.thread_variable_set(:time_now, Time.at(1000))
+    identity_calls = 0
+    provider = Anthropic::Credentials::WorkloadIdentity.new(
+      identity_token_provider: -> {
+        identity_calls += 1
+        if identity_calls == 2
+          Thread.current.thread_variable_set(:time_now, Time.now + 16)
+        end
+        "identity-jwt"
+      },
+      federation_rule_id: "fdrl_01abc",
+      organization_id: "org-123"
+    )
+    client = Anthropic::Client.new(credentials: provider, max_retries: 0)
+    token_calls = 0
+    stub_request(:post, "https://api.anthropic.com/v1/oauth/token").to_return do
+      token_calls += 1
+      if token_calls == 2
+        Thread.current.thread_variable_set(:time_now, Time.now + 16)
+        {status: 503, body: '{"error":"temporarily_unavailable"}'}
+      else
+        token = token_calls == 1 ? "initial" : "recovered"
+        {status: 200, body: JSON.generate(access_token: token, expires_in: 600)}
+      end
+    end
+    stub_request(:post, "https://api.anthropic.com/v1/messages")
+      .to_return(status: 200, body: '{"content": []}', headers: {"Content-Type" => "application/json"})
+    params = {max_tokens: 8, messages: [{content: "Hello", role: :user}], model: :"claude-3-opus"}
+
+    client.messages.create(**params)
+    Thread.current.thread_variable_set(:time_now, Time.at(1569))
+
+    error = assert_raises(Anthropic::Credentials::WorkloadIdentityError) { client.messages.create(**params) }
+    assert_equal(503, error.status_code)
+    assert_equal(1601, Time.now.to_i)
+    assert_requested(:post, "https://api.anthropic.com/v1/messages", times: 1)
+    assert_requested(:post, "https://api.anthropic.com/v1/oauth/token", times: 2)
+
+    client.messages.create(**params)
+    assert_requested(
+      :post,
+      "https://api.anthropic.com/v1/messages",
+      headers: {"Authorization" => "Bearer recovered"},
+      times: 1
+    )
+    assert_equal(3, identity_calls)
+    assert_equal(3, token_calls)
+  ensure
+    Thread.current.thread_variable_set(:time_now, original_time)
+  end
+
   def test_401_without_token_cache_does_not_retry
     Thread.current.thread_variable_set(:mock_sleep, [])
     client = Anthropic::Client.new(
