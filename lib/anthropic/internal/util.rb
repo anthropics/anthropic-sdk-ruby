@@ -26,6 +26,66 @@ module Anthropic
           .chain([ns])
       end
 
+      @sorbet_constants_lock = Mutex.new
+
+      # @api private
+      #
+      # Called at the end of `models.rb`, once every model is defined.
+      def self.models_loaded! = @models_loaded = true
+
+      # @api private
+      #
+      # Registers the Sorbet aliases of every model (`OrHash`, `Tagged*`/`Or*`,
+      # `Variants`) on the first `const_missing` on an SDK module, since walking
+      # the models would be most of what `require` allocates. It does nothing
+      # until `models_loaded!`, so a lookup made while the models are loading
+      # leaves no later model without its aliases.
+      def self.define_model_sorbet_constants!
+        return if @sorbet_constants_defined || !@models_loaded
+
+        # rubocop:disable Metrics/BlockLength
+        @sorbet_constants_lock.synchronize do
+          next if @sorbet_constants_defined
+
+          [Anthropic::Internal::Type::BaseModel, *Anthropic::Internal::Type::BaseModel.subclasses].each do |cls|
+            next if cls.sorbet_constant_defined?(:OrHash)
+
+            cls.define_sorbet_constant!(:OrHash) { T.type_alias { T.any(cls, Anthropic::Internal::AnyHash) } }
+          end
+
+          Anthropic::Internal::Util.walk_namespaces(Anthropic::Models).each do |mod|
+            case mod
+            in Anthropic::Internal::Type::Enum | Anthropic::Internal::Type::Union
+              mod.constants.each do |name|
+                case mod.const_get(name)
+                in true | false
+                  mod.define_sorbet_constant!(:TaggedBoolean) { T.type_alias { T::Boolean } }
+                  mod.define_sorbet_constant!(:OrBoolean) { T.type_alias { T::Boolean } }
+                in Integer
+                  mod.define_sorbet_constant!(:TaggedInteger) { T.type_alias { Integer } }
+                  mod.define_sorbet_constant!(:OrInteger) { T.type_alias { Integer } }
+                in Float
+                  mod.define_sorbet_constant!(:TaggedFloat) { T.type_alias { Float } }
+                  mod.define_sorbet_constant!(:OrFloat) { T.type_alias { Float } }
+                in Symbol
+                  mod.define_sorbet_constant!(:TaggedSymbol) { T.type_alias { Symbol } }
+                  mod.define_sorbet_constant!(:OrSymbol) { T.type_alias { T.any(Symbol, String) } }
+                else
+                end
+              end
+              next unless mod.is_a?(Anthropic::Internal::Type::Union)
+              next if mod.sorbet_constant_defined?(:Variants)
+
+              mod.define_sorbet_constant!(:Variants) { T.type_alias { mod.to_sorbet_type } }
+            else
+            end
+          end
+
+          @sorbet_constants_defined = true
+        end
+        # rubocop:enable Metrics/BlockLength
+      end
+
       class << self
         # @api private
         #
@@ -963,6 +1023,8 @@ module Anthropic
         #
         # @param name [Symbol]
         def const_missing(name)
+          # first, so this module's aliases are never read while another thread's walk writes them
+          Anthropic::Internal::Util.define_model_sorbet_constants!
           super unless sorbet_runtime_constants.key?(name)
 
           unless Object.const_defined?(:T)
