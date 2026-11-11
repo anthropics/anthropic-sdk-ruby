@@ -26,14 +26,6 @@ module Anthropic
 
         class << self
           # @api private
-          #
-          # Loading the system CA bundle takes a few milliseconds and about 1 MB, so
-          # all requesters share one store.
-          sig { returns(OpenSSL::X509::Store) }
-          def default_cert_store
-          end
-
-          # @api private
           sig do
             params(
               cert_store: OpenSSL::X509::Store,

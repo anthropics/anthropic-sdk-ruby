@@ -17,8 +17,6 @@ module Anthropic
 
         DEFAULT_MAX_CONNECTIONS: Integer
 
-        def self.default_cert_store: -> OpenSSL::X509::Store
-
         def self.connect: (
           cert_store: OpenSSL::X509::Store,
           url: URI::Generic,
