@@ -130,7 +130,7 @@ module Anthropic
           # @return [Hash{Symbol=>Object}]
           def meta_info(type_info, spec)
             info = spec.is_a?(Hash) ? spec : type_info
-            return NO_META unless info.is_a?(Hash)
+            return NO_META unless info.is_a?(Hash) && !info.empty?
 
             meta = info.except(:const, :enum, :union, :nil?)
             meta.empty? ? NO_META : meta
