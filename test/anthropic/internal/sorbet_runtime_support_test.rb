@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "open3"
+
 require_relative "../test_helper"
 
 class Anthropic::Test::SorbetRuntimeSupportTest < Minitest::Test
@@ -44,6 +46,34 @@ class Anthropic::Test::SorbetRuntimeSupportTest < Minitest::Test
     assert_raises(err) { Anthropic::Models::StopReason::TaggedSymbol }
     assert_raises(err) { Anthropic::Models::ContentBlock::Variants }
     assert_raises(NameError) { Anthropic::Models::Message::Missing }
+  end
+
+  def test_lookup_while_models_load_keeps_later_aliases
+    script = <<~RUBY
+      seen = 0
+      trace = TracePoint.new(:class) do |event|
+        next unless defined?(Anthropic::Internal::Type::BaseModel) && event.self.is_a?(Class)
+        next unless event.self < Anthropic::Internal::Type::BaseModel
+        next unless (seen += 1) == 1000
+
+        begin
+          event.self::Missing
+        rescue NameError
+        end
+      end
+      trace.enable { require "anthropic" }
+
+      begin
+        Anthropic::Models::Message::OrHash
+      rescue Anthropic::Internal::Util::SorbetRuntimeSupport::MissingSorbetRuntimeError
+        print "registered"
+      end
+    RUBY
+    lib = File.expand_path("../../../lib", __dir__)
+    out, status = Open3.capture2(RbConfig.ruby, "-I", lib, "-e", script)
+
+    assert_predicate(status, :success?)
+    assert_equal("registered", out)
   end
 
   def test_stubbed_aliases

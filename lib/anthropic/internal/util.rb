@@ -30,10 +30,17 @@ module Anthropic
 
       # @api private
       #
+      # Called by `models.rb` once every model is defined, where the walk used to run.
+      def self.models_loaded! = @models_loaded = true
+
+      # @api private
+      #
       # Walking every model is most of what `require` allocates, so it waits
-      # for the first `const_missing` on an SDK module instead.
+      # for the first `const_missing` on an SDK module instead. A lookup made
+      # while the models are still loading doesn't walk, so no model defined
+      # after it misses its constants.
       def self.define_model_sorbet_constants!
-        return if @sorbet_constants_defined
+        return if @sorbet_constants_defined || !@models_loaded
 
         # rubocop:disable Metrics/BlockLength
         @sorbet_constants_lock.synchronize do

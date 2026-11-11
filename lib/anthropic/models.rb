@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module Anthropic
+  Anthropic::Internal::Util.models_loaded!
+
   AnthropicBeta = Anthropic::Models::AnthropicBeta
 
   APIErrorObject = Anthropic::Models::APIErrorObject
