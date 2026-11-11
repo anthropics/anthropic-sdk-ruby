@@ -71,6 +71,11 @@ module Anthropic
 
         # rubocop:enable Lint/UnusedMethodArgument
 
+        # Nearly every field, variant and container has no meta, so they share
+        # this one instead of each keeping an empty Hash alive.
+        NO_META = {}.freeze
+        private_constant :NO_META
+
         class << self
           # @api private
           #
@@ -124,7 +129,11 @@ module Anthropic
           #
           # @return [Hash{Symbol=>Object}]
           def meta_info(type_info, spec)
-            [spec, type_info].grep(Hash).first.to_h.except(:const, :enum, :union, :nil?)
+            info = spec.is_a?(Hash) ? spec : type_info
+            return NO_META unless info.is_a?(Hash) && !info.empty?
+
+            meta = info.except(:const, :enum, :union, :nil?)
+            meta.empty? ? NO_META : meta
           end
 
           # @api private
