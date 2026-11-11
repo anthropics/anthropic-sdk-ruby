@@ -30,15 +30,16 @@ module Anthropic
 
       # @api private
       #
-      # Called by `models.rb` once every model is defined, where the walk used to run.
+      # Called at the end of `models.rb`, once every model is defined.
       def self.models_loaded! = @models_loaded = true
 
       # @api private
       #
-      # Walking every model is most of what `require` allocates, so it waits
-      # for the first `const_missing` on an SDK module instead. A lookup made
-      # while the models are still loading doesn't walk, so no model defined
-      # after it misses its constants.
+      # Registers the Sorbet aliases of every model (`OrHash`, `Tagged*`/`Or*`,
+      # `Variants`) on the first `const_missing` on an SDK module, since walking
+      # the models would be most of what `require` allocates. It does nothing
+      # until `models_loaded!`, so a lookup made while the models are loading
+      # leaves no later model without its aliases.
       def self.define_model_sorbet_constants!
         return if @sorbet_constants_defined || !@models_loaded
 
@@ -72,18 +73,12 @@ module Anthropic
                 else
                 end
               end
+              next unless mod.is_a?(Anthropic::Internal::Type::Union)
+              next if mod.sorbet_constant_defined?(:Variants)
+
+              mod.define_sorbet_constant!(:Variants) { T.type_alias { mod.to_sorbet_type } }
             else
             end
-          end
-
-          Anthropic::Internal::Util.walk_namespaces(Anthropic::Models)
-                                   .lazy
-                                   .grep(Anthropic::Internal::Type::Union)
-                                   .each do |mod|
-            const = :Variants
-            next if mod.sorbet_constant_defined?(const)
-
-            mod.define_sorbet_constant!(const) { T.type_alias { mod.to_sorbet_type } }
           end
 
           @sorbet_constants_defined = true
@@ -1028,7 +1023,8 @@ module Anthropic
         #
         # @param name [Symbol]
         def const_missing(name)
-          Anthropic::Internal::Util.define_model_sorbet_constants! unless sorbet_runtime_constants.key?(name)
+          # first, so this module's aliases are never read while another thread's walk writes them
+          Anthropic::Internal::Util.define_model_sorbet_constants!
           super unless sorbet_runtime_constants.key?(name)
 
           unless Object.const_defined?(:T)

@@ -22,17 +22,18 @@ module Anthropic
 
       # @api private
       #
-      # Called by `models.rb` once every model is defined, where the walk used to run.
+      # Called at the end of `models.rb`, once every model is defined.
       sig { returns(T::Boolean) }
       def self.models_loaded!
       end
 
       # @api private
       #
-      # Walking every model is most of what `require` allocates, so it waits
-      # for the first `const_missing` on an SDK module instead. A lookup made
-      # while the models are still loading doesn't walk, so no model defined
-      # after it misses its constants.
+      # Registers the Sorbet aliases of every model (`OrHash`, `Tagged*`/`Or*`,
+      # `Variants`) on the first `const_missing` on an SDK module, since walking
+      # the models would be most of what `require` allocates. It does nothing
+      # until `models_loaded!`, so a lookup made while the models are loading
+      # leaves no later model without its aliases.
       sig { void }
       def self.define_model_sorbet_constants!
       end
