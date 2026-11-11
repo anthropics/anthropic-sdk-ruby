@@ -184,8 +184,8 @@ class Anthropic::Test::InputSchemaTest < Minitest::Test
           ".a" => {
             type: "object",
             properties: {
-              a: {anyOf: [{:$ref => "#/$defs/.a/.a/[]"}, {type: "null"}]},
-              b: {anyOf: [{:$ref => "#/$defs/.a/.a/[]"}, {type: "null"}]}
+              a: {anyOf: [{:$ref => "#/$defs/.a~1.a~1[]"}, {type: "null"}]},
+              b: {anyOf: [{:$ref => "#/$defs/.a~1.a~1[]"}, {type: "null"}]}
             },
             required: %w[a b],
             additionalProperties: false
@@ -206,8 +206,8 @@ class Anthropic::Test::InputSchemaTest < Minitest::Test
             ".a" => {
               type: "object",
               properties: {
-                a: {anyOf: [{:$ref => "#/$defs/.a/.a/[]"}, {type: "null"}]},
-                b: {anyOf: [{:$ref => "#/$defs/.a/.a/[]"}, {type: "null"}]}
+                a: {anyOf: [{:$ref => "#/$defs/.a~1.a~1[]"}, {type: "null"}]},
+                b: {anyOf: [{:$ref => "#/$defs/.a~1.a~1[]"}, {type: "null"}]}
               },
               required: %w[a b],
               additionalProperties: false
@@ -246,15 +246,15 @@ class Anthropic::Test::InputSchemaTest < Minitest::Test
       },
       U3 => {
         :$defs => {"?.0/[]" => {type: "array", items: {type: "string"}}},
-        :anyOf => [{:$ref => "#/$defs/?.0/[]"}, {:$ref => "#/$defs/?.0/[]"}]
+        :anyOf => [{:$ref => "#/$defs/?.0~1[]"}, {:$ref => "#/$defs/?.0~1[]"}]
       },
       M11 => {
         :$defs => {".a/?.0/[]" => {type: "array", items: {type: "string"}}},
         :type => "object",
         :properties => {
-          a: {anyOf: [{:$ref => "#/$defs/.a/?.0/[]"}, {:$ref => "#/$defs/.a/?.0/[]"}]},
-          b: {:$ref => "#/$defs/.a/?.0/[]"},
-          c: {:$ref => "#/$defs/.a/?.0/[]"}
+          a: {anyOf: [{:$ref => "#/$defs/.a~1?.0~1[]"}, {:$ref => "#/$defs/.a~1?.0~1[]"}]},
+          b: {:$ref => "#/$defs/.a~1?.0~1[]"},
+          c: {:$ref => "#/$defs/.a~1?.0~1[]"}
         },
         :required => %w[a b c],
         :additionalProperties => false
