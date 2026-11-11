@@ -312,6 +312,9 @@ module Anthropic
         T.let(%r{^application/(?:[a-zA-Z0-9.-]+\+)?json(?!l)}, Regexp)
       JSONL_CONTENT =
         T.let(%r{^application/(:?x-(?:n|l)djson)|(:?(?:x-)?jsonl)}, Regexp)
+      # The file types the Messages API reads from an uploaded `file_id`: PDF and
+      # plain-text documents, and the image types of `Base64ImageSource`.
+      MULTIPART_CONTENT_TYPE_BY_FILE_EXTENSION = T.let(T.unsafe(nil), T::Hash[String, String])
 
       class << self
         # @api private
