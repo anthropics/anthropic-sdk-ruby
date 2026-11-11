@@ -253,7 +253,8 @@ module Anthropic
           @mutex = Mutex.new
           @size = size
           @proxy = self.class.parse_proxy(proxy)
-          @cert_store = OpenSSL::X509::Store.new.tap(&:set_default_paths)
+          # The store Net::HTTP falls back to, loaded once by `require "openssl"`.
+          @cert_store = OpenSSL::SSL::SSLContext::DEFAULT_CERT_STORE
           @pools = {}
         end
 
