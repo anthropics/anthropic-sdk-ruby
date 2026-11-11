@@ -88,7 +88,7 @@ module Anthropic
             defs, path = state.fetch_values(:defs, :path)
             if (stored = defs[type])
               pointers = stored.fetch(Anthropic::Helpers::InputSchema::JsonSchemaConverter::POINTERS)
-              pointers.first.except(Anthropic::Helpers::InputSchema::JsonSchemaConverter::NO_REF).tap do
+              pointers.first.slice(:$ref).tap do
                 pointers << _1
               end
             else
@@ -139,7 +139,7 @@ module Anthropic
                 end
               else
               end
-              no_refs.each { _1.replace(_1.except(:$ref).merge(sch)) }
+              no_refs.each { _1.replace(sch.merge(_1.except(:$ref))) }
             end
 
             xformed = reused_defs.transform_keys { _1.delete_prefix("#/$defs/") }
