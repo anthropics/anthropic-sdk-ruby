@@ -473,18 +473,23 @@ module Anthropic
         #
         # @param max_len [Integer, nil]
         #
-        # @return [String]
+        # @return [String, nil]
         private def read_enum(max_len)
           case max_len
           in nil
-            @stream.to_a.join
+            loop { @buf << @stream.next }
+            @stream = nil
+            @buf.slice!(0..)
           in Integer
             @buf << @stream.next while @buf.length < max_len
-            @buf.slice!(..max_len)
+            @buf.slice!(0, max_len)
           end
         rescue StopIteration
           @stream = nil
-          @buf.slice!(0..)
+          # Return nil, not "", once the body is used up, as `IO#read(length)` does: Net::HTTP sends each read as a
+          # chunk, and an empty chunk ends the body, so "" would end it twice and break the next request on the
+          # connection.
+          @buf.slice!(0..) unless @buf.empty?
         end
 
         # @api private
@@ -496,15 +501,19 @@ module Anthropic
         def read(max_len = nil, out_string = nil)
           case @stream
           in nil
+            out_string&.clear
             nil
           in IO | StringIO
             @stream.read(max_len, out_string)
           in Enumerator
             read = read_enum(max_len)
-            case out_string
-            in String
+            case [out_string, read]
+            in [String, String]
               out_string.replace(read)
-            in nil
+            in [String, nil]
+              out_string.clear
+              nil
+            in [nil, _]
               read
             end
           end

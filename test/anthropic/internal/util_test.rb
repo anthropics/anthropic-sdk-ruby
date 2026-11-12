@@ -555,6 +555,42 @@ class Anthropic::Test::UtilIOAdapterTest < Minitest::Test
     end
   end
 
+  def test_read_returns_at_most_max_len_then_nil
+    cases = {
+      %w[abc def] => %w[abc def],
+      %w[abcdef] => %w[abc def],
+      %w[ab cd ef] => %w[abc def],
+      %w[abcd] => %w[abc d]
+    }
+    cases.each do |chunks, expected|
+      # rubocop:disable Lint/EmptyBlock
+      adapter = Anthropic::Internal::Util::ReadIOAdapter.new(chunks.each) {}
+      # rubocop:enable Lint/EmptyBlock
+      assert_equal(expected, Array.new(expected.length) { adapter.read(3) })
+      assert_nil(adapter.read(3))
+    end
+  end
+
+  def test_read_into_a_buffer_clears_it_at_the_end
+    [%w[abc def], %w[abc de]].each do |chunks|
+      # rubocop:disable Lint/EmptyBlock
+      adapter = Anthropic::Internal::Util::ReadIOAdapter.new(chunks.each) {}
+      # rubocop:enable Lint/EmptyBlock
+      buf = String.new
+      assert_equal(chunks, Array.new(2) { adapter.read(3, buf).dup })
+      assert_nil(adapter.read(3, buf))
+      assert_equal("", buf)
+    end
+  end
+
+  def test_read_the_rest_after_a_partial_read
+    # rubocop:disable Lint/EmptyBlock
+    adapter = Anthropic::Internal::Util::ReadIOAdapter.new(%w[abc def].each) {}
+    # rubocop:enable Lint/EmptyBlock
+    assert_equal("ab", adapter.read(2))
+    assert_equal("cdef", adapter.read)
+  end
+
   def test_copy_write
     cases = {
       StringIO.new => "",
