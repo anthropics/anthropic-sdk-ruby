@@ -55,7 +55,7 @@ module Anthropic
               headers: parsed.slice(*header_params.keys).transform_keys(header_params),
               body: parsed.except(*header_params.keys),
               model: Anthropic::Beta::Messages::BetaMessageBatch,
-              options: {extra_headers: {"anthropic-beta" => "message-batches-2024-09-24"}, **options}
+              options: options
             )
           end
 
@@ -96,7 +96,7 @@ module Anthropic
               path: ["v1/messages/batches/%1$s", message_batch_id],
               headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
               model: Anthropic::Beta::Messages::BetaMessageBatch,
-              options: {extra_headers: {"anthropic-beta" => "message-batches-2024-09-24"}, **options}
+              options: options
             )
           end
 
@@ -147,7 +147,7 @@ module Anthropic
               ),
               page: Anthropic::Internal::Page,
               model: Anthropic::Beta::Messages::BetaMessageBatch,
-              options: {extra_headers: {"anthropic-beta" => "message-batches-2024-09-24"}, **options}
+              options: options
             )
           end
 
@@ -189,7 +189,7 @@ module Anthropic
               path: ["v1/messages/batches/%1$s", message_batch_id],
               headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
               model: Anthropic::Beta::Messages::BetaDeletedMessageBatch,
-              options: {extra_headers: {"anthropic-beta" => "message-batches-2024-09-24"}, **options}
+              options: options
             )
           end
 
@@ -236,7 +236,7 @@ module Anthropic
               path: ["v1/messages/batches/%1$s/cancel", message_batch_id],
               headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
               model: Anthropic::Beta::Messages::BetaMessageBatch,
-              options: {extra_headers: {"anthropic-beta" => "message-batches-2024-09-24"}, **options}
+              options: options
             )
           end
 
@@ -284,7 +284,7 @@ module Anthropic
               ),
               stream: Anthropic::Internal::JsonLStream,
               model: Anthropic::Beta::Messages::BetaMessageBatchIndividualResponse,
-              options: {extra_headers: {"anthropic-beta" => "message-batches-2024-09-24"}, **options}
+              options: options
             )
           end
 

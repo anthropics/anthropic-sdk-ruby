@@ -19,11 +19,6 @@ module Anthropic
       TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::AnthropicBeta) }
       OrSymbol = T.type_alias { T.any(Symbol, String) }
 
-      MESSAGE_BATCHES_2024_09_24 =
-        T.let(
-          :"message-batches-2024-09-24",
-          Anthropic::AnthropicBeta::TaggedSymbol
-        )
       COMPUTER_USE_2024_10_22 =
         T.let(
           :"computer-use-2024-10-22",
@@ -213,6 +208,11 @@ module Anthropic
       EXPERIMENTAL_CLAUDE_TAG_2026_10_21 =
         T.let(
           :"experimental-claude-tag-2026-10-21",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
+      MESSAGE_BATCHES_2024_09_24 =
+        T.let(
+          :"message-batches-2024-09-24",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
       PROMPT_CACHING_2024_07_31 =

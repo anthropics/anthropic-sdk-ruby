@@ -9,8 +9,6 @@ module Anthropic
     module AnthropicBeta
       extend Anthropic::Internal::Type::Union
 
-      variant const: -> { Anthropic::Models::AnthropicBeta::MESSAGE_BATCHES_2024_09_24 }
-
       variant const: -> { Anthropic::Models::AnthropicBeta::COMPUTER_USE_2024_10_22 }
 
       variant const: -> { Anthropic::Models::AnthropicBeta::COMPUTER_USE_2025_01_24 }
@@ -103,6 +101,8 @@ module Anthropic
 
       variant const: -> { Anthropic::Models::AnthropicBeta::EXPERIMENTAL_CLAUDE_TAG_2026_10_21 }
 
+      variant const: -> { Anthropic::Models::AnthropicBeta::MESSAGE_BATCHES_2024_09_24 }
+
       variant const: -> { Anthropic::Models::AnthropicBeta::PROMPT_CACHING_2024_07_31 }
 
       variant const: -> { Anthropic::Models::AnthropicBeta::PDFS_2024_09_25 }
@@ -132,7 +132,6 @@ module Anthropic
 
       # @!group
 
-      MESSAGE_BATCHES_2024_09_24 = :"message-batches-2024-09-24"
       COMPUTER_USE_2024_10_22 = :"computer-use-2024-10-22"
       COMPUTER_USE_2025_01_24 = :"computer-use-2025-01-24"
       OUTPUT_128K_2025_02_19 = :"output-128k-2025-02-19"
@@ -179,6 +178,8 @@ module Anthropic
       MESSAGE_THREADS_2026_08_12 = :"message-threads-2026-08-12"
       ANALYTICS_USAGE_COST_2026_08_24 = :"analytics-usage-cost-2026-08-24"
       EXPERIMENTAL_CLAUDE_TAG_2026_10_21 = :"experimental-claude-tag-2026-10-21"
+      # @deprecated This value is no longer needed. Remove it from your requests.
+      MESSAGE_BATCHES_2024_09_24 = :"message-batches-2024-09-24"
       # @deprecated This value is no longer needed. Remove it from your requests.
       PROMPT_CACHING_2024_07_31 = :"prompt-caching-2024-07-31"
       # @deprecated This value is no longer needed. Remove it from your requests.
