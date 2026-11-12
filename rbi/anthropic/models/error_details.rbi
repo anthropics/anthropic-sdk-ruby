@@ -62,6 +62,8 @@ module Anthropic
             Anthropic::Organization::ExternalKeyChangedErrorDetails,
             Anthropic::Organization::WorkspaceMemberLimitExceededErrorDetails,
             Anthropic::OrganizationTypeNotSupportedErrorDetails,
+            Anthropic::ParentOrganizationRequiredErrorDetails,
+            Anthropic::RBACRoleNotFoundErrorDetails,
             Anthropic::Beta::BetaEnvironmentCreateDisabledErrorDetails,
             Anthropic::Beta::BetaEnvironmentArchivedErrorDetails,
             Anthropic::Beta::BetaInvalidConfigTypeChangeErrorDetails,
@@ -365,6 +367,16 @@ module Anthropic
         ORGANIZATION_TYPE_NOT_SUPPORTED =
           T.let(
             :organization_type_not_supported,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        PARENT_ORGANIZATION_REQUIRED =
+          T.let(
+            :parent_organization_required,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        RBAC_ROLE_NOT_FOUND =
+          T.let(
+            :rbac_role_not_found,
             Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
           )
         ENVIRONMENT_CREATE_DISABLED =

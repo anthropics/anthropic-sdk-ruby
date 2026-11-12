@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class RBACRoleNotFoundError < Anthropic::Errors::NotFoundError
+      def error_code: -> :rbac_role_not_found
+
+      def details: -> Anthropic::RBACRoleNotFoundErrorDetails
+    end
+  end
+end

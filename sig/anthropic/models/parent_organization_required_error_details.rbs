@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type parent_organization_required_error_details =
+      { error_code: :parent_organization_required }
+
+    class ParentOrganizationRequiredErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :parent_organization_required
+
+      def initialize: (?error_code: :parent_organization_required) -> void
+
+      def to_hash: -> { error_code: :parent_organization_required }
+    end
+  end
+end

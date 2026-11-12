@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class ParentOrganizationRequiredError < Anthropic::Errors::BadRequestError
+      def error_code: -> :parent_organization_required
+
+      def details: -> Anthropic::ParentOrganizationRequiredErrorDetails
+    end
+  end
+end

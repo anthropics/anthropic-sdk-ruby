@@ -1,0 +1,15 @@
+module Anthropic
+  module Models
+    module Organization
+      type rbac_role_source_built_in = { type: :built_in }
+
+      class RBACRoleSourceBuiltIn < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :built_in
+
+        def initialize: (?type: :built_in) -> void
+
+        def to_hash: -> { type: :built_in }
+      end
+    end
+  end
+end

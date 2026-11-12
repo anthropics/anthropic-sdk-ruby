@@ -17,6 +17,10 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
+        # @raise [Anthropic::Models::OrganizationTypeNotSupportedError]
+        # @raise [Anthropic::Models::ParentOrganizationRequiredError]
+        # @raise [Anthropic::Models::RBACRoleNotFoundError]
+        #
         # @return [Anthropic::Models::Organization::RBACRole]
         #
         # @see Anthropic::Models::Organization::RBACRoleRetrieveParams
@@ -46,6 +50,9 @@ module Anthropic
         # @param page [String, nil] Optionally set to the `next_page` token from the previous response.
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @raise [Anthropic::Models::OrganizationTypeNotSupportedError]
+        # @raise [Anthropic::Models::ParentOrganizationRequiredError]
         #
         # @return [Anthropic::Internal::PageCursor<Anthropic::Models::Organization::RBACRole>]
         #

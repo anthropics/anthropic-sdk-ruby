@@ -55,6 +55,8 @@ module Anthropic
       | Anthropic::Organization::ExternalKeyChangedErrorDetails
       | Anthropic::Organization::WorkspaceMemberLimitExceededErrorDetails
       | Anthropic::OrganizationTypeNotSupportedErrorDetails
+      | Anthropic::ParentOrganizationRequiredErrorDetails
+      | Anthropic::RBACRoleNotFoundErrorDetails
       | Anthropic::Beta::BetaEnvironmentCreateDisabledErrorDetails
       | Anthropic::Beta::BetaEnvironmentArchivedErrorDetails
       | Anthropic::Beta::BetaInvalidConfigTypeChangeErrorDetails
@@ -142,6 +144,8 @@ module Anthropic
         | :external_key_changed
         | :workspace_member_limit_exceeded
         | :organization_type_not_supported
+        | :parent_organization_required
+        | :rbac_role_not_found
         | :environment_create_disabled
         | :environment_archived
         | :invalid_config_type_change
@@ -228,6 +232,8 @@ module Anthropic
         EXTERNAL_KEY_CHANGED: :external_key_changed
         WORKSPACE_MEMBER_LIMIT_EXCEEDED: :workspace_member_limit_exceeded
         ORGANIZATION_TYPE_NOT_SUPPORTED: :organization_type_not_supported
+        PARENT_ORGANIZATION_REQUIRED: :parent_organization_required
+        RBAC_ROLE_NOT_FOUND: :rbac_role_not_found
         ENVIRONMENT_CREATE_DISABLED: :environment_create_disabled
         ENVIRONMENT_ARCHIVED: :environment_archived
         INVALID_CONFIG_TYPE_CHANGE: :invalid_config_type_change
@@ -454,6 +460,13 @@ module Anthropic
           error_code: :organization_type_not_supported
           | "organization_type_not_supported"
         ) -> Anthropic::OrganizationTypeNotSupportedErrorDetails
+        | (
+          error_code: :parent_organization_required
+          | "parent_organization_required"
+        ) -> Anthropic::ParentOrganizationRequiredErrorDetails
+        | (
+          error_code: :rbac_role_not_found | "rbac_role_not_found"
+        ) -> Anthropic::RBACRoleNotFoundErrorDetails
         | (
           error_code: :environment_create_disabled
           | "environment_create_disabled"

@@ -23,6 +23,10 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
+          # @raise [Anthropic::Models::OrganizationTypeNotSupportedError]
+          # @raise [Anthropic::Models::ParentOrganizationRequiredError]
+          # @raise [Anthropic::Models::RBACRoleNotFoundError]
+          #
           # @return [Anthropic::Internal::PageCursor<Anthropic::Models::Organization::RBACRoles::RBACRolePermission>]
           #
           # @see Anthropic::Models::Organization::RBACRoles::PermissionListParams

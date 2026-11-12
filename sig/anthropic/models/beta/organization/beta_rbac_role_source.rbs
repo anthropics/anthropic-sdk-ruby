@@ -1,0 +1,40 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_rbac_role_source =
+          Anthropic::Beta::Organization::BetaRBACRoleSourceBuiltIn
+          | Anthropic::Beta::Organization::BetaRBACRoleSourceCustom
+
+        module BetaRBACRoleSource
+          extend Anthropic::Internal::Type::Union
+
+          type type_ = :built_in | :custom
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            BUILT_IN: :built_in
+            CUSTOM: :custom
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaRBACRoleSource::type_]
+          end
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::beta_rbac_role_source]
+
+          def self.new:
+            (
+              type: :built_in | "built_in"
+            ) -> Anthropic::Beta::Organization::BetaRBACRoleSourceBuiltIn
+            | (
+              type: :custom | "custom"
+            ) -> Anthropic::Beta::Organization::BetaRBACRoleSourceCustom
+            | (
+              type: Anthropic::Models::Beta::Organization::BetaRBACRoleSource::type_
+              | String
+            ) -> Anthropic::Models::Beta::Organization::beta_rbac_role_source
+        end
+      end
+    end
+  end
+end
