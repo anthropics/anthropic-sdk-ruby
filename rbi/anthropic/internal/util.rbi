@@ -311,7 +311,7 @@ module Anthropic
       JSON_CONTENT =
         T.let(%r{^application/(?:[a-zA-Z0-9.-]+\+)?json(?!l)}, Regexp)
       JSONL_CONTENT =
-        T.let(%r{^application/(:?x-(?:n|l)djson)|(:?(?:x-)?jsonl)}, Regexp)
+        T.let(%r{^application/(?:x-(?:n|l)djson|(?:x-)?jsonl)}, Regexp)
 
       class << self
         # @api private

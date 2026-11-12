@@ -344,7 +344,9 @@ class Anthropic::Test::RegexMatchTest < Minitest::Test
       "application/jsonl" => true,
       "application/x-jsonl" => true,
       "application/json" => false,
-      "application/vnd.api+json" => false
+      "application/vnd.api+json" => false,
+      "text/jsonl" => false,
+      "text/plain; name=x.jsonl" => false
     }
     cases.each do |header, verdict|
       assert_pattern do
