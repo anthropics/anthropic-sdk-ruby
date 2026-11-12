@@ -465,6 +465,78 @@ class Anthropic::Test::UtilFormDataEncodingTest < Minitest::Test
   end
 end
 
+class Anthropic::Test::UtilMultipartResendTest < Minitest::Test
+  class TrackedPathname < Pathname
+    def opened = (@opened ||= [])
+
+    def open(...)
+      super.tap { opened << _1 }
+    end
+  end
+
+  def encode(body)
+    Anthropic::Internal::Util.encode_content({"content-type" => "multipart/form-data"}, body)
+  end
+
+  # rubocop:disable Lint/EmptyBlock
+  def adapter(body) = Anthropic::Internal::Util::ReadIOAdapter.new(body) {}
+  # rubocop:enable Lint/EmptyBlock
+
+  # Sends `body` once the way the SDK sends each attempt: through a new `ReadIOAdapter`, read in chunks, then closed.
+  def send_once(body)
+    out = StringIO.new(String.new)
+    io = adapter(body)
+    IO.copy_stream(io, out)
+    io.close
+    out.string
+  end
+
+  def test_each_attempt_sends_the_whole_body_and_closes_its_files
+    file = TrackedPathname.new(__FILE__)
+    _, body = encode({a: file, b: Anthropic::FilePart.new(file, filename: "b.rb")})
+
+    first = send_once(body)
+    second = send_once(body)
+
+    assert_equal(first, second)
+    assert_equal(2, first.scan(File.binread(__FILE__)).length)
+    assert_equal(4, file.opened.length)
+    assert(file.opened.all?(&:closed?))
+  end
+
+  def test_closing_a_partly_read_attempt_closes_its_file
+    file = TrackedPathname.new(__FILE__)
+    _, body = encode({a: file})
+    whole = send_once(body)
+    file.opened.clear
+
+    io = adapter(body)
+    io.read(whole.index(File.binread(__FILE__)) + 10)
+    assert_equal(1, file.opened.length)
+    refute(file.opened.first.closed?)
+
+    io.close
+    assert(file.opened.first.closed?)
+
+    assert_equal(whole, send_once(body))
+    assert_equal(2, file.opened.length)
+    assert(file.opened.all?(&:closed?))
+  end
+
+  def test_a_body_holding_an_io_is_read_once
+    file = TrackedPathname.new(__FILE__)
+    File.open(__FILE__, binmode: true) do |io|
+      _, body = encode({a: io, b: file})
+
+      assert_equal(2, send_once(body).scan(File.binread(__FILE__)).length)
+      assert_equal("", send_once(body))
+      refute(io.closed?)
+    end
+    assert_equal(1, file.opened.length)
+    assert(file.opened.first.closed?)
+  end
+end
+
 class Anthropic::Test::UtilIOAdapterTest < Minitest::Test
   def test_copy_read
     cases = {

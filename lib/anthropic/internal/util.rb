@@ -525,6 +525,10 @@ module Anthropic
             in Pathname
               @closing = true
               src.open(binmode: true)
+            in Enumerator
+              # Each retry or redirect reads the same body through a new adapter. Calling `next` on `src` itself would
+              # resume where the previous adapter stopped; `to_enum` starts from the beginning.
+              src.to_enum
             else
               src
             end
@@ -685,6 +689,9 @@ module Anthropic
           # RFC 1521 Section 7.2.1 says we should have 70 char maximum for boundary length
           boundary = SecureRandom.urlsafe_base64(30)
 
+          # Each read of `strio` runs this block from the start, so a retry or redirect sends the whole body. A read
+          # stopped partway skips the `ensure` below; `ReadIOAdapter#close` then starts a new read and stops it at the
+          # first chunk, and that read's `ensure` closes every file left in `closing`.
           closing = []
           strio = writable_enum do |y|
             case body
@@ -703,10 +710,24 @@ module Anthropic
               write_multipart_chunk(y, boundary: boundary, key: nil, val: body, closing: closing)
             end
             y << "--#{boundary}--\r\n"
+          ensure
+            closing.each(&:call)
+            closing.clear
           end
 
-          fused_io = fused_enum(strio) { closing.each(&:call) }
-          [boundary, fused_io]
+          # An IO can be read only once, so a body holding one is wrapped to yield nothing when read again, rather than
+          # resend the other parts with an empty file part. Resource methods turn retries off for such a body; a retry
+          # through `client.request`, or a 307 or 308 redirect, sends it again, empty.
+          parts = if body.is_a?(Hash)
+            body.values.flat_map { _1.is_a?(Array) ? _1 : [_1] }
+          else
+            [body]
+          end
+          if parts.any? { _1.is_a?(IO) || (_1.is_a?(Anthropic::FilePart) && _1.content.is_a?(IO)) }
+            return [boundary, fused_enum(strio) { closing.each(&:call) }]
+          end
+
+          [boundary, strio]
           # rubocop:enable Style/CaseEquality
         end
 
