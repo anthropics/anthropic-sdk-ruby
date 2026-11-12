@@ -83,7 +83,9 @@ module Anthropic
         end
 
         # @api private
-        sig { params(req: Anthropic::APIRequest).returns(Anthropic::APIRequest) }
+        sig do
+          params(req: Anthropic::APIRequest).returns(Anthropic::APIRequest)
+        end
         private def adapt_request(req)
         end
       end

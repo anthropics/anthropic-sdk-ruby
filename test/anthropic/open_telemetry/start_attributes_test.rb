@@ -155,7 +155,10 @@ class Anthropic::Test::OpenTelemetryStartAttributesTest < Anthropic::Test::OpenT
 
     client(base_url: "https://api.example.com").messages.create(**PARAMS)
 
-    assert_equal(["api.example.com", 443], sampler.started.first.last.values_at("server.address", "server.port"))
+    assert_equal(
+      ["api.example.com", 443],
+      sampler.started.first.last.values_at("server.address", "server.port")
+    )
     assert_equal(["api.example.com", 443], only_span.attributes.values_at("server.address", "server.port"))
   end
 

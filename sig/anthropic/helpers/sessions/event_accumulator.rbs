@@ -21,9 +21,13 @@ module Anthropic
 
         private
 
-        def on_event_start: (Anthropic::Beta::BetaManagedAgentsStartEvent event) -> void
+        def on_event_start: (
+          Anthropic::Beta::BetaManagedAgentsStartEvent event
+        ) -> void
 
-        def on_event_delta: (Anthropic::Beta::BetaManagedAgentsDeltaEvent event) -> void
+        def on_event_delta: (
+          Anthropic::Beta::BetaManagedAgentsDeltaEvent event
+        ) -> void
       end
     end
   end

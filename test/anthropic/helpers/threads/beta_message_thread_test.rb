@@ -9,7 +9,10 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
 
   TOOLS = [{name: "lookup", input_schema: {type: "object"}}].freeze
   OTHER_TOOLS = [{name: "other", input_schema: {type: "object"}}].freeze
-  CREATE_ONLY_FIELDS = {system_: [[{type: :text, text: "one"}], [{type: :text, text: "two"}]], tools: [TOOLS, OTHER_TOOLS]}.freeze
+  CREATE_ONLY_FIELDS = {
+    system_: [[{type: :text, text: "one"}], [{type: :text, text: "two"}]],
+    tools: [TOOLS, OTHER_TOOLS]
+  }.freeze
 
   def reply(id, text: "ok", stop_reason: "end_turn", content: nil, **)
     json(reply_body(id, content || [{type: "text", text: text}], stop_reason, **))
@@ -18,14 +21,23 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
   def api_error(status, code: nil, type: "invalid_request_error", unsupported: nil)
     error = {type: type, message: "thread_not_found thread_unsupported_request"}
     error[:details] = {error_code: code, unsupported: unsupported}.compact unless code.nil?
-    {status: status, headers: {"Content-Type" => "application/json"}, body: {type: "error", error: error}.to_json}
+    {
+      status: status,
+      headers: {"Content-Type" => "application/json"},
+      body: {type: "error", error: error}.to_json
+    }
   end
 
   def assistant_wire(text) = {role: "assistant", content: [{text: text, type: "text"}]}
 
   def marked(text) = {role: :user, content: [{type: :text, text: text, cache_control: {type: :ephemeral}}]}
 
-  def marked_wire(text) = {role: "user", content: [{type: "text", text: text, cache_control: {type: "ephemeral"}}]}
+  def marked_wire(text)
+    {
+      role: "user",
+      content: [{type: "text", text: text, cache_control: {type: "ephemeral"}}]
+    }
+  end
 
   def unmarked_wire(text) = {role: "user", content: [{type: "text", text: text}]}
 
@@ -111,7 +123,9 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
         -> { thread.stream(user("a"), thread: value) }
       ].each do |route|
         error = assert_raises(ArgumentError, &route)
-        assert_equal("`thread` cannot be given here. The message thread sets `thread` for each request itself.", error.message)
+        assert_equal(
+          "`thread` cannot be given here. The message thread sets `thread` for each request itself.", error.message
+        )
       end
       assert_empty(thread.messages)
     end
@@ -209,8 +223,18 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
 
   def test_refused_turn_is_not_recorded_and_the_next_turn_starts_a_new_thread
     refusals = [
-      [reply("msg_2", text: "no", stop_reason: "refusal"), ->(thread, message) { thread.send_message(message) }],
-      [streamed("msg_2", "no", stop_reason: "refusal"), ->(thread, message) { thread.stream(message).accumulated_message }]
+      [
+        reply("msg_2", text: "no", stop_reason: "refusal"),
+        ->(thread, message) {
+          thread.send_message(message)
+        }
+      ],
+      [
+        streamed("msg_2", "no", stop_reason: "refusal"),
+        ->(thread, message) {
+          thread.stream(message).accumulated_message
+        }
+      ]
     ]
     refusals.each do |refusal, send|
       start_over
@@ -242,7 +266,10 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
     thread.send_message(user("good"))
 
     assert_equal(["once", 1], [bodies[0][:system], bodies[0][:tools].length])
-    assert_equal([{type: "create"}, [user_wire("seed"), user_wire("good")]], bodies[1].values_at(:thread, :messages))
+    assert_equal(
+      [{type: "create"}, [user_wire("seed"), user_wire("good")]],
+      bodies[1].values_at(:thread, :messages)
+    )
     assert_empty(bodies[1].keys & [:system, :tools])
   end
 
@@ -256,7 +283,10 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
     thread.send_message(user("good"))
 
     assert_equal({type: "create"}, bodies[2][:thread])
-    assert_equal([user_wire("a"), assistant_wire("one"), user_wire("b"), user_wire("good")], bodies[2][:messages])
+    assert_equal(
+      [user_wire("a"), assistant_wire("one"), user_wire("b"), user_wire("good")],
+      bodies[2][:messages]
+    )
   end
 
   def test_refused_turn_is_not_recorded_without_a_thread
@@ -280,9 +310,19 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
 
   def test_reply_of_a_fallback_model_starts_a_new_thread_and_changes_no_field
     iterations = written_by_fallback("claude-b")
-    hop = {from: {model: "claude-sonnet-4-5"}, to: {model: "claude-b"}, trigger: {category: nil, type: "refusal"}, type: "fallback"}
+    hop = {
+      from: {model: "claude-sonnet-4-5"},
+      to: {model: "claude-b"},
+      trigger: {category: nil, type: "refusal"},
+      type: "fallback"
+    }
     replies = [
-      [reply("msg_1", content: [hop, {text: "one", type: "text"}], iterations:), ->(thread) { thread.send_message(user("a")) }],
+      [
+        reply("msg_1", content: [hop, {text: "one", type: "text"}], iterations:),
+        ->(thread) {
+          thread.send_message(user("a"))
+        }
+      ],
       [
         sse(
           message_start("msg_1"),
@@ -327,7 +367,10 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
     thread.send_message(user("bad"))
     thread.send_message(user("good"))
 
-    assert_equal([{type: "create"}, "claude-sonnet-4-5", [{model: "claude-b"}]], bodies[1].values_at(:thread, :model, :fallbacks))
+    assert_equal(
+      [{type: "create"}, "claude-sonnet-4-5", [{model: "claude-b"}]],
+      bodies[1].values_at(:thread, :model, :fallbacks)
+    )
     assert_equal([user_wire("good")], bodies[1][:messages])
   end
 
@@ -348,28 +391,54 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
       reply("msg_1", iterations: written_by_fallback("claude-b")),
       reply("msg_2")
     )
-    thread = new_thread(unsupported_request_behavior: :continue_unthreaded, fallbacks: [{model: "claude-b"}], betas: [FALLBACK_BETA])
+    thread = new_thread(
+      unsupported_request_behavior: :continue_unthreaded,
+      fallbacks: [{model: "claude-b"}],
+      betas: [FALLBACK_BETA]
+    )
 
     thread.send_message(user("a"))
     thread.send_message(user("b"))
 
-    assert_equal([nil, "claude-sonnet-4-5", [{model: "claude-b"}]], bodies[2].values_at(:thread, :model, :fallbacks))
+    assert_equal(
+      [nil, "claude-sonnet-4-5", [{model: "claude-b"}]],
+      bodies[2].values_at(:thread, :model, :fallbacks)
+    )
   end
 
   def test_thread_not_found_after_the_new_thread_of_a_fallback_reply_replays
     not_found = api_error(404, code: "thread_not_found", type: "not_found_error")
-    serve(reply("msg_1", iterations: written_by_fallback("claude-b")), reply("msg_2"), not_found, reply("msg_3"))
-    thread = new_thread(unsupported_request_behavior: :continue_unthreaded, fallbacks: [{model: "claude-b"}], betas: [FALLBACK_BETA])
+    serve(
+      reply("msg_1", iterations: written_by_fallback("claude-b")),
+      reply("msg_2"),
+      not_found,
+      reply("msg_3")
+    )
+    thread = new_thread(
+      unsupported_request_behavior: :continue_unthreaded,
+      fallbacks: [{model: "claude-b"}],
+      betas: [FALLBACK_BETA]
+    )
 
     %w[a b c].each { thread.send_message(user(_1)) }
 
-    assert_equal([{type: "create"}, {type: "create"}, continue_from("msg_2"), {type: "create"}], bodies.map { _1[:thread] })
+    assert_equal(
+      [{type: "create"}, {type: "create"}, continue_from("msg_2"), {type: "create"}],
+      bodies.map do
+        _1[:thread]
+      end
+    )
   end
 
   def test_rejected_continue_replays_under_create
     %w[thread_not_found thread_already_continued thread_continue_in_flight].each do |code|
       start_over
-      serve(reply("msg_1", text: "one"), api_error(code == "thread_not_found" ? 404 : 409, code: code), reply("msg_2"), reply("msg_3"))
+      serve(
+        reply("msg_1", text: "one"),
+        api_error(code == "thread_not_found" ? 404 : 409, code: code),
+        reply("msg_2"),
+        reply("msg_3")
+      )
       thread = new_thread(system_: "s", tools: TOOLS)
       thread.send_message(user("a"))
 
@@ -387,7 +456,13 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
   end
 
   def test_replay_drops_the_cache_markers_of_the_recorded_messages
-    serve(*(1..5).map { reply("msg_#{_1}", text: "r") }, api_error(404, code: "thread_not_found"), reply("msg_6"))
+    serve(
+      *(1..5).map do
+        reply("msg_#{_1}", text: "r")
+      end,
+      api_error(404, code: "thread_not_found"),
+      reply("msg_6")
+    )
     thread = new_thread
     given = (1..6).map { marked("m#{_1}") }
     before = copy(given)
@@ -415,7 +490,10 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
 
   def test_fork_drops_the_cache_markers_of_the_recorded_messages_only
     marker = {type: "ephemeral"}
-    fields = {system: [{type: "text", text: "s", cache_control: marker}], tools: [{**TOOLS.first, cache_control: marker}]}
+    fields = {
+      system: [{type: "text", text: "s", cache_control: marker}],
+      tools: [{**TOOLS.first, cache_control: marker}]
+    }
     serve(reply("msg_1", text: "one"), reply("msg_2"))
     thread = new_thread(**fields, cache_control: marker)
     thread.send_message(marked("a"))
@@ -430,14 +508,25 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
   end
 
   def test_unthreaded_turns_drop_the_cache_markers_of_the_recorded_messages
-    serve(api_error(400, code: "thread_unsupported_request"), reply("msg_1", text: "one"), reply("msg_2", text: "two"), reply("msg_3"))
+    serve(
+      api_error(400, code: "thread_unsupported_request"),
+      reply("msg_1", text: "one"),
+      reply("msg_2", text: "two"),
+      reply("msg_3")
+    )
     thread = new_thread(unsupported_request_behavior: :continue_unthreaded)
 
     %w[a b c].each { thread.send_message(marked(_1)) }
 
     assert_equal([nil, [marked_wire("a")]], bodies[1].values_at(:thread, :messages))
     assert_equal([unmarked_wire("a"), assistant_wire("one"), marked_wire("b")], bodies[2][:messages])
-    sent = [unmarked_wire("a"), assistant_wire("one"), unmarked_wire("b"), assistant_wire("two"), marked_wire("c")]
+    sent = [
+      unmarked_wire("a"),
+      assistant_wire("one"),
+      unmarked_wire("b"),
+      assistant_wire("two"),
+      marked_wire("c")
+    ]
     assert_equal([nil, sent], bodies[3].values_at(:thread, :messages))
   end
 
@@ -452,14 +541,22 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
       input_schema: {type: "object", properties: {cache_control: {type: "string"}}},
       input_examples: [{cache_control: "no-store"}]
     }
-    addition = ->(**mark) { {type: "tool_addition", tool: {type: "tool_definition", definition: {**definition, **mark}}, **mark} }
+    addition = ->(**mark) {
+      {type: "tool_addition", tool: {type: "tool_definition", definition: {**definition, **mark}}, **mark}
+    }
     marked_addition = addition.call(cache_control: marker)
     compaction = {type: "compaction", content: "summary", tool_changes: [marked_addition]}
     search = lambda do |**mark|
-      found = {type: "tool_search_tool_search_result", tool_references: [{type: "tool_reference", tool_name: "lookup", **mark}]}
+      found = {
+        type: "tool_search_tool_search_result",
+        tool_references: [{type: "tool_reference", tool_name: "lookup", **mark}]
+      }
       {type: "tool_search_tool_result", tool_use_id: "srvtoolu_1", content: found, **mark}
     end
-    seed = {role: :assistant, content: [{**compaction, cache_control: marker}, search.call(cache_control: marker)]}
+    seed = {
+      role: :assistant,
+      content: [{**compaction, cache_control: marker}, search.call(cache_control: marker)]
+    }
     serve(reply("msg_1", content: [tool_use], stop_reason: "tool_use"), reply("msg_2"), reply("msg_3"))
     thread = new_thread(tools: TOOLS, messages: [seed])
     thread.send_message(user("a"))
@@ -525,7 +622,12 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
   end
 
   def test_failed_replay_then_create
-    serve(reply("msg_1", text: "one"), api_error(404, code: "thread_not_found"), api_error(500, type: "api_error"), reply("msg_2"))
+    serve(
+      reply("msg_1", text: "one"),
+      api_error(404, code: "thread_not_found"),
+      api_error(500, type: "api_error"),
+      reply("msg_2")
+    )
     thread = new_thread
     thread.send_message(user("a"))
 
@@ -552,7 +654,11 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
       reply("msg_1", text: "one"),
       reply("msg_2")
     )
-    thread = new_thread(unsupported_request_behavior: :continue_unthreaded, betas: ["other-beta"], system_: "s")
+    thread = new_thread(
+      unsupported_request_behavior: :continue_unthreaded,
+      betas: ["other-beta"],
+      system_: "s"
+    )
 
     thread.send_message(user("a"))
     assert_nil(thread.previous_message_id)
@@ -568,7 +674,14 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
 
   def test_thread_not_found_right_after_a_replay_stops_threading
     not_found = api_error(404, code: "thread_not_found", type: "not_found_error")
-    serve(reply("msg_1", text: "one"), not_found, reply("msg_2", text: "two"), not_found, reply("msg_3", text: "three"), reply("msg_4"))
+    serve(
+      reply("msg_1", text: "one"),
+      not_found,
+      reply("msg_2", text: "two"),
+      not_found,
+      reply("msg_3", text: "three"),
+      reply("msg_4")
+    )
     thread = new_thread(unsupported_request_behavior: :continue_unthreaded, system_: "s")
 
     %w[a b c d].each { thread.send_message(user(_1)) }
@@ -585,7 +698,14 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
 
   def test_thread_not_found_right_after_a_replay_that_failed_at_first_stops_threading
     not_found = api_error(404, code: "thread_not_found", type: "not_found_error")
-    serve(reply("msg_1"), not_found, api_error(500, type: "api_error"), reply("msg_2"), not_found, reply("msg_3"))
+    serve(
+      reply("msg_1"),
+      not_found,
+      api_error(500, type: "api_error"),
+      reply("msg_2"),
+      not_found,
+      reply("msg_3")
+    )
     thread = new_thread(unsupported_request_behavior: :continue_unthreaded)
     thread.send_message(user("a"))
 
@@ -593,7 +713,12 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
     thread.send_message(user("b"))
     thread.send_message(user("c"))
 
-    assert_equal([{type: "create"}, {type: "create"}, continue_from("msg_2"), nil], bodies.drop(2).map { _1[:thread] })
+    assert_equal(
+      [{type: "create"}, {type: "create"}, continue_from("msg_2"), nil],
+      bodies.drop(2).map do
+        _1[:thread]
+      end
+    )
   end
 
   def test_thread_not_found_right_after_a_replay_replays_again_on_a_thread_that_raises
@@ -604,7 +729,14 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
     %w[a b c d].each { thread.send_message(user(_1)) }
 
     assert_equal(
-      [{type: "create"}, continue_from("msg_1"), {type: "create"}, continue_from("msg_2"), {type: "create"}, continue_from("msg_3")],
+      [
+        {type: "create"},
+        continue_from("msg_1"),
+        {type: "create"},
+        continue_from("msg_2"),
+        {type: "create"},
+        continue_from("msg_3")
+      ],
       bodies.map { _1[:thread] }
     )
   end
@@ -634,7 +766,12 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
   def test_unfinished_turn_resumes_with_no_messages
     %w[pause_turn compaction].each do |stop_reason|
       start_over
-      serve(reply("msg_1", stop_reason: stop_reason), reply("msg_2", stop_reason: stop_reason), reply("msg_3"), reply("msg_4"))
+      serve(
+        reply("msg_1", stop_reason: stop_reason),
+        reply("msg_2", stop_reason: stop_reason),
+        reply("msg_3"),
+        reply("msg_4")
+      )
       thread = new_thread
       thread.send_message(user("a"))
 
@@ -659,8 +796,14 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
     thread.send_message(user("c"), max_tokens: 128)
     thread.send_message(user("d"))
 
-    assert_equal([32, "us", false], [bodies[0][:max_tokens], bodies[0][:inference_geo], bodies[0].key?(:metadata)])
-    assert_equal([64, false, {user_id: "u"}], [bodies[1][:max_tokens], bodies[1].key?(:inference_geo), bodies[1][:metadata]])
+    assert_equal(
+      [32, "us", false],
+      [bodies[0][:max_tokens], bodies[0][:inference_geo], bodies[0].key?(:metadata)]
+    )
+    assert_equal(
+      [64, false, {user_id: "u"}],
+      [bodies[1][:max_tokens], bodies[1].key?(:inference_geo), bodies[1][:metadata]]
+    )
     assert_equal(128, bodies[2][:max_tokens])
     assert_equal(64, bodies[3][:max_tokens])
     assert_equal(continue_from("msg_3"), bodies[3][:thread])
@@ -668,7 +811,11 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
 
   def test_a_later_request_option_replaces_the_threads_as_a_whole
     serve(reply("msg_1"), reply("msg_2"), reply("msg_3"), reply("msg_4"), url: %r{\Ahttp://localhost/v1/messages})
-    given = {extra_headers: {"x-a" => "1", "x-b" => "1"}, extra_query: {"a" => "1", "b" => "1"}, extra_body: {a: 1, b: 1}}
+    given = {
+      extra_headers: {"x-a" => "1", "x-b" => "1"},
+      extra_query: {"a" => "1", "b" => "1"},
+      extra_body: {a: 1, b: 1}
+    }
     thread = new_thread(request_options: given)
 
     thread.send_message(
@@ -681,7 +828,11 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
     thread.send_message(user("d"), request_options: {extra_headers: nil})
 
     sent = @requests.map do |request|
-      [request[:headers].values_at("X-A", "X-B", "X-C"), request[:query].values_at("a", "b"), request[:body].values_at(:a, :b)]
+      [
+        request[:headers].values_at("X-A", "X-B", "X-C"),
+        request[:query].values_at("a", "b"),
+        request[:body].values_at(:a, :b)
+      ]
     end
     assert_equal(
       [
@@ -711,7 +862,10 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
       assert_raises(Anthropic::Errors::Error) { thread.stream(user("b")) }
 
       assert_includes(error.message, "Cannot change `#{field}` on a thread")
-      assert_equal(field == :tools, error.message.end_with?("send `tool_addition` or `tool_removal` blocks in a `system` message."))
+      assert_equal(
+        field == :tools,
+        error.message.end_with?("send `tool_addition` or `tool_removal` blocks in a `system` message.")
+      )
       assert_equal([1, "msg_1", 2], [@requests.length, thread.previous_message_id, thread.messages.length])
 
       thread.update(field => before)
@@ -754,7 +908,10 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
     fork.update(system_: "two")
     fork.send_message(user("b"), tools: OTHER_TOOLS)
 
-    assert_equal([{type: "create"}, "two", "other"], [bodies[1][:thread], bodies[1][:system], bodies[1][:tools].first[:name]])
+    assert_equal(
+      [{type: "create"}, "two", "other"],
+      [bodies[1][:thread], bodies[1][:system], bodies[1][:tools].first[:name]]
+    )
   end
 
   def test_a_tool_change_appended_by_hand_goes_out_on_the_continue
@@ -762,17 +919,29 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
     thread = new_thread(tools: TOOLS, betas: ["inline-tools-2026-09-15"])
     thread.send_message(user("a"))
 
-    thread.append({role: :system, content: [{type: :tool_removal, tool: {type: :tool_reference, name: "lookup"}}]})
+    thread.append(
+      {
+        role: :system,
+        content: [{type: :tool_removal, tool: {type: :tool_reference, name: "lookup"}}]
+      }
+    )
     thread.send_message(user("b"))
 
-    removal = {role: "system", content: [{type: "tool_removal", tool: {type: "tool_reference", name: "lookup"}}]}
+    removal = {
+      role: "system",
+      content: [{type: "tool_removal", tool: {type: "tool_reference", name: "lookup"}}]
+    }
     assert_equal([continue_from("msg_1"), [removal, user_wire("b")]], bodies[1].values_at(:thread, :messages))
     refute(bodies[1].key?(:tools))
   end
 
   def test_container_of_the_reply_is_sent_on_later_turns
     container = {id: "cont_1", expires_at: "2026-01-01T00:00:00Z"}
-    [[{}, "cont_1"], [{container: "mine"}, "mine"], [{container: {skills: []}}, {skills: [], id: "cont_1"}]].each do |params, expected|
+    [
+      [{}, "cont_1"],
+      [{container: "mine"}, "mine"],
+      [{container: {skills: []}}, {skills: [], id: "cont_1"}]
+    ].each do |params, expected|
       start_over
       serve(reply("msg_1", container: container), reply("msg_2"))
       thread = new_thread(**params)
@@ -836,9 +1005,23 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
     types = ->(name) { rbi[/sig do\s+params\((?:(?!sig do).)*?def #{name}\(/m].scan(/Anthropic::Beta::(\w+)::OrHash/).flatten.uniq.sort }
     update = "Update `thread` in rbi/anthropic/resources/beta/messages.rbi and sig/anthropic/resources/beta/messages.rbs"
 
-    assert_equal(keywords.sort, rbi[/def thread\((.*?)^        \)$/m, 1].scan(/^          (\w+):/).flatten.map(&:to_sym).sort, update)
-    assert_equal(keywords.sort, rbs[/def thread: \((.*?)^        \) ->/m, 1].scan(/^          \??(\w+):/).flatten.map(&:to_sym).sort, update)
-    assert_equal(types.call("create") - %w[BetaThreadCreateParams BetaThreadContinueParams], types.call("thread"), update)
+    assert_equal(
+      keywords.sort,
+      rbi[/def thread\((.*?)^        \)$/m,
+          1].scan(/^          (\w+):/).flatten.map(&:to_sym).sort,
+      update
+    )
+    assert_equal(
+      keywords.sort,
+      rbs[/def thread: \((.*?)^        \) ->/m,
+          1].scan(/^          \??(\w+):/).flatten.map(&:to_sym).sort,
+      update
+    )
+    assert_equal(
+      types.call("create") - %w[BetaThreadCreateParams BetaThreadContinueParams],
+      types.call("thread"),
+      update
+    )
   end
 
   def test_fork_is_independent
@@ -857,7 +1040,10 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
     fork.send_message(user("d"))
 
     assert_equal({type: "create"}, bodies[1][:thread])
-    assert_equal([user_wire("a"), assistant_wire("one"), user_wire("staged"), user_wire("b")], bodies[1][:messages])
+    assert_equal(
+      [user_wire("a"), assistant_wire("one"), user_wire("staged"), user_wire("b")],
+      bodies[1][:messages]
+    )
     assert_equal(%w[s 1], [bodies[1][:system], @requests[1][:headers]["X-A"]])
     assert_equal(continue_from("msg_1"), bodies[2][:thread])
     assert_equal([user_wire("staged"), user_wire("c")], bodies[2][:messages])
@@ -900,7 +1086,10 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
     assert_equal(%w[n m], [first.parsed_output.name, second.parsed_output.name])
     assert_equal([[THREADS_BETA]] * 2, [betas(0), betas(1)])
     assert_equal(bodies[0][:output_config], bodies[1][:output_config])
-    assert_equal(%w[json_schema low], [bodies[0][:output_config][:format][:type], bodies[0][:output_config][:effort]])
+    assert_equal(
+      %w[json_schema low],
+      [bodies[0][:output_config][:format][:type], bodies[0][:output_config][:effort]]
+    )
   end
 
   def test_tool_inputs_are_parsed_on_a_continue
@@ -959,7 +1148,11 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
   def block_stop(index) = {type: "content_block_stop", index: index}
 
   def message_delta(stop_reason = "end_turn", **usage)
-    {type: "message_delta", delta: {stop_reason: stop_reason, stop_sequence: nil}, usage: {output_tokens: 2, **usage}}
+    {
+      type: "message_delta",
+      delta: {stop_reason: stop_reason, stop_sequence: nil},
+      usage: {output_tokens: 2, **usage}
+    }
   end
 
   def text_events(id, text, stop_reason: "end_turn", **)
@@ -1013,7 +1206,10 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
     thread.send_message(user("a"))
     thread.stream(user("b")).until_done
     thread.send_message(user("c"))
-    thread.send_message(user("d"), request_options: {extra_headers: {"X-Stainless-Helper" => "mine, message-thread"}})
+    thread.send_message(
+      user("d"),
+      request_options: {extra_headers: {"X-Stainless-Helper" => "mine, message-thread"}}
+    )
 
     assert_equal(
       [{type: "create"}, continue_from("msg_1"), {type: "create"}, continue_from("msg_2"), nil, nil],
@@ -1140,7 +1336,10 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
       assert_equal([nil, before], [thread.previous_message_id, thread.messages])
       thread.send_message(user("good"))
 
-      assert_equal([continue_from("msg_1"), [user_wire("b"), user_wire("bad")]], bodies[1].values_at(:thread, :messages))
+      assert_equal(
+        [continue_from("msg_1"), [user_wire("b"), user_wire("bad")]],
+        bodies[1].values_at(:thread, :messages)
+      )
       sent = [user_wire("a"), assistant_wire("one"), user_wire("b"), user_wire("good")]
       assert_equal([{type: "create"}, sent, "s"], bodies[2].values_at(:thread, :messages, :system))
     end
@@ -1157,7 +1356,10 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
     thread.send_message(user("c"))
 
     assert_equal({type: "create"}, bodies[2][:thread])
-    assert_equal([user_wire("a"), assistant_wire("one"), user_wire("b1"), user_wire("b2")], bodies[2][:messages])
+    assert_equal(
+      [user_wire("a"), assistant_wire("one"), user_wire("b1"), user_wire("b2")],
+      bodies[2][:messages]
+    )
     assert_equal(continue_from("msg_3"), bodies[3][:thread])
     assert_equal(7, thread.messages.length)
   end
@@ -1248,7 +1450,10 @@ class Anthropic::Test::Helpers::Threads::BetaMessageThreadTest < Minitest::Test
 
     refute(bodies[1].key?(:tools))
     assert_equal("q", message.content.first.parsed.query)
-    assert_equal({type: "tool_use", id: "toolu_1", name: "lookup", input: {query: "q"}}, bodies[2][:messages][3][:content].first)
+    assert_equal(
+      {type: "tool_use", id: "toolu_1", name: "lookup", input: {query: "q"}},
+      bodies[2][:messages][3][:content].first
+    )
   end
 
   class LookupInput < Anthropic::BaseModel

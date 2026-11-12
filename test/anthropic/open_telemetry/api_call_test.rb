@@ -92,7 +92,12 @@ class Anthropic::Test::OpenTelemetryApiCallTest < Anthropic::Test::OpenTelemetry
     c.messages.create(**PARAMS, output_config: {format: {type: :text}})
     c.messages.create(**PARAMS, output_config: {effort: :high})
 
-    assert_equal(["json", "json", "json", "json", nil, nil], spans.map { _1.attributes["gen_ai.output.type"] })
+    assert_equal(
+      ["json", "json", "json", "json", nil, nil],
+      spans.map do
+        _1.attributes["gen_ai.output.type"]
+      end
+    )
     spans.last(2).each { refute_includes(_1.attributes.keys, "gen_ai.output.type") }
   end
 

@@ -20,7 +20,10 @@ class Anthropic::Test::OpenTelemetryProvidersTest < Anthropic::Test::OpenTelemet
     server = {"server.address" => "bedrock-runtime.us-east-1.amazonaws.com", "server.port" => 443}
     assert_equal(server, span.attributes.to_h.slice(*server.keys))
     # The span starts with the provider and the server, for a sampler to read.
-    assert_equal({"gen_ai.provider.name" => "aws.bedrock", **server}, sampler.started.first.last.slice("gen_ai.provider.name", *server.keys))
+    assert_equal(
+      {"gen_ai.provider.name" => "aws.bedrock", **server},
+      sampler.started.first.last.slice("gen_ai.provider.name", *server.keys)
+    )
     assert_nil(span.attributes["anthropic.request.id"])
     # The route is the endpoint's, and the URL is that of the request as Bedrock takes it.
     assert_equal("/v1/messages", sampler.started.first.last["http.route"])
@@ -243,7 +246,11 @@ class Anthropic::Test::OpenTelemetryProvidersTest < Anthropic::Test::OpenTelemet
         skip_auth: true,
         open_telemetry: option
       )
-      clients << Anthropic::FoundryClient.new(resource: "example-resource", api_key: "k", open_telemetry: option)
+      clients << Anthropic::FoundryClient.new(
+        resource: "example-resource",
+        api_key: "k",
+        open_telemetry: option
+      )
       Google::Auth.stub(:get_application_default, creds) { clients.each { _1.messages.create(**PARAMS) } }
     end
 
@@ -273,7 +280,9 @@ class Anthropic::Test::OpenTelemetryProvidersTest < Anthropic::Test::OpenTelemet
       clients = with_env({**key, "ANTHROPIC_OPEN_TELEMETRY_TRACES_CONTENT_MODE" => "content"}) do
         platform_clients(open_telemetry: nil)
       end
-      clients += with_env({**key, "ANTHROPIC_OPEN_TELEMETRY" => "false"}) { platform_clients(open_telemetry: nil) }
+      clients += with_env({**key, "ANTHROPIC_OPEN_TELEMETRY" => "false"}) do
+        platform_clients(open_telemetry: nil)
+      end
       # A client that is given the option does not read the environment.
       clients += with_env({**key, "ANTHROPIC_OPEN_TELEMETRY" => "false"}) do
         platform_clients(open_telemetry: {tracer_provider: @provider})

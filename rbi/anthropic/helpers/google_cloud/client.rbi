@@ -44,7 +44,9 @@ module Anthropic
         end
 
         # @api private
-        sig { params(req: Anthropic::APIRequest).returns(Anthropic::APIRequest) }
+        sig do
+          params(req: Anthropic::APIRequest).returns(Anthropic::APIRequest)
+        end
         private def apply_auth(req)
         end
 

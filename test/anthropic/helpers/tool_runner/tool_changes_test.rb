@@ -339,7 +339,14 @@ class Anthropic::Test::Helpers::ToolRunner::ToolChangesTest < Minitest::Test
   end
 
   def test_changes_made_during_a_paused_turn_are_sent_one_request_later
-    paused = [{type: "server_tool_use", id: "srvtoolu_1", name: "web_search", input: {query: "weather paris"}}]
+    paused = [
+      {
+        type: "server_tool_use",
+        id: "srvtoolu_1",
+        name: "web_search",
+        input: {query: "weather paris"}
+      }
+    ]
     bodies = stub_responses(
       response("msg_1", paused, stop_reason: "pause_turn"),
       response("msg_2", [call_tool("tool_1", "get_weather")]),
