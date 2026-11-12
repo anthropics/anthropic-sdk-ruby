@@ -24,11 +24,6 @@ module Anthropic
           :"message-batches-2024-09-24",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
-      PROMPT_CACHING_2024_07_31 =
-        T.let(
-          :"prompt-caching-2024-07-31",
-          Anthropic::AnthropicBeta::TaggedSymbol
-        )
       COMPUTER_USE_2024_10_22 =
         T.let(
           :"computer-use-2024-10-22",
@@ -39,22 +34,8 @@ module Anthropic
           :"computer-use-2025-01-24",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
-      PDFS_2024_09_25 =
-        T.let(:"pdfs-2024-09-25", Anthropic::AnthropicBeta::TaggedSymbol)
-      TOKEN_COUNTING_2024_11_01 =
-        T.let(
-          :"token-counting-2024-11-01",
-          Anthropic::AnthropicBeta::TaggedSymbol
-        )
-      TOKEN_EFFICIENT_TOOLS_2025_02_19 =
-        T.let(
-          :"token-efficient-tools-2025-02-19",
-          Anthropic::AnthropicBeta::TaggedSymbol
-        )
       OUTPUT_128K_2025_02_19 =
         T.let(:"output-128k-2025-02-19", Anthropic::AnthropicBeta::TaggedSymbol)
-      FILES_API_2025_04_14 =
-        T.let(:"files-api-2025-04-14", Anthropic::AnthropicBeta::TaggedSymbol)
       MCP_CLIENT_2025_04_04 =
         T.let(:"mcp-client-2025-04-04", Anthropic::AnthropicBeta::TaggedSymbol)
       MCP_CLIENT_2025_11_20 =
@@ -74,11 +55,6 @@ module Anthropic
           :"code-execution-2025-05-22",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
-      EXTENDED_CACHE_TTL_2025_04_11 =
-        T.let(
-          :"extended-cache-ttl-2025-04-11",
-          Anthropic::AnthropicBeta::TaggedSymbol
-        )
       CONTEXT_1M_2025_08_07 =
         T.let(:"context-1m-2025-08-07", Anthropic::AnthropicBeta::TaggedSymbol)
       CONTEXT_MANAGEMENT_2025_06_27 =
@@ -91,8 +67,6 @@ module Anthropic
           :"model-context-window-exceeded-2025-08-26",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
-      SKILLS_2025_10_02 =
-        T.let(:"skills-2025-10-02", Anthropic::AnthropicBeta::TaggedSymbol)
       FAST_MODE_2026_02_01 =
         T.let(:"fast-mode-2026-02-01", Anthropic::AnthropicBeta::TaggedSymbol)
       OUTPUT_300K_2026_03_24 =
@@ -120,11 +94,6 @@ module Anthropic
       MANAGED_AGENTS_2026_04_01 =
         T.let(
           :"managed-agents-2026-04-01",
-          Anthropic::AnthropicBeta::TaggedSymbol
-        )
-      CACHE_DIAGNOSIS_2026_04_07 =
-        T.let(
-          :"cache-diagnosis-2026-04-07",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
       DREAMING_2026_04_21 =
@@ -188,11 +157,6 @@ module Anthropic
           :"thinking-display-updates-2026-08-18",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
-      CE_USER_MANAGEMENT_2026_07_13 =
-        T.let(
-          :"ce-user-management-2026-07-13",
-          Anthropic::AnthropicBeta::TaggedSymbol
-        )
       MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01 =
         T.let(
           :"mid-conversation-output-config-2026-07-01",
@@ -249,6 +213,42 @@ module Anthropic
       EXPERIMENTAL_CLAUDE_TAG_2026_10_21 =
         T.let(
           :"experimental-claude-tag-2026-10-21",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
+      PROMPT_CACHING_2024_07_31 =
+        T.let(
+          :"prompt-caching-2024-07-31",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
+      PDFS_2024_09_25 =
+        T.let(:"pdfs-2024-09-25", Anthropic::AnthropicBeta::TaggedSymbol)
+      TOKEN_COUNTING_2024_11_01 =
+        T.let(
+          :"token-counting-2024-11-01",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
+      TOKEN_EFFICIENT_TOOLS_2025_02_19 =
+        T.let(
+          :"token-efficient-tools-2025-02-19",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
+      FILES_API_2025_04_14 =
+        T.let(:"files-api-2025-04-14", Anthropic::AnthropicBeta::TaggedSymbol)
+      EXTENDED_CACHE_TTL_2025_04_11 =
+        T.let(
+          :"extended-cache-ttl-2025-04-11",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
+      SKILLS_2025_10_02 =
+        T.let(:"skills-2025-10-02", Anthropic::AnthropicBeta::TaggedSymbol)
+      CACHE_DIAGNOSIS_2026_04_07 =
+        T.let(
+          :"cache-diagnosis-2026-04-07",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
+      CE_USER_MANAGEMENT_2026_07_13 =
+        T.let(
+          :"ce-user-management-2026-07-13",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
     end
