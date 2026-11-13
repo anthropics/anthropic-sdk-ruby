@@ -92,6 +92,17 @@ module Anthropic
             in Anthropic::FilePart if value.content.is_a?(IO)
               state[:can_retry] = false
               value
+            in Anthropic::FilePart if IO.try_convert(value.content)
+              dump(
+                Anthropic::FilePart.new(
+                  value.content.to_io,
+                  filename: value.filename,
+                  content_type: value.content_type
+                ),
+                state: state
+              )
+            in -> { IO.try_convert(_1) }
+              dump(value.to_io, state: state)
             else
               value
             end
