@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "cgi"
+require "tempfile"
 
 require_relative "../test_helper"
 
@@ -445,6 +446,13 @@ class Anthropic::Test::UtilFormDataEncodingTest < Minitest::Test
       {a: 2, b: [1, 2, 3]} => {"a" => "2", "b[]" => "1"},
       {strio: StringIO.new("a")} => {"strio" => "a"},
       {strio: Anthropic::FilePart.new("a")} => {"strio" => "a"},
+      {
+        text: "héllo",
+        file: Anthropic::FilePart.new(StringIO.new("\xFF\xFE".b), filename: "data.bin")
+      } => {
+        "text" => "héllo",
+        "file" => -> { _1.b == "\xFF\xFE".b }
+      },
       {pathname: Pathname(__FILE__)} => {"pathname" => -> { _1.read in /^class Anthropic/ }},
       {pathname: Anthropic::FilePart.new(Pathname(__FILE__))} => {"pathname" => -> { _1.read in /^class Anthropic/ }}
     }
@@ -601,6 +609,31 @@ class Anthropic::Test::UtilIOAdapterTest < Minitest::Test
         IO.copy_stream(input, y)
       end
       assert_equal(expected, enum.to_a.join)
+    end
+  end
+
+  def test_write_mixed_encodings
+    text = "héllo "
+    bytes = "w\xF6rld".b
+    enum = Anthropic::Internal::Util.writable_enum do |y|
+      y << text
+      y.write(bytes)
+    end
+    assert_equal(text.b + bytes, enum.to_a.join)
+  end
+
+  # Only a Ruby with bug #21131, such as 3.2.3, can catch a regression here.
+  def test_copy_write_file_spanning_chunks
+    data = Random.new(0).bytes(1 << 20)
+    Tempfile.create("copy_write", binmode: true) do |file|
+      file.write(data)
+      file.rewind
+      enum = Anthropic::Internal::Util.writable_enum do |y|
+        IO.copy_stream(file, y)
+      end
+      copied = enum.to_a.join
+      assert_equal(data.bytesize, copied.bytesize)
+      assert(copied == data, "joined chunks differ from the file contents")
     end
   end
 end

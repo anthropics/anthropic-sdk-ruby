@@ -553,8 +553,10 @@ module Anthropic
         # @return [Enumerable<String>]
         def writable_enum(&blk)
           Enumerator.new do |y|
+            y.define_singleton_method(:<<) { super(_1.b) }
             y.define_singleton_method(:write) do
-              self << _1.dup
+              # `IO.copy_stream` reuses its buffer. With Ruby bug #21131, a `dup` or `b` of it changes on the next read.
+              self << (String.new(capacity: _1.bytesize) << _1)
               _1.bytesize
             end
 
@@ -724,9 +726,9 @@ module Anthropic
             closing.clear
           end
 
-          # An IO can be read only once, so a body holding one is wrapped to yield nothing when read again, rather than
-          # resend the other parts with an empty file part. Resource methods turn retries off for such a body; a retry
-          # through `client.request`, or a 307 or 308 redirect, sends it again, empty.
+          # An IO can be read only once, so a second read of `strio` would send the other parts with an empty file part.
+          # `fused_enum` yields nothing instead. Resource methods turn retries off for a body holding an IO; a retry
+          # through `client.request`, or a 307 or 308 redirect, can still send it without the file's contents.
           parts = if body.is_a?(Hash)
             body.values.flat_map { _1.is_a?(Array) ? _1 : [_1] }
           else
