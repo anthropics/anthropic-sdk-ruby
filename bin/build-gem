@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+
+cd -- "$(dirname -- "$0")/.."
+
+# optimizing for grepping through the gem bundle: many tools honour `.ignore` files, including VSCode
+#
+# both `rbi` and `sig` directories are navigable by their respective tool chains and therefore can be ignored by tools such as `rg`
+printf 'rbi/*\nsig/*\n' > .ignore
+gem build -- anthropic.gemspec
+rm .ignore

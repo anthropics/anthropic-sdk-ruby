@@ -244,19 +244,5 @@ end
 
 desc("Build ruby gem")
 multitask(:"build:gem") do
-  # optimizing for grepping through the gem bundle: many tools honour `.ignore` files, including VSCode
-  #
-  # both `rbi` and `sig` directories are navigable by their respective tool chains and therefore can be ignored by tools such as `rg`
-  Pathname(ignore_file).write(<<~GLOB)
-    rbi/*
-    sig/*
-  GLOB
-
-  sh(*%w[gem build -- anthropic.gemspec])
-  rm_rf(ignore_file)
-end
-
-desc("Release ruby gem")
-multitask(release: [:"build:gem"]) do
-  sh(*%w[gem push], *FileList["*.gem"])
+  sh(*%w[bash ./bin/build-gem])
 end
