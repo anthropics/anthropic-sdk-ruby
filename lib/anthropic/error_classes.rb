@@ -25,6 +25,8 @@ module Anthropic
         [529, nil] => Anthropic::Errors::OverloadedError,
         [400, "already_member"] => Anthropic::Models::Organization::AlreadyMemberError,
         [400, "available_tools_limit_exceeded"] => Anthropic::Models::AvailableToolsLimitExceededError,
+        [400, "bundle_attachment_not_supported"] => Anthropic::Models::Beta::Organization::BetaBundleAttachmentNotSupportedError,
+        [400, "bundle_on_call"] => Anthropic::Models::Beta::Organization::BetaBundleOnCallError,
         [400, "cannot_invite_emails_with_unverified_domains"] => Anthropic::Models::Organization::CannotInviteEmailsWithUnverifiedDomainsError,
         [400, "cannot_remove_last_member"] => Anthropic::Models::Organization::CannotRemoveLastMemberError,
         [400, "cannot_sign_out_primary_owner"] => Anthropic::Models::Beta::Organization::BetaCannotSignOutPrimaryOwnerError,

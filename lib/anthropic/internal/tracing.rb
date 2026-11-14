@@ -366,6 +366,7 @@ module Anthropic
           "anthropic.organization.claude_tag.slack_workspaces.update"
         ORGANIZATION_CLAUDE_TAG_SLACK_WORKSPACES_LIST = "anthropic.organization.claude_tag.slack_workspaces.list"
         ORGANIZATION_CLAUDE_TAG_BUNDLES_RETRIEVE = "anthropic.organization.claude_tag.bundles.retrieve"
+        ORGANIZATION_CLAUDE_TAG_BUNDLES_UPDATE = "anthropic.organization.claude_tag.bundles.update"
         ORGANIZATION_CLAUDE_TAG_BUNDLES_LIST = "anthropic.organization.claude_tag.bundles.list"
         ORGANIZATION_CLAUDE_TAG_BUNDLES_TARGETS_CREATE =
           "anthropic.organization.claude_tag.bundles.targets.create"

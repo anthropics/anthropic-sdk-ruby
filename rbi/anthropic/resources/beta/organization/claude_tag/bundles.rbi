@@ -35,6 +35,36 @@ module Anthropic
             )
             end
 
+            # Change a Bundle's instructions. The update is partial: a field left out is
+            # unchanged, and `instructions` sent as null or as an empty string clears them.
+            # The later of two updates wins. Sessions that start after the change use the new
+            # instructions; sessions already running keep the ones they started with. Some
+            # Bundles are managed in claude.ai, and an update of one returns 400.
+            sig do
+              params(
+                bundle_id: String,
+                instructions: T.nilable(String),
+                betas:
+                  T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
+                request_options: Anthropic::RequestOptions::OrHash
+              ).returns(
+                Anthropic::Beta::Organization::ClaudeTag::BetaClaudeTagBundle
+              )
+            end
+            def update(
+              # Path param: The Bundle's identifier, starting with `capp_`.
+              bundle_id,
+              # Body param: Instructions for Claude, up to 10,000 bytes (UTF-8), added to the
+              # instructions of every session that can use the Bundle. Null or an empty string
+              # clears them.
+              instructions: nil,
+              # Header param: This endpoint is in beta: requests must send
+              # `experimental-claude-tag-2026-10-21` in this header.
+              betas: nil,
+              request_options: {}
+            )
+            end
+
             # List the organization's Bundles, newest first by `created_at`. A Bundle that
             # Claude Tag manages for itself is not listed.
             sig do

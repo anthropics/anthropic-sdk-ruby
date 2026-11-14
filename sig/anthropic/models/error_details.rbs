@@ -85,6 +85,8 @@ module Anthropic
       | Anthropic::Beta::BetaEnvironmentNotFoundErrorDetails
       | Anthropic::Beta::Organization::BetaSlackChannelSetUpEnvironmentNotFoundErrorDetails
       | Anthropic::Beta::Organization::BetaSlackChannelSetUpSettingsConflictErrorDetails
+      | Anthropic::Beta::Organization::BetaBundleAttachmentNotSupportedErrorDetails
+      | Anthropic::Beta::Organization::BetaBundleOnCallErrorDetails
 
     module ErrorDetails
       extend Anthropic::Internal::Type::Union
@@ -174,6 +176,8 @@ module Anthropic
         | :environment_not_found
         | :slack_channel_set_up_environment_not_found
         | :slack_channel_set_up_settings_conflict
+        | :bundle_attachment_not_supported
+        | :bundle_on_call
 
       module ErrorCode
         extend Anthropic::Internal::Type::Enum
@@ -262,6 +266,8 @@ module Anthropic
         ENVIRONMENT_NOT_FOUND: :environment_not_found
         SLACK_CHANNEL_SET_UP_ENVIRONMENT_NOT_FOUND: :slack_channel_set_up_environment_not_found
         SLACK_CHANNEL_SET_UP_SETTINGS_CONFLICT: :slack_channel_set_up_settings_conflict
+        BUNDLE_ATTACHMENT_NOT_SUPPORTED: :bundle_attachment_not_supported
+        BUNDLE_ON_CALL: :bundle_on_call
 
         def self?.values: -> ::Array[Anthropic::Models::ErrorDetails::error_code]
       end
@@ -576,6 +582,13 @@ module Anthropic
           | "slack_channel_set_up_settings_conflict",
           slack_channel_id: String
         ) -> Anthropic::Beta::Organization::BetaSlackChannelSetUpSettingsConflictErrorDetails
+        | (
+          error_code: :bundle_attachment_not_supported
+          | "bundle_attachment_not_supported"
+        ) -> Anthropic::Beta::Organization::BetaBundleAttachmentNotSupportedErrorDetails
+        | (
+          error_code: :bundle_on_call | "bundle_on_call"
+        ) -> Anthropic::Beta::Organization::BetaBundleOnCallErrorDetails
         | (
           error_code: Anthropic::Models::ErrorDetails::error_code | String,
           ?appeal_url: String?,

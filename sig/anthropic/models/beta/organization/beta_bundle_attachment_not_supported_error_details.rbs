@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_bundle_attachment_not_supported_error_details =
+          { error_code: :bundle_attachment_not_supported }
+
+        class BetaBundleAttachmentNotSupportedErrorDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor error_code: :bundle_attachment_not_supported
+
+          def initialize: (
+            ?error_code: :bundle_attachment_not_supported
+          ) -> void
+
+          def to_hash: -> { error_code: :bundle_attachment_not_supported }
+        end
+      end
+    end
+  end
+end

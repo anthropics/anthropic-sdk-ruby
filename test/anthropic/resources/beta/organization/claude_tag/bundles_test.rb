@@ -20,6 +20,31 @@ class Anthropic::Test::Resources::Beta::Organization::ClaudeTag::BundlesTest < A
         created_at: Time,
         description: String | nil,
         display_name: String,
+        instructions: String | nil,
+        type: Symbol,
+        updated_at: Time
+      }
+    end
+  end
+
+  def test_update
+    response =
+      @anthropic.beta.organization.claude_tag.bundles.update(
+        "capp_011CZkZjLP1cWxj5EtMmdgbq",
+        request_options: {extra_query: {beta: "true"}}
+      )
+
+    assert_pattern do
+      response => Anthropic::Beta::Organization::ClaudeTag::BetaClaudeTagBundle
+    end
+
+    assert_pattern do
+      response => {
+        id: String,
+        created_at: Time,
+        description: String | nil,
+        display_name: String,
+        instructions: String | nil,
         type: Symbol,
         updated_at: Time
       }
@@ -47,6 +72,7 @@ class Anthropic::Test::Resources::Beta::Organization::ClaudeTag::BundlesTest < A
         created_at: Time,
         description: String | nil,
         display_name: String,
+        instructions: String | nil,
         type: Symbol,
         updated_at: Time
       }

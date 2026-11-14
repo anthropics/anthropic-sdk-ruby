@@ -9,6 +9,7 @@ module Anthropic
               created_at: Time,
               description: String?,
               display_name: String,
+              instructions: String?,
               type: :bundle,
               updated_at: Time
             }
@@ -22,6 +23,8 @@ module Anthropic
 
             attr_accessor display_name: String
 
+            attr_accessor instructions: String?
+
             attr_accessor type: :bundle
 
             attr_accessor updated_at: Time
@@ -31,6 +34,7 @@ module Anthropic
               created_at: Time,
               description: String?,
               display_name: String,
+              instructions: String?,
               updated_at: Time,
               ?type: :bundle
             ) -> void
@@ -40,6 +44,7 @@ module Anthropic
               created_at: Time,
               description: String?,
               display_name: String,
+              instructions: String?,
               type: :bundle,
               updated_at: Time
             }

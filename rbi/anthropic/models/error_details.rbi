@@ -91,7 +91,9 @@ module Anthropic
             Anthropic::Beta::Organization::BetaOrganizationLevelScopedAPIKeyRequiredErrorDetails,
             Anthropic::Beta::BetaEnvironmentNotFoundErrorDetails,
             Anthropic::Beta::Organization::BetaSlackChannelSetUpEnvironmentNotFoundErrorDetails,
-            Anthropic::Beta::Organization::BetaSlackChannelSetUpSettingsConflictErrorDetails
+            Anthropic::Beta::Organization::BetaSlackChannelSetUpSettingsConflictErrorDetails,
+            Anthropic::Beta::Organization::BetaBundleAttachmentNotSupportedErrorDetails,
+            Anthropic::Beta::Organization::BetaBundleOnCallErrorDetails
           )
         end
 
@@ -511,6 +513,16 @@ module Anthropic
         SLACK_CHANNEL_SET_UP_SETTINGS_CONFLICT =
           T.let(
             :slack_channel_set_up_settings_conflict,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        BUNDLE_ATTACHMENT_NOT_SUPPORTED =
+          T.let(
+            :bundle_attachment_not_supported,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        BUNDLE_ON_CALL =
+          T.let(
+            :bundle_on_call,
             Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
           )
 

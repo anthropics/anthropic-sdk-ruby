@@ -12,6 +12,13 @@ module Anthropic
               ?request_options: Anthropic::request_opts
             ) -> Anthropic::Beta::Organization::ClaudeTag::BetaClaudeTagBundle
 
+            def update: (
+              String bundle_id,
+              ?instructions: String?,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Beta::Organization::ClaudeTag::BetaClaudeTagBundle
+
             def list: (
               ?limit: Integer,
               ?page: String,
