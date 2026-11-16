@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_bundle_on_call_error_details = { error_code: :bundle_on_call }
+
+        class BetaBundleOnCallErrorDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor error_code: :bundle_on_call
+
+          def initialize: (?error_code: :bundle_on_call) -> void
+
+          def to_hash: -> { error_code: :bundle_on_call }
+        end
+      end
+    end
+  end
+end

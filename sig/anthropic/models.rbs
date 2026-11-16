@@ -693,6 +693,10 @@ module Anthropic
 
   class OverloadedError = Anthropic::Models::OverloadedError
 
+  class ParentOrganizationRequiredError = Anthropic::Models::ParentOrganizationRequiredError
+
+  class ParentOrganizationRequiredErrorDetails = Anthropic::Models::ParentOrganizationRequiredErrorDetails
+
   class PermissionError = Anthropic::Models::PermissionError
 
   class PlainTextSource = Anthropic::Models::PlainTextSource
@@ -718,6 +722,10 @@ module Anthropic
   class RawMessageStopEvent = Anthropic::Models::RawMessageStopEvent
 
   module RawMessageStreamEvent = Anthropic::Models::RawMessageStreamEvent
+
+  class RBACRoleNotFoundError = Anthropic::Models::RBACRoleNotFoundError
+
+  class RBACRoleNotFoundErrorDetails = Anthropic::Models::RBACRoleNotFoundErrorDetails
 
   class RedactedThinkingBlock = Anthropic::Models::RedactedThinkingBlock
 

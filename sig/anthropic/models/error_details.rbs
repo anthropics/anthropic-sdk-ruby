@@ -55,6 +55,8 @@ module Anthropic
       | Anthropic::Organization::ExternalKeyChangedErrorDetails
       | Anthropic::Organization::WorkspaceMemberLimitExceededErrorDetails
       | Anthropic::OrganizationTypeNotSupportedErrorDetails
+      | Anthropic::ParentOrganizationRequiredErrorDetails
+      | Anthropic::RBACRoleNotFoundErrorDetails
       | Anthropic::Beta::BetaEnvironmentCreateDisabledErrorDetails
       | Anthropic::Beta::BetaEnvironmentArchivedErrorDetails
       | Anthropic::Beta::BetaInvalidConfigTypeChangeErrorDetails
@@ -83,6 +85,8 @@ module Anthropic
       | Anthropic::Beta::BetaEnvironmentNotFoundErrorDetails
       | Anthropic::Beta::Organization::BetaSlackChannelSetUpEnvironmentNotFoundErrorDetails
       | Anthropic::Beta::Organization::BetaSlackChannelSetUpSettingsConflictErrorDetails
+      | Anthropic::Beta::Organization::BetaBundleAttachmentNotSupportedErrorDetails
+      | Anthropic::Beta::Organization::BetaBundleOnCallErrorDetails
 
     module ErrorDetails
       extend Anthropic::Internal::Type::Union
@@ -142,6 +146,8 @@ module Anthropic
         | :external_key_changed
         | :workspace_member_limit_exceeded
         | :organization_type_not_supported
+        | :parent_organization_required
+        | :rbac_role_not_found
         | :environment_create_disabled
         | :environment_archived
         | :invalid_config_type_change
@@ -170,6 +176,8 @@ module Anthropic
         | :environment_not_found
         | :slack_channel_set_up_environment_not_found
         | :slack_channel_set_up_settings_conflict
+        | :bundle_attachment_not_supported
+        | :bundle_on_call
 
       module ErrorCode
         extend Anthropic::Internal::Type::Enum
@@ -228,6 +236,8 @@ module Anthropic
         EXTERNAL_KEY_CHANGED: :external_key_changed
         WORKSPACE_MEMBER_LIMIT_EXCEEDED: :workspace_member_limit_exceeded
         ORGANIZATION_TYPE_NOT_SUPPORTED: :organization_type_not_supported
+        PARENT_ORGANIZATION_REQUIRED: :parent_organization_required
+        RBAC_ROLE_NOT_FOUND: :rbac_role_not_found
         ENVIRONMENT_CREATE_DISABLED: :environment_create_disabled
         ENVIRONMENT_ARCHIVED: :environment_archived
         INVALID_CONFIG_TYPE_CHANGE: :invalid_config_type_change
@@ -256,6 +266,8 @@ module Anthropic
         ENVIRONMENT_NOT_FOUND: :environment_not_found
         SLACK_CHANNEL_SET_UP_ENVIRONMENT_NOT_FOUND: :slack_channel_set_up_environment_not_found
         SLACK_CHANNEL_SET_UP_SETTINGS_CONFLICT: :slack_channel_set_up_settings_conflict
+        BUNDLE_ATTACHMENT_NOT_SUPPORTED: :bundle_attachment_not_supported
+        BUNDLE_ON_CALL: :bundle_on_call
 
         def self?.values: -> ::Array[Anthropic::Models::ErrorDetails::error_code]
       end
@@ -455,6 +467,13 @@ module Anthropic
           | "organization_type_not_supported"
         ) -> Anthropic::OrganizationTypeNotSupportedErrorDetails
         | (
+          error_code: :parent_organization_required
+          | "parent_organization_required"
+        ) -> Anthropic::ParentOrganizationRequiredErrorDetails
+        | (
+          error_code: :rbac_role_not_found | "rbac_role_not_found"
+        ) -> Anthropic::RBACRoleNotFoundErrorDetails
+        | (
           error_code: :environment_create_disabled
           | "environment_create_disabled"
         ) -> Anthropic::Beta::BetaEnvironmentCreateDisabledErrorDetails
@@ -563,6 +582,13 @@ module Anthropic
           | "slack_channel_set_up_settings_conflict",
           slack_channel_id: String
         ) -> Anthropic::Beta::Organization::BetaSlackChannelSetUpSettingsConflictErrorDetails
+        | (
+          error_code: :bundle_attachment_not_supported
+          | "bundle_attachment_not_supported"
+        ) -> Anthropic::Beta::Organization::BetaBundleAttachmentNotSupportedErrorDetails
+        | (
+          error_code: :bundle_on_call | "bundle_on_call"
+        ) -> Anthropic::Beta::Organization::BetaBundleOnCallErrorDetails
         | (
           error_code: Anthropic::Models::ErrorDetails::error_code | String,
           ?appeal_url: String?,

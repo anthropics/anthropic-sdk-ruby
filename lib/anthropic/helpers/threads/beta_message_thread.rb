@@ -11,7 +11,9 @@ module Anthropic
         THREADS_BETA = Anthropic::Models::AnthropicBeta::MESSAGE_THREADS_2026_08_12.to_s
         NOT_FOUND_ERROR_CODE = "thread_not_found"
         # A `continue` rejected with one of these is sent again as a `create`.
-        REPLAY_ERROR_CODES = Set[NOT_FOUND_ERROR_CODE, "thread_already_continued", "thread_continue_in_flight"].freeze
+        REPLAY_ERROR_CODES = Set[NOT_FOUND_ERROR_CODE,
+                                 "thread_already_continued",
+                                 "thread_continue_in_flight"].freeze
         UNSUPPORTED_REQUEST_ERROR_CODE = "thread_unsupported_request"
         UNSUPPORTED_REQUEST_BEHAVIORS = Set[:error, :continue_unthreaded].freeze
 
@@ -455,7 +457,16 @@ module Anthropic
           value.except(:cache_control, "cache_control").to_h do |key, nested|
             next [key, nested] unless %w[content source tool definition tool_references].include?(key.to_s)
 
-            [key, nested.is_a?(Array) ? nested.map { without_cache_control(_1) } : without_cache_control(nested)]
+            [
+              key,
+              if nested.is_a?(Array)
+                nested.map do
+                  without_cache_control(_1)
+                end
+              else
+                without_cache_control(nested)
+              end
+            ]
           end
         end
 
@@ -463,11 +474,20 @@ module Anthropic
         #   as the API would receive it, and the classes that its tool inputs and output parse into
         def wire_request(fields)
           wire, = Anthropic::Models::Beta::MessageCreateParams.dump_request(fields)
-          tools, models = Anthropic::Helpers::Messages.distill_input_schema_models!(wire, strict: nil, is_beta: true)
+          tools, models = Anthropic::Helpers::Messages.distill_input_schema_models!(
+            wire,
+            strict: nil,
+            is_beta: true
+          )
           [wire, tools, models]
         end
 
-        def create_only_fields(wire) = {system_: wire[:system], tools: wire[:tools]}.transform_values(&:to_json)
+        def create_only_fields(wire)
+          {
+            system_: wire[:system],
+            tools: wire[:tools]
+          }.transform_values(&:to_json)
+        end
 
         def refuse_change!(created_with)
           return if !@anchor.is_a?(Continue) || created_with == @anchor.created_with
@@ -495,14 +515,18 @@ module Anthropic
                 in Anthropic::Models::Beta::BetaToolUseBlock[type: :tool_use] if (tool = request.tools[block.name])
                   Anthropic::Internal::Type::Converter.coerce(tool, block.input)
                 in Anthropic::Models::Beta::BetaTextBlock if (model = request.models.first&.last)
-                  Anthropic::Internal::Type::Converter.coerce(model, JSON.parse(block.text, symbolize_names: true))
+                  Anthropic::Internal::Type::Converter.coerce(
+                    model,
+                    JSON.parse(block.text, symbolize_names: true)
+                  )
                 else
                   next
                 end
               rescue StandardError => e
                 {error: e.message}
               end
-            reply.content[index] = Anthropic::Internal::Type::Converter.coerce(block.class, {**block.to_h, parsed:})
+            reply.content[index] =
+              Anthropic::Internal::Type::Converter.coerce(block.class, {**block.to_h, parsed:})
           end
         end
 

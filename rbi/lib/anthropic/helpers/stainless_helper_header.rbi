@@ -12,7 +12,12 @@ module Anthropic
       MESSAGE_THREAD = T.let("message-thread", String)
 
       class << self
-        sig { params(headers: T::Hash[T.any(String, Symbol), T.untyped], value: String).returns(String) }
+        sig do
+          params(
+            headers: T::Hash[T.any(String, Symbol), T.untyped],
+            value: String
+          ).returns(String)
+        end
         def merged_value(headers, value)
         end
       end

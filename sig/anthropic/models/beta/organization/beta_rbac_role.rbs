@@ -7,6 +7,7 @@ module Anthropic
             id: String,
             created_at: Time,
             display_name: String,
+            source: Anthropic::Models::Beta::Organization::beta_rbac_role_source,
             type: :rbac_role,
             updated_at: Time
           }
@@ -18,6 +19,8 @@ module Anthropic
 
           attr_accessor display_name: String
 
+          attr_accessor source: Anthropic::Models::Beta::Organization::beta_rbac_role_source
+
           attr_accessor type: :rbac_role
 
           attr_accessor updated_at: Time
@@ -26,6 +29,7 @@ module Anthropic
             id: String,
             created_at: Time,
             display_name: String,
+            source: Anthropic::Models::Beta::Organization::beta_rbac_role_source,
             updated_at: Time,
             ?type: :rbac_role
           ) -> void
@@ -34,6 +38,7 @@ module Anthropic
             id: String,
             created_at: Time,
             display_name: String,
+            source: Anthropic::Models::Beta::Organization::beta_rbac_role_source,
             type: :rbac_role,
             updated_at: Time
           }

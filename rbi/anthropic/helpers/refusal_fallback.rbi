@@ -23,9 +23,13 @@ module Anthropic
 
     sig do
       params(
-        fallbacks: T::Array[
-          T.any(Anthropic::Models::Beta::BetaFallbackParam, T::Hash[Symbol, T.anything])
-        ],
+        fallbacks:
+          T::Array[
+            T.any(
+              Anthropic::Models::Beta::BetaFallbackParam,
+              T::Hash[Symbol, T.anything]
+            )
+          ],
         betas: T::Array[String]
       ).void
     end
@@ -36,7 +40,11 @@ module Anthropic
       override
         .params(
           request: Anthropic::APIRequest,
-          nxt: T.proc.params(req: Anthropic::APIRequest).returns(Anthropic::APIResponse)
+          nxt:
+            T
+              .proc
+              .params(req: Anthropic::APIRequest)
+              .returns(Anthropic::APIResponse)
         )
         .returns(Anthropic::APIResponse)
     end

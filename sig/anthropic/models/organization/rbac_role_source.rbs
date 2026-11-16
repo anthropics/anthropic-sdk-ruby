@@ -1,0 +1,38 @@
+module Anthropic
+  module Models
+    module Organization
+      type rbac_role_source =
+        Anthropic::Organization::RBACRoleSourceBuiltIn
+        | Anthropic::Organization::RBACRoleSourceCustom
+
+      module RBACRoleSource
+        extend Anthropic::Internal::Type::Union
+
+        type type_ = :built_in | :custom
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          BUILT_IN: :built_in
+          CUSTOM: :custom
+
+          def self?.values: -> ::Array[Anthropic::Models::Organization::RBACRoleSource::type_]
+        end
+
+        def self?.variants: -> ::Array[Anthropic::Models::Organization::rbac_role_source]
+
+        def self.new:
+          (
+            type: :built_in | "built_in"
+          ) -> Anthropic::Organization::RBACRoleSourceBuiltIn
+          | (
+            type: :custom | "custom"
+          ) -> Anthropic::Organization::RBACRoleSourceCustom
+          | (
+            type: Anthropic::Models::Organization::RBACRoleSource::type_
+            | String
+          ) -> Anthropic::Models::Organization::rbac_role_source
+      end
+    end
+  end
+end

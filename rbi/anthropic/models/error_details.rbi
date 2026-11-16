@@ -62,6 +62,8 @@ module Anthropic
             Anthropic::Organization::ExternalKeyChangedErrorDetails,
             Anthropic::Organization::WorkspaceMemberLimitExceededErrorDetails,
             Anthropic::OrganizationTypeNotSupportedErrorDetails,
+            Anthropic::ParentOrganizationRequiredErrorDetails,
+            Anthropic::RBACRoleNotFoundErrorDetails,
             Anthropic::Beta::BetaEnvironmentCreateDisabledErrorDetails,
             Anthropic::Beta::BetaEnvironmentArchivedErrorDetails,
             Anthropic::Beta::BetaInvalidConfigTypeChangeErrorDetails,
@@ -89,7 +91,9 @@ module Anthropic
             Anthropic::Beta::Organization::BetaOrganizationLevelScopedAPIKeyRequiredErrorDetails,
             Anthropic::Beta::BetaEnvironmentNotFoundErrorDetails,
             Anthropic::Beta::Organization::BetaSlackChannelSetUpEnvironmentNotFoundErrorDetails,
-            Anthropic::Beta::Organization::BetaSlackChannelSetUpSettingsConflictErrorDetails
+            Anthropic::Beta::Organization::BetaSlackChannelSetUpSettingsConflictErrorDetails,
+            Anthropic::Beta::Organization::BetaBundleAttachmentNotSupportedErrorDetails,
+            Anthropic::Beta::Organization::BetaBundleOnCallErrorDetails
           )
         end
 
@@ -367,6 +371,16 @@ module Anthropic
             :organization_type_not_supported,
             Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
           )
+        PARENT_ORGANIZATION_REQUIRED =
+          T.let(
+            :parent_organization_required,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        RBAC_ROLE_NOT_FOUND =
+          T.let(
+            :rbac_role_not_found,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
         ENVIRONMENT_CREATE_DISABLED =
           T.let(
             :environment_create_disabled,
@@ -499,6 +513,16 @@ module Anthropic
         SLACK_CHANNEL_SET_UP_SETTINGS_CONFLICT =
           T.let(
             :slack_channel_set_up_settings_conflict,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        BUNDLE_ATTACHMENT_NOT_SUPPORTED =
+          T.let(
+            :bundle_attachment_not_supported,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        BUNDLE_ON_CALL =
+          T.let(
+            :bundle_on_call,
             Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
           )
 

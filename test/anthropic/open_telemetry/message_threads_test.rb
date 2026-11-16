@@ -29,7 +29,10 @@ class Anthropic::Test::OpenTelemetryMessageThreadsTest < Anthropic::Test::OpenTe
 
   def message_events(message)
     blocks = message[:content].each_with_index.flat_map do |block, index|
-      [{type: "content_block_start", index: index, content_block: block}, {type: "content_block_stop", index: index}]
+      [
+        {type: "content_block_start", index: index, content_block: block},
+        {type: "content_block_stop", index: index}
+      ]
     end
     delta = {stop_reason: message[:stop_reason], stop_sequence: nil}
     [
@@ -42,7 +45,11 @@ class Anthropic::Test::OpenTelemetryMessageThreadsTest < Anthropic::Test::OpenTe
 
   def thread_not_found
     error = {type: "not_found_error", message: "no", details: {error_code: "thread_not_found"}}
-    {status: 404, body: {type: "error", error: error}.to_json, headers: {"content-type" => "application/json"}}
+    {
+      status: 404,
+      body: {type: "error", error: error}.to_json,
+      headers: {"content-type" => "application/json"}
+    }
   end
 
   # Serves each Message as the request asks for it, streamed or not, and any other response as it
@@ -108,11 +115,22 @@ class Anthropic::Test::OpenTelemetryMessageThreadsTest < Anthropic::Test::OpenTe
       end
 
       assert_equal(
-        [[REQUEST, TOOL_RUNNER, OK], [TOOL_USE, TOOL_RUNNER, OK], [REQUEST, TOOL_RUNNER, OK], [TOOL_RUNNER, nil, OK]],
+        [
+          [REQUEST, TOOL_RUNNER, OK],
+          [TOOL_USE, TOOL_RUNNER, OK],
+          [REQUEST, TOOL_RUNNER, OK],
+          [TOOL_RUNNER, nil, OK]
+        ],
         traces.fetch(:unthreaded).map { _1.first(3) },
         drive
       )
-      assert_equal(["conv_1"], traces.fetch(:unthreaded).map { _1.last["gen_ai.conversation.id"] }.uniq, drive)
+      assert_equal(
+        ["conv_1"],
+        traces.fetch(:unthreaded).map do
+          _1.last["gen_ai.conversation.id"]
+        end.uniq,
+        drive
+      )
       assert_equal(traces.fetch(:unthreaded), traces.fetch(:own_thread), drive)
       assert_equal(traces.fetch(:unthreaded), traces.fetch(:given_thread), drive)
     end
@@ -133,7 +151,13 @@ class Anthropic::Test::OpenTelemetryMessageThreadsTest < Anthropic::Test::OpenTe
       assert_equal(["yes"] * 4, @requests.map { _1[:headers]["x-caller"] }, name)
       assert_equal(["conv_1"] * 4, request_spans.map { _1.attributes["gen_ai.conversation.id"] }, name)
       # Each request carries the context of its own span.
-      assert_equal(request_spans.map(&:hex_span_id), @requests.map { _1[:headers]["traceparent"].split("-")[2] }, name)
+      assert_equal(
+        request_spans.map(&:hex_span_id),
+        @requests.map do
+          _1[:headers]["traceparent"].split("-")[2]
+        end,
+        name
+      )
     end
   end
 
@@ -160,7 +184,11 @@ class Anthropic::Test::OpenTelemetryMessageThreadsTest < Anthropic::Test::OpenTe
 
   def test_the_content_of_a_request_span_is_that_of_the_request_that_was_sent
     first = {"role" => "user", "parts" => [{"type" => "text", "content" => "Hi"}]}
-    response = {"type" => "tool_call_response", "id" => "toolu_msg_1", "response" => [{"type" => "text", "text" => "sunny"}]}
+    response = {
+      "type" => "tool_call_response",
+      "id" => "toolu_msg_1",
+      "response" => [{"type" => "text", "text" => "sunny"}]
+    }
     sent = {unthreaded: [1, 3], own_thread: [1, 1], given_thread: [1, 1]}
 
     DRIVES.each do |drive, run|
@@ -171,7 +199,14 @@ class Anthropic::Test::OpenTelemetryMessageThreadsTest < Anthropic::Test::OpenTe
         bodies = @requests.map { _1[:body] }
         inputs = request_spans.map { json_attribute(_1, "gen_ai.input.messages") }
         assert_equal(sent.fetch(name), bodies.map { _1[:messages].length }, [drive, name])
-        assert_equal(bodies.map { |body| body[:messages].map { _1[:role] } }, inputs.map { |input| input.map { _1["role"] } })
+        assert_equal(
+          bodies.map { |body| body[:messages].map { _1[:role] } },
+          inputs.map do |input|
+            input.map do
+              _1["role"]
+            end
+          end
+        )
         assert_equal([first], inputs.first, [drive, name])
         assert_equal({"role" => "user", "parts" => [response]}, inputs.last.last, [drive, name])
         assert_equal(

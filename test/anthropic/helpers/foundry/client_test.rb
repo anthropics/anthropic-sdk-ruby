@@ -534,7 +534,10 @@ class Anthropic::Test::FoundryClientTest < Minitest::Test
   end
 
   def test_multipart_body_is_sent_whole_on_every_attempt
-    stub_request(:post, "#{BASE_URL}v1/files").to_return_json({status: 500, body: {}}, {status: 200, body: {}})
+    stub_request(:post, "#{BASE_URL}v1/files").to_return_json(
+      {status: 500, body: {}},
+      {status: 200, body: {}}
+    )
 
     make_client.files.upload(file: Pathname(__FILE__))
 

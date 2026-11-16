@@ -703,7 +703,12 @@ class Anthropic::Test::BedrockClientTest < Minitest::Test
     ENV["ANTHROPIC_WEBHOOK_SIGNING_KEY"] = "whsec_fake_env_value"
     assert_equal("whsec_fake_env_value", make_client.webhook_key)
   ensure
-    original.nil? ? ENV.delete("ANTHROPIC_WEBHOOK_SIGNING_KEY") : ENV["ANTHROPIC_WEBHOOK_SIGNING_KEY"] = original
+    if original.nil?
+      ENV.delete("ANTHROPIC_WEBHOOK_SIGNING_KEY")
+    else
+      ENV["ANTHROPIC_WEBHOOK_SIGNING_KEY"] =
+        original
+    end
   end
 
   def test_long_request_check_applies_unless_timeout_is_passed
@@ -766,7 +771,11 @@ class Anthropic::Test::BedrockClientTest < Minitest::Test
       uri = "https://bedrock-runtime.us-east-1.amazonaws.com/model/m/invoke"
       stub_request(:post, uri).to_return_json({status: 200, body: {}})
 
-      client = Anthropic::BedrockClient.new(aws_region: "us-east-1", aws_access_key: "ak", aws_secret_key: "sk")
+      client = Anthropic::BedrockClient.new(
+        aws_region: "us-east-1",
+        aws_access_key: "ak",
+        aws_secret_key: "sk"
+      )
       assert_nil(client.credentials)
       assert_nil(client.token_cache)
       client.messages.create(max_tokens: 1024, messages: [{content: "hi", role: :user}], model: :m)

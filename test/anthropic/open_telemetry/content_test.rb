@@ -680,7 +680,14 @@ class Anthropic::Test::OpenTelemetryContentTest < Anthropic::Test::OpenTelemetry
 
       bounded, whole = spans
       input = json_attribute(bounded, "gen_ai.input.messages")
-      assert_equal([[], [], ["2#{'x' * 100}"]], input.map { |message| message["parts"].map { _1["content"] } })
+      assert_equal(
+        [[], [], ["2#{'x' * 100}"]],
+        input.map do |message|
+          message["parts"].map do
+            _1["content"]
+          end
+        end
+      )
       assert_equal(true, bounded.attributes[TRUNCATED])
       assert_operator(content_bytes(bounded), :<=, 300)
       assert_equal(3, json_attribute(whole, "gen_ai.input.messages").count { _1["parts"].any? })
@@ -695,7 +702,9 @@ class Anthropic::Test::OpenTelemetryContentTest < Anthropic::Test::OpenTelemetry
       "ANTHROPIC_OPEN_TELEMETRY_TRACES_CONTENT_MODE" => "content",
       "ANTHROPIC_OPEN_TELEMETRY_TRACES_MAX_CONTENT_BYTES" => " 300 "
     ) do
-      with_global_provider(@provider) { client(open_telemetry: nil).messages.create(**PARAMS, messages: messages) }
+      with_global_provider(@provider) do
+        client(open_telemetry: nil).messages.create(**PARAMS, messages: messages)
+      end
       content_client.messages.create(**PARAMS, messages: messages)
     end
 
@@ -712,7 +721,9 @@ class Anthropic::Test::OpenTelemetryContentTest < Anthropic::Test::OpenTelemetry
         "ANTHROPIC_OPEN_TELEMETRY_TRACES_CONTENT_MODE" => "content",
         "ANTHROPIC_OPEN_TELEMETRY_TRACES_MAX_CONTENT_BYTES" => value
       ) do
-        with_global_provider(@provider) { client(open_telemetry: nil).messages.create(**PARAMS, messages: messages) }
+        with_global_provider(@provider) do
+          client(open_telemetry: nil).messages.create(**PARAMS, messages: messages)
+        end
       end
     end
 

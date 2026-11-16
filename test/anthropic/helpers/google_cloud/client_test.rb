@@ -597,14 +597,26 @@ class Anthropic::Test::GoogleCloudClientTest < Minitest::Test
       [:post, "#{url}/uprof_test", -> { profiles.update("uprof_test") }],
       [:get, url, -> { profiles.list }],
       [:delete, "#{url}/uprof_test", -> { profiles.delete("uprof_test") }],
-      [:post, "#{url}/uprof_test/action_urls", -> { profiles.action_urls.create("uprof_test", action: action) }],
+      [
+        :post,
+        "#{url}/uprof_test/action_urls",
+        -> {
+          profiles.action_urls.create("uprof_test", action: action)
+        }
+      ],
       [:post, url, -> { beta_profiles.create }],
       [:get, "#{url}/uprof_test", -> { beta_profiles.retrieve("uprof_test") }],
       [:post, "#{url}/uprof_test", -> { beta_profiles.update("uprof_test") }],
       [:get, url, -> { beta_profiles.list }],
       [:delete, "#{url}/uprof_test", -> { beta_profiles.delete("uprof_test") }],
       [:post, "#{url}/uprof_test/enrollment_url", -> { beta_profiles.create_enrollment_url("uprof_test") }],
-      [:post, "#{url}/uprof_test/action_urls", -> { beta_profiles.action_urls.create("uprof_test", action: action) }]
+      [
+        :post,
+        "#{url}/uprof_test/action_urls",
+        -> {
+          beta_profiles.action_urls.create("uprof_test", action: action)
+        }
+      ]
     ]
     calls.each { _1.last.call }
 

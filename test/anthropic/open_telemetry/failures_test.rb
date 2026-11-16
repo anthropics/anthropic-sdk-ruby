@@ -216,7 +216,9 @@ class Anthropic::Test::OpenTelemetryFailuresTest < Anthropic::Test::OpenTelemetr
     )
     ids = []
 
-    failing_client(failure).beta.messages.tool_runner(**PARAMS, tools: [GetWeather.new]).each_message { ids << _1.id }
+    failing_client(failure).beta.messages.tool_runner(**PARAMS, tools: [GetWeather.new]).each_message do
+      ids << _1.id
+    end
 
     assert_equal(%w[msg_1 msg_2], ids)
     result = requests.last[:messages].last[:content].first

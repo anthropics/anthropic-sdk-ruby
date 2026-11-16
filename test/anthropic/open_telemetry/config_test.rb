@@ -18,7 +18,11 @@ class Anthropic::Test::OpenTelemetryConfigTest < Anthropic::Test::OpenTelemetryT
     with_env("ANTHROPIC_OPEN_TELEMETRY" => "FALSE") do
       with_global_provider(@provider) do
         Anthropic::Client.new(base_url: BASE_URL, api_key: "test-key").messages.create(**PARAMS)
-        Anthropic::Client.new(base_url: BASE_URL, api_key: "test-key", open_telemetry: nil).messages.create(**PARAMS)
+        Anthropic::Client.new(
+          base_url: BASE_URL,
+          api_key: "test-key",
+          open_telemetry: nil
+        ).messages.create(**PARAMS)
       end
     end
 
@@ -49,9 +53,17 @@ class Anthropic::Test::OpenTelemetryConfigTest < Anthropic::Test::OpenTelemetryT
   def test_open_telemetry_true_is_short_for_traces_true
     stub_messages
     with_global_provider(@provider) do
-      Anthropic::Client.new(base_url: BASE_URL, api_key: "test-key", open_telemetry: true).messages.create(**PARAMS)
+      Anthropic::Client.new(
+        base_url: BASE_URL,
+        api_key: "test-key",
+        open_telemetry: true
+      ).messages.create(**PARAMS)
       with_env("ANTHROPIC_OPEN_TELEMETRY" => "false") do
-        Anthropic::Client.new(base_url: BASE_URL, api_key: "test-key", open_telemetry: true).messages.create(**PARAMS)
+        Anthropic::Client.new(
+          base_url: BASE_URL,
+          api_key: "test-key",
+          open_telemetry: true
+        ).messages.create(**PARAMS)
       end
     end
 
@@ -146,13 +158,29 @@ class Anthropic::Test::OpenTelemetryConfigTest < Anthropic::Test::OpenTelemetryT
     a_string_for_traces: [{traces: "off"}, '"off"', "[:traces]"],
     a_string_for_enabled: [{traces: {enabled: "no"}}, '"no"', "[:traces][:enabled]"],
     an_object_for_enabled: [{traces: {enabled: Object.new}}, "a Object", "[:traces][:enabled]"],
-    an_unknown_content_mode: [{traces: {content_mode: :everything}}, ":everything", "[:traces][:content_mode]"],
-    an_object_for_the_content_mode: [{traces: {content_mode: {secret: "s3cret"}}}, "a Hash", "[:traces][:content_mode]"],
+    an_unknown_content_mode: [
+      {traces: {content_mode: :everything}},
+      ":everything",
+      "[:traces][:content_mode]"
+    ],
+    an_object_for_the_content_mode: [
+      {traces: {content_mode: {secret: "s3cret"}}},
+      "a Hash",
+      "[:traces][:content_mode]"
+    ],
     a_bound_of_zero: [{traces: {max_content_bytes: 0}}, "0", "[:traces][:max_content_bytes]"],
     a_negative_bound: [{traces: {max_content_bytes: -1}}, "-1", "[:traces][:max_content_bytes]"],
     a_fractional_bound: [{traces: {max_content_bytes: 1.5}}, "1.5", "[:traces][:max_content_bytes]"],
-    a_string_for_the_bound: [{traces: {max_content_bytes: "1024"}}, '"1024"', "[:traces][:max_content_bytes]"],
-    an_object_for_the_bound: [{traces: {max_content_bytes: [1024]}}, "a Array", "[:traces][:max_content_bytes]"]
+    a_string_for_the_bound: [
+      {traces: {max_content_bytes: "1024"}},
+      '"1024"',
+      "[:traces][:max_content_bytes]"
+    ],
+    an_object_for_the_bound: [
+      {traces: {max_content_bytes: [1024]}},
+      "a Array",
+      "[:traces][:max_content_bytes]"
+    ]
   }.freeze
 
   INVALID_OPTIONS.each do |name, (invalid, got, key)|
@@ -193,7 +221,11 @@ class Anthropic::Test::OpenTelemetryConfigTest < Anthropic::Test::OpenTelemetryT
   end
 
   # `traces: false` is short for `traces: {enabled: false}`.
-  {false: false, enabled_false: {enabled: false}, a_string_keyed_enabled_false: {"enabled" => false}}.each do |name, traces|
+  {
+    false: false,
+    enabled_false: {enabled: false},
+    a_string_keyed_enabled_false: {"enabled" => false}
+  }.each do |name, traces|
     define_method(:"test_traces_of_#{name}_disables_the_spans") do
       stub_messages
       client(open_telemetry: {tracer_provider: @provider, traces: traces}).messages.create(**PARAMS)
@@ -230,7 +262,9 @@ class Anthropic::Test::OpenTelemetryConfigTest < Anthropic::Test::OpenTelemetryT
   end
 
   def test_the_settings_of_a_disabled_client_are_still_checked
-    assert_raises(ArgumentError) { client(open_telemetry: {traces: {enabled: false, content_mode: :everything}}) }
+    assert_raises(ArgumentError) do
+      client(open_telemetry: {traces: {enabled: false, content_mode: :everything}})
+    end
     assert_raises(ArgumentError) { client(open_telemetry: {traces: {enabled: false, max_content_bytes: 0}}) }
   end
 

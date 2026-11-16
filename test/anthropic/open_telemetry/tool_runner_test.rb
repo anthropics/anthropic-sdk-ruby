@@ -160,7 +160,15 @@ class Anthropic::Test::OpenTelemetryToolRunnerTest < Anthropic::Test::OpenTeleme
     stub_runner(tool_use_message("msg_1", "Paris"), MESSAGE.merge(id: "msg_2"))
     runner.run_until_finished
 
-    names = %w[http.request.method http.route url.scheme url.path url.query url.full http.request.resend_count]
+    names = %w[
+      http.request.method
+      http.route
+      url.scheme
+      url.path
+      url.query
+      url.full
+      http.request.resend_count
+    ]
     http = spans.to_h { [_1.name, _1.attributes.to_h.slice(*names)] }
     assert_equal({}, http.fetch("anthropic.messages.tool_runner"))
     assert_equal({}, http.fetch("anthropic.custom_tool_use get_weather"))
@@ -595,7 +603,12 @@ class Anthropic::Test::OpenTelemetryToolRunnerTest < Anthropic::Test::OpenTeleme
     requests = spans.select { _1.name == "anthropic.messages.create" }
     assert_equal([loop_span.span_id] * 3, requests.map(&:parent_span_id))
     assert_equal(["conv_1"], requests.map { _1.attributes["gen_ai.conversation.id"] }.uniq)
-    assert_equal(%w[tool_use compaction end_turn], requests.map { _1.attributes["anthropic.message.stop_reason"] })
+    assert_equal(
+      %w[tool_use compaction end_turn],
+      requests.map do
+        _1.attributes["anthropic.message.stop_reason"]
+      end
+    )
     refute(OpenTelemetry::Trace.current_span.context.valid?)
   end
 
@@ -717,7 +730,11 @@ class Anthropic::Test::OpenTelemetryToolRunnerTest < Anthropic::Test::OpenTeleme
 
     def call(_input)
       # One block has string keys, as a tool that parses JSON returns them.
-      [CITED, JSON.parse(FOUND.to_json), {type: "image", source: {type: "base64", media_type: "image/png", data: "aGk="}}]
+      [
+        CITED,
+        JSON.parse(FOUND.to_json),
+        {type: "image", source: {type: "base64", media_type: "image/png", data: "aGk="}}
+      ]
     end
   end
 
@@ -827,7 +844,10 @@ class Anthropic::Test::OpenTelemetryToolRunnerTest < Anthropic::Test::OpenTeleme
     end
     tool = run_essay(content_client(max_content_bytes: 200), essay)
 
-    assert_equal([{"type" => "text", "text" => "a" * 100}], json_attribute(tool, "anthropic.tool_result.content"))
+    assert_equal(
+      [{"type" => "text", "text" => "a" * 100}],
+      json_attribute(tool, "anthropic.tool_result.content")
+    )
     assert_equal({"topic" => "x"}, json_attribute(tool, "gen_ai.tool.call.arguments"))
     assert_equal(true, tool.attributes[TRUNCATED])
   end

@@ -31,6 +31,13 @@ module Anthropic
             #   @return [String]
             required :display_name, String
 
+            # @!attribute instructions
+            #   Instructions for Claude, added to the instructions of every session that can use
+            #   the Bundle. Null when it has none.
+            #
+            #   @return [String, nil]
+            required :instructions, String, nil?: true
+
             # @!attribute type
             #
             #   @return [Symbol, :bundle]
@@ -42,10 +49,14 @@ module Anthropic
             #   @return [Time]
             required :updated_at, Time
 
-            # @!method initialize(id:, created_at:, description:, display_name:, updated_at:, type: :bundle)
+            # @!method initialize(id:, created_at:, description:, display_name:, instructions:, updated_at:, type: :bundle)
             #   A named set of access that Claude can use in a Slack channel or a Slack
             #   workspace: connectors, repositories and credentials. Created and edited in
-            #   claude.ai.
+            #   claude.ai; Update Bundle also changes its instructions.
+            #
+            #   Some parameter documentations has been truncated, see
+            #   {Anthropic::Models::Beta::Organization::ClaudeTag::BetaClaudeTagBundle} for more
+            #   details.
             #
             #   @param id [String] The Bundle's identifier. Starts with `capp_`.
             #
@@ -54,6 +65,8 @@ module Anthropic
             #   @param description [String, nil] What the Bundle is for. Null when it has none. Read-only.
             #
             #   @param display_name [String] The Bundle's name. Always set. Read-only.
+            #
+            #   @param instructions [String, nil] Instructions for Claude, added to the instructions of every session that can use
             #
             #   @param updated_at [Time] Time of the last change to the Bundle.
             #

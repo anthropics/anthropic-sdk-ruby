@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        class BetaBundleOnCallError < Anthropic::Errors::BadRequestError
+          def error_code: -> :bundle_on_call
+
+          def details: -> Anthropic::Beta::Organization::BetaBundleOnCallErrorDetails
+        end
+      end
+    end
+  end
+end

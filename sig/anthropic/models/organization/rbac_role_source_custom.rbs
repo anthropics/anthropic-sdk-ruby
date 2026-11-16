@@ -1,0 +1,15 @@
+module Anthropic
+  module Models
+    module Organization
+      type rbac_role_source_custom = { type: :custom }
+
+      class RBACRoleSourceCustom < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :custom
+
+        def initialize: (?type: :custom) -> void
+
+        def to_hash: -> { type: :custom }
+      end
+    end
+  end
+end

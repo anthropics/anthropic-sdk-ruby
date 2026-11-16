@@ -473,18 +473,23 @@ module Anthropic
         #
         # @param max_len [Integer, nil]
         #
-        # @return [String]
+        # @return [String, nil]
         private def read_enum(max_len)
           case max_len
           in nil
-            @stream.to_a.join
+            loop { @buf << @stream.next }
+            @stream = nil
+            @buf.slice!(0..)
           in Integer
             @buf << @stream.next while @buf.length < max_len
-            @buf.slice!(..max_len)
+            @buf.slice!(0, max_len)
           end
         rescue StopIteration
           @stream = nil
-          @buf.slice!(0..)
+          # Return nil, not "", once the body is used up, as `IO#read(length)` does: Net::HTTP sends each read as a
+          # chunk, and an empty chunk ends the body, so "" would end it twice and break the next request on the
+          # connection.
+          @buf.slice!(0..) unless @buf.empty?
         end
 
         # @api private
@@ -496,15 +501,19 @@ module Anthropic
         def read(max_len = nil, out_string = nil)
           case @stream
           in nil
+            out_string&.clear
             nil
           in IO | StringIO
             @stream.read(max_len, out_string)
           in Enumerator
             read = read_enum(max_len)
-            case out_string
-            in String
+            case [out_string, read]
+            in [String, String]
               out_string.replace(read)
-            in nil
+            in [String, nil]
+              out_string.clear
+              nil
+            in [nil, _]
               read
             end
           end
@@ -525,6 +534,10 @@ module Anthropic
             in Pathname
               @closing = true
               src.open(binmode: true)
+            in Enumerator
+              # Each retry or redirect reads the same body through a new adapter. Calling `next` on `src` itself would
+              # resume where the previous adapter stopped; `to_enum` starts from the beginning.
+              src.to_enum
             else
               src
             end
@@ -540,8 +553,10 @@ module Anthropic
         # @return [Enumerable<String>]
         def writable_enum(&blk)
           Enumerator.new do |y|
+            y.define_singleton_method(:<<) { super(_1.b) }
             y.define_singleton_method(:write) do
-              self << _1.dup
+              # `IO.copy_stream` reuses its buffer. With Ruby bug #21131, a `dup` or `b` of it changes on the next read.
+              self << (String.new(capacity: _1.bytesize) << _1)
               _1.bytesize
             end
 
@@ -553,7 +568,7 @@ module Anthropic
       # @type [Regexp]
       JSON_CONTENT = %r{^application/(?:[a-zA-Z0-9.-]+\+)?json(?!l)}
       # @type [Regexp]
-      JSONL_CONTENT = %r{^application/(:?x-(?:n|l)djson)|(:?(?:x-)?jsonl)}
+      JSONL_CONTENT = %r{^application/(?:x-(?:n|l)djson|(?:x-)?jsonl)}
 
       class << self
         # @api private
@@ -685,6 +700,9 @@ module Anthropic
           # RFC 1521 Section 7.2.1 says we should have 70 char maximum for boundary length
           boundary = SecureRandom.urlsafe_base64(30)
 
+          # Each read of `strio` runs this block from the start, so a retry or redirect sends the whole body. A read
+          # stopped partway skips the `ensure` below; `ReadIOAdapter#close` then starts a new read and stops it at the
+          # first chunk, and that read's `ensure` closes every file left in `closing`.
           closing = []
           strio = writable_enum do |y|
             case body
@@ -703,10 +721,24 @@ module Anthropic
               write_multipart_chunk(y, boundary: boundary, key: nil, val: body, closing: closing)
             end
             y << "--#{boundary}--\r\n"
+          ensure
+            closing.each(&:call)
+            closing.clear
           end
 
-          fused_io = fused_enum(strio) { closing.each(&:call) }
-          [boundary, fused_io]
+          # An IO can be read only once, so a second read of `strio` would send the other parts with an empty file part.
+          # `fused_enum` yields nothing instead. Resource methods turn retries off for a body holding an IO; a retry
+          # through `client.request`, or a 307 or 308 redirect, can still send it without the file's contents.
+          parts = if body.is_a?(Hash)
+            body.values.flat_map { _1.is_a?(Array) ? _1 : [_1] }
+          else
+            [body]
+          end
+          if parts.any? { _1.is_a?(IO) || (_1.is_a?(Anthropic::FilePart) && _1.content.is_a?(IO)) }
+            return [boundary, fused_enum(strio) { closing.each(&:call) }]
+          end
+
+          [boundary, strio]
           # rubocop:enable Style/CaseEquality
         end
 

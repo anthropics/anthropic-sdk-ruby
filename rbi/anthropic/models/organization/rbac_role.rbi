@@ -20,11 +20,16 @@ module Anthropic
         sig { returns(Time) }
         attr_accessor :created_at
 
-        # Name of the RBAC Role. For a role created by Anthropic, this is Anthropic's name
-        # for the access that the role grants. Anthropic may change this name, so to keep
-        # a lasting reference to a role, store its `id`.
+        # Name of the RBAC Role. For a built-in role, this is Anthropic's name for the
+        # access that the role grants. Anthropic may change this name, so to keep a
+        # lasting reference to a role, store its `id`.
         sig { returns(String) }
         attr_accessor :display_name
+
+        # Whether the RBAC Role is built-in or custom. More values of `type` may be added,
+        # so do not treat every role that is not `built_in` as `custom`.
+        sig { returns(Anthropic::Organization::RBACRoleSource::Variants) }
+        attr_accessor :source
 
         # Object type.
         #
@@ -41,6 +46,11 @@ module Anthropic
             id: String,
             created_at: Time,
             display_name: String,
+            source:
+              T.any(
+                Anthropic::Organization::RBACRoleSourceBuiltIn::OrHash,
+                Anthropic::Organization::RBACRoleSourceCustom::OrHash
+              ),
             updated_at: Time,
             type: Symbol
           ).returns(T.attached_class)
@@ -50,10 +60,13 @@ module Anthropic
           id:,
           # RFC 3339 datetime string indicating when the RBAC Role was created.
           created_at:,
-          # Name of the RBAC Role. For a role created by Anthropic, this is Anthropic's name
-          # for the access that the role grants. Anthropic may change this name, so to keep
-          # a lasting reference to a role, store its `id`.
+          # Name of the RBAC Role. For a built-in role, this is Anthropic's name for the
+          # access that the role grants. Anthropic may change this name, so to keep a
+          # lasting reference to a role, store its `id`.
           display_name:,
+          # Whether the RBAC Role is built-in or custom. More values of `type` may be added,
+          # so do not treat every role that is not `built_in` as `custom`.
+          source:,
           # RFC 3339 datetime string indicating when the RBAC Role was last updated.
           updated_at:,
           # Object type.
@@ -69,6 +82,7 @@ module Anthropic
               id: String,
               created_at: Time,
               display_name: String,
+              source: Anthropic::Organization::RBACRoleSource::Variants,
               type: Symbol,
               updated_at: Time
             }

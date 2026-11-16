@@ -240,7 +240,12 @@ class Anthropic::Test::OpenTelemetryHTTPAttributesTest < Anthropic::Test::OpenTe
       refute(metadata_only.attributes.values.any? { _1.to_s.include?("Quarterly") })
       query = "filter%5B%5D=skill_name%3AQuarterly&limit=2"
       assert_equal(
-        {"url.scheme" => "http", "url.path" => path, "url.query" => query, "url.full" => "#{BASE_URL}#{path}?#{query}"},
+        {
+          "url.scheme" => "http",
+          "url.path" => path,
+          "url.query" => query,
+          "url.full" => "#{BASE_URL}#{path}?#{query}"
+        },
         url_attributes(content)
       )
     end

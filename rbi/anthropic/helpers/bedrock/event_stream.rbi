@@ -4,14 +4,23 @@ module Anthropic
   module Helpers
     module Bedrock
       module EventStream
-        AWS_CONTENT_TYPE = T.let(%r{^application/vnd\.amazon\.eventstream}, Regexp)
+        AWS_CONTENT_TYPE =
+          T.let(%r{^application/vnd\.amazon\.eventstream}, Regexp)
 
         class << self
-          sig { params(chunks: T::Enumerable[String]).returns(T::Enumerable[String]) }
+          sig do
+            params(chunks: T::Enumerable[String]).returns(T::Enumerable[String])
+          end
           def to_sse(chunks)
           end
 
-          sig { params(decoder: T.untyped, chunk: T.nilable(String), y: Enumerator::Yielder).void }
+          sig do
+            params(
+              decoder: T.untyped,
+              chunk: T.nilable(String),
+              y: Enumerator::Yielder
+            ).void
+          end
           def drain(decoder, chunk, y)
           end
 

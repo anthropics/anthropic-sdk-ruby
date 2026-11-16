@@ -272,7 +272,11 @@ module Anthropic
             raise
           ensure
             if tool_runner_span
-              Anthropic::Helpers::Tracing.end_tool_runner_span(tool_runner_span, returned: returned, error: error)
+              Anthropic::Helpers::Tracing.end_tool_runner_span(
+                tool_runner_span,
+                returned: returned,
+                error: error
+              )
             end
             @tool_runner_otel_context, @app_otel_context, @stopped_by_app = outer
           end
@@ -349,7 +353,12 @@ module Anthropic
                   begin
                     # `parsed` was read against `params[:tools]`, which an added tool is not in.
                     input = tool_use.parsed
-                    input = Anthropic::Internal::Type::Converter.coerce(tool, tool_use.input) if @tool_overrides.key?(tool_use.name)
+                    if @tool_overrides.key?(tool_use.name)
+                      input = Anthropic::Internal::Type::Converter.coerce(
+                        tool,
+                        tool_use.input
+                      )
+                    end
                     run = proc { tool.call(input) }
                     raw = tool_use_span ? OpenTelemetry::Trace.with_span(tool_use_span, &run) : run.call
                     is_error = false
@@ -360,7 +369,12 @@ module Anthropic
                     if tool_use_span
                       # `is_error` is unset when the run was interrupted, and then so is the span's status.
                       result = {content: tool_result_content(raw), is_error:} unless is_error.nil?
-                      Anthropic::Helpers::Tracing.end_tool_use_span(@client, tool_use_span, tool_use.input, result)
+                      Anthropic::Helpers::Tracing.end_tool_use_span(
+                        @client,
+                        tool_use_span,
+                        tool_use.input,
+                        result
+                      )
                     end
                   end
                 else
@@ -597,7 +611,10 @@ module Anthropic
         # A compaction response replaces the history, `tool_removal` blocks included, so what the
         # history took away is taken out of the overrides first.
         private def keep_removals_from_history
-          runnable = [*params[:tools].to_a.grep(Anthropic::Helpers::Tools::BaseTool), *@tool_overrides.values.compact]
+          runnable = [
+            *params[:tools].to_a.grep(Anthropic::Helpers::Tools::BaseTool),
+            *@tool_overrides.values.compact
+          ]
           names = runnable.map { Anthropic::Helpers::Messages.tool_api_name(_1) }
           (names - available_tool_names(runnable).to_a).each { @tool_overrides.store(_1, nil) }
         end

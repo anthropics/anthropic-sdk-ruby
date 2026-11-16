@@ -18,7 +18,7 @@ module Anthropic
           # The server reached no judgement; the invocation is held for client approval.
           variant :ask, -> { Anthropic::Beta::Sessions::BetaManagedAgentsAgentAutoEvaluatedPermissionAsk }
 
-          # The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
+          # The server judged the invocation high-risk, or reached no judgement and did not hold it for client approval (for example, because the organization is out of credits or has reached a spend limit); it does not execute and a synthetic error tool result is appended.
           variant :deny, -> { Anthropic::Beta::Sessions::BetaManagedAgentsAgentAutoEvaluatedPermissionDeny }
 
           module Type

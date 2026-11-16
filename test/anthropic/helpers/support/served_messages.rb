@@ -77,7 +77,13 @@ module Anthropic::Test::ServedMessages
 
   # The `usage.iterations` of a reply that `model` wrote after the requested model declined.
   def written_by_fallback(model)
-    tokens = {cache_creation: nil, cache_creation_input_tokens: 0, cache_read_input_tokens: 0, input_tokens: 1, output_tokens: 1}
+    tokens = {
+      cache_creation: nil,
+      cache_creation_input_tokens: 0,
+      cache_read_input_tokens: 0,
+      input_tokens: 1,
+      output_tokens: 1
+    }
     [
       {**tokens, model: "claude-sonnet-4-5", type: "message"},
       {**tokens, model: model, type: "fallback_message"},

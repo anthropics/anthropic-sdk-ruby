@@ -296,7 +296,10 @@ class Anthropic::Test::Resources::Messages::StreamingTest < Minitest::Test
   def test_accumulated_message_keeps_every_field_of_a_parsed_tool_use_block
     stub_streaming_response(toolset_member_tool_use_sse_response)
 
-    stream = @client.messages.stream(**tools_params, tools: [{name: "get_weather", input_schema: GetWeatherInput}])
+    stream = @client.messages.stream(
+      **tools_params,
+      tools: [{name: "get_weather", input_schema: GetWeatherInput}]
+    )
 
     block = stream.accumulated_message.content.first
 

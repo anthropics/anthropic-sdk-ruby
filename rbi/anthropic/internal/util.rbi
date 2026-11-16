@@ -273,7 +273,7 @@ module Anthropic
         end
 
         # @api private
-        sig { params(max_len: T.nilable(Integer)).returns(String) }
+        sig { params(max_len: T.nilable(Integer)).returns(T.nilable(String)) }
         private def read_enum(max_len)
         end
 
@@ -311,7 +311,7 @@ module Anthropic
       JSON_CONTENT =
         T.let(%r{^application/(?:[a-zA-Z0-9.-]+\+)?json(?!l)}, Regexp)
       JSONL_CONTENT =
-        T.let(%r{^application/(:?x-(?:n|l)djson)|(:?(?:x-)?jsonl)}, Regexp)
+        T.let(%r{^application/(?:x-(?:n|l)djson|(?:x-)?jsonl)}, Regexp)
 
       class << self
         # @api private

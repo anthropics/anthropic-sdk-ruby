@@ -18,12 +18,19 @@ module Anthropic
         required :created_at, Time
 
         # @!attribute display_name
-        #   Name of the RBAC Role. For a role created by Anthropic, this is Anthropic's name
-        #   for the access that the role grants. Anthropic may change this name, so to keep
-        #   a lasting reference to a role, store its `id`.
+        #   Name of the RBAC Role. For a built-in role, this is Anthropic's name for the
+        #   access that the role grants. Anthropic may change this name, so to keep a
+        #   lasting reference to a role, store its `id`.
         #
         #   @return [String]
         required :display_name, String
+
+        # @!attribute source
+        #   Whether the RBAC Role is built-in or custom. More values of `type` may be added,
+        #   so do not treat every role that is not `built_in` as `custom`.
+        #
+        #   @return [Anthropic::Models::Organization::RBACRoleSourceBuiltIn, Anthropic::Models::Organization::RBACRoleSourceCustom]
+        required :source, union: -> { Anthropic::Organization::RBACRoleSource }
 
         # @!attribute type
         #   Object type.
@@ -39,7 +46,7 @@ module Anthropic
         #   @return [Time]
         required :updated_at, Time
 
-        # @!method initialize(id:, created_at:, display_name:, updated_at:, type: :rbac_role)
+        # @!method initialize(id:, created_at:, display_name:, source:, updated_at:, type: :rbac_role)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Organization::RBACRole} for more details.
         #
@@ -47,7 +54,9 @@ module Anthropic
         #
         #   @param created_at [Time] RFC 3339 datetime string indicating when the RBAC Role was created.
         #
-        #   @param display_name [String] Name of the RBAC Role. For a role created by Anthropic, this is Anthropic's name
+        #   @param display_name [String] Name of the RBAC Role. For a built-in role, this is Anthropic's name for the acc
+        #
+        #   @param source [Anthropic::Models::Organization::RBACRoleSourceBuiltIn, Anthropic::Models::Organization::RBACRoleSourceCustom] Whether the RBAC Role is built-in or custom. More values of `type` may be added,
         #
         #   @param updated_at [Time] RFC 3339 datetime string indicating when the RBAC Role was last updated.
         #

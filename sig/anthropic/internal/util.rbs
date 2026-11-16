@@ -94,7 +94,7 @@ module Anthropic
 
         def close: -> void
 
-        private def read_enum: (Integer? max_len) -> String
+        private def read_enum: (Integer? max_len) -> String?
 
         def read: (?Integer? max_len, ?String? out_string) -> String?
 

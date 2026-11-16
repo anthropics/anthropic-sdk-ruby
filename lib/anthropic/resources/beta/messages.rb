@@ -506,7 +506,11 @@ module Anthropic
         # @return [Anthropic::Helpers::Streaming::MessageStream]
         def stream(params)
           parsed = Anthropic::Models::Beta::MessageCreateParams.dump_request(params).first
-          tools, models = Anthropic::Helpers::Messages.distill_input_schema_models!(parsed, strict: nil, is_beta: true)
+          tools, models = Anthropic::Helpers::Messages.distill_input_schema_models!(
+            parsed,
+            strict: nil,
+            is_beta: true
+          )
           Anthropic::Streaming::MessageStream.new(raw_stream: stream_raw(params), tools:, models:)
         end
 

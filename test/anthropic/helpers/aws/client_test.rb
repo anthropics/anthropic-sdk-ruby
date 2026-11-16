@@ -648,7 +648,12 @@ class Anthropic::Test::AWSClientTest < Minitest::Test
     assert_equal("uprof_test", profiles.update("uprof_test", name: "Name").id)
     assert_equal(["uprof_test"], profiles.list.data.map(&:id))
 
-    [[:post, url], [:get, "#{url}/uprof_test"], [:post, "#{url}/uprof_test"], [:get, url]].each do |method, uri|
+    [
+      [:post, url],
+      [:get, "#{url}/uprof_test"],
+      [:post, "#{url}/uprof_test"],
+      [:get, url]
+    ].each do |method, uri|
       assert_requested(method, uri, times: 1) do |req|
         assert_equal("Bearer sk-ant-xxx", req.headers["Authorization"])
         assert_nil(req.headers["X-Api-Key"])

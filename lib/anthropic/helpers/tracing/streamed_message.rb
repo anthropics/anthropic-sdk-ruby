@@ -26,7 +26,14 @@ module Anthropic
         # @param content_limit [Integer] the most bytes the `content` attributes hold
         #
         # @return [Array(Enumerator, Anthropic::Helpers::Tracing::StreamedMessage)]
-        def follow_streamed_message(span, events, params:, start_time:, content:, content_limit: CONTENT_LIMIT)
+        def follow_streamed_message(
+          span,
+          events,
+          params:,
+          start_time:,
+          content:,
+          content_limit: CONTENT_LIMIT
+        )
           tracker = StreamedMessage.new(
             span,
             params: params,

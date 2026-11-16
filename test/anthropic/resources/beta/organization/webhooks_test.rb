@@ -6,8 +6,11 @@ class Anthropic::Test::Resources::Beta::Organization::WebhooksTest < Anthropic::
   def test_create_required_params
     response =
       @anthropic.beta.organization.webhooks.create(
-        enabled_events: [:"user_profile.enforcement_action_opened"],
-        url: "x",
+        enabled_events: [
+          :"user_profile.enforcement_action_opened",
+          :"user_profile.enforcement_action_resolved"
+        ],
+        url: "https://example.com/anthropic-webhooks",
         request_options: {extra_query: {beta: "true"}}
       )
 

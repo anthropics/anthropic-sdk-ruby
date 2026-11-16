@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "cgi"
+require "tempfile"
 
 require_relative "../test_helper"
 
@@ -344,7 +345,9 @@ class Anthropic::Test::RegexMatchTest < Minitest::Test
       "application/jsonl" => true,
       "application/x-jsonl" => true,
       "application/json" => false,
-      "application/vnd.api+json" => false
+      "application/vnd.api+json" => false,
+      "text/jsonl" => false,
+      "text/plain; name=x.jsonl" => false
     }
     cases.each do |header, verdict|
       assert_pattern do
@@ -443,6 +446,13 @@ class Anthropic::Test::UtilFormDataEncodingTest < Minitest::Test
       {a: 2, b: [1, 2, 3]} => {"a" => "2", "b[]" => "1"},
       {strio: StringIO.new("a")} => {"strio" => "a"},
       {strio: Anthropic::FilePart.new("a")} => {"strio" => "a"},
+      {
+        text: "héllo",
+        file: Anthropic::FilePart.new(StringIO.new("\xFF\xFE".b), filename: "data.bin")
+      } => {
+        "text" => "héllo",
+        "file" => -> { _1.b == "\xFF\xFE".b }
+      },
       {pathname: Pathname(__FILE__)} => {"pathname" => -> { _1.read in /^class Anthropic/ }},
       {pathname: Anthropic::FilePart.new(Pathname(__FILE__))} => {"pathname" => -> { _1.read in /^class Anthropic/ }}
     }
@@ -465,6 +475,78 @@ class Anthropic::Test::UtilFormDataEncodingTest < Minitest::Test
   end
 end
 
+class Anthropic::Test::UtilMultipartResendTest < Minitest::Test
+  class TrackedPathname < Pathname
+    def opened = (@opened ||= [])
+
+    def open(...)
+      super.tap { opened << _1 }
+    end
+  end
+
+  def encode(body)
+    Anthropic::Internal::Util.encode_content({"content-type" => "multipart/form-data"}, body)
+  end
+
+  # rubocop:disable Lint/EmptyBlock
+  def adapter(body) = Anthropic::Internal::Util::ReadIOAdapter.new(body) {}
+  # rubocop:enable Lint/EmptyBlock
+
+  # Sends `body` once the way the SDK sends each attempt: through a new `ReadIOAdapter`, read in chunks, then closed.
+  def send_once(body)
+    out = StringIO.new(String.new)
+    io = adapter(body)
+    IO.copy_stream(io, out)
+    io.close
+    out.string
+  end
+
+  def test_each_attempt_sends_the_whole_body_and_closes_its_files
+    file = TrackedPathname.new(__FILE__)
+    _, body = encode({a: file, b: Anthropic::FilePart.new(file, filename: "b.rb")})
+
+    first = send_once(body)
+    second = send_once(body)
+
+    assert_equal(first, second)
+    assert_equal(2, first.scan(File.binread(__FILE__)).length)
+    assert_equal(4, file.opened.length)
+    assert(file.opened.all?(&:closed?))
+  end
+
+  def test_closing_a_partly_read_attempt_closes_its_file
+    file = TrackedPathname.new(__FILE__)
+    _, body = encode({a: file})
+    whole = send_once(body)
+    file.opened.clear
+
+    io = adapter(body)
+    io.read(whole.index(File.binread(__FILE__)) + 10)
+    assert_equal(1, file.opened.length)
+    refute(file.opened.first.closed?)
+
+    io.close
+    assert(file.opened.first.closed?)
+
+    assert_equal(whole, send_once(body))
+    assert_equal(2, file.opened.length)
+    assert(file.opened.all?(&:closed?))
+  end
+
+  def test_a_body_holding_an_io_is_read_once
+    file = TrackedPathname.new(__FILE__)
+    File.open(__FILE__, binmode: true) do |io|
+      _, body = encode({a: io, b: file})
+
+      assert_equal(2, send_once(body).scan(File.binread(__FILE__)).length)
+      assert_equal("", send_once(body))
+      refute(io.closed?)
+    end
+    assert_equal(1, file.opened.length)
+    assert(file.opened.first.closed?)
+  end
+end
+
 class Anthropic::Test::UtilIOAdapterTest < Minitest::Test
   def test_copy_read
     cases = {
@@ -481,6 +563,42 @@ class Anthropic::Test::UtilIOAdapterTest < Minitest::Test
     end
   end
 
+  def test_read_returns_at_most_max_len_then_nil
+    cases = {
+      %w[abc def] => %w[abc def],
+      %w[abcdef] => %w[abc def],
+      %w[ab cd ef] => %w[abc def],
+      %w[abcd] => %w[abc d]
+    }
+    cases.each do |chunks, expected|
+      # rubocop:disable Lint/EmptyBlock
+      adapter = Anthropic::Internal::Util::ReadIOAdapter.new(chunks.each) {}
+      # rubocop:enable Lint/EmptyBlock
+      assert_equal(expected, Array.new(expected.length) { adapter.read(3) })
+      assert_nil(adapter.read(3))
+    end
+  end
+
+  def test_read_into_a_buffer_clears_it_at_the_end
+    [%w[abc def], %w[abc de]].each do |chunks|
+      # rubocop:disable Lint/EmptyBlock
+      adapter = Anthropic::Internal::Util::ReadIOAdapter.new(chunks.each) {}
+      # rubocop:enable Lint/EmptyBlock
+      buf = String.new
+      assert_equal(chunks, Array.new(2) { adapter.read(3, buf).dup })
+      assert_nil(adapter.read(3, buf))
+      assert_equal("", buf)
+    end
+  end
+
+  def test_read_the_rest_after_a_partial_read
+    # rubocop:disable Lint/EmptyBlock
+    adapter = Anthropic::Internal::Util::ReadIOAdapter.new(%w[abc def].each) {}
+    # rubocop:enable Lint/EmptyBlock
+    assert_equal("ab", adapter.read(2))
+    assert_equal("cdef", adapter.read)
+  end
+
   def test_copy_write
     cases = {
       StringIO.new => "",
@@ -491,6 +609,31 @@ class Anthropic::Test::UtilIOAdapterTest < Minitest::Test
         IO.copy_stream(input, y)
       end
       assert_equal(expected, enum.to_a.join)
+    end
+  end
+
+  def test_write_mixed_encodings
+    text = "héllo "
+    bytes = "w\xF6rld".b
+    enum = Anthropic::Internal::Util.writable_enum do |y|
+      y << text
+      y.write(bytes)
+    end
+    assert_equal(text.b + bytes, enum.to_a.join)
+  end
+
+  # Only a Ruby with bug #21131, such as 3.2.3, can catch a regression here.
+  def test_copy_write_file_spanning_chunks
+    data = Random.new(0).bytes(1 << 20)
+    Tempfile.create("copy_write", binmode: true) do |file|
+      file.write(data)
+      file.rewind
+      enum = Anthropic::Internal::Util.writable_enum do |y|
+        IO.copy_stream(file, y)
+      end
+      copied = enum.to_a.join
+      assert_equal(data.bytesize, copied.bytesize)
+      assert(copied == data, "joined chunks differ from the file contents")
     end
   end
 end
