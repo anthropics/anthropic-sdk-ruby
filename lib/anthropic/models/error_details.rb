@@ -163,7 +163,7 @@ module Anthropic
       variant :external_key_validation_timed_out,
               -> { Anthropic::Organization::ExternalKeyValidationTimedOutErrorDetails }
 
-      # The External Key is bound to a user profile, and the Workspace does not have that user profile. A Workspace can use only a key bound to its own user profile or a key that isn't bound to one.
+      # After this request, the External Key and the Workspace would not have the same user profile. A key and its Workspace must have the same user profile, or both have none.
       variant :key_profile_mismatch, -> { Anthropic::Organization::KeyProfileMismatchErrorDetails }
 
       # The request breaks the organization's Workspace Policy. The message says which rule it broke; an organization admin can see and change the policy in the Console.
