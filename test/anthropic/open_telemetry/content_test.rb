@@ -473,7 +473,7 @@ class Anthropic::Test::OpenTelemetryContentTest < Anthropic::Test::OpenTelemetry
       content: [
         {type: "text", text: "found"},
         {type: "image", source: {type: "base64", media_type: "image/png", data: "aW1hZ2U="}},
-        {text: "untyped"}
+        {type: nil, text: "untyped"}
       ]
     },
     {

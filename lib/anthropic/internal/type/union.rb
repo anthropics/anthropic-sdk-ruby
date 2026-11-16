@@ -112,6 +112,28 @@ module Anthropic
           end
         end
 
+        # @api private
+        #
+        # @param value [Object]
+        #
+        # @return [Anthropic::Internal::Type::Converter, Class, nil]
+        private def resolve_untagged_variant(value)
+          variants.find do |target|
+            case [target, value]
+            in [Anthropic::Internal::Type::ArrayOf, Array]
+              true
+            in [Class, Hash] if target <= Anthropic::Internal::Type::BaseModel
+              consts = target.known_fields.reject { _2.fetch(:const) == Anthropic::Internal::OMIT }
+              consts.any? && consts.all? do |name, field|
+                val = value.fetch(name) { value[name.to_s] }
+                (val.is_a?(String) ? val.to_sym : val) == field.fetch(:const)
+              end
+            else
+              false
+            end
+          end
+        end
+
         # rubocop:disable Style/HashEachMethods
         # rubocop:disable Style/CaseEquality
 
@@ -224,6 +246,10 @@ module Anthropic
           known_variants.each do
             target = _2.call
             return Anthropic::Internal::Type::Converter.dump(target, value, state: state) if target === value
+          end
+
+          if (target = resolve_untagged_variant(value))
+            return Anthropic::Internal::Type::Converter.dump(target, value, state: state)
           end
 
           super

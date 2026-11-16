@@ -579,6 +579,29 @@ class Anthropic::Test::UnionTest < Minitest::Test
     required :a, -> { U7 }
   end
 
+  class M7 < Anthropic::Internal::Type::BaseModel
+    optional :b_, String, api_name: :b
+  end
+
+  class M8 < M7
+    required :t, const: :c, api_name: :type
+  end
+
+  class M9 < M8
+    required :t, const: :d, api_name: :type
+    required :u, const: :e
+  end
+
+  module U8
+    extend Anthropic::Internal::Type::Union
+
+    variant -> { M7 }
+    variant -> { M9 }
+    variant -> { M8 }
+    variant Anthropic::Internal::Type::ArrayOf[-> { M8 }]
+    variant String
+  end
+
   def test_accessors
     model = M3.new(recur: [])
     tap do
@@ -642,6 +665,23 @@ class Anthropic::Test::UnionTest < Minitest::Test
         state.fetch(:exactness).filter { _2.nonzero? }.to_h => ^exactness
         state => {branched: ^branched}
       end
+    end
+  end
+
+  def test_dump_without_a_discriminator
+    cases = {
+      "one" => "one",
+      {t: :c, b_: "1"} => {type: :c, b: "1"},
+      {"t" => "c", "b_" => "1"} => {type: "c", b: "1"},
+      {t: :d, u: :e, b_: "1"} => {type: :d, u: :e, b: "1"},
+      {t: :d, b_: "1"} => {t: :d, b_: "1"},
+      {b_: "1"} => {b_: "1"},
+      [{t: :c, b_: "1"}] => [{type: :c, b: "1"}],
+      [M8.new(b_: "1"), {b_: "2"}] => [{b: "1", type: :c}, {b: "2", type: :c}]
+    }
+
+    cases.each do |input, expect|
+      assert_equal(expect, Anthropic::Internal::Type::Converter.dump(U8, input))
     end
   end
 
