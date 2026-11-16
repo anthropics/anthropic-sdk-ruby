@@ -8,15 +8,15 @@ module Anthropic
       Variants =
         T.type_alias do
           T.any(
-            Anthropic::InvalidRequestError,
-            Anthropic::AuthenticationError,
-            Anthropic::BillingError,
-            Anthropic::PermissionError,
-            Anthropic::NotFoundError,
-            Anthropic::RateLimitError,
-            Anthropic::GatewayTimeoutError,
+            Anthropic::InvalidRequestErrorObject,
+            Anthropic::AuthenticationErrorObject,
+            Anthropic::BillingErrorObject,
+            Anthropic::PermissionErrorObject,
+            Anthropic::NotFoundErrorObject,
+            Anthropic::RateLimitErrorObject,
+            Anthropic::GatewayTimeoutErrorObject,
             Anthropic::APIErrorObject,
-            Anthropic::OverloadedError
+            Anthropic::OverloadedErrorObject
           )
         end
 

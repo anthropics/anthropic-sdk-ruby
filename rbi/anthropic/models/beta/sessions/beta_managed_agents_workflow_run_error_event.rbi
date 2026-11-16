@@ -20,7 +20,7 @@ module Anthropic
           # Why the run did not finish, or was not created.
           sig do
             returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunError::Variants
+              Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunErrorObject::Variants
             )
           end
           attr_accessor :error
@@ -45,11 +45,11 @@ module Anthropic
               id: String,
               error:
                 T.any(
-                  Anthropic::Beta::Sessions::BetaManagedAgentsTimeoutWorkflowRunError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsProgramWorkflowRunError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsUnknownWorkflowRunError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsThreadLimitWorkflowRunError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsMaxWorkflowRunsWorkflowRunError::OrHash
+                  Anthropic::Beta::Sessions::BetaManagedAgentsTimeoutWorkflowRunErrorObject::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsProgramWorkflowRunErrorObject::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsUnknownWorkflowRunErrorObject::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsThreadLimitWorkflowRunErrorObject::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsMaxWorkflowRunsWorkflowRunErrorObject::OrHash
                 ),
               processed_at: Time,
               workflow_run_id: T.nilable(String),
@@ -75,7 +75,7 @@ module Anthropic
               {
                 id: String,
                 error:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunError::Variants,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunErrorObject::Variants,
                 processed_at: Time,
                 type: Symbol,
                 workflow_run_id: T.nilable(String)

@@ -31,7 +31,7 @@ module Anthropic
           params(
             content:
               T.any(
-                Anthropic::Beta::BetaAdvisorToolResultError::OrHash,
+                Anthropic::Beta::BetaAdvisorToolResultErrorObject::OrHash,
                 Anthropic::Beta::BetaAdvisorResultBlock::OrHash,
                 Anthropic::Beta::BetaAdvisorRedactedResultBlock::OrHash
               ),
@@ -61,7 +61,7 @@ module Anthropic
           Variants =
             T.type_alias do
               T.any(
-                Anthropic::Beta::BetaAdvisorToolResultError,
+                Anthropic::Beta::BetaAdvisorToolResultErrorObject,
                 Anthropic::Beta::BetaAdvisorResultBlock,
                 Anthropic::Beta::BetaAdvisorRedactedResultBlock
               )

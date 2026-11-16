@@ -47,6 +47,8 @@ module Anthropic
 
   AuthenticationError = Anthropic::Models::AuthenticationError
 
+  AuthenticationErrorObject = Anthropic::Models::AuthenticationErrorObject
+
   AvailableToolsLimitExceededError = Anthropic::Models::AvailableToolsLimitExceededError
 
   AvailableToolsLimitExceededErrorDetails = Anthropic::Models::AvailableToolsLimitExceededErrorDetails
@@ -71,29 +73,45 @@ module Anthropic
 
   BashCodeExecutionToolResultErrorCode = Anthropic::Models::BashCodeExecutionToolResultErrorCode
 
+  BashCodeExecutionToolResultErrorObject = Anthropic::Models::BashCodeExecutionToolResultErrorObject
+
   BashCodeExecutionToolResultErrorParam = Anthropic::Models::BashCodeExecutionToolResultErrorParam
 
   Beta = Anthropic::Models::Beta
 
   BetaAPIError = Anthropic::Models::BetaAPIError
 
+  BetaAPIErrorObject = Anthropic::Models::BetaAPIErrorObject
+
   BetaAuthenticationError = Anthropic::Models::BetaAuthenticationError
 
+  BetaAuthenticationErrorObject = Anthropic::Models::BetaAuthenticationErrorObject
+
   BetaBillingError = Anthropic::Models::BetaBillingError
+
+  BetaBillingErrorObject = Anthropic::Models::BetaBillingErrorObject
 
   BetaCurrency = Anthropic::Models::BetaCurrency
 
   BetaError = Anthropic::Models::BetaError
 
+  BetaErrorObject = Anthropic::Models::BetaErrorObject
+
   BetaErrorResponse = Anthropic::Models::BetaErrorResponse
 
   BetaGatewayTimeoutError = Anthropic::Models::BetaGatewayTimeoutError
 
+  BetaGatewayTimeoutErrorObject = Anthropic::Models::BetaGatewayTimeoutErrorObject
+
   BetaInvalidRequestError = Anthropic::Models::BetaInvalidRequestError
+
+  BetaInvalidRequestErrorObject = Anthropic::Models::BetaInvalidRequestErrorObject
 
   BetaMonetaryAmount = Anthropic::Models::BetaMonetaryAmount
 
   BetaNotFoundError = Anthropic::Models::BetaNotFoundError
+
+  BetaNotFoundErrorObject = Anthropic::Models::BetaNotFoundErrorObject
 
   BetaOrganizationNotEnrolledInBetaError = Anthropic::Models::BetaOrganizationNotEnrolledInBetaError
 
@@ -102,15 +120,23 @@ module Anthropic
 
   BetaOverloadedError = Anthropic::Models::BetaOverloadedError
 
+  BetaOverloadedErrorObject = Anthropic::Models::BetaOverloadedErrorObject
+
   BetaPermissionError = Anthropic::Models::BetaPermissionError
 
+  BetaPermissionErrorObject = Anthropic::Models::BetaPermissionErrorObject
+
   BetaRateLimitError = Anthropic::Models::BetaRateLimitError
+
+  BetaRateLimitErrorObject = Anthropic::Models::BetaRateLimitErrorObject
 
   BetaUnsupportedCharsetError = Anthropic::Models::BetaUnsupportedCharsetError
 
   BetaUnsupportedCharsetErrorDetails = Anthropic::Models::BetaUnsupportedCharsetErrorDetails
 
   BillingError = Anthropic::Models::BillingError
+
+  BillingErrorObject = Anthropic::Models::BillingErrorObject
 
   BrowserClickTarget = Anthropic::Models::BrowserClickTarget
 
@@ -428,6 +454,8 @@ module Anthropic
 
   CodeExecutionToolResultErrorCode = Anthropic::Models::CodeExecutionToolResultErrorCode
 
+  CodeExecutionToolResultErrorObject = Anthropic::Models::CodeExecutionToolResultErrorObject
+
   CodeExecutionToolResultErrorParam = Anthropic::Models::CodeExecutionToolResultErrorParam
 
   CompactionBlockAmbiguousError = Anthropic::Models::CompactionBlockAmbiguousError
@@ -661,6 +689,8 @@ module Anthropic
 
   GatewayTimeoutError = Anthropic::Models::GatewayTimeoutError
 
+  GatewayTimeoutErrorObject = Anthropic::Models::GatewayTimeoutErrorObject
+
   ImageBlockParam = Anthropic::Models::ImageBlockParam
 
   ImageTransformationsParam = Anthropic::Models::ImageTransformationsParam
@@ -668,6 +698,8 @@ module Anthropic
   InputJSONDelta = Anthropic::Models::InputJSONDelta
 
   InvalidRequestError = Anthropic::Models::InvalidRequestError
+
+  InvalidRequestErrorObject = Anthropic::Models::InvalidRequestErrorObject
 
   JSONOutputFormat = Anthropic::Models::JSONOutputFormat
 
@@ -709,6 +741,8 @@ module Anthropic
 
   NotFoundError = Anthropic::Models::NotFoundError
 
+  NotFoundErrorObject = Anthropic::Models::NotFoundErrorObject
+
   Organization = Anthropic::Models::Organization
 
   OrganizationInfo = Anthropic::Models::OrganizationInfo
@@ -735,11 +769,15 @@ module Anthropic
 
   OverloadedError = Anthropic::Models::OverloadedError
 
+  OverloadedErrorObject = Anthropic::Models::OverloadedErrorObject
+
   ParentOrganizationRequiredError = Anthropic::Models::ParentOrganizationRequiredError
 
   ParentOrganizationRequiredErrorDetails = Anthropic::Models::ParentOrganizationRequiredErrorDetails
 
   PermissionError = Anthropic::Models::PermissionError
+
+  PermissionErrorObject = Anthropic::Models::PermissionErrorObject
 
   PlainTextSource = Anthropic::Models::PlainTextSource
 
@@ -748,6 +786,8 @@ module Anthropic
   RampLimitExceededErrorDetails = Anthropic::Models::RampLimitExceededErrorDetails
 
   RateLimitError = Anthropic::Models::RateLimitError
+
+  RateLimitErrorObject = Anthropic::Models::RateLimitErrorObject
 
   RawContentBlockDelta = Anthropic::Models::RawContentBlockDelta
 
@@ -868,6 +908,9 @@ module Anthropic
   TextEditorCodeExecutionToolResultErrorCode =
     Anthropic::Models::TextEditorCodeExecutionToolResultErrorCode
 
+  TextEditorCodeExecutionToolResultErrorObject =
+    Anthropic::Models::TextEditorCodeExecutionToolResultErrorObject
+
   TextEditorCodeExecutionToolResultErrorParam =
     Anthropic::Models::TextEditorCodeExecutionToolResultErrorParam
 
@@ -957,6 +1000,8 @@ module Anthropic
   ToolSearchToolResultError = Anthropic::Models::ToolSearchToolResultError
 
   ToolSearchToolResultErrorCode = Anthropic::Models::ToolSearchToolResultErrorCode
+
+  ToolSearchToolResultErrorObject = Anthropic::Models::ToolSearchToolResultErrorObject
 
   ToolSearchToolResultErrorParam = Anthropic::Models::ToolSearchToolResultErrorParam
 
@@ -1094,6 +1139,8 @@ module Anthropic
 
   WebSearchToolRequestError = Anthropic::Models::WebSearchToolRequestError
 
+  WebSearchToolRequestErrorObject = Anthropic::Models::WebSearchToolRequestErrorObject
+
   WebSearchToolResultBlock = Anthropic::Models::WebSearchToolResultBlock
 
   WebSearchToolResultBlockContent = Anthropic::Models::WebSearchToolResultBlockContent
@@ -1105,4 +1152,6 @@ module Anthropic
   WebSearchToolResultError = Anthropic::Models::WebSearchToolResultError
 
   WebSearchToolResultErrorCode = Anthropic::Models::WebSearchToolResultErrorCode
+
+  WebSearchToolResultErrorObject = Anthropic::Models::WebSearchToolResultErrorObject
 end

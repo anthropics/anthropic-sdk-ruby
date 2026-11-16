@@ -12,7 +12,7 @@ module Anthropic
         Variants =
           T.type_alias do
             T.any(
-              Anthropic::Beta::BetaWebSearchToolRequestError,
+              Anthropic::Beta::BetaWebSearchToolRequestErrorObject,
               T::Array[Anthropic::Beta::BetaWebSearchResultBlockParam]
             )
           end

@@ -12,7 +12,7 @@ module Anthropic
             T.type_alias do
               T.any(
                 Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResultCompleted,
-                Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResultError,
+                Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResultErrorObject,
                 Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResultStopped
               )
             end
@@ -74,11 +74,11 @@ module Anthropic
                 Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResult::Type::OrSymbol,
               error:
                 T.any(
-                  Anthropic::Beta::Sessions::BetaManagedAgentsTimeoutWorkflowRunError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsProgramWorkflowRunError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsUnknownWorkflowRunError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsThreadLimitWorkflowRunError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsMaxWorkflowRunsWorkflowRunError::OrHash
+                  Anthropic::Beta::Sessions::BetaManagedAgentsTimeoutWorkflowRunErrorObject::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsProgramWorkflowRunErrorObject::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsUnknownWorkflowRunErrorObject::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsThreadLimitWorkflowRunErrorObject::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsMaxWorkflowRunsWorkflowRunErrorObject::OrHash
                 )
             ).returns(
               Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResult::Variants

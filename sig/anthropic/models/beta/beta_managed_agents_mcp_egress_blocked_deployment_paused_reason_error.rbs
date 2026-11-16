@@ -3,16 +3,7 @@ module Anthropic
     class BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError = Beta::BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError
 
     module Beta
-      type beta_managed_agents_mcp_egress_blocked_deployment_paused_reason_error =
-        { type: :mcp_egress_blocked_error }
-
-      class BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError < Anthropic::Internal::Type::BaseModel
-        attr_accessor type: :mcp_egress_blocked_error
-
-        def initialize: (?type: :mcp_egress_blocked_error) -> void
-
-        def to_hash: -> { type: :mcp_egress_blocked_error }
-      end
+      class BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError = Anthropic::Models::Beta::BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonErrorObject
     end
   end
 end

@@ -5,7 +5,7 @@ module Anthropic
     class CodeExecutionToolResultBlock < Anthropic::Internal::Type::BaseModel
       # @!attribute content
       #
-      #   @return [Anthropic::Models::CodeExecutionToolResultError, Anthropic::Models::CodeExecutionResultBlock, Anthropic::Models::EncryptedCodeExecutionResultBlock]
+      #   @return [Anthropic::Models::CodeExecutionToolResultErrorObject, Anthropic::Models::CodeExecutionResultBlock, Anthropic::Models::EncryptedCodeExecutionResultBlock]
       required :content, union: -> { Anthropic::CodeExecutionToolResultBlockContent }
 
       # @!attribute tool_use_id
@@ -19,7 +19,7 @@ module Anthropic
       required :type, const: :code_execution_tool_result
 
       # @!method initialize(content:, tool_use_id:, type: :code_execution_tool_result)
-      #   @param content [Anthropic::Models::CodeExecutionToolResultError, Anthropic::Models::CodeExecutionResultBlock, Anthropic::Models::EncryptedCodeExecutionResultBlock]
+      #   @param content [Anthropic::Models::CodeExecutionToolResultErrorObject, Anthropic::Models::CodeExecutionResultBlock, Anthropic::Models::EncryptedCodeExecutionResultBlock]
       #   @param tool_use_id [String]
       #   @param type [Symbol, :code_execution_tool_result]
     end

@@ -4,7 +4,7 @@ module Anthropic
       module Sessions
         type beta_managed_agents_workflow_run_result =
           Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResultCompleted
-          | Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResultError
+          | Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResultErrorObject
           | Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResultStopped
 
         module BetaManagedAgentsWorkflowRunResult
@@ -30,15 +30,15 @@ module Anthropic
             ) -> Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResultCompleted
             | (
               type: :error | "error",
-              error: Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_error
-            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResultError
+              error: Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_error_object
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResultErrorObject
             | (
               type: :stopped | "stopped"
             ) -> Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResultStopped
             | (
               type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsWorkflowRunResult::type_
               | String,
-              ?error: Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_error
+              ?error: Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_error_object
             ) -> Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_result
         end
       end

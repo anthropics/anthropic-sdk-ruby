@@ -236,7 +236,7 @@ module Anthropic
                 T::Array[Anthropic::Beta::BetaTextBlockParam::OrHash],
                 Anthropic::Beta::BetaToolResultBlockParam::Content::Variants,
                 T.any(
-                  Anthropic::Beta::BetaWebSearchToolRequestError::OrHash,
+                  Anthropic::Beta::BetaWebSearchToolRequestErrorObject::OrHash,
                   T::Array[
                     Anthropic::Beta::BetaWebSearchResultBlockParam::OrHash
                   ]

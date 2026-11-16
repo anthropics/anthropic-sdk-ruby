@@ -35,8 +35,8 @@ module Anthropic
         # @!attribute error
         #   Why the dream failed, or `null` if `status` isn't `failed`.
         #
-        #   @return [Anthropic::Models::Beta::BetaDreamError, nil]
-        required :error, -> { Anthropic::Beta::BetaDreamError }, nil?: true
+        #   @return [Anthropic::Models::Beta::BetaDreamErrorObject, nil]
+        required :error, -> { Anthropic::Beta::BetaDreamErrorObject }, nil?: true
 
         # @!attribute inputs
         #   The sources that the dream reads, from the request that created it.
@@ -148,7 +148,7 @@ module Anthropic
         #
         #   @param ended_at [Time, nil] When the dream reached `completed`, `failed`, or `canceled`, in RFC 3339, or
         #
-        #   @param error [Anthropic::Models::Beta::BetaDreamError, nil] Why the dream failed, or `null` if `status` isn't `failed`.
+        #   @param error [Anthropic::Models::Beta::BetaDreamErrorObject, nil] Why the dream failed, or `null` if `status` isn't `failed`.
         #
         #   @param inputs [Array<Anthropic::Models::Beta::BetaDreamMemoryStoreInput, Anthropic::Models::Beta::BetaDreamSessionsInput>] The sources that the dream reads, from the request that created it.
         #

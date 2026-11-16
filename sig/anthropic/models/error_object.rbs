@@ -1,15 +1,15 @@
 module Anthropic
   module Models
     type error_object =
-      Anthropic::InvalidRequestError
-      | Anthropic::AuthenticationError
-      | Anthropic::BillingError
-      | Anthropic::PermissionError
-      | Anthropic::NotFoundError
-      | Anthropic::RateLimitError
-      | Anthropic::GatewayTimeoutError
+      Anthropic::InvalidRequestErrorObject
+      | Anthropic::AuthenticationErrorObject
+      | Anthropic::BillingErrorObject
+      | Anthropic::PermissionErrorObject
+      | Anthropic::NotFoundErrorObject
+      | Anthropic::RateLimitErrorObject
+      | Anthropic::GatewayTimeoutErrorObject
       | Anthropic::APIErrorObject
-      | Anthropic::OverloadedError
+      | Anthropic::OverloadedErrorObject
 
     module ErrorObject
       extend Anthropic::Internal::Type::Union
@@ -47,31 +47,31 @@ module Anthropic
         (
           type: :invalid_request_error | "invalid_request_error",
           message: String
-        ) -> Anthropic::InvalidRequestError
+        ) -> Anthropic::InvalidRequestErrorObject
         | (
           type: :authentication_error | "authentication_error",
           message: String
-        ) -> Anthropic::AuthenticationError
+        ) -> Anthropic::AuthenticationErrorObject
         | (
           type: :billing_error | "billing_error",
           message: String
-        ) -> Anthropic::BillingError
+        ) -> Anthropic::BillingErrorObject
         | (
           type: :permission_error | "permission_error",
           message: String
-        ) -> Anthropic::PermissionError
+        ) -> Anthropic::PermissionErrorObject
         | (
           type: :not_found_error | "not_found_error",
           message: String
-        ) -> Anthropic::NotFoundError
+        ) -> Anthropic::NotFoundErrorObject
         | (
           type: :rate_limit_error | "rate_limit_error",
           message: String
-        ) -> Anthropic::RateLimitError
+        ) -> Anthropic::RateLimitErrorObject
         | (
           type: :timeout_error | "timeout_error",
           message: String
-        ) -> Anthropic::GatewayTimeoutError
+        ) -> Anthropic::GatewayTimeoutErrorObject
         | (
           type: :api_error | "api_error",
           message: String
@@ -79,7 +79,7 @@ module Anthropic
         | (
           type: :overloaded_error | "overloaded_error",
           message: String
-        ) -> Anthropic::OverloadedError
+        ) -> Anthropic::OverloadedErrorObject
         | (
           type: Anthropic::Models::ErrorObject::type_ | String,
           message: String

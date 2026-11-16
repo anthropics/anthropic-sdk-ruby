@@ -8,7 +8,7 @@ module Anthropic
           T.any(Anthropic::BetaErrorResponse, Anthropic::Internal::AnyHash)
         end
 
-      sig { returns(Anthropic::BetaError::Variants) }
+      sig { returns(Anthropic::BetaErrorObject::Variants) }
       attr_accessor :error
 
       sig { returns(T.nilable(String)) }
@@ -21,15 +21,15 @@ module Anthropic
         params(
           error:
             T.any(
-              Anthropic::BetaInvalidRequestError::OrHash,
-              Anthropic::BetaAuthenticationError::OrHash,
-              Anthropic::BetaBillingError::OrHash,
-              Anthropic::BetaPermissionError::OrHash,
-              Anthropic::BetaNotFoundError::OrHash,
-              Anthropic::BetaRateLimitError::OrHash,
-              Anthropic::BetaGatewayTimeoutError::OrHash,
-              Anthropic::BetaAPIError::OrHash,
-              Anthropic::BetaOverloadedError::OrHash
+              Anthropic::BetaInvalidRequestErrorObject::OrHash,
+              Anthropic::BetaAuthenticationErrorObject::OrHash,
+              Anthropic::BetaBillingErrorObject::OrHash,
+              Anthropic::BetaPermissionErrorObject::OrHash,
+              Anthropic::BetaNotFoundErrorObject::OrHash,
+              Anthropic::BetaRateLimitErrorObject::OrHash,
+              Anthropic::BetaGatewayTimeoutErrorObject::OrHash,
+              Anthropic::BetaAPIErrorObject::OrHash,
+              Anthropic::BetaOverloadedErrorObject::OrHash
             ),
           request_id: T.nilable(String),
           type: Symbol
@@ -41,7 +41,7 @@ module Anthropic
       sig do
         override.returns(
           {
-            error: Anthropic::BetaError::Variants,
+            error: Anthropic::BetaErrorObject::Variants,
             request_id: T.nilable(String),
             type: Symbol
           }

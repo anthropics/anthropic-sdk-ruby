@@ -5,7 +5,7 @@ module Anthropic
     class TextEditorCodeExecutionToolResultBlock < Anthropic::Internal::Type::BaseModel
       # @!attribute content
       #
-      #   @return [Anthropic::Models::TextEditorCodeExecutionToolResultError, Anthropic::Models::TextEditorCodeExecutionViewResultBlock, Anthropic::Models::TextEditorCodeExecutionCreateResultBlock, Anthropic::Models::TextEditorCodeExecutionStrReplaceResultBlock]
+      #   @return [Anthropic::Models::TextEditorCodeExecutionToolResultErrorObject, Anthropic::Models::TextEditorCodeExecutionViewResultBlock, Anthropic::Models::TextEditorCodeExecutionCreateResultBlock, Anthropic::Models::TextEditorCodeExecutionStrReplaceResultBlock]
       required :content, union: -> { Anthropic::TextEditorCodeExecutionToolResultBlock::Content }
 
       # @!attribute tool_use_id
@@ -19,7 +19,7 @@ module Anthropic
       required :type, const: :text_editor_code_execution_tool_result
 
       # @!method initialize(content:, tool_use_id:, type: :text_editor_code_execution_tool_result)
-      #   @param content [Anthropic::Models::TextEditorCodeExecutionToolResultError, Anthropic::Models::TextEditorCodeExecutionViewResultBlock, Anthropic::Models::TextEditorCodeExecutionCreateResultBlock, Anthropic::Models::TextEditorCodeExecutionStrReplaceResultBlock]
+      #   @param content [Anthropic::Models::TextEditorCodeExecutionToolResultErrorObject, Anthropic::Models::TextEditorCodeExecutionViewResultBlock, Anthropic::Models::TextEditorCodeExecutionCreateResultBlock, Anthropic::Models::TextEditorCodeExecutionStrReplaceResultBlock]
       #   @param tool_use_id [String]
       #   @param type [Symbol, :text_editor_code_execution_tool_result]
 
@@ -27,7 +27,7 @@ module Anthropic
       module Content
         extend Anthropic::Internal::Type::Union
 
-        variant -> { Anthropic::TextEditorCodeExecutionToolResultError }
+        variant -> { Anthropic::TextEditorCodeExecutionToolResultErrorObject }
 
         variant -> { Anthropic::TextEditorCodeExecutionViewResultBlock }
 
@@ -36,7 +36,7 @@ module Anthropic
         variant -> { Anthropic::TextEditorCodeExecutionStrReplaceResultBlock }
 
         # @!method self.variants
-        #   @return [Array(Anthropic::Models::TextEditorCodeExecutionToolResultError, Anthropic::Models::TextEditorCodeExecutionViewResultBlock, Anthropic::Models::TextEditorCodeExecutionCreateResultBlock, Anthropic::Models::TextEditorCodeExecutionStrReplaceResultBlock)]
+        #   @return [Array(Anthropic::Models::TextEditorCodeExecutionToolResultErrorObject, Anthropic::Models::TextEditorCodeExecutionViewResultBlock, Anthropic::Models::TextEditorCodeExecutionCreateResultBlock, Anthropic::Models::TextEditorCodeExecutionStrReplaceResultBlock)]
       end
     end
   end

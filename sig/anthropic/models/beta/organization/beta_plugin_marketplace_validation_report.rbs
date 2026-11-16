@@ -7,7 +7,7 @@ module Anthropic
             commit_sha: String?,
             manifest_error: String?,
             manifest_error_code: String?,
-            plugin_errors: ::Array[Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginError],
+            plugin_errors: ::Array[Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginErrorObject],
             plugin_warnings: ::Array[Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginWarnings],
             ref: String?,
             total_plugin_count: Integer,
@@ -22,7 +22,7 @@ module Anthropic
 
           attr_accessor manifest_error_code: String?
 
-          attr_accessor plugin_errors: ::Array[Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginError]
+          attr_accessor plugin_errors: ::Array[Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginErrorObject]
 
           attr_accessor plugin_warnings: ::Array[Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginWarnings]
 
@@ -38,7 +38,7 @@ module Anthropic
             commit_sha: String?,
             manifest_error: String?,
             manifest_error_code: String?,
-            plugin_errors: ::Array[Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginError],
+            plugin_errors: ::Array[Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginErrorObject],
             plugin_warnings: ::Array[Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginWarnings],
             ref: String?,
             total_plugin_count: Integer,
@@ -50,7 +50,7 @@ module Anthropic
             commit_sha: String?,
             manifest_error: String?,
             manifest_error_code: String?,
-            plugin_errors: ::Array[Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginError],
+            plugin_errors: ::Array[Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginErrorObject],
             plugin_warnings: ::Array[Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginWarnings],
             ref: String?,
             total_plugin_count: Integer,

@@ -31,11 +31,13 @@ module Anthropic
         attr_accessor :ended_at
 
         # Why the dream failed, or `null` if `status` isn't `failed`.
-        sig { returns(T.nilable(Anthropic::Beta::BetaDreamError)) }
+        sig { returns(T.nilable(Anthropic::Beta::BetaDreamErrorObject)) }
         attr_reader :error
 
         sig do
-          params(error: T.nilable(Anthropic::Beta::BetaDreamError::OrHash)).void
+          params(
+            error: T.nilable(Anthropic::Beta::BetaDreamErrorObject::OrHash)
+          ).void
         end
         attr_writer :error
 
@@ -132,7 +134,7 @@ module Anthropic
             archived_at: T.nilable(Time),
             created_at: Time,
             ended_at: T.nilable(Time),
-            error: T.nilable(Anthropic::Beta::BetaDreamError::OrHash),
+            error: T.nilable(Anthropic::Beta::BetaDreamErrorObject::OrHash),
             inputs:
               T::Array[
                 T.any(
@@ -225,7 +227,7 @@ module Anthropic
               archived_at: T.nilable(Time),
               created_at: Time,
               ended_at: T.nilable(Time),
-              error: T.nilable(Anthropic::Beta::BetaDreamError),
+              error: T.nilable(Anthropic::Beta::BetaDreamErrorObject),
               inputs: T::Array[Anthropic::Beta::BetaDreamInput::Variants],
               instructions: T.nilable(String),
               model: Anthropic::Beta::BetaDreamModelConfig,

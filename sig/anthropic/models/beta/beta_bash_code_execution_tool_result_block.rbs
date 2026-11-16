@@ -30,7 +30,7 @@ module Anthropic
         }
 
         type content =
-          Anthropic::Beta::BetaBashCodeExecutionToolResultError
+          Anthropic::Beta::BetaBashCodeExecutionToolResultErrorObject
           | Anthropic::Beta::BetaBashCodeExecutionResultBlock
 
         module Content

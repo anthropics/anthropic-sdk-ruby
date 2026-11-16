@@ -3,16 +3,7 @@ module Anthropic
     class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError = Beta::BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError
 
     module Beta
-      type beta_managed_agents_session_resource_not_found_deployment_paused_reason_error =
-        { type: :session_resource_not_found_error }
-
-      class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError < Anthropic::Internal::Type::BaseModel
-        attr_accessor type: :session_resource_not_found_error
-
-        def initialize: (?type: :session_resource_not_found_error) -> void
-
-        def to_hash: -> { type: :session_resource_not_found_error }
-      end
+      class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError = Anthropic::Models::Beta::BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonErrorObject
     end
   end
 end

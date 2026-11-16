@@ -27,7 +27,7 @@ module Anthropic
       }
 
       type content =
-        Anthropic::ToolSearchToolResultError
+        Anthropic::ToolSearchToolResultErrorObject
         | Anthropic::ToolSearchToolSearchResultBlock
 
       module Content

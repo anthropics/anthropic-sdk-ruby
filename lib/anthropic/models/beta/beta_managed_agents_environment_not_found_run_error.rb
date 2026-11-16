@@ -3,25 +3,10 @@
 module Anthropic
   module Models
     module Beta
-      class BetaManagedAgentsEnvironmentNotFoundRunError < Anthropic::Internal::Type::BaseModel
-        # @!attribute message
-        #   Human-readable error description.
-        #
-        #   @return [String]
-        required :message, String
-
-        # @!attribute type
-        #
-        #   @return [Symbol, :environment_not_found_error]
-        required :type, const: :environment_not_found_error
-
-        # @!method initialize(message:, type: :environment_not_found_error)
-        #   The deployment's environment no longer exists.
-        #
-        #   @param message [String] Human-readable error description.
-        #
-        #   @param type [Symbol, :environment_not_found_error]
-      end
+      # @deprecated BetaManagedAgentsEnvironmentNotFoundRunError has been renamed to
+      # BetaManagedAgentsEnvironmentNotFoundRunErrorObject
+      BetaManagedAgentsEnvironmentNotFoundRunError =
+        Anthropic::Models::Beta::BetaManagedAgentsEnvironmentNotFoundRunErrorObject
     end
 
     BetaManagedAgentsEnvironmentNotFoundRunError = Beta::BetaManagedAgentsEnvironmentNotFoundRunError

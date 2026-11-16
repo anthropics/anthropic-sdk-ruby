@@ -32,7 +32,7 @@ module Anthropic
           params(
             content:
               T.any(
-                Anthropic::Beta::BetaTextEditorCodeExecutionToolResultError::OrHash,
+                Anthropic::Beta::BetaTextEditorCodeExecutionToolResultErrorObject::OrHash,
                 Anthropic::Beta::BetaTextEditorCodeExecutionViewResultBlock::OrHash,
                 Anthropic::Beta::BetaTextEditorCodeExecutionCreateResultBlock::OrHash,
                 Anthropic::Beta::BetaTextEditorCodeExecutionStrReplaceResultBlock::OrHash
@@ -67,7 +67,7 @@ module Anthropic
           Variants =
             T.type_alias do
               T.any(
-                Anthropic::Beta::BetaTextEditorCodeExecutionToolResultError,
+                Anthropic::Beta::BetaTextEditorCodeExecutionToolResultErrorObject,
                 Anthropic::Beta::BetaTextEditorCodeExecutionViewResultBlock,
                 Anthropic::Beta::BetaTextEditorCodeExecutionCreateResultBlock,
                 Anthropic::Beta::BetaTextEditorCodeExecutionStrReplaceResultBlock

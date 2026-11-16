@@ -30,7 +30,7 @@ module Anthropic
         }
 
         type content =
-          Anthropic::Beta::BetaAdvisorToolResultError
+          Anthropic::Beta::BetaAdvisorToolResultErrorObject
           | Anthropic::Beta::BetaAdvisorResultBlock
           | Anthropic::Beta::BetaAdvisorRedactedResultBlock
 

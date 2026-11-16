@@ -3,27 +3,7 @@ module Anthropic
     class BetaWebSearchToolResultError = Beta::BetaWebSearchToolResultError
 
     module Beta
-      type beta_web_search_tool_result_error =
-        {
-          error_code: Anthropic::Models::Beta::beta_web_search_tool_result_error_code,
-          type: :web_search_tool_result_error
-        }
-
-      class BetaWebSearchToolResultError < Anthropic::Internal::Type::BaseModel
-        attr_accessor error_code: Anthropic::Models::Beta::beta_web_search_tool_result_error_code
-
-        attr_accessor type: :web_search_tool_result_error
-
-        def initialize: (
-          error_code: Anthropic::Models::Beta::beta_web_search_tool_result_error_code,
-          ?type: :web_search_tool_result_error
-        ) -> void
-
-        def to_hash: -> {
-          error_code: Anthropic::Models::Beta::beta_web_search_tool_result_error_code,
-          type: :web_search_tool_result_error
-        }
-      end
+      class BetaWebSearchToolResultError = Anthropic::Models::Beta::BetaWebSearchToolResultErrorObject
     end
   end
 end

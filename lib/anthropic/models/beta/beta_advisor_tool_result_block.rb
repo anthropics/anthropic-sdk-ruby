@@ -6,7 +6,7 @@ module Anthropic
       class BetaAdvisorToolResultBlock < Anthropic::Internal::Type::BaseModel
         # @!attribute content
         #
-        #   @return [Anthropic::Models::Beta::BetaAdvisorToolResultError, Anthropic::Models::Beta::BetaAdvisorResultBlock, Anthropic::Models::Beta::BetaAdvisorRedactedResultBlock]
+        #   @return [Anthropic::Models::Beta::BetaAdvisorToolResultErrorObject, Anthropic::Models::Beta::BetaAdvisorResultBlock, Anthropic::Models::Beta::BetaAdvisorRedactedResultBlock]
         required :content, union: -> { Anthropic::Beta::BetaAdvisorToolResultBlock::Content }
 
         # @!attribute tool_use_id
@@ -20,7 +20,7 @@ module Anthropic
         required :type, const: :advisor_tool_result
 
         # @!method initialize(content:, tool_use_id:, type: :advisor_tool_result)
-        #   @param content [Anthropic::Models::Beta::BetaAdvisorToolResultError, Anthropic::Models::Beta::BetaAdvisorResultBlock, Anthropic::Models::Beta::BetaAdvisorRedactedResultBlock]
+        #   @param content [Anthropic::Models::Beta::BetaAdvisorToolResultErrorObject, Anthropic::Models::Beta::BetaAdvisorResultBlock, Anthropic::Models::Beta::BetaAdvisorRedactedResultBlock]
         #   @param tool_use_id [String]
         #   @param type [Symbol, :advisor_tool_result]
 
@@ -28,14 +28,14 @@ module Anthropic
         module Content
           extend Anthropic::Internal::Type::Union
 
-          variant -> { Anthropic::Beta::BetaAdvisorToolResultError }
+          variant -> { Anthropic::Beta::BetaAdvisorToolResultErrorObject }
 
           variant -> { Anthropic::Beta::BetaAdvisorResultBlock }
 
           variant -> { Anthropic::Beta::BetaAdvisorRedactedResultBlock }
 
           # @!method self.variants
-          #   @return [Array(Anthropic::Models::Beta::BetaAdvisorToolResultError, Anthropic::Models::Beta::BetaAdvisorResultBlock, Anthropic::Models::Beta::BetaAdvisorRedactedResultBlock)]
+          #   @return [Array(Anthropic::Models::Beta::BetaAdvisorToolResultErrorObject, Anthropic::Models::Beta::BetaAdvisorResultBlock, Anthropic::Models::Beta::BetaAdvisorRedactedResultBlock)]
         end
       end
     end

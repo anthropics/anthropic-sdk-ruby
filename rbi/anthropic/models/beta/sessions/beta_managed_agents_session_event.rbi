@@ -343,7 +343,7 @@ module Anthropic
                   String,
                   T.any(
                     Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResultCompleted::OrHash,
-                    Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResultError::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResultErrorObject::OrHash,
                     Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResultStopped::OrHash
                   )
                 ),
@@ -370,28 +370,28 @@ module Anthropic
               error:
                 T.any(
                   T.any(
-                    Anthropic::Beta::Sessions::BetaManagedAgentsUnknownError::OrHash,
-                    Anthropic::Beta::Sessions::BetaManagedAgentsModelOverloadedError::OrHash,
-                    Anthropic::Beta::Sessions::BetaManagedAgentsModelRateLimitedError::OrHash,
-                    Anthropic::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::OrHash,
-                    Anthropic::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::OrHash,
-                    Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError::OrHash,
-                    Anthropic::Beta::Sessions::BetaManagedAgentsBillingError::OrHash,
-                    Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError::OrHash,
-                    Anthropic::Beta::Sessions::BetaManagedAgentsToolUseLimitReachedError::OrHash,
-                    Anthropic::Beta::Sessions::BetaManagedAgentsCompactionLimitReachedError::OrHash,
-                    Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError::OrHash,
-                    Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError::OrHash,
-                    Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError::OrHash,
-                    Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutError::OrHash,
-                    Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCloneError::OrHash
+                    Anthropic::Beta::Sessions::BetaManagedAgentsUnknownErrorObject::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsModelOverloadedErrorObject::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsModelRateLimitedErrorObject::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsModelRequestFailedErrorObject::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedErrorObject::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedErrorObject::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsBillingErrorObject::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableErrorObject::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsToolUseLimitReachedErrorObject::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsCompactionLimitReachedErrorObject::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationErrorObject::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenErrorObject::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundErrorObject::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutErrorObject::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCloneErrorObject::OrHash
                   ),
                   T.any(
-                    Anthropic::Beta::Sessions::BetaManagedAgentsTimeoutWorkflowRunError::OrHash,
-                    Anthropic::Beta::Sessions::BetaManagedAgentsProgramWorkflowRunError::OrHash,
-                    Anthropic::Beta::Sessions::BetaManagedAgentsUnknownWorkflowRunError::OrHash,
-                    Anthropic::Beta::Sessions::BetaManagedAgentsThreadLimitWorkflowRunError::OrHash,
-                    Anthropic::Beta::Sessions::BetaManagedAgentsMaxWorkflowRunsWorkflowRunError::OrHash
+                    Anthropic::Beta::Sessions::BetaManagedAgentsTimeoutWorkflowRunErrorObject::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsProgramWorkflowRunErrorObject::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsUnknownWorkflowRunErrorObject::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsThreadLimitWorkflowRunErrorObject::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsMaxWorkflowRunsWorkflowRunErrorObject::OrHash
                   )
                 ),
               stop_details:

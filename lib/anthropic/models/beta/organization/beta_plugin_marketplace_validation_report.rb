@@ -31,9 +31,9 @@ module Anthropic
           #   One entry per plugin a synchronization would skip entirely, keyed by the
           #   plugin's name in marketplace.json.
           #
-          #   @return [Array<Anthropic::Models::Beta::Organization::BetaPluginMarketplaceValidationPluginError>]
+          #   @return [Array<Anthropic::Models::Beta::Organization::BetaPluginMarketplaceValidationPluginErrorObject>]
           required :plugin_errors,
-                   -> { Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginError] }
+                   -> { Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginErrorObject] }
 
           # @!attribute plugin_warnings
           #   One entry per plugin that would synchronize with some of its contents left out,
@@ -85,7 +85,7 @@ module Anthropic
           #
           #   @param manifest_error_code [String, nil] A stable identifier for `manifest_error`; null when that is.
           #
-          #   @param plugin_errors [Array<Anthropic::Models::Beta::Organization::BetaPluginMarketplaceValidationPluginError>] One entry per plugin a synchronization would skip entirely, keyed by the plugin'
+          #   @param plugin_errors [Array<Anthropic::Models::Beta::Organization::BetaPluginMarketplaceValidationPluginErrorObject>] One entry per plugin a synchronization would skip entirely, keyed by the plugin'
           #
           #   @param plugin_warnings [Array<Anthropic::Models::Beta::Organization::BetaPluginMarketplaceValidationPluginWarnings>] One entry per plugin that would synchronize with some of its contents left out,
           #

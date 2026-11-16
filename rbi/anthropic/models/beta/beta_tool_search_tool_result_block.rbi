@@ -31,7 +31,7 @@ module Anthropic
           params(
             content:
               T.any(
-                Anthropic::Beta::BetaToolSearchToolResultError::OrHash,
+                Anthropic::Beta::BetaToolSearchToolResultErrorObject::OrHash,
                 Anthropic::Beta::BetaToolSearchToolSearchResultBlock::OrHash
               ),
             tool_use_id: String,
@@ -60,7 +60,7 @@ module Anthropic
           Variants =
             T.type_alias do
               T.any(
-                Anthropic::Beta::BetaToolSearchToolResultError,
+                Anthropic::Beta::BetaToolSearchToolResultErrorObject,
                 Anthropic::Beta::BetaToolSearchToolSearchResultBlock
               )
             end

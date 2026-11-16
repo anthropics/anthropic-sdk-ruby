@@ -24,7 +24,7 @@ module Anthropic
         params(
           content:
             T.any(
-              Anthropic::ToolSearchToolResultError::OrHash,
+              Anthropic::ToolSearchToolResultErrorObject::OrHash,
               Anthropic::ToolSearchToolSearchResultBlock::OrHash
             ),
           tool_use_id: String,
@@ -52,7 +52,7 @@ module Anthropic
         Variants =
           T.type_alias do
             T.any(
-              Anthropic::ToolSearchToolResultError,
+              Anthropic::ToolSearchToolResultErrorObject,
               Anthropic::ToolSearchToolSearchResultBlock
             )
           end

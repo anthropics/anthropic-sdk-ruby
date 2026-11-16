@@ -1,0 +1,15 @@
+module Anthropic
+  module Models
+    type not_found_error_object = { message: String, type: :not_found_error }
+
+    class NotFoundErrorObject < Anthropic::Internal::Type::BaseModel
+      attr_accessor message: String
+
+      attr_accessor type: :not_found_error
+
+      def initialize: (message: String, ?type: :not_found_error) -> void
+
+      def to_hash: -> { message: String, type: :not_found_error }
+    end
+  end
+end

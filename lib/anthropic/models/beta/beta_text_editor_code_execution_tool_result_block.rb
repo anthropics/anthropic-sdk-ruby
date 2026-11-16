@@ -6,7 +6,7 @@ module Anthropic
       class BetaTextEditorCodeExecutionToolResultBlock < Anthropic::Internal::Type::BaseModel
         # @!attribute content
         #
-        #   @return [Anthropic::Models::Beta::BetaTextEditorCodeExecutionToolResultError, Anthropic::Models::Beta::BetaTextEditorCodeExecutionViewResultBlock, Anthropic::Models::Beta::BetaTextEditorCodeExecutionCreateResultBlock, Anthropic::Models::Beta::BetaTextEditorCodeExecutionStrReplaceResultBlock]
+        #   @return [Anthropic::Models::Beta::BetaTextEditorCodeExecutionToolResultErrorObject, Anthropic::Models::Beta::BetaTextEditorCodeExecutionViewResultBlock, Anthropic::Models::Beta::BetaTextEditorCodeExecutionCreateResultBlock, Anthropic::Models::Beta::BetaTextEditorCodeExecutionStrReplaceResultBlock]
         required :content, union: -> { Anthropic::Beta::BetaTextEditorCodeExecutionToolResultBlock::Content }
 
         # @!attribute tool_use_id
@@ -20,7 +20,7 @@ module Anthropic
         required :type, const: :text_editor_code_execution_tool_result
 
         # @!method initialize(content:, tool_use_id:, type: :text_editor_code_execution_tool_result)
-        #   @param content [Anthropic::Models::Beta::BetaTextEditorCodeExecutionToolResultError, Anthropic::Models::Beta::BetaTextEditorCodeExecutionViewResultBlock, Anthropic::Models::Beta::BetaTextEditorCodeExecutionCreateResultBlock, Anthropic::Models::Beta::BetaTextEditorCodeExecutionStrReplaceResultBlock]
+        #   @param content [Anthropic::Models::Beta::BetaTextEditorCodeExecutionToolResultErrorObject, Anthropic::Models::Beta::BetaTextEditorCodeExecutionViewResultBlock, Anthropic::Models::Beta::BetaTextEditorCodeExecutionCreateResultBlock, Anthropic::Models::Beta::BetaTextEditorCodeExecutionStrReplaceResultBlock]
         #   @param tool_use_id [String]
         #   @param type [Symbol, :text_editor_code_execution_tool_result]
 
@@ -28,7 +28,7 @@ module Anthropic
         module Content
           extend Anthropic::Internal::Type::Union
 
-          variant -> { Anthropic::Beta::BetaTextEditorCodeExecutionToolResultError }
+          variant -> { Anthropic::Beta::BetaTextEditorCodeExecutionToolResultErrorObject }
 
           variant -> { Anthropic::Beta::BetaTextEditorCodeExecutionViewResultBlock }
 
@@ -37,7 +37,7 @@ module Anthropic
           variant -> { Anthropic::Beta::BetaTextEditorCodeExecutionStrReplaceResultBlock }
 
           # @!method self.variants
-          #   @return [Array(Anthropic::Models::Beta::BetaTextEditorCodeExecutionToolResultError, Anthropic::Models::Beta::BetaTextEditorCodeExecutionViewResultBlock, Anthropic::Models::Beta::BetaTextEditorCodeExecutionCreateResultBlock, Anthropic::Models::Beta::BetaTextEditorCodeExecutionStrReplaceResultBlock)]
+          #   @return [Array(Anthropic::Models::Beta::BetaTextEditorCodeExecutionToolResultErrorObject, Anthropic::Models::Beta::BetaTextEditorCodeExecutionViewResultBlock, Anthropic::Models::Beta::BetaTextEditorCodeExecutionCreateResultBlock, Anthropic::Models::Beta::BetaTextEditorCodeExecutionStrReplaceResultBlock)]
         end
       end
     end

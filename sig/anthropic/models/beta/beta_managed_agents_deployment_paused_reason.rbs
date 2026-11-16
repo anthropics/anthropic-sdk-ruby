@@ -29,12 +29,12 @@ module Anthropic
           ) -> Anthropic::Beta::BetaManagedAgentsManualDeploymentPausedReason
           | (
             type: :error | "error",
-            error: Anthropic::Models::Beta::beta_managed_agents_deployment_paused_reason_error
+            error: Anthropic::Models::Beta::beta_managed_agents_deployment_paused_reason_error_object
           ) -> Anthropic::Beta::BetaManagedAgentsErrorDeploymentPausedReason
           | (
             type: Anthropic::Models::Beta::BetaManagedAgentsDeploymentPausedReason::type_
             | String,
-            ?error: Anthropic::Models::Beta::beta_managed_agents_deployment_paused_reason_error
+            ?error: Anthropic::Models::Beta::beta_managed_agents_deployment_paused_reason_error_object
           ) -> Anthropic::Models::Beta::beta_managed_agents_deployment_paused_reason
       end
     end

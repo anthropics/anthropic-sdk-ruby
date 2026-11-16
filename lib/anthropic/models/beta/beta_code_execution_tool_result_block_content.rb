@@ -6,7 +6,7 @@ module Anthropic
       module BetaCodeExecutionToolResultBlockContent
         extend Anthropic::Internal::Type::Union
 
-        variant -> { Anthropic::Beta::BetaCodeExecutionToolResultError }
+        variant -> { Anthropic::Beta::BetaCodeExecutionToolResultErrorObject }
 
         variant -> { Anthropic::Beta::BetaCodeExecutionResultBlock }
 
@@ -18,7 +18,7 @@ module Anthropic
         variant -> { Anthropic::Beta::BetaEncryptedCodeExecutionResultBlock }
 
         # @!method self.variants
-        #   @return [Array(Anthropic::Models::Beta::BetaCodeExecutionToolResultError, Anthropic::Models::Beta::BetaCodeExecutionResultBlock, Anthropic::Models::Beta::BetaEncryptedCodeExecutionResultBlock)]
+        #   @return [Array(Anthropic::Models::Beta::BetaCodeExecutionToolResultErrorObject, Anthropic::Models::Beta::BetaCodeExecutionResultBlock, Anthropic::Models::Beta::BetaEncryptedCodeExecutionResultBlock)]
       end
     end
 

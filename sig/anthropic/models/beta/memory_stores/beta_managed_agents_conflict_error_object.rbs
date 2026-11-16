@@ -1,0 +1,22 @@
+module Anthropic
+  module Models
+    module Beta
+      module MemoryStores
+        type beta_managed_agents_conflict_error_object =
+          { type: :conflict_error, message: String }
+
+        class BetaManagedAgentsConflictErrorObject < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :conflict_error
+
+          attr_reader message: String?
+
+          def message=: (String) -> String
+
+          def initialize: (?message: String, ?type: :conflict_error) -> void
+
+          def to_hash: -> { type: :conflict_error, message: String }
+        end
+      end
+    end
+  end
+end

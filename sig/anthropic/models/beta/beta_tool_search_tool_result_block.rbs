@@ -30,7 +30,7 @@ module Anthropic
         }
 
         type content =
-          Anthropic::Beta::BetaToolSearchToolResultError
+          Anthropic::Beta::BetaToolSearchToolResultErrorObject
           | Anthropic::Beta::BetaToolSearchToolSearchResultBlock
 
         module Content

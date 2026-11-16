@@ -3,18 +3,7 @@ module Anthropic
     class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError = Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError
 
     module Beta
-      type beta_managed_agents_self_hosted_resources_unsupported_deployment_paused_reason_error =
-        { type: :self_hosted_resources_unsupported_error }
-
-      class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError < Anthropic::Internal::Type::BaseModel
-        attr_accessor type: :self_hosted_resources_unsupported_error
-
-        def initialize: (
-          ?type: :self_hosted_resources_unsupported_error
-        ) -> void
-
-        def to_hash: -> { type: :self_hosted_resources_unsupported_error }
-      end
+      class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError = Anthropic::Models::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonErrorObject
     end
   end
 end

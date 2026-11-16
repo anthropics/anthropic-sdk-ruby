@@ -1,0 +1,101 @@
+module Anthropic
+  module Models
+    module BetaDreamingErrorObject = Beta::BetaDreamingErrorObject
+
+    module Beta
+      type beta_dreaming_error_object =
+        Anthropic::BetaInvalidRequestErrorObject
+        | Anthropic::BetaAuthenticationErrorObject
+        | Anthropic::BetaBillingErrorObject
+        | Anthropic::BetaPermissionErrorObject
+        | Anthropic::BetaNotFoundErrorObject
+        | Anthropic::BetaRateLimitErrorObject
+        | Anthropic::BetaGatewayTimeoutErrorObject
+        | Anthropic::BetaAPIErrorObject
+        | Anthropic::BetaOverloadedErrorObject
+        | Anthropic::Beta::BetaTargetStoreHeldErrorObject
+
+      module BetaDreamingErrorObject
+        extend Anthropic::Internal::Type::Union
+
+        type type_ =
+          :invalid_request_error
+          | :authentication_error
+          | :billing_error
+          | :permission_error
+          | :not_found_error
+          | :rate_limit_error
+          | :timeout_error
+          | :api_error
+          | :overloaded_error
+          | :conflict_error
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          INVALID_REQUEST_ERROR: :invalid_request_error
+          AUTHENTICATION_ERROR: :authentication_error
+          BILLING_ERROR: :billing_error
+          PERMISSION_ERROR: :permission_error
+          NOT_FOUND_ERROR: :not_found_error
+          RATE_LIMIT_ERROR: :rate_limit_error
+          TIMEOUT_ERROR: :timeout_error
+          API_ERROR: :api_error
+          OVERLOADED_ERROR: :overloaded_error
+          CONFLICT_ERROR: :conflict_error
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaDreamingErrorObject::type_]
+        end
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_dreaming_error_object]
+
+        def self.new:
+          (
+            type: :invalid_request_error | "invalid_request_error",
+            message: String
+          ) -> Anthropic::BetaInvalidRequestErrorObject
+          | (
+            type: :authentication_error | "authentication_error",
+            message: String
+          ) -> Anthropic::BetaAuthenticationErrorObject
+          | (
+            type: :billing_error | "billing_error",
+            message: String
+          ) -> Anthropic::BetaBillingErrorObject
+          | (
+            type: :permission_error | "permission_error",
+            message: String
+          ) -> Anthropic::BetaPermissionErrorObject
+          | (
+            type: :not_found_error | "not_found_error",
+            message: String
+          ) -> Anthropic::BetaNotFoundErrorObject
+          | (
+            type: :rate_limit_error | "rate_limit_error",
+            message: String
+          ) -> Anthropic::BetaRateLimitErrorObject
+          | (
+            type: :timeout_error | "timeout_error",
+            message: String
+          ) -> Anthropic::BetaGatewayTimeoutErrorObject
+          | (
+            type: :api_error | "api_error",
+            message: String
+          ) -> Anthropic::BetaAPIErrorObject
+          | (
+            type: :overloaded_error | "overloaded_error",
+            message: String
+          ) -> Anthropic::BetaOverloadedErrorObject
+          | (
+            type: :conflict_error | "conflict_error",
+            ?message: String
+          ) -> Anthropic::Beta::BetaTargetStoreHeldErrorObject
+          | (
+            type: Anthropic::Models::Beta::BetaDreamingErrorObject::type_
+            | String,
+            ?message: String
+          ) -> Anthropic::Models::Beta::beta_dreaming_error_object
+      end
+    end
+  end
+end

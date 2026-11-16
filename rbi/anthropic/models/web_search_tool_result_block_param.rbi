@@ -14,7 +14,7 @@ module Anthropic
       sig do
         returns(
           T.any(
-            Anthropic::WebSearchToolRequestError,
+            Anthropic::WebSearchToolRequestErrorObject,
             T::Array[Anthropic::WebSearchResultBlockParam]
           )
         )
@@ -67,7 +67,7 @@ module Anthropic
         params(
           content:
             T.any(
-              Anthropic::WebSearchToolRequestError::OrHash,
+              Anthropic::WebSearchToolRequestErrorObject::OrHash,
               T::Array[Anthropic::WebSearchResultBlockParam::OrHash]
             ),
           tool_use_id: String,
@@ -96,7 +96,7 @@ module Anthropic
           {
             content:
               T.any(
-                Anthropic::WebSearchToolRequestError,
+                Anthropic::WebSearchToolRequestErrorObject,
                 T::Array[Anthropic::WebSearchResultBlockParam]
               ),
             tool_use_id: String,

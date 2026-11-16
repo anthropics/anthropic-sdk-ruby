@@ -8,7 +8,7 @@ module Anthropic
       Variants =
         T.type_alias do
           T.any(
-            Anthropic::WebSearchToolResultError,
+            Anthropic::WebSearchToolResultErrorObject,
             T::Array[Anthropic::WebSearchResultBlock]
           )
         end

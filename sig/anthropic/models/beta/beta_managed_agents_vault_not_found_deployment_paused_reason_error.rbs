@@ -3,16 +3,7 @@ module Anthropic
     class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError = Beta::BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError
 
     module Beta
-      type beta_managed_agents_vault_not_found_deployment_paused_reason_error =
-        { type: :vault_not_found_error }
-
-      class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError < Anthropic::Internal::Type::BaseModel
-        attr_accessor type: :vault_not_found_error
-
-        def initialize: (?type: :vault_not_found_error) -> void
-
-        def to_hash: -> { type: :vault_not_found_error }
-      end
+      class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError = Anthropic::Models::Beta::BetaManagedAgentsVaultNotFoundDeploymentPausedReasonErrorObject
     end
   end
 end

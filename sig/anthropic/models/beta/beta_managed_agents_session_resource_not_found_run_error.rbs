@@ -3,24 +3,7 @@ module Anthropic
     class BetaManagedAgentsSessionResourceNotFoundRunError = Beta::BetaManagedAgentsSessionResourceNotFoundRunError
 
     module Beta
-      type beta_managed_agents_session_resource_not_found_run_error =
-        { message: String, type: :session_resource_not_found_error }
-
-      class BetaManagedAgentsSessionResourceNotFoundRunError < Anthropic::Internal::Type::BaseModel
-        attr_accessor message: String
-
-        attr_accessor type: :session_resource_not_found_error
-
-        def initialize: (
-          message: String,
-          ?type: :session_resource_not_found_error
-        ) -> void
-
-        def to_hash: -> {
-          message: String,
-          type: :session_resource_not_found_error
-        }
-      end
+      class BetaManagedAgentsSessionResourceNotFoundRunError = Anthropic::Models::Beta::BetaManagedAgentsSessionResourceNotFoundRunErrorObject
     end
   end
 end

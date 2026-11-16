@@ -1,0 +1,16 @@
+module Anthropic
+  module Models
+    type beta_permission_error_object =
+      { message: String, type: :permission_error }
+
+    class BetaPermissionErrorObject < Anthropic::Internal::Type::BaseModel
+      attr_accessor message: String
+
+      attr_accessor type: :permission_error
+
+      def initialize: (message: String, ?type: :permission_error) -> void
+
+      def to_hash: -> { message: String, type: :permission_error }
+    end
+  end
+end

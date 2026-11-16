@@ -24,7 +24,7 @@ module Anthropic
         params(
           content:
             T.any(
-              Anthropic::CodeExecutionToolResultError::OrHash,
+              Anthropic::CodeExecutionToolResultErrorObject::OrHash,
               Anthropic::CodeExecutionResultBlock::OrHash,
               Anthropic::EncryptedCodeExecutionResultBlock::OrHash
             ),

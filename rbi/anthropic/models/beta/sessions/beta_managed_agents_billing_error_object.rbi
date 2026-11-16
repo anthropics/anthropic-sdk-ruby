@@ -1,0 +1,147 @@
+# typed: strong
+
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        class BetaManagedAgentsBillingErrorObject < Anthropic::Internal::Type::BaseModel
+          OrHash =
+            T.type_alias do
+              T.any(
+                Anthropic::Beta::Sessions::BetaManagedAgentsBillingErrorObject,
+                Anthropic::Internal::AnyHash
+              )
+            end
+
+          # Human-readable error description.
+          sig { returns(String) }
+          attr_accessor :message
+
+          # What the client should do next.
+          sig do
+            returns(
+              Anthropic::Beta::Sessions::BetaManagedAgentsBillingErrorObject::RetryStatus::Variants
+            )
+          end
+          attr_accessor :retry_status
+
+          sig { returns(Symbol) }
+          attr_accessor :type
+
+          # The caller's organization or workspace cannot make model requests — out of
+          # credits or spend limit reached. Retrying with the same credentials will not
+          # succeed; the caller must resolve the billing state.
+          sig do
+            params(
+              message: String,
+              retry_status:
+                T.any(
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal::OrHash
+                ),
+              type: Symbol
+            ).returns(T.attached_class)
+          end
+          def self.new(
+            # Human-readable error description.
+            message:,
+            # What the client should do next.
+            retry_status:,
+            type: :billing_error
+          )
+          end
+
+          sig do
+            override.returns(
+              {
+                message: String,
+                retry_status:
+                  Anthropic::Beta::Sessions::BetaManagedAgentsBillingErrorObject::RetryStatus::Variants,
+                type: Symbol
+              }
+            )
+          end
+          def to_hash
+          end
+
+          # What the client should do next.
+          module RetryStatus
+            extend Anthropic::Internal::Type::Union
+
+            Variants =
+              T.type_alias do
+                T.any(
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal
+                )
+              end
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              TaggedSymbol =
+                T.type_alias do
+                  T.all(
+                    Symbol,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsBillingErrorObject::RetryStatus::Type
+                  )
+                end
+              OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+              RETRYING =
+                T.let(
+                  :retrying,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsBillingErrorObject::RetryStatus::Type::TaggedSymbol
+                )
+              EXHAUSTED =
+                T.let(
+                  :exhausted,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsBillingErrorObject::RetryStatus::Type::TaggedSymbol
+                )
+              TERMINAL =
+                T.let(
+                  :terminal,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsBillingErrorObject::RetryStatus::Type::TaggedSymbol
+                )
+
+              sig do
+                override.returns(
+                  T::Array[
+                    Anthropic::Beta::Sessions::BetaManagedAgentsBillingErrorObject::RetryStatus::Type::TaggedSymbol
+                  ]
+                )
+              end
+              def self.values
+              end
+            end
+
+            sig do
+              override.returns(
+                T::Array[
+                  Anthropic::Beta::Sessions::BetaManagedAgentsBillingErrorObject::RetryStatus::Variants
+                ]
+              )
+            end
+            def self.variants
+            end
+
+            # Creates a new instance of the variant class whose `type` matches the given
+            # value, passing the remaining arguments to its constructor.
+            sig do
+              params(
+                type:
+                  Anthropic::Beta::Sessions::BetaManagedAgentsBillingErrorObject::RetryStatus::Type::OrSymbol
+              ).returns(
+                Anthropic::Beta::Sessions::BetaManagedAgentsBillingErrorObject::RetryStatus::Variants
+              )
+            end
+            def self.new(type:)
+            end
+          end
+        end
+      end
+    end
+  end
+end

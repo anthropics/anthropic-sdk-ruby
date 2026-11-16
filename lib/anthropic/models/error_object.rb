@@ -7,23 +7,23 @@ module Anthropic
 
       discriminator :type
 
-      variant :invalid_request_error, -> { Anthropic::InvalidRequestError }
+      variant :invalid_request_error, -> { Anthropic::InvalidRequestErrorObject }
 
-      variant :authentication_error, -> { Anthropic::AuthenticationError }
+      variant :authentication_error, -> { Anthropic::AuthenticationErrorObject }
 
-      variant :billing_error, -> { Anthropic::BillingError }
+      variant :billing_error, -> { Anthropic::BillingErrorObject }
 
-      variant :permission_error, -> { Anthropic::PermissionError }
+      variant :permission_error, -> { Anthropic::PermissionErrorObject }
 
-      variant :not_found_error, -> { Anthropic::NotFoundError }
+      variant :not_found_error, -> { Anthropic::NotFoundErrorObject }
 
-      variant :rate_limit_error, -> { Anthropic::RateLimitError }
+      variant :rate_limit_error, -> { Anthropic::RateLimitErrorObject }
 
-      variant :timeout_error, -> { Anthropic::GatewayTimeoutError }
+      variant :timeout_error, -> { Anthropic::GatewayTimeoutErrorObject }
 
       variant :api_error, -> { Anthropic::APIErrorObject }
 
-      variant :overloaded_error, -> { Anthropic::OverloadedError }
+      variant :overloaded_error, -> { Anthropic::OverloadedErrorObject }
 
       module Type
         extend Anthropic::Internal::Type::Enum
@@ -43,7 +43,7 @@ module Anthropic
       end
 
       # @!method self.variants
-      #   @return [Array(Anthropic::Models::InvalidRequestError, Anthropic::Models::AuthenticationError, Anthropic::Models::BillingError, Anthropic::Models::PermissionError, Anthropic::Models::NotFoundError, Anthropic::Models::RateLimitError, Anthropic::Models::GatewayTimeoutError, Anthropic::Models::APIErrorObject, Anthropic::Models::OverloadedError)]
+      #   @return [Array(Anthropic::Models::InvalidRequestErrorObject, Anthropic::Models::AuthenticationErrorObject, Anthropic::Models::BillingErrorObject, Anthropic::Models::PermissionErrorObject, Anthropic::Models::NotFoundErrorObject, Anthropic::Models::RateLimitErrorObject, Anthropic::Models::GatewayTimeoutErrorObject, Anthropic::Models::APIErrorObject, Anthropic::Models::OverloadedErrorObject)]
 
       # Creates a new instance of the variant class whose `type` matches the given
       # value, passing the remaining arguments to its constructor.
@@ -58,27 +58,27 @@ module Anthropic
       #   @option args [String] :message A human-readable explanation of the error. Its wording can change, so don't matc
       #
       # @raise [ArgumentError]
-      # @return [Anthropic::Models::InvalidRequestError, Anthropic::Models::AuthenticationError, Anthropic::Models::BillingError, Anthropic::Models::PermissionError, Anthropic::Models::NotFoundError, Anthropic::Models::RateLimitError, Anthropic::Models::GatewayTimeoutError, Anthropic::Models::APIErrorObject, Anthropic::Models::OverloadedError]
+      # @return [Anthropic::Models::InvalidRequestErrorObject, Anthropic::Models::AuthenticationErrorObject, Anthropic::Models::BillingErrorObject, Anthropic::Models::PermissionErrorObject, Anthropic::Models::NotFoundErrorObject, Anthropic::Models::RateLimitErrorObject, Anthropic::Models::GatewayTimeoutErrorObject, Anthropic::Models::APIErrorObject, Anthropic::Models::OverloadedErrorObject]
       def self.new(type:, **args)
         case type.to_sym
         when :invalid_request_error
-          Anthropic::InvalidRequestError.new(**args)
+          Anthropic::InvalidRequestErrorObject.new(**args)
         when :authentication_error
-          Anthropic::AuthenticationError.new(**args)
+          Anthropic::AuthenticationErrorObject.new(**args)
         when :billing_error
-          Anthropic::BillingError.new(**args)
+          Anthropic::BillingErrorObject.new(**args)
         when :permission_error
-          Anthropic::PermissionError.new(**args)
+          Anthropic::PermissionErrorObject.new(**args)
         when :not_found_error
-          Anthropic::NotFoundError.new(**args)
+          Anthropic::NotFoundErrorObject.new(**args)
         when :rate_limit_error
-          Anthropic::RateLimitError.new(**args)
+          Anthropic::RateLimitErrorObject.new(**args)
         when :timeout_error
-          Anthropic::GatewayTimeoutError.new(**args)
+          Anthropic::GatewayTimeoutErrorObject.new(**args)
         when :api_error
           Anthropic::APIErrorObject.new(**args)
         when :overloaded_error
-          Anthropic::OverloadedError.new(**args)
+          Anthropic::OverloadedErrorObject.new(**args)
         else
           raise ArgumentError, "unknown type: #{type}"
         end

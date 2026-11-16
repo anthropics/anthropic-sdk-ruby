@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsVaultArchivedRunErrorObject = Beta::BetaManagedAgentsVaultArchivedRunErrorObject
+
+    module Beta
+      type beta_managed_agents_vault_archived_run_error_object =
+        { message: String, type: :vault_archived_error }
+
+      class BetaManagedAgentsVaultArchivedRunErrorObject < Anthropic::Internal::Type::BaseModel
+        attr_accessor message: String
+
+        attr_accessor type: :vault_archived_error
+
+        def initialize: (message: String, ?type: :vault_archived_error) -> void
+
+        def to_hash: -> { message: String, type: :vault_archived_error }
+      end
+    end
+  end
+end

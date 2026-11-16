@@ -1,7 +1,7 @@
 module Anthropic
   module Models
     type web_search_tool_result_block_content =
-      Anthropic::WebSearchToolResultError
+      Anthropic::WebSearchToolResultErrorObject
       | ::Array[Anthropic::WebSearchResultBlock]
 
     module WebSearchToolResultBlockContent

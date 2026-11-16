@@ -3,18 +3,7 @@ module Anthropic
     class BetaManagedAgentsFileNotFoundRunError = Beta::BetaManagedAgentsFileNotFoundRunError
 
     module Beta
-      type beta_managed_agents_file_not_found_run_error =
-        { message: String, type: :file_not_found_error }
-
-      class BetaManagedAgentsFileNotFoundRunError < Anthropic::Internal::Type::BaseModel
-        attr_accessor message: String
-
-        attr_accessor type: :file_not_found_error
-
-        def initialize: (message: String, ?type: :file_not_found_error) -> void
-
-        def to_hash: -> { message: String, type: :file_not_found_error }
-      end
+      class BetaManagedAgentsFileNotFoundRunError = Anthropic::Models::Beta::BetaManagedAgentsFileNotFoundRunErrorObject
     end
   end
 end

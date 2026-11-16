@@ -1,7 +1,7 @@
 module Anthropic
   module Models
     type code_execution_tool_result_block_content =
-      Anthropic::CodeExecutionToolResultError
+      Anthropic::CodeExecutionToolResultErrorObject
       | Anthropic::CodeExecutionResultBlock
       | Anthropic::EncryptedCodeExecutionResultBlock
 

@@ -5,7 +5,7 @@ module Anthropic
     class WebSearchToolResultBlockParam < Anthropic::Internal::Type::BaseModel
       # @!attribute content
       #
-      #   @return [Anthropic::Models::WebSearchToolRequestError, Array<Anthropic::Models::WebSearchResultBlockParam>]
+      #   @return [Anthropic::Models::WebSearchToolRequestErrorObject, Array<Anthropic::Models::WebSearchResultBlockParam>]
       required :content, union: -> { Anthropic::WebSearchToolResultBlockParamContent }
 
       # @!attribute tool_use_id
@@ -30,7 +30,7 @@ module Anthropic
       optional :caller_, union: -> { Anthropic::WebSearchToolResultBlockParam::Caller }, api_name: :caller
 
       # @!method initialize(content:, tool_use_id:, cache_control: nil, caller_: nil, type: :web_search_tool_result)
-      #   @param content [Anthropic::Models::WebSearchToolRequestError, Array<Anthropic::Models::WebSearchResultBlockParam>]
+      #   @param content [Anthropic::Models::WebSearchToolRequestErrorObject, Array<Anthropic::Models::WebSearchResultBlockParam>]
       #
       #   @param tool_use_id [String]
       #

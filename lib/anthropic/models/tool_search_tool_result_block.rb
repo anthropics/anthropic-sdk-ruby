@@ -5,7 +5,7 @@ module Anthropic
     class ToolSearchToolResultBlock < Anthropic::Internal::Type::BaseModel
       # @!attribute content
       #
-      #   @return [Anthropic::Models::ToolSearchToolResultError, Anthropic::Models::ToolSearchToolSearchResultBlock]
+      #   @return [Anthropic::Models::ToolSearchToolResultErrorObject, Anthropic::Models::ToolSearchToolSearchResultBlock]
       required :content, union: -> { Anthropic::ToolSearchToolResultBlock::Content }
 
       # @!attribute tool_use_id
@@ -19,7 +19,7 @@ module Anthropic
       required :type, const: :tool_search_tool_result
 
       # @!method initialize(content:, tool_use_id:, type: :tool_search_tool_result)
-      #   @param content [Anthropic::Models::ToolSearchToolResultError, Anthropic::Models::ToolSearchToolSearchResultBlock]
+      #   @param content [Anthropic::Models::ToolSearchToolResultErrorObject, Anthropic::Models::ToolSearchToolSearchResultBlock]
       #   @param tool_use_id [String]
       #   @param type [Symbol, :tool_search_tool_result]
 
@@ -27,12 +27,12 @@ module Anthropic
       module Content
         extend Anthropic::Internal::Type::Union
 
-        variant -> { Anthropic::ToolSearchToolResultError }
+        variant -> { Anthropic::ToolSearchToolResultErrorObject }
 
         variant -> { Anthropic::ToolSearchToolSearchResultBlock }
 
         # @!method self.variants
-        #   @return [Array(Anthropic::Models::ToolSearchToolResultError, Anthropic::Models::ToolSearchToolSearchResultBlock)]
+        #   @return [Array(Anthropic::Models::ToolSearchToolResultErrorObject, Anthropic::Models::ToolSearchToolSearchResultBlock)]
       end
     end
   end
