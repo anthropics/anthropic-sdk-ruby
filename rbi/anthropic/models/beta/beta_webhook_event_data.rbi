@@ -57,7 +57,9 @@ module Anthropic
               Anthropic::Beta::BetaWebhookSessionBudgetReachedEventData,
               Anthropic::Beta::BetaWebhookUserProfileEnforcementActionOpenedEventData,
               Anthropic::Beta::BetaWebhookUserProfileEnforcementActionResolvedEventData,
-              Anthropic::Beta::BetaWebhookUserProfileProgramStatusUpdatedEventData
+              Anthropic::Beta::BetaWebhookUserProfileProgramStatusUpdatedEventData,
+              Anthropic::Beta::BetaWebhookExternalKeyFailedEventData,
+              Anthropic::Beta::BetaWebhookExternalKeyRecoveredEventData
             )
           end
 
@@ -303,6 +305,16 @@ module Anthropic
           USER_PROFILE_PROGRAM_STATUS_UPDATED =
             T.let(
               :"user_profile.program_status_updated",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          EXTERNAL_KEY_FAILED =
+            T.let(
+              :"external_key.failed",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          EXTERNAL_KEY_RECOVERED =
+            T.let(
+              :"external_key.recovered",
               Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
             )
 

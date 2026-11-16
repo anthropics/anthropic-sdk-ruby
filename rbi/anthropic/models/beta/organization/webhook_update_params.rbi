@@ -176,6 +176,16 @@ module Anthropic
               end
             OrSymbol = T.type_alias { T.any(Symbol, String) }
 
+            EXTERNAL_KEY_FAILED =
+              T.let(
+                :"external_key.failed",
+                Anthropic::Beta::Organization::WebhookUpdateParams::EnabledEvent::TaggedSymbol
+              )
+            EXTERNAL_KEY_RECOVERED =
+              T.let(
+                :"external_key.recovered",
+                Anthropic::Beta::Organization::WebhookUpdateParams::EnabledEvent::TaggedSymbol
+              )
             USER_PROFILE_ENFORCEMENT_ACTION_OPENED =
               T.let(
                 :"user_profile.enforcement_action_opened",

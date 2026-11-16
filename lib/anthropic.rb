@@ -938,6 +938,8 @@ require_relative "anthropic/models/beta/beta_webhook_environment_created_event_d
 require_relative "anthropic/models/beta/beta_webhook_environment_deleted_event_data"
 require_relative "anthropic/models/beta/beta_webhook_environment_updated_event_data"
 require_relative "anthropic/models/beta/beta_webhook_event_data"
+require_relative "anthropic/models/beta/beta_webhook_external_key_failed_event_data"
+require_relative "anthropic/models/beta/beta_webhook_external_key_recovered_event_data"
 require_relative "anthropic/models/beta/beta_webhook_memory_store_archived_event_data"
 require_relative "anthropic/models/beta/beta_webhook_memory_store_created_event_data"
 require_relative "anthropic/models/beta/beta_webhook_memory_store_deleted_event_data"
