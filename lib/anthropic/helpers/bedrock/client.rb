@@ -15,8 +15,8 @@ module Anthropic
         # @return [String]
         attr_reader :aws_region
 
-        # @return [Aws::Credentials]
-        attr_reader :aws_credentials
+        # @return [Aws::Credentials, nil]
+        def aws_credentials = @signer&.credentials_provider&.credentials
 
         # @return [String, nil]
         def api_key = @auth_token
@@ -105,7 +105,7 @@ module Anthropic
               raise RuntimeError.new(message)
             end
 
-            @aws_region, @aws_credentials = resolve_region_and_credentials(
+            @aws_region, credentials_provider = resolve_region_and_credentials(
               aws_region: aws_region,
               aws_secret_key: aws_secret_key,
               aws_access_key: aws_access_key,
@@ -116,7 +116,7 @@ module Anthropic
             @signer = Aws::Sigv4::Signer.new(
               service: "bedrock",
               region: @aws_region,
-              credentials: @aws_credentials
+              credentials_provider: credentials_provider
             )
           else
             @aws_region = aws_region || env_lookup("AWS_REGION", "AWS_DEFAULT_REGION")
@@ -280,7 +280,7 @@ module Anthropic
         #
         # @param aws_profile [String, nil]
         #
-        # @return [Array<String, Aws::Credentials>]
+        # @return [Array<String, Aws::CredentialProvider>]
         #
         private def resolve_region_and_credentials(
           aws_region:,
@@ -298,7 +298,7 @@ module Anthropic
           (client_options[:region] = aws_region) unless aws_region.nil?
 
           bedrock_client = Aws::BedrockRuntime::Client.new(client_options)
-          [bedrock_client.config.region, bedrock_client.config.credentials.credentials]
+          [bedrock_client.config.region, bedrock_client.config.credentials]
         end
 
         # @private
