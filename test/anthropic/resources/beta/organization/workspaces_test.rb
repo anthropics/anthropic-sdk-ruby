@@ -6,7 +6,7 @@ class Anthropic::Test::Resources::Beta::Organization::WorkspacesTest < Anthropic
   def test_create_required_params
     response =
       @anthropic.beta.organization.workspaces.create(
-        name: "x",
+        name: "Workspace Name",
         request_options: {extra_query: {beta: "true"}}
       )
 

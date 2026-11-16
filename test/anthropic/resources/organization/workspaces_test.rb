@@ -4,7 +4,7 @@ require_relative "../../test_helper"
 
 class Anthropic::Test::Resources::Organization::WorkspacesTest < Anthropic::Test::ResourceTest
   def test_create_required_params
-    response = @anthropic.organization.workspaces.create(name: "x")
+    response = @anthropic.organization.workspaces.create(name: "Workspace Name")
 
     assert_pattern do
       response => Anthropic::Organization::Workspace
