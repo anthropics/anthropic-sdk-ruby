@@ -91,6 +91,15 @@ module Anthropic
         #   @return [Symbol, String, Anthropic::Models::Model]
         required :model, union: -> { Anthropic::Model }
 
+        # @!attribute billing_policy
+        #   Declares which organization is billed when this body is sent to `/v1/messages`.
+        #   Accepted here so that you can count the tokens of the exact body you will send,
+        #   and otherwise ignored: counting tokens bills nobody, so no user profile is
+        #   required.
+        #
+        #   @return [Anthropic::Models::Beta::BetaBillingPolicy, nil]
+        optional :billing_policy, -> { Anthropic::Beta::BetaBillingPolicy }, nil?: true
+
         # @!attribute cache_control
         #   Top-level cache control automatically applies a cache_control marker to the last
         #   cacheable block in the request.
@@ -297,13 +306,15 @@ module Anthropic
         #   @return [String, nil]
         optional :workspace_id, String
 
-        # @!method initialize(messages:, model:, cache_control: nil, compaction: nil, context_management: nil, mcp_servers: nil, output_config: nil, output_format: nil, speed: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+        # @!method initialize(messages:, model:, billing_policy: nil, cache_control: nil, compaction: nil, context_management: nil, mcp_servers: nil, output_config: nil, output_format: nil, speed: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::MessageCountTokensParams} for more details.
         #
         #   @param messages [Array<Anthropic::Models::Beta::BetaUserMessageParam, Anthropic::Models::Beta::BetaAssistantMessageParam, Anthropic::Models::Beta::BetaSystemMessageParam>] Input messages.
         #
         #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.
+        #
+        #   @param billing_policy [Anthropic::Models::Beta::BetaBillingPolicy, nil] Declares which organization is billed when this body is sent to `/v1/messages`.
         #
         #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Top-level cache control automatically applies a cache_control marker to the last
         #

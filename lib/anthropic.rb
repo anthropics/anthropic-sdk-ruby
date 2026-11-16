@@ -247,6 +247,8 @@ require_relative "anthropic/models/beta/beta_bash_code_execution_tool_result_blo
 require_relative "anthropic/models/beta/beta_bash_code_execution_tool_result_block_param"
 require_relative "anthropic/models/beta/beta_bash_code_execution_tool_result_error"
 require_relative "anthropic/models/beta/beta_bash_code_execution_tool_result_error_param"
+require_relative "anthropic/models/beta/beta_billing_policy"
+require_relative "anthropic/models/beta/beta_bill_to"
 require_relative "anthropic/models/beta/beta_browser_click_target"
 require_relative "anthropic/models/beta/beta_browser_close_tab_config"
 require_relative "anthropic/models/beta/beta_browser_close_tab_input"

@@ -73,6 +73,7 @@ module Anthropic
                 max_tokens: Integer,
                 messages: ::Array[Anthropic::Models::Beta::beta_message_param],
                 model: Anthropic::Models::model,
+                billing_policy: Anthropic::Beta::BetaBillingPolicy?,
                 cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
                 compaction: Anthropic::Beta::BetaCompactionConfig?,
                 container: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::container?,
@@ -102,6 +103,8 @@ module Anthropic
               attr_accessor messages: ::Array[Anthropic::Models::Beta::beta_message_param]
 
               attr_accessor model: Anthropic::Models::model
+
+              attr_accessor billing_policy: Anthropic::Beta::BetaBillingPolicy?
 
               attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
 
@@ -185,6 +188,7 @@ module Anthropic
                 max_tokens: Integer,
                 messages: ::Array[Anthropic::Models::Beta::beta_message_param],
                 model: Anthropic::Models::model,
+                ?billing_policy: Anthropic::Beta::BetaBillingPolicy?,
                 ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
                 ?compaction: Anthropic::Beta::BetaCompactionConfig?,
                 ?container: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::container?,
@@ -212,6 +216,7 @@ module Anthropic
                 max_tokens: Integer,
                 messages: ::Array[Anthropic::Models::Beta::beta_message_param],
                 model: Anthropic::Models::model,
+                billing_policy: Anthropic::Beta::BetaBillingPolicy?,
                 cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
                 compaction: Anthropic::Beta::BetaCompactionConfig?,
                 container: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::container?,

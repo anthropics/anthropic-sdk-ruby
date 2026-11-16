@@ -18,6 +18,8 @@ module Anthropic
                 )
               ],
             model: T.any(Anthropic::Model::OrSymbol, String),
+            billing_policy:
+              T.nilable(Anthropic::Beta::BetaBillingPolicy::OrHash),
             container:
               T.nilable(
                 T.any(Anthropic::Beta::BetaContainerParams::OrHash, String)
@@ -149,6 +151,14 @@ module Anthropic
           # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
           # details and options.
           model:,
+          # Body param: Declares which organization is billed for this request.
+          # `{"type": "billing_policy", "bill_to": "user_profile"}` bills the customer
+          # behind the user profile named in the `anthropic-user-profile-id` header, instead
+          # of your organization. If that customer has not linked an Anthropic organization
+          # to the profile, or has not allowed your organization to bill it, the request is
+          # rejected rather than billed to you. Omit the field, or send `"bill_to": "self"`
+          # (the default), to be billed as usual.
+          billing_policy: nil,
           # Body param: Container identifier for reuse across requests.
           container: nil,
           # Body param: Context management configuration.
@@ -303,6 +313,8 @@ module Anthropic
                   Anthropic::Beta::BetaSystemMessageParam::OrHash
                 )
               ],
+            billing_policy:
+              T.nilable(Anthropic::Beta::BetaBillingPolicy::OrHash),
             cache_control:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
             compaction:
@@ -403,6 +415,7 @@ module Anthropic
           model:,
           # The messages that seed the history. The first turn sends them.
           messages: nil,
+          billing_policy: nil,
           cache_control: nil,
           compaction: nil,
           container: nil,
@@ -455,6 +468,8 @@ module Anthropic
                 )
               ],
             model: T.any(Anthropic::Model::OrSymbol, String),
+            billing_policy:
+              T.nilable(Anthropic::Beta::BetaBillingPolicy::OrHash),
             cache_control:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
             compaction:
@@ -646,6 +661,14 @@ module Anthropic
           # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
           # details and options.
           model:,
+          # Body param: Declares which organization is billed for this request.
+          # `{"type": "billing_policy", "bill_to": "user_profile"}` bills the customer
+          # behind the user profile named in the `anthropic-user-profile-id` header, instead
+          # of your organization. If that customer has not linked an Anthropic organization
+          # to the profile, or has not allowed your organization to bill it, the request is
+          # rejected rather than billed to you. Omit the field, or send `"bill_to": "self"`
+          # (the default), to be billed as usual.
+          billing_policy: nil,
           # Body param: Top-level cache control automatically applies a cache_control marker
           # to the last cacheable block in the request.
           cache_control: nil,
@@ -885,6 +908,8 @@ module Anthropic
                 )
               ],
             model: T.any(Anthropic::Model::OrSymbol, String),
+            billing_policy:
+              T.nilable(Anthropic::Beta::BetaBillingPolicy::OrHash),
             cache_control:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
             compaction:
@@ -1081,6 +1106,14 @@ module Anthropic
           # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
           # details and options.
           model:,
+          # Body param: Declares which organization is billed for this request.
+          # `{"type": "billing_policy", "bill_to": "user_profile"}` bills the customer
+          # behind the user profile named in the `anthropic-user-profile-id` header, instead
+          # of your organization. If that customer has not linked an Anthropic organization
+          # to the profile, or has not allowed your organization to bill it, the request is
+          # rejected rather than billed to you. Omit the field, or send `"bill_to": "self"`
+          # (the default), to be billed as usual.
+          billing_policy: nil,
           # Body param: Top-level cache control automatically applies a cache_control marker
           # to the last cacheable block in the request.
           cache_control: nil,
@@ -1316,6 +1349,8 @@ module Anthropic
                 )
               ],
             model: T.any(Anthropic::Model::OrSymbol, String),
+            billing_policy:
+              T.nilable(Anthropic::Beta::BetaBillingPolicy::OrHash),
             cache_control:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
             compaction:
@@ -1464,6 +1499,11 @@ module Anthropic
           # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
           # details and options.
           model:,
+          # Body param: Declares which organization is billed when this body is sent to
+          # `/v1/messages`. Accepted here so that you can count the tokens of the exact body
+          # you will send, and otherwise ignored: counting tokens bills nobody, so no user
+          # profile is required.
+          billing_policy: nil,
           # Body param: Top-level cache control automatically applies a cache_control marker
           # to the last cacheable block in the request.
           cache_control: nil,
@@ -1629,6 +1669,8 @@ module Anthropic
                 )
               ],
             model: T.any(Anthropic::Model::OrSymbol, String),
+            billing_policy:
+              T.nilable(Anthropic::Beta::BetaBillingPolicy::OrHash),
             cache_control:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
             compaction:
@@ -1819,6 +1861,14 @@ module Anthropic
           # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
           # details and options.
           model:,
+          # Body param: Declares which organization is billed for this request.
+          # `{"type": "billing_policy", "bill_to": "user_profile"}` bills the customer
+          # behind the user profile named in the `anthropic-user-profile-id` header, instead
+          # of your organization. If that customer has not linked an Anthropic organization
+          # to the profile, or has not allowed your organization to bill it, the request is
+          # rejected rather than billed to you. Omit the field, or send `"bill_to": "self"`
+          # (the default), to be billed as usual.
+          billing_policy: nil,
           # Body param: Top-level cache control automatically applies a cache_control marker
           # to the last cacheable block in the request.
           cache_control: nil,

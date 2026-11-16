@@ -121,6 +121,8 @@ module Anthropic
 
       variant const: -> { Anthropic::Models::AnthropicBeta::CE_USER_MANAGEMENT_2026_07_13 }
 
+      variant const: -> { Anthropic::Models::AnthropicBeta::USER_PROFILES_BILLING_2026_10_01 }
+
       variant String
 
       # @!method self.variants
@@ -202,6 +204,7 @@ module Anthropic
       CACHE_DIAGNOSIS_2026_04_07 = :"cache-diagnosis-2026-04-07"
       # @deprecated This value is no longer needed. Remove it from your requests.
       CE_USER_MANAGEMENT_2026_07_13 = :"ce-user-management-2026-07-13"
+      USER_PROFILES_BILLING_2026_10_01 = :"user-profiles-billing-2026-10-01"
 
       # @!endgroup
     end

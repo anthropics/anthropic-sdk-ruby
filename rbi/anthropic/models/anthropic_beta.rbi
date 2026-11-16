@@ -251,6 +251,11 @@ module Anthropic
           :"ce-user-management-2026-07-13",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
+      USER_PROFILES_BILLING_2026_10_01 =
+        T.let(
+          :"user-profiles-billing-2026-10-01",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
     end
   end
 end

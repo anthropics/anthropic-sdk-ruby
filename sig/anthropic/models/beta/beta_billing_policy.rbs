@@ -1,0 +1,33 @@
+module Anthropic
+  module Models
+    class BetaBillingPolicy = Beta::BetaBillingPolicy
+
+    module Beta
+      type beta_billing_policy =
+        {
+          type: :billing_policy,
+          bill_to: Anthropic::Models::Beta::beta_bill_to
+        }
+
+      class BetaBillingPolicy < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :billing_policy
+
+        attr_reader bill_to: Anthropic::Models::Beta::beta_bill_to?
+
+        def bill_to=: (
+          Anthropic::Models::Beta::beta_bill_to
+        ) -> Anthropic::Models::Beta::beta_bill_to
+
+        def initialize: (
+          ?bill_to: Anthropic::Models::Beta::beta_bill_to,
+          ?type: :billing_policy
+        ) -> void
+
+        def to_hash: -> {
+          type: :billing_policy,
+          bill_to: Anthropic::Models::Beta::beta_bill_to
+        }
+      end
+    end
+  end
+end

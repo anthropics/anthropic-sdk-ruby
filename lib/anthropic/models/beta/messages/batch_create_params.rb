@@ -188,6 +188,18 @@ module Anthropic
               #   @return [Symbol, String, Anthropic::Models::Model]
               required :model, union: -> { Anthropic::Model }
 
+              # @!attribute billing_policy
+              #   Declares which organization is billed for this request.
+              #   `{"type": "billing_policy", "bill_to": "user_profile"}` bills the customer
+              #   behind the user profile named in the `anthropic-user-profile-id` header, instead
+              #   of your organization. If that customer has not linked an Anthropic organization
+              #   to the profile, or has not allowed your organization to bill it, the request is
+              #   rejected rather than billed to you. Omit the field, or send `"bill_to": "self"`
+              #   (the default), to be billed as usual.
+              #
+              #   @return [Anthropic::Models::Beta::BetaBillingPolicy, nil]
+              optional :billing_policy, -> { Anthropic::Beta::BetaBillingPolicy }, nil?: true
+
               # @!attribute cache_control
               #   Top-level cache control automatically applies a cache_control marker to the last
               #   cacheable block in the request.
@@ -492,7 +504,7 @@ module Anthropic
               #   @return [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaCodeExecutionTool20250522, Anthropic::Models::Beta::BetaCodeExecutionTool20250825, Anthropic::Models::Beta::BetaCodeExecutionTool20260120, Anthropic::Models::Beta::BetaCodeExecutionTool20260521, Anthropic::Models::Beta::BetaBrowserToolset20260801, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaMemoryTool20250818, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20251124, Anthropic::Models::Beta::BetaComputerToolset20260801, Anthropic::Models::Beta::BetaToolTextEditor20250124, Anthropic::Models::Beta::BetaToolTextEditor20250429, Anthropic::Models::Beta::BetaToolTextEditor20250728, Anthropic::Models::Beta::BetaWebSearchTool20250305, Anthropic::Models::Beta::BetaWebFetchTool20250910, Anthropic::Models::Beta::BetaWebSearchTool20260209, Anthropic::Models::Beta::BetaWebFetchTool20260209, Anthropic::Models::Beta::BetaWebFetchTool20260309, Anthropic::Models::Beta::BetaWebSearchTool20260318, Anthropic::Models::Beta::BetaWebFetchTool20260318, Anthropic::Models::Beta::BetaAdvisorTool20260301, Anthropic::Models::Beta::BetaToolSearchToolBm25_20251119, Anthropic::Models::Beta::BetaToolSearchToolRegex20251119, Anthropic::Models::Beta::BetaMCPToolset>, nil]
               optional :tools, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaToolUnion] }
 
-              # @!method initialize(max_tokens:, messages:, model:, cache_control: nil, compaction: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, stream: nil, system_: nil, thinking: nil, thread: nil, tool_choice: nil, tools: nil)
+              # @!method initialize(max_tokens:, messages:, model:, billing_policy: nil, cache_control: nil, compaction: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, stream: nil, system_: nil, thinking: nil, thread: nil, tool_choice: nil, tools: nil)
               #   Messages API creation parameters for the individual request.
               #
               #   See the
@@ -508,6 +520,8 @@ module Anthropic
               #   @param messages [Array<Anthropic::Models::Beta::BetaUserMessageParam, Anthropic::Models::Beta::BetaAssistantMessageParam, Anthropic::Models::Beta::BetaSystemMessageParam>] Input messages.
               #
               #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.
+              #
+              #   @param billing_policy [Anthropic::Models::Beta::BetaBillingPolicy, nil] Declares which organization is billed for this request.
               #
               #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Top-level cache control automatically applies a cache_control marker to the last
               #

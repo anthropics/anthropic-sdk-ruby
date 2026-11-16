@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module BetaBillTo = Beta::BetaBillTo
+
+    module Beta
+      type beta_bill_to = :self | :user_profile
+
+      module BetaBillTo
+        extend Anthropic::Internal::Type::Enum
+
+        SELF: :self
+        USER_PROFILE: :user_profile
+
+        def self?.values: -> ::Array[Anthropic::Models::Beta::beta_bill_to]
+      end
+    end
+  end
+end

@@ -57,6 +57,7 @@ module Anthropic
       | :"skills-2025-10-02"
       | :"cache-diagnosis-2026-04-07"
       | :"ce-user-management-2026-07-13"
+      | :"user-profiles-billing-2026-10-01"
       | String
 
     module AnthropicBeta
@@ -120,6 +121,7 @@ module Anthropic
       SKILLS_2025_10_02: :"skills-2025-10-02"
       CACHE_DIAGNOSIS_2026_04_07: :"cache-diagnosis-2026-04-07"
       CE_USER_MANAGEMENT_2026_07_13: :"ce-user-management-2026-07-13"
+      USER_PROFILES_BILLING_2026_10_01: :"user-profiles-billing-2026-10-01"
     end
   end
 end
