@@ -71,12 +71,12 @@ module Anthropic
 
         # rubocop:enable Lint/UnusedMethodArgument
 
-        # Nearly every field, variant and container has no meta, so they share
-        # this one instead of each keeping an empty Hash alive.
-        NO_META = {}.freeze
-        private_constant :NO_META
-
         class << self
+          # Nearly every field, variant and container has no meta, so they share
+          # this one instead of each keeping an empty Hash alive.
+          NO_META = {}.freeze
+          private_constant :NO_META
+
           # @api private
           #
           # @param spec [Hash{Symbol=>Object}, Proc, Anthropic::Internal::Type::Converter, Class] .
@@ -132,8 +132,8 @@ module Anthropic
             info = spec.is_a?(Hash) ? spec : type_info
             return NO_META unless info.is_a?(Hash) && !info.empty?
 
-            meta = info.except(:const, :enum, :union, :nil?)
-            meta.empty? ? NO_META : meta
+            meta = info.to_h.except(:const, :enum, :union, :nil?)
+            meta.empty? ? NO_META : meta.freeze
           end
 
           # @api private
