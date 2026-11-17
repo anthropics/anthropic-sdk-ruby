@@ -93,7 +93,7 @@ class Anthropic::Test::OpenTelemetryHTTPAttributesTest < Anthropic::Test::OpenTe
     )
 
     # `trace` is not a parameter of the endpoint. `page` is, whoever set it.
-    query = "ids%5B%5D=a+b&ids%5B%5D=c&limit=2&page=p+2"
+    query = "ids%5B%5D=a%20b&ids%5B%5D=c&limit=2&page=p%202"
     assert_equal(query, only_span.attributes["url.query"])
     assert_equal("http://localhost:4010/v1/files?#{query}", only_span.attributes["url.full"])
     assert_equal("/v1/files", only_span.attributes["url.path"])

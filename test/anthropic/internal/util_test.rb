@@ -308,6 +308,19 @@ class Anthropic::Test::UtilUriHandlingTest < Minitest::Test
     end
   end
 
+  def test_encode_query
+    cases = {
+      {"a" => "b c"} => "a=b%20c",
+      {"a" => "b+c"} => "a=b%2Bc",
+      {"a" => "*~"} => "a=%2A~",
+      {"a b" => ["é&", "c d"]} => "a%20b=%C3%A9%26&a%20b=c%20d"
+    }
+
+    cases.each do |query, expected|
+      assert_equal(expected, Anthropic::Internal::Util.encode_query(query))
+    end
+  end
+
   def test_encoding_time_query_params
     cases = {
       {"utc" => Time.utc(2024, 1, 2, 3, 4, 5)} => {"utc" => "2024-01-02T03:04:05Z"},
