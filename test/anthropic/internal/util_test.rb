@@ -461,12 +461,26 @@ class Anthropic::Test::UtilFormDataEncodingTest < Minitest::Test
       }
       cases.each do |file, content_types|
         _headers, stream = Anthropic::Internal::Util.encode_content({"content-type" => "multipart/form-data"}, {"file" => file})
-        body = stream.respond_to?(:read) ? stream.read : stream.to_a.join
+        body = stream.to_a.join
 
         assert_equal(content_types, body.scan(/^Content-Type: (.+)\r$/).flatten)
       ensure
         file.close if file.is_a?(File)
       end
+    end
+  end
+
+  def test_multipart_content_type_from_an_unusual_filename
+    {
+      "re\0port.pdf" => "application/pdf",
+      "assets.pdf/" => "application/octet-stream",
+      "report.pdf\r\n" => "application/pdf",
+      "my-skill/.png" => "application/octet-stream"
+    }.each do |filename, content_type|
+      file = Anthropic::FilePart.new(StringIO.new("x"), filename: filename)
+      _headers, stream = Anthropic::Internal::Util.encode_content({"content-type" => "multipart/form-data"}, {"file" => file})
+
+      assert_equal([content_type], stream.to_a.join.scan(/^Content-Type: (.+)\r$/).flatten, filename.inspect)
     end
   end
 

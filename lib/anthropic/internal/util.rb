@@ -698,7 +698,9 @@ module Anthropic
           end
           y << "\r\n"
 
-          content_type = MULTIPART_CONTENT_TYPE_BY_FILE_EXTENSION[::File.extname(filename.to_s).downcase]
+          # Not `File.extname`, which raises on a null byte and skips a trailing `/`.
+          extension = filename.to_s[%r{(?<=[^/])\.[^./]*\z}]&.downcase
+          content_type = MULTIPART_CONTENT_TYPE_BY_FILE_EXTENSION[extension]
           write_multipart_content(y, val: val, closing: closing, content_type: content_type)
         end
 
