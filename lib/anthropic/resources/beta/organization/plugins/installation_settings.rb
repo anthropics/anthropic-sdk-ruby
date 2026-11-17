@@ -110,6 +110,8 @@ module Anthropic
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #
+            # @raise [Anthropic::Models::SandboxEgressRestrictedError]
+            #
             # @return [Anthropic::Models::Beta::Organization::Plugins::BetaDeletedPluginInstallationSetting]
             #
             # @see Anthropic::Models::Beta::Organization::Plugins::InstallationSettingRemoveParams
@@ -174,6 +176,8 @@ module Anthropic
             # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: This endpoint is in beta: requests must send
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+            #
+            # @raise [Anthropic::Models::SandboxEgressRestrictedError]
             #
             # @return [Anthropic::Models::Beta::Organization::Plugins::BetaPluginInstallationSetting]
             #

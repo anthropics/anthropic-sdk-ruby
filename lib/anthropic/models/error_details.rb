@@ -136,7 +136,7 @@ module Anthropic
       variant :workspace_api_key_limit_exceeded,
               -> { Anthropic::Organization::WorkspaceAPIKeyLimitExceededErrorDetails }
 
-      # The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+      # The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
       variant :sandbox_egress_restricted, -> { Anthropic::SandboxEgressRestrictedErrorDetails }
 
       # The request depends on a user profile that does not exist in the organization or is no longer active. The request either names this user profile by ID, or names a resource, such as an External Key, that is bound to it.
