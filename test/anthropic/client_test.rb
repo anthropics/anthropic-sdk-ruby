@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require "open3"
+require "tempfile"
+
 require_relative "test_helper"
 
 class AnthropicTest < Minitest::Test
@@ -47,6 +50,49 @@ class AnthropicTest < Minitest::Test
     assert(conn.proxy?)
     refute(conn.proxy_from_env?)
     refute(conn.started?)
+  end
+
+  def test_clients_share_one_cert_store
+    cert_stores = Array.new(2) do
+      requester = Anthropic::Client.new(api_key: "my-anthropic-api-key").requester
+      deadline = Anthropic::Internal::Util.monotonic_secs + 1
+      requester.send(:with_pool, URI("https://example.com"), deadline: deadline, &:cert_store)
+    end
+
+    assert_kind_of(OpenSSL::X509::Store, cert_stores.first)
+    assert_same(*cert_stores)
+    refute_same(OpenSSL::SSL::SSLContext::DEFAULT_CERT_STORE, cert_stores.first)
+  end
+
+  def test_cert_store_reads_ssl_cert_file_set_after_require
+    key = OpenSSL::PKey::EC.generate("prime256v1")
+    ca = OpenSSL::X509::Certificate.new
+    ca.version = 2
+    ca.serial = 1
+    ca.subject = ca.issuer = OpenSSL::X509::Name.parse("/CN=example.com test CA")
+    ca.public_key = key
+    ca.not_before = Time.now - 60
+    ca.not_after = Time.now + 3600
+    extensions = OpenSSL::X509::ExtensionFactory.new(ca, ca)
+    ca.add_extension(extensions.create_extension("basicConstraints", "CA:TRUE", true))
+    ca.add_extension(extensions.create_extension("keyUsage", "keyCertSign", true))
+    ca.sign(key, "SHA256")
+
+    Tempfile.create(%w[ca .pem]) do |file|
+      file.write(ca.to_pem)
+      file.close
+
+      program = <<~RUBY
+        ENV["SSL_CERT_FILE"] = ARGV.fetch(0)
+        requester = Anthropic::Client.new(api_key: "my-anthropic-api-key").requester
+        deadline = Anthropic::Internal::Util.monotonic_secs + 1
+        cert_store = requester.send(:with_pool, URI("https://example.com"), deadline: deadline, &:cert_store)
+        print(cert_store.verify(OpenSSL::X509::Certificate.new(File.read(ARGV.fetch(0)))))
+      RUBY
+      out, err = Open3.capture3(RbConfig.ruby, "-r./lib/anthropic", "-e", program, file.path)
+
+      assert_equal("true", out, err)
+    end
   end
 
   def test_client_proxy_defaults_to_env
