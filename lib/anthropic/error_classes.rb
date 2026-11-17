@@ -109,6 +109,7 @@ module Anthropic
         [409, "slack_channel_set_up_settings_conflict"] => Anthropic::Models::Beta::Organization::BetaSlackChannelSetUpSettingsConflictError,
         [412, "heartbeat_precondition_failed"] => Anthropic::Models::Beta::Environments::BetaHeartbeatPreconditionFailedError,
         [413, "request_body_too_large_after_decoding"] => Anthropic::Models::RequestBodyTooLargeAfterDecodingError,
+        [429, "contract_spend_limit_reached"] => Anthropic::Models::ContractSpendLimitReachedError,
         [429, "enforced_spend_limit_reached"] => Anthropic::Models::EnforcedSpendLimitReachedError,
         [429, "ramp_limit_exceeded"] => Anthropic::Models::RampLimitExceededError,
         [503, "cmek_context_unavailable"] => Anthropic::Models::CMEKContextUnavailableError,

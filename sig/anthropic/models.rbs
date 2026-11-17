@@ -587,6 +587,10 @@ module Anthropic
 
   class ContextManagementCapability = Anthropic::Models::ContextManagementCapability
 
+  class ContractSpendLimitReachedError = Anthropic::Models::ContractSpendLimitReachedError
+
+  class ContractSpendLimitReachedErrorDetails = Anthropic::Models::ContractSpendLimitReachedErrorDetails
+
   class DeletedFile = Anthropic::Models::DeletedFile
 
   class DeletedSkill = Anthropic::Models::DeletedSkill

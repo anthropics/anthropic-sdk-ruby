@@ -38,6 +38,7 @@ module Anthropic
             Anthropic::ThreadNotFoundErrorDetails,
             Anthropic::SkillReadBlockedUndecryptableErrorDetails,
             Anthropic::RequestBodyTooLargeAfterDecodingErrorDetails,
+            Anthropic::ContractSpendLimitReachedErrorDetails,
             Anthropic::EnforcedSpendLimitReachedErrorDetails,
             Anthropic::RampLimitExceededErrorDetails,
             Anthropic::CMEKKeyUnreachableErrorDetails,
@@ -257,6 +258,11 @@ module Anthropic
         REQUEST_BODY_TOO_LARGE_AFTER_DECODING =
           T.let(
             :request_body_too_large_after_decoding,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        CONTRACT_SPEND_LIMIT_REACHED =
+          T.let(
+            :contract_spend_limit_reached,
             Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
           )
         ENFORCED_SPEND_LIMIT_REACHED =

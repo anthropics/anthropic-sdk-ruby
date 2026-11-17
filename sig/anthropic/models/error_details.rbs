@@ -31,6 +31,7 @@ module Anthropic
       | Anthropic::ThreadNotFoundErrorDetails
       | Anthropic::SkillReadBlockedUndecryptableErrorDetails
       | Anthropic::RequestBodyTooLargeAfterDecodingErrorDetails
+      | Anthropic::ContractSpendLimitReachedErrorDetails
       | Anthropic::EnforcedSpendLimitReachedErrorDetails
       | Anthropic::RampLimitExceededErrorDetails
       | Anthropic::CMEKKeyUnreachableErrorDetails
@@ -127,6 +128,7 @@ module Anthropic
         | :thread_not_found
         | :skill_read_blocked_undecryptable
         | :request_body_too_large_after_decoding
+        | :contract_spend_limit_reached
         | :enforced_spend_limit_reached
         | :ramp_limit_exceeded
         | :cmek_key_unreachable
@@ -222,6 +224,7 @@ module Anthropic
         THREAD_NOT_FOUND: :thread_not_found
         SKILL_READ_BLOCKED_UNDECRYPTABLE: :skill_read_blocked_undecryptable
         REQUEST_BODY_TOO_LARGE_AFTER_DECODING: :request_body_too_large_after_decoding
+        CONTRACT_SPEND_LIMIT_REACHED: :contract_spend_limit_reached
         ENFORCED_SPEND_LIMIT_REACHED: :enforced_spend_limit_reached
         RAMP_LIMIT_EXCEEDED: :ramp_limit_exceeded
         CMEK_KEY_UNREACHABLE: :cmek_key_unreachable
@@ -399,6 +402,10 @@ module Anthropic
           error_code: :request_body_too_large_after_decoding
           | "request_body_too_large_after_decoding"
         ) -> Anthropic::RequestBodyTooLargeAfterDecodingErrorDetails
+        | (
+          error_code: :contract_spend_limit_reached
+          | "contract_spend_limit_reached"
+        ) -> Anthropic::ContractSpendLimitReachedErrorDetails
         | (
           error_code: :enforced_spend_limit_reached
           | "enforced_spend_limit_reached"
