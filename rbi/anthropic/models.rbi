@@ -1130,6 +1130,12 @@ module Anthropic
 
   UserProfileAccessType = Anthropic::Models::UserProfileAccessType
 
+  UserProfileBillingNotAuthorizedError =
+    Anthropic::Models::UserProfileBillingNotAuthorizedError
+
+  UserProfileBillingNotAuthorizedErrorDetails =
+    Anthropic::Models::UserProfileBillingNotAuthorizedErrorDetails
+
   UserProfileCreateParams = Anthropic::Models::UserProfileCreateParams
 
   UserProfileCyberProgram = Anthropic::Models::UserProfileCyberProgram

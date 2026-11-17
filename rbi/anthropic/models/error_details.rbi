@@ -33,6 +33,7 @@ module Anthropic
             Anthropic::UserProfileRequiredErrorDetails,
             Anthropic::LinkedOrganizationBillingUnavailableErrorDetails,
             Anthropic::LinkedOrganizationSpendLimitReachedErrorDetails,
+            Anthropic::UserProfileBillingNotAuthorizedErrorDetails,
             Anthropic::UserProfileNotBillableErrorDetails,
             Anthropic::ThreadNotFoundErrorDetails,
             Anthropic::SkillReadBlockedUndecryptableErrorDetails,
@@ -231,6 +232,11 @@ module Anthropic
         LINKED_ORGANIZATION_SPEND_LIMIT_REACHED =
           T.let(
             :linked_organization_spend_limit_reached,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        USER_PROFILE_BILLING_NOT_AUTHORIZED =
+          T.let(
+            :user_profile_billing_not_authorized,
             Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
           )
         USER_PROFILE_NOT_BILLABLE =
