@@ -30,6 +30,10 @@ module Anthropic
             Anthropic::ThreadUnsupportedRequestErrorDetails,
             Anthropic::ToolNameConflictErrorDetails,
             Anthropic::ToolReferenceUnresolvedErrorDetails,
+            Anthropic::UserProfileRequiredErrorDetails,
+            Anthropic::LinkedOrganizationBillingUnavailableErrorDetails,
+            Anthropic::LinkedOrganizationSpendLimitReachedErrorDetails,
+            Anthropic::UserProfileNotBillableErrorDetails,
             Anthropic::ThreadNotFoundErrorDetails,
             Anthropic::SkillReadBlockedUndecryptableErrorDetails,
             Anthropic::RequestBodyTooLargeAfterDecodingErrorDetails,
@@ -212,6 +216,26 @@ module Anthropic
         TOOL_REFERENCE_UNRESOLVED =
           T.let(
             :tool_reference_unresolved,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        USER_PROFILE_REQUIRED =
+          T.let(
+            :user_profile_required,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        LINKED_ORGANIZATION_BILLING_UNAVAILABLE =
+          T.let(
+            :linked_organization_billing_unavailable,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        LINKED_ORGANIZATION_SPEND_LIMIT_REACHED =
+          T.let(
+            :linked_organization_spend_limit_reached,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        USER_PROFILE_NOT_BILLABLE =
+          T.let(
+            :user_profile_not_billable,
             Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
           )
         THREAD_NOT_FOUND =

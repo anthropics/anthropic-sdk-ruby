@@ -1,0 +1,16 @@
+module Anthropic
+  module Models
+    type linked_organization_billing_unavailable_error_details =
+      { error_code: :linked_organization_billing_unavailable }
+
+    class LinkedOrganizationBillingUnavailableErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :linked_organization_billing_unavailable
+
+      def initialize: (
+        ?error_code: :linked_organization_billing_unavailable
+      ) -> void
+
+      def to_hash: -> { error_code: :linked_organization_billing_unavailable }
+    end
+  end
+end

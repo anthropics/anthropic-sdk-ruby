@@ -661,6 +661,14 @@ module Anthropic
 
   class JSONOutputFormat = Anthropic::Models::JSONOutputFormat
 
+  class LinkedOrganizationBillingUnavailableError = Anthropic::Models::LinkedOrganizationBillingUnavailableError
+
+  class LinkedOrganizationBillingUnavailableErrorDetails = Anthropic::Models::LinkedOrganizationBillingUnavailableErrorDetails
+
+  class LinkedOrganizationSpendLimitReachedError = Anthropic::Models::LinkedOrganizationSpendLimitReachedError
+
+  class LinkedOrganizationSpendLimitReachedErrorDetails = Anthropic::Models::LinkedOrganizationSpendLimitReachedErrorDetails
+
   class MemoryTool20250818 = Anthropic::Models::MemoryTool20250818
 
   class Message = Anthropic::Models::Message
@@ -1027,6 +1035,10 @@ module Anthropic
 
   class UserProfileListParams = Anthropic::Models::UserProfileListParams
 
+  class UserProfileNotBillableError = Anthropic::Models::UserProfileNotBillableError
+
+  class UserProfileNotBillableErrorDetails = Anthropic::Models::UserProfileNotBillableErrorDetails
+
   class UserProfileNotFoundError = Anthropic::Models::UserProfileNotFoundError
 
   class UserProfileNotFoundErrorDetails = Anthropic::Models::UserProfileNotFoundErrorDetails
@@ -1034,6 +1046,10 @@ module Anthropic
   class UserProfilePrograms = Anthropic::Models::UserProfilePrograms
 
   module UserProfileProgramStatus = Anthropic::Models::UserProfileProgramStatus
+
+  class UserProfileRequiredError = Anthropic::Models::UserProfileRequiredError
+
+  class UserProfileRequiredErrorDetails = Anthropic::Models::UserProfileRequiredErrorDetails
 
   class UserProfileRetrieveParams = Anthropic::Models::UserProfileRetrieveParams
 

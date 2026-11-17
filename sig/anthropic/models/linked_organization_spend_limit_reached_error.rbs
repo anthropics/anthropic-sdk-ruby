@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class LinkedOrganizationSpendLimitReachedError < Anthropic::Errors::PaymentRequiredError
+      def error_code: -> :linked_organization_spend_limit_reached
+
+      def details: -> Anthropic::LinkedOrganizationSpendLimitReachedErrorDetails
+    end
+  end
+end

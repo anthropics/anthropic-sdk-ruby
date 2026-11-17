@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class LinkedOrganizationBillingUnavailableError < Anthropic::Errors::PaymentRequiredError
+      def error_code: -> :linked_organization_billing_unavailable
+
+      def details: -> Anthropic::LinkedOrganizationBillingUnavailableErrorDetails
+    end
+  end
+end

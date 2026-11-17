@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class UserProfileRequiredError < Anthropic::Errors::BadRequestError
+      def error_code: -> :user_profile_required
+
+      def details: -> Anthropic::UserProfileRequiredErrorDetails
+    end
+  end
+end
