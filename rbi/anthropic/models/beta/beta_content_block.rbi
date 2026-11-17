@@ -184,7 +184,7 @@ module Anthropic
             content:
               T.any(
                 T.any(
-                  Anthropic::Beta::BetaWebSearchToolResultError::OrHash,
+                  Anthropic::Beta::BetaWebSearchToolResultErrorObject::OrHash,
                   T::Array[Anthropic::Beta::BetaWebSearchResultBlock::OrHash]
                 ),
                 T.any(
@@ -192,27 +192,27 @@ module Anthropic
                   Anthropic::Beta::BetaWebFetchBlock::OrHash
                 ),
                 T.any(
-                  Anthropic::Beta::BetaAdvisorToolResultError::OrHash,
+                  Anthropic::Beta::BetaAdvisorToolResultErrorObject::OrHash,
                   Anthropic::Beta::BetaAdvisorResultBlock::OrHash,
                   Anthropic::Beta::BetaAdvisorRedactedResultBlock::OrHash
                 ),
                 T.any(
-                  Anthropic::Beta::BetaCodeExecutionToolResultError::OrHash,
+                  Anthropic::Beta::BetaCodeExecutionToolResultErrorObject::OrHash,
                   Anthropic::Beta::BetaCodeExecutionResultBlock::OrHash,
                   Anthropic::Beta::BetaEncryptedCodeExecutionResultBlock::OrHash
                 ),
                 T.any(
-                  Anthropic::Beta::BetaBashCodeExecutionToolResultError::OrHash,
+                  Anthropic::Beta::BetaBashCodeExecutionToolResultErrorObject::OrHash,
                   Anthropic::Beta::BetaBashCodeExecutionResultBlock::OrHash
                 ),
                 T.any(
-                  Anthropic::Beta::BetaTextEditorCodeExecutionToolResultError::OrHash,
+                  Anthropic::Beta::BetaTextEditorCodeExecutionToolResultErrorObject::OrHash,
                   Anthropic::Beta::BetaTextEditorCodeExecutionViewResultBlock::OrHash,
                   Anthropic::Beta::BetaTextEditorCodeExecutionCreateResultBlock::OrHash,
                   Anthropic::Beta::BetaTextEditorCodeExecutionStrReplaceResultBlock::OrHash
                 ),
                 T.any(
-                  Anthropic::Beta::BetaToolSearchToolResultError::OrHash,
+                  Anthropic::Beta::BetaToolSearchToolResultErrorObject::OrHash,
                   Anthropic::Beta::BetaToolSearchToolSearchResultBlock::OrHash
                 ),
                 Anthropic::Beta::BetaMCPToolResultBlock::Content::Variants,

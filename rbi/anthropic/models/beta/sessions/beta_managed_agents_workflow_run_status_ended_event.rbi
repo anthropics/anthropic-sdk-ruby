@@ -46,7 +46,7 @@ module Anthropic
               result:
                 T.any(
                   Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResultCompleted::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResultError::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResultErrorObject::OrHash,
                   Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResultStopped::OrHash
                 ),
               workflow_run_id: String,

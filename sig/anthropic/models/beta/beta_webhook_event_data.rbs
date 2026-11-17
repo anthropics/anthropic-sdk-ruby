@@ -51,6 +51,8 @@ module Anthropic
         | Anthropic::Beta::BetaWebhookUserProfileEnforcementActionOpenedEventData
         | Anthropic::Beta::BetaWebhookUserProfileEnforcementActionResolvedEventData
         | Anthropic::Beta::BetaWebhookUserProfileProgramStatusUpdatedEventData
+        | Anthropic::Beta::BetaWebhookExternalKeyFailedEventData
+        | Anthropic::Beta::BetaWebhookExternalKeyRecoveredEventData
 
       module BetaWebhookEventData
         extend Anthropic::Internal::Type::Union
@@ -103,6 +105,8 @@ module Anthropic
           | :"user_profile.enforcement_action_opened"
           | :"user_profile.enforcement_action_resolved"
           | :"user_profile.program_status_updated"
+          | :"external_key.failed"
+          | :"external_key.recovered"
 
         module Type
           extend Anthropic::Internal::Type::Enum
@@ -154,6 +158,8 @@ module Anthropic
           USER_PROFILE_ENFORCEMENT_ACTION_OPENED: :"user_profile.enforcement_action_opened"
           USER_PROFILE_ENFORCEMENT_ACTION_RESOLVED: :"user_profile.enforcement_action_resolved"
           USER_PROFILE_PROGRAM_STATUS_UPDATED: :"user_profile.program_status_updated"
+          EXTERNAL_KEY_FAILED: :"external_key.failed"
+          EXTERNAL_KEY_RECOVERED: :"external_key.recovered"
 
           def self?.values: -> ::Array[Anthropic::Models::Beta::BetaWebhookEventData::type_]
         end
@@ -454,6 +460,16 @@ module Anthropic
             id: String,
             organization_id: String
           ) -> Anthropic::Beta::BetaWebhookUserProfileProgramStatusUpdatedEventData
+          | (
+            type: :"external_key.failed" | "external_key.failed",
+            id: String,
+            organization_id: String
+          ) -> Anthropic::Beta::BetaWebhookExternalKeyFailedEventData
+          | (
+            type: :"external_key.recovered" | "external_key.recovered",
+            id: String,
+            organization_id: String
+          ) -> Anthropic::Beta::BetaWebhookExternalKeyRecoveredEventData
           | (
             type: Anthropic::Models::Beta::BetaWebhookEventData::type_ | String,
             id: String,

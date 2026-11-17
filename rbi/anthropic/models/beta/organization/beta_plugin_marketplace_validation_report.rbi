@@ -33,7 +33,7 @@ module Anthropic
           sig do
             returns(
               T::Array[
-                Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginError
+                Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginErrorObject
               ]
             )
           end
@@ -79,7 +79,7 @@ module Anthropic
               manifest_error_code: T.nilable(String),
               plugin_errors:
                 T::Array[
-                  Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginError::OrHash
+                  Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginErrorObject::OrHash
                 ],
               plugin_warnings:
                 T::Array[
@@ -130,7 +130,7 @@ module Anthropic
                 manifest_error_code: T.nilable(String),
                 plugin_errors:
                   T::Array[
-                    Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginError
+                    Anthropic::Beta::Organization::BetaPluginMarketplaceValidationPluginErrorObject
                   ],
                 plugin_warnings:
                   T::Array[

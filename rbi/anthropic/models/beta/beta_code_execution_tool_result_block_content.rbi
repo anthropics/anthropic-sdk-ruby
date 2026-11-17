@@ -12,7 +12,7 @@ module Anthropic
         Variants =
           T.type_alias do
             T.any(
-              Anthropic::Beta::BetaCodeExecutionToolResultError,
+              Anthropic::Beta::BetaCodeExecutionToolResultErrorObject,
               Anthropic::Beta::BetaCodeExecutionResultBlock,
               Anthropic::Beta::BetaEncryptedCodeExecutionResultBlock
             )

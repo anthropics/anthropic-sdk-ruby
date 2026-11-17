@@ -1,25 +1,5 @@
 module Anthropic
   module Models
-    type web_search_tool_request_error =
-      {
-        error_code: Anthropic::Models::web_search_tool_result_error_code,
-        type: :web_search_tool_result_error
-      }
-
-    class WebSearchToolRequestError < Anthropic::Internal::Type::BaseModel
-      attr_accessor error_code: Anthropic::Models::web_search_tool_result_error_code
-
-      attr_accessor type: :web_search_tool_result_error
-
-      def initialize: (
-        error_code: Anthropic::Models::web_search_tool_result_error_code,
-        ?type: :web_search_tool_result_error
-      ) -> void
-
-      def to_hash: -> {
-        error_code: Anthropic::Models::web_search_tool_result_error_code,
-        type: :web_search_tool_result_error
-      }
-    end
+    class WebSearchToolRequestError = Anthropic::Models::WebSearchToolRequestErrorObject
   end
 end

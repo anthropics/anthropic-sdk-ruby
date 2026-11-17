@@ -23,9 +23,15 @@ module Anthropic
       | Anthropic::ThreadUnsupportedRequestErrorDetails
       | Anthropic::ToolNameConflictErrorDetails
       | Anthropic::ToolReferenceUnresolvedErrorDetails
+      | Anthropic::UserProfileRequiredErrorDetails
+      | Anthropic::LinkedOrganizationBillingUnavailableErrorDetails
+      | Anthropic::LinkedOrganizationSpendLimitReachedErrorDetails
+      | Anthropic::UserProfileBillingNotAuthorizedErrorDetails
+      | Anthropic::UserProfileNotBillableErrorDetails
       | Anthropic::ThreadNotFoundErrorDetails
       | Anthropic::SkillReadBlockedUndecryptableErrorDetails
       | Anthropic::RequestBodyTooLargeAfterDecodingErrorDetails
+      | Anthropic::ContractSpendLimitReachedErrorDetails
       | Anthropic::EnforcedSpendLimitReachedErrorDetails
       | Anthropic::RampLimitExceededErrorDetails
       | Anthropic::CMEKKeyUnreachableErrorDetails
@@ -114,9 +120,15 @@ module Anthropic
         | :thread_unsupported_request
         | :tool_name_conflict
         | :tool_reference_unresolved
+        | :user_profile_required
+        | :linked_organization_billing_unavailable
+        | :linked_organization_spend_limit_reached
+        | :user_profile_billing_not_authorized
+        | :user_profile_not_billable
         | :thread_not_found
         | :skill_read_blocked_undecryptable
         | :request_body_too_large_after_decoding
+        | :contract_spend_limit_reached
         | :enforced_spend_limit_reached
         | :ramp_limit_exceeded
         | :cmek_key_unreachable
@@ -204,9 +216,15 @@ module Anthropic
         THREAD_UNSUPPORTED_REQUEST: :thread_unsupported_request
         TOOL_NAME_CONFLICT: :tool_name_conflict
         TOOL_REFERENCE_UNRESOLVED: :tool_reference_unresolved
+        USER_PROFILE_REQUIRED: :user_profile_required
+        LINKED_ORGANIZATION_BILLING_UNAVAILABLE: :linked_organization_billing_unavailable
+        LINKED_ORGANIZATION_SPEND_LIMIT_REACHED: :linked_organization_spend_limit_reached
+        USER_PROFILE_BILLING_NOT_AUTHORIZED: :user_profile_billing_not_authorized
+        USER_PROFILE_NOT_BILLABLE: :user_profile_not_billable
         THREAD_NOT_FOUND: :thread_not_found
         SKILL_READ_BLOCKED_UNDECRYPTABLE: :skill_read_blocked_undecryptable
         REQUEST_BODY_TOO_LARGE_AFTER_DECODING: :request_body_too_large_after_decoding
+        CONTRACT_SPEND_LIMIT_REACHED: :contract_spend_limit_reached
         ENFORCED_SPEND_LIMIT_REACHED: :enforced_spend_limit_reached
         RAMP_LIMIT_EXCEEDED: :ramp_limit_exceeded
         CMEK_KEY_UNREACHABLE: :cmek_key_unreachable
@@ -356,6 +374,24 @@ module Anthropic
           error_code: :tool_reference_unresolved | "tool_reference_unresolved"
         ) -> Anthropic::ToolReferenceUnresolvedErrorDetails
         | (
+          error_code: :user_profile_required | "user_profile_required"
+        ) -> Anthropic::UserProfileRequiredErrorDetails
+        | (
+          error_code: :linked_organization_billing_unavailable
+          | "linked_organization_billing_unavailable"
+        ) -> Anthropic::LinkedOrganizationBillingUnavailableErrorDetails
+        | (
+          error_code: :linked_organization_spend_limit_reached
+          | "linked_organization_spend_limit_reached"
+        ) -> Anthropic::LinkedOrganizationSpendLimitReachedErrorDetails
+        | (
+          error_code: :user_profile_billing_not_authorized
+          | "user_profile_billing_not_authorized"
+        ) -> Anthropic::UserProfileBillingNotAuthorizedErrorDetails
+        | (
+          error_code: :user_profile_not_billable | "user_profile_not_billable"
+        ) -> Anthropic::UserProfileNotBillableErrorDetails
+        | (
           error_code: :thread_not_found | "thread_not_found"
         ) -> Anthropic::ThreadNotFoundErrorDetails
         | (
@@ -366,6 +402,10 @@ module Anthropic
           error_code: :request_body_too_large_after_decoding
           | "request_body_too_large_after_decoding"
         ) -> Anthropic::RequestBodyTooLargeAfterDecodingErrorDetails
+        | (
+          error_code: :contract_spend_limit_reached
+          | "contract_spend_limit_reached"
+        ) -> Anthropic::ContractSpendLimitReachedErrorDetails
         | (
           error_code: :enforced_spend_limit_reached
           | "enforced_spend_limit_reached"

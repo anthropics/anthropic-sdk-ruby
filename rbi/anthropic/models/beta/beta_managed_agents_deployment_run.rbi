@@ -74,22 +74,22 @@ module Anthropic
             error:
               T.nilable(
                 T.any(
-                  Anthropic::Beta::BetaManagedAgentsEnvironmentArchivedRunError::OrHash,
-                  Anthropic::Beta::BetaManagedAgentsAgentArchivedRunError::OrHash,
-                  Anthropic::Beta::BetaManagedAgentsEnvironmentNotFoundRunError::OrHash,
-                  Anthropic::Beta::BetaManagedAgentsVaultNotFoundRunError::OrHash,
-                  Anthropic::Beta::BetaManagedAgentsVaultArchivedRunError::OrHash,
-                  Anthropic::Beta::BetaManagedAgentsFileNotFoundRunError::OrHash,
-                  Anthropic::Beta::BetaManagedAgentsMemoryStoreArchivedRunError::OrHash,
-                  Anthropic::Beta::BetaManagedAgentsSkillNotFoundRunError::OrHash,
-                  Anthropic::Beta::BetaManagedAgentsSessionResourceNotFoundRunError::OrHash,
-                  Anthropic::Beta::BetaManagedAgentsWorkspaceArchivedRunError::OrHash,
-                  Anthropic::Beta::BetaManagedAgentsOrganizationDisabledRunError::OrHash,
-                  Anthropic::Beta::BetaManagedAgentsSessionRateLimitedRunError::OrHash,
-                  Anthropic::Beta::BetaManagedAgentsSessionCreationRejectedRunError::OrHash,
-                  Anthropic::Beta::BetaManagedAgentsUnknownRunError::OrHash,
-                  Anthropic::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedRunError::OrHash,
-                  Anthropic::Beta::BetaManagedAgentsMCPEgressBlockedRunError::OrHash
+                  Anthropic::Beta::BetaManagedAgentsEnvironmentArchivedRunErrorObject::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsAgentArchivedRunErrorObject::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsEnvironmentNotFoundRunErrorObject::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsVaultNotFoundRunErrorObject::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsVaultArchivedRunErrorObject::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsFileNotFoundRunErrorObject::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsMemoryStoreArchivedRunErrorObject::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsSkillNotFoundRunErrorObject::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsSessionResourceNotFoundRunErrorObject::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsWorkspaceArchivedRunErrorObject::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsOrganizationDisabledRunErrorObject::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsSessionRateLimitedRunErrorObject::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsSessionCreationRejectedRunErrorObject::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsUnknownRunErrorObject::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedRunErrorObject::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsMCPEgressBlockedRunErrorObject::OrHash
                 )
               ),
             session_id: T.nilable(String),
@@ -152,22 +152,22 @@ module Anthropic
           Variants =
             T.type_alias do
               T.any(
-                Anthropic::Beta::BetaManagedAgentsEnvironmentArchivedRunError,
-                Anthropic::Beta::BetaManagedAgentsAgentArchivedRunError,
-                Anthropic::Beta::BetaManagedAgentsEnvironmentNotFoundRunError,
-                Anthropic::Beta::BetaManagedAgentsVaultNotFoundRunError,
-                Anthropic::Beta::BetaManagedAgentsVaultArchivedRunError,
-                Anthropic::Beta::BetaManagedAgentsFileNotFoundRunError,
-                Anthropic::Beta::BetaManagedAgentsMemoryStoreArchivedRunError,
-                Anthropic::Beta::BetaManagedAgentsSkillNotFoundRunError,
-                Anthropic::Beta::BetaManagedAgentsSessionResourceNotFoundRunError,
-                Anthropic::Beta::BetaManagedAgentsWorkspaceArchivedRunError,
-                Anthropic::Beta::BetaManagedAgentsOrganizationDisabledRunError,
-                Anthropic::Beta::BetaManagedAgentsSessionRateLimitedRunError,
-                Anthropic::Beta::BetaManagedAgentsSessionCreationRejectedRunError,
-                Anthropic::Beta::BetaManagedAgentsUnknownRunError,
-                Anthropic::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedRunError,
-                Anthropic::Beta::BetaManagedAgentsMCPEgressBlockedRunError
+                Anthropic::Beta::BetaManagedAgentsEnvironmentArchivedRunErrorObject,
+                Anthropic::Beta::BetaManagedAgentsAgentArchivedRunErrorObject,
+                Anthropic::Beta::BetaManagedAgentsEnvironmentNotFoundRunErrorObject,
+                Anthropic::Beta::BetaManagedAgentsVaultNotFoundRunErrorObject,
+                Anthropic::Beta::BetaManagedAgentsVaultArchivedRunErrorObject,
+                Anthropic::Beta::BetaManagedAgentsFileNotFoundRunErrorObject,
+                Anthropic::Beta::BetaManagedAgentsMemoryStoreArchivedRunErrorObject,
+                Anthropic::Beta::BetaManagedAgentsSkillNotFoundRunErrorObject,
+                Anthropic::Beta::BetaManagedAgentsSessionResourceNotFoundRunErrorObject,
+                Anthropic::Beta::BetaManagedAgentsWorkspaceArchivedRunErrorObject,
+                Anthropic::Beta::BetaManagedAgentsOrganizationDisabledRunErrorObject,
+                Anthropic::Beta::BetaManagedAgentsSessionRateLimitedRunErrorObject,
+                Anthropic::Beta::BetaManagedAgentsSessionCreationRejectedRunErrorObject,
+                Anthropic::Beta::BetaManagedAgentsUnknownRunErrorObject,
+                Anthropic::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedRunErrorObject,
+                Anthropic::Beta::BetaManagedAgentsMCPEgressBlockedRunErrorObject
               )
             end
 

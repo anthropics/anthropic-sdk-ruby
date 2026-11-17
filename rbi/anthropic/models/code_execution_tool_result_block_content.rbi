@@ -8,7 +8,7 @@ module Anthropic
       Variants =
         T.type_alias do
           T.any(
-            Anthropic::CodeExecutionToolResultError,
+            Anthropic::CodeExecutionToolResultErrorObject,
             Anthropic::CodeExecutionResultBlock,
             Anthropic::EncryptedCodeExecutionResultBlock
           )

@@ -10,7 +10,7 @@ module Anthropic
 
       # @!attribute content
       #
-      #   @return [Anthropic::Models::WebSearchToolResultError, Array<Anthropic::Models::WebSearchResultBlock>]
+      #   @return [Anthropic::Models::WebSearchToolResultErrorObject, Array<Anthropic::Models::WebSearchResultBlock>]
       required :content, union: -> { Anthropic::WebSearchToolResultBlockContent }
 
       # @!attribute tool_use_id
@@ -25,7 +25,7 @@ module Anthropic
 
       # @!method initialize(caller_:, content:, tool_use_id:, type: :web_search_tool_result)
       #   @param caller_ [Anthropic::Models::DirectCaller, Anthropic::Models::ServerToolCaller, Anthropic::Models::ServerToolCaller20260120]
-      #   @param content [Anthropic::Models::WebSearchToolResultError, Array<Anthropic::Models::WebSearchResultBlock>]
+      #   @param content [Anthropic::Models::WebSearchToolResultErrorObject, Array<Anthropic::Models::WebSearchResultBlock>]
       #   @param tool_use_id [String]
       #   @param type [Symbol, :web_search_tool_result]
 

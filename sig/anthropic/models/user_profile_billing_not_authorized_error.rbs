@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class UserProfileBillingNotAuthorizedError < Anthropic::Errors::PermissionDeniedError
+      def error_code: -> :user_profile_billing_not_authorized
+
+      def details: -> Anthropic::UserProfileBillingNotAuthorizedErrorDetails
+    end
+  end
+end

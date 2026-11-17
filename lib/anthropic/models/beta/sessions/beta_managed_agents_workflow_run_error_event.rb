@@ -14,8 +14,8 @@ module Anthropic
           # @!attribute error
           #   Why the run did not finish, or was not created.
           #
-          #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsTimeoutWorkflowRunError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsProgramWorkflowRunError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownWorkflowRunError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsThreadLimitWorkflowRunError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMaxWorkflowRunsWorkflowRunError]
-          required :error, union: -> { Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunError }
+          #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsTimeoutWorkflowRunErrorObject, Anthropic::Models::Beta::Sessions::BetaManagedAgentsProgramWorkflowRunErrorObject, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownWorkflowRunErrorObject, Anthropic::Models::Beta::Sessions::BetaManagedAgentsThreadLimitWorkflowRunErrorObject, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMaxWorkflowRunsWorkflowRunErrorObject]
+          required :error, union: -> { Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunErrorObject }
 
           # @!attribute processed_at
           #   Timestamp when this event was processed.
@@ -46,7 +46,7 @@ module Anthropic
           #
           #   @param id [String] Unique identifier for this event.
           #
-          #   @param error [Anthropic::Models::Beta::Sessions::BetaManagedAgentsTimeoutWorkflowRunError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsProgramWorkflowRunError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownWorkflowRunError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsThreadLimitWorkflowRunError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMaxWorkflowRunsWorkflowRunError] Why the run did not finish, or was not created.
+          #   @param error [Anthropic::Models::Beta::Sessions::BetaManagedAgentsTimeoutWorkflowRunErrorObject, Anthropic::Models::Beta::Sessions::BetaManagedAgentsProgramWorkflowRunErrorObject, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownWorkflowRunErrorObject, Anthropic::Models::Beta::Sessions::BetaManagedAgentsThreadLimitWorkflowRunErrorObject, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMaxWorkflowRunsWorkflowRunErrorObject] Why the run did not finish, or was not created.
           #
           #   @param processed_at [Time] Timestamp when this event was processed.
           #

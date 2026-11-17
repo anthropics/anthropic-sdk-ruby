@@ -318,7 +318,7 @@ class Anthropic::Test::Resources::Beta::Sessions::Threads::EventsTest < Anthropi
       in {
         type: :"workflow_run.error",
         id: String,
-        error: Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunError,
+        error: Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunErrorObject,
         processed_at: Time,
         workflow_run_id: String | nil
       }

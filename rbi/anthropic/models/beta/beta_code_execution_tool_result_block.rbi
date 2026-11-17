@@ -31,7 +31,7 @@ module Anthropic
           params(
             content:
               T.any(
-                Anthropic::Beta::BetaCodeExecutionToolResultError::OrHash,
+                Anthropic::Beta::BetaCodeExecutionToolResultErrorObject::OrHash,
                 Anthropic::Beta::BetaCodeExecutionResultBlock::OrHash,
                 Anthropic::Beta::BetaEncryptedCodeExecutionResultBlock::OrHash
               ),

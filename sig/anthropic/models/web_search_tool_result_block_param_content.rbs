@@ -1,7 +1,7 @@
 module Anthropic
   module Models
     type web_search_tool_result_block_param_content =
-      Anthropic::WebSearchToolRequestError
+      Anthropic::WebSearchToolRequestErrorObject
       | ::Array[Anthropic::WebSearchResultBlockParam]
 
     module WebSearchToolResultBlockParamContent

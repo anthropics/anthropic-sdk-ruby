@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type user_profile_not_billable_error_details =
+      { error_code: :user_profile_not_billable }
+
+    class UserProfileNotBillableErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :user_profile_not_billable
+
+      def initialize: (?error_code: :user_profile_not_billable) -> void
+
+      def to_hash: -> { error_code: :user_profile_not_billable }
+    end
+  end
+end

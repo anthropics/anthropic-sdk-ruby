@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type user_profile_required_error_details =
+      { error_code: :user_profile_required }
+
+    class UserProfileRequiredErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :user_profile_required
+
+      def initialize: (?error_code: :user_profile_required) -> void
+
+      def to_hash: -> { error_code: :user_profile_required }
+    end
+  end
+end

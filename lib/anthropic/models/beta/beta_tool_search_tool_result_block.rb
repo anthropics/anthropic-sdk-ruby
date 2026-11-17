@@ -6,7 +6,7 @@ module Anthropic
       class BetaToolSearchToolResultBlock < Anthropic::Internal::Type::BaseModel
         # @!attribute content
         #
-        #   @return [Anthropic::Models::Beta::BetaToolSearchToolResultError, Anthropic::Models::Beta::BetaToolSearchToolSearchResultBlock]
+        #   @return [Anthropic::Models::Beta::BetaToolSearchToolResultErrorObject, Anthropic::Models::Beta::BetaToolSearchToolSearchResultBlock]
         required :content, union: -> { Anthropic::Beta::BetaToolSearchToolResultBlock::Content }
 
         # @!attribute tool_use_id
@@ -20,7 +20,7 @@ module Anthropic
         required :type, const: :tool_search_tool_result
 
         # @!method initialize(content:, tool_use_id:, type: :tool_search_tool_result)
-        #   @param content [Anthropic::Models::Beta::BetaToolSearchToolResultError, Anthropic::Models::Beta::BetaToolSearchToolSearchResultBlock]
+        #   @param content [Anthropic::Models::Beta::BetaToolSearchToolResultErrorObject, Anthropic::Models::Beta::BetaToolSearchToolSearchResultBlock]
         #   @param tool_use_id [String]
         #   @param type [Symbol, :tool_search_tool_result]
 
@@ -28,12 +28,12 @@ module Anthropic
         module Content
           extend Anthropic::Internal::Type::Union
 
-          variant -> { Anthropic::Beta::BetaToolSearchToolResultError }
+          variant -> { Anthropic::Beta::BetaToolSearchToolResultErrorObject }
 
           variant -> { Anthropic::Beta::BetaToolSearchToolSearchResultBlock }
 
           # @!method self.variants
-          #   @return [Array(Anthropic::Models::Beta::BetaToolSearchToolResultError, Anthropic::Models::Beta::BetaToolSearchToolSearchResultBlock)]
+          #   @return [Array(Anthropic::Models::Beta::BetaToolSearchToolResultErrorObject, Anthropic::Models::Beta::BetaToolSearchToolSearchResultBlock)]
         end
       end
     end

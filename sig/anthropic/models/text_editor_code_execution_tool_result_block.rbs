@@ -27,7 +27,7 @@ module Anthropic
       }
 
       type content =
-        Anthropic::TextEditorCodeExecutionToolResultError
+        Anthropic::TextEditorCodeExecutionToolResultErrorObject
         | Anthropic::TextEditorCodeExecutionViewResultBlock
         | Anthropic::TextEditorCodeExecutionCreateResultBlock
         | Anthropic::TextEditorCodeExecutionStrReplaceResultBlock

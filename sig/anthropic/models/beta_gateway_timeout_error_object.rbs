@@ -1,0 +1,16 @@
+module Anthropic
+  module Models
+    type beta_gateway_timeout_error_object =
+      { message: String, type: :timeout_error }
+
+    class BetaGatewayTimeoutErrorObject < Anthropic::Internal::Type::BaseModel
+      attr_accessor message: String
+
+      attr_accessor type: :timeout_error
+
+      def initialize: (message: String, ?type: :timeout_error) -> void
+
+      def to_hash: -> { message: String, type: :timeout_error }
+    end
+  end
+end

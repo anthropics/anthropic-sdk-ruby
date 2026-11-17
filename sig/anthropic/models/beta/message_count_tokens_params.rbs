@@ -5,6 +5,7 @@ module Anthropic
         {
           messages: ::Array[Anthropic::Models::Beta::beta_message_param],
           model: Anthropic::Models::model,
+          billing_policy: Anthropic::Beta::BetaBillingPolicy?,
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           compaction: Anthropic::Beta::BetaCompactionConfig?,
           context_management: Anthropic::Beta::BetaContextManagementConfig?,
@@ -29,6 +30,8 @@ module Anthropic
         attr_accessor messages: ::Array[Anthropic::Models::Beta::beta_message_param]
 
         attr_accessor model: Anthropic::Models::model
+
+        attr_accessor billing_policy: Anthropic::Beta::BetaBillingPolicy?
 
         attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
 
@@ -93,6 +96,7 @@ module Anthropic
         def initialize: (
           messages: ::Array[Anthropic::Models::Beta::beta_message_param],
           model: Anthropic::Models::model,
+          ?billing_policy: Anthropic::Beta::BetaBillingPolicy?,
           ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           ?compaction: Anthropic::Beta::BetaCompactionConfig?,
           ?context_management: Anthropic::Beta::BetaContextManagementConfig?,
@@ -113,6 +117,7 @@ module Anthropic
         def to_hash: -> {
           messages: ::Array[Anthropic::Models::Beta::beta_message_param],
           model: Anthropic::Models::model,
+          billing_policy: Anthropic::Beta::BetaBillingPolicy?,
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           compaction: Anthropic::Beta::BetaCompactionConfig?,
           context_management: Anthropic::Beta::BetaContextManagementConfig?,

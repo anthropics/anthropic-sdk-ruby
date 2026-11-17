@@ -1,15 +1,5 @@
 module Anthropic
   module Models
-    type beta_billing_error = { message: String, type: :billing_error }
-
-    class BetaBillingError < Anthropic::Internal::Type::BaseModel
-      attr_accessor message: String
-
-      attr_accessor type: :billing_error
-
-      def initialize: (message: String, ?type: :billing_error) -> void
-
-      def to_hash: -> { message: String, type: :billing_error }
-    end
+    class BetaBillingError = Anthropic::Models::BetaBillingErrorObject
   end
 end

@@ -6,12 +6,12 @@ module Anthropic
       module BetaWebSearchToolResultBlockParamContent
         extend Anthropic::Internal::Type::Union
 
-        variant -> { Anthropic::Beta::BetaWebSearchToolRequestError }
+        variant -> { Anthropic::Beta::BetaWebSearchToolRequestErrorObject }
 
         variant -> { Anthropic::Models::Beta::BetaWebSearchToolResultBlockParamContent::BetaWebSearchResultBlockParamArray }
 
         # @!method self.variants
-        #   @return [Array(Anthropic::Models::Beta::BetaWebSearchToolRequestError, Array<Anthropic::Models::Beta::BetaWebSearchResultBlockParam>)]
+        #   @return [Array(Anthropic::Models::Beta::BetaWebSearchToolRequestErrorObject, Array<Anthropic::Models::Beta::BetaWebSearchResultBlockParam>)]
 
         # @type [Anthropic::Internal::Type::Converter]
         BetaWebSearchResultBlockParamArray =

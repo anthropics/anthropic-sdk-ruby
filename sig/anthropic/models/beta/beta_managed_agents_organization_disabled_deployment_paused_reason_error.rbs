@@ -3,16 +3,7 @@ module Anthropic
     class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError = Beta::BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError
 
     module Beta
-      type beta_managed_agents_organization_disabled_deployment_paused_reason_error =
-        { type: :organization_disabled_error }
-
-      class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError < Anthropic::Internal::Type::BaseModel
-        attr_accessor type: :organization_disabled_error
-
-        def initialize: (?type: :organization_disabled_error) -> void
-
-        def to_hash: -> { type: :organization_disabled_error }
-      end
+      class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError = Anthropic::Models::Beta::BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonErrorObject
     end
   end
 end

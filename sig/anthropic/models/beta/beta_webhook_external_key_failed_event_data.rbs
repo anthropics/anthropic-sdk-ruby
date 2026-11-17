@@ -1,0 +1,30 @@
+module Anthropic
+  module Models
+    class BetaWebhookExternalKeyFailedEventData = Beta::BetaWebhookExternalKeyFailedEventData
+
+    module Beta
+      type beta_webhook_external_key_failed_event_data =
+        { id: String, organization_id: String, type: :"external_key.failed" }
+
+      class BetaWebhookExternalKeyFailedEventData < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor organization_id: String
+
+        attr_accessor type: :"external_key.failed"
+
+        def initialize: (
+          id: String,
+          organization_id: String,
+          ?type: :"external_key.failed"
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          organization_id: String,
+          type: :"external_key.failed"
+        }
+      end
+    end
+  end
+end

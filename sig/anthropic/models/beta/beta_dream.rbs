@@ -9,7 +9,7 @@ module Anthropic
           archived_at: Time?,
           created_at: Time,
           ended_at: Time?,
-          error: Anthropic::Beta::BetaDreamError?,
+          error: Anthropic::Beta::BetaDreamErrorObject?,
           inputs: ::Array[Anthropic::Models::Beta::beta_dream_input],
           instructions: String?,
           model: Anthropic::Beta::BetaDreamModelConfig,
@@ -30,7 +30,7 @@ module Anthropic
 
         attr_accessor ended_at: Time?
 
-        attr_accessor error: Anthropic::Beta::BetaDreamError?
+        attr_accessor error: Anthropic::Beta::BetaDreamErrorObject?
 
         attr_accessor inputs: ::Array[Anthropic::Models::Beta::beta_dream_input]
 
@@ -55,7 +55,7 @@ module Anthropic
           archived_at: Time?,
           created_at: Time,
           ended_at: Time?,
-          error: Anthropic::Beta::BetaDreamError?,
+          error: Anthropic::Beta::BetaDreamErrorObject?,
           inputs: ::Array[Anthropic::Models::Beta::beta_dream_input],
           instructions: String?,
           model: Anthropic::Beta::BetaDreamModelConfig,
@@ -72,7 +72,7 @@ module Anthropic
           archived_at: Time?,
           created_at: Time,
           ended_at: Time?,
-          error: Anthropic::Beta::BetaDreamError?,
+          error: Anthropic::Beta::BetaDreamErrorObject?,
           inputs: ::Array[Anthropic::Models::Beta::beta_dream_input],
           instructions: String?,
           model: Anthropic::Beta::BetaDreamModelConfig,

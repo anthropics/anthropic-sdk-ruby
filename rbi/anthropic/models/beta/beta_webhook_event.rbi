@@ -81,7 +81,9 @@ module Anthropic
                 Anthropic::Beta::BetaWebhookSessionBudgetReachedEventData::OrHash,
                 Anthropic::Beta::BetaWebhookUserProfileEnforcementActionOpenedEventData::OrHash,
                 Anthropic::Beta::BetaWebhookUserProfileEnforcementActionResolvedEventData::OrHash,
-                Anthropic::Beta::BetaWebhookUserProfileProgramStatusUpdatedEventData::OrHash
+                Anthropic::Beta::BetaWebhookUserProfileProgramStatusUpdatedEventData::OrHash,
+                Anthropic::Beta::BetaWebhookExternalKeyFailedEventData::OrHash,
+                Anthropic::Beta::BetaWebhookExternalKeyRecoveredEventData::OrHash
               ),
             type: Symbol
           ).returns(T.attached_class)

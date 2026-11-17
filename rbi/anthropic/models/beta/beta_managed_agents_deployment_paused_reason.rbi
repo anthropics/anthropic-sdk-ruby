@@ -70,20 +70,20 @@ module Anthropic
               Anthropic::Beta::BetaManagedAgentsDeploymentPausedReason::Type::OrSymbol,
             error:
               T.any(
-                Anthropic::Beta::BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError::OrHash,
-                Anthropic::Beta::BetaManagedAgentsAgentArchivedDeploymentPausedReasonError::OrHash,
-                Anthropic::Beta::BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError::OrHash,
-                Anthropic::Beta::BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError::OrHash,
-                Anthropic::Beta::BetaManagedAgentsFileNotFoundDeploymentPausedReasonError::OrHash,
-                Anthropic::Beta::BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError::OrHash,
-                Anthropic::Beta::BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError::OrHash,
-                Anthropic::Beta::BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError::OrHash,
-                Anthropic::Beta::BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError::OrHash,
-                Anthropic::Beta::BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError::OrHash,
-                Anthropic::Beta::BetaManagedAgentsVaultArchivedDeploymentPausedReasonError::OrHash,
-                Anthropic::Beta::BetaManagedAgentsUnknownDeploymentPausedReasonError::OrHash,
-                Anthropic::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError::OrHash,
-                Anthropic::Beta::BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError::OrHash
+                Anthropic::Beta::BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonErrorObject::OrHash,
+                Anthropic::Beta::BetaManagedAgentsAgentArchivedDeploymentPausedReasonErrorObject::OrHash,
+                Anthropic::Beta::BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonErrorObject::OrHash,
+                Anthropic::Beta::BetaManagedAgentsVaultNotFoundDeploymentPausedReasonErrorObject::OrHash,
+                Anthropic::Beta::BetaManagedAgentsFileNotFoundDeploymentPausedReasonErrorObject::OrHash,
+                Anthropic::Beta::BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonErrorObject::OrHash,
+                Anthropic::Beta::BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonErrorObject::OrHash,
+                Anthropic::Beta::BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonErrorObject::OrHash,
+                Anthropic::Beta::BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonErrorObject::OrHash,
+                Anthropic::Beta::BetaManagedAgentsSkillNotFoundDeploymentPausedReasonErrorObject::OrHash,
+                Anthropic::Beta::BetaManagedAgentsVaultArchivedDeploymentPausedReasonErrorObject::OrHash,
+                Anthropic::Beta::BetaManagedAgentsUnknownDeploymentPausedReasonErrorObject::OrHash,
+                Anthropic::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonErrorObject::OrHash,
+                Anthropic::Beta::BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonErrorObject::OrHash
               )
           ).returns(
             Anthropic::Beta::BetaManagedAgentsDeploymentPausedReason::Variants

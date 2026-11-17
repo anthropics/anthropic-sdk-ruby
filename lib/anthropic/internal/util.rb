@@ -338,7 +338,9 @@ module Anthropic
         #
         # @return [String, nil]
         def encode_query(query)
-          query.to_h.empty? ? nil : URI.encode_www_form(query)
+          return if query.to_h.empty?
+
+          URI.encode_www_form(query).gsub(/[+*]|%7E/, {"+" => "%20", "*" => "%2A", "%7E" => "~"})
         end
       end
 

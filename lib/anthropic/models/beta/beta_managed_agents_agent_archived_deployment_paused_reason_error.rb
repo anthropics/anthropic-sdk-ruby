@@ -3,17 +3,10 @@
 module Anthropic
   module Models
     module Beta
-      class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError < Anthropic::Internal::Type::BaseModel
-        # @!attribute type
-        #
-        #   @return [Symbol, :agent_archived_error]
-        required :type, const: :agent_archived_error
-
-        # @!method initialize(type: :agent_archived_error)
-        #   The deployment's agent was archived.
-        #
-        #   @param type [Symbol, :agent_archived_error]
-      end
+      # @deprecated BetaManagedAgentsAgentArchivedDeploymentPausedReasonError has been renamed to
+      # BetaManagedAgentsAgentArchivedDeploymentPausedReasonErrorObject
+      BetaManagedAgentsAgentArchivedDeploymentPausedReasonError =
+        Anthropic::Models::Beta::BetaManagedAgentsAgentArchivedDeploymentPausedReasonErrorObject
     end
 
     BetaManagedAgentsAgentArchivedDeploymentPausedReasonError =

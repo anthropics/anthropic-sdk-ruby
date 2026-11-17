@@ -2,6 +2,7 @@
 
 require_relative "../../test_helper"
 require_relative "../support/platform_client_timeout"
+require "aws-sdk-core"
 
 class Anthropic::Test::BedrockClientTest < Minitest::Test
   extend Minitest::Serial
@@ -542,6 +543,28 @@ class Anthropic::Test::BedrockClientTest < Minitest::Test
     assert_equal(3, acc.uniq.length)
   end
 
+  def test_each_request_is_signed_with_the_current_credentials
+    original = Aws.config
+    sent = []
+    stub_request(:post, "https://bedrock-runtime.us-east-1.amazonaws.com/model/m/invoke")
+      .with { sent << _1.headers }
+      .to_return_json(status: 200, body: {})
+    params = {max_tokens: 1024, messages: [{content: "hi", role: :user}], model: :m}
+    provider = Struct.new(:credentials).new(Aws::Credentials.new("first-key", "first-secret", "first-token"))
+    Aws.config = original.merge(credentials: provider)
+
+    client = Anthropic::BedrockClient.new(aws_region: "us-east-1")
+    client.messages.create(**params)
+    provider.credentials = Aws::Credentials.new("second-key", "second-secret", "second-token")
+    client.messages.create(**params)
+
+    assert_equal(%w[first-key second-key], sent.map { _1.fetch("Authorization")[%r{Credential=([^/]+)}, 1] })
+    assert_equal(%w[first-token second-token], sent.map { _1.fetch("X-Amz-Security-Token") })
+    assert_equal("second-key", client.aws_credentials.access_key_id)
+  ensure
+    Aws.config = original
+  end
+
   def test_api_key_auth
     uri = "https://bedrock-runtime.us-east-1.amazonaws.com/model/claude-3-7-sonnet-latest/invoke"
     stub_request(:post, uri).to_return_json(
@@ -570,6 +593,7 @@ class Anthropic::Test::BedrockClientTest < Minitest::Test
       assert_equal("Bearer test-api-key", req.headers.fetch("Authorization"))
       assert_nil(req.headers["X-Api-Key"])
     end
+    assert_nil(anthropic.aws_credentials)
   end
 
   def test_api_key_from_env

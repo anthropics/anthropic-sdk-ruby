@@ -76,13 +76,15 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MessageCreateParams} for more details.
         #
-        # @overload create(max_tokens:, messages:, model:, cache_control: nil, compaction: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, thinking: nil, thread: nil, tool_choice: nil, tools: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+        # @overload create(max_tokens:, messages:, model:, billing_policy: nil, cache_control: nil, compaction: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, thinking: nil, thread: nil, tool_choice: nil, tools: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
         #
         # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
         #
         # @param messages [Array<Anthropic::Models::Beta::BetaUserMessageParam, Anthropic::Models::Beta::BetaAssistantMessageParam, Anthropic::Models::Beta::BetaSystemMessageParam>] Body param: Input messages.
         #
         # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.
+        #
+        # @param billing_policy [Anthropic::Models::Beta::BetaBillingPolicy, nil] Body param: Declares which organization is billed for this request.
         #
         # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Body param: Top-level cache control automatically applies a cache_control marker
         #
@@ -154,9 +156,15 @@ module Anthropic
         # @raise [Anthropic::Models::ThreadUnsupportedRequestError]
         # @raise [Anthropic::Models::ToolNameConflictError]
         # @raise [Anthropic::Models::ToolReferenceUnresolvedError]
+        # @raise [Anthropic::Models::UserProfileRequiredError]
+        # @raise [Anthropic::Models::LinkedOrganizationBillingUnavailableError]
+        # @raise [Anthropic::Models::LinkedOrganizationSpendLimitReachedError]
+        # @raise [Anthropic::Models::UserProfileBillingNotAuthorizedError]
+        # @raise [Anthropic::Models::UserProfileNotBillableError]
         # @raise [Anthropic::Models::ThreadNotFoundError]
         # @raise [Anthropic::Models::SkillReadBlockedUndecryptableError]
         # @raise [Anthropic::Models::RequestBodyTooLargeAfterDecodingError]
+        # @raise [Anthropic::Models::ContractSpendLimitReachedError]
         # @raise [Anthropic::Models::EnforcedSpendLimitReachedError]
         # @raise [Anthropic::Models::RampLimitExceededError]
         # @raise [Anthropic::Models::CMEKKeyUnreachableError]
@@ -226,13 +234,15 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MessageCreateParams} for more details.
         #
-        # @overload stream_raw(max_tokens:, messages:, model:, cache_control: nil, compaction: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, thinking: nil, thread: nil, tool_choice: nil, tools: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+        # @overload stream_raw(max_tokens:, messages:, model:, billing_policy: nil, cache_control: nil, compaction: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, thinking: nil, thread: nil, tool_choice: nil, tools: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
         #
         # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
         #
         # @param messages [Array<Anthropic::Models::Beta::BetaUserMessageParam, Anthropic::Models::Beta::BetaAssistantMessageParam, Anthropic::Models::Beta::BetaSystemMessageParam>] Body param: Input messages.
         #
         # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.
+        #
+        # @param billing_policy [Anthropic::Models::Beta::BetaBillingPolicy, nil] Body param: Declares which organization is billed for this request.
         #
         # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Body param: Top-level cache control automatically applies a cache_control marker
         #
@@ -304,9 +314,15 @@ module Anthropic
         # @raise [Anthropic::Models::ThreadUnsupportedRequestError]
         # @raise [Anthropic::Models::ToolNameConflictError]
         # @raise [Anthropic::Models::ToolReferenceUnresolvedError]
+        # @raise [Anthropic::Models::UserProfileRequiredError]
+        # @raise [Anthropic::Models::LinkedOrganizationBillingUnavailableError]
+        # @raise [Anthropic::Models::LinkedOrganizationSpendLimitReachedError]
+        # @raise [Anthropic::Models::UserProfileBillingNotAuthorizedError]
+        # @raise [Anthropic::Models::UserProfileNotBillableError]
         # @raise [Anthropic::Models::ThreadNotFoundError]
         # @raise [Anthropic::Models::SkillReadBlockedUndecryptableError]
         # @raise [Anthropic::Models::RequestBodyTooLargeAfterDecodingError]
+        # @raise [Anthropic::Models::ContractSpendLimitReachedError]
         # @raise [Anthropic::Models::EnforcedSpendLimitReachedError]
         # @raise [Anthropic::Models::RampLimitExceededError]
         # @raise [Anthropic::Models::CMEKKeyUnreachableError]
@@ -362,11 +378,13 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MessageCountTokensParams} for more details.
         #
-        # @overload count_tokens(messages:, model:, cache_control: nil, compaction: nil, context_management: nil, mcp_servers: nil, output_config: nil, output_format: nil, speed: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+        # @overload count_tokens(messages:, model:, billing_policy: nil, cache_control: nil, compaction: nil, context_management: nil, mcp_servers: nil, output_config: nil, output_format: nil, speed: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
         #
         # @param messages [Array<Anthropic::Models::Beta::BetaUserMessageParam, Anthropic::Models::Beta::BetaAssistantMessageParam, Anthropic::Models::Beta::BetaSystemMessageParam>] Body param: Input messages.
         #
         # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.
+        #
+        # @param billing_policy [Anthropic::Models::Beta::BetaBillingPolicy, nil] Body param: Declares which organization is billed when this body is sent to
         #
         # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Body param: Top-level cache control automatically applies a cache_control marker
         #
@@ -447,13 +465,15 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MessageCreateParams} for more details.
         #
-        # @overload stream(max_tokens:, messages:, model:, cache_control: nil, compaction: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, thinking: nil, thread: nil, tool_choice: nil, tools: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+        # @overload stream(max_tokens:, messages:, model:, billing_policy: nil, cache_control: nil, compaction: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, thinking: nil, thread: nil, tool_choice: nil, tools: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
         #
         # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
         #
         # @param messages [Array<Anthropic::Models::Beta::BetaUserMessageParam, Anthropic::Models::Beta::BetaAssistantMessageParam, Anthropic::Models::Beta::BetaSystemMessageParam>] Body param: Input messages.
         #
         # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.
+        #
+        # @param billing_policy [Anthropic::Models::Beta::BetaBillingPolicy, nil] Body param: Declares which organization is billed for this request.
         #
         # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Body param: Top-level cache control automatically applies a cache_control marker
         #
@@ -502,6 +522,42 @@ module Anthropic
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @raise [Anthropic::Models::AvailableToolsLimitExceededError]
+        # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError]
+        # @raise [Anthropic::Models::ClaudeCodeVersionTooOldError]
+        # @raise [Anthropic::Models::CMEKKeyDisabledError]
+        # @raise [Anthropic::Models::CMEKKeyNetworkBlockedError]
+        # @raise [Anthropic::Models::CompactionBlockAmbiguousError]
+        # @raise [Anthropic::Models::CompactionBlockMisplacedError]
+        # @raise [Anthropic::Models::CompactionContentMismatchError]
+        # @raise [Anthropic::Models::CompactionIncompleteTurnError]
+        # @raise [Anthropic::Models::CompactionNothingToSummarizeError]
+        # @raise [Anthropic::Models::CompactionSignatureInvalidError]
+        # @raise [Anthropic::Models::CompactionTooManyToolReferencesError]
+        # @raise [Anthropic::Models::CompactionToolChangesMismatchError]
+        # @raise [Anthropic::Models::OrganizationOnHoldError]
+        # @raise [Anthropic::Models::RequestBodyEncodingInvalidError]
+        # @raise [Anthropic::Models::RequestBodyEncodingUnsupportedError]
+        # @raise [Anthropic::Models::ThreadAlreadyContinuedError]
+        # @raise [Anthropic::Models::ThreadContinueInFlightError]
+        # @raise [Anthropic::Models::ThreadFingerprintMismatchError]
+        # @raise [Anthropic::Models::ThreadUnsupportedRequestError]
+        # @raise [Anthropic::Models::ToolNameConflictError]
+        # @raise [Anthropic::Models::ToolReferenceUnresolvedError]
+        # @raise [Anthropic::Models::UserProfileRequiredError]
+        # @raise [Anthropic::Models::LinkedOrganizationBillingUnavailableError]
+        # @raise [Anthropic::Models::LinkedOrganizationSpendLimitReachedError]
+        # @raise [Anthropic::Models::UserProfileBillingNotAuthorizedError]
+        # @raise [Anthropic::Models::UserProfileNotBillableError]
+        # @raise [Anthropic::Models::ThreadNotFoundError]
+        # @raise [Anthropic::Models::SkillReadBlockedUndecryptableError]
+        # @raise [Anthropic::Models::RequestBodyTooLargeAfterDecodingError]
+        # @raise [Anthropic::Models::ContractSpendLimitReachedError]
+        # @raise [Anthropic::Models::EnforcedSpendLimitReachedError]
+        # @raise [Anthropic::Models::RampLimitExceededError]
+        # @raise [Anthropic::Models::CMEKKeyUnreachableError]
+        # @raise [Anthropic::Models::CompactionUnavailableError]
         #
         # @return [Anthropic::Helpers::Streaming::MessageStream]
         def stream(params)

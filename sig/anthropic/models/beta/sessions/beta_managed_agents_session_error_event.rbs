@@ -34,21 +34,21 @@ module Anthropic
           }
 
           type error =
-            Anthropic::Beta::Sessions::BetaManagedAgentsUnknownError
-            | Anthropic::Beta::Sessions::BetaManagedAgentsModelOverloadedError
-            | Anthropic::Beta::Sessions::BetaManagedAgentsModelRateLimitedError
-            | Anthropic::Beta::Sessions::BetaManagedAgentsModelRequestFailedError
-            | Anthropic::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError
-            | Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError
-            | Anthropic::Beta::Sessions::BetaManagedAgentsBillingError
-            | Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError
-            | Anthropic::Beta::Sessions::BetaManagedAgentsToolUseLimitReachedError
-            | Anthropic::Beta::Sessions::BetaManagedAgentsCompactionLimitReachedError
-            | Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError
-            | Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError
-            | Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError
-            | Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutError
-            | Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCloneError
+            Anthropic::Beta::Sessions::BetaManagedAgentsUnknownErrorObject
+            | Anthropic::Beta::Sessions::BetaManagedAgentsModelOverloadedErrorObject
+            | Anthropic::Beta::Sessions::BetaManagedAgentsModelRateLimitedErrorObject
+            | Anthropic::Beta::Sessions::BetaManagedAgentsModelRequestFailedErrorObject
+            | Anthropic::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedErrorObject
+            | Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedErrorObject
+            | Anthropic::Beta::Sessions::BetaManagedAgentsBillingErrorObject
+            | Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableErrorObject
+            | Anthropic::Beta::Sessions::BetaManagedAgentsToolUseLimitReachedErrorObject
+            | Anthropic::Beta::Sessions::BetaManagedAgentsCompactionLimitReachedErrorObject
+            | Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationErrorObject
+            | Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenErrorObject
+            | Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundErrorObject
+            | Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutErrorObject
+            | Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCloneErrorObject
 
           module Error
             extend Anthropic::Internal::Type::Union
@@ -98,115 +98,115 @@ module Anthropic
               (
                 type: :unknown_error | "unknown_error",
                 message: String,
-                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError::retry_status
-              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsUnknownError
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownErrorObject::retry_status
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsUnknownErrorObject
               | (
                 type: :model_overloaded_error | "model_overloaded_error",
                 message: String,
-                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError::retry_status
-              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsModelOverloadedError
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedErrorObject::retry_status
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsModelOverloadedErrorObject
               | (
                 type: :model_rate_limited_error | "model_rate_limited_error",
                 message: String,
-                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError::retry_status
-              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsModelRateLimitedError
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedErrorObject::retry_status
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsModelRateLimitedErrorObject
               | (
                 type: :model_request_failed_error
                 | "model_request_failed_error",
                 message: String,
-                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::retry_status
-              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsModelRequestFailedError
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedErrorObject::retry_status
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsModelRequestFailedErrorObject
               | (
                 type: :mcp_connection_failed_error
                 | "mcp_connection_failed_error",
                 mcp_server_name: String,
                 message: String,
-                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::retry_status
-              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedErrorObject::retry_status
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedErrorObject
               | (
                 type: :mcp_authentication_failed_error
                 | "mcp_authentication_failed_error",
                 mcp_server_name: String,
                 message: String,
-                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError::retry_status
-              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedErrorObject::retry_status
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedErrorObject
               | (
                 type: :billing_error | "billing_error",
                 message: String,
-                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError::retry_status
-              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsBillingError
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingErrorObject::retry_status
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsBillingErrorObject
               | (
                 type: :credential_host_unreachable_error
                 | "credential_host_unreachable_error",
                 credential_id: String,
                 message: String,
-                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError::retry_status,
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableErrorObject::retry_status,
                 vault_id: String
-              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableErrorObject
               | (
                 type: :tool_use_limit_reached_error
                 | "tool_use_limit_reached_error",
                 message: String,
-                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsToolUseLimitReachedError::retry_status
-              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsToolUseLimitReachedError
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsToolUseLimitReachedErrorObject::retry_status
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsToolUseLimitReachedErrorObject
               | (
                 type: :compaction_limit_reached_error
                 | "compaction_limit_reached_error",
                 message: String,
-                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsCompactionLimitReachedError::retry_status
-              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsCompactionLimitReachedError
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsCompactionLimitReachedErrorObject::retry_status
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsCompactionLimitReachedErrorObject
               | (
                 type: :repository_authentication_error
                 | "repository_authentication_error",
                 message: String,
                 repository_url: String?,
-                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError::retry_status
-              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationErrorObject::retry_status
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationErrorObject
               | (
                 type: :repository_forbidden_error
                 | "repository_forbidden_error",
                 message: String,
                 repository_url: String?,
-                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError::retry_status
-              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenErrorObject::retry_status
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenErrorObject
               | (
                 type: :repository_not_found_error
                 | "repository_not_found_error",
                 message: String,
                 repository_url: String?,
-                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError::retry_status
-              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundErrorObject::retry_status
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundErrorObject
               | (
                 type: :repository_checkout_error | "repository_checkout_error",
                 message: String,
                 repository_url: String?,
-                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutError::retry_status
-              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutError
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutErrorObject::retry_status
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutErrorObject
               | (
                 type: :repository_clone_error | "repository_clone_error",
                 message: String,
                 repository_url: String?,
-                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCloneError::retry_status
-              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCloneError
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCloneErrorObject::retry_status
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCloneErrorObject
               | (
                 type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error::type_
                 | String,
                 message: String,
-                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError::retry_status
-                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError::retry_status
-                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError::retry_status
-                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::retry_status
-                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::retry_status
-                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError::retry_status
-                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError::retry_status
-                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError::retry_status
-                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsToolUseLimitReachedError::retry_status
-                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsCompactionLimitReachedError::retry_status
-                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError::retry_status
-                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError::retry_status
-                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError::retry_status
-                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutError::retry_status
-                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCloneError::retry_status,
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownErrorObject::retry_status
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedErrorObject::retry_status
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedErrorObject::retry_status
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedErrorObject::retry_status
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedErrorObject::retry_status
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedErrorObject::retry_status
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingErrorObject::retry_status
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableErrorObject::retry_status
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsToolUseLimitReachedErrorObject::retry_status
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsCompactionLimitReachedErrorObject::retry_status
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationErrorObject::retry_status
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenErrorObject::retry_status
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundErrorObject::retry_status
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutErrorObject::retry_status
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsRepositoryCloneErrorObject::retry_status,
                 ?mcp_server_name: String,
                 ?credential_id: String,
                 ?vault_id: String,

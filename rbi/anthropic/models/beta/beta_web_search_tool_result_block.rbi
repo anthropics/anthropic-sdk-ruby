@@ -52,7 +52,7 @@ module Anthropic
           params(
             content:
               T.any(
-                Anthropic::Beta::BetaWebSearchToolResultError::OrHash,
+                Anthropic::Beta::BetaWebSearchToolResultErrorObject::OrHash,
                 T::Array[Anthropic::Beta::BetaWebSearchResultBlock::OrHash]
               ),
             tool_use_id: String,

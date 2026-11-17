@@ -104,6 +104,21 @@ module Anthropic
         sig { returns(T.any(Anthropic::Model::OrSymbol, String)) }
         attr_accessor :model
 
+        # Declares which organization is billed when this body is sent to `/v1/messages`.
+        # Accepted here so that you can count the tokens of the exact body you will send,
+        # and otherwise ignored: counting tokens bills nobody, so no user profile is
+        # required.
+        sig { returns(T.nilable(Anthropic::Beta::BetaBillingPolicy)) }
+        attr_reader :billing_policy
+
+        sig do
+          params(
+            billing_policy:
+              T.nilable(Anthropic::Beta::BetaBillingPolicy::OrHash)
+          ).void
+        end
+        attr_writer :billing_policy
+
         # Top-level cache control automatically applies a cache_control marker to the last
         # cacheable block in the request.
         sig { returns(T.nilable(Anthropic::Beta::BetaCacheControlEphemeral)) }
@@ -503,6 +518,8 @@ module Anthropic
                 )
               ],
             model: T.any(Anthropic::Model::OrSymbol, String),
+            billing_policy:
+              T.nilable(Anthropic::Beta::BetaBillingPolicy::OrHash),
             cache_control:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
             compaction:
@@ -651,6 +668,11 @@ module Anthropic
           # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
           # details and options.
           model:,
+          # Declares which organization is billed when this body is sent to `/v1/messages`.
+          # Accepted here so that you can count the tokens of the exact body you will send,
+          # and otherwise ignored: counting tokens bills nobody, so no user profile is
+          # required.
+          billing_policy: nil,
           # Top-level cache control automatically applies a cache_control marker to the last
           # cacheable block in the request.
           cache_control: nil,
@@ -813,6 +835,7 @@ module Anthropic
                   )
                 ],
               model: T.any(Anthropic::Model::OrSymbol, String),
+              billing_policy: T.nilable(Anthropic::Beta::BetaBillingPolicy),
               cache_control:
                 T.nilable(Anthropic::Beta::BetaCacheControlEphemeral),
               compaction: T.nilable(Anthropic::Beta::BetaCompactionConfig),

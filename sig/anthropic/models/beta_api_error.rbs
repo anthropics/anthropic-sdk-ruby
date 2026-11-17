@@ -1,15 +1,5 @@
 module Anthropic
   module Models
-    type beta_api_error = { message: String, type: :api_error }
-
-    class BetaAPIError < Anthropic::Internal::Type::BaseModel
-      attr_accessor message: String
-
-      attr_accessor type: :api_error
-
-      def initialize: (message: String, ?type: :api_error) -> void
-
-      def to_hash: -> { message: String, type: :api_error }
-    end
+    class BetaAPIError = Anthropic::Models::BetaAPIErrorObject
   end
 end

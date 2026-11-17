@@ -20,7 +20,7 @@ module Anthropic
           # @!attribute result
           #   How the run ended.
           #
-          #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsWorkflowRunResultCompleted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsWorkflowRunResultError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsWorkflowRunResultStopped]
+          #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsWorkflowRunResultCompleted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsWorkflowRunResultErrorObject, Anthropic::Models::Beta::Sessions::BetaManagedAgentsWorkflowRunResultStopped]
           required :result, union: -> { Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunResult }
 
           # @!attribute type
@@ -47,7 +47,7 @@ module Anthropic
           #
           #   @param processed_at [Time] Timestamp when this event was processed.
           #
-          #   @param result [Anthropic::Models::Beta::Sessions::BetaManagedAgentsWorkflowRunResultCompleted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsWorkflowRunResultError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsWorkflowRunResultStopped] How the run ended.
+          #   @param result [Anthropic::Models::Beta::Sessions::BetaManagedAgentsWorkflowRunResultCompleted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsWorkflowRunResultErrorObject, Anthropic::Models::Beta::Sessions::BetaManagedAgentsWorkflowRunResultStopped] How the run ended.
           #
           #   @param workflow_run_id [String] Identifier of the run. The same value is on all of the run's `workflow_run.*` ev
           #

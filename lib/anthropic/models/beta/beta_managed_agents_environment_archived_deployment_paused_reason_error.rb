@@ -3,17 +3,10 @@
 module Anthropic
   module Models
     module Beta
-      class BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError < Anthropic::Internal::Type::BaseModel
-        # @!attribute type
-        #
-        #   @return [Symbol, :environment_archived_error]
-        required :type, const: :environment_archived_error
-
-        # @!method initialize(type: :environment_archived_error)
-        #   The deployment's environment was archived.
-        #
-        #   @param type [Symbol, :environment_archived_error]
-      end
+      # @deprecated BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError has been renamed
+      # to BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonErrorObject
+      BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError =
+        Anthropic::Models::Beta::BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonErrorObject
     end
 
     BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError =

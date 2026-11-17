@@ -474,7 +474,7 @@ module Anthropic
             | (
               type: :"workflow_run.error" | "workflow_run.error",
               id: String,
-              error: Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_error,
+              error: Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_error_object,
               processed_at: Time,
               workflow_run_id: String?
             ) -> Anthropic::Beta::Sessions::BetaManagedAgentsWorkflowRunErrorEvent
@@ -511,7 +511,7 @@ module Anthropic
               ?to_session_thread_id: String,
               ?to_agent_name: String?,
               ?error: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::error
-              | Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_error,
+              | Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_error_object,
               ?stop_details: Anthropic::Beta::Sessions::BetaManagedAgentsSessionRefusalStopDetails?,
               ?stop_reason: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent::stop_reason
               | Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::stop_reason,

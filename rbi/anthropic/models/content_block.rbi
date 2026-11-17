@@ -117,7 +117,7 @@ module Anthropic
           content:
             T.any(
               T.any(
-                Anthropic::WebSearchToolResultError::OrHash,
+                Anthropic::WebSearchToolResultErrorObject::OrHash,
                 T::Array[Anthropic::WebSearchResultBlock::OrHash]
               ),
               T.any(
@@ -125,22 +125,22 @@ module Anthropic
                 Anthropic::WebFetchBlock::OrHash
               ),
               T.any(
-                Anthropic::CodeExecutionToolResultError::OrHash,
+                Anthropic::CodeExecutionToolResultErrorObject::OrHash,
                 Anthropic::CodeExecutionResultBlock::OrHash,
                 Anthropic::EncryptedCodeExecutionResultBlock::OrHash
               ),
               T.any(
-                Anthropic::BashCodeExecutionToolResultError::OrHash,
+                Anthropic::BashCodeExecutionToolResultErrorObject::OrHash,
                 Anthropic::BashCodeExecutionResultBlock::OrHash
               ),
               T.any(
-                Anthropic::TextEditorCodeExecutionToolResultError::OrHash,
+                Anthropic::TextEditorCodeExecutionToolResultErrorObject::OrHash,
                 Anthropic::TextEditorCodeExecutionViewResultBlock::OrHash,
                 Anthropic::TextEditorCodeExecutionCreateResultBlock::OrHash,
                 Anthropic::TextEditorCodeExecutionStrReplaceResultBlock::OrHash
               ),
               T.any(
-                Anthropic::ToolSearchToolResultError::OrHash,
+                Anthropic::ToolSearchToolResultErrorObject::OrHash,
                 Anthropic::ToolSearchToolSearchResultBlock::OrHash
               )
             ),

@@ -26,7 +26,7 @@ module Anthropic
         params(
           content:
             T.any(
-              Anthropic::BashCodeExecutionToolResultError::OrHash,
+              Anthropic::BashCodeExecutionToolResultErrorObject::OrHash,
               Anthropic::BashCodeExecutionResultBlock::OrHash
             ),
           tool_use_id: String,
@@ -59,7 +59,7 @@ module Anthropic
         Variants =
           T.type_alias do
             T.any(
-              Anthropic::BashCodeExecutionToolResultError,
+              Anthropic::BashCodeExecutionToolResultErrorObject,
               Anthropic::BashCodeExecutionResultBlock
             )
           end

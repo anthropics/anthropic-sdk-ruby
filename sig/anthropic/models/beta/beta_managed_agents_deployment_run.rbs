@@ -55,22 +55,22 @@ module Anthropic
         }
 
         type error =
-          Anthropic::Beta::BetaManagedAgentsEnvironmentArchivedRunError
-          | Anthropic::Beta::BetaManagedAgentsAgentArchivedRunError
-          | Anthropic::Beta::BetaManagedAgentsEnvironmentNotFoundRunError
-          | Anthropic::Beta::BetaManagedAgentsVaultNotFoundRunError
-          | Anthropic::Beta::BetaManagedAgentsVaultArchivedRunError
-          | Anthropic::Beta::BetaManagedAgentsFileNotFoundRunError
-          | Anthropic::Beta::BetaManagedAgentsMemoryStoreArchivedRunError
-          | Anthropic::Beta::BetaManagedAgentsSkillNotFoundRunError
-          | Anthropic::Beta::BetaManagedAgentsSessionResourceNotFoundRunError
-          | Anthropic::Beta::BetaManagedAgentsWorkspaceArchivedRunError
-          | Anthropic::Beta::BetaManagedAgentsOrganizationDisabledRunError
-          | Anthropic::Beta::BetaManagedAgentsSessionRateLimitedRunError
-          | Anthropic::Beta::BetaManagedAgentsSessionCreationRejectedRunError
-          | Anthropic::Beta::BetaManagedAgentsUnknownRunError
-          | Anthropic::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedRunError
-          | Anthropic::Beta::BetaManagedAgentsMCPEgressBlockedRunError
+          Anthropic::Beta::BetaManagedAgentsEnvironmentArchivedRunErrorObject
+          | Anthropic::Beta::BetaManagedAgentsAgentArchivedRunErrorObject
+          | Anthropic::Beta::BetaManagedAgentsEnvironmentNotFoundRunErrorObject
+          | Anthropic::Beta::BetaManagedAgentsVaultNotFoundRunErrorObject
+          | Anthropic::Beta::BetaManagedAgentsVaultArchivedRunErrorObject
+          | Anthropic::Beta::BetaManagedAgentsFileNotFoundRunErrorObject
+          | Anthropic::Beta::BetaManagedAgentsMemoryStoreArchivedRunErrorObject
+          | Anthropic::Beta::BetaManagedAgentsSkillNotFoundRunErrorObject
+          | Anthropic::Beta::BetaManagedAgentsSessionResourceNotFoundRunErrorObject
+          | Anthropic::Beta::BetaManagedAgentsWorkspaceArchivedRunErrorObject
+          | Anthropic::Beta::BetaManagedAgentsOrganizationDisabledRunErrorObject
+          | Anthropic::Beta::BetaManagedAgentsSessionRateLimitedRunErrorObject
+          | Anthropic::Beta::BetaManagedAgentsSessionCreationRejectedRunErrorObject
+          | Anthropic::Beta::BetaManagedAgentsUnknownRunErrorObject
+          | Anthropic::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedRunErrorObject
+          | Anthropic::Beta::BetaManagedAgentsMCPEgressBlockedRunErrorObject
 
         module Error
           extend Anthropic::Internal::Type::Union
@@ -122,73 +122,73 @@ module Anthropic
             (
               type: :environment_archived_error | "environment_archived_error",
               message: String
-            ) -> Anthropic::Beta::BetaManagedAgentsEnvironmentArchivedRunError
+            ) -> Anthropic::Beta::BetaManagedAgentsEnvironmentArchivedRunErrorObject
             | (
               type: :agent_archived_error | "agent_archived_error",
               message: String
-            ) -> Anthropic::Beta::BetaManagedAgentsAgentArchivedRunError
+            ) -> Anthropic::Beta::BetaManagedAgentsAgentArchivedRunErrorObject
             | (
               type: :environment_not_found_error
               | "environment_not_found_error",
               message: String
-            ) -> Anthropic::Beta::BetaManagedAgentsEnvironmentNotFoundRunError
+            ) -> Anthropic::Beta::BetaManagedAgentsEnvironmentNotFoundRunErrorObject
             | (
               type: :vault_not_found_error | "vault_not_found_error",
               message: String
-            ) -> Anthropic::Beta::BetaManagedAgentsVaultNotFoundRunError
+            ) -> Anthropic::Beta::BetaManagedAgentsVaultNotFoundRunErrorObject
             | (
               type: :vault_archived_error | "vault_archived_error",
               message: String
-            ) -> Anthropic::Beta::BetaManagedAgentsVaultArchivedRunError
+            ) -> Anthropic::Beta::BetaManagedAgentsVaultArchivedRunErrorObject
             | (
               type: :file_not_found_error | "file_not_found_error",
               message: String
-            ) -> Anthropic::Beta::BetaManagedAgentsFileNotFoundRunError
+            ) -> Anthropic::Beta::BetaManagedAgentsFileNotFoundRunErrorObject
             | (
               type: :memory_store_archived_error
               | "memory_store_archived_error",
               message: String
-            ) -> Anthropic::Beta::BetaManagedAgentsMemoryStoreArchivedRunError
+            ) -> Anthropic::Beta::BetaManagedAgentsMemoryStoreArchivedRunErrorObject
             | (
               type: :skill_not_found_error | "skill_not_found_error",
               message: String
-            ) -> Anthropic::Beta::BetaManagedAgentsSkillNotFoundRunError
+            ) -> Anthropic::Beta::BetaManagedAgentsSkillNotFoundRunErrorObject
             | (
               type: :session_resource_not_found_error
               | "session_resource_not_found_error",
               message: String
-            ) -> Anthropic::Beta::BetaManagedAgentsSessionResourceNotFoundRunError
+            ) -> Anthropic::Beta::BetaManagedAgentsSessionResourceNotFoundRunErrorObject
             | (
               type: :workspace_archived_error | "workspace_archived_error",
               message: String
-            ) -> Anthropic::Beta::BetaManagedAgentsWorkspaceArchivedRunError
+            ) -> Anthropic::Beta::BetaManagedAgentsWorkspaceArchivedRunErrorObject
             | (
               type: :organization_disabled_error
               | "organization_disabled_error",
               message: String
-            ) -> Anthropic::Beta::BetaManagedAgentsOrganizationDisabledRunError
+            ) -> Anthropic::Beta::BetaManagedAgentsOrganizationDisabledRunErrorObject
             | (
               type: :session_rate_limited_error | "session_rate_limited_error",
               message: String
-            ) -> Anthropic::Beta::BetaManagedAgentsSessionRateLimitedRunError
+            ) -> Anthropic::Beta::BetaManagedAgentsSessionRateLimitedRunErrorObject
             | (
               type: :session_creation_rejected_error
               | "session_creation_rejected_error",
               message: String
-            ) -> Anthropic::Beta::BetaManagedAgentsSessionCreationRejectedRunError
+            ) -> Anthropic::Beta::BetaManagedAgentsSessionCreationRejectedRunErrorObject
             | (
               type: :unknown_error | "unknown_error",
               message: String
-            ) -> Anthropic::Beta::BetaManagedAgentsUnknownRunError
+            ) -> Anthropic::Beta::BetaManagedAgentsUnknownRunErrorObject
             | (
               type: :self_hosted_resources_unsupported_error
               | "self_hosted_resources_unsupported_error",
               message: String
-            ) -> Anthropic::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedRunError
+            ) -> Anthropic::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedRunErrorObject
             | (
               type: :mcp_egress_blocked_error | "mcp_egress_blocked_error",
               message: String
-            ) -> Anthropic::Beta::BetaManagedAgentsMCPEgressBlockedRunError
+            ) -> Anthropic::Beta::BetaManagedAgentsMCPEgressBlockedRunErrorObject
             | (
               type: Anthropic::Models::Beta::BetaManagedAgentsDeploymentRun::Error::type_
               | String,

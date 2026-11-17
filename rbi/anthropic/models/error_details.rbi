@@ -30,9 +30,15 @@ module Anthropic
             Anthropic::ThreadUnsupportedRequestErrorDetails,
             Anthropic::ToolNameConflictErrorDetails,
             Anthropic::ToolReferenceUnresolvedErrorDetails,
+            Anthropic::UserProfileRequiredErrorDetails,
+            Anthropic::LinkedOrganizationBillingUnavailableErrorDetails,
+            Anthropic::LinkedOrganizationSpendLimitReachedErrorDetails,
+            Anthropic::UserProfileBillingNotAuthorizedErrorDetails,
+            Anthropic::UserProfileNotBillableErrorDetails,
             Anthropic::ThreadNotFoundErrorDetails,
             Anthropic::SkillReadBlockedUndecryptableErrorDetails,
             Anthropic::RequestBodyTooLargeAfterDecodingErrorDetails,
+            Anthropic::ContractSpendLimitReachedErrorDetails,
             Anthropic::EnforcedSpendLimitReachedErrorDetails,
             Anthropic::RampLimitExceededErrorDetails,
             Anthropic::CMEKKeyUnreachableErrorDetails,
@@ -214,6 +220,31 @@ module Anthropic
             :tool_reference_unresolved,
             Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
           )
+        USER_PROFILE_REQUIRED =
+          T.let(
+            :user_profile_required,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        LINKED_ORGANIZATION_BILLING_UNAVAILABLE =
+          T.let(
+            :linked_organization_billing_unavailable,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        LINKED_ORGANIZATION_SPEND_LIMIT_REACHED =
+          T.let(
+            :linked_organization_spend_limit_reached,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        USER_PROFILE_BILLING_NOT_AUTHORIZED =
+          T.let(
+            :user_profile_billing_not_authorized,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        USER_PROFILE_NOT_BILLABLE =
+          T.let(
+            :user_profile_not_billable,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
         THREAD_NOT_FOUND =
           T.let(
             :thread_not_found,
@@ -227,6 +258,11 @@ module Anthropic
         REQUEST_BODY_TOO_LARGE_AFTER_DECODING =
           T.let(
             :request_body_too_large_after_decoding,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        CONTRACT_SPEND_LIMIT_REACHED =
+          T.let(
+            :contract_spend_limit_reached,
             Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
           )
         ENFORCED_SPEND_LIMIT_REACHED =

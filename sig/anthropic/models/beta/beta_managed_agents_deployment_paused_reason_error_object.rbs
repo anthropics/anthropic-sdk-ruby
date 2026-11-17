@@ -1,0 +1,116 @@
+module Anthropic
+  module Models
+    module BetaManagedAgentsDeploymentPausedReasonErrorObject = Beta::BetaManagedAgentsDeploymentPausedReasonErrorObject
+
+    module Beta
+      type beta_managed_agents_deployment_paused_reason_error_object =
+        Anthropic::Beta::BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonErrorObject
+        | Anthropic::Beta::BetaManagedAgentsAgentArchivedDeploymentPausedReasonErrorObject
+        | Anthropic::Beta::BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonErrorObject
+        | Anthropic::Beta::BetaManagedAgentsVaultNotFoundDeploymentPausedReasonErrorObject
+        | Anthropic::Beta::BetaManagedAgentsFileNotFoundDeploymentPausedReasonErrorObject
+        | Anthropic::Beta::BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonErrorObject
+        | Anthropic::Beta::BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonErrorObject
+        | Anthropic::Beta::BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonErrorObject
+        | Anthropic::Beta::BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonErrorObject
+        | Anthropic::Beta::BetaManagedAgentsSkillNotFoundDeploymentPausedReasonErrorObject
+        | Anthropic::Beta::BetaManagedAgentsVaultArchivedDeploymentPausedReasonErrorObject
+        | Anthropic::Beta::BetaManagedAgentsUnknownDeploymentPausedReasonErrorObject
+        | Anthropic::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonErrorObject
+        | Anthropic::Beta::BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonErrorObject
+
+      module BetaManagedAgentsDeploymentPausedReasonErrorObject
+        extend Anthropic::Internal::Type::Union
+
+        type type_ =
+          :environment_archived_error
+          | :agent_archived_error
+          | :environment_not_found_error
+          | :vault_not_found_error
+          | :file_not_found_error
+          | :session_resource_not_found_error
+          | :workspace_archived_error
+          | :organization_disabled_error
+          | :memory_store_archived_error
+          | :skill_not_found_error
+          | :vault_archived_error
+          | :unknown_error
+          | :self_hosted_resources_unsupported_error
+          | :mcp_egress_blocked_error
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          ENVIRONMENT_ARCHIVED_ERROR: :environment_archived_error
+          AGENT_ARCHIVED_ERROR: :agent_archived_error
+          ENVIRONMENT_NOT_FOUND_ERROR: :environment_not_found_error
+          VAULT_NOT_FOUND_ERROR: :vault_not_found_error
+          FILE_NOT_FOUND_ERROR: :file_not_found_error
+          SESSION_RESOURCE_NOT_FOUND_ERROR: :session_resource_not_found_error
+          WORKSPACE_ARCHIVED_ERROR: :workspace_archived_error
+          ORGANIZATION_DISABLED_ERROR: :organization_disabled_error
+          MEMORY_STORE_ARCHIVED_ERROR: :memory_store_archived_error
+          SKILL_NOT_FOUND_ERROR: :skill_not_found_error
+          VAULT_ARCHIVED_ERROR: :vault_archived_error
+          UNKNOWN_ERROR: :unknown_error
+          SELF_HOSTED_RESOURCES_UNSUPPORTED_ERROR: :self_hosted_resources_unsupported_error
+          MCP_EGRESS_BLOCKED_ERROR: :mcp_egress_blocked_error
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsDeploymentPausedReasonErrorObject::type_]
+        end
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_deployment_paused_reason_error_object]
+
+        def self.new:
+          (
+            type: :environment_archived_error | "environment_archived_error"
+          ) -> Anthropic::Beta::BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonErrorObject
+          | (
+            type: :agent_archived_error | "agent_archived_error"
+          ) -> Anthropic::Beta::BetaManagedAgentsAgentArchivedDeploymentPausedReasonErrorObject
+          | (
+            type: :environment_not_found_error | "environment_not_found_error"
+          ) -> Anthropic::Beta::BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonErrorObject
+          | (
+            type: :vault_not_found_error | "vault_not_found_error"
+          ) -> Anthropic::Beta::BetaManagedAgentsVaultNotFoundDeploymentPausedReasonErrorObject
+          | (
+            type: :file_not_found_error | "file_not_found_error"
+          ) -> Anthropic::Beta::BetaManagedAgentsFileNotFoundDeploymentPausedReasonErrorObject
+          | (
+            type: :session_resource_not_found_error
+            | "session_resource_not_found_error"
+          ) -> Anthropic::Beta::BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonErrorObject
+          | (
+            type: :workspace_archived_error | "workspace_archived_error"
+          ) -> Anthropic::Beta::BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonErrorObject
+          | (
+            type: :organization_disabled_error | "organization_disabled_error"
+          ) -> Anthropic::Beta::BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonErrorObject
+          | (
+            type: :memory_store_archived_error | "memory_store_archived_error"
+          ) -> Anthropic::Beta::BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonErrorObject
+          | (
+            type: :skill_not_found_error | "skill_not_found_error"
+          ) -> Anthropic::Beta::BetaManagedAgentsSkillNotFoundDeploymentPausedReasonErrorObject
+          | (
+            type: :vault_archived_error | "vault_archived_error"
+          ) -> Anthropic::Beta::BetaManagedAgentsVaultArchivedDeploymentPausedReasonErrorObject
+          | (
+            type: :unknown_error | "unknown_error"
+          ) -> Anthropic::Beta::BetaManagedAgentsUnknownDeploymentPausedReasonErrorObject
+          | (
+            type: :self_hosted_resources_unsupported_error
+            | "self_hosted_resources_unsupported_error"
+          ) -> Anthropic::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonErrorObject
+          | (
+            type: :mcp_egress_blocked_error | "mcp_egress_blocked_error"
+          ) -> Anthropic::Beta::BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonErrorObject
+          | (
+            type: Anthropic::Models::Beta::BetaManagedAgentsDeploymentPausedReasonErrorObject::type_
+            | String
+          ) -> Anthropic::Models::Beta::beta_managed_agents_deployment_paused_reason_error_object
+      end
+    end
+  end
+end

@@ -3,16 +3,7 @@ module Anthropic
     class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError = Beta::BetaManagedAgentsAgentArchivedDeploymentPausedReasonError
 
     module Beta
-      type beta_managed_agents_agent_archived_deployment_paused_reason_error =
-        { type: :agent_archived_error }
-
-      class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError < Anthropic::Internal::Type::BaseModel
-        attr_accessor type: :agent_archived_error
-
-        def initialize: (?type: :agent_archived_error) -> void
-
-        def to_hash: -> { type: :agent_archived_error }
-      end
+      class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError = Anthropic::Models::Beta::BetaManagedAgentsAgentArchivedDeploymentPausedReasonErrorObject
     end
   end
 end

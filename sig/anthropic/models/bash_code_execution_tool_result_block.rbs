@@ -27,7 +27,7 @@ module Anthropic
       }
 
       type content =
-        Anthropic::BashCodeExecutionToolResultError
+        Anthropic::BashCodeExecutionToolResultErrorObject
         | Anthropic::BashCodeExecutionResultBlock
 
       module Content

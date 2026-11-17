@@ -1,0 +1,16 @@
+module Anthropic
+  module Models
+    type beta_overloaded_error_object =
+      { message: String, type: :overloaded_error }
+
+    class BetaOverloadedErrorObject < Anthropic::Internal::Type::BaseModel
+      attr_accessor message: String
+
+      attr_accessor type: :overloaded_error
+
+      def initialize: (message: String, ?type: :overloaded_error) -> void
+
+      def to_hash: -> { message: String, type: :overloaded_error }
+    end
+  end
+end

@@ -72,6 +72,11 @@ module Anthropic
         private def resolve_variant(value)
         end
 
+        # @api private
+        sig { params(value: T.anything).returns(T.nilable(T.anything)) }
+        private def resolve_untagged_variant(value)
+        end
+
         sig { params(other: T.anything).returns(T::Boolean) }
         def ===(other)
         end

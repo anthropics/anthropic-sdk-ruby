@@ -5,7 +5,7 @@ module Anthropic
         type beta_managed_agents_workflow_run_error_event =
           {
             id: String,
-            error: Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_error,
+            error: Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_error_object,
             processed_at: Time,
             type: :"workflow_run.error",
             workflow_run_id: String?
@@ -14,7 +14,7 @@ module Anthropic
         class BetaManagedAgentsWorkflowRunErrorEvent < Anthropic::Internal::Type::BaseModel
           attr_accessor id: String
 
-          attr_accessor error: Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_error
+          attr_accessor error: Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_error_object
 
           attr_accessor processed_at: Time
 
@@ -24,7 +24,7 @@ module Anthropic
 
           def initialize: (
             id: String,
-            error: Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_error,
+            error: Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_error_object,
             processed_at: Time,
             workflow_run_id: String?,
             ?type: :"workflow_run.error"
@@ -32,7 +32,7 @@ module Anthropic
 
           def to_hash: -> {
             id: String,
-            error: Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_error,
+            error: Anthropic::Models::Beta::Sessions::beta_managed_agents_workflow_run_error_object,
             processed_at: Time,
             type: :"workflow_run.error",
             workflow_run_id: String?

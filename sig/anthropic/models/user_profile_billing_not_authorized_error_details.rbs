@@ -1,0 +1,16 @@
+module Anthropic
+  module Models
+    type user_profile_billing_not_authorized_error_details =
+      { error_code: :user_profile_billing_not_authorized }
+
+    class UserProfileBillingNotAuthorizedErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :user_profile_billing_not_authorized
+
+      def initialize: (
+        ?error_code: :user_profile_billing_not_authorized
+      ) -> void
+
+      def to_hash: -> { error_code: :user_profile_billing_not_authorized }
+    end
+  end
+end

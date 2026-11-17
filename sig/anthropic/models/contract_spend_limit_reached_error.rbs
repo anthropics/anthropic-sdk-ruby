@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class ContractSpendLimitReachedError < Anthropic::Errors::RateLimitError
+      def error_code: -> :contract_spend_limit_reached
+
+      def details: -> Anthropic::ContractSpendLimitReachedErrorDetails
+    end
+  end
+end

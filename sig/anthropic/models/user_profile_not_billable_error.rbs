@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class UserProfileNotBillableError < Anthropic::Errors::PermissionDeniedError
+      def error_code: -> :user_profile_not_billable
+
+      def details: -> Anthropic::UserProfileNotBillableErrorDetails
+    end
+  end
+end

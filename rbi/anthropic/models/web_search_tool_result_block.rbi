@@ -33,7 +33,7 @@ module Anthropic
             ),
           content:
             T.any(
-              Anthropic::WebSearchToolResultError::OrHash,
+              Anthropic::WebSearchToolResultErrorObject::OrHash,
               T::Array[Anthropic::WebSearchResultBlock::OrHash]
             ),
           tool_use_id: String,

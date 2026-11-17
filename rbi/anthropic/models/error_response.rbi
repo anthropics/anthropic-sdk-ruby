@@ -21,15 +21,15 @@ module Anthropic
         params(
           error:
             T.any(
-              Anthropic::InvalidRequestError::OrHash,
-              Anthropic::AuthenticationError::OrHash,
-              Anthropic::BillingError::OrHash,
-              Anthropic::PermissionError::OrHash,
-              Anthropic::NotFoundError::OrHash,
-              Anthropic::RateLimitError::OrHash,
-              Anthropic::GatewayTimeoutError::OrHash,
+              Anthropic::InvalidRequestErrorObject::OrHash,
+              Anthropic::AuthenticationErrorObject::OrHash,
+              Anthropic::BillingErrorObject::OrHash,
+              Anthropic::PermissionErrorObject::OrHash,
+              Anthropic::NotFoundErrorObject::OrHash,
+              Anthropic::RateLimitErrorObject::OrHash,
+              Anthropic::GatewayTimeoutErrorObject::OrHash,
               Anthropic::APIErrorObject::OrHash,
-              Anthropic::OverloadedError::OrHash
+              Anthropic::OverloadedErrorObject::OrHash
             ),
           request_id: T.nilable(String),
           type: Symbol

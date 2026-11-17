@@ -248,6 +248,10 @@ module Anthropic
       HTTP_STATUS = 401
     end
 
+    class PaymentRequiredError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS = 402
+    end
+
     class PermissionDeniedError < Anthropic::Errors::APIStatusError
       HTTP_STATUS = 403
     end

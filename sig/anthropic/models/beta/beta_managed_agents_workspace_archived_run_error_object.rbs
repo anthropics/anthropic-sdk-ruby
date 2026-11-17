@@ -1,0 +1,23 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsWorkspaceArchivedRunErrorObject = Beta::BetaManagedAgentsWorkspaceArchivedRunErrorObject
+
+    module Beta
+      type beta_managed_agents_workspace_archived_run_error_object =
+        { message: String, type: :workspace_archived_error }
+
+      class BetaManagedAgentsWorkspaceArchivedRunErrorObject < Anthropic::Internal::Type::BaseModel
+        attr_accessor message: String
+
+        attr_accessor type: :workspace_archived_error
+
+        def initialize: (
+          message: String,
+          ?type: :workspace_archived_error
+        ) -> void
+
+        def to_hash: -> { message: String, type: :workspace_archived_error }
+      end
+    end
+  end
+end

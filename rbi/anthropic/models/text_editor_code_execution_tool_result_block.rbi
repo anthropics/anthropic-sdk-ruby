@@ -28,7 +28,7 @@ module Anthropic
         params(
           content:
             T.any(
-              Anthropic::TextEditorCodeExecutionToolResultError::OrHash,
+              Anthropic::TextEditorCodeExecutionToolResultErrorObject::OrHash,
               Anthropic::TextEditorCodeExecutionViewResultBlock::OrHash,
               Anthropic::TextEditorCodeExecutionCreateResultBlock::OrHash,
               Anthropic::TextEditorCodeExecutionStrReplaceResultBlock::OrHash
@@ -63,7 +63,7 @@ module Anthropic
         Variants =
           T.type_alias do
             T.any(
-              Anthropic::TextEditorCodeExecutionToolResultError,
+              Anthropic::TextEditorCodeExecutionToolResultErrorObject,
               Anthropic::TextEditorCodeExecutionViewResultBlock,
               Anthropic::TextEditorCodeExecutionCreateResultBlock,
               Anthropic::TextEditorCodeExecutionStrReplaceResultBlock

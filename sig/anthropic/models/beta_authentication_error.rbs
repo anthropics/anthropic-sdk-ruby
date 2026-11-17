@@ -1,16 +1,5 @@
 module Anthropic
   module Models
-    type beta_authentication_error =
-      { message: String, type: :authentication_error }
-
-    class BetaAuthenticationError < Anthropic::Internal::Type::BaseModel
-      attr_accessor message: String
-
-      attr_accessor type: :authentication_error
-
-      def initialize: (message: String, ?type: :authentication_error) -> void
-
-      def to_hash: -> { message: String, type: :authentication_error }
-    end
+    class BetaAuthenticationError = Anthropic::Models::BetaAuthenticationErrorObject
   end
 end

@@ -37,21 +37,21 @@ module Anthropic
               id: String,
               error:
                 T.any(
-                  Anthropic::Beta::Sessions::BetaManagedAgentsUnknownError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsModelOverloadedError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsModelRateLimitedError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsBillingError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsToolUseLimitReachedError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsCompactionLimitReachedError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCloneError::OrHash
+                  Anthropic::Beta::Sessions::BetaManagedAgentsUnknownErrorObject::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsModelOverloadedErrorObject::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsModelRateLimitedErrorObject::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsModelRequestFailedErrorObject::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedErrorObject::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedErrorObject::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsBillingErrorObject::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableErrorObject::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsToolUseLimitReachedErrorObject::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsCompactionLimitReachedErrorObject::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationErrorObject::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenErrorObject::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundErrorObject::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutErrorObject::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCloneErrorObject::OrHash
                 ),
               processed_at: Time,
               type: Symbol
@@ -87,21 +87,21 @@ module Anthropic
             Variants =
               T.type_alias do
                 T.any(
-                  Anthropic::Beta::Sessions::BetaManagedAgentsUnknownError,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsModelOverloadedError,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsModelRateLimitedError,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsModelRequestFailedError,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsBillingError,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsToolUseLimitReachedError,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsCompactionLimitReachedError,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationError,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenError,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundError,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutError,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCloneError
+                  Anthropic::Beta::Sessions::BetaManagedAgentsUnknownErrorObject,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsModelOverloadedErrorObject,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsModelRateLimitedErrorObject,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsModelRequestFailedErrorObject,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedErrorObject,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedErrorObject,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsBillingErrorObject,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableErrorObject,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsToolUseLimitReachedErrorObject,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsCompactionLimitReachedErrorObject,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryAuthenticationErrorObject,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryForbiddenErrorObject,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryNotFoundErrorObject,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCheckoutErrorObject,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRepositoryCloneErrorObject
                 )
               end
 

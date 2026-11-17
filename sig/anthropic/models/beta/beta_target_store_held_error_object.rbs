@@ -1,0 +1,22 @@
+module Anthropic
+  module Models
+    class BetaTargetStoreHeldErrorObject = Beta::BetaTargetStoreHeldErrorObject
+
+    module Beta
+      type beta_target_store_held_error_object =
+        { type: :conflict_error, message: String }
+
+      class BetaTargetStoreHeldErrorObject < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :conflict_error
+
+        attr_reader message: String?
+
+        def message=: (String) -> String
+
+        def initialize: (?message: String, ?type: :conflict_error) -> void
+
+        def to_hash: -> { type: :conflict_error, message: String }
+      end
+    end
+  end
+end

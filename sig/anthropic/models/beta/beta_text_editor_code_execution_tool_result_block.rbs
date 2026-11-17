@@ -30,7 +30,7 @@ module Anthropic
         }
 
         type content =
-          Anthropic::Beta::BetaTextEditorCodeExecutionToolResultError
+          Anthropic::Beta::BetaTextEditorCodeExecutionToolResultErrorObject
           | Anthropic::Beta::BetaTextEditorCodeExecutionViewResultBlock
           | Anthropic::Beta::BetaTextEditorCodeExecutionCreateResultBlock
           | Anthropic::Beta::BetaTextEditorCodeExecutionStrReplaceResultBlock
