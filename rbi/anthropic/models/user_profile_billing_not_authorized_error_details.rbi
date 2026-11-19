@@ -14,7 +14,7 @@ module Anthropic
       sig { returns(Symbol) }
       attr_accessor :error_code
 
-      # The customer that the named user profile represents has not authorized the
+      # The customer that the request's user profile represents has not authorized the
       # caller to bill them, or the authorization that the request's credential uses has
       # ended. The response does not say which applies.
       sig { params(error_code: Symbol).returns(T.attached_class) }

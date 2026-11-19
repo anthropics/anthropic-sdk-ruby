@@ -85,11 +85,11 @@ module Anthropic
       variant :linked_organization_spend_limit_reached,
               -> { Anthropic::LinkedOrganizationSpendLimitReachedErrorDetails }
 
-      # The customer that the named user profile represents has not authorized the caller to bill them, or the authorization that the request's credential uses has ended. The response does not say which applies.
+      # The customer that the request's user profile represents has not authorized the caller to bill them, or the authorization that the request's credential uses has ended. The response does not say which applies.
       variant :user_profile_billing_not_authorized,
               -> { Anthropic::UserProfileBillingNotAuthorizedErrorDetails }
 
-      # The caller is not allowed to bill the user profile that the request names. The response gives no more specific error code and does not say what the reason is.
+      # The request's user profile cannot be billed. The response gives no more specific error code and does not say what the reason is.
       variant :user_profile_not_billable, -> { Anthropic::UserProfileNotBillableErrorDetails }
 
       # No usable Thread state was found for `previous_message_id`. Replay the full conversation with `thread: {"type": "create"}` to start a new Thread.

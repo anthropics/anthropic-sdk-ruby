@@ -14,8 +14,8 @@ module Anthropic
       sig { returns(Symbol) }
       attr_accessor :error_code
 
-      # The caller is not allowed to bill the user profile that the request names. The
-      # response gives no more specific error code and does not say what the reason is.
+      # The request's user profile cannot be billed. The response gives no more specific
+      # error code and does not say what the reason is.
       sig { params(error_code: Symbol).returns(T.attached_class) }
       def self.new(error_code: :user_profile_not_billable)
       end
