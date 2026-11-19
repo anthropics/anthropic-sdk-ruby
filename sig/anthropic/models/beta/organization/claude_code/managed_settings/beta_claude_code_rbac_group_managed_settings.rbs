@@ -1,0 +1,53 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeCode
+          module ManagedSettings
+            type beta_claude_code_rbac_group_managed_settings =
+              {
+                created_at: Time,
+                rbac_group_id: String,
+                rbac_group_status: Anthropic::Models::Beta::Organization::ClaudeCode::ManagedSettings::beta_claude_code_rbac_group_status,
+                settings: ::Hash[Symbol, top]?,
+                type: :claude_code_rbac_group_managed_settings,
+                updated_at: Time
+              }
+
+            class BetaClaudeCodeRBACGroupManagedSettings < Anthropic::Internal::Type::BaseModel
+              attr_accessor created_at: Time
+
+              attr_accessor rbac_group_id: String
+
+              attr_accessor rbac_group_status: Anthropic::Models::Beta::Organization::ClaudeCode::ManagedSettings::beta_claude_code_rbac_group_status
+
+              attr_accessor settings: ::Hash[Symbol, top]?
+
+              attr_accessor type: :claude_code_rbac_group_managed_settings
+
+              attr_accessor updated_at: Time
+
+              def initialize: (
+                created_at: Time,
+                rbac_group_id: String,
+                rbac_group_status: Anthropic::Models::Beta::Organization::ClaudeCode::ManagedSettings::beta_claude_code_rbac_group_status,
+                settings: ::Hash[Symbol, top]?,
+                updated_at: Time,
+                ?type: :claude_code_rbac_group_managed_settings
+              ) -> void
+
+              def to_hash: -> {
+                created_at: Time,
+                rbac_group_id: String,
+                rbac_group_status: Anthropic::Models::Beta::Organization::ClaudeCode::ManagedSettings::beta_claude_code_rbac_group_status,
+                settings: ::Hash[Symbol, top]?,
+                type: :claude_code_rbac_group_managed_settings,
+                updated_at: Time
+              }
+            end
+          end
+        end
+      end
+    end
+  end
+end

@@ -127,6 +127,11 @@ TEST_PATHS=(
 	test/anthropic/resources/beta/organization/telemetry_destinations_test.rb
 	test/anthropic/resources/beta/organization/telemetry_destinations/workspaces_test.rb
 	test/anthropic/resources/beta/organization/webhooks_test.rb
+	test/anthropic/resources/beta/organization/claude_code_test.rb
+	test/anthropic/resources/beta/organization/claude_code/managed_settings_test.rb
+	test/anthropic/resources/beta/organization/claude_code/managed_settings/configuration_test.rb
+	test/anthropic/resources/beta/organization/claude_code/managed_settings/rbac_groups_test.rb
+	test/anthropic/resources/beta/organization/claude_code/managed_settings/rbac_group_default_test.rb
 	test/anthropic/resources/beta/organization/claude_tag_test.rb
 	test/anthropic/resources/beta/organization/claude_tag/slack_channels_test.rb
 	test/anthropic/resources/beta/organization/claude_tag/slack_workspaces_test.rb

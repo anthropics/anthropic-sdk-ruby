@@ -1,0 +1,28 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class ClaudeCode
+          class ManagedSettings
+            class Configuration
+              def retrieve: (
+                ?betas: ::Array[Anthropic::Models::anthropic_beta],
+                ?request_options: Anthropic::request_opts
+              ) -> Anthropic::Beta::Organization::ClaudeCode::ManagedSettings::BetaClaudeCodeManagedSettingsConfiguration
+
+              def update: (
+                ?mode: Anthropic::Models::Beta::Organization::ClaudeCode::ManagedSettings::beta_claude_code_managed_settings_mode_param,
+                ?rbac_group_order: ::Array[String],
+                ?rbac_group_order_version: String,
+                ?betas: ::Array[Anthropic::Models::anthropic_beta],
+                ?request_options: Anthropic::request_opts
+              ) -> Anthropic::Beta::Organization::ClaudeCode::ManagedSettings::BetaClaudeCodeManagedSettingsConfiguration
+
+              def initialize: (client: Anthropic::Client) -> void
+            end
+          end
+        end
+      end
+    end
+  end
+end

@@ -57,6 +57,7 @@ module Anthropic
       | :"skills-2025-10-02"
       | :"cache-diagnosis-2026-04-07"
       | :"ce-user-management-2026-07-13"
+      | :"ce-claude-code-managed-settings-2026-10-06"
       | :"user-profiles-billing-2026-10-01"
       | String
 
@@ -121,6 +122,7 @@ module Anthropic
       SKILLS_2025_10_02: :"skills-2025-10-02"
       CACHE_DIAGNOSIS_2026_04_07: :"cache-diagnosis-2026-04-07"
       CE_USER_MANAGEMENT_2026_07_13: :"ce-user-management-2026-07-13"
+      CE_CLAUDE_CODE_MANAGED_SETTINGS_2026_10_06: :"ce-claude-code-managed-settings-2026-10-06"
       USER_PROFILES_BILLING_2026_10_01: :"user-profiles-billing-2026-10-01"
     end
   end

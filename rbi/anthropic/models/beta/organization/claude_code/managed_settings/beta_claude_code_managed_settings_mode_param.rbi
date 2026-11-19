@@ -1,0 +1,82 @@
+# typed: strong
+
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeCode
+          module ManagedSettings
+            module BetaClaudeCodeManagedSettingsModeParam
+              extend Anthropic::Internal::Type::Union
+
+              Variants =
+                T.type_alias do
+                  T.any(
+                    Anthropic::Beta::Organization::ClaudeCode::ManagedSettings::BetaClaudeCodeManagedSettingsOrganizationModeParam,
+                    Anthropic::Beta::Organization::ClaudeCode::ManagedSettings::BetaClaudeCodeManagedSettingsRBACGroupsModeParam
+                  )
+                end
+
+              module Type
+                extend Anthropic::Internal::Type::Enum
+
+                TaggedSymbol =
+                  T.type_alias do
+                    T.all(
+                      Symbol,
+                      Anthropic::Beta::Organization::ClaudeCode::ManagedSettings::BetaClaudeCodeManagedSettingsModeParam::Type
+                    )
+                  end
+                OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+                ORGANIZATION =
+                  T.let(
+                    :organization,
+                    Anthropic::Beta::Organization::ClaudeCode::ManagedSettings::BetaClaudeCodeManagedSettingsModeParam::Type::TaggedSymbol
+                  )
+                RBAC_GROUPS =
+                  T.let(
+                    :rbac_groups,
+                    Anthropic::Beta::Organization::ClaudeCode::ManagedSettings::BetaClaudeCodeManagedSettingsModeParam::Type::TaggedSymbol
+                  )
+
+                sig do
+                  override.returns(
+                    T::Array[
+                      Anthropic::Beta::Organization::ClaudeCode::ManagedSettings::BetaClaudeCodeManagedSettingsModeParam::Type::TaggedSymbol
+                    ]
+                  )
+                end
+                def self.values
+                end
+              end
+
+              sig do
+                override.returns(
+                  T::Array[
+                    Anthropic::Beta::Organization::ClaudeCode::ManagedSettings::BetaClaudeCodeManagedSettingsModeParam::Variants
+                  ]
+                )
+              end
+              def self.variants
+              end
+
+              # Creates a new instance of the variant class whose `type` matches the given
+              # value, passing the remaining arguments to its constructor.
+              sig do
+                params(
+                  type:
+                    Anthropic::Beta::Organization::ClaudeCode::ManagedSettings::BetaClaudeCodeManagedSettingsModeParam::Type::OrSymbol
+                ).returns(
+                  Anthropic::Beta::Organization::ClaudeCode::ManagedSettings::BetaClaudeCodeManagedSettingsModeParam::Variants
+                )
+              end
+              def self.new(type:)
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,15 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeCode
+          class BetaSettingsHistoryLimitExceededError < Anthropic::Errors::BadRequestError
+            def error_code: -> :settings_history_limit_exceeded
+
+            def details: -> Anthropic::Beta::Organization::ClaudeCode::BetaSettingsHistoryLimitExceededErrorDetails
+          end
+        end
+      end
+    end
+  end
+end

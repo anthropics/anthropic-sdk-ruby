@@ -1,0 +1,19 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class ClaudeCode
+          class ManagedSettings
+            attr_reader configuration: Anthropic::Resources::Beta::Organization::ClaudeCode::ManagedSettings::Configuration
+
+            attr_reader rbac_groups: Anthropic::Resources::Beta::Organization::ClaudeCode::ManagedSettings::RBACGroups
+
+            attr_reader rbac_group_default: Anthropic::Resources::Beta::Organization::ClaudeCode::ManagedSettings::RBACGroupDefault
+
+            def initialize: (client: Anthropic::Client) -> void
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,22 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeCode
+          module ManagedSettings
+            type beta_claude_code_managed_settings_organization_mode_param =
+              { type: :organization }
+
+            class BetaClaudeCodeManagedSettingsOrganizationModeParam < Anthropic::Internal::Type::BaseModel
+              attr_accessor type: :organization
+
+              def initialize: (?type: :organization) -> void
+
+              def to_hash: -> { type: :organization }
+            end
+          end
+        end
+      end
+    end
+  end
+end

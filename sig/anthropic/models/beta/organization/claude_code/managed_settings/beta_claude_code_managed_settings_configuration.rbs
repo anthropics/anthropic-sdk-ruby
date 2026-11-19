@@ -1,0 +1,48 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeCode
+          module ManagedSettings
+            type beta_claude_code_managed_settings_configuration =
+              {
+                mode: Anthropic::Models::Beta::Organization::ClaudeCode::ManagedSettings::beta_claude_code_managed_settings_mode,
+                mode_updated_at: Time?,
+                rbac_group_order: ::Array[String],
+                rbac_group_order_version: String,
+                type: :claude_code_managed_settings_configuration
+              }
+
+            class BetaClaudeCodeManagedSettingsConfiguration < Anthropic::Internal::Type::BaseModel
+              attr_accessor mode: Anthropic::Models::Beta::Organization::ClaudeCode::ManagedSettings::beta_claude_code_managed_settings_mode
+
+              attr_accessor mode_updated_at: Time?
+
+              attr_accessor rbac_group_order: ::Array[String]
+
+              attr_accessor rbac_group_order_version: String
+
+              attr_accessor type: :claude_code_managed_settings_configuration
+
+              def initialize: (
+                mode: Anthropic::Models::Beta::Organization::ClaudeCode::ManagedSettings::beta_claude_code_managed_settings_mode,
+                mode_updated_at: Time?,
+                rbac_group_order: ::Array[String],
+                rbac_group_order_version: String,
+                ?type: :claude_code_managed_settings_configuration
+              ) -> void
+
+              def to_hash: -> {
+                mode: Anthropic::Models::Beta::Organization::ClaudeCode::ManagedSettings::beta_claude_code_managed_settings_mode,
+                mode_updated_at: Time?,
+                rbac_group_order: ::Array[String],
+                rbac_group_order_version: String,
+                type: :claude_code_managed_settings_configuration
+              }
+            end
+          end
+        end
+      end
+    end
+  end
+end

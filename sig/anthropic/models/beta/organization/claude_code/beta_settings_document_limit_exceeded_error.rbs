@@ -1,0 +1,15 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeCode
+          class BetaSettingsDocumentLimitExceededError < Anthropic::Errors::BadRequestError
+            def error_code: -> :settings_document_limit_exceeded
+
+            def details: -> Anthropic::Beta::Organization::ClaudeCode::BetaSettingsDocumentLimitExceededErrorDetails
+          end
+        end
+      end
+    end
+  end
+end

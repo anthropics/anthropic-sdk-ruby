@@ -1,0 +1,15 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeCode
+          class BetaRBACGroupOrderLimitExceededError < Anthropic::Errors::BadRequestError
+            def error_code: -> :rbac_group_order_limit_exceeded
+
+            def details: -> Anthropic::Beta::Organization::ClaudeCode::BetaRBACGroupOrderLimitExceededErrorDetails
+          end
+        end
+      end
+    end
+  end
+end

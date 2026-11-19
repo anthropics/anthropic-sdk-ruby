@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class BetaRequestBodyTimeoutError < Anthropic::Errors::BadRequestError
+      def error_code: -> :request_body_timeout
+
+      def details: -> Anthropic::BetaRequestBodyTimeoutErrorDetails
+    end
+  end
+end

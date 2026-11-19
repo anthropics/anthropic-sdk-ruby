@@ -1,0 +1,22 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeCode
+          module ManagedSettings
+            type beta_claude_code_managed_settings_rbac_groups_mode =
+              { type: :rbac_groups }
+
+            class BetaClaudeCodeManagedSettingsRBACGroupsMode < Anthropic::Internal::Type::BaseModel
+              attr_accessor type: :rbac_groups
+
+              def initialize: (?type: :rbac_groups) -> void
+
+              def to_hash: -> { type: :rbac_groups }
+            end
+          end
+        end
+      end
+    end
+  end
+end

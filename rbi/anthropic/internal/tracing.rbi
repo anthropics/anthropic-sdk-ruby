@@ -459,6 +459,22 @@ module Anthropic
         ORGANIZATION_WEBHOOKS_DELETE = "anthropic.organization.webhooks.delete"
         ORGANIZATION_WEBHOOKS_REGENERATE_SIGNING_SECRET =
           "anthropic.organization.webhooks.regenerate_signing_secret"
+        ORGANIZATION_CLAUDE_CODE_MANAGED_SETTINGS_CONFIGURATION_RETRIEVE =
+          "anthropic.organization.claude_code.managed_settings.configuration.retrieve"
+        ORGANIZATION_CLAUDE_CODE_MANAGED_SETTINGS_CONFIGURATION_UPDATE =
+          "anthropic.organization.claude_code.managed_settings.configuration.update"
+        ORGANIZATION_CLAUDE_CODE_MANAGED_SETTINGS_RBAC_GROUPS_RETRIEVE =
+          "anthropic.organization.claude_code.managed_settings.rbac_groups.retrieve"
+        ORGANIZATION_CLAUDE_CODE_MANAGED_SETTINGS_RBAC_GROUPS_LIST =
+          "anthropic.organization.claude_code.managed_settings.rbac_groups.list"
+        ORGANIZATION_CLAUDE_CODE_MANAGED_SETTINGS_RBAC_GROUPS_DELETE =
+          "anthropic.organization.claude_code.managed_settings.rbac_groups.delete"
+        ORGANIZATION_CLAUDE_CODE_MANAGED_SETTINGS_RBAC_GROUPS_SET =
+          "anthropic.organization.claude_code.managed_settings.rbac_groups.set"
+        ORGANIZATION_CLAUDE_CODE_MANAGED_SETTINGS_RBAC_GROUP_DEFAULT_RETRIEVE =
+          "anthropic.organization.claude_code.managed_settings.rbac_group_default.retrieve"
+        ORGANIZATION_CLAUDE_CODE_MANAGED_SETTINGS_RBAC_GROUP_DEFAULT_UPDATE =
+          "anthropic.organization.claude_code.managed_settings.rbac_group_default.update"
         ORGANIZATION_CLAUDE_TAG_SLACK_CHANNELS_CREATE =
           "anthropic.organization.claude_tag.slack_channels.create"
         ORGANIZATION_CLAUDE_TAG_SLACK_CHANNELS_RETRIEVE =

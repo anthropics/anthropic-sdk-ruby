@@ -39,6 +39,11 @@ module Anthropic
             end
           end
 
+          module ClaudeCode
+            module ManagedSettings
+            end
+          end
+
           module ClaudeTag
             module Bundles
             end
@@ -95,6 +100,11 @@ module Anthropic
       module Chat
       end
 
+      module ClaudeCode
+        module ManagedSettings
+        end
+      end
+
       module ClaudeTag
         module Bundles
         end
@@ -108,6 +118,9 @@ module Anthropic
         end
       end
 
+      module ManagedSettings
+      end
+
       module MemoryStores
       end
 
@@ -119,6 +132,11 @@ module Anthropic
           module Apps
             module Chat
             end
+          end
+        end
+
+        module ClaudeCode
+          module ManagedSettings
           end
         end
 

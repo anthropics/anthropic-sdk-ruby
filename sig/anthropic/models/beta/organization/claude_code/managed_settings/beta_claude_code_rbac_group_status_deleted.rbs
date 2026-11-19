@@ -1,0 +1,21 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeCode
+          module ManagedSettings
+            type beta_claude_code_rbac_group_status_deleted = { type: :deleted }
+
+            class BetaClaudeCodeRBACGroupStatusDeleted < Anthropic::Internal::Type::BaseModel
+              attr_accessor type: :deleted
+
+              def initialize: (?type: :deleted) -> void
+
+              def to_hash: -> { type: :deleted }
+            end
+          end
+        end
+      end
+    end
+  end
+end

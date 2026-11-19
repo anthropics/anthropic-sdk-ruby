@@ -1,0 +1,41 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class ClaudeCode
+          class ManagedSettings
+            class RBACGroups
+              def retrieve: (
+                String rbac_group_id,
+                ?betas: ::Array[Anthropic::Models::anthropic_beta],
+                ?request_options: Anthropic::request_opts
+              ) -> Anthropic::Beta::Organization::ClaudeCode::ManagedSettings::BetaClaudeCodeRBACGroupManagedSettings
+
+              def list: (
+                ?limit: Integer,
+                ?page: String?,
+                ?betas: ::Array[Anthropic::Models::anthropic_beta],
+                ?request_options: Anthropic::request_opts
+              ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Organization::ClaudeCode::ManagedSettings::BetaClaudeCodeRBACGroupManagedSettingsSummary]
+
+              def delete: (
+                String rbac_group_id,
+                ?betas: ::Array[Anthropic::Models::anthropic_beta],
+                ?request_options: Anthropic::request_opts
+              ) -> Anthropic::Beta::Organization::ClaudeCode::ManagedSettings::BetaDeletedClaudeCodeRBACGroupManagedSettings
+
+              def set: (
+                String rbac_group_id,
+                settings: ::Hash[Symbol, top],
+                ?betas: ::Array[Anthropic::Models::anthropic_beta],
+                ?request_options: Anthropic::request_opts
+              ) -> Anthropic::Beta::Organization::ClaudeCode::ManagedSettings::BetaClaudeCodeRBACGroupManagedSettings
+
+              def initialize: (client: Anthropic::Client) -> void
+            end
+          end
+        end
+      end
+    end
+  end
+end

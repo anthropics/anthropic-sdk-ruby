@@ -90,6 +90,13 @@ module Anthropic
             Anthropic::Beta::Organization::BetaRegistrationPendingErrorDetails,
             Anthropic::Beta::Organization::BetaScanFailedErrorDetails,
             Anthropic::Beta::Organization::BetaScanPendingErrorDetails,
+            Anthropic::BetaRequestBodyTimeoutErrorDetails,
+            Anthropic::Beta::Organization::ClaudeCode::BetaSettingsDocumentLimitExceededErrorDetails,
+            Anthropic::Beta::Organization::ClaudeCode::BetaSettingsHistoryLimitExceededErrorDetails,
+            Anthropic::Beta::Organization::ClaudeCode::BetaCMEKFeatureUnsupportedErrorDetails,
+            Anthropic::Beta::Organization::ClaudeCode::BetaRBACGroupManagedSettingsNotFoundErrorDetails,
+            Anthropic::Beta::Organization::ClaudeCode::BetaRBACGroupOrderLimitExceededErrorDetails,
+            Anthropic::Beta::Organization::BetaRBACGroupNotFoundErrorDetails,
             Anthropic::Beta::Organization::BetaSlackChannelSetUpSettingsRefusedErrorDetails,
             Anthropic::Beta::Organization::BetaAPIKeyScopeMissingErrorDetails,
             Anthropic::Beta::Organization::BetaClaudeTagWritesNotEnabledErrorDetails,
@@ -511,6 +518,41 @@ module Anthropic
           T.let(:scan_failed, Anthropic::ErrorDetails::ErrorCode::TaggedSymbol)
         SCAN_PENDING =
           T.let(:scan_pending, Anthropic::ErrorDetails::ErrorCode::TaggedSymbol)
+        REQUEST_BODY_TIMEOUT =
+          T.let(
+            :request_body_timeout,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        SETTINGS_DOCUMENT_LIMIT_EXCEEDED =
+          T.let(
+            :settings_document_limit_exceeded,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        SETTINGS_HISTORY_LIMIT_EXCEEDED =
+          T.let(
+            :settings_history_limit_exceeded,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        CMEK_FEATURE_UNSUPPORTED =
+          T.let(
+            :cmek_feature_unsupported,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        RBAC_GROUP_MANAGED_SETTINGS_NOT_FOUND =
+          T.let(
+            :rbac_group_managed_settings_not_found,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        RBAC_GROUP_ORDER_LIMIT_EXCEEDED =
+          T.let(
+            :rbac_group_order_limit_exceeded,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        RBAC_GROUP_NOT_FOUND =
+          T.let(
+            :rbac_group_not_found,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
         SLACK_CHANNEL_SET_UP_SETTINGS_REFUSED =
           T.let(
             :slack_channel_set_up_settings_refused,

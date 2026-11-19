@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        class BetaRBACGroupNotFoundError < Anthropic::Errors::NotFoundError
+          def error_code: -> :rbac_group_not_found
+
+          def details: -> Anthropic::Beta::Organization::BetaRBACGroupNotFoundErrorDetails
+        end
+      end
+    end
+  end
+end

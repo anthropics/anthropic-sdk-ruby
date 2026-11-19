@@ -1,0 +1,21 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeCode
+          module ManagedSettings
+            type beta_claude_code_rbac_group_status_unknown = { type: :unknown }
+
+            class BetaClaudeCodeRBACGroupStatusUnknown < Anthropic::Internal::Type::BaseModel
+              attr_accessor type: :unknown
+
+              def initialize: (?type: :unknown) -> void
+
+              def to_hash: -> { type: :unknown }
+            end
+          end
+        end
+      end
+    end
+  end
+end

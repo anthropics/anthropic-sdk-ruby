@@ -1,0 +1,21 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeCode
+          module ManagedSettings
+            type beta_claude_code_rbac_group_status_active = { type: :active }
+
+            class BetaClaudeCodeRBACGroupStatusActive < Anthropic::Internal::Type::BaseModel
+              attr_accessor type: :active
+
+              def initialize: (?type: :active) -> void
+
+              def to_hash: -> { type: :active }
+            end
+          end
+        end
+      end
+    end
+  end
+end

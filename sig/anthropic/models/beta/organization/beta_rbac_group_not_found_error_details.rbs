@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_rbac_group_not_found_error_details =
+          { error_code: :rbac_group_not_found }
+
+        class BetaRBACGroupNotFoundErrorDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor error_code: :rbac_group_not_found
+
+          def initialize: (?error_code: :rbac_group_not_found) -> void
+
+          def to_hash: -> { error_code: :rbac_group_not_found }
+        end
+      end
+    end
+  end
+end

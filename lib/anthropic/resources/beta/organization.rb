@@ -55,6 +55,9 @@ module Anthropic
         # @return [Anthropic::Resources::Beta::Organization::Webhooks]
         attr_reader :webhooks
 
+        # @return [Anthropic::Resources::Beta::Organization::ClaudeCode]
+        attr_reader :claude_code
+
         # @return [Anthropic::Resources::Beta::Organization::ClaudeTag]
         attr_reader :claude_tag
 
@@ -103,6 +106,7 @@ module Anthropic
           @telemetry_destinations =
             Anthropic::Resources::Beta::Organization::TelemetryDestinations.new(client: client)
           @webhooks = Anthropic::Resources::Beta::Organization::Webhooks.new(client: client)
+          @claude_code = Anthropic::Resources::Beta::Organization::ClaudeCode.new(client: client)
           @claude_tag = Anthropic::Resources::Beta::Organization::ClaudeTag.new(client: client)
         end
       end
