@@ -866,7 +866,11 @@ module Anthropic
           )
           yield(status, headers) if block_given?
 
-          decoded = Anthropic::Internal::Util.decode_content(headers, stream: stream)
+          decoded = Anthropic::Internal::Util.decode_content(
+            headers,
+            stream: stream,
+            binary: model == StringIO
+          )
           case req
           in {stream: Class => st}
             st.new(

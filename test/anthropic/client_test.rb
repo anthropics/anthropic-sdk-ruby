@@ -647,6 +647,29 @@ class AnthropicTest < Minitest::Test
     assert_equal([{variant: "b"}] * 2, seen)
   end
 
+  def test_binary_response_keeps_its_bytes_whatever_the_content_type
+    client = Anthropic::Client.new(base_url: "http://localhost", api_key: "my-anthropic-api-key")
+
+    {
+      "application/json" => Encoding::BINARY,
+      "application/x-ndjson" => Encoding::BINARY,
+      "text/event-stream" => Encoding::BINARY,
+      "text/plain; charset=utf-8" => Encoding::UTF_8
+    }.each do |content_type, encoding|
+      stub_request(:get, "http://localhost/download").to_return(
+        status: 200,
+        headers: {"content-type" => content_type},
+        body: "{}"
+      )
+
+      downloaded = client.request(method: :get, path: "download", model: StringIO)
+
+      assert_instance_of(StringIO, downloaded, content_type)
+      assert_equal("{}", downloaded.string, content_type)
+      assert_equal(encoding, downloaded.string.encoding, content_type)
+    end
+  end
+
   def test_default_headers
     stub_request(:post, "http://localhost/v1/messages").to_return_json(status: 200, body: {})
 
