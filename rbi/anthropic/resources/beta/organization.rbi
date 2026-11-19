@@ -65,6 +65,9 @@ module Anthropic
         sig { returns(Anthropic::Resources::Beta::Organization::Webhooks) }
         attr_reader :webhooks
 
+        sig { returns(Anthropic::Resources::Beta::Organization::ClaudeCode) }
+        attr_reader :claude_code
+
         sig { returns(Anthropic::Resources::Beta::Organization::ClaudeTag) }
         attr_reader :claude_tag
 

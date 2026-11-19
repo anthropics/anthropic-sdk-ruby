@@ -1,0 +1,33 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeCode
+          module ManagedSettings
+            type beta_deleted_claude_code_rbac_group_managed_settings =
+              {
+                rbac_group_id: String,
+                type: :claude_code_rbac_group_managed_settings_deleted
+              }
+
+            class BetaDeletedClaudeCodeRBACGroupManagedSettings < Anthropic::Internal::Type::BaseModel
+              attr_accessor rbac_group_id: String
+
+              attr_accessor type: :claude_code_rbac_group_managed_settings_deleted
+
+              def initialize: (
+                rbac_group_id: String,
+                ?type: :claude_code_rbac_group_managed_settings_deleted
+              ) -> void
+
+              def to_hash: -> {
+                rbac_group_id: String,
+                type: :claude_code_rbac_group_managed_settings_deleted
+              }
+            end
+          end
+        end
+      end
+    end
+  end
+end

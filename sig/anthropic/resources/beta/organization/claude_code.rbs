@@ -1,0 +1,13 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class ClaudeCode
+          attr_reader managed_settings: Anthropic::Resources::Beta::Organization::ClaudeCode::ManagedSettings
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

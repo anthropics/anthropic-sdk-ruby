@@ -1,0 +1,49 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeCode
+          module ManagedSettings
+            type beta_claude_code_rbac_group_status =
+              Anthropic::Beta::Organization::ClaudeCode::ManagedSettings::BetaClaudeCodeRBACGroupStatusActive
+              | Anthropic::Beta::Organization::ClaudeCode::ManagedSettings::BetaClaudeCodeRBACGroupStatusDeleted
+              | Anthropic::Beta::Organization::ClaudeCode::ManagedSettings::BetaClaudeCodeRBACGroupStatusUnknown
+
+            module BetaClaudeCodeRBACGroupStatus
+              extend Anthropic::Internal::Type::Union
+
+              type type_ = :active | :deleted | :unknown
+
+              module Type
+                extend Anthropic::Internal::Type::Enum
+
+                ACTIVE: :active
+                DELETED: :deleted
+                UNKNOWN: :unknown
+
+                def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::ClaudeCode::ManagedSettings::BetaClaudeCodeRBACGroupStatus::type_]
+              end
+
+              def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::ClaudeCode::ManagedSettings::beta_claude_code_rbac_group_status]
+
+              def self.new:
+                (
+                  type: :active | "active"
+                ) -> Anthropic::Beta::Organization::ClaudeCode::ManagedSettings::BetaClaudeCodeRBACGroupStatusActive
+                | (
+                  type: :deleted | "deleted"
+                ) -> Anthropic::Beta::Organization::ClaudeCode::ManagedSettings::BetaClaudeCodeRBACGroupStatusDeleted
+                | (
+                  type: :unknown | "unknown"
+                ) -> Anthropic::Beta::Organization::ClaudeCode::ManagedSettings::BetaClaudeCodeRBACGroupStatusUnknown
+                | (
+                  type: Anthropic::Models::Beta::Organization::ClaudeCode::ManagedSettings::BetaClaudeCodeRBACGroupStatus::type_
+                  | String
+                ) -> Anthropic::Models::Beta::Organization::ClaudeCode::ManagedSettings::beta_claude_code_rbac_group_status
+            end
+          end
+        end
+      end
+    end
+  end
+end

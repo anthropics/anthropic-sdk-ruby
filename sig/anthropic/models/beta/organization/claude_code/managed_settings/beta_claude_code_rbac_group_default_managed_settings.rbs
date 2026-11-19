@@ -1,0 +1,38 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeCode
+          module ManagedSettings
+            type beta_claude_code_rbac_group_default_managed_settings =
+              {
+                settings: ::Hash[Symbol, top]?,
+                type: :claude_code_rbac_group_default_managed_settings,
+                updated_at: Time?
+              }
+
+            class BetaClaudeCodeRBACGroupDefaultManagedSettings < Anthropic::Internal::Type::BaseModel
+              attr_accessor settings: ::Hash[Symbol, top]?
+
+              attr_accessor type: :claude_code_rbac_group_default_managed_settings
+
+              attr_accessor updated_at: Time?
+
+              def initialize: (
+                settings: ::Hash[Symbol, top]?,
+                updated_at: Time?,
+                ?type: :claude_code_rbac_group_default_managed_settings
+              ) -> void
+
+              def to_hash: -> {
+                settings: ::Hash[Symbol, top]?,
+                type: :claude_code_rbac_group_default_managed_settings,
+                updated_at: Time?
+              }
+            end
+          end
+        end
+      end
+    end
+  end
+end

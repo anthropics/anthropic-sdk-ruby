@@ -1,0 +1,61 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeCode
+          module ManagedSettings
+            type configuration_update_params =
+              {
+                mode: Anthropic::Models::Beta::Organization::ClaudeCode::ManagedSettings::beta_claude_code_managed_settings_mode_param,
+                rbac_group_order: ::Array[String],
+                rbac_group_order_version: String,
+                betas: ::Array[Anthropic::Models::anthropic_beta]
+              }
+              & Anthropic::Internal::Type::request_parameters
+
+            class ConfigurationUpdateParams < Anthropic::Internal::Type::BaseModel
+              extend Anthropic::Internal::Type::RequestParameters::Converter
+              include Anthropic::Internal::Type::RequestParameters
+
+              attr_reader mode: Anthropic::Models::Beta::Organization::ClaudeCode::ManagedSettings::beta_claude_code_managed_settings_mode_param?
+
+              def mode=: (
+                Anthropic::Models::Beta::Organization::ClaudeCode::ManagedSettings::beta_claude_code_managed_settings_mode_param
+              ) -> Anthropic::Models::Beta::Organization::ClaudeCode::ManagedSettings::beta_claude_code_managed_settings_mode_param
+
+              attr_reader rbac_group_order: ::Array[String]?
+
+              def rbac_group_order=: (::Array[String]) -> ::Array[String]
+
+              attr_reader rbac_group_order_version: String?
+
+              def rbac_group_order_version=: (String) -> String
+
+              attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+              def betas=: (
+                ::Array[Anthropic::Models::anthropic_beta]
+              ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+              def initialize: (
+                ?mode: Anthropic::Models::Beta::Organization::ClaudeCode::ManagedSettings::beta_claude_code_managed_settings_mode_param,
+                ?rbac_group_order: ::Array[String],
+                ?rbac_group_order_version: String,
+                ?betas: ::Array[Anthropic::Models::anthropic_beta],
+                ?request_options: Anthropic::request_opts
+              ) -> void
+
+              def to_hash: -> {
+                mode: Anthropic::Models::Beta::Organization::ClaudeCode::ManagedSettings::beta_claude_code_managed_settings_mode_param,
+                rbac_group_order: ::Array[String],
+                rbac_group_order_version: String,
+                betas: ::Array[Anthropic::Models::anthropic_beta],
+                request_options: Anthropic::RequestOptions
+              }
+            end
+          end
+        end
+      end
+    end
+  end
+end

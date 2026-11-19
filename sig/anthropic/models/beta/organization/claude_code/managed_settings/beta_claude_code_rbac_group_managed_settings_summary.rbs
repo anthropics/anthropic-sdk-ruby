@@ -1,0 +1,48 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeCode
+          module ManagedSettings
+            type beta_claude_code_rbac_group_managed_settings_summary =
+              {
+                created_at: Time,
+                rbac_group_id: String,
+                rbac_group_status: Anthropic::Models::Beta::Organization::ClaudeCode::ManagedSettings::beta_claude_code_rbac_group_status,
+                type: :claude_code_rbac_group_managed_settings_summary,
+                updated_at: Time
+              }
+
+            class BetaClaudeCodeRBACGroupManagedSettingsSummary < Anthropic::Internal::Type::BaseModel
+              attr_accessor created_at: Time
+
+              attr_accessor rbac_group_id: String
+
+              attr_accessor rbac_group_status: Anthropic::Models::Beta::Organization::ClaudeCode::ManagedSettings::beta_claude_code_rbac_group_status
+
+              attr_accessor type: :claude_code_rbac_group_managed_settings_summary
+
+              attr_accessor updated_at: Time
+
+              def initialize: (
+                created_at: Time,
+                rbac_group_id: String,
+                rbac_group_status: Anthropic::Models::Beta::Organization::ClaudeCode::ManagedSettings::beta_claude_code_rbac_group_status,
+                updated_at: Time,
+                ?type: :claude_code_rbac_group_managed_settings_summary
+              ) -> void
+
+              def to_hash: -> {
+                created_at: Time,
+                rbac_group_id: String,
+                rbac_group_status: Anthropic::Models::Beta::Organization::ClaudeCode::ManagedSettings::beta_claude_code_rbac_group_status,
+                type: :claude_code_rbac_group_managed_settings_summary,
+                updated_at: Time
+              }
+            end
+          end
+        end
+      end
+    end
+  end
+end

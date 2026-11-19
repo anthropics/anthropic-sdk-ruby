@@ -83,6 +83,13 @@ module Anthropic
       | Anthropic::Beta::Organization::BetaRegistrationPendingErrorDetails
       | Anthropic::Beta::Organization::BetaScanFailedErrorDetails
       | Anthropic::Beta::Organization::BetaScanPendingErrorDetails
+      | Anthropic::BetaRequestBodyTimeoutErrorDetails
+      | Anthropic::Beta::Organization::ClaudeCode::BetaSettingsDocumentLimitExceededErrorDetails
+      | Anthropic::Beta::Organization::ClaudeCode::BetaSettingsHistoryLimitExceededErrorDetails
+      | Anthropic::Beta::Organization::ClaudeCode::BetaCMEKFeatureUnsupportedErrorDetails
+      | Anthropic::Beta::Organization::ClaudeCode::BetaRBACGroupManagedSettingsNotFoundErrorDetails
+      | Anthropic::Beta::Organization::ClaudeCode::BetaRBACGroupOrderLimitExceededErrorDetails
+      | Anthropic::Beta::Organization::BetaRBACGroupNotFoundErrorDetails
       | Anthropic::Beta::Organization::BetaSlackChannelSetUpSettingsRefusedErrorDetails
       | Anthropic::Beta::Organization::BetaAPIKeyScopeMissingErrorDetails
       | Anthropic::Beta::Organization::BetaClaudeTagWritesNotEnabledErrorDetails
@@ -180,6 +187,13 @@ module Anthropic
         | :registration_pending
         | :scan_failed
         | :scan_pending
+        | :request_body_timeout
+        | :settings_document_limit_exceeded
+        | :settings_history_limit_exceeded
+        | :cmek_feature_unsupported
+        | :rbac_group_managed_settings_not_found
+        | :rbac_group_order_limit_exceeded
+        | :rbac_group_not_found
         | :slack_channel_set_up_settings_refused
         | :api_key_scope_missing
         | :claude_tag_writes_not_enabled
@@ -276,6 +290,13 @@ module Anthropic
         REGISTRATION_PENDING: :registration_pending
         SCAN_FAILED: :scan_failed
         SCAN_PENDING: :scan_pending
+        REQUEST_BODY_TIMEOUT: :request_body_timeout
+        SETTINGS_DOCUMENT_LIMIT_EXCEEDED: :settings_document_limit_exceeded
+        SETTINGS_HISTORY_LIMIT_EXCEEDED: :settings_history_limit_exceeded
+        CMEK_FEATURE_UNSUPPORTED: :cmek_feature_unsupported
+        RBAC_GROUP_MANAGED_SETTINGS_NOT_FOUND: :rbac_group_managed_settings_not_found
+        RBAC_GROUP_ORDER_LIMIT_EXCEEDED: :rbac_group_order_limit_exceeded
+        RBAC_GROUP_NOT_FOUND: :rbac_group_not_found
         SLACK_CHANNEL_SET_UP_SETTINGS_REFUSED: :slack_channel_set_up_settings_refused
         API_KEY_SCOPE_MISSING: :api_key_scope_missing
         CLAUDE_TAG_WRITES_NOT_ENABLED: :claude_tag_writes_not_enabled
@@ -589,6 +610,31 @@ module Anthropic
           error_code: :scan_pending | "scan_pending",
           plugin_version_id: String
         ) -> Anthropic::Beta::Organization::BetaScanPendingErrorDetails
+        | (
+          error_code: :request_body_timeout | "request_body_timeout"
+        ) -> Anthropic::BetaRequestBodyTimeoutErrorDetails
+        | (
+          error_code: :settings_document_limit_exceeded
+          | "settings_document_limit_exceeded"
+        ) -> Anthropic::Beta::Organization::ClaudeCode::BetaSettingsDocumentLimitExceededErrorDetails
+        | (
+          error_code: :settings_history_limit_exceeded
+          | "settings_history_limit_exceeded"
+        ) -> Anthropic::Beta::Organization::ClaudeCode::BetaSettingsHistoryLimitExceededErrorDetails
+        | (
+          error_code: :cmek_feature_unsupported | "cmek_feature_unsupported"
+        ) -> Anthropic::Beta::Organization::ClaudeCode::BetaCMEKFeatureUnsupportedErrorDetails
+        | (
+          error_code: :rbac_group_managed_settings_not_found
+          | "rbac_group_managed_settings_not_found"
+        ) -> Anthropic::Beta::Organization::ClaudeCode::BetaRBACGroupManagedSettingsNotFoundErrorDetails
+        | (
+          error_code: :rbac_group_order_limit_exceeded
+          | "rbac_group_order_limit_exceeded"
+        ) -> Anthropic::Beta::Organization::ClaudeCode::BetaRBACGroupOrderLimitExceededErrorDetails
+        | (
+          error_code: :rbac_group_not_found | "rbac_group_not_found"
+        ) -> Anthropic::Beta::Organization::BetaRBACGroupNotFoundErrorDetails
         | (
           error_code: :slack_channel_set_up_settings_refused
           | "slack_channel_set_up_settings_refused",

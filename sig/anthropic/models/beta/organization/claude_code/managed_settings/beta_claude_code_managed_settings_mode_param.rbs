@@ -1,0 +1,44 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeCode
+          module ManagedSettings
+            type beta_claude_code_managed_settings_mode_param =
+              Anthropic::Beta::Organization::ClaudeCode::ManagedSettings::BetaClaudeCodeManagedSettingsOrganizationModeParam
+              | Anthropic::Beta::Organization::ClaudeCode::ManagedSettings::BetaClaudeCodeManagedSettingsRBACGroupsModeParam
+
+            module BetaClaudeCodeManagedSettingsModeParam
+              extend Anthropic::Internal::Type::Union
+
+              type type_ = :organization | :rbac_groups
+
+              module Type
+                extend Anthropic::Internal::Type::Enum
+
+                ORGANIZATION: :organization
+                RBAC_GROUPS: :rbac_groups
+
+                def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::ClaudeCode::ManagedSettings::BetaClaudeCodeManagedSettingsModeParam::type_]
+              end
+
+              def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::ClaudeCode::ManagedSettings::beta_claude_code_managed_settings_mode_param]
+
+              def self.new:
+                (
+                  type: :organization | "organization"
+                ) -> Anthropic::Beta::Organization::ClaudeCode::ManagedSettings::BetaClaudeCodeManagedSettingsOrganizationModeParam
+                | (
+                  type: :rbac_groups | "rbac_groups"
+                ) -> Anthropic::Beta::Organization::ClaudeCode::ManagedSettings::BetaClaudeCodeManagedSettingsRBACGroupsModeParam
+                | (
+                  type: Anthropic::Models::Beta::Organization::ClaudeCode::ManagedSettings::BetaClaudeCodeManagedSettingsModeParam::type_
+                  | String
+                ) -> Anthropic::Models::Beta::Organization::ClaudeCode::ManagedSettings::beta_claude_code_managed_settings_mode_param
+            end
+          end
+        end
+      end
+    end
+  end
+end

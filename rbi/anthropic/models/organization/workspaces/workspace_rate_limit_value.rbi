@@ -30,7 +30,7 @@ module Anthropic
           attr_accessor :source
 
           # The limiter type (for example, `requests_per_minute` or
-          # `input_tokens_per_minute`).
+          # `input_tokens_per_minute_cache_aware`).
           sig { returns(String) }
           attr_accessor :type
 
@@ -59,7 +59,7 @@ module Anthropic
             # `include_inherited` is `true`, and then `value` equals `org_limit`.
             source:,
             # The limiter type (for example, `requests_per_minute` or
-            # `input_tokens_per_minute`).
+            # `input_tokens_per_minute_cache_aware`).
             type:,
             # The workspace's value for this limiter type: the workspace-level override when
             # `source.type` is `workspace`, otherwise the organization's value.

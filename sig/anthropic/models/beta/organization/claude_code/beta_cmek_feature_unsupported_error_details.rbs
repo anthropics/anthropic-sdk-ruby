@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeCode
+          type beta_cmek_feature_unsupported_error_details =
+            { error_code: :cmek_feature_unsupported }
+
+          class BetaCMEKFeatureUnsupportedErrorDetails < Anthropic::Internal::Type::BaseModel
+            attr_accessor error_code: :cmek_feature_unsupported
+
+            def initialize: (?error_code: :cmek_feature_unsupported) -> void
+
+            def to_hash: -> { error_code: :cmek_feature_unsupported }
+          end
+        end
+      end
+    end
+  end
+end

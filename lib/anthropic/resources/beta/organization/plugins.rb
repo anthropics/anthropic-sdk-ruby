@@ -69,6 +69,7 @@ module Anthropic
           # @raise [Anthropic::Models::CMEKKeyDisabledError]
           # @raise [Anthropic::Models::CMEKKeyNetworkBlockedError]
           # @raise [Anthropic::Models::BetaUnsupportedCharsetError]
+          # @raise [Anthropic::Models::SandboxEgressRestrictedError]
           # @raise [Anthropic::Models::Beta::Organization::BetaPluginNameTakenError]
           # @raise [Anthropic::Models::Beta::Organization::BetaSkillNameTakenError]
           # @raise [Anthropic::Models::Beta::Organization::BetaRegistrationPendingError]
@@ -200,6 +201,7 @@ module Anthropic
           # @raise [Anthropic::Models::CMEKKeyDisabledError]
           # @raise [Anthropic::Models::CMEKKeyNetworkBlockedError]
           # @raise [Anthropic::Models::Beta::Organization::BetaScanFailedError]
+          # @raise [Anthropic::Models::SandboxEgressRestrictedError]
           # @raise [Anthropic::Models::Beta::Organization::BetaScanPendingError]
           # @raise [Anthropic::Models::Beta::Organization::BetaSkillNameTakenError]
           #
@@ -358,6 +360,7 @@ module Anthropic
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
           # @raise [Anthropic::Models::CMEKKeyDisabledError]
+          # @raise [Anthropic::Models::SandboxEgressRestrictedError]
           #
           # @return [Anthropic::Models::Beta::Organization::BetaDeletedPlugin]
           #

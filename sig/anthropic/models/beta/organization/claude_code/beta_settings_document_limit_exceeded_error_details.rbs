@@ -1,0 +1,22 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeCode
+          type beta_settings_document_limit_exceeded_error_details =
+            { error_code: :settings_document_limit_exceeded }
+
+          class BetaSettingsDocumentLimitExceededErrorDetails < Anthropic::Internal::Type::BaseModel
+            attr_accessor error_code: :settings_document_limit_exceeded
+
+            def initialize: (
+              ?error_code: :settings_document_limit_exceeded
+            ) -> void
+
+            def to_hash: -> { error_code: :settings_document_limit_exceeded }
+          end
+        end
+      end
+    end
+  end
+end

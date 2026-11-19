@@ -89,6 +89,10 @@ module Anthropic
 
   class BetaRateLimitErrorObject = Anthropic::Models::BetaRateLimitErrorObject
 
+  class BetaRequestBodyTimeoutError = Anthropic::Models::BetaRequestBodyTimeoutError
+
+  class BetaRequestBodyTimeoutErrorDetails = Anthropic::Models::BetaRequestBodyTimeoutErrorDetails
+
   class BetaUnsupportedCharsetError = Anthropic::Models::BetaUnsupportedCharsetError
 
   class BetaUnsupportedCharsetErrorDetails = Anthropic::Models::BetaUnsupportedCharsetErrorDetails

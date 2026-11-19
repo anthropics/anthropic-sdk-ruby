@@ -14,7 +14,7 @@ module Anthropic
             end
 
           # The limiter type (for example, `requests_per_minute` or
-          # `input_tokens_per_minute`).
+          # `input_tokens_per_minute_cache_aware`).
           sig { returns(String) }
           attr_accessor :type
 
@@ -25,7 +25,7 @@ module Anthropic
           sig { params(type: String, value: Integer).returns(T.attached_class) }
           def self.new(
             # The limiter type (for example, `requests_per_minute` or
-            # `input_tokens_per_minute`).
+            # `input_tokens_per_minute_cache_aware`).
             type:,
             # The configured limit value for this limiter type.
             value:

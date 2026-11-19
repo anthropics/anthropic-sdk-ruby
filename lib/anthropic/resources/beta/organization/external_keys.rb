@@ -71,8 +71,8 @@ module Anthropic
           # Partially update an external key config. Omitted fields are left unchanged.
           #
           # `display_name` is always editable. `geo` and `provider_config` cannot be changed
-          # once any workspace references this config, because previously encrypted data
-          # requires the original key identity to decrypt.
+          # once any workspace references this config, and a Google Cloud key's provider and
+          # `key_name` cannot be changed at all.
           #
           # @overload update(external_key_id, display_name: nil, geo: nil, provider_config: nil, request_options: {})
           #

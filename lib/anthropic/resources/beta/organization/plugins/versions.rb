@@ -55,6 +55,7 @@ module Anthropic
             # @raise [Anthropic::Models::CMEKKeyDisabledError]
             # @raise [Anthropic::Models::CMEKKeyNetworkBlockedError]
             # @raise [Anthropic::Models::BetaUnsupportedCharsetError]
+            # @raise [Anthropic::Models::SandboxEgressRestrictedError]
             # @raise [Anthropic::Models::Beta::Organization::BetaSkillNameTakenError]
             # @raise [Anthropic::Models::Beta::Organization::BetaRegistrationPendingError]
             #
@@ -246,6 +247,7 @@ module Anthropic
             #
             # @raise [Anthropic::Models::CMEKKeyDisabledError]
             # @raise [Anthropic::Models::CMEKKeyNetworkBlockedError]
+            # @raise [Anthropic::Models::SandboxEgressRestrictedError]
             #
             # @return [StringIO]
             #

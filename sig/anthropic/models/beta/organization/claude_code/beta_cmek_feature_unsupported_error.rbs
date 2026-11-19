@@ -1,0 +1,15 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ClaudeCode
+          class BetaCMEKFeatureUnsupportedError < Anthropic::Errors::BadRequestError
+            def error_code: -> :cmek_feature_unsupported
+
+            def details: -> Anthropic::Beta::Organization::ClaudeCode::BetaCMEKFeatureUnsupportedErrorDetails
+          end
+        end
+      end
+    end
+  end
+end

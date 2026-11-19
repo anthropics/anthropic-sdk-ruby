@@ -806,12 +806,13 @@ module Anthropic
         # @param headers [Hash{String=>String}]
         # @param stream [Enumerable<String>]
         # @param suppress_error [Boolean]
+        # @param binary [Boolean]
         #
         # @raise [JSON::ParserError]
         # @return [Object]
-        def decode_content(headers, stream:, suppress_error: false)
+        def decode_content(headers, stream:, suppress_error: false, binary: false)
           case (content_type = headers["content-type"])
-          in Anthropic::Internal::Util::JSON_CONTENT
+          in Anthropic::Internal::Util::JSON_CONTENT unless binary
             return nil if (json = stream.to_a.join).empty?
 
             begin
@@ -820,7 +821,7 @@ module Anthropic
               raise e unless suppress_error
               json
             end
-          in Anthropic::Internal::Util::JSONL_CONTENT
+          in Anthropic::Internal::Util::JSONL_CONTENT unless binary
             lines = decode_lines(stream)
             chain_fused(lines) do |y|
               lines.each do
@@ -829,7 +830,7 @@ module Anthropic
                 y << JSON.parse(_1, symbolize_names: true)
               end
             end
-          in %r{^text/event-stream}
+          in %r{^text/event-stream} unless binary
             lines = decode_lines(stream)
             decode_sse(lines)
           else
