@@ -9,12 +9,15 @@ jobs:
     name: publish
     runs-on: ubuntu-24.04
     environment: production-release
+    permissions:
+      contents: read
+      id-token: write
     env:
       NODE_OPTIONS: --use-openssl-ca
       SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
       SSL_CERT_DIR: /etc/ssl/certs
 
-    # This job holds the RubyGems API key, so it installs no gem.
+    # This job can get a key that publishes the gem, so it installs no gem.
     steps:
       - name: Set up CA certificates
         shell: sudo /usr/bin/python3 -I {0}
@@ -76,10 +79,31 @@ jobs:
           bundler: none
           bundler-cache: false
 
+      - name: Log in to RubyGems.org
+        id: login
+        shell: bash
+        run: |
+          request() {
+            curl --fail --silent --show-error --max-time 30 --retry 3 "$@"
+          }
+          fail() {
+            echo "::error::$1"
+            exit 1
+          }
+          jwt=$(
+            request "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=rubygems.org" \
+              --header "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" |
+              jq '{ jwt: .value }'
+          ) || fail "GitHub gave no identity token. Check that the job has the permission id-token: write."
+          key=$(
+            request --json @- https://rubygems.org/api/v1/oidc/trusted_publisher/exchange_token <<< "$jwt" |
+              jq --exit-status --raw-output .rubygems_api_key
+          ) || fail "RubyGems.org gave no key. A 404 usually means that none of the gem's trusted publishers matches this repository, workflow file and environment."
+          echo "::add-mask::$key"
+          echo "key=$key" >> "$GITHUB_OUTPUT"
+
       - name: Publish to RubyGems.org
         run: |
           bash ./bin/publish-gem
         env:
-          # `RUBYGEMS_HOST` is only required for private gem repositories, not https://rubygems.org
-          RUBYGEMS_HOST: ${{ secrets.ANTHROPIC_RUBYGEMS_HOST || secrets.RUBYGEMS_HOST }}
-          GEM_HOST_API_KEY: ${{ secrets.ANTHROPIC_GEM_HOST_API_KEY || secrets.GEM_HOST_API_KEY }}
+          GEM_HOST_API_KEY: ${{ steps.login.outputs.key }}
