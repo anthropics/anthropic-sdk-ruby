@@ -81,6 +81,8 @@ module Anthropic
 
             EXTERNAL_KEY_FAILED = :"external_key.failed"
             EXTERNAL_KEY_RECOVERED = :"external_key.recovered"
+            EXTERNAL_STORAGE_FAILED = :"external_storage.failed"
+            EXTERNAL_STORAGE_RECOVERED = :"external_storage.recovered"
             USER_PROFILE_ENFORCEMENT_ACTION_OPENED = :"user_profile.enforcement_action_opened"
             USER_PROFILE_ENFORCEMENT_ACTION_RESOLVED = :"user_profile.enforcement_action_resolved"
             USER_PROFILE_PROGRAM_STATUS_UPDATED = :"user_profile.program_status_updated"

@@ -59,7 +59,9 @@ module Anthropic
               Anthropic::Beta::BetaWebhookUserProfileEnforcementActionResolvedEventData,
               Anthropic::Beta::BetaWebhookUserProfileProgramStatusUpdatedEventData,
               Anthropic::Beta::BetaWebhookExternalKeyFailedEventData,
-              Anthropic::Beta::BetaWebhookExternalKeyRecoveredEventData
+              Anthropic::Beta::BetaWebhookExternalKeyRecoveredEventData,
+              Anthropic::Beta::BetaWebhookExternalStorageFailedEventData,
+              Anthropic::Beta::BetaWebhookExternalStorageRecoveredEventData
             )
           end
 
@@ -315,6 +317,16 @@ module Anthropic
           EXTERNAL_KEY_RECOVERED =
             T.let(
               :"external_key.recovered",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          EXTERNAL_STORAGE_FAILED =
+            T.let(
+              :"external_storage.failed",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          EXTERNAL_STORAGE_RECOVERED =
+            T.let(
+              :"external_storage.recovered",
               Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
             )
 

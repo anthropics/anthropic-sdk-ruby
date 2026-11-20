@@ -53,6 +53,8 @@ module Anthropic
         | Anthropic::Beta::BetaWebhookUserProfileProgramStatusUpdatedEventData
         | Anthropic::Beta::BetaWebhookExternalKeyFailedEventData
         | Anthropic::Beta::BetaWebhookExternalKeyRecoveredEventData
+        | Anthropic::Beta::BetaWebhookExternalStorageFailedEventData
+        | Anthropic::Beta::BetaWebhookExternalStorageRecoveredEventData
 
       module BetaWebhookEventData
         extend Anthropic::Internal::Type::Union
@@ -107,6 +109,8 @@ module Anthropic
           | :"user_profile.program_status_updated"
           | :"external_key.failed"
           | :"external_key.recovered"
+          | :"external_storage.failed"
+          | :"external_storage.recovered"
 
         module Type
           extend Anthropic::Internal::Type::Enum
@@ -160,6 +164,8 @@ module Anthropic
           USER_PROFILE_PROGRAM_STATUS_UPDATED: :"user_profile.program_status_updated"
           EXTERNAL_KEY_FAILED: :"external_key.failed"
           EXTERNAL_KEY_RECOVERED: :"external_key.recovered"
+          EXTERNAL_STORAGE_FAILED: :"external_storage.failed"
+          EXTERNAL_STORAGE_RECOVERED: :"external_storage.recovered"
 
           def self?.values: -> ::Array[Anthropic::Models::Beta::BetaWebhookEventData::type_]
         end
@@ -470,6 +476,16 @@ module Anthropic
             id: String,
             organization_id: String
           ) -> Anthropic::Beta::BetaWebhookExternalKeyRecoveredEventData
+          | (
+            type: :"external_storage.failed" | "external_storage.failed",
+            id: String,
+            organization_id: String
+          ) -> Anthropic::Beta::BetaWebhookExternalStorageFailedEventData
+          | (
+            type: :"external_storage.recovered" | "external_storage.recovered",
+            id: String,
+            organization_id: String
+          ) -> Anthropic::Beta::BetaWebhookExternalStorageRecoveredEventData
           | (
             type: Anthropic::Models::Beta::BetaWebhookEventData::type_ | String,
             id: String,

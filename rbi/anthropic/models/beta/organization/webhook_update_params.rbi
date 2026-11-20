@@ -186,6 +186,16 @@ module Anthropic
                 :"external_key.recovered",
                 Anthropic::Beta::Organization::WebhookUpdateParams::EnabledEvent::TaggedSymbol
               )
+            EXTERNAL_STORAGE_FAILED =
+              T.let(
+                :"external_storage.failed",
+                Anthropic::Beta::Organization::WebhookUpdateParams::EnabledEvent::TaggedSymbol
+              )
+            EXTERNAL_STORAGE_RECOVERED =
+              T.let(
+                :"external_storage.recovered",
+                Anthropic::Beta::Organization::WebhookUpdateParams::EnabledEvent::TaggedSymbol
+              )
             USER_PROFILE_ENFORCEMENT_ACTION_OPENED =
               T.let(
                 :"user_profile.enforcement_action_opened",
