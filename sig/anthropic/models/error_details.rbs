@@ -14,6 +14,7 @@ module Anthropic
       | Anthropic::CompactionSignatureInvalidErrorDetails
       | Anthropic::CompactionTooManyToolReferencesErrorDetails
       | Anthropic::CompactionToolChangesMismatchErrorDetails
+      | Anthropic::ImageDimensionsTooLargeErrorDetails
       | Anthropic::OrganizationOnHoldErrorDetails
       | Anthropic::RequestBodyEncodingInvalidErrorDetails
       | Anthropic::RequestBodyEncodingUnsupportedErrorDetails
@@ -118,6 +119,7 @@ module Anthropic
         | :compaction_signature_invalid
         | :compaction_too_many_tool_references
         | :compaction_tool_changes_mismatch
+        | :image_dimensions_too_large
         | :organization_on_hold
         | :request_body_encoding_invalid
         | :request_body_encoding_unsupported
@@ -221,6 +223,7 @@ module Anthropic
         COMPACTION_SIGNATURE_INVALID: :compaction_signature_invalid
         COMPACTION_TOO_MANY_TOOL_REFERENCES: :compaction_too_many_tool_references
         COMPACTION_TOOL_CHANGES_MISMATCH: :compaction_tool_changes_mismatch
+        IMAGE_DIMENSIONS_TOO_LARGE: :image_dimensions_too_large
         ORGANIZATION_ON_HOLD: :organization_on_hold
         REQUEST_BODY_ENCODING_INVALID: :request_body_encoding_invalid
         REQUEST_BODY_ENCODING_UNSUPPORTED: :request_body_encoding_unsupported
@@ -361,6 +364,12 @@ module Anthropic
           error_code: :compaction_tool_changes_mismatch
           | "compaction_tool_changes_mismatch"
         ) -> Anthropic::CompactionToolChangesMismatchErrorDetails
+        | (
+          error_code: :image_dimensions_too_large
+          | "image_dimensions_too_large",
+          max_side_length_pixels: Integer,
+          paths: ::Array[String]
+        ) -> Anthropic::ImageDimensionsTooLargeErrorDetails
         | (
           error_code: :organization_on_hold | "organization_on_hold",
           ?appeal_url: String?
@@ -677,6 +686,8 @@ module Anthropic
         ) -> Anthropic::Beta::Organization::BetaBundleOnCallErrorDetails
         | (
           error_code: Anthropic::Models::ErrorDetails::error_code | String,
+          ?max_side_length_pixels: Integer,
+          ?paths: ::Array[String],
           ?appeal_url: String?,
           ?unsupported: ::Array[Anthropic::Models::thread_unsupported_feature_name]?,
           ?field: Anthropic::Models::Organization::workspace_policy_field,

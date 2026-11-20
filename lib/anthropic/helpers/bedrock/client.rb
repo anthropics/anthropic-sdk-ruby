@@ -333,8 +333,9 @@ module Anthropic
         # @api private
         #
         # Rewrites the canonical Anthropic request into Bedrock's shape — moves
-        # the `anthropic-version` header into the body, drops
-        # `:model`/`:stream` from the body and retargets the URL to
+        # the `anthropic-version` header into the body, moves the
+        # `anthropic-user-profile-id` header of a Messages request into the
+        # body, drops `:model`/`:stream` from the body and retargets the URL to
         # `/model/{model}/invoke[-with-response-stream]`. Called from
         # {#provider_middleware}, so user middleware sees the canonical
         # request. Pure: the incoming request, its body, and its URI are never
@@ -356,6 +357,15 @@ module Anthropic
           messages_route = path.end_with?("/v1/messages") && (query.nil? || query == "beta=true")
 
           return req.with(body: body) unless req.method == :post && messages_route
+
+          profile_headers, headers = req.headers.partition do |name, _|
+            name.to_s.casecmp?("anthropic-user-profile-id")
+          end
+          user_profile_id = profile_headers.last&.last
+          unless user_profile_id.to_s.empty?
+            body[:user_profile_id] = user_profile_id unless body.keys.any? { _1.to_s == "user_profile_id" }
+            req = req.with(headers: headers.to_h)
+          end
 
           model = Anthropic::Internal::Util.encode_path(body.delete(:model).to_s)
           stream = body.delete(:stream) || false

@@ -206,6 +206,34 @@ class Anthropic::Test::BedrockClientTest < Minitest::Test
     refute(adapted.body.key?(:model))
   end
 
+  def test_create_sends_user_profile_id_in_body_instead_of_header
+    uri = "https://bedrock-runtime.us-east-1.amazonaws.com/model/m/invoke"
+    stub_request(:post, uri).to_return_json(status: 200, body: {})
+
+    make_client.messages.create(
+      max_tokens: 1,
+      messages: [{role: "user", content: "Hi"}],
+      model: "m",
+      user_profile_id: "uprof_test"
+    )
+
+    assert_requested(:post, uri, times: 1) do |req|
+      assert_nil(req.headers["Anthropic-User-Profile-Id"])
+      assert_equal("uprof_test", JSON.parse(req.body)["user_profile_id"])
+    end
+  end
+
+  def test_create_without_user_profile_id_sends_no_body_field
+    uri = "https://bedrock-runtime.us-east-1.amazonaws.com/model/m/invoke"
+    stub_request(:post, uri).to_return_json(status: 200, body: {})
+
+    make_client.messages.create(max_tokens: 1, messages: [{role: "user", content: "Hi"}], model: "m")
+
+    assert_requested(:post, uri, times: 1) do |req|
+      refute(JSON.parse(req.body).key?("user_profile_id"))
+    end
+  end
+
   def test_adapt_request_is_pure
     body = {max_tokens: 1024, messages: [].freeze, model: "m"}.freeze
     req = make_api_request(

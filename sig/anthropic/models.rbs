@@ -659,6 +659,10 @@ module Anthropic
 
   class ImageBlockParam = Anthropic::Models::ImageBlockParam
 
+  class ImageDimensionsTooLargeError = Anthropic::Models::ImageDimensionsTooLargeError
+
+  class ImageDimensionsTooLargeErrorDetails = Anthropic::Models::ImageDimensionsTooLargeErrorDetails
+
   class ImageTransformationsParam = Anthropic::Models::ImageTransformationsParam
 
   class InputJSONDelta = Anthropic::Models::InputJSONDelta

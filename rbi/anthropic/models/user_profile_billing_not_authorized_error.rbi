@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    # The customer that the named user profile represents has not authorized the
+    # The customer that the request's user profile represents has not authorized the
     # caller to bill them, or the authorization that the request's credential uses has
     # ended. The response does not say which applies.
     class UserProfileBillingNotAuthorizedError < Anthropic::Errors::PermissionDeniedError

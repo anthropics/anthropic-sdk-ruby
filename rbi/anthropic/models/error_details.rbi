@@ -21,6 +21,7 @@ module Anthropic
             Anthropic::CompactionSignatureInvalidErrorDetails,
             Anthropic::CompactionTooManyToolReferencesErrorDetails,
             Anthropic::CompactionToolChangesMismatchErrorDetails,
+            Anthropic::ImageDimensionsTooLargeErrorDetails,
             Anthropic::OrganizationOnHoldErrorDetails,
             Anthropic::RequestBodyEncodingInvalidErrorDetails,
             Anthropic::RequestBodyEncodingUnsupportedErrorDetails,
@@ -180,6 +181,11 @@ module Anthropic
         COMPACTION_TOOL_CHANGES_MISMATCH =
           T.let(
             :compaction_tool_changes_mismatch,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        IMAGE_DIMENSIONS_TOO_LARGE =
+          T.let(
+            :image_dimensions_too_large,
             Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
           )
         ORGANIZATION_ON_HOLD =
@@ -622,6 +628,8 @@ module Anthropic
       sig do
         params(
           error_code: Anthropic::ErrorDetails::ErrorCode::OrSymbol,
+          max_side_length_pixels: Integer,
+          paths: T::Array[String],
           appeal_url: T.nilable(String),
           unsupported:
             T.nilable(
@@ -638,6 +646,13 @@ module Anthropic
       end
       def self.new(
         error_code:,
+        # The limit the images exceeded: the largest width or height, in pixels, that an
+        # image on this request may have.
+        max_side_length_pixels: nil,
+        # The position of every image over the limit, in the order you sent them, nested
+        # blocks included, such as `messages.0.content.1`, or
+        # `messages.0.content.1.content.0` for an image in a `tool_result` block.
+        paths: nil,
         appeal_url: nil,
         # Each entry names a request field or an organization setting that Threads do not
         # support. On a value you do not recognize, send the full conversation without
