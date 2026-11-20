@@ -51,6 +51,7 @@ module Anthropic
         [400, "external_key_validation_failed"] => Anthropic::Models::Organization::ExternalKeyValidationFailedError,
         [400, "external_key_validation_timed_out"] => Anthropic::Models::Organization::ExternalKeyValidationTimedOutError,
         [400, "file_not_downloadable"] => Anthropic::Models::FileNotDownloadableError,
+        [400, "image_dimensions_too_large"] => Anthropic::Models::ImageDimensionsTooLargeError,
         [400, "invalid_config_type_change"] => Anthropic::Models::Beta::BetaInvalidConfigTypeChangeError,
         [400, "invalid_metadata"] => Anthropic::Models::Beta::BetaInvalidMetadataError,
         [400, "invite_already_exists"] => Anthropic::Models::Organization::InviteAlreadyExistsError,

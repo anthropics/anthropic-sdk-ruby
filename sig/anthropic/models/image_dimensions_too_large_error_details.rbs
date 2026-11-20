@@ -1,0 +1,30 @@
+module Anthropic
+  module Models
+    type image_dimensions_too_large_error_details =
+      {
+        error_code: :image_dimensions_too_large,
+        max_side_length_pixels: Integer,
+        paths: ::Array[String]
+      }
+
+    class ImageDimensionsTooLargeErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :image_dimensions_too_large
+
+      attr_accessor max_side_length_pixels: Integer
+
+      attr_accessor paths: ::Array[String]
+
+      def initialize: (
+        max_side_length_pixels: Integer,
+        paths: ::Array[String],
+        ?error_code: :image_dimensions_too_large
+      ) -> void
+
+      def to_hash: -> {
+        error_code: :image_dimensions_too_large,
+        max_side_length_pixels: Integer,
+        paths: ::Array[String]
+      }
+    end
+  end
+end

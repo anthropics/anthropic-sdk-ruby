@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class ImageDimensionsTooLargeError < Anthropic::Errors::BadRequestError
+      def error_code: -> :image_dimensions_too_large
+
+      def details: -> Anthropic::ImageDimensionsTooLargeErrorDetails
+    end
+  end
+end
