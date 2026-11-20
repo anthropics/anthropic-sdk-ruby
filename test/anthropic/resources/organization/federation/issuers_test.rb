@@ -4,7 +4,11 @@ require_relative "../../../test_helper"
 
 class Anthropic::Test::Resources::Organization::Federation::IssuersTest < Anthropic::Test::ResourceTest
   def test_create_required_params
-    response = @anthropic.organization.federation.issuers.create(issuer_url: "x", name: "x")
+    response =
+      @anthropic.organization.federation.issuers.create(
+        issuer_url: "https://token.actions.githubusercontent.com",
+        name: "github-actions"
+      )
 
     assert_pattern do
       response => Anthropic::Organization::Federation::FederationIssuer

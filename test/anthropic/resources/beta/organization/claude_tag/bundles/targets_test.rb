@@ -7,7 +7,7 @@ class Anthropic::Test::Resources::Beta::Organization::ClaudeTag::Bundles::Target
     response =
       @anthropic.beta.organization.claude_tag.bundles.targets.create(
         "capp_011CZkZjLP1cWxj5EtMmdgbq",
-        target: {slack_channel_id: "xxxxxxxx", type: :slack_channel},
+        target: {slack_channel_id: "slch_01SvpyRQK3nN6eH9uhRA7n1q", type: :slack_channel},
         request_options: {extra_query: {beta: "true"}}
       )
 

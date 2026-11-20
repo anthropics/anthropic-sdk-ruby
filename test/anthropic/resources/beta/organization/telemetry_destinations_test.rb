@@ -6,7 +6,7 @@ class Anthropic::Test::Resources::Beta::Organization::TelemetryDestinationsTest 
   def test_create_required_params
     response =
       @anthropic.beta.organization.telemetry_destinations.create(
-        endpoint_url: "x",
+        endpoint_url: "https://gateway.example.com",
         workspaces: {type: :all},
         request_options: {extra_query: {beta: "true"}}
       )
