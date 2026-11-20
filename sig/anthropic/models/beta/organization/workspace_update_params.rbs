@@ -8,9 +8,11 @@ module Anthropic
             data_residency: Anthropic::Beta::Organization::BetaDataResidencyUpdateConfig?,
             display_color: String,
             external_key_id: String,
+            inference_data_privacy: Anthropic::Beta::Organization::BetaInferenceDataPrivacyUpdateParam?,
             name: String,
             tags: ::Hash[Symbol, String?]?,
-            user_profile_id: String
+            user_profile_id: String,
+            betas: ::Array[Anthropic::Models::anthropic_beta]
           }
           & Anthropic::Internal::Type::request_parameters
 
@@ -30,6 +32,8 @@ module Anthropic
 
           def external_key_id=: (String) -> String
 
+          attr_accessor inference_data_privacy: Anthropic::Beta::Organization::BetaInferenceDataPrivacyUpdateParam?
+
           attr_reader name: String?
 
           def name=: (String) -> String
@@ -40,14 +44,22 @@ module Anthropic
 
           def user_profile_id=: (String) -> String
 
+          attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+          def betas=: (
+            ::Array[Anthropic::Models::anthropic_beta]
+          ) -> ::Array[Anthropic::Models::anthropic_beta]
+
           def initialize: (
             workspace_id: String,
             ?data_residency: Anthropic::Beta::Organization::BetaDataResidencyUpdateConfig?,
             ?display_color: String,
             ?external_key_id: String,
+            ?inference_data_privacy: Anthropic::Beta::Organization::BetaInferenceDataPrivacyUpdateParam?,
             ?name: String,
             ?tags: ::Hash[Symbol, String?]?,
             ?user_profile_id: String,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?request_options: Anthropic::request_opts
           ) -> void
 
@@ -56,9 +68,11 @@ module Anthropic
             data_residency: Anthropic::Beta::Organization::BetaDataResidencyUpdateConfig?,
             display_color: String,
             external_key_id: String,
+            inference_data_privacy: Anthropic::Beta::Organization::BetaInferenceDataPrivacyUpdateParam?,
             name: String,
             tags: ::Hash[Symbol, String?]?,
             user_profile_id: String,
+            betas: ::Array[Anthropic::Models::anthropic_beta],
             request_options: Anthropic::RequestOptions
           }
         end

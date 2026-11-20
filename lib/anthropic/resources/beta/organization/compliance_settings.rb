@@ -12,7 +12,13 @@ module Anthropic
           # whether the Compliance API is enabled. An organization with a parent
           # organization reads the state inherited from the parent's configuration.
           #
-          # @overload retrieve(request_options: {})
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::Organization::ComplianceSettingRetrieveParams} for
+          # more details.
+          #
+          # @overload retrieve(betas: nil, request_options: {})
+          #
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional. Send `efs-2026-10-01` in this header to use this endpoint's beta featu
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -20,14 +26,16 @@ module Anthropic
           #
           # @see Anthropic::Models::Beta::Organization::ComplianceSettingRetrieveParams
           def retrieve(params = {})
+            parsed, options = Anthropic::Beta::Organization::ComplianceSettingRetrieveParams.dump_request(params)
             @client.request(
               qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_COMPLIANCE_SETTINGS_RETRIEVE,
               span_route: "/v1/organizations/compliance_settings",
               method: :get,
               path: "v1/organizations/compliance_settings",
+              headers: parsed.transform_keys(betas: "anthropic-beta"),
               model: Anthropic::Beta::Organization::BetaComplianceSettings,
-              options: params[:request_options]
+              options: options
             )
           end
 
@@ -52,9 +60,11 @@ module Anthropic
           # {Anthropic::Models::Beta::Organization::ComplianceSettingUpdateParams} for more
           # details.
           #
-          # @overload update(state:, request_options: {})
+          # @overload update(state:, betas: nil, request_options: {})
           #
-          # @param state [Anthropic::Models::Beta::Organization::BetaComplianceSettingsStateEnabledParam, Anthropic::Models::Beta::Organization::BetaComplianceSettingsStateDisabledParam] Desired state. Accepts the string shorthand "enabled" or "disabled" in place of
+          # @param state [Anthropic::Models::Beta::Organization::BetaComplianceSettingsStateEnabledParam, Anthropic::Models::Beta::Organization::BetaComplianceSettingsStateDisabledParam] Body param: Desired state. Accepts the string shorthand "enabled" or "disabled"
+          #
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional. Send `efs-2026-10-01` in this header to use this endpoin
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -65,13 +75,15 @@ module Anthropic
           # @see Anthropic::Models::Beta::Organization::ComplianceSettingUpdateParams
           def update(params)
             parsed, options = Anthropic::Beta::Organization::ComplianceSettingUpdateParams.dump_request(params)
+            header_params = {betas: "anthropic-beta"}
             @client.request(
               qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_COMPLIANCE_SETTINGS_UPDATE,
               span_route: "/v1/organizations/compliance_settings",
               method: :post,
               path: "v1/organizations/compliance_settings",
-              body: parsed,
+              headers: parsed.slice(*header_params.keys).transform_keys(header_params),
+              body: parsed.except(*header_params.keys),
               model: Anthropic::Beta::Organization::BetaComplianceSettings,
               options: options
             )

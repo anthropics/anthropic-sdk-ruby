@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        class BetaStorageAttachLimitReachedError < Anthropic::Errors::BadRequestError
+          def error_code: -> :storage_attach_limit_reached
+
+          def details: -> Anthropic::Beta::Organization::BetaStorageAttachLimitReachedErrorDetails
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,161 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_external_storage =
+          {
+            id: String,
+            created_at: Time,
+            display_name: String?,
+            provider_config: Anthropic::Models::Beta::Organization::BetaExternalStorage::provider_config,
+            setup_template_version: String?,
+            status: Anthropic::Models::Beta::Organization::BetaExternalStorage::status,
+            type: :external_storage,
+            updated_at: Time,
+            user_profile_id: String?
+          }
+
+        class BetaExternalStorage < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor created_at: Time
+
+          attr_accessor display_name: String?
+
+          attr_accessor provider_config: Anthropic::Models::Beta::Organization::BetaExternalStorage::provider_config
+
+          attr_accessor setup_template_version: String?
+
+          attr_accessor status: Anthropic::Models::Beta::Organization::BetaExternalStorage::status
+
+          attr_accessor type: :external_storage
+
+          attr_accessor updated_at: Time
+
+          attr_accessor user_profile_id: String?
+
+          def initialize: (
+            id: String,
+            created_at: Time,
+            display_name: String?,
+            provider_config: Anthropic::Models::Beta::Organization::BetaExternalStorage::provider_config,
+            setup_template_version: String?,
+            status: Anthropic::Models::Beta::Organization::BetaExternalStorage::status,
+            updated_at: Time,
+            user_profile_id: String?,
+            ?type: :external_storage
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            created_at: Time,
+            display_name: String?,
+            provider_config: Anthropic::Models::Beta::Organization::BetaExternalStorage::provider_config,
+            setup_template_version: String?,
+            status: Anthropic::Models::Beta::Organization::BetaExternalStorage::status,
+            type: :external_storage,
+            updated_at: Time,
+            user_profile_id: String?
+          }
+
+          type provider_config =
+            Anthropic::Beta::Organization::BetaAWSExternalStorageConfig
+            | Anthropic::Beta::Organization::BetaGCPExternalStorageConfig
+
+          module ProviderConfig
+            extend Anthropic::Internal::Type::Union
+
+            type type_ = :aws | :gcp
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              AWS: :aws
+              GCP: :gcp
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaExternalStorage::ProviderConfig::type_]
+            end
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::BetaExternalStorage::provider_config]
+
+            def self.new:
+              (
+                type: :aws | "aws",
+                account_id: String,
+                bucket_name: String,
+                region: String
+              ) -> Anthropic::Beta::Organization::BetaAWSExternalStorageConfig
+              | (
+                type: :gcp | "gcp",
+                bucket_name: String,
+                project_number: String,
+                region: String
+              ) -> Anthropic::Beta::Organization::BetaGCPExternalStorageConfig
+              | (
+                type: Anthropic::Models::Beta::Organization::BetaExternalStorage::ProviderConfig::type_
+                | String,
+                bucket_name: String,
+                region: String,
+                ?account_id: String,
+                ?project_number: String
+              ) -> Anthropic::Models::Beta::Organization::BetaExternalStorage::provider_config
+          end
+
+          type status =
+            Anthropic::Beta::Organization::BetaPendingConfigurationExternalStorageStatus
+            | Anthropic::Beta::Organization::BetaAvailableExternalStorageStatus
+            | Anthropic::Beta::Organization::BetaActiveExternalStorageStatus
+            | Anthropic::Beta::Organization::BetaDrainingExternalStorageStatus
+
+          module Status
+            extend Anthropic::Internal::Type::Union
+
+            type type_ =
+              :pending_configuration | :available | :active | :draining
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              PENDING_CONFIGURATION: :pending_configuration
+              AVAILABLE: :available
+              ACTIVE: :active
+              DRAINING: :draining
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaExternalStorage::Status::type_]
+            end
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::BetaExternalStorage::status]
+
+            def self.new:
+              (
+                type: :pending_configuration | "pending_configuration"
+              ) -> Anthropic::Beta::Organization::BetaPendingConfigurationExternalStorageStatus
+              | (
+                type: :available | "available",
+                healthy: bool,
+                last_checked_at: Time
+              ) -> Anthropic::Beta::Organization::BetaAvailableExternalStorageStatus
+              | (
+                type: :active | "active",
+                healthy: bool,
+                last_checked_at: Time
+              ) -> Anthropic::Beta::Organization::BetaActiveExternalStorageStatus
+              | (
+                type: :draining | "draining",
+                healthy: bool,
+                last_checked_at: Time,
+                removal_started: bool
+              ) -> Anthropic::Beta::Organization::BetaDrainingExternalStorageStatus
+              | (
+                type: Anthropic::Models::Beta::Organization::BetaExternalStorage::Status::type_
+                | String,
+                ?healthy: bool,
+                ?last_checked_at: Time,
+                ?removal_started: bool
+              ) -> Anthropic::Models::Beta::Organization::BetaExternalStorage::status
+          end
+        end
+      end
+    end
+  end
+end

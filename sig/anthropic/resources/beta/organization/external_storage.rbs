@@ -1,0 +1,52 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class ExternalStorage
+          def create: (
+            provider_config: Anthropic::Models::Beta::Organization::ExternalStorageCreateParams::provider_config,
+            ?display_name: String?,
+            ?user_profile_id: String?,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaExternalStorage
+
+          def retrieve: (
+            String external_storage_id,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaExternalStorage
+
+          def update: (
+            String external_storage_id,
+            display_name: String?,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaExternalStorage
+
+          def list: (
+            ?limit: Integer,
+            ?page: String?,
+            ?user_profile_ids: ::Array[String]?,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Organization::BetaExternalStorage]
+
+          def delete: (
+            String external_storage_id,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaDeletedExternalStorage
+
+          def activate: (
+            String external_storage_id,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaExternalStorage
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

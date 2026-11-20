@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_storage_verification_failed_error_details =
+          {
+            error_code: :storage_verification_failed,
+            failed_checks: ::Array[Anthropic::Beta::Organization::BetaExternalStorageFailedCheck],
+            field: String?
+          }
+
+        class BetaStorageVerificationFailedErrorDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor error_code: :storage_verification_failed
+
+          attr_accessor failed_checks: ::Array[Anthropic::Beta::Organization::BetaExternalStorageFailedCheck]
+
+          attr_accessor field: String?
+
+          def initialize: (
+            failed_checks: ::Array[Anthropic::Beta::Organization::BetaExternalStorageFailedCheck],
+            ?field: String?,
+            ?error_code: :storage_verification_failed
+          ) -> void
+
+          def to_hash: -> {
+            error_code: :storage_verification_failed,
+            failed_checks: ::Array[Anthropic::Beta::Organization::BetaExternalStorageFailedCheck],
+            field: String?
+          }
+        end
+      end
+    end
+  end
+end

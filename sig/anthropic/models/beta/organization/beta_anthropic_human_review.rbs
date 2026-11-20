@@ -1,0 +1,35 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_anthropic_human_review =
+          {
+            type: Anthropic::Models::Beta::Organization::BetaAnthropicHumanReview::type_
+          }
+
+        class BetaAnthropicHumanReview < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: Anthropic::Models::Beta::Organization::BetaAnthropicHumanReview::type_
+
+          def initialize: (
+            type: Anthropic::Models::Beta::Organization::BetaAnthropicHumanReview::type_
+          ) -> void
+
+          def to_hash: -> {
+            type: Anthropic::Models::Beta::Organization::BetaAnthropicHumanReview::type_
+          }
+
+          type type_ = :disabled | :enabled
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            DISABLED: :disabled
+            ENABLED: :enabled
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaAnthropicHumanReview::type_]
+          end
+        end
+      end
+    end
+  end
+end

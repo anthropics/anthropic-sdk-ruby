@@ -1,0 +1,29 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_workspace_changed_concurrently_error_details =
+          {
+            error_code: :workspace_changed_concurrently,
+            field: Anthropic::Models::Beta::Organization::beta_workspace_changed_concurrently_field
+          }
+
+        class BetaWorkspaceChangedConcurrentlyErrorDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor error_code: :workspace_changed_concurrently
+
+          attr_accessor field: Anthropic::Models::Beta::Organization::beta_workspace_changed_concurrently_field
+
+          def initialize: (
+            field: Anthropic::Models::Beta::Organization::beta_workspace_changed_concurrently_field,
+            ?error_code: :workspace_changed_concurrently
+          ) -> void
+
+          def to_hash: -> {
+            error_code: :workspace_changed_concurrently,
+            field: Anthropic::Models::Beta::Organization::beta_workspace_changed_concurrently_field
+          }
+        end
+      end
+    end
+  end
+end

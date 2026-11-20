@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        class BetaInvalidStorageARNError < Anthropic::Errors::BadRequestError
+          def error_code: -> :invalid_storage_arn
+
+          def details: -> Anthropic::Beta::Organization::BetaInvalidStorageARNErrorDetails
+        end
+      end
+    end
+  end
+end

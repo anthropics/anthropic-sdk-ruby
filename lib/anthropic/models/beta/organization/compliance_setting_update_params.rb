@@ -16,12 +16,21 @@ module Anthropic
           #   @return [Anthropic::Models::Beta::Organization::BetaComplianceSettingsStateEnabledParam, Anthropic::Models::Beta::Organization::BetaComplianceSettingsStateDisabledParam]
           required :state, union: -> { Anthropic::Beta::Organization::BetaComplianceSettingsStateParam }
 
-          # @!method initialize(state:, request_options: {})
+          # @!attribute betas
+          #   Optional. Send `efs-2026-10-01` in this header to use this endpoint's beta
+          #   features: additional parameters, accepted values and response fields.
+          #
+          #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
+          optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
+
+          # @!method initialize(state:, betas: nil, request_options: {})
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Organization::ComplianceSettingUpdateParams} for more
           #   details.
           #
           #   @param state [Anthropic::Models::Beta::Organization::BetaComplianceSettingsStateEnabledParam, Anthropic::Models::Beta::Organization::BetaComplianceSettingsStateDisabledParam] Desired state. Accepts the string shorthand "enabled" or "disabled" in place of
+          #
+          #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional. Send `efs-2026-10-01` in this header to use this endpoint's beta featu
           #
           #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
         end

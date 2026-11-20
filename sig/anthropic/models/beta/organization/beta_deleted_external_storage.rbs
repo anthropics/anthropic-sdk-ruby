@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_deleted_external_storage =
+          { id: String, type: :external_storage_deleted }
+
+        class BetaDeletedExternalStorage < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor type: :external_storage_deleted
+
+          def initialize: (id: String, ?type: :external_storage_deleted) -> void
+
+          def to_hash: -> { id: String, type: :external_storage_deleted }
+        end
+      end
+    end
+  end
+end

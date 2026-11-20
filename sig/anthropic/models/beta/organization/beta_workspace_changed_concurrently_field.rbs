@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_workspace_changed_concurrently_field =
+          :"inference_data_privacy.human_review"
+
+        module BetaWorkspaceChangedConcurrentlyField
+          extend Anthropic::Internal::Type::Enum
+
+          INFERENCE_DATA_PRIVACY_HUMAN_REVIEW: :"inference_data_privacy.human_review"
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::beta_workspace_changed_concurrently_field]
+        end
+      end
+    end
+  end
+end

@@ -64,6 +64,24 @@ module Anthropic
           sig { params(limit: Integer).void }
           attr_writer :limit
 
+          # Optional. Send `efs-2026-10-01` in this header to use this endpoint's beta
+          # features: additional parameters, accepted values and response fields.
+          sig do
+            returns(
+              T.nilable(
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)]
+              )
+            )
+          end
+          attr_reader :betas
+
+          sig do
+            params(
+              betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)]
+            ).void
+          end
+          attr_writer :betas
+
           sig do
             params(
               after_id: String,
@@ -72,6 +90,8 @@ module Anthropic
               include_archived: T::Boolean,
               include_default: T::Boolean,
               limit: Integer,
+              betas:
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(T.attached_class)
           end
@@ -94,6 +114,9 @@ module Anthropic
             #
             # Defaults to `20`. Ranges from `1` to `1000`.
             limit: nil,
+            # Optional. Send `efs-2026-10-01` in this header to use this endpoint's beta
+            # features: additional parameters, accepted values and response fields.
+            betas: nil,
             request_options: {}
           )
           end
@@ -107,6 +130,8 @@ module Anthropic
                 include_archived: T::Boolean,
                 include_default: T::Boolean,
                 limit: Integer,
+                betas:
+                  T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
                 request_options: Anthropic::RequestOptions
               }
             )

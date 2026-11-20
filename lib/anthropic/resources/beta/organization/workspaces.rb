@@ -19,7 +19,7 @@ module Anthropic
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Organization::WorkspaceCreateParams} for more details.
           #
-          # @overload create(name:, data_residency: nil, display_color: nil, external_key_id: nil, tags: nil, user_profile_id: nil, betas: nil, request_options: {})
+          # @overload create(name:, data_residency: nil, display_color: nil, external_key_id: nil, inference_data_privacy: nil, tags: nil, user_profile_id: nil, betas: nil, request_options: {})
           #
           # @param name [String] Body param: Name of the Workspace.
           #
@@ -29,6 +29,8 @@ module Anthropic
           #
           # @param external_key_id [String, nil] Body param: ID of the customer-managed encryption key (CMEK) configuration to us
           #
+          # @param inference_data_privacy [Anthropic::Models::Beta::Organization::BetaInferenceDataPrivacyCreateParam, nil] Body param: Where the Workspace's retained inference data and transcript copies
+          #
           # @param tags [Hash{Symbol=>String}, nil] Body param: User-defined tags as string key-value pairs. Keys may not begin with
           #
           # @param user_profile_id [String, nil] Body param: ID of a user profile to attach to the Workspace. Every inference req
@@ -37,13 +39,26 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
+          # @raise [Anthropic::Models::Beta::BetaApprovalRequiredError]
           # @raise [Anthropic::Models::Organization::ExternalKeyValidationFailedError]
           # @raise [Anthropic::Models::Organization::ExternalKeyValidationTimedOutError]
+          # @raise [Anthropic::Models::Beta::Organization::BetaExternalStorageNotAvailableError]
+          # @raise [Anthropic::Models::Beta::Organization::BetaGrantRequiredError]
+          # @raise [Anthropic::Models::Beta::BetaHumanReviewNotAvailableError]
+          # @raise [Anthropic::Models::Beta::Organization::BetaHumanReviewOnWithExternalStorageError]
+          # @raise [Anthropic::Models::Beta::Organization::BetaInvalidStorageARNError]
           # @raise [Anthropic::Models::Organization::KeyProfileMismatchError]
+          # @raise [Anthropic::Models::Beta::BetaOrganizationNotEligibleError]
+          # @raise [Anthropic::Models::Beta::Organization::BetaStorageNotAttachableError]
+          # @raise [Anthropic::Models::Organization::StorageProfileMismatchError]
+          # @raise [Anthropic::Models::Beta::Organization::BetaStorageVerificationFailedError]
+          # @raise [Anthropic::Models::Beta::Organization::BetaTranscriptsStorageRequiredError]
           # @raise [Anthropic::Models::UserProfileNotFoundError]
           # @raise [Anthropic::Models::Organization::WorkspacePolicyViolationError]
           # @raise [Anthropic::Models::SandboxEgressRestrictedError]
           # @raise [Anthropic::Models::Organization::ExternalKeyChangedError]
+          # @raise [Anthropic::Models::Beta::BetaAuthorizationCheckUnavailableError]
+          # @raise [Anthropic::Models::Organization::WorkspaceCreatedIncompleteError]
           #
           # @return [Anthropic::Models::Beta::Organization::BetaWorkspace]
           #
@@ -67,9 +82,15 @@ module Anthropic
 
           # Get Workspace
           #
-          # @overload retrieve(workspace_id, request_options: {})
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::Organization::WorkspaceRetrieveParams} for more
+          # details.
+          #
+          # @overload retrieve(workspace_id, betas: nil, request_options: {})
           #
           # @param workspace_id [String] ID of the Workspace.
+          #
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional. Send `efs-2026-10-01` in this header to use this endpoint's beta featu
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -77,6 +98,7 @@ module Anthropic
           #
           # @see Anthropic::Models::Beta::Organization::WorkspaceRetrieveParams
           def retrieve(workspace_id, params = {})
+            parsed, options = Anthropic::Beta::Organization::WorkspaceRetrieveParams.dump_request(params)
             @client.request(
               qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_WORKSPACES_RETRIEVE,
@@ -84,8 +106,9 @@ module Anthropic
               span_route: "/v1/organizations/workspaces/{workspace_id}",
               method: :get,
               path: ["v1/organizations/workspaces/%1$s", workspace_id],
+              headers: parsed.transform_keys(betas: "anthropic-beta"),
               model: Anthropic::Beta::Organization::BetaWorkspace,
-              options: params[:request_options]
+              options: options
             )
           end
 
@@ -94,37 +117,59 @@ module Anthropic
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Organization::WorkspaceUpdateParams} for more details.
           #
-          # @overload update(workspace_id, data_residency: nil, display_color: nil, external_key_id: nil, name: nil, tags: nil, user_profile_id: nil, request_options: {})
+          # @overload update(workspace_id, data_residency: nil, display_color: nil, external_key_id: nil, inference_data_privacy: nil, name: nil, tags: nil, user_profile_id: nil, betas: nil, request_options: {})
           #
-          # @param workspace_id [String]
+          # @param workspace_id [String] Path param
           #
-          # @param data_residency [Anthropic::Models::Beta::Organization::BetaDataResidencyUpdateConfig, nil] Data residency configuration for the workspace.
+          # @param data_residency [Anthropic::Models::Beta::Organization::BetaDataResidencyUpdateConfig, nil] Body param: Data residency configuration for the workspace.
           #
-          # @param display_color [String] Hex color code representing the Workspace in the Anthropic Console.
+          # @param display_color [String] Body param: Hex color code representing the Workspace in the Anthropic Console.
           #
-          # @param external_key_id [String] ID of the customer-managed encryption key (CMEK) configuration to use for this
+          # @param external_key_id [String] Body param: ID of the customer-managed encryption key (CMEK) configuration to us
           #
-          # @param name [String] Name of the Workspace.
+          # @param inference_data_privacy [Anthropic::Models::Beta::Organization::BetaInferenceDataPrivacyUpdateParam, nil] Body param: Changes to where the Workspace's retained inference data and transcr
           #
-          # @param tags [Hash{Symbol=>String, nil}, nil] User-defined tags as string key-value pairs. Keys may not begin with `anthropic`
+          # @param name [String] Body param: Name of the Workspace.
           #
-          # @param user_profile_id [String] ID of a user profile to attach to the Workspace. Every inference request through
+          # @param tags [Hash{Symbol=>String, nil}, nil] Body param: User-defined tags as string key-value pairs. Keys may not begin with
+          #
+          # @param user_profile_id [String] Body param: ID of a user profile to attach to the Workspace. Every inference req
+          #
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional. Send `efs-2026-10-01` in this header to use this endpoin
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
+          # @raise [Anthropic::Models::Beta::BetaApprovalRequiredError]
           # @raise [Anthropic::Models::Organization::ExternalKeyValidationFailedError]
           # @raise [Anthropic::Models::Organization::ExternalKeyValidationTimedOutError]
+          # @raise [Anthropic::Models::Beta::Organization::BetaExternalStorageNotAvailableError]
+          # @raise [Anthropic::Models::Beta::Organization::BetaGrantRequiredError]
+          # @raise [Anthropic::Models::Beta::BetaHumanReviewNotAvailableError]
+          # @raise [Anthropic::Models::Beta::Organization::BetaHumanReviewOnWithExternalStorageError]
+          # @raise [Anthropic::Models::Beta::Organization::BetaInvalidStorageARNError]
           # @raise [Anthropic::Models::Organization::KeyProfileMismatchError]
+          # @raise [Anthropic::Models::Beta::BetaOrganizationNotEligibleError]
+          # @raise [Anthropic::Models::Beta::Organization::BetaStorageAttachLimitReachedError]
+          # @raise [Anthropic::Models::Beta::Organization::BetaStorageNotAttachableError]
+          # @raise [Anthropic::Models::Organization::StorageProfileMismatchError]
+          # @raise [Anthropic::Models::Beta::Organization::BetaStorageProfileStillRequiredError]
+          # @raise [Anthropic::Models::Beta::Organization::BetaStorageVerificationFailedError]
+          # @raise [Anthropic::Models::Beta::Organization::BetaTranscriptsStorageRequiredError]
           # @raise [Anthropic::Models::UserProfileNotFoundError]
           # @raise [Anthropic::Models::Organization::WorkspacePolicyViolationError]
           # @raise [Anthropic::Models::SandboxEgressRestrictedError]
           # @raise [Anthropic::Models::Organization::ExternalKeyChangedError]
+          # @raise [Anthropic::Models::Beta::Organization::BetaStorageChangedConcurrentlyError]
+          # @raise [Anthropic::Models::Beta::Organization::BetaWorkspaceChangedConcurrentlyError]
+          # @raise [Anthropic::Models::Beta::BetaAuthorizationCheckUnavailableError]
+          # @raise [Anthropic::Models::ChangeOutcomeUnknownError]
           #
           # @return [Anthropic::Models::Beta::Organization::BetaWorkspace]
           #
           # @see Anthropic::Models::Beta::Organization::WorkspaceUpdateParams
           def update(workspace_id, params = {})
             parsed, options = Anthropic::Beta::Organization::WorkspaceUpdateParams.dump_request(params)
+            header_params = {betas: "anthropic-beta"}
             @client.request(
               qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_WORKSPACES_UPDATE,
@@ -132,7 +177,8 @@ module Anthropic
               span_route: "/v1/organizations/workspaces/{workspace_id}",
               method: :post,
               path: ["v1/organizations/workspaces/%1$s", workspace_id],
-              body: parsed,
+              headers: parsed.slice(*header_params.keys).transform_keys(header_params),
+              body: parsed.except(*header_params.keys),
               model: Anthropic::Beta::Organization::BetaWorkspace,
               options: options
             )
@@ -143,19 +189,21 @@ module Anthropic
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Organization::WorkspaceListParams} for more details.
           #
-          # @overload list(after_id: nil, before_id: nil, ids: nil, include_archived: nil, include_default: nil, limit: nil, request_options: {})
+          # @overload list(after_id: nil, before_id: nil, ids: nil, include_archived: nil, include_default: nil, limit: nil, betas: nil, request_options: {})
           #
-          # @param after_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
+          # @param after_id [String] Query param: ID of the object to use as a cursor for pagination. When provided,
           #
-          # @param before_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
+          # @param before_id [String] Query param: ID of the object to use as a cursor for pagination. When provided,
           #
-          # @param ids [Array<String>] Only the Workspaces with these IDs, at most 100. `include_archived` and
+          # @param ids [Array<String>] Query param: Only the Workspaces with these IDs, at most 100. `include_archived`
           #
-          # @param include_archived [Boolean] Whether to include Workspaces that have been archived in the response
+          # @param include_archived [Boolean] Query param: Whether to include Workspaces that have been archived in the respon
           #
-          # @param include_default [Boolean] Whether to include the organization's default Workspace in the response
+          # @param include_default [Boolean] Query param: Whether to include the organization's default Workspace in the resp
           #
-          # @param limit [Integer] Number of items to return per page.
+          # @param limit [Integer] Query param: Number of items to return per page.
+          #
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional. Send `efs-2026-10-01` in this header to use this endpoin
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -163,8 +211,9 @@ module Anthropic
           #
           # @see Anthropic::Models::Beta::Organization::WorkspaceListParams
           def list(params = {})
+            query_params = [:after_id, :before_id, :ids, :include_archived, :include_default, :limit]
             parsed, options = Anthropic::Beta::Organization::WorkspaceListParams.dump_request(params)
-            query = Anthropic::Internal::Util.encode_query_params(parsed)
+            query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
               qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_WORKSPACES_LIST,
@@ -173,6 +222,7 @@ module Anthropic
               method: :get,
               path: "v1/organizations/workspaces",
               query: query,
+              headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
               page: Anthropic::Internal::Page,
               model: Anthropic::Beta::Organization::BetaWorkspace,
               options: options
@@ -181,17 +231,26 @@ module Anthropic
 
           # Archive Workspace
           #
-          # @overload archive(workspace_id, request_options: {})
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::Organization::WorkspaceArchiveParams} for more
+          # details.
+          #
+          # @overload archive(workspace_id, betas: nil, request_options: {})
           #
           # @param workspace_id [String]
+          #
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional. Send `efs-2026-10-01` in this header to use this endpoint's beta featu
+          #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
           # @raise [Anthropic::Models::SandboxEgressRestrictedError]
+          # @raise [Anthropic::Models::Organization::StorageAttachedDuringArchiveError]
           #
           # @return [Anthropic::Models::Beta::Organization::BetaWorkspace]
           #
           # @see Anthropic::Models::Beta::Organization::WorkspaceArchiveParams
           def archive(workspace_id, params = {})
+            parsed, options = Anthropic::Beta::Organization::WorkspaceArchiveParams.dump_request(params)
             @client.request(
               qualifiers: {beta: "true"},
               span_name: Anthropic::Internal::Tracing::SpanName::ORGANIZATION_WORKSPACES_ARCHIVE,
@@ -199,8 +258,9 @@ module Anthropic
               span_route: "/v1/organizations/workspaces/{workspace_id}/archive",
               method: :post,
               path: ["v1/organizations/workspaces/%1$s/archive", workspace_id],
+              headers: parsed.transform_keys(betas: "anthropic-beta"),
               model: Anthropic::Beta::Organization::BetaWorkspace,
-              options: params[:request_options]
+              options: options
             )
           end
 

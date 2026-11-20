@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    class BetaApprovalRequiredErrorDetails = Beta::BetaApprovalRequiredErrorDetails
+
+    module Beta
+      type beta_approval_required_error_details =
+        { error_code: :approval_required, field: String }
+
+      class BetaApprovalRequiredErrorDetails < Anthropic::Internal::Type::BaseModel
+        attr_accessor error_code: :approval_required
+
+        attr_accessor field: String
+
+        def initialize: (field: String, ?error_code: :approval_required) -> void
+
+        def to_hash: -> { error_code: :approval_required, field: String }
+      end
+    end
+  end
+end

@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        class BetaStorageProfileStillRequiredError < Anthropic::Errors::BadRequestError
+          def error_code: -> :storage_profile_still_required
+
+          def details: -> Anthropic::Beta::Organization::BetaStorageProfileStillRequiredErrorDetails
+        end
+      end
+    end
+  end
+end

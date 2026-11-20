@@ -4,7 +4,8 @@ module Anthropic
       module Organization
         type compliance_setting_update_params =
           {
-            state: Anthropic::Models::Beta::Organization::beta_compliance_settings_state_param
+            state: Anthropic::Models::Beta::Organization::beta_compliance_settings_state_param,
+            betas: ::Array[Anthropic::Models::anthropic_beta]
           }
           & Anthropic::Internal::Type::request_parameters
 
@@ -14,13 +15,21 @@ module Anthropic
 
           attr_accessor state: Anthropic::Models::Beta::Organization::beta_compliance_settings_state_param
 
+          attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+          def betas=: (
+            ::Array[Anthropic::Models::anthropic_beta]
+          ) -> ::Array[Anthropic::Models::anthropic_beta]
+
           def initialize: (
             state: Anthropic::Models::Beta::Organization::beta_compliance_settings_state_param,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?request_options: Anthropic::request_opts
           ) -> void
 
           def to_hash: -> {
             state: Anthropic::Models::Beta::Organization::beta_compliance_settings_state_param,
+            betas: ::Array[Anthropic::Models::anthropic_beta],
             request_options: Anthropic::RequestOptions
           }
         end

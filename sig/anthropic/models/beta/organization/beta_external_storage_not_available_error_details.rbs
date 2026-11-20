@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_external_storage_not_available_error_details =
+          { error_code: :external_storage_not_available }
+
+        class BetaExternalStorageNotAvailableErrorDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor error_code: :external_storage_not_available
+
+          def initialize: (?error_code: :external_storage_not_available) -> void
+
+          def to_hash: -> { error_code: :external_storage_not_available }
+        end
+      end
+    end
+  end
+end

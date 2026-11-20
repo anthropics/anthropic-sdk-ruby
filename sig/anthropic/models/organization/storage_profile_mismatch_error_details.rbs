@@ -1,0 +1,21 @@
+module Anthropic
+  module Models
+    module Organization
+      type storage_profile_mismatch_error_details =
+        { error_code: :storage_profile_mismatch, field: String }
+
+      class StorageProfileMismatchErrorDetails < Anthropic::Internal::Type::BaseModel
+        attr_accessor error_code: :storage_profile_mismatch
+
+        attr_accessor field: String
+
+        def initialize: (
+          field: String,
+          ?error_code: :storage_profile_mismatch
+        ) -> void
+
+        def to_hash: -> { error_code: :storage_profile_mismatch, field: String }
+      end
+    end
+  end
+end

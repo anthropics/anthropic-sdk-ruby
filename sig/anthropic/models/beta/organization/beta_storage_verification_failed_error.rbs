@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        class BetaStorageVerificationFailedError < Anthropic::Errors::BadRequestError
+          def error_code: -> :storage_verification_failed
+
+          def details: -> Anthropic::Beta::Organization::BetaStorageVerificationFailedErrorDetails
+        end
+      end
+    end
+  end
+end

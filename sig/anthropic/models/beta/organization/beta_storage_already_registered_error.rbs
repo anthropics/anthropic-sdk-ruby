@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        class BetaStorageAlreadyRegisteredError < Anthropic::Errors::ConflictError
+          def error_code: -> :storage_already_registered
+
+          def details: -> Anthropic::Beta::Organization::BetaStorageAlreadyRegisteredErrorDetails
+        end
+      end
+    end
+  end
+end

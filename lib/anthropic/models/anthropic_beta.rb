@@ -123,6 +123,8 @@ module Anthropic
 
       variant const: -> { Anthropic::Models::AnthropicBeta::CE_CLAUDE_CODE_MANAGED_SETTINGS_2026_10_06 }
 
+      variant const: -> { Anthropic::Models::AnthropicBeta::EFS_2026_10_01 }
+
       variant const: -> { Anthropic::Models::AnthropicBeta::USER_PROFILES_BILLING_2026_10_01 }
 
       variant String
@@ -207,6 +209,7 @@ module Anthropic
       # @deprecated This value is no longer needed. Remove it from your requests.
       CE_USER_MANAGEMENT_2026_07_13 = :"ce-user-management-2026-07-13"
       CE_CLAUDE_CODE_MANAGED_SETTINGS_2026_10_06 = :"ce-claude-code-managed-settings-2026-10-06"
+      EFS_2026_10_01 = :"efs-2026-10-01"
       USER_PROFILES_BILLING_2026_10_01 = :"user-profiles-billing-2026-10-01"
 
       # @!endgroup

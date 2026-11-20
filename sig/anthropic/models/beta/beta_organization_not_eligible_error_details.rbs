@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    class BetaOrganizationNotEligibleErrorDetails = Beta::BetaOrganizationNotEligibleErrorDetails
+
+    module Beta
+      type beta_organization_not_eligible_error_details =
+        { error_code: :organization_not_eligible }
+
+      class BetaOrganizationNotEligibleErrorDetails < Anthropic::Internal::Type::BaseModel
+        attr_accessor error_code: :organization_not_eligible
+
+        def initialize: (?error_code: :organization_not_eligible) -> void
+
+        def to_hash: -> { error_code: :organization_not_eligible }
+      end
+    end
+  end
+end

@@ -50,6 +50,19 @@ module Anthropic
           #   @return [String, nil]
           optional :external_key_id, String, nil?: true
 
+          # @!attribute inference_data_privacy
+          #   Where the Workspace's retained inference data and transcript copies go, and
+          #   whether Anthropic's human review applies. Requires the `efs-2026-10-01`
+          #   `anthropic-beta` value. When omitted, `safeguards_storage` and
+          #   `transcripts_storage` are `internal` and `human_review` is `enabled`. Cannot be
+          #   null. An Admin API key can't set this field, because it doesn't belong to a user
+          #   or a service account. Use an API key that belongs to one, or an OAuth token.
+          #
+          #   @return [Anthropic::Models::Beta::Organization::BetaInferenceDataPrivacyCreateParam, nil]
+          optional :inference_data_privacy,
+                   -> { Anthropic::Beta::Organization::BetaInferenceDataPrivacyCreateParam },
+                   nil?: true
+
           # @!attribute tags
           #   User-defined tags as string key-value pairs. Keys may not begin with
           #   `anthropic`.
@@ -72,7 +85,7 @@ module Anthropic
           #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
           optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-          # @!method initialize(name:, data_residency: nil, display_color: nil, external_key_id: nil, tags: nil, user_profile_id: nil, betas: nil, request_options: {})
+          # @!method initialize(name:, data_residency: nil, display_color: nil, external_key_id: nil, inference_data_privacy: nil, tags: nil, user_profile_id: nil, betas: nil, request_options: {})
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Organization::WorkspaceCreateParams} for more details.
           #
@@ -83,6 +96,8 @@ module Anthropic
           #   @param display_color [String, nil] Hex color code representing the Workspace in the Anthropic Console.
           #
           #   @param external_key_id [String, nil] ID of the customer-managed encryption key (CMEK) configuration to use for this
+          #
+          #   @param inference_data_privacy [Anthropic::Models::Beta::Organization::BetaInferenceDataPrivacyCreateParam, nil] Where the Workspace's retained inference data and transcript copies go, and whet
           #
           #   @param tags [Hash{Symbol=>String}, nil] User-defined tags as string key-value pairs. Keys may not begin with `anthropic`
           #

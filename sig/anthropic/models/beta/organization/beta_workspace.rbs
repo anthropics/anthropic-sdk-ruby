@@ -14,7 +14,8 @@ module Anthropic
             name: String,
             tags: ::Hash[Symbol, String],
             type: :workspace,
-            user_profile_id: String?
+            user_profile_id: String?,
+            inference_data_privacy: Anthropic::Beta::Organization::BetaInferenceDataPrivacy
           }
 
         class BetaWorkspace < Anthropic::Internal::Type::BaseModel
@@ -40,6 +41,12 @@ module Anthropic
 
           attr_accessor user_profile_id: String?
 
+          attr_reader inference_data_privacy: Anthropic::Beta::Organization::BetaInferenceDataPrivacy?
+
+          def inference_data_privacy=: (
+            Anthropic::Beta::Organization::BetaInferenceDataPrivacy
+          ) -> Anthropic::Beta::Organization::BetaInferenceDataPrivacy
+
           def initialize: (
             id: String,
             archived_at: Time?,
@@ -51,6 +58,7 @@ module Anthropic
             name: String,
             tags: ::Hash[Symbol, String],
             user_profile_id: String?,
+            ?inference_data_privacy: Anthropic::Beta::Organization::BetaInferenceDataPrivacy,
             ?type: :workspace
           ) -> void
 
@@ -65,7 +73,8 @@ module Anthropic
             name: String,
             tags: ::Hash[Symbol, String],
             type: :workspace,
-            user_profile_id: String?
+            user_profile_id: String?,
+            inference_data_privacy: Anthropic::Beta::Organization::BetaInferenceDataPrivacy
           }
         end
       end

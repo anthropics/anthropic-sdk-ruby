@@ -41,6 +41,7 @@ module Anthropic
         # @raise [Anthropic::Models::Organization::WorkspacePolicyViolationError]
         # @raise [Anthropic::Models::SandboxEgressRestrictedError]
         # @raise [Anthropic::Models::Organization::ExternalKeyChangedError]
+        # @raise [Anthropic::Models::Organization::WorkspaceCreatedIncompleteError]
         #
         # @return [Anthropic::Models::Organization::Workspace]
         #
@@ -108,10 +109,12 @@ module Anthropic
         # @raise [Anthropic::Models::Organization::ExternalKeyValidationFailedError]
         # @raise [Anthropic::Models::Organization::ExternalKeyValidationTimedOutError]
         # @raise [Anthropic::Models::Organization::KeyProfileMismatchError]
+        # @raise [Anthropic::Models::Organization::StorageProfileMismatchError]
         # @raise [Anthropic::Models::UserProfileNotFoundError]
         # @raise [Anthropic::Models::Organization::WorkspacePolicyViolationError]
         # @raise [Anthropic::Models::SandboxEgressRestrictedError]
         # @raise [Anthropic::Models::Organization::ExternalKeyChangedError]
+        # @raise [Anthropic::Models::ChangeOutcomeUnknownError]
         #
         # @return [Anthropic::Models::Organization::Workspace]
         #
@@ -178,6 +181,7 @@ module Anthropic
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @raise [Anthropic::Models::SandboxEgressRestrictedError]
+        # @raise [Anthropic::Models::Organization::StorageAttachedDuringArchiveError]
         #
         # @return [Anthropic::Models::Organization::Workspace]
         #

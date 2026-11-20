@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class ChangeOutcomeUnknownError < Anthropic::Errors::ServiceUnavailableError
+      def error_code: -> :change_outcome_unknown
+
+      def details: -> Anthropic::ChangeOutcomeUnknownErrorDetails
+    end
+  end
+end

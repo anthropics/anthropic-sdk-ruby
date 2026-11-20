@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_human_review_on_with_external_storage_error_details =
+          { error_code: :human_review_on_with_external_storage }
+
+        class BetaHumanReviewOnWithExternalStorageErrorDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor error_code: :human_review_on_with_external_storage
+
+          def initialize: (
+            ?error_code: :human_review_on_with_external_storage
+          ) -> void
+
+          def to_hash: -> { error_code: :human_review_on_with_external_storage }
+        end
+      end
+    end
+  end
+end

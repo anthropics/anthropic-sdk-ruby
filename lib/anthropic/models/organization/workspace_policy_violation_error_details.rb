@@ -10,7 +10,7 @@ module Anthropic
         required :error_code, const: :workspace_policy_violation
 
         # @!attribute field
-        #   The request field the broken rule applies to.
+        #   The request field the broken rule applies to. Other values may be returned.
         #
         #   @return [Symbol, Anthropic::Models::Organization::WorkspacePolicyField]
         required :field, enum: -> { Anthropic::Organization::WorkspacePolicyField }
@@ -20,7 +20,7 @@ module Anthropic
         #   rule it broke; an organization admin can see and change the policy in the
         #   Console.
         #
-        #   @param field [Symbol, Anthropic::Models::Organization::WorkspacePolicyField] The request field the broken rule applies to.
+        #   @param field [Symbol, Anthropic::Models::Organization::WorkspacePolicyField] The request field the broken rule applies to. Other values may be returned.
         #
         #   @param error_code [Symbol, :workspace_policy_violation]
       end

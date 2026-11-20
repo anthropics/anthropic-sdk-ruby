@@ -9,7 +9,8 @@ module Anthropic
             ids: ::Array[String],
             include_archived: bool,
             include_default: bool,
-            limit: Integer
+            limit: Integer,
+            betas: ::Array[Anthropic::Models::anthropic_beta]
           }
           & Anthropic::Internal::Type::request_parameters
 
@@ -41,6 +42,12 @@ module Anthropic
 
           def limit=: (Integer) -> Integer
 
+          attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+          def betas=: (
+            ::Array[Anthropic::Models::anthropic_beta]
+          ) -> ::Array[Anthropic::Models::anthropic_beta]
+
           def initialize: (
             ?after_id: String,
             ?before_id: String,
@@ -48,6 +55,7 @@ module Anthropic
             ?include_archived: bool,
             ?include_default: bool,
             ?limit: Integer,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?request_options: Anthropic::request_opts
           ) -> void
 
@@ -58,6 +66,7 @@ module Anthropic
             include_archived: bool,
             include_default: bool,
             limit: Integer,
+            betas: ::Array[Anthropic::Models::anthropic_beta],
             request_options: Anthropic::RequestOptions
           }
         end

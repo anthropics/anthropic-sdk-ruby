@@ -1,0 +1,26 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_storage_changed_concurrently_error_details =
+          { error_code: :storage_changed_concurrently, field: String }
+
+        class BetaStorageChangedConcurrentlyErrorDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor error_code: :storage_changed_concurrently
+
+          attr_accessor field: String
+
+          def initialize: (
+            field: String,
+            ?error_code: :storage_changed_concurrently
+          ) -> void
+
+          def to_hash: -> {
+            error_code: :storage_changed_concurrently,
+            field: String
+          }
+        end
+      end
+    end
+  end
+end

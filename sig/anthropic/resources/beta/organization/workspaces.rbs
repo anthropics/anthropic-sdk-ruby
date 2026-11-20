@@ -14,6 +14,7 @@ module Anthropic
             ?data_residency: Anthropic::Beta::Organization::BetaDataResidencyCreateConfig?,
             ?display_color: String?,
             ?external_key_id: String?,
+            ?inference_data_privacy: Anthropic::Beta::Organization::BetaInferenceDataPrivacyCreateParam?,
             ?tags: ::Hash[Symbol, String]?,
             ?user_profile_id: String?,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
@@ -22,6 +23,7 @@ module Anthropic
 
           def retrieve: (
             String workspace_id,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Beta::Organization::BetaWorkspace
 
@@ -30,9 +32,11 @@ module Anthropic
             ?data_residency: Anthropic::Beta::Organization::BetaDataResidencyUpdateConfig?,
             ?display_color: String,
             ?external_key_id: String,
+            ?inference_data_privacy: Anthropic::Beta::Organization::BetaInferenceDataPrivacyUpdateParam?,
             ?name: String,
             ?tags: ::Hash[Symbol, String?]?,
             ?user_profile_id: String,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Beta::Organization::BetaWorkspace
 
@@ -43,11 +47,13 @@ module Anthropic
             ?include_archived: bool,
             ?include_default: bool,
             ?limit: Integer,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Internal::Page[Anthropic::Beta::Organization::BetaWorkspace]
 
           def archive: (
             String workspace_id,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Beta::Organization::BetaWorkspace
 

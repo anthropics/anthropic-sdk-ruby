@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    class BetaHumanReviewNotAvailableErrorDetails = Beta::BetaHumanReviewNotAvailableErrorDetails
+
+    module Beta
+      type beta_human_review_not_available_error_details =
+        { error_code: :human_review_not_available }
+
+      class BetaHumanReviewNotAvailableErrorDetails < Anthropic::Internal::Type::BaseModel
+        attr_accessor error_code: :human_review_not_available
+
+        def initialize: (?error_code: :human_review_not_available) -> void
+
+        def to_hash: -> { error_code: :human_review_not_available }
+      end
+    end
+  end
+end

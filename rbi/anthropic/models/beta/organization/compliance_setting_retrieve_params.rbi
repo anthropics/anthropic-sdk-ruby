@@ -16,16 +16,47 @@ module Anthropic
               )
             end
 
+          # Optional. Send `efs-2026-10-01` in this header to use this endpoint's beta
+          # features: additional parameters, accepted values and response fields.
           sig do
-            params(request_options: Anthropic::RequestOptions::OrHash).returns(
-              T.attached_class
+            returns(
+              T.nilable(
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)]
+              )
             )
           end
-          def self.new(request_options: {})
+          attr_reader :betas
+
+          sig do
+            params(
+              betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)]
+            ).void
+          end
+          attr_writer :betas
+
+          sig do
+            params(
+              betas:
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
+              request_options: Anthropic::RequestOptions::OrHash
+            ).returns(T.attached_class)
+          end
+          def self.new(
+            # Optional. Send `efs-2026-10-01` in this header to use this endpoint's beta
+            # features: additional parameters, accepted values and response fields.
+            betas: nil,
+            request_options: {}
+          )
           end
 
           sig do
-            override.returns({ request_options: Anthropic::RequestOptions })
+            override.returns(
+              {
+                betas:
+                  T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
+                request_options: Anthropic::RequestOptions
+              }
+            )
           end
           def to_hash
           end

@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        class BetaHumanReviewOnWithExternalStorageError < Anthropic::Errors::BadRequestError
+          def error_code: -> :human_review_on_with_external_storage
+
+          def details: -> Anthropic::Beta::Organization::BetaHumanReviewOnWithExternalStorageErrorDetails
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        class BetaExternalStorageInWorkspacePolicyError < Anthropic::Errors::BadRequestError
+          def error_code: -> :external_storage_in_workspace_policy
+
+          def details: -> Anthropic::Beta::Organization::BetaExternalStorageInWorkspacePolicyErrorDetails
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_storage_already_registered_error_details =
+          { error_code: :storage_already_registered }
+
+        class BetaStorageAlreadyRegisteredErrorDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor error_code: :storage_already_registered
+
+          def initialize: (?error_code: :storage_already_registered) -> void
+
+          def to_hash: -> { error_code: :storage_already_registered }
+        end
+      end
+    end
+  end
+end

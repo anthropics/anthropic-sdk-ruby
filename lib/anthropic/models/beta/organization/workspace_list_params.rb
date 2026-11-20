@@ -51,7 +51,14 @@ module Anthropic
           #   @return [Integer, nil]
           optional :limit, Integer
 
-          # @!method initialize(after_id: nil, before_id: nil, ids: nil, include_archived: nil, include_default: nil, limit: nil, request_options: {})
+          # @!attribute betas
+          #   Optional. Send `efs-2026-10-01` in this header to use this endpoint's beta
+          #   features: additional parameters, accepted values and response fields.
+          #
+          #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
+          optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
+
+          # @!method initialize(after_id: nil, before_id: nil, ids: nil, include_archived: nil, include_default: nil, limit: nil, betas: nil, request_options: {})
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Organization::WorkspaceListParams} for more details.
           #
@@ -66,6 +73,8 @@ module Anthropic
           #   @param include_default [Boolean] Whether to include the organization's default Workspace in the response
           #
           #   @param limit [Integer] Number of items to return per page.
+          #
+          #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional. Send `efs-2026-10-01` in this header to use this endpoint's beta featu
           #
           #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
         end

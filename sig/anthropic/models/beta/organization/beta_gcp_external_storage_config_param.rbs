@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_gcp_external_storage_config_param =
+          {
+            bucket_name: String,
+            project_number: String,
+            region: String,
+            type: :gcp
+          }
+
+        class BetaGCPExternalStorageConfigParam < Anthropic::Internal::Type::BaseModel
+          attr_accessor bucket_name: String
+
+          attr_accessor project_number: String
+
+          attr_accessor region: String
+
+          attr_accessor type: :gcp
+
+          def initialize: (
+            bucket_name: String,
+            project_number: String,
+            region: String,
+            ?type: :gcp
+          ) -> void
+
+          def to_hash: -> {
+            bucket_name: String,
+            project_number: String,
+            region: String,
+            type: :gcp
+          }
+        end
+      end
+    end
+  end
+end

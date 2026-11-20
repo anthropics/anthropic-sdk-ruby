@@ -36,6 +36,10 @@ module Anthropic
                 ),
               display_color: T.nilable(String),
               external_key_id: T.nilable(String),
+              inference_data_privacy:
+                T.nilable(
+                  Anthropic::Beta::Organization::BetaInferenceDataPrivacyCreateParam::OrHash
+                ),
               tags: T.nilable(T::Hash[Symbol, String]),
               user_profile_id: T.nilable(String),
               betas:
@@ -66,6 +70,13 @@ module Anthropic
             # material, rotate the underlying key on your cloud KMS; the `external_key_id`
             # stays the same.
             external_key_id: nil,
+            # Body param: Where the Workspace's retained inference data and transcript copies
+            # go, and whether Anthropic's human review applies. Requires the `efs-2026-10-01`
+            # `anthropic-beta` value. When omitted, `safeguards_storage` and
+            # `transcripts_storage` are `internal` and `human_review` is `enabled`. Cannot be
+            # null. An Admin API key can't set this field, because it doesn't belong to a user
+            # or a service account. Use an API key that belongs to one, or an OAuth token.
+            inference_data_privacy: nil,
             # Body param: User-defined tags as string key-value pairs. Keys may not begin with
             # `anthropic`.
             tags: nil,
@@ -84,12 +95,17 @@ module Anthropic
           sig do
             params(
               workspace_id: String,
+              betas:
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(Anthropic::Beta::Organization::BetaWorkspace)
           end
           def retrieve(
             # ID of the Workspace.
             workspace_id,
+            # Optional. Send `efs-2026-10-01` in this header to use this endpoint's beta
+            # features: additional parameters, accepted values and response fields.
+            betas: nil,
             request_options: {}
           )
           end
@@ -104,43 +120,62 @@ module Anthropic
                 ),
               display_color: String,
               external_key_id: String,
+              inference_data_privacy:
+                T.nilable(
+                  Anthropic::Beta::Organization::BetaInferenceDataPrivacyUpdateParam::OrHash
+                ),
               name: String,
               tags: T.nilable(T::Hash[Symbol, T.nilable(String)]),
               user_profile_id: String,
+              betas:
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(Anthropic::Beta::Organization::BetaWorkspace)
           end
           def update(
+            # Path param
             workspace_id,
-            # Data residency configuration for the workspace.
+            # Body param: Data residency configuration for the workspace.
             data_residency: nil,
-            # Hex color code representing the Workspace in the Anthropic Console.
+            # Body param: Hex color code representing the Workspace in the Anthropic Console.
             display_color: nil,
-            # ID of the customer-managed encryption key (CMEK) configuration to use for this
-            # Workspace. Setting this field requires CMEK to be enabled for your organization.
-            # When set, data stored for this Workspace is encrypted with the referenced key.
-            # Create key configurations with the External Keys API. On Claude Platform on AWS
-            # the value for an AWS KMS key is the key's ARN, and your organization's own key
-            # must be a single-Region key in the same Region as the Workspace. If that key is
-            # outside the Workspace's AWS account, it can be attached only by updating an
-            # active Workspace. On that platform the key is validated against this Workspace
-            # when it is attached, so a key-policy problem is reported as an error on this
-            # request. This field is write-once: once a key is attached to a Workspace it
-            # cannot be detached or replaced. To rotate key material, rotate the underlying
-            # key on your cloud KMS; the `external_key_id` stays the same.
+            # Body param: ID of the customer-managed encryption key (CMEK) configuration to
+            # use for this Workspace. Setting this field requires CMEK to be enabled for your
+            # organization. When set, data stored for this Workspace is encrypted with the
+            # referenced key. Create key configurations with the External Keys API. On Claude
+            # Platform on AWS the value for an AWS KMS key is the key's ARN, and your
+            # organization's own key must be a single-Region key in the same Region as the
+            # Workspace. If that key is outside the Workspace's AWS account, it can be
+            # attached only by updating an active Workspace. On that platform the key is
+            # validated against this Workspace when it is attached, so a key-policy problem is
+            # reported as an error on this request. This field is write-once: once a key is
+            # attached to a Workspace it cannot be detached or replaced. To rotate key
+            # material, rotate the underlying key on your cloud KMS; the `external_key_id`
+            # stays the same.
             external_key_id: nil,
-            # Name of the Workspace.
+            # Body param: Changes to where the Workspace's retained inference data and
+            # transcript copies go, and to whether Anthropic's human review applies. Requires
+            # the `efs-2026-10-01` `anthropic-beta` value. An omitted member is unchanged.
+            # Cannot be null. An Admin API key can't set this field, because it doesn't belong
+            # to a user or a service account. Use an API key that belongs to one, or an OAuth
+            # token.
+            inference_data_privacy: nil,
+            # Body param: Name of the Workspace.
             name: nil,
-            # User-defined tags as string key-value pairs. Keys may not begin with
+            # Body param: User-defined tags as string key-value pairs. Keys may not begin with
             # `anthropic`.
             tags: nil,
-            # ID of a user profile to attach to the Workspace. Every inference request through
-            # the Workspace must then name this user profile; the API rejects a request that
-            # names none or a different one. Once set, it can't be replaced or removed
-            # (sending the same ID again changes nothing); only deleting the user profile
-            # clears it. It can't be set on a Workspace whose External Key isn't bound to this
-            # user profile. The default Workspace can't have a user profile.
+            # Body param: ID of a user profile to attach to the Workspace. Every inference
+            # request through the Workspace must then name this user profile; the API rejects
+            # a request that names none or a different one. Once set, it can't be replaced or
+            # removed (sending the same ID again changes nothing); only deleting the user
+            # profile clears it. It can't be set on a Workspace whose External Key isn't bound
+            # to this user profile. The default Workspace can't have a user profile.
             user_profile_id: nil,
+            # Header param: Optional. Send `efs-2026-10-01` in this header to use this
+            # endpoint's beta features: additional parameters, accepted values and response
+            # fields.
+            betas: nil,
             request_options: {}
           )
           end
@@ -154,6 +189,8 @@ module Anthropic
               include_archived: T::Boolean,
               include_default: T::Boolean,
               limit: Integer,
+              betas:
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(
               Anthropic::Internal::Page[
@@ -162,24 +199,30 @@ module Anthropic
             )
           end
           def list(
-            # ID of the object to use as a cursor for pagination. When provided, returns the
-            # page of results immediately after this object.
+            # Query param: ID of the object to use as a cursor for pagination. When provided,
+            # returns the page of results immediately after this object.
             after_id: nil,
-            # ID of the object to use as a cursor for pagination. When provided, returns the
-            # page of results immediately before this object.
+            # Query param: ID of the object to use as a cursor for pagination. When provided,
+            # returns the page of results immediately before this object.
             before_id: nil,
-            # Only the Workspaces with these IDs, at most 100. `include_archived` and
-            # `include_default` still apply, and IDs of Workspaces the caller can't list are
-            # left out.
+            # Query param: Only the Workspaces with these IDs, at most 100. `include_archived`
+            # and `include_default` still apply, and IDs of Workspaces the caller can't list
+            # are left out.
             ids: nil,
-            # Whether to include Workspaces that have been archived in the response
+            # Query param: Whether to include Workspaces that have been archived in the
+            # response
             include_archived: nil,
-            # Whether to include the organization's default Workspace in the response
+            # Query param: Whether to include the organization's default Workspace in the
+            # response
             include_default: nil,
-            # Number of items to return per page.
+            # Query param: Number of items to return per page.
             #
             # Defaults to `20`. Ranges from `1` to `1000`.
             limit: nil,
+            # Header param: Optional. Send `efs-2026-10-01` in this header to use this
+            # endpoint's beta features: additional parameters, accepted values and response
+            # fields.
+            betas: nil,
             request_options: {}
           )
           end
@@ -188,10 +231,18 @@ module Anthropic
           sig do
             params(
               workspace_id: String,
+              betas:
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(Anthropic::Beta::Organization::BetaWorkspace)
           end
-          def archive(workspace_id, request_options: {})
+          def archive(
+            workspace_id,
+            # Optional. Send `efs-2026-10-01` in this header to use this endpoint's beta
+            # features: additional parameters, accepted values and response fields.
+            betas: nil,
+            request_options: {}
+          )
           end
 
           # @api private

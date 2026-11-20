@@ -1,0 +1,11 @@
+module Anthropic
+  module Models
+    module Organization
+      class WorkspaceCreatedIncompleteError < Anthropic::Errors::ServiceUnavailableError
+        def error_code: -> :workspace_created_incomplete
+
+        def details: -> Anthropic::Organization::WorkspaceCreatedIncompleteErrorDetails
+      end
+    end
+  end
+end

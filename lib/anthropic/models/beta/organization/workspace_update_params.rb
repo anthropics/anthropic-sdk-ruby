@@ -47,6 +47,19 @@ module Anthropic
           #   @return [String, nil]
           optional :external_key_id, String
 
+          # @!attribute inference_data_privacy
+          #   Changes to where the Workspace's retained inference data and transcript copies
+          #   go, and to whether Anthropic's human review applies. Requires the
+          #   `efs-2026-10-01` `anthropic-beta` value. An omitted member is unchanged. Cannot
+          #   be null. An Admin API key can't set this field, because it doesn't belong to a
+          #   user or a service account. Use an API key that belongs to one, or an OAuth
+          #   token.
+          #
+          #   @return [Anthropic::Models::Beta::Organization::BetaInferenceDataPrivacyUpdateParam, nil]
+          optional :inference_data_privacy,
+                   -> { Anthropic::Beta::Organization::BetaInferenceDataPrivacyUpdateParam },
+                   nil?: true
+
           # @!attribute name
           #   Name of the Workspace.
           #
@@ -71,7 +84,14 @@ module Anthropic
           #   @return [String, nil]
           optional :user_profile_id, String
 
-          # @!method initialize(workspace_id:, data_residency: nil, display_color: nil, external_key_id: nil, name: nil, tags: nil, user_profile_id: nil, request_options: {})
+          # @!attribute betas
+          #   Optional. Send `efs-2026-10-01` in this header to use this endpoint's beta
+          #   features: additional parameters, accepted values and response fields.
+          #
+          #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
+          optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
+
+          # @!method initialize(workspace_id:, data_residency: nil, display_color: nil, external_key_id: nil, inference_data_privacy: nil, name: nil, tags: nil, user_profile_id: nil, betas: nil, request_options: {})
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Organization::WorkspaceUpdateParams} for more details.
           #
@@ -83,11 +103,15 @@ module Anthropic
           #
           #   @param external_key_id [String] ID of the customer-managed encryption key (CMEK) configuration to use for this
           #
+          #   @param inference_data_privacy [Anthropic::Models::Beta::Organization::BetaInferenceDataPrivacyUpdateParam, nil] Changes to where the Workspace's retained inference data and transcript copies g
+          #
           #   @param name [String] Name of the Workspace.
           #
           #   @param tags [Hash{Symbol=>String, nil}, nil] User-defined tags as string key-value pairs. Keys may not begin with `anthropic`
           #
           #   @param user_profile_id [String] ID of a user profile to attach to the Workspace. Every inference request through
+          #
+          #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional. Send `efs-2026-10-01` in this header to use this endpoint's beta featu
           #
           #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
         end

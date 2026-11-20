@@ -26,7 +26,8 @@ class Anthropic::Test::Resources::Beta::Organization::WorkspacesTest < Anthropic
         name: String,
         tags: ^(Anthropic::Internal::Type::HashOf[String]),
         type: Symbol,
-        user_profile_id: String | nil
+        user_profile_id: String | nil,
+        inference_data_privacy: Anthropic::Beta::Organization::BetaInferenceDataPrivacy | nil
       }
     end
   end
@@ -54,7 +55,8 @@ class Anthropic::Test::Resources::Beta::Organization::WorkspacesTest < Anthropic
         name: String,
         tags: ^(Anthropic::Internal::Type::HashOf[String]),
         type: Symbol,
-        user_profile_id: String | nil
+        user_profile_id: String | nil,
+        inference_data_privacy: Anthropic::Beta::Organization::BetaInferenceDataPrivacy | nil
       }
     end
   end
@@ -82,7 +84,8 @@ class Anthropic::Test::Resources::Beta::Organization::WorkspacesTest < Anthropic
         name: String,
         tags: ^(Anthropic::Internal::Type::HashOf[String]),
         type: Symbol,
-        user_profile_id: String | nil
+        user_profile_id: String | nil,
+        inference_data_privacy: Anthropic::Beta::Organization::BetaInferenceDataPrivacy | nil
       }
     end
   end
@@ -113,7 +116,8 @@ class Anthropic::Test::Resources::Beta::Organization::WorkspacesTest < Anthropic
         name: String,
         tags: ^(Anthropic::Internal::Type::HashOf[String]),
         type: Symbol,
-        user_profile_id: String | nil
+        user_profile_id: String | nil,
+        inference_data_privacy: Anthropic::Beta::Organization::BetaInferenceDataPrivacy | nil
       }
     end
   end
@@ -141,7 +145,8 @@ class Anthropic::Test::Resources::Beta::Organization::WorkspacesTest < Anthropic
         name: String,
         tags: ^(Anthropic::Internal::Type::HashOf[String]),
         type: Symbol,
-        user_profile_id: String | nil
+        user_profile_id: String | nil,
+        inference_data_privacy: Anthropic::Beta::Organization::BetaInferenceDataPrivacy | nil
       }
     end
   end

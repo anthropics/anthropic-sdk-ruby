@@ -375,6 +375,11 @@ module Anthropic
 
   CapabilitySupport = Anthropic::Models::CapabilitySupport
 
+  ChangeOutcomeUnknownError = Anthropic::Models::ChangeOutcomeUnknownError
+
+  ChangeOutcomeUnknownErrorDetails =
+    Anthropic::Models::ChangeOutcomeUnknownErrorDetails
+
   CitationCharLocation = Anthropic::Models::CitationCharLocation
 
   CitationCharLocationParam = Anthropic::Models::CitationCharLocationParam

@@ -1,0 +1,92 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type external_storage_create_params =
+          {
+            provider_config: Anthropic::Models::Beta::Organization::ExternalStorageCreateParams::provider_config,
+            display_name: String?,
+            user_profile_id: String?,
+            betas: ::Array[Anthropic::Models::anthropic_beta]
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class ExternalStorageCreateParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor provider_config: Anthropic::Models::Beta::Organization::ExternalStorageCreateParams::provider_config
+
+          attr_accessor display_name: String?
+
+          attr_accessor user_profile_id: String?
+
+          attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+          def betas=: (
+            ::Array[Anthropic::Models::anthropic_beta]
+          ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+          def initialize: (
+            provider_config: Anthropic::Models::Beta::Organization::ExternalStorageCreateParams::provider_config,
+            ?display_name: String?,
+            ?user_profile_id: String?,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            provider_config: Anthropic::Models::Beta::Organization::ExternalStorageCreateParams::provider_config,
+            display_name: String?,
+            user_profile_id: String?,
+            betas: ::Array[Anthropic::Models::anthropic_beta],
+            request_options: Anthropic::RequestOptions
+          }
+
+          type provider_config =
+            Anthropic::Beta::Organization::BetaAWSExternalStorageConfigParam
+            | Anthropic::Beta::Organization::BetaGCPExternalStorageConfigParam
+
+          module ProviderConfig
+            extend Anthropic::Internal::Type::Union
+
+            type type_ = :aws | :gcp
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              AWS: :aws
+              GCP: :gcp
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::ExternalStorageCreateParams::ProviderConfig::type_]
+            end
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::ExternalStorageCreateParams::provider_config]
+
+            def self.new:
+              (
+                type: :aws | "aws",
+                account_id: String,
+                bucket_name: String,
+                region: String
+              ) -> Anthropic::Beta::Organization::BetaAWSExternalStorageConfigParam
+              | (
+                type: :gcp | "gcp",
+                bucket_name: String,
+                project_number: String,
+                region: String
+              ) -> Anthropic::Beta::Organization::BetaGCPExternalStorageConfigParam
+              | (
+                type: Anthropic::Models::Beta::Organization::ExternalStorageCreateParams::ProviderConfig::type_
+                | String,
+                bucket_name: String,
+                region: String,
+                ?account_id: String,
+                ?project_number: String
+              ) -> Anthropic::Models::Beta::Organization::ExternalStorageCreateParams::provider_config
+          end
+        end
+      end
+    end
+  end
+end
