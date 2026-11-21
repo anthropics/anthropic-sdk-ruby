@@ -37,6 +37,7 @@ module Anthropic
       | Anthropic::RampLimitExceededErrorDetails
       | Anthropic::CMEKKeyUnreachableErrorDetails
       | Anthropic::CompactionUnavailableErrorDetails
+      | Anthropic::WorkspaceHumanReviewDisabledErrorDetails
       | Anthropic::StorageQuotaExceededErrorDetails
       | Anthropic::FileNotDownloadableErrorDetails
       | Anthropic::FileExpiredErrorDetails
@@ -166,6 +167,7 @@ module Anthropic
         | :ramp_limit_exceeded
         | :cmek_key_unreachable
         | :compaction_unavailable
+        | :workspace_human_review_disabled
         | :storage_quota_exceeded
         | :file_not_downloadable
         | :file_expired
@@ -294,6 +296,7 @@ module Anthropic
         RAMP_LIMIT_EXCEEDED: :ramp_limit_exceeded
         CMEK_KEY_UNREACHABLE: :cmek_key_unreachable
         COMPACTION_UNAVAILABLE: :compaction_unavailable
+        WORKSPACE_HUMAN_REVIEW_DISABLED: :workspace_human_review_disabled
         STORAGE_QUOTA_EXCEEDED: :storage_quota_exceeded
         FILE_NOT_DOWNLOADABLE: :file_not_downloadable
         FILE_EXPIRED: :file_expired
@@ -521,6 +524,10 @@ module Anthropic
         | (
           error_code: :compaction_unavailable | "compaction_unavailable"
         ) -> Anthropic::CompactionUnavailableErrorDetails
+        | (
+          error_code: :workspace_human_review_disabled
+          | "workspace_human_review_disabled"
+        ) -> Anthropic::WorkspaceHumanReviewDisabledErrorDetails
         | (
           error_code: :storage_quota_exceeded | "storage_quota_exceeded"
         ) -> Anthropic::StorageQuotaExceededErrorDetails

@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class WorkspaceHumanReviewDisabledError < Anthropic::Errors::BadRequestError
+      def error_code: -> :workspace_human_review_disabled
+
+      def details: -> Anthropic::WorkspaceHumanReviewDisabledErrorDetails
+    end
+  end
+end

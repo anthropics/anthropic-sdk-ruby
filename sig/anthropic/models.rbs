@@ -1138,4 +1138,8 @@ module Anthropic
   module WebSearchToolResultErrorCode = Anthropic::Models::WebSearchToolResultErrorCode
 
   class WebSearchToolResultErrorObject = Anthropic::Models::WebSearchToolResultErrorObject
+
+  class WorkspaceHumanReviewDisabledError = Anthropic::Models::WorkspaceHumanReviewDisabledError
+
+  class WorkspaceHumanReviewDisabledErrorDetails = Anthropic::Models::WorkspaceHumanReviewDisabledErrorDetails
 end

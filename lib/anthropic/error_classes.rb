@@ -100,6 +100,7 @@ module Anthropic
         [400, "user_profile_not_found"] => Anthropic::Models::UserProfileNotFoundError,
         [400, "user_profile_required"] => Anthropic::Models::UserProfileRequiredError,
         [400, "workspace_api_key_limit_exceeded"] => Anthropic::Models::Organization::WorkspaceAPIKeyLimitExceededError,
+        [400, "workspace_human_review_disabled"] => Anthropic::Models::WorkspaceHumanReviewDisabledError,
         [400, "workspace_member_limit_exceeded"] => Anthropic::Models::Organization::WorkspaceMemberLimitExceededError,
         [400, "workspace_policy_violation"] => Anthropic::Models::Organization::WorkspacePolicyViolationError,
         [402, "linked_organization_billing_unavailable"] => Anthropic::Models::LinkedOrganizationBillingUnavailableError,

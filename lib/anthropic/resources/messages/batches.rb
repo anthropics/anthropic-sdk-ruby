@@ -29,6 +29,7 @@ module Anthropic
         # @raise [Anthropic::Models::ClaudeCodeKeyCreatorNotMemberError]
         # @raise [Anthropic::Models::CMEKKeyDisabledError]
         # @raise [Anthropic::Models::OrganizationOnHoldError]
+        # @raise [Anthropic::Models::WorkspaceHumanReviewDisabledError]
         # @raise [Anthropic::Models::EnforcedSpendLimitReachedError]
         #
         # @return [Anthropic::Models::Messages::MessageBatch]

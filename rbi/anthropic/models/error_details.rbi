@@ -44,6 +44,7 @@ module Anthropic
             Anthropic::RampLimitExceededErrorDetails,
             Anthropic::CMEKKeyUnreachableErrorDetails,
             Anthropic::CompactionUnavailableErrorDetails,
+            Anthropic::WorkspaceHumanReviewDisabledErrorDetails,
             Anthropic::StorageQuotaExceededErrorDetails,
             Anthropic::FileNotDownloadableErrorDetails,
             Anthropic::FileExpiredErrorDetails,
@@ -320,6 +321,11 @@ module Anthropic
         COMPACTION_UNAVAILABLE =
           T.let(
             :compaction_unavailable,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        WORKSPACE_HUMAN_REVIEW_DISABLED =
+          T.let(
+            :workspace_human_review_disabled,
             Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
           )
         STORAGE_QUOTA_EXCEEDED =

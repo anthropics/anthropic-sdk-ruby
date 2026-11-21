@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type workspace_human_review_disabled_error_details =
+      { error_code: :workspace_human_review_disabled }
+
+    class WorkspaceHumanReviewDisabledErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :workspace_human_review_disabled
+
+      def initialize: (?error_code: :workspace_human_review_disabled) -> void
+
+      def to_hash: -> { error_code: :workspace_human_review_disabled }
+    end
+  end
+end
