@@ -7,8 +7,7 @@ module Anthropic
         class BetaInferenceDataPrivacy < Anthropic::Internal::Type::BaseModel
           # @!attribute human_review
           #   The Workspace's human review setting. Human review is off only while this is
-          #   `disabled` and Anthropic's approval stands. If Anthropic withdraws approval,
-          #   review is back on, though this field still reads `disabled`.
+          #   `disabled` and Anthropic's approval stands.
           #
           #   @return [Anthropic::Models::Beta::Organization::BetaAnthropicHumanReview, nil]
           optional :human_review, -> { Anthropic::Beta::Organization::BetaAnthropicHumanReview }
