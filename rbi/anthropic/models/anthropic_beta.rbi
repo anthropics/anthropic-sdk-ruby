@@ -256,6 +256,8 @@ module Anthropic
           :"ce-claude-code-managed-settings-2026-10-06",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
+      EFS_2026_10_01 =
+        T.let(:"efs-2026-10-01", Anthropic::AnthropicBeta::TaggedSymbol)
       USER_PROFILES_BILLING_2026_10_01 =
         T.let(
           :"user-profiles-billing-2026-10-01",

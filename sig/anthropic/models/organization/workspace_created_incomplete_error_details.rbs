@@ -1,0 +1,24 @@
+module Anthropic
+  module Models
+    module Organization
+      type workspace_created_incomplete_error_details =
+        { error_code: :workspace_created_incomplete, workspace_id: String }
+
+      class WorkspaceCreatedIncompleteErrorDetails < Anthropic::Internal::Type::BaseModel
+        attr_accessor error_code: :workspace_created_incomplete
+
+        attr_accessor workspace_id: String
+
+        def initialize: (
+          workspace_id: String,
+          ?error_code: :workspace_created_incomplete
+        ) -> void
+
+        def to_hash: -> {
+          error_code: :workspace_created_incomplete,
+          workspace_id: String
+        }
+      end
+    end
+  end
+end

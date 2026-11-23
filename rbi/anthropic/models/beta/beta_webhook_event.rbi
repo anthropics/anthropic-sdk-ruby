@@ -83,7 +83,9 @@ module Anthropic
                 Anthropic::Beta::BetaWebhookUserProfileEnforcementActionResolvedEventData::OrHash,
                 Anthropic::Beta::BetaWebhookUserProfileProgramStatusUpdatedEventData::OrHash,
                 Anthropic::Beta::BetaWebhookExternalKeyFailedEventData::OrHash,
-                Anthropic::Beta::BetaWebhookExternalKeyRecoveredEventData::OrHash
+                Anthropic::Beta::BetaWebhookExternalKeyRecoveredEventData::OrHash,
+                Anthropic::Beta::BetaWebhookExternalStorageFailedEventData::OrHash,
+                Anthropic::Beta::BetaWebhookExternalStorageRecoveredEventData::OrHash
               ),
             type: Symbol
           ).returns(T.attached_class)

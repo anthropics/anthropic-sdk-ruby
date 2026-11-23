@@ -1,0 +1,11 @@
+module Anthropic
+  module Models
+    module Beta
+      class BetaOrganizationNotEligibleError < Anthropic::Errors::BadRequestError
+        def error_code: -> :organization_not_eligible
+
+        def details: -> Anthropic::Beta::BetaOrganizationNotEligibleErrorDetails
+      end
+    end
+  end
+end

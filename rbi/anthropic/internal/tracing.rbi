@@ -380,6 +380,18 @@ module Anthropic
           "anthropic.tunnels.certificates.retrieve"
         TUNNELS_CERTIFICATES_LIST = "anthropic.tunnels.certificates.list"
         TUNNELS_CERTIFICATES_ARCHIVE = "anthropic.tunnels.certificates.archive"
+        ORGANIZATION_EXTERNAL_STORAGE_CREATE =
+          "anthropic.organization.external_storage.create"
+        ORGANIZATION_EXTERNAL_STORAGE_RETRIEVE =
+          "anthropic.organization.external_storage.retrieve"
+        ORGANIZATION_EXTERNAL_STORAGE_UPDATE =
+          "anthropic.organization.external_storage.update"
+        ORGANIZATION_EXTERNAL_STORAGE_LIST =
+          "anthropic.organization.external_storage.list"
+        ORGANIZATION_EXTERNAL_STORAGE_DELETE =
+          "anthropic.organization.external_storage.delete"
+        ORGANIZATION_EXTERNAL_STORAGE_ACTIVATE =
+          "anthropic.organization.external_storage.activate"
         ORGANIZATION_USERS_SIGN_OUT = "anthropic.organization.users.sign_out"
         ORGANIZATION_ANALYTICS_USAGE_LIST =
           "anthropic.organization.analytics.usage.list"

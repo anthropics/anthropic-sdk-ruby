@@ -15,7 +15,7 @@ module Anthropic
         sig { returns(Symbol) }
         attr_accessor :error_code
 
-        # The request field the broken rule applies to.
+        # The request field the broken rule applies to. Other values may be returned.
         sig do
           returns(Anthropic::Organization::WorkspacePolicyField::TaggedSymbol)
         end
@@ -31,7 +31,7 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
-          # The request field the broken rule applies to.
+          # The request field the broken rule applies to. Other values may be returned.
           field:,
           error_code: :workspace_policy_violation
         )

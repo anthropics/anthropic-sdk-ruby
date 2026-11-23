@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_grant_required_error_details = { error_code: :grant_required }
+
+        class BetaGrantRequiredErrorDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor error_code: :grant_required
+
+          def initialize: (?error_code: :grant_required) -> void
+
+          def to_hash: -> { error_code: :grant_required }
+        end
+      end
+    end
+  end
+end

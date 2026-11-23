@@ -6,10 +6,15 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
   def test_create_required_params
     response =
       @anthropic.beta.deployments.create(
-        agent: "string",
-        environment_id: "x",
-        initial_events: [{content: [{text: "Where is my order #1234?", type: :text}], type: :"user.message"}],
-        name: "x",
+        agent: {id: "agent_011CZkYpogX7uDKUyvBTophP", type: :agent},
+        environment_id: "env_011CZkZ9X2dpNyB7HsEFoRfW",
+        initial_events: [
+          {
+            content: [{text: "Compile yesterday's orders into report.md.", type: :text}],
+            type: :"user.message"
+          }
+        ],
+        name: "Daily order report",
         request_options: {extra_query: {beta: "true"}}
       )
 

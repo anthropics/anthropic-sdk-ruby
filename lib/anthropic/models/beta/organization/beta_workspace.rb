@@ -99,7 +99,16 @@ module Anthropic
           #   @return [String, nil]
           required :user_profile_id, String, nil?: true
 
-          # @!method initialize(id:, archived_at:, compartment_id:, created_at:, data_residency:, display_color:, external_key_id:, name:, tags:, user_profile_id:, type: :workspace)
+          # @!attribute inference_data_privacy
+          #   Where the Workspace's retained inference data and transcript copies go, and
+          #   whether Anthropic's human review applies. Returned only to requests that send
+          #   the `efs-2026-10-01` `anthropic-beta` value, and each member only to
+          #   organizations enabled for it.
+          #
+          #   @return [Anthropic::Models::Beta::Organization::BetaInferenceDataPrivacy, nil]
+          optional :inference_data_privacy, -> { Anthropic::Beta::Organization::BetaInferenceDataPrivacy }
+
+          # @!method initialize(id:, archived_at:, compartment_id:, created_at:, data_residency:, display_color:, external_key_id:, name:, tags:, user_profile_id:, inference_data_privacy: nil, type: :workspace)
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Organization::BetaWorkspace} for more details.
           #
@@ -122,6 +131,8 @@ module Anthropic
           #   @param tags [Hash{Symbol=>String}] User-defined tags as string key-value pairs. Keys may not begin with `anthropic`
           #
           #   @param user_profile_id [String, nil] ID of the user profile attached to the Workspace, or null if it has none. Every
+          #
+          #   @param inference_data_privacy [Anthropic::Models::Beta::Organization::BetaInferenceDataPrivacy] Where the Workspace's retained inference data and transcript copies go, and whet
           #
           #   @param type [Symbol, :workspace] Object type.
         end

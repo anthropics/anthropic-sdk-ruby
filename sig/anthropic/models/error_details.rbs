@@ -37,6 +37,7 @@ module Anthropic
       | Anthropic::RampLimitExceededErrorDetails
       | Anthropic::CMEKKeyUnreachableErrorDetails
       | Anthropic::CompactionUnavailableErrorDetails
+      | Anthropic::WorkspaceHumanReviewDisabledErrorDetails
       | Anthropic::StorageQuotaExceededErrorDetails
       | Anthropic::FileNotDownloadableErrorDetails
       | Anthropic::FileExpiredErrorDetails
@@ -60,6 +61,10 @@ module Anthropic
       | Anthropic::Organization::KeyProfileMismatchErrorDetails
       | Anthropic::Organization::WorkspacePolicyViolationErrorDetails
       | Anthropic::Organization::ExternalKeyChangedErrorDetails
+      | Anthropic::Organization::WorkspaceCreatedIncompleteErrorDetails
+      | Anthropic::Organization::StorageProfileMismatchErrorDetails
+      | Anthropic::ChangeOutcomeUnknownErrorDetails
+      | Anthropic::Organization::StorageAttachedDuringArchiveErrorDetails
       | Anthropic::Organization::WorkspaceMemberLimitExceededErrorDetails
       | Anthropic::OrganizationTypeNotSupportedErrorDetails
       | Anthropic::ParentOrganizationRequiredErrorDetails
@@ -70,6 +75,16 @@ module Anthropic
       | Anthropic::Beta::BetaEnvironmentUpdateDisabledErrorDetails
       | Anthropic::Beta::Environments::BetaHeartbeatPreconditionFailedErrorDetails
       | Anthropic::Beta::BetaInvalidMetadataErrorDetails
+      | Anthropic::Beta::Organization::BetaGrantRequiredErrorDetails
+      | Anthropic::Beta::BetaOrganizationNotEligibleErrorDetails
+      | Anthropic::Beta::Organization::BetaProviderNotAllowedErrorDetails
+      | Anthropic::Beta::Organization::BetaUnsupportedRegionErrorDetails
+      | Anthropic::Beta::Organization::BetaStorageAlreadyRegisteredErrorDetails
+      | Anthropic::Beta::BetaAuthorizationCheckUnavailableErrorDetails
+      | Anthropic::Beta::Organization::BetaInvalidStorageARNErrorDetails
+      | Anthropic::Beta::Organization::BetaExternalStorageInUseErrorDetails
+      | Anthropic::Beta::Organization::BetaExternalStorageInWorkspacePolicyErrorDetails
+      | Anthropic::Beta::Organization::BetaStorageVerificationFailedErrorDetails
       | Anthropic::Beta::Organization::BetaCannotSignOutPrimaryOwnerErrorDetails
       | Anthropic::Beta::Organization::BetaCannotSignOutSelfErrorDetails
       | Anthropic::BetaOrganizationNotEnrolledInBetaErrorDetails
@@ -77,6 +92,16 @@ module Anthropic
       | Anthropic::Beta::Organization::BetaCannotSignOutMembershipAdminErrorDetails
       | Anthropic::Beta::Organization::BetaCannotSignOutOwnerErrorDetails
       | Anthropic::Beta::Organization::BetaCannotSignOutPrivilegedMemberErrorDetails
+      | Anthropic::Beta::BetaApprovalRequiredErrorDetails
+      | Anthropic::Beta::Organization::BetaExternalStorageNotAvailableErrorDetails
+      | Anthropic::Beta::BetaHumanReviewNotAvailableErrorDetails
+      | Anthropic::Beta::Organization::BetaHumanReviewOnWithExternalStorageErrorDetails
+      | Anthropic::Beta::Organization::BetaStorageNotAttachableErrorDetails
+      | Anthropic::Beta::Organization::BetaTranscriptsStorageRequiredErrorDetails
+      | Anthropic::Beta::Organization::BetaStorageAttachLimitReachedErrorDetails
+      | Anthropic::Beta::Organization::BetaStorageProfileStillRequiredErrorDetails
+      | Anthropic::Beta::Organization::BetaStorageChangedConcurrentlyErrorDetails
+      | Anthropic::Beta::Organization::BetaWorkspaceChangedConcurrentlyErrorDetails
       | Anthropic::Beta::Organization::BetaSpendLimitsAdminAPIWritesNotEnabledErrorDetails
       | Anthropic::BetaUnsupportedCharsetErrorDetails
       | Anthropic::Beta::Organization::BetaPluginNameTakenErrorDetails
@@ -142,6 +167,7 @@ module Anthropic
         | :ramp_limit_exceeded
         | :cmek_key_unreachable
         | :compaction_unavailable
+        | :workspace_human_review_disabled
         | :storage_quota_exceeded
         | :file_not_downloadable
         | :file_expired
@@ -165,6 +191,10 @@ module Anthropic
         | :key_profile_mismatch
         | :workspace_policy_violation
         | :external_key_changed
+        | :workspace_created_incomplete
+        | :storage_profile_mismatch
+        | :change_outcome_unknown
+        | :storage_attached_during_archive
         | :workspace_member_limit_exceeded
         | :organization_type_not_supported
         | :parent_organization_required
@@ -175,6 +205,16 @@ module Anthropic
         | :environment_update_disabled
         | :heartbeat_precondition_failed
         | :invalid_metadata
+        | :grant_required
+        | :organization_not_eligible
+        | :provider_not_allowed
+        | :unsupported_region
+        | :storage_already_registered
+        | :authorization_check_unavailable
+        | :invalid_storage_arn
+        | :external_storage_in_use
+        | :external_storage_in_workspace_policy
+        | :storage_verification_failed
         | :cannot_sign_out_primary_owner
         | :cannot_sign_out_self
         | :organization_not_enrolled_in_beta
@@ -182,6 +222,16 @@ module Anthropic
         | :cannot_sign_out_membership_admin
         | :cannot_sign_out_owner
         | :cannot_sign_out_privileged_member
+        | :approval_required
+        | :external_storage_not_available
+        | :human_review_not_available
+        | :human_review_on_with_external_storage
+        | :storage_not_attachable
+        | :transcripts_storage_required
+        | :storage_attach_limit_reached
+        | :storage_profile_still_required
+        | :storage_changed_concurrently
+        | :workspace_changed_concurrently
         | :spend_limits_admin_api_writes_not_enabled
         | :unsupported_charset
         | :plugin_name_taken
@@ -246,6 +296,7 @@ module Anthropic
         RAMP_LIMIT_EXCEEDED: :ramp_limit_exceeded
         CMEK_KEY_UNREACHABLE: :cmek_key_unreachable
         COMPACTION_UNAVAILABLE: :compaction_unavailable
+        WORKSPACE_HUMAN_REVIEW_DISABLED: :workspace_human_review_disabled
         STORAGE_QUOTA_EXCEEDED: :storage_quota_exceeded
         FILE_NOT_DOWNLOADABLE: :file_not_downloadable
         FILE_EXPIRED: :file_expired
@@ -269,6 +320,10 @@ module Anthropic
         KEY_PROFILE_MISMATCH: :key_profile_mismatch
         WORKSPACE_POLICY_VIOLATION: :workspace_policy_violation
         EXTERNAL_KEY_CHANGED: :external_key_changed
+        WORKSPACE_CREATED_INCOMPLETE: :workspace_created_incomplete
+        STORAGE_PROFILE_MISMATCH: :storage_profile_mismatch
+        CHANGE_OUTCOME_UNKNOWN: :change_outcome_unknown
+        STORAGE_ATTACHED_DURING_ARCHIVE: :storage_attached_during_archive
         WORKSPACE_MEMBER_LIMIT_EXCEEDED: :workspace_member_limit_exceeded
         ORGANIZATION_TYPE_NOT_SUPPORTED: :organization_type_not_supported
         PARENT_ORGANIZATION_REQUIRED: :parent_organization_required
@@ -279,6 +334,16 @@ module Anthropic
         ENVIRONMENT_UPDATE_DISABLED: :environment_update_disabled
         HEARTBEAT_PRECONDITION_FAILED: :heartbeat_precondition_failed
         INVALID_METADATA: :invalid_metadata
+        GRANT_REQUIRED: :grant_required
+        ORGANIZATION_NOT_ELIGIBLE: :organization_not_eligible
+        PROVIDER_NOT_ALLOWED: :provider_not_allowed
+        UNSUPPORTED_REGION: :unsupported_region
+        STORAGE_ALREADY_REGISTERED: :storage_already_registered
+        AUTHORIZATION_CHECK_UNAVAILABLE: :authorization_check_unavailable
+        INVALID_STORAGE_ARN: :invalid_storage_arn
+        EXTERNAL_STORAGE_IN_USE: :external_storage_in_use
+        EXTERNAL_STORAGE_IN_WORKSPACE_POLICY: :external_storage_in_workspace_policy
+        STORAGE_VERIFICATION_FAILED: :storage_verification_failed
         CANNOT_SIGN_OUT_PRIMARY_OWNER: :cannot_sign_out_primary_owner
         CANNOT_SIGN_OUT_SELF: :cannot_sign_out_self
         ORGANIZATION_NOT_ENROLLED_IN_BETA: :organization_not_enrolled_in_beta
@@ -286,6 +351,16 @@ module Anthropic
         CANNOT_SIGN_OUT_MEMBERSHIP_ADMIN: :cannot_sign_out_membership_admin
         CANNOT_SIGN_OUT_OWNER: :cannot_sign_out_owner
         CANNOT_SIGN_OUT_PRIVILEGED_MEMBER: :cannot_sign_out_privileged_member
+        APPROVAL_REQUIRED: :approval_required
+        EXTERNAL_STORAGE_NOT_AVAILABLE: :external_storage_not_available
+        HUMAN_REVIEW_NOT_AVAILABLE: :human_review_not_available
+        HUMAN_REVIEW_ON_WITH_EXTERNAL_STORAGE: :human_review_on_with_external_storage
+        STORAGE_NOT_ATTACHABLE: :storage_not_attachable
+        TRANSCRIPTS_STORAGE_REQUIRED: :transcripts_storage_required
+        STORAGE_ATTACH_LIMIT_REACHED: :storage_attach_limit_reached
+        STORAGE_PROFILE_STILL_REQUIRED: :storage_profile_still_required
+        STORAGE_CHANGED_CONCURRENTLY: :storage_changed_concurrently
+        WORKSPACE_CHANGED_CONCURRENTLY: :workspace_changed_concurrently
         SPEND_LIMITS_ADMIN_API_WRITES_NOT_ENABLED: :spend_limits_admin_api_writes_not_enabled
         UNSUPPORTED_CHARSET: :unsupported_charset
         PLUGIN_NAME_TAKEN: :plugin_name_taken
@@ -450,6 +525,10 @@ module Anthropic
           error_code: :compaction_unavailable | "compaction_unavailable"
         ) -> Anthropic::CompactionUnavailableErrorDetails
         | (
+          error_code: :workspace_human_review_disabled
+          | "workspace_human_review_disabled"
+        ) -> Anthropic::WorkspaceHumanReviewDisabledErrorDetails
+        | (
           error_code: :storage_quota_exceeded | "storage_quota_exceeded"
         ) -> Anthropic::StorageQuotaExceededErrorDetails
         | (
@@ -529,6 +608,22 @@ module Anthropic
           error_code: :external_key_changed | "external_key_changed"
         ) -> Anthropic::Organization::ExternalKeyChangedErrorDetails
         | (
+          error_code: :workspace_created_incomplete
+          | "workspace_created_incomplete",
+          workspace_id: String
+        ) -> Anthropic::Organization::WorkspaceCreatedIncompleteErrorDetails
+        | (
+          error_code: :storage_profile_mismatch | "storage_profile_mismatch",
+          field: String
+        ) -> Anthropic::Organization::StorageProfileMismatchErrorDetails
+        | (
+          error_code: :change_outcome_unknown | "change_outcome_unknown"
+        ) -> Anthropic::ChangeOutcomeUnknownErrorDetails
+        | (
+          error_code: :storage_attached_during_archive
+          | "storage_attached_during_archive"
+        ) -> Anthropic::Organization::StorageAttachedDuringArchiveErrorDetails
+        | (
           error_code: :workspace_member_limit_exceeded
           | "workspace_member_limit_exceeded"
         ) -> Anthropic::Organization::WorkspaceMemberLimitExceededErrorDetails
@@ -566,6 +661,41 @@ module Anthropic
           error_code: :invalid_metadata | "invalid_metadata"
         ) -> Anthropic::Beta::BetaInvalidMetadataErrorDetails
         | (
+          error_code: :grant_required | "grant_required"
+        ) -> Anthropic::Beta::Organization::BetaGrantRequiredErrorDetails
+        | (
+          error_code: :organization_not_eligible | "organization_not_eligible"
+        ) -> Anthropic::Beta::BetaOrganizationNotEligibleErrorDetails
+        | (
+          error_code: :provider_not_allowed | "provider_not_allowed"
+        ) -> Anthropic::Beta::Organization::BetaProviderNotAllowedErrorDetails
+        | (
+          error_code: :unsupported_region | "unsupported_region"
+        ) -> Anthropic::Beta::Organization::BetaUnsupportedRegionErrorDetails
+        | (
+          error_code: :storage_already_registered | "storage_already_registered"
+        ) -> Anthropic::Beta::Organization::BetaStorageAlreadyRegisteredErrorDetails
+        | (
+          error_code: :authorization_check_unavailable
+          | "authorization_check_unavailable"
+        ) -> Anthropic::Beta::BetaAuthorizationCheckUnavailableErrorDetails
+        | (
+          error_code: :invalid_storage_arn | "invalid_storage_arn"
+        ) -> Anthropic::Beta::Organization::BetaInvalidStorageARNErrorDetails
+        | (
+          error_code: :external_storage_in_use | "external_storage_in_use"
+        ) -> Anthropic::Beta::Organization::BetaExternalStorageInUseErrorDetails
+        | (
+          error_code: :external_storage_in_workspace_policy
+          | "external_storage_in_workspace_policy"
+        ) -> Anthropic::Beta::Organization::BetaExternalStorageInWorkspacePolicyErrorDetails
+        | (
+          error_code: :storage_verification_failed
+          | "storage_verification_failed",
+          failed_checks: ::Array[Anthropic::Beta::Organization::BetaExternalStorageFailedCheck],
+          ?field: String?
+        ) -> Anthropic::Beta::Organization::BetaStorageVerificationFailedErrorDetails
+        | (
           error_code: :cannot_sign_out_primary_owner
           | "cannot_sign_out_primary_owner"
         ) -> Anthropic::Beta::Organization::BetaCannotSignOutPrimaryOwnerErrorDetails
@@ -591,6 +721,47 @@ module Anthropic
           error_code: :cannot_sign_out_privileged_member
           | "cannot_sign_out_privileged_member"
         ) -> Anthropic::Beta::Organization::BetaCannotSignOutPrivilegedMemberErrorDetails
+        | (
+          error_code: :approval_required | "approval_required",
+          field: String
+        ) -> Anthropic::Beta::BetaApprovalRequiredErrorDetails
+        | (
+          error_code: :external_storage_not_available
+          | "external_storage_not_available"
+        ) -> Anthropic::Beta::Organization::BetaExternalStorageNotAvailableErrorDetails
+        | (
+          error_code: :human_review_not_available | "human_review_not_available"
+        ) -> Anthropic::Beta::BetaHumanReviewNotAvailableErrorDetails
+        | (
+          error_code: :human_review_on_with_external_storage
+          | "human_review_on_with_external_storage"
+        ) -> Anthropic::Beta::Organization::BetaHumanReviewOnWithExternalStorageErrorDetails
+        | (
+          error_code: :storage_not_attachable | "storage_not_attachable",
+          field: String
+        ) -> Anthropic::Beta::Organization::BetaStorageNotAttachableErrorDetails
+        | (
+          error_code: :transcripts_storage_required
+          | "transcripts_storage_required"
+        ) -> Anthropic::Beta::Organization::BetaTranscriptsStorageRequiredErrorDetails
+        | (
+          error_code: :storage_attach_limit_reached
+          | "storage_attach_limit_reached"
+        ) -> Anthropic::Beta::Organization::BetaStorageAttachLimitReachedErrorDetails
+        | (
+          error_code: :storage_profile_still_required
+          | "storage_profile_still_required"
+        ) -> Anthropic::Beta::Organization::BetaStorageProfileStillRequiredErrorDetails
+        | (
+          error_code: :storage_changed_concurrently
+          | "storage_changed_concurrently",
+          field: String
+        ) -> Anthropic::Beta::Organization::BetaStorageChangedConcurrentlyErrorDetails
+        | (
+          error_code: :workspace_changed_concurrently
+          | "workspace_changed_concurrently",
+          field: Anthropic::Models::Beta::Organization::beta_workspace_changed_concurrently_field
+        ) -> Anthropic::Beta::Organization::BetaWorkspaceChangedConcurrentlyErrorDetails
         | (
           error_code: :spend_limits_admin_api_writes_not_enabled
           | "spend_limits_admin_api_writes_not_enabled"
@@ -690,8 +861,13 @@ module Anthropic
           ?paths: ::Array[String],
           ?appeal_url: String?,
           ?unsupported: ::Array[Anthropic::Models::thread_unsupported_feature_name]?,
-          ?field: Anthropic::Models::Organization::workspace_policy_field,
+          ?field: Anthropic::Models::Organization::workspace_policy_field
+          | String
+          | String?
+          | Anthropic::Models::Beta::Organization::beta_workspace_changed_concurrently_field,
+          ?workspace_id: String,
           ?current_state: Anthropic::Beta::Environments::BetaWorkLeaseState,
+          ?failed_checks: ::Array[Anthropic::Beta::Organization::BetaExternalStorageFailedCheck],
           ?plugin_id: String? | String,
           ?skill_name: String,
           ?plugin_version_id: String,

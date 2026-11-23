@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_storage_attach_limit_reached_error_details =
+          { error_code: :storage_attach_limit_reached }
+
+        class BetaStorageAttachLimitReachedErrorDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor error_code: :storage_attach_limit_reached
+
+          def initialize: (?error_code: :storage_attach_limit_reached) -> void
+
+          def to_hash: -> { error_code: :storage_attach_limit_reached }
+        end
+      end
+    end
+  end
+end

@@ -58,6 +58,7 @@ module Anthropic
       | :"cache-diagnosis-2026-04-07"
       | :"ce-user-management-2026-07-13"
       | :"ce-claude-code-managed-settings-2026-10-06"
+      | :"efs-2026-10-01"
       | :"user-profiles-billing-2026-10-01"
       | String
 
@@ -123,6 +124,7 @@ module Anthropic
       CACHE_DIAGNOSIS_2026_04_07: :"cache-diagnosis-2026-04-07"
       CE_USER_MANAGEMENT_2026_07_13: :"ce-user-management-2026-07-13"
       CE_CLAUDE_CODE_MANAGED_SETTINGS_2026_10_06: :"ce-claude-code-managed-settings-2026-10-06"
+      EFS_2026_10_01: :"efs-2026-10-01"
       USER_PROFILES_BILLING_2026_10_01: :"user-profiles-billing-2026-10-01"
     end
   end

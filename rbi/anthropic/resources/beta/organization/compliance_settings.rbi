@@ -12,11 +12,18 @@ module Anthropic
           # whether the Compliance API is enabled. An organization with a parent
           # organization reads the state inherited from the parent's configuration.
           sig do
-            params(request_options: Anthropic::RequestOptions::OrHash).returns(
-              Anthropic::Beta::Organization::BetaComplianceSettings
-            )
+            params(
+              betas:
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
+              request_options: Anthropic::RequestOptions::OrHash
+            ).returns(Anthropic::Beta::Organization::BetaComplianceSettings)
           end
-          def retrieve(request_options: {})
+          def retrieve(
+            # Optional. Send `efs-2026-10-01` in this header to use this endpoint's beta
+            # features: additional parameters, accepted values and response fields.
+            betas: nil,
+            request_options: {}
+          )
           end
 
           # Update your organization's Compliance Settings.
@@ -42,13 +49,20 @@ module Anthropic
                   Anthropic::Beta::Organization::BetaComplianceSettingsStateEnabledParam::OrHash,
                   Anthropic::Beta::Organization::BetaComplianceSettingsStateDisabledParam::OrHash
                 ),
+              betas:
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(Anthropic::Beta::Organization::BetaComplianceSettings)
           end
           def update(
-            # Desired state. Accepts the string shorthand "enabled" or "disabled" in place of
-            # the object form; the response always returns the canonical object form.
+            # Body param: Desired state. Accepts the string shorthand "enabled" or "disabled"
+            # in place of the object form; the response always returns the canonical object
+            # form.
             state:,
+            # Header param: Optional. Send `efs-2026-10-01` in this header to use this
+            # endpoint's beta features: additional parameters, accepted values and response
+            # fields.
+            betas: nil,
             request_options: {}
           )
           end

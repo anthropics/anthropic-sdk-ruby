@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        class BetaTranscriptsStorageRequiredError < Anthropic::Errors::BadRequestError
+          def error_code: -> :transcripts_storage_required
+
+          def details: -> Anthropic::Beta::Organization::BetaTranscriptsStorageRequiredErrorDetails
+        end
+      end
+    end
+  end
+end

@@ -64,6 +64,31 @@ module Anthropic
           sig { params(external_key_id: String).void }
           attr_writer :external_key_id
 
+          # Changes to where the Workspace's retained inference data and transcript copies
+          # go, and to whether Anthropic's human review applies. Requires the
+          # `efs-2026-10-01` `anthropic-beta` value. An omitted member is unchanged. Cannot
+          # be null. An Admin API key can't set this field, because it doesn't belong to a
+          # user or a service account. Use an API key that belongs to one, or an OAuth
+          # token.
+          sig do
+            returns(
+              T.nilable(
+                Anthropic::Beta::Organization::BetaInferenceDataPrivacyUpdateParam
+              )
+            )
+          end
+          attr_reader :inference_data_privacy
+
+          sig do
+            params(
+              inference_data_privacy:
+                T.nilable(
+                  Anthropic::Beta::Organization::BetaInferenceDataPrivacyUpdateParam::OrHash
+                )
+            ).void
+          end
+          attr_writer :inference_data_privacy
+
           # Name of the Workspace.
           sig { returns(T.nilable(String)) }
           attr_reader :name
@@ -88,6 +113,24 @@ module Anthropic
           sig { params(user_profile_id: String).void }
           attr_writer :user_profile_id
 
+          # Optional. Send `efs-2026-10-01` in this header to use this endpoint's beta
+          # features: additional parameters, accepted values and response fields.
+          sig do
+            returns(
+              T.nilable(
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)]
+              )
+            )
+          end
+          attr_reader :betas
+
+          sig do
+            params(
+              betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)]
+            ).void
+          end
+          attr_writer :betas
+
           sig do
             params(
               workspace_id: String,
@@ -97,9 +140,15 @@ module Anthropic
                 ),
               display_color: String,
               external_key_id: String,
+              inference_data_privacy:
+                T.nilable(
+                  Anthropic::Beta::Organization::BetaInferenceDataPrivacyUpdateParam::OrHash
+                ),
               name: String,
               tags: T.nilable(T::Hash[Symbol, T.nilable(String)]),
               user_profile_id: String,
+              betas:
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(T.attached_class)
           end
@@ -122,6 +171,13 @@ module Anthropic
             # cannot be detached or replaced. To rotate key material, rotate the underlying
             # key on your cloud KMS; the `external_key_id` stays the same.
             external_key_id: nil,
+            # Changes to where the Workspace's retained inference data and transcript copies
+            # go, and to whether Anthropic's human review applies. Requires the
+            # `efs-2026-10-01` `anthropic-beta` value. An omitted member is unchanged. Cannot
+            # be null. An Admin API key can't set this field, because it doesn't belong to a
+            # user or a service account. Use an API key that belongs to one, or an OAuth
+            # token.
+            inference_data_privacy: nil,
             # Name of the Workspace.
             name: nil,
             # User-defined tags as string key-value pairs. Keys may not begin with
@@ -134,6 +190,9 @@ module Anthropic
             # clears it. It can't be set on a Workspace whose External Key isn't bound to this
             # user profile. The default Workspace can't have a user profile.
             user_profile_id: nil,
+            # Optional. Send `efs-2026-10-01` in this header to use this endpoint's beta
+            # features: additional parameters, accepted values and response fields.
+            betas: nil,
             request_options: {}
           )
           end
@@ -148,9 +207,15 @@ module Anthropic
                   ),
                 display_color: String,
                 external_key_id: String,
+                inference_data_privacy:
+                  T.nilable(
+                    Anthropic::Beta::Organization::BetaInferenceDataPrivacyUpdateParam
+                  ),
                 name: String,
                 tags: T.nilable(T::Hash[Symbol, T.nilable(String)]),
                 user_profile_id: String,
+                betas:
+                  T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
                 request_options: Anthropic::RequestOptions
               }
             )

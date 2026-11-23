@@ -44,6 +44,7 @@ module Anthropic
             Anthropic::RampLimitExceededErrorDetails,
             Anthropic::CMEKKeyUnreachableErrorDetails,
             Anthropic::CompactionUnavailableErrorDetails,
+            Anthropic::WorkspaceHumanReviewDisabledErrorDetails,
             Anthropic::StorageQuotaExceededErrorDetails,
             Anthropic::FileNotDownloadableErrorDetails,
             Anthropic::FileExpiredErrorDetails,
@@ -67,6 +68,10 @@ module Anthropic
             Anthropic::Organization::KeyProfileMismatchErrorDetails,
             Anthropic::Organization::WorkspacePolicyViolationErrorDetails,
             Anthropic::Organization::ExternalKeyChangedErrorDetails,
+            Anthropic::Organization::WorkspaceCreatedIncompleteErrorDetails,
+            Anthropic::Organization::StorageProfileMismatchErrorDetails,
+            Anthropic::ChangeOutcomeUnknownErrorDetails,
+            Anthropic::Organization::StorageAttachedDuringArchiveErrorDetails,
             Anthropic::Organization::WorkspaceMemberLimitExceededErrorDetails,
             Anthropic::OrganizationTypeNotSupportedErrorDetails,
             Anthropic::ParentOrganizationRequiredErrorDetails,
@@ -77,6 +82,16 @@ module Anthropic
             Anthropic::Beta::BetaEnvironmentUpdateDisabledErrorDetails,
             Anthropic::Beta::Environments::BetaHeartbeatPreconditionFailedErrorDetails,
             Anthropic::Beta::BetaInvalidMetadataErrorDetails,
+            Anthropic::Beta::Organization::BetaGrantRequiredErrorDetails,
+            Anthropic::Beta::BetaOrganizationNotEligibleErrorDetails,
+            Anthropic::Beta::Organization::BetaProviderNotAllowedErrorDetails,
+            Anthropic::Beta::Organization::BetaUnsupportedRegionErrorDetails,
+            Anthropic::Beta::Organization::BetaStorageAlreadyRegisteredErrorDetails,
+            Anthropic::Beta::BetaAuthorizationCheckUnavailableErrorDetails,
+            Anthropic::Beta::Organization::BetaInvalidStorageARNErrorDetails,
+            Anthropic::Beta::Organization::BetaExternalStorageInUseErrorDetails,
+            Anthropic::Beta::Organization::BetaExternalStorageInWorkspacePolicyErrorDetails,
+            Anthropic::Beta::Organization::BetaStorageVerificationFailedErrorDetails,
             Anthropic::Beta::Organization::BetaCannotSignOutPrimaryOwnerErrorDetails,
             Anthropic::Beta::Organization::BetaCannotSignOutSelfErrorDetails,
             Anthropic::BetaOrganizationNotEnrolledInBetaErrorDetails,
@@ -84,6 +99,16 @@ module Anthropic
             Anthropic::Beta::Organization::BetaCannotSignOutMembershipAdminErrorDetails,
             Anthropic::Beta::Organization::BetaCannotSignOutOwnerErrorDetails,
             Anthropic::Beta::Organization::BetaCannotSignOutPrivilegedMemberErrorDetails,
+            Anthropic::Beta::BetaApprovalRequiredErrorDetails,
+            Anthropic::Beta::Organization::BetaExternalStorageNotAvailableErrorDetails,
+            Anthropic::Beta::BetaHumanReviewNotAvailableErrorDetails,
+            Anthropic::Beta::Organization::BetaHumanReviewOnWithExternalStorageErrorDetails,
+            Anthropic::Beta::Organization::BetaStorageNotAttachableErrorDetails,
+            Anthropic::Beta::Organization::BetaTranscriptsStorageRequiredErrorDetails,
+            Anthropic::Beta::Organization::BetaStorageAttachLimitReachedErrorDetails,
+            Anthropic::Beta::Organization::BetaStorageProfileStillRequiredErrorDetails,
+            Anthropic::Beta::Organization::BetaStorageChangedConcurrentlyErrorDetails,
+            Anthropic::Beta::Organization::BetaWorkspaceChangedConcurrentlyErrorDetails,
             Anthropic::Beta::Organization::BetaSpendLimitsAdminAPIWritesNotEnabledErrorDetails,
             Anthropic::BetaUnsupportedCharsetErrorDetails,
             Anthropic::Beta::Organization::BetaPluginNameTakenErrorDetails,
@@ -298,6 +323,11 @@ module Anthropic
             :compaction_unavailable,
             Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
           )
+        WORKSPACE_HUMAN_REVIEW_DISABLED =
+          T.let(
+            :workspace_human_review_disabled,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
         STORAGE_QUOTA_EXCEEDED =
           T.let(
             :storage_quota_exceeded,
@@ -410,6 +440,26 @@ module Anthropic
             :external_key_changed,
             Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
           )
+        WORKSPACE_CREATED_INCOMPLETE =
+          T.let(
+            :workspace_created_incomplete,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        STORAGE_PROFILE_MISMATCH =
+          T.let(
+            :storage_profile_mismatch,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        CHANGE_OUTCOME_UNKNOWN =
+          T.let(
+            :change_outcome_unknown,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        STORAGE_ATTACHED_DURING_ARCHIVE =
+          T.let(
+            :storage_attached_during_archive,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
         WORKSPACE_MEMBER_LIMIT_EXCEEDED =
           T.let(
             :workspace_member_limit_exceeded,
@@ -460,6 +510,56 @@ module Anthropic
             :invalid_metadata,
             Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
           )
+        GRANT_REQUIRED =
+          T.let(
+            :grant_required,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        ORGANIZATION_NOT_ELIGIBLE =
+          T.let(
+            :organization_not_eligible,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        PROVIDER_NOT_ALLOWED =
+          T.let(
+            :provider_not_allowed,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        UNSUPPORTED_REGION =
+          T.let(
+            :unsupported_region,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        STORAGE_ALREADY_REGISTERED =
+          T.let(
+            :storage_already_registered,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        AUTHORIZATION_CHECK_UNAVAILABLE =
+          T.let(
+            :authorization_check_unavailable,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        INVALID_STORAGE_ARN =
+          T.let(
+            :invalid_storage_arn,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        EXTERNAL_STORAGE_IN_USE =
+          T.let(
+            :external_storage_in_use,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        EXTERNAL_STORAGE_IN_WORKSPACE_POLICY =
+          T.let(
+            :external_storage_in_workspace_policy,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        STORAGE_VERIFICATION_FAILED =
+          T.let(
+            :storage_verification_failed,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
         CANNOT_SIGN_OUT_PRIMARY_OWNER =
           T.let(
             :cannot_sign_out_primary_owner,
@@ -493,6 +593,56 @@ module Anthropic
         CANNOT_SIGN_OUT_PRIVILEGED_MEMBER =
           T.let(
             :cannot_sign_out_privileged_member,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        APPROVAL_REQUIRED =
+          T.let(
+            :approval_required,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        EXTERNAL_STORAGE_NOT_AVAILABLE =
+          T.let(
+            :external_storage_not_available,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        HUMAN_REVIEW_NOT_AVAILABLE =
+          T.let(
+            :human_review_not_available,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        HUMAN_REVIEW_ON_WITH_EXTERNAL_STORAGE =
+          T.let(
+            :human_review_on_with_external_storage,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        STORAGE_NOT_ATTACHABLE =
+          T.let(
+            :storage_not_attachable,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        TRANSCRIPTS_STORAGE_REQUIRED =
+          T.let(
+            :transcripts_storage_required,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        STORAGE_ATTACH_LIMIT_REACHED =
+          T.let(
+            :storage_attach_limit_reached,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        STORAGE_PROFILE_STILL_REQUIRED =
+          T.let(
+            :storage_profile_still_required,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        STORAGE_CHANGED_CONCURRENTLY =
+          T.let(
+            :storage_changed_concurrently,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        WORKSPACE_CHANGED_CONCURRENTLY =
+          T.let(
+            :workspace_changed_concurrently,
             Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
           )
         SPEND_LIMITS_ADMIN_API_WRITES_NOT_ENABLED =
@@ -635,9 +785,20 @@ module Anthropic
             T.nilable(
               T::Array[Anthropic::ThreadUnsupportedFeatureName::OrSymbol]
             ),
-          field: Anthropic::Organization::WorkspacePolicyField::OrSymbol,
+          field:
+            T.any(
+              Anthropic::Organization::WorkspacePolicyField::OrSymbol,
+              String,
+              T.nilable(String),
+              Anthropic::Beta::Organization::BetaWorkspaceChangedConcurrentlyField::OrSymbol
+            ),
+          workspace_id: String,
           current_state:
             Anthropic::Beta::Environments::BetaWorkLeaseState::OrHash,
+          failed_checks:
+            T::Array[
+              Anthropic::Beta::Organization::BetaExternalStorageFailedCheck::OrHash
+            ],
           plugin_id: T.any(T.nilable(String), String),
           skill_name: String,
           plugin_version_id: String,
@@ -658,10 +819,14 @@ module Anthropic
         # support. On a value you do not recognize, send the full conversation without
         # `thread`.
         unsupported: nil,
-        # The request field the broken rule applies to.
+        # The request field the broken rule applies to. Other values may be returned.
         field: nil,
+        # ID of the Workspace the request created.
+        workspace_id: nil,
         # The lease as the server holds it.
         current_state: nil,
+        # One entry for each check that failed.
+        failed_checks: nil,
         plugin_id: nil,
         skill_name: nil,
         plugin_version_id: nil,

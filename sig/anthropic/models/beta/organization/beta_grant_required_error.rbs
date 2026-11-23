@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        class BetaGrantRequiredError < Anthropic::Errors::BadRequestError
+          def error_code: -> :grant_required
+
+          def details: -> Anthropic::Beta::Organization::BetaGrantRequiredErrorDetails
+        end
+      end
+    end
+  end
+end

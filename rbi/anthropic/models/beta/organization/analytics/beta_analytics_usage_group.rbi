@@ -150,8 +150,7 @@ module Anthropic
             attr_accessor :rbac_group_id
 
             # Service tier the usage was served at. Populated only when `service_tier` is in
-            # `group_by[]`; null for usage with no service tier (for example, code execution)
-            # and for Claude Enterprise usage.
+            # `group_by[]`; null for usage with no service tier (for example, code execution).
             sig do
               returns(
                 T.nilable(
@@ -186,13 +185,14 @@ module Anthropic
 
             # User profile the usage was attributed to, as a tagged `uprof_` ID. Populated
             # only when `user_profile_id` is in `group_by[]`; null for usage that named no
-            # profile and for Claude Enterprise usage.
+            # profile.
             sig { returns(T.nilable(String)) }
             attr_accessor :user_profile_id
 
-            # Workspace the usage occurred in, as a tagged workspace ID, including the
-            # organization's default workspace. Populated only when `workspace_id` is in
-            # `group_by[]`; null for Claude Enterprise usage.
+            # Workspace the usage occurred in, as a tagged workspace ID, including a Claude
+            # Platform organization's default workspace. Populated only when `workspace_id` is
+            # in `group_by[]`; null for usage in a Claude Enterprise organization's default
+            # workspace, which is its only workspace.
             sig { returns(T.nilable(String)) }
             attr_accessor :workspace_id
 
@@ -327,8 +327,7 @@ module Anthropic
               # query without `group_by[]`.
               rbac_group_id:,
               # Service tier the usage was served at. Populated only when `service_tier` is in
-              # `group_by[]`; null for usage with no service tier (for example, code execution)
-              # and for Claude Enterprise usage.
+              # `group_by[]`; null for usage with no service tier (for example, code execution).
               service_tier:,
               # Claude Managed Agents session that incurred the usage. Populated only when
               # `session_id` is in `group_by[]`; null for usage outside a managed session.
@@ -343,11 +342,12 @@ module Anthropic
               speed:,
               # User profile the usage was attributed to, as a tagged `uprof_` ID. Populated
               # only when `user_profile_id` is in `group_by[]`; null for usage that named no
-              # profile and for Claude Enterprise usage.
+              # profile.
               user_profile_id:,
-              # Workspace the usage occurred in, as a tagged workspace ID, including the
-              # organization's default workspace. Populated only when `workspace_id` is in
-              # `group_by[]`; null for Claude Enterprise usage.
+              # Workspace the usage occurred in, as a tagged workspace ID, including a Claude
+              # Platform organization's default workspace. Populated only when `workspace_id` is
+              # in `group_by[]`; null for usage in a Claude Enterprise organization's default
+              # workspace, which is its only workspace.
               workspace_id:
             )
             end

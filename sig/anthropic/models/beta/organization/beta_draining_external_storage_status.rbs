@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_draining_external_storage_status =
+          {
+            healthy: bool,
+            last_checked_at: Time,
+            removal_started: bool,
+            type: :draining
+          }
+
+        class BetaDrainingExternalStorageStatus < Anthropic::Internal::Type::BaseModel
+          attr_accessor healthy: bool
+
+          attr_accessor last_checked_at: Time
+
+          attr_accessor removal_started: bool
+
+          attr_accessor type: :draining
+
+          def initialize: (
+            healthy: bool,
+            last_checked_at: Time,
+            removal_started: bool,
+            ?type: :draining
+          ) -> void
+
+          def to_hash: -> {
+            healthy: bool,
+            last_checked_at: Time,
+            removal_started: bool,
+            type: :draining
+          }
+        end
+      end
+    end
+  end
+end

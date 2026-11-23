@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_provider_not_allowed_error_details =
+          { error_code: :provider_not_allowed }
+
+        class BetaProviderNotAllowedErrorDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor error_code: :provider_not_allowed
+
+          def initialize: (?error_code: :provider_not_allowed) -> void
+
+          def to_hash: -> { error_code: :provider_not_allowed }
+        end
+      end
+    end
+  end
+end

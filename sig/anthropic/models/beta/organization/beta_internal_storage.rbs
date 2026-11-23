@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_internal_storage = { type: :internal }
+
+        class BetaInternalStorage < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :internal
+
+          def initialize: (?type: :internal) -> void
+
+          def to_hash: -> { type: :internal }
+        end
+      end
+    end
+  end
+end

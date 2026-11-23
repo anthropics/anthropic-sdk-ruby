@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_pending_configuration_external_storage_status =
+          { type: :pending_configuration }
+
+        class BetaPendingConfigurationExternalStorageStatus < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :pending_configuration
+
+          def initialize: (?type: :pending_configuration) -> void
+
+          def to_hash: -> { type: :pending_configuration }
+        end
+      end
+    end
+  end
+end

@@ -6,7 +6,7 @@ class Anthropic::Test::Resources::Beta::Organization::ClaudeTag::SlackChannelsTe
   def test_create_required_params
     response =
       @anthropic.beta.organization.claude_tag.slack_channels.create(
-        slack: {channel_id: "xx", workspace_id: "xx"},
+        slack: {channel_id: "C0456EFGH", workspace_id: "T0123ABCD"},
         request_options: {extra_query: {beta: "true"}}
       )
 

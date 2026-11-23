@@ -37,7 +37,7 @@ class Anthropic::Test::Resources::Beta::Organization::Federation::Rules::Workspa
     response =
       @anthropic.beta.organization.federation.rules.workspaces.add(
         "federation_rule_id",
-        workspace_id: "workspace_id",
+        workspace_id: "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
         request_options: {extra_query: {beta: "true"}}
       )
 

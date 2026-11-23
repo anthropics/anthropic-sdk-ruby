@@ -86,7 +86,7 @@ class Anthropic::Test::Resources::Beta::Organization::Workspaces::ServiceAccount
     response =
       @anthropic.beta.organization.workspaces.service_accounts.add(
         "workspace_id",
-        service_account_id: "service_account_id",
+        service_account_id: "svac_01SDCCSbTxrXDpWc1phhtcfK",
         workspace_role: :workspace_admin,
         request_options: {extra_query: {beta: "true"}}
       )

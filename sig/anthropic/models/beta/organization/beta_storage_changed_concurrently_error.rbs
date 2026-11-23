@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        class BetaStorageChangedConcurrentlyError < Anthropic::Errors::ConflictError
+          def error_code: -> :storage_changed_concurrently
+
+          def details: -> Anthropic::Beta::Organization::BetaStorageChangedConcurrentlyErrorDetails
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,46 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_inference_data_privacy_update_param =
+          {
+            human_review: Anthropic::Beta::Organization::BetaAnthropicHumanReviewParam,
+            safeguards_storage: Anthropic::Models::Beta::Organization::beta_storage_member_param,
+            transcripts_storage: Anthropic::Models::Beta::Organization::beta_storage_member_param
+          }
+
+        class BetaInferenceDataPrivacyUpdateParam < Anthropic::Internal::Type::BaseModel
+          attr_reader human_review: Anthropic::Beta::Organization::BetaAnthropicHumanReviewParam?
+
+          def human_review=: (
+            Anthropic::Beta::Organization::BetaAnthropicHumanReviewParam
+          ) -> Anthropic::Beta::Organization::BetaAnthropicHumanReviewParam
+
+          attr_reader safeguards_storage: Anthropic::Models::Beta::Organization::beta_storage_member_param?
+
+          def safeguards_storage=: (
+            Anthropic::Models::Beta::Organization::beta_storage_member_param
+          ) -> Anthropic::Models::Beta::Organization::beta_storage_member_param
+
+          attr_reader transcripts_storage: Anthropic::Models::Beta::Organization::beta_storage_member_param?
+
+          def transcripts_storage=: (
+            Anthropic::Models::Beta::Organization::beta_storage_member_param
+          ) -> Anthropic::Models::Beta::Organization::beta_storage_member_param
+
+          def initialize: (
+            ?human_review: Anthropic::Beta::Organization::BetaAnthropicHumanReviewParam,
+            ?safeguards_storage: Anthropic::Models::Beta::Organization::beta_storage_member_param,
+            ?transcripts_storage: Anthropic::Models::Beta::Organization::beta_storage_member_param
+          ) -> void
+
+          def to_hash: -> {
+            human_review: Anthropic::Beta::Organization::BetaAnthropicHumanReviewParam,
+            safeguards_storage: Anthropic::Models::Beta::Organization::beta_storage_member_param,
+            transcripts_storage: Anthropic::Models::Beta::Organization::beta_storage_member_param
+          }
+        end
+      end
+    end
+  end
+end

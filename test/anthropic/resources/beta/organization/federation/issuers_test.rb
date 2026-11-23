@@ -6,8 +6,8 @@ class Anthropic::Test::Resources::Beta::Organization::Federation::IssuersTest < 
   def test_create_required_params
     response =
       @anthropic.beta.organization.federation.issuers.create(
-        issuer_url: "x",
-        name: "x",
+        issuer_url: "https://token.actions.githubusercontent.com",
+        name: "github-actions",
         request_options: {extra_query: {beta: "true"}}
       )
 

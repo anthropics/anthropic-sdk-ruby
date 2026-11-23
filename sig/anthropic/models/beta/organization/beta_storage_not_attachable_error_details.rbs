@@ -1,0 +1,23 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_storage_not_attachable_error_details =
+          { error_code: :storage_not_attachable, field: String }
+
+        class BetaStorageNotAttachableErrorDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor error_code: :storage_not_attachable
+
+          attr_accessor field: String
+
+          def initialize: (
+            field: String,
+            ?error_code: :storage_not_attachable
+          ) -> void
+
+          def to_hash: -> { error_code: :storage_not_attachable, field: String }
+        end
+      end
+    end
+  end
+end

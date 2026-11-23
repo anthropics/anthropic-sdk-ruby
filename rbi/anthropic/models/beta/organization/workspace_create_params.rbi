@@ -61,6 +61,31 @@ module Anthropic
           sig { returns(T.nilable(String)) }
           attr_accessor :external_key_id
 
+          # Where the Workspace's retained inference data and transcript copies go, and
+          # whether Anthropic's human review applies. Requires the `efs-2026-10-01`
+          # `anthropic-beta` value. When omitted, `safeguards_storage` and
+          # `transcripts_storage` are `internal` and `human_review` is `enabled`. Cannot be
+          # null. An Admin API key can't set this field, because it doesn't belong to a user
+          # or a service account. Use an API key that belongs to one, or an OAuth token.
+          sig do
+            returns(
+              T.nilable(
+                Anthropic::Beta::Organization::BetaInferenceDataPrivacyCreateParam
+              )
+            )
+          end
+          attr_reader :inference_data_privacy
+
+          sig do
+            params(
+              inference_data_privacy:
+                T.nilable(
+                  Anthropic::Beta::Organization::BetaInferenceDataPrivacyCreateParam::OrHash
+                )
+            ).void
+          end
+          attr_writer :inference_data_privacy
+
           # User-defined tags as string key-value pairs. Keys may not begin with
           # `anthropic`.
           sig { returns(T.nilable(T::Hash[Symbol, String])) }
@@ -99,6 +124,10 @@ module Anthropic
                 ),
               display_color: T.nilable(String),
               external_key_id: T.nilable(String),
+              inference_data_privacy:
+                T.nilable(
+                  Anthropic::Beta::Organization::BetaInferenceDataPrivacyCreateParam::OrHash
+                ),
               tags: T.nilable(T::Hash[Symbol, String]),
               user_profile_id: T.nilable(String),
               betas:
@@ -128,6 +157,13 @@ module Anthropic
             # cannot be detached or replaced. To rotate key material, rotate the underlying
             # key on your cloud KMS; the `external_key_id` stays the same.
             external_key_id: nil,
+            # Where the Workspace's retained inference data and transcript copies go, and
+            # whether Anthropic's human review applies. Requires the `efs-2026-10-01`
+            # `anthropic-beta` value. When omitted, `safeguards_storage` and
+            # `transcripts_storage` are `internal` and `human_review` is `enabled`. Cannot be
+            # null. An Admin API key can't set this field, because it doesn't belong to a user
+            # or a service account. Use an API key that belongs to one, or an OAuth token.
+            inference_data_privacy: nil,
             # User-defined tags as string key-value pairs. Keys may not begin with
             # `anthropic`.
             tags: nil,
@@ -152,6 +188,10 @@ module Anthropic
                   ),
                 display_color: T.nilable(String),
                 external_key_id: T.nilable(String),
+                inference_data_privacy:
+                  T.nilable(
+                    Anthropic::Beta::Organization::BetaInferenceDataPrivacyCreateParam
+                  ),
                 tags: T.nilable(T::Hash[Symbol, String]),
                 user_profile_id: T.nilable(String),
                 betas:

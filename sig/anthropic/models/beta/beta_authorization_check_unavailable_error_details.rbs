@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    class BetaAuthorizationCheckUnavailableErrorDetails = Beta::BetaAuthorizationCheckUnavailableErrorDetails
+
+    module Beta
+      type beta_authorization_check_unavailable_error_details =
+        { error_code: :authorization_check_unavailable }
+
+      class BetaAuthorizationCheckUnavailableErrorDetails < Anthropic::Internal::Type::BaseModel
+        attr_accessor error_code: :authorization_check_unavailable
+
+        def initialize: (?error_code: :authorization_check_unavailable) -> void
+
+        def to_hash: -> { error_code: :authorization_check_unavailable }
+      end
+    end
+  end
+end

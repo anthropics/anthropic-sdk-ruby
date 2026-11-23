@@ -80,7 +80,7 @@ class Anthropic::Test::Resources::Organization::Workspaces::ServiceAccountsTest 
     response =
       @anthropic.organization.workspaces.service_accounts.add(
         "workspace_id",
-        service_account_id: "service_account_id",
+        service_account_id: "svac_01SDCCSbTxrXDpWc1phhtcfK",
         workspace_role: :workspace_admin
       )
 

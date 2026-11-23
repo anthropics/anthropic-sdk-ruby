@@ -6,10 +6,10 @@ class Anthropic::Test::Resources::Organization::Federation::RulesTest < Anthropi
   def test_create_required_params
     response =
       @anthropic.organization.federation.rules.create(
-        issuer_id: "issuer_id",
+        issuer_id: "fdis_01SDCCSbTxrXDpWc1phhtcfK",
         match: {},
-        name: "x",
-        oauth_scope: "x",
+        name: "prod-deploy-pipeline",
+        oauth_scope: "workspace:developer",
         target: {service_account_id: "svac_01SDCCSbTxrXDpWc1phhtcfK", type: :service_account}
       )
 

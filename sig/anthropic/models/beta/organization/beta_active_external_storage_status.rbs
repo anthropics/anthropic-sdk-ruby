@@ -1,0 +1,30 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_active_external_storage_status =
+          { healthy: bool, last_checked_at: Time, type: :active }
+
+        class BetaActiveExternalStorageStatus < Anthropic::Internal::Type::BaseModel
+          attr_accessor healthy: bool
+
+          attr_accessor last_checked_at: Time
+
+          attr_accessor type: :active
+
+          def initialize: (
+            healthy: bool,
+            last_checked_at: Time,
+            ?type: :active
+          ) -> void
+
+          def to_hash: -> {
+            healthy: bool,
+            last_checked_at: Time,
+            type: :active
+          }
+        end
+      end
+    end
+  end
+end

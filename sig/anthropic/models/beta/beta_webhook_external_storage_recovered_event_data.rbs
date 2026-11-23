@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    class BetaWebhookExternalStorageRecoveredEventData = Beta::BetaWebhookExternalStorageRecoveredEventData
+
+    module Beta
+      type beta_webhook_external_storage_recovered_event_data =
+        {
+          id: String,
+          organization_id: String,
+          type: :"external_storage.recovered"
+        }
+
+      class BetaWebhookExternalStorageRecoveredEventData < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor organization_id: String
+
+        attr_accessor type: :"external_storage.recovered"
+
+        def initialize: (
+          id: String,
+          organization_id: String,
+          ?type: :"external_storage.recovered"
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          organization_id: String,
+          type: :"external_storage.recovered"
+        }
+      end
+    end
+  end
+end

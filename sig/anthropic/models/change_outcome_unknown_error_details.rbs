@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type change_outcome_unknown_error_details =
+      { error_code: :change_outcome_unknown }
+
+    class ChangeOutcomeUnknownErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :change_outcome_unknown
+
+      def initialize: (?error_code: :change_outcome_unknown) -> void
+
+      def to_hash: -> { error_code: :change_outcome_unknown }
+    end
+  end
+end

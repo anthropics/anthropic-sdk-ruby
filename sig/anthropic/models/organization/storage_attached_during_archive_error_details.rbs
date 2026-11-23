@@ -1,0 +1,16 @@
+module Anthropic
+  module Models
+    module Organization
+      type storage_attached_during_archive_error_details =
+        { error_code: :storage_attached_during_archive }
+
+      class StorageAttachedDuringArchiveErrorDetails < Anthropic::Internal::Type::BaseModel
+        attr_accessor error_code: :storage_attached_during_archive
+
+        def initialize: (?error_code: :storage_attached_during_archive) -> void
+
+        def to_hash: -> { error_code: :storage_attached_during_archive }
+      end
+    end
+  end
+end

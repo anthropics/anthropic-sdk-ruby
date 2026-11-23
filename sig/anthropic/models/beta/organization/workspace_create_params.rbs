@@ -8,6 +8,7 @@ module Anthropic
             data_residency: Anthropic::Beta::Organization::BetaDataResidencyCreateConfig?,
             display_color: String?,
             external_key_id: String?,
+            inference_data_privacy: Anthropic::Beta::Organization::BetaInferenceDataPrivacyCreateParam?,
             tags: ::Hash[Symbol, String]?,
             user_profile_id: String?,
             betas: ::Array[Anthropic::Models::anthropic_beta]
@@ -26,6 +27,8 @@ module Anthropic
 
           attr_accessor external_key_id: String?
 
+          attr_accessor inference_data_privacy: Anthropic::Beta::Organization::BetaInferenceDataPrivacyCreateParam?
+
           attr_accessor tags: ::Hash[Symbol, String]?
 
           attr_accessor user_profile_id: String?
@@ -41,6 +44,7 @@ module Anthropic
             ?data_residency: Anthropic::Beta::Organization::BetaDataResidencyCreateConfig?,
             ?display_color: String?,
             ?external_key_id: String?,
+            ?inference_data_privacy: Anthropic::Beta::Organization::BetaInferenceDataPrivacyCreateParam?,
             ?tags: ::Hash[Symbol, String]?,
             ?user_profile_id: String?,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
@@ -52,6 +56,7 @@ module Anthropic
             data_residency: Anthropic::Beta::Organization::BetaDataResidencyCreateConfig?,
             display_color: String?,
             external_key_id: String?,
+            inference_data_privacy: Anthropic::Beta::Organization::BetaInferenceDataPrivacyCreateParam?,
             tags: ::Hash[Symbol, String]?,
             user_profile_id: String?,
             betas: ::Array[Anthropic::Models::anthropic_beta],

@@ -14,7 +14,8 @@ class Anthropic::Test::Resources::Beta::Organization::ComplianceSettingsTest < A
     assert_pattern do
       response => {
         state: Anthropic::Beta::Organization::BetaComplianceSettingsState,
-        type: Symbol
+        type: Symbol,
+        access_transparency: Anthropic::Beta::Organization::BetaAccessTransparency | nil
       }
     end
   end
@@ -33,7 +34,8 @@ class Anthropic::Test::Resources::Beta::Organization::ComplianceSettingsTest < A
     assert_pattern do
       response => {
         state: Anthropic::Beta::Organization::BetaComplianceSettingsState,
-        type: Symbol
+        type: Symbol,
+        access_transparency: Anthropic::Beta::Organization::BetaAccessTransparency | nil
       }
     end
   end

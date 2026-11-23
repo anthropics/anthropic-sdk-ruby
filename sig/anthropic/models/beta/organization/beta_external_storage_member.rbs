@@ -1,0 +1,23 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_external_storage_member =
+          { external_storage_id: String, type: :external }
+
+        class BetaExternalStorageMember < Anthropic::Internal::Type::BaseModel
+          attr_accessor external_storage_id: String
+
+          attr_accessor type: :external
+
+          def initialize: (
+            external_storage_id: String,
+            ?type: :external
+          ) -> void
+
+          def to_hash: -> { external_storage_id: String, type: :external }
+        end
+      end
+    end
+  end
+end

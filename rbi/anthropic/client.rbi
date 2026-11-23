@@ -34,6 +34,9 @@ module Anthropic
     sig { returns(Anthropic::Resources::Skills) }
     attr_reader :skills
 
+    # Register the end customers that your platform serves, so each request can name
+    # who it's for. To get started, see the
+    # [User profiles guide](https://platform.claude.com/docs/en/manage-claude/user-profiles).
     sig { returns(Anthropic::Resources::UserProfiles) }
     attr_reader :user_profiles
 

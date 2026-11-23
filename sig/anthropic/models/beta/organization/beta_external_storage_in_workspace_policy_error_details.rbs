@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_external_storage_in_workspace_policy_error_details =
+          { error_code: :external_storage_in_workspace_policy }
+
+        class BetaExternalStorageInWorkspacePolicyErrorDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor error_code: :external_storage_in_workspace_policy
+
+          def initialize: (
+            ?error_code: :external_storage_in_workspace_policy
+          ) -> void
+
+          def to_hash: -> { error_code: :external_storage_in_workspace_policy }
+        end
+      end
+    end
+  end
+end

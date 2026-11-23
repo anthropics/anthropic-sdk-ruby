@@ -3,11 +3,19 @@
 module Anthropic
   module Resources
     class Beta
+      # Register the end customers that your platform serves, so each request can name
+      # who it's for. To get started, see the
+      # [User profiles guide](https://platform.claude.com/docs/en/manage-claude/user-profiles).
       class UserProfiles
         sig { returns(Anthropic::Resources::Beta::UserProfiles::ActionURLs) }
         attr_reader :action_urls
 
-        # Create User Profile
+        # Register one of your end customers and get the ID to send on the requests you
+        # make for them.
+        #
+        # See the
+        # [User profiles guide](https://platform.claude.com/docs/en/manage-claude/user-profiles#create-a-profile-for-each-end-customer)
+        # for what to send.
         sig do
           params(
             access_type:
@@ -69,7 +77,11 @@ module Anthropic
         )
         end
 
-        # Get User Profile
+        # Get a user profile by ID to check the details stored for it.
+        #
+        # See the
+        # [User profiles guide](https://platform.claude.com/docs/en/manage-claude/user-profiles)
+        # for how to set up and manage profiles.
         sig do
           params(
             user_profile_id: String,
@@ -94,7 +106,12 @@ module Anthropic
         )
         end
 
-        # Update User Profile
+        # Change the details of a user profile, leaving the fields that you don't send as
+        # they are.
+        #
+        # See the
+        # [User profiles guide](https://platform.claude.com/docs/en/manage-claude/user-profiles#update-a-profile)
+        # for how each field is updated.
         sig do
           params(
             user_profile_id: String,
@@ -157,7 +174,11 @@ module Anthropic
         )
         end
 
-        # List User Profiles
+        # List the user profiles in your organization, newest first by default.
+        #
+        # See the
+        # [User profiles guide](https://platform.claude.com/docs/en/manage-claude/user-profiles)
+        # for how to set up and manage profiles.
         sig do
           params(
             limit: Integer,
@@ -199,7 +220,11 @@ module Anthropic
         )
         end
 
-        # Delete User Profile
+        # Delete a user profile, for example when the end customer closes their account.
+        #
+        # Stop sending the profile's ID first. See the
+        # [User profiles guide](https://platform.claude.com/docs/en/manage-claude/user-profiles#delete-a-profile)
+        # for what happens after a delete.
         sig do
           params(
             user_profile_id: String,
@@ -224,7 +249,12 @@ module Anthropic
         )
         end
 
-        # Create Enrollment URL
+        # Create a link that sends the profile's end customer to the Verification Portal
+        # from Claude Platform on AWS.
+        #
+        # On the Claude API, create an action URL instead. See
+        # [Send an end customer a link to the Verification Portal](https://platform.claude.com/docs/en/manage-claude/user-profiles-verification-portal)
+        # for when to create the link and what the end customer sees.
         sig do
           params(
             user_profile_id: String,

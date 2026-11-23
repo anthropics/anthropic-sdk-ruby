@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_external_storage_in_use_error_details =
+          { error_code: :external_storage_in_use }
+
+        class BetaExternalStorageInUseErrorDetails < Anthropic::Internal::Type::BaseModel
+          attr_accessor error_code: :external_storage_in_use
+
+          def initialize: (?error_code: :external_storage_in_use) -> void
+
+          def to_hash: -> { error_code: :external_storage_in_use }
+        end
+      end
+    end
+  end
+end

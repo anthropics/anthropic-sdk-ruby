@@ -92,6 +92,25 @@ module Anthropic
           sig { returns(T.nilable(String)) }
           attr_accessor :user_profile_id
 
+          # Where the Workspace's retained inference data and transcript copies go, and
+          # whether Anthropic's human review applies. Returned only to requests that send
+          # the `efs-2026-10-01` `anthropic-beta` value, and each member only to
+          # organizations enabled for it.
+          sig do
+            returns(
+              T.nilable(Anthropic::Beta::Organization::BetaInferenceDataPrivacy)
+            )
+          end
+          attr_reader :inference_data_privacy
+
+          sig do
+            params(
+              inference_data_privacy:
+                Anthropic::Beta::Organization::BetaInferenceDataPrivacy::OrHash
+            ).void
+          end
+          attr_writer :inference_data_privacy
+
           sig do
             params(
               id: String,
@@ -105,6 +124,8 @@ module Anthropic
               name: String,
               tags: T::Hash[Symbol, String],
               user_profile_id: T.nilable(String),
+              inference_data_privacy:
+                Anthropic::Beta::Organization::BetaInferenceDataPrivacy::OrHash,
               type: Symbol
             ).returns(T.attached_class)
           end
@@ -154,6 +175,11 @@ module Anthropic
             # inference request through a Workspace that has a user profile must name that
             # profile.
             user_profile_id:,
+            # Where the Workspace's retained inference data and transcript copies go, and
+            # whether Anthropic's human review applies. Returned only to requests that send
+            # the `efs-2026-10-01` `anthropic-beta` value, and each member only to
+            # organizations enabled for it.
+            inference_data_privacy: nil,
             # Object type.
             #
             # For Workspaces, this is always `"workspace"`.
@@ -175,7 +201,9 @@ module Anthropic
                 name: String,
                 tags: T::Hash[Symbol, String],
                 type: Symbol,
-                user_profile_id: T.nilable(String)
+                user_profile_id: T.nilable(String),
+                inference_data_privacy:
+                  Anthropic::Beta::Organization::BetaInferenceDataPrivacy
               }
             )
           end

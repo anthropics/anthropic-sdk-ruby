@@ -1,0 +1,46 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_inference_data_privacy =
+          {
+            human_review: Anthropic::Beta::Organization::BetaAnthropicHumanReview,
+            safeguards_storage: Anthropic::Models::Beta::Organization::beta_storage_member,
+            transcripts_storage: Anthropic::Models::Beta::Organization::beta_storage_member
+          }
+
+        class BetaInferenceDataPrivacy < Anthropic::Internal::Type::BaseModel
+          attr_reader human_review: Anthropic::Beta::Organization::BetaAnthropicHumanReview?
+
+          def human_review=: (
+            Anthropic::Beta::Organization::BetaAnthropicHumanReview
+          ) -> Anthropic::Beta::Organization::BetaAnthropicHumanReview
+
+          attr_reader safeguards_storage: Anthropic::Models::Beta::Organization::beta_storage_member?
+
+          def safeguards_storage=: (
+            Anthropic::Models::Beta::Organization::beta_storage_member
+          ) -> Anthropic::Models::Beta::Organization::beta_storage_member
+
+          attr_reader transcripts_storage: Anthropic::Models::Beta::Organization::beta_storage_member?
+
+          def transcripts_storage=: (
+            Anthropic::Models::Beta::Organization::beta_storage_member
+          ) -> Anthropic::Models::Beta::Organization::beta_storage_member
+
+          def initialize: (
+            ?human_review: Anthropic::Beta::Organization::BetaAnthropicHumanReview,
+            ?safeguards_storage: Anthropic::Models::Beta::Organization::beta_storage_member,
+            ?transcripts_storage: Anthropic::Models::Beta::Organization::beta_storage_member
+          ) -> void
+
+          def to_hash: -> {
+            human_review: Anthropic::Beta::Organization::BetaAnthropicHumanReview,
+            safeguards_storage: Anthropic::Models::Beta::Organization::beta_storage_member,
+            transcripts_storage: Anthropic::Models::Beta::Organization::beta_storage_member
+          }
+        end
+      end
+    end
+  end
+end

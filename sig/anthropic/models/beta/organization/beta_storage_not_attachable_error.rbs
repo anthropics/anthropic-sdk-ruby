@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        class BetaStorageNotAttachableError < Anthropic::Errors::BadRequestError
+          def error_code: -> :storage_not_attachable
+
+          def details: -> Anthropic::Beta::Organization::BetaStorageNotAttachableErrorDetails
+        end
+      end
+    end
+  end
+end

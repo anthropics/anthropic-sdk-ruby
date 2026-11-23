@@ -375,6 +375,11 @@ module Anthropic
 
   CapabilitySupport = Anthropic::Models::CapabilitySupport
 
+  ChangeOutcomeUnknownError = Anthropic::Models::ChangeOutcomeUnknownError
+
+  ChangeOutcomeUnknownErrorDetails =
+    Anthropic::Models::ChangeOutcomeUnknownErrorDetails
+
   CitationCharLocation = Anthropic::Models::CitationCharLocation
 
   CitationCharLocationParam = Anthropic::Models::CitationCharLocationParam
@@ -1293,4 +1298,10 @@ module Anthropic
 
   WebSearchToolResultErrorObject =
     Anthropic::Models::WebSearchToolResultErrorObject
+
+  WorkspaceHumanReviewDisabledError =
+    Anthropic::Models::WorkspaceHumanReviewDisabledError
+
+  WorkspaceHumanReviewDisabledErrorDetails =
+    Anthropic::Models::WorkspaceHumanReviewDisabledErrorDetails
 end

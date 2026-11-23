@@ -1,0 +1,11 @@
+module Anthropic
+  module Models
+    module Organization
+      class StorageAttachedDuringArchiveError < Anthropic::Errors::ConflictError
+        def error_code: -> :storage_attached_during_archive
+
+        def details: -> Anthropic::Organization::StorageAttachedDuringArchiveErrorDetails
+      end
+    end
+  end
+end
