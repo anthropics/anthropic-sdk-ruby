@@ -14,7 +14,12 @@ module Anthropic
             # returned across pages. With no `group_by[]` and no `time_bucket_width`, a single
             # row aggregates the whole range. Includes all usage, whether or not it is
             # attributable to a seat user. Requires an API key with the `read:analytics`
-            # scope, or an Admin API key.
+            # scope, or an Admin API key. This endpoint is in beta and is not available to
+            # organizations with HIPAA readiness enabled: their API requests return a 400
+            # error. A parent organization's report across its child organizations leaves out
+            # the child organizations that have HIPAA readiness enabled. If the parent has
+            # child organizations and all of them have HIPAA readiness enabled, the request
+            # returns a 400 error.
             #
             # Some parameter documentations has been truncated, see
             # {Anthropic::Models::Beta::Organization::Analytics::UsageListParams} for more
