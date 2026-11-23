@@ -120,9 +120,15 @@ module Anthropic
       CLAUDE_HAIKU_4_5_20251001 = :"claude-haiku-4-5-20251001"
 
       # Powerful intelligence for long-running agents and coding
+      # @deprecated Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5.
+      # Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more
+      # information.
       CLAUDE_OPUS_4_5 = :"claude-opus-4-5"
 
       # Powerful intelligence for long-running agents and coding
+      # @deprecated Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5.
+      # Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more
+      # information.
       CLAUDE_OPUS_4_5_20251101 = :"claude-opus-4-5-20251101"
 
       # High-performance model for agents and coding
