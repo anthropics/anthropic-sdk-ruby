@@ -107,7 +107,7 @@ module Anthropic
             end
             return fresh.token
           rescue Anthropic::Errors::Error, IOError
-            raise if advisory_fallback.nil?
+            raise if advisory_fallback.nil? || advisory_fallback.expires_at <= @time_source.call
 
             @lock.synchronize { @last_advisory_failure_time = @time_source.call }
             return advisory_fallback.token
