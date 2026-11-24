@@ -51,6 +51,9 @@ module Anthropic
       sig { returns(Anthropic::Resources::Beta::Tunnels) }
       attr_reader :tunnels
 
+      sig { returns(Anthropic::Resources::Beta::Compliance) }
+      attr_reader :compliance
+
       sig { returns(Anthropic::Resources::Beta::Organization) }
       attr_reader :organization
 

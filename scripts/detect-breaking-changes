@@ -82,6 +82,11 @@ TEST_PATHS=(
 	test/anthropic/resources/beta/dreams_test.rb
 	test/anthropic/resources/beta/tunnels_test.rb
 	test/anthropic/resources/beta/tunnels/certificates_test.rb
+	test/anthropic/resources/beta/compliance_test.rb
+	test/anthropic/resources/beta/compliance/review_test.rb
+	test/anthropic/resources/beta/compliance/review/cases_test.rb
+	test/anthropic/resources/beta/compliance/review/notices_test.rb
+	test/anthropic/resources/beta/compliance/review/items_test.rb
 	test/anthropic/resources/beta/organization_test.rb
 	test/anthropic/resources/beta/organization/api_keys_test.rb
 	test/anthropic/resources/beta/organization/external_keys_test.rb

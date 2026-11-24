@@ -1,0 +1,64 @@
+module Anthropic
+  module Models
+    module Beta
+      module Compliance
+        module Review
+          type case_respond_params =
+            {
+              case_id: String,
+              determination: Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_determination,
+              policy_categories: ::Array[Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_violated_policy_category],
+              verdicts: ::Array[Anthropic::Beta::Compliance::Review::BetaComplianceReviewVerdictParam],
+              betas: ::Array[Anthropic::Models::anthropic_beta]
+            }
+            & Anthropic::Internal::Type::request_parameters
+
+          class CaseRespondParams < Anthropic::Internal::Type::BaseModel
+            extend Anthropic::Internal::Type::RequestParameters::Converter
+            include Anthropic::Internal::Type::RequestParameters
+
+            attr_accessor case_id: String
+
+            attr_accessor determination: Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_determination
+
+            attr_reader policy_categories: ::Array[Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_violated_policy_category]?
+
+            def policy_categories=: (
+              ::Array[Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_violated_policy_category]
+            ) -> ::Array[Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_violated_policy_category]
+
+            attr_reader verdicts: ::Array[Anthropic::Beta::Compliance::Review::BetaComplianceReviewVerdictParam]?
+
+            def verdicts=: (
+              ::Array[Anthropic::Beta::Compliance::Review::BetaComplianceReviewVerdictParam]
+            ) -> ::Array[Anthropic::Beta::Compliance::Review::BetaComplianceReviewVerdictParam]
+
+            attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+            def betas=: (
+              ::Array[Anthropic::Models::anthropic_beta]
+            ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+            def initialize: (
+              case_id: String,
+              determination: Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_determination,
+              ?policy_categories: ::Array[Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_violated_policy_category],
+              ?verdicts: ::Array[Anthropic::Beta::Compliance::Review::BetaComplianceReviewVerdictParam],
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> void
+
+            def to_hash: -> {
+              case_id: String,
+              determination: Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_determination,
+              policy_categories: ::Array[Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_violated_policy_category],
+              verdicts: ::Array[Anthropic::Beta::Compliance::Review::BetaComplianceReviewVerdictParam],
+              betas: ::Array[Anthropic::Models::anthropic_beta],
+              request_options: Anthropic::RequestOptions
+            }
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,23 @@
+module Anthropic
+  module Models
+    module Beta
+      module Compliance
+        module Review
+          type beta_compliance_review_case_status_filter = :open | :closed
+
+          module BetaComplianceReviewCaseStatusFilter
+            extend Anthropic::Internal::Type::Enum
+
+            # Cases that Anthropic is waiting for a response to.
+            OPEN: :open
+
+            # Cases that Anthropic has stopped waiting on.
+            CLOSED: :closed
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_case_status_filter]
+          end
+        end
+      end
+    end
+  end
+end

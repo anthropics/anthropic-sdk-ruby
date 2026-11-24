@@ -1,0 +1,52 @@
+module Anthropic
+  module Models
+    module Beta
+      module Compliance
+        module Review
+          type beta_compliance_review_violated_policy_category =
+            :cyber
+            | :bio
+            | :chem
+            | :radnuc
+            | :cgw
+            | :mgw
+            | :io
+            | :fraud
+            | :violent_extremism
+            | :surveillance
+            | :human_exploitation
+            | :self_harm
+            | :adult_content
+            | :reasoning_extraction
+            | :frontier_llm
+            | :compromised_key
+            | :other
+
+          module BetaComplianceReviewViolatedPolicyCategory
+            extend Anthropic::Internal::Type::Enum
+
+            CYBER: :cyber
+            BIO: :bio
+            CHEM: :chem
+            RADNUC: :radnuc
+            CGW: :cgw
+            MGW: :mgw
+            IO: :io
+            FRAUD: :fraud
+            VIOLENT_EXTREMISM: :violent_extremism
+            SURVEILLANCE: :surveillance
+            HUMAN_EXPLOITATION: :human_exploitation
+            SELF_HARM: :self_harm
+            ADULT_CONTENT: :adult_content
+            REASONING_EXTRACTION: :reasoning_extraction
+            FRONTIER_LLM: :frontier_llm
+            COMPROMISED_KEY: :compromised_key
+            OTHER: :other
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_violated_policy_category]
+          end
+        end
+      end
+    end
+  end
+end

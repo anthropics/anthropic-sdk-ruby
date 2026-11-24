@@ -1,0 +1,36 @@
+module Anthropic
+  module Models
+    module Beta
+      module Compliance
+        module Review
+          type beta_compliance_review_verdict_param =
+            {
+              determination: Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_determination,
+              item_id: String,
+              policy_category: Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_violated_policy_category?
+            }
+
+          class BetaComplianceReviewVerdictParam < Anthropic::Internal::Type::BaseModel
+            attr_accessor determination: Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_determination
+
+            attr_accessor item_id: String
+
+            attr_accessor policy_category: Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_violated_policy_category?
+
+            def initialize: (
+              determination: Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_determination,
+              item_id: String,
+              ?policy_category: Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_violated_policy_category?
+            ) -> void
+
+            def to_hash: -> {
+              determination: Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_determination,
+              item_id: String,
+              policy_category: Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_violated_policy_category?
+            }
+          end
+        end
+      end
+    end
+  end
+end

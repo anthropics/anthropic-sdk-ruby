@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    module Beta
+      module Compliance
+        module Review
+          type beta_compliance_review_case_open = { type: :open }
+
+          class BetaComplianceReviewCaseOpen < Anthropic::Internal::Type::BaseModel
+            attr_accessor type: :open
+
+            def initialize: (?type: :open) -> void
+
+            def to_hash: -> { type: :open }
+          end
+        end
+      end
+    end
+  end
+end

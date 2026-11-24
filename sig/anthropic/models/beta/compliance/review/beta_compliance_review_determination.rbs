@@ -1,0 +1,23 @@
+module Anthropic
+  module Models
+    module Beta
+      module Compliance
+        module Review
+          type beta_compliance_review_determination = :violation | :no_violation
+
+          module BetaComplianceReviewDetermination
+            extend Anthropic::Internal::Type::Enum
+
+            # The messages violated a policy.
+            VIOLATION: :violation
+
+            # The messages violated no policy.
+            NO_VIOLATION: :no_violation
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_determination]
+          end
+        end
+      end
+    end
+  end
+end

@@ -384,6 +384,15 @@ module Anthropic
           "anthropic.tunnels.certificates.retrieve"
         TUNNELS_CERTIFICATES_LIST = "anthropic.tunnels.certificates.list"
         TUNNELS_CERTIFICATES_ARCHIVE = "anthropic.tunnels.certificates.archive"
+        COMPLIANCE_REVIEW_CASES_RETRIEVE =
+          "anthropic.compliance.review.cases.retrieve"
+        COMPLIANCE_REVIEW_CASES_LIST = "anthropic.compliance.review.cases.list"
+        COMPLIANCE_REVIEW_CASES_RESPOND =
+          "anthropic.compliance.review.cases.respond"
+        COMPLIANCE_REVIEW_NOTICES_LIST =
+          "anthropic.compliance.review.notices.list"
+        COMPLIANCE_REVIEW_ITEMS_RETRIEVE =
+          "anthropic.compliance.review.items.retrieve"
         ORGANIZATION_EXTERNAL_STORAGE_CREATE =
           "anthropic.organization.external_storage.create"
         ORGANIZATION_EXTERNAL_STORAGE_RETRIEVE =

@@ -1,0 +1,26 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Compliance
+        class Review
+          class Notices
+            def list: (
+              ?case_id: String,
+              ?created_at_gt: Time,
+              ?created_at_gte: Time,
+              ?created_at_lt: Time,
+              ?created_at_lte: Time,
+              ?limit: Integer,
+              ?order: Anthropic::Models::Beta::Compliance::beta_compliance_review_order,
+              ?page: String,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Compliance::Review::BetaComplianceReviewNotice]
+
+            def initialize: (client: Anthropic::Client) -> void
+          end
+        end
+      end
+    end
+  end
+end

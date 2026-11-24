@@ -1,0 +1,36 @@
+module Anthropic
+  module Models
+    module Beta
+      module Compliance
+        module Review
+          type beta_compliance_review_create_message_content =
+            {
+              request: ::Hash[Symbol, top],
+              response: Anthropic::Beta::BetaMessage?,
+              type: :create_message
+            }
+
+          class BetaComplianceReviewCreateMessageContent < Anthropic::Internal::Type::BaseModel
+            attr_accessor request: ::Hash[Symbol, top]
+
+            attr_accessor response: Anthropic::Beta::BetaMessage?
+
+            attr_accessor type: :create_message
+
+            def initialize: (
+              request: ::Hash[Symbol, top],
+              response: Anthropic::Beta::BetaMessage?,
+              ?type: :create_message
+            ) -> void
+
+            def to_hash: -> {
+              request: ::Hash[Symbol, top],
+              response: Anthropic::Beta::BetaMessage?,
+              type: :create_message
+            }
+          end
+        end
+      end
+    end
+  end
+end

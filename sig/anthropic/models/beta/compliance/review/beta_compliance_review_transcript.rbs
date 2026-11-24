@@ -1,0 +1,22 @@
+module Anthropic
+  module Models
+    module Beta
+      module Compliance
+        module Review
+          type beta_compliance_review_transcript =
+            { item_id: String, user_profile_id: String? }
+
+          class BetaComplianceReviewTranscript < Anthropic::Internal::Type::BaseModel
+            attr_accessor item_id: String
+
+            attr_accessor user_profile_id: String?
+
+            def initialize: (item_id: String, user_profile_id: String?) -> void
+
+            def to_hash: -> { item_id: String, user_profile_id: String? }
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    module Beta
+      module Compliance
+        module Review
+          type beta_compliance_review_content_not_captured =
+            { type: :not_captured }
+
+          class BetaComplianceReviewContentNotCaptured < Anthropic::Internal::Type::BaseModel
+            attr_accessor type: :not_captured
+
+            def initialize: (?type: :not_captured) -> void
+
+            def to_hash: -> { type: :not_captured }
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,41 @@
+module Anthropic
+  module Models
+    module Beta
+      module Compliance
+        module Review
+          type beta_compliance_review_message_details =
+            {
+              content: Anthropic::Beta::Compliance::Review::BetaComplianceReviewCreateMessageContent?,
+              content_unavailable_reason: Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_content_unavailable_reason?,
+              model: String?,
+              type: :message
+            }
+
+          class BetaComplianceReviewMessageDetails < Anthropic::Internal::Type::BaseModel
+            attr_accessor content: Anthropic::Beta::Compliance::Review::BetaComplianceReviewCreateMessageContent?
+
+            attr_accessor content_unavailable_reason: Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_content_unavailable_reason?
+
+            attr_accessor model: String?
+
+            attr_accessor type: :message
+
+            def initialize: (
+              content: Anthropic::Beta::Compliance::Review::BetaComplianceReviewCreateMessageContent?,
+              content_unavailable_reason: Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_content_unavailable_reason?,
+              model: String?,
+              ?type: :message
+            ) -> void
+
+            def to_hash: -> {
+              content: Anthropic::Beta::Compliance::Review::BetaComplianceReviewCreateMessageContent?,
+              content_unavailable_reason: Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_content_unavailable_reason?,
+              model: String?,
+              type: :message
+            }
+          end
+        end
+      end
+    end
+  end
+end

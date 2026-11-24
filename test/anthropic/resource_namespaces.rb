@@ -22,6 +22,11 @@ module Anthropic
         module Agents
         end
 
+        module Compliance
+          module Review
+          end
+        end
+
         module Environments
         end
 
@@ -121,6 +126,11 @@ module Anthropic
         end
       end
 
+      module Compliance
+        module Review
+        end
+      end
+
       module Environments
       end
 
@@ -212,6 +222,9 @@ module Anthropic
       end
 
       module RBACRoles
+      end
+
+      module Review
       end
 
       module Rules
