@@ -33,7 +33,7 @@ class Anthropic::Test::Resources::Organization::Federation::Rules::WorkspacesTes
     response =
       @anthropic.organization.federation.rules.workspaces.add(
         "federation_rule_id",
-        workspace_id: "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+        workspace_id: "wrkspc_01AbCdEfGhJkLmNpQrStUvWx"
       )
 
     assert_pattern do
