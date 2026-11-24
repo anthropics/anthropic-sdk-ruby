@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class BetaExternalKeyProviderMismatchError < Anthropic::Errors::BadRequestError
+      def error_code: -> :external_key_provider_mismatch
+
+      def details: -> Anthropic::BetaExternalKeyProviderMismatchErrorDetails
+    end
+  end
+end

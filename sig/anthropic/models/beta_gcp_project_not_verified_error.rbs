@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class BetaGCPProjectNotVerifiedError < Anthropic::Errors::BadRequestError
+      def error_code: -> :gcp_project_not_verified
+
+      def details: -> Anthropic::BetaGCPProjectNotVerifiedErrorDetails
+    end
+  end
+end

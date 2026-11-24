@@ -22,6 +22,9 @@ module Anthropic
         # @return [Anthropic::Resources::Beta::Organization::ExternalStorage]
         attr_reader :external_storage
 
+        # @return [Anthropic::Resources::Beta::Organization::Providers]
+        attr_reader :providers
+
         # @return [Anthropic::Resources::Beta::Organization::Users]
         attr_reader :users
 
@@ -97,6 +100,7 @@ module Anthropic
           @invites = Anthropic::Resources::Beta::Organization::Invites.new(client: client)
           @service_accounts = Anthropic::Resources::Beta::Organization::ServiceAccounts.new(client: client)
           @external_storage = Anthropic::Resources::Beta::Organization::ExternalStorage.new(client: client)
+          @providers = Anthropic::Resources::Beta::Organization::Providers.new(client: client)
           @users = Anthropic::Resources::Beta::Organization::Users.new(client: client)
           @workspaces = Anthropic::Resources::Beta::Organization::Workspaces.new(client: client)
           @rate_limits = Anthropic::Resources::Beta::Organization::RateLimits.new(client: client)

@@ -1,0 +1,40 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Providers
+          module Google
+            module Projects
+              type beta_google_managed_project_storage_region_pending =
+                {
+                  effective_bucket: Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectEffectiveBucket?,
+                  failed_checks: ::Array[Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageFailedCheck],
+                  type: :pending
+                }
+
+              class BetaGoogleManagedProjectStorageRegionPending < Anthropic::Internal::Type::BaseModel
+                attr_accessor effective_bucket: Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectEffectiveBucket?
+
+                attr_accessor failed_checks: ::Array[Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageFailedCheck]
+
+                attr_accessor type: :pending
+
+                def initialize: (
+                  effective_bucket: Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectEffectiveBucket?,
+                  failed_checks: ::Array[Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageFailedCheck],
+                  ?type: :pending
+                ) -> void
+
+                def to_hash: -> {
+                  effective_bucket: Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectEffectiveBucket?,
+                  failed_checks: ::Array[Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageFailedCheck],
+                  type: :pending
+                }
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end

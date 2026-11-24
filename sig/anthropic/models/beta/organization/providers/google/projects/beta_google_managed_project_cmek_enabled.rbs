@@ -1,0 +1,45 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Providers
+          module Google
+            module Projects
+              type beta_google_managed_project_cmek_enabled =
+                {
+                  external_key_ids: ::Hash[Symbol, String],
+                  retired_keys: ::Array[Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectRetiredKey],
+                  status: ::Hash[Symbol, Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_cmek_region_status],
+                  type: :enabled
+                }
+
+              class BetaGoogleManagedProjectCMEKEnabled < Anthropic::Internal::Type::BaseModel
+                attr_accessor external_key_ids: ::Hash[Symbol, String]
+
+                attr_accessor retired_keys: ::Array[Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectRetiredKey]
+
+                attr_accessor status: ::Hash[Symbol, Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_cmek_region_status]
+
+                attr_accessor type: :enabled
+
+                def initialize: (
+                  external_key_ids: ::Hash[Symbol, String],
+                  retired_keys: ::Array[Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectRetiredKey],
+                  status: ::Hash[Symbol, Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_cmek_region_status],
+                  ?type: :enabled
+                ) -> void
+
+                def to_hash: -> {
+                  external_key_ids: ::Hash[Symbol, String],
+                  retired_keys: ::Array[Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectRetiredKey],
+                  status: ::Hash[Symbol, Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_cmek_region_status],
+                  type: :enabled
+                }
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,86 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Providers
+          module Google
+            module Projects
+              type beta_google_managed_project_storage_failed_check =
+                {
+                  check: Anthropic::Models::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageFailedCheck::check,
+                  message: String,
+                  role: Anthropic::Models::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageFailedCheck::role?
+                }
+
+              class BetaGoogleManagedProjectStorageFailedCheck < Anthropic::Internal::Type::BaseModel
+                attr_accessor check: Anthropic::Models::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageFailedCheck::check
+
+                attr_accessor message: String
+
+                attr_accessor role: Anthropic::Models::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageFailedCheck::role?
+
+                def initialize: (
+                  check: Anthropic::Models::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageFailedCheck::check,
+                  message: String,
+                  role: Anthropic::Models::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageFailedCheck::role?
+                ) -> void
+
+                def to_hash: -> {
+                  check: Anthropic::Models::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageFailedCheck::check,
+                  message: String,
+                  role: Anthropic::Models::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageFailedCheck::role?
+                }
+
+                type check =
+                  :bucket_settings
+                  | :deletion_policy
+                  | :encryption
+                  | :grant_mismatch
+                  | :kms_key_refused
+                  | :label_mismatch
+                  | :lifecycle_rules
+                  | :location_mismatch
+                  | :probe_failed
+                  | :project_not_verified
+                  | :versioning
+
+                module Check
+                  extend Anthropic::Internal::Type::Enum
+
+                  BUCKET_SETTINGS: :bucket_settings
+                  DELETION_POLICY: :deletion_policy
+                  ENCRYPTION: :encryption
+                  GRANT_MISMATCH: :grant_mismatch
+                  KMS_KEY_REFUSED: :kms_key_refused
+                  LABEL_MISMATCH: :label_mismatch
+                  LIFECYCLE_RULES: :lifecycle_rules
+                  LOCATION_MISMATCH: :location_mismatch
+                  PROBE_FAILED: :probe_failed
+                  PROJECT_NOT_VERIFIED: :project_not_verified
+                  VERSIONING: :versioning
+
+                  def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageFailedCheck::check]
+                end
+
+                type role =
+                  :ingest | :maintenance | :media_erasure | :read | :verify
+
+                module Role
+                  extend Anthropic::Internal::Type::Enum
+
+                  INGEST: :ingest
+                  MAINTENANCE: :maintenance
+                  MEDIA_ERASURE: :media_erasure
+                  READ: :read
+                  VERIFY: :verify
+
+                  def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageFailedCheck::role]
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end

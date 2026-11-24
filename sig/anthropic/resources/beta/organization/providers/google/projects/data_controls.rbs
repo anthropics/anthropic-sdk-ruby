@@ -1,0 +1,31 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class Providers
+          class Google
+            class Projects
+              class DataControls
+                def retrieve: (
+                  String project_number,
+                  ?betas: ::Array[Anthropic::Models::anthropic_beta],
+                  ?request_options: Anthropic::request_opts
+                ) -> Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectDataControls
+
+                def update: (
+                  String project_number,
+                  ?cmek: Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_cmek_control_params,
+                  ?storage: Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_storage_control_params,
+                  ?betas: ::Array[Anthropic::Models::anthropic_beta],
+                  ?request_options: Anthropic::request_opts
+                ) -> Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectDataControls
+
+                def initialize: (client: Anthropic::Client) -> void
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end

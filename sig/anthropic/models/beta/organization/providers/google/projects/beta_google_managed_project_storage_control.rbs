@@ -1,0 +1,53 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Providers
+          module Google
+            module Projects
+              type beta_google_managed_project_storage_control =
+                Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageDisabled
+                | Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageEnabled
+
+              module BetaGoogleManagedProjectStorageControl
+                extend Anthropic::Internal::Type::Union
+
+                type type_ = :disabled | :enabled
+
+                module Type
+                  extend Anthropic::Internal::Type::Enum
+
+                  DISABLED: :disabled
+                  ENABLED: :enabled
+
+                  def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageControl::type_]
+                end
+
+                def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_storage_control]
+
+                def self.new:
+                  (
+                    type: :disabled | "disabled",
+                    retired_buckets: ::Array[Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectRetiredBucket]
+                  ) -> Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageDisabled
+                  | (
+                    type: :enabled | "enabled",
+                    buckets: ::Hash[Symbol, Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageBucket],
+                    retired_buckets: ::Array[Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectRetiredBucket],
+                    status: ::Hash[Symbol, Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_storage_region_status]
+                  ) -> Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageEnabled
+                  | (
+                    type: Anthropic::Models::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageControl::type_
+                    | String,
+                    retired_buckets: ::Array[Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectRetiredBucket],
+                    ?buckets: ::Hash[Symbol, Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageBucket],
+                    ?status: ::Hash[Symbol, Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_storage_region_status]
+                  ) -> Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_storage_control
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end

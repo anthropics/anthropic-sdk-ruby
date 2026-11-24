@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class BetaCMEKNotApprovedError < Anthropic::Errors::BadRequestError
+      def error_code: -> :cmek_not_approved
+
+      def details: -> Anthropic::BetaCMEKNotApprovedErrorDetails
+    end
+  end
+end

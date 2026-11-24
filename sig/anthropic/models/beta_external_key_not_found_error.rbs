@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class BetaExternalKeyNotFoundError < Anthropic::Errors::BadRequestError
+      def error_code: -> :external_key_not_found
+
+      def details: -> Anthropic::BetaExternalKeyNotFoundErrorDetails
+    end
+  end
+end

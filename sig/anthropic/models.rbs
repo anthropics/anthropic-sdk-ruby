@@ -51,6 +51,10 @@ module Anthropic
 
   class BetaBillingErrorObject = Anthropic::Models::BetaBillingErrorObject
 
+  class BetaCMEKNotApprovedError = Anthropic::Models::BetaCMEKNotApprovedError
+
+  class BetaCMEKNotApprovedErrorDetails = Anthropic::Models::BetaCMEKNotApprovedErrorDetails
+
   module BetaCurrency = Anthropic::Models::BetaCurrency
 
   module BetaError = Anthropic::Models::BetaError
@@ -59,9 +63,25 @@ module Anthropic
 
   class BetaErrorResponse = Anthropic::Models::BetaErrorResponse
 
+  class BetaExternalKeyNotFoundError = Anthropic::Models::BetaExternalKeyNotFoundError
+
+  class BetaExternalKeyNotFoundErrorDetails = Anthropic::Models::BetaExternalKeyNotFoundErrorDetails
+
+  class BetaExternalKeyProviderMismatchError = Anthropic::Models::BetaExternalKeyProviderMismatchError
+
+  class BetaExternalKeyProviderMismatchErrorDetails = Anthropic::Models::BetaExternalKeyProviderMismatchErrorDetails
+
   class BetaGatewayTimeoutError = Anthropic::Models::BetaGatewayTimeoutError
 
   class BetaGatewayTimeoutErrorObject = Anthropic::Models::BetaGatewayTimeoutErrorObject
+
+  class BetaGCPProjectControlledByAnotherOrganizationError = Anthropic::Models::BetaGCPProjectControlledByAnotherOrganizationError
+
+  class BetaGCPProjectControlledByAnotherOrganizationErrorDetails = Anthropic::Models::BetaGCPProjectControlledByAnotherOrganizationErrorDetails
+
+  class BetaGCPProjectNotVerifiedError = Anthropic::Models::BetaGCPProjectNotVerifiedError
+
+  class BetaGCPProjectNotVerifiedErrorDetails = Anthropic::Models::BetaGCPProjectNotVerifiedErrorDetails
 
   class BetaInvalidRequestError = Anthropic::Models::BetaInvalidRequestError
 
@@ -89,9 +109,21 @@ module Anthropic
 
   class BetaRateLimitErrorObject = Anthropic::Models::BetaRateLimitErrorObject
 
+  class BetaRegionNotSupportedError = Anthropic::Models::BetaRegionNotSupportedError
+
+  class BetaRegionNotSupportedErrorDetails = Anthropic::Models::BetaRegionNotSupportedErrorDetails
+
   class BetaRequestBodyTimeoutError = Anthropic::Models::BetaRequestBodyTimeoutError
 
   class BetaRequestBodyTimeoutErrorDetails = Anthropic::Models::BetaRequestBodyTimeoutErrorDetails
+
+  class BetaStorageInUseError = Anthropic::Models::BetaStorageInUseError
+
+  class BetaStorageInUseErrorDetails = Anthropic::Models::BetaStorageInUseErrorDetails
+
+  class BetaStorageNotApprovedError = Anthropic::Models::BetaStorageNotApprovedError
+
+  class BetaStorageNotApprovedErrorDetails = Anthropic::Models::BetaStorageNotApprovedErrorDetails
 
   class BetaUnsupportedCharsetError = Anthropic::Models::BetaUnsupportedCharsetError
 

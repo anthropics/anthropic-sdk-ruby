@@ -93,6 +93,10 @@ TEST_PATHS=(
 	test/anthropic/resources/beta/organization/service_accounts_test.rb
 	test/anthropic/resources/beta/organization/service_accounts/workspaces_test.rb
 	test/anthropic/resources/beta/organization/external_storage_test.rb
+	test/anthropic/resources/beta/organization/providers_test.rb
+	test/anthropic/resources/beta/organization/providers/google_test.rb
+	test/anthropic/resources/beta/organization/providers/google/projects_test.rb
+	test/anthropic/resources/beta/organization/providers/google/projects/data_controls_test.rb
 	test/anthropic/resources/beta/organization/users_test.rb
 	test/anthropic/resources/beta/organization/workspaces_test.rb
 	test/anthropic/resources/beta/organization/workspaces/rate_limits_test.rb

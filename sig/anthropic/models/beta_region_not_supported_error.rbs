@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class BetaRegionNotSupportedError < Anthropic::Errors::BadRequestError
+      def error_code: -> :region_not_supported
+
+      def details: -> Anthropic::BetaRegionNotSupportedErrorDetails
+    end
+  end
+end

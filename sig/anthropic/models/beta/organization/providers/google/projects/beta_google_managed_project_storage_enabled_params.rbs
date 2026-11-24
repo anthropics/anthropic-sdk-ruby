@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Providers
+          module Google
+            module Projects
+              type beta_google_managed_project_storage_enabled_params =
+                {
+                  type: :enabled,
+                  buckets: ::Hash[Symbol, Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectBucketReference?]
+                }
+
+              class BetaGoogleManagedProjectStorageEnabledParams < Anthropic::Internal::Type::BaseModel
+                attr_accessor type: :enabled
+
+                attr_reader buckets: ::Hash[Symbol, Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectBucketReference?]?
+
+                def buckets=: (
+                  ::Hash[Symbol, Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectBucketReference?]
+                ) -> ::Hash[Symbol, Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectBucketReference?]
+
+                def initialize: (
+                  ?buckets: ::Hash[Symbol, Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectBucketReference?],
+                  ?type: :enabled
+                ) -> void
+
+                def to_hash: -> {
+                  type: :enabled,
+                  buckets: ::Hash[Symbol, Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectBucketReference?]
+                }
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end

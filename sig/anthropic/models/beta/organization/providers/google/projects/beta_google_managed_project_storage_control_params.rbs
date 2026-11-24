@@ -1,0 +1,48 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Providers
+          module Google
+            module Projects
+              type beta_google_managed_project_storage_control_params =
+                Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageDisabledParams
+                | Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageEnabledParams
+
+              module BetaGoogleManagedProjectStorageControlParams
+                extend Anthropic::Internal::Type::Union
+
+                type type_ = :disabled | :enabled
+
+                module Type
+                  extend Anthropic::Internal::Type::Enum
+
+                  DISABLED: :disabled
+                  ENABLED: :enabled
+
+                  def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageControlParams::type_]
+                end
+
+                def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_storage_control_params]
+
+                def self.new:
+                  (
+                    type: :disabled | "disabled"
+                  ) -> Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageDisabledParams
+                  | (
+                    type: :enabled | "enabled",
+                    ?buckets: ::Hash[Symbol, Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectBucketReference?]
+                  ) -> Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageEnabledParams
+                  | (
+                    type: Anthropic::Models::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageControlParams::type_
+                    | String,
+                    ?buckets: ::Hash[Symbol, Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectBucketReference?]
+                  ) -> Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_storage_control_params
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end

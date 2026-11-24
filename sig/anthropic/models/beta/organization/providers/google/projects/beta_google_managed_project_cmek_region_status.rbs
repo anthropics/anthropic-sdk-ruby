@@ -1,0 +1,76 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Providers
+          module Google
+            module Projects
+              type beta_google_managed_project_cmek_region_status =
+                Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectCMEKRegionNotConfigured
+                | Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectCMEKRegionPending
+                | Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectCMEKRegionActive
+                | Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectCMEKRegionFailed
+                | Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectCMEKRegionSuspended
+
+              module BetaGoogleManagedProjectCMEKRegionStatus
+                extend Anthropic::Internal::Type::Union
+
+                type type_ =
+                  :not_configured | :pending | :active | :failed | :suspended
+
+                module Type
+                  extend Anthropic::Internal::Type::Enum
+
+                  NOT_CONFIGURED: :not_configured
+                  PENDING: :pending
+                  ACTIVE: :active
+                  FAILED: :failed
+                  SUSPENDED: :suspended
+
+                  def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectCMEKRegionStatus::type_]
+                end
+
+                def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_cmek_region_status]
+
+                def self.new:
+                  (
+                    type: :not_configured | "not_configured",
+                    effective_external_key_id: String?
+                  ) -> Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectCMEKRegionNotConfigured
+                  | (
+                    type: :pending | "pending",
+                    effective_external_key_id: String?,
+                    error: String?
+                  ) -> Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectCMEKRegionPending
+                  | (
+                    type: :active | "active",
+                    effective_external_key_id: String?,
+                    error: String?,
+                    last_checked_at: Time?,
+                    validated_at: Time
+                  ) -> Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectCMEKRegionActive
+                  | (
+                    type: :failed | "failed",
+                    effective_external_key_id: String?,
+                    error: String
+                  ) -> Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectCMEKRegionFailed
+                  | (
+                    type: :suspended | "suspended",
+                    effective_external_key_id: String?
+                  ) -> Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectCMEKRegionSuspended
+                  | (
+                    type: Anthropic::Models::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectCMEKRegionStatus::type_
+                    | String,
+                    effective_external_key_id: String?,
+                    ?error: String? | String,
+                    ?last_checked_at: Time?,
+                    ?validated_at: Time
+                  ) -> Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_cmek_region_status
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end

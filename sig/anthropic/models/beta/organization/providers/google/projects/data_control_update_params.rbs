@@ -1,0 +1,63 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Providers
+          module Google
+            module Projects
+              type data_control_update_params =
+                {
+                  project_number: String,
+                  cmek: Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_cmek_control_params,
+                  storage: Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_storage_control_params,
+                  betas: ::Array[Anthropic::Models::anthropic_beta]
+                }
+                & Anthropic::Internal::Type::request_parameters
+
+              class DataControlUpdateParams < Anthropic::Internal::Type::BaseModel
+                extend Anthropic::Internal::Type::RequestParameters::Converter
+                include Anthropic::Internal::Type::RequestParameters
+
+                attr_accessor project_number: String
+
+                attr_reader cmek: Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_cmek_control_params?
+
+                def cmek=: (
+                  Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_cmek_control_params
+                ) -> Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_cmek_control_params
+
+                attr_reader storage: Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_storage_control_params?
+
+                def storage=: (
+                  Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_storage_control_params
+                ) -> Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_storage_control_params
+
+                attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+                def betas=: (
+                  ::Array[Anthropic::Models::anthropic_beta]
+                ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+                def initialize: (
+                  project_number: String,
+                  ?cmek: Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_cmek_control_params,
+                  ?storage: Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_storage_control_params,
+                  ?betas: ::Array[Anthropic::Models::anthropic_beta],
+                  ?request_options: Anthropic::request_opts
+                ) -> void
+
+                def to_hash: -> {
+                  project_number: String,
+                  cmek: Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_cmek_control_params,
+                  storage: Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_storage_control_params,
+                  betas: ::Array[Anthropic::Models::anthropic_beta],
+                  request_options: Anthropic::RequestOptions
+                }
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end

@@ -57,6 +57,13 @@ module Anthropic
           module Plugins
           end
 
+          module Providers
+            module Google
+              module Projects
+              end
+            end
+          end
+
           module RBACGroups
           end
 
@@ -123,6 +130,8 @@ module Anthropic
       end
 
       module Google
+        module Projects
+        end
       end
 
       module ManagedSettings
@@ -160,6 +169,13 @@ module Anthropic
         module Plugins
         end
 
+        module Providers
+          module Google
+            module Projects
+            end
+          end
+        end
+
         module RBACGroups
         end
 
@@ -182,8 +198,13 @@ module Anthropic
       module Plugins
       end
 
+      module Projects
+      end
+
       module Providers
         module Google
+          module Projects
+          end
         end
       end
 

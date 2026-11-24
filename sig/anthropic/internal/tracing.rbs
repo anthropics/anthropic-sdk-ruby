@@ -270,6 +270,8 @@ module Anthropic
         ORGANIZATION_EXTERNAL_STORAGE_LIST: "anthropic.organization.external_storage.list"
         ORGANIZATION_EXTERNAL_STORAGE_DELETE: "anthropic.organization.external_storage.delete"
         ORGANIZATION_EXTERNAL_STORAGE_ACTIVATE: "anthropic.organization.external_storage.activate"
+        ORGANIZATION_PROVIDERS_GOOGLE_PROJECTS_DATA_CONTROLS_RETRIEVE: "anthropic.organization.providers.google.projects.data_controls.retrieve"
+        ORGANIZATION_PROVIDERS_GOOGLE_PROJECTS_DATA_CONTROLS_UPDATE: "anthropic.organization.providers.google.projects.data_controls.update"
         ORGANIZATION_USERS_SIGN_OUT: "anthropic.organization.users.sign_out"
         ORGANIZATION_ANALYTICS_USAGE_LIST: "anthropic.organization.analytics.usage.list"
         ORGANIZATION_ANALYTICS_COST_LIST: "anthropic.organization.analytics.cost.list"
