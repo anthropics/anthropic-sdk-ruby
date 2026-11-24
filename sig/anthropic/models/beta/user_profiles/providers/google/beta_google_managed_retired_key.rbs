@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    module Beta
+      module UserProfiles
+        module Providers
+          module Google
+            type beta_google_managed_retired_key =
+              { expires_at: Time, external_key_id: String, region: String }
+
+            class BetaGoogleManagedRetiredKey < Anthropic::Internal::Type::BaseModel
+              attr_accessor expires_at: Time
+
+              attr_accessor external_key_id: String
+
+              attr_accessor region: String
+
+              def initialize: (
+                expires_at: Time,
+                external_key_id: String,
+                region: String
+              ) -> void
+
+              def to_hash: -> {
+                expires_at: Time,
+                external_key_id: String,
+                region: String
+              }
+            end
+          end
+        end
+      end
+    end
+  end
+end

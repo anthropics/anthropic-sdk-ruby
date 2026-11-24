@@ -10,6 +10,9 @@ module Anthropic
         sig { returns(Anthropic::Resources::Beta::UserProfiles::ActionURLs) }
         attr_reader :action_urls
 
+        sig { returns(Anthropic::Resources::Beta::UserProfiles::Providers) }
+        attr_reader :providers
+
         # Register one of your end customers and get the ID to send on the requests you
         # make for them.
         #

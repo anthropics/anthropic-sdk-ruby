@@ -1,0 +1,43 @@
+module Anthropic
+  module Models
+    module Beta
+      module UserProfiles
+        module Providers
+          module Google
+            type beta_google_managed_cmek_enabled =
+              {
+                external_key_ids: ::Hash[Symbol, String],
+                retired_keys: ::Array[Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedRetiredKey],
+                status: ::Hash[Symbol, Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_cmek_region_status],
+                type: :enabled
+              }
+
+            class BetaGoogleManagedCMEKEnabled < Anthropic::Internal::Type::BaseModel
+              attr_accessor external_key_ids: ::Hash[Symbol, String]
+
+              attr_accessor retired_keys: ::Array[Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedRetiredKey]
+
+              attr_accessor status: ::Hash[Symbol, Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_cmek_region_status]
+
+              attr_accessor type: :enabled
+
+              def initialize: (
+                external_key_ids: ::Hash[Symbol, String],
+                retired_keys: ::Array[Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedRetiredKey],
+                status: ::Hash[Symbol, Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_cmek_region_status],
+                ?type: :enabled
+              ) -> void
+
+              def to_hash: -> {
+                external_key_ids: ::Hash[Symbol, String],
+                retired_keys: ::Array[Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedRetiredKey],
+                status: ::Hash[Symbol, Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_cmek_region_status],
+                type: :enabled
+              }
+            end
+          end
+        end
+      end
+    end
+  end
+end

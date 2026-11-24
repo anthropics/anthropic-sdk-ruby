@@ -258,6 +258,11 @@ module Anthropic
         )
       EFS_2026_10_01 =
         T.let(:"efs-2026-10-01", Anthropic::AnthropicBeta::TaggedSymbol)
+      GOOGLE_MANAGED_DATA_CONTROLS_2026_09_01 =
+        T.let(
+          :"google-managed-data-controls-2026-09-01",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
       USER_PROFILES_BILLING_2026_10_01 =
         T.let(
           :"user-profiles-billing-2026-10-01",

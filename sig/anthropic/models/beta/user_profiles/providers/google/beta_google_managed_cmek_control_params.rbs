@@ -1,0 +1,46 @@
+module Anthropic
+  module Models
+    module Beta
+      module UserProfiles
+        module Providers
+          module Google
+            type beta_google_managed_cmek_control_params =
+              Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedCMEKDisabledParams
+              | Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedCMEKEnabledParams
+
+            module BetaGoogleManagedCMEKControlParams
+              extend Anthropic::Internal::Type::Union
+
+              type type_ = :disabled | :enabled
+
+              module Type
+                extend Anthropic::Internal::Type::Enum
+
+                DISABLED: :disabled
+                ENABLED: :enabled
+
+                def self?.values: -> ::Array[Anthropic::Models::Beta::UserProfiles::Providers::Google::BetaGoogleManagedCMEKControlParams::type_]
+              end
+
+              def self?.variants: -> ::Array[Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_cmek_control_params]
+
+              def self.new:
+                (
+                  type: :disabled | "disabled"
+                ) -> Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedCMEKDisabledParams
+                | (
+                  type: :enabled | "enabled",
+                  ?external_key_ids: ::Hash[Symbol, String?]?
+                ) -> Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedCMEKEnabledParams
+                | (
+                  type: Anthropic::Models::Beta::UserProfiles::Providers::Google::BetaGoogleManagedCMEKControlParams::type_
+                  | String,
+                  ?external_key_ids: ::Hash[Symbol, String?]?
+                ) -> Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_cmek_control_params
+            end
+          end
+        end
+      end
+    end
+  end
+end

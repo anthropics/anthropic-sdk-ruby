@@ -88,6 +88,10 @@ module Anthropic
         end
 
         module UserProfiles
+          module Providers
+            module Google
+            end
+          end
         end
 
         module Vaults
@@ -116,6 +120,9 @@ module Anthropic
       module Federation
         module Rules
         end
+      end
+
+      module Google
       end
 
       module ManagedSettings
@@ -175,6 +182,11 @@ module Anthropic
       module Plugins
       end
 
+      module Providers
+        module Google
+        end
+      end
+
       module RBACGroups
       end
 
@@ -208,6 +220,10 @@ module Anthropic
       end
 
       module UserProfiles
+        module Providers
+          module Google
+          end
+        end
       end
 
       module Vaults

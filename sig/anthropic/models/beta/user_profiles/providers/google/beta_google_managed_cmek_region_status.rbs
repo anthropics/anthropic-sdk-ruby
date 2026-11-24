@@ -1,0 +1,74 @@
+module Anthropic
+  module Models
+    module Beta
+      module UserProfiles
+        module Providers
+          module Google
+            type beta_google_managed_cmek_region_status =
+              Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedCMEKRegionNotConfigured
+              | Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedCMEKRegionPending
+              | Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedCMEKRegionActive
+              | Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedCMEKRegionFailed
+              | Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedCMEKRegionSuspended
+
+            module BetaGoogleManagedCMEKRegionStatus
+              extend Anthropic::Internal::Type::Union
+
+              type type_ =
+                :not_configured | :pending | :active | :failed | :suspended
+
+              module Type
+                extend Anthropic::Internal::Type::Enum
+
+                NOT_CONFIGURED: :not_configured
+                PENDING: :pending
+                ACTIVE: :active
+                FAILED: :failed
+                SUSPENDED: :suspended
+
+                def self?.values: -> ::Array[Anthropic::Models::Beta::UserProfiles::Providers::Google::BetaGoogleManagedCMEKRegionStatus::type_]
+              end
+
+              def self?.variants: -> ::Array[Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_cmek_region_status]
+
+              def self.new:
+                (
+                  type: :not_configured | "not_configured",
+                  effective_external_key_id: String?
+                ) -> Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedCMEKRegionNotConfigured
+                | (
+                  type: :pending | "pending",
+                  effective_external_key_id: String?,
+                  error: String?
+                ) -> Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedCMEKRegionPending
+                | (
+                  type: :active | "active",
+                  effective_external_key_id: String?,
+                  error: String?,
+                  last_checked_at: Time?,
+                  validated_at: Time
+                ) -> Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedCMEKRegionActive
+                | (
+                  type: :failed | "failed",
+                  effective_external_key_id: String?,
+                  error: String
+                ) -> Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedCMEKRegionFailed
+                | (
+                  type: :suspended | "suspended",
+                  effective_external_key_id: String?
+                ) -> Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedCMEKRegionSuspended
+                | (
+                  type: Anthropic::Models::Beta::UserProfiles::Providers::Google::BetaGoogleManagedCMEKRegionStatus::type_
+                  | String,
+                  effective_external_key_id: String?,
+                  ?error: String? | String,
+                  ?last_checked_at: Time?,
+                  ?validated_at: Time
+                ) -> Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_cmek_region_status
+            end
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,38 @@
+module Anthropic
+  module Models
+    module Beta
+      module UserProfiles
+        module Providers
+          module Google
+            type beta_google_managed_storage_region_pending =
+              {
+                effective_bucket: Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedBucketReference?,
+                failed_checks: ::Array[Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageFailedCheck],
+                type: :pending
+              }
+
+            class BetaGoogleManagedStorageRegionPending < Anthropic::Internal::Type::BaseModel
+              attr_accessor effective_bucket: Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedBucketReference?
+
+              attr_accessor failed_checks: ::Array[Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageFailedCheck]
+
+              attr_accessor type: :pending
+
+              def initialize: (
+                effective_bucket: Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedBucketReference?,
+                failed_checks: ::Array[Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageFailedCheck],
+                ?type: :pending
+              ) -> void
+
+              def to_hash: -> {
+                effective_bucket: Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedBucketReference?,
+                failed_checks: ::Array[Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageFailedCheck],
+                type: :pending
+              }
+            end
+          end
+        end
+      end
+    end
+  end
+end

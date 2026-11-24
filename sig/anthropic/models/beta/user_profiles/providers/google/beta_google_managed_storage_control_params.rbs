@@ -1,0 +1,46 @@
+module Anthropic
+  module Models
+    module Beta
+      module UserProfiles
+        module Providers
+          module Google
+            type beta_google_managed_storage_control_params =
+              Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageDisabledParams
+              | Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageEnabledParams
+
+            module BetaGoogleManagedStorageControlParams
+              extend Anthropic::Internal::Type::Union
+
+              type type_ = :disabled | :enabled
+
+              module Type
+                extend Anthropic::Internal::Type::Enum
+
+                DISABLED: :disabled
+                ENABLED: :enabled
+
+                def self?.values: -> ::Array[Anthropic::Models::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageControlParams::type_]
+              end
+
+              def self?.variants: -> ::Array[Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_storage_control_params]
+
+              def self.new:
+                (
+                  type: :disabled | "disabled"
+                ) -> Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageDisabledParams
+                | (
+                  type: :enabled | "enabled",
+                  ?buckets: ::Hash[Symbol, Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedBucketReference?]
+                ) -> Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageEnabledParams
+                | (
+                  type: Anthropic::Models::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageControlParams::type_
+                  | String,
+                  ?buckets: ::Hash[Symbol, Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedBucketReference?]
+                ) -> Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_storage_control_params
+            end
+          end
+        end
+      end
+    end
+  end
+end

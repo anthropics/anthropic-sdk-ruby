@@ -76,6 +76,9 @@ TEST_PATHS=(
 	test/anthropic/resources/beta/webhooks_test.rb
 	test/anthropic/resources/beta/user_profiles_test.rb
 	test/anthropic/resources/beta/user_profiles/action_urls_test.rb
+	test/anthropic/resources/beta/user_profiles/providers_test.rb
+	test/anthropic/resources/beta/user_profiles/providers/google_test.rb
+	test/anthropic/resources/beta/user_profiles/providers/google/data_controls_test.rb
 	test/anthropic/resources/beta/dreams_test.rb
 	test/anthropic/resources/beta/tunnels_test.rb
 	test/anthropic/resources/beta/tunnels/certificates_test.rb

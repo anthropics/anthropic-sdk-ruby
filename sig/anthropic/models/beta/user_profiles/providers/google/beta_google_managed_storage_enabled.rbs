@@ -1,0 +1,43 @@
+module Anthropic
+  module Models
+    module Beta
+      module UserProfiles
+        module Providers
+          module Google
+            type beta_google_managed_storage_enabled =
+              {
+                buckets: ::Hash[Symbol, Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageBucket],
+                retired_buckets: ::Array[Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedRetiredBucket],
+                status: ::Hash[Symbol, Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_storage_region_status],
+                type: :enabled
+              }
+
+            class BetaGoogleManagedStorageEnabled < Anthropic::Internal::Type::BaseModel
+              attr_accessor buckets: ::Hash[Symbol, Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageBucket]
+
+              attr_accessor retired_buckets: ::Array[Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedRetiredBucket]
+
+              attr_accessor status: ::Hash[Symbol, Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_storage_region_status]
+
+              attr_accessor type: :enabled
+
+              def initialize: (
+                buckets: ::Hash[Symbol, Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageBucket],
+                retired_buckets: ::Array[Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedRetiredBucket],
+                status: ::Hash[Symbol, Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_storage_region_status],
+                ?type: :enabled
+              ) -> void
+
+              def to_hash: -> {
+                buckets: ::Hash[Symbol, Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageBucket],
+                retired_buckets: ::Array[Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedRetiredBucket],
+                status: ::Hash[Symbol, Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_storage_region_status],
+                type: :enabled
+              }
+            end
+          end
+        end
+      end
+    end
+  end
+end

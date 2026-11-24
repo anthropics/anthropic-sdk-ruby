@@ -364,6 +364,10 @@ module Anthropic
         SKILLS_VERSIONS_DOWNLOAD = "anthropic.skills.versions.download"
         USER_PROFILES_CREATE_ENROLLMENT_URL =
           "anthropic.user_profiles.create_enrollment_url"
+        USER_PROFILES_PROVIDERS_GOOGLE_DATA_CONTROLS_RETRIEVE =
+          "anthropic.user_profiles.providers.google.data_controls.retrieve"
+        USER_PROFILES_PROVIDERS_GOOGLE_DATA_CONTROLS_UPDATE =
+          "anthropic.user_profiles.providers.google.data_controls.update"
         DREAMS_CREATE = "anthropic.dreams.create"
         DREAMS_RETRIEVE = "anthropic.dreams.retrieve"
         DREAMS_LIST = "anthropic.dreams.list"

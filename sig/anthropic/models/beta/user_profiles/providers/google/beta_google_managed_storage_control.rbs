@@ -1,0 +1,51 @@
+module Anthropic
+  module Models
+    module Beta
+      module UserProfiles
+        module Providers
+          module Google
+            type beta_google_managed_storage_control =
+              Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageDisabled
+              | Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageEnabled
+
+            module BetaGoogleManagedStorageControl
+              extend Anthropic::Internal::Type::Union
+
+              type type_ = :disabled | :enabled
+
+              module Type
+                extend Anthropic::Internal::Type::Enum
+
+                DISABLED: :disabled
+                ENABLED: :enabled
+
+                def self?.values: -> ::Array[Anthropic::Models::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageControl::type_]
+              end
+
+              def self?.variants: -> ::Array[Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_storage_control]
+
+              def self.new:
+                (
+                  type: :disabled | "disabled",
+                  retired_buckets: ::Array[Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedRetiredBucket]
+                ) -> Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageDisabled
+                | (
+                  type: :enabled | "enabled",
+                  buckets: ::Hash[Symbol, Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageBucket],
+                  retired_buckets: ::Array[Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedRetiredBucket],
+                  status: ::Hash[Symbol, Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_storage_region_status]
+                ) -> Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageEnabled
+                | (
+                  type: Anthropic::Models::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageControl::type_
+                  | String,
+                  retired_buckets: ::Array[Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedRetiredBucket],
+                  ?buckets: ::Hash[Symbol, Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageBucket],
+                  ?status: ::Hash[Symbol, Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_storage_region_status]
+                ) -> Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_storage_control
+            end
+          end
+        end
+      end
+    end
+  end
+end

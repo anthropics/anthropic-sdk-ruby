@@ -1,0 +1,21 @@
+module Anthropic
+  module Models
+    module Beta
+      module UserProfiles
+        module Providers
+          module Google
+            type beta_google_managed_cmek_disabled_params = { type: :disabled }
+
+            class BetaGoogleManagedCMEKDisabledParams < Anthropic::Internal::Type::BaseModel
+              attr_accessor type: :disabled
+
+              def initialize: (?type: :disabled) -> void
+
+              def to_hash: -> { type: :disabled }
+            end
+          end
+        end
+      end
+    end
+  end
+end

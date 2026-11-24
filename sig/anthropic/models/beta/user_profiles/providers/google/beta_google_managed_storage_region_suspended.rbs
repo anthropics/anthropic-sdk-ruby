@@ -1,0 +1,33 @@
+module Anthropic
+  module Models
+    module Beta
+      module UserProfiles
+        module Providers
+          module Google
+            type beta_google_managed_storage_region_suspended =
+              {
+                effective_bucket: Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedBucketReference?,
+                type: :suspended
+              }
+
+            class BetaGoogleManagedStorageRegionSuspended < Anthropic::Internal::Type::BaseModel
+              attr_accessor effective_bucket: Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedBucketReference?
+
+              attr_accessor type: :suspended
+
+              def initialize: (
+                effective_bucket: Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedBucketReference?,
+                ?type: :suspended
+              ) -> void
+
+              def to_hash: -> {
+                effective_bucket: Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedBucketReference?,
+                type: :suspended
+              }
+            end
+          end
+        end
+      end
+    end
+  end
+end
