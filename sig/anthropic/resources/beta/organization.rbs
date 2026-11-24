@@ -14,6 +14,8 @@ module Anthropic
 
         attr_reader external_storage: Anthropic::Resources::Beta::Organization::ExternalStorage
 
+        attr_reader providers: Anthropic::Resources::Beta::Organization::Providers
+
         attr_reader users: Anthropic::Resources::Beta::Organization::Users
 
         attr_reader workspaces: Anthropic::Resources::Beta::Organization::Workspaces

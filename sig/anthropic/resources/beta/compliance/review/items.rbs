@@ -1,0 +1,20 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Compliance
+        class Review
+          class Items
+            def retrieve: (
+              String item_id,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?user_profile_id: String,
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Beta::Compliance::Review::BetaComplianceReviewItem
+
+            def initialize: (client: Anthropic::Client) -> void
+          end
+        end
+      end
+    end
+  end
+end

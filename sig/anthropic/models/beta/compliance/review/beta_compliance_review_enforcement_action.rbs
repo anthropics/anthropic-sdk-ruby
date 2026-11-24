@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    module Beta
+      module Compliance
+        module Review
+          type beta_compliance_review_enforcement_action = { type: String }
+
+          class BetaComplianceReviewEnforcementAction < Anthropic::Internal::Type::BaseModel
+            attr_accessor type: String
+
+            def initialize: (type: String) -> void
+
+            def to_hash: -> { type: String }
+          end
+        end
+      end
+    end
+  end
+end

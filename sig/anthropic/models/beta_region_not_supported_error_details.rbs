@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type beta_region_not_supported_error_details =
+      { error_code: :region_not_supported }
+
+    class BetaRegionNotSupportedErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :region_not_supported
+
+      def initialize: (?error_code: :region_not_supported) -> void
+
+      def to_hash: -> { error_code: :region_not_supported }
+    end
+  end
+end

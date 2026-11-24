@@ -85,6 +85,14 @@ module Anthropic
       | Anthropic::Beta::Organization::BetaExternalStorageInUseErrorDetails
       | Anthropic::Beta::Organization::BetaExternalStorageInWorkspacePolicyErrorDetails
       | Anthropic::Beta::Organization::BetaStorageVerificationFailedErrorDetails
+      | Anthropic::BetaCMEKNotApprovedErrorDetails
+      | Anthropic::BetaExternalKeyNotFoundErrorDetails
+      | Anthropic::BetaExternalKeyProviderMismatchErrorDetails
+      | Anthropic::BetaGCPProjectNotVerifiedErrorDetails
+      | Anthropic::BetaRegionNotSupportedErrorDetails
+      | Anthropic::BetaStorageNotApprovedErrorDetails
+      | Anthropic::BetaGCPProjectControlledByAnotherOrganizationErrorDetails
+      | Anthropic::BetaStorageInUseErrorDetails
       | Anthropic::Beta::Organization::BetaCannotSignOutPrimaryOwnerErrorDetails
       | Anthropic::Beta::Organization::BetaCannotSignOutSelfErrorDetails
       | Anthropic::BetaOrganizationNotEnrolledInBetaErrorDetails
@@ -215,6 +223,14 @@ module Anthropic
         | :external_storage_in_use
         | :external_storage_in_workspace_policy
         | :storage_verification_failed
+        | :cmek_not_approved
+        | :external_key_not_found
+        | :external_key_provider_mismatch
+        | :gcp_project_not_verified
+        | :region_not_supported
+        | :storage_not_approved
+        | :gcp_project_controlled_by_another_organization
+        | :storage_in_use
         | :cannot_sign_out_primary_owner
         | :cannot_sign_out_self
         | :organization_not_enrolled_in_beta
@@ -344,6 +360,14 @@ module Anthropic
         EXTERNAL_STORAGE_IN_USE: :external_storage_in_use
         EXTERNAL_STORAGE_IN_WORKSPACE_POLICY: :external_storage_in_workspace_policy
         STORAGE_VERIFICATION_FAILED: :storage_verification_failed
+        CMEK_NOT_APPROVED: :cmek_not_approved
+        EXTERNAL_KEY_NOT_FOUND: :external_key_not_found
+        EXTERNAL_KEY_PROVIDER_MISMATCH: :external_key_provider_mismatch
+        GCP_PROJECT_NOT_VERIFIED: :gcp_project_not_verified
+        REGION_NOT_SUPPORTED: :region_not_supported
+        STORAGE_NOT_APPROVED: :storage_not_approved
+        GCP_PROJECT_CONTROLLED_BY_ANOTHER_ORGANIZATION: :gcp_project_controlled_by_another_organization
+        STORAGE_IN_USE: :storage_in_use
         CANNOT_SIGN_OUT_PRIMARY_OWNER: :cannot_sign_out_primary_owner
         CANNOT_SIGN_OUT_SELF: :cannot_sign_out_self
         ORGANIZATION_NOT_ENROLLED_IN_BETA: :organization_not_enrolled_in_beta
@@ -695,6 +719,32 @@ module Anthropic
           failed_checks: ::Array[Anthropic::Beta::Organization::BetaExternalStorageFailedCheck],
           ?field: String?
         ) -> Anthropic::Beta::Organization::BetaStorageVerificationFailedErrorDetails
+        | (
+          error_code: :cmek_not_approved | "cmek_not_approved"
+        ) -> Anthropic::BetaCMEKNotApprovedErrorDetails
+        | (
+          error_code: :external_key_not_found | "external_key_not_found"
+        ) -> Anthropic::BetaExternalKeyNotFoundErrorDetails
+        | (
+          error_code: :external_key_provider_mismatch
+          | "external_key_provider_mismatch"
+        ) -> Anthropic::BetaExternalKeyProviderMismatchErrorDetails
+        | (
+          error_code: :gcp_project_not_verified | "gcp_project_not_verified"
+        ) -> Anthropic::BetaGCPProjectNotVerifiedErrorDetails
+        | (
+          error_code: :region_not_supported | "region_not_supported"
+        ) -> Anthropic::BetaRegionNotSupportedErrorDetails
+        | (
+          error_code: :storage_not_approved | "storage_not_approved"
+        ) -> Anthropic::BetaStorageNotApprovedErrorDetails
+        | (
+          error_code: :gcp_project_controlled_by_another_organization
+          | "gcp_project_controlled_by_another_organization"
+        ) -> Anthropic::BetaGCPProjectControlledByAnotherOrganizationErrorDetails
+        | (
+          error_code: :storage_in_use | "storage_in_use"
+        ) -> Anthropic::BetaStorageInUseErrorDetails
         | (
           error_code: :cannot_sign_out_primary_owner
           | "cannot_sign_out_primary_owner"

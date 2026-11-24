@@ -1,0 +1,38 @@
+module Anthropic
+  module Models
+    module Beta
+      module Compliance
+        module Review
+          type beta_compliance_review_case_close_reason =
+            {
+              type: Anthropic::Models::Beta::Compliance::Review::BetaComplianceReviewCaseCloseReason::type_
+            }
+
+          class BetaComplianceReviewCaseCloseReason < Anthropic::Internal::Type::BaseModel
+            attr_accessor type: Anthropic::Models::Beta::Compliance::Review::BetaComplianceReviewCaseCloseReason::type_
+
+            def initialize: (
+              type: Anthropic::Models::Beta::Compliance::Review::BetaComplianceReviewCaseCloseReason::type_
+            ) -> void
+
+            def to_hash: -> {
+              type: Anthropic::Models::Beta::Compliance::Review::BetaComplianceReviewCaseCloseReason::type_
+            }
+
+            type type_ = :responded | :window_ended | :ended_by_anthropic
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              RESPONDED: :responded
+              WINDOW_ENDED: :window_ended
+              ENDED_BY_ANTHROPIC: :ended_by_anthropic
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Compliance::Review::BetaComplianceReviewCaseCloseReason::type_]
+            end
+          end
+        end
+      end
+    end
+  end
+end

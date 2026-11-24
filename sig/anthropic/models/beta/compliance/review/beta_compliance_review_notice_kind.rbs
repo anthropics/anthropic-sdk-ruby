@@ -1,0 +1,38 @@
+module Anthropic
+  module Models
+    module Beta
+      module Compliance
+        module Review
+          type beta_compliance_review_notice_kind =
+            {
+              type: Anthropic::Models::Beta::Compliance::Review::BetaComplianceReviewNoticeKind::type_
+            }
+
+          class BetaComplianceReviewNoticeKind < Anthropic::Internal::Type::BaseModel
+            attr_accessor type: Anthropic::Models::Beta::Compliance::Review::BetaComplianceReviewNoticeKind::type_
+
+            def initialize: (
+              type: Anthropic::Models::Beta::Compliance::Review::BetaComplianceReviewNoticeKind::type_
+            ) -> void
+
+            def to_hash: -> {
+              type: Anthropic::Models::Beta::Compliance::Review::BetaComplianceReviewNoticeKind::type_
+            }
+
+            type type_ = :response_requested | :warning | :question
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              RESPONSE_REQUESTED: :response_requested
+              WARNING: :warning
+              QUESTION: :question
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Compliance::Review::BetaComplianceReviewNoticeKind::type_]
+            end
+          end
+        end
+      end
+    end
+  end
+end

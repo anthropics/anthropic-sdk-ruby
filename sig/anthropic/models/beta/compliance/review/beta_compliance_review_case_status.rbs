@@ -1,0 +1,44 @@
+module Anthropic
+  module Models
+    module Beta
+      module Compliance
+        module Review
+          type beta_compliance_review_case_status =
+            Anthropic::Beta::Compliance::Review::BetaComplianceReviewCaseOpen
+            | Anthropic::Beta::Compliance::Review::BetaComplianceReviewCaseClosed
+
+          module BetaComplianceReviewCaseStatus
+            extend Anthropic::Internal::Type::Union
+
+            type type_ = :open | :closed
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              OPEN: :open
+              CLOSED: :closed
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Compliance::Review::BetaComplianceReviewCaseStatus::type_]
+            end
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_case_status]
+
+            def self.new:
+              (
+                type: :open | "open"
+              ) -> Anthropic::Beta::Compliance::Review::BetaComplianceReviewCaseOpen
+              | (
+                type: :closed | "closed",
+                reason: Anthropic::Beta::Compliance::Review::BetaComplianceReviewCaseCloseReason
+              ) -> Anthropic::Beta::Compliance::Review::BetaComplianceReviewCaseClosed
+              | (
+                type: Anthropic::Models::Beta::Compliance::Review::BetaComplianceReviewCaseStatus::type_
+                | String,
+                ?reason: Anthropic::Beta::Compliance::Review::BetaComplianceReviewCaseCloseReason
+              ) -> Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_case_status
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,33 @@
+module Anthropic
+  module Models
+    module Beta
+      module UserProfiles
+        module Providers
+          module Google
+            type beta_google_managed_storage_disabled =
+              {
+                retired_buckets: ::Array[Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedRetiredBucket],
+                type: :disabled
+              }
+
+            class BetaGoogleManagedStorageDisabled < Anthropic::Internal::Type::BaseModel
+              attr_accessor retired_buckets: ::Array[Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedRetiredBucket]
+
+              attr_accessor type: :disabled
+
+              def initialize: (
+                retired_buckets: ::Array[Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedRetiredBucket],
+                ?type: :disabled
+              ) -> void
+
+              def to_hash: -> {
+                retired_buckets: ::Array[Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedRetiredBucket],
+                type: :disabled
+              }
+            end
+          end
+        end
+      end
+    end
+  end
+end

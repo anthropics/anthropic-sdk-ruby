@@ -10,6 +10,9 @@ module Anthropic
         # @return [Anthropic::Resources::Beta::UserProfiles::ActionURLs]
         attr_reader :action_urls
 
+        # @return [Anthropic::Resources::Beta::UserProfiles::Providers]
+        attr_reader :providers
+
         # Register one of your end customers and get the ID to send on the requests you
         # make for them.
         #
@@ -281,6 +284,7 @@ module Anthropic
         def initialize(client:)
           @client = client
           @action_urls = Anthropic::Resources::Beta::UserProfiles::ActionURLs.new(client: client)
+          @providers = Anthropic::Resources::Beta::UserProfiles::Providers.new(client: client)
         end
       end
     end

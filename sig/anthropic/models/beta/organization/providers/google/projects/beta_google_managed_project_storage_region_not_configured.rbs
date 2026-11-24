@@ -1,0 +1,35 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Providers
+          module Google
+            module Projects
+              type beta_google_managed_project_storage_region_not_configured =
+                {
+                  effective_bucket: Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectEffectiveBucket?,
+                  type: :not_configured
+                }
+
+              class BetaGoogleManagedProjectStorageRegionNotConfigured < Anthropic::Internal::Type::BaseModel
+                attr_accessor effective_bucket: Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectEffectiveBucket?
+
+                attr_accessor type: :not_configured
+
+                def initialize: (
+                  effective_bucket: Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectEffectiveBucket?,
+                  ?type: :not_configured
+                ) -> void
+
+                def to_hash: -> {
+                  effective_bucket: Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectEffectiveBucket?,
+                  type: :not_configured
+                }
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end

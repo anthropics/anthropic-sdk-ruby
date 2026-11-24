@@ -1,0 +1,48 @@
+module Anthropic
+  module Models
+    module Beta
+      module UserProfiles
+        module Providers
+          module Google
+            type beta_google_managed_storage_bucket =
+              {
+                bucket_name: String,
+                kms_key_name: String?,
+                location: String?,
+                project_id: String?,
+                project_number: String
+              }
+
+            class BetaGoogleManagedStorageBucket < Anthropic::Internal::Type::BaseModel
+              attr_accessor bucket_name: String
+
+              attr_accessor kms_key_name: String?
+
+              attr_accessor location: String?
+
+              attr_accessor project_id: String?
+
+              attr_accessor project_number: String
+
+              def initialize: (
+                bucket_name: String,
+                kms_key_name: String?,
+                location: String?,
+                project_id: String?,
+                project_number: String
+              ) -> void
+
+              def to_hash: -> {
+                bucket_name: String,
+                kms_key_name: String?,
+                location: String?,
+                project_id: String?,
+                project_number: String
+              }
+            end
+          end
+        end
+      end
+    end
+  end
+end

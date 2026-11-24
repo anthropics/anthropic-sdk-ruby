@@ -1,0 +1,23 @@
+module Anthropic
+  module Models
+    module Beta
+      module Compliance
+        module Review
+          type beta_compliance_review_case_order_by = :created_at | :updated_at
+
+          module BetaComplianceReviewCaseOrderBy
+            extend Anthropic::Internal::Type::Enum
+
+            # Sort by when Anthropic sent the case.
+            CREATED_AT: :created_at
+
+            # Sort by when the case last changed.
+            UPDATED_AT: :updated_at
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_case_order_by]
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,33 @@
+module Anthropic
+  module Models
+    module Beta
+      module UserProfiles
+        module Providers
+          module Google
+            type beta_google_managed_cmek_disabled =
+              {
+                retired_keys: ::Array[Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedRetiredKey],
+                type: :disabled
+              }
+
+            class BetaGoogleManagedCMEKDisabled < Anthropic::Internal::Type::BaseModel
+              attr_accessor retired_keys: ::Array[Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedRetiredKey]
+
+              attr_accessor type: :disabled
+
+              def initialize: (
+                retired_keys: ::Array[Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedRetiredKey],
+                ?type: :disabled
+              ) -> void
+
+              def to_hash: -> {
+                retired_keys: ::Array[Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedRetiredKey],
+                type: :disabled
+              }
+            end
+          end
+        end
+      end
+    end
+  end
+end

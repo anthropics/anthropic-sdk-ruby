@@ -54,7 +54,7 @@ module Anthropic
             state[:can_retry] = false if value.content.is_a?(IO)
             value
           in Time
-            value.iso8601
+            value.iso8601(value.usec.zero? ? 0 : 6)
           else
             value
           end

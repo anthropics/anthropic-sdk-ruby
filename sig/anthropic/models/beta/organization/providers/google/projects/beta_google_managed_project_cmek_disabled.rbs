@@ -1,0 +1,35 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Providers
+          module Google
+            module Projects
+              type beta_google_managed_project_cmek_disabled =
+                {
+                  retired_keys: ::Array[Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectRetiredKey],
+                  type: :disabled
+                }
+
+              class BetaGoogleManagedProjectCMEKDisabled < Anthropic::Internal::Type::BaseModel
+                attr_accessor retired_keys: ::Array[Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectRetiredKey]
+
+                attr_accessor type: :disabled
+
+                def initialize: (
+                  retired_keys: ::Array[Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectRetiredKey],
+                  ?type: :disabled
+                ) -> void
+
+                def to_hash: -> {
+                  retired_keys: ::Array[Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectRetiredKey],
+                  type: :disabled
+                }
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,50 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Providers
+          module Google
+            module Projects
+              type beta_google_managed_project_data_controls =
+                {
+                  cmek: Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_cmek_control,
+                  project_number: String,
+                  storage: Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_storage_control,
+                  type: :google_managed_project_data_controls,
+                  updated_at: Time
+                }
+
+              class BetaGoogleManagedProjectDataControls < Anthropic::Internal::Type::BaseModel
+                attr_accessor cmek: Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_cmek_control
+
+                attr_accessor project_number: String
+
+                attr_accessor storage: Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_storage_control
+
+                attr_accessor type: :google_managed_project_data_controls
+
+                attr_accessor updated_at: Time
+
+                def initialize: (
+                  cmek: Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_cmek_control,
+                  project_number: String,
+                  storage: Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_storage_control,
+                  updated_at: Time,
+                  ?type: :google_managed_project_data_controls
+                ) -> void
+
+                def to_hash: -> {
+                  cmek: Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_cmek_control,
+                  project_number: String,
+                  storage: Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_storage_control,
+                  type: :google_managed_project_data_controls,
+                  updated_at: Time
+                }
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end

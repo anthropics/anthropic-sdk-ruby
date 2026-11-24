@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class BetaStorageInUseError < Anthropic::Errors::ConflictError
+      def error_code: -> :storage_in_use
+
+      def details: -> Anthropic::BetaStorageInUseErrorDetails
+    end
+  end
+end

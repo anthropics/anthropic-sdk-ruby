@@ -1,0 +1,53 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Providers
+          module Google
+            module Projects
+              type beta_google_managed_project_cmek_control =
+                Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectCMEKDisabled
+                | Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectCMEKEnabled
+
+              module BetaGoogleManagedProjectCMEKControl
+                extend Anthropic::Internal::Type::Union
+
+                type type_ = :disabled | :enabled
+
+                module Type
+                  extend Anthropic::Internal::Type::Enum
+
+                  DISABLED: :disabled
+                  ENABLED: :enabled
+
+                  def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectCMEKControl::type_]
+                end
+
+                def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_cmek_control]
+
+                def self.new:
+                  (
+                    type: :disabled | "disabled",
+                    retired_keys: ::Array[Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectRetiredKey]
+                  ) -> Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectCMEKDisabled
+                  | (
+                    type: :enabled | "enabled",
+                    external_key_ids: ::Hash[Symbol, String],
+                    retired_keys: ::Array[Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectRetiredKey],
+                    status: ::Hash[Symbol, Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_cmek_region_status]
+                  ) -> Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectCMEKEnabled
+                  | (
+                    type: Anthropic::Models::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectCMEKControl::type_
+                    | String,
+                    retired_keys: ::Array[Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectRetiredKey],
+                    ?external_key_ids: ::Hash[Symbol, String],
+                    ?status: ::Hash[Symbol, Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_cmek_region_status]
+                  ) -> Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_cmek_control
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,13 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class Providers
+          attr_reader google: Anthropic::Resources::Beta::Organization::Providers::Google
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

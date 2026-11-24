@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class BetaGCPProjectControlledByAnotherOrganizationError < Anthropic::Errors::ConflictError
+      def error_code: -> :gcp_project_controlled_by_another_organization
+
+      def details: -> Anthropic::BetaGCPProjectControlledByAnotherOrganizationErrorDetails
+    end
+  end
+end

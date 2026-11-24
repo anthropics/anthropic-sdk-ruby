@@ -51,6 +51,9 @@ module Anthropic
       # @return [Anthropic::Resources::Beta::Tunnels]
       attr_reader :tunnels
 
+      # @return [Anthropic::Resources::Beta::Compliance]
+      attr_reader :compliance
+
       # @return [Anthropic::Resources::Beta::Organization]
       attr_reader :organization
 
@@ -74,6 +77,7 @@ module Anthropic
         @user_profiles = Anthropic::Resources::Beta::UserProfiles.new(client: client)
         @dreams = Anthropic::Resources::Beta::Dreams.new(client: client)
         @tunnels = Anthropic::Resources::Beta::Tunnels.new(client: client)
+        @compliance = Anthropic::Resources::Beta::Compliance.new(client: client)
         @organization = Anthropic::Resources::Beta::Organization.new(client: client)
       end
     end

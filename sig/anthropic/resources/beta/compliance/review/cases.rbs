@@ -1,0 +1,47 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Compliance
+        class Review
+          class Cases
+            def retrieve: (
+              String case_id,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Beta::Compliance::Review::BetaComplianceReviewCase
+
+            def list: (
+              ?created_at_gt: Time,
+              ?created_at_gte: Time,
+              ?created_at_lt: Time,
+              ?created_at_lte: Time,
+              ?limit: Integer,
+              ?order: Anthropic::Models::Beta::Compliance::beta_compliance_review_order,
+              ?order_by: Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_case_order_by,
+              ?page: String,
+              ?status: Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_case_status_filter,
+              ?updated_at_gt: Time,
+              ?updated_at_gte: Time,
+              ?updated_at_lt: Time,
+              ?updated_at_lte: Time,
+              ?user_profile_id: String,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Compliance::Review::BetaComplianceReviewCase]
+
+            def respond: (
+              String case_id,
+              determination: Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_determination,
+              ?policy_categories: ::Array[Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_violated_policy_category],
+              ?verdicts: ::Array[Anthropic::Beta::Compliance::Review::BetaComplianceReviewVerdictParam],
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Beta::Compliance::Review::BetaComplianceReviewCase
+
+            def initialize: (client: Anthropic::Client) -> void
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,31 @@
+module Anthropic
+  module Models
+    module Beta
+      module Compliance
+        module Review
+          type beta_compliance_review_case_closed =
+            {
+              reason: Anthropic::Beta::Compliance::Review::BetaComplianceReviewCaseCloseReason,
+              type: :closed
+            }
+
+          class BetaComplianceReviewCaseClosed < Anthropic::Internal::Type::BaseModel
+            attr_accessor reason: Anthropic::Beta::Compliance::Review::BetaComplianceReviewCaseCloseReason
+
+            attr_accessor type: :closed
+
+            def initialize: (
+              reason: Anthropic::Beta::Compliance::Review::BetaComplianceReviewCaseCloseReason,
+              ?type: :closed
+            ) -> void
+
+            def to_hash: -> {
+              reason: Anthropic::Beta::Compliance::Review::BetaComplianceReviewCaseCloseReason,
+              type: :closed
+            }
+          end
+        end
+      end
+    end
+  end
+end

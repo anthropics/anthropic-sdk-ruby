@@ -1,0 +1,53 @@
+module Anthropic
+  module Models
+    module Beta
+      module UserProfiles
+        module Providers
+          module Google
+            type beta_google_managed_data_controls =
+              {
+                bucket_label_value: String,
+                cmek: Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_cmek_control,
+                storage: Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_storage_control,
+                type: :google_managed_data_controls,
+                updated_at: Time,
+                user_profile_id: String
+              }
+
+            class BetaGoogleManagedDataControls < Anthropic::Internal::Type::BaseModel
+              attr_accessor bucket_label_value: String
+
+              attr_accessor cmek: Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_cmek_control
+
+              attr_accessor storage: Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_storage_control
+
+              attr_accessor type: :google_managed_data_controls
+
+              attr_accessor updated_at: Time
+
+              attr_accessor user_profile_id: String
+
+              def initialize: (
+                bucket_label_value: String,
+                cmek: Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_cmek_control,
+                storage: Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_storage_control,
+                updated_at: Time,
+                user_profile_id: String,
+                ?type: :google_managed_data_controls
+              ) -> void
+
+              def to_hash: -> {
+                bucket_label_value: String,
+                cmek: Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_cmek_control,
+                storage: Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_storage_control,
+                type: :google_managed_data_controls,
+                updated_at: Time,
+                user_profile_id: String
+              }
+            end
+          end
+        end
+      end
+    end
+  end
+end

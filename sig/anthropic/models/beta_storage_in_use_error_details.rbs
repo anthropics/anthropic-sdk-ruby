@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    type beta_storage_in_use_error_details = { error_code: :storage_in_use }
+
+    class BetaStorageInUseErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :storage_in_use
+
+      def initialize: (?error_code: :storage_in_use) -> void
+
+      def to_hash: -> { error_code: :storage_in_use }
+    end
+  end
+end

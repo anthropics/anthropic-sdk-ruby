@@ -1,0 +1,55 @@
+module Anthropic
+  module Models
+    module Beta
+      module Compliance
+        module Review
+          type beta_compliance_review_actor =
+            Anthropic::Beta::Compliance::Review::BetaComplianceReviewUserActor
+            | Anthropic::Beta::Compliance::Review::BetaComplianceReviewAPIActor
+            | Anthropic::Beta::Compliance::Review::BetaComplianceReviewServiceAccountActor
+
+          module BetaComplianceReviewActor
+            extend Anthropic::Internal::Type::Union
+
+            type type_ = :user_actor | :api_actor | :service_account_actor
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              USER_ACTOR: :user_actor
+              API_ACTOR: :api_actor
+              SERVICE_ACCOUNT_ACTOR: :service_account_actor
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Compliance::Review::BetaComplianceReviewActor::type_]
+            end
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_actor]
+
+            def self.new:
+              (
+                type: :user_actor | "user_actor",
+                email_address: String?,
+                user_id: String
+              ) -> Anthropic::Beta::Compliance::Review::BetaComplianceReviewUserActor
+              | (
+                type: :api_actor | "api_actor",
+                api_key_id: String
+              ) -> Anthropic::Beta::Compliance::Review::BetaComplianceReviewAPIActor
+              | (
+                type: :service_account_actor | "service_account_actor",
+                service_account_id: String
+              ) -> Anthropic::Beta::Compliance::Review::BetaComplianceReviewServiceAccountActor
+              | (
+                type: Anthropic::Models::Beta::Compliance::Review::BetaComplianceReviewActor::type_
+                | String,
+                ?email_address: String?,
+                ?user_id: String,
+                ?api_key_id: String,
+                ?service_account_id: String
+              ) -> Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_actor
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,17 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Compliance
+        class Review
+          attr_reader cases: Anthropic::Resources::Beta::Compliance::Review::Cases
+
+          attr_reader notices: Anthropic::Resources::Beta::Compliance::Review::Notices
+
+          attr_reader items: Anthropic::Resources::Beta::Compliance::Review::Items
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

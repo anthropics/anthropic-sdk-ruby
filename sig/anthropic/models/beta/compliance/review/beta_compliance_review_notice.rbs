@@ -1,0 +1,61 @@
+module Anthropic
+  module Models
+    module Beta
+      module Compliance
+        module Review
+          type beta_compliance_review_notice =
+            {
+              id: String,
+              case_ids: ::Array[String],
+              created_at: Time,
+              kind: Anthropic::Beta::Compliance::Review::BetaComplianceReviewNoticeKind,
+              message: String,
+              organization_id: String,
+              respond_by: Time?,
+              type: :compliance_review_notice
+            }
+
+          class BetaComplianceReviewNotice < Anthropic::Internal::Type::BaseModel
+            attr_accessor id: String
+
+            attr_accessor case_ids: ::Array[String]
+
+            attr_accessor created_at: Time
+
+            attr_accessor kind: Anthropic::Beta::Compliance::Review::BetaComplianceReviewNoticeKind
+
+            attr_accessor message: String
+
+            attr_accessor organization_id: String
+
+            attr_accessor respond_by: Time?
+
+            attr_accessor type: :compliance_review_notice
+
+            def initialize: (
+              id: String,
+              case_ids: ::Array[String],
+              created_at: Time,
+              kind: Anthropic::Beta::Compliance::Review::BetaComplianceReviewNoticeKind,
+              message: String,
+              organization_id: String,
+              respond_by: Time?,
+              ?type: :compliance_review_notice
+            ) -> void
+
+            def to_hash: -> {
+              id: String,
+              case_ids: ::Array[String],
+              created_at: Time,
+              kind: Anthropic::Beta::Compliance::Review::BetaComplianceReviewNoticeKind,
+              message: String,
+              organization_id: String,
+              respond_by: Time?,
+              type: :compliance_review_notice
+            }
+          end
+        end
+      end
+    end
+  end
+end

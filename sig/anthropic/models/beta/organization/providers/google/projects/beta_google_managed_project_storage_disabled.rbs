@@ -1,0 +1,35 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Providers
+          module Google
+            module Projects
+              type beta_google_managed_project_storage_disabled =
+                {
+                  retired_buckets: ::Array[Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectRetiredBucket],
+                  type: :disabled
+                }
+
+              class BetaGoogleManagedProjectStorageDisabled < Anthropic::Internal::Type::BaseModel
+                attr_accessor retired_buckets: ::Array[Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectRetiredBucket]
+
+                attr_accessor type: :disabled
+
+                def initialize: (
+                  retired_buckets: ::Array[Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectRetiredBucket],
+                  ?type: :disabled
+                ) -> void
+
+                def to_hash: -> {
+                  retired_buckets: ::Array[Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectRetiredBucket],
+                  type: :disabled
+                }
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end

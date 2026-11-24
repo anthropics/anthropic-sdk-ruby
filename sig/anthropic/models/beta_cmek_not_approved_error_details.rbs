@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type beta_cmek_not_approved_error_details =
+      { error_code: :cmek_not_approved }
+
+    class BetaCMEKNotApprovedErrorDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: :cmek_not_approved
+
+      def initialize: (?error_code: :cmek_not_approved) -> void
+
+      def to_hash: -> { error_code: :cmek_not_approved }
+    end
+  end
+end

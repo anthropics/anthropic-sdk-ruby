@@ -1,0 +1,71 @@
+module Anthropic
+  module Models
+    module Beta
+      module Compliance
+        module Review
+          type beta_compliance_review_item =
+            {
+              id: String,
+              actor: Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_actor?,
+              content_expires_at: Time,
+              created_at: Time,
+              details: Anthropic::Beta::Compliance::Review::BetaComplianceReviewMessageDetails,
+              organization_id: String,
+              read_reason: Anthropic::Beta::Compliance::Review::BetaComplianceReviewSafeguardsReason,
+              type: :compliance_review_item,
+              user_profile_id: String?,
+              workspace_id: String?
+            }
+
+          class BetaComplianceReviewItem < Anthropic::Internal::Type::BaseModel
+            attr_accessor id: String
+
+            attr_accessor actor: Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_actor?
+
+            attr_accessor content_expires_at: Time
+
+            attr_accessor created_at: Time
+
+            attr_accessor details: Anthropic::Beta::Compliance::Review::BetaComplianceReviewMessageDetails
+
+            attr_accessor organization_id: String
+
+            attr_accessor read_reason: Anthropic::Beta::Compliance::Review::BetaComplianceReviewSafeguardsReason
+
+            attr_accessor type: :compliance_review_item
+
+            attr_accessor user_profile_id: String?
+
+            attr_accessor workspace_id: String?
+
+            def initialize: (
+              id: String,
+              actor: Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_actor?,
+              content_expires_at: Time,
+              created_at: Time,
+              details: Anthropic::Beta::Compliance::Review::BetaComplianceReviewMessageDetails,
+              organization_id: String,
+              read_reason: Anthropic::Beta::Compliance::Review::BetaComplianceReviewSafeguardsReason,
+              user_profile_id: String?,
+              workspace_id: String?,
+              ?type: :compliance_review_item
+            ) -> void
+
+            def to_hash: -> {
+              id: String,
+              actor: Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_actor?,
+              content_expires_at: Time,
+              created_at: Time,
+              details: Anthropic::Beta::Compliance::Review::BetaComplianceReviewMessageDetails,
+              organization_id: String,
+              read_reason: Anthropic::Beta::Compliance::Review::BetaComplianceReviewSafeguardsReason,
+              type: :compliance_review_item,
+              user_profile_id: String?,
+              workspace_id: String?
+            }
+          end
+        end
+      end
+    end
+  end
+end

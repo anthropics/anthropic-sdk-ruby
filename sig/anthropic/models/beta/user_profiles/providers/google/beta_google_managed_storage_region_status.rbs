@@ -1,0 +1,72 @@
+module Anthropic
+  module Models
+    module Beta
+      module UserProfiles
+        module Providers
+          module Google
+            type beta_google_managed_storage_region_status =
+              Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageRegionNotConfigured
+              | Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageRegionPending
+              | Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageRegionActive
+              | Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageRegionFailed
+              | Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageRegionSuspended
+
+            module BetaGoogleManagedStorageRegionStatus
+              extend Anthropic::Internal::Type::Union
+
+              type type_ =
+                :not_configured | :pending | :active | :failed | :suspended
+
+              module Type
+                extend Anthropic::Internal::Type::Enum
+
+                NOT_CONFIGURED: :not_configured
+                PENDING: :pending
+                ACTIVE: :active
+                FAILED: :failed
+                SUSPENDED: :suspended
+
+                def self?.values: -> ::Array[Anthropic::Models::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageRegionStatus::type_]
+              end
+
+              def self?.variants: -> ::Array[Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_storage_region_status]
+
+              def self.new:
+                (
+                  type: :not_configured | "not_configured",
+                  effective_bucket: Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedBucketReference?
+                ) -> Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageRegionNotConfigured
+                | (
+                  type: :pending | "pending",
+                  effective_bucket: Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedBucketReference?,
+                  failed_checks: ::Array[Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageFailedCheck]
+                ) -> Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageRegionPending
+                | (
+                  type: :active | "active",
+                  effective_bucket: Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedBucketReference?,
+                  failed_checks: ::Array[Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageFailedCheck],
+                  validated_at: Time
+                ) -> Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageRegionActive
+                | (
+                  type: :failed | "failed",
+                  effective_bucket: Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedBucketReference?,
+                  failed_checks: ::Array[Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageFailedCheck]
+                ) -> Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageRegionFailed
+                | (
+                  type: :suspended | "suspended",
+                  effective_bucket: Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedBucketReference?
+                ) -> Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageRegionSuspended
+                | (
+                  type: Anthropic::Models::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageRegionStatus::type_
+                  | String,
+                  effective_bucket: Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedBucketReference?,
+                  ?failed_checks: ::Array[Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedStorageFailedCheck],
+                  ?validated_at: Time
+                ) -> Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_storage_region_status
+            end
+          end
+        end
+      end
+    end
+  end
+end

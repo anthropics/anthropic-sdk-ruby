@@ -1,0 +1,36 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Providers
+          module Google
+            module Projects
+              type beta_google_managed_project_cmek_enabled_params =
+                { type: :enabled, external_key_ids: ::Hash[Symbol, String?] }
+
+              class BetaGoogleManagedProjectCMEKEnabledParams < Anthropic::Internal::Type::BaseModel
+                attr_accessor type: :enabled
+
+                attr_reader external_key_ids: ::Hash[Symbol, String?]?
+
+                def external_key_ids=: (
+                  ::Hash[Symbol, String?]
+                ) -> ::Hash[Symbol, String?]
+
+                def initialize: (
+                  ?external_key_ids: ::Hash[Symbol, String?],
+                  ?type: :enabled
+                ) -> void
+
+                def to_hash: -> {
+                  type: :enabled,
+                  external_key_ids: ::Hash[Symbol, String?]
+                }
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,38 @@
+module Anthropic
+  module Models
+    module Beta
+      module UserProfiles
+        module Providers
+          module Google
+            type beta_google_managed_cmek_region_pending =
+              {
+                effective_external_key_id: String?,
+                error: String?,
+                type: :pending
+              }
+
+            class BetaGoogleManagedCMEKRegionPending < Anthropic::Internal::Type::BaseModel
+              attr_accessor effective_external_key_id: String?
+
+              attr_accessor error: String?
+
+              attr_accessor type: :pending
+
+              def initialize: (
+                effective_external_key_id: String?,
+                error: String?,
+                ?type: :pending
+              ) -> void
+
+              def to_hash: -> {
+                effective_external_key_id: String?,
+                error: String?,
+                type: :pending
+              }
+            end
+          end
+        end
+      end
+    end
+  end
+end

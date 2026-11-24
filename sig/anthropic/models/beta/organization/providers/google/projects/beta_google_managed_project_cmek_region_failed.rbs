@@ -1,0 +1,40 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Providers
+          module Google
+            module Projects
+              type beta_google_managed_project_cmek_region_failed =
+                {
+                  effective_external_key_id: String?,
+                  error: String,
+                  type: :failed
+                }
+
+              class BetaGoogleManagedProjectCMEKRegionFailed < Anthropic::Internal::Type::BaseModel
+                attr_accessor effective_external_key_id: String?
+
+                attr_accessor error: String
+
+                attr_accessor type: :failed
+
+                def initialize: (
+                  effective_external_key_id: String?,
+                  error: String,
+                  ?type: :failed
+                ) -> void
+
+                def to_hash: -> {
+                  effective_external_key_id: String?,
+                  error: String,
+                  type: :failed
+                }
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end

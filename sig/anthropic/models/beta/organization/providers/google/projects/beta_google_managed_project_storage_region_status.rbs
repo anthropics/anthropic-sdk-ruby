@@ -1,0 +1,74 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Providers
+          module Google
+            module Projects
+              type beta_google_managed_project_storage_region_status =
+                Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageRegionNotConfigured
+                | Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageRegionPending
+                | Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageRegionActive
+                | Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageRegionFailed
+                | Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageRegionSuspended
+
+              module BetaGoogleManagedProjectStorageRegionStatus
+                extend Anthropic::Internal::Type::Union
+
+                type type_ =
+                  :not_configured | :pending | :active | :failed | :suspended
+
+                module Type
+                  extend Anthropic::Internal::Type::Enum
+
+                  NOT_CONFIGURED: :not_configured
+                  PENDING: :pending
+                  ACTIVE: :active
+                  FAILED: :failed
+                  SUSPENDED: :suspended
+
+                  def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageRegionStatus::type_]
+                end
+
+                def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_storage_region_status]
+
+                def self.new:
+                  (
+                    type: :not_configured | "not_configured",
+                    effective_bucket: Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectEffectiveBucket?
+                  ) -> Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageRegionNotConfigured
+                  | (
+                    type: :pending | "pending",
+                    effective_bucket: Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectEffectiveBucket?,
+                    failed_checks: ::Array[Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageFailedCheck]
+                  ) -> Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageRegionPending
+                  | (
+                    type: :active | "active",
+                    effective_bucket: Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectEffectiveBucket?,
+                    failed_checks: ::Array[Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageFailedCheck],
+                    validated_at: Time
+                  ) -> Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageRegionActive
+                  | (
+                    type: :failed | "failed",
+                    effective_bucket: Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectEffectiveBucket?,
+                    failed_checks: ::Array[Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageFailedCheck]
+                  ) -> Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageRegionFailed
+                  | (
+                    type: :suspended | "suspended",
+                    effective_bucket: Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectEffectiveBucket?
+                  ) -> Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageRegionSuspended
+                  | (
+                    type: Anthropic::Models::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageRegionStatus::type_
+                    | String,
+                    effective_bucket: Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectEffectiveBucket?,
+                    ?failed_checks: ::Array[Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectStorageFailedCheck],
+                    ?validated_at: Time
+                  ) -> Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_storage_region_status
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end

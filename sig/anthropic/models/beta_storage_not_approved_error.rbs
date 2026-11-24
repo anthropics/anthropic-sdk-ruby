@@ -1,0 +1,9 @@
+module Anthropic
+  module Models
+    class BetaStorageNotApprovedError < Anthropic::Errors::BadRequestError
+      def error_code: -> :storage_not_approved
+
+      def details: -> Anthropic::BetaStorageNotApprovedErrorDetails
+    end
+  end
+end

@@ -22,6 +22,11 @@ module Anthropic
         module Agents
         end
 
+        module Compliance
+          module Review
+          end
+        end
+
         module Environments
         end
 
@@ -57,6 +62,13 @@ module Anthropic
           module Plugins
           end
 
+          module Providers
+            module Google
+              module Projects
+              end
+            end
+          end
+
           module RBACGroups
           end
 
@@ -88,6 +100,10 @@ module Anthropic
         end
 
         module UserProfiles
+          module Providers
+            module Google
+            end
+          end
         end
 
         module Vaults
@@ -110,11 +126,21 @@ module Anthropic
         end
       end
 
+      module Compliance
+        module Review
+        end
+      end
+
       module Environments
       end
 
       module Federation
         module Rules
+        end
+      end
+
+      module Google
+        module Projects
         end
       end
 
@@ -153,6 +179,13 @@ module Anthropic
         module Plugins
         end
 
+        module Providers
+          module Google
+            module Projects
+            end
+          end
+        end
+
         module RBACGroups
         end
 
@@ -175,10 +208,23 @@ module Anthropic
       module Plugins
       end
 
+      module Projects
+      end
+
+      module Providers
+        module Google
+          module Projects
+          end
+        end
+      end
+
       module RBACGroups
       end
 
       module RBACRoles
+      end
+
+      module Review
       end
 
       module Rules
@@ -208,6 +254,10 @@ module Anthropic
       end
 
       module UserProfiles
+        module Providers
+          module Google
+          end
+        end
       end
 
       module Vaults

@@ -1,0 +1,30 @@
+module Anthropic
+  module Models
+    module Beta
+      module UserProfiles
+        module Providers
+          module Google
+            type beta_google_managed_cmek_region_not_configured =
+              { effective_external_key_id: String?, type: :not_configured }
+
+            class BetaGoogleManagedCMEKRegionNotConfigured < Anthropic::Internal::Type::BaseModel
+              attr_accessor effective_external_key_id: String?
+
+              attr_accessor type: :not_configured
+
+              def initialize: (
+                effective_external_key_id: String?,
+                ?type: :not_configured
+              ) -> void
+
+              def to_hash: -> {
+                effective_external_key_id: String?,
+                type: :not_configured
+              }
+            end
+          end
+        end
+      end
+    end
+  end
+end

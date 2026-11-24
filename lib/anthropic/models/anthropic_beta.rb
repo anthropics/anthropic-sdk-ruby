@@ -125,6 +125,8 @@ module Anthropic
 
       variant const: -> { Anthropic::Models::AnthropicBeta::EFS_2026_10_01 }
 
+      variant const: -> { Anthropic::Models::AnthropicBeta::GOOGLE_MANAGED_DATA_CONTROLS_2026_09_01 }
+
       variant const: -> { Anthropic::Models::AnthropicBeta::USER_PROFILES_BILLING_2026_10_01 }
 
       variant String
@@ -210,6 +212,7 @@ module Anthropic
       CE_USER_MANAGEMENT_2026_07_13 = :"ce-user-management-2026-07-13"
       CE_CLAUDE_CODE_MANAGED_SETTINGS_2026_10_06 = :"ce-claude-code-managed-settings-2026-10-06"
       EFS_2026_10_01 = :"efs-2026-10-01"
+      GOOGLE_MANAGED_DATA_CONTROLS_2026_09_01 = :"google-managed-data-controls-2026-09-01"
       USER_PROFILES_BILLING_2026_10_01 = :"user-profiles-billing-2026-10-01"
 
       # @!endgroup

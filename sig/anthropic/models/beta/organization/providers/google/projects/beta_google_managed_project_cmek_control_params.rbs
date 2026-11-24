@@ -1,0 +1,48 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Providers
+          module Google
+            module Projects
+              type beta_google_managed_project_cmek_control_params =
+                Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectCMEKDisabledParams
+                | Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectCMEKEnabledParams
+
+              module BetaGoogleManagedProjectCMEKControlParams
+                extend Anthropic::Internal::Type::Union
+
+                type type_ = :disabled | :enabled
+
+                module Type
+                  extend Anthropic::Internal::Type::Enum
+
+                  DISABLED: :disabled
+                  ENABLED: :enabled
+
+                  def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectCMEKControlParams::type_]
+                end
+
+                def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_cmek_control_params]
+
+                def self.new:
+                  (
+                    type: :disabled | "disabled"
+                  ) -> Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectCMEKDisabledParams
+                  | (
+                    type: :enabled | "enabled",
+                    ?external_key_ids: ::Hash[Symbol, String?]
+                  ) -> Anthropic::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectCMEKEnabledParams
+                  | (
+                    type: Anthropic::Models::Beta::Organization::Providers::Google::Projects::BetaGoogleManagedProjectCMEKControlParams::type_
+                    | String,
+                    ?external_key_ids: ::Hash[Symbol, String?]
+                  ) -> Anthropic::Models::Beta::Organization::Providers::Google::Projects::beta_google_managed_project_cmek_control_params
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end

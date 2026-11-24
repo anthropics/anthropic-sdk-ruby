@@ -91,6 +91,10 @@ module Anthropic
 
   BetaBillingErrorObject = Anthropic::Models::BetaBillingErrorObject
 
+  BetaCMEKNotApprovedError = Anthropic::Models::BetaCMEKNotApprovedError
+
+  BetaCMEKNotApprovedErrorDetails = Anthropic::Models::BetaCMEKNotApprovedErrorDetails
+
   BetaCurrency = Anthropic::Models::BetaCurrency
 
   BetaError = Anthropic::Models::BetaError
@@ -99,9 +103,28 @@ module Anthropic
 
   BetaErrorResponse = Anthropic::Models::BetaErrorResponse
 
+  BetaExternalKeyNotFoundError = Anthropic::Models::BetaExternalKeyNotFoundError
+
+  BetaExternalKeyNotFoundErrorDetails = Anthropic::Models::BetaExternalKeyNotFoundErrorDetails
+
+  BetaExternalKeyProviderMismatchError = Anthropic::Models::BetaExternalKeyProviderMismatchError
+
+  BetaExternalKeyProviderMismatchErrorDetails =
+    Anthropic::Models::BetaExternalKeyProviderMismatchErrorDetails
+
   BetaGatewayTimeoutError = Anthropic::Models::BetaGatewayTimeoutError
 
   BetaGatewayTimeoutErrorObject = Anthropic::Models::BetaGatewayTimeoutErrorObject
+
+  BetaGCPProjectControlledByAnotherOrganizationError =
+    Anthropic::Models::BetaGCPProjectControlledByAnotherOrganizationError
+
+  BetaGCPProjectControlledByAnotherOrganizationErrorDetails =
+    Anthropic::Models::BetaGCPProjectControlledByAnotherOrganizationErrorDetails
+
+  BetaGCPProjectNotVerifiedError = Anthropic::Models::BetaGCPProjectNotVerifiedError
+
+  BetaGCPProjectNotVerifiedErrorDetails = Anthropic::Models::BetaGCPProjectNotVerifiedErrorDetails
 
   BetaInvalidRequestError = Anthropic::Models::BetaInvalidRequestError
 
@@ -130,9 +153,21 @@ module Anthropic
 
   BetaRateLimitErrorObject = Anthropic::Models::BetaRateLimitErrorObject
 
+  BetaRegionNotSupportedError = Anthropic::Models::BetaRegionNotSupportedError
+
+  BetaRegionNotSupportedErrorDetails = Anthropic::Models::BetaRegionNotSupportedErrorDetails
+
   BetaRequestBodyTimeoutError = Anthropic::Models::BetaRequestBodyTimeoutError
 
   BetaRequestBodyTimeoutErrorDetails = Anthropic::Models::BetaRequestBodyTimeoutErrorDetails
+
+  BetaStorageInUseError = Anthropic::Models::BetaStorageInUseError
+
+  BetaStorageInUseErrorDetails = Anthropic::Models::BetaStorageInUseErrorDetails
+
+  BetaStorageNotApprovedError = Anthropic::Models::BetaStorageNotApprovedError
+
+  BetaStorageNotApprovedErrorDetails = Anthropic::Models::BetaStorageNotApprovedErrorDetails
 
   BetaUnsupportedCharsetError = Anthropic::Models::BetaUnsupportedCharsetError
 

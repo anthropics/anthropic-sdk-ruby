@@ -1,0 +1,51 @@
+module Anthropic
+  module Models
+    module Beta
+      module UserProfiles
+        module Providers
+          module Google
+            type beta_google_managed_cmek_control =
+              Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedCMEKDisabled
+              | Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedCMEKEnabled
+
+            module BetaGoogleManagedCMEKControl
+              extend Anthropic::Internal::Type::Union
+
+              type type_ = :disabled | :enabled
+
+              module Type
+                extend Anthropic::Internal::Type::Enum
+
+                DISABLED: :disabled
+                ENABLED: :enabled
+
+                def self?.values: -> ::Array[Anthropic::Models::Beta::UserProfiles::Providers::Google::BetaGoogleManagedCMEKControl::type_]
+              end
+
+              def self?.variants: -> ::Array[Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_cmek_control]
+
+              def self.new:
+                (
+                  type: :disabled | "disabled",
+                  retired_keys: ::Array[Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedRetiredKey]
+                ) -> Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedCMEKDisabled
+                | (
+                  type: :enabled | "enabled",
+                  external_key_ids: ::Hash[Symbol, String],
+                  retired_keys: ::Array[Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedRetiredKey],
+                  status: ::Hash[Symbol, Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_cmek_region_status]
+                ) -> Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedCMEKEnabled
+                | (
+                  type: Anthropic::Models::Beta::UserProfiles::Providers::Google::BetaGoogleManagedCMEKControl::type_
+                  | String,
+                  retired_keys: ::Array[Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedRetiredKey],
+                  ?external_key_ids: ::Hash[Symbol, String],
+                  ?status: ::Hash[Symbol, Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_cmek_region_status]
+                ) -> Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_cmek_control
+            end
+          end
+        end
+      end
+    end
+  end
+end

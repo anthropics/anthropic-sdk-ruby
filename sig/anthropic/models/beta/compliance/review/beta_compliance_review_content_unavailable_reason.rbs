@@ -1,0 +1,42 @@
+module Anthropic
+  module Models
+    module Beta
+      module Compliance
+        module Review
+          type beta_compliance_review_content_unavailable_reason =
+            Anthropic::Beta::Compliance::Review::BetaComplianceReviewContentNotCaptured
+            | Anthropic::Beta::Compliance::Review::BetaComplianceReviewStoredCopyUnavailable
+
+          module BetaComplianceReviewContentUnavailableReason
+            extend Anthropic::Internal::Type::Union
+
+            type type_ = :not_captured | :stored_copy_unavailable
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              NOT_CAPTURED: :not_captured
+              STORED_COPY_UNAVAILABLE: :stored_copy_unavailable
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Compliance::Review::BetaComplianceReviewContentUnavailableReason::type_]
+            end
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_content_unavailable_reason]
+
+            def self.new:
+              (
+                type: :not_captured | "not_captured"
+              ) -> Anthropic::Beta::Compliance::Review::BetaComplianceReviewContentNotCaptured
+              | (
+                type: :stored_copy_unavailable | "stored_copy_unavailable"
+              ) -> Anthropic::Beta::Compliance::Review::BetaComplianceReviewStoredCopyUnavailable
+              | (
+                type: Anthropic::Models::Beta::Compliance::Review::BetaComplianceReviewContentUnavailableReason::type_
+                | String
+              ) -> Anthropic::Models::Beta::Compliance::Review::beta_compliance_review_content_unavailable_reason
+          end
+        end
+      end
+    end
+  end
+end

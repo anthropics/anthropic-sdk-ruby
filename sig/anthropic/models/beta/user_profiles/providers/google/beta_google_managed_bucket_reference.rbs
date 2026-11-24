@@ -1,0 +1,27 @@
+module Anthropic
+  module Models
+    module Beta
+      module UserProfiles
+        module Providers
+          module Google
+            type beta_google_managed_bucket_reference =
+              { bucket_name: String, project_number: String }
+
+            class BetaGoogleManagedBucketReference < Anthropic::Internal::Type::BaseModel
+              attr_accessor bucket_name: String
+
+              attr_accessor project_number: String
+
+              def initialize: (
+                bucket_name: String,
+                project_number: String
+              ) -> void
+
+              def to_hash: -> { bucket_name: String, project_number: String }
+            end
+          end
+        end
+      end
+    end
+  end
+end

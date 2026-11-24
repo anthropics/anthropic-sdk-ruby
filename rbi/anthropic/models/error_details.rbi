@@ -92,6 +92,14 @@ module Anthropic
             Anthropic::Beta::Organization::BetaExternalStorageInUseErrorDetails,
             Anthropic::Beta::Organization::BetaExternalStorageInWorkspacePolicyErrorDetails,
             Anthropic::Beta::Organization::BetaStorageVerificationFailedErrorDetails,
+            Anthropic::BetaCMEKNotApprovedErrorDetails,
+            Anthropic::BetaExternalKeyNotFoundErrorDetails,
+            Anthropic::BetaExternalKeyProviderMismatchErrorDetails,
+            Anthropic::BetaGCPProjectNotVerifiedErrorDetails,
+            Anthropic::BetaRegionNotSupportedErrorDetails,
+            Anthropic::BetaStorageNotApprovedErrorDetails,
+            Anthropic::BetaGCPProjectControlledByAnotherOrganizationErrorDetails,
+            Anthropic::BetaStorageInUseErrorDetails,
             Anthropic::Beta::Organization::BetaCannotSignOutPrimaryOwnerErrorDetails,
             Anthropic::Beta::Organization::BetaCannotSignOutSelfErrorDetails,
             Anthropic::BetaOrganizationNotEnrolledInBetaErrorDetails,
@@ -558,6 +566,46 @@ module Anthropic
         STORAGE_VERIFICATION_FAILED =
           T.let(
             :storage_verification_failed,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        CMEK_NOT_APPROVED =
+          T.let(
+            :cmek_not_approved,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        EXTERNAL_KEY_NOT_FOUND =
+          T.let(
+            :external_key_not_found,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        EXTERNAL_KEY_PROVIDER_MISMATCH =
+          T.let(
+            :external_key_provider_mismatch,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        GCP_PROJECT_NOT_VERIFIED =
+          T.let(
+            :gcp_project_not_verified,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        REGION_NOT_SUPPORTED =
+          T.let(
+            :region_not_supported,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        STORAGE_NOT_APPROVED =
+          T.let(
+            :storage_not_approved,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        GCP_PROJECT_CONTROLLED_BY_ANOTHER_ORGANIZATION =
+          T.let(
+            :gcp_project_controlled_by_another_organization,
+            Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
+          )
+        STORAGE_IN_USE =
+          T.let(
+            :storage_in_use,
             Anthropic::ErrorDetails::ErrorCode::TaggedSymbol
           )
         CANNOT_SIGN_OUT_PRIMARY_OWNER =

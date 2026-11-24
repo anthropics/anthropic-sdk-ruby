@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    module Beta
+      module Compliance
+        module Review
+          type beta_compliance_review_stored_copy_unavailable =
+            { type: :stored_copy_unavailable }
+
+          class BetaComplianceReviewStoredCopyUnavailable < Anthropic::Internal::Type::BaseModel
+            attr_accessor type: :stored_copy_unavailable
+
+            def initialize: (?type: :stored_copy_unavailable) -> void
+
+            def to_hash: -> { type: :stored_copy_unavailable }
+          end
+        end
+      end
+    end
+  end
+end

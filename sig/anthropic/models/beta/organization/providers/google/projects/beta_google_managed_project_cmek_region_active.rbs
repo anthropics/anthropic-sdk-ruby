@@ -1,0 +1,50 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Providers
+          module Google
+            module Projects
+              type beta_google_managed_project_cmek_region_active =
+                {
+                  effective_external_key_id: String?,
+                  error: String?,
+                  last_checked_at: Time?,
+                  type: :active,
+                  validated_at: Time
+                }
+
+              class BetaGoogleManagedProjectCMEKRegionActive < Anthropic::Internal::Type::BaseModel
+                attr_accessor effective_external_key_id: String?
+
+                attr_accessor error: String?
+
+                attr_accessor last_checked_at: Time?
+
+                attr_accessor type: :active
+
+                attr_accessor validated_at: Time
+
+                def initialize: (
+                  effective_external_key_id: String?,
+                  error: String?,
+                  last_checked_at: Time?,
+                  validated_at: Time,
+                  ?type: :active
+                ) -> void
+
+                def to_hash: -> {
+                  effective_external_key_id: String?,
+                  error: String?,
+                  last_checked_at: Time?,
+                  type: :active,
+                  validated_at: Time
+                }
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end

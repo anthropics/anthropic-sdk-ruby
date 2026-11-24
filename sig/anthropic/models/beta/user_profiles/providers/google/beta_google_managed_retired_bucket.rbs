@@ -1,0 +1,43 @@
+module Anthropic
+  module Models
+    module Beta
+      module UserProfiles
+        module Providers
+          module Google
+            type beta_google_managed_retired_bucket =
+              {
+                bucket_name: String,
+                expires_at: Time,
+                project_number: String,
+                region: String
+              }
+
+            class BetaGoogleManagedRetiredBucket < Anthropic::Internal::Type::BaseModel
+              attr_accessor bucket_name: String
+
+              attr_accessor expires_at: Time
+
+              attr_accessor project_number: String
+
+              attr_accessor region: String
+
+              def initialize: (
+                bucket_name: String,
+                expires_at: Time,
+                project_number: String,
+                region: String
+              ) -> void
+
+              def to_hash: -> {
+                bucket_name: String,
+                expires_at: Time,
+                project_number: String,
+                region: String
+              }
+            end
+          end
+        end
+      end
+    end
+  end
+end

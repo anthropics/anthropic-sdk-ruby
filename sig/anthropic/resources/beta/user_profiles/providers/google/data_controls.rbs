@@ -1,0 +1,31 @@
+module Anthropic
+  module Resources
+    class Beta
+      class UserProfiles
+        class Providers
+          class Google
+            class DataControls
+              def retrieve: (
+                String user_profile_id,
+                ?betas: ::Array[Anthropic::Models::anthropic_beta],
+                ?workspace_id: String,
+                ?request_options: Anthropic::request_opts
+              ) -> Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedDataControls
+
+              def update: (
+                String user_profile_id,
+                ?cmek: Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_cmek_control_params,
+                ?storage: Anthropic::Models::Beta::UserProfiles::Providers::Google::beta_google_managed_storage_control_params,
+                ?betas: ::Array[Anthropic::Models::anthropic_beta],
+                ?workspace_id: String,
+                ?request_options: Anthropic::request_opts
+              ) -> Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedDataControls
+
+              def initialize: (client: Anthropic::Client) -> void
+            end
+          end
+        end
+      end
+    end
+  end
+end

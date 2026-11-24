@@ -26,6 +26,9 @@ module Anthropic
         end
         attr_reader :external_storage
 
+        sig { returns(Anthropic::Resources::Beta::Organization::Providers) }
+        attr_reader :providers
+
         sig { returns(Anthropic::Resources::Beta::Organization::Users) }
         attr_reader :users
 

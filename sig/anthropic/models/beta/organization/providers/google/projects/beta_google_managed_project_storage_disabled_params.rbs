@@ -1,0 +1,24 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Providers
+          module Google
+            module Projects
+              type beta_google_managed_project_storage_disabled_params =
+                { type: :disabled }
+
+              class BetaGoogleManagedProjectStorageDisabledParams < Anthropic::Internal::Type::BaseModel
+                attr_accessor type: :disabled
+
+                def initialize: (?type: :disabled) -> void
+
+                def to_hash: -> { type: :disabled }
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end

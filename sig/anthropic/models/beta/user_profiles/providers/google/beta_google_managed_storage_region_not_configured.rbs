@@ -1,0 +1,33 @@
+module Anthropic
+  module Models
+    module Beta
+      module UserProfiles
+        module Providers
+          module Google
+            type beta_google_managed_storage_region_not_configured =
+              {
+                effective_bucket: Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedBucketReference?,
+                type: :not_configured
+              }
+
+            class BetaGoogleManagedStorageRegionNotConfigured < Anthropic::Internal::Type::BaseModel
+              attr_accessor effective_bucket: Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedBucketReference?
+
+              attr_accessor type: :not_configured
+
+              def initialize: (
+                effective_bucket: Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedBucketReference?,
+                ?type: :not_configured
+              ) -> void
+
+              def to_hash: -> {
+                effective_bucket: Anthropic::Beta::UserProfiles::Providers::Google::BetaGoogleManagedBucketReference?,
+                type: :not_configured
+              }
+            end
+          end
+        end
+      end
+    end
+  end
+end
