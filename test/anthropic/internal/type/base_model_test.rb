@@ -829,4 +829,41 @@ class Anthropic::Test::MetaInfoTest < Minitest::Test
     assert_equal({doc: "dog"}, ua)
     assert_equal({doc: "dawg"}, ub)
   end
+
+  # left unfrozen, to check that meta_info freezes its own copy
+  SPEC = {doc: "dog"} # rubocop:disable Style/MutableConstant
+
+  class M2 < Anthropic::Internal::Type::BaseModel
+    required :a, Integer
+    required :b, -> { String }, nil?: true
+    required :c, const: :c
+    # a Hash subclass as spec still yields a plain Hash
+    optional :d, String, Class.new(Hash).new.merge!(doc: "dog")
+    optional :e, String, SPEC
+  end
+
+  module U2
+    extend Anthropic::Internal::Type::Union
+
+    variant -> { Integer }
+    variant -> { String }, doc: "dawg"
+  end
+
+  def test_meta_is_a_frozen_hash
+    metas = M2.fields.transform_values { _1.fetch(:meta) }
+
+    assert_equal({a: {}, b: {}, c: {}, d: {doc: "dog"}, e: {doc: "dog"}}, metas)
+    refute_predicate(SPEC, :frozen?)
+    assert_equal([{}, {doc: "dawg"}], U2.send(:known_variants).map(&:last))
+    [
+      *metas.values,
+      *U2.send(:known_variants).map(&:last),
+      A1.instance_variable_get(:@meta),
+      H1.instance_variable_get(:@meta),
+      Anthropic::Internal::Type::ArrayOf[Integer].instance_variable_get(:@meta)
+    ].each do
+      assert_instance_of(Hash, _1)
+      assert_predicate(_1, :frozen?)
+    end
+  end
 end
