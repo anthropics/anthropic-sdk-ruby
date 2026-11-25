@@ -26,6 +26,15 @@ module Anthropic
 
         class << self
           # @api private
+          #
+          # The system CA bundle costs a few milliseconds and about 1 MB to load, so clients share one
+          # store, built on first use rather than at load time so that `SSL_CERT_FILE`/`SSL_CERT_DIR` set
+          # after `require` still apply.
+          sig { returns(OpenSSL::X509::Store) }
+          def default_cert_store
+          end
+
+          # @api private
           sig do
             params(
               cert_store: OpenSSL::X509::Store,
