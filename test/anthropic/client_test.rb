@@ -627,6 +627,19 @@ class AnthropicTest < Minitest::Test
     end
   end
 
+  def test_file_upload_sends_the_content_type_of_its_extension
+    stub_request(:post, "http://localhost/v1/files").to_return_json(status: 200, body: {})
+    anthropic = Anthropic::Client.new(base_url: "http://localhost", api_key: "my-anthropic-api-key")
+    file = Anthropic::FilePart.new("%PDF-1.7", filename: "report.pdf")
+
+    anthropic.files.upload(file: file)
+    anthropic.beta.files.upload(file: file)
+
+    assert_requested(:post, "http://localhost/v1/files", times: 2) do
+      assert_includes(_1.body, %(filename="report.pdf"\r\nContent-Type: application/pdf\r\n\r\n%PDF-1.7\r\n))
+    end
+  end
+
   def test_every_attempt_has_the_qualifiers
     stub_request(:get, /./).to_return_json(status: 500, body: {})
     client = Anthropic::Client.new(
