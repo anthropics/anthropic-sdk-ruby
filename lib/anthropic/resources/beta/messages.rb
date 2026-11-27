@@ -15,6 +15,8 @@ module Anthropic
         #
         # @param params [Anthropic::Models::Beta::MessageCreateParams]
         #
+        # @option params [Array<Anthropic::BaseTool, Anthropic::Models::Beta::BetaToolUnion, Hash{Symbol=>Object}>] :tools
+        #
         # @option params [false, nil] :thread `false` turns the message thread off; `nil` leaves it on.
         #
         # @raise [ArgumentError] if `thread` is anything else

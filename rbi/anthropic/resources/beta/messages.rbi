@@ -50,20 +50,9 @@ module Anthropic
             tools:
               T::Array[
                 T.any(
-                  Anthropic::Beta::BetaTool::OrHash,
-                  Anthropic::Beta::BetaToolBash20241022::OrHash,
-                  Anthropic::Beta::BetaToolBash20250124::OrHash,
-                  Anthropic::Beta::BetaCodeExecutionTool20250522::OrHash,
-                  Anthropic::Beta::BetaCodeExecutionTool20250825::OrHash,
-                  Anthropic::Beta::BetaToolComputerUse20241022::OrHash,
-                  Anthropic::Beta::BetaMemoryTool20250818::OrHash,
-                  Anthropic::Beta::BetaToolComputerUse20250124::OrHash,
-                  Anthropic::Beta::BetaToolTextEditor20241022::OrHash,
-                  Anthropic::Beta::BetaToolTextEditor20250124::OrHash,
-                  Anthropic::Beta::BetaToolTextEditor20250429::OrHash,
-                  Anthropic::Beta::BetaToolTextEditor20250728::OrHash,
-                  Anthropic::Beta::BetaWebSearchTool20250305::OrHash,
-                  Anthropic::Beta::BetaWebFetchTool20250910::OrHash
+                  Anthropic::Helpers::Tools::BaseTool,
+                  Anthropic::Beta::BetaToolUnion::Variants,
+                  Anthropic::Internal::AnyHash
                 )
               ],
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
